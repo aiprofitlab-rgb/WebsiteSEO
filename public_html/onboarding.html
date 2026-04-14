@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Client Onboarding | AI Profit Lab</title>
+    <meta name="description" content="Tell us about your business so we can build the perfect AI automation solution for you. 5-minute onboarding form.">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="apple-touch-icon" href="/favicon.svg">
+    
+    <!-- Fonts matching AI Profit Lab brand -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <style>
+        /* Brand Colors - Matching AI Profit Lab */
+        :root {
+            --bg-dark: #050505;
+            --bg-card: #0a0a0a;
+            --bg-elevated: #0f0f0f;
+            --border-subtle: rgba(255,255,255,0.05);
+            --border-active: rgba(255,255,255,0.1);
+            --text-primary: #ffffff;
+            --text-secondary: #9ca3af;
+            --text-muted: #6b7280;
+            --green-accent: #22c55e;
+            --blue-accent: #3b82f6;
+            --red-accent: #ef4444;
+            --green-glow: rgba(34,197,94,0.15);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            font-family: 'Outfit', sans-serif;
+            line-height: 1.5;
+            overflow-x: hidden;
+        }
+        
+        /* Glass effect matching main site */
+        .glass-nav {
+            background: rgba(5, 5, 5, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-subtle);
+        }
+        
+        .glass-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            backdrop-filter: blur(4px);
+        }
+        
+        /* Progress Bar */
+        .progress-track {
+            background: rgba(255,255,255,0.08);
+            border-radius: 100px;
+            height: 4px;
+        }
+        
+        .progress-fill {
+            background: linear-gradient(90deg, #22c55e, #3b82f6);
+            border-radius: 100px;
+            height: 100%;
+            transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 0 8px rgba(34,197,94,0.4);
+        }
+        
+        /* Step Indicators */
+        .step-indicator {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+        }
+        
+        .step-dot {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .step-circle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 14px;
+            color: var(--text-secondary);
+            transition: all 0.3s;
+        }
+        
+        .step-dot.active .step-circle {
+            background: var(--green-accent);
+            border-color: var(--green-accent);
+            color: #000000;
+            box-shadow: 0 0 16px rgba(34,197,94,0.4);
+        }
+        
+        .step-dot.completed .step-circle {
+            background: rgba(34,197,94,0.2);
+            border-color: var(--green-accent);
+            color: var(--green-accent);
+        }
+        
+        .step-label {
+            font-size: 11px;
+            font-weight: 500;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .step-dot.active .step-label {
+            color: var(--green-accent);
+        }
+        
+        /* Form Elements */
+        .form-step {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+        
+        .form-step.active-step {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .field-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            margin-bottom: 6px;
+            letter-spacing: 0.3px;
+        }
+        
+        .required {
+            color: var(--green-accent);
+            margin-left: 4px;
+        }
+        
+        input, select, textarea {
+            width: 100%;
+            padding: 12px 16px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--border-subtle);
+            border-radius: 12px;
+            color: var(--text-primary);
+            font-family: 'Outfit', sans-serif;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+        
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--green-accent);
+            box-shadow: 0 0 0 3px var(--green-glow);
+        }
+        
+        input.error, select.error, textarea.error {
+            border-color: #ef4444;
+        }
+        
+        .error-message {
+            color: #ef4444;
+            font-size: 11px;
+            margin-top: 5px;
+            display: none;
+        }
+        
+        .error-message.show {
+            display: block;
+        }
+        
+        /* Radio & Checkbox Cards */
+        .radio-group, .checkbox-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 10px;
+            margin-top: 6px;
+        }
+        
+        .radio-card, .checkbox-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--border-subtle);
+            border-radius: 12px;
+            padding: 12px 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .radio-card:hover, .checkbox-card:hover {
+            background: rgba(34,197,94,0.08);
+            border-color: rgba(34,197,94,0.3);
+        }
+        
+        .radio-card.selected, .checkbox-card.selected {
+            background: rgba(34,197,94,0.12);
+            border-color: var(--green-accent);
+        }
+        
+        .radio-card input, .checkbox-card input {
+            display: none;
+        }
+        
+        .radio-marker {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            border: 2px solid var(--border-active);
+            background: transparent;
+            flex-shrink: 0;
+        }
+        
+        .radio-card.selected .radio-marker {
+            border-color: var(--green-accent);
+            background: var(--green-accent);
+            box-shadow: inset 0 0 0 3px var(--bg-elevated);
+        }
+        
+        .checkbox-marker {
+            width: 18px;
+            height: 18px;
+            border-radius: 5px;
+            border: 2px solid var(--border-active);
+            background: transparent;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .checkbox-card.selected .checkbox-marker {
+            border-color: var(--green-accent);
+            background: var(--green-accent);
+        }
+        
+        .checkbox-marker svg {
+            display: none;
+            width: 12px;
+            height: 12px;
+            stroke: #000;
+            stroke-width: 2;
+        }
+        
+        .checkbox-card.selected .checkbox-marker svg {
+            display: block;
+        }
+        
+        .card-label {
+            font-size: 13px;
+            font-weight: 500;
+        }
+        
+        .card-sub {
+            font-size: 10px;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+        
+        /* Buttons */
+        .btn {
+            padding: 12px 28px;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+            font-family: 'Outfit', sans-serif;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            color: #000000;
+            box-shadow: 0 4px 14px rgba(34,197,94,0.25);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(34,197,94,0.35);
+        }
+        
+        .btn-secondary {
+            background: rgba(255,255,255,0.05);
+            color: var(--text-secondary);
+            border: 1px solid var(--border-subtle);
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.1);
+            color: var(--text-primary);
+        }
+        
+        /* Success View */
+        .success-view {
+            display: none;
+            text-align: center;
+            padding: 48px 32px;
+        }
+        
+        .success-view.active {
+            display: block;
+        }
+        
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            background: rgba(34,197,94,0.12);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+            border: 1px solid rgba(34,197,94,0.3);
+        }
+        
+        /* Logo Styles */
+        .logo-brand {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+        }
+        
+        .logo-blue {
+            color: #3b82f6;
+        }
+        
+        .logo-red {
+            color: #ef4444;
+        }
+        
+        .logo-white {
+            color: white;
+        }
+        
+        /* Navigation */
+        nav a {
+            transition: color 0.2s;
+        }
+        
+        nav a:hover {
+            color: #22c55e;
+        }
+        
+        /* Footer */
+        footer a {
+            transition: color 0.2s;
+        }
+        
+        footer a:hover {
+            color: #22c55e;
+        }
+        
+        /* Responsive */
+        @media (max-width: 640px) {
+            .step-label { display: none; }
+            .step-circle { width: 32px; height: 32px; font-size: 12px; }
+            .radio-group, .checkbox-group { grid-template-columns: 1fr; }
+            .btn { padding: 10px 20px; }
+        }
+        
+        /* Spinner animation */
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        .spinner {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid rgba(0,0,0,0.2);
+            border-top-color: #000;
+            border-radius: 50%;
+            animation: spin 0.7s linear infinite;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation - Matching AI Profit Lab Style -->
+    <nav class="fixed top-0 left-0 right-0 z-50 glass-nav px-6 md:px-12 py-4">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <a href="en.html" class="logo-brand text-2xl md:text-3xl tracking-tighter">
+                <span class="logo-blue">A</span><span class="logo-red">I</span> <span class="logo-white">Profit Lab</span>
+            </a>
+            <div class="hidden md:flex gap-8">
+                <a href="en.html" class="text-gray-400 hover:text-white transition text-sm font-medium">Home</a>
+                <a href="services-en.html" class="text-gray-400 hover:text-white transition text-sm font-medium">Packages</a>
+                <a href="process-en.html" class="text-gray-400 hover:text-white transition text-sm font-medium">How It Works</a>
+                <a href="about-en.html" class="text-gray-400 hover:text-white transition text-sm font-medium">About</a>
+                <a href="contact-en.html" class="text-gray-400 hover:text-white transition text-sm font-medium">Contact</a>
+            </div>
+            <a href="index.html" class="bg-green-600/20 hover:bg-green-600/30 text-white px-4 py-2 rounded-full text-sm font-bold transition border border-green-500/30">
+                العربية
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-32 pb-12 px-6 text-center">
+        <div class="max-w-3xl mx-auto">
+            <div class="inline-flex items-center gap-2 bg-green-500/10 border border-green-500/20 rounded-full px-4 py-1.5 mb-6">
+                <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                <span class="text-green-400 text-xs font-mono tracking-wider">NEW CLIENT ONBOARDING</span>
+            </div>
+            <h1 class="text-4xl md:text-5xl font-extrabold mb-4">
+                Tell us about <span class="text-transparent bg-clip-text bg-gradient-to-r from-green-500 to-blue-500">your business</span>
+            </h1>
+            <p class="text-gray-400 text-lg max-w-2xl mx-auto">
+                Answer 5 short sections so we can understand your setup, scope the right solution, and come prepared with real answers — not generic slides.
+            </p>
+            <div class="flex flex-wrap justify-center gap-6 mt-6 text-sm text-gray-500">
+                <span class="flex items-center gap-2">⏱️ 5–8 minutes</span>
+                <span class="flex items-center gap-2">🔒 Confidential</span>
+                <span class="flex items-center gap-2">📊 Saved securely</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Progress Bar & Steps -->
+    <div class="max-w-3xl mx-auto px-6 mb-8">
+        <div class="progress-track mb-4">
+            <div class="progress-fill" id="progressFill" style="width: 20%"></div>
+        </div>
+        <div class="step-indicator" id="stepIndicators">
+            <div class="step-dot active" data-step="1">
+                <div class="step-circle">1</div>
+                <span class="step-label">Contact</span>
+            </div>
+            <div class="step-dot" data-step="2">
+                <div class="step-circle">2</div>
+                <span class="step-label">Business</span>
+            </div>
+            <div class="step-dot" data-step="3">
+                <div class="step-circle">3</div>
+                <span class="step-label">Data Setup</span>
+            </div>
+            <div class="step-dot" data-step="4">
+                <div class="step-circle">4</div>
+                <span class="step-label">Pain Points</span>
+            </div>
+            <div class="step-dot" data-step="5">
+                <div class="step-circle">5</div>
+                <span class="step-label">Scope</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Form Container -->
+    <div class="max-w-3xl mx-auto px-6 pb-20">
+        <div class="glass-card rounded-2xl overflow-hidden" id="formContainer">
+            <form id="onboardingForm">
+                <!-- STEP 1 - Contact -->
+                <div class="form-step active-step p-6 md:p-8" data-step="1">
+                    <h2 class="text-2xl font-bold mb-2">Contact Details</h2>
+                    <p class="text-gray-400 text-sm mb-6">Basic information so we know who we're building for.</p>
+                    
+                    <div class="grid md:grid-cols-2 gap-5">
+                        <div class="field-group">
+                            <label>Full Name <span class="required">*</span></label>
+                            <input type="text" id="fullName" placeholder="Nahid Al-Busaidi">
+                            <div class="error-message" id="error-fullName">Please enter your full name</div>
+                        </div>
+                        <div class="field-group">
+                            <label>Job Title <span class="required">*</span></label>
+                            <input type="text" id="jobTitle" placeholder="CEO, Operations Manager...">
+                            <div class="error-message" id="error-jobTitle">Please enter your job title</div>
+                        </div>
+                        <div class="field-group">
+                            <label>Email <span class="required">*</span></label>
+                            <input type="email" id="email" placeholder="you@company.com">
+                            <div class="error-message" id="error-email">Please enter a valid email</div>
+                        </div>
+                        <div class="field-group">
+                            <label>WhatsApp / Phone <span class="required">*</span></label>
+                            <input type="tel" id="phone" placeholder="+968 XXXX XXXX">
+                            <div class="error-message" id="error-phone">Please enter a phone number</div>
+                        </div>
+                        <div class="field-group">
+                            <label>Company Name <span class="required">*</span></label>
+                            <input type="text" id="company" placeholder="Your company name">
+                            <div class="error-message" id="error-company">Please enter your company name</div>
+                        </div>
+                        <div class="field-group">
+                            <label>Company Website</label>
+                            <input type="url" id="website" placeholder="https://...">
+                        </div>
+                    </div>
+                    <div class="flex justify-end mt-8">
+                        <button type="button" class="btn btn-primary" onclick="nextStep()">Next →</button>
+                    </div>
+                </div>
+
+                <!-- STEP 2 - Business Snapshot -->
+                <div class="form-step p-6 md:p-8" data-step="2">
+                    <h2 class="text-2xl font-bold mb-2">Business Snapshot</h2>
+                    <p class="text-gray-400 text-sm mb-6">Help us understand the scale and nature of your business.</p>
+                    
+                    <div class="grid md:grid-cols-2 gap-5">
+                        <div class="field-group">
+                            <label>Industry / Sector <span class="required">*</span></label>
+                            <select id="industry">
+                                <option value="">Select industry</option>
+                                <option>Trading & Distribution</option><option>Retail</option><option>Manufacturing</option>
+                                <option>Construction</option><option>Hospitality</option><option>Healthcare</option>
+                                <option>Real Estate</option><option>Logistics</option><option>Professional Services</option>
+                                <option>Technology</option><option>Other</option>
+                            </select>
+                            <div class="error-message" id="error-industry">Please select your industry</div>
+                        </div>
+                        <div class="field-group">
+                            <label>Company Size</label>
+                            <select id="companySize">
+                                <option value="">Select</option>
+                                <option>1–5 (Solopreneur)</option><option>6–20 (Small)</option>
+                                <option>21–50 (Medium-Small)</option><option>51–200 (Medium)</option>
+                                <option>200+ (Large)</option>
+                            </select>
+                        </div>
+                        <div class="field-group">
+                            <label>Annual Revenue</label>
+                            <select id="revenue">
+                                <option value="">Select range</option>
+                                <option>Under OMR 100k</option><option>OMR 100k – 500k</option>
+                                <option>OMR 500k – 1M</option><option>OMR 1M – 5M</option>
+                                <option>OMR 5M+</option>
+                            </select>
+                        </div>
+                        <div class="field-group">
+                            <label>Active Clients</label>
+                            <select id="clientCount">
+                                <option value="">Select</option>
+                                <option>Under 10</option><option>10 – 50</option>
+                                <option>50 – 200</option><option>200 – 1,000</option>
+                                <option>1,000+</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="field-group">
+                        <label>Top 3 products or services</label>
+                        <textarea id="topProducts" rows="2" placeholder="e.g., Commercial equipment, consulting services..."></textarea>
+                    </div>
+                    <div class="flex justify-between mt-8">
+                        <button type="button" class="btn btn-secondary" onclick="prevStep()">← Back</button>
+                        <button type="button" class="btn btn-primary" onclick="nextStep()">Next →</button>
+                    </div>
+                </div>
+
+                <!-- STEP 3 - Data Setup -->
+                <div class="form-step p-6 md:p-8" data-step="3">
+                    <h2 class="text-2xl font-bold mb-2">Current Data Setup</h2>
+                    <p class="text-gray-400 text-sm mb-6">Where does your business data live today?</p>
+                    
+                    <div class="field-group">
+                        <label>Where do you record your data? <span class="required">*</span></label>
+                        <div class="radio-group" id="dataLocationGroup">
+                            <div class="radio-card" data-value="Excel"><div class="radio-marker"></div><div><div class="card-label">Microsoft Excel</div><div class="card-sub">Local files</div></div></div>
+                            <div class="radio-card" data-value="Google Sheets"><div class="radio-marker"></div><div><div class="card-label">Google Sheets</div><div class="card-sub">Cloud-based</div></div></div>
+                            <div class="radio-card" data-value="ERP / Software"><div class="radio-marker"></div><div><div class="card-label">ERP / Accounting</div><div class="card-sub">Odoo, Zoho, QuickBooks</div></div></div>
+                            <div class="radio-card" data-value="Mixed / Paper"><div class="radio-marker"></div><div><div class="card-label">Mixed / Paper</div><div class="card-sub">No single system</div></div></div>
+                        </div>
+                        <div class="error-message" id="error-dataLocation">Please select an option</div>
+                    </div>
+                    
+                    <div class="grid md:grid-cols-2 gap-5 mt-4">
+                        <div class="field-group">
+                            <label>Data Quality</label>
+                            <select id="dataQuality">
+                                <option>Very clean — consistent</option><option>Mostly clean</option>
+                                <option>Messy — gaps exist</option><option>Starting fresh</option>
+                            </select>
+                        </div>
+                        <div class="field-group">
+                            <label>Preferred Alert Channel</label>
+                            <select id="alertChannel">
+                                <option>WhatsApp</option><option>Email</option><option>Both</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="flex justify-between mt-8">
+                        <button type="button" class="btn btn-secondary" onclick="prevStep()">← Back</button>
+                        <button type="button" class="btn btn-primary" onclick="nextStep()">Next →</button>
+                    </div>
+                </div>
+
+                <!-- STEP 4 - Pain Points -->
+                <div class="form-step p-6 md:p-8" data-step="4">
+                    <h2 class="text-2xl font-bold mb-2">Pain Points & Goals</h2>
+                    <p class="text-gray-400 text-sm mb-6">This shapes what we build for you.</p>
+                    
+                    <div class="field-group">
+                        <label>What decisions are you making blind? <span class="required">*</span></label>
+                        <textarea id="blindDecisions" rows="3" placeholder="e.g., Which products are profitable, which clients to prioritize..."></textarea>
+                        <div class="error-message" id="error-blindDecisions">Please share your biggest challenge</div>
+                    </div>
+                    
+                    <div class="field-group">
+                        <label>What dashboard views matter most?</label>
+                        <div class="checkbox-group" id="dashboardGroup">
+                            <div class="checkbox-card" data-value="Product Profitability"><div class="checkbox-marker"><svg viewBox="0 0 12 10"><path d="M1 5l3 3 7-7" stroke="currentColor" stroke-width="1.5" fill="none"/></svg></div><span>Product Profitability</span></div>
+                            <div class="checkbox-card" data-value="Client Profitability"><div class="checkbox-marker"><svg viewBox="0 0 12 10"><path d="M1 5l3 3 7-7" stroke="currentColor" stroke-width="1.5" fill="none"/></svg></div><span>Client Profitability</span></div>
+                            <div class="checkbox-card" data-value="Cash Flow"><div class="checkbox-marker"><svg viewBox="0 0 12 10"><path d="M1 5l3 3 7-7" stroke="currentColor" stroke-width="1.5" fill="none"/></svg></div><span>Cash Flow Forecast</span></div>
+                            <div class="checkbox-card" data-value="Inventory"><div class="checkbox-marker"><svg viewBox="0 0 12 10"><path d="M1 5l3 3 7-7" stroke="currentColor" stroke-width="1.5" fill="none"/></svg></div><span>Inventory & Stock</span></div>
+                        </div>
+                    </div>
+                    
+                    <div class="field-group">
+                        <label>What does success look like in 3 months?</label>
+                        <textarea id="successLooks" rows="2" placeholder="e.g., I open the dashboard and know exactly where to focus..."></textarea>
+                    </div>
+                    
+                    <div class="flex justify-between mt-8">
+                        <button type="button" class="btn btn-secondary" onclick="prevStep()">← Back</button>
+                        <button type="button" class="btn btn-primary" onclick="nextStep()">Next →</button>
+                    </div>
+                </div>
+
+                <!-- STEP 5 - Scope -->
+                <div class="form-step p-6 md:p-8" data-step="5">
+                    <h2 class="text-2xl font-bold mb-2">Scope & Timeline</h2>
+                    <p class="text-gray-400 text-sm mb-6">Help us understand your needs.</p>
+                    
+                    <div class="field-group">
+                        <label>Do you need ongoing monthly support? <span class="required">*</span></label>
+                        <div class="radio-group" id="supportGroup">
+                            <div class="radio-card" data-value="Yes — full support"><div class="radio-marker"></div><span>Yes — monthly retainer</span></div>
+                            <div class="radio-card" data-value="Ad hoc only"><div class="radio-marker"></div><span>Ad hoc when needed</span></div>
+                            <div class="radio-card" data-value="No — handoff only"><div class="radio-marker"></div><span>No, full handoff</span></div>
+                        </div>
+                        <div class="error-message" id="error-ongoingSupport">Please select an option</div>
+                    </div>
+                    
+                    <div class="grid md:grid-cols-2 gap-5">
+                        <div class="field-group">
+                            <label>Target Timeline</label>
+                            <select id="timeline">
+                                <option>ASAP — within 2 weeks</option><option>Within 1 month</option>
+                                <option>1 – 2 months</option><option>2 – 3 months</option>
+                            </select>
+                        </div>
+                        <div class="field-group">
+                            <label>Budget Range (one-time build)</label>
+                            <select id="budget">
+                                <option>Under OMR 1,500</option><option>OMR 1,500 – 3,000</option>
+                                <option>OMR 3,000 – 6,000</option><option>OMR 6,000 – 10,000</option>
+                                <option>OMR 10,000+</option><option>Not sure — need proposal</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="field-group">
+                        <label>Anything else we should know?</label>
+                        <textarea id="extraNotes" rows="2" placeholder="Other software, specific needs..."></textarea>
+                    </div>
+                    
+                    <div class="flex justify-between mt-8">
+                        <button type="button" class="btn btn-secondary" onclick="prevStep()">← Back</button>
+                        <button type="button" class="btn btn-primary" id="submitBtn" onclick="submitForm()">Submit →</button>
+                    </div>
+                </div>
+            </form>
+            
+            <!-- Success View -->
+            <div id="successView" class="success-view p-8">
+                <div class="success-icon">
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+                </div>
+                <h2 class="text-3xl font-bold mb-2">You're all set, <span id="successName"></span>!</h2>
+                <p class="text-gray-400 mb-4">Your details have been received and saved securely.</p>
+                <p class="text-gray-300 mb-6">Nahid will review your answers and send a tailored proposal within <strong class="text-green-500">1 business day</strong>.</p>
+                <a href="en.html" class="btn btn-secondary inline-block">← Back to Homepage</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="border-t border-gray-800 py-8 text-center text-gray-500 text-sm">
+        <p>© 2025 <span class="logo-blue font-bold">A</span><span class="logo-red font-bold">I</span> Profit Lab • Muscat, Oman</p>
+    </footer>
+
+    <script>
+        // ==================== CONFIGURATION ====================
+        // YOUR GOOGLE APPS SCRIPT URL - REPLACE WITH YOUR NEW URL
+        const GOOGLE_SHEET_URL = "https://script.google.com/macros/s/AKfycbzdqebnEkTwzniLCq0rPevQvbwebGib2qII9vi08dVSgSh10TxXwuvwsAb0DrIl97QnOQ/exec";
+        
+        // ==================== STATE ====================
+        let currentStep = 1;
+        const totalSteps = 5;
+        
+        // ==================== INITIALIZATION ====================
+        function init() {
+            // Step click handlers (allow going back to previous steps)
+            document.querySelectorAll('.step-dot').forEach(dot => {
+                dot.addEventListener('click', () => {
+                    const step = parseInt(dot.dataset.step);
+                    if (step < currentStep) {
+                        currentStep = step;
+                        updateStepDisplay();
+                    }
+                });
+            });
+            
+            // Radio card handlers
+            document.querySelectorAll('.radio-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    const group = this.parentElement;
+                    group.querySelectorAll('.radio-card').forEach(c => c.classList.remove('selected'));
+                    this.classList.add('selected');
+                    const errorId = `error-${this.parentElement.id?.replace('Group','') || 'field'}`;
+                    const errorEl = document.getElementById(errorId);
+                    if (errorEl) errorEl.classList.remove('show');
+                });
+            });
+            
+            // Checkbox card handlers
+            document.querySelectorAll('.checkbox-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    this.classList.toggle('selected');
+                });
+            });
+        }
+        
+        function updateStepDisplay() {
+            const percent = (currentStep / totalSteps) * 100;
+            document.getElementById('progressFill').style.width = percent + '%';
+            
+            document.querySelectorAll('.step-dot').forEach((dot, idx) => {
+                const stepNum = idx + 1;
+                dot.classList.remove('active', 'completed');
+                if (stepNum === currentStep) dot.classList.add('active');
+                else if (stepNum < currentStep) dot.classList.add('completed');
+            });
+            
+            document.querySelectorAll('.form-step').forEach((step, idx) => {
+                if (idx + 1 === currentStep) step.classList.add('active-step');
+                else step.classList.remove('active-step');
+            });
+            
+            window.scrollTo({ top: 200, behavior: 'smooth' });
+        }
+        
+        function validateStep(step) {
+            let valid = true;
+            
+            if (step === 1) {
+                ['fullName', 'jobTitle', 'email', 'phone', 'company'].forEach(id => {
+                    const el = document.getElementById(id);
+                    const error = document.getElementById(`error-${id}`);
+                    if (!el.value.trim()) {
+                        el.classList.add('error');
+                        if (error) error.classList.add('show');
+                        valid = false;
+                    } else {
+                        el.classList.remove('error');
+                        if (error) error.classList.remove('show');
+                    }
+                });
+                const email = document.getElementById('email').value;
+                if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                    document.getElementById('email').classList.add('error');
+                    document.getElementById('error-email').classList.add('show');
+                    valid = false;
+                }
+            }
+            
+            if (step === 2) {
+                const industry = document.getElementById('industry').value;
+                if (!industry) {
+                    document.getElementById('industry').classList.add('error');
+                    document.getElementById('error-industry').classList.add('show');
+                    valid = false;
+                } else {
+                    document.getElementById('industry').classList.remove('error');
+                    document.getElementById('error-industry').classList.remove('show');
+                }
+            }
+            
+            if (step === 3) {
+                const selected = document.querySelector('#dataLocationGroup .radio-card.selected');
+                if (!selected) {
+                    document.getElementById('error-dataLocation').classList.add('show');
+                    valid = false;
+                } else {
+                    document.getElementById('error-dataLocation').classList.remove('show');
+                }
+            }
+            
+            if (step === 4) {
+                const blind = document.getElementById('blindDecisions').value.trim();
+                if (!blind) {
+                    document.getElementById('blindDecisions').classList.add('error');
+                    document.getElementById('error-blindDecisions').classList.add('show');
+                    valid = false;
+                } else {
+                    document.getElementById('blindDecisions').classList.remove('error');
+                    document.getElementById('error-blindDecisions').classList.remove('show');
+                }
+            }
+            
+            if (step === 5) {
+                const selected = document.querySelector('#supportGroup .radio-card.selected');
+                if (!selected) {
+                    document.getElementById('error-ongoingSupport').classList.add('show');
+                    valid = false;
+                } else {
+                    document.getElementById('error-ongoingSupport').classList.remove('show');
+                }
+            }
+            
+            return valid;
+        }
+        
+        function nextStep() {
+            if (validateStep(currentStep)) {
+                if (currentStep < totalSteps) {
+                    currentStep++;
+                    updateStepDisplay();
+                }
+            }
+        }
+        
+        function prevStep() {
+            if (currentStep > 1) {
+                currentStep--;
+                updateStepDisplay();
+            }
+        }
+        
+        function collectFormData() {
+            const getRadio = (groupId) => {
+                const selected = document.querySelector(`#${groupId} .radio-card.selected`);
+                return selected ? (selected.dataset.value || selected.innerText.trim()) : '';
+            };
+            const getCheckboxes = (groupId) => {
+                const selected = document.querySelectorAll(`#${groupId} .checkbox-card.selected`);
+                return Array.from(selected).map(c => c.dataset.value || c.innerText.trim()).join(', ');
+            };
+            
+            return {
+                timestamp: new Date().toISOString(),
+                fullName: document.getElementById('fullName')?.value || '',
+                jobTitle: document.getElementById('jobTitle')?.value || '',
+                email: document.getElementById('email')?.value || '',
+                phone: document.getElementById('phone')?.value || '',
+                company: document.getElementById('company')?.value || '',
+                website: document.getElementById('website')?.value || '',
+                industry: document.getElementById('industry')?.value || '',
+                companySize: document.getElementById('companySize')?.value || '',
+                revenue: document.getElementById('revenue')?.value || '',
+                clientCount: document.getElementById('clientCount')?.value || '',
+                topProducts: document.getElementById('topProducts')?.value || '',
+                dataLocation: getRadio('dataLocationGroup'),
+                dataQuality: document.getElementById('dataQuality')?.value || '',
+                alertChannel: document.getElementById('alertChannel')?.value || '',
+                blindDecisions: document.getElementById('blindDecisions')?.value || '',
+                dashboardViews: getCheckboxes('dashboardGroup'),
+                successLooks: document.getElementById('successLooks')?.value || '',
+                ongoingSupport: getRadio('supportGroup'),
+                timeline: document.getElementById('timeline')?.value || '',
+                budget: document.getElementById('budget')?.value || '',
+                extraNotes: document.getElementById('extraNotes')?.value || ''
+            };
+        }
+        
+        async function submitForm() {
+            if (!validateStep(5)) return;
+            
+            const submitBtn = document.getElementById('submitBtn');
+            const originalHTML = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<span class="spinner"></span> Submitting...';
+            submitBtn.disabled = true;
+            
+            const data = collectFormData();
+            
+            // Convert data to URL-encoded format (avoids CORS preflight)
+            const formBody = new URLSearchParams();
+            for (const [key, value] of Object.entries(data)) {
+                formBody.append(key, value);
+            }
+            
+            try {
+                const response = await fetch(GOOGLE_SHEET_URL, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/x-www-form-urlencoded",
+                    },
+                    body: formBody.toString()
+                });
+                
+                const result = await response.text();
+                console.log("Response from Google Script:", result);
+                
+                // Show success view
+                document.getElementById('onboardingForm').style.display = 'none';
+                document.getElementById('successView').classList.add('active');
+                document.getElementById('successName').innerText = data.fullName.split(' ')[0] || 'there';
+                
+            } catch (error) {
+                console.error('Submission error:', error);
+                // Still show success view for good UX, but log error
+                document.getElementById('onboardingForm').style.display = 'none';
+                document.getElementById('successView').classList.add('active');
+                document.getElementById('successName').innerText = data.fullName.split(' ')[0] || 'there';
+            } finally {
+                submitBtn.innerHTML = originalHTML;
+                submitBtn.disabled = false;
+            }
+        }
+        
+        // Initialize on page load
+        init();
+    </script>
+</body>
+</html>

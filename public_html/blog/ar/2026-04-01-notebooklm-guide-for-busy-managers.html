@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NotebookLM للمدراء المشغولين: الدليل العملي الكامل | AI Profit Lab</title>
+    <meta name="description" content="دليل عملي خالٍ من النظريات حول Google NotebookLM لأصحاب الأعمال والمدراء. اكتشف كيف تقرأ التقارير في دقائق، وتستعد للاجتماعات، وتتخذ قرارات أذكى — ابتداءً من اليوم.">
+    <meta name="keywords" content="NotebookLM للأعمال, دليل Google NotebookLM, ذكاء اصطناعي للمدراء, أدوات الذكاء الاصطناعي للإنتاجية, نوت بوك إل إم عربي, تلخيص الوثائق بالذكاء الاصطناعي, ذكاء اصطناعي مجاني, أدوات الأعمال الذكية, مدير ناجح بالذكاء الاصطناعي, NotebookLM Arabic, AI for business owners, أتمتة إدارة المعرفة">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="apple-touch-icon" href="../../favicon.svg">
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: #050505;
+            color: #ffffff;
+            margin: 0;
+            overflow-x: hidden;
+        }
+        .glass {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+        .prose, .prose p {
+            color: #d1d5db;
+            line-height: 2.1;
+            margin-bottom: 1.5rem;
+            font-size: 1.125rem;
+        }
+        .prose h2, .prose h3 {
+            color: #ffffff;
+            font-weight: 700;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        .prose h2 { font-size: 1.875rem; }
+        .prose h3 { font-size: 1.35rem; }
+
+        .callout-tip {
+            background: rgba(16, 185, 129, 0.07);
+            border-right: 4px solid rgba(16, 185, 129, 0.5);
+            border-left: none;
+            border-radius: 1rem;
+            padding: 1.25rem 1.5rem;
+            margin: 1.5rem 0;
+            color: #6ee7b7;
+        }
+        .callout-info {
+            background: rgba(99, 102, 241, 0.07);
+            border-right: 4px solid rgba(99, 102, 241, 0.5);
+            border-left: none;
+            border-radius: 1rem;
+            padding: 1.25rem 1.5rem;
+            margin: 1.5rem 0;
+            color: #c7d2fe;
+        }
+
+        .use-case-card {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.07);
+            border-radius: 1.25rem;
+            padding: 1.5rem 1.75rem;
+            margin-bottom: 1.25rem;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        .use-case-card:hover {
+            border-color: rgba(139,92,246,0.45);
+            box-shadow: 0 12px 35px rgba(139,92,246,0.08);
+        }
+        .use-case-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .step-card {
+            background: rgba(99, 102, 241, 0.05);
+            border: 1px solid rgba(99, 102, 241, 0.15);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            transition: border-color 0.3s ease;
+        }
+        .step-card:hover { border-color: rgba(99,102,241,0.4); }
+        .step-number {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            color: white;
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .custom-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            border-radius: 1rem;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.1);
+            margin: 2rem 0;
+        }
+        .custom-table th {
+            background: rgba(99,102,241,0.12);
+            color: #a5b4fc;
+            font-weight: 700;
+            padding: 1.25rem 1rem;
+            text-align: right;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .custom-table td {
+            padding: 1rem;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            color: #D1D5DB;
+            text-align: right;
+        }
+        .custom-table tr:last-child td { border-bottom: none; }
+    </style>
+</head>
+<body>
+
+    <nav class="flex justify-between items-center px-6 md:px-12 py-8 w-full glass bg-black/30 sticky top-0 z-50">
+        <a href="../../index.html" class="font-extrabold text-3xl md:text-4xl tracking-tighter hover:opacity-80 transition">
+            <span class="text-blue-500">A</span><span class="text-red-500">I</span> <span class="text-white text-2xl md:text-3xl">Profit Lab</span>
+        </a>
+    </nav>
+
+    <div class="max-w-4xl mx-auto px-4 py-16">
+        <div class="glass-card rounded-3xl overflow-hidden p-8 md:p-12">
+
+            <p class="text-violet-400 font-bold text-sm uppercase tracking-widest mb-4">🧠 أدوات الذكاء الاصطناعي · الإنتاجية · الأعمال</p>
+
+            <h1 class="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-indigo-400 mb-6 leading-tight">
+                NotebookLM للمدراء المشغولين: الدليل العملي الكامل
+            </h1>
+
+            <img src="../../blog/images/ceo_dashboard_story_1774720867978.png"
+                 alt="أداة NotebookLM للذكاء الاصطناعي للمدراء التنفيذيين وأصحاب الأعمال"
+                 class="w-full rounded-2xl mb-10 shadow-2xl border border-white/10" />
+
+            <div class="prose">
+                <p class="text-xl text-gray-300 font-semibold mb-8">
+                    أنت تدير شركة. بريدك الإلكتروني يحتوي على 200 رسالة لم تُقرأ بعد. على مكتبك وثيقة مناقصة حكومية من 60 صفحة، واجتماع مجلس إدارة بعد يومين، وثلاثة من موظفيك أرسلوا للتو تقاريرهم الأسبوعية. ليس لديك الوقت لقراءة كل شيء — لكنك <em>تحتاج</em> أن تعرف ما يهم. هذا بالضبط ما صُمِّم Google NotebookLM من أجله.
+                </p>
+
+                <h2>ما هو NotebookLM؟ (في جملة واحدة)</h2>
+                <p>
+                    NotebookLM هو أداة ذكاء اصطناعي مجانية من Google تقرأ وثائقك نيابةً عنك وتتيح لك طرح الأسئلة عليها — كأنك تمتلك مساعداً ذكياً قرأ فعلاً كل ما أعطيته إياه.
+                </p>
+                <p>
+                    لا اشتراكات. لا رسوم إعداد. إن كان لديك حساب Google، يمكنك استخدامه الآن على <a href="https://notebooklm.google.com" class="text-violet-400 hover:text-violet-300 underline" target="_blank">notebooklm.google.com</a>.
+                </p>
+
+                <div class="callout-info">
+                    <strong>📌 تنبيه مهم:</strong> NotebookLM لا يتصفح الإنترنت. يعمل فقط مع الوثائق التي <em>ترفعها أنت</em>. تخيّله كدماغ خاص مدعوم بالذكاء الاصطناعي مبني من ملفاتك الخاصة — وليس محرك بحث.
+                </div>
+
+                <h2>لماذا يهم هذا أصحاب الأعمال والمدراء؟</h2>
+                <p>
+                    معظم أدوات الذكاء الاصطناعي مثل ChatGPT تعطيك إجابات عامة من الإنترنت. أما NotebookLM فيعطيك إجابات دقيقة من <em>وثائقك أنت</em>. هذا فرق جوهري — وأكثر فائدة بكثير في السياق التجاري.
+                </p>
+                <p>إليك ما يعنيه ذلك فعلياً:</p>
+                <ul class="list-disc pr-6 space-y-2 text-gray-300 my-4">
+                    <li>ارفع تقريراً مالياً من 90 صفحة ← اسأل: <em>"ما أبرز 3 مخاطر؟"</em> ← احصل على إجابة واضحة في 10 ثوانٍ.</li>
+                    <li>ارفع محاضر اجتماعات طاقمك خلال 3 أشهر ← اسأل: <em>"ما المشكلات المتكررة باستمرار؟"</em> ← استخلاص أنماط فوري.</li>
+                    <li>ارفع عقداً ← اسأل: <em>"هل يوجد أي بنود غرامات؟"</em> ← اكتشف البنود المخفية في ثوانٍ.</li>
+                </ul>
+
+                <h2>حالات استخدام تجارية حقيقية — بلا نظريات</h2>
+
+                <div class="use-case-card">
+                    <span class="use-case-icon">📊</span>
+                    <h3 class="text-white font-bold text-lg mt-0 mb-2">الحالة الأولى: التحضير لاجتماعات مجلس الإدارة في 15 دقيقة</h3>
+                    <p class="text-gray-300 mb-0">ارفع جميع تقارير الأقسام في دفتر ملاحظات واحد. ثم اسأل: <em>"لخّص المؤشرات الرئيسية وحدد ما يستحق اهتمام مجلس الإدارة."</em> ادخل اجتماعك وكأنك قرأت كل صفحة — لأن مساعدك الذكي قرأها فعلاً.</p>
+                </div>
+
+                <div class="use-case-card">
+                    <span class="use-case-icon">📋</span>
+                    <h3 class="text-white font-bold text-lg mt-0 mb-2">الحالة الثانية: قراءة المناقصات والكراسات الحكومية</h3>
+                    <p class="text-gray-300 mb-0">المناقصات الحكومية في عُمان والسعودية والإمارات مطوّلة ومليئة بالمصطلحات القانونية. ارفع ملف PDF واسأل: <em>"ما الموعد النهائي للتقديم؟"</em>، <em>"ما شروط الأهلية الإلزامية؟"</em>، <em>"ما الوثائق المالية المطلوبة؟"</em> — احصل على إجابات دقيقة مع رقم الصفحة المصدر.</p>
+                </div>
+
+                <div class="use-case-card">
+                    <span class="use-case-icon">📝</span>
+                    <h3 class="text-white font-bold text-lg mt-0 mb-2">الحالة الثالثة: مراجعة العقود قبل اللجوء إلى المحامي</h3>
+                    <p class="text-gray-300 mb-0">ارفع عقد مورّد واسأل: <em>"هل يوجد تجديد تلقائي؟"</em> أو <em>"ماذا يحدث إذا أنهينا العقد مبكراً؟"</em> هذا لن يُغني عن محاميك، لكنه يعني أنك ستدخل جلسة المراجعة القانونية بأسئلة محددة وحادة — توفيراً للوقت وتكاليف الاستشارة.</p>
+                </div>
+
+                <div class="use-case-card">
+                    <span class="use-case-icon">🎙️</span>
+                    <h3 class="text-white font-bold text-lg mt-0 mb-2">الحالة الرابعة: الملخص الصوتي (الميزة الخفية الأقوى)</h3>
+                    <p class="text-gray-300 mb-0">يمتلك NotebookLM ميزة تُسمى <strong>Audio Overview</strong> تحوّل وثائقك إلى نقاش بودكاست بين مضيفَيْن من الذكاء الاصطناعي. ارفع وثيقة استراتيجية، اضغط "Generate Audio Overview"، واستمع إليها خلال تنقلاتك أو رياضتك. هذه الميزة وحدها تستحق تجربة الأداة.</p>
+                </div>
+
+                <div class="use-case-card">
+                    <span class="use-case-icon">📚</span>
+                    <h3 class="text-white font-bold text-lg mt-0 mb-2">الحالة الخامسة: تسريع تأهيل الموظفين الجدد</h3>
+                    <p class="text-gray-300 mb-0">ارفع دليل الموظف وسياسات الموارد البشرية ووثائق الإجراءات في دفتر ملاحظات واحد. شاركه مع الموظفين الجدد ودعهم يسألونه: <em>"ما إجراء طلب الإجازة؟"</em> بدلاً من مقاطعة مديرهم عشرين مرة يومياً.</p>
+                </div>
+
+                <div class="use-case-card">
+                    <span class="use-case-icon">🔍</span>
+                    <h3 class="text-white font-bold text-lg mt-0 mb-2">الحالة السادسة: بحث تنافسي في دقائق</h3>
+                    <p class="text-gray-300 mb-0">حمّل التقارير السنوية للمنافسين أو الأوراق البحثية أو دراسات السوق. ارفعها جميعاً في دفتر واحد واسأل: <em>"ما الاتجاهات التي تستثمر فيها الشركات الثلاث؟"</em> هذا بحث كان يأخذ من المحلل يوماً كاملاً — ينجز في أقل من 5 دقائق.</p>
+                </div>
+
+                <h2>كيف تبدأ في 4 خطوات</h2>
+
+                <div class="step-card">
+                    <div class="step-number">١</div>
+                    <h3 class="text-white font-bold text-lg mt-0 mb-2">انتقل إلى notebooklm.google.com</h3>
+                    <p class="mb-0">سجّل الدخول بأي حساب Google. انقر على <strong>"New Notebook"</strong>. الأداة مجانية تماماً — لا بطاقة ائتمانية مطلوبة.</p>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">٢</div>
+                    <h3 class="text-white font-bold text-lg mt-0 mb-2">ارفع مصادرك</h3>
+                    <p class="mb-0">يمكنك رفع ملفات PDF ومستندات Google Docs وملفات Word وPowerPoint ونصوص مُلصقة وحتى روابط فيديو YouTube. يستوعب دفتر الملاحظات الواحد ما يصل إلى 50 مصدراً. ارفع كل ما يتعلق بمشروع أو قرار بعينه.</p>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">٣</div>
+                    <h3 class="text-white font-bold text-lg mt-0 mb-2">اطرح أسئلتك بلغة طبيعية</h3>
+                    <p class="mb-0">لا تكتب أوامر معقدة — فقط اسأل بشكل طبيعي. <em>"ما أبرز المخاطر؟"</em>، <em>"أعطني ملخصاً في 5 نقاط"</em>، <em>"هل يُذكر شيء عن شروط الدفع؟"</em> كل إجابة تأتي مرفقة بمصدر يُشير بدقة إلى الموضع في وثيقتك.</p>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">٤</div>
+                    <h3 class="text-white font-bold text-lg mt-0 mb-2">أنشئ الملخص الصوتي (اختياري لكنه قوي)</h3>
+                    <p class="mb-0">انقر على <strong>"Audio Overview"</strong> في اللوحة العلوية اليمنى. انتظر 2-3 دقائق للتوليد. استمع إلى ملخص بودكاست لمدة 10-15 دقيقة لكل ما رفعته. مثالي لاستيعاب المعلومات الكثيفة دون استخدام يديك.</p>
+                </div>
+
+                <h2>NotebookLM مقابل ChatGPT مقابل Gemini — أيها تستخدم؟</h2>
+                <div class="overflow-x-auto">
+                    <table class="custom-table">
+                        <thead>
+                            <tr>
+                                <th>الميزة</th>
+                                <th>NotebookLM</th>
+                                <th>ChatGPT</th>
+                                <th>Gemini</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>الأفضل لـ</strong></td>
+                                <td>وثائقك الشخصية</td>
+                                <td>المهام العامة والكتابة</td>
+                                <td>مهام بيئة Google</td>
+                            </tr>
+                            <tr>
+                                <td><strong>يستشهد بالمصادر؟</strong></td>
+                                <td>✅ نعم — اقتباسات دقيقة</td>
+                                <td>❌ لا</td>
+                                <td>جزئياً</td>
+                            </tr>
+                            <tr>
+                                <td><strong>التكلفة</strong></td>
+                                <td>✅ مجاني</td>
+                                <td>مجاني / 20$/شهر</td>
+                                <td>مجاني / 20$/شهر</td>
+                            </tr>
+                            <tr>
+                                <td><strong>خصوصية البيانات؟</strong></td>
+                                <td>✅ وثائقك فقط</td>
+                                <td>يعتمد على الخطة</td>
+                                <td>يعتمد على الخطة</td>
+                            </tr>
+                            <tr>
+                                <td><strong>ملخص صوتي</strong></td>
+                                <td>✅ نعم (ميزة حصرية)</td>
+                                <td>❌ لا</td>
+                                <td>❌ لا</td>
+                            </tr>
+                            <tr>
+                                <td><strong>تصفح الإنترنت</strong></td>
+                                <td>❌ لا</td>
+                                <td>✅ نعم (Plus)</td>
+                                <td>✅ نعم</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <p><strong>الخلاصة للمدراء:</strong> استخدم NotebookLM لأي شيء يتعلق بوثائقك الخاصة. استخدم ChatGPT أو Gemini عندما تحتاج معلومات من الإنترنت أو تريد كتابة شيء من الصفر.</p>
+
+                <h2>ما لا تستطيع فعله (القيود بصدق)</h2>
+                <ul class="list-disc pr-6 space-y-2 text-gray-300 my-4">
+                    <li><strong>لا وصول للإنترنت</strong> — يعرف فقط ما رفعته. لا يمكنه معرفة سعر الصرف اليوم أو الأخبار الجديدة.</li>
+                    <li><strong>دعم اللغة العربية قيد التطوير</strong> — يتعامل مع الوثائق العربية، لكن الردود قد تكون بالإنجليزية ما لم تطلب صراحةً الإجابة بالعربية.</li>
+                    <li><strong>ليس صانع قرار</strong> — يلخص ويُبرز المعلومات، لكن الحكم النهائي لا يزال بيدك أنت.</li>
+                    <li><strong>حد 50 مصدراً لكل دفتر</strong> — للمشاريع الضخمة جداً، قد تحتاج لتقسيمها على أكثر من دفتر.</li>
+                </ul>
+
+                <div class="callout-tip">
+                    <strong>✅ نصيحة ذهبية للمدراء:</strong> أنشئ دفتر ملاحظات لكل وظيفة تجارية رئيسية: واحد للموارد البشرية، وآخر للمالية، وواحد لكل عميل رئيسي، وواحد لكل مناقصة نشطة. تعامل مع كل دفتر كخزانة ملفات ذكية تستطيع الإجابة على أسئلتك.
+                </div>
+
+                <h2>الخلاصة</h2>
+                <p>
+                    NotebookLM لن يدير شركتك نيابةً عنك. لكنه سيضمن أنك لن تدخل اجتماعاً غير مستعد، ولن تفوتك بنود مخفية في عقد، ولن تقضي 3 ساعات في قراءة تقرير يمكن تلخيصه في 3 دقائق.
+                </p>
+                <p>
+                    يستغرق الأمر أقل من 5 دقائق لتجربته. افتح دفتراً، ارفع أي وثيقة تراكمت على مكتبك، واطرح سؤالاً واحداً. ما ستراه سيفاجئك على الأرجح.
+                </p>
+
+                <div class="mt-16 pt-8 border-t border-white/10">
+                    <h3 class="text-xl mb-4">المراجع والمصادر</h3>
+                    <ul class="list-disc pr-5 space-y-2 text-gray-400 text-sm">
+                        <li><a href="https://notebooklm.google.com" class="text-violet-400 hover:text-violet-300 transition" target="_blank">Google NotebookLM — الصفحة الرسمية للمنتج</a></li>
+                        <li><a href="https://blog.google/technology/ai/notebooklm-audio-overviews/" class="text-violet-400 hover:text-violet-300 transition" target="_blank">مدونة Google: الإعلان عن ميزة الملخصات الصوتية في NotebookLM</a></li>
+                        <li><a href="https://workspace.google.com/intl/en/products/notebooklm/" class="text-violet-400 hover:text-violet-300 transition" target="_blank">NotebookLM لـ Google Workspace — الميزات المؤسسية</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
