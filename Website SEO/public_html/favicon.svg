@@ -1,0 +1,6 @@
+<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+    <rect width="64" height="64" rx="12" fill="#050505"/>
+    <text x="50%" y="50%" font-family="Outfit, sans-serif" font-size="32" font-weight="800" fill="#3b82f6" text-anchor="middle" dy=".3em">
+        A<tspan fill="#ef4444">I</tspan>
+    </text>
+</svg>

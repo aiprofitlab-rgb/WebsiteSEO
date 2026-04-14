@@ -1,0 +1,1183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-XXXXXXXXXX');
+    </script>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO Meta Tags -->
+    <title>AI Profit Lab | Smart Business Solutions for Oman & GCC</title>
+    <meta name="description" content="Save time and increase profits with simple smart systems. We build tools that handle repetitive tasks, so you can focus on growing your business. No tech skills needed.">
+    <meta name="keywords" content="AI Oman, business automation Muscat, chatbot, automated marketing, save time, increase profits, Omani SME solutions">
+    <meta name="author" content="AI Profit Lab">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:title" content="AI Profit Lab | Smart Business Solutions for Oman">
+    <meta property="og:description" content="Save time and increase profits with simple smart systems. No tech skills needed.">
+    <meta property="og:image" content="https://aiprofitlab.io/og-image.jpg">
+    <meta property="og:url" content="https://aiprofitlab.io/en">
+    <meta property="og:type" content="website">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="AI Profit Lab">
+    <meta name="twitter:description" content="Smart Business Solutions for Oman">
+    <meta name="twitter:image" content="https://aiprofitlab.io/twitter-image.jpg">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="apple-touch-icon" href="/favicon.svg">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://aiprofitlab.io/en">
+    
+    <!-- Hreflang -->
+    <link rel="alternate" hreflang="ar" href="https://aiprofitlab.io">
+    <link rel="alternate" hreflang="en" href="https://aiprofitlab.io/en">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { 
+            font-family: 'Outfit', sans-serif; 
+            background-color: #050505; 
+            color: #ffffff; 
+            margin: 0; 
+            overflow-x: hidden; 
+        }
+        .glass { 
+            background: rgba(255, 255, 255, 0.03); 
+            backdrop-filter: blur(12px); 
+            border: 1px solid rgba(255, 255, 255, 0.05); 
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+        .glass-card:hover {
+            border-color: #3B82F6;
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(59, 130, 246, 0.1);
+        }
+        
+        /* Mobile menu styles */
+        .nav-links {
+            display: none;
+        }
+        .nav-links.mobile-menu {
+            display: none;
+            flex-direction: column;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background-color: #0f0f0f;
+            padding: 20px;
+            gap: 15px;
+            z-index: 1000;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        .nav-links.mobile-menu a {
+            padding: 12px 0;
+            text-align: center;
+            width: 100%;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            color: #fff;
+            text-decoration: none;
+        }
+        .nav-links.mobile-menu a:last-child {
+            border-bottom: none;
+        }
+        .nav-links.mobile-menu a:hover {
+            color: #3B82F6;
+        }
+        .nav-links.mobile-menu.active {
+            display: flex !important;
+        }
+        
+        .mobile-nav-toggle {
+            display: block;
+            cursor: pointer;
+        }
+        
+        @media (min-width: 768px) {
+            .nav-links {
+                display: flex !important;
+                position: static;
+                background-color: transparent;
+                padding: 0;
+                gap: 2rem;
+                border: none;
+            }
+            .nav-links a {
+                padding: 0 !important;
+                border: none !important;
+            }
+            .nav-links.mobile-menu {
+                display: none !important;
+            }
+            .mobile-nav-toggle {
+                display: none !important;
+            }
+        }
+        
+        /* Chatbot Styles */
+        #aiden-ui { 
+            transform: translateY(120%); 
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1); 
+            visibility: hidden; 
+            z-index: 1000; 
+            right: 8px; 
+            left: auto; 
+        }
+        #aiden-ui.active { 
+            transform: translateY(0); 
+            visibility: visible; 
+        }
+        .pulse { 
+            animation: pulse-animation 2s infinite; 
+        }
+        @keyframes pulse-animation { 
+            0% { box-shadow: 0 0 0 0px rgba(59, 130, 246, 0.4); } 
+            100% { box-shadow: 0 0 0 20px rgba(59, 130, 246, 0); } 
+        }
+        
+        /* Multi-Step Form Modal Styles */
+        .form-modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(8px);
+            z-index: 2000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .form-modal-overlay.active {
+            display: flex;
+            opacity: 1;
+        }
+        .form-modal-content {
+            width: 90%;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 2rem;
+            border-radius: 1.5rem;
+            position: relative;
+            transform: scale(0.95);
+            transition: transform 0.3s ease;
+            background: #0a0a0a;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .form-modal-overlay.active .form-modal-content {
+            transform: scale(1);
+        }
+        .form-modal-content .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: #aaa;
+            font-size: 2rem;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        .form-modal-content .close-btn:hover {
+            color: #fff;
+        }
+        .form-modal-content h2 {
+            text-align: center;
+            color: #fff;
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+        .form-modal-content .subtitle {
+            text-align: center;
+            color: #a0aec0;
+            margin-bottom: 1rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .progress-bar {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+            position: relative;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .progress-bar::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-50%);
+            z-index: -1;
+        }
+        .progress-step {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+        .progress-step.active {
+            background: linear-gradient(135deg, #3B82F6, #22C55E);
+            border-color: transparent;
+            transform: scale(1.1);
+        }
+        
+        .form-step {
+            display: none;
+        }
+        .form-step.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .form-step h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #fff;
+            text-align: center;
+            margin-bottom: 0.5rem;
+        }
+        .form-step .step-description {
+            text-align: center;
+            color: #a0aec0;
+            margin-bottom: 2rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            font-size: 0.875rem;
+            color: #cbd5e0;
+        }
+        label .required {
+            color: #ef4444;
+            margin-left: 2px;
+        }
+        
+        input[type="text"], input[type="email"], input[type="tel"], input[type="url"], input[type="number"], textarea, select {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            margin-bottom: 1rem;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 0.5rem;
+            color: #fff;
+            box-sizing: border-box;
+            transition: border-color 0.3s;
+        }
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: #3B82F6;
+        }
+        textarea {
+            min-height: 80px;
+            resize: vertical;
+        }
+
+        .checkbox-group {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+        .checkbox-item {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            border: 1px solid transparent;
+            transition: all .2s;
+        }
+        .checkbox-item:hover {
+            background: rgba(59, 130, 246, 0.1);
+            border-color: #3B82F6;
+        }
+        .checkbox-item input[type="checkbox"] {
+            display: none;
+        }
+        .checkbox-item .checkmark {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #3B82F6;
+            border-radius: 4px;
+            margin-right: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .checkbox-item .checkmark svg {
+            display: none;
+            width: 14px;
+            height: 14px;
+        }
+        .checkbox-item input[type="checkbox"]:checked + .checkmark {
+            background: linear-gradient(135deg, #3B82F6, #22C55E);
+        }
+        .checkbox-item input[type="checkbox"]:checked + .checkmark svg {
+            display: block;
+        }
+
+        .slider-container {
+            margin-bottom: 1rem;
+        }
+        .slider-output {
+            text-align: center;
+            font-weight: bold;
+            color: #22C55E;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+        }
+        .nav-btn {
+            padding: 0.75rem 2rem;
+            background: linear-gradient(135deg, #3B82F6, #2563EB);
+            color: white;
+            border: none;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .nav-btn.prev {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        .nav-btn:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+        .nav-btn.prev:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .form-footer {
+            text-align: center;
+            color: #718096;
+            font-size: 0.8rem;
+            margin-top: 2rem;
+        }
+
+        @media (max-width: 640px) {
+            .checkbox-group {
+                grid-template-columns: 1fr;
+            }
+            .form-modal-content {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+    
+    <!-- AI Profit Lab Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "AI Profit Lab",
+  "alternateName": "AI automation for businesses",
+  "url": "https://aiprofitlab.io",
+  "logo": "https://aiprofitlab.io/favicon.svg",
+  "image": "https://aiprofitlab.io/og-image.jpg",
+  "description": "Expert AI automation and business scaling solutions using n8n and Make.com for businesses in Oman and the GCC.",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Seeb",
+    "addressRegion": "Muscat",
+    "addressCountry": "OM"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 23.655,
+    "longitude": 58.188
+  },
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "telephone": "+96899245250",
+    "contactType": "customer service",
+    "areaServed": ["OM", "SA", "AE","Kuwait", "QA"],
+    "availableLanguage": ["Arabic", "English"]
+  },
+  "sameAs": [
+    "https://www.linkedin.com/in/nahid-aby",
+    "https://www.instagram.com/aiprofitlab"
+  ],
+  "service": [
+    {
+      "@type": "Service",
+      "name": "n8n Workflow Automation",
+      "description": "Custom AI-driven workflows to automate repetitive business tasks."
+    },
+    {
+      "@type": "Service",
+      "name": "Make.com Integration",
+      "description": "Connecting business apps for seamless data flow and automation."
+    },
+    {
+      "@type": "Service",
+      "name": "AI Lead Generation",
+      "description": "Automated systems for identifying and engaging business leads."
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+    <!-- ======================= Navigation ======================= -->
+    <nav class="flex justify-between items-center px-6 md:px-12 py-8 fixed w-full z-50 glass bg-black/30">
+        <a href="en.html" class="font-extrabold text-3xl md:text-4xl tracking-tighter">
+            <span class="text-blue-500">A</span><span class="text-red-500">I</span> <span class="text-white text-2xl md:text-3xl">Profit Lab</span>
+        </a>
+        
+        <!-- Desktop Menu -->
+        <div class="hidden md:flex items-center gap-8">
+            <div class="nav-links flex gap-8 text-sm font-bold uppercase items-center">
+                <a href="en.html" class="hover:text-blue-400 transition">Home</a>
+                <a href="services-en.html" class="hover:text-blue-400 transition">Packages</a>
+                <a href="process-en.html" class="hover:text-blue-400 transition">How It Works</a>
+                <a href="about-en.html" class="hover:text-blue-400 transition">About</a>
+                <a href="contact-en.html" class="hover:text-blue-400 transition">Contact</a>
+            </div>
+            <!-- Language Switch Button - INSIDE desktop menu -->
+            <a href="index.html" class="bg-blue-600/20 hover:bg-blue-600/30 text-white px-4 py-2 rounded-full text-sm font-bold transition border border-blue-500/30">
+                العربية
+            </a>
+        </div>
+        
+        <!-- Mobile Menu Button and Language -->
+        <div class="flex items-center gap-4 md:hidden">
+            <a href="index.html" class="bg-blue-600/20 text-white px-3 py-1 rounded-full text-xs font-bold border border-blue-500/30">
+                عربي
+            </a>
+            <button class="mobile-nav-toggle text-white text-2xl focus:outline-none">☰</button>
+        </div>
+        
+        <!-- Mobile Menu Dropdown -->
+        <div class="nav-links mobile-menu">
+            <a href="en.html">Home</a>
+            <a href="services-en.html">Packages</a>
+            <a href="process-en.html">How It Works</a>
+            <a href="about-en.html">About</a>
+            <a href="contact-en.html">Contact</a>
+            <a href="index.html" style="color: #3B82F6; font-weight: bold;">العربية</a>
+        </div>
+    </nav>
+
+    <!-- ======================= Hero Section ======================= -->
+    <section id="home" class="min-h-screen flex items-center justify-center px-4 pt-24" style="background: radial-gradient(circle at 30% 30%, rgba(59,130,246,0.1) 0%, transparent 50%);">
+        <div class="max-w-4xl mx-auto text-center">
+            <h1 class="text-5xl sm:text-6xl md:text-7xl font-extrabold leading-tight">
+                Save Your Time, <br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-green-500">Grow Your Profits</span>
+            </h1>
+            <p class="mt-6 text-xl text-gray-300 max-w-2xl mx-auto">
+                Are you tired of repetitive tasks? We build simple smart systems that handle them for you—so you can focus on what matters.
+            </p>
+            
+            <!-- Hidden Cost Banner -->
+            <div class="mt-10 glass-card p-5 rounded-xl max-w-xl mx-auto border border-red-500/20">
+                <p class="text-red-400 font-semibold mb-1">⚠️ The hidden cost of manual work:</p>
+                <div class="flex flex-wrap justify-center gap-x-4 gap-y-2 text-sm text-gray-300">
+                    <span>❌ Missed messages</span>
+                    <span>❌ Forgotten leads</span>
+                    <span>❌ Wasted hours</span>
+                    <span>❌ Lost sales</span>
+                </div>
+            </div>
+            
+            <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="#" onclick="openAuditForm(); return false;" class="bg-blue-600 text-white px-8 py-4 rounded-xl font-bold hover:bg-blue-500 transition shadow-lg text-lg">
+                    Start Saving Time Today →
+                </a>
+                <a href="#services" class="border border-gray-700 text-white px-8 py-4 rounded-xl font-bold hover:bg-white/5 transition text-lg">
+                    See Packages
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ======================= Quick Comparison ======================= -->
+    <section class="py-16 px-4 bg-[#0a0a0a]">
+        <div class="max-w-5xl mx-auto">
+            <h2 class="text-3xl font-bold text-center mb-10">System vs. Staff: The Math</h2>
+            <div class="grid md:grid-cols-2 gap-6">
+                <!-- Staff Card -->
+                <div class="glass-card p-6 rounded-2xl border border-red-500/20">
+                    <p class="text-red-400 font-bold text-lg mb-3">👤 Hiring an Admin</p>
+                    <p class="text-3xl font-bold text-white">OMR 350<span class="text-lg font-normal text-gray-500">/mo</span></p>
+                    <p class="text-sm text-gray-400 mt-2">+ visa, insurance, leave</p>
+                </div>
+                <!-- System Card -->
+                <div class="glass-card p-6 rounded-2xl border border-green-500/20 bg-gradient-to-br from-green-500/5 to-blue-500/5">
+                    <p class="text-green-400 font-bold text-lg mb-3">🤖 Our Smart System</p>
+                    <p class="text-3xl font-bold text-white">OMR 75<span class="text-lg font-normal text-gray-500">/mo</span></p>
+                    <p class="text-sm text-gray-400 mt-2">+ works 24/7, never takes leave</p>
+                </div>
+            </div>
+            <!-- Simple ROI -->
+            <div class="mt-8 p-5 bg-gradient-to-r from-blue-600/20 to-green-600/20 rounded-xl text-center">
+                <p class="text-lg">📈 <strong>Example ROI:</strong> 3 extra clients at OMR 200 each = <span class="text-green-400 font-bold">OMR 600/month</span> extra revenue.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ======================= Packages Teaser ======================= -->
+    <section id="services" class="py-16 px-4">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-3xl font-bold text-center mb-4">Packages Built for You</h2>
+            <p class="text-gray-400 text-center max-w-xl mx-auto mb-12">Simple, transparent, and designed to grow with your business.</p>
+            <div class="grid md:grid-cols-3 gap-6">
+                <!-- STARTER -->
+                <div class="glass-card p-6 rounded-2xl text-center">
+                    <div class="w-12 h-12 bg-green-500/10 rounded-full flex items-center justify-center text-green-400 text-2xl mx-auto mb-3">🌱</div>
+                    <h3 class="text-xl font-bold mb-1">STARTER</h3>
+                    <p class="text-2xl font-bold text-green-400 mb-2">OMR 500</p>
+                    <p class="text-xs text-gray-400 mb-3">+ OMR 75/mo support</p>
+                    <p class="text-sm text-gray-300">Ideal for startups & solopreneurs.</p>
+                </div>
+                <!-- GROWTH -->
+                <div class="glass-card p-6 rounded-2xl text-center border-2 border-blue-500 relative">
+                    <span class="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-blue-500 text-white text-xs px-3 py-1 rounded-full">Most Popular</span>
+                    <div class="w-12 h-12 bg-blue-500/10 rounded-full flex items-center justify-center text-blue-400 text-2xl mx-auto mb-3">📈</div>
+                    <h3 class="text-xl font-bold mb-1">GROWTH</h3>
+                    <p class="text-2xl font-bold text-blue-400 mb-2">OMR 1,200</p>
+                    <p class="text-xs text-gray-400 mb-3">+ OMR 150/mo support</p>
+                    <p class="text-sm text-gray-300">Perfect for growing SMEs.</p>
+                </div>
+                <!-- SCALE -->
+                <div class="glass-card p-6 rounded-2xl text-center">
+                    <div class="w-12 h-12 bg-purple-500/10 rounded-full flex items-center justify-center text-purple-400 text-2xl mx-auto mb-3">⚡</div>
+                    <h3 class="text-xl font-bold mb-1">SCALE</h3>
+                    <p class="text-2xl font-bold text-purple-400 mb-2">OMR 2,500+</p>
+                    <p class="text-xs text-gray-400 mb-3">+ OMR 300/mo support</p>
+                    <p class="text-sm text-gray-300">For established businesses.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ======================= 3-Step Process ======================= -->
+    <section id="how-it-works" class="py-16 px-4 bg-[#0a0a0a]">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-3xl font-bold mb-10">How It Works</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div>
+                    <div class="text-4xl text-blue-500 font-bold mb-2">1</div>
+                    <h3 class="font-bold text-lg">We Discover</h3>
+                    <p class="text-sm text-gray-400">We learn about your business and where your time goes.</p>
+                </div>
+                <div>
+                    <div class="text-4xl text-green-500 font-bold mb-2">2</div>
+                    <h3 class="font-bold text-lg">We Build</h3>
+                    <p class="text-sm text-gray-400">We create your system and show you how it works.</p>
+                </div>
+                <div>
+                    <div class="text-4xl text-purple-500 font-bold mb-2">3</div>
+                    <h3 class="font-bold text-lg">We Support</h3>
+                    <p class="text-sm text-gray-400">We launch it and stay with you to keep it running.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ======================= Final CTA ======================= -->
+    <section id="contact" class="py-16 px-4">
+        <div class="max-w-2xl mx-auto text-center glass-card p-10 rounded-3xl">
+            <h2 class="text-3xl font-bold mb-3">Ready to Save Time?</h2>
+            <p class="text-gray-300 mb-6">Let's have a 30-minute chat, no pressure, no jargon.</p>
+            <a href="#" onclick="openAuditForm(); return false;" class="inline-block bg-gradient-to-r from-blue-600 to-green-600 text-white px-8 py-4 rounded-xl font-bold hover:from-blue-700 hover:to-green-700 transition shadow-lg text-lg">
+                Book Your Free Call
+            </a>
+        </div>
+    </section>
+
+    <!-- ======================= Footer ======================= -->
+    <footer class="py-8 border-t border-gray-900 text-center text-sm text-gray-600">
+        © 2025 <span class="text-blue-500">A</span><span class="text-red-500">I</span> Profit Lab • All Rights Reserved • Muscat, Oman
+    </footer>
+
+    <!-- ======================= Chatbot Widget ======================= -->
+    <div class="fixed bottom-8 right-8 z-[1000]">
+        <button onclick="toggleChat()" class="pulse w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center shadow-2xl">
+            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path>
+            </svg>
+        </button>
+        
+        <div id="aiden-ui" class="absolute bottom-24 right-0 w-[350px] md:w-[400px] h-[500px] bg-[#0f0f0f] border border-gray-800 rounded-3xl shadow-2xl flex flex-col overflow-hidden">
+            <div class="p-4 bg-gradient-to-r from-blue-900 to-black flex justify-between items-center border-b border-gray-800">
+                <span class="font-bold text-sm tracking-widest text-white">
+                    <span class="text-blue-500">A</span><span class="text-red-500">I</span>DEN 
+                    <span class="text-green-400 text-[10px] ml-2">● ONLINE</span>
+                </span>
+                <span class="text-xs text-gray-500" id="visitor-country"></span>
+                <button onclick="toggleChat()" class="text-white opacity-50 hover:opacity-100 font-bold text-xl">✕</button>
+            </div>
+            <div id="chat-messages" class="flex-1 p-6 overflow-y-auto space-y-4 text-sm text-gray-300">
+                <div class="bg-gray-800 p-4 rounded-2xl rounded-tl-none max-w-[85%]">
+                    Hello! I'm Aiden. How can I help you today? 
+                    <span class="block text-xs text-gray-500 mt-1" id="welcome-message"></span>
+                </div>
+            </div>
+            <div class="p-4 bg-[#050505] border-t border-gray-800 flex items-center">
+                <input id="user-input" type="text" placeholder="Type your message..." class="bg-transparent border-none outline-none flex-1 text-sm text-white py-2">
+                <button onclick="handleSend()" class="bg-blue-600 text-white px-4 py-1 rounded-full text-xs font-bold hover:bg-blue-500 transition ml-2">SEND</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ======================= MULTI-STEP AUDIT FORM MODAL ======================= -->
+    <div id="auditModal" class="form-modal-overlay">
+        <div class="form-modal-content">
+            <button onclick="closeAuditForm()" class="close-btn">&times;</button>
+            <h2>AI Strategy Call Audit</h2>
+            <p class="subtitle">Complete this short form (3-5 minutes) to help us tailor your 30-minute strategy call.</p>
+            
+            <div class="progress-bar">
+                <div class="progress-step active" data-step="1">1</div>
+                <div class="progress-step" data-step="2">2</div>
+                <div class="progress-step" data-step="3">3</div>
+                <div class="progress-step" data-step="4">4</div>
+            </div>
+
+            <form id="auditForm">
+                <!-- Step 1: Contact Details -->
+                <div class="form-step active" data-step="1">
+                    <h3>Contact Details</h3>
+                    <p class="step-description">Let's start with the basics.</p>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div>
+                            <label for="fullName">Full Name <span class="required">*</span></label>
+                            <input type="text" id="fullName" name="fullName" required>
+                        </div>
+                        <div>
+                            <label for="email">Email <span class="required">*</span></label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div>
+                            <label for="phone">Phone</label>
+                            <input type="tel" id="phone" name="phone">
+                        </div>
+                        <div>
+                            <label for="company">Company <span class="required">*</span></label>
+                            <input type="text" id="company" name="company" required>
+                        </div>
+                        <div>
+                            <label for="role">Role/Title <span class="required">*</span></label>
+                            <input type="text" id="role" name="role" required>
+                        </div>
+                        <div>
+                            <label for="website">Website</label>
+                            <input type="url" id="website" name="website" placeholder="https://example.com">
+                        </div>
+                    </div>
+                    <div class="form-navigation">
+                        <button type="button" class="nav-btn next">Next →</button>
+                    </div>
+                </div>
+
+                <!-- Step 2: Business Snapshot -->
+                <div class="form-step" data-step="2">
+                    <h3>Business Snapshot</h3>
+                    <p class="step-description">Tell us about your business to assess AI fit.</p>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div>
+                            <label for="industry">Industry/Sector?</label>
+                            <input type="text" id="industry" name="industry" placeholder="e.g., E-commerce, Real Estate">
+                        </div>
+                        <div>
+                            <label for="employees">Company Size (Employees)</label>
+                            <input type="number" id="employees" name="employees">
+                        </div>
+                    </div>
+                    <label for="revenue">Annual Revenue</label>
+                    <input type="text" id="revenue" name="revenue" placeholder="e.g., OMR 500K, OMR 2M">
+                    <label for="revenueStreams">Top 3 Revenue Streams or Products/Services?</label>
+                    <textarea id="revenueStreams" name="revenueStreams"></textarea>
+                    
+                    <div class="form-navigation">
+                        <button type="button" class="nav-btn prev">← Previous</button>
+                        <button type="button" class="nav-btn next">Next →</button>
+                    </div>
+                </div>
+
+                <!-- Step 3: Pain Points & Goals -->
+                <div class="form-step" data-step="3">
+                    <h3>Pain Points & Goals</h3>
+                    <p class="step-description">What challenges are holding you back? What does success look like?</p>
+                    <label for="challenges">Top 3 Business Challenges?</label>
+                    <textarea id="challenges" name="challenges" placeholder='e.g., "Manual data entry wastes 20 hrs/week"'></textarea>
+                    <label for="goals">Specific Goals for AI? <span class="required">*</span></label>
+                    <textarea id="goals" name="goals" placeholder='e.g., "Save 10 hours/week, increase sales by 30%"' required></textarea>
+                    <label for="pastExperience">Past AI/Automation Experience?</label>
+                    <textarea id="pastExperience" name="pastExperience"></textarea>
+                    <label for="aiComfort">Team's AI Comfort Level</label>
+                    <div class="slider-container">
+                        <div class="slider-output" id="aiComfortOutput">5</div>
+                        <input type="range" id="aiComfort" name="aiComfort" min="1" max="10" value="5" class="w-full">
+                    </div>
+                    <div class="form-navigation">
+                        <button type="button" class="nav-btn prev">← Previous</button>
+                        <button type="button" class="nav-btn next">Next →</button>
+                    </div>
+                </div>
+
+                <!-- Step 4: Automation Targets & Readiness -->
+                <div class="form-step" data-step="4">
+                    <h3>Readiness & Next Steps</h3>
+                    <p class="step-description">Help us understand your timeline and commitment.</p>
+                    <label>Which processes are you looking to automate?</label>
+                    <div class="checkbox-group">
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="process" value="Marketing">
+                            <span class="checkmark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M5 13l4 4L19 7"/></svg></span>
+                            Marketing
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="process" value="Sales">
+                            <span class="checkmark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M5 13l4 4L19 7"/></svg></span>
+                            Sales
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="process" value="Operations">
+                            <span class="checkmark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M5 13l4 4L19 7"/></svg></span>
+                            Operations
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="process" value="Customer Service">
+                            <span class="checkmark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M5 13l4 4L19 7"/></svg></span>
+                            Customer Service
+                        </label>
+                    </div>
+                    <label for="budget">Budget Range?</label>
+                    <select id="budget" name="budget">
+                        <option value="OMR 5K">OMR 5,000</option>
+                        <option value="OMR 5-20K">OMR 5,000 - 20,000</option>
+                        <option value="OMR 20-50K">OMR 20,000 - 50,000</option>
+                        <option value="OMR 50K+">OMR 50,000+</option>
+                    </select>
+                    <label for="timeline">Target Timeline?</label>
+                    <select id="timeline" name="timeline">
+                        <option value="1-3 months">1-3 months</option>
+                        <option value="3-6 months">3-6 months</option>
+                        <option value="6+ months">6+ months</option>
+                    </select>
+                    <label for="keyQuestion">Must-Ask Question for Our Call? <span class="required">*</span></label>
+                    <input type="text" id="keyQuestion" name="keyQuestion" required>
+                    
+                    <div class="form-navigation">
+                        <button type="button" class="nav-btn prev">← Previous</button>
+                        <button type="submit" class="nav-btn submit">Schedule My Call →</button>
+                    </div>
+                </div>
+            </form>
+            <p class="form-footer">We respect your privacy—data used only for call prep.</p>
+        </div>
+    </div>
+
+    <!-- ======================= COMPLETE WORKING JAVASCRIPT ======================= -->
+    <script>
+        // ==================== MULTI-STEP FORM LOGIC ====================
+        const modal = document.getElementById('auditModal');
+        const form = document.getElementById('auditForm');
+        const steps = Array.from(form.querySelectorAll('.form-step'));
+        const progressSteps = Array.from(document.querySelectorAll('.progress-step'));
+        let currentStep = 0;
+
+        function openAuditForm() {
+            currentStep = 0;
+            showStep(currentStep);
+            modal.classList.add('active');
+        }
+
+        function closeAuditForm() {
+            modal.classList.remove('active');
+        }
+
+        function showStep(stepIndex) {
+            steps.forEach((step, index) => {
+                step.classList.toggle('active', index === stepIndex);
+            });
+            progressSteps.forEach((pStep, index) => {
+                pStep.classList.toggle('active', index <= stepIndex);
+            });
+        }
+
+        function validateStep(stepIndex) {
+            const currentStepElement = steps[stepIndex];
+            const inputs = currentStepElement.querySelectorAll('input[required], textarea[required], select[required]');
+            let isValid = true;
+            inputs.forEach(input => {
+                if (!input.value.trim()) {
+                    input.style.borderColor = '#ef4444';
+                    isValid = false;
+                } else {
+                    input.style.borderColor = 'rgba(255,255,255,0.1)';
+                }
+            });
+            return isValid;
+        }
+
+        form.addEventListener('click', (e) => {
+            if (e.target.matches('.next')) {
+                if (validateStep(currentStep)) {
+                    if (currentStep < steps.length - 1) {
+                        currentStep++;
+                        showStep(currentStep);
+                    }
+                }
+            } else if (e.target.matches('.prev')) {
+                if (currentStep > 0) {
+                    currentStep--;
+                    showStep(currentStep);
+                }
+            }
+        });
+
+        // Slider for AI Comfort
+        const comfortSlider = document.getElementById('aiComfort');
+        const comfortOutput = document.getElementById('aiComfortOutput');
+        if (comfortSlider && comfortOutput) {
+            comfortOutput.innerText = comfortSlider.value;
+            comfortSlider.addEventListener('input', function() {
+                comfortOutput.innerText = this.value;
+            });
+        }
+
+        // FORM SUBMIT - FIXED VERSION (from your code)
+        form.addEventListener('submit', async function(event) {
+            event.preventDefault();
+
+            if (!validateStep(currentStep)) return;
+
+            const submitBtn = document.querySelector('.nav-btn.submit');
+            const originalText = submitBtn.textContent;
+            const lang = document.documentElement.lang || 'en';
+            
+            submitBtn.textContent = 'Sending...';
+            submitBtn.disabled = true;
+
+            // Collect ALL form data including checkboxes
+            const formData = {
+                // Step 1
+                fullName: document.getElementById('fullName')?.value || '',
+                email: document.getElementById('email')?.value || '',
+                phone: document.getElementById('phone')?.value || '',
+                company: document.getElementById('company')?.value || '',
+                role: document.getElementById('role')?.value || '',
+                website: document.getElementById('website')?.value || '',
+                
+                // Step 2
+                industry: document.getElementById('industry')?.value || '',
+                employees: document.getElementById('employees')?.value || '',
+                revenue: document.getElementById('revenue')?.value || '',
+                revenueStreams: document.getElementById('revenueStreams')?.value || '',
+                
+                // Step 3
+                challenges: document.getElementById('challenges')?.value || '',
+                goals: document.getElementById('goals')?.value || '',
+                pastExperience: document.getElementById('pastExperience')?.value || '',
+                aiComfort: document.getElementById('aiComfort')?.value || '',
+                
+                // Step 4 - Process checkboxes (collect all checked)
+                processes: Array.from(document.querySelectorAll('input[name="process"]:checked')).map(cb => cb.value).join(', '),
+                budget: document.getElementById('budget')?.value || '',
+                timeline: document.getElementById('timeline')?.value || '',
+                keyQuestion: document.getElementById('keyQuestion')?.value || '',
+                
+                // Metadata
+                submittedAt: new Date().toISOString(),
+                language: lang,
+                page: window.location.pathname,
+                userAgent: navigator.userAgent
+            };
+
+            try {
+                // Try main endpoint
+                const response = await fetch("https://aiden-backend-aiden.up.railway.app/audit", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(formData)
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    alert('Form submitted successfully! Redirecting to Calendly...');
+                    window.location.href = "https://calendly.com/ai-profit-lab2026";
+                } else {
+                    // Try alternative endpoint
+                    const altResponse = await fetch("https://aiden-backend-aiden.up.railway.app/api/audit", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify(formData)
+                    });
+                    const altResult = await altResponse.json();
+                    
+                    if (altResult.success) {
+                        alert('Form submitted successfully! Redirecting to Calendly...');
+                        window.location.href = "https://calendly.com/ai-profit-lab2026";
+                    } else {
+                        alert("An error occurred. Please try again.");
+                    }
+                }
+            } catch (error) {
+                console.error('Submission error:', error);
+                alert("Connection error. Please check your internet.");
+            } finally {
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            }
+        });
+
+        // Close modal when clicking outside
+        modal.addEventListener('click', (event) => {
+            if (event.target === modal) closeAuditForm();
+        });
+
+        // ==================== COUNTRY DETECTION ====================
+        async function detectCountry() {
+            try {
+                const response = await fetch('https://ipapi.co/json/');
+                const data = await response.json();
+                const country = data.country_name || 'Oman';
+                const countryCode = data.country_code || 'OM';
+                
+                localStorage.setItem('visitorCountry', country);
+                localStorage.setItem('visitorCountryCode', countryCode);
+                
+                const countrySpan = document.getElementById('visitor-country');
+                if (countrySpan) countrySpan.textContent = countryCode;
+                
+                const welcomeMsg = document.getElementById('welcome-message');
+                if (welcomeMsg) {
+                    if (countryCode === 'OM') {
+                        welcomeMsg.textContent = 'Welcome from Oman!';
+                    } else if (countryCode === 'SA') {
+                        welcomeMsg.textContent = 'Welcome from Saudi Arabia!';
+                    } else if (countryCode === 'AE') {
+                        welcomeMsg.textContent = 'Welcome from UAE!';
+                    } else if (countryCode === 'QA') {
+                        welcomeMsg.textContent = 'Welcome from Qatar!';
+                    } else if (countryCode === 'KW') {
+                        welcomeMsg.textContent = 'Welcome from Kuwait!';
+                    } else {
+                        welcomeMsg.textContent = `Welcome from ${country}!`;
+                    }
+                }
+                
+                return { country, countryCode };
+            } catch (error) {
+                console.log('Country detection failed, defaulting to Oman');
+                return { country: 'Oman', countryCode: 'OM' };
+            }
+        }
+
+        // ==================== PAGE-SPECIFIC CHAT GREETINGS ====================
+        function getPageSpecificGreeting() {
+            const path = window.location.pathname;
+            
+            if (path.includes('services')) {
+                return 'Which package looks right for your business? I can explain the details.';
+            } else if (path.includes('process')) {
+                return 'Our process is simple: Discover, Build, Launch. Which step would you like to understand better?';
+            } else if (path.includes('contact')) {
+                return 'You can contact us directly, or ask me your question now.';
+            } else if (path.includes('about')) {
+                return 'We build smart systems for Omani businesses. What would you like to know about us?';
+            } else {
+                return 'Hello! How can I help you today?';
+            }
+        }
+
+        // ==================== CHAT FUNCTIONS ====================
+        async function handleSend() {
+            const input = document.getElementById('user-input');
+            const message = input.value.trim();
+            if (!message) return;
+            
+            const box = document.getElementById('chat-messages');
+            const lang = 'en';
+            
+            // Get or create visitor data
+            let visitorId = localStorage.getItem('aidenVisitorId');
+            let visitCount = localStorage.getItem('aidenVisitCount');
+            let firstVisit = localStorage.getItem('aidenFirstVisit');
+            
+            if (!visitorId) {
+                visitorId = 'visitor_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+                visitCount = '1';
+                firstVisit = new Date().toISOString();
+                localStorage.setItem('aidenVisitorId', visitorId);
+                localStorage.setItem('aidenVisitCount', visitCount);
+                localStorage.setItem('aidenFirstVisit', firstVisit);
+            } else {
+                visitCount = (parseInt(visitCount) + 1).toString();
+                localStorage.setItem('aidenVisitCount', visitCount);
+            }
+            
+            // Get country data
+            const country = localStorage.getItem('visitorCountry') || 'Oman';
+            const countryCode = localStorage.getItem('visitorCountryCode') || 'OM';
+            
+            // Get or create email
+            let chatEmail = localStorage.getItem('aidenVisitorEmail');
+            if (!chatEmail) {
+                chatEmail = `visitor_${visitorId}@aiprofitlab.local`;
+                localStorage.setItem('aidenVisitorEmail', chatEmail);
+            }
+            
+            // Add user message
+            box.innerHTML += `<div class="bg-blue-900/50 ml-auto p-3 rounded-2xl rounded-br-none max-w-[85%] text-white">${message}</div>`;
+            input.value = '';
+            box.scrollTop = box.scrollHeight;
+            
+            // Show typing indicator
+            box.innerHTML += `<div id="typing-indicator" class="bg-gray-800 p-3 rounded-2xl rounded-tl-none max-w-[85%] text-gray-300">...</div>`;
+            
+            try {
+                const requestBody = {
+                    message: message,
+                    sessionId: visitorId,
+                    email: chatEmail,
+                    language: 'en',
+                    country: country,
+                    countryCode: countryCode,
+                    page: window.location.pathname,
+                    visitCount: visitCount,
+                    isReturning: parseInt(visitCount) > 1,
+                    previousVisits: parseInt(visitCount) - 1,
+                    firstVisit: firstVisit
+                };
+                
+                const response = await fetch('https://aiden-backend-aiden.up.railway.app/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(requestBody)
+                });
+                
+                const result = await response.json();
+                document.getElementById('typing-indicator')?.remove();
+                
+                const reply = result.reply || result.response || 'Thanks for your message! Let\'s continue.';
+                box.innerHTML += `<div class="bg-gray-800 p-3 rounded-2xl rounded-tl-none max-w-[85%] text-gray-300">${reply}</div>`;
+                
+            } catch (error) {
+                console.error('Chat error:', error);
+                document.getElementById('typing-indicator')?.remove();
+                box.innerHTML += `<div class="bg-gray-800 p-3 rounded-2xl rounded-tl-none max-w-[85%] text-red-300">Sorry, please try again</div>`;
+            }
+            box.scrollTop = box.scrollHeight;
+        }
+
+        function toggleChat() {
+            const chat = document.getElementById('aiden-ui');
+            chat.classList.toggle('active');
+            
+            // Update greeting when chat opens
+            if (chat.classList.contains('active')) {
+                const chatMessages = document.getElementById('chat-messages');
+                const greeting = getPageSpecificGreeting();
+                const welcomeMsg = document.getElementById('welcome-message').textContent;
+                
+                // Only update if it's the first message
+                if (chatMessages.children.length === 1) {
+                    chatMessages.innerHTML = `<div class="bg-gray-800 p-4 rounded-2xl rounded-tl-none max-w-[85%]">${greeting} <span class="block text-xs text-gray-500 mt-1">${welcomeMsg}</span></div>`;
+                }
+            }
+        }
+
+        // ==================== MOBILE MENU (FIXED) ====================
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileToggle = document.querySelector('.mobile-nav-toggle');
+            const mobileMenu = document.querySelector('.nav-links.mobile-menu');
+            
+            if (mobileToggle && mobileMenu) {
+                mobileToggle.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    if (mobileMenu.classList.contains('active')) {
+                        mobileMenu.classList.remove('active');
+                    } else {
+                        mobileMenu.classList.add('active');
+                    }
+                });
+
+                // Close menu when clicking a link
+                mobileMenu.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', function() {
+                        mobileMenu.classList.remove('active');
+                    });
+                });
+
+                // Close menu when clicking outside
+                document.addEventListener('click', function(event) {
+                    if (!mobileToggle.contains(event.target) && !mobileMenu.contains(event.target)) {
+                        mobileMenu.classList.remove('active');
+                    }
+                });
+            }
+        });
+
+        // ==================== INIT ====================
+        window.onload = async function() {
+            await detectCountry();
+            
+            // Auto-pop chat for new visitors (after 10 seconds)
+            if (!sessionStorage.getItem('aidenPopped')) {
+                setTimeout(() => {
+                    const chat = document.getElementById('aiden-ui');
+                    if (chat && !chat.classList.contains('active')) {
+                        toggleChat();
+                        sessionStorage.setItem('aidenPopped', 'true');
+                    }
+                }, 10000);
+            }
+        };
+    </script>
+</body>
+</html>
