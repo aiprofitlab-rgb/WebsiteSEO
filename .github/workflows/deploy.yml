@@ -11,14 +11,14 @@ jobs:
       - name: 🚚 Get latest code
         uses: actions/checkout@v4
 
-      - name: 🚀 Sync everything to Hostinger
+      - name: 🚀 Mirror public_html to Server
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          # This looks at your local folder
+          # This tells the robot: "Only look inside my local public_html folder"
           local-dir: ./public_html/
-          # This looks at Hostinger's folder
+          # This tells the robot: "Put them directly into the server's public_html"
           server-dir: public_html/
           port: 21
