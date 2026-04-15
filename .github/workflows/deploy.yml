@@ -15,13 +15,14 @@ jobs:
       - name: 🚚 Get latest code
         uses: actions/checkout@v4
 
-      - name: 🚀 Mirror public_html to Server
+      - name: 🚀 Mirror to Website Root
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          # Use quotes because of the space in 'Website SEO'
+          # Local source
           local-dir: "./Website SEO/public_html/"
-          server-dir: "public_html/"
+          # Destination: The dot means "The main entrance"
+          server-dir: "./" 
           port: 21
