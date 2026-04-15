@@ -1,10 +1,27 @@
-- name: 🚀 Mirror public_html to Server
+name: Deploy to Hostinger
+on:
+  push:
+    branches:
+      - main
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+jobs:
+  web-deploy:
+    name: 🎉 Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🚚 Get latest code
+        uses: actions/checkout@v4
+
+      - name: 🚀 Mirror public_html to Server
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          # The robot now looks INSIDE the 'Website SEO' folder
-          local-dir: ./Website SEO/public_html/
-          server-dir: public_html/
+          # Use quotes because of the space in 'Website SEO'
+          local-dir: "./Website SEO/public_html/"
+          server-dir: "public_html/"
           port: 21
