@@ -10,14 +10,19 @@ This skill automates the end-to-end creation of high-quality, story-driven, full
 When the user asks you to write an article for a given keyword/topic, follow these steps exactly:
 
 ## Step 1: Research and Outline
-- The article must be highly compelling, using a storytelling style based on reality (no hallucinations/unverified claims).
-- The article must be a rich, highly SEO-friendly article at least 1000 words long. Use appropriate keyword density, semantic LSI keywords, and optimized H2/H3 headers.
-- Include a specific section for References at the end (verify that references exist and are not broken logic).
+- **Lead with Provocative Expertise**: The article must be highly compelling, using a storytelling style based on reality and lived-experience. Do not write safe, generic tech guides. Tell the audience exactly why most tech implementations fail for non-technical leaders and how our framework fixes it.
+- **The "Extractable" Content Structure**: Rip out long walls of text. Use clear `<h2>` and `<h3>` headings. Start every major section with a bolded direct answer or a quick "TL;DR." bulleted list so that AI models can instantly pull your exact bullet points.
+- **Target "Fan-Out" Queries**: Optimize not just for short keywords, but for complex, long, conversational "fan-out" questions (e.g., "What is the most cost-effective AI implementation strategy for regional businesses looking to scale internationally?").
+- **Factual Density**: AI prioritizes data over fluff. When discussing boosting ROI, back it up. Include real statistics, HTML comparison tables, and strict Q&A formats directly within the body content to increase citation rates.
+- **Video-to-Text Synergy**: Embed relevant, energetic, high-retention YouTube videos directly into the written posts to skyrocket page engagement metrics.
+- The article must be a rich, highly SEO-friendly article at least 1000 words long.
+- Include a specific section for References at the end (verify that references exist and are not broken).
 - Generate an extensive FAQ section at the end containing AT LEAST 10 Frequently Asked Questions. These questions should be optimized for AI search engines (like Perplexity, ChatGPT, and Google AI Overviews) by directly answering the most common, long-tail queries users or LLMs might have about the topic.
 - Designate a hero image concept that matches the futuristic, semi-realistic AI vibe of the other articles.
 
 ## Step 2: Generate the English Version
 Draft the English article content. Then wrap it in the exact HTML structure expected for the blog. Ensure it follows the dark-mode glassmorphism style.
+Ensure you strictly populate the embedded JSON-LD Schema Markup in the `<head>` with the article's specific `Article` data, the 10+ `FAQPage` data, and the `Organization` details, as AI search engines prioritize highly structured schema paths.
 Save it to: `public_html/blog/en/YYYY-MM-DD-[slug-title].html` (use the current date).
 
 ## Step 3: Generate the Arabic Version
@@ -52,6 +57,53 @@ Whenever you generate the files, use the following HTML template. Do NOT deviate
     <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
     <link rel="apple-touch-icon" href="../../favicon.svg">
     
+    <!-- JSON-LD Schema Markup -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": "https://aiprofitlab.io/#organization",
+          "name": "AI Profit Lab",
+          "url": "https://aiprofitlab.io/",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://aiprofitlab.io/favicon.svg"
+          }
+        },
+        {
+          "@type": "Article",
+          "headline": "[SEO Title]",
+          "description": "[SEO Description]",
+          "image": "https://aiprofitlab.io/blog/images/[image_name].png",
+          "author": {
+            "@type": "Organization",
+            "name": "AI Profit Lab"
+          },
+          "publisher": {
+            "@id": "https://aiprofitlab.io/#organization"
+          },
+          "datePublished": "YYYY-MM-DD"
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "[Question 1]",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "[Answer 1]"
+              }
+            }
+            // Generate for ALL 10+ FAQs sequentially
+          ]
+        }
+      ]
+    }
+    </script>
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <style>
