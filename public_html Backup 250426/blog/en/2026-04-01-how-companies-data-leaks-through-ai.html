@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2GPVY4Z5KR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-2GPVY4Z5KR');
+</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How Company Data Leaks Through AI — And How to Stop It | AI Profit Lab</title>
+    <meta name="description" content="Discover how artificial intelligence tools are silently leaking your company's confidential data — and learn the exact steps to protect your business from AI-driven data breaches in 2025.">
+    <meta name="keywords" content="AI data leak, company data security, artificial intelligence risk, data privacy AI, تسريب بيانات الشركات, الذكاء الاصطناعي وأمن البيانات, حماية بيانات الشركة, مخاطر الذكاء الاصطناعي">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="apple-touch-icon" href="../../favicon.svg">
+    <style>
+        body { 
+            font-family: 'Outfit', sans-serif; 
+            background-color: #050505; 
+            color: #ffffff; 
+            margin: 0; 
+            overflow-x: hidden; 
+        }
+        .glass { 
+            background: rgba(255, 255, 255, 0.03); 
+            backdrop-filter: blur(12px); 
+            border: 1px solid rgba(255, 255, 255, 0.05); 
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+        .prose, .prose p {
+            color: #d1d5db;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            font-size: 1.125rem;
+        }
+        .prose h2, .prose h3 {
+            color: #ffffff;
+            font-weight: 700;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        .prose h2 { font-size: 2rem; }
+        .prose h3 { font-size: 1.5rem; }
+
+        .callout-danger {
+            background: rgba(239, 68, 68, 0.08);
+            border: 1px solid rgba(239, 68, 68, 0.25);
+            border-radius: 1rem;
+            padding: 1.25rem 1.5rem;
+            margin: 1.5rem 0;
+            color: #fca5a5;
+        }
+        .callout-tip {
+            background: rgba(16, 185, 129, 0.08);
+            border: 1px solid rgba(16, 185, 129, 0.25);
+            border-radius: 1rem;
+            padding: 1.25rem 1.5rem;
+            margin: 1.5rem 0;
+            color: #6ee7b7;
+        }
+
+        .custom-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            border-radius: 1rem;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin: 2rem 0;
+        }
+        .custom-table th {
+            background: rgba(239, 68, 68, 0.12);
+            color: #f87171;
+            font-weight: 700;
+            padding: 1.25rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .custom-table td {
+            padding: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            color: #D1D5DB;
+        }
+        .custom-table tr:last-child td { border-bottom: none; }
+
+        .step-card {
+            background: rgba(59, 130, 246, 0.05);
+            border: 1px solid rgba(59, 130, 246, 0.15);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            transition: border-color 0.3s ease;
+        }
+        .step-card:hover { border-color: rgba(59, 130, 246, 0.4); }
+        .step-number {
+            background: linear-gradient(135deg, #3B82F6, #06b6d4);
+            color: white;
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1rem;
+            margin-bottom: 0.75rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="flex justify-between items-center px-6 md:px-12 py-8 w-full glass bg-black/30 sticky top-0 z-50">
+        <a href="../../en.html" class="font-extrabold text-3xl md:text-4xl tracking-tighter hover:opacity-80 transition">
+            <span class="text-blue-500">A</span><span class="text-red-500">I</span> <span class="text-white text-2xl md:text-3xl">Profit Lab</span>
+        </a>
+    </nav>
+
+    <div class="max-w-4xl mx-auto px-4 py-16">
+        <div class="glass-card rounded-3xl overflow-hidden p-8 md:p-12">
+
+            <!-- Eyebrow -->
+            <p class="text-red-400 font-bold text-sm uppercase tracking-widest mb-4">⚠️ Data Security · AI Risk · 2025</p>
+
+            <h1 class="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-orange-400 mb-6 leading-tight">
+                How Company Data Leaks Through AI — And How to Stop It
+            </h1>
+            
+            <img src="../../blog/images/ai_data_leak_companies.png" 
+                 alt="Company data leaking through AI systems - cybersecurity risk" 
+                 class="w-full rounded-2xl mb-10 shadow-2xl border border-white/10" />
+
+            <div class="prose">
+                <p class="text-xl text-gray-300 font-semibold mb-8">
+                    Every day, thousands of employees worldwide type confidential company data — client lists, financial reports, internal strategies — into AI tools like ChatGPT, Gemini, and Copilot. Most of them have no idea that this data could be stored, used for training, or exposed to other users. This article reveals exactly how it happens, and what you can do to protect your company.
+                </p>
+
+                <h2>The Silent Threat: AI as an Unintentional Data Leak</h2>
+                <p>
+                    Artificial intelligence tools have become the new workplace assistant. They write emails, summarize reports, translate documents, and generate code. But there is a critical, often ignored question: <strong>where does the data you type actually go?</strong>
+                </p>
+                <p>
+                    When an employee pastes a confidential customer contract into ChatGPT to "summarize it quickly," that data may be processed on external servers, stored in logs, used to improve the AI model, or in some historical cases, exposed to other users. This is not a hypothetical threat — it has already happened. According to a 2023 report by cybersecurity firm Cyberhaven, <strong>over 11% of data pasted into AI tools was classified as corporate confidential</strong>.
+                </p>
+
+                <div class="callout-danger">
+                    <strong>🔴 Real Incident:</strong> Samsung engineers accidentally leaked proprietary source code and confidential meeting notes by pasting them into ChatGPT in early 2023. The company subsequently banned its internal use entirely.
+                </div>
+
+                <h2>The 5 Main Ways AI Causes Data Leaks in Companies</h2>
+
+                <h3>1. Employees Entering Sensitive Data into AI Chatbots</h3>
+                <p>
+                    The most common risk. Staff use public AI tools without understanding the data retention policies. Customer PII (Personally Identifiable Information), salary data, legal documents, and merger plans have all been entered into general-purpose AI chatbots.
+                </p>
+
+                <h3>2. AI Training on Your Internal Documents</h3>
+                <p>
+                    When businesses integrate AI tools directly into their work environment (e.g., a plugin that reads all emails or files), the AI model may learn from those documents. If the AI is cloud-based and shared, its "learnings" can potentially surface in responses to other users.
+                </p>
+
+                <h3>3. Shadow AI Usage — Unmonitored Tools</h3>
+                <p>
+                    Employees increasingly install AI browser extensions, apps, and APIs without IT department approval. This "Shadow AI" operates outside any company policy or security review, creating invisible data pipelines to unknown third parties.
+                </p>
+
+                <h3>4. Third-Party AI Vendor Breaches</h3>
+                <p>
+                    If the AI company itself suffers a breach, your data — which was processed on their servers — becomes exposed. Your own security posture is irrelevant if your AI vendor is compromised.
+                </p>
+
+                <h3>5. AI-Powered Phishing and Social Engineering</h3>
+                <p>
+                    Attackers now use AI to craft hyper-personalized phishing emails using publicly scraped data about your company and employees. Once an employee is tricked, internal data flows directly to attackers.
+                </p>
+
+                <h2>The Risk Is Higher in Arabic-Speaking Markets</h2>
+                <p>
+                    Businesses in the Gulf region and wider Arab world face a unique additional layer of risk. Most global AI tools process data on servers located outside the region — in the US or Europe. This means:
+                </p>
+                <ul class="list-disc pl-6 space-y-2 text-gray-300 my-4">
+                    <li>Sensitive data crosses international jurisdictions the moment it is entered into the AI.</li>
+                    <li>It may conflict with local data sovereignty laws (e.g., Oman's Personal Data Protection Law, Saudi Arabia's PDPL, UAE's PDPL).</li>
+                    <li>Companies may unknowingly violate regulations, creating legal and financial liability.</li>
+                </ul>
+
+                <div class="callout-danger">
+                    <strong>⚠️ Compliance Alert:</strong> Under Saudi Arabia's Personal Data Protection Law (PDPL) and Oman's Data Protection Law, transferring personal data to foreign servers without proper safeguards can result in significant fines and penalties.
+                </div>
+
+                <h2>AI Data Leak Risk: At-a-Glance</h2>
+                <div class="overflow-x-auto">
+                    <table class="custom-table">
+                        <thead>
+                            <tr>
+                                <th>Risk Vector</th>
+                                <th>Likelihood</th>
+                                <th>Data Exposed</th>
+                                <th>Example</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Employee Chatbot Input</strong></td>
+                                <td>🔴 High</td>
+                                <td>Contracts, PII, Financials</td>
+                                <td>Samsung 2023 Breach</td>
+                            </tr>
+                            <tr>
+                                <td><strong>AI Tool Training</strong></td>
+                                <td>🟡 Medium</td>
+                                <td>Documents, Emails, Code</td>
+                                <td>GitHub Copilot code exposure</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Shadow AI Tools</strong></td>
+                                <td>🔴 High</td>
+                                <td>All company data types</td>
+                                <td>Unauthorized browser extensions</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Vendor Breach</strong></td>
+                                <td>🟡 Medium</td>
+                                <td>Processed data logs</td>
+                                <td>OpenAI 2023 data exposure incident</td>
+                            </tr>
+                            <tr>
+                                <td><strong>AI Phishing</strong></td>
+                                <td>🔴 High</td>
+                                <td>Credentials, Access Tokens</td>
+                                <td>AI-generated spear phishing attacks</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h2>7 Steps to Protect Your Company from AI Data Leaks</h2>
+
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <h3 class="text-white font-bold text-lg mt-0 mb-2">Create a Clear AI Usage Policy</h3>
+                    <p class="mb-0">Define exactly which AI tools employees are authorized to use, and which categories of data they are absolutely forbidden from entering into any AI system. Make it a signed document with annual refreshes.</p>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <h3 class="text-white font-bold text-lg mt-0 mb-2">Use Enterprise Versions with Data Isolation</h3>
+                    <p class="mb-0">Enterprise plans for tools like ChatGPT Team, Gemini for Workspace, and Microsoft Copilot explicitly guarantee that your data is NOT used for training. This is the minimum bar for any business AI usage.</p>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <h3 class="text-white font-bold text-lg mt-0 mb-2">Deploy On-Premise or Regional AI Solutions</h3>
+                    <p class="mb-0">For the highest-sensitivity data, deploy AI models within your own infrastructure or use regional providers whose servers are located within your jurisdiction. Arabic-first models like Jais (UAE) or Lean LLM offer Gulf-based deployments.</p>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">4</div>
+                    <h3 class="text-white font-bold text-lg mt-0 mb-2">Conduct Shadow AI Audits</h3>
+                    <p class="mb-0">Use network monitoring tools to identify which AI services are being accessed on company networks. Block unauthorized AI domains at the firewall level and build a whitelist of approved tools.</p>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">5</div>
+                    <h3 class="text-white font-bold text-lg mt-0 mb-2">Classify Data Before AI Interaction</h3>
+                    <p class="mb-0">Implement a data classification system (Public, Internal, Confidential, Restricted). Train employees to recognize which tier their data falls into before deciding whether to share it with an AI tool.</p>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">6</div>
+                    <h3 class="text-white font-bold text-lg mt-0 mb-2">Enable DLP (Data Loss Prevention) Systems</h3>
+                    <p class="mb-0">Modern DLP solutions can detect and block the transfer of sensitive data patterns (credit card numbers, passport numbers, confidential document identifiers) to AI tools in real-time, even in browser environments.</p>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">7</div>
+                    <h3 class="text-white font-bold text-lg mt-0 mb-2">Train Your Team Continuously</h3>
+                    <p class="mb-0">Human error is the single biggest vulnerability. Quarterly security awareness training that explicitly covers AI-specific risks (not just phishing) is now a business necessity. Simulate AI data leak scenarios in your training exercises.</p>
+                </div>
+
+                <div class="callout-tip">
+                    <strong>✅ Pro Tip for GCC Companies:</strong> Review your AI vendor contracts against the requirements of your local data protection law before signing. Require data processing agreements (DPAs) that explicitly restrict your data from being used for model training.
+                </div>
+
+                <h2>The Bottom Line</h2>
+                <p>
+                    AI is not the enemy — unmanaged AI usage is. The companies that will thrive in the coming decade are those that <em>harness</em> AI's power while maintaining airtight control over their data. This requires treating AI security not as an IT afterthought but as a core business strategy.
+                </p>
+                <p>
+                    For businesses in Oman, Saudi Arabia, the UAE, and across the Arab world, the stakes are even higher given the emerging legal landscape around data sovereignty. Acting now — before an incident forces your hand — is the only responsible path forward.
+                </p>
+
+                <div class="mt-16 pt-8 border-t border-white/10">
+                    <h3 class="text-xl mb-4">References</h3>
+                    <ul class="list-disc pl-5 space-y-2 text-gray-400 text-sm">
+                        <li><a href="https://cyberhaven.com/blog/4-2-of-workers-have-pasted-company-data-into-chatgpt" class="text-blue-400 hover:text-blue-300 transition" target="_blank">Cyberhaven Research: Workers Pasting Sensitive Data into ChatGPT (2023)</a></li>
+                        <li><a href="https://www.reuters.com/technology/samsung-bans-use-generative-ai-tools-like-chatgpt-internal-use-2023-05-02/" class="text-blue-400 hover:text-blue-300 transition" target="_blank">Reuters: Samsung Bans ChatGPT After Data Leak Incident (2023)</a></li>
+                        <li><a href="https://www.openai.com/enterprise-privacy" class="text-blue-400 hover:text-blue-300 transition" target="_blank">OpenAI Enterprise Privacy Policy and Data Handling</a></li>
+                        <li><a href="https://sdaia.gov.sa/en/SDAIA/about/Pages/pdpl.aspx" class="text-blue-400 hover:text-blue-300 transition" target="_blank">Saudi Arabia Personal Data Protection Law (PDPL) — SDAIA</a></li>
+                        <li><a href="https://www.tra.gov.om/en/" class="text-blue-400 hover:text-blue-300 transition" target="_blank">Oman Telecommunications Regulatory Authority — Data Privacy Framework</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

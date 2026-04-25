@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2GPVY4Z5KR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-2GPVY4Z5KR');
+</script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-XXXXXXXXXX');
+    </script>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO Meta Tags -->
+    <title>Our Packages | AI Profit Lab - Smart Business Solutions</title>
+    <meta name="description" content="Simple, transparent packages for Omani businesses. STARTER for startups, GROWTH for SMEs, SCALE for established companies. Save time and grow profits.">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="apple-touch-icon" href="/favicon.svg">
+    
+    <!-- Fonts & CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Outfit', sans-serif; background-color: #050505; color: #ffffff; margin: 0; overflow-x: hidden; }
+        .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.05); }
+        .glass-card { background: rgba(255, 255, 255, 0.02); backdrop-filter: blur(8px); border: 1px solid rgba(255, 255, 255, 0.05); transition: all 0.3s ease; }
+        .glass-card:hover { border-color: #3B82F6; transform: translateY(-5px); }
+        .nav-links { display: none; }
+        .mobile-nav-toggle { display: block; }
+        @media (min-width: 768px) { .nav-links { display: flex !important; } .mobile-nav-toggle { display: none; } }
+        
+        /* Chatbot Styles */
+        #aiden-ui { transform: translateY(120%); transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1); visibility: hidden; z-index: 1000; right: 8px; left: auto; }
+        #aiden-ui.active { transform: translateY(0); visibility: visible; }
+        .pulse { animation: pulse-animation 2s infinite; }
+        @keyframes pulse-animation { 0% { box-shadow: 0 0 0 0px rgba(59, 130, 246, 0.4); } 100% { box-shadow: 0 0 0 20px rgba(59, 130, 246, 0); } }
+        
+        /* Form Modal Styles (full multi-step) */
+        .form-modal-overlay {
+            position: fixed; inset: 0; background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(8px); z-index: 2000;
+            display: none; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s ease;
+        }
+        .form-modal-overlay.active { display: flex; opacity: 1; }
+        .form-modal-content {
+            width: 90%; max-width: 800px; max-height: 90vh; overflow-y: auto; padding: 2rem;
+            border-radius: 1.5rem; background: #0a0a0a; border: 1px solid rgba(255, 255, 255, 0.1);
+            transform: scale(0.95); transition: transform 0.3s ease;
+        }
+        .form-modal-overlay.active .form-modal-content { transform: scale(1); }
+        .close-btn { position: absolute; top: 20px; right: 20px; background: none; border: none; color: #aaa; font-size: 2rem; cursor: pointer; }
+        .close-btn:hover { color: #fff; }
+        .progress-bar {
+            display: flex; justify-content: space-between; margin-bottom: 2rem; max-width: 400px;
+            margin-left: auto; margin-right: auto; position: relative;
+        }
+        .progress-bar::before {
+            content: ''; position: absolute; top: 50%; left: 0; right: 0; height: 2px;
+            background-color: rgba(255,255,255,0.2); transform: translateY(-50%); z-index: -1;
+        }
+        .progress-step {
+            width: 35px; height: 35px; border-radius: 50%; background: rgba(255,255,255,0.1);
+            border: 2px solid rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center;
+            color: #fff; transition: all 0.3s;
+        }
+        .progress-step.active {
+            background: linear-gradient(135deg, #3B82F6, #22C55E);
+            border-color: transparent; transform: scale(1.1);
+        }
+        .form-step { display: none; }
+        .form-step.active { display: block; animation: fadeIn 0.5s; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        input, textarea, select {
+            width: 100%; padding: 0.75rem; margin-bottom: 1rem; background: rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.1); border-radius: 0.5rem; color: #fff;
+        }
+        input:focus, textarea:focus, select:focus { outline: none; border-color: #3B82F6; }
+        .checkbox-group { display: grid; grid-template-columns: repeat(2,1fr); gap: 0.75rem; }
+        .checkbox-item {
+            background: rgba(255,255,255,0.03); padding: 0.75rem; border-radius: 0.5rem;
+            display: flex; align-items: center; cursor: pointer;
+        }
+        .checkbox-item:hover { background: rgba(59,130,246,0.1); }
+        .checkbox-item input[type="checkbox"] { display: none; }
+        .checkbox-item .checkmark {
+            width: 20px; height: 20px; border: 2px solid #3B82F6; border-radius: 4px;
+            margin-right: 10px; display: flex; align-items: center; justify-content: center;
+        }
+        .checkbox-item .checkmark svg { display: none; width: 14px; height: 14px; }
+        .checkbox-item input[type="checkbox"]:checked + .checkmark {
+            background: linear-gradient(135deg, #3B82F6, #22C55E);
+        }
+        .checkbox-item input[type="checkbox"]:checked + .checkmark svg { display: block; }
+        .slider-output { text-align: center; font-weight: bold; color: #22C55E; }
+        .form-navigation { display: flex; justify-content: space-between; margin-top: 2rem; }
+        .nav-btn {
+            padding: 0.75rem 2rem; background: linear-gradient(135deg, #3B82F6, #2563EB);
+            color: white; border: none; border-radius: 0.5rem; font-weight: bold; cursor: pointer;
+            transition: all 0.3s;
+        }
+        .nav-btn.prev { background: rgba(255,255,255,0.1); }
+        .nav-btn:hover { opacity: 0.9; transform: translateY(-2px); }
+        
+        .comparison-table { border-collapse: separate; border-spacing: 0 8px; width: 100%; }
+        .comparison-table th { background: rgba(59,130,246,0.1); padding: 1rem; font-weight: 700; }
+        .comparison-table td { padding: 1rem; background: rgba(255,255,255,0.02); border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .comparison-table tr:hover td { background: rgba(59,130,246,0.05); }
+        @media (max-width: 640px) { .checkbox-group { grid-template-columns: 1fr; } }
+        
+        /* Custom styling for add-on cards */
+        .addon-card {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+        .addon-card:hover {
+            border-color: #3B82F6;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(59,130,246,0.1);
+        }
+        .addon-title {
+            font-size: 1.25rem;
+            font-weight: bold;
+            margin-bottom: 0.75rem;
+            color: #3B82F6;
+        }
+        .addon-price {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #22C55E;
+            margin-bottom: 1rem;
+        }
+        .addon-price span {
+            font-size: 1rem;
+            font-weight: normal;
+            color: #9CA3AF;
+        }
+        .addon-desc {
+            color: #9CA3AF;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        .addon-desc strong {
+            color: white;
+        }
+        /* Annual offer badge */
+        .annual-offer {
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            border-radius: 0.5rem;
+            padding: 0.5rem 0.75rem;
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+        }
+        /* Currency note - shows OMR by default */
+        .currency-note {
+            font-size: 0.8rem;
+            color: #9CA3AF;
+            margin-top: 0.25rem;
+        }
+        .hidden-currency {
+            display: none;
+        }
+    </style>
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://aiprofitlab.io/services-en/">
+</head>
+<body>
+
+<!-- ======================= Navigation ======================= -->
+<nav class="flex justify-between items-center px-6 md:px-12 py-8 fixed w-full z-50 glass bg-black/30">
+    <a href="en.html" class="font-extrabold text-3xl md:text-4xl tracking-tighter">
+        <span class="text-blue-500">A</span><span class="text-red-500">I</span> <span class="text-white text-2xl md:text-3xl">Profit Lab</span>
+    </a>
+    
+    <!-- Desktop Menu -->
+    <div class="hidden md:flex items-center gap-8">
+        <div class="nav-links flex gap-8 text-sm font-bold uppercase items-center">
+            <a href="en.html" class="hover:text-blue-400 transition">Home</a>
+            <a href="services-en.html" class="hover:text-blue-400 transition">Packages</a>
+            <a href="process-en.html" class="hover:text-blue-400 transition">How It Works</a>
+            <a href="about-en.html" class="hover:text-blue-400 transition">About</a>
+            <a href="contact-en.html" class="hover:text-blue-400 transition">Contact</a>
+        </div>
+        <!-- Language Switch Button - OUTSIDE menu -->
+        <a href="index.html" class="bg-blue-600/20 hover:bg-blue-600/30 text-white px-4 py-2 rounded-full text-sm font-bold transition border border-blue-500/30">
+            العربية
+        </a>
+    </div>
+    
+    <!-- Mobile Menu Button -->
+    <div class="mobile-nav-toggle md:hidden flex items-center gap-4">
+        <a href="index.html" class="bg-blue-600/20 text-white px-3 py-1 rounded-full text-xs font-bold border border-blue-500/30">
+            عربي
+        </a>
+        <button class="text-white text-2xl">☰</button>
+    </div>
+</nav>
+
+    <!-- ======================= Page Header ======================= -->
+    <section class="pt-32 pb-16 px-4 text-center">
+        <h1 class="text-4xl md:text-5xl font-extrabold mb-4">Our Packages</h1>
+        <p class="text-gray-400 max-w-2xl mx-auto">Simple, transparent pricing. One setup fee + monthly support. You focus on your business, we handle the tech.</p>
+        <div class="mt-4 inline-block bg-yellow-500/10 text-yellow-400 border border-yellow-500/20 px-4 py-2 rounded-full text-sm">
+            ✨ Annual offer: Pay for 10 months, get 12 months support (2 months free)
+        </div>
+        <div class="currency-note mt-2">💰 All prices shown in Omani Rial (OMR)</div>
+    </section>
+
+    <!-- ======================= Model Explanation ======================= -->
+    <section class="px-4 pb-16">
+        <div class="max-w-5xl mx-auto grid md:grid-cols-3 gap-6">
+            <div class="glass-card p-6 rounded-xl text-center">
+                <div class="text-4xl text-blue-500 mb-2">💰</div>
+                <h3 class="font-bold text-xl mb-2">Setup Fee</h3>
+                <p class="text-gray-400">One-time payment. We build and launch your system.</p>
+            </div>
+            <div class="glass-card p-6 rounded-xl text-center border-blue-500/20">
+                <div class="text-4xl text-blue-500 mb-2">🔄</div>
+                <h3 class="font-bold text-xl mb-2">Monthly Support</h3>
+                <p class="text-gray-400">We keep everything running, updated, and working.</p>
+            </div>
+            <div class="glass-card p-6 rounded-xl text-center">
+                <div class="text-4xl text-blue-500 mb-2">🎯</div>
+                <h3 class="font-bold text-xl mb-2">Results</h3>
+                <p class="text-gray-400">You save time, grow profits, and focus on what matters.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ======================= Detailed Packages ======================= -->
+    <section class="px-4 pb-20">
+        <div class="max-w-7xl mx-auto space-y-12">
+            
+            <!-- STARTER Package -->
+            <div class="glass-card p-8 md:p-12 rounded-3xl border border-green-500/20" id="starter">
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="md:col-span-1">
+                        <div class="text-green-500 text-sm font-bold mb-2">🌱 STARTER</div>
+                        <h2 class="text-3xl font-bold mb-2">Start Smart</h2>
+                        <p class="text-gray-400 mb-4">"Start Small, Win Big"</p>
+                        <div class="mb-4">
+                            <span class="text-4xl font-bold">OMR 500</span>
+                            <span class="text-gray-400"> setup</span>
+                            <div class="text-green-400 font-bold text-xl mt-2">OMR 75/month</div>
+                            <!-- Annual offer -->
+                            <div class="annual-offer mt-3">
+                                <span class="text-green-400 font-bold">✨ Annual: OMR 750</span>
+                                <span class="text-gray-300 text-sm block">(Pay for 10 months, get 12 months — save OMR 150)</span>
+                            </div>
+                        </div>
+                        <p class="text-sm text-gray-500 mb-6">Delivery in 3-6 weeks</p>
+                        <a href="#" onclick="openAuditForm('starter'); return false;" class="block w-full bg-green-600 text-white text-center px-6 py-4 rounded-xl font-bold hover:bg-green-500 transition">
+                            Start Now
+                        </a>
+                    </div>
+                    <div class="md:col-span-2">
+                        <h3 class="font-bold text-xl mb-4">What's included:</h3>
+                        <ul class="space-y-4">
+                            <li class="flex gap-3">
+                                <span class="text-green-500 shrink-0">✓</span>
+                                <span><strong class="text-white">WhatsApp or website chatbot</strong> – Never miss a message. It replies 24/7, even while you sleep, so you don't lose customers after hours.</span>
+                            </li>
+                            <li class="flex gap-3">
+                                <span class="text-green-500 shrink-0">✓</span>
+                                <span><strong class="text-white">Smart lead follow-up</strong> – When someone messages you, we don't just save their info – we automatically follow up with them. Imagine this: a potential customer sends you a message at midnight. Our system instantly replies, saves their details, AND sends them automatic reminders. For example, if someone asks about a product but doesn't buy, they'll get a friendly WhatsApp message the next day: "Hi [Name], just checking if you had any questions about [product]?" Or a few days later: "Still interested? We have a special offer just for you." All sent automatically. It's like having a salesperson who never forgets to follow up with every single lead.</span>
+                            </li>
+                            <li class="flex gap-3">
+                                <span class="text-green-500 shrink-0">✓</span>
+                                <span><strong class="text-white">Customer phonebook</strong> – Imagine having a notebook that writes itself. Every person who contacts you gets added to a list automatically. You can see their name, number, and what they asked about – all in one place, like a contact list on your phone.</span>
+                            </li>
+                            <li class="flex gap-3">
+                                <span class="text-green-500 shrink-0">✓</span>
+                                <span><strong class="text-white">One custom automation</strong> – For example: automatic invoice generation (sends bills to customers automatically) or automatic lead searching (finds new potential customers for you). Saves hours every week.</span>
+                            </li>
+                            <li class="flex gap-3">
+                                <span class="text-green-500 shrink-0">✓</span>
+                                <span><strong class="text-white">30 days post-launch support</strong> – We're with you as you start, answering questions and ensuring everything runs smoothly.</span>
+                            </li>
+                        </ul>
+                        <p class="text-sm text-gray-500 mt-6">Ideal for: Startups, solopreneurs, new businesses</p>
+                        <p class="text-sm text-gray-400 mt-2"><strong>Result:</strong> You'll have the power of a small team without hiring anyone. Stop losing leads after hours and start capturing every opportunity automatically. Every single person who shows interest gets followed up with – no one falls through the cracks.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- GROWTH Package - MOST POPULAR -->
+            <div class="glass-card p-8 md:p-12 rounded-3xl border-2 border-blue-500 relative" id="growth">
+                <div class="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-blue-500 text-white px-6 py-2 rounded-full font-bold text-sm">
+                    MOST POPULAR ⭐
+                </div>
+                <div class="grid md:grid-cols-3 gap-8 mt-4">
+                    <div class="md:col-span-1">
+                        <div class="text-blue-500 text-sm font-bold mb-2">📈 GROWTH</div>
+                        <h2 class="text-3xl font-bold mb-2">Grow Fast</h2>
+                        <p class="text-gray-400 mb-4">"Grow Without the Chaos"</p>
+                        <div class="mb-4">
+                            <span class="text-4xl font-bold">OMR 1,200</span>
+                            <span class="text-gray-400"> setup</span>
+                            <div class="text-blue-400 font-bold text-xl mt-2">OMR 150/month</div>
+                            <!-- Annual offer -->
+                            <div class="annual-offer mt-3">
+                                <span class="text-blue-400 font-bold">✨ Annual: OMR 1,500</span>
+                                <span class="text-gray-300 text-sm block">(Pay for 10 months, get 12 months — save OMR 300)</span>
+                            </div>
+                        </div>
+                        <p class="text-sm text-gray-500 mb-6">Delivery in 6-12 weeks</p>
+                        <a href="#" onclick="openAuditForm('growth'); return false;" class="block w-full bg-blue-600 text-white text-center px-6 py-4 rounded-xl font-bold hover:bg-blue-500 transition">
+                            Choose Growth
+                        </a>
+                    </div>
+                    <div class="md:col-span-2">
+                        <h3 class="font-bold text-xl mb-4">Everything in STARTER, plus:</h3>
+                        <ul class="space-y-4">
+                            <li class="flex gap-3">
+                                <span class="text-blue-500 shrink-0">✓</span>
+                                <span><strong class="text-white">Up to 3 smart automations working together</strong> – They follow up with leads, book appointments, and answer common questions – all automatically.</span>
+                            </li>
+                            <li class="flex gap-3">
+                                <span class="text-blue-500 shrink-0">✓</span>
+                                <span><strong class="text-white">Automated follow-up sequences</strong> – Set up entire sequences of follow-ups. For example: Day 1 – Thank you message, Day 3 – Helpful information about your product, Day 7 – Special offer reminder. All sent automatically via WhatsApp or email. Never let a single lead go cold again.</span>
+                            </li>
+                            <li class="flex gap-3">
+                                <span class="text-blue-500 shrink-0">✓</span>
+                                <span><strong class="text-white">Full CRM (Customer Relationship Management)</strong> – See every customer's journey from first message to closed deal. No more lost follow-ups.</span>
+                            </li>
+                            <li class="flex gap-3">
+                                <span class="text-blue-500 shrink-0">✓</span>
+                                <span><strong class="text-white">1 content channel on autopilot</strong> – Choose social media, Telegram, WhatsApp, or a blog. Fresh content goes out automatically, building your brand while you sleep.</span>
+                            </li>
+                            <li class="flex gap-3">
+                                <span class="text-blue-500 shrink-0">✓</span>
+                                <span><strong class="text-white">AI model kept up to date</strong> – When your prices, products, or services change, we update your AI tools so they always give correct information.</span>
+                            </li>
+                            <li class="flex gap-3">
+                                <span class="text-blue-500 shrink-0">✓</span>
+                                <span><strong class="text-white">Monthly check-in call (30 min)</strong> – We review what's working, fix what isn't, and keep improving.</span>
+                            </li>
+                            <li class="flex gap-3">
+                                <span class="text-blue-500 shrink-0">✓</span>
+                                <span><strong class="text-white">1 staff training session</strong> – Your team learns to use the tools confidently from day one.</span>
+                            </li>
+                            <li class="flex gap-3">
+                                <span class="text-blue-500 shrink-0">✓</span>
+                                <span><strong class="text-white">Monthly performance report</strong> – Clear numbers on leads, conversions, and growth. You'll know exactly what's driving your business forward.</span>
+                            </li>
+                        </ul>
+                        <p class="text-sm text-gray-500 mt-6">Ideal for: Growing SMEs (Small to Medium Enterprises), 2-10 staff, established businesses ready to scale</p>
+                        <p class="text-sm text-gray-400 mt-2"><strong>Result:</strong> Your business grows without growing your headcount. More customers, less chaos. You'll have a system that handles the busywork, freeing you to focus on strategy.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SCALE Package -->
+            <div class="glass-card p-8 md:p-12 rounded-3xl border border-purple-500/20" id="scale">
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="md:col-span-1">
+                        <div class="text-purple-500 text-sm font-bold mb-2">⚡ SCALE</div>
+                        <h2 class="text-3xl font-bold mb-2">Everything Automated</h2>
+                        <p class="text-gray-400 mb-4">"I want a business that runs like clockwork — with or without me."</p>
+                        <div class="mb-4">
+                            <span class="text-4xl font-bold">OMR 2,500</span>
+                            <span class="text-gray-400"> setup</span>
+                            <div class="text-purple-400 font-bold text-xl mt-2">OMR 300/month</div>
+                            <!-- Annual offer -->
+                            <div class="annual-offer mt-3">
+                                <span class="text-purple-400 font-bold">✨ Annual: OMR 3,000</span>
+                                <span class="text-gray-300 text-sm block">(Pay for 10 months, get 12 months — save OMR 600)</span>
+                            </div>
+                        </div>
+                        <p class="text-sm text-gray-500 mb-6">Delivery in 10-14 weeks</p>
+                        <a href="#" onclick="openAuditForm('scale'); return false;" class="block w-full bg-purple-600 text-white text-center px-6 py-4 rounded-xl font-bold hover:bg-purple-500 transition">
+                            Contact Us
+                        </a>
+                    </div>
+                    <div class="md:col-span-2">
+                        <h3 class="font-bold text-xl mb-4">Everything in GROWTH, plus:</h3>
+                        <ul class="space-y-4">
+                            <li class="flex gap-3">
+                                <span class="text-purple-500 shrink-0">✓</span>
+                                <span><strong class="text-white">Up to 10 automations</strong> – We automate every repetitive task: sales, operations, customer service, admin – all of it.</span>
+                            </li>
+                            <li class="flex gap-3">
+                                <span class="text-purple-500 shrink-0">✓</span>
+                                <span><strong class="text-white">AI-powered lead nurturing</strong> – The system learns which follow-up messages work best and automatically optimizes them. It can send personalized WhatsApp messages, emails, or even SMS based on each lead's behavior. If a lead opens a message but doesn't reply, it sends a different follow-up. It's like having a full sales team working 24/7.</span>
+                            </li>
+                            <li class="flex gap-3">
+                                <span class="text-purple-500 shrink-0">✓</span>
+                                <span><strong class="text-white">Advanced CRM with pipeline management</strong> – Track every customer from first contact to repeat purchase. Full conversation history, follow-up reminders, and a complete view of your sales pipeline.</span>
+                            </li>
+                            <li class="flex gap-3">
+                                <span class="text-purple-500 shrink-0">✓</span>
+                                <span><strong class="text-white">AI sales assistant</strong> – Qualifies leads, follows up automatically, and books meetings in your calendar without you lifting a finger.</span>
+                            </li>
+                            <li class="flex gap-3">
+                                <span class="text-purple-500 shrink-0">✓</span>
+                                <span><strong class="text-white">3 content channels on autopilot</strong> – Social media, blog, Telegram, WhatsApp – consistent, professional content published automatically. Build your brand effortlessly.</span>
+                            </li>
+                            <li class="flex gap-3">
+                                <span class="text-purple-500 shrink-0">✓</span>
+                                <span><strong class="text-white">Website SEO (Search Engine Optimisation) improvements</strong> – We regularly update your website so more customers find you on Google without you paying for ads.</span>
+                            </li>
+                            <li class="flex gap-3">
+                                <span class="text-purple-500 shrink-0">✓</span>
+                                <span><strong class="text-white">Priority support</strong> – Any issue resolved within 24 hours, guaranteed. You're never left waiting.</span>
+                            </li>
+                            <li class="flex gap-3">
+                                <span class="text-purple-500 shrink-0">✓</span>
+                                <span><strong class="text-white">Monthly strategy session (60 min)</strong> – We sit with you, review your data, and map out the next move together.</span>
+                            </li>
+                            <li class="flex gap-3">
+                                <span class="text-purple-500 shrink-0">✓</span>
+                                <span><strong class="text-white">Quarterly ROI (Return on Investment) review</strong> – Clear numbers: how many hours saved, extra leads generated, and extra revenue earned thanks to your system.</span>
+                            </li>
+                        </ul>
+                        <p class="text-sm text-gray-500 mt-6">Ideal for: Established SMEs (Small to Medium Enterprises), 10+ staff, businesses ready to dominate their market</p>
+                        <p class="text-sm text-gray-400 mt-2"><strong>Result:</strong> Your business runs like a machine – consistent, scalable, and built to win. This is what your competitors can't keep up with.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ======================= Comparison Table ======================= -->
+    <section class="py-16 px-4 bg-[#0a0a0a]">
+        <div class="max-w-5xl mx-auto">
+            <h2 class="text-3xl font-bold text-center mb-10">Compare Packages</h2>
+            <div class="overflow-x-auto">
+                <table class="comparison-table">
+                    <thead>
+                        <tr><th></th><th>STARTER</th><th>GROWTH</th><th>SCALE</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Setup Fee</td><td class="text-green-400 font-bold">OMR 500</td><td class="text-blue-400 font-bold">OMR 1,200</td><td class="text-purple-400 font-bold">OMR 2,500</td></tr>
+                        <tr><td>Monthly Support</td><td class="text-green-400">OMR 75</td><td class="text-blue-400">OMR 150</td><td class="text-purple-400">OMR 300</td></tr>
+                        <tr><td>Annual Support (12 months)</td><td class="text-green-400">OMR 750 upfront</td><td class="text-blue-400">OMR 1,500 upfront</td><td class="text-purple-400">OMR 3,000 upfront</td></tr>
+                        <tr><td>Savings with Annual</td><td class="text-green-400">Save OMR 150</td><td class="text-blue-400">Save OMR 300</td><td class="text-purple-400">Save OMR 600</td></tr>
+                        <tr><td>Chatbot</td><td>✓ 1</td><td>✓ Up to 3</td><td>✓ Up to 10</td></tr>
+                        <tr><td>CRM (Customer Relationship Management)</td><td>Basic</td><td>Full</td><td>Advanced</td></tr>
+                        <tr><td>Content Channels on Autopilot</td><td>✗</td><td>1</td><td>3</td></tr>
+                        <tr><td>Staff Training</td><td>✗</td><td>1 session</td><td>Ongoing</td></tr>
+                        <tr><td>Strategy Calls</td><td>✗</td><td>Monthly (30m)</td><td>Monthly (60m)</td></tr>
+                        <tr><td>Support Priority</td><td>Standard</td><td>Standard</td><td>Priority (24h)</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- ======================= Add-ons ======================= -->
+    <section class="py-16 px-4">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-3xl font-bold text-center mb-4">Optional Add-Ons</h2>
+            <p class="text-gray-400 text-center max-w-2xl mx-auto mb-12">Enhance your package with these powerful tools. Each add-on is designed to solve a specific problem and deliver measurable results.</p>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="addon-card"><div class="addon-title">🗣️ Arabic-Optimized Chatbot</div><div class="addon-price">OMR 150 <span>one-time</span></div><div class="addon-desc"><p>Your customers speak Arabic – your chatbot should too. We'll train your bot to understand local dialects, cultural nuances, and respond naturally.</p><p class="mt-2"><strong>Why add this?</strong> Build trust instantly. Arabic-speaking customers are more likely to engage and buy when addressed in their own language.</p></div></div>
+                <div class="addon-card border-green-500/30 bg-gradient-to-br from-green-500/5 to-blue-500/5"><div class="addon-title">📱 AI WhatsApp Receptionist</div><div class="addon-price">OMR 250 <span>setup +</span> OMR 50<span>/month</span></div><div class="addon-desc"><p><strong class="text-white">Imagine having a receptionist on WhatsApp who never sleeps, never takes a break, and can handle 100 conversations at once.</strong></p><ul class="list-disc list-inside mt-2 space-y-1 text-gray-300"><li><strong>Greets every customer automatically</strong> – When someone messages your WhatsApp, they get an instant reply, even at 2 AM.</li><li><strong>Answers common questions</strong> – "What are your prices?" "Do you deliver?" "Are you open?" – answered instantly without you typing.</li><li><strong>Collects customer information</strong> – Names, phone numbers, and what they want – all saved automatically.</li><li><strong>Books appointments</strong> – Customers can book meetings directly through WhatsApp, and it shows up in your calendar.</li><li><strong>Sends automatic reminders</strong> – Never have a "no-show" again. The bot reminds customers about their appointments.</li><li><strong>Can switch to you anytime</strong> – If the conversation gets complicated, it hands it over to you seamlessly.</li></ul><p class="mt-3 text-white"><strong>The result:</strong> You never miss another WhatsApp message. Your customers get instant replies 24/7, and you save hours every day.</p></div></div>
+                <div class="addon-card"><div class="addon-title">📢 Additional Content Channel</div><div class="addon-price">OMR 200 <span>+</span> OMR 60<span>/month</span></div><div class="addon-desc"><p>Already have one channel on autopilot? Add another! Choose from social media, Telegram, WhatsApp, or a blog. Fresh, relevant content will be published automatically, saving you hours of manual posting.</p><p class="mt-2"><strong>Why add this?</strong> More channels = more visibility. Your brand stays top-of-mind without any extra effort from you.</p></div></div>
+                <div class="addon-card"><div class="addon-title">⚙️ Extra Custom Automation</div><div class="addon-price">OMR 200 <span>one-time</span></div><div class="addon-desc"><p>Need to automate another specific task? Maybe you want to automatically send thank-you messages after purchase, or sync data between two apps. We'll build it for you.</p><p class="mt-2"><strong>Why add this?</strong> Every task you automate frees up more of your time. The more you automate, the more you can focus on growing your business.</p></div></div>
+                <div class="addon-card"><div class="addon-title">👥 Staff Training Session</div><div class="addon-price">OMR 100 <span>per session</span></div><div class="addon-desc"><p>A 2-hour hands-on session to get your team comfortable with your new tools. We'll show them exactly how to use the system, answer questions, and ensure everyone is confident.</p><p class="mt-2"><strong>Why add this?</strong> Your team is your greatest asset. When they know how to use the tools properly, you get maximum value from your investment.</p></div></div>
+                <div class="addon-card border-blue-500/30 bg-gradient-to-br from-blue-500/5 to-green-500/5"><div class="addon-title">🌐 Smart Website – Your 24/7 Sales Agent</div><div class="addon-price">OMR 800 <span>setup +</span> OMR 100<span>/month</span></div><div class="addon-desc"><p><strong class="text-white">Imagine a website that doesn't just sit there – it works for you like a full-time employee.</strong></p><ul class="list-disc list-inside mt-2 space-y-1 text-gray-300"><li><strong>Built-in AI chatbot</strong> that talks to visitors in their own language (Arabic or English), answers questions instantly, and collects their details – just like a friendly salesperson who never gets tired.</li><li><strong>Smart lead detector</strong> – It can tell if someone is a hot lead (ready to buy) or just browsing, and responds differently to each.</li><li><strong>Acts as a mini address book</strong> – Every visitor's name, email, and conversation is saved automatically.</li><li><strong>SEO-optimized from day one</strong> – Built to rank high on Google so new customers find you without you paying for ads.</li><li><strong>Auto-pilot content publishing</strong> – The website can search the internet for the latest news in your industry and turn it into blog posts automatically.</li><li><strong>Built-in visitor tracker</strong> – See who came to your site, what they looked at, and how long they stayed.</li></ul><p class="mt-3 text-white"><strong>The result:</strong> A website that works 24/7 as your sales agent, marketer, and personal assistant – while you sleep, travel, or focus on your business.</p></div></div>
+                <div class="addon-card"><div class="addon-title">📊 Custom Dashboard</div><div class="addon-price">OMR 300 <span>+</span> OMR 50<span>/month</span></div><div class="addon-desc"><p>See all your business data in one screen. Sales, leads, customer interactions, performance metrics – customized exactly how you want it. No more jumping between different apps and spreadsheets.</p><p class="mt-2"><strong>Why add this?</strong> When you can see everything clearly, you make better decisions faster.</p></div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ======================= FAQ ======================= -->
+    <section class="py-16 px-4 bg-[#0a0a0a]">
+        <div class="max-w-3xl mx-auto">
+            <h2 class="text-3xl font-bold text-center mb-8">Common Questions</h2>
+            <div class="space-y-4">
+                <div class="glass-card p-5 rounded-xl"><p class="font-bold mb-1">🤔 Can I start with STARTER and upgrade later?</p><p class="text-sm text-gray-400">Absolutely! Many clients start small and upgrade as they grow. We make switching easy.</p></div>
+                <div class="glass-card p-5 rounded-xl"><p class="font-bold mb-1">⏱️ What's the setup time?</p><p class="text-sm text-gray-400">STARTER: 3-6 weeks, GROWTH: 6-12 weeks, SCALE: 10-14 weeks. We work at your pace.</p></div>
+                <div class="glass-card p-5 rounded-xl"><p class="font-bold mb-1">📝 Is there a contract?</p><p class="text-sm text-gray-400">3-month minimum commitment, then month-to-month. We want time to deliver real results.</p></div>
+                <div class="glass-card p-5 rounded-xl"><p class="font-bold mb-1">🔧 What if something breaks?</p><p class="text-sm text-gray-400">Monthly support covers maintenance and fixes. We monitor your tools 24/7 and fix issues – often before you even notice them.</p></div>
+                <div class="glass-card p-5 rounded-xl"><p class="font-bold mb-1">✨ How does the annual offer work?</p><p class="text-sm text-gray-400">You pay for 10 months upfront and receive 12 months of support – that's 2 months completely free. The setup fee remains the same. You can choose monthly or annual at checkout.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ======================= CTA ======================= -->
+    <section class="py-16 px-4">
+        <div class="max-w-2xl mx-auto text-center glass-card p-10 rounded-3xl">
+            <h2 class="text-3xl font-bold mb-3">Not Sure Which Package?</h2>
+            <p class="text-gray-300 mb-6">Let's have a 30-minute chat. We'll help you figure it out – no pressure, no jargon.</p>
+            <a href="#" onclick="openAuditForm(); return false;" class="inline-block bg-gradient-to-r from-blue-600 to-green-600 text-white px-8 py-4 rounded-xl font-bold hover:from-blue-700 hover:to-green-700 transition shadow-lg text-lg">
+                Book Your Free Call
+            </a>
+        </div>
+    </section>
+
+    <!-- ======================= Footer ======================= -->
+    <footer class="py-8 border-t border-gray-900 text-center text-sm text-gray-600">
+        © 2025 <span class="text-blue-500">A</span><span class="text-red-500">I</span> Profit Lab • All Rights Reserved • Serving the GCC
+    </footer>
+
+    <!-- ======================= Chatbot Widget ======================= -->
+    <div class="fixed bottom-8 right-8 z-[1000]">
+        <button onclick="toggleChat()" class="pulse w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center shadow-2xl">
+            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path></svg>
+        </button>
+        <div id="aiden-ui" class="absolute bottom-24 right-0 w-[350px] md:w-[400px] h-[500px] bg-[#0f0f0f] border border-gray-800 rounded-3xl shadow-2xl flex flex-col overflow-hidden">
+            <div class="p-4 bg-gradient-to-r from-blue-900 to-black flex justify-between items-center border-b border-gray-800"><span class="font-bold text-sm tracking-widest text-white"><span class="text-blue-500">A</span><span class="text-red-500">I</span>DEN <span class="text-green-400 text-[10px] ml-2">● ONLINE</span></span><span class="text-xs text-gray-500" id="visitor-country"></span><button onclick="toggleChat()" class="text-white opacity-50 hover:opacity-100 font-bold text-xl">✕</button></div>
+            <div id="chat-messages" class="flex-1 p-6 overflow-y-auto space-y-4 text-sm text-gray-300"><div class="bg-gray-800 p-4 rounded-2xl rounded-tl-none max-w-[85%]">Looking for the right package? I can help you compare! <span class="block text-xs text-gray-500 mt-1" id="welcome-message"></span></div></div>
+            <div class="p-4 bg-[#050505] border-t border-gray-800 flex items-center"><input id="user-input" type="text" placeholder="Type your message..." class="bg-transparent border-none outline-none flex-1 text-sm text-white py-2"><button onclick="handleSend()" class="bg-blue-600 text-white px-4 py-1 rounded-full text-xs font-bold hover:bg-blue-500 transition ml-2">SEND</button></div>
+        </div>
+    </div>
+
+    <!-- ======================= MULTI-STEP FORM MODAL ======================= -->
+    <div id="auditModal" class="form-modal-overlay"><div class="form-modal-content"><button onclick="closeAuditForm()" class="close-btn">&times;</button><h2 class="text-2xl font-bold text-center mb-2">AI Strategy Call Audit</h2><p class="text-gray-400 text-center mb-6">Complete this short form (3-5 minutes) to help us tailor your call.</p><div class="progress-bar"><div class="progress-step active" data-step="1">1</div><div class="progress-step" data-step="2">2</div><div class="progress-step" data-step="3">3</div><div class="progress-step" data-step="4">4</div></div><form id="auditForm"><div class="form-step active" data-step="1"><h3 class="text-xl font-bold mb-4">Contact Details</h3><div class="grid md:grid-cols-2 gap-4"><div><input type="text" id="fullName" placeholder="Full Name *" required></div><div><input type="email" id="email" placeholder="Email *" required></div><div><input type="tel" id="phone" placeholder="Phone (optional)"></div><div><input type="text" id="company" placeholder="Company *" required></div><div><input type="text" id="role" placeholder="Role/Title *" required></div><div><input type="url" id="website" placeholder="Website (optional)"></div></div><div class="form-navigation"><button type="button" class="nav-btn next">Next →</button></div></div><div class="form-step" data-step="2"><h3 class="text-xl font-bold mb-4">Business Snapshot</h3><div class="grid md:grid-cols-2 gap-4"><div><input type="text" id="industry" placeholder="Industry (e.g., Retail, Real Estate)"></div><div><input type="number" id="employees" placeholder="Number of Employees"></div></div><input type="text" id="revenue" placeholder="Annual Revenue (e.g., OMR 500K)"><textarea id="revenueStreams" placeholder="What are your main products or services?"></textarea><div class="form-navigation"><button type="button" class="nav-btn prev">← Previous</button><button type="button" class="nav-btn next">Next →</button></div></div><div class="form-step" data-step="3"><h3 class="text-xl font-bold mb-4">Pain Points & Goals</h3><textarea id="challenges" placeholder="What tasks are wasting your time right now? (e.g., Answering same questions, manual data entry)"></textarea><textarea id="goals" placeholder="What would you like to achieve? *" required></textarea><textarea id="pastExperience" placeholder="Have you tried automation before?"></textarea><label class="block mb-2">How comfortable is your team with new technology? (1-10):</label><div class="slider-container"><div class="slider-output" id="aiComfortOutput">5</div><input type="range" id="aiComfort" min="1" max="10" value="5" class="w-full"></div><div class="form-navigation"><button type="button" class="nav-btn prev">← Previous</button><button type="button" class="nav-btn next">Next →</button></div></div><div class="form-step" data-step="4"><h3 class="text-xl font-bold mb-4">Readiness & Next Steps</h3><label class="block mb-2">Which areas interest you?</label><div class="checkbox-group mb-4"><label class="checkbox-item"><input type="checkbox" name="process" value="Marketing"><span class="checkmark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M5 13l4 4L19 7"/></svg></span>Marketing</label><label class="checkbox-item"><input type="checkbox" name="process" value="Sales"><span class="checkmark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M5 13l4 4L19 7"/></svg></span>Sales</label><label class="checkbox-item"><input type="checkbox" name="process" value="Operations"><span class="checkmark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M5 13l4 4L19 7"/></svg></span>Operations</label><label class="checkbox-item"><input type="checkbox" name="process" value="Customer Service"><span class="checkmark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M5 13l4 4L19 7"/></svg></span>Customer Service</label></div><label class="block mb-2">Budget range (optional):</label><select id="budget" class="mb-4"><option value="">Not sure yet</option><option value="OMR 5K">OMR 5,000</option><option value="OMR 5-20K">OMR 5,000 - 20,000</option><option value="OMR 20-50K">OMR 20,000 - 50,000</option><option value="OMR 50K+">OMR 50,000+</option></select><label class="block mb-2">When would you like to start?</label><select id="timeline" class="mb-4"><option value="ASAP">As soon as possible</option><option value="1-3 months">Within 1-3 months</option><option value="3-6 months">Within 3-6 months</option><option value="Just exploring">Just exploring for now</option></select><input type="text" id="keyQuestion" placeholder="Any specific question for our call? *" required><div class="form-navigation"><button type="button" class="nav-btn prev">← Previous</button><button type="submit" class="nav-btn submit">Schedule My Call →</button></div></div></form></div></div>
+
+    <!-- ======================= SCRIPT ======================= -->
+    <script>
+    // Multi-step form logic (preserved)
+    const modal = document.getElementById('auditModal');
+    const auditForm = document.getElementById('auditForm');
+    const steps = Array.from(auditForm.querySelectorAll('.form-step'));
+    const progressSteps = Array.from(document.querySelectorAll('.progress-step'));
+    let currentStep = 0;
+    function openAuditForm(pkg=''){ currentStep=0; showStep(currentStep); modal.classList.add('active'); if(pkg) console.log(pkg); }
+    function closeAuditForm(){ modal.classList.remove('active'); }
+    function showStep(stepIndex){ steps.forEach((s,i)=>s.classList.toggle('active',i===stepIndex)); progressSteps.forEach((ps,i)=>ps.classList.toggle('active',i<=stepIndex)); }
+    function validateStep(stepIndex){ const inputs=steps[stepIndex].querySelectorAll('input[required], textarea[required]'); let valid=true; inputs.forEach(i=>{ if(!i.value.trim()){ i.style.borderColor='#ef4444'; valid=false;} else i.style.borderColor='rgba(255,255,255,0.1)'; }); return valid; }
+    auditForm.addEventListener('click',(e)=>{ if(e.target.matches('.next')){ if(validateStep(currentStep) && currentStep<steps.length-1){ currentStep++; showStep(currentStep); } } else if(e.target.matches('.prev') && currentStep>0){ currentStep--; showStep(currentStep); } });
+    const slider=document.getElementById('aiComfort'), out=document.getElementById('aiComfortOutput'); if(slider&&out){ out.innerText=slider.value; slider.addEventListener('input',()=>out.innerText=slider.value); }
+    auditForm.addEventListener('submit',async(e)=>{ e.preventDefault(); if(!validateStep(currentStep)) return; const btn=document.querySelector('.nav-btn.submit'), orig=btn.textContent; btn.textContent='Sending...'; btn.disabled=true; const data={ fullName:document.getElementById('fullName')?.value||'', email:document.getElementById('email')?.value||'', phone:document.getElementById('phone')?.value||'', company:document.getElementById('company')?.value||'', role:document.getElementById('role')?.value||'', website:document.getElementById('website')?.value||'', industry:document.getElementById('industry')?.value||'', employees:document.getElementById('employees')?.value||'', revenue:document.getElementById('revenue')?.value||'', revenueStreams:document.getElementById('revenueStreams')?.value||'', challenges:document.getElementById('challenges')?.value||'', goals:document.getElementById('goals')?.value||'', pastExperience:document.getElementById('pastExperience')?.value||'', aiComfort:document.getElementById('aiComfort')?.value||'', processes:Array.from(document.querySelectorAll('input[name="process"]:checked')).map(c=>c.value).join(', '), budget:document.getElementById('budget')?.value||'', timeline:document.getElementById('timeline')?.value||'', keyQuestion:document.getElementById('keyQuestion')?.value||'', language:'en', page:window.location.pathname, submittedAt:new Date().toISOString() }; try{ const res=await fetch("https://aiden-backend-aiden.up.railway.app/audit",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(data)}); const result=await res.json(); if(result.success){ alert('Form submitted! Redirecting to Calendly...'); window.location.href="https://calendly.com/ai-profit-lab2026"; } else alert("An error occurred. Please try again."); } catch(err){ alert("Connection error. Please check your internet."); } finally{ btn.textContent=orig; btn.disabled=false; } });
+    modal.addEventListener('click',(e)=>{ if(e.target===modal) closeAuditForm(); });
+    // Country detection (simplified, shows OMR for all since prices are in OMR)
+    async function detectCountry(){ try{ const res=await fetch('https://ipwhois.app/json/'); const data=await res.json(); const code=data.country_code||'OM'; const country=data.country||'Oman'; localStorage.setItem('visitorCountry',country); localStorage.setItem('visitorCountryCode',code); document.getElementById('visitor-country').textContent=code; document.getElementById('welcome-message').textContent=`Welcome from ${country}!`; } catch(e){ console.log('Country detection fallback'); document.getElementById('visitor-country').textContent='OM'; document.getElementById('welcome-message').textContent='Welcome from Oman!'; } }
+    // Chat functions
+    async function handleSend(){ const input=document.getElementById('user-input'), msg=input.value.trim(); if(!msg) return; const box=document.getElementById('chat-messages'); let vid=localStorage.getItem('aidenVisitorId')||('visitor_'+Date.now()+'_'+Math.random().toString(36).substr(2,9)); if(!localStorage.getItem('aidenVisitorId')) localStorage.setItem('aidenVisitorId',vid); const country=localStorage.getItem('visitorCountry')||'Oman', code=localStorage.getItem('visitorCountryCode')||'OM'; box.innerHTML+=`<div class="bg-blue-900/50 ml-auto p-3 rounded-2xl rounded-br-none max-w-[85%] text-white">${msg}</div>`; input.value=''; box.scrollTop=box.scrollHeight; box.innerHTML+=`<div id="typing-indicator" class="bg-gray-800 p-3 rounded-2xl rounded-tl-none max-w-[85%] text-gray-300">...</div>`; try{ const res=await fetch('https://aiden-backend-aiden.up.railway.app/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:msg,sessionId:vid,language:'en',country:country,countryCode:code})}); const result=await res.json(); document.getElementById('typing-indicator')?.remove(); const reply=result.reply||result.response||'Thanks for your message!'; box.innerHTML+=`<div class="bg-gray-800 p-3 rounded-2xl rounded-tl-none max-w-[85%] text-gray-300">${reply}</div>`; } catch(err){ document.getElementById('typing-indicator')?.remove(); box.innerHTML+=`<div class="bg-gray-800 p-3 rounded-2xl rounded-tl-none max-w-[85%] text-red-300">Sorry, please try again</div>`; } box.scrollTop=box.scrollHeight; }
+    function toggleChat(){ document.getElementById('aiden-ui').classList.toggle('active'); }
+    document.addEventListener('DOMContentLoaded',function(){ const toggle=document.querySelector('.mobile-nav-toggle button'); const links=document.querySelector('.nav-links'); if(toggle&&links){ toggle.addEventListener('click',function(){ if(links.style.display==='flex') links.style.display='none'; else{ links.style.display='flex'; links.style.flexDirection='column'; links.style.position='absolute'; links.style.top='100%'; links.style.left='0'; links.style.right='0'; links.style.backgroundColor='#0f0f0f'; links.style.padding='20px'; links.style.gap='15px'; links.style.zIndex='1000'; } }); } });
+    window.onload=async()=>{ await detectCountry(); if(!sessionStorage.getItem('aidenPopped')){ setTimeout(()=>{ if(!document.getElementById('aiden-ui').classList.contains('active')){ toggleChat(); sessionStorage.setItem('aidenPopped','true'); } },10000); } };
+    </script>
+</body>
+</html>
