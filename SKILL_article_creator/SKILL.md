@@ -10,15 +10,18 @@ This skill automates the end-to-end creation of high-quality, story-driven, full
 When the user asks you to write an article for a given keyword/topic, follow these steps exactly:
 
 ## Step 1: Research and Outline
-- **Lead with Provocative Expertise**: The article must be highly compelling, using a storytelling style based on reality and lived-experience. Do not write safe, generic tech guides. Tell the audience exactly why most tech implementations fail for non-technical leaders and how our framework fixes it.
-- **The "Extractable" Content Structure**: Rip out long walls of text. Use clear `<h2>` and `<h3>` headings. Start every major section with a bolded direct answer or a quick "TL;DR." bulleted list so that AI models can instantly pull your exact bullet points.
-- **Target "Fan-Out" Queries**: Optimize not just for short keywords, but for complex, long, conversational "fan-out" questions (e.g., "What is the most cost-effective AI implementation strategy for regional businesses looking to scale internationally?").
-- **Factual Density**: AI prioritizes data over fluff. When discussing boosting ROI, back it up. Include real statistics, HTML comparison tables, and strict Q&A formats directly within the body content to increase citation rates.
-- **Video-to-Text Synergy**: Embed relevant, energetic, high-retention YouTube videos directly into the written posts to skyrocket page engagement metrics.
+- **Transform H2 Headers into Questions**: Transform all `<h2>` headers into specific business questions.
+- **Direct Answers**: Write a concise, 40-word direct answer immediately below each `<h2>`.
+- **Factual Density**: Eliminate adjectives (e.g., "amazing", "incredible") and replace with hard data (e.g., "30% increase"). AI prioritizes data over fluff. When discussing boosting ROI, back it up.
+- **Data Tables**: Add HTML Data Tables within the content showing ROI, time savings, or tool comparisons.
+- **High-Authority Links**: Link out to high-authority tech docs (e.g., OpenAI docs, Omani Gov Tech portals) whenever it is related.
+- **Internal Links**: Ensure all internal links point to the clean URL version (e.g., `/blog/en/my-article.html`). Interlink with the ROI data pages (e.g., linking to `../../roi-calculator.html` or similar relevant pages).
+- **Video-to-Text Synergy**: Embed relevant, energetic, high-retention YouTube videos directly into the written posts.
 - The article must be a rich, highly SEO-friendly article at least 1000 words long.
 - Include a specific section for References at the end (verify that references exist and are not broken).
-- Generate an extensive FAQ section at the end containing AT LEAST 10 Frequently Asked Questions. These questions should be optimized for AI search engines (like Perplexity, ChatGPT, and Google AI Overviews) by directly answering the most common, long-tail queries users or LLMs might have about the topic.
-- Designate a hero image concept that matches the futuristic, semi-realistic AI vibe of the other articles.
+- Generate an extensive FAQ section at the end containing AT LEAST 10 Frequently Asked Questions optimized for AI search engines.
+- Designate a hero image concept that matches the futuristic, semi-realistic AI vibe of the other articles, and ensure you write descriptive Alt Text for all images.
+- **Forum Snippet**: Generate a short promotional snippet (or pitch) for a local GCC business forum at the end of the generation process, related to the article topic.
 
 ## Step 2: Generate the English Version
 Draft the English article content. Then wrap it in the exact HTML structure expected for the blog. Ensure it follows the dark-mode glassmorphism style.
@@ -61,8 +64,9 @@ Whenever you generate the files, use the following HTML template. Do NOT deviate
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="category" content="[Category]">
     <title>[SEO Title] | AI Profit Lab</title>
-    <meta name="description" content="[SEO Description]">
+    <meta name="description" content="[Energetic, unique SEO Description (exactly 150 characters)]">
     <meta name="keywords" content="[SEO Keywords]">
+    <link rel="canonical" href="https://aiprofitlab.io/blog/en/YYYY-MM-DD-[slug-title].html"> <!-- Note: Update path for Arabic: /blog/ar/... -->
     <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
     <link rel="apple-touch-icon" href="../../favicon.svg">
     
