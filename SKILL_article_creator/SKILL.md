@@ -130,6 +130,42 @@ Whenever you generate the files, use the following HTML template. Do NOT deviate
         .prose strong { color: #F3F4F6; }
         .prose blockquote { border-left: 4px solid #3B82F6; padding-left: 1rem; font-style: italic; color: #9CA3AF; margin-left: 0; }
     </style>
+    <!-- Local Business Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "name": "AI Profit Lab",
+      "url": "https://aiprofitlab.io",
+      "logo": "https://aiprofitlab.io/logo.webp",
+      "image": "https://aiprofitlab.io/Nahid_Business_Banner.png",
+      "description": "Helping non-technical managers leverage AI, automation, and technology to increase ROI and business efficiency.",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Al Seeb",
+        "addressLocality": "Muscat",
+        "addressRegion": "Muscat Governorate",
+        "postalCode": "000",
+        "addressCountry": "OM"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 23.635950490475295, 
+        "longitude": 58.207628165445385
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+968-99245250",
+        "contactType": "customer service",
+        "areaServed": "GCC",
+        "availableLanguage": ["en", "ar"]
+      },
+      "sameAs": [
+        "https://www.youtube.com/@AI_for_Managers",
+        "https://www.linkedin.com/in/nahid-aby"
+      ]
+    }
+    </script>
 </head>
 <body class="antialiased">
     <!-- Navbar -->
