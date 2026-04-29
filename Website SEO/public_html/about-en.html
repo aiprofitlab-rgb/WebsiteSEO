@@ -244,9 +244,24 @@
         <div class="hidden md:flex items-center gap-8">
             <div class="nav-links flex gap-8 text-sm font-bold uppercase items-center">
                 <a href="en.html" class="hover:text-blue-400 transition">Home</a>
-                <a href="services-en.html" class="hover:text-blue-400 transition">Packages</a>
+                <a href="services-en.html" class="hover:text-blue-400 transition">Services</a>
                 <a href="process-en.html" class="hover:text-blue-400 transition">How It Works</a>
-                <a href="about-en.html" class="hover:text-blue-400 transition">About</a>
+                
+                <!-- Resources Dropdown -->
+                <div class="relative group cursor-pointer h-full flex items-center">
+                    <span class="hover:text-blue-400 transition flex items-center gap-1">
+                        Resources
+                        <svg class="w-4 h-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </span>
+                    <div class="absolute top-8 left-1/2 -translate-x-1/2 w-48 bg-[#0a0a0a] border border-gray-800 rounded-xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 overflow-hidden flex flex-col z-50">
+                        <a href="#" class="px-5 py-3 hover:bg-gray-800 hover:text-blue-400 border-b border-gray-800 transition">Demo</a>
+                        <a href="roi-calculator.html" class="px-5 py-3 hover:bg-gray-800 hover:text-blue-400 border-b border-gray-800 transition">Simulators</a>
+                        <a href="blog.html" class="px-5 py-3 hover:bg-gray-800 hover:text-blue-400 border-b border-gray-800 transition">Articles</a>
+                        <a href="#" class="px-5 py-3 hover:bg-gray-800 hover:text-blue-400 border-b border-gray-800 transition">YouTube</a>
+                        <a href="about-en.html" class="px-5 py-3 hover:bg-gray-800 hover:text-blue-400 transition">About</a>
+                    </div>
+                </div>
+                
                 <a href="contact-en.html" class="hover:text-blue-400 transition">Contact</a>
             </div>
             <!-- Language Switch Button - INSIDE desktop menu -->
@@ -266,9 +281,18 @@
         <!-- Mobile Menu Dropdown -->
         <div class="nav-links mobile-menu">
             <a href="en.html">Home</a>
-            <a href="services-en.html">Packages</a>
+            <a href="services-en.html">Services</a>
             <a href="process-en.html">How It Works</a>
-            <a href="about-en.html">About</a>
+            
+            <div class="flex flex-col text-center w-full py-2 bg-black/40 rounded-lg">
+                <span class="text-xs text-gray-500 font-bold uppercase tracking-widest mb-2">Resources</span>
+                <a href="#" class="py-1.5 text-sm text-gray-300 border-none">Demo</a>
+                <a href="roi-calculator.html" class="py-1.5 text-sm text-gray-300 border-none">Simulators</a>
+                <a href="blog.html" class="py-1.5 text-sm text-gray-300 border-none">Articles</a>
+                <a href="#" class="py-1.5 text-sm text-gray-300 border-none">YouTube</a>
+                <a href="about-en.html" class="py-1.5 text-sm text-gray-300 border-none">About</a>
+            </div>
+            
             <a href="contact-en.html">Contact</a>
             <a href="index.html" style="color: #3B82F6; font-weight: bold;">العربية</a>
         </div>
