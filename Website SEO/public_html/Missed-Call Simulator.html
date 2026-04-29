@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Missed Call Revenue Killer — See Your Real Losses</title>
+  <!-- Google Fonts & Font Awesome 6 -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800;14..32,900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: radial-gradient(circle at 10% 30%, #0B0C10, #03050B);
+      font-family: 'Inter', sans-serif;
+      color: #EFF3F8;
+      line-height: 1.4;
+      overflow-x: hidden;
+    }
+
+    /* animated grain overlay */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJmIj48ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iLjciIG51bU9jdGF2ZXM9IjMiLz48L2ZpbHRlcj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWx0ZXI9InVybCgjZikiIG9wYWNpdHk9IjAuMDYiLz48L3N2Zz4=');
+      background-repeat: repeat;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.2;
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 4rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* hero section with pulse */
+    .hero {
+      text-align: center;
+      margin-bottom: 3rem;
+      animation: fadeSlideUp 0.9s ease-out;
+    }
+    @keyframes fadeSlideUp {
+      0% { opacity: 0; transform: translateY(30px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    .badge-loss {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(255, 65, 65, 0.15);
+      backdrop-filter: blur(4px);
+      border: 1px solid rgba(255, 65, 65, 0.4);
+      padding: 0.4rem 1.2rem;
+      border-radius: 100px;
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.5px;
+      color: #FFA2A2;
+      margin-bottom: 1.5rem;
+    }
+    .hero h1 {
+      font-size: 3.5rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #FFFFFF, #FF9292);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+    }
+    .hero .sub {
+      font-size: 1.2rem;
+      color: #B9C3E0;
+      max-width: 650px;
+      margin: 1rem auto 0;
+      font-weight: 400;
+    }
+
+    /* main calculator card — glassmorphic with red energy */
+    .calc-card {
+      background: rgba(12, 15, 28, 0.85);
+      backdrop-filter: blur(16px);
+      border-radius: 2.5rem;
+      border: 1px solid rgba(255, 80, 80, 0.3);
+      box-shadow: 0 25px 45px -12px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 80, 80, 0.1) inset;
+      padding: 2rem 2rem 2.2rem;
+      transition: all 0.2s;
+    }
+
+    /* two columns layout */
+    .flex-calc {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+    .inputs-panel {
+      flex: 1.2;
+      min-width: 250px;
+    }
+    .results-panel {
+      flex: 1;
+      background: rgba(0, 0, 0, 0.35);
+      border-radius: 1.8rem;
+      padding: 1.5rem;
+      border-left: 3px solid #E53E3E;
+    }
+
+    .input-group {
+      margin-bottom: 1.8rem;
+    }
+    .input-group label {
+      display: flex;
+      justify-content: space-between;
+      font-weight: 600;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #B9C3E0;
+      margin-bottom: 0.5rem;
+    }
+    .input-group input[type="number"] {
+      width: 100%;
+      background: #10131F;
+      border: 1px solid #2A2F42;
+      border-radius: 1.2rem;
+      padding: 0.8rem 1rem;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: white;
+      font-family: 'Inter', monospace;
+    }
+    .slider-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .slider-row input[type="range"] {
+      flex: 1;
+      height: 5px;
+      -webkit-appearance: none;
+      background: #2A2F42;
+      border-radius: 10px;
+    }
+    .slider-row input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 18px;
+      height: 18px;
+      background: #FF5A5A;
+      border-radius: 50%;
+      cursor: pointer;
+      box-shadow: 0 0 8px #ff4d4d;
+      border: none;
+    }
+    .slider-val {
+      background: #1F2336;
+      padding: 4px 12px;
+      border-radius: 40px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: #FFA2A2;
+      min-width: 55px;
+      text-align: center;
+    }
+
+    /* metric boxes */
+    .metric-red {
+      background: rgba(229, 62, 62, 0.12);
+      border-radius: 1.5rem;
+      padding: 1rem 1.2rem;
+      margin-bottom: 1rem;
+      transition: all 0.2s;
+      border: 1px solid rgba(229, 62, 62, 0.3);
+    }
+    .metric-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      font-weight: 700;
+      letter-spacing: 1px;
+      color: #CAC9DD;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .metric-number {
+      font-size: 2.2rem;
+      font-weight: 800;
+      line-height: 1.2;
+      margin-top: 6px;
+      word-break: break-word;
+    }
+    .metric-number.loss {
+      color: #FF6B6B;
+      text-shadow: 0 0 8px rgba(255, 60, 60, 0.4);
+    }
+    .big-loss-number {
+      font-size: 2.7rem;
+      font-weight: 900;
+      background: linear-gradient(120deg, #FF8A8A, #FF2E2E);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+    .annual-box {
+      background: #0B0E17;
+      border-radius: 1.5rem;
+      padding: 1rem;
+      text-align: center;
+      margin-top: 0.5rem;
+      border: 1px dashed #E53E3E;
+    }
+    .icon-call-miss {
+      font-size: 1.2rem;
+      color: #FF6B6B;
+    }
+
+    .cta-section {
+      margin-top: 2.5rem;
+      display: flex;
+      justify-content: center;
+    }
+    .btn-primary {
+      background: #E53E3E;
+      border: none;
+      padding: 1rem 2.5rem;
+      font-size: 1.1rem;
+      font-weight: 700;
+      border-radius: 60px;
+      color: white;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      transition: 0.2s;
+      cursor: pointer;
+      box-shadow: 0 12px 20px -8px rgba(229, 62, 62, 0.4);
+    }
+    .btn-primary:hover {
+      background: #C53030;
+      transform: scale(1.02);
+      box-shadow: 0 20px 25px -10px #b91c1c60;
+    }
+
+    /* trust strip */
+    .trust-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 2.5rem;
+      text-align: center;
+      font-size: 0.75rem;
+      color: #8F9BB3;
+    }
+    hr {
+      margin: 2rem 0 1rem;
+      border-color: #2E3450;
+      opacity: 0.5;
+    }
+
+    /* animation for numbers */
+    @keyframes pulseRed {
+      0% { text-shadow: 0 0 0px rgba(255, 80, 80, 0); }
+      100% { text-shadow: 0 0 10px rgba(255, 80, 80, 0.6); }
+    }
+    .pulse-effect {
+      animation: pulseRed 0.25s ease-out;
+    }
+
+    @media (max-width: 780px) {
+      .hero h1 { font-size: 2.3rem; }
+      .calc-card { padding: 1.5rem; }
+      .metric-number { font-size: 1.7rem; }
+    }
+    .missed-icon-large {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 1rem;
+      font-size: 1rem;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <!-- AI Profit Lab Logo -->
+  <div style="text-align: center; margin-bottom: 3rem; animation: fadeSlideUp 0.9s ease-out;">
+    <a href="en.html" style="display: inline-block; text-decoration: none;">
+      <div style="font-size: 28px; font-weight: 900; font-family: 'Inter', sans-serif; letter-spacing: -1px;">
+        <span style="color: #3B82F6;">A</span><span style="color: #EF4444;">I</span> <span style="color: #ffffff;">Profit Lab</span>
+      </div>
+    </a>
+  </div>
+
+  <div class="hero">
+    <div class="badge-loss">
+      <i class="fas fa-phone-slash"></i> THE SILENT REVENUE KILLER
+    </div>
+    <h1>Missed calls cost you <span style="color:#FF5A5A;">real money</span> <br> every single day.</h1>
+    <p class="sub">See exactly how much revenue evaporates when you don’t pick up. 68% of customers hang up and never call back.</p>
+  </div>
+
+  <div class="calc-card">
+    <div class="flex-calc">
+      <!-- LEFT: INPUTS -->
+      <div class="inputs-panel">
+        <div class="missed-icon-large">
+          <i class="fas fa-phone-alt" style="color:#FF5A5A;"></i>
+          <span>📞 Your call & sales metrics</span>
+        </div>
+
+        <div class="input-group">
+          <label><span><i class="fas fa-chart-line"></i> Daily inbound calls</span> <span id="dailyCallsVal">50</span></label>
+          <input type="number" id="callsPerDay" value="62" step="1" min="1">
+        </div>
+
+        <div class="input-group">
+          <label><span><i class="fas fa-percent"></i> Missed call rate</span> <span id="missRateLabel">44%</span></label>
+          <div class="slider-row">
+            <input type="range" id="missedRate" min="5" max="85" value="44" step="1">
+            <span class="slider-val" id="missedRateVal">44%</span>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label><span><i class="fas fa-user-check"></i> Caller → customer rate</span> <span id="convRateLabel">48%</span></label>
+          <div class="slider-row">
+            <input type="range" id="convRate" min="10" max="75" value="48" step="1">
+            <span class="slider-val" id="convRateVal">48%</span>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label><span><i class="fas fa-dollar-sign"></i> Average ticket value ($)</span> <span id="ticketLabel">$395</span></label>
+          <input type="number" id="avgTicket" value="395" step="10" min="10">
+        </div>
+      </div>
+
+      <!-- RIGHT: RESULTS WITH RED LOSS HIGHLIGHT -->
+      <div class="results-panel">
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 20px;">
+          <i class="fas fa-chart-simple" style="color:#FF5A5A; font-size: 1.4rem;"></i>
+          <span style="font-weight: 700; letter-spacing: -0.2px;">YOUR LEAKAGE REPORT</span>
+        </div>
+
+        <div class="metric-red">
+          <div class="metric-label"><i class="fas fa-phone-slash icon-call-miss"></i> Missed calls / day</div>
+          <div class="metric-number" id="missedDayNum">—</div>
+        </div>
+
+        <div class="metric-red">
+          <div class="metric-label"><i class="fas fa-calendar-week"></i> Missed calls / month</div>
+          <div class="metric-number" id="missedMonthNum">—</div>
+        </div>
+
+        <div class="metric-red">
+          <div class="metric-label"><i class="fas fa-user-slash"></i> Lost customers / month</div>
+          <div class="metric-number" id="lostCustomersNum">—</div>
+        </div>
+
+        <div class="metric-red" style="background: rgba(229, 62, 62, 0.25); border-left: 4px solid #FF2E2E;">
+          <div class="metric-label"><i class="fas fa-fire-flame-curved"></i> MONTHLY LOST REVENUE</div>
+          <div class="metric-number loss big-loss-number" id="monthlyLoss">$0</div>
+        </div>
+
+        <div class="annual-box">
+          <div class="metric-label"><i class="fas fa-calendar-alt"></i> ANNUAL REVENUE LEAK</div>
+          <div class="metric-number loss" id="annualLoss" style="font-size: 1.9rem;">$0</div>
+          <div style="font-size: 11px; margin-top: 6px;">💸 Enough to hire 2+ full-time staff</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cta-section">
+      <button class="btn-primary" id="mainCtaBtn"><i class="fas fa-chalkboard-user"></i> Stop the bleed — get free audit</button>
+    </div>
+  </div>
+
+  <div class="trust-row">
+    <span><i class="fas fa-chart-line"></i> Real industry data</span>
+    <span><i class="fas fa-clock"></i> 30-70% miss rate average</span>
+    <span><i class="fas fa-phone-volume"></i> Answered calls = 5x more revenue</span>
+  </div>
+  <hr>
+  <div style="text-align: center; font-size: 13px; color: #9BA3BF;">
+    <i class="fas fa-database"></i> Based on 3,200+ business audits. Each missed call costs between $30–$600 in lost lifetime value.
+  </div>
+</div>
+
+<script>
+  // DOM elements
+  const callsInput = document.getElementById('callsPerDay');
+  const missedRateSlider = document.getElementById('missedRate');
+  const missedRateVal = document.getElementById('missedRateVal');
+  const convRateSlider = document.getElementById('convRate');
+  const convRateVal = document.getElementById('convRateVal');
+  const ticketInput = document.getElementById('avgTicket');
+
+  // result fields
+  const missedDaySpan = document.getElementById('missedDayNum');
+  const missedMonthSpan = document.getElementById('missedMonthNum');
+  const lostCustomersSpan = document.getElementById('lostCustomersNum');
+  const monthlyLossSpan = document.getElementById('monthlyLoss');
+  const annualLossSpan = document.getElementById('annualLoss');
+
+  // label syncs
+  const dailyCallsLabel = document.getElementById('dailyCallsVal');
+  const missRateLabel = document.getElementById('missRateLabel');
+  const convRateLabel = document.getElementById('convRateLabel');
+  const ticketLabelSpan = document.getElementById('ticketLabel');
+
+  // helper: add pulse class on important numbers
+  function pulseElement(el) {
+    if (!el) return;
+    el.classList.add('pulse-effect');
+    setTimeout(() => el.classList.remove('pulse-effect'), 250);
+  }
+
+  function formatMoney(value) {
+    return '$' + Math.round(value).toLocaleString();
+  }
+
+  function updateCalculator() {
+    // get values
+    let dailyCalls = Math.max(1, parseInt(callsInput.value) || 0);
+    let missRatePercent = parseFloat(missedRateSlider.value);
+    let convRatePercent = parseFloat(convRateSlider.value);
+    let ticket = Math.max(1, parseFloat(ticketInput.value) || 0);
+
+    // update labels
+    dailyCallsLabel.innerText = dailyCalls;
+    missRateLabel.innerText = missRatePercent + '%';
+    convRateLabel.innerText = convRatePercent + '%';
+    ticketLabelSpan.innerText = '$' + Math.round(ticket).toLocaleString();
+    missedRateVal.innerText = missRatePercent + '%';
+    convRateVal.innerText = convRatePercent + '%';
+
+    // calculate core metrics
+    const missedPerDay = Math.round(dailyCalls * (missRatePercent / 100));
+    const missedPerMonth = missedPerDay * 30;   // standard month
+    const lostCustomers = Math.round(missedPerMonth * (convRatePercent / 100));
+    const monthlyLostRev = lostCustomers * ticket;
+    const annualLostRev = monthlyLostRev * 12;
+
+    // update DOM with animations on critical fields
+    if (missedDaySpan.innerText !== missedPerDay.toLocaleString()) {
+      pulseElement(missedDaySpan);
+    }
+    if (missedMonthSpan.innerText !== missedPerMonth.toLocaleString()) {
+      pulseElement(missedMonthSpan);
+    }
+    if (lostCustomersSpan.innerText !== lostCustomers.toLocaleString()) {
+      pulseElement(lostCustomersSpan);
+    }
+    if (monthlyLossSpan.innerText !== formatMoney(monthlyLostRev)) {
+      pulseElement(monthlyLossSpan);
+      pulseElement(annualLossSpan);
+    }
+
+    missedDaySpan.innerText = missedPerDay.toLocaleString();
+    missedMonthSpan.innerText = missedPerMonth.toLocaleString();
+    lostCustomersSpan.innerText = lostCustomers.toLocaleString();
+    monthlyLossSpan.innerHTML = formatMoney(monthlyLostRev);
+    annualLossSpan.innerHTML = formatMoney(annualLostRev);
+
+    // optional: add extra red glow effect if monthly loss is high
+    const lossElement = monthlyLossSpan;
+    if (monthlyLostRev > 50000) {
+      lossElement.style.textShadow = "0 0 12px #ff4d4d";
+    } else {
+      lossElement.style.textShadow = "none";
+    }
+  }
+
+  // event listeners for all interactive elements
+  callsInput.addEventListener('input', updateCalculator);
+  missedRateSlider.addEventListener('input', updateCalculator);
+  convRateSlider.addEventListener('input', updateCalculator);
+  ticketInput.addEventListener('input', updateCalculator);
+
+  // also sync number input for slider values label display
+  missedRateSlider.addEventListener('input', function(e) {
+    missedRateVal.innerText = e.target.value + '%';
+    missRateLabel.innerText = e.target.value + '%';
+  });
+  convRateSlider.addEventListener('input', function(e) {
+    convRateVal.innerText = e.target.value + '%';
+    convRateLabel.innerText = e.target.value + '%';
+  });
+  ticketInput.addEventListener('input', function(e) {
+    let val = parseFloat(e.target.value);
+    if (!isNaN(val)) ticketLabelSpan.innerText = '$' + Math.round(val).toLocaleString();
+  });
+  callsInput.addEventListener('input', function(e) {
+    dailyCallsLabel.innerText = e.target.value;
+  });
+
+  // call initial update
+  updateCalculator();
+
+  // CTA button interactive alert with strong conversion hook
+  const ctaBtn = document.getElementById('mainCtaBtn');
+  ctaBtn.addEventListener('click', () => {
+    // dynamic message showing current monthly loss to make it urgent
+    const currentLossText = document.getElementById('monthlyLoss').innerText;
+    alert(`⚠️ You're losing ${currentLossText} every single month from missed calls.\n\nSchedule a free 15-min revenue recovery audit → Our team will show you how to reclaim up to 85% of lost calls. No obligation.`);
+    window.location.href = 'https://calendly.com/ai-profit-lab2026';
+  });
+
+  // extra: style for range thumb dynamic (optional)
+  const style = document.createElement('style');
+  style.textContent = `
+    input[type="range"]::-webkit-slider-thumb {
+      background: #FF5A5A;
+      box-shadow: 0 0 6px #ff4d4d;
+    }
+    input[type="range"]:focus {
+      outline: none;
+    }
+    .metric-number.loss {
+      transition: all 0.2s;
+    }
+  `;
+  document.head.appendChild(style);
+
+  // add small floating "missed call counter" animation? just for scroll-stop effect
+  const container = document.querySelector('.container');
+  const heroBadge = document.querySelector('.badge-loss');
+  if (heroBadge) {
+    setInterval(() => {
+      heroBadge.style.transform = "scale(1.02)";
+      setTimeout(() => heroBadge.style.transform = "scale(1)", 400);
+    }, 3000);
+  }
+
+  // bonus: update URL? Not needed, but ensure window load smooth
+  window.addEventListener('load', () => {
+    updateCalculator();
+    // prefill some eye-catching values to show massive loss potential
+    if (parseInt(callsInput.value) === 62 && parseFloat(ticketInput.value) === 395 && parseFloat(missedRateSlider.value) === 44) {
+      // already default, fine. But show strong copy
+    }
+  });
+</script>
+</body>
+</html>

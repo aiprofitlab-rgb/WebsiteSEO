@@ -550,6 +550,13 @@
       ]
     }
     </script>
+
+    <style>
+        .group-submenu:hover .submenu-content {
+            opacity: 1;
+            visibility: visible;
+        }
+    </style>
 </head>
 <body>
 
@@ -567,18 +574,37 @@
                 <a href="services.html" class="hover:text-blue-400 transition">الخدمات</a>
                 <a href="process.html" class="hover:text-blue-400 transition">طريقتنا</a>
                 
+                
                 <!-- Resources Dropdown -->
                 <div class="relative group cursor-pointer h-full flex items-center">
                     <span class="hover:text-blue-400 transition flex items-center gap-1">
                         الموارد
                         <svg class="w-4 h-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                     </span>
-                    <div class="absolute top-8 right-1/2 translate-x-1/2 w-48 bg-[#0a0a0a] border border-gray-800 rounded-xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 overflow-hidden flex flex-col z-50">
-                        <a href="#" class="px-5 py-3 hover:bg-gray-800 hover:text-blue-400 border-b border-gray-800 transition">العروض التجريبية</a>
-                        <a href="roi-calculator.html" class="px-5 py-3 hover:bg-gray-800 hover:text-blue-400 border-b border-gray-800 transition">حاسبة العائد</a>
-                        <a href="blog_ar.html" class="px-5 py-3 hover:bg-gray-800 hover:text-blue-400 border-b border-gray-800 transition">المقالات</a>
-                        <a href="#" class="px-5 py-3 hover:bg-gray-800 hover:text-blue-400 border-b border-gray-800 transition">يوتيوب</a>
-                        <a href="about.html" class="px-5 py-3 hover:bg-gray-800 hover:text-blue-400 transition">من نحن</a>
+                    <div class="absolute top-8 right-1/2 translate-x-1/2 w-48 bg-[#0a0a0a] border border-gray-800 rounded-xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 flex flex-col z-50">
+                                                <div class="relative group-submenu">
+                            <div class="px-5 py-4 hover:bg-gray-800 hover:text-blue-400 border-b border-gray-800 transition flex justify-between items-center cursor-pointer text-[15px] font-bold tracking-wide">
+                                العروض التجريبية
+                                <svg class="w-4 h-4 transform rotate-90" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </div>
+                            <div class="submenu-content absolute right-full top-0 w-64 bg-[#0a0a0a] border border-gray-800 rounded-xl shadow-2xl opacity-0 invisible transition-all duration-300 flex flex-col z-50 text-right">
+                                <a href="Customized_CEO_Dashboard_demo.html" class="px-5 py-4 hover:bg-gray-800 hover:text-blue-400 border-b border-gray-800 transition text-[15px] font-bold tracking-wide">لوحة تحكم المدير التنفيذي</a>
+                                <a href="whatsapp_receptionist_demo_ar.html" class="px-5 py-4 hover:bg-gray-800 hover:text-blue-400 transition text-[15px] font-bold tracking-wide">موظف استقبال واتساب</a>
+                            </div>
+                        </div>
+                        <div class="relative group-submenu">
+                            <div class="px-5 py-4 hover:bg-gray-800 hover:text-blue-400 border-b border-gray-800 transition flex justify-between items-center cursor-pointer text-[15px] font-bold tracking-wide">
+                                المحاكيات
+                                <svg class="w-4 h-4 transform rotate-90" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </div>
+                            <div class="submenu-content absolute right-full top-0 w-64 bg-[#0a0a0a] border border-gray-800 rounded-xl shadow-2xl opacity-0 invisible transition-all duration-300 flex flex-col z-50 text-right">
+                                <a href="Missed-Call-Simulator-ar.html" class="px-5 py-4 hover:bg-gray-800 hover:text-blue-400 border-b border-gray-800 transition text-[15px] font-bold tracking-wide">محاكي المكالمات الفائتة</a>
+                                <a href="Campaign_ROI_Simulator.html" class="px-5 py-4 hover:bg-gray-800 hover:text-blue-400 transition text-[15px] font-bold tracking-wide">محاكي عائد الحملات</a>
+                            </div>
+                        </div>
+                        <a href="blog_ar.html" class="px-5 py-4 hover:bg-gray-800 hover:text-blue-400 border-b border-gray-800 transition text-[15px] font-bold tracking-wide">المقالات</a>
+                        <a href="#" class="px-5 py-4 hover:bg-gray-800 hover:text-blue-400 border-b border-gray-800 transition text-[15px] font-bold tracking-wide">يوتيوب</a>
+                        <a href="about.html" class="px-5 py-4 hover:bg-gray-800 hover:text-blue-400 transition text-[15px] font-bold tracking-wide">من نحن</a>
                     </div>
                 </div>
                 
@@ -606,10 +632,17 @@
             <a href="services.html" class="hover:text-blue-400 transition">الخدمات</a>
             <a href="process.html" class="hover:text-blue-400 transition">طريقتنا</a>
             
+            
+            
+
             <div class="flex flex-col text-center w-full py-2 bg-black/40 rounded-lg">
                 <span class="text-xs text-gray-500 font-bold uppercase tracking-widest mb-2">الموارد</span>
-                <a href="#" class="py-1.5 text-sm text-gray-300 border-none">العروض التجريبية</a>
-                <a href="roi-calculator.html" class="py-1.5 text-sm text-gray-300 border-none">حاسبة العائد</a>
+                                <a href="#" class="py-2 text-[15px] font-bold text-gray-300 border-none">العروض التجريبية:</a>
+                <a href="Customized_CEO_Dashboard_demo.html" class="py-1.5 text-sm text-gray-400 border-none pr-4">← لوحة تحكم المدير التنفيذي</a>
+                <a href="whatsapp_receptionist_demo_ar.html" class="py-1.5 text-sm text-gray-400 border-none pr-4">← موظف استقبال واتساب</a>
+                <a href="#" class="py-2 text-[15px] font-bold text-gray-300 border-none mt-1">المحاكيات:</a>
+                <a href="Missed-Call-Simulator-ar.html" class="py-1.5 text-sm text-gray-400 border-none pr-4">← محاكي المكالمات الفائتة</a>
+                <a href="Campaign_ROI_Simulator.html" class="py-1.5 text-sm text-gray-400 border-none pr-4">← محاكي عائد الحملات</a>
                 <a href="blog_ar.html" class="py-1.5 text-sm text-gray-300 border-none">المقالات</a>
                 <a href="#" class="py-1.5 text-sm text-gray-300 border-none">يوتيوب</a>
                 <a href="about.html" class="py-1.5 text-sm text-gray-300 border-none">من نحن</a>
@@ -838,7 +871,7 @@
                 <ul class="space-y-2 text-gray-400 text-sm">
                     <li><a href="Missed-Call Simulator.html" class="hover:text-blue-400 transition">محاكي المكالمات الفائتة</a></li>
                     <li><a href="Customized_CEO_Dashboard_demo.html" class="hover:text-blue-400 transition">لوحة تحكم المدير التنفيذي</a></li>
-                    <li><a href="whatsapp_receptionist_demo.html" class="hover:text-blue-400 transition">موظف استقبال واتساب</a></li>
+                    <li><a href="whatsapp_receptionist_demo_ar.html" class="hover:text-blue-400 transition">موظف استقبال واتساب</a></li>
                     <li><a href="Campaign_ROI_Simulator.html" class="hover:text-blue-400 transition">محاكي عائد الحملات</a></li>
                 </ul>
             </div>

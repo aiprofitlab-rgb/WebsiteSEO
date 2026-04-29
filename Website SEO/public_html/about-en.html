@@ -231,6 +231,13 @@
       ]
     }
     </script>
+
+    <style>
+        .group-submenu:hover .submenu-content {
+            opacity: 1;
+            visibility: visible;
+        }
+    </style>
 </head>
 <body>
 
@@ -247,18 +254,37 @@
                 <a href="services-en.html" class="hover:text-blue-400 transition">Services</a>
                 <a href="process-en.html" class="hover:text-blue-400 transition">How It Works</a>
                 
+                
                 <!-- Resources Dropdown -->
                 <div class="relative group cursor-pointer h-full flex items-center">
                     <span class="hover:text-blue-400 transition flex items-center gap-1">
                         Resources
                         <svg class="w-4 h-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                     </span>
-                    <div class="absolute top-8 left-1/2 -translate-x-1/2 w-48 bg-[#0a0a0a] border border-gray-800 rounded-xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 overflow-hidden flex flex-col z-50">
-                        <a href="#" class="px-5 py-3 hover:bg-gray-800 hover:text-blue-400 border-b border-gray-800 transition">Demo</a>
-                        <a href="roi-calculator.html" class="px-5 py-3 hover:bg-gray-800 hover:text-blue-400 border-b border-gray-800 transition">Simulators</a>
-                        <a href="blog.html" class="px-5 py-3 hover:bg-gray-800 hover:text-blue-400 border-b border-gray-800 transition">Articles</a>
-                        <a href="#" class="px-5 py-3 hover:bg-gray-800 hover:text-blue-400 border-b border-gray-800 transition">YouTube</a>
-                        <a href="about-en.html" class="px-5 py-3 hover:bg-gray-800 hover:text-blue-400 transition">About</a>
+                    <div class="absolute top-8 left-1/2 -translate-x-1/2 w-48 bg-[#0a0a0a] border border-gray-800 rounded-xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 flex flex-col z-50">
+                                                <div class="relative group-submenu">
+                            <div class="px-5 py-4 hover:bg-gray-800 hover:text-blue-400 border-b border-gray-800 transition flex justify-between items-center cursor-pointer text-[15px] font-bold tracking-wide">
+                                Demo
+                                <svg class="w-4 h-4 transform -rotate-90" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </div>
+                            <div class="submenu-content absolute left-full top-0 w-64 bg-[#0a0a0a] border border-gray-800 rounded-xl shadow-2xl opacity-0 invisible transition-all duration-300 flex flex-col z-50">
+                                <a href="Customized_CEO_Dashboard_demo.html" class="px-5 py-4 hover:bg-gray-800 hover:text-blue-400 border-b border-gray-800 transition text-[15px] font-bold tracking-wide">CEO Dashboard</a>
+                                <a href="whatsapp_receptionist_demo.html" class="px-5 py-4 hover:bg-gray-800 hover:text-blue-400 transition text-[15px] font-bold tracking-wide">WhatsApp Receptionist</a>
+                            </div>
+                        </div>
+                        <div class="relative group-submenu">
+                            <div class="px-5 py-4 hover:bg-gray-800 hover:text-blue-400 border-b border-gray-800 transition flex justify-between items-center cursor-pointer text-[15px] font-bold tracking-wide">
+                                Simulators
+                                <svg class="w-4 h-4 transform -rotate-90" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </div>
+                            <div class="submenu-content absolute left-full top-0 w-64 bg-[#0a0a0a] border border-gray-800 rounded-xl shadow-2xl opacity-0 invisible transition-all duration-300 flex flex-col z-50">
+                                <a href="Missed-Call Simulator.html" class="px-5 py-4 hover:bg-gray-800 hover:text-blue-400 border-b border-gray-800 transition text-[15px] font-bold tracking-wide">Missed-Call Simulator</a>
+                                <a href="Campaign_ROI_Simulator.html" class="px-5 py-4 hover:bg-gray-800 hover:text-blue-400 transition text-[15px] font-bold tracking-wide">Campaign ROI Simulator</a>
+                            </div>
+                        </div>
+                        <a href="blog.html" class="px-5 py-4 hover:bg-gray-800 hover:text-blue-400 border-b border-gray-800 transition text-[15px] font-bold tracking-wide">Articles</a>
+                        <a href="#" class="px-5 py-4 hover:bg-gray-800 hover:text-blue-400 border-b border-gray-800 transition text-[15px] font-bold tracking-wide">YouTube</a>
+                        <a href="about-en.html" class="px-5 py-4 hover:bg-gray-800 hover:text-blue-400 transition text-[15px] font-bold tracking-wide">About</a>
                     </div>
                 </div>
                 
@@ -284,10 +310,17 @@
             <a href="services-en.html">Services</a>
             <a href="process-en.html">How It Works</a>
             
+            
+            
+
             <div class="flex flex-col text-center w-full py-2 bg-black/40 rounded-lg">
                 <span class="text-xs text-gray-500 font-bold uppercase tracking-widest mb-2">Resources</span>
-                <a href="#" class="py-1.5 text-sm text-gray-300 border-none">Demo</a>
-                <a href="roi-calculator.html" class="py-1.5 text-sm text-gray-300 border-none">Simulators</a>
+                                <a href="#" class="py-2 text-[15px] font-bold text-gray-300 border-none">Demo:</a>
+                <a href="Customized_CEO_Dashboard_demo.html" class="py-1.5 text-sm text-gray-400 border-none pl-4">→ CEO Dashboard</a>
+                <a href="whatsapp_receptionist_demo.html" class="py-1.5 text-sm text-gray-400 border-none pl-4">→ WhatsApp Receptionist</a>
+                <a href="#" class="py-2 text-[15px] font-bold text-gray-300 border-none mt-1">Simulators:</a>
+                <a href="Missed-Call Simulator.html" class="py-1.5 text-sm text-gray-400 border-none pl-4">→ Missed-Call Simulator</a>
+                <a href="Campaign_ROI_Simulator.html" class="py-1.5 text-sm text-gray-400 border-none pl-4">→ Campaign ROI Simulator</a>
                 <a href="blog.html" class="py-1.5 text-sm text-gray-300 border-none">Articles</a>
                 <a href="#" class="py-1.5 text-sm text-gray-300 border-none">YouTube</a>
                 <a href="about-en.html" class="py-1.5 text-sm text-gray-300 border-none">About</a>

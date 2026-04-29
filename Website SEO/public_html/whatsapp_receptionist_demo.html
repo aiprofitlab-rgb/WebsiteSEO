@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2GPVY4Z5KR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-2GPVY4Z5KR');
+</script>
+
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<!-- SEO Meta Tags -->
+<title>WhatsApp Receptionist Demo | AI Profit Lab</title>
+<meta name="description" content="Experience our AI WhatsApp Receptionist in action. Save time, qualify leads instantly, and book appointments automatically 24/7. Discover how AI Profit Lab can scale your operations in Oman.">
+<meta name="keywords" content="WhatsApp AI, AI receptionist, lead qualification, automated booking, real estate AI, AI Profit Lab, Oman business automation">
+<meta name="author" content="AI Profit Lab">
+<meta name="robots" content="index, follow">
+
+<!-- Open Graph / Social Media -->
+<meta property="og:title" content="WhatsApp Receptionist Demo | AI Profit Lab">
+<meta property="og:description" content="Experience our AI WhatsApp Receptionist in action. Save time, qualify leads instantly, and book appointments automatically 24/7.">
+<meta property="og:url" content="https://aiprofitlab.io/whatsapp_receptionist_demo.html">
+<meta property="og:type" content="website">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="WhatsApp Receptionist Demo | AI Profit Lab">
+<meta name="twitter:description" content="Automate lead qualification and appointment booking with our AI WhatsApp Receptionist.">
+
+<!-- LocalBusiness Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "AI Profit Lab",
+  "image": "https://aiprofitlab.io/og-image.jpg",
+  "url": "https://aiprofitlab.io",
+  "telephone": "+96890000000", 
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Muscat",
+    "addressRegion": "Muscat Governorate",
+    "addressCountry": "OM"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 23.5880,
+    "longitude": 58.3829
+  },
+  "description": "AI Profit Lab specializes in AI automation solutions for businesses in Oman, Qatar, UAE and the GCC. We provide smart WhatsApp receptionists, AI dashboards, and workflow automation.",
+  "priceRange": "$$"
+}
+</script>
+
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f0f2f5; min-height: 100vh; }
+
+  /* ── Top Nav ── */
+  .nav { background: #075E54; color: #fff; padding: 0 24px; height: 56px; display: flex; align-items: center; justify-content: space-between; }
+  .nav-brand { font-size: 18px; font-weight: 600; display: flex; align-items: center; gap: 10px; }
+  .nav-badge { background: #25D366; border-radius: 20px; font-size: 11px; padding: 2px 10px; font-weight: 500; }
+  .nav-tabs { display: flex; gap: 4px; }
+  .nav-tab { background: transparent; border: 1px solid rgba(255,255,255,0.3); color: #fff; padding: 6px 16px; border-radius: 20px; cursor: pointer; font-size: 13px; transition: all .2s; }
+  .nav-tab.active, .nav-tab:hover { background: rgba(255,255,255,0.2); }
+
+  /* ── Layout ── */
+  .layout { display: grid; grid-template-columns: 320px 1fr; gap: 0; height: calc(100vh - 56px); }
+
+  /* ── Lead Sidebar ── */
+  .sidebar { background: #fff; border-right: 1px solid #e9ecef; overflow-y: auto; }
+  .sidebar-header { padding: 16px; border-bottom: 1px solid #e9ecef; display: flex; align-items: center; justify-content: space-between; }
+  .sidebar-header h3 { font-size: 14px; color: #495057; font-weight: 600; }
+  .lead-count { background: #25D366; color: #fff; border-radius: 12px; font-size: 11px; padding: 2px 8px; font-weight: 600; }
+  .lead-item { padding: 12px 16px; border-bottom: 1px solid #f8f9fa; cursor: pointer; display: flex; gap: 12px; align-items: flex-start; transition: background .15s; }
+  .lead-item:hover { background: #f8f9fa; }
+  .lead-item.active { background: #e7f8f0; border-left: 3px solid #25D366; }
+  .avatar { width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 15px; flex-shrink: 0; }
+  .av-green { background: #d4edda; color: #155724; }
+  .av-blue { background: #cce5ff; color: #004085; }
+  .av-orange { background: #fff3cd; color: #856404; }
+  .av-red { background: #f8d7da; color: #721c24; }
+  .lead-info { flex: 1; min-width: 0; }
+  .lead-name { font-size: 14px; font-weight: 600; color: #212529; }
+  .lead-preview { font-size: 12px; color: #6c757d; margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .lead-meta { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; flex-shrink: 0; }
+  .lead-time { font-size: 11px; color: #adb5bd; }
+  .score-badge { font-size: 10px; padding: 2px 7px; border-radius: 10px; font-weight: 600; }
+  .score-hot { background: #fde8e8; color: #c0392b; }
+  .score-warm { background: #fef3cd; color: #7a5800; }
+  .score-cold { background: #e8f4fd; color: #1a5276; }
+
+  /* ── Main Chat ── */
+  .main { display: flex; flex-direction: column; height: 100%; }
+  .chat-header { background: #fff; border-bottom: 1px solid #e9ecef; padding: 12px 20px; display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+  .chat-header-info { flex: 1; }
+  .chat-header-name { font-size: 16px; font-weight: 600; color: #212529; }
+  .chat-header-status { font-size: 12px; color: #6c757d; margin-top: 1px; }
+  .chat-header-actions { display: flex; gap: 8px; }
+  .btn { padding: 7px 16px; border-radius: 8px; font-size: 13px; cursor: pointer; border: none; font-weight: 500; transition: all .15s; }
+  .btn-primary { background: #25D366; color: #fff; }
+  .btn-primary:hover { background: #1da851; }
+  .btn-outline { background: #fff; color: #495057; border: 1px solid #dee2e6; }
+  .btn-outline:hover { background: #f8f9fa; }
+
+  /* ── Messages ── */
+  .messages { flex: 1; overflow-y: auto; padding: 20px; display: flex; flex-direction: column; gap: 12px; background: #e5ddd5; }
+  .msg { max-width: 72%; display: flex; flex-direction: column; }
+  .msg.ai { align-self: flex-start; }
+  .msg.user { align-self: flex-end; }
+  .msg-bubble { padding: 10px 14px; border-radius: 12px; font-size: 14px; line-height: 1.5; }
+  .msg.ai .msg-bubble { background: #fff; color: #212529; border-bottom-left-radius: 4px; }
+  .msg.user .msg-bubble { background: #dcf8c6; color: #212529; border-bottom-right-radius: 4px; }
+  .msg-time { font-size: 11px; color: #6c757d; margin-top: 3px; }
+  .msg.user .msg-time { text-align: right; }
+  .ai-tag { font-size: 10px; background: #e7f8f0; color: #155724; padding: 2px 8px; border-radius: 10px; margin-bottom: 4px; align-self: flex-start; font-weight: 600; }
+
+  /* ── Input ── */
+  .chat-input { background: #f0f2f5; border-top: 1px solid #e9ecef; padding: 12px 20px; flex-shrink: 0; }
+  .simulate-note { font-size: 12px; color: #6c757d; margin-bottom: 10px; background: #fff3cd; border-radius: 6px; padding: 6px 10px; border-left: 3px solid #ffc107; }
+  .quick-replies { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
+  .qr-btn { background: #fff; border: 1px solid #dee2e6; border-radius: 20px; padding: 6px 14px; font-size: 13px; cursor: pointer; color: #075E54; font-weight: 500; transition: all .15s; }
+  .qr-btn:hover { background: #e7f8f0; border-color: #25D366; }
+  .input-row { display: flex; gap: 10px; align-items: center; }
+  .msg-input { flex: 1; padding: 10px 16px; border: 1px solid #dee2e6; border-radius: 24px; font-size: 14px; outline: none; font-family: inherit; }
+  .msg-input:focus { border-color: #25D366; }
+  .send-btn { width: 42px; height: 42px; background: #25D366; border: none; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: background .15s; }
+  .send-btn:hover { background: #1da851; }
+  .send-btn svg { width: 20px; height: 20px; fill: #fff; }
+
+  /* ── Lead Panel ── */
+  .lead-panel { display: none; }
+  .lead-panel.active { display: block; }
+  .panel-section { background: #fff; margin: 16px; border-radius: 12px; overflow: hidden; border: 1px solid #e9ecef; }
+  .panel-section-header { padding: 12px 16px; background: #f8f9fa; border-bottom: 1px solid #e9ecef; font-size: 13px; font-weight: 600; color: #495057; }
+  .panel-row { padding: 10px 16px; display: flex; justify-content: space-between; border-bottom: 1px solid #f8f9fa; font-size: 13px; }
+  .panel-row:last-child { border-bottom: none; }
+  .panel-label { color: #6c757d; }
+  .panel-value { color: #212529; font-weight: 500; }
+  .score-bar { height: 8px; background: #e9ecef; border-radius: 4px; margin: 12px 16px; overflow: hidden; }
+  .score-fill { height: 100%; border-radius: 4px; transition: width .6s ease; }
+
+  /* ── Dashboard ── */
+  .dashboard { padding: 24px; overflow-y: auto; }
+  .dash-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 24px; }
+  .stat-card { background: #fff; border-radius: 12px; padding: 20px; border: 1px solid #e9ecef; }
+  .stat-label { font-size: 12px; color: #6c757d; margin-bottom: 8px; font-weight: 500; text-transform: uppercase; letter-spacing: .5px; }
+  .stat-value { font-size: 28px; font-weight: 700; color: #212529; }
+  .stat-sub { font-size: 12px; color: #25D366; margin-top: 4px; font-weight: 500; }
+  .dash-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .dash-card { background: #fff; border-radius: 12px; padding: 20px; border: 1px solid #e9ecef; }
+  .dash-card h4 { font-size: 14px; font-weight: 600; color: #212529; margin-bottom: 16px; }
+  .funnel-bar { margin-bottom: 12px; }
+  .funnel-label { display: flex; justify-content: space-between; font-size: 13px; color: #495057; margin-bottom: 4px; }
+  .funnel-track { height: 10px; background: #e9ecef; border-radius: 5px; overflow: hidden; }
+  .funnel-fill { height: 100%; border-radius: 5px; }
+  .activity-item { display: flex; align-items: center; gap: 10px; padding: 8px 0; border-bottom: 1px solid #f8f9fa; font-size: 13px; }
+  .activity-item:last-child { border-bottom: none; }
+  .activity-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+
+  /* ── Appointment ── */
+  .appt-view { padding: 24px; overflow-y: auto; }
+  .calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; margin-bottom: 16px; }
+  .cal-day { text-align: center; padding: 8px 4px; border-radius: 8px; font-size: 13px; cursor: pointer; border: 1px solid transparent; transition: all .15s; }
+  .cal-day.header { font-weight: 600; font-size: 12px; color: #6c757d; cursor: default; background: none; }
+  .cal-day:not(.header):hover { background: #e7f8f0; border-color: #25D366; }
+  .cal-day.has-appt { background: #d4edda; font-weight: 600; color: #155724; }
+  .cal-day.today { background: #25D366; color: #fff; font-weight: 700; }
+  .cal-day.empty { cursor: default; }
+  .time-slots { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 16px; }
+  .time-slot { border: 1px solid #dee2e6; border-radius: 8px; padding: 10px; text-align: center; cursor: pointer; font-size: 13px; transition: all .15s; }
+  .time-slot.booked { background: #d4edda; border-color: #25D366; color: #155724; font-weight: 600; }
+  .time-slot:not(.booked):hover { border-color: #25D366; background: #e7f8f0; }
+
+  /* ── Tabs content ── */
+  .tab-content { display: none; height: 100%; overflow: hidden; }
+  .tab-content.active { display: flex; }
+  #tab-dashboard, #tab-appointments { display: none; overflow: auto; }
+  #tab-dashboard.active, #tab-appointments.active { display: block; }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-brand">
+    <a href="en.html" style="color:#fff; text-decoration:none; display:flex; align-items:center; gap: 8px; margin-right: 15px; border-right: 1px solid rgba(255,255,255,0.3); padding-right: 15px;">
+      <span style="font-weight:900; letter-spacing:-0.5px;"><span style="color:#3B82F6;">A</span><span style="color:#EF4444;">I</span> Profit Lab</span>
+    </a>
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+      <rect width="24" height="24" rx="6" fill="#25D366"/>
+      <path d="M12 4C7.58 4 4 7.58 4 12c0 1.42.37 2.75 1.01 3.91L4 20l4.2-1.01A7.95 7.95 0 0012 20c4.42 0 8-3.58 8-8s-3.58-8-8-8z" fill="#fff"/>
+      <path d="M16 13.5c-.25-.12-1.47-.72-1.7-.81-.23-.09-.39-.12-.56.12-.17.25-.64.81-.78.97-.14.16-.29.18-.54.06-.25-.12-1.05-.39-2-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.5.11-.11.25-.29.37-.43.12-.14.16-.25.25-.41.09-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.43H8.5c-.14 0-.37.05-.57.25-.19.19-.74.72-.74 1.76s.76 2.04.87 2.18c.12.14 1.49 2.27 3.62 3.18.51.22.9.35 1.21.45.51.16.97.14 1.33.09.41-.06 1.25-.51 1.43-1 .18-.49.18-.91.12-.99-.05-.09-.2-.14-.44-.26z" fill="#25D366"/>
+    </svg>
+    RealtyAI — WhatsApp Receptionist
+    <span class="nav-badge">LIVE</span>
+  </div>
+  <div class="nav-tabs">
+    <button class="nav-tab active" onclick="switchTab('chat')">Conversations</button>
+    <button class="nav-tab" onclick="switchTab('dashboard')">Dashboard</button>
+    <button class="nav-tab" onclick="switchTab('appointments')">Appointments</button>
+  </div>
+</nav>
+
+<!-- CHAT TAB -->
+<div class="tab-content active" id="tab-chat">
+  <div class="layout" style="width:100%; height:100%;">
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="sidebar-header">
+        <h3>Active Leads</h3>
+        <span class="lead-count">6</span>
+      </div>
+      <div id="lead-list"></div>
+    </div>
+
+    <!-- Chat + panel -->
+    <div style="display:flex; flex-direction:column; height:100%; overflow:hidden; flex:1;">
+      <div class="main" id="chat-area">
+        <div class="chat-header">
+          <div class="avatar av-green" id="active-avatar">SJ</div>
+          <div class="chat-header-info">
+            <div class="chat-header-name" id="active-name">Sara Johnson</div>
+            <div class="chat-header-status" id="active-status">🟢 Responding via AI · Hot lead · Budget: OMR 180,000</div>
+          </div>
+          <div class="chat-header-actions">
+            <button class="btn btn-outline" onclick="showLeadPanel()">Lead Details</button>
+            <button class="btn btn-primary" onclick="bookAppt()">Book Appointment ↗</button>
+          </div>
+        </div>
+        <div class="messages" id="messages"></div>
+        <div class="chat-input">
+          <div class="simulate-note">🤖 Simulate the lead's reply — tap a quick reply or type your own</div>
+          <div class="quick-replies" id="quick-replies"></div>
+          <div class="input-row">
+            <input class="msg-input" id="msg-input" placeholder="Type a message as the lead…" onkeydown="if(event.key==='Enter')sendMsg()"/>
+            <button class="send-btn" onclick="sendMsg()">
+              <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DASHBOARD TAB -->
+<div class="tab-content" id="tab-dashboard">
+  <div class="dashboard">
+    <h2 style="font-size:20px;font-weight:700;color:#212529;margin-bottom:20px;">AI Receptionist Dashboard</h2>
+    <div class="dash-grid">
+      <div class="stat-card">
+        <div class="stat-label">Leads today</div>
+        <div class="stat-value">24</div>
+        <div class="stat-sub">↑ 18% vs yesterday</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Response time</div>
+        <div class="stat-value">38s</div>
+        <div class="stat-sub">Avg. first reply</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Qualified rate</div>
+        <div class="stat-value">61%</div>
+        <div class="stat-sub">↑ 9% vs last week</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Appointments</div>
+        <div class="stat-value">7</div>
+        <div class="stat-sub">Booked today by AI</div>
+      </div>
+    </div>
+    <div class="dash-row">
+      <div class="dash-card">
+        <h4>Lead Funnel</h4>
+        <div class="funnel-bar">
+          <div class="funnel-label"><span>New contacts</span><span>24</span></div>
+          <div class="funnel-track"><div class="funnel-fill" style="width:100%;background:#25D366;"></div></div>
+        </div>
+        <div class="funnel-bar">
+          <div class="funnel-label"><span>Engaged (replied)</span><span>21</span></div>
+          <div class="funnel-track"><div class="funnel-fill" style="width:87%;background:#52b788;"></div></div>
+        </div>
+        <div class="funnel-bar">
+          <div class="funnel-label"><span>Qualified</span><span>15</span></div>
+          <div class="funnel-track"><div class="funnel-fill" style="width:61%;background:#74c69d;"></div></div>
+        </div>
+        <div class="funnel-bar">
+          <div class="funnel-label"><span>Appointment booked</span><span>7</span></div>
+          <div class="funnel-track"><div class="funnel-fill" style="width:29%;background:#b7e4c7;"></div></div>
+        </div>
+      </div>
+      <div class="dash-card">
+        <h4>Recent Activity</h4>
+        <div class="activity-item"><div class="activity-dot" style="background:#25D366;"></div><span><strong>Sara Johnson</strong> — appointment booked 2:30PM</span></div>
+        <div class="activity-item"><div class="activity-dot" style="background:#ffc107;"></div><span><strong>Ahmed Al-Rashid</strong> — re-qualified after 3 follow-ups</span></div>
+        <div class="activity-item"><div class="activity-dot" style="background:#25D366;"></div><span><strong>Priya Nair</strong> — hot lead, agent alerted</span></div>
+        <div class="activity-item"><div class="activity-dot" style="background:#6c757d;"></div><span><strong>Mark Whitfield</strong> — entered nurture sequence</span></div>
+        <div class="activity-item"><div class="activity-dot" style="background:#25D366;"></div><span><strong>Layla Hassan</strong> — appointment booked 4:00PM</span></div>
+        <div class="activity-item"><div class="activity-dot" style="background:#dc3545;"></div><span><strong>Carlos Mendez</strong> — not qualified, budget mismatch</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- APPOINTMENTS TAB -->
+<div class="tab-content" id="tab-appointments">
+  <div class="appt-view">
+    <h2 style="font-size:20px;font-weight:700;color:#212529;margin-bottom:20px;">Appointment Calendar — March 2026</h2>
+    <div style="background:#fff;border-radius:12px;border:1px solid #e9ecef;padding:20px;max-width:600px;">
+      <div class="calendar-grid" id="calendar"></div>
+      <div style="border-top:1px solid #e9ecef;padding-top:16px;">
+        <div style="font-size:14px;font-weight:600;color:#212529;margin-bottom:12px;">Today's slots — <span style="color:#25D366;">21 Mar</span></div>
+        <div class="time-slots">
+          <div class="time-slot booked">9:00 AM<br><small>Sara Johnson</small></div>
+          <div class="time-slot">10:00 AM<br><small>Available</small></div>
+          <div class="time-slot booked">11:30 AM<br><small>Priya Nair</small></div>
+          <div class="time-slot">1:00 PM<br><small>Available</small></div>
+          <div class="time-slot booked">2:30 PM<br><small>Ahmed Al-R.</small></div>
+          <div class="time-slot">4:00 PM<br><small>Available</small></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const leads = [
+  {
+    id: 'sara', name: 'Sara Johnson', initials: 'SJ', avClass: 'av-green',
+    score: 92, scoreLabel: 'Hot', scoreCls: 'score-hot',
+    preview: "I'd love to see it this week!",
+    time: '2 min ago',
+    status: '🟢 Responding via AI · Hot lead · Budget: OMR 180,000',
+    details: { Budget: 'OMR 150,000–180,000', Area: 'Muscat Hills, Al Mouj', Timeline: 'Within 2 months', Type: '3-bed villa', Intent: 'Buy', Source: 'Property Finder' },
+    messages: [
+      { role: 'ai', text: "Hi Sara! 👋 Welcome to Al-Noor Properties. I'm Aria, your AI assistant. I saw you enquired about our Muscat Hills villas — I'd love to help! May I ask a few quick questions?", time: '10:02 AM' },
+      { role: 'user', text: "Yes sure, go ahead!", time: '10:03 AM' },
+      { role: 'ai', text: "Great! What's your approximate budget for this purchase?", time: '10:03 AM' },
+      { role: 'user', text: "Around OMR 150,000 to 180,000", time: '10:04 AM' },
+      { role: 'ai', text: "Perfect, that works well with our current inventory! Are you looking to buy, or would renting be an option too?", time: '10:04 AM' },
+      { role: 'user', text: "Definitely buying. Looking for a 3-bedroom villa.", time: '10:05 AM' },
+      { role: 'ai', text: "Excellent choice — we have two beautiful 3-bed villas in Muscat Hills launching this week. What's your ideal move-in timeline?", time: '10:05 AM' },
+      { role: 'user', text: "Ideally within the next 2 months.", time: '10:06 AM' },
+      { role: 'ai', text: "That's very doable! 🎉 Based on what you've told me, I'd love to arrange a private viewing for you. Would you prefer a morning or afternoon slot this week?", time: '10:06 AM' },
+    ],
+    quickReplies: ["Morning works for me", "Afternoon please", "Can I see photos first?", "What's the price per sqm?"]
+  },
+  {
+    id: 'ahmed', name: 'Ahmed Al-Rashid', initials: 'AA', avClass: 'av-blue',
+    score: 68, scoreLabel: 'Warm', scoreCls: 'score-warm',
+    preview: "Maybe next quarter actually",
+    time: '15 min ago',
+    status: '🟡 In nurture sequence · Follow-up #2 sent',
+    details: { Budget: 'OMR 90,000–110,000', Area: 'Ghubra, Qurum', Timeline: '3–6 months', Type: '2-bed apartment', Intent: 'Buy', Source: 'Instagram Ad' },
+    messages: [
+      { role: 'ai', text: "Hi Ahmed! 👋 I'm Aria from Al-Noor Properties. You expressed interest in our Qurum apartments — fantastic choice! Are you looking to buy or rent?", time: '9:30 AM' },
+      { role: 'user', text: "Buying, but I'm not in a rush. Maybe 3-4 months.", time: '9:32 AM' },
+      { role: 'ai', text: "No worries at all! We'd love to keep you updated as new units come in. What's your budget range?", time: '9:32 AM' },
+      { role: 'user', text: "OMR 90k to 110k roughly", time: '9:35 AM' },
+      { role: 'ai', text: "Great, we have several options in that range. Would you like me to send you a digital brochure with our current 2-bed listings in Qurum and Ghubra?", time: '9:35 AM' },
+      { role: 'user', text: "Maybe next quarter actually, things are a bit busy now", time: '9:50 AM' },
+      { role: 'ai', text: "Absolutely understood, Ahmed! I'll check back in with you in 3 weeks. In the meantime, I'll send you our newsletter so you stay updated on the best deals. 😊", time: '9:51 AM' },
+    ],
+    quickReplies: ["Actually I'm ready now", "Send me the brochure", "Not interested anymore", "Remind me in a month"]
+  },
+  {
+    id: 'priya', name: 'Priya Nair', initials: 'PN', avClass: 'av-green',
+    score: 87, scoreLabel: 'Hot', scoreCls: 'score-hot',
+    preview: "Yes! Tuesday 11am works perfectly",
+    time: '32 min ago',
+    status: '🟢 Appointment confirmed · Tue 25 Mar · 11:00 AM',
+    details: { Budget: 'OMR 200,000+', Area: 'Al Mouj Marina', Timeline: 'ASAP', Type: '4-bed waterfront', Intent: 'Buy', Source: 'Agent referral' },
+    messages: [
+      { role: 'ai', text: "Hello Priya! 🏡 Welcome to Al-Noor Properties. I understand you're looking for a waterfront property in Al Mouj — you have great taste! What's your budget?", time: '8:15 AM' },
+      { role: 'user', text: "Budget isn't really the issue, I'm looking for the right property. Probably OMR 200k+", time: '8:17 AM' },
+      { role: 'ai', text: "Wonderful! We have an exclusive 4-bedroom marina-view villa that just came to market — it won't last long. Would you like to schedule a viewing this week?", time: '8:17 AM' },
+      { role: 'user', text: "Yes! Tuesday 11am works perfectly", time: '8:19 AM' },
+      { role: 'ai', text: "✅ Appointment confirmed! Tuesday 25 Mar at 11:00 AM at Al Mouj Sales Centre. Our senior agent Sarah will meet you personally. You'll receive a confirmation + directions via WhatsApp shortly. See you Tuesday! 🎉", time: '8:20 AM' },
+    ],
+    quickReplies: ["Can I reschedule?", "Who will I meet?", "Send me more details", "Can I bring a friend?"]
+  },
+  {
+    id: 'mark', name: 'Mark Whitfield', initials: 'MW', avClass: 'av-orange',
+    score: 30, scoreLabel: 'Cold', scoreCls: 'score-cold',
+    preview: "Just browsing for now",
+    time: '1 hr ago',
+    status: '🔵 Cold lead · Nurture sequence active',
+    details: { Budget: 'Not disclosed', Area: 'TBD', Timeline: '12+ months', Type: 'Unknown', Intent: 'Exploring', Source: 'Google Search' },
+    messages: [
+      { role: 'ai', text: "Hi Mark! Thanks for visiting Al-Noor Properties online. Are you looking to buy or rent in Oman?", time: '7:45 AM' },
+      { role: 'user', text: "Just browsing for now, not sure yet", time: '7:50 AM' },
+      { role: 'ai', text: "Totally fine! Oman's property market has some great opportunities right now. Would you like to receive our monthly property digest — no pressure, just useful insights?", time: '7:51 AM' },
+      { role: 'user', text: "Sure, that sounds fine", time: '7:55 AM' },
+      { role: 'ai', text: "Great! You're subscribed to our monthly digest. 📬 I'll reach out again in 3 weeks — if anything catches your eye before then, just message here anytime!", time: '7:56 AM' },
+    ],
+    quickReplies: ["Actually I'm ready to look seriously", "What areas do you cover?", "Stop messaging me", "Tell me about current deals"]
+  },
+  {
+    id: 'layla', name: 'Layla Hassan', initials: 'LH', avClass: 'av-blue',
+    score: 75, scoreLabel: 'Warm', scoreCls: 'score-warm',
+    preview: "I prefer something quieter",
+    time: '2 hrs ago',
+    status: '🟡 Qualified · Agent follow-up needed',
+    details: { Budget: 'OMR 120,000–140,000', Area: 'Amerat, Seeb', Timeline: '3 months', Type: '3-bed villa', Intent: 'Buy', Source: 'Bayut' },
+    messages: [
+      { role: 'ai', text: "Hi Layla! 👋 I'm Aria from Al-Noor Properties. What type of property are you looking for?", time: '6:00 AM' },
+      { role: 'user', text: "3 bedroom villa, looking to buy", time: '6:05 AM' },
+      { role: 'ai', text: "Lovely! Are you open to areas like Amerat or Seeb? We have some wonderful family villas there within a great price range.", time: '6:06 AM' },
+      { role: 'user', text: "I prefer something quieter, yes", time: '6:10 AM' },
+      { role: 'ai', text: "Perfect! What's your approximate budget?", time: '6:11 AM' },
+      { role: 'user', text: "Around OMR 120 to 140k", time: '6:14 AM' },
+      { role: 'ai', text: "Great news — we have 3 listings that match perfectly! Our agent Khalid is available for a call this week. Would Wednesday or Thursday suit you?", time: '6:15 AM' },
+    ],
+    quickReplies: ["Wednesday works", "Thursday please", "Can I see the listings?", "What about payment plans?"]
+  },
+  {
+    id: 'carlos', name: 'Carlos Mendez', initials: 'CM', avClass: 'av-red',
+    score: 12, scoreLabel: 'Cold', scoreCls: 'score-cold',
+    preview: "OMR 40k max, final answer",
+    time: '3 hrs ago',
+    status: '🔴 Not qualified · Budget mismatch · Auto-archived',
+    details: { Budget: 'OMR 40,000 max', Area: 'Any', Timeline: 'Flexible', Type: 'Studio/1-bed', Intent: 'Rent or buy', Source: 'Facebook Ad' },
+    messages: [
+      { role: 'ai', text: "Hi Carlos! Welcome to Al-Noor Properties. What brings you here today — buying or renting?", time: '5:00 AM' },
+      { role: 'user', text: "Looking to buy, something small", time: '5:05 AM' },
+      { role: 'ai', text: "Great! Our entry-level apartments start from OMR 65,000. Do you have a budget range in mind?", time: '5:06 AM' },
+      { role: 'user', text: "OMR 40k max, final answer", time: '5:08 AM' },
+      { role: 'ai', text: "Thanks for letting me know, Carlos! Our properties are currently above that range, but if your budget changes in the future, we'd love to help. In the meantime, I can add you to our waitlist for affordable units — would that be useful?", time: '5:09 AM' },
+    ],
+    quickReplies: ["Yes add me to waitlist", "What about rentals?", "Thanks anyway"]
+  }
+];
+
+let activeLead = leads[0];
+let leadPanel = false;
+
+function renderLeadList() {
+  const list = document.getElementById('lead-list');
+  list.innerHTML = leads.map(l => `
+    <div class="lead-item ${l.id === activeLead.id ? 'active' : ''}" onclick="selectLead('${l.id}')">
+      <div class="avatar ${l.avClass}">${l.initials}</div>
+      <div class="lead-info">
+        <div class="lead-name">${l.name}</div>
+        <div class="lead-preview">${l.preview}</div>
+      </div>
+      <div class="lead-meta">
+        <span class="lead-time">${l.time}</span>
+        <span class="score-badge ${l.scoreCls}">${l.scoreLabel}</span>
+      </div>
+    </div>
+  `).join('');
+}
+
+function selectLead(id) {
+  activeLead = leads.find(l => l.id === id);
+  renderLeadList();
+  renderChat();
+  document.getElementById('active-name').textContent = activeLead.name;
+  document.getElementById('active-status').textContent = activeLead.status;
+  document.getElementById('active-avatar').textContent = activeLead.initials;
+  document.getElementById('active-avatar').className = 'avatar ' + activeLead.avClass;
+  leadPanel = false;
+  document.getElementById('quick-replies').innerHTML = activeLead.quickReplies.map(r =>
+    `<button class="qr-btn" onclick="sendQuickReply('${r}')">${r}</button>`
+  ).join('');
+}
+
+function renderChat() {
+  const box = document.getElementById('messages');
+  box.innerHTML = activeLead.messages.map(m => `
+    <div class="msg ${m.role}">
+      ${m.role === 'ai' ? '<span class="ai-tag">🤖 Aria AI</span>' : ''}
+      <div class="msg-bubble">${m.text}</div>
+      <div class="msg-time">${m.time}</div>
+    </div>
+  `).join('');
+  box.scrollTop = box.scrollHeight;
+}
+
+function sendQuickReply(text) {
+  document.getElementById('msg-input').value = text;
+  sendMsg();
+}
+
+async function sendMsg() {
+  const input = document.getElementById('msg-input');
+  const text = input.value.trim();
+  if (!text) return;
+  input.value = '';
+
+  const now = new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});
+  activeLead.messages.push({ role: 'user', text, time: now });
+  renderChat();
+
+  // Show typing indicator
+  const box = document.getElementById('messages');
+  const typing = document.createElement('div');
+  typing.className = 'msg ai';
+  typing.id = 'typing';
+  typing.innerHTML = '<span class="ai-tag">🤖 Aria AI</span><div class="msg-bubble" style="color:#6c757d;font-style:italic">Aria is typing…</div>';
+  box.appendChild(typing);
+  box.scrollTop = box.scrollHeight;
+
+  try {
+    const systemPrompt = `You are Aria, an AI WhatsApp receptionist for Al-Noor Properties, a premium real estate agency in Muscat, Oman. You are currently chatting with ${activeLead.name}.
+
+Lead details so far:
+- Budget: ${activeLead.details.Budget}
+- Area preference: ${activeLead.details.Area}
+- Timeline: ${activeLead.details.Timeline}
+- Property type: ${activeLead.details.Type}
+- Intent: ${activeLead.details.Intent}
+
+Your goals:
+1. Be warm, professional, and brief (WhatsApp style — 1-3 sentences max)
+2. Qualify leads by budget, timeline, location, and intent
+3. Push toward booking a viewing appointment
+4. If the user seems ready, offer a specific time slot (e.g. "Would Tuesday at 11am or Wednesday at 2pm work?")
+5. Use emojis sparingly but naturally
+
+Current conversation context determines the next logical step. Respond naturally to what the lead just said.`;
+
+    const response = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1000,
+        system: systemPrompt,
+        messages: activeLead.messages.map(m => ({
+          role: m.role === 'ai' ? 'assistant' : 'user',
+          content: m.text
+        }))
+      })
+    });
+
+    const data = await response.json();
+    const reply = data.content?.[0]?.text || "Thanks for your message! Our team will be in touch shortly.";
+
+    document.getElementById('typing')?.remove();
+    const replyTime = new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});
+    activeLead.messages.push({ role: 'ai', text: reply, time: replyTime });
+    renderChat();
+  } catch (e) {
+    document.getElementById('typing')?.remove();
+    const fallbacks = [
+      "Thanks for that! So when would be a good time for a viewing?",
+      "Great to hear! Would you like me to send you our latest listings?",
+      "Understood! Let me check availability and get back to you shortly."
+    ];
+    const replyTime = new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});
+    activeLead.messages.push({ role: 'ai', text: fallbacks[Math.floor(Math.random()*fallbacks.length)], time: replyTime });
+    renderChat();
+  }
+}
+
+function showLeadPanel() {
+  const existing = document.getElementById('lead-panel-modal');
+  if (existing) { existing.remove(); return; }
+
+  const scoreColor = activeLead.score > 75 ? '#25D366' : activeLead.score > 50 ? '#ffc107' : '#6c757d';
+  const panel = document.createElement('div');
+  panel.id = 'lead-panel-modal';
+  panel.style.cssText = 'position:fixed;top:56px;right:0;width:320px;height:calc(100vh - 56px);background:#f8f9fa;border-left:1px solid #e9ecef;overflow-y:auto;z-index:100;';
+  panel.innerHTML = `
+    <div style="padding:16px;background:#fff;border-bottom:1px solid #e9ecef;display:flex;justify-content:space-between;align-items:center;">
+      <span style="font-weight:600;font-size:14px;">Lead Profile</span>
+      <button onclick="document.getElementById('lead-panel-modal').remove()" style="border:none;background:none;cursor:pointer;font-size:18px;color:#6c757d;">×</button>
+    </div>
+    <div style="padding:16px;text-align:center;background:#fff;border-bottom:1px solid #e9ecef;">
+      <div class="avatar ${activeLead.avClass}" style="margin:0 auto 8px;width:56px;height:56px;font-size:20px;">${activeLead.initials}</div>
+      <div style="font-weight:600;font-size:16px;">${activeLead.name}</div>
+      <span class="score-badge ${activeLead.scoreCls}" style="margin-top:6px;display:inline-block;">${activeLead.scoreLabel} Lead</span>
+    </div>
+    <div style="margin:12px;background:#fff;border-radius:10px;border:1px solid #e9ecef;overflow:hidden;">
+      <div style="padding:10px 14px;background:#f8f9fa;font-size:12px;font-weight:600;color:#495057;border-bottom:1px solid #e9ecef;">AI SCORE</div>
+      <div style="padding:12px 14px;">
+        <div style="display:flex;justify-content:space-between;margin-bottom:6px;font-size:13px;"><span>Qualification score</span><strong>${activeLead.score}/100</strong></div>
+        <div style="height:8px;background:#e9ecef;border-radius:4px;overflow:hidden;"><div style="width:${activeLead.score}%;height:100%;background:${scoreColor};border-radius:4px;"></div></div>
+      </div>
+    </div>
+    <div style="margin:12px;background:#fff;border-radius:10px;border:1px solid #e9ecef;overflow:hidden;">
+      <div style="padding:10px 14px;background:#f8f9fa;font-size:12px;font-weight:600;color:#495057;border-bottom:1px solid #e9ecef;">DETAILS</div>
+      ${Object.entries(activeLead.details).map(([k,v]) => `
+        <div style="padding:9px 14px;display:flex;justify-content:space-between;border-bottom:1px solid #f8f9fa;font-size:13px;">
+          <span style="color:#6c757d;">${k}</span><span style="font-weight:500;">${v}</span>
+        </div>`).join('')}
+    </div>
+  `;
+  document.body.appendChild(panel);
+}
+
+function bookAppt() {
+  alert(`✅ Booking appointment for ${activeLead.name}\n\nAria will send available slots via WhatsApp automatically.\n\nSuggested: Tuesday 25 Mar · 11:00 AM`);
+}
+
+function switchTab(tab) {
+  document.querySelectorAll('.nav-tab').forEach((t,i) => {
+    t.classList.toggle('active', ['chat','dashboard','appointments'][i] === tab);
+  });
+  document.getElementById('tab-chat').style.display = tab === 'chat' ? 'flex' : 'none';
+  document.getElementById('tab-dashboard').style.display = tab === 'dashboard' ? 'block' : 'none';
+  document.getElementById('tab-appointments').style.display = tab === 'appointments' ? 'block' : 'none';
+}
+
+function buildCalendar() {
+  const grid = document.getElementById('calendar');
+  const days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  const apptDays = [9, 14, 17, 21, 25, 28];
+  grid.innerHTML = days.map(d => `<div class="cal-day header">${d}</div>`).join('');
+  // March 2026 starts on Sunday (day 0)
+  for (let i = 1; i <= 31; i++) {
+    const cls = i === 21 ? 'today' : apptDays.includes(i) ? 'has-appt' : '';
+    grid.innerHTML += `<div class="cal-day ${cls}">${i}</div>`;
+  }
+}
+
+// Init
+renderLeadList();
+selectLead('sara');
+buildCalendar();
+</script>
+</body>
+</html>
