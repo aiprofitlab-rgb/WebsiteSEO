@@ -58,11 +58,37 @@
             .mobile-dropdown-menu { display: none !important; }
         }
 
+        /* ========== NAV SUBMENU FIX ========== */
+        .group-submenu:hover .submenu-content { opacity: 1 !important; visibility: visible !important; }
+        @media (min-width: 768px) {
+            .submenu-content { left: 100% !important; top: 0 !important; }
+        }
+
         /* ========== CORE AESTHETICS ========== */
         body { font-family: 'Cairo', sans-serif; background-color: #050505; color: #ffffff; margin: 0; overflow-x: hidden; }
         .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.05); }
         .glass-card { background: rgba(255, 255, 255, 0.02); backdrop-filter: blur(8px); border: 1px solid rgba(255, 255, 255, 0.05); transition: all 0.3s ease; }
         .glass-card:hover { border-color: #3B82F6; transform: translateY(-5px); }
+
+        /* ========== USER CUSTOM DESIGNS (RESTORED) ========== */
+        .comparison-table { border-collapse: separate; border-spacing: 0 8px; width: 100%; }
+        .comparison-table th { background: rgba(59, 130, 246, 0.1); padding: 1rem; font-weight: 700; text-align: right; }
+        .comparison-table td { padding: 1rem; background: rgba(255, 255, 255, 0.02); border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
+        .comparison-table tr:hover td { background: rgba(59, 130, 246, 0.05); }
+        
+        .addon-card { background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 1rem; padding: 1.5rem; transition: all 0.3s ease; height: 100%; }
+        .addon-card:hover { border-color: #3B82F6; transform: translateY(-5px); box-shadow: 0 10px 30px rgba(59, 130, 246, 0.1); }
+        .addon-title { font-size: 1.1rem; font-weight: bold; margin-bottom: 0.5rem; color: #3B82F6; }
+        .addon-price { font-size: 1.3rem; font-weight: bold; color: #22C55E; margin-bottom: 0.75rem; }
+        .addon-price span { font-size: 0.9rem; font-weight: normal; color: #9CA3AF; }
+        .addon-desc { color: #9CA3AF; font-size: 0.9rem; line-height: 1.6; }
+        .addon-desc strong { color: white; }
+
+        .why-ai-card { background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 1rem; padding: 1.5rem; transition: all 0.3s; }
+        .why-ai-card:hover { border-color: #3B82F6; background: rgba(59, 130, 246, 0.03); }
+
+        .product-card { background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 1rem; padding: 1.5rem; transition: all 0.3s ease; display: flex; flex-direction: column; gap: 0.75rem; }
+        .product-card:hover { border-color: #22C55E; transform: translateY(-4px); box-shadow: 0 10px 30px rgba(34, 197, 94, 0.08); }
 
         /* ========== CHATBOT STYLES ========== */
         #aiden-ui { transform: translateY(120%); transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1); visibility: hidden; z-index: 1000; left: 8px; right: auto; }
@@ -159,6 +185,7 @@
 
     <!-- ======================= Navigation (Fixed Mobile Menu) ======================= -->
 <!-- ======================= Navigation ======================= -->
+    <!-- ======================= Navigation ======================= -->
     <nav class="flex justify-between items-center px-6 md:px-12 py-8 fixed w-full z-50 glass bg-black/30">
         <a href="index.html" class="font-extrabold text-3xl md:text-4xl tracking-tighter">
             <span class="text-blue-500">A</span><span class="text-red-500">I</span> <span class="text-white text-2xl md:text-3xl">Profit Lab</span>
