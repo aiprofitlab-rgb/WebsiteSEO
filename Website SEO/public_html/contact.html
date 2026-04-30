@@ -37,63 +37,86 @@
         .glass-card { background: rgba(255, 255, 255, 0.02); backdrop-filter: blur(8px); border: 1px solid rgba(255, 255, 255, 0.05); transition: all 0.3s ease; }
         .glass-card:hover { border-color: #3B82F6; transform: translateY(-5px); }
         
-        /* Mobile menu styles - RTL optimized */
-        .nav-links {
+        /* ========== FIXED: UNIFIED NAVIGATION STYLES ========== */
+        /* Desktop menu container - hidden on mobile, visible on desktop */
+        .desktop-menu-container {
             display: none;
         }
-        .nav-links.mobile-menu {
+        
+        /* Mobile elements container */
+        .mobile-controls {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        /* Mobile dropdown menu - hidden by default */
+        .mobile-dropdown-menu {
             display: none;
-            flex-direction: column;
             position: absolute;
             top: 100%;
             left: 0;
             right: 0;
-            background-color: #0f0f0f;
-            padding: 20px;
-            gap: 15px;
-            z-index: 1000;
+            background-color: #0a0a0a;
+            padding: 1.25rem;
+            flex-direction: column;
+            gap: 1rem;
             border-top: 1px solid rgba(255,255,255,0.1);
-        }
-        .nav-links.mobile-menu a {
-            padding: 12px 0;
-            text-align: center;
-            width: 100%;
             border-bottom: 1px solid rgba(255,255,255,0.05);
-            color: #fff;
-            text-decoration: none;
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.5);
+            z-index: 1000;
         }
-        .nav-links.mobile-menu a:last-child {
+        
+        .mobile-dropdown-menu a {
+            padding: 0.75rem 0;
+            text-align: center;
+            font-weight: 600;
+            font-size: 1.1rem;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            transition: color 0.2s;
+        }
+        
+        .mobile-dropdown-menu a:last-child {
             border-bottom: none;
         }
-        .nav-links.mobile-menu a:hover {
-            color: #3B82F6;
-        }
-        .nav-links.mobile-menu.active {
-            display: flex !important;
+        
+        .mobile-dropdown-menu a:hover {
+            color: #60a5fa;
         }
         
-        .mobile-nav-toggle {
-            display: block;
-            cursor: pointer;
+        /* When mobile menu is open */
+        .mobile-dropdown-menu.open {
+            display: flex;
         }
         
+        /* Desktop menu links - horizontal row */
+        .desktop-nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+        
+        .desktop-nav-links a {
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: color 0.2s;
+        }
+        
+        .desktop-nav-links a:hover {
+            color: #3b82f6;
+        }
+        
+        /* Responsive breakpoint */
         @media (min-width: 768px) {
-            .nav-links {
-                display: flex !important;
-                position: static;
-                background-color: transparent;
-                padding: 0;
-                gap: 2rem;
-                border: none;
+            .desktop-menu-container {
+                display: block;
             }
-            .nav-links a {
-                padding: 0 !important;
-                border: none !important;
-            }
-            .nav-links.mobile-menu {
+            .mobile-controls {
                 display: none !important;
             }
-            .mobile-nav-toggle {
+            .mobile-dropdown-menu {
                 display: none !important;
             }
         }
@@ -786,39 +809,31 @@
         function toggleChat() {
             document.getElementById('aiden-ui').classList.toggle('active');
         }
-
-        // ==================== MOBILE MENU (FIXED) ====================
-        document.addEventListener('DOMContentLoaded', function() {
-            const mobileToggle = document.querySelector('.mobile-nav-toggle');
-            const mobileMenu = document.querySelector('.nav-links.mobile-menu');
+        // ==================== FIXED: MOBILE MENU TOGGLE (Unified System) ====================
+        const mobileToggleBtn = document.getElementById('mobileMenuToggle');
+        const mobileMenuDropdown = document.getElementById('mobileDropdownMenu');
+        
+        if (mobileToggleBtn && mobileMenuDropdown) {
+            mobileToggleBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                mobileMenuDropdown.classList.toggle('open');
+            });
             
-            if (mobileToggle && mobileMenu) {
-                mobileToggle.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    
-                    if (mobileMenu.classList.contains('active')) {
-                        mobileMenu.classList.remove('active');
-                    } else {
-                        mobileMenu.classList.add('active');
-                    }
+            // Close menu when clicking any link inside
+            mobileMenuDropdown.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenuDropdown.classList.remove('open');
                 });
+            });
+            
+            // Close if user clicks outside
+            document.addEventListener('click', function(event) {
+                if (!mobileToggleBtn.contains(event.target) && !mobileMenuDropdown.contains(event.target)) {
+                    mobileMenuDropdown.classList.remove('open');
+                }
+            });
+        }
 
-                // Close menu when clicking a link
-                mobileMenu.querySelectorAll('a').forEach(link => {
-                    link.addEventListener('click', function() {
-                        mobileMenu.classList.remove('active');
-                    });
-                });
-
-                // Close menu when clicking outside
-                document.addEventListener('click', function(event) {
-                    if (!mobileToggle.contains(event.target) && !mobileMenu.contains(event.target)) {
-                        mobileMenu.classList.remove('active');
-                    }
-                });
-            }
-        });
 
         // ==================== INIT ====================
         window.onload = async function() {

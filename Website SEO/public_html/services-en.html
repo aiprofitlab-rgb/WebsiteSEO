@@ -36,9 +36,89 @@
         .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.05); }
         .glass-card { background: rgba(255, 255, 255, 0.02); backdrop-filter: blur(8px); border: 1px solid rgba(255, 255, 255, 0.05); transition: all 0.3s ease; }
         .glass-card:hover { border-color: #3B82F6; transform: translateY(-5px); }
-        .nav-links { display: none; }
-        .mobile-nav-toggle { display: block; }
-        @media (min-width: 768px) { .nav-links { display: flex !important; } .mobile-nav-toggle { display: none; } }
+        /* ========== FIXED: UNIFIED NAVIGATION STYLES ========== */
+        /* Desktop menu container - hidden on mobile, visible on desktop */
+        .desktop-menu-container {
+            display: none;
+        }
+        
+        /* Mobile elements container */
+        .mobile-controls {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        /* Mobile dropdown menu - hidden by default */
+        .mobile-dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background-color: #0a0a0a;
+            padding: 1.25rem;
+            flex-direction: column;
+            gap: 1rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.5);
+            z-index: 1000;
+        }
+        
+        .mobile-dropdown-menu a {
+            padding: 0.75rem 0;
+            text-align: center;
+            font-weight: 600;
+            font-size: 1.1rem;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            transition: color 0.2s;
+        }
+        
+        .mobile-dropdown-menu a:last-child {
+            border-bottom: none;
+        }
+        
+        .mobile-dropdown-menu a:hover {
+            color: #60a5fa;
+        }
+        
+        /* When mobile menu is open */
+        .mobile-dropdown-menu.open {
+            display: flex;
+        }
+        
+        /* Desktop menu links - horizontal row */
+        .desktop-nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+        
+        .desktop-nav-links a {
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: color 0.2s;
+        }
+        
+        .desktop-nav-links a:hover {
+            color: #3b82f6;
+        }
+        
+        /* Responsive breakpoint */
+        @media (min-width: 768px) {
+            .desktop-menu-container {
+                display: block;
+            }
+            .mobile-controls {
+                display: none !important;
+            }
+            .mobile-dropdown-menu {
+                display: none !important;
+            }
+        }
         
         /* Chatbot Styles */
         #aiden-ui { transform: translateY(120%); transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1); visibility: hidden; z-index: 1000; right: 8px; left: auto; }
@@ -630,27 +710,51 @@
 
     <!-- ======================= SCRIPT ======================= -->
     <script>
-    // Multi-step form logic (preserved)
-    const modal = document.getElementById('auditModal');
-    const auditForm = document.getElementById('auditForm');
-    const steps = Array.from(auditForm.querySelectorAll('.form-step'));
-    const progressSteps = Array.from(document.querySelectorAll('.progress-step'));
-    let currentStep = 0;
-    function openAuditForm(pkg=''){ currentStep=0; showStep(currentStep); modal.classList.add('active'); if(pkg) console.log(pkg); }
-    function closeAuditForm(){ modal.classList.remove('active'); }
-    function showStep(stepIndex){ steps.forEach((s,i)=>s.classList.toggle('active',i===stepIndex)); progressSteps.forEach((ps,i)=>ps.classList.toggle('active',i<=stepIndex)); }
-    function validateStep(stepIndex){ const inputs=steps[stepIndex].querySelectorAll('input[required], textarea[required]'); let valid=true; inputs.forEach(i=>{ if(!i.value.trim()){ i.style.borderColor='#ef4444'; valid=false;} else i.style.borderColor='rgba(255,255,255,0.1)'; }); return valid; }
-    auditForm.addEventListener('click',(e)=>{ if(e.target.matches('.next')){ if(validateStep(currentStep) && currentStep<steps.length-1){ currentStep++; showStep(currentStep); } } else if(e.target.matches('.prev') && currentStep>0){ currentStep--; showStep(currentStep); } });
-    const slider=document.getElementById('aiComfort'), out=document.getElementById('aiComfortOutput'); if(slider&&out){ out.innerText=slider.value; slider.addEventListener('input',()=>out.innerText=slider.value); }
-    auditForm.addEventListener('submit',async(e)=>{ e.preventDefault(); if(!validateStep(currentStep)) return; const btn=document.querySelector('.nav-btn.submit'), orig=btn.textContent; btn.textContent='Sending...'; btn.disabled=true; const data={ fullName:document.getElementById('fullName')?.value||'', email:document.getElementById('email')?.value||'', phone:document.getElementById('phone')?.value||'', company:document.getElementById('company')?.value||'', role:document.getElementById('role')?.value||'', website:document.getElementById('website')?.value||'', industry:document.getElementById('industry')?.value||'', employees:document.getElementById('employees')?.value||'', revenue:document.getElementById('revenue')?.value||'', revenueStreams:document.getElementById('revenueStreams')?.value||'', challenges:document.getElementById('challenges')?.value||'', goals:document.getElementById('goals')?.value||'', pastExperience:document.getElementById('pastExperience')?.value||'', aiComfort:document.getElementById('aiComfort')?.value||'', processes:Array.from(document.querySelectorAll('input[name="process"]:checked')).map(c=>c.value).join(', '), budget:document.getElementById('budget')?.value||'', timeline:document.getElementById('timeline')?.value||'', keyQuestion:document.getElementById('keyQuestion')?.value||'', language:'en', page:window.location.pathname, submittedAt:new Date().toISOString() }; try{ const res=await fetch("https://aiden-backend-aiden.up.railway.app/audit",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(data)}); const result=await res.json(); if(result.success){ alert('Form submitted! Redirecting to Calendly...'); window.location.href="https://calendly.com/ai-profit-lab2026"; } else alert("An error occurred. Please try again."); } catch(err){ alert("Connection error. Please check your internet."); } finally{ btn.textContent=orig; btn.disabled=false; } });
-    modal.addEventListener('click',(e)=>{ if(e.target===modal) closeAuditForm(); });
-    // Country detection (simplified, shows OMR for all since prices are in OMR)
-    async function detectCountry(){ try{ const res=await fetch('https://ipwhois.app/json/'); const data=await res.json(); const code=data.country_code||'OM'; const country=data.country||'Oman'; localStorage.setItem('visitorCountry',country); localStorage.setItem('visitorCountryCode',code); document.getElementById('visitor-country').textContent=code; document.getElementById('welcome-message').textContent=`Welcome from ${country}!`; } catch(e){ console.log('Country detection fallback'); document.getElementById('visitor-country').textContent='OM'; document.getElementById('welcome-message').textContent='Welcome from Oman!'; } }
-    // Chat functions
-    async function handleSend(){ const input=document.getElementById('user-input'), msg=input.value.trim(); if(!msg) return; const box=document.getElementById('chat-messages'); let vid=localStorage.getItem('aidenVisitorId')||('visitor_'+Date.now()+'_'+Math.random().toString(36).substr(2,9)); if(!localStorage.getItem('aidenVisitorId')) localStorage.setItem('aidenVisitorId',vid); const country=localStorage.getItem('visitorCountry')||'Oman', code=localStorage.getItem('visitorCountryCode')||'OM'; box.innerHTML+=`<div class="bg-blue-900/50 ml-auto p-3 rounded-2xl rounded-br-none max-w-[85%] text-white">${msg}</div>`; input.value=''; box.scrollTop=box.scrollHeight; box.innerHTML+=`<div id="typing-indicator" class="bg-gray-800 p-3 rounded-2xl rounded-tl-none max-w-[85%] text-gray-300">...</div>`; try{ const res=await fetch('https://aiden-backend-aiden.up.railway.app/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:msg,sessionId:vid,language:'en',country:country,countryCode:code})}); const result=await res.json(); document.getElementById('typing-indicator')?.remove(); const reply=result.reply||result.response||'Thanks for your message!'; box.innerHTML+=`<div class="bg-gray-800 p-3 rounded-2xl rounded-tl-none max-w-[85%] text-gray-300">${reply}</div>`; } catch(err){ document.getElementById('typing-indicator')?.remove(); box.innerHTML+=`<div class="bg-gray-800 p-3 rounded-2xl rounded-tl-none max-w-[85%] text-red-300">Sorry, please try again</div>`; } box.scrollTop=box.scrollHeight; }
-    function toggleChat(){ document.getElementById('aiden-ui').classList.toggle('active'); }
-    document.addEventListener('DOMContentLoaded',function(){ const toggle=document.querySelector('.mobile-nav-toggle button'); const links=document.querySelector('.nav-links'); if(toggle&&links){ toggle.addEventListener('click',function(){ if(links.style.display==='flex') links.style.display='none'; else{ links.style.display='flex'; links.style.flexDirection='column'; links.style.position='absolute'; links.style.top='100%'; links.style.left='0'; links.style.right='0'; links.style.backgroundColor='#0f0f0f'; links.style.padding='20px'; links.style.gap='15px'; links.style.zIndex='1000'; } }); } });
-    window.onload=async()=>{ await detectCountry(); if(!sessionStorage.getItem('aidenPopped')){ setTimeout(()=>{ if(!document.getElementById('aiden-ui').classList.contains('active')){ toggleChat(); sessionStorage.setItem('aidenPopped','true'); } },10000); } };
+        // FIXED: MOBILE MENU TOGGLE (Unified System)
+        const mobileToggleBtn = document.getElementById('mobileMenuToggle');
+        const mobileMenuDropdown = document.getElementById('mobileDropdownMenu');
+        
+        if (mobileToggleBtn && mobileMenuDropdown) {
+            mobileToggleBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                mobileMenuDropdown.classList.toggle('open');
+            });
+            
+            // Close menu when clicking any link inside
+            mobileMenuDropdown.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenuDropdown.classList.remove('open');
+                });
+            });
+            
+            // Close if user clicks outside
+            document.addEventListener('click', function(event) {
+                if (!mobileToggleBtn.contains(event.target) && !mobileMenuDropdown.contains(event.target)) {
+                    mobileMenuDropdown.classList.remove('open');
+                }
+            });
+        }
+
+        // Multi-step form logic (preserved)
+        const modal = document.getElementById('auditModal');
+        const auditForm = document.getElementById('auditForm');
+        const steps = Array.from(auditForm.querySelectorAll('.form-step'));
+        const progressSteps = Array.from(document.querySelectorAll('.progress-step'));
+        let currentStep = 0;
+        function openAuditForm(pkg=''){ currentStep=0; showStep(currentStep); modal.classList.add('active'); }
+        function closeAuditForm(){ modal.classList.remove('active'); }
+        function showStep(stepIndex){ steps.forEach((s,i)=>s.classList.toggle('active',i===stepIndex)); progressSteps.forEach((ps,i)=>ps.classList.toggle('active',i<=stepIndex)); }
+        function validateStep(stepIndex){ const inputs=steps[stepIndex].querySelectorAll('input[required], textarea[required]'); let valid=true; inputs.forEach(i=>{ if(!i.value.trim()){ i.style.borderColor='#ef4444'; valid=false;} else i.style.borderColor='rgba(255,255,255,0.1)'; }); return valid; }
+        auditForm.addEventListener('click',(e)=>{ if(e.target.matches('.next')){ if(validateStep(currentStep) && currentStep<steps.length-1){ currentStep++; showStep(currentStep); } } else if(e.target.matches('.prev') && currentStep>0){ currentStep--; showStep(currentStep); } });
+        const slider=document.getElementById('aiComfort'), out=document.getElementById('aiComfortOutput'); if(slider&&out){ out.innerText=slider.value; slider.addEventListener('input',()=>out.innerText=slider.value); }
+        auditForm.addEventListener('submit',async(e)=>{ e.preventDefault(); if(!validateStep(currentStep)) return; const btn=document.querySelector('.nav-btn.submit'), orig=btn.textContent; btn.textContent='Sending...'; btn.disabled=true; const data={ fullName:document.getElementById('fullName')?.value||'', email:document.getElementById('email')?.value||'', phone:document.getElementById('phone')?.value||'', company:document.getElementById('company')?.value||'', role:document.getElementById('role')?.value||'', website:document.getElementById('website')?.value||'', industry:document.getElementById('industry')?.value||'', employees:document.getElementById('employees')?.value||'', revenue:document.getElementById('revenue')?.value||'', revenueStreams:document.getElementById('revenueStreams')?.value||'', challenges:document.getElementById('challenges')?.value||'', goals:document.getElementById('goals')?.value||'', pastExperience:document.getElementById('pastExperience')?.value||'', aiComfort:document.getElementById('aiComfort')?.value||'', processes:Array.from(document.querySelectorAll('input[name="process"]:checked')).map(c=>c.value).join(', '), budget:document.getElementById('budget')?.value||'', timeline:document.getElementById('timeline')?.value||'', keyQuestion:document.getElementById('keyQuestion')?.value||'', language:'en', page:window.location.pathname, submittedAt:new Date().toISOString() }; try{ const res=await fetch("https://aiden-backend-aiden.up.railway.app/audit",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(data)}); const result=await res.json(); if(result.success){ alert('Form submitted! Redirecting to Calendly...'); window.location.href="https://calendly.com/ai-profit-lab2026"; } else alert("An error occurred. Please try again."); } catch(err){ alert("Connection error. Please check your internet."); } finally{ btn.textContent=orig; btn.disabled=false; } });
+        modal.addEventListener('click',(e)=>{ if(e.target===modal) closeAuditForm(); });
+        // Country detection
+        async function detectCountry(){ try{ const res=await fetch('https://ipwhois.app/json/'); const data=await res.json(); const code=data.country_code||'OM'; const country=data.country||'Oman'; localStorage.setItem('visitorCountry',country); localStorage.setItem('visitorCountryCode',code); document.getElementById('visitor-country').textContent=code; document.getElementById('welcome-message').textContent=`Welcome from ${country}!`; } catch(e){ console.log('Country detection fallback'); } }
+        // Chat functions
+        async function handleSend(){ const input=document.getElementById('user-input'), msg=input.value.trim(); if(!msg) return; const box=document.getElementById('chat-messages'); let vid=localStorage.getItem('aidenVisitorId')||('visitor_'+Date.now()+'_'+Math.random().toString(36).substr(2,9)); if(!localStorage.getItem('aidenVisitorId')) localStorage.setItem('aidenVisitorId',vid); const country=localStorage.getItem('visitorCountry')||'Oman', code=localStorage.getItem('visitorCountryCode')||'OM'; box.innerHTML+=`<div class="bg-blue-900/50 ml-auto p-3 rounded-2xl rounded-br-none max-w-[85%] text-white">${msg}</div>`; input.value=''; box.scrollTop=box.scrollHeight; box.innerHTML+=`<div id="typing-indicator" class="bg-gray-800 p-3 rounded-2xl rounded-tl-none max-w-[85%] text-gray-300">...</div>`; try{ const res=await fetch('https://aiden-backend-aiden.up.railway.app/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:msg,sessionId:vid,language:'en',country:country,countryCode:code})}); const result=await res.json(); document.getElementById('typing-indicator')?.remove(); const reply=result.reply||result.response||'Thanks for your message!'; box.innerHTML+=`<div class="bg-gray-800 p-3 rounded-2xl rounded-tl-none max-w-[85%] text-gray-300">${reply}</div>`; } catch(err){ document.getElementById('typing-indicator')?.remove(); box.innerHTML+=`<div class="bg-gray-800 p-3 rounded-2xl rounded-tl-none max-w-[85%] text-red-300">Sorry, please try again</div>`; } box.scrollTop=box.scrollHeight; }
+        function toggleChat(){ document.getElementById('aiden-ui').classList.toggle('active'); }
+        window.onload=async()=>{ await detectCountry(); if(!sessionStorage.getItem('aidenPopped')){ setTimeout(()=>{ if(!document.getElementById('aiden-ui').classList.contains('active')){ toggleChat(); sessionStorage.setItem('aidenPopped','true'); } },10000); } };
     </script>
 </body>
 </html>
