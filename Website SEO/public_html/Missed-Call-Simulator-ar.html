@@ -3,7 +3,61 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>قاتل الإيرادات: المكالمات الفائتة — شاهد خسائرك الحقيقية</title>
+  
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-2GPVY4Z5KR"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-2GPVY4Z5KR');
+  </script>
+
+  <!-- SEO Meta Tags -->
+  <title>حاسبة خسائر المكالمات الفائتة | AI Profit Lab | أتمتة الأعمال في عُمان</title>
+  <meta name="description" content="اكتشف مقدار الأرباح التي تفقدها شركتك بسبب المكالمات الفائتة. استخدم حاسبة AI Profit Lab المتقدمة لتقدير الخسائر الشهرية والسنوية في سلطنة عُمان والخليج.">
+  <meta name="keywords" content="حاسبة المكالمات الفائتة، خسارة الأرباح، أتمتة المكالمات، ذكاء اصطناعي للأعمال، سلطنة عُمان، مسقط، الإمارات، قطر، أتمتة المبيعات">
+  <meta name="author" content="AI Profit Lab">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://aiprofitlab.io/Missed-Call-Simulator-ar.html" />
+
+  <!-- Open Graph / Social Media -->
+  <meta property="og:title" content="حاسبة خسائر المكالمات الفائتة | شاهد خسائرك الحقيقية">
+  <meta property="og:description" content="هل تعلم كم تكلفك المكالمات الفائتة؟ احسب خسائرك الآن مع حاسبة AI Profit Lab الذكية.">
+  <meta property="og:url" content="https://aiprofitlab.io/Missed-Call-Simulator-ar.html">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://aiprofitlab.io/IMG_7275.webp">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="حاسبة خسائر المكالمات الفائتة | AI Profit Lab">
+  <meta name="twitter:description" content="توقف عن فقدان العملاء. احسب أثر المكالمات الفائتة على نمو عملك في عُمان والخليج.">
+
+  <!-- LocalBusiness Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "AI Profit Lab",
+    "image": "https://aiprofitlab.io/og-image.jpg",
+    "url": "https://aiprofitlab.io",
+    "telephone": "+96890000000", 
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Muscat",
+      "addressRegion": "Muscat Governorate",
+      "addressCountry": "OM"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 23.5880,
+      "longitude": 58.3829
+    },
+    "description": "AI Profit Lab specializes in AI automation solutions for businesses in Oman, Qatar, UAE and the GCC. We provide smart WhatsApp receptionists, AI dashboards, and workflow automation.",
+    "priceRange": "$$"
+  }
+  </script>
+
   <!-- Google Fonts & Font Awesome 6 -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800;14..32,900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -299,11 +353,14 @@
 
 <div class="container">
   <!-- AI Profit Lab Logo -->
-  <div style="text-align: center; margin-bottom: 3rem; animation: fadeSlideUp 0.9s ease-out;">
-    <a href="index.html" style="display: inline-block; text-decoration: none;">
+  <div style="display: flex; justify-content: space-between; align-items: center; max-width: 1280px; margin: 0 auto 3rem; padding: 0 1.5rem; animation: fadeSlideUp 0.9s ease-out;">
+    <a href="index.html" style="text-decoration: none;">
       <div style="font-size: 28px; font-weight: 900; font-family: 'Inter', sans-serif; letter-spacing: -1px;">
         <span style="color: #3B82F6;">A</span><span style="color: #EF4444;">I</span> <span style="color: #ffffff;">Profit Lab</span>
       </div>
+    </a>
+    <a href="Missed-Call%20Simulator.html" style="color: #B9C3E0; text-decoration: none; font-size: 0.9rem; font-weight: 600; padding: 0.5rem 1rem; border: 1px solid rgba(185, 195, 224, 0.3); border-radius: 50px; transition: 0.2s;">
+      English
     </a>
   </div>
 
@@ -346,8 +403,8 @@
         </div>
 
         <div class="input-group">
-          <label><span><i class="fas fa-dollar-sign"></i> متوسط قيمة الطلب ($)</span> <span id="ticketLabel">$395</span></label>
-          <input type="number" id="avgTicket" value="395" step="10" min="10">
+          <label><span><i class="fas fa-coins"></i> متوسط قيمة الطلب (ر.ع)</span> <span id="ticketLabel">١٥٠ ر.ع</span></label>
+          <input type="number" id="avgTicket" value="150" step="10" min="10">
         </div>
       </div>
 
@@ -375,12 +432,12 @@
 
         <div class="metric-red" style="background: rgba(229, 62, 62, 0.25); border-left: 4px solid #FF2E2E;">
           <div class="metric-label"><i class="fas fa-fire-flame-curved"></i> الإيرادات الشهرية المفقودة</div>
-          <div class="metric-number loss big-loss-number" id="monthlyLoss">$0</div>
+          <div class="metric-number loss big-loss-number" id="monthlyLoss">٠ ر.ع</div>
         </div>
-
+        
         <div class="annual-box">
           <div class="metric-label"><i class="fas fa-calendar-alt"></i> تسرب الإيرادات السنوي</div>
-          <div class="metric-number loss" id="annualLoss" style="font-size: 1.9rem;">$0</div>
+          <div class="metric-number loss" id="annualLoss" style="font-size: 1.9rem;">٠ ر.ع</div>
           <div style="font-size: 11px; margin-top: 6px;">💸 يكفي لتوظيف موظفين أو أكثر بدوام كامل</div>
         </div>
       </div>
@@ -432,7 +489,7 @@
   }
 
   function formatMoney(value) {
-    return '$' + Math.round(value).toLocaleString();
+    return Math.round(value).toLocaleString('ar-EG') + ' ر.ع';
   }
 
   function updateCalculator() {
@@ -446,7 +503,7 @@
     dailyCallsLabel.innerText = dailyCalls;
     missRateLabel.innerText = missRatePercent + '%';
     convRateLabel.innerText = convRatePercent + '%';
-    ticketLabelSpan.innerText = '$' + Math.round(ticket).toLocaleString();
+    ticketLabelSpan.innerText = Math.round(ticket).toLocaleString('ar-EG') + ' ر.ع';
     missedRateVal.innerText = missRatePercent + '%';
     convRateVal.innerText = convRatePercent + '%';
 
@@ -504,7 +561,7 @@
   });
   ticketInput.addEventListener('input', function(e) {
     let val = parseFloat(e.target.value);
-    if (!isNaN(val)) ticketLabelSpan.innerText = '$' + Math.round(val).toLocaleString();
+    if (!isNaN(val)) ticketLabelSpan.innerText = Math.round(val).toLocaleString('ar-EG') + ' ر.ع';
   });
   callsInput.addEventListener('input', function(e) {
     dailyCallsLabel.innerText = e.target.value;
