@@ -32,102 +32,45 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <style>
+        
+        /* ========== UNIFIED NAVIGATION STYLES ========== */
+        .desktop-menu-container { display: none; }
+        .mobile-controls { display: flex; align-items: center; gap: 1rem; }
+        .mobile-dropdown-menu {
+            display: none; position: absolute; top: 100%; left: 0; right: 0;
+            background-color: #0a0a0a; padding: 1.25rem; flex-direction: column; gap: 1rem;
+            border-top: 1px solid rgba(255,255,255,0.1); border-bottom: 1px solid rgba(255,255,255,0.05);
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.5); z-index: 1000;
+        }
+        .mobile-dropdown-menu a {
+            padding: 0.75rem 0; text-align: center; font-weight: 600; font-size: 1.1rem;
+            border-bottom: 1px solid rgba(255,255,255,0.08); transition: color 0.2s;
+        }
+        .mobile-dropdown-menu a:last-child { border-bottom: none; }
+        .mobile-dropdown-menu a:hover { color: #60a5fa; }
+        .mobile-dropdown-menu.open { display: flex; }
+        .desktop-nav-links { display: flex; gap: 2rem; align-items: center; }
+        .desktop-nav-links a { font-weight: 700; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.5px; transition: color 0.2s; }
+        .desktop-nav-links a:hover { color: #3b82f6; }
+        @media (min-width: 768px) {
+            .desktop-menu-container { display: block !important; }
+            .mobile-controls { display: none !important; }
+            .mobile-dropdown-menu { display: none !important; }
+        }
+
+        /* ========== CORE AESTHETICS ========== */
         body { font-family: 'Cairo', sans-serif; background-color: #050505; color: #ffffff; margin: 0; overflow-x: hidden; }
         .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.05); }
         .glass-card { background: rgba(255, 255, 255, 0.02); backdrop-filter: blur(8px); border: 1px solid rgba(255, 255, 255, 0.05); transition: all 0.3s ease; }
         .glass-card:hover { border-color: #3B82F6; transform: translateY(-5px); }
-        
-        /* ========== FIXED: UNIFIED NAVIGATION STYLES ========== */
-        /* Desktop menu container - hidden on mobile, visible on desktop */
-        .desktop-menu-container {
-            display: none;
-        }
-        
-        /* Mobile elements container */
-        .mobile-controls {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-        
-        /* Mobile dropdown menu - hidden by default */
-        .mobile-dropdown-menu {
-            display: none;
-            position: absolute;
-            top: 100%;
-            left: 0;
-            right: 0;
-            background-color: #0a0a0a;
-            padding: 1.25rem;
-            flex-direction: column;
-            gap: 1rem;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.5);
-            z-index: 1000;
-        }
-        
-        .mobile-dropdown-menu a {
-            padding: 0.75rem 0;
-            text-align: center;
-            font-weight: 600;
-            font-size: 1.1rem;
-            border-bottom: 1px solid rgba(255,255,255,0.08);
-            transition: color 0.2s;
-        }
-        
-        .mobile-dropdown-menu a:last-child {
-            border-bottom: none;
-        }
-        
-        .mobile-dropdown-menu a:hover {
-            color: #60a5fa;
-        }
-        
-        /* When mobile menu is open */
-        .mobile-dropdown-menu.open {
-            display: flex;
-        }
-        
-        /* Desktop menu links - horizontal row */
-        .desktop-nav-links {
-            display: flex;
-            gap: 2rem;
-            align-items: center;
-        }
-        
-        .desktop-nav-links a {
-            font-weight: 700;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            transition: color 0.2s;
-        }
-        
-        .desktop-nav-links a:hover {
-            color: #3b82f6;
-        }
-        
-        /* Responsive breakpoint */
-        @media (min-width: 768px) {
-            .desktop-menu-container {
-                display: block;
-            }
-            .mobile-controls {
-                display: none !important;
-            }
-            .mobile-dropdown-menu {
-                display: none !important;
-            }
-        }
-        
-        /* Chatbot Styles */
+
+        /* ========== CHATBOT STYLES ========== */
         #aiden-ui { transform: translateY(120%); transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1); visibility: hidden; z-index: 1000; left: 8px; right: auto; }
         #aiden-ui.active { transform: translateY(0); visibility: visible; }
         .pulse { animation: pulse-animation 2s infinite; }
         @keyframes pulse-animation { 0% { box-shadow: 0 0 0 0px rgba(59, 130, 246, 0.4); } 100% { box-shadow: 0 0 0 20px rgba(59, 130, 246, 0); } }
-        
-        /* Form Modal Styles */
+
+        /* ========== FORM MODAL STYLES ========== */
         .form-modal-overlay {
             position: fixed; inset: 0; background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(8px); z-index: 2000;
             display: none; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s ease;
@@ -136,7 +79,7 @@
         .form-modal-content {
             width: 90%; max-width: 800px; max-height: 90vh; overflow-y: auto; padding: 2rem;
             border-radius: 1.5rem; background: #0a0a0a; border: 1px solid rgba(255, 255, 255, 0.1);
-            transform: scale(0.95); transition: transform 0.3s ease;
+            transform: scale(0.95); transition: transform 0.3s ease; position: relative;
         }
         .form-modal-overlay.active .form-modal-content { transform: scale(1); }
         .close-btn { position: absolute; top: 20px; left: 20px; background: none; border: none; color: #aaa; font-size: 2rem; cursor: pointer; }
@@ -148,8 +91,7 @@
         .form-step { display: none; }
         .form-step.active { display: block; animation: fadeIn 0.5s; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        input, textarea, select { width: 100%; padding: 0.75rem; margin-bottom: 1rem; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); border-radius: 0.5rem; color: #fff; text-align: right; }
-        input:focus, textarea:focus, select:focus { outline: none; border-color: #3B82F6; }
+        input, textarea, select { width: 100%; padding: 0.75rem; margin-bottom: 1rem; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); border-radius: 0.5rem; color: #fff; }
         .checkbox-group { display: grid; grid-template-columns: repeat(2,1fr); gap: 0.75rem; }
         .checkbox-item { background: rgba(255,255,255,0.03); padding: 0.75rem; border-radius: 0.5rem; display: flex; align-items: center; cursor: pointer; }
         .checkbox-item:hover { background: rgba(59,130,246,0.1); }
@@ -163,24 +105,7 @@
         .nav-btn { padding: 0.75rem 2rem; background: linear-gradient(135deg, #3B82F6, #2563EB); color: white; border: none; border-radius: 0.5rem; font-weight: bold; cursor: pointer; transition: all 0.3s; }
         .nav-btn.prev { background: rgba(255,255,255,0.1); }
         .nav-btn:hover { opacity: 0.9; transform: translateY(-2px); }
-        
-        .contact-method {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            padding: 1.5rem;
-            border-radius: 1rem;
-            background: rgba(255,255,255,0.02);
-            border: 1px solid rgba(255,255,255,0.05);
-            transition: all 0.3s ease;
-        }
-        .contact-method:hover {
-            border-color: #3B82F6;
-            transform: translateX(5px);
-        }
-        @media (max-width: 768px) {
-            .checkbox-group { grid-template-columns: 1fr; }
-        }
+    
     </style>
 
     <!-- Canonical URL -->
@@ -220,32 +145,30 @@
         "https://www.youtube.com/@AI_for_Managers",
         "https://www.linkedin.com/in/nahid-aby"
       ]
-    }
+
     </script>
 
     <style>
         .group-submenu:hover .submenu-content {
             opacity: 1;
             visibility: visible;
-        }
+
     </style>
 </head>
 <body>
 
     <!-- ======================= Navigation ======================= -->
-    <nav class="flex justify-between items-center px-6 md:px-12 py-6 fixed w-full z-50 glass bg-black/40 backdrop-blur-md">
-        <!-- Logo -->
+    <nav class="flex justify-between items-center px-6 md:px-12 py-8 fixed w-full z-50 glass bg-black/30">
         <a href="index.html" class="font-extrabold text-3xl md:text-4xl tracking-tighter">
             <span class="text-blue-500">A</span><span class="text-red-500">I</span> <span class="text-white text-2xl md:text-3xl">Profit Lab</span>
         </a>
         
-        <!-- DESKTOP MENU (visible only on md and up) -->
-        <div class="desktop-menu-container">
-            <div class="desktop-nav-links flex items-center gap-6 text-sm font-bold">
-                <a href="index.html" class="hover:text-blue-400 transition">الرئيسية</a>
-                <a href="services.html" class="hover:text-blue-400 transition">الخدمات</a>
-                <a href="process.html" class="hover:text-blue-400 transition">طريقتنا</a>
-                
+        <!-- Desktop Menu -->
+        <div class="hidden md:flex items-center gap-8">
+            <div class="desktop-nav-links">
+                <a href="index.html">الرئيسية</a>
+                <a href="services.html">الخدمات</a>
+                <a href="process.html">طريقتنا</a>
                 
                 <!-- Resources Dropdown -->
                 <div class="relative group cursor-pointer h-full flex items-center">
@@ -253,42 +176,42 @@
                         الموارد
                         <svg class="w-4 h-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                     </span>
-                    <div class="absolute top-8 right-1/2 translate-x-1/2 w-48 bg-[#0a0a0a] border border-gray-800 rounded-xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 flex flex-col z-50">
-                                                <div class="relative group-submenu">
+                    <div class="absolute top-full left-1/2 -translate-x-1/2 w-48 bg-[#0a0a0a] border border-gray-800 rounded-xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 flex flex-col z-50">
+                        <div class="relative group-submenu">
                             <div class="px-5 py-4 hover:bg-gray-800 hover:text-blue-400 border-b border-gray-800 transition flex justify-between items-center cursor-pointer text-[15px] font-bold tracking-wide">
-                                العروض التجريبية
+                                عروض تجريبية
                                 <svg class="w-4 h-4 transform rotate-90" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                             </div>
-                            <div class="submenu-content absolute right-full top-0 w-64 bg-[#0a0a0a] border border-gray-800 rounded-xl shadow-2xl opacity-0 invisible transition-all duration-300 flex flex-col z-50 text-right">
-                                <a href="Customized_CEO_Dashboard_demo.html" class="px-5 py-4 hover:bg-gray-800 hover:text-blue-400 border-b border-gray-800 transition text-[15px] font-bold tracking-wide">لوحة تحكم المدير التنفيذي</a>
+                            <div class="submenu-content absolute left-full top-0 w-64 bg-[#0a0a0a] border border-gray-800 rounded-xl shadow-2xl opacity-0 invisible transition-all duration-300 flex flex-col z-50">
+                                <a href="Customized_CEO_Dashboard_demo.html" class="px-5 py-4 hover:bg-gray-800 hover:text-blue-400 border-b border-gray-800 transition text-[15px] font-bold tracking-wide">لوحة تحكم المدير</a>
                                 <a href="whatsapp_receptionist_demo_ar.html" class="px-5 py-4 hover:bg-gray-800 hover:text-blue-400 transition text-[15px] font-bold tracking-wide">موظف استقبال واتساب</a>
                             </div>
                         </div>
                         <div class="relative group-submenu">
                             <div class="px-5 py-4 hover:bg-gray-800 hover:text-blue-400 border-b border-gray-800 transition flex justify-between items-center cursor-pointer text-[15px] font-bold tracking-wide">
-                                المحاكيات
+                                محاكيات
                                 <svg class="w-4 h-4 transform rotate-90" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                             </div>
-                            <div class="submenu-content absolute right-full top-0 w-64 bg-[#0a0a0a] border border-gray-800 rounded-xl shadow-2xl opacity-0 invisible transition-all duration-300 flex flex-col z-50 text-right">
+                            <div class="submenu-content absolute left-full top-0 w-64 bg-[#0a0a0a] border border-gray-800 rounded-xl shadow-2xl opacity-0 invisible transition-all duration-300 flex flex-col z-50">
                                 <a href="Missed-Call-Simulator-ar.html" class="px-5 py-4 hover:bg-gray-800 hover:text-blue-400 border-b border-gray-800 transition text-[15px] font-bold tracking-wide">محاكي المكالمات الفائتة</a>
                                 <a href="Campaign_ROI_Simulator.html" class="px-5 py-4 hover:bg-gray-800 hover:text-blue-400 transition text-[15px] font-bold tracking-wide">محاكي عائد الحملات</a>
                             </div>
                         </div>
                         <a href="blog_ar.html" class="px-5 py-4 hover:bg-gray-800 hover:text-blue-400 border-b border-gray-800 transition text-[15px] font-bold tracking-wide">المقالات</a>
-                        <a href="#" class="px-5 py-4 hover:bg-gray-800 hover:text-blue-400 border-b border-gray-800 transition text-[15px] font-bold tracking-wide">يوتيوب</a>
+                        <a href="https://www.youtube.com/@AI_for_Managers" class="px-5 py-4 hover:bg-gray-800 hover:text-blue-400 border-b border-gray-800 transition text-[15px] font-bold tracking-wide">يوتيوب</a>
                         <a href="about.html" class="px-5 py-4 hover:bg-gray-800 hover:text-blue-400 transition text-[15px] font-bold tracking-wide">من نحن</a>
                     </div>
                 </div>
                 
-                <a href="contact.html" class="hover:text-blue-400 transition">اتصل بنا</a>
-                <!-- Language Switch inside desktop menu -->
-                <a href="en.html" class="bg-blue-600/30 hover:bg-blue-600/50 text-white px-5 py-2 rounded-full text-sm font-bold transition border border-blue-500/40 shadow-sm mr-2">
-                    English
-                </a>
+                <a href="contact.html">اتصل بنا</a>
             </div>
+            <!-- Language Switch -->
+            <a href="en.html" class="bg-blue-600/20 hover:bg-blue-600/30 text-white px-4 py-2 rounded-full text-sm font-bold transition border border-blue-500/30">
+                English
+            </a>
         </div>
         
-        <!-- MOBILE CONTROLS (visible only on small screens) -->
+        <!-- Mobile Controls -->
         <div class="mobile-controls">
             <a href="en.html" class="bg-blue-600/30 text-white px-3 py-1.5 rounded-full text-sm font-bold border border-blue-500/40">
                 EN
@@ -298,29 +221,24 @@
             </button>
         </div>
         
-        <!-- MOBILE DROPDOWN MENU (hidden by default, toggled via JS) -->
+        <!-- Mobile Dropdown Menu -->
         <div id="mobileDropdownMenu" class="mobile-dropdown-menu">
             <a href="index.html" class="hover:text-blue-400 transition">الرئيسية</a>
             <a href="services.html" class="hover:text-blue-400 transition">الخدمات</a>
             <a href="process.html" class="hover:text-blue-400 transition">طريقتنا</a>
             
-            
-            
-
             <div class="flex flex-col text-center w-full py-2 bg-black/40 rounded-lg">
                 <span class="text-xs text-gray-500 font-bold uppercase tracking-widest mb-2">الموارد</span>
-                                <a href="#" class="py-2 text-[15px] font-bold text-gray-300 border-none">العروض التجريبية:</a>
-                <a href="Customized_CEO_Dashboard_demo.html" class="py-1.5 text-sm text-gray-400 border-none pr-4">← لوحة تحكم المدير التنفيذي</a>
-                <a href="whatsapp_receptionist_demo_ar.html" class="py-1.5 text-sm text-gray-400 border-none pr-4">← موظف استقبال واتساب</a>
-                <a href="#" class="py-2 text-[15px] font-bold text-gray-300 border-none mt-1">المحاكيات:</a>
-                <a href="Missed-Call-Simulator-ar.html" class="py-1.5 text-sm text-gray-400 border-none pr-4">← محاكي المكالمات الفائتة</a>
-                <a href="Campaign_ROI_Simulator.html" class="py-1.5 text-sm text-gray-400 border-none pr-4">← محاكي عائد الحملات</a>
-                <a href="blog_ar.html" class="py-1.5 text-sm text-gray-300 border-none">المقالات</a>
-                <a href="#" class="py-1.5 text-sm text-gray-300 border-none">يوتيوب</a>
-                <a href="about.html" class="py-1.5 text-sm text-gray-300 border-none">من نحن</a>
+                <a href="Customized_CEO_Dashboard_demo.html" class="py-2 text-sm text-gray-300 border-none">لوحة تحكم المدير</a>
+                <a href="whatsapp_receptionist_demo_ar.html" class="py-2 text-sm text-gray-300 border-none">موظف استقبال واتساب</a>
+                <a href="Missed-Call-Simulator-ar.html" class="py-2 text-sm text-gray-300 border-none">محاكي المكالمات الفائتة</a>
+                <a href="Campaign_ROI_Simulator.html" class="py-2 text-sm text-gray-300 border-none">محاكي عائد الحملات</a>
+                <a href="blog_ar.html" class="py-2 text-sm text-gray-300 border-none">المقالات</a>
+                <a href="about.html" class="py-2 text-sm text-gray-300 border-none">من نحن</a>
             </div>
             
             <a href="contact.html" class="hover:text-blue-400 transition">اتصل بنا</a>
+            <a href="en.html" style="color: #3B82F6; font-weight: bold;">English</a>
         </div>
     </nav>
 
@@ -586,11 +504,9 @@
             currentStep = 0;
             showStep(currentStep);
             modal.classList.add('active');
-        }
 
         function closeAuditForm() {
             modal.classList.remove('active');
-        }
 
         function showStep(stepIndex) {
             steps.forEach((step, index) => {
@@ -599,7 +515,6 @@
             progressSteps.forEach((pStep, index) => {
                 pStep.classList.toggle('active', index <= stepIndex);
             });
-        }
 
         function validateStep(stepIndex) {
             const currentStepElement = steps[stepIndex];
@@ -611,10 +526,9 @@
                     isValid = false;
                 } else {
                     input.style.borderColor = 'rgba(255,255,255,0.1)';
-                }
+
             });
             return isValid;
-        }
 
         form.addEventListener('click', (e) => {
             if (e.target.matches('.next')) {
@@ -622,14 +536,14 @@
                     if (currentStep < steps.length - 1) {
                         currentStep++;
                         showStep(currentStep);
-                    }
-                }
+
+
             } else if (e.target.matches('.prev')) {
                 if (currentStep > 0) {
                     currentStep--;
                     showStep(currentStep);
-                }
-            }
+
+
         });
 
         // Slider
@@ -640,7 +554,6 @@
             comfortSlider.addEventListener('input', function() {
                 comfortOutput.innerText = this.value;
             });
-        }
 
         // Main Audit Form Submit
         form.addEventListener('submit', async function(event) {
@@ -688,13 +601,13 @@
                     window.location.href = "https://calendly.com/ai-profit-lab2026";
                 } else {
                     alert("حدث خطأ. الرجاء المحاولة مرة أخرى.");
-                }
+
             } catch (error) {
                 alert("خطأ في الاتصال. تحقق من اتصالك بالإنترنت.");
             } finally {
                 submitBtn.textContent = originalText;
                 submitBtn.disabled = false;
-            }
+
         });
 
         // Quick Contact Form
@@ -733,15 +646,14 @@
                         quickForm.reset();
                     } else {
                         alert('حدث خطأ. الرجاء المحاولة مرة أخرى أو استخدام نموذج حجز المكالمة.');
-                    }
+
                 } catch (error) {
                     alert('خطأ في الاتصال. حاول مرة أخرى.');
                 } finally {
                     submitBtn.textContent = originalText;
                     submitBtn.disabled = false;
-                }
+
             });
-        }
 
         modal.addEventListener('click', (event) => {
             if (event.target === modal) closeAuditForm();
@@ -760,8 +672,7 @@
                 document.getElementById('welcome-message').textContent = `مرحباً بك من ${country}!`;
             } catch (error) {
                 console.log('Country detection failed');
-            }
-        }
+
 
         // ==================== CHAT FUNCTIONS ====================
         async function handleSend() {
@@ -775,8 +686,7 @@
             if (!visitorId) {
                 visitorId = 'visitor_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
                 localStorage.setItem('aidenVisitorId', visitorId);
-            }
-            
+
             // RTL: user message on the right (mr-auto)
             box.innerHTML += `<div class="bg-blue-900/50 mr-auto p-3 rounded-2xl rounded-bl-none max-w-[85%] text-white">${message}</div>`;
             input.value = '';
@@ -802,13 +712,12 @@
             } catch (error) {
                 document.getElementById('typing-indicator')?.remove();
                 box.innerHTML += `<div class="bg-gray-800 p-3 rounded-2xl rounded-tr-none max-w-[85%] text-red-300">عذراً، حدث خطأ</div>`;
-            }
+
             box.scrollTop = box.scrollHeight;
-        }
 
         function toggleChat() {
             document.getElementById('aiden-ui').classList.toggle('active');
-        }
+
         // ==================== FIXED: MOBILE MENU TOGGLE (Unified System) ====================
         const mobileToggleBtn = document.getElementById('mobileMenuToggle');
         const mobileMenuDropdown = document.getElementById('mobileDropdownMenu');
@@ -830,10 +739,8 @@
             document.addEventListener('click', function(event) {
                 if (!mobileToggleBtn.contains(event.target) && !mobileMenuDropdown.contains(event.target)) {
                     mobileMenuDropdown.classList.remove('open');
-                }
-            });
-        }
 
+            });
 
         // ==================== INIT ====================
         window.onload = async function() {
@@ -843,9 +750,9 @@
                     if (!document.getElementById('aiden-ui').classList.contains('active')) {
                         toggleChat();
                         sessionStorage.setItem('aidenPopped', 'true');
-                    }
+
                 }, 10000);
-            }
+
         };
     </script>
 </body>

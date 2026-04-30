@@ -17,10 +17,11 @@
     "logo": {
       "@type": "ImageObject",
       "url": "https://aiprofitlab.com/logo.webp"
-    }
-  }
-}
-</script>
+
+
+
+
+    </script>
     <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-2GPVY4Z5KR"></script>
 <script>
@@ -74,392 +75,80 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <style>
-        body { 
-            font-family: 'Cairo', sans-serif; 
-            background-color: #050505; 
-            color: #ffffff; 
-            margin: 0; 
-            overflow-x: hidden; 
-        }
-        .glass { 
-            background: rgba(255, 255, 255, 0.03); 
-            backdrop-filter: blur(12px); 
-            border: 1px solid rgba(255, 255, 255, 0.05); 
-        }
-        .glass-card {
-            background: rgba(255, 255, 255, 0.02);
-            backdrop-filter: blur(8px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            transition: all 0.3s ease;
-        }
-        .glass-card:hover {
-            border-color: #3B82F6;
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(59, 130, 246, 0.1);
-        }
         
-        /* ========== FIXED: UNIFIED NAVIGATION STYLES ========== */
-        /* Desktop menu container - hidden on mobile, visible on desktop */
-        .desktop-menu-container {
-            display: none;
-        }
-        
-        /* Mobile elements container */
-        .mobile-controls {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-        
-        /* Mobile dropdown menu - hidden by default */
+        /* ========== UNIFIED NAVIGATION STYLES ========== */
+        .desktop-menu-container { display: none; }
+        .mobile-controls { display: flex; align-items: center; gap: 1rem; }
         .mobile-dropdown-menu {
-            display: none;
-            position: absolute;
-            top: 100%;
-            left: 0;
-            right: 0;
-            background-color: #0a0a0a;
-            padding: 1.25rem;
-            flex-direction: column;
-            gap: 1rem;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.5);
-            z-index: 1000;
+            display: none; position: absolute; top: 100%; left: 0; right: 0;
+            background-color: #0a0a0a; padding: 1.25rem; flex-direction: column; gap: 1rem;
+            border-top: 1px solid rgba(255,255,255,0.1); border-bottom: 1px solid rgba(255,255,255,0.05);
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.5); z-index: 1000;
         }
-        
         .mobile-dropdown-menu a {
-            padding: 0.75rem 0;
-            text-align: center;
-            font-weight: 600;
-            font-size: 1.1rem;
-            border-bottom: 1px solid rgba(255,255,255,0.08);
-            transition: color 0.2s;
+            padding: 0.75rem 0; text-align: center; font-weight: 600; font-size: 1.1rem;
+            border-bottom: 1px solid rgba(255,255,255,0.08); transition: color 0.2s;
         }
-        
-        .mobile-dropdown-menu a:last-child {
-            border-bottom: none;
-        }
-        
-        .mobile-dropdown-menu a:hover {
-            color: #60a5fa;
-        }
-        
-        /* When mobile menu is open */
-        .mobile-dropdown-menu.open {
-            display: flex;
-        }
-        
-        /* Desktop menu links - horizontal row */
-        .desktop-nav-links {
-            display: flex;
-            gap: 2rem;
-            align-items: center;
-        }
-        
-        .desktop-nav-links a {
-            font-weight: 700;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            transition: color 0.2s;
-        }
-        
-        .desktop-nav-links a:hover {
-            color: #3b82f6;
-        }
-        
-        /* Responsive breakpoint */
+        .mobile-dropdown-menu a:last-child { border-bottom: none; }
+        .mobile-dropdown-menu a:hover { color: #60a5fa; }
+        .mobile-dropdown-menu.open { display: flex; }
+        .desktop-nav-links { display: flex; gap: 2rem; align-items: center; }
+        .desktop-nav-links a { font-weight: 700; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.5px; transition: color 0.2s; }
+        .desktop-nav-links a:hover { color: #3b82f6; }
         @media (min-width: 768px) {
-            .desktop-menu-container {
-                display: block;
-            }
-            .mobile-controls {
-                display: none !important;
-            }
-            .mobile-dropdown-menu {
-                display: none !important;
-            }
+            .desktop-menu-container { display: block !important; }
+            .mobile-controls { display: none !important; }
+            .mobile-dropdown-menu { display: none !important; }
         }
-        
-        /* Chatbot Styles */
-        #aiden-ui { 
-            transform: translateY(120%); 
-            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1); 
-            visibility: hidden; 
-            z-index: 1000; 
-            left: 8px; 
-            right: auto; 
-        }
-        #aiden-ui.active { 
-            transform: translateY(0); 
-            visibility: visible; 
-        }
-        .pulse { 
-            animation: pulse-animation 2s infinite; 
-        }
-        @keyframes pulse-animation { 
-            0% { box-shadow: 0 0 0 0px rgba(59, 130, 246, 0.4); } 
-            100% { box-shadow: 0 0 0 20px rgba(59, 130, 246, 0); } 
-        }
-        
-        /* Multi-Step Form Modal Styles */
+
+        /* ========== CORE AESTHETICS ========== */
+        body { font-family: 'Cairo', sans-serif; background-color: #050505; color: #ffffff; margin: 0; overflow-x: hidden; }
+        .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.05); }
+        .glass-card { background: rgba(255, 255, 255, 0.02); backdrop-filter: blur(8px); border: 1px solid rgba(255, 255, 255, 0.05); transition: all 0.3s ease; }
+        .glass-card:hover { border-color: #3B82F6; transform: translateY(-5px); }
+
+        /* ========== CHATBOT STYLES ========== */
+        #aiden-ui { transform: translateY(120%); transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1); visibility: hidden; z-index: 1000; left: 8px; right: auto; }
+        #aiden-ui.active { transform: translateY(0); visibility: visible; }
+        .pulse { animation: pulse-animation 2s infinite; }
+        @keyframes pulse-animation { 0% { box-shadow: 0 0 0 0px rgba(59, 130, 246, 0.4); } 100% { box-shadow: 0 0 0 20px rgba(59, 130, 246, 0); } }
+
+        /* ========== FORM MODAL STYLES ========== */
         .form-modal-overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(8px);
-            z-index: 2000;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            transition: opacity 0.3s ease;
+            position: fixed; inset: 0; background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(8px); z-index: 2000;
+            display: none; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s ease;
         }
-        .form-modal-overlay.active {
-            display: flex;
-            opacity: 1;
-        }
+        .form-modal-overlay.active { display: flex; opacity: 1; }
         .form-modal-content {
-            width: 90%;
-            max-width: 800px;
-            max-height: 90vh;
-            overflow-y: auto;
-            padding: 2rem;
-            border-radius: 1.5rem;
-            position: relative;
-            transform: scale(0.95);
-            transition: transform 0.3s ease;
-            background: #0a0a0a;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            width: 90%; max-width: 800px; max-height: 90vh; overflow-y: auto; padding: 2rem;
+            border-radius: 1.5rem; background: #0a0a0a; border: 1px solid rgba(255, 255, 255, 0.1);
+            transform: scale(0.95); transition: transform 0.3s ease; position: relative;
         }
-        .form-modal-overlay.active .form-modal-content {
-            transform: scale(1);
-        }
-        .form-modal-content .close-btn {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            background: none;
-            border: none;
-            color: #aaa;
-            font-size: 2rem;
-            cursor: pointer;
-            transition: color 0.2s;
-        }
-        .form-modal-content .close-btn:hover {
-            color: #fff;
-        }
-        .form-modal-content h2 {
-            text-align: center;
-            color: #fff;
-            font-size: 2rem;
-            font-weight: 800;
-            margin-bottom: 0.5rem;
-        }
-        .form-modal-content .subtitle {
-            text-align: center;
-            color: #a0aec0;
-            margin-bottom: 1rem;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        
-        .progress-bar {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 2rem;
-            position: relative;
-            max-width: 400px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        .progress-bar::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background-color: rgba(255, 255, 255, 0.2);
-            transform: translateY(-50%);
-            z-index: -1;
-        }
-        .progress-step {
-            width: 35px;
-            height: 35px;
-            border-radius: 50%;
-            background-color: rgba(255, 255, 255, 0.1);
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #fff;
-            transition: all 0.3s ease;
-            font-weight: bold;
-        }
-        .progress-step.active {
-            background: linear-gradient(135deg, #3B82F6, #22C55E);
-            border-color: transparent;
-            transform: scale(1.1);
-        }
-        
-        .form-step {
-            display: none;
-        }
-        .form-step.active {
-            display: block;
-            animation: fadeIn 0.5s;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .form-step h3 {
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: #fff;
-            text-align: center;
-            margin-bottom: 0.5rem;
-        }
-        .form-step .step-description {
-            text-align: center;
-            color: #a0aec0;
-            margin-bottom: 2rem;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-            font-size: 0.875rem;
-            color: #cbd5e0;
-        }
-        label .required {
-            color: #ef4444;
-            margin-right: 2px;
-        }
-        
-        input[type="text"], input[type="email"], input[type="tel"], input[type="url"], input[type="number"], textarea, select {
-            width: 100%;
-            padding: 0.75rem 1rem;
-            margin-bottom: 1rem;
-            background: rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 0.5rem;
-            color: #fff;
-            box-sizing: border-box;
-            transition: border-color 0.3s;
-            text-align: right;
-        }
-        input:focus, textarea:focus, select:focus {
-            outline: none;
-            border-color: #3B82F6;
-        }
-        textarea {
-            min-height: 80px;
-            resize: vertical;
-        }
-
-        .checkbox-group {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 0.75rem;
-            margin-bottom: 1rem;
-        }
-        .checkbox-item {
-            background: rgba(255, 255, 255, 0.03);
-            padding: 0.75rem;
-            border-radius: 0.5rem;
-            display: flex;
-            align-items: center;
-            cursor: pointer;
-            border: 1px solid transparent;
-            transition: all .2s;
-        }
-        .checkbox-item:hover {
-            background: rgba(59, 130, 246, 0.1);
-            border-color: #3B82F6;
-        }
-        .checkbox-item input[type="checkbox"] {
-            display: none;
-        }
-        .checkbox-item .checkmark {
-            width: 20px;
-            height: 20px;
-            border: 2px solid #3B82F6;
-            border-radius: 4px;
-            margin-left: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .checkbox-item .checkmark svg {
-            display: none;
-            width: 14px;
-            height: 14px;
-        }
-        .checkbox-item input[type="checkbox"]:checked + .checkmark {
-            background: linear-gradient(135deg, #3B82F6, #22C55E);
-        }
-        .checkbox-item input[type="checkbox"]:checked + .checkmark svg {
-            display: block;
-        }
-
-        .slider-container {
-            margin-bottom: 1rem;
-        }
-        .slider-output {
-            text-align: center;
-            font-weight: bold;
-            color: #22C55E;
-            margin-bottom: 0.5rem;
-        }
-
-        .form-navigation {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 2rem;
-        }
-        .nav-btn {
-            padding: 0.75rem 2rem;
-            background: linear-gradient(135deg, #3B82F6, #2563EB);
-            color: white;
-            border: none;
-            border-radius: 0.5rem;
-            font-size: 1rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        .nav-btn.prev {
-            background: rgba(255, 255, 255, 0.1);
-        }
-        .nav-btn:hover {
-            opacity: 0.9;
-            transform: translateY(-2px);
-        }
-        .nav-btn.prev:hover {
-            background: rgba(255, 255, 255, 0.15);
-        }
-
-        .form-footer {
-            text-align: center;
-            color: #718096;
-            font-size: 0.8rem;
-            margin-top: 2rem;
-        }
-
-        @media (max-width: 640px) {
-            .checkbox-group {
-                grid-template-columns: 1fr;
-            }
-            .form-modal-content {
-                padding: 1.5rem;
-            }
-        }
+        .form-modal-overlay.active .form-modal-content { transform: scale(1); }
+        .close-btn { position: absolute; top: 20px; left: 20px; background: none; border: none; color: #aaa; font-size: 2rem; cursor: pointer; }
+        .close-btn:hover { color: #fff; }
+        .progress-bar { display: flex; justify-content: space-between; margin-bottom: 2rem; max-width: 400px; margin-left: auto; margin-right: auto; position: relative; }
+        .progress-bar::before { content: ''; position: absolute; top: 50%; left: 0; right: 0; height: 2px; background-color: rgba(255,255,255,0.2); transform: translateY(-50%); z-index: -1; }
+        .progress-step { width: 35px; height: 35px; border-radius: 50%; background: rgba(255,255,255,0.1); border: 2px solid rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center; color: #fff; transition: all 0.3s; }
+        .progress-step.active { background: linear-gradient(135deg, #3B82F6, #22C55E); border-color: transparent; transform: scale(1.1); }
+        .form-step { display: none; }
+        .form-step.active { display: block; animation: fadeIn 0.5s; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        input, textarea, select { width: 100%; padding: 0.75rem; margin-bottom: 1rem; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); border-radius: 0.5rem; color: #fff; }
+        .checkbox-group { display: grid; grid-template-columns: repeat(2,1fr); gap: 0.75rem; }
+        .checkbox-item { background: rgba(255,255,255,0.03); padding: 0.75rem; border-radius: 0.5rem; display: flex; align-items: center; cursor: pointer; }
+        .checkbox-item:hover { background: rgba(59,130,246,0.1); }
+        .checkbox-item input[type="checkbox"] { display: none; }
+        .checkbox-item .checkmark { width: 20px; height: 20px; border: 2px solid #3B82F6; border-radius: 4px; margin-left: 10px; display: flex; align-items: center; justify-content: center; }
+        .checkbox-item .checkmark svg { display: none; width: 14px; height: 14px; }
+        .checkbox-item input[type="checkbox"]:checked + .checkmark { background: linear-gradient(135deg, #3B82F6, #22C55E); }
+        .checkbox-item input[type="checkbox"]:checked + .checkmark svg { display: block; }
+        .slider-output { text-align: center; font-weight: bold; color: #22C55E; }
+        .form-navigation { display: flex; justify-content: space-between; margin-top: 2rem; }
+        .nav-btn { padding: 0.75rem 2rem; background: linear-gradient(135deg, #3B82F6, #2563EB); color: white; border: none; border-radius: 0.5rem; font-weight: bold; cursor: pointer; transition: all 0.3s; }
+        .nav-btn.prev { background: rgba(255,255,255,0.1); }
+        .nav-btn:hover { opacity: 0.9; transform: translateY(-2px); }
+    
     </style>
     <!-- AI Profit Lab Structured Data -->
 <script type="application/ld+json">
@@ -509,9 +198,9 @@
       "@type": "Service",
       "name": "AI Lead Generation",
       "description": "Automated systems for identifying and engaging business leads."
-    }
+
   ]
-}
+
 </script>
 
     <!-- Local Business Schema -->
@@ -548,32 +237,31 @@
         "https://www.youtube.com/@AI_for_Managers",
         "https://www.linkedin.com/in/nahid-aby"
       ]
-    }
+
     </script>
 
     <style>
         .group-submenu:hover .submenu-content {
             opacity: 1;
             visibility: visible;
-        }
+
     </style>
 </head>
 <body>
 
     <!-- ======================= FIXED: SINGLE NAVIGATION SYSTEM ======================= -->
-    <nav class="flex justify-between items-center px-6 md:px-12 py-6 fixed w-full z-50 glass bg-black/40 backdrop-blur-md">
-        <!-- Logo -->
+    <!-- ======================= Navigation ======================= -->
+    <nav class="flex justify-between items-center px-6 md:px-12 py-8 fixed w-full z-50 glass bg-black/30">
         <a href="index.html" class="font-extrabold text-3xl md:text-4xl tracking-tighter">
             <span class="text-blue-500">A</span><span class="text-red-500">I</span> <span class="text-white text-2xl md:text-3xl">Profit Lab</span>
         </a>
         
-        <!-- DESKTOP MENU (visible only on md and up) -->
-        <div class="desktop-menu-container">
-            <div class="desktop-nav-links flex items-center gap-6 text-sm font-bold">
-                <a href="index.html" class="hover:text-blue-400 transition">الرئيسية</a>
-                <a href="services.html" class="hover:text-blue-400 transition">الخدمات</a>
-                <a href="process.html" class="hover:text-blue-400 transition">طريقتنا</a>
-                
+        <!-- Desktop Menu -->
+        <div class="hidden md:flex items-center gap-8">
+            <div class="desktop-nav-links">
+                <a href="index.html">الرئيسية</a>
+                <a href="services.html">الخدمات</a>
+                <a href="process.html">طريقتنا</a>
                 
                 <!-- Resources Dropdown -->
                 <div class="relative group cursor-pointer h-full flex items-center">
@@ -581,42 +269,42 @@
                         الموارد
                         <svg class="w-4 h-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                     </span>
-                    <div class="absolute top-8 right-1/2 translate-x-1/2 w-48 bg-[#0a0a0a] border border-gray-800 rounded-xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 flex flex-col z-50">
-                                                <div class="relative group-submenu">
+                    <div class="absolute top-full left-1/2 -translate-x-1/2 w-48 bg-[#0a0a0a] border border-gray-800 rounded-xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 flex flex-col z-50">
+                        <div class="relative group-submenu">
                             <div class="px-5 py-4 hover:bg-gray-800 hover:text-blue-400 border-b border-gray-800 transition flex justify-between items-center cursor-pointer text-[15px] font-bold tracking-wide">
-                                العروض التجريبية
+                                عروض تجريبية
                                 <svg class="w-4 h-4 transform rotate-90" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                             </div>
-                            <div class="submenu-content absolute right-full top-0 w-64 bg-[#0a0a0a] border border-gray-800 rounded-xl shadow-2xl opacity-0 invisible transition-all duration-300 flex flex-col z-50 text-right">
-                                <a href="Customized_CEO_Dashboard_demo.html" class="px-5 py-4 hover:bg-gray-800 hover:text-blue-400 border-b border-gray-800 transition text-[15px] font-bold tracking-wide">لوحة تحكم المدير التنفيذي</a>
+                            <div class="submenu-content absolute left-full top-0 w-64 bg-[#0a0a0a] border border-gray-800 rounded-xl shadow-2xl opacity-0 invisible transition-all duration-300 flex flex-col z-50">
+                                <a href="Customized_CEO_Dashboard_demo.html" class="px-5 py-4 hover:bg-gray-800 hover:text-blue-400 border-b border-gray-800 transition text-[15px] font-bold tracking-wide">لوحة تحكم المدير</a>
                                 <a href="whatsapp_receptionist_demo_ar.html" class="px-5 py-4 hover:bg-gray-800 hover:text-blue-400 transition text-[15px] font-bold tracking-wide">موظف استقبال واتساب</a>
                             </div>
                         </div>
                         <div class="relative group-submenu">
                             <div class="px-5 py-4 hover:bg-gray-800 hover:text-blue-400 border-b border-gray-800 transition flex justify-between items-center cursor-pointer text-[15px] font-bold tracking-wide">
-                                المحاكيات
+                                محاكيات
                                 <svg class="w-4 h-4 transform rotate-90" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                             </div>
-                            <div class="submenu-content absolute right-full top-0 w-64 bg-[#0a0a0a] border border-gray-800 rounded-xl shadow-2xl opacity-0 invisible transition-all duration-300 flex flex-col z-50 text-right">
+                            <div class="submenu-content absolute left-full top-0 w-64 bg-[#0a0a0a] border border-gray-800 rounded-xl shadow-2xl opacity-0 invisible transition-all duration-300 flex flex-col z-50">
                                 <a href="Missed-Call-Simulator-ar.html" class="px-5 py-4 hover:bg-gray-800 hover:text-blue-400 border-b border-gray-800 transition text-[15px] font-bold tracking-wide">محاكي المكالمات الفائتة</a>
                                 <a href="Campaign_ROI_Simulator.html" class="px-5 py-4 hover:bg-gray-800 hover:text-blue-400 transition text-[15px] font-bold tracking-wide">محاكي عائد الحملات</a>
                             </div>
                         </div>
                         <a href="blog_ar.html" class="px-5 py-4 hover:bg-gray-800 hover:text-blue-400 border-b border-gray-800 transition text-[15px] font-bold tracking-wide">المقالات</a>
-                        <a href="academy_ar.html" class="px-5 py-4 hover:bg-gray-800 hover:text-blue-400 border-b border-gray-800 transition text-[15px] font-bold tracking-wide">يوتيوب</a>
+                        <a href="https://www.youtube.com/@AI_for_Managers" class="px-5 py-4 hover:bg-gray-800 hover:text-blue-400 border-b border-gray-800 transition text-[15px] font-bold tracking-wide">يوتيوب</a>
                         <a href="about.html" class="px-5 py-4 hover:bg-gray-800 hover:text-blue-400 transition text-[15px] font-bold tracking-wide">من نحن</a>
                     </div>
                 </div>
                 
-                <a href="contact.html" class="hover:text-blue-400 transition">اتصل بنا</a>
-                <!-- Language Switch inside desktop menu -->
-                <a href="en.html" class="bg-blue-600/30 hover:bg-blue-600/50 text-white px-5 py-2 rounded-full text-sm font-bold transition border border-blue-500/40 shadow-sm mr-2">
-                    English
-                </a>
+                <a href="contact.html">اتصل بنا</a>
             </div>
+            <!-- Language Switch -->
+            <a href="en.html" class="bg-blue-600/20 hover:bg-blue-600/30 text-white px-4 py-2 rounded-full text-sm font-bold transition border border-blue-500/30">
+                English
+            </a>
         </div>
         
-        <!-- MOBILE CONTROLS (visible only on small screens) -->
+        <!-- Mobile Controls -->
         <div class="mobile-controls">
             <a href="en.html" class="bg-blue-600/30 text-white px-3 py-1.5 rounded-full text-sm font-bold border border-blue-500/40">
                 EN
@@ -626,29 +314,24 @@
             </button>
         </div>
         
-        <!-- MOBILE DROPDOWN MENU (hidden by default, toggled via JS) -->
+        <!-- Mobile Dropdown Menu -->
         <div id="mobileDropdownMenu" class="mobile-dropdown-menu">
             <a href="index.html" class="hover:text-blue-400 transition">الرئيسية</a>
             <a href="services.html" class="hover:text-blue-400 transition">الخدمات</a>
             <a href="process.html" class="hover:text-blue-400 transition">طريقتنا</a>
             
-            
-            
-
             <div class="flex flex-col text-center w-full py-2 bg-black/40 rounded-lg">
                 <span class="text-xs text-gray-500 font-bold uppercase tracking-widest mb-2">الموارد</span>
-                                <a href="#" class="py-2 text-[15px] font-bold text-gray-300 border-none">العروض التجريبية:</a>
-                <a href="Customized_CEO_Dashboard_demo.html" class="py-1.5 text-sm text-gray-400 border-none pr-4">← لوحة تحكم المدير التنفيذي</a>
-                <a href="whatsapp_receptionist_demo_ar.html" class="py-1.5 text-sm text-gray-400 border-none pr-4">← موظف استقبال واتساب</a>
-                <a href="#" class="py-2 text-[15px] font-bold text-gray-300 border-none mt-1">المحاكيات:</a>
-                <a href="Missed-Call-Simulator-ar.html" class="py-1.5 text-sm text-gray-400 border-none pr-4">← محاكي المكالمات الفائتة</a>
-                <a href="Campaign_ROI_Simulator.html" class="py-1.5 text-sm text-gray-400 border-none pr-4">← محاكي عائد الحملات</a>
-                <a href="blog_ar.html" class="py-1.5 text-sm text-gray-300 border-none">المقالات</a>
-                <a href="academy_ar.html" class="py-1.5 text-sm text-gray-300 border-none">يوتيوب</a>
-                <a href="about.html" class="py-1.5 text-sm text-gray-300 border-none">من نحن</a>
+                <a href="Customized_CEO_Dashboard_demo.html" class="py-2 text-sm text-gray-300 border-none">لوحة تحكم المدير</a>
+                <a href="whatsapp_receptionist_demo_ar.html" class="py-2 text-sm text-gray-300 border-none">موظف استقبال واتساب</a>
+                <a href="Missed-Call-Simulator-ar.html" class="py-2 text-sm text-gray-300 border-none">محاكي المكالمات الفائتة</a>
+                <a href="Campaign_ROI_Simulator.html" class="py-2 text-sm text-gray-300 border-none">محاكي عائد الحملات</a>
+                <a href="blog_ar.html" class="py-2 text-sm text-gray-300 border-none">المقالات</a>
+                <a href="about.html" class="py-2 text-sm text-gray-300 border-none">من نحن</a>
             </div>
             
             <a href="contact.html" class="hover:text-blue-400 transition">اتصل بنا</a>
+            <a href="en.html" style="color: #3B82F6; font-weight: bold;">English</a>
         </div>
     </nav>
 
@@ -907,32 +590,7 @@
     <div id="auditModal" class="form-modal-overlay"><div class="form-modal-content"><button onclick="closeAuditForm()" class="close-btn">&times;</button><h2>استبيان جلسة استراتيجية الذكاء الاصطناعي</h2><p class="subtitle">أكمل هذا النموذج القصير (٣-٥ دقائق) لمساعدتنا في تخصيص مكالمتك الاستراتيجية.</p><div class="progress-bar"><div class="progress-step active" data-step="1">١</div><div class="progress-step" data-step="2">٢</div><div class="progress-step" data-step="3">٣</div><div class="progress-step" data-step="4">٤</div></div><form id="auditForm"><div class="form-step active" data-step="1"><h3>بيانات التواصل</h3><p class="step-description">لنبدأ بالأساسيات.</p><div class="grid md:grid-cols-2 gap-4"><div><label for="fullName">الاسم الكامل <span class="required">*</span></label><input type="text" id="fullName" name="fullName" required></div><div><label for="email">البريد الإلكتروني <span class="required">*</span></label><input type="email" id="email" name="email" required></div><div><label for="phone">رقم الهاتف</label><input type="tel" id="phone" name="phone"></div><div><label for="company">الشركة <span class="required">*</span></label><input type="text" id="company" name="company" required></div><div><label for="role">المسمى الوظيفي <span class="required">*</span></label><input type="text" id="role" name="role" required></div><div><label for="website">الموقع الإلكتروني</label><input type="url" id="website" name="website"></div></div><div class="form-navigation"><button type="button" class="nav-btn next">التالي →</button></div></div><div class="form-step" data-step="2"><h3>لمحة عن عملك</h3><p class="step-description">أخبرنا عن عملك لتقييم ملاءمة الذكاء الاصطناعي.</p><div class="grid md:grid-cols-2 gap-4"><div><label for="industry">المجال/القطاع؟</label><input type="text" id="industry" name="industry"></div><div><label for="employees">حجم الشركة (عدد الموظفين)</label><input type="number" id="employees" name="employees"></div></div><label for="revenue">الإيرادات السنوية</label><input type="text" id="revenue" name="revenue"><label for="revenueStreams">أهم ٣ مصادر دخل أو منتجات/خدمات؟</label><textarea id="revenueStreams" name="revenueStreams"></textarea><div class="form-navigation"><button type="button" class="nav-btn prev">→ السابق</button><button type="button" class="nav-btn next">التالي →</button></div></div><div class="form-step" data-step="3"><h3>التحديات والأهداف</h3><p class="step-description">ما التحديات التي تعيقك؟ كيف يبدو النجاح؟</p><label for="challenges">أهم ٣ تحديات تواجه عملك؟</label><textarea id="challenges" name="challenges"></textarea><label for="goals">أهدافك من الذكاء الاصطناعي؟ <span class="required">*</span></label><textarea id="goals" name="goals" required></textarea><label for="pastExperience">تجارب سابقة مع الذكاء الاصطناعي/الأتمتة؟</label><textarea id="pastExperience" name="pastExperience"></textarea><label for="aiComfort">مستوى راحة فريقك مع الذكاء الاصطناعي (١-١٠):</label><div class="slider-container"><div class="slider-output" id="aiComfortOutput">٥</div><input type="range" id="aiComfort" name="aiComfort" min="1" max="10" value="5" class="w-full"></div><div class="form-navigation"><button type="button" class="nav-btn prev">→ السابق</button><button type="button" class="nav-btn next">التالي →</button></div></div><div class="form-step" data-step="4"><h3>الجاهزية والخطوات التالية</h3><p class="step-description">ساعدنا على فهم جدولك الزمني والتزامك.</p><label>ما العمليات التي تبحث عن أتمتتها؟</label><div class="checkbox-group"><label class="checkbox-item"><input type="checkbox" name="process" value="Marketing"><span class="checkmark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M5 13l4 4L19 7"/></svg></span>التسويق</label><label class="checkbox-item"><input type="checkbox" name="process" value="Sales"><span class="checkmark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M5 13l4 4L19 7"/></svg></span>المبيعات</label><label class="checkbox-item"><input type="checkbox" name="process" value="Operations"><span class="checkmark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M5 13l4 4L19 7"/></svg></span>العمليات</label><label class="checkbox-item"><input type="checkbox" name="process" value="Customer Service"><span class="checkmark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M5 13l4 4L19 7"/></svg></span>خدمة العملاء</label></div><label for="budget">نطاق الميزانية؟</label><select id="budget" name="budget"><option value="OMR 5K">٥ آلاف ر.ع</option><option value="OMR 5-20K">٥-٢٠ ألف ر.ع</option><option value="OMR 20-50K">٢٠-٥٠ ألف ر.ع</option><option value="OMR 50K+">أكثر من ٥٠ ألف ر.ع</option></select><label for="timeline">الجدول الزمني المستهدف؟</label><select id="timeline" name="timeline"><option value="1-3 months">١-٣ أشهر</option><option value="3-6 months">٣-٦ أشهر</option><option value="6+ months">أكثر من ٦ أشهر</option></select><label for="keyQuestion">السؤال الذي يجب طرحه في مكالمتنا؟ <span class="required">*</span></label><input type="text" id="keyQuestion" name="keyQuestion" required><div class="form-navigation"><button type="button" class="nav-btn prev">→ السابق</button><button type="submit" class="nav-btn submit">احجز مكالمتي ←</button></div></div></form><p class="form-footer">نحترم خصوصيتك—البيانات تُستخدم فقط للتحضير للمكالمة.</p></div></div>
 
     <script>
-        // FIXED: MOBILE MENU TOGGLE (Single source of truth)
-        const mobileToggleBtn = document.getElementById('mobileMenuToggle');
-        const mobileMenuDropdown = document.getElementById('mobileDropdownMenu');
-        
-        if (mobileToggleBtn && mobileMenuDropdown) {
-            mobileToggleBtn.addEventListener('click', function(e) {
-                e.stopPropagation();
-                mobileMenuDropdown.classList.toggle('open');
-            });
-            
-            // Close menu when clicking any link inside mobile menu
-            const mobileLinks = mobileMenuDropdown.querySelectorAll('a');
-            mobileLinks.forEach(link => {
-                link.addEventListener('click', () => {
-                    mobileMenuDropdown.classList.remove('open');
-                });
-            });
-            
-            // Close if user clicks outside
-            document.addEventListener('click', function(event) {
-                if (!mobileToggleBtn.contains(event.target) && !mobileMenuDropdown.contains(event.target)) {
-                    mobileMenuDropdown.classList.remove('open');
-                }
-            });
-        }
-        
+
         // ==================== MULTI-STEP FORM LOGIC (preserved) ====================
         const modal = document.getElementById('auditModal');
         const form = document.getElementById('auditForm');
@@ -972,8 +630,37 @@
                     this.innerHTML = '';
                     this.appendChild(iframe);
                 });
-            }
+
         });
     </script>
-</body>
+
+    <script>
+        // FIXED: MOBILE MENU TOGGLE (Unified System)
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileToggleBtn = document.getElementById('mobileMenuToggle');
+            const mobileMenuDropdown = document.getElementById('mobileDropdownMenu');
+            
+            if (mobileToggleBtn && mobileMenuDropdown) {
+                mobileToggleBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    mobileMenuDropdown.classList.toggle('open');
+                });
+                
+                // Close menu when clicking any link inside
+                mobileMenuDropdown.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', () => {
+                        mobileMenuDropdown.classList.remove('open');
+                    });
+                });
+                
+                // Close if user clicks outside
+                document.addEventListener('click', function(event) {
+                    if (!mobileToggleBtn.contains(event.target) && !mobileMenuDropdown.contains(event.target)) {
+                        mobileMenuDropdown.classList.remove('open');
+
+                });
+
+        });
+    </script>
+    </body>
 </html>

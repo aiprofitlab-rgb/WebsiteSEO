@@ -32,101 +32,45 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <style>
+        
+        /* ========== UNIFIED NAVIGATION STYLES ========== */
+        .desktop-menu-container { display: none; }
+        .mobile-controls { display: flex; align-items: center; gap: 1rem; }
+        .mobile-dropdown-menu {
+            display: none; position: absolute; top: 100%; left: 0; right: 0;
+            background-color: #0a0a0a; padding: 1.25rem; flex-direction: column; gap: 1rem;
+            border-top: 1px solid rgba(255,255,255,0.1); border-bottom: 1px solid rgba(255,255,255,0.05);
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.5); z-index: 1000;
+        }
+        .mobile-dropdown-menu a {
+            padding: 0.75rem 0; text-align: center; font-weight: 600; font-size: 1.1rem;
+            border-bottom: 1px solid rgba(255,255,255,0.08); transition: color 0.2s;
+        }
+        .mobile-dropdown-menu a:last-child { border-bottom: none; }
+        .mobile-dropdown-menu a:hover { color: #60a5fa; }
+        .mobile-dropdown-menu.open { display: flex; }
+        .desktop-nav-links { display: flex; gap: 2rem; align-items: center; }
+        .desktop-nav-links a { font-weight: 700; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.5px; transition: color 0.2s; }
+        .desktop-nav-links a:hover { color: #3b82f6; }
+        @media (min-width: 768px) {
+            .desktop-menu-container { display: block !important; }
+            .mobile-controls { display: none !important; }
+            .mobile-dropdown-menu { display: none !important; }
+        }
+
+        /* ========== CORE AESTHETICS ========== */
         body { font-family: 'Outfit', sans-serif; background-color: #050505; color: #ffffff; margin: 0; overflow-x: hidden; }
         .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.05); }
         .glass-card { background: rgba(255, 255, 255, 0.02); backdrop-filter: blur(8px); border: 1px solid rgba(255, 255, 255, 0.05); transition: all 0.3s ease; }
         .glass-card:hover { border-color: #3B82F6; transform: translateY(-5px); }
-        /* ========== FIXED: UNIFIED NAVIGATION STYLES ========== */
-        /* Desktop menu container - hidden on mobile, visible on desktop */
-        .desktop-menu-container {
-            display: none;
-        }
-        
-        /* Mobile elements container */
-        .mobile-controls {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-        
-        /* Mobile dropdown menu - hidden by default */
-        .mobile-dropdown-menu {
-            display: none;
-            position: absolute;
-            top: 100%;
-            left: 0;
-            right: 0;
-            background-color: #0a0a0a;
-            padding: 1.25rem;
-            flex-direction: column;
-            gap: 1rem;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.5);
-            z-index: 1000;
-        }
-        
-        .mobile-dropdown-menu a {
-            padding: 0.75rem 0;
-            text-align: center;
-            font-weight: 600;
-            font-size: 1.1rem;
-            border-bottom: 1px solid rgba(255,255,255,0.08);
-            transition: color 0.2s;
-        }
-        
-        .mobile-dropdown-menu a:last-child {
-            border-bottom: none;
-        }
-        
-        .mobile-dropdown-menu a:hover {
-            color: #60a5fa;
-        }
-        
-        /* When mobile menu is open */
-        .mobile-dropdown-menu.open {
-            display: flex;
-        }
-        
-        /* Desktop menu links - horizontal row */
-        .desktop-nav-links {
-            display: flex;
-            gap: 2rem;
-            align-items: center;
-        }
-        
-        .desktop-nav-links a {
-            font-weight: 700;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            transition: color 0.2s;
-        }
-        
-        .desktop-nav-links a:hover {
-            color: #3b82f6;
-        }
-        
-        /* Responsive breakpoint */
-        @media (min-width: 768px) {
-            .desktop-menu-container {
-                display: block;
-            }
-            .mobile-controls {
-                display: none !important;
-            }
-            .mobile-dropdown-menu {
-                display: none !important;
-            }
-        }
-        
-        /* Chatbot Styles */
+
+        /* ========== CHATBOT STYLES ========== */
         #aiden-ui { transform: translateY(120%); transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1); visibility: hidden; z-index: 1000; right: 8px; left: auto; }
         #aiden-ui.active { transform: translateY(0); visibility: visible; }
         .pulse { animation: pulse-animation 2s infinite; }
         @keyframes pulse-animation { 0% { box-shadow: 0 0 0 0px rgba(59, 130, 246, 0.4); } 100% { box-shadow: 0 0 0 20px rgba(59, 130, 246, 0); } }
-        
-        /* Form Modal Styles (full multi-step) */
+
+        /* ========== FORM MODAL STYLES ========== */
         .form-modal-overlay {
             position: fixed; inset: 0; background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(8px); z-index: 2000;
             display: none; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s ease;
@@ -135,125 +79,33 @@
         .form-modal-content {
             width: 90%; max-width: 800px; max-height: 90vh; overflow-y: auto; padding: 2rem;
             border-radius: 1.5rem; background: #0a0a0a; border: 1px solid rgba(255, 255, 255, 0.1);
-            transform: scale(0.95); transition: transform 0.3s ease;
+            transform: scale(0.95); transition: transform 0.3s ease; position: relative;
         }
         .form-modal-overlay.active .form-modal-content { transform: scale(1); }
         .close-btn { position: absolute; top: 20px; right: 20px; background: none; border: none; color: #aaa; font-size: 2rem; cursor: pointer; }
         .close-btn:hover { color: #fff; }
-        .progress-bar {
-            display: flex; justify-content: space-between; margin-bottom: 2rem; max-width: 400px;
-            margin-left: auto; margin-right: auto; position: relative;
-        }
-        .progress-bar::before {
-            content: ''; position: absolute; top: 50%; left: 0; right: 0; height: 2px;
-            background-color: rgba(255,255,255,0.2); transform: translateY(-50%); z-index: -1;
-        }
-        .progress-step {
-            width: 35px; height: 35px; border-radius: 50%; background: rgba(255,255,255,0.1);
-            border: 2px solid rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center;
-            color: #fff; transition: all 0.3s;
-        }
-        .progress-step.active {
-            background: linear-gradient(135deg, #3B82F6, #22C55E);
-            border-color: transparent; transform: scale(1.1);
-        }
+        .progress-bar { display: flex; justify-content: space-between; margin-bottom: 2rem; max-width: 400px; margin-left: auto; margin-right: auto; position: relative; }
+        .progress-bar::before { content: ''; position: absolute; top: 50%; left: 0; right: 0; height: 2px; background-color: rgba(255,255,255,0.2); transform: translateY(-50%); z-index: -1; }
+        .progress-step { width: 35px; height: 35px; border-radius: 50%; background: rgba(255,255,255,0.1); border: 2px solid rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center; color: #fff; transition: all 0.3s; }
+        .progress-step.active { background: linear-gradient(135deg, #3B82F6, #22C55E); border-color: transparent; transform: scale(1.1); }
         .form-step { display: none; }
         .form-step.active { display: block; animation: fadeIn 0.5s; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        input, textarea, select {
-            width: 100%; padding: 0.75rem; margin-bottom: 1rem; background: rgba(0,0,0,0.3);
-            border: 1px solid rgba(255,255,255,0.1); border-radius: 0.5rem; color: #fff;
-        }
-        input:focus, textarea:focus, select:focus { outline: none; border-color: #3B82F6; }
+        input, textarea, select { width: 100%; padding: 0.75rem; margin-bottom: 1rem; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); border-radius: 0.5rem; color: #fff; }
         .checkbox-group { display: grid; grid-template-columns: repeat(2,1fr); gap: 0.75rem; }
-        .checkbox-item {
-            background: rgba(255,255,255,0.03); padding: 0.75rem; border-radius: 0.5rem;
-            display: flex; align-items: center; cursor: pointer;
-        }
+        .checkbox-item { background: rgba(255,255,255,0.03); padding: 0.75rem; border-radius: 0.5rem; display: flex; align-items: center; cursor: pointer; }
         .checkbox-item:hover { background: rgba(59,130,246,0.1); }
         .checkbox-item input[type="checkbox"] { display: none; }
-        .checkbox-item .checkmark {
-            width: 20px; height: 20px; border: 2px solid #3B82F6; border-radius: 4px;
-            margin-right: 10px; display: flex; align-items: center; justify-content: center;
-        }
+        .checkbox-item .checkmark { width: 20px; height: 20px; border: 2px solid #3B82F6; border-radius: 4px; margin-right: 10px; display: flex; align-items: center; justify-content: center; }
         .checkbox-item .checkmark svg { display: none; width: 14px; height: 14px; }
-        .checkbox-item input[type="checkbox"]:checked + .checkmark {
-            background: linear-gradient(135deg, #3B82F6, #22C55E);
-        }
+        .checkbox-item input[type="checkbox"]:checked + .checkmark { background: linear-gradient(135deg, #3B82F6, #22C55E); }
         .checkbox-item input[type="checkbox"]:checked + .checkmark svg { display: block; }
         .slider-output { text-align: center; font-weight: bold; color: #22C55E; }
         .form-navigation { display: flex; justify-content: space-between; margin-top: 2rem; }
-        .nav-btn {
-            padding: 0.75rem 2rem; background: linear-gradient(135deg, #3B82F6, #2563EB);
-            color: white; border: none; border-radius: 0.5rem; font-weight: bold; cursor: pointer;
-            transition: all 0.3s;
-        }
+        .nav-btn { padding: 0.75rem 2rem; background: linear-gradient(135deg, #3B82F6, #2563EB); color: white; border: none; border-radius: 0.5rem; font-weight: bold; cursor: pointer; transition: all 0.3s; }
         .nav-btn.prev { background: rgba(255,255,255,0.1); }
         .nav-btn:hover { opacity: 0.9; transform: translateY(-2px); }
-        
-        .comparison-table { border-collapse: separate; border-spacing: 0 8px; width: 100%; }
-        .comparison-table th { background: rgba(59,130,246,0.1); padding: 1rem; font-weight: 700; }
-        .comparison-table td { padding: 1rem; background: rgba(255,255,255,0.02); border-bottom: 1px solid rgba(255,255,255,0.05); }
-        .comparison-table tr:hover td { background: rgba(59,130,246,0.05); }
-        @media (max-width: 640px) { .checkbox-group { grid-template-columns: 1fr; } }
-        
-        /* Custom styling for add-on cards */
-        .addon-card {
-            background: rgba(255,255,255,0.02);
-            border: 1px solid rgba(255,255,255,0.05);
-            border-radius: 1rem;
-            padding: 1.5rem;
-            transition: all 0.3s ease;
-            height: 100%;
-        }
-        .addon-card:hover {
-            border-color: #3B82F6;
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(59,130,246,0.1);
-        }
-        .addon-title {
-            font-size: 1.25rem;
-            font-weight: bold;
-            margin-bottom: 0.75rem;
-            color: #3B82F6;
-        }
-        .addon-price {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #22C55E;
-            margin-bottom: 1rem;
-        }
-        .addon-price span {
-            font-size: 1rem;
-            font-weight: normal;
-            color: #9CA3AF;
-        }
-        .addon-desc {
-            color: #9CA3AF;
-            font-size: 0.95rem;
-            line-height: 1.6;
-        }
-        .addon-desc strong {
-            color: white;
-        }
-        /* Annual offer badge */
-        .annual-offer {
-            background: rgba(34, 197, 94, 0.1);
-            border: 1px solid rgba(34, 197, 94, 0.3);
-            border-radius: 0.5rem;
-            padding: 0.5rem 0.75rem;
-            margin-top: 0.5rem;
-            font-size: 0.9rem;
-        }
-        /* Currency note - shows OMR by default */
-        .currency-note {
-            font-size: 0.8rem;
-            color: #9CA3AF;
-            margin-top: 0.25rem;
-        }
-        .hidden-currency {
-            display: none;
-        }
+    
     </style>
 
     <!-- Canonical URL -->
@@ -293,31 +145,30 @@
         "https://www.youtube.com/@AI_for_Managers",
         "https://www.linkedin.com/in/nahid-aby"
       ]
-    }
+
     </script>
 
     <style>
         .group-submenu:hover .submenu-content {
             opacity: 1;
             visibility: visible;
-        }
+
     </style>
 </head>
 <body>
 
 <!-- ======================= Navigation ======================= -->
-<nav class="flex justify-between items-center px-6 md:px-12 py-8 fixed w-full z-50 glass bg-black/30">
+    <nav class="flex justify-between items-center px-6 md:px-12 py-8 fixed w-full z-50 glass bg-black/30">
         <a href="en.html" class="font-extrabold text-3xl md:text-4xl tracking-tighter">
             <span class="text-blue-500">A</span><span class="text-red-500">I</span> <span class="text-white text-2xl md:text-3xl">Profit Lab</span>
         </a>
         
         <!-- Desktop Menu -->
         <div class="hidden md:flex items-center gap-8">
-            <div class="nav-links flex gap-8 text-sm font-bold uppercase items-center">
-                <a href="en.html" class="hover:text-blue-400 transition">Home</a>
-                <a href="services-en.html" class="hover:text-blue-400 transition">Services</a>
-                <a href="process-en.html" class="hover:text-blue-400 transition">How It Works</a>
-                
+            <div class="desktop-nav-links">
+                <a href="en.html">Home</a>
+                <a href="services-en.html">Services</a>
+                <a href="process-en.html">How It Works</a>
                 
                 <!-- Resources Dropdown -->
                 <div class="relative group cursor-pointer h-full flex items-center">
@@ -325,8 +176,8 @@
                         Resources
                         <svg class="w-4 h-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                     </span>
-                    <div class="absolute top-8 left-1/2 -translate-x-1/2 w-48 bg-[#0a0a0a] border border-gray-800 rounded-xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 flex flex-col z-50">
-                                                <div class="relative group-submenu">
+                    <div class="absolute top-full left-1/2 -translate-x-1/2 w-48 bg-[#0a0a0a] border border-gray-800 rounded-xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 flex flex-col z-50">
+                        <div class="relative group-submenu">
                             <div class="px-5 py-4 hover:bg-gray-800 hover:text-blue-400 border-b border-gray-800 transition flex justify-between items-center cursor-pointer text-[15px] font-bold tracking-wide">
                                 Demo
                                 <svg class="w-4 h-4 transform -rotate-90" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
@@ -347,47 +198,41 @@
                             </div>
                         </div>
                         <a href="blog.html" class="px-5 py-4 hover:bg-gray-800 hover:text-blue-400 border-b border-gray-800 transition text-[15px] font-bold tracking-wide">Articles</a>
-                        <a href="#" class="px-5 py-4 hover:bg-gray-800 hover:text-blue-400 border-b border-gray-800 transition text-[15px] font-bold tracking-wide">YouTube</a>
+                        <a href="https://www.youtube.com/@AI_for_Managers" class="px-5 py-4 hover:bg-gray-800 hover:text-blue-400 border-b border-gray-800 transition text-[15px] font-bold tracking-wide">YouTube</a>
                         <a href="about-en.html" class="px-5 py-4 hover:bg-gray-800 hover:text-blue-400 transition text-[15px] font-bold tracking-wide">About</a>
                     </div>
                 </div>
                 
-                <a href="contact-en.html" class="hover:text-blue-400 transition">Contact</a>
+                <a href="contact-en.html">Contact</a>
             </div>
-            <!-- Language Switch Button - INSIDE desktop menu -->
+            <!-- Language Switch -->
             <a href="index.html" class="bg-blue-600/20 hover:bg-blue-600/30 text-white px-4 py-2 rounded-full text-sm font-bold transition border border-blue-500/30">
                 العربية
             </a>
         </div>
         
-        <!-- Mobile Menu Button and Language -->
-        <div class="flex items-center gap-4 md:hidden">
+        <!-- Mobile Controls -->
+        <div class="mobile-controls md:hidden">
             <a href="index.html" class="bg-blue-600/20 text-white px-3 py-1 rounded-full text-xs font-bold border border-blue-500/30">
                 عربي
             </a>
-            <button class="mobile-nav-toggle text-white text-2xl focus:outline-none">☰</button>
+            <button id="mobileMenuToggle" class="text-white text-3xl focus:outline-none">☰</button>
         </div>
         
-        <!-- Mobile Menu Dropdown -->
-        <div class="nav-links mobile-menu">
+        <!-- Mobile Dropdown Menu -->
+        <div id="mobileDropdownMenu" class="mobile-dropdown-menu">
             <a href="en.html">Home</a>
             <a href="services-en.html">Services</a>
             <a href="process-en.html">How It Works</a>
             
-            
-            
-
             <div class="flex flex-col text-center w-full py-2 bg-black/40 rounded-lg">
                 <span class="text-xs text-gray-500 font-bold uppercase tracking-widest mb-2">Resources</span>
-                                <a href="#" class="py-2 text-[15px] font-bold text-gray-300 border-none">Demo:</a>
-                <a href="Customized_CEO_Dashboard_demo.html" class="py-1.5 text-sm text-gray-400 border-none pl-4">→ CEO Dashboard</a>
-                <a href="whatsapp_receptionist_demo.html" class="py-1.5 text-sm text-gray-400 border-none pl-4">→ WhatsApp Receptionist</a>
-                <a href="#" class="py-2 text-[15px] font-bold text-gray-300 border-none mt-1">Simulators:</a>
-                <a href="Missed-Call Simulator.html" class="py-1.5 text-sm text-gray-400 border-none pl-4">→ Missed-Call Simulator</a>
-                <a href="Campaign_ROI_Simulator.html" class="py-1.5 text-sm text-gray-400 border-none pl-4">→ Campaign ROI Simulator</a>
-                <a href="blog.html" class="py-1.5 text-sm text-gray-300 border-none">Articles</a>
-                <a href="#" class="py-1.5 text-sm text-gray-300 border-none">YouTube</a>
-                <a href="about-en.html" class="py-1.5 text-sm text-gray-300 border-none">About</a>
+                <a href="Customized_CEO_Dashboard_demo.html" class="py-2 text-sm text-gray-300 border-none">CEO Dashboard</a>
+                <a href="whatsapp_receptionist_demo.html" class="py-2 text-sm text-gray-300 border-none">WhatsApp Receptionist</a>
+                <a href="Missed-Call Simulator.html" class="py-2 text-sm text-gray-300 border-none">Missed-Call Simulator</a>
+                <a href="Campaign_ROI_Simulator.html" class="py-2 text-sm text-gray-300 border-none">Campaign ROI Simulator</a>
+                <a href="blog.html" class="py-2 text-sm text-gray-300 border-none">Articles</a>
+                <a href="about-en.html" class="py-2 text-sm text-gray-300 border-none">About</a>
             </div>
             
             <a href="contact-en.html">Contact</a>
@@ -710,30 +555,6 @@
 
     <!-- ======================= SCRIPT ======================= -->
     <script>
-        // FIXED: MOBILE MENU TOGGLE (Unified System)
-        const mobileToggleBtn = document.getElementById('mobileMenuToggle');
-        const mobileMenuDropdown = document.getElementById('mobileDropdownMenu');
-        
-        if (mobileToggleBtn && mobileMenuDropdown) {
-            mobileToggleBtn.addEventListener('click', function(e) {
-                e.stopPropagation();
-                mobileMenuDropdown.classList.toggle('open');
-            });
-            
-            // Close menu when clicking any link inside
-            mobileMenuDropdown.querySelectorAll('a').forEach(link => {
-                link.addEventListener('click', () => {
-                    mobileMenuDropdown.classList.remove('open');
-                });
-            });
-            
-            // Close if user clicks outside
-            document.addEventListener('click', function(event) {
-                if (!mobileToggleBtn.contains(event.target) && !mobileMenuDropdown.contains(event.target)) {
-                    mobileMenuDropdown.classList.remove('open');
-                }
-            });
-        }
 
         // Multi-step form logic (preserved)
         const modal = document.getElementById('auditModal');
@@ -756,5 +577,34 @@
         function toggleChat(){ document.getElementById('aiden-ui').classList.toggle('active'); }
         window.onload=async()=>{ await detectCountry(); if(!sessionStorage.getItem('aidenPopped')){ setTimeout(()=>{ if(!document.getElementById('aiden-ui').classList.contains('active')){ toggleChat(); sessionStorage.setItem('aidenPopped','true'); } },10000); } };
     </script>
-</body>
+
+    <script>
+        // FIXED: MOBILE MENU TOGGLE (Unified System)
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileToggleBtn = document.getElementById('mobileMenuToggle');
+            const mobileMenuDropdown = document.getElementById('mobileDropdownMenu');
+            
+            if (mobileToggleBtn && mobileMenuDropdown) {
+                mobileToggleBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    mobileMenuDropdown.classList.toggle('open');
+                });
+                
+                // Close menu when clicking any link inside
+                mobileMenuDropdown.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', () => {
+                        mobileMenuDropdown.classList.remove('open');
+                    });
+                });
+                
+                // Close if user clicks outside
+                document.addEventListener('click', function(event) {
+                    if (!mobileToggleBtn.contains(event.target) && !mobileMenuDropdown.contains(event.target)) {
+                        mobileMenuDropdown.classList.remove('open');
+
+                });
+
+        });
+    </script>
+    </body>
 </html>
