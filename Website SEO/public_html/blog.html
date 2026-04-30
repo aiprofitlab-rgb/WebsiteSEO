@@ -22,6 +22,37 @@
         .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.05); }
         .glass-card { background: rgba(255, 255, 255, 0.02); backdrop-filter: blur(8px); border: 1px solid rgba(255, 255, 255, 0.05); transition: all 0.3s ease; }
         .glass-card:hover { border-color: #3B82F6; transform: translateY(-5px); box-shadow: 0 20px 40px rgba(59, 130, 246, 0.1); }
+        
+        /* ========== FIXED: UNIFIED NAVIGATION STYLES ========== */
+        .desktop-menu-container { display: none; }
+        .mobile-controls { display: flex; align-items: center; gap: 1rem; }
+        .mobile-dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background-color: #0a0a0a;
+            padding: 1.25rem;
+            flex-direction: column;
+            gap: 1rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.5);
+            z-index: 1000;
+        }
+        .mobile-dropdown-menu a { padding: 0.75rem 0; text-align: center; font-weight: 600; font-size: 1.1rem; border-bottom: 1px solid rgba(255,255,255,0.08); transition: color 0.2s; }
+        .mobile-dropdown-menu a:last-child { border-bottom: none; }
+        .mobile-dropdown-menu a:hover { color: #60a5fa; }
+        .mobile-dropdown-menu.open { display: flex; }
+        .desktop-nav-links { display: flex; gap: 2rem; align-items: center; }
+        .desktop-nav-links a { font-weight: 700; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.5px; transition: color 0.2s; }
+        .desktop-nav-links a:hover { color: #3b82f6; }
+        @media (min-width: 768px) {
+            .desktop-menu-container { display: block; }
+            .mobile-controls { display: none !important; }
+            .mobile-dropdown-menu { display: none !important; }
+        }
     </style>
 
     <!-- Canonical URL -->
@@ -72,18 +103,18 @@
     </style>
 </head>
 <body class="antialiased">
-    <nav class="flex justify-between items-center px-6 md:px-12 py-8 fixed w-full z-50 glass bg-black/30">
+    <nav class="flex justify-between items-center px-6 md:px-12 py-6 fixed w-full z-50 glass bg-black/40 backdrop-blur-md">
+        <!-- Logo -->
         <a href="en.html" class="font-extrabold text-3xl md:text-4xl tracking-tighter">
             <span class="text-blue-500">A</span><span class="text-red-500">I</span> <span class="text-white text-2xl md:text-3xl">Profit Lab</span>
         </a>
         
-        <!-- Desktop Menu -->
-        <div class="hidden md:flex items-center gap-8">
-            <div class="nav-links flex gap-8 text-sm font-bold uppercase items-center">
+        <!-- DESKTOP MENU -->
+        <div class="desktop-menu-container">
+            <div class="desktop-nav-links flex items-center gap-6 text-sm font-bold">
                 <a href="en.html" class="hover:text-blue-400 transition">Home</a>
                 <a href="services-en.html" class="hover:text-blue-400 transition">Services</a>
                 <a href="process-en.html" class="hover:text-blue-400 transition">How It Works</a>
-                
                 
                 <!-- Resources Dropdown -->
                 <div class="relative group cursor-pointer h-full flex items-center">
@@ -92,7 +123,7 @@
                         <svg class="w-4 h-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                     </span>
                     <div class="absolute top-8 left-1/2 -translate-x-1/2 w-48 bg-[#0a0a0a] border border-gray-800 rounded-xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 flex flex-col z-50">
-                                                <div class="relative group-submenu">
+                        <div class="relative group-submenu">
                             <div class="px-5 py-4 hover:bg-gray-800 hover:text-blue-400 border-b border-gray-800 transition flex justify-between items-center cursor-pointer text-[15px] font-bold tracking-wide">
                                 Demo
                                 <svg class="w-4 h-4 transform -rotate-90" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
@@ -113,54 +144,51 @@
                             </div>
                         </div>
                         <a href="blog.html" class="px-5 py-4 hover:bg-gray-800 hover:text-blue-400 border-b border-gray-800 transition text-[15px] font-bold tracking-wide">Articles</a>
-                        <a href="#" class="px-5 py-4 hover:bg-gray-800 hover:text-blue-400 border-b border-gray-800 transition text-[15px] font-bold tracking-wide">YouTube</a>
+                        <a href="academy.html" class="px-5 py-4 hover:bg-gray-800 hover:text-blue-400 border-b border-gray-800 transition text-[15px] font-bold tracking-wide">YouTube</a>
                         <a href="about-en.html" class="px-5 py-4 hover:bg-gray-800 hover:text-blue-400 transition text-[15px] font-bold tracking-wide">About</a>
                     </div>
                 </div>
                 
                 <a href="contact-en.html" class="hover:text-blue-400 transition">Contact</a>
+                <a href="index.html" class="bg-blue-600/30 hover:bg-blue-600/50 text-white px-5 py-2 rounded-full text-sm font-bold transition border border-blue-500/40 shadow-sm ml-2">
+                    العربية
+                </a>
             </div>
-            <!-- Language Switch Button - INSIDE desktop menu -->
-            <a href="index.html" class="bg-blue-600/20 hover:bg-blue-600/30 text-white px-4 py-2 rounded-full text-sm font-bold transition border border-blue-500/30">
-                العربية
-            </a>
         </div>
         
-        <!-- Mobile Menu Button and Language -->
-        <div class="flex items-center gap-4 md:hidden">
-            <a href="index.html" class="bg-blue-600/20 text-white px-3 py-1 rounded-full text-xs font-bold border border-blue-500/30">
-                عربي
+        <!-- MOBILE CONTROLS -->
+        <div class="mobile-controls">
+            <a href="index.html" class="bg-blue-600/30 text-white px-3 py-1.5 rounded-full text-sm font-bold border border-blue-500/40">
+                AR
             </a>
-            <button class="mobile-nav-toggle text-white text-2xl focus:outline-none">☰</button>
+            <button id="mobileMenuToggle" class="text-white text-3xl focus:outline-none leading-none">
+                ☰
+            </button>
         </div>
         
-        <!-- Mobile Menu Dropdown -->
-        <div class="nav-links mobile-menu">
+        <!-- MOBILE DROPDOWN MENU -->
+        <div id="mobileDropdownMenu" class="mobile-dropdown-menu">
             <a href="en.html">Home</a>
             <a href="services-en.html">Services</a>
             <a href="process-en.html">How It Works</a>
             
-            
-            
-
             <div class="flex flex-col text-center w-full py-2 bg-black/40 rounded-lg">
                 <span class="text-xs text-gray-500 font-bold uppercase tracking-widest mb-2">Resources</span>
-                                <a href="#" class="py-2 text-[15px] font-bold text-gray-300 border-none">Demo:</a>
+                <a href="#" class="py-2 text-[15px] font-bold text-gray-300 border-none">Demo:</a>
                 <a href="Customized_CEO_Dashboard_demo.html" class="py-1.5 text-sm text-gray-400 border-none pl-4">→ CEO Dashboard</a>
                 <a href="whatsapp_receptionist_demo.html" class="py-1.5 text-sm text-gray-400 border-none pl-4">→ WhatsApp Receptionist</a>
                 <a href="#" class="py-2 text-[15px] font-bold text-gray-300 border-none mt-1">Simulators:</a>
                 <a href="Missed-Call Simulator.html" class="py-1.5 text-sm text-gray-400 border-none pl-4">→ Missed-Call Simulator</a>
                 <a href="Campaign_ROI_Simulator.html" class="py-1.5 text-sm text-gray-400 border-none pl-4">→ Campaign ROI Simulator</a>
                 <a href="blog.html" class="py-1.5 text-sm text-gray-300 border-none">Articles</a>
-                <a href="#" class="py-1.5 text-sm text-gray-300 border-none">YouTube</a>
+                <a href="academy.html" class="py-1.5 text-sm text-gray-300 border-none">YouTube</a>
                 <a href="about-en.html" class="py-1.5 text-sm text-gray-300 border-none">About</a>
             </div>
             
             <a href="contact-en.html">Contact</a>
-            <a href="index.html" style="color: #3B82F6; font-weight: bold;">العربية</a>
         </div>
     </nav>
-    <main class="max-w-6xl mx-auto px-4 py-16">
+    <main class="max-w-6xl mx-auto px-4 pt-32 pb-16">
         <h1 class="text-4xl md:text-6xl font-extrabold text-center mb-16">Latest <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-cyan-400">Articles & News</span></h1>
         
         <!-- Filter Bar -->
@@ -176,6 +204,19 @@
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+            <a href="blog/en/2026-04-30-ai-insurance-oman-roi-costs.html" class="article-card glass-card rounded-2xl overflow-hidden block relative group" data-category="cat_2">
+                <img src="blog/images/oman_ai_insurance_hero.png" alt="AI in Omani Insurance: How Automation Increases ROI and Reduces Costs" class="w-full h-48 object-cover">
+                <div class="p-6">
+                    <div class="flex justify-between items-center mb-3">
+                        <span class="bg-blue-500/10 text-blue-400 text-xs px-3 py-1 rounded-full border border-blue-500/20">Business ROI</span>
+                        <p class="text-sm text-gray-500 font-semibold">2026-04-30</p>
+                    </div>
+                    <h2 class="text-xl font-bold mb-3 text-white group-hover:text-blue-400 transition">AI in Omani Insurance: How Automation Increases ROI and Reduces Costs</h2>
+                    <p class="text-gray-400 line-clamp-3 mb-4">Discover how AI is transforming the Omani insurance sector. Learn about automated claims, risk assessment, and ROI metrics for local insurers under Oman Vision 2040.</p>
+                    <span class="text-blue-500 font-bold text-sm inline-block">Read More →</span>
+                </div>
+            </a>
 
             <a href="blog/en/2026-04-28-ai-automation-oman-2025-guide.html" class="article-card glass-card rounded-2xl overflow-hidden block relative group" data-category="cat_2">
                 <img src="blog/images/oman_ai_automation_2025_hero.png" alt="AI Automation in Oman: 2025 Guide for Business Owners" class="w-full h-48 object-cover">
@@ -545,6 +586,23 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
+            // FIXED: MOBILE MENU TOGGLE
+            const mobileToggleBtn = document.getElementById('mobileMenuToggle');
+            const mobileMenuDropdown = document.getElementById('mobileDropdownMenu');
+            
+            if (mobileToggleBtn && mobileMenuDropdown) {
+                mobileToggleBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    mobileMenuDropdown.classList.toggle('open');
+                });
+                
+                document.addEventListener('click', function(event) {
+                    if (!mobileToggleBtn.contains(event.target) && !mobileMenuDropdown.contains(event.target)) {
+                        mobileMenuDropdown.classList.remove('open');
+                    }
+                });
+            }
+
             const buttons = document.querySelectorAll("#filter-buttons button");
             const cards = document.querySelectorAll(".article-card");
 
