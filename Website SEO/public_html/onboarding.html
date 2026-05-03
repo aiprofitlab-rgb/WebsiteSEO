@@ -1014,6 +1014,8 @@
                 successLooks: document.getElementById('successLooks')?.value || '',
                 ongoingSupport: getRadio('supportGroup'),
                 timeline: document.getElementById('timeline')?.value || '',
+                source: Array.from(document.querySelectorAll('input[name="source"]:checked')).map(cb => cb.value).join(', '),
+                otherSource: document.getElementById('otherSource')?.value || '',
                 budget: document.getElementById('budget')?.value || '',
                 extraNotes: document.getElementById('extraNotes')?.value || ''
             };

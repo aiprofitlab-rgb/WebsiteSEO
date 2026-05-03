@@ -635,6 +635,7 @@
                     </select>
                     
                     <input type="text" id="keyQuestion" placeholder="أي سؤال محدد لمكالمتنا؟ *" required>
+<label style="margin-top: 1rem; display: block; font-weight: bold;">كيف سمعت عنا؟</label><div class="checkbox-group" style="margin-bottom: 1rem;"><label class="checkbox-item"><input type="checkbox" name="source" value="LinkedIn"><span class="checkmark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M5 13l4 4L19 7"/></svg></span>لينكد إن (LinkedIn)</label><label class="checkbox-item"><input type="checkbox" name="source" value="YouTube"><span class="checkmark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M5 13l4 4L19 7"/></svg></span>يوتيوب (YouTube)</label><label class="checkbox-item"><input type="checkbox" name="source" value="Google Search"><span class="checkmark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M5 13l4 4L19 7"/></svg></span>بحث جوجل</label><label class="checkbox-item"><input type="checkbox" name="source" value="Chat GPT"><span class="checkmark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M5 13l4 4L19 7"/></svg></span>شات جي بي تي (Chat GPT)</label><label class="checkbox-item"><input type="checkbox" name="source" value="Gemini"><span class="checkmark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M5 13l4 4L19 7"/></svg></span>جيميني (Gemini)</label><label class="checkbox-item"><input type="checkbox" name="source" value="Claude"><span class="checkmark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M5 13l4 4L19 7"/></svg></span>كلود (Claude)</label><label class="checkbox-item"><input type="checkbox" name="source" value="Perplexity"><span class="checkmark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M5 13l4 4L19 7"/></svg></span>بيربلكسيتي (Perplexity)</label><label class="checkbox-item"><input type="checkbox" name="source" value="Word of mouth"><span class="checkmark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M5 13l4 4L19 7"/></svg></span>عن طريق المعارف</label></div><label for="otherSource">أخرى (يرجى التحديد)</label><input type="text" id="otherSource" name="otherSource">
                     
                     <div class="form-navigation">
                         <button type="button" class="nav-btn prev">→ السابق</button>
@@ -760,6 +761,8 @@
                 pastExperience: document.getElementById('pastExperience')?.value || '',
                 aiComfort: document.getElementById('aiComfort')?.value || '',
                 processes: Array.from(document.querySelectorAll('input[name="process"]:checked')).map(cb => cb.value).join(', '),
+                source: Array.from(document.querySelectorAll('input[name="source"]:checked')).map(cb => cb.value).join(', '),
+                otherSource: document.getElementById('otherSource')?.value || '',
                 budget: document.getElementById('budget')?.value || '',
                 timeline: document.getElementById('timeline')?.value || '',
                 keyQuestion: document.getElementById('keyQuestion')?.value || '',
