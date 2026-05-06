@@ -256,6 +256,17 @@
     <main class="max-w-6xl mx-auto px-4 pt-32 pb-16">
         <h1 class="text-4xl md:text-6xl font-extrabold text-center mb-16">أحدث <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-cyan-400">المقالات والأخبار</span></h1>
         
+        <!-- Search Bar -->
+        <div class="max-w-2xl mx-auto mb-12 relative">
+            <div class="relative group">
+                <input type="text" id="blogSearch" placeholder="البحث عن المقالات بالكلمات المفتاحية (مثال: الاستثمار، عمان، استراتيجية)..." 
+                    class="w-full bg-white/5 border border-white/10 rounded-2xl py-4 pr-12 pl-6 text-white text-right placeholder-gray-500 focus:outline-none focus:border-blue-500/50 focus:ring-4 focus:ring-blue-500/10 transition-all duration-300 glass">
+                <div class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 group-focus-within:text-blue-400 transition-colors">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                </div>
+            </div>
+        </div>
+
         <!-- Filter Bar -->
         <div class="flex flex-wrap justify-center gap-3 mb-12" id="filter-buttons">
             <button class="glass px-5 py-2 rounded-full text-blue-400 font-bold border-blue-500/50 hover:bg-blue-500/10 transition active-filter" data-filter="all">
@@ -732,33 +743,48 @@
         document.addEventListener("DOMContentLoaded", function() {
             const buttons = document.querySelectorAll("#filter-buttons button");
             const cards = document.querySelectorAll(".article-card");
+            const searchInput = document.getElementById("blogSearch");
+            
+            let activeFilter = "all";
+            let searchTerm = "";
+
+            function filterArticles() {
+                cards.forEach(card => {
+                    const title = card.querySelector("h2").innerText.toLowerCase();
+                    const description = card.querySelector("p").innerText.toLowerCase();
+                    const category = card.getAttribute("data-category");
+                    
+                    const matchesSearch = title.includes(searchTerm) || description.includes(searchTerm);
+                    const matchesCategory = activeFilter === "all" || category === activeFilter;
+
+                    if (matchesSearch && matchesCategory) {
+                        card.style.display = "block";
+                        card.style.opacity = "1";
+                    } else {
+                        card.style.display = "none";
+                        card.style.opacity = "0";
+                    }
+                });
+            }
 
             buttons.forEach(btn => {
                 btn.addEventListener("click", () => {
-                    // Reset all buttons to default state
                     buttons.forEach(b => {
                         b.classList.remove("text-blue-400", "font-bold", "border-blue-500/50");
                         b.classList.add("text-gray-400", "border-transparent");
                     });
                     
-                    // Highlight active button
                     btn.classList.add("text-blue-400", "font-bold", "border-blue-500/50");
                     btn.classList.remove("text-gray-400", "border-transparent");
 
-                    const filter = btn.getAttribute("data-filter");
-                    
-                    // Filter cards
-                    cards.forEach(card => {
-                        if(filter === "all" || card.getAttribute("data-category") === filter) {
-                            card.style.display = "block";
-                            // small animation effect
-                            card.style.opacity = "0";
-                            setTimeout(() => { card.style.transition = "opacity 0.3s ease"; card.style.opacity = "1"; }, 50);
-                        } else {
-                            card.style.display = "none";
-
-                    });
+                    activeFilter = btn.getAttribute("data-filter");
+                    filterArticles();
                 });
+            });
+
+            searchInput.addEventListener("input", (e) => {
+                searchTerm = e.target.value.toLowerCase();
+                filterArticles();
             });
         });
     </script>
