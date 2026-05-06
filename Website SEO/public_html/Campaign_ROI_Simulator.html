@@ -1,0 +1,1196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Campaign Simulator — Business Marketing Suite</title>
+
+<!-- SEO & GEO Tags -->
+<meta name="description" content="Use the AI Profit Lab Campaign Simulator to forecast and optimize your marketing budget, channels, and ROI. Tailored for businesses in Oman and the GCC.">
+<meta name="keywords" content="Campaign Simulator, Marketing ROI Simulator, Business Marketing Suite, AI Profit Lab, Oman Marketing, GCC Campaign ROI">
+<meta property="og:title" content="Campaign Simulator — Business Marketing Suite | AI Profit Lab">
+<meta property="og:description" content="Use the AI Profit Lab Campaign Simulator to forecast and optimize your marketing budget, channels, and ROI. Tailored for businesses in Oman and the GCC.">
+<meta property="og:url" content="https://aiprofitlab.io/Campaign_ROI_Simulator.html">
+<meta property="og:type" content="website">
+
+<!-- Local Business Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "AI Profit Lab",
+  "url": "https://aiprofitlab.io",
+  "logo": "https://aiprofitlab.io/logo.webp",
+  "image": "https://aiprofitlab.io/Nahid_Business_Banner.png",
+  "description": "Helping non-technical managers leverage AI, automation, and technology to increase ROI and business efficiency.",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Al Seeb",
+    "addressLocality": "Muscat",
+    "addressRegion": "Muscat Governorate",
+    "postalCode": "000",
+    "addressCountry": "OM"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 23.635950490475295, 
+    "longitude": 58.207628165445385
+  }
+}
+</script>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2GPVY4Z5KR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-2GPVY4Z5KR');
+</script>
+
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0f0f13;
+    --bg2: #16161d;
+    --bg3: #1e1e28;
+    --surface: #232330;
+    --surface2: #2a2a3a;
+    --border: rgba(255,255,255,0.07);
+    --border2: rgba(255,255,255,0.12);
+    --text: #f0f0f5;
+    --text2: #9999b0;
+    --text3: #5f5f78;
+    --accent: #7c6fff;
+    --accent2: #5b4ef8;
+    --green: #1ecc8b;
+    --amber: #f5a623;
+    --red: #f05c5c;
+    --blue: #4b9cf7;
+    --pink: #d45fa0;
+    --teal: #2dd4bf;
+    --radius: 10px;
+    --radius-lg: 14px;
+    --font: 'DM Sans', sans-serif;
+    --mono: 'DM Mono', monospace;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: var(--font);
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    line-height: 1.6;
+  }
+
+  /* ── Layout ── */
+  .app { display: flex; min-height: 100vh; }
+
+  .sidebar {
+    width: 220px;
+    flex-shrink: 0;
+    background: var(--bg2);
+    border-right: 1px solid var(--border);
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+  }
+
+  .logo {
+    padding: 24px 20px 20px;
+    border-bottom: 1px solid var(--border);
+  }
+  .logo-mark {
+    width: 32px; height: 32px;
+    background: var(--accent);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px; font-weight: 600; color: #fff;
+    margin-bottom: 10px;
+  }
+  .logo-name { font-size: 14px; font-weight: 600; color: var(--text); }
+  .logo-sub  { font-size: 11px; color: var(--text3); }
+
+  .nav { padding: 12px 0; flex: 1; }
+  .nav-label {
+    font-size: 10px; font-weight: 600; letter-spacing: .08em;
+    color: var(--text3); text-transform: uppercase;
+    padding: 8px 20px 4px;
+  }
+  .nav-item {
+    display: flex; align-items: center; gap: 10px;
+    padding: 9px 20px;
+    font-size: 13px; font-weight: 400; color: var(--text2);
+    cursor: pointer; border-left: 2px solid transparent;
+    transition: all .15s;
+  }
+  .nav-item:hover { color: var(--text); background: var(--surface); }
+  .nav-item.active {
+    color: var(--accent); background: rgba(124,111,255,.08);
+    border-left-color: var(--accent); font-weight: 500;
+  }
+  .nav-icon { font-size: 14px; width: 18px; text-align: center; }
+
+  .sidebar-footer {
+    padding: 16px 20px;
+    border-top: 1px solid var(--border);
+    font-size: 11px; color: var(--text3);
+  }
+
+  /* ── Main ── */
+  .main { flex: 1; overflow-y: auto; }
+
+  .topbar {
+    background: var(--bg2);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 28px;
+    display: flex; align-items: center; justify-content: space-between;
+    position: sticky; top: 0; z-index: 10;
+  }
+  .page-title { font-size: 15px; font-weight: 500; }
+  .page-sub   { font-size: 12px; color: var(--text3); }
+  .topbar-actions { display: flex; gap: 8px; }
+
+  .content { padding: 28px; }
+
+  /* ── Sections ── */
+  .section { display: none; }
+  .section.active { display: block; }
+
+  /* ── Metric cards ── */
+  .metrics {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+  .metric {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px;
+  }
+  .metric-label { font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 6px; }
+  .metric-value { font-size: 24px; font-weight: 600; color: var(--text); }
+  .metric-delta { font-size: 11px; margin-top: 4px; }
+  .up   { color: var(--green); }
+  .down { color: var(--red);   }
+
+  /* ── Cards ── */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 20px 22px;
+    margin-bottom: 16px;
+  }
+  .card-header {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 16px;
+  }
+  .card-title {
+    font-size: 11px; font-weight: 600; letter-spacing: .07em;
+    color: var(--text3); text-transform: uppercase;
+  }
+
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+
+  /* ── Form controls ── */
+  label { font-size: 12px; color: var(--text2); display: block; margin-bottom: 5px; }
+  .val  { color: var(--text); font-weight: 500; }
+
+  input[type=range] {
+    width: 100%; accent-color: var(--accent);
+    cursor: pointer; height: 18px;
+  }
+  select, input[type=text], input[type=number] {
+    width: 100%; padding: 8px 11px;
+    border-radius: var(--radius);
+    border: 1px solid var(--border2);
+    background: var(--bg3);
+    color: var(--text); font-size: 13px;
+    font-family: var(--font);
+    outline: none;
+    transition: border-color .15s;
+  }
+  select:focus, input:focus { border-color: var(--accent); }
+  select option { background: var(--bg3); }
+
+  /* ── Buttons ── */
+  .btn {
+    padding: 8px 18px;
+    border-radius: var(--radius);
+    border: 1px solid var(--border2);
+    background: var(--surface);
+    color: var(--text); font-size: 13px; font-weight: 500;
+    cursor: pointer; font-family: var(--font);
+    transition: all .15s;
+  }
+  .btn:hover { background: var(--surface2); border-color: rgba(255,255,255,.2); }
+  .btn-primary {
+    background: var(--accent); border-color: var(--accent); color: #fff;
+  }
+  .btn-primary:hover { background: var(--accent2); border-color: var(--accent2); }
+  .btn-sm { padding: 5px 12px; font-size: 12px; }
+
+  /* ── Progress ── */
+  .progress-track {
+    background: var(--bg3); border-radius: 999px; height: 7px; overflow: hidden; margin: 6px 0;
+  }
+  .progress-fill { height: 100%; border-radius: 999px; transition: width .4s; }
+
+  /* ── Funnel ── */
+  .funnel-step {
+    display: flex; align-items: center; gap: 14px;
+    padding: 11px 0; border-bottom: 1px solid var(--border);
+  }
+  .funnel-step:last-child { border-bottom: none; }
+  .funnel-label { width: 110px; font-size: 13px; color: var(--text2); }
+  .funnel-bar-wrap { flex: 1; background: var(--bg3); border-radius: 999px; height: 22px; overflow: hidden; }
+  .funnel-bar {
+    height: 100%; border-radius: 999px;
+    display: flex; align-items: center; padding-left: 10px;
+    font-size: 11px; color: #fff; font-weight: 600;
+    transition: width .6s cubic-bezier(.4,0,.2,1);
+    min-width: 4px;
+  }
+  .funnel-count { width: 80px; text-align: right; font-size: 13px; font-weight: 600; color: var(--text); }
+  .funnel-pct   { width: 48px; text-align: right; font-size: 11px; color: var(--text3); }
+
+  /* ── Channels ── */
+  .channel-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 10px; margin-bottom: 16px;
+  }
+  .channel-card {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 12px 14px; cursor: pointer;
+    transition: all .15s; position: relative;
+    background: var(--bg3);
+  }
+  .channel-card:hover { border-color: var(--border2); background: var(--surface); }
+  .channel-card.selected { border-color: var(--accent); background: rgba(124,111,255,.1); }
+  .channel-icon  { font-size: 20px; font-weight: 700; margin-bottom: 5px; font-family: var(--mono); }
+  .channel-name  { font-size: 13px; font-weight: 500; color: var(--text); margin-bottom: 2px; }
+  .channel-meta  { font-size: 11px; color: var(--text3); }
+  .ch-check { position: absolute; top: 8px; right: 10px; color: var(--accent); font-size: 13px; display: none; }
+  .channel-card.selected .ch-check { display: block; }
+
+  /* ── Segments ── */
+  .seg-pill {
+    display: inline-block; padding: 4px 12px;
+    border-radius: 999px; font-size: 12px; margin: 3px;
+    border: 1px solid transparent; cursor: pointer;
+    transition: all .15s; font-weight: 500;
+  }
+
+  /* ── Timeline ── */
+  .tl-item { display: flex; gap: 14px; padding-bottom: 16px; }
+  .tl-left  { display: flex; flex-direction: column; align-items: center; }
+  .tl-dot   { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; margin-top: 3px; }
+  .tl-line  { width: 1px; flex: 1; background: var(--border); margin: 6px 0 0 0; }
+  .tl-date  { font-size: 11px; color: var(--text3); margin-bottom: 1px; font-family: var(--mono); }
+  .tl-event { font-size: 13px; color: var(--text2); }
+
+  /* ── A/B ── */
+  .ab-card { border-radius: var(--radius-lg); padding: 18px; border: 1px solid var(--border); background: var(--bg3); }
+  .ab-winner { border-color: var(--green) !important; background: rgba(30,204,139,.06) !important; }
+  .score-bar { height: 5px; border-radius: 999px; background: var(--bg); margin-top: 5px; overflow: hidden; }
+  .score-fill { height: 100%; border-radius: 999px; background: var(--accent); }
+
+  /* ── Log ── */
+  .log {
+    background: var(--bg); border-radius: var(--radius);
+    padding: 12px; font-size: 12px; color: var(--text3);
+    max-height: 130px; overflow-y: auto;
+    font-family: var(--mono); line-height: 1.8;
+    border: 1px solid var(--border);
+  }
+  .log-line { border-bottom: 1px solid var(--border); padding: 2px 0; }
+
+  /* ── Badges ── */
+  .badge {
+    display: inline-block; padding: 3px 9px;
+    border-radius: 999px; font-size: 11px; font-weight: 600;
+  }
+  .badge-green  { background: rgba(30,204,139,.15); color: var(--green); }
+  .badge-amber  { background: rgba(245,166,35,.15);  color: var(--amber); }
+  .badge-blue   { background: rgba(75,156,247,.15);  color: var(--blue); }
+  .badge-red    { background: rgba(240,92,92,.15);   color: var(--red); }
+  .badge-accent { background: rgba(124,111,255,.15); color: var(--accent); }
+
+  /* ── Recommendations ── */
+  .rec {
+    display: flex; align-items: flex-start; gap: 10px;
+    padding: 12px 14px; border-radius: var(--radius);
+    margin-bottom: 8px; font-size: 13px;
+  }
+  .rec-green  { background: rgba(30,204,139,.08);  color: #7ae8c2; border-left: 3px solid var(--green); }
+  .rec-amber  { background: rgba(245,166,35,.08);  color: #f5c97a; border-left: 3px solid var(--amber); }
+  .rec-blue   { background: rgba(75,156,247,.08);  color: #9bc8fb; border-left: 3px solid var(--blue); }
+
+  /* ── Chart wrapper ── */
+  .chart-wrap { position: relative; width: 100%; height: 200px; }
+  .chart-wrap-lg { position: relative; width: 100%; height: 240px; }
+
+  /* ── Custom legend ── */
+  .legend { display: flex; flex-wrap: wrap; gap: 14px; margin-bottom: 10px; }
+  .legend-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text2); }
+  .legend-swatch { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; }
+
+  /* ── Health bars ── */
+  .health-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+  .health-item { }
+  .health-label { font-size: 12px; color: var(--text2); margin-bottom: 4px; }
+  .health-sub   { font-size: 11px; color: var(--text3); margin-top: 2px; }
+
+  /* ── Alloc row ── */
+  .alloc-row {
+    display: flex; align-items: center; gap: 10px; margin-bottom: 8px;
+  }
+  .alloc-name { width: 90px; font-size: 12px; color: var(--text2); }
+  .alloc-bar-wrap { flex: 1; background: var(--bg3); border-radius: 999px; height: 7px; overflow: hidden; }
+  .alloc-bar  { height: 100%; border-radius: 999px; }
+  .alloc-amt  { width: 72px; text-align: right; font-size: 12px; font-weight: 500; color: var(--text); }
+
+  /* ── Stat block ── */
+  .stat-block {
+    background: var(--bg3); border-radius: var(--radius);
+    padding: 12px; text-align: center;
+  }
+  .stat-num { font-size: 28px; font-weight: 600; }
+  .stat-lbl { font-size: 11px; color: var(--text3); margin-top: 2px; }
+
+  /* ── Rate rows ── */
+  .rate-row {
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 13px; padding: 7px 0; border-bottom: 1px solid var(--border);
+  }
+  .rate-row:last-child { border-bottom: none; }
+
+  /* ── Scrollbar ── */
+  ::-webkit-scrollbar { width: 5px; height: 5px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--surface2); border-radius: 99px; }
+
+  @media (max-width: 768px) {
+    .sidebar { display: none; }
+    .grid2, .grid3 { grid-template-columns: 1fr; }
+    .content { padding: 16px; }
+    .health-row { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="app">
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="logo">
+      <div class="logo-mark">C</div>
+      <div class="logo-name">CampaignSim</div>
+      <div class="logo-sub">Marketing Intelligence Suite</div>
+    </div>
+    <nav class="nav">
+      <div class="nav-label">Campaign</div>
+      <div class="nav-item active" onclick="switchTab('setup',this)"><span class="nav-icon">⚙</span>Setup</div>
+      <div class="nav-item" onclick="switchTab('channels',this)"><span class="nav-icon">📡</span>Channels</div>
+      <div class="nav-item" onclick="switchTab('audience',this)"><span class="nav-icon">🎯</span>Audience</div>
+      <div class="nav-label">Execution</div>
+      <div class="nav-item" onclick="switchTab('funnel',this)"><span class="nav-icon">▽</span>Funnel</div>
+      <div class="nav-item" onclick="switchTab('ab',this)"><span class="nav-icon">⚖</span>A/B Testing</div>
+      <div class="nav-label">Analysis</div>
+      <div class="nav-item" onclick="switchTab('results',this)"><span class="nav-icon">📊</span>Results</div>
+    </nav>
+    <div class="sidebar-footer">
+      Campaign Simulator v1.0<br>
+      All projections are estimates
+    </div>
+  </aside>
+
+  <!-- Main content -->
+  <div class="main">
+    <div class="topbar">
+      <div>
+        <div class="page-title" id="page-title">Campaign Setup</div>
+        <div class="page-sub" id="page-sub">Configure your campaign parameters</div>
+      </div>
+      <div class="topbar-actions">
+        <button class="btn btn-sm" onclick="resetSim()">↺ Reset</button>
+        <button class="btn btn-sm btn-primary" onclick="switchTab('results', document.querySelectorAll('.nav-item')[5])">View Results →</button>
+      </div>
+    </div>
+
+    <div class="content">
+
+      <!-- ═══ SETUP ═══ -->
+      <div id="tab-setup" class="section active">
+        <div class="metrics" id="setup-metrics">
+          <div class="metric">
+            <div class="metric-label">Budget</div>
+            <div class="metric-value" id="m-budget">$10,000</div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">Duration</div>
+            <div class="metric-value" id="m-duration">30d</div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">Target leads</div>
+            <div class="metric-value" id="m-leads">1,250</div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">Est. revenue</div>
+            <div class="metric-value" id="m-rev">$37,500</div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">Expected ROI</div>
+            <div class="metric-value up" id="m-roi">275%</div>
+          </div>
+        </div>
+
+        <div class="grid2">
+          <div class="card">
+            <div class="card-title">Campaign basics</div>
+            <div style="display:flex;flex-direction:column;gap:14px">
+              <div>
+                <label>Campaign name</label>
+                <input type="text" id="camp-name" value="Spring Launch 2025">
+              </div>
+              <div>
+                <label>Campaign type</label>
+                <select id="camp-type" onchange="updateSetup()">
+                  <option>Brand awareness</option>
+                  <option>Lead generation</option>
+                  <option selected>Product launch</option>
+                  <option>Retention</option>
+                  <option>Seasonal promo</option>
+                </select>
+              </div>
+              <div>
+                <label>Primary goal</label>
+                <select id="camp-goal" onchange="updateSetup()">
+                  <option>Maximize reach</option>
+                  <option selected>Maximize conversions</option>
+                  <option>Maximize revenue</option>
+                  <option>Minimize cost per lead</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">Budget & timeline</div>
+            <div style="display:flex;flex-direction:column;gap:16px">
+              <div>
+                <label>Total budget — <span class="val" id="budget-val">$10,000</span></label>
+                <input type="range" min="1000" max="100000" step="500" value="10000" id="budget" oninput="updateSetup()">
+              </div>
+              <div>
+                <label>Duration — <span class="val" id="dur-val">30 days</span></label>
+                <input type="range" min="7" max="90" step="1" value="30" id="duration" oninput="updateSetup()">
+              </div>
+              <div>
+                <label>Avg deal size — <span class="val" id="deal-val">$200</span></label>
+                <input type="range" min="10" max="5000" step="10" value="200" id="dealsize" oninput="updateSetup()">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Campaign health indicators</div>
+          <div class="health-row">
+            <div class="health-item">
+              <div class="health-label">Budget sufficiency</div>
+              <div class="progress-track">
+                <div class="progress-fill" id="ph-budget" style="width:65%;background:var(--accent)"></div>
+              </div>
+              <div class="health-sub" id="ph-budget-lbl">Adequate for 30 days</div>
+            </div>
+            <div class="health-item">
+              <div class="health-label">Timeline feasibility</div>
+              <div class="progress-track">
+                <div class="progress-fill" id="ph-time" style="width:80%;background:var(--green)"></div>
+              </div>
+              <div class="health-sub" id="ph-time-lbl">Good runway</div>
+            </div>
+            <div class="health-item">
+              <div class="health-label">ROI potential</div>
+              <div class="progress-track">
+                <div class="progress-fill" id="ph-roi" style="width:70%;background:var(--amber)"></div>
+              </div>
+              <div class="health-sub" id="ph-roi-lbl">Strong potential</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ CHANNELS ═══ -->
+      <div id="tab-channels" class="section">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Select channels</div>
+            <span class="badge badge-accent" id="ch-count">3 selected</span>
+          </div>
+          <div class="channel-grid" id="channel-grid"></div>
+          <div style="font-size:12px;color:var(--text3)">Budget is split equally among selected channels. Click to toggle.</div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Budget allocation</div>
+          <div id="channel-alloc"></div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Estimated reach per channel</div>
+          <div class="legend" id="ch-legend"></div>
+          <div class="chart-wrap-lg"><canvas id="channel-chart" role="img" aria-label="Bar chart of estimated reach per channel">Estimated reach by channel</canvas></div>
+        </div>
+      </div>
+
+      <!-- ═══ AUDIENCE ═══ -->
+      <div id="tab-audience" class="section">
+        <div class="grid2">
+          <div class="card">
+            <div class="card-title">Targeting parameters</div>
+            <div style="display:flex;flex-direction:column;gap:16px">
+              <div>
+                <label>Age range — <span class="val" id="age-val">25 – 44</span></label>
+                <input type="range" min="18" max="65" step="1" value="25" id="age-min" oninput="updateAudience()">
+                <input type="range" min="18" max="65" step="1" value="44" id="age-max" oninput="updateAudience()" style="margin-top:4px">
+              </div>
+              <div>
+                <label>Geography</label>
+                <select id="geo" onchange="updateAudience()">
+                  <option>Global</option><option selected>National</option>
+                  <option>Regional</option><option>Local (city)</option>
+                </select>
+              </div>
+              <div>
+                <label>Income bracket</label>
+                <select id="income" onchange="updateAudience()">
+                  <option>All</option><option>Under $50k</option>
+                  <option selected>$50k–$100k</option>
+                  <option>$100k–$200k</option><option>$200k+</option>
+                </select>
+              </div>
+              <div>
+                <label>Industry focus</label>
+                <select id="industry" onchange="updateAudience()">
+                  <option selected>All industries</option><option>Technology</option>
+                  <option>Healthcare</option><option>Finance</option>
+                  <option>Retail</option><option>Education</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="card" style="text-align:center">
+            <div class="card-title">Audience size estimate</div>
+            <div style="padding:16px 0">
+              <div style="font-size:48px;font-weight:700;color:var(--accent)" id="aud-size">2.4M</div>
+              <div style="font-size:13px;color:var(--text3);margin-top:4px;margin-bottom:20px">estimated addressable audience</div>
+              <div style="background:var(--bg3);border-radius:var(--radius);padding:14px;margin-bottom:10px">
+                <div style="font-size:11px;color:var(--text3);margin-bottom:4px">REACHABLE WITH BUDGET</div>
+                <div style="font-size:32px;font-weight:600;color:var(--green)" id="aud-reach">48,000</div>
+                <div style="font-size:12px;color:var(--text3)" id="aud-pct">2.0% of audience</div>
+              </div>
+              <div style="font-size:12px;color:var(--text3)">
+                Daily reach: <span style="color:var(--text);font-weight:500" id="aud-daily">1,600</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Audience segments</div>
+          <div id="segments-wrap" style="margin-bottom:14px"></div>
+          <div class="grid3" id="seg-stats"></div>
+        </div>
+      </div>
+
+      <!-- ═══ FUNNEL ═══ -->
+      <div id="tab-funnel" class="section">
+        <div class="card">
+          <div class="card-title">Conversion funnel</div>
+          <div id="funnel-steps"></div>
+        </div>
+
+        <div class="grid2">
+          <div class="card">
+            <div class="card-title">Funnel optimization levers</div>
+            <div style="display:flex;flex-direction:column;gap:14px">
+              <div>
+                <label>Landing page quality — <span class="val" id="lp-val">Good</span></label>
+                <input type="range" min="1" max="5" step="1" value="3" id="lp-q" oninput="updateFunnel()">
+              </div>
+              <div>
+                <label>Email sequence — <span class="val" id="em-val">3 emails</span></label>
+                <input type="range" min="1" max="10" step="1" value="3" id="em-seq" oninput="updateFunnel()">
+              </div>
+              <div>
+                <label>Offer strength — <span class="val" id="offer-val">Medium</span></label>
+                <input type="range" min="1" max="5" step="1" value="3" id="offer-s" oninput="updateFunnel()">
+              </div>
+              <div>
+                <label>Retargeting — <span class="val" id="ret-val">Enabled</span></label>
+                <input type="range" min="0" max="1" step="1" value="1" id="retarget" oninput="updateFunnel()">
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">Stage conversion rates</div>
+            <div id="conv-rates"></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Campaign timeline</div>
+          <div id="timeline"></div>
+        </div>
+      </div>
+
+      <!-- ═══ A/B TESTING ═══ -->
+      <div id="tab-ab" class="section">
+        <div class="metrics">
+          <div class="metric">
+            <div class="metric-label">Confidence</div>
+            <div class="metric-value" id="ab-conf">87%</div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">Sample size</div>
+            <div class="metric-value" id="ab-sample">5,200</div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">Test duration</div>
+            <div class="metric-value" id="ab-dur">14d</div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">Uplift (B vs A)</div>
+            <div class="metric-value up" id="ab-uplift">+18%</div>
+          </div>
+        </div>
+
+        <div class="grid2" style="margin-bottom:16px">
+          <div class="ab-card" id="ab-a-card">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+              <div style="font-size:14px;font-weight:600">Variant A — Control</div>
+              <span class="badge badge-blue">Running</span>
+            </div>
+            <div id="ab-a-stats"></div>
+          </div>
+          <div class="ab-card ab-winner" id="ab-b-card">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+              <div style="font-size:14px;font-weight:600">Variant B — Test</div>
+              <span class="badge badge-green">Winning ✓</span>
+            </div>
+            <div id="ab-b-stats"></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Test configuration</div>
+          <div class="grid3">
+            <div>
+              <label>Variable to test</label>
+              <select id="ab-var" onchange="updateAB()">
+                <option>Headline copy</option><option selected>CTA button</option>
+                <option>Hero image</option><option>Pricing display</option>
+                <option>Email subject</option>
+              </select>
+            </div>
+            <div>
+              <label>Traffic split — <span class="val" id="ab-split-val">50 / 50</span></label>
+              <input type="range" min="10" max="50" step="5" value="50" id="ab-split" oninput="updateAB()">
+            </div>
+            <div>
+              <label>Test duration — <span class="val" id="ab-dur-val">14 days</span></label>
+              <input type="range" min="3" max="30" step="1" value="14" id="ab-dur-in" oninput="updateAB()">
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Activity log</div>
+          <div class="log" id="ab-log"></div>
+        </div>
+      </div>
+
+      <!-- ═══ RESULTS ═══ -->
+      <div id="tab-results" class="section">
+        <div class="metrics">
+          <div class="metric">
+            <div class="metric-label">Total reach</div>
+            <div class="metric-value" id="r-reach">48,200</div>
+            <div class="metric-delta up">↑ on target</div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">Leads generated</div>
+            <div class="metric-value" id="r-leads">963</div>
+            <div class="metric-delta up">↑ 14% over goal</div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">Conversions</div>
+            <div class="metric-value" id="r-conv">144</div>
+            <div class="metric-delta" id="r-conv-rate">15% conv rate</div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">Revenue</div>
+            <div class="metric-value" id="r-rev">$28,800</div>
+            <div class="metric-delta up">↑ 6.7% vs est</div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">ROI</div>
+            <div class="metric-value up" id="r-roi">188%</div>
+            <div class="metric-delta up">↑ 18pts vs plan</div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">Cost per lead</div>
+            <div class="metric-value" id="r-cpl">$10.39</div>
+            <div class="metric-delta up">Below target</div>
+          </div>
+        </div>
+
+        <div class="grid2">
+          <div class="card">
+            <div class="card-title">Weekly performance</div>
+            <div class="legend">
+              <div class="legend-item"><div class="legend-swatch" style="background:var(--accent)"></div>Leads</div>
+              <div class="legend-item"><div class="legend-swatch" style="background:var(--green);border-style:dashed"></div>Conversions</div>
+            </div>
+            <div class="chart-wrap"><canvas id="results-chart" role="img" aria-label="Line chart of weekly leads and conversions">Weekly leads and conversions</canvas></div>
+          </div>
+          <div class="card">
+            <div class="card-title">Lead contribution by channel</div>
+            <div class="chart-wrap" style="height:190px"><canvas id="contrib-chart" role="img" aria-label="Doughnut chart of lead share per channel">Channel contribution breakdown</canvas></div>
+            <div class="legend" id="contrib-legend" style="margin-top:10px;margin-bottom:0"></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">AI recommendations</div>
+          <div id="recommendations"></div>
+        </div>
+
+        <div style="margin-top:16px;display:flex;gap:8px;flex-wrap:wrap">
+          <button class="btn btn-primary" onclick="alert('In a real deployment this would connect to an AI assistant. Configure your API key to enable this.')">Get AI insights →</button>
+          <button class="btn" onclick="window.print()">Export report</button>
+          <button class="btn" onclick="resetSim()">↺ Run another campaign</button>
+        </div>
+      </div>
+
+    </div><!-- /content -->
+  </div><!-- /main -->
+</div><!-- /app -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+/* ─── Data ─── */
+const CHANNELS = [
+  {name:'Google Ads',  icon:'G',  cpc:2.5,  reach:15000, color:'#4b9cf7'},
+  {name:'Meta Ads',    icon:'M',  cpc:1.8,  reach:22000, color:'#7c6fff'},
+  {name:'LinkedIn',    icon:'Li', cpc:6.0,  reach:5000,  color:'#2dd4bf'},
+  {name:'Email',       icon:'@',  cpc:0.3,  reach:12000, color:'#1ecc8b'},
+  {name:'SEO/Organic', icon:'S',  cpc:0.5,  reach:8000,  color:'#f5a623'},
+  {name:'Influencer',  icon:'I',  cpc:4.0,  reach:18000, color:'#d45fa0'},
+  {name:'YouTube',     icon:'▶',  cpc:3.2,  reach:10000, color:'#f05c5c'},
+  {name:'SMS',         icon:'~',  cpc:0.8,  reach:6000,  color:'#a78bfa'},
+];
+
+const SEGMENTS = [
+  {name:'Early adopters',  color:'#7c6fff', pct:22},
+  {name:'Value seekers',   color:'#1ecc8b', pct:35},
+  {name:'Brand loyalists', color:'#f5a623', pct:18},
+  {name:'Impulse buyers',  color:'#d45fa0', pct:15},
+  {name:'Researchers',     color:'#4b9cf7', pct:10},
+];
+
+const PAGE_META = {
+  setup:    {title:'Campaign Setup',    sub:'Configure your campaign parameters'},
+  channels: {title:'Channel Selection', sub:'Choose and allocate marketing channels'},
+  audience: {title:'Audience Targeting',sub:'Define and size your target audience'},
+  funnel:   {title:'Conversion Funnel', sub:'Model your end-to-end funnel performance'},
+  ab:       {title:'A/B Testing',       sub:'Simulate and compare creative variants'},
+  results:  {title:'Campaign Results',  sub:'Review projected performance and recommendations'},
+};
+
+let selectedChannels = new Set([0,1,3]);
+let channelChart = null, resultsChart = null, contribChart = null;
+
+/* ─── Tab switching ─── */
+function switchTab(t, navEl) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.getElementById('tab-'+t).classList.add('active');
+  if(navEl) navEl.classList.add('active');
+  document.getElementById('page-title').textContent = PAGE_META[t].title;
+  document.getElementById('page-sub').textContent   = PAGE_META[t].sub;
+  if(t==='channels') initChannels();
+  if(t==='funnel')   updateFunnel();
+  if(t==='results')  initResults();
+  if(t==='ab')       updateAB();
+  if(t==='audience') updateAudience();
+}
+
+/* ─── Helpers ─── */
+const getBudget   = () => parseInt(document.getElementById('budget').value)   || 10000;
+const getDuration = () => parseInt(document.getElementById('duration').value) || 30;
+const getDealSize = () => parseInt(document.getElementById('dealsize').value) || 200;
+const fmt = n => n.toLocaleString();
+
+/* ─── Setup ─── */
+function updateSetup() {
+  const b = getBudget(), d = getDuration(), deal = getDealSize();
+  document.getElementById('budget-val').textContent = '$'+fmt(b);
+  document.getElementById('dur-val').textContent    = d+' days';
+  document.getElementById('deal-val').textContent   = '$'+deal;
+
+  const leads = Math.round(b / 8);
+  const conv  = Math.round(leads * 0.15);
+  const rev   = conv * deal;
+  const roi   = Math.round((rev - b) / b * 100);
+
+  document.getElementById('m-budget').textContent   = '$'+fmt(b);
+  document.getElementById('m-duration').textContent = d+'d';
+  document.getElementById('m-leads').textContent    = fmt(leads);
+  document.getElementById('m-rev').textContent      = '$'+fmt(rev);
+  document.getElementById('m-roi').textContent      = roi+'%';
+
+  const bPct = Math.min(95, Math.round(b / 100000 * 100));
+  document.getElementById('ph-budget').style.width  = bPct+'%';
+  document.getElementById('ph-budget-lbl').textContent = b > 5000 ? 'Adequate for chosen duration' : 'Consider increasing budget';
+
+  const tPct = Math.min(95, Math.round(d / 90 * 100));
+  document.getElementById('ph-time').style.width  = tPct+'%';
+  document.getElementById('ph-time-lbl').textContent = d > 21 ? 'Good runway for results' : 'Short — consider extending';
+
+  const rPct = Math.min(95, Math.max(5, Math.round(roi / 4)));
+  document.getElementById('ph-roi').style.width  = rPct+'%';
+  document.getElementById('ph-roi-lbl').textContent = roi > 150 ? 'Excellent potential' : roi > 50 ? 'Strong potential' : roi > 0 ? 'Marginal — review inputs' : 'At risk — adjust strategy';
+}
+
+/* ─── Channels ─── */
+function initChannels() {
+  const grid = document.getElementById('channel-grid');
+  grid.innerHTML = '';
+  CHANNELS.forEach((ch, i) => {
+    const d = document.createElement('div');
+    d.className = 'channel-card' + (selectedChannels.has(i) ? ' selected' : '');
+    d.innerHTML = `<div class="channel-icon" style="color:${ch.color}">${ch.icon}</div>
+      <div class="channel-name">${ch.name}</div>
+      <div class="channel-meta">CPC $${ch.cpc.toFixed(2)} · Reach ${fmt(ch.reach)}</div>
+      <div class="ch-check">✓</div>`;
+    d.onclick = () => {
+      selectedChannels.has(i) ? selectedChannels.delete(i) : selectedChannels.add(i);
+      initChannels();
+    };
+    grid.appendChild(d);
+  });
+  document.getElementById('ch-count').textContent = selectedChannels.size + ' selected';
+  updateChannelAlloc();
+  drawChannelChart();
+}
+
+function updateChannelAlloc() {
+  const b = getBudget();
+  const sel = [...selectedChannels];
+  const alloc = document.getElementById('channel-alloc');
+  if (!sel.length) { alloc.innerHTML = '<div style="color:var(--text3);font-size:13px">No channels selected.</div>'; return; }
+  const share = Math.round(b / sel.length);
+  alloc.innerHTML = sel.map(i => {
+    const ch = CHANNELS[i];
+    const pct = Math.round(100 / sel.length);
+    return `<div class="alloc-row">
+      <div class="alloc-name">${ch.name}</div>
+      <div class="alloc-bar-wrap"><div class="alloc-bar" style="width:${pct}%;background:${ch.color}"></div></div>
+      <div class="alloc-amt">$${fmt(share)}</div>
+    </div>`;
+  }).join('');
+}
+
+function drawChannelChart() {
+  const ctx = document.getElementById('channel-chart');
+  if (!ctx) return;
+  if (channelChart) { channelChart.destroy(); channelChart = null; }
+  const sel = [...selectedChannels];
+  if (!sel.length) return;
+  const b = getBudget(), share = b / sel.length;
+  const labels = sel.map(i => CHANNELS[i].name);
+  const data   = sel.map(i => Math.round(share / CHANNELS[i].cpc));
+  const colors = sel.map(i => CHANNELS[i].color);
+  // legend
+  document.getElementById('ch-legend').innerHTML = sel.map(i =>
+    `<div class="legend-item"><div class="legend-swatch" style="background:${CHANNELS[i].color}"></div>${CHANNELS[i].name}</div>`
+  ).join('');
+  channelChart = new Chart(ctx, {
+    type: 'bar',
+    data: { labels, datasets: [{ label: 'Est. reach', data, backgroundColor: colors, borderRadius: 6 }] },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: {
+        x: { ticks: { color: '#9999b0', font: { family: 'DM Sans' } }, grid: { color: 'rgba(255,255,255,.04)' } },
+        y: { beginAtZero: true, ticks: { color: '#9999b0', font: { family: 'DM Sans' }, callback: v => fmt(v) }, grid: { color: 'rgba(255,255,255,.04)' } }
+      }
+    }
+  });
+}
+
+/* ─── Audience ─── */
+function updateAudience() {
+  const amin = parseInt(document.getElementById('age-min').value) || 25;
+  const amax = Math.max(amin + 1, parseInt(document.getElementById('age-max').value) || 44);
+  document.getElementById('age-val').textContent = amin + ' – ' + amax;
+  const geoM   = { Global: 10, National: 3, Regional: 0.8, 'Local (city)': 0.2 };
+  const incM   = { All: 1, 'Under $50k': 0.8, '$50k–$100k': 0.7, '$100k–$200k': 0.4, '$200k+': 0.15 };
+  const indM   = { 'All industries': 1, Technology: 0.4, Healthcare: 0.35, Finance: 0.3, Retail: 0.6, Education: 0.25 };
+  const geo    = document.getElementById('geo').value;
+  const inc    = document.getElementById('income').value;
+  const ind    = document.getElementById('industry').value;
+  const ageR   = amax - amin;
+  const size   = Math.round((geoM[geo] || 3) * (ageR / 10) * (incM[inc] || 0.7) * (indM[ind] || 1) * 100000) * 10;
+  const reach  = Math.round(getBudget() / 4);
+  const pct    = Math.round(reach / size * 1000) / 10;
+  const daily  = Math.round(reach / getDuration());
+  document.getElementById('aud-size').textContent  = (size / 1000000).toFixed(1) + 'M';
+  document.getElementById('aud-reach').textContent = fmt(reach);
+  document.getElementById('aud-pct').textContent   = pct + '% of audience';
+  document.getElementById('aud-daily').textContent = fmt(daily);
+
+  document.getElementById('segments-wrap').innerHTML =
+    SEGMENTS.map(s => `<span class="seg-pill" style="background:${s.color}22;border-color:${s.color};color:${s.color}">${s.name} · ${s.pct}%</span>`).join('');
+  document.getElementById('seg-stats').innerHTML =
+    SEGMENTS.slice(0, 3).map(s => `
+      <div class="stat-block">
+        <div style="font-size:11px;color:${s.color};font-weight:600;margin-bottom:4px;text-transform:uppercase;letter-spacing:.06em">${s.name}</div>
+        <div class="stat-num" style="color:var(--text)">${fmt(Math.round(reach * s.pct / 100))}</div>
+        <div class="stat-lbl">projected reach</div>
+      </div>`).join('');
+}
+
+/* ─── Funnel ─── */
+function updateFunnel() {
+  const lpQ    = parseInt(document.getElementById('lp-q').value)    || 3;
+  const emSeq  = parseInt(document.getElementById('em-seq').value)  || 3;
+  const offerS = parseInt(document.getElementById('offer-s').value) || 3;
+  const ret    = parseInt(document.getElementById('retarget').value)|| 0;
+  const lpL    = ['Poor','Fair','Good','Great','Excellent'];
+  const ofL    = ['Weak','Below avg','Medium','Strong','Compelling'];
+  document.getElementById('lp-val').textContent    = lpL[lpQ - 1];
+  document.getElementById('em-val').textContent    = emSeq + ' email' + (emSeq > 1 ? 's' : '');
+  document.getElementById('offer-val').textContent = ofL[offerS - 1];
+  document.getElementById('ret-val').textContent   = ret ? 'Enabled' : 'Disabled';
+
+  const reach     = Math.round(getBudget() / 4);
+  const ctr       = 0.02 + lpQ * 0.008;
+  const clicks    = Math.round(reach * ctr);
+  const lpConv    = 0.1 + lpQ * 0.04 + offerS * 0.02;
+  const leads     = Math.round(clicks * lpConv);
+  const nurtureR  = Math.min(0.75, 0.2 + emSeq * 0.05);
+  const nurtured  = Math.round(leads * nurtureR);
+  const retBonus  = ret ? 1.25 : 1;
+  const conv      = Math.round(nurtured * 0.2 * retBonus);
+
+  const steps = [
+    {label:'Audience reached', count:reach,   color:'#7c6fff'},
+    {label:'Clicks',           count:clicks,  color:'#4b9cf7'},
+    {label:'Leads captured',   count:leads,   color:'#1ecc8b'},
+    {label:'Nurtured',         count:nurtured,color:'#f5a623'},
+    {label:'Conversions',      count:conv,    color:'#f05c5c'},
+  ];
+  const maxC = steps[0].count || 1;
+  document.getElementById('funnel-steps').innerHTML = steps.map((s, idx) => {
+    const prev = idx === 0 ? maxC : steps[idx - 1].count || 1;
+    const drop = idx === 0 ? 100 : Math.round(s.count / prev * 100);
+    return `<div class="funnel-step">
+      <div class="funnel-label">${s.label}</div>
+      <div class="funnel-bar-wrap">
+        <div class="funnel-bar" style="width:${Math.max(2, Math.round(s.count / maxC * 100))}%;background:${s.color}">
+          ${Math.round(s.count / maxC * 100) > 15 ? Math.round(s.count / maxC * 100) + '%' : ''}
+        </div>
+      </div>
+      <div class="funnel-count">${fmt(s.count)}</div>
+      <div class="funnel-pct">${idx === 0 ? '' : drop + '%'}</div>
+    </div>`;
+  }).join('');
+
+  const rates = [
+    {label:'Click-through rate',     val:(ctr * 100).toFixed(1) + '%'},
+    {label:'Lead capture rate',      val:(lpConv * 100).toFixed(1) + '%'},
+    {label:'Nurture rate',           val:(nurtureR * 100).toFixed(0) + '%'},
+    {label:'Sales close rate',       val:((0.2 * retBonus) * 100).toFixed(0) + '%'},
+    {label:'Overall conversion',     val:reach > 0 ? (conv / reach * 100).toFixed(2) + '%' : '0%'},
+  ];
+  document.getElementById('conv-rates').innerHTML = rates.map(r =>
+    `<div class="rate-row"><span style="color:var(--text2)">${r.label}</span><span style="font-weight:600">${r.val}</span></div>`
+  ).join('');
+
+  const d = getDuration();
+  const tl = [
+    {day:0,                       event:'Campaign launched — ads go live across all channels',          color:'#7c6fff'},
+    {day:Math.round(d * 0.15),    event:'First leads captured, email nurture sequence begins',           color:'#1ecc8b'},
+    {day:Math.round(d * 0.30),    event:'A/B test results available — deploy winning variant',           color:'#f5a623'},
+    {day:Math.round(d * 0.50),    event:'Mid-campaign review — reallocate budget to top channels',       color:'#4b9cf7'},
+    {day:Math.round(d * 0.75),    event:'Retargeting wave activated for unconverted visitors',           color:'#d45fa0'},
+    {day:d,                       event:'Campaign closes — final conversions tallied and reported',       color:'#f05c5c'},
+  ];
+  document.getElementById('timeline').innerHTML = tl.map((t, idx) => `
+    <div class="tl-item">
+      <div class="tl-left">
+        <div class="tl-dot" style="background:${t.color}"></div>
+        ${idx < tl.length - 1 ? '<div class="tl-line"></div>' : ''}
+      </div>
+      <div>
+        <div class="tl-date">Day ${t.day}</div>
+        <div class="tl-event">${t.event}</div>
+      </div>
+    </div>`).join('');
+}
+
+/* ─── A/B Testing ─── */
+function updateAB() {
+  const v      = document.getElementById('ab-var').value;
+  const split  = parseInt(document.getElementById('ab-split').value) || 50;
+  const dur    = parseInt(document.getElementById('ab-dur-in').value) || 14;
+  document.getElementById('ab-split-val').textContent = split + ' / ' + (100 - split);
+  document.getElementById('ab-dur-val').textContent   = dur + ' days';
+
+  const sample  = Math.round(getBudget() / 3 * dur / 14);
+  const conf    = Math.min(99, Math.round(68 + dur * 1.5 + split * 0.2));
+  const uplift  = Math.round(10 + split * 0.3 + dur * 0.4);
+
+  document.getElementById('ab-conf').textContent   = conf + '%';
+  document.getElementById('ab-sample').textContent = fmt(sample);
+  document.getElementById('ab-dur').textContent    = dur + 'd';
+  document.getElementById('ab-uplift').textContent = '+' + uplift + '%';
+
+  const aM = {CTR:'2.1%', CVR:'3.4%', CPL:'$12.40', ROAS:'2.1x'};
+  const bM = {
+    CTR:  (2.1 * (1 + uplift / 200)).toFixed(1) + '%',
+    CVR:  (3.4 * (1 + uplift / 200)).toFixed(1) + '%',
+    CPL:  '$' + (12.4 / (1 + uplift / 200)).toFixed(2),
+    ROAS: (2.1 * (1 + uplift / 200)).toFixed(1) + 'x',
+  };
+  const renderStats = m => Object.entries(m).map(([k, v]) => `
+    <div style="margin-bottom:10px">
+      <div style="font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.06em">${k}</div>
+      <div style="font-size:20px;font-weight:600">${v}</div>
+      <div class="score-bar"><div class="score-fill" style="width:${Math.min(95, Math.round(parseFloat(v) * 20))}%"></div></div>
+    </div>`).join('');
+  document.getElementById('ab-a-stats').innerHTML = renderStats(aM);
+  document.getElementById('ab-b-stats').innerHTML = renderStats(bM);
+
+  const entries = [
+    `[Day 01]  Test initialized — variable: ${v}`,
+    `[Day 03]  Variant B showing +${Math.round(uplift * 0.4)}% CTR advantage`,
+    `[Day 07]  Statistical confidence reached ${Math.round(conf * 0.7)}%`,
+    `[Day ${String(dur).padStart(2,'0')}]  Test concluded — Variant B wins with ${conf}% confidence`,
+    `[Auto  ]  Variant B deployed to 100% of traffic`,
+  ];
+  document.getElementById('ab-log').innerHTML = entries.map(e => `<div class="log-line">${e}</div>`).join('');
+}
+
+/* ─── Results ─── */
+function initResults() {
+  const b = getBudget(), d = getDuration(), deal = getDealSize();
+  const leads = Math.round(b / 8);
+  const conv  = Math.round(leads * 0.15);
+  const rev   = conv * deal;
+  const roi   = Math.round((rev - b) / b * 100);
+  const cpl   = (b / leads).toFixed(2);
+  const reach = Math.round(b / 4);
+
+  document.getElementById('r-reach').textContent    = fmt(reach);
+  document.getElementById('r-leads').textContent    = fmt(leads);
+  document.getElementById('r-conv').textContent     = fmt(conv);
+  document.getElementById('r-conv-rate').textContent= Math.round(conv/leads*100) + '% conv rate';
+  document.getElementById('r-rev').textContent      = '$' + fmt(rev);
+  document.getElementById('r-roi').textContent      = roi + '%';
+  document.getElementById('r-cpl').textContent      = '$' + cpl;
+
+  // Weekly chart
+  const weeks     = Math.ceil(d / 7);
+  const wLabels   = Array.from({length: weeks}, (_, i) => 'W' + (i + 1));
+  const wLeads    = wLabels.map((_, i) => Math.round(leads / weeks * (0.5 + i * 0.15)));
+  const wConv     = wLeads.map(v => Math.round(v * 0.15));
+  const rc = document.getElementById('results-chart');
+  if (resultsChart) { resultsChart.destroy(); resultsChart = null; }
+  resultsChart = new Chart(rc, {
+    type: 'line',
+    data: { labels: wLabels, datasets: [
+      {label:'Leads', data:wLeads, borderColor:'#7c6fff', backgroundColor:'rgba(124,111,255,.12)', fill:true, tension:0.4, borderWidth:2, pointBackgroundColor:'#7c6fff'},
+      {label:'Conversions', data:wConv, borderColor:'#1ecc8b', backgroundColor:'rgba(30,204,139,.10)', fill:true, tension:0.4, borderWidth:2, borderDash:[5,4], pointBackgroundColor:'#1ecc8b'},
+    ]},
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: {
+        x: { ticks:{color:'#9999b0', font:{family:'DM Sans'}}, grid:{color:'rgba(255,255,255,.04)'} },
+        y: { beginAtZero:true, ticks:{color:'#9999b0', font:{family:'DM Sans'}}, grid:{color:'rgba(255,255,255,.04)'} }
+      }
+    }
+  });
+
+  // Contrib donut
+  const sel = [...selectedChannels];
+  const cc = document.getElementById('contrib-chart');
+  if (contribChart) { contribChart.destroy(); contribChart = null; }
+  if (sel.length) {
+    const cLabels = sel.map(i => CHANNELS[i].name);
+    const rawData = sel.map(i => Math.round(100 / sel.length + (Math.sin(i * 7) * 8)));
+    const cColors = sel.map(i => CHANNELS[i].color);
+    contribChart = new Chart(cc, {
+      type: 'doughnut',
+      data: { labels: cLabels, datasets: [{ data: rawData, backgroundColor: cColors, borderWidth: 0, hoverOffset: 8 }] },
+      options: { responsive:true, maintainAspectRatio:false, plugins:{ legend:{display:false} }, cutout:'62%' }
+    });
+    document.getElementById('contrib-legend').innerHTML = sel.map(i =>
+      `<div class="legend-item"><div class="legend-swatch" style="background:${CHANNELS[i].color}"></div>${CHANNELS[i].name}</div>`
+    ).join('');
+  }
+
+  // Recommendations
+  const recs = [
+    roi > 150 ? {type:'green', icon:'↑', text:'Strong ROI — consider scaling budget by 20–30% in the next campaign cycle.'} :
+                {type:'amber', icon:'!', text:'ROI is below target — revisit channel mix, offer strength, and deal size assumptions.'},
+    leads > 200 ? {type:'green', icon:'✓', text:'Lead volume is on track. Maintain current targeting and creative strategy.'} :
+                  {type:'blue',  icon:'→', text:'Lead volume is modest — expand audience segments or add higher-reach channels.'},
+    {type:'blue',  icon:'→', text:'Apply A/B test winning variant as the default creative for your next campaign.'},
+    d < 21 ? {type:'amber', icon:'!', text:'Short campaign duration detected — campaigns of 30+ days outperform by ~40% on average.'} :
+             {type:'green', icon:'✓', text:'Campaign duration is adequate for statistically reliable results and optimization.'},
+  ];
+  document.getElementById('recommendations').innerHTML = recs.map(r =>
+    `<div class="rec rec-${r.type}"><strong style="flex-shrink:0">${r.icon}</strong><span>${r.text}</span></div>`
+  ).join('');
+}
+
+/* ─── Reset ─── */
+function resetSim() {
+  document.getElementById('budget').value   = 10000;
+  document.getElementById('duration').value = 30;
+  document.getElementById('dealsize').value = 200;
+  selectedChannels = new Set([0, 1, 3]);
+  updateSetup();
+  const firstNav = document.querySelector('.nav-item');
+  switchTab('setup', firstNav);
+}
+
+/* ─── Init ─── */
+updateSetup();
+setTimeout(() => {
+  updateAB();
+  updateAudience();
+  updateFunnel();
+}, 80);
+</script>
+</body>
+</html>
