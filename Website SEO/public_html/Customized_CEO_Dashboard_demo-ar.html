@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>لوحة القيادة — منصة الذكاء الإداري</title>
+
+<!-- SEO & GEO Tags -->
+<meta name="description" content="استكشف لوحة القيادة التنفيذية المخصصة لمديري الشركات في عُمان ودول الخليج. شاهد كيف تساعد منصة الذكاء الإداري في أتمتة الأرباح والخسائر والمخزون وربحية العملاء.">
+<meta name="keywords" content="CEO Dashboard, Management Intelligence, Business Automation, P&L Automation, AI Profit Lab, Oman AI, GCC Business Dashboard">
+<meta property="og:title" content="لوحة القيادة التنفيذية — منصة الذكاء الإداري | AI Profit Lab">
+<meta property="og:description" content="استكشف لوحة القيادة التنفيذية المخصصة لمديري الشركات في عُمان ودول الخليج. شاهد كيف تساعد منصة الذكاء الإداري في أتمتة الأرباح والخسائر والمخزون وربحية العملاء.">
+<meta property="og:url" content="https://aiprofitlab.io/Customized_CEO_Dashboard_demo-ar.html">
+<meta property="og:type" content="website">
+
+<!-- Local Business Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "AI Profit Lab",
+  "url": "https://aiprofitlab.io",
+  "logo": "https://aiprofitlab.io/logo.webp",
+  "image": "https://aiprofitlab.io/Nahid_Business_Banner.png",
+  "description": "Helping non-technical managers leverage AI, automation, and technology to increase ROI and business efficiency.",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Al Seeb",
+    "addressLocality": "Muscat",
+    "addressRegion": "Muscat Governorate",
+    "postalCode": "000",
+    "addressCountry": "OM"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 23.635950490475295, 
+    "longitude": 58.207628165445385
+  }
+}
+</script>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2GPVY4Z5KR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-2GPVY4Z5KR');
+</script>
+
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f4f6fb;--bg2:#ffffff;--bg3:#eef1f8;--bg4:#e4e8f4;
+  --border:rgba(60,80,160,0.10);--border2:rgba(60,80,160,0.18);
+  --text:#181c2e;--muted:#7b84a3;--muted2:#4e5675;
+  --teal:#00c2a8;--teal-bg:rgba(0,194,168,0.10);--teal-dark:#007d6e;
+  --indigo:#4c5ff7;--indigo-bg:rgba(76,95,247,0.09);--indigo-dark:#2b3bbf;
+  --coral:#ff4d6d;--coral-bg:rgba(255,77,109,0.09);
+  --amber:#f59e0b;--amber-bg:rgba(245,158,11,0.10);--amber-dark:#92600a;
+  --violet:#7c3aed;--violet-bg:rgba(124,58,237,0.09);
+  --sky:#0ea5e9;--sky-bg:rgba(14,165,233,0.09);
+  --green:#10b981;--green-bg:rgba(16,185,129,0.09);--green-dark:#065f46;
+  --red:#dc2626;--red-bg:rgba(220,38,38,0.08);
+  --font-display:'DM Serif Display',serif;--font-body:'Outfit',sans-serif;--font-mono:'DM Mono',monospace;
+  --r:10px;--r2:14px;
+  --shadow:0 1px 4px rgba(60,80,160,0.07),0 4px 16px rgba(60,80,160,0.05);
+  --shadow2:0 2px 8px rgba(60,80,160,0.10),0 8px 24px rgba(60,80,160,0.07);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-size:14px;line-height:1.5;min-height:100vh}
+.shell{display:flex;min-height:100vh}
+.sidebar{width:224px;flex-shrink:0;background:var(--bg2);border-right:1px solid var(--border);display:flex;flex-direction:column;position:fixed;top:49px;right:0;bottom:0;left:auto;z-index:100;box-shadow:2px 0 12px rgba(60,80,160,0.06)}
+.main{margin-right:224px;margin-left:0;flex:1;padding-top:0}
+.logo{padding:22px 20px 16px;border-bottom:1px solid var(--border)}
+.logo-name{font-family:var(--font-display);font-size:24px;background:linear-gradient(135deg,var(--indigo),var(--teal));-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:-0.5px}
+.logo-sub{font-size:10px;color:var(--muted);letter-spacing:.12em;text-transform:uppercase;margin-top:2px}
+.live-dot{display:inline-flex;align-items:center;gap:5px;font-size:10px;color:var(--teal);font-family:var(--font-mono);margin-top:7px}
+.live-dot::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--teal);box-shadow:0 0 7px var(--teal);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.35}}
+.nav{padding:12px 10px;flex:1;overflow-y:auto}
+.nav-section{font-size:10px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;padding:0 10px;margin-bottom:4px;margin-top:14px}
+.nav-section:first-child{margin-top:0}
+.nav-item{display:flex;align-items:center;gap:9px;padding:8px 10px;border-radius:var(--r);cursor:pointer;color:var(--muted2);font-size:13px;font-weight:400;transition:all .15s;margin-bottom:2px;border:none;background:none;width:100%;text-align:left}
+.nav-item:hover{background:var(--bg3);color:var(--text)}
+.nav-item.نشطة{background:var(--indigo-bg);color:var(--indigo);font-weight:500}
+.nav-icon{width:15px;height:15px;flex-shrink:0}
+.sidebar-footer{padding:12px 16px;border-top:1px solid var(--border);font-size:11px;color:var(--muted)}
+.powered{display:flex;align-items:center;gap:5px;margin-top:4px;font-size:10px}
+.powered span{color:var(--green);font-family:var(--font-mono)}
+.topbar{display:flex;justify-content:space-between;align-items:center;padding:13px 28px;border-bottom:1px solid var(--border);background:var(--bg2);position:sticky;top:0;z-index:50;box-shadow:0 1px 8px rgba(60,80,160,0.06)}
+.topbar-title{font-size:18px;font-family:var(--font-display);color:var(--text)}
+.topbar-right{display:flex;align-items:center;gap:10px}
+.date-badge{font-size:11px;font-family:var(--font-mono);color:var(--muted2);background:var(--bg3);padding:4px 11px;border-radius:20px;border:1px solid var(--border)}
+.refresh-btn{font-size:11px;font-family:var(--font-mono);color:#fff;background:var(--indigo);border:none;padding:5px 14px;border-radius:20px;cursor:pointer;transition:all .15s;box-shadow:0 2px 8px rgba(76,95,247,0.3)}
+.refresh-btn:hover{background:var(--indigo-dark)}
+.gs-tag{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-family:var(--font-mono);color:var(--green-dark);background:var(--green-bg);border:1px solid rgba(16,185,129,0.22);padding:3px 9px;border-radius:20px}
+.content{padding:24px 28px}
+.section{display:none}
+.section.نشطة{display:block}
+
+/* KPI */
+.kpi-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px;margin-bottom:20px}
+.kpi{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r2);padding:17px 19px;box-shadow:var(--shadow);position:relative;overflow:hidden;transition:box-shadow .2s,transform .15s}
+.kpi:hover{box-shadow:var(--shadow2);transform:translateY(-1px)}
+.kpi-accent{position:absolute;top:0;left:0;right:0;height:3px;border-radius:var(--r2) var(--r2) 0 0}
+.kpi-label{font-size:11px;color:var(--muted);letter-spacing:.06em;text-transform:uppercase;margin-bottom:7px;margin-top:4px}
+.kpi-val{font-size:23px;font-family:var(--font-display);color:var(--text);line-height:1.1;margin-bottom:5px}
+.kpi-delta{font-size:10px;font-family:var(--font-mono);display:inline-flex;align-items:center;gap:3px;padding:2px 8px;border-radius:20px;font-weight:500}
+.kpi-delta.up{color:var(--green-dark);background:var(--green-bg)}
+.kpi-delta.dn{color:var(--red);background:var(--red-bg)}
+.kpi-delta.neu{color:var(--amber-dark);background:var(--amber-bg)}
+.kpi-delta.info{color:var(--indigo-dark);background:var(--indigo-bg)}
+.kpi-sub{font-size:11px;color:var(--muted);margin-top:4px}
+
+/* GRIDS */
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:15px;margin-bottom:16px}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:15px;margin-bottom:16px}
+.grid-60-40{display:grid;grid-template-columns:1.5fr 1fr;gap:15px;margin-bottom:16px}
+.grid-40-60{display:grid;grid-template-columns:1fr 1.5fr;gap:15px;margin-bottom:16px}
+
+/* CARDS */
+.card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r2);padding:18px 20px;box-shadow:var(--shadow)}
+.card-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.card-title{font-size:13px;font-weight:600;color:var(--text)}
+.card-badge{font-size:10px;font-family:var(--font-mono);padding:2px 9px;border-radius:20px;background:var(--bg3);color:var(--muted2);border:1px solid var(--border)}
+.card-badge.green{background:var(--green-bg);color:var(--green-dark);border-color:rgba(16,185,129,0.2)}
+.card-badge.red{background:var(--red-bg);color:var(--red);border-color:rgba(220,38,38,0.2)}
+.card-badge.amber{background:var(--amber-bg);color:var(--amber-dark);border-color:rgba(245,158,11,0.2)}
+.card-badge.indigo{background:var(--indigo-bg);color:var(--indigo-dark);border-color:rgba(76,95,247,0.2)}
+
+/* WATERFALL */
+.wf-row{display:flex;align-items:center;gap:9px;margin-bottom:8px}
+.wf-label{font-size:12px;color:var(--muted2);width:130px;flex-shrink:0}
+.wf-track{flex:1;height:26px;background:var(--bg3);border-radius:6px;overflow:hidden}
+.wf-fill{height:100%;border-radius:6px;display:flex;align-items:center;padding:0 9px;transition:width 1s cubic-bezier(.4,0,.2,1)}
+.wf-num{font-size:11px;font-family:var(--font-mono);font-weight:500;white-space:nowrap}
+.wf-pct{font-size:10px;color:var(--muted);font-family:var(--font-mono);min-width:36px;text-align:right}
+
+/* BAR CHART */
+.bar-chart{display:flex;align-items:flex-end;gap:7px;height:110px;margin-bottom:7px}
+.bar-col{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;height:100%;justify-content:flex-end}
+.bar-fill{width:100%;border-radius:5px 5px 0 0;transition:height 1s cubic-bezier(.4,0,.2,1);min-height:4px}
+.bar-lbl{font-size:10px;color:var(--muted);font-family:var(--font-mono)}
+.bar-val{font-size:10px;color:var(--muted2);font-family:var(--font-mono)}
+
+/* TABLES */
+.data-table{width:100%;border-collapse:collapse}
+.data-table th{font-size:10px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;padding:7px 9px;border-bottom:1px solid var(--border);font-weight:500;text-align:left;background:var(--bg3)}
+.data-table th:first-child{border-radius:6px 0 0 0}
+.data-table th:last-child{border-radius:0 6px 0 0}
+.data-table td{padding:9px 9px;border-bottom:1px solid var(--border);font-size:12px;color:var(--text)}
+.data-table tr:last-child td{border-bottom:none}
+.data-table tr:hover td{background:var(--bg3)}
+.data-table .mono{font-family:var(--font-mono)}
+.data-table .right{text-align:right}
+
+/* PILLS */
+.pill{display:inline-flex;align-items:center;font-size:10px;font-family:var(--font-mono);padding:2px 8px;border-radius:20px;white-space:nowrap;font-weight:500}
+.pill.hi{background:var(--green-bg);color:var(--green-dark)}
+.pill.mid{background:var(--amber-bg);color:var(--amber-dark)}
+.pill.lo{background:var(--red-bg);color:var(--red)}
+.pill.info{background:var(--sky-bg);color:#0369a1}
+.pill.purple{background:var(--violet-bg);color:var(--violet)}
+
+/* PROGRESS */
+.progress-row{display:flex;align-items:center;gap:9px;margin-bottom:9px}
+.progress-label{font-size:12px;color:var(--muted2);flex:1}
+.progress-track{width:120px;height:7px;background:var(--bg3);border-radius:4px;overflow:hidden}
+.progress-fill{height:100%;border-radius:4px;transition:width 1s}
+.progress-val{font-size:11px;font-family:var(--font-mono);color:var(--muted2);min-width:52px;text-align:right}
+
+/* MARGIN BAR */
+.margin-bar{display:flex;height:6px;border-radius:3px;background:var(--bg3);overflow:hidden;margin-top:3px}
+.margin-fill{border-radius:3px;transition:width 1s}
+
+/* ALERTS */
+.alert{display:flex;align-items:flex-start;gap:11px;padding:11px 13px;border-radius:var(--r);margin-bottom:8px;border:1px solid transparent}
+.alert.red{background:var(--red-bg);border-color:rgba(220,38,38,0.18)}
+.alert.amber{background:var(--amber-bg);border-color:rgba(245,158,11,0.22)}
+.alert.green{background:var(--teal-bg);border-color:rgba(0,194,168,0.22)}
+.alert.indigo{background:var(--indigo-bg);border-color:rgba(76,95,247,0.18)}
+.alert.sky{background:var(--sky-bg);border-color:rgba(14,165,233,0.22)}
+.alert-icon{font-size:15px;margin-top:1px;flex-shrink:0}
+.alert-title{font-size:12px;font-weight:600;margin-bottom:2px}
+.alert.red .alert-title{color:var(--red)}
+.alert.amber .alert-title{color:var(--amber-dark)}
+.alert.green .alert-title{color:var(--teal-dark)}
+.alert.indigo .alert-title{color:var(--indigo-dark)}
+.alert.sky .alert-title{color:#0369a1}
+.alert-body{font-size:11px;color:var(--muted2);line-height:1.5}
+.alert-action{font-size:10px;font-family:var(--font-mono);color:var(--indigo);margin-top:5px;font-weight:500}
+
+/* INSIGHT BOX */
+.insight-box{background:linear-gradient(135deg,var(--indigo-bg),var(--teal-bg));border:1px solid rgba(76,95,247,0.2);border-radius:var(--r);padding:14px 18px;margin-bottom:14px}
+.insight-box .ib-title{color:var(--indigo);font-weight:600;font-size:12px;margin-bottom:3px}
+.insight-box .ib-body{font-size:12px;color:var(--muted2);line-height:1.55}
+
+/* STORY CARD */
+.story-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r2);padding:16px 18px;box-shadow:var(--shadow);margin-bottom:12px}
+.story-card .sc-label{font-size:10px;font-family:var(--font-mono);letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px;font-weight:500}
+.story-card .sc-headline{font-size:15px;font-family:var(--font-display);color:var(--text);margin-bottom:6px;line-height:1.3}
+.story-card .sc-body{font-size:12px;color:var(--muted2);line-height:1.55}
+.story-card .sc-actions{margin-top:10px;display:flex;gap:8px;flex-wrap:wrap}
+.sc-action-btn{font-size:10px;font-family:var(--font-mono);padding:3px 10px;border-radius:20px;font-weight:500;border:none;cursor:pointer}
+.sc-action-btn.primary{background:var(--indigo-bg);color:var(--indigo-dark);border:1px solid rgba(76,95,247,0.2)}
+.sc-action-btn.success{background:var(--green-bg);color:var(--green-dark);border:1px solid rgba(16,185,129,0.2)}
+.sc-action-btn.warn{background:var(--amber-bg);color:var(--amber-dark);border:1px solid rgba(245,158,11,0.2)}
+
+/* AUTOMATION CARDS */
+.auto-card{background:var(--bg3);border:1px solid var(--border);border-radius:var(--r);padding:13px 15px;display:flex;align-items:flex-start;gap:13px;margin-bottom:10px}
+.auto-icon{font-size:20px;flex-shrink:0;margin-top:2px}
+.auto-title{font-size:13px;font-weight:600;color:var(--text);margin-bottom:3px}
+.auto-body{font-size:11px;color:var(--muted2)}
+.auto-tag{display:inline-flex;font-size:10px;font-family:var(--font-mono);padding:1px 7px;border-radius:20px;margin-top:5px;font-weight:500;background:var(--indigo-bg);color:var(--indigo-dark)}
+
+/* TIER CARDS */
+.tier-card{background:var(--bg3);border:1px solid var(--border);border-radius:var(--r);padding:13px 15px;margin-bottom:9px;display:flex;align-items:center;gap:13px;transition:box-shadow .15s}
+.tier-card:hover{box-shadow:var(--shadow2)}
+.tier-icon{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0}
+.tier-info{flex:1}
+.tier-name{font-size:13px;font-weight:600}
+.tier-range{font-size:11px;color:var(--muted)}
+.tier-count{font-size:21px;font-family:var(--font-display)}
+.tier-count-lbl{font-size:10px;color:var(--muted)}
+
+/* CLIENT AVATAR */
+.client-avatar{width:29px;height:29px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;flex-shrink:0}
+
+/* SECTION HEADER */
+.section-header{margin-bottom:20px}
+.section-header h1{font-family:var(--font-display);font-size:26px;color:var(--text);margin-bottom:3px}
+.section-header p{font-size:13px;color:var(--muted2)}
+
+/* SLIDER */
+.slider-wrap{display:flex;align-items:center;gap:10px;margin:8px 0}
+.slider-wrap label{font-size:11px;color:var(--muted2);width:120px;flex-shrink:0}
+.slider-wrap input[type=range]{flex:1}
+.slider-wrap .val{font-size:12px;font-family:var(--font-mono);font-weight:500;min-width:50px;text-align:right;color:var(--text)}
+
+/* DONUT */
+.donut-wrap{display:flex;align-items:center;gap:18px}
+.donut-legend{display:flex;flex-direction:column;gap:8px}
+.legend-item{display:flex;align-items:center;gap:7px;font-size:12px}
+.legend-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+
+/* FLOW */
+.flow-row{display:flex;align-items:center;gap:0;padding:14px 0;overflow-x:auto}
+.flow-step{display:flex;flex-direction:column;align-items:center;gap:7px;min-width:86px}
+.flow-icon{width:48px;height:48px;border-radius:var(--r);background:var(--bg3);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:20px;box-shadow:var(--shadow)}
+.flow-lbl{font-size:11px;color:var(--muted2);text-align:center;max-width:76px;line-height:1.3}
+.flow-arrow{font-size:16px;color:var(--indigo);padding:0 5px;margin-top:-18px}
+
+/* ANIMATIONS */
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.section.نشطة .kpi{animation:fadeUp .35s both}
+.section.نشطة .kpi:nth-child(1){animation-delay:.04s}
+.section.نشطة .kpi:nth-child(2){animation-delay:.09s}
+.section.نشطة .kpi:nth-child(3){animation-delay:.14s}
+.section.نشطة .kpi:nth-child(4){animation-delay:.19s}
+.section.نشطة .card,.section.نشطة .story-card{animation:fadeUp .38s .1s both}
+</style>
+</head>
+<body>
+
+<!-- AI Profit Lab Logo -->
+<div style="display:flex;justify-content:space-between;align-items:center;padding:12px 28px;background:#ffffff;border-bottom:1px solid rgba(60,80,160,0.10);box-shadow:0 1px 4px rgba(60,80,160,0.06);position:sticky;top:0;z-index:200;">
+  <a href="index.html" style="text-decoration:none;">
+    <div style="font-size:22px;font-weight:900;font-family:'Outfit',sans-serif;letter-spacing:-1px;">
+      <span style="color:#3B82F6;">A</span><span style="color:#EF4444;">I</span> <span style="color:#181c2e;">Profit Lab</span>
+    </div>
+  </a>
+  <a href="index.html" style="color:#4e5675; font-family:'Outfit',sans-serif;text-decoration:none;font-size:0.85rem;font-weight:500;padding:0.4rem 1rem;border:1px solid rgba(60,80,160,0.18);border-radius:50px;transition:0.2s;font-family:'Outfit',sans-serif;">
+    ← العودة إلى الموقع
+  </a>
+</div>
+
+<div class="shell">
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <div class="logo">
+    <div class="logo-name">فيت فلو</div>
+    <div class="logo-sub">منصة الذكاء الإداري</div>
+    <div class="live-dot">مباشر · مزامنة مع جداول جوجل</div>
+  </div>
+  <nav class="nav">
+    <div class="nav-section">نظرة عامة</div>
+    <button class="nav-item نشطة" onclick="go('overview',this)">
+      <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1" stroke-width="1.6"/><rect x="14" y="3" width="7" height="7" rx="1" stroke-width="1.6"/><rect x="3" y="14" width="7" height="7" rx="1" stroke-width="1.6"/><rect x="14" y="14" width="7" height="7" rx="1" stroke-width="1.6"/></svg>
+      الملخص التنفيذي
+    </button>
+    <button class="nav-item" onclick="go('pl',this)">
+      <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><polyline points="16 7 22 7 22 13" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      الأرباح والخسائر · هامش المساهمة
+    </button>
+    <div class="nav-section">المنتجات</div>
+    <button class="nav-item" onclick="go('products',this)">
+      <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" stroke-width="1.6"/></svg>
+      ربحية المنتجات
+    </button>
+    <button class="nav-item" onclick="go('inventory',this)">
+      <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" stroke-width="1.6"/><polyline points="9 22 9 12 15 12 15 22" stroke-width="1.6"/></svg>
+      المخزون والمخزون الراكد
+    </button>
+    <div class="nav-section">العملاء</div>
+    <button class="nav-item" onclick="go('عملاء',this)">
+      <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" stroke-width="1.6"/><circle cx="9" cy="7" r="4" stroke-width="1.6"/><path d="M23 21v-2a4 4 0 0 0-3-3.87" stroke-width="1.6"/><path d="M16 3.13a4 4 0 0 1 0 7.75" stroke-width="1.6"/></svg>
+      ربحية العملاء
+    </button>
+    <button class="nav-item" onclick="go('loyalty',this)">
+      <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" stroke-width="1.6"/></svg>
+      برنامج الولاء
+    </button>
+    <div class="nav-section">التقارير</div>
+    <button class="nav-item" onclick="go('cashflow',this)">
+      <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2" stroke-width="1.6"/><line x1="2" y1="10" x2="22" y2="10" stroke-width="1.6"/></svg>
+      توقعات التدفق النقدي
+    </button>
+    <button class="nav-item" onclick="go('automation',this)">
+      <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6" stroke-width="1.6" stroke-linecap="round"/><polyline points="8 6 2 12 8 18" stroke-width="1.6" stroke-linecap="round"/></svg>
+      إعداد الأتمتة
+    </button>
+  </nav>
+  <div class="sidebar-footer">
+    <div>مصدر البيانات</div>
+    <div class="powered"><span>● جداول جوجل</span>&nbsp;via Make.com</div>
+  </div>
+</aside>
+
+<div class="main">
+<div class="topbar">
+  <div class="topbar-title" id="page-title">الملخص التنفيذي</div>
+  <div class="topbar-right">
+    <div class="date-badge" id="date-display"></div>
+    <div class="gs-tag">📊 جداول جوجل</div>
+    <button class="refresh-btn" onclick="animateBars()">↻ تحديث</button>
+  </div>
+</div>
+
+<div class="content">
+
+<!-- ══════════════════════════════════════════════════ OVERVIEW -->
+<div class="section نشطة" id="sec-overview">
+  <div class="section-header">
+    <h1>صباح الخير، خالد.</h1>
+    <p>إليك ما حدث في عملك أمس — وما يحتاج إلى اهتمامك اليوم.</p>
+  </div>
+
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-accent" style="background:linear-gradient(90deg,var(--indigo),var(--sky))"></div><div class="kpi-label">الإيرادات منذ بداية الشهر</div><div class="kpi-val">OMR 109K</div><span class="kpi-delta up">↑ +12%</span><div class="kpi-sub">مقابل 97 ألف ر.ع الشهر الماضي</div></div>
+    <div class="kpi"><div class="kpi-accent" style="background:linear-gradient(90deg,var(--teal),var(--green))"></div><div class="kpi-label">الربح الإجمالي</div><div class="kpi-val">OMR 41.9K</div><span class="kpi-delta neu">هامش 38.4%</span><div class="kpi-sub">الهدف 42% — فجوة 3.6%</div></div>
+    <div class="kpi"><div class="kpi-accent" style="background:linear-gradient(90deg,var(--violet),var(--coral))"></div><div class="kpi-label">صافي الربح</div><div class="kpi-val">OMR 15.8K</div><span class="kpi-delta up">14.4% ✓ يحقق الهدف</span><div class="kpi-sub">كان الهدف 12%</div></div>
+    <div class="kpi"><div class="kpi-accent" style="background:linear-gradient(90deg,var(--amber),var(--coral))"></div><div class="kpi-label">منتجات تحت حد الهامش</div><div class="kpi-val">16 / 47</div><span class="kpi-delta dn">مراجعة عاجلة</span><div class="kpi-sub">3 منتجات تخسر بشكل فعلي</div></div>
+  </div>
+
+  <!-- STORY CARDS -->
+  <div class="story-card" style="border-left:4px solid var(--red)">
+    <div class="sc-label" style="color:var(--red)">⚡ حرج — تصرف اليوم</div>
+    <div class="sc-headline">المعدات الثقيلة تسحب هامشك الإجمالي لأسفل بمقدار 4.2 نقطة</div>
+    <div class="sc-body">الدمبل 10 كجم والكيتل بيل وعجلة البطن معاً تولّد 35 ألف ر.ع إيرادات لكن ربح صافي مجمّع 700 ر.ع فقط. سبب المشكلة: تكاليف الشحن المرتفعة (متوسط 22% من إيرادات المعدات الثقيلة مقابل 9% للمكملات). هامشك الإجمالي CM1 الحالي 38.4% — الهدف 42%، وهذه المنتجات الثلاثة وحدها تشكّل كامل الفجوة.<br><br>الإجراء المقترح: أعِد التفاوض على أسعار الشحن مع الناقل أو ارفع الحد الأدنى للطلب لتوزيع تكاليف اللوجستيات. إذا فشل التفاوض خلال 30 يوماً فكّر في إيقاف خط الدمبل — فهو يستهلك 470 ر.ع شهرياً بعد التكاليف.</div>
+    <div class="sc-actions">
+      <button class="sc-action-btn primary">📊 عرض تفصيل المنتج</button>
+      <button class="sc-action-btn warn">💬 تم إرسال تنبيه واتساب إليك</button>
+    </div>
+  </div>
+
+  <div class="story-card" style="border-left:4px solid var(--amber)">
+    <div class="sc-label" style="color:var(--amber-dark)">◈ فرصة — هذا الأسبوع</div>
+    <div class="sc-headline">6,900 ر.ع من النقد راكدة في 4 منتجات — تكلفك 350 ر.ع/شهر في رسوم المستودع</div>
+    <div class="sc-body">فوم رولر V1 وأثقال الكاحل وحبل القفز الأساسي وقفازات الجيم XS لم تتحرك منذ 91–127 يوماً. بمعدلات المستودع الحالية، هذا المخزون يكلّفك 350 ر.ع/شهر رسوماً دون أي إيراد. حملة خصم 20% مستهدفة لقائمة عملائك ستصفّي هذا المخزون خلال 30 يوماً وتسترجع 5,500 ر.ع نقداً.<br><br>الإجراء المقترح: أرسل عرضاً ترويجياً لعملاء الفئة الذهبية والفضية هذا الأسبوع. أعطِ الأولوية للفوم رولر وأثقال الكاحل — أعلى القيمة.</div>
+    <div class="sc-actions">
+      <button class="sc-action-btn warn">📦 عرض تقرير المخزون الراكد</button>
+      <button class="sc-action-btn primary">📧 صياغة عرض للعملاء</button>
+    </div>
+  </div>
+
+  <div class="story-card" style="border-left:4px solid var(--teal)">
+    <div class="sc-label" style="color:var(--teal-dark)">✓ أخبار جيدة — ضاعف الجهود</div>
+    <div class="sc-headline">زجاجة الشيكر وأحزمة المقاومة هي منتجاتك الأعلى هامشاً — والمخزون ينفد</div>
+    <div class="sc-body">زجاجة الشيكر تحقق هامش صافي 33% (CM3) مع وزن منخفض ودورة بيع سريعة — أفضل منتجاتك من حيث الربحية لكل ر.ع مستثمر. أحزمة المقاومة تليها بـ 28% CM3. كلاهما تحت مستوى المخزون الأدنى (14 و22 وحدة على التوالي). إذا نفدت أي منهما، تخسر ما يقدّر بـ 1,800–2,400 ر.ع/أسبوع من إيرادات عالية الهامش.<br><br>الإجراء المقترح: أطلب إعادة تزويد لزجاجات الشيكر (500 وحدة) وأحزمة المقاومة (200 وحدة) اليوم. فكّر في التفاوض على التزام بحجم طلب مقابل تخفيض 5% من تكلفة البضاعة.</div>
+    <div class="sc-actions">
+      <button class="sc-action-btn success">📦 اطلب الآن</button>
+      <button class="sc-action-btn primary">💰 عرض تحليل الهامش</button>
+    </div>
+  </div>
+
+  <div class="grid-3">
+    <div class="card">
+      <div class="card-header"><div class="card-title">اتجاه الإيرادات خلال 6 أشهر</div><div class="card-badge green">+12% شهرياً</div></div>
+      <div class="bar-chart">
+        <div class="bar-col"><div class="bar-fill" style="height:52%;background:var(--bg4)"></div><div class="bar-lbl">سبت</div><div class="bar-val">77K</div></div>
+        <div class="bar-col"><div class="bar-fill" style="height:58%;background:var(--bg4)"></div><div class="bar-lbl">أكت</div><div class="bar-val">84K</div></div>
+        <div class="bar-col"><div class="bar-fill" style="height:61%;background:var(--bg4)"></div><div class="bar-lbl">نوف</div><div class="bar-val">89K</div></div>
+        <div class="bar-col"><div class="bar-fill" style="height:64%;background:var(--bg4)"></div><div class="bar-lbl">ديس</div><div class="bar-val">93K</div></div>
+        <div class="bar-col"><div class="bar-fill" style="height:67%;background:var(--bg4)"></div><div class="bar-lbl">ين</div><div class="bar-val">97K</div></div>
+        <div class="bar-col"><div class="bar-fill" style="height:75%;background:linear-gradient(180deg,var(--indigo),var(--sky))"></div><div class="bar-lbl" style="color:var(--indigo);font-weight:600">فبر</div><div class="bar-val" style="color:var(--indigo)">109K</div></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header"><div class="card-title">أفضل وأسوأ المنتجات</div></div>
+      <div style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px">النجوم — CM3 أعلى من 20%</div>
+      <div class="progress-row"><div class="progress-label">Shaker Bottle</div><div class="progress-track"><div class="progress-fill" style="width:100%;background:var(--teal)"></div></div><div class="progress-val" style="color:var(--teal-dark)">33%</div></div>
+      <div class="progress-row"><div class="progress-label">Resistance Bands</div><div class="progress-track"><div class="progress-fill" style="width:85%;background:var(--indigo)"></div></div><div class="progress-val" style="color:var(--indigo-dark)">28%</div></div>
+      <div style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin:10px 0 8px">المشاكل — CM3 أقل من 5%</div>
+      <div class="progress-row"><div class="progress-label">Dumbbell 10kg</div><div class="progress-track"><div class="progress-fill" style="width:7%;background:var(--coral)"></div></div><div class="progress-val" style="color:var(--red)">2%</div></div>
+      <div class="progress-row"><div class="progress-label">Kettlebell 12kg</div><div class="progress-track"><div class="progress-fill" style="width:4%;background:var(--coral)"></div></div><div class="progress-val" style="color:var(--red)">-2%</div></div>
+    </div>
+    <div class="card">
+      <div class="card-header"><div class="card-title">التنبيهات الآن</div><div class="card-badge red">3 حرجة</div></div>
+      <div class="alert red"><div class="alert-icon">⚠</div><div><div class="alert-title">هامش الدمبل: 2%</div><div class="alert-body">الشحن = 22% من الإيرادات. تجاوز الحد المسموح.</div><div class="alert-action">→ تم إرسال رسالة واتساب 07:14 اليوم</div></div></div>
+      <div class="alert amber"><div class="alert-icon">◈</div><div><div class="alert-title">سبورت بلس مباشر متأخر 12 يوماً</div><div class="alert-body">5,510 ر.ع متأخر. لا رد على البريد الإلكتروني.</div><div class="alert-action">→ يُنصح: إيقاف الشحنة التالية</div></div></div>
+      <div class="alert amber"><div class="alert-icon">◈</div><div><div class="alert-title">زجاجة الشيكر: 14 وحدة متبقية</div><div class="alert-body">تبيع 70 وحدة/أسبوع. نفاد المخزون خلال 3 أيام.</div><div class="alert-action">→ اطلب 500 وحدة اليوم</div></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════ P&L -->
+<div class="section" id="sec-pl">
+  <div class="section-header"><h1>الأرباح والخسائر · هوامش المساهمة</h1><p>من الإيرادات إلى صافي الربح — كل تكلفة مرئية · محسوبة تلقائياً من جداول جوجل</p></div>
+
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-accent" style="background:var(--indigo)"></div><div class="kpi-label">الإيرادات</div><div class="kpi-val">OMR 109K</div><span class="kpi-delta info">خط الأساس</span></div>
+    <div class="kpi"><div class="kpi-accent" style="background:var(--teal)"></div><div class="kpi-label">الربح الإجمالي CM1</div><div class="kpi-val">OMR 41.9K</div><span class="kpi-delta up">38.4%</span><div class="kpi-sub">بعد تكلفة المنتج فقط</div></div>
+    <div class="kpi"><div class="kpi-accent" style="background:var(--sky)"></div><div class="kpi-label">بعد المتغيرات CM2</div><div class="kpi-val">OMR 21.9K</div><span class="kpi-delta up">20.1%</span><div class="kpi-sub">After logistics & commissions</div></div>
+    <div class="kpi"><div class="kpi-accent" style="background:var(--green)"></div><div class="kpi-label">صافي الربح CM3</div><div class="kpi-val">OMR 15.8K</div><span class="kpi-delta up">14.4%</span><div class="kpi-sub">بعد جميع التكاليف الثابتة</div></div>
+  </div>
+
+  <div class="grid-60-40">
+    <div class="card">
+      <div class="card-header"><div class="card-title">شلال الأرباح والخسائر — فبراير 2026</div><div class="card-badge green">تفصيل كامل</div></div>
+      <div class="wf-row"><div class="wf-label">الإيرادات</div><div class="wf-track"><div class="wf-fill" style="width:100%;background:var(--indigo-bg);border:1px solid rgba(76,95,247,0.2)"><span class="wf-num" style="color:var(--indigo-dark)">OMR 109,000</span></div></div><div class="wf-pct">100%</div></div>
+      <div class="wf-row"><div class="wf-label">− تكلفة البضاعة</div><div class="wf-track"><div class="wf-fill" style="width:62%;background:var(--red-bg);border:1px solid rgba(220,38,38,0.18)"><span class="wf-num" style="color:var(--red)">−OMR 67,200</span></div></div><div class="wf-pct" style="color:var(--red)">61.6%</div></div>
+      <div class="wf-row"><div class="wf-label" style="font-weight:700;color:var(--teal-dark);font-size:12px">= الربح الإجمالي CM1</div><div class="wf-track" style="background:transparent"><div class="wf-fill" style="width:38%;background:var(--teal-bg);border:1.5px solid rgba(0,194,168,0.35)"><span class="wf-num" style="color:var(--teal-dark)">OMR 41,900</span></div></div><div class="wf-pct" style="color:var(--teal-dark)">38.4%</div></div>
+      <div class="wf-row"><div class="wf-label">− اللوجستيات / الشحن</div><div class="wf-track"><div class="wf-fill" style="width:9%;background:var(--red-bg);border:1px solid rgba(220,38,38,0.15)"><span class="wf-num" style="color:var(--red)">−OMR 10,000</span></div></div><div class="wf-pct" style="color:var(--red)">9.2%</div></div>
+      <div class="wf-row"><div class="wf-label">− عمولات المبيعات</div><div class="wf-track"><div class="wf-fill" style="width:5%;background:var(--red-bg);border:1px solid rgba(220,38,38,0.15)"><span class="wf-num" style="color:var(--red)">−OMR 5,400</span></div></div><div class="wf-pct" style="color:var(--red)">4.9%</div></div>
+      <div class="wf-row"><div class="wf-label">− رسوم الدفع</div><div class="wf-track"><div class="wf-fill" style="width:4%;background:var(--red-bg);border:1px solid rgba(220,38,38,0.15)"><span class="wf-num" style="color:var(--red)">−OMR 4,600</span></div></div><div class="wf-pct" style="color:var(--red)">4.2%</div></div>
+      <div class="wf-row"><div class="wf-label" style="font-weight:700;color:#0369a1;font-size:12px">= CM2</div><div class="wf-track" style="background:transparent"><div class="wf-fill" style="width:20%;background:var(--sky-bg);border:1.5px solid rgba(14,165,233,0.3)"><span class="wf-num" style="color:#0369a1">OMR 21,900</span></div></div><div class="wf-pct" style="color:#0369a1">20.1%</div></div>
+      <div class="wf-row"><div class="wf-label">− إيجار المستودع</div><div class="wf-track"><div class="wf-fill" style="width:4%;background:var(--red-bg);border:1px solid rgba(220,38,38,0.15)"><span class="wf-num" style="color:var(--red)">−OMR 3,100</span></div></div><div class="wf-pct" style="color:var(--red)">2.8%</div></div>
+      <div class="wf-row"><div class="wf-label">− الموظفون / الرواتب</div><div class="wf-track"><div class="wf-fill" style="width:3%;background:var(--red-bg);border:1px solid rgba(220,38,38,0.15)"><span class="wf-num" style="color:var(--red)">−OMR 2,300</span></div></div><div class="wf-pct" style="color:var(--red)">2.1%</div></div>
+      <div class="wf-row"><div class="wf-label">− البرامج والإدارة</div><div class="wf-track"><div class="wf-fill" style="width:1%;background:var(--red-bg);border:1px solid rgba(220,38,38,0.15)"><span class="wf-num" style="color:var(--red)">−OMR 770</span></div></div><div class="wf-pct" style="color:var(--red)">0.7%</div></div>
+      <div class="wf-row"><div class="wf-label" style="font-weight:700;color:var(--green-dark);font-size:13px">= صافي الربح CM3</div><div class="wf-track" style="height:30px;background:transparent"><div class="wf-fill" style="width:14%;background:var(--green-bg);border:2px solid rgba(16,185,129,0.4)"><span class="wf-num" style="color:var(--green-dark)">OMR 15,800</span></div></div><div class="wf-pct" style="color:var(--green-dark)">14.4%</div></div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:14px">
+      <!-- DONUT: cost breakdown -->
+      <div class="card">
+        <div class="card-header"><div class="card-title">تفصيل التكاليف</div><div class="card-badge">من إجمالي تكلفة 93,200 ر.ع</div></div>
+        <div class="donut-wrap">
+          <canvas id="donutCost" width="110" height="110"></canvas>
+          <div class="donut-legend">
+            <div class="legend-item"><div class="legend-dot" style="background:#e05555"></div><span>تكلفة البضاعة <b>72.1%</b></span></div>
+            <div class="legend-item"><div class="legend-dot" style="background:#f59e0b"></div><span>اللوجستيات <b>10.7%</b></span></div>
+            <div class="legend-item"><div class="legend-dot" style="background:#4c5ff7"></div><span>العمولات <b>5.8%</b></span></div>
+            <div class="legend-item"><div class="legend-dot" style="background:#0ea5e9"></div><span>رسوم الدفع <b>4.9%</b></span></div>
+            <div class="legend-item"><div class="legend-dot" style="background:#10b981"></div><span>التكاليف الثابتة <b>6.5%</b></span></div>
+          </div>
+        </div>
+      </div>
+      <!-- Variable vs Fixed -->
+      <div class="card">
+        <div class="card-header"><div class="card-title">التكاليف المتغيرة مقابل الثابتة</div></div>
+        <div style="margin-bottom:10px">
+          <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:5px"><span style="color:var(--muted2)">التكاليف المتغيرة</span><span style="font-family:var(--font-mono);font-weight:500;color:var(--coral)">OMR 20,000 · 18.3%</span></div>
+          <div style="height:10px;background:var(--bg3);border-radius:5px;overflow:hidden"><div style="height:100%;width:55%;background:linear-gradient(90deg,var(--coral),var(--amber));border-radius:5px"></div></div>
+          <div style="font-size:10px;color:var(--muted);margin-top:3px">الشحن، العمولات، رسوم الدفع — تتناسب مع حجم المبيعات</div>
+        </div>
+        <div>
+          <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:5px"><span style="color:var(--muted2)">التكاليف الثابتة</span><span style="font-family:var(--font-mono);font-weight:500;color:var(--indigo)">OMR 6,170 · 5.7%</span></div>
+          <div style="height:10px;background:var(--bg3);border-radius:5px;overflow:hidden"><div style="height:100%;width:17%;background:linear-gradient(90deg,var(--indigo),var(--violet));border-radius:5px"></div></div>
+          <div style="font-size:10px;color:var(--muted);margin-top:3px">المستودع، الموظفون، الإدارة — ثابتة شهرياً بغض النظر عن المبيعات</div>
+        </div>
+        <div style="margin-top:12px;padding-top:10px;border-top:1px solid var(--border)">
+          <div style="font-size:11px;color:var(--muted2)">رؤية: مقابل كل 1,000 ر.ع إضافية في المبيعات، تذهب 183 ر.ع فقط للتكاليف المتغيرة — <b style="color:var(--teal-dark)">رافعة تشغيلية قوية.</b></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Margin by category -->
+  <div class="card">
+    <div class="card-header"><div class="card-title">الهامش حسب فئة المنتج</div><div class="card-badge">هامش المساهمة 1 · 2 · 3 لكل فئة</div></div>
+    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:12px">
+      <div style="text-align:center">
+        <div style="font-size:11px;color:var(--muted);margin-bottom:8px">المكملات الغذائية</div>
+        <div style="display:flex;flex-direction:column;gap:4px;align-items:center">
+          <div style="width:100%;height:60px;background:var(--bg3);border-radius:6px;display:flex;align-items:flex-end;overflow:hidden"><div style="width:100%;height:90%;background:linear-gradient(180deg,var(--teal),rgba(0,194,168,0.4));border-radius:6px"></div></div>
+          <div style="font-size:12px;font-family:var(--font-mono);color:var(--teal-dark);font-weight:500">CM1 45%</div>
+          <div style="font-size:11px;color:var(--muted2)">CM2 30% · CM3 21%</div>
+        </div>
+      </div>
+      <div style="text-align:center">
+        <div style="font-size:11px;color:var(--muted);margin-bottom:8px">الإكسسوارات</div>
+        <div style="display:flex;flex-direction:column;gap:4px;align-items:center">
+          <div style="width:100%;height:60px;background:var(--bg3);border-radius:6px;display:flex;align-items:flex-end;overflow:hidden"><div style="width:100%;height:82%;background:linear-gradient(180deg,var(--sky),rgba(14,165,233,0.4));border-radius:6px"></div></div>
+          <div style="font-size:12px;font-family:var(--font-mono);color:#0369a1;font-weight:500">CM1 51%</div>
+          <div style="font-size:11px;color:var(--muted2)">CM2 36% · CM3 25%</div>
+        </div>
+      </div>
+      <div style="text-align:center">
+        <div style="font-size:11px;color:var(--muted);margin-bottom:8px">أدوات التعافي</div>
+        <div style="display:flex;flex-direction:column;gap:4px;align-items:center">
+          <div style="width:100%;height:60px;background:var(--bg3);border-radius:6px;display:flex;align-items:flex-end;overflow:hidden"><div style="width:100%;height:57%;background:linear-gradient(180deg,var(--violet),rgba(124,58,237,0.4));border-radius:6px"></div></div>
+          <div style="font-size:12px;font-family:var(--font-mono);color:var(--violet);font-weight:500">CM1 35%</div>
+          <div style="font-size:11px;color:var(--muted2)">CM2 20% · CM3 12%</div>
+        </div>
+      </div>
+      <div style="text-align:center">
+        <div style="font-size:11px;color:var(--muted);margin-bottom:8px">معدات خفيفة</div>
+        <div style="display:flex;flex-direction:column;gap:4px;align-items:center">
+          <div style="width:100%;height:60px;background:var(--bg3);border-radius:6px;display:flex;align-items:flex-end;overflow:hidden"><div style="width:100%;height:42%;background:linear-gradient(180deg,var(--amber),rgba(245,158,11,0.4));border-radius:6px"></div></div>
+          <div style="font-size:12px;font-family:var(--font-mono);color:var(--amber-dark);font-weight:500">CM1 28%</div>
+          <div style="font-size:11px;color:var(--muted2)">CM2 15% · CM3 8%</div>
+        </div>
+      </div>
+      <div style="text-align:center">
+        <div style="font-size:11px;color:var(--muted);margin-bottom:8px">معدات ثقيلة</div>
+        <div style="display:flex;flex-direction:column;gap:4px;align-items:center">
+          <div style="width:100%;height:60px;background:var(--bg3);border-radius:6px;display:flex;align-items:flex-end;overflow:hidden"><div style="width:100%;height:14%;background:linear-gradient(180deg,var(--coral),rgba(255,77,109,0.4));border-radius:6px"></div></div>
+          <div style="font-size:12px;font-family:var(--font-mono);color:var(--red);font-weight:500">CM1 16%</div>
+          <div style="font-size:11px;color:var(--muted2)">CM2 6% · CM3 2%</div>
+        </div>
+      </div>
+    </div>
+    <div class="insight-box" style="margin-top:14px;margin-bottom:0">
+      <div class="ib-title">📊 رؤية: الإكسسوارات والمكملات هي محرك أرباحك. المعدات الثقيلة هي فخ الحجم.</div>
+      <div class="ib-body">الإكسسوارات تحقق 25% CM3 على 30 ألف ر.ع إيرادات = 7,500 ر.ع ربح صافي. المعدات الثقيلة تحقق 2% CM3 فقط على 35 ألف ر.ع = 700 ر.ع. إيراداتك من المعدات الثقيلة أعلى بـ 17%، لكن ربحك منها أقل بـ 91%. إعادة توازن مزيج منتجاتك نحو المكملات والإكسسوارات ستضيف ما يقارب 4,200 ر.ع/شهر للربح الصافي دون إضافة عميل واحد جديد.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════ PRODUCTS -->
+<div class="section" id="sec-products">
+  <div class="section-header"><h1>ربحية المنتجات</h1><p>تفصيل الهامش لكل منتج — تحديث تلقائي كل 60 ثانية</p></div>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-accent" style="background:var(--indigo)"></div><div class="kpi-label">إجمالي المنتجات</div><div class="kpi-val">47</div><span class="kpi-delta info">نشطة</span></div>
+    <div class="kpi"><div class="kpi-accent" style="background:var(--teal)"></div><div class="kpi-label">منتجات نجمة (CM3&gt;20%)</div><div class="kpi-val">8</div><span class="kpi-delta up">استثمر هنا</span></div>
+    <div class="kpi"><div class="kpi-accent" style="background:var(--amber)"></div><div class="kpi-label">تحتاج تحسيناً (8–20%)</div><div class="kpi-val">23</div><span class="kpi-delta neu">حسّن التسعير</span></div>
+    <div class="kpi"><div class="kpi-accent" style="background:var(--coral)"></div><div class="kpi-label">تخسر بشكل فعلي (أقل من 8%)</div><div class="kpi-val">16</div><span class="kpi-delta dn">تصرف فوراً</span></div>
+  </div>
+  <div class="card" style="margin-bottom:14px">
+    <div class="card-header"><div class="card-title">مصفوفة ربحية المنتجات</div><div class="card-badge">أفضل 12 من 47 منتجاً</div></div>
+    <table class="data-table">
+      <thead><tr><th>المنتج</th><th>الفئة</th><th class="right">الإيرادات</th><th class="right">COGS</th><th class="right">CM1</th><th class="right">CM2</th><th class="right">CM3</th><th style="width:80px">الهامش</th><th>الحالة</th></tr></thead>
+      <tbody>
+        <tr><td>Shaker Bottle 700ml</td><td style="color:var(--muted)">الإكسسوارات</td><td class="right mono">OMR 8,500</td><td class="right mono">OMR 3,500</td><td class="right mono" style="color:var(--teal-dark)">59%</td><td class="right mono" style="color:var(--teal-dark)">44%</td><td class="right mono" style="color:var(--teal-dark)">33%</td><td><div class="margin-bar"><div class="margin-fill" style="width:100%;background:var(--teal)"></div></div></td><td><span class="pill hi">⭐ نجمة</span></td></tr>
+        <tr><td>Resistance Bands Set</td><td style="color:var(--muted)">معدات خفيفة</td><td class="right mono">OMR 14,600</td><td class="right mono">OMR 6,900</td><td class="right mono" style="color:var(--teal-dark)">53%</td><td class="right mono" style="color:var(--teal-dark)">38%</td><td class="right mono" style="color:var(--teal-dark)">28%</td><td><div class="margin-bar"><div class="margin-fill" style="width:85%;background:var(--teal)"></div></div></td><td><span class="pill hi">⭐ نجمة</span></td></tr>
+        <tr><td>Whey Protein 1kg</td><td style="color:var(--muted)">المكملات الغذائية</td><td class="right mono">OMR 20,000</td><td class="right mono">OMR 10,800</td><td class="right mono" style="color:#0369a1">46%</td><td class="right mono" style="color:#0369a1">31%</td><td class="right mono" style="color:#0369a1">22%</td><td><div class="margin-bar"><div class="margin-fill" style="width:67%;background:var(--sky)"></div></div></td><td><span class="pill info">جيد</span></td></tr>
+        <tr><td>BCAA 300g</td><td style="color:var(--muted)">المكملات الغذائية</td><td class="right mono">OMR 6,900</td><td class="right mono">OMR 3,850</td><td class="right mono" style="color:#0369a1">44%</td><td class="right mono" style="color:#0369a1">29%</td><td class="right mono" style="color:#0369a1">19%</td><td><div class="margin-bar"><div class="margin-fill" style="width:58%;background:var(--sky)"></div></div></td><td><span class="pill info">جيد</span></td></tr>
+        <tr><td>Pre-Workout 300g</td><td style="color:var(--muted)">المكملات الغذائية</td><td class="right mono">OMR 16,900</td><td class="right mono">OMR 11,550</td><td class="right mono" style="color:var(--amber-dark)">32%</td><td class="right mono" style="color:var(--amber-dark)">19%</td><td class="right mono" style="color:var(--amber-dark)">11%</td><td><div class="margin-bar"><div class="margin-fill" style="width:33%;background:var(--amber)"></div></div></td><td><span class="pill mid">تحسين</span></td></tr>
+        <tr><td>Yoga Mat Premium</td><td style="color:var(--muted)">معدات خفيفة</td><td class="right mono">OMR 11,200</td><td class="right mono">OMR 8,100</td><td class="right mono" style="color:var(--amber-dark)">28%</td><td class="right mono" style="color:var(--amber-dark)">14%</td><td class="right mono" style="color:var(--amber-dark)">6%</td><td><div class="margin-bar"><div class="margin-fill" style="width:18%;background:var(--amber)"></div></div></td><td><span class="pill lo">الإجراء</span></td></tr>
+        <tr><td>Creatine 500g</td><td style="color:var(--muted)">المكملات الغذائية</td><td class="right mono">OMR 6,200</td><td class="right mono">OMR 4,600</td><td class="right mono" style="color:var(--amber-dark)">25%</td><td class="right mono" style="color:var(--amber-dark)">12%</td><td class="right mono" style="color:var(--amber-dark)">5%</td><td><div class="margin-bar"><div class="margin-fill" style="width:15%;background:var(--amber)"></div></div></td><td><span class="pill lo">الإجراء</span></td></tr>
+        <tr><td>Dumbbell 10kg pair</td><td style="color:var(--muted)">معدات ثقيلة</td><td class="right mono">OMR 23,500</td><td class="right mono">OMR 19,250</td><td class="right mono" style="color:var(--red)">18%</td><td class="right mono" style="color:var(--red)">8%</td><td class="right mono" style="color:var(--red)">2%</td><td><div class="margin-bar"><div class="margin-fill" style="width:7%;background:var(--coral)"></div></div></td><td><span class="pill lo">حرج</span></td></tr>
+        <tr><td>Ab Wheel</td><td style="color:var(--muted)">معدات ثقيلة</td><td class="right mono">OMR 2,300</td><td class="right mono">OMR 1,930</td><td class="right mono" style="color:var(--red)">17%</td><td class="right mono" style="color:var(--red)">6%</td><td class="right mono" style="color:var(--red)">1%</td><td><div class="margin-bar"><div class="margin-fill" style="width:4%;background:var(--coral)"></div></div></td><td><span class="pill lo">حرج</span></td></tr>
+        <tr><td>Kettlebell 12kg</td><td style="color:var(--muted)">معدات ثقيلة</td><td class="right mono">OMR 9,200</td><td class="right mono">OMR 8,100</td><td class="right mono" style="color:var(--red)">13%</td><td class="right mono" style="color:var(--red)">4%</td><td class="right mono" style="color:var(--red)">−2%</td><td><div class="margin-bar"><div class="margin-fill" style="width:2%;background:var(--coral)"></div></div></td><td><span class="pill lo">إلغاء؟</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════ INVENTORY -->
+<div class="section" id="sec-inventory">
+  <div class="section-header"><h1>المخزون والمخزون الراكد</h1><p>معدلات البيع، البطيئة الحركة والنقد المحتجز في المستودع</p></div>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-accent" style="background:var(--indigo)"></div><div class="kpi-label">إجمالي قيمة المخزون</div><div class="kpi-val">OMR 54.7K</div><span class="kpi-delta info">في المستودع</span></div>
+    <div class="kpi"><div class="kpi-accent" style="background:var(--coral)"></div><div class="kpi-label">مخزون راكد (90+ يوم)</div><div class="kpi-val">OMR 6.9K</div><span class="kpi-delta dn">نقد محتجز</span><div class="kpi-sub">تكلّف 350 ر.ع/شهر في رسوم المستودع</div></div>
+    <div class="kpi"><div class="kpi-accent" style="background:var(--teal)"></div><div class="kpi-label">متوسط معدل البيع</div><div class="kpi-val">67%</div><span class="kpi-delta neu">شهرياً</span></div>
+    <div class="kpi"><div class="kpi-accent" style="background:var(--amber)"></div><div class="kpi-label">تنبيهات إعادة الطلب</div><div class="kpi-val">6 SKUs</div><span class="kpi-delta neu">تحت الحد الأدنى</span></div>
+  </div>
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-header"><div class="card-title">المخزون الراكد — نقد محتجز</div><div class="card-badge red">6.9 ألف ر.ع في خطر</div></div>
+      <table class="data-table">
+        <thead><tr><th>المنتج</th><th class="right">القيمة</th><th class="right">أيام الركود</th><th>الإجراء</th></tr></thead>
+        <tbody>
+          <tr><td>Foam Roller V1 (old)</td><td class="right mono" style="color:var(--red)">OMR 2,460</td><td class="right mono" style="color:var(--red)">127 يوماً</td><td><span class="pill lo">تصفية</span></td></tr>
+          <tr><td>Ankle Weights 2kg</td><td class="right mono" style="color:var(--red)">OMR 1,620</td><td class="right mono" style="color:var(--red)">104 يوماً</td><td><span class="pill lo">خصم</span></td></tr>
+          <tr><td>Jump Rope Basic</td><td class="right mono" style="color:var(--amber-dark)">OMR 1,850</td><td class="right mono" style="color:var(--amber-dark)">98 يوماً</td><td><span class="pill mid">تجميع</span></td></tr>
+          <tr><td>Gym Gloves XS</td><td class="right mono" style="color:var(--amber-dark)">OMR 1,000</td><td class="right mono" style="color:var(--amber-dark)">91 يوماً</td><td><span class="pill mid">ترويج</span></td></tr>
+        </tbody>
+      </table>
+      <div class="alert amber" style="margin-top:12px;margin-bottom:0"><div class="alert-icon">◈</div><div><div class="alert-title">كل شهر إضافي في المستودع = 350 ر.ع مهدرة</div><div class="alert-body">حملة خصم 20% لعملاء الذهب والفضة هذا الأسبوع ستصفي هذا المخزون خلال 30 يوماً وتسترجع 5,500 ر.ع.</div></div></div>
+    </div>
+    <div class="card">
+      <div class="card-header"><div class="card-title">معدل البيع حسب الفئة</div></div>
+      <div class="progress-row"><div class="progress-label">المكملات الغذائية</div><div class="progress-track" style="width:140px"><div class="progress-fill" style="width:91%;background:var(--teal)"></div></div><div class="progress-val" style="color:var(--teal-dark)">91%</div></div>
+      <div class="progress-row"><div class="progress-label">الإكسسوارات</div><div class="progress-track" style="width:140px"><div class="progress-fill" style="width:84%;background:var(--indigo)"></div></div><div class="progress-val" style="color:var(--indigo-dark)">84%</div></div>
+      <div class="progress-row"><div class="progress-label">أدوات التعافي</div><div class="progress-track" style="width:140px"><div class="progress-fill" style="width:62%;background:var(--sky)"></div></div><div class="progress-val" style="color:#0369a1">62%</div></div>
+      <div class="progress-row"><div class="progress-label">المعدات الخفيفة</div><div class="progress-track" style="width:140px"><div class="progress-fill" style="width:54%;background:var(--amber)"></div></div><div class="progress-val" style="color:var(--amber-dark)">54%</div></div>
+      <div class="progress-row"><div class="progress-label">المعدات الثقيلة</div><div class="progress-track" style="width:140px"><div class="progress-fill" style="width:31%;background:var(--coral)"></div></div><div class="progress-val" style="color:var(--red)">31%</div></div>
+      <div style="margin-top:12px;border-top:1px solid var(--border);padding-top:12px">
+        <div style="font-size:11px;color:var(--muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em">اطلب الآن</div>
+        <div class="alert green" style="margin-bottom:7px"><div class="alert-icon">↓</div><div><div class="alert-title">بروتين واي 1 كجم — 8 وحدات متبقية</div><div class="alert-body">يُباع 22 وحدة/أسبوع. نفاد المخزون خلال 2.5 يوم. اطلب 200 وحدة.</div></div></div>
+        <div class="alert green"><div class="alert-icon">↓</div><div><div class="alert-title">زجاجة الشيكر — 14 وحدة متبقية</div><div class="alert-body">الأكثر مبيعاً. نفاد المخزون خلال 3 أيام. اطلب 500 وحدة.</div></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════ CLIENTS -->
+<div class="section" id="sec-عملاء">
+  <div class="section-header"><h1>ربحية العملاء</h1><p>من يجلب لك المال فعلاً — بعد التسليم والمرتجعات وشروط الدفع</p></div>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-accent" style="background:var(--indigo)"></div><div class="kpi-label">العملاء النشطون</div><div class="kpi-val">24</div><span class="kpi-delta up">+3 هذا الربع</span></div>
+    <div class="kpi"><div class="kpi-accent" style="background:var(--teal)"></div><div class="kpi-label">متوسط صافي الربح/عميل</div><div class="kpi-val">OMR 658</div><span class="kpi-delta neu">شهرياً</span></div>
+    <div class="kpi"><div class="kpi-accent" style="background:var(--amber)"></div><div class="kpi-label">حصة أفضل 5 عملاء</div><div class="kpi-val">61%</div><span class="kpi-delta neu">خطر التركيز</span></div>
+    <div class="kpi"><div class="kpi-accent" style="background:var(--coral)"></div><div class="kpi-label">عملاء غير مربحون</div><div class="kpi-val">3</div><span class="kpi-delta dn">يكلفونك المال</span></div>
+  </div>
+
+  <div class="grid-60-40">
+    <div class="card">
+      <div class="card-header"><div class="card-title">ترتيب العملاء — صافي الربح بعد جميع التكاليف</div><div class="card-badge">24 عميل</div></div>
+      <table class="data-table">
+        <thead><tr><th>العميل</th><th>النوع</th><th class="right">الإيرادات</th><th class="right">صافي الربح</th><th class="right">CM3</th><th class="right">أيام الدفع</th><th>الفئة</th></tr></thead>
+        <tbody>
+          <tr><td><div style="display:flex;align-items:center;gap:7px"><div class="client-avatar" style="background:var(--teal-bg);color:var(--teal-dark)">IG</div>Iron Gym Chain</div></td><td style="color:var(--muted)">سلسلة صالات رياضية</td><td class="right mono">OMR 20,000</td><td class="right mono" style="color:var(--teal-dark)">OMR 4,300</td><td class="right mono" style="color:var(--teal-dark)">21.5%</td><td class="right mono">15 ي</td><td><span class="pill hi">بلاتيني</span></td></tr>
+          <tr><td><div style="display:flex;align-items:center;gap:7px"><div class="client-avatar" style="background:var(--indigo-bg);color:var(--indigo-dark)">FL</div>FitLife Centers</div></td><td style="color:var(--muted)">سلسلة صالات رياضية</td><td class="right mono">OMR 14,600</td><td class="right mono" style="color:var(--teal-dark)">OMR 3,210</td><td class="right mono" style="color:var(--teal-dark)">22%</td><td class="right mono">20 ي</td><td><span class="pill hi">بلاتيني</span></td></tr>
+          <tr><td><div style="display:flex;align-items:center;gap:7px"><div class="client-avatar" style="background:var(--violet-bg);color:var(--violet)">PP</div>Peak Performance</div></td><td style="color:var(--muted)">متجر رياضي</td><td class="right mono">OMR 11,200</td><td class="right mono" style="color:#0369a1">OMR 2,240</td><td class="right mono" style="color:#0369a1">20%</td><td class="right mono">22 ي</td><td><span class="pill info">ذهبي</span></td></tr>
+          <tr><td><div style="display:flex;align-items:center;gap:7px"><div class="client-avatar" style="background:var(--amber-bg);color:var(--amber-dark)">BS</div>BodySport LLC</div></td><td style="color:var(--muted)">تجزئة إلكترونية</td><td class="right mono">OMR 8,100</td><td class="right mono" style="color:#0369a1">OMR 1,540</td><td class="right mono" style="color:#0369a1">19%</td><td class="right mono">28 ي</td><td><span class="pill info">ذهبي</span></td></tr>
+          <tr><td><div style="display:flex;align-items:center;gap:7px"><div class="client-avatar" style="background:var(--bg3);color:var(--muted2)">MF</div>MegaFit Wholesale</div></td><td style="color:var(--muted)">تاجر جملة</td><td class="right mono">OMR 16,900</td><td class="right mono" style="color:var(--amber-dark)">OMR 680</td><td class="right mono" style="color:var(--amber-dark)">4%</td><td class="right mono">45 ي</td><td><span class="pill mid">مراجعة</span></td></tr>
+          <tr><td><div style="display:flex;align-items:center;gap:7px"><div class="client-avatar" style="background:var(--red-bg);color:var(--red)">SP</div>SportPlus Direct</div></td><td style="color:var(--muted)">تاجر جملة</td><td class="right mono">OMR 10,800</td><td class="right mono" style="color:var(--red)">−OMR 323</td><td class="right mono" style="color:var(--red)">−3%</td><td class="right mono">60 ي</td><td><span class="pill lo">يخسر ر.ع</span></td></tr>
+        </tbody>
+      </table>
+      <div class="insight-box" style="margin-top:12px;margin-bottom:0">
+        <div class="ib-title">💡 ميغافيت تولّد 16,900 ر.ع إيرادات لكن 680 ر.ع ربحاً فقط — أسوأ من عميل بنصف حجمها</div>
+        <div class="ib-body">خصومات عميقة + 30 يوم دفع = رأس مال محتجز لشهرين تقريباً بعائد 4% فقط. الحل: رفع الأسعار 8% على الأقل أو الانسحاب من هذا العميل. سبورت بلس أسوأ — يخسر 323 ر.ع/شهر بعد تكاليف التسليم.</div>
+      </div>
+    </div>
+
+    <!-- Revenue vs Profit chart -->
+    <div class="card">
+      <div class="card-header"><div class="card-title">الإيرادات مقابل الربح لكل عميل</div><div class="card-badge indigo">الفقاعة = الربح ر.ع</div></div>
+      <div style="position:relative;height:240px;background:var(--bg3);border-radius:var(--r);overflow:hidden">
+        <!-- Axes labels -->
+        <div style="position:absolute;bottom:6px;left:0;right:0;text-align:center;font-size:9px;color:var(--muted);font-family:var(--font-mono)">الإيرادات ←</div>
+        <div style="position:absolute;top:50%;left:6px;font-size:9px;color:var(--muted);font-family:var(--font-mono);transform:translateY(-50%) rotate(-90deg)">الربح</div>
+        <!-- Quadrant lines -->
+        <div style="position:absolute;left:50%;top:0;bottom:20px;border-left:1px dashed var(--border2)"></div>
+        <div style="position:absolute;top:50%;left:20px;right:0;border-top:1px dashed var(--border2)"></div>
+        <!-- Quadrant labels -->
+        <div style="position:absolute;top:8px;left:24px;font-size:9px;color:var(--muted)">إيرادات منخفضة / ربح مرتفع</div>
+        <div style="position:absolute;top:8px;right:8px;font-size:9px;color:var(--teal-dark);font-weight:600">⭐ النقطة المثلى</div>
+        <div style="position:absolute;bottom:26px;left:24px;font-size:9px;color:var(--red)">إيرادات منخفضة / ربح منخفض</div>
+        <div style="position:absolute;bottom:26px;right:8px;font-size:9px;color:var(--amber-dark)">فخ الحجم ⚠</div>
+        <!-- Bubbles: x=revenue position, y=profit position (inverted), size=profit -->
+        <!-- Iron Gym: rev 20K (high), profit 4.3K (high) -->
+        <div style="position:absolute;right:28%;top:18%;width:44px;height:44px;border-radius:50%;background:rgba(0,194,168,0.3);border:2px solid var(--teal);display:flex;align-items:center;justify-content:center;font-size:8px;font-family:var(--font-mono);color:var(--teal-dark);font-weight:600;cursor:default" title="Iron Gym Chain">IG</div>
+        <!-- FitLife: rev 14.6K (mid-high), profit 3.2K -->
+        <div style="position:absolute;right:42%;top:26%;width:38px;height:38px;border-radius:50%;background:rgba(76,95,247,0.2);border:2px solid var(--indigo);display:flex;align-items:center;justify-content:center;font-size:8px;font-family:var(--font-mono);color:var(--indigo-dark);font-weight:600;cursor:default" title="FitLife">FL</div>
+        <!-- Peak: rev 11.2K, profit 2.2K -->
+        <div style="position:absolute;right:56%;top:36%;width:32px;height:32px;border-radius:50%;background:rgba(124,58,237,0.2);border:2px solid var(--violet);display:flex;align-items:center;justify-content:center;font-size:8px;font-family:var(--font-mono);color:var(--violet);font-weight:600;cursor:default" title="Peak Performance">PP</div>
+        <!-- BodySport: rev 8.1K, profit 1.5K -->
+        <div style="position:absolute;left:42%;top:44%;width:26px;height:26px;border-radius:50%;background:rgba(245,158,11,0.2);border:2px solid var(--amber);display:flex;align-items:center;justify-content:center;font-size:7px;font-family:var(--font-mono);color:var(--amber-dark);font-weight:600;cursor:default" title="BodySport">BS</div>
+        <!-- MegaFit: rev 16.9K (high), profit 680 (low) -->
+        <div style="position:absolute;right:30%;bottom:32%;width:22px;height:22px;border-radius:50%;background:rgba(245,158,11,0.15);border:2px dashed var(--amber);display:flex;align-items:center;justify-content:center;font-size:7px;font-family:var(--font-mono);color:var(--amber-dark);font-weight:600;cursor:default" title="MegaFit — Volume trap">MF</div>
+        <!-- SportPlus: rev 10.8K, profit negative -->
+        <div style="position:absolute;left:50%;bottom:18%;width:20px;height:20px;border-radius:50%;background:rgba(220,38,38,0.15);border:2px dashed var(--red);display:flex;align-items:center;justify-content:center;font-size:7px;font-family:var(--font-mono);color:var(--red);font-weight:600;cursor:default" title="SportPlus — Losing money">SP</div>
+      </div>
+      <div style="margin-top:10px;display:flex;flex-wrap:wrap;gap:6px">
+        <div style="font-size:10px;color:var(--muted2)"><span style="color:var(--teal-dark)">●</span> IG · FL · PP = النقطة المثلى</div>
+        <div style="font-size:10px;color:var(--muted2)"><span style="color:var(--amber-dark)">◌</span> MF = فخ الحجم</div>
+        <div style="font-size:10px;color:var(--muted2)"><span style="color:var(--red)">◌</span> SP = يخسر المال</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════ LOYALTY -->
+<div class="section" id="sec-loyalty">
+  <div class="section-header"><h1>برنامج الولاء</h1><p>هيكل الفئات مبني على بيانات الربحية + محاكي العائد على الاستثمار</p></div>
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-header"><div class="card-title">هيكل المستويات المقترح</div><div class="card-badge green">جاهز للإطلاق</div></div>
+      <div class="tier-card" style="border-color:rgba(0,194,168,0.3)">
+        <div class="tier-icon" style="background:var(--teal-bg)">💎</div>
+        <div class="tier-info"><div class="tier-name" style="color:var(--teal-dark)">بلاتيني</div><div class="tier-range">CM3 &gt; 3 آلاف ر.ع/شهر · دفع ≤ 20 يوماً</div><div style="font-size:11px;color:var(--muted);margin-top:3px">مخزون أولوية · خصم 3% · مدير حساب مخصص</div></div>
+        <div style="text-align:right"><div class="tier-count" style="color:var(--teal-dark)">2</div><div class="tier-count-lbl">عملاء</div></div>
+      </div>
+      <div class="tier-card" style="border-color:rgba(14,165,233,0.25)">
+        <div class="tier-icon" style="background:var(--sky-bg)">🥇</div>
+        <div class="tier-info"><div class="tier-name" style="color:#0369a1">ذهبي</div><div class="tier-range">CM3 من 1–3 آلاف ر.ع/شهر · دفع ≤ 30 يوماً</div><div style="font-size:11px;color:var(--muted);margin-top:3px">خصم 2%، وصول مبكر للمنتجات، مراجعة ربع سنوية</div></div>
+        <div style="text-align:right"><div class="tier-count" style="color:#0369a1">5</div><div class="tier-count-lbl">عملاء</div></div>
+      </div>
+      <div class="tier-card" style="border-color:rgba(245,158,11,0.25)">
+        <div class="tier-icon" style="background:var(--amber-bg)">🥈</div>
+        <div class="tier-info"><div class="tier-name" style="color:var(--amber-dark)">فضي</div><div class="tier-range">CM3 من 400–1,000 ر.ع/شهر</div><div style="font-size:11px;color:var(--muted);margin-top:3px">خصم 1%، نشرة شهرية، تدريب</div></div>
+        <div style="text-align:right"><div class="tier-count" style="color:var(--amber-dark)">11</div><div class="tier-count-lbl">عملاء</div></div>
+      </div>
+      <div class="tier-card">
+        <div class="tier-icon" style="background:var(--bg3)">🔵</div>
+        <div class="tier-info"><div class="tier-name">قياسي</div><div class="tier-range">CM3 &lt; 400 ر.ع/شهر أو عملاء جدد</div><div style="font-size:11px;color:var(--muted);margin-top:3px">شروط قياسية، بوابة خدمة ذاتية</div></div>
+        <div style="text-align:right"><div class="tier-count">6</div><div class="tier-count-lbl">عملاء</div></div>
+      </div>
+    </div>
+
+    <!-- LOYALTY ROI SIMULATOR -->
+    <div class="card">
+      <div class="card-header"><div class="card-title">💡 محاكي عائد برنامج الولاء</div><div class="card-badge indigo">تفاعلي</div></div>
+      <div style="font-size:12px;color:var(--muted2);margin-bottom:14px">اضبط المنزلقات لترى كيف يؤتي برنامج الولاء ثماره.</div>
+
+      <div class="slider-wrap">
+        <label>عملاء بلاتينيون</label>
+        <input type="range" id="s_plat" min="1" max="8" value="2" oninput="calcLoyalty()">
+        <span class="val" id="v_plat">2</span>
+      </div>
+      <div class="slider-wrap">
+        <label>متوسط ربح البلاتين/شهر</label>
+        <input type="range" id="s_plat_cm3" min="2000" max="10000" step="100" value="3750" oninput="calcLoyalty()">
+        <span class="val" id="v_plat_cm3">OMR 3,750</span>
+      </div>
+      <div class="slider-wrap">
+        <label>عملاء ذهبيون</label>
+        <input type="range" id="s_gold" min="2" max="12" value="5" oninput="calcLoyalty()">
+        <span class="val" id="v_gold">5</span>
+      </div>
+      <div class="slider-wrap">
+        <label>متوسط ربح الذهب/شهر</label>
+        <input type="range" id="s_gold_cm3" min="800" max="3000" step="50" value="1750" oninput="calcLoyalty()">
+        <span class="val" id="v_gold_cm3">OMR 1,750</span>
+      </div>
+      <div class="slider-wrap">
+        <label>نسبة الخصم المقدم</label>
+        <input type="range" id="s_rebate" min="1" max="5" step="0.5" value="2.5" oninput="calcLoyalty()">
+        <span class="val" id="v_rebate">2.5%</span>
+      </div>
+      <div class="slider-wrap">
+        <label>تحسن معدل الاحتفاظ</label>
+        <input type="range" id="s_ret" min="5" max="25" value="15" oninput="calcLoyalty()">
+        <span class="val" id="v_ret">15%</span>
+      </div>
+
+      <div style="border-top:1px solid var(--border);margin-top:14px;padding-top:14px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px">
+        <div style="text-align:center;background:var(--red-bg);border-radius:var(--r);padding:10px"><div style="font-size:10px;color:var(--red);margin-bottom:4px">تكلفة الخصم</div><div style="font-size:16px;font-family:var(--font-display);color:var(--red)" id="sim_cost">OMR 1,094</div></div>
+        <div style="text-align:center;background:var(--green-bg);border-radius:var(--r);padding:10px"><div style="font-size:10px;color:var(--green-dark);margin-bottom:4px">الإيرادات المحمية</div><div style="font-size:16px;font-family:var(--font-display);color:var(--green-dark)" id="sim_prot">OMR 8,250</div></div>
+        <div style="text-align:center;background:var(--indigo-bg);border-radius:var(--r);padding:10px"><div style="font-size:10px;color:var(--indigo-dark);margin-bottom:4px">صافي العائد / شهر</div><div style="font-size:16px;font-family:var(--font-display);color:var(--indigo)" id="sim_roi">OMR 7,156</div></div>
+      </div>
+      <div style="margin-top:10px;font-size:11px;color:var(--muted2);background:var(--bg3);border-radius:var(--r);padding:10px" id="sim_story">مع 2 عميل بلاتيني و5 عملاء ذهبيين، تكلّف برنامج الولاء 1,094 ر.ع/شهر كخصومات، لكنه يحمي 8,250 ر.ع من الإيرادات الشهرية من خلال تحسين الاستبقاء — بصافي ربح 7,156 ر.ع كل شهر.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════ CASH FLOW -->
+<div class="section" id="sec-cashflow">
+  <div class="section-header"><h1>توقعات التدفق النقدي — 90 يوماً</h1><p>رؤية مستقبلية بناءً على الطلبات الحالية ومستويات المخزون وشروط الدفع</p></div>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-accent" style="background:var(--indigo)"></div><div class="kpi-label">النقد المتاح الآن</div><div class="kpi-val">OMR 24.2K</div><span class="kpi-delta up">صحي</span></div>
+    <div class="kpi"><div class="kpi-accent" style="background:var(--teal)"></div><div class="kpi-label">التدفقات الواردة المتوقعة (30 يوم)</div><div class="kpi-val">OMR 41.6K</div><span class="kpi-delta up">طلبات مؤكدة</span></div>
+    <div class="kpi"><div class="kpi-accent" style="background:var(--coral)"></div><div class="kpi-label">التدفقات الصادرة المتوقعة (30 يوم)</div><div class="kpi-val">OMR 28.5K</div><span class="kpi-delta neu">تكلفة البضاعة + المصاريف</span></div>
+    <div class="kpi"><div class="kpi-accent" style="background:var(--green)"></div><div class="kpi-label">الصافي (30 يوم)</div><div class="kpi-val">+OMR 37.3K</div><span class="kpi-delta up">قوي</span></div>
+  </div>
+
+  <div class="grid-60-40">
+    <div class="card">
+      <div class="card-header"><div class="card-title">توقعات التدفق النقدي لـ 90 يوماً</div><div class="card-badge green">إيجابي في الأشهر الثلاثة ✓</div></div>
+      <!-- April -->
+      <div style="margin-bottom:14px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px"><span style="font-size:12px;font-weight:600;color:var(--text)">أبريل 2026</span><span style="font-size:11px;font-family:var(--font-mono);color:var(--green-dark);background:var(--green-bg);padding:1px 8px;border-radius:20px">Net +OMR 13,100</span></div>
+        <div class="wf-row"><div class="wf-label">التدفقات الواردة</div><div class="wf-track"><div class="wf-fill" style="width:90%;background:var(--teal-bg);border:1px solid rgba(0,194,168,0.25)"><span class="wf-num" style="color:var(--teal-dark)">OMR 41,600</span></div></div></div>
+        <div class="wf-row"><div class="wf-label">التدفقات الصادرة</div><div class="wf-track"><div class="wf-fill" style="width:61%;background:var(--red-bg);border:1px solid rgba(220,38,38,0.18)"><span class="wf-num" style="color:var(--red)">OMR 28,500</span></div></div></div>
+      </div>
+      <!-- May -->
+      <div style="margin-bottom:14px;border-top:1px solid var(--border);padding-top:12px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px"><span style="font-size:12px;font-weight:600;color:var(--text)">مايو 2026</span><span style="font-size:11px;font-family:var(--font-mono);color:var(--green-dark);background:var(--green-bg);padding:1px 8px;border-radius:20px">Net +OMR 14,200</span></div>
+        <div class="wf-row"><div class="wf-label">التدفقات الواردة</div><div class="wf-track"><div class="wf-fill" style="width:95%;background:var(--teal-bg);border:1px solid rgba(0,194,168,0.25)"><span class="wf-num" style="color:var(--teal-dark)">OMR 44,300</span></div></div></div>
+        <div class="wf-row"><div class="wf-label">التدفقات الصادرة</div><div class="wf-track"><div class="wf-fill" style="width:65%;background:var(--red-bg);border:1px solid rgba(220,38,38,0.18)"><span class="wf-num" style="color:var(--red)">OMR 30,000</span></div></div></div>
+      </div>
+      <!-- June -->
+      <div style="border-top:1px solid var(--border);padding-top:12px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px"><span style="font-size:12px;font-weight:600;color:var(--text)">يونيو 2026</span><span style="font-size:11px;font-family:var(--font-mono);color:var(--green-dark);background:var(--green-bg);padding:1px 8px;border-radius:20px">Net +OMR 15,400</span></div>
+        <div class="wf-row"><div class="wf-label">التدفقات الواردة</div><div class="wf-track"><div class="wf-fill" style="width:100%;background:var(--teal-bg);border:1px solid rgba(0,194,168,0.25)"><span class="wf-num" style="color:var(--teal-dark)">OMR 47,000</span></div></div></div>
+        <div class="wf-row"><div class="wf-label">التدفقات الصادرة</div><div class="wf-track"><div class="wf-fill" style="width:68%;background:var(--red-bg);border:1px solid rgba(220,38,38,0.18)"><span class="wf-num" style="color:var(--red)">OMR 31,600</span></div></div></div>
+      </div>
+      <!-- 90-day summary bar -->
+      <div style="margin-top:14px;padding-top:12px;border-top:1px solid var(--border)">
+        <div style="font-size:11px;color:var(--muted);margin-bottom:8px">صافي النقد التراكمي لـ 90 يوماً</div>
+        <div style="height:12px;background:var(--bg3);border-radius:6px;overflow:hidden"><div style="height:100%;width:82%;background:linear-gradient(90deg,var(--teal),var(--green));border-radius:6px"></div></div>
+        <div style="display:flex;justify-content:space-between;margin-top:5px;font-size:11px;font-family:var(--font-mono)"><span style="color:var(--muted)">أبر</span><span style="color:var(--muted)">ماي</span><span style="color:var(--green-dark);font-weight:500">+OMR 42,700 total</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header"><div class="card-title">مخاطر الدفع — الفواتير المتأخرة</div><div class="card-badge amber">25.8 ألف ر.ع مستحقة</div></div>
+      <table class="data-table">
+        <thead><tr><th>العميل</th><th class="right">المتأخر</th><th class="right">الاستحقاق</th><th>الخطر</th></tr></thead>
+        <tbody>
+          <tr><td>Iron Gym Chain</td><td class="right mono">OMR 3,350</td><td class="right mono" style="color:var(--teal-dark)">3 days</td><td><span class="pill hi">في الوعد</span></td></tr>
+          <tr><td>FitLife Centers</td><td class="right mono">OMR 4,780</td><td class="right mono">8 days</td><td><span class="pill hi">في الوعد</span></td></tr>
+          <tr><td>MegaFit Wholesale</td><td class="right mono">OMR 10,100</td><td class="right mono" style="color:var(--amber-dark)">18 days</td><td><span class="pill mid">مراقبة</span></td></tr>
+          <tr><td>SportPlus Direct</td><td class="right mono" style="color:var(--red)">OMR 5,510</td><td class="right mono" style="color:var(--red)">متأخر 12 يوماً</td><td><span class="pill lo">تابع الآن</span></td></tr>
+          <tr><td>BodySport LLC</td><td class="right mono">OMR 2,240</td><td class="right mono">22 days</td><td><span class="pill info">عادي</span></td></tr>
+        </tbody>
+      </table>
+      <div class="alert red" style="margin-top:12px;margin-bottom:0"><div class="alert-icon">⚠</div><div><div class="alert-title">سبورت بلس مباشر — 5,510 ر.ع متأخر 12 يوماً</div><div class="alert-body">تم إرسال تنبيه تلقائي قبل 3 أيام. لا رد. أوقف الشحنة التالية حتى السداد.</div><div class="alert-action">→ تم إرسال تذكير واتساب تلقائياً</div></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════ AUTOMATION -->
+<div class="section" id="sec-automation">
+  <div class="section-header"><h1>إعداد الأتمتة</h1><p>جداول جوجل تتحول إلى نظام ذكاء مالي حي — مشغّل بـ Make.com</p></div>
+
+  <div class="insight-box" style="margin-bottom:20px">
+    <div class="ib-title">✓ لا برامج جديدة. لا محاسب مطلوب. مبني على جداول جوجل التي تستخدمها بالفعل.</div>
+    <div class="ib-body">نضيف الأتمتة فوق جدولك الحالي. تدخل بيعاً أو شراءً — كل شيء آخر يُحسب ويُنبّه ويُقرّر تلقائياً خلال 60 ثانية.</div>
+  </div>
+
+  <div class="card" style="margin-bottom:16px">
+    <div class="card-header"><div class="card-title">كيف يعمل النظام — من البداية إلى النهاية</div></div>
+    <div class="flow-row">
+      <div class="flow-step"><div class="flow-icon">📊</div><div class="flow-lbl">تحدّث جدول جوجل</div></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step"><div class="flow-icon" style="background:var(--indigo-bg);border-color:rgba(76,95,247,0.2)">⚡</div><div class="flow-lbl">Make.com ينطلق تلقائياً</div></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step"><div class="flow-icon">🧮</div><div class="flow-lbl">يُعاد حساب CM1/CM2/CM3</div></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step"><div class="flow-icon">📈</div><div class="flow-lbl">تتحدث اللوحة مباشرةً</div></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step"><div class="flow-icon">🔔</div><div class="flow-lbl">يُرسَل التنبيه فوراً</div></div>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div>
+      <div class="auto-card"><div class="auto-icon">📧</div><div><div class="auto-title">بريد إلكتروني صباحي يومي — 8:00 صباحاً</div><div class="auto-body">إيرادات أمس مقابل الهدف. أهم 3 تنبيهات للهامش. الوضع النقدي. أي عملاء متأخرون. يُرسَل قبل بدء يومك لتعرف ما يجب التركيز عليه.</div><div class="auto-tag">يُشغَّل: يومياً 08:00</div></div></div>
+      <div class="auto-card"><div class="auto-icon">📱</div><div><div class="auto-title">واتساب — تنبيه فوري بانخفاض الهامش</div><div class="auto-body">إذا انخفض CM3 لأي منتج عن الحد المحدد (مثلاً 10%)، تصلك رسالة واتساب خلال 60 ثانية تحدّد المنتج والمقدار والإجراء الموصى به.</div><div class="auto-tag">يُشغَّل: فور تجاوز الحد</div></div></div>
+      <div class="auto-card"><div class="auto-icon">📉</div><div><div class="auto-title">واتساب — تنبيه انخفاض الإيرادات</div><div class="auto-body">إذا انخفضت الإيرادات الأسبوعية أكثر من 15% مقارنة بنفس الأسبوع الشهر الماضي، تصلك رسالة واتساب تحدّد الفئة المتراجعة والمقدار وتقترح إجراءات (مثلاً: رفع Y، تخفيض Z).</div><div class="auto-tag">يُشغَّل: مقارنة أسبوعية، فوري</div></div></div>
+      <div class="auto-card"><div class="auto-icon">📊</div><div><div class="auto-title">تقرير الأداء الأسبوعي — يُولَّد تلقائياً</div><div class="auto-body">كل أحد مساءً، يُولَّد تقرير PDF كامل تلقائياً من جدول جوجل: ملخص الإيرادات، CM1/CM2/CM3 مقابل الأهداف، أفضل وأسوأ المنتجات، ترتيب العملاء، وتوقعات النقد للأسبوع القادم. يُرسَل لبريدك — بلا عمل يدوي.</div><div class="auto-tag">يُشغَّل: كل أحد 20:00</div></div></div>
+    </div>
+    <div>
+      <div class="auto-card"><div class="auto-icon">💰</div><div><div class="auto-title">متابعة الفواتير المتأخرة تلقائياً</div><div class="auto-body">عند تجاوز فاتورة عميل تاريخ استحقاقها، يُرسَل بريد إلكتروني تلقائي للعميل في اليوم 1 واليوم 5 واليوم 10. في اليوم 12 تصلك رسالة واتساب للتصعيد اليدوي.</div><div class="auto-tag">يُشغَّل: عند تجاوز تاريخ الاستحقاق</div></div></div>
+      <div class="auto-card"><div class="auto-icon">📦</div><div><div class="auto-title">تنبيه إعادة طلب المخزون المنخفض</div><div class="auto-body">عند انخفاض أي SKU عن حد الكمية الأدنى، يُرسَل تنبيه بالبريد الإلكتروني يتضمن المنتج والمخزون الحالي ومعدل البيع الأسبوعي وكمية إعادة الطلب المقترحة.</div><div class="auto-tag">يُشغَّل: فحص مستوى المخزون، يومياً</div></div></div>
+      <div class="card" style="margin-top:2px">
+        <div class="card-header"><div class="card-title">هيكل جدول جوجل</div></div>
+        <table class="data-table">
+          <thead><tr><th>التبويب</th><th>ما تُدخله</th><th>ما يُحسب تلقائياً</th></tr></thead>
+          <tbody>
+            <tr><td style="color:var(--indigo-dark);font-weight:500">المبيعات</td><td style="font-size:11px;color:var(--muted2)">العميل، المنتج، الكمية، السعر</td><td style="font-size:11px;color:var(--teal-dark)">الإيراد، هامش المساهمة لكل طلب</td></tr>
+            <tr><td style="color:var(--indigo-dark);font-weight:500">المشتريات</td><td style="font-size:11px;color:var(--muted2)">المورّد، المنتج، التكلفة</td><td style="font-size:11px;color:var(--teal-dark)">تكلفة البضاعة، قيمة المخزون</td></tr>
+            <tr><td style="color:var(--indigo-dark);font-weight:500">اللوجستيات</td><td style="font-size:11px;color:var(--muted2)">الناقل، الشحنة، التكلفة</td><td style="font-size:11px;color:var(--teal-dark)">التكلفة المتغيرة لكل طلب</td></tr>
+            <tr><td style="color:var(--indigo-dark);font-weight:500">التكاليف الثابتة</td><td style="font-size:11px;color:var(--muted2)">التكاليف الثابتة الشهرية</td><td style="font-size:11px;color:var(--teal-dark)">CM3 المخصص لكل SKU</td></tr>
+            <tr><td style="color:var(--indigo-dark);font-weight:500">لوحة القيادة</td><td style="font-size:11px;color:var(--muted2)">لا شيء — يُملأ تلقائياً</td><td style="font-size:11px;color:var(--teal-dark)">جميع مؤشرات الأداء والتقارير</td></tr>
+          </tbody>
+        </table>
+        <div style="margin-top:12px;border-top:1px solid var(--border);padding-top:10px">
+          <div style="font-size:11px;font-weight:600;color:var(--text);margin-bottom:8px">جدول التسليم — 4 أسابيع</div>
+          <div style="display:grid;grid-template-columns:auto 1fr;gap:4px 10px;font-size:11px">
+            <span style="color:var(--indigo-dark);font-family:var(--font-mono)">الأسبوع 1</span><span style="color:var(--muted2)">قالب الجدول + معادلات CM لجميع منتجاتك</span>
+            <span style="color:var(--indigo-dark);font-family:var(--font-mono)">الأسبوع 2</span><span style="color:var(--muted2)">أتمتة Make.com + ملخص البريد اليومي مباشر</span>
+            <span style="color:var(--indigo-dark);font-family:var(--font-mono)">الأسبوع 3</span><span style="color:var(--muted2)">لوحة القيادة + واتساب + أتمتة متابعة الفواتير المتأخرة</span>
+            <span style="color:var(--indigo-dark);font-family:var(--font-mono)">الأسبوع 4</span><span style="color:var(--muted2)">ربحية العملاء + فئات الولاء + تقرير PDF أسبوعي</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /content -->
+</div><!-- /main -->
+</div><!-- /shell -->
+
+<script>
+const titles={overview:'الملخص التنفيذي',pl:'الأرباح والخسائر',products:'ربحية المنتجات',inventory:'المخزون الراكد',عملاء:'ربحية العملاء',loyalty:'برنامج الولاء',cashflow:'توقعات التدفق النقدي — 90 يوماً',automation:'إعداد الأتمتة'};
+
+function go(id,btn){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('نشطة'));
+  document.querySelectorAll('.nav-item').forEach(b=>b.classList.remove('نشطة'));
+  document.getElementById('sec-'+id).classList.add('نشطة');
+  btn.classList.add('نشطة');
+  document.getElementById('page-title').textContent=titles[id];
+  setTimeout(animateBars,80);
+  if(id==='pl') setTimeout(drawDonut,200);
+}
+
+function animateBars(){
+  document.querySelectorAll('.wf-fill,.margin-fill,.progress-fill').forEach(b=>{
+    const w=b.style.width; b.style.width='0%';
+    setTimeout(()=>{b.style.width=w;},60);
+  });
+}
+
+/* DONUT CHART */
+function drawDonut(){
+  const c=document.getElementById('donutCost');
+  if(!c)return;
+  const ctx=c.getContext('2d');
+  const data=[72.1,10.7,5.8,4.9,6.5];
+  const colors=['#e05555','#f59e0b','#4c5ff7','#0ea5e9','#10b981'];
+  let start=-Math.PI/2;
+  const cx=55,cy=55,r=44,inner=26;
+  ctx.clearRect(0,0,110,110);
+  data.forEach((v,i)=>{
+    const angle=(v/100)*Math.PI*2;
+    ctx.beginPath();
+    ctx.moveTo(cx,cy);
+    ctx.arc(cx,cy,r,start,start+angle);
+    ctx.closePath();
+    ctx.fillStyle=colors[i];
+    ctx.fill();
+    start+=angle;
+  });
+  ctx.beginPath();
+  ctx.arc(cx,cy,inner,0,Math.PI*2);
+  ctx.fillStyle=getComputedStyle(document.documentElement).getPropertyValue('--bg2').trim()||'#fff';
+  ctx.fill();
+  ctx.fillStyle='#181c2e';
+  ctx.font='bold 11px DM Mono,monospace';
+  ctx.textAlign='center';
+  ctx.textBaseline='middle';
+  ctx.fillText('تكاليف',cx,cy-6);
+  ctx.fillText('OMR 93K',cx,cy+8);
+}
+
+/* LOYALTY SIMULATOR */
+function calcLoyalty(){
+  const plat=+document.getElementById('s_plat').value;
+  const platCM3=+document.getElementById('s_plat_cm3').value;
+  const gold=+document.getElementById('s_gold').value;
+  const goldCM3=+document.getElementById('s_gold_cm3').value;
+  const rebate=+document.getElementById('s_rebate').value/100;
+  const ret=+document.getElementById('s_ret').value/100;
+
+  document.getElementById('v_plat').textContent=plat;
+  document.getElementById('v_plat_cm3').textContent='OMR '+platCM3.toLocaleString();
+  document.getElementById('v_gold').textContent=gold;
+  document.getElementById('v_gold_cm3').textContent='OMR '+goldCM3.toLocaleString();
+  document.getElementById('v_rebate').textContent=(rebate*100).toFixed(1)+'%';
+  document.getElementById('v_ret').textContent=Math.round(ret*100)+'%';
+
+  const totalRev=(plat*platCM3/0.215)+(gold*goldCM3/0.20);
+  const rebateCost=Math.round(totalRev*rebate);
+  const protected_rev=Math.round(totalRev*ret);
+  const roi=protected_rev-rebateCost;
+
+  document.getElementById('sim_cost').textContent='OMR '+rebateCost.toLocaleString();
+  document.getElementById('sim_prot').textContent='OMR '+protected_rev.toLocaleString();
+  document.getElementById('sim_roi').textContent='OMR '+roi.toLocaleString();
+  document.getElementById('sim_roi').style.color=roi>0?'var(--indigo)':'var(--red)';
+  document.getElementById('sim_story').textContent=
+    `مع ${plat} عميل بلاتيني و${gold} عملاء ذهبيين، تكلّف برنامج الولاء ${rebateCost.toLocaleString()} ر.ع/شهر كخصومات، لكنه يحمي ${protected_rev.toLocaleString()} ر.ع من الإيرادات الشهرية من خلال تحسين الاستبقاء بنسبة ${Math.round(ret*100)}%‏ — بصافي ربح ${roi.toLocaleString()} ر.ع كل شهر.`;
+}
+
+/* DATE */
+const d=new Date();
+document.getElementById('date-display').textContent=d.toLocaleDateString('ar-OM',{weekday:'long',month:'long',day:'numeric',year:'numeric'});
+
+/* INIT */
+setTimeout(animateBars,300);
+drawDonut();
+</script>
+</body>
+</html>

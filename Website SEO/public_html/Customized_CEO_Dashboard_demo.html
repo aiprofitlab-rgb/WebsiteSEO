@@ -71,8 +71,8 @@
 html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-size:14px;line-height:1.5;min-height:100vh}
 .shell{display:flex;min-height:100vh}
-.sidebar{width:224px;flex-shrink:0;background:var(--bg2);border-right:1px solid var(--border);display:flex;flex-direction:column;position:fixed;top:0;left:0;bottom:0;z-index:100;box-shadow:2px 0 12px rgba(60,80,160,0.06)}
-.main{margin-left:224px;flex:1}
+.sidebar{width:224px;flex-shrink:0;background:var(--bg2);border-right:1px solid var(--border);display:flex;flex-direction:column;position:fixed;top:49px;left:0;bottom:0;z-index:100;box-shadow:2px 0 12px rgba(60,80,160,0.06)}
+.main{margin-left:224px;flex:1;padding-top:0}
 .logo{padding:22px 20px 16px;border-bottom:1px solid var(--border)}
 .logo-name{font-family:var(--font-display);font-size:24px;background:linear-gradient(135deg,var(--indigo),var(--teal));-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:-0.5px}
 .logo-sub{font-size:10px;color:var(--muted);letter-spacing:.12em;text-transform:uppercase;margin-top:2px}
@@ -263,6 +263,20 @@ body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-si
 </style>
 </head>
 <body>
+
+<!-- AI Profit Lab Logo -->
+<div style="display:flex;justify-content:space-between;align-items:center;padding:12px 28px;background:#ffffff;border-bottom:1px solid rgba(60,80,160,0.10);box-shadow:0 1px 4px rgba(60,80,160,0.06);position:sticky;top:0;z-index:200;">
+  <a href="index.html" style="text-decoration:none;">
+    <div style="font-size:22px;font-weight:900;font-family:'Outfit',sans-serif;letter-spacing:-1px;">
+      <span style="color:#3B82F6;">A</span><span style="color:#EF4444;">I</span> <span style="color:#181c2e;">Profit Lab</span>
+    </div>
+  </a>
+  <div style="display:flex;gap:10px;align-items:center;">
+    <a href="Customized_CEO_Dashboard_demo-ar.html" style="color:#4e5675;text-decoration:none;font-size:0.85rem;font-weight:500;padding:0.4rem 1rem;border:1px solid rgba(60,80,160,0.18);border-radius:50px;font-family:'Outfit',sans-serif;">عربي</a>
+    <a href="en.html" style="color:#4e5675;text-decoration:none;font-size:0.85rem;font-weight:500;padding:0.4rem 1rem;border:1px solid rgba(60,80,160,0.18);border-radius:50px;font-family:'Outfit',sans-serif;">← Back to Website</a>
+  </div>
+</div>
+
 <div class="shell">
 
 <!-- SIDEBAR -->

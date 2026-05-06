@@ -1,0 +1,186 @@
+Line 3:
+ EN:   {name:'Google Ads',  icon:'G',  cpc:2.5,  reach:15000, color:'#4b9cf7'},
+ AR:   {name:'إعلانات جوجل',  icon:'G',  cpc:2.5,  reach:15000, color:'#4b9cf7'},
+Line 4:
+ EN:   {name:'Meta Ads',    icon:'M',  cpc:1.8,  reach:22000, color:'#7c6fff'},
+ AR:   {name:'إعلانات ميتا',    icon:'M',  cpc:1.8,  reach:22000, color:'#7c6fff'},
+Line 5:
+ EN:   {name:'LinkedIn',    icon:'Li', cpc:6.0,  reach:5000,  color:'#2dd4bf'},
+ AR:   {name:'لينكد إن',    icon:'Li', cpc:6.0,  reach:5000,  color:'#2dd4bf'},
+Line 6:
+ EN:   {name:'Email',       icon:'@',  cpc:0.3,  reach:12000, color:'#1ecc8b'},
+ AR:   {name:'البريد الإلكتروني',       icon:'@',  cpc:0.3,  reach:12000, color:'#1ecc8b'},
+Line 7:
+ EN:   {name:'SEO/Organic', icon:'S',  cpc:0.5,  reach:8000,  color:'#f5a623'},
+ AR:   {name:'تحسين محركات البحث', icon:'S',  cpc:0.5,  reach:8000,  color:'#f5a623'},
+Line 8:
+ EN:   {name:'Influencer',  icon:'I',  cpc:4.0,  reach:18000, color:'#d45fa0'},
+ AR:   {name:'المؤثرون',  icon:'I',  cpc:4.0,  reach:18000, color:'#d45fa0'},
+Line 9:
+ EN:   {name:'YouTube',     icon:'▶',  cpc:3.2,  reach:10000, color:'#f05c5c'},
+ AR:   {name:'يوتيوب',     icon:'▶',  cpc:3.2,  reach:10000, color:'#f05c5c'},
+Line 10:
+ EN:   {name:'SMS',         icon:'~',  cpc:0.8,  reach:6000,  color:'#a78bfa'},
+ AR:   {name:'الرسائل النصية',         icon:'~',  cpc:0.8,  reach:6000,  color:'#a78bfa'},
+Line 14:
+ EN:   {name:'Early adopters',  color:'#7c6fff', pct:22},
+ AR:   {name:'المتبنون الأوائل',  color:'#7c6fff', pct:22},
+Line 15:
+ EN:   {name:'Value seekers',   color:'#1ecc8b', pct:35},
+ AR:   {name:'الباحثون عن القيمة',   color:'#1ecc8b', pct:35},
+Line 16:
+ EN:   {name:'Brand loyalists', color:'#f5a623', pct:18},
+ AR:   {name:'المخلصون للعلامة', color:'#f5a623', pct:18},
+Line 17:
+ EN:   {name:'Impulse buyers',  color:'#d45fa0', pct:15},
+ AR:   {name:'المشترون الاندفاعيون',  color:'#d45fa0', pct:15},
+Line 18:
+ EN:   {name:'Researchers',     color:'#4b9cf7', pct:10},
+ AR:   {name:'الباحثون',     color:'#4b9cf7', pct:10},
+Line 22:
+ EN:   setup:    {title:'Campaign Setup',    sub:'Configure your campaign parameters'},
+ AR:   setup:    {title:'إعداد الحملة',    sub:'ضبط معاملات الحملة'},
+Line 23:
+ EN:   channels: {title:'Channel Selection', sub:'Choose and allocate marketing channels'},
+ AR:   channels: {title:'اختيار القنوات', sub:'اختر وخصص قنوات التسويق'},
+Line 24:
+ EN:   audience: {title:'Audience Targeting',sub:'Define and size your target audience'},
+ AR:   audience: {title:'استهداف الجمهور',sub:'تحديد حجم جمهورك المستهدف'},
+Line 25:
+ EN:   funnel:   {title:'Conversion Funnel', sub:'Model your end-to-end funnel performance'},
+ AR:   funnel:   {title:'مسار التحويل', sub:'نمذجة أداء مسار التحويل بالكامل'},
+Line 26:
+ EN:   ab:       {title:'A/B Testing',       sub:'Simulate and compare creative variants'},
+ AR:   ab:       {title:'اختبار أ/ب',       sub:'محاكاة ومقارنة النسخ الإبداعية'},
+Line 27:
+ EN:   results:  {title:'Campaign Results',  sub:'Review projected performance and recommendations'},
+ AR:   results:  {title:'نتائج الحملة',  sub:'مراجعة الأداء المتوقع والتوصيات'},
+Line 58:
+ EN:   document.getElementById('dur-val').textContent    = d+' days';
+ AR:   document.getElementById('dur-val').textContent    = d+' أيام';
+Line 74:
+ EN:   document.getElementById('ph-budget-lbl').textContent = b > 5000 ? 'Adequate for chosen duration' : 'Consider increasing budget';
+ AR:   document.getElementById('ph-budget-lbl').textContent = b > 5000 ? 'مناسبة للمدة المختارة' : 'فكر في زيادة الميزانية';
+Line 78:
+ EN:   document.getElementById('ph-time-lbl').textContent = d > 21 ? 'Good runway for results' : 'Short — consider extending';
+ AR:   document.getElementById('ph-time-lbl').textContent = d > 21 ? 'مدة مناسبة for results' : 'قصيرة — فكر في التمديد';
+Line 82:
+ EN:   document.getElementById('ph-roi-lbl').textContent = roi > 150 ? 'Excellent potential' : roi > 50 ? 'Strong potential' : roi > 0 ? 'Marginal — review inputs' : 'At risk — adjust strategy';
+ AR:   document.getElementById('ph-roi-lbl').textContent = roi > 150 ? 'إمكانية ممتازة' : roi > 50 ? 'إمكانية قوية' : roi > 0 ? 'هامشي — راجع المدخلات' : 'في خطر — عدّل الاستراتيجية';
+Line 102:
+ EN:   document.getElementById('ch-count').textContent = selectedChannels.size + ' selected';
+ AR:   document.getElementById('ch-count').textContent = selectedChannels.size + ' مختارة';
+Line 111:
+ EN:   if (!sel.length) { alloc.innerHTML = '<div style="color:var(--text3);font-size:13px">No channels selected.</div>'; return; }
+ AR:   if (!sel.length) { alloc.innerHTML = '<div style="color:var(--text3);font-size:13px">No channels مختارة.</div>'; return; }
+Line 170:
+ EN:   document.getElementById('aud-pct').textContent   = pct + '% of audience';
+ AR:   document.getElementById('aud-pct').textContent   = pct + '% من الجمهور';
+Line 180:
+ EN:         <div class="stat-lbl">projected reach</div>
+ AR:         <div class="stat-lbl">وصول متوقع</div>
+Line 190:
+ EN:   const lpL    = ['Poor','Fair','Good','Great','Excellent'];
+ AR:   const lpL    = ['ضعيف','مقبول','جيد','ممتاز','رائع'];
+Line 191:
+ EN:   const ofL    = ['Weak','Below avg','Medium','Strong','Compelling'];
+ AR:   const ofL    = ['ضعيف','دون المتوسط','متوسط','قوي','مقنع'];
+Line 195:
+ EN:   document.getElementById('ret-val').textContent   = ret ? 'Enabled' : 'Disabled';
+ AR:   document.getElementById('ret-val').textContent   = ret ? 'مفعّل' : 'معطّل';
+Line 208:
+ EN:     {label:'Audience reached', count:reach,   color:'#7c6fff'},
+ AR:     {label:'الجمهور الوصول', count:reach,   color:'#7c6fff'},
+Line 209:
+ EN:     {label:'Clicks',           count:clicks,  color:'#4b9cf7'},
+ AR:     {label:'النقرات',           count:clicks,  color:'#4b9cf7'},
+Line 210:
+ EN:     {label:'Leads captured',   count:leads,   color:'#1ecc8b'},
+ AR:     {label:'العملاء المحتملون',   count:leads,   color:'#1ecc8b'},
+Line 211:
+ EN:     {label:'Nurtured',         count:nurtured,color:'#f5a623'},
+ AR:     {label:'المرعيون',         count:nurtured,color:'#f5a623'},
+Line 212:
+ EN:     {label:'Conversions',      count:conv,    color:'#f05c5c'},
+ AR:     {label:'التحويلات',      count:conv,    color:'#f05c5c'},
+Line 231:
+ EN:     {label:'Click-through rate',     val:(ctr * 100).toFixed(1) + '%'},
+ AR:     {label:'معدل النقر',     val:(ctr * 100).toFixed(1) + '%'},
+Line 232:
+ EN:     {label:'Lead capture rate',      val:(lpConv * 100).toFixed(1) + '%'},
+ AR:     {label:'معدل استحواذ العملاء',      val:(lpConv * 100).toFixed(1) + '%'},
+Line 233:
+ EN:     {label:'Nurture rate',           val:(nurtureR * 100).toFixed(0) + '%'},
+ AR:     {label:'معدل الرعاية',           val:(nurtureR * 100).toFixed(0) + '%'},
+Line 234:
+ EN:     {label:'Sales close rate',       val:((0.2 * retBonus) * 100).toFixed(0) + '%'},
+ AR:     {label:'معدل إغلاق المبيعات',       val:((0.2 * retBonus) * 100).toFixed(0) + '%'},
+Line 235:
+ EN:     {label:'Overall conversion',     val:reach > 0 ? (conv / reach * 100).toFixed(2) + '%' : '0%'},
+ AR:     {label:'معدل التحويل الإجمالي',     val:reach > 0 ? (conv / reach * 100).toFixed(2) + '%' : '0%'},
+Line 243:
+ EN:     {day:0,                       event:'Campaign launched — ads go live across all channels',          color:'#7c6fff'},
+ AR:     {day:0,                       event:'إطلاق الحملة — تبدأ الإعلانات على جميع القنوات',          color:'#7c6fff'},
+Line 244:
+ EN:     {day:Math.round(d * 0.15),    event:'First leads captured, email nurture sequence begins',           color:'#1ecc8b'},
+ AR:     {day:Math.round(d * 0.15),    event:'أول عملاء محتملين، تبدأ سلسلة البريد الإلكتروني',           color:'#1ecc8b'},
+Line 245:
+ EN:     {day:Math.round(d * 0.30),    event:'A/B test results available — deploy winning variant',           color:'#f5a623'},
+ AR:     {day:Math.round(d * 0.30),    event:'نتائج اختبار أ/ب متاحة — تفعيل النسخة الفائزة',           color:'#f5a623'},
+Line 246:
+ EN:     {day:Math.round(d * 0.50),    event:'Mid-campaign review — reallocate budget to top channels',       color:'#4b9cf7'},
+ AR:     {day:Math.round(d * 0.50),    event:'مراجعة منتصف الحملة — إعادة توزيع الميزانية',       color:'#4b9cf7'},
+Line 247:
+ EN:     {day:Math.round(d * 0.75),    event:'Retargeting wave activated for unconverted visitors',           color:'#d45fa0'},
+ AR:     {day:Math.round(d * 0.75),    event:'تفعيل موجة إعادة الاستهداف للزوار غير المحولين',           color:'#d45fa0'},
+Line 248:
+ EN:     {day:d,                       event:'Campaign closes — final conversions tallied and reported',       color:'#f05c5c'},
+ AR:     {day:d,                       event:'إغلاق الحملة — حساب وتقرير التحويلات النهائية',       color:'#f05c5c'},
+Line 269:
+ EN:   document.getElementById('ab-dur-val').textContent   = dur + ' days';
+ AR:   document.getElementById('ab-dur-val').textContent   = dur + ' أيام';
+Line 297:
+ EN:     `[Day 01]  Test initialized — variable: ${v}`,
+ AR:     `[اليوم 01]  بدء الاختبار — المتغير: ${v}`,
+Line 298:
+ EN:     `[Day 03]  Variant B showing +${Math.round(uplift * 0.4)}% CTR advantage`,
+ AR:     `[اليوم 03]  النسخة ب تُظهر تحسناً +${Math.round(uplift * 0.4)}% في معدل النقر`,
+Line 299:
+ EN:     `[Day 07]  Statistical confidence reached ${Math.round(conf * 0.7)}%`,
+ AR:     `[اليوم 07]  الثقة الإحصائية وصلت ${Math.round(conf * 0.7)}%`,
+Line 300:
+ EN:     `[Day ${String(dur).padStart(2,'0')}]  Test concluded — Variant B wins with ${conf}% confidence`,
+ AR:     `[Day ${String(dur).padStart(2,'0')}]  انتهى الاختبار — النسخة ب فائزة بثقة ${conf}%`,
+Line 301:
+ EN:     `[Auto  ]  Variant B deployed to 100% of traffic`,
+ AR:     `[تلقائي]  تم تطبيق النسخة ب على 100% من الزيارات`,
+Line 319:
+ EN:   document.getElementById('r-conv-rate').textContent= Math.round(conv/leads*100) + '% conv rate';
+ AR:   document.getElementById('r-conv-rate').textContent= Math.round(conv/leads*100) + '% معدل تحويل';
+Line 334:
+ EN:       {label:'Leads', data:wLeads, borderColor:'#7c6fff', backgroundColor:'rgba(124,111,255,.12)', fill:true, tension:0.4, borderWidth:2, pointBackgroundColor:'#7c6fff'},
+ AR:       {label:'عملاء محتملون', data:wLeads, borderColor:'#7c6fff', backgroundColor:'rgba(124,111,255,.12)', fill:true, tension:0.4, borderWidth:2, pointBackgroundColor:'#7c6fff'},
+Line 335:
+ EN:       {label:'Conversions', data:wConv, borderColor:'#1ecc8b', backgroundColor:'rgba(30,204,139,.10)', fill:true, tension:0.4, borderWidth:2, borderDash:[5,4], pointBackgroundColor:'#1ecc8b'},
+ AR:       {label:'التحويلات', data:wConv, borderColor:'#1ecc8b', backgroundColor:'rgba(30,204,139,.10)', fill:true, tension:0.4, borderWidth:2, borderDash:[5,4], pointBackgroundColor:'#1ecc8b'},
+Line 367:
+ EN:     roi > 150 ? {type:'green', icon:'↑', text:'Strong ROI — consider scaling budget by 20–30% in the next campaign cycle.'} :
+ AR:     roi > 150 ? {type:'green', icon:'↑', text:'عائد قوي — فكر في زيادة الميزانية بنسبة 20-30% في دورة الحملة القادمة.'} :
+Line 368:
+ EN:                 {type:'amber', icon:'!', text:'ROI is below target — revisit channel mix, offer strength, and deal size assumptions.'},
+ AR:                 {type:'amber', icon:'!', text:'العائد أقل من المستهدف — راجع مزيج القنوات وقوة العرض وافتراضات حجم الصفقة.'},
+Line 369:
+ EN:     leads > 200 ? {type:'green', icon:'✓', text:'Lead volume is on track. Maintain current targeting and creative strategy.'} :
+ AR:     leads > 200 ? {type:'green', icon:'✓', text:'حجم العملاء المحتملين في المسار الصحيح. حافظ على الاستراتيجية الحالية.'} :
+Line 370:
+ EN:                   {type:'blue',  icon:'→', text:'Lead volume is modest — expand audience segments or add higher-reach channels.'},
+ AR:                   {type:'blue',  icon:'→', text:'حجم العملاء المحتملين محدود — وسّع شرائح الجمهور أو أضف قنوات أعلى وصولاً.'},
+Line 371:
+ EN:     {type:'blue',  icon:'→', text:'Apply A/B test winning variant as the default creative for your next campaign.'},
+ AR:     {type:'blue',  icon:'→', text:'طبّق النسخة الفائزة من اختبار أ/ب كإعلان افتراضي للحملة القادمة.'},
+Line 372:
+ EN:     d < 21 ? {type:'amber', icon:'!', text:'Short campaign duration detected — campaigns of 30+ days outperform by ~40% on average.'} :
+ AR:     d < 21 ? {type:'amber', icon:'!', text:'تم اكتشاف مدة قصيرة للحملة — الحملات التي تزيد عن 30 يومًا تتفوق بنسبة 40% في المتوسط.'} :
+Line 373:
+ EN:              {type:'green', icon:'✓', text:'Campaign duration is adequate for statistically reliable results and optimization.'},
+ AR:              {type:'green', icon:'✓', text:'مدة الحملة مناسبة لنتائج موثوقة إحصائيًا وتحسين مستمر.'},
