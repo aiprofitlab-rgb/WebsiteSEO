@@ -16,7 +16,7 @@
     <priority>0.8</priority>
   
     <xhtml:link rel="alternate" hreflang="ar" href="https://aiprofitlab.io/about/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://aiprofitlab.io/about-en/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://aiprofitlab.io/en/about-en/"/>
   </url>
   <url>
     <loc>https://aiprofitlab.io/academy-ar/</loc>
@@ -25,7 +25,7 @@
     <priority>0.8</priority>
   
     <xhtml:link rel="alternate" hreflang="ar" href="https://aiprofitlab.io/academy-ar/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://aiprofitlab.io/academy/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://aiprofitlab.io/en/academy/"/>
   </url>
   <url>
     <loc>https://aiprofitlab.io/academy/ar/ai-for-managers/</loc>
@@ -88,7 +88,7 @@
     <priority>0.8</priority>
   
     <xhtml:link rel="alternate" hreflang="ar" href="https://aiprofitlab.io/blog-ar/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://aiprofitlab.io/blog/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://aiprofitlab.io/en/blog/"/>
   </url>
   <url>
     <loc>https://aiprofitlab.io/blog/ar/2026-03-28-ceo-dashboard/</loc>
@@ -763,7 +763,7 @@
     <priority>0.8</priority>
   
     <xhtml:link rel="alternate" hreflang="ar" href="https://aiprofitlab.io/contact/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://aiprofitlab.io/contact-en/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://aiprofitlab.io/en/contact-en/"/>
   </url>
   <url>
     <loc>https://aiprofitlab.io/customized-ceo-dashboard-demo-ar/</loc>
@@ -797,48 +797,72 @@
     <lastmod>2026-05-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+  
+    <xhtml:link rel="alternate" hreflang="en" href="https://aiprofitlab.io/en/about-en/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://aiprofitlab.io/about/"/>
   </url>
   <url>
     <loc>https://aiprofitlab.io/en/academy/</loc>
     <lastmod>2026-05-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+  
+    <xhtml:link rel="alternate" hreflang="en" href="https://aiprofitlab.io/en/academy/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://aiprofitlab.io/academy-ar/"/>
   </url>
   <url>
     <loc>https://aiprofitlab.io/en/blog/</loc>
     <lastmod>2026-05-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+  
+    <xhtml:link rel="alternate" hreflang="en" href="https://aiprofitlab.io/en/blog/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://aiprofitlab.io/blog-ar/"/>
   </url>
   <url>
     <loc>https://aiprofitlab.io/en/contact-en/</loc>
     <lastmod>2026-05-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+  
+    <xhtml:link rel="alternate" hreflang="en" href="https://aiprofitlab.io/en/contact-en/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://aiprofitlab.io/contact/"/>
   </url>
   <url>
     <loc>https://aiprofitlab.io/en/missed-call-simulator-en/</loc>
     <lastmod>2026-05-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
+  
+    <xhtml:link rel="alternate" hreflang="en" href="https://aiprofitlab.io/en/missed-call-simulator-en/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://aiprofitlab.io/missed-call-simulator-ar/"/>
   </url>
   <url>
     <loc>https://aiprofitlab.io/en/process-en/</loc>
     <lastmod>2026-05-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+  
+    <xhtml:link rel="alternate" hreflang="en" href="https://aiprofitlab.io/en/process-en/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://aiprofitlab.io/process/"/>
   </url>
   <url>
     <loc>https://aiprofitlab.io/en/services-en/</loc>
     <lastmod>2026-05-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+  
+    <xhtml:link rel="alternate" hreflang="en" href="https://aiprofitlab.io/en/services-en/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://aiprofitlab.io/services/"/>
   </url>
   <url>
     <loc>https://aiprofitlab.io/en/whatsapp-receptionist-demo/</loc>
     <lastmod>2026-05-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
+  
+    <xhtml:link rel="alternate" hreflang="en" href="https://aiprofitlab.io/en/whatsapp-receptionist-demo/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://aiprofitlab.io/whatsapp-receptionist-demo-ar/"/>
   </url>
   <url>
     <loc>https://aiprofitlab.io/missed-call-simulator-ar/</loc>
@@ -847,7 +871,7 @@
     <priority>0.7</priority>
   
     <xhtml:link rel="alternate" hreflang="ar" href="https://aiprofitlab.io/missed-call-simulator-ar/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://aiprofitlab.io/missed-call-simulator-en/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://aiprofitlab.io/en/missed-call-simulator-en/"/>
   </url>
   <url>
     <loc>https://aiprofitlab.io/process/</loc>
@@ -856,7 +880,7 @@
     <priority>0.8</priority>
   
     <xhtml:link rel="alternate" hreflang="ar" href="https://aiprofitlab.io/process/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://aiprofitlab.io/process-en/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://aiprofitlab.io/en/process-en/"/>
   </url>
   <url>
     <loc>https://aiprofitlab.io/services/</loc>
@@ -865,7 +889,7 @@
     <priority>0.8</priority>
   
     <xhtml:link rel="alternate" hreflang="ar" href="https://aiprofitlab.io/services/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://aiprofitlab.io/services-en/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://aiprofitlab.io/en/services-en/"/>
   </url>
   <url>
     <loc>https://aiprofitlab.io/whatsapp-receptionist-demo-ar/</loc>
@@ -874,6 +898,6 @@
     <priority>0.7</priority>
   
     <xhtml:link rel="alternate" hreflang="ar" href="https://aiprofitlab.io/whatsapp-receptionist-demo-ar/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://aiprofitlab.io/whatsapp-receptionist-demo/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://aiprofitlab.io/en/whatsapp-receptionist-demo/"/>
   </url>
 </urlset>
