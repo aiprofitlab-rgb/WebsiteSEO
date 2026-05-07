@@ -1,7 +1,13 @@
 # Basic Server Configuration
 Options +FollowSymLinks
 Options -MultiViews
-DirectoryIndex index
+Options -Indexes
+DirectoryIndex index.html index
+
+# Allow access
+<Files "*">
+    Require all granted
+</Files>
 
 # Enable Rewriting
 RewriteEngine On
