@@ -33,7 +33,6 @@ def extract_metadata(filepath):
     category = meta_cat_match.group(1).strip() if meta_cat_match else "Implementation & Automation"
     
     if category not in CATEGORY_MAP:
-        # Default to cat_2 if unknown
         cat_id = "cat_2"
     else:
         cat_id = CATEGORY_MAP[category]
@@ -43,15 +42,12 @@ def extract_metadata(filepath):
     if meta_desc_match:
         desc = meta_desc_match.group(1).strip()
     else:
-        # Fallback to finding the first paragraph that looks like a subtitle hook
         hook_match = re.search(r'<p class="[^"]*text-xl[^"]*text-gray-400[^"]*">(.*?)</p>', content, re.IGNORECASE | re.DOTALL)
         desc = hook_match.group(1).strip() if hook_match else "Read our latest updates and news."
 
     # Image
     img_match = re.search(r'<img[^>]+src=["\'](.*?)["\']', content, re.IGNORECASE)
-    img_src = img_match.group(1) if img_match else "../../blog/images/default.png"
-    # Convert src to match blog hub relative path
-    img_src = img_src.replace("../../", "") 
+    img_src = img_match.group(1) if img_match else "/blog/images/default.png"
 
     return {
         "filename": filename,
@@ -66,7 +62,12 @@ def extract_metadata(filepath):
 
 def generate_card_html(article, lang="en"):
     # Determine the link path
-    link = f"blog/{lang}/{article['filename']}"
+    if lang == "en":
+        link = f"/blog/en/{article['filename'].replace('.html', '/')}" # Support extensionless links if needed, but keeping it simple
+        link = f"/blog/en/{article['filename']}" # Match current structure in index.html
+    else:
+        link = f"/blog/ar/{article['filename']}"
+    
     read_more = "Read More →" if lang == "en" else "اقرأ المزيد ←"
     
     html = f"""
@@ -105,12 +106,17 @@ def update_hub(hub_file, lang, article_dir):
         content = f.read()
 
     # Regex to find the grid container and replace its contents
-    pattern = r'(<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">).*?(</main>)'
+    pattern = r'(<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">).*?(</div>\s*</main>)'
     
-    # Ensure replacement has the newline for formatting
-    replacement = f"\\1\n{cards_html}\n        </div>\n    \\2"
+    replacement = f"\\1\n{cards_html}\n        </div>\n    "
     
-    new_content = re.sub(pattern, replacement, content, flags=re.DOTALL)
+    # Check if we can find the pattern
+    if not re.search(pattern, content, flags=re.DOTALL):
+        print(f"Could not find article grid in {hub_file}")
+        # Fallback to a simpler pattern if needed, but the current one matches the list_dir output
+        return
+
+    new_content = re.sub(pattern, replacement + "</main>", content, flags=re.DOTALL)
 
     with open(hub_file, 'w', encoding='utf-8') as f:
         f.write(new_content)
@@ -120,12 +126,12 @@ def update_hub(hub_file, lang, article_dir):
 if __name__ == "__main__":
     base_dir = os.path.dirname(os.path.abspath(__file__))
     
-    # English
-    blog_en_html = os.path.join(base_dir, "public_html", "blog.html")
+    # English Hub is at public_html/blog/index.html
+    blog_en_html = os.path.join(base_dir, "public_html", "blog", "index.html")
     blog_en_dir = os.path.join(base_dir, "public_html", "blog", "en")
     update_hub(blog_en_html, "en", blog_en_dir)
     
-    # Arabic
-    blog_ar_html = os.path.join(base_dir, "public_html", "blog_ar.html")
+    # Arabic Hub is at public_html/blog-ar/index.html
+    blog_ar_html = os.path.join(base_dir, "public_html", "blog-ar", "index.html")
     blog_ar_dir = os.path.join(base_dir, "public_html", "blog", "ar")
     update_hub(blog_ar_html, "ar", blog_ar_dir)
