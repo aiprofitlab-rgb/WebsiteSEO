@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>محاكي الحملات — حزمة التسويق للأعمال</title>
+<title>Campaign Simulator — Business Marketing Suite</title>
 
 <!-- SEO & GEO Tags -->
-<meta name="description" content="استخدم محاكي حملات AI Profit Lab لتوقع ميزانيتك التسويقية وتحسين قنواتك وعائدك. مصمم لأعمال عُمان ومنطقة الخليج.">
-<meta name="keywords" content="محاكي الحملات، محاكي عائد التسويق، حزمة التسويق، AI Profit Lab، تسويق عُمان، عائد الحملات في الخليج">
-<meta property="og:title" content="محاكي الحملات — حزمة التسويق | AI Profit Lab">
-<meta property="og:description" content="استخدم محاكي حملات AI Profit Lab لتوقع ميزانيتك التسويقية وتحسين قنواتك وعائدك. مصمم لأعمال عُمان ومنطقة الخليج.">
-<meta property="og:url" content="https://aiprofitlab.io/Campaign_ROI_Simulator-ar.html">
+<meta name="description" content="Use the AI Profit Lab Campaign Simulator to forecast and optimize your marketing budget, channels, and ROI. Tailored for businesses in Oman and the GCC.">
+<meta name="keywords" content="Campaign Simulator, Marketing ROI Simulator, Business Marketing Suite, AI Profit Lab, Oman Marketing, GCC Campaign ROI">
+<meta property="og:title" content="Campaign Simulator — Business Marketing Suite | AI Profit Lab">
+<meta property="og:description" content="Use the AI Profit Lab Campaign Simulator to forecast and optimize your marketing budget, channels, and ROI. Tailored for businesses in Oman and the GCC.">
+<meta property="og:url" content="https://aiprofitlab.io/Campaign_ROI_Simulator.html">
 <meta property="og:type" content="website">
 
 <!-- Local Business Schema -->
@@ -126,13 +126,13 @@
     display: flex; align-items: center; gap: 10px;
     padding: 9px 20px;
     font-size: 13px; font-weight: 400; color: var(--text2);
-    cursor: pointer; border-right: 2px solid transparent; border-left: none;
+    cursor: pointer; border-left: 2px solid transparent;
     transition: all .15s;
   }
   .nav-item:hover { color: var(--text); background: var(--surface); }
   .nav-item.active {
     color: var(--accent); background: rgba(124,111,255,.08);
-    border-right-color: var(--accent); border-left-color: transparent; font-weight: 500;
+    border-left-color: var(--accent); font-weight: 500;
   }
   .nav-icon { font-size: 14px; width: 18px; text-align: center; }
 
@@ -388,8 +388,8 @@
   }
 </style>
 
-    <link rel="alternate" hreflang="ar" href="https:/aiprofitlab.io/campaign-roi-simulator-ar/">
     <link rel="alternate" hreflang="en" href="https:/aiprofitlab.io/campaign-roi-simulator/">
+    <link rel="alternate" hreflang="ar" href="https:/aiprofitlab.io/campaign-roi-simulator-ar/">
     <link rel="alternate" hreflang="x-default" href="https://aiprofitlab.io/">
 </head>
 <body>
@@ -402,13 +402,9 @@
     </div>
   </a>
   <div style="display:flex;gap:10px;align-items:center;">
-    <a href="campaign-roi-simulator" style="color:#9999b0;text-decoration:none;font-size:0.85rem;font-weight:500;padding:0.4rem 1rem;border:1px solid rgba(255,255,255,0.12);border-radius:50px;transition:0.2s;font-family:'DM Sans',sans-serif;">
-      English
-    </a>
-    <a href="/" style="color:#9999b0;text-decoration:none;font-size:0.85rem;font-weight:500;padding:0.4rem 1rem;border:1px solid rgba(255,255,255,0.12);border-radius:50px;transition:0.2s;font-family:'DM Sans',sans-serif;">
-      ← العودة إلى الموقع
-    </a>
-  </div>
+  <a href="/campaign-roi-simulator-ar/" style="color:#9999b0;text-decoration:none;font-size:0.85rem;font-weight:500;padding:0.4rem 1rem;border:1px solid rgba(255,255,255,0.12);border-radius:50px;font-family:'DM Sans',sans-serif;">عربي</a>
+  <a href="/" style="color:#9999b0;text-decoration:none;font-size:0.85rem;font-weight:500;padding:0.4rem 1rem;border:1px solid rgba(255,255,255,0.12);border-radius:50px;font-family:'DM Sans',sans-serif;">← Back to Website</a>
+</div>
 </div>
 
 <div class="app">
@@ -417,23 +413,23 @@
   <aside class="sidebar">
     <div class="logo">
       <div class="logo-mark">C</div>
-      <div class="logo-name">محاكي الحملات</div>
-      <div class="logo-sub">حزمة الذكاء التسويقي</div>
+      <div class="logo-name">CampaignSim</div>
+      <div class="logo-sub">Marketing Intelligence Suite</div>
     </div>
     <nav class="nav">
-      <div class="nav-label">الحملة</div>
-      <div class="nav-item active" onclick="switchTab('setup',this)"><span class="nav-icon">⚙</span>الإعداد</div>
-      <div class="nav-item" onclick="switchTab('channels',this)"><span class="nav-icon">📡</span>القنوات</div>
-      <div class="nav-item" onclick="switchTab('audience',this)"><span class="nav-icon">🎯</span>الجمهور</div>
-      <div class="nav-label">التنفيذ</div>
-      <div class="nav-item" onclick="switchTab('funnel',this)"><span class="nav-icon">▽</span>المسار</div>
-      <div class="nav-item" onclick="switchTab('ab',this)"><span class="nav-icon">⚖</span>اختبار أ/ب</div>
-      <div class="nav-label">التحليل</div>
-      <div class="nav-item" onclick="switchTab('results',this)"><span class="nav-icon">📊</span>النتائج</div>
+      <div class="nav-label">Campaign</div>
+      <div class="nav-item active" onclick="switchTab('setup',this)"><span class="nav-icon">⚙</span>Setup</div>
+      <div class="nav-item" onclick="switchTab('channels',this)"><span class="nav-icon">📡</span>Channels</div>
+      <div class="nav-item" onclick="switchTab('audience',this)"><span class="nav-icon">🎯</span>Audience</div>
+      <div class="nav-label">Execution</div>
+      <div class="nav-item" onclick="switchTab('funnel',this)"><span class="nav-icon">▽</span>Funnel</div>
+      <div class="nav-item" onclick="switchTab('ab',this)"><span class="nav-icon">⚖</span>A/B Testing</div>
+      <div class="nav-label">Analysis</div>
+      <div class="nav-item" onclick="switchTab('results',this)"><span class="nav-icon">📊</span>Results</div>
     </nav>
     <div class="sidebar-footer">
-      محاكي الحملات v1.0<br>
-      جميع التوقعات تقريبية
+      Campaign Simulator v1.0<br>
+      All projections are estimates
     </div>
   </aside>
 
@@ -441,12 +437,12 @@
   <div class="main">
     <div class="topbar">
       <div>
-        <div class="page-title" id="page-title">إعداد الحملة</div>
-        <div class="page-sub" id="page-sub">ضبط معاملات الحملة</div>
+        <div class="page-title" id="page-title">Campaign Setup</div>
+        <div class="page-sub" id="page-sub">Configure your campaign parameters</div>
       </div>
       <div class="topbar-actions">
-        <button class="btn btn-sm" onclick="resetSim()">↺ إعادة تعيين</button>
-        <button class="btn btn-sm btn-primary" onclick="switchTab('results', document.querySelectorAll('.nav-item')[5])">← عرض النتائج</button>
+        <button class="btn btn-sm" onclick="resetSim()">↺ Reset</button>
+        <button class="btn btn-sm btn-primary" onclick="switchTab('results', document.querySelectorAll('.nav-item')[5])">View Results →</button>
       </div>
     </div>
 
@@ -456,70 +452,70 @@
       <div id="tab-setup" class="section active">
         <div class="metrics" id="setup-metrics">
           <div class="metric">
-            <div class="metric-label">الميزانية</div>
+            <div class="metric-label">Budget</div>
             <div class="metric-value" id="m-budget">$10,000</div>
           </div>
           <div class="metric">
-            <div class="metric-label">المدة</div>
+            <div class="metric-label">Duration</div>
             <div class="metric-value" id="m-duration">30d</div>
           </div>
           <div class="metric">
-            <div class="metric-label">العملاء المستهدفون</div>
+            <div class="metric-label">Target leads</div>
             <div class="metric-value" id="m-leads">1,250</div>
           </div>
           <div class="metric">
-            <div class="metric-label">الإيرادات المتوقعة</div>
+            <div class="metric-label">Est. revenue</div>
             <div class="metric-value" id="m-rev">$37,500</div>
           </div>
           <div class="metric">
-            <div class="metric-label">العائد المتوقع</div>
+            <div class="metric-label">Expected ROI</div>
             <div class="metric-value up" id="m-roi">275%</div>
           </div>
         </div>
 
         <div class="grid2">
           <div class="card">
-            <div class="card-title">أساسيات الحملة</div>
+            <div class="card-title">Campaign basics</div>
             <div style="display:flex;flex-direction:column;gap:14px">
               <div>
-                <label>اسم الحملة</label>
-                <input type="text" id="camp-name" value="إطلاق الربيع 2025">
+                <label>Campaign name</label>
+                <input type="text" id="camp-name" value="Spring Launch 2025">
               </div>
               <div>
-                <label>نوع الحملة</label>
+                <label>Campaign type</label>
                 <select id="camp-type" onchange="updateSetup()">
-                  <option>الوعي بالعلامة التجارية</option>
-                  <option>توليد العملاء المحتملين</option>
-                  <option selected>إطلاق منتج</option>
-                  <option>الاحتفاظ بالعملاء</option>
-                  <option>عرض موسمي</option>
+                  <option>Brand awareness</option>
+                  <option>Lead generation</option>
+                  <option selected>Product launch</option>
+                  <option>Retention</option>
+                  <option>Seasonal promo</option>
                 </select>
               </div>
               <div>
-                <label>الهدف الرئيسي</label>
+                <label>Primary goal</label>
                 <select id="camp-goal" onchange="updateSetup()">
-                  <option>تعظيم الوصول</option>
-                  <option selected>تعظيم التحويلات</option>
-                  <option>تعظيم الإيرادات</option>
-                  <option>تقليل تكلفة العميل</option>
+                  <option>Maximize reach</option>
+                  <option selected>Maximize conversions</option>
+                  <option>Maximize revenue</option>
+                  <option>Minimize cost per lead</option>
                 </select>
               </div>
             </div>
           </div>
 
           <div class="card">
-            <div class="card-title">الميزانية والجدول الزمني</div>
+            <div class="card-title">Budget & timeline</div>
             <div style="display:flex;flex-direction:column;gap:16px">
               <div>
-                <label>إجمالي الميزانية — <span class="val" id="budget-val">$10,000</span></label>
+                <label>Total budget — <span class="val" id="budget-val">$10,000</span></label>
                 <input type="range" min="1000" max="100000" step="500" value="10000" id="budget" oninput="updateSetup()">
               </div>
               <div>
-                <label>المدة — <span class="val" id="dur-val">30 أيام</span></label>
+                <label>Duration — <span class="val" id="dur-val">30 days</span></label>
                 <input type="range" min="7" max="90" step="1" value="30" id="duration" oninput="updateSetup()">
               </div>
               <div>
-                <label>متوسط قيمة الصفقة — <span class="val" id="deal-val">$200</span></label>
+                <label>Avg deal size — <span class="val" id="deal-val">$200</span></label>
                 <input type="range" min="10" max="5000" step="10" value="200" id="dealsize" oninput="updateSetup()">
               </div>
             </div>
@@ -527,28 +523,28 @@
         </div>
 
         <div class="card">
-          <div class="card-title">مؤشرات صحة الحملة</div>
+          <div class="card-title">Campaign health indicators</div>
           <div class="health-row">
             <div class="health-item">
-              <div class="health-label">كفاية الميزانية</div>
+              <div class="health-label">Budget sufficiency</div>
               <div class="progress-track">
                 <div class="progress-fill" id="ph-budget" style="width:65%;background:var(--accent)"></div>
               </div>
-              <div class="health-sub" id="ph-budget-lbl">Adequate for 30 أيام</div>
+              <div class="health-sub" id="ph-budget-lbl">Adequate for 30 days</div>
             </div>
             <div class="health-item">
-              <div class="health-label">جدوى الجدول الزمني</div>
+              <div class="health-label">Timeline feasibility</div>
               <div class="progress-track">
                 <div class="progress-fill" id="ph-time" style="width:80%;background:var(--green)"></div>
               </div>
-              <div class="health-sub" id="ph-time-lbl">مدة مناسبة</div>
+              <div class="health-sub" id="ph-time-lbl">Good runway</div>
             </div>
             <div class="health-item">
-              <div class="health-label">إمكانية العائد</div>
+              <div class="health-label">ROI potential</div>
               <div class="progress-track">
                 <div class="progress-fill" id="ph-roi" style="width:70%;background:var(--amber)"></div>
               </div>
-              <div class="health-sub" id="ph-roi-lbl">إمكانية قوية</div>
+              <div class="health-sub" id="ph-roi-lbl">Strong potential</div>
             </div>
           </div>
         </div>
@@ -558,22 +554,22 @@
       <div id="tab-channels" class="section">
         <div class="card">
           <div class="card-header">
-            <div class="card-title">اختر القنوات</div>
-            <span class="badge badge-accent" id="ch-count">3 مختارة</span>
+            <div class="card-title">Select channels</div>
+            <span class="badge badge-accent" id="ch-count">3 selected</span>
           </div>
           <div class="channel-grid" id="channel-grid"></div>
-          <div style="font-size:12px;color:var(--text3)">يتم تقسيم الميزانية بالتساوي بين القنوات المختارة. انقر للتبديل.</div>
+          <div style="font-size:12px;color:var(--text3)">Budget is split equally among selected channels. Click to toggle.</div>
         </div>
 
         <div class="card">
-          <div class="card-title">توزيع الميزانية</div>
+          <div class="card-title">Budget allocation</div>
           <div id="channel-alloc"></div>
         </div>
 
         <div class="card">
-          <div class="card-title">الوصول المتوقع لكل قناة</div>
+          <div class="card-title">Estimated reach per channel</div>
           <div class="legend" id="ch-legend"></div>
-          <div class="chart-wrap-lg"><canvas id="channel-chart" role="img" aria-label="مخطط شريطي للوصول المتوقع لكل قناة">الوصول المتوقع لكل قناة</canvas></div>
+          <div class="chart-wrap-lg"><canvas id="channel-chart" role="img" aria-label="Bar chart of estimated reach per channel">Estimated reach by channel</canvas></div>
         </div>
       </div>
 
@@ -581,58 +577,58 @@
       <div id="tab-audience" class="section">
         <div class="grid2">
           <div class="card">
-            <div class="card-title">معاملات الاستهداف</div>
+            <div class="card-title">Targeting parameters</div>
             <div style="display:flex;flex-direction:column;gap:16px">
               <div>
-                <label>الفئة العمرية — <span class="val" id="age-val">25 – 44</span></label>
+                <label>Age range — <span class="val" id="age-val">25 – 44</span></label>
                 <input type="range" min="18" max="65" step="1" value="25" id="age-min" oninput="updateAudience()">
                 <input type="range" min="18" max="65" step="1" value="44" id="age-max" oninput="updateAudience()" style="margin-top:4px">
               </div>
               <div>
-                <label>الجغرافيا</label>
+                <label>Geography</label>
                 <select id="geo" onchange="updateAudience()">
-                  <option>عالمي</option><option selected>وطني</option>
-                  <option>إقليمي</option><option>محلي (مدينة)</option>
+                  <option>Global</option><option selected>National</option>
+                  <option>Regional</option><option>Local (city)</option>
                 </select>
               </div>
               <div>
-                <label>شريحة الدخل</label>
+                <label>Income bracket</label>
                 <select id="income" onchange="updateAudience()">
-                  <option>الكل</option><option>أقل من 50,000$</option>
-                  <option selected>50,000$–100,000$</option>
-                  <option>100,000$–200,000$</option><option>200,000$+</option>
+                  <option>All</option><option>Under $50k</option>
+                  <option selected>$50k–$100k</option>
+                  <option>$100k–$200k</option><option>$200k+</option>
                 </select>
               </div>
               <div>
-                <label>التركيز الصناعي</label>
+                <label>Industry focus</label>
                 <select id="industry" onchange="updateAudience()">
-                  <option selected>جميع الصناعات</option><option>التكنولوجيا</option>
-                  <option>الرعاية الصحية</option><option>المالية</option>
-                  <option>التجزئة</option><option>التعليم</option>
+                  <option selected>All industries</option><option>Technology</option>
+                  <option>Healthcare</option><option>Finance</option>
+                  <option>Retail</option><option>Education</option>
                 </select>
               </div>
             </div>
           </div>
 
           <div class="card" style="text-align:center">
-            <div class="card-title">تقدير حجم الجمهور</div>
+            <div class="card-title">Audience size estimate</div>
             <div style="padding:16px 0">
               <div style="font-size:48px;font-weight:700;color:var(--accent)" id="aud-size">2.4M</div>
-              <div style="font-size:13px;color:var(--text3);margin-top:4px;margin-bottom:20px">الجمهور المستهدف المقدر</div>
+              <div style="font-size:13px;color:var(--text3);margin-top:4px;margin-bottom:20px">estimated addressable audience</div>
               <div style="background:var(--bg3);border-radius:var(--radius);padding:14px;margin-bottom:10px">
-                <div style="font-size:11px;color:var(--text3);margin-bottom:4px">قابل للوصول بالميزانية</div>
+                <div style="font-size:11px;color:var(--text3);margin-bottom:4px">REACHABLE WITH BUDGET</div>
                 <div style="font-size:32px;font-weight:600;color:var(--green)" id="aud-reach">48,000</div>
-                <div style="font-size:12px;color:var(--text3)" id="aud-pct">2.0% من الجمهور</div>
+                <div style="font-size:12px;color:var(--text3)" id="aud-pct">2.0% of audience</div>
               </div>
               <div style="font-size:12px;color:var(--text3)">
-                الوصول اليومي: <span style="color:var(--text);font-weight:500" id="aud-daily">1,600</span>
+                Daily reach: <span style="color:var(--text);font-weight:500" id="aud-daily">1,600</span>
               </div>
             </div>
           </div>
         </div>
 
         <div class="card">
-          <div class="card-title">شرائح الجمهور</div>
+          <div class="card-title">Audience segments</div>
           <div id="segments-wrap" style="margin-bottom:14px"></div>
           <div class="grid3" id="seg-stats"></div>
         </div>
@@ -641,41 +637,41 @@
       <!-- ═══ FUNNEL ═══ -->
       <div id="tab-funnel" class="section">
         <div class="card">
-          <div class="card-title">مسار التحويل</div>
+          <div class="card-title">Conversion funnel</div>
           <div id="funnel-steps"></div>
         </div>
 
         <div class="grid2">
           <div class="card">
-            <div class="card-title">روافع تحسين المسار</div>
+            <div class="card-title">Funnel optimization levers</div>
             <div style="display:flex;flex-direction:column;gap:14px">
               <div>
-                <label>جودة الصفحة المقصودة — <span class="val" id="lp-val">Good</span></label>
+                <label>Landing page quality — <span class="val" id="lp-val">Good</span></label>
                 <input type="range" min="1" max="5" step="1" value="3" id="lp-q" oninput="updateFunnel()">
               </div>
               <div>
-                <label>سلسلة البريد الإلكتروني — <span class="val" id="em-val">3 emails</span></label>
+                <label>Email sequence — <span class="val" id="em-val">3 emails</span></label>
                 <input type="range" min="1" max="10" step="1" value="3" id="em-seq" oninput="updateFunnel()">
               </div>
               <div>
-                <label>قوة العرض — <span class="val" id="offer-val">Medium</span></label>
+                <label>Offer strength — <span class="val" id="offer-val">Medium</span></label>
                 <input type="range" min="1" max="5" step="1" value="3" id="offer-s" oninput="updateFunnel()">
               </div>
               <div>
-                <label>إعادة الاستهداف — <span class="val" id="ret-val">Enabled</span></label>
+                <label>Retargeting — <span class="val" id="ret-val">Enabled</span></label>
                 <input type="range" min="0" max="1" step="1" value="1" id="retarget" oninput="updateFunnel()">
               </div>
             </div>
           </div>
 
           <div class="card">
-            <div class="card-title">معدلات التحويل</div>
+            <div class="card-title">Stage conversion rates</div>
             <div id="conv-rates"></div>
           </div>
         </div>
 
         <div class="card">
-          <div class="card-title">الجدول الزمني للحملة</div>
+          <div class="card-title">Campaign timeline</div>
           <div id="timeline"></div>
         </div>
       </div>
@@ -684,19 +680,19 @@
       <div id="tab-ab" class="section">
         <div class="metrics">
           <div class="metric">
-            <div class="metric-label">الثقة</div>
+            <div class="metric-label">Confidence</div>
             <div class="metric-value" id="ab-conf">87%</div>
           </div>
           <div class="metric">
-            <div class="metric-label">حجم العينة</div>
+            <div class="metric-label">Sample size</div>
             <div class="metric-value" id="ab-sample">5,200</div>
           </div>
           <div class="metric">
-            <div class="metric-label">مدة الاختبار</div>
+            <div class="metric-label">Test duration</div>
             <div class="metric-value" id="ab-dur">14d</div>
           </div>
           <div class="metric">
-            <div class="metric-label">التحسن (ب مقابل أ)</div>
+            <div class="metric-label">Uplift (B vs A)</div>
             <div class="metric-value up" id="ab-uplift">+18%</div>
           </div>
         </div>
@@ -704,44 +700,44 @@
         <div class="grid2" style="margin-bottom:16px">
           <div class="ab-card" id="ab-a-card">
             <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
-              <div style="font-size:14px;font-weight:600">النسخة أ — التحكم</div>
-              <span class="badge badge-blue">جارٍ</span>
+              <div style="font-size:14px;font-weight:600">Variant A — Control</div>
+              <span class="badge badge-blue">Running</span>
             </div>
             <div id="ab-a-stats"></div>
           </div>
           <div class="ab-card ab-winner" id="ab-b-card">
             <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
-              <div style="font-size:14px;font-weight:600">النسخة ب — الاختبار</div>
-              <span class="badge badge-green">فائز ✓</span>
+              <div style="font-size:14px;font-weight:600">Variant B — Test</div>
+              <span class="badge badge-green">Winning ✓</span>
             </div>
             <div id="ab-b-stats"></div>
           </div>
         </div>
 
         <div class="card">
-          <div class="card-title">إعداد الاختبار</div>
+          <div class="card-title">Test configuration</div>
           <div class="grid3">
             <div>
-              <label>المتغير المراد اختباره</label>
+              <label>Variable to test</label>
               <select id="ab-var" onchange="updateAB()">
-                <option>نص العنوان</option><option selected>زر الدعوة للعمل</option>
-                <option>الصورة الرئيسية</option><option>عرض الأسعار</option>
-                <option>موضوع البريد</option>
+                <option>Headline copy</option><option selected>CTA button</option>
+                <option>Hero image</option><option>Pricing display</option>
+                <option>Email subject</option>
               </select>
             </div>
             <div>
-              <label>توزيع الزيارات — <span class="val" id="ab-split-val">50 / 50</span></label>
+              <label>Traffic split — <span class="val" id="ab-split-val">50 / 50</span></label>
               <input type="range" min="10" max="50" step="5" value="50" id="ab-split" oninput="updateAB()">
             </div>
             <div>
-              <label>مدة الاختبار — <span class="val" id="ab-dur-val">14 أيام</span></label>
+              <label>Test duration — <span class="val" id="ab-dur-val">14 days</span></label>
               <input type="range" min="3" max="30" step="1" value="14" id="ab-dur-in" oninput="updateAB()">
             </div>
           </div>
         </div>
 
         <div class="card">
-          <div class="card-title">سجل النشاط</div>
+          <div class="card-title">Activity log</div>
           <div class="log" id="ab-log"></div>
         </div>
       </div>
@@ -750,62 +746,62 @@
       <div id="tab-results" class="section">
         <div class="metrics">
           <div class="metric">
-            <div class="metric-label">إجمالي الوصول</div>
+            <div class="metric-label">Total reach</div>
             <div class="metric-value" id="r-reach">48,200</div>
-            <div class="metric-delta up">↑ في المسار</div>
+            <div class="metric-delta up">↑ on target</div>
           </div>
           <div class="metric">
-            <div class="metric-label">العملاء المحتملون</div>
+            <div class="metric-label">Leads generated</div>
             <div class="metric-value" id="r-leads">963</div>
-            <div class="metric-delta up">↑ 14% فوق الهدف</div>
+            <div class="metric-delta up">↑ 14% over goal</div>
           </div>
           <div class="metric">
-            <div class="metric-label">التحويلات</div>
+            <div class="metric-label">Conversions</div>
             <div class="metric-value" id="r-conv">144</div>
-            <div class="metric-delta" id="r-conv-rate">معدل تحويل 15%</div>
+            <div class="metric-delta" id="r-conv-rate">15% conv rate</div>
           </div>
           <div class="metric">
-            <div class="metric-label">الإيرادات</div>
+            <div class="metric-label">Revenue</div>
             <div class="metric-value" id="r-rev">$28,800</div>
-            <div class="metric-delta up">↑ 6.7% مقابل التوقعات</div>
+            <div class="metric-delta up">↑ 6.7% vs est</div>
           </div>
           <div class="metric">
             <div class="metric-label">ROI</div>
             <div class="metric-value up" id="r-roi">188%</div>
-            <div class="metric-delta up">↑ 18 نقطة مقابل الخطة</div>
+            <div class="metric-delta up">↑ 18pts vs plan</div>
           </div>
           <div class="metric">
-            <div class="metric-label">تكلفة العميل المحتمل</div>
+            <div class="metric-label">Cost per lead</div>
             <div class="metric-value" id="r-cpl">$10.39</div>
-            <div class="metric-delta up">أقل من المستهدف</div>
+            <div class="metric-delta up">Below target</div>
           </div>
         </div>
 
         <div class="grid2">
           <div class="card">
-            <div class="card-title">الأداء الأسبوعي</div>
+            <div class="card-title">Weekly performance</div>
             <div class="legend">
               <div class="legend-item"><div class="legend-swatch" style="background:var(--accent)"></div>Leads</div>
-              <div class="legend-item"><div class="legend-swatch" style="background:var(--green);border-style:dashed"></div>التحويلات</div>
+              <div class="legend-item"><div class="legend-swatch" style="background:var(--green);border-style:dashed"></div>Conversions</div>
             </div>
-            <div class="chart-wrap"><canvas id="results-chart" role="img" aria-label="مخطط خطي للعملاء والتحويلات الأسبوعية">العملاء والتحويلات الأسبوعية</canvas></div>
+            <div class="chart-wrap"><canvas id="results-chart" role="img" aria-label="Line chart of weekly leads and conversions">Weekly leads and conversions</canvas></div>
           </div>
           <div class="card">
-            <div class="card-title">مساهمة العملاء لكل قناة</div>
-            <div class="chart-wrap" style="height:190px"><canvas id="contrib-chart" role="img" aria-label="مخطط دائري لنسبة العملاء لكل قناة">توزيع مساهمة القنوات</canvas></div>
+            <div class="card-title">Lead contribution by channel</div>
+            <div class="chart-wrap" style="height:190px"><canvas id="contrib-chart" role="img" aria-label="Doughnut chart of lead share per channel">Channel contribution breakdown</canvas></div>
             <div class="legend" id="contrib-legend" style="margin-top:10px;margin-bottom:0"></div>
           </div>
         </div>
 
         <div class="card">
-          <div class="card-title">توصيات الذكاء الاصطناعي</div>
+          <div class="card-title">AI recommendations</div>
           <div id="recommendations"></div>
         </div>
 
         <div style="margin-top:16px;display:flex;gap:8px;flex-wrap:wrap">
-          <button class="btn btn-primary" onclick="alert('في التطوير الكامل سيتصل هذا بمساعد ذكاء اصطناعي. أضف مفتاح API لتفعيل هذه الميزة.')">← احصل على رؤى الذكاء الاصطناعي</button>
-          <button class="btn" onclick="window.print()">تصدير التقرير</button>
-          <button class="btn" onclick="resetSim()">↺ تشغيل حملة أخرى</button>
+          <button class="btn btn-primary" onclick="alert('In a real deployment this would connect to an AI assistant. Configure your API key to enable this.')">Get AI insights →</button>
+          <button class="btn" onclick="window.print()">Export report</button>
+          <button class="btn" onclick="resetSim()">↺ Run another campaign</button>
         </div>
       </div>
 
@@ -817,31 +813,31 @@
 <script>
 /* ─── Data ─── */
 const CHANNELS = [
-  {name:'إعلانات جوجل',  icon:'G',  cpc:2.5,  reach:15000, color:'#4b9cf7'},
-  {name:'إعلانات ميتا',    icon:'M',  cpc:1.8,  reach:22000, color:'#7c6fff'},
-  {name:'لينكد إن',    icon:'Li', cpc:6.0,  reach:5000,  color:'#2dd4bf'},
-  {name:'البريد الإلكتروني',       icon:'@',  cpc:0.3,  reach:12000, color:'#1ecc8b'},
-  {name:'تحسين محركات البحث', icon:'S',  cpc:0.5,  reach:8000,  color:'#f5a623'},
-  {name:'المؤثرون',  icon:'I',  cpc:4.0,  reach:18000, color:'#d45fa0'},
-  {name:'يوتيوب',     icon:'▶',  cpc:3.2,  reach:10000, color:'#f05c5c'},
-  {name:'الرسائل النصية',         icon:'~',  cpc:0.8,  reach:6000,  color:'#a78bfa'},
+  {name:'Google Ads',  icon:'G',  cpc:2.5,  reach:15000, color:'#4b9cf7'},
+  {name:'Meta Ads',    icon:'M',  cpc:1.8,  reach:22000, color:'#7c6fff'},
+  {name:'LinkedIn',    icon:'Li', cpc:6.0,  reach:5000,  color:'#2dd4bf'},
+  {name:'Email',       icon:'@',  cpc:0.3,  reach:12000, color:'#1ecc8b'},
+  {name:'SEO/Organic', icon:'S',  cpc:0.5,  reach:8000,  color:'#f5a623'},
+  {name:'Influencer',  icon:'I',  cpc:4.0,  reach:18000, color:'#d45fa0'},
+  {name:'YouTube',     icon:'▶',  cpc:3.2,  reach:10000, color:'#f05c5c'},
+  {name:'SMS',         icon:'~',  cpc:0.8,  reach:6000,  color:'#a78bfa'},
 ];
 
 const SEGMENTS = [
-  {name:'المتبنون الأوائل',  color:'#7c6fff', pct:22},
-  {name:'الباحثون عن القيمة',   color:'#1ecc8b', pct:35},
-  {name:'المخلصون للعلامة', color:'#f5a623', pct:18},
-  {name:'المشترون الاندفاعيون',  color:'#d45fa0', pct:15},
-  {name:'الباحثون',     color:'#4b9cf7', pct:10},
+  {name:'Early adopters',  color:'#7c6fff', pct:22},
+  {name:'Value seekers',   color:'#1ecc8b', pct:35},
+  {name:'Brand loyalists', color:'#f5a623', pct:18},
+  {name:'Impulse buyers',  color:'#d45fa0', pct:15},
+  {name:'Researchers',     color:'#4b9cf7', pct:10},
 ];
 
 const PAGE_META = {
-  setup:    {title:'إعداد الحملة',    sub:'ضبط معاملات الحملة'},
-  channels: {title:'اختيار القنوات', sub:'اختر وخصص قنوات التسويق'},
-  audience: {title:'استهداف الجمهور',sub:'تحديد حجم جمهورك المستهدف'},
-  funnel:   {title:'مسار التحويل', sub:'نمذجة أداء مسار التحويل بالكامل'},
-  ab:       {title:'اختبار أ/ب',       sub:'محاكاة ومقارنة النسخ الإبداعية'},
-  results:  {title:'نتائج الحملة',  sub:'مراجعة الأداء المتوقع والتوصيات'},
+  setup:    {title:'Campaign Setup',    sub:'Configure your campaign parameters'},
+  channels: {title:'Channel Selection', sub:'Choose and allocate marketing channels'},
+  audience: {title:'Audience Targeting',sub:'Define and size your target audience'},
+  funnel:   {title:'Conversion Funnel', sub:'Model your end-to-end funnel performance'},
+  ab:       {title:'A/B Testing',       sub:'Simulate and compare creative variants'},
+  results:  {title:'Campaign Results',  sub:'Review projected performance and recommendations'},
 };
 
 let selectedChannels = new Set([0,1,3]);
@@ -872,7 +868,7 @@ const fmt = n => n.toLocaleString();
 function updateSetup() {
   const b = getBudget(), d = getDuration(), deal = getDealSize();
   document.getElementById('budget-val').textContent = '$'+fmt(b);
-  document.getElementById('dur-val').textContent    = d+' أيام';
+  document.getElementById('dur-val').textContent    = d+' days';
   document.getElementById('deal-val').textContent   = '$'+deal;
 
   const leads = Math.round(b / 8);
@@ -888,15 +884,15 @@ function updateSetup() {
 
   const bPct = Math.min(95, Math.round(b / 100000 * 100));
   document.getElementById('ph-budget').style.width  = bPct+'%';
-  document.getElementById('ph-budget-lbl').textContent = b > 5000 ? 'مناسبة للمدة المختارة' : 'فكر في زيادة الميزانية';
+  document.getElementById('ph-budget-lbl').textContent = b > 5000 ? 'Adequate for chosen duration' : 'Consider increasing budget';
 
   const tPct = Math.min(95, Math.round(d / 90 * 100));
   document.getElementById('ph-time').style.width  = tPct+'%';
-  document.getElementById('ph-time-lbl').textContent = d > 21 ? 'مدة مناسبة for results' : 'قصيرة — فكر في التمديد';
+  document.getElementById('ph-time-lbl').textContent = d > 21 ? 'Good runway for results' : 'Short — consider extending';
 
   const rPct = Math.min(95, Math.max(5, Math.round(roi / 4)));
   document.getElementById('ph-roi').style.width  = rPct+'%';
-  document.getElementById('ph-roi-lbl').textContent = roi > 150 ? 'إمكانية ممتازة' : roi > 50 ? 'إمكانية قوية' : roi > 0 ? 'هامشي — راجع المدخلات' : 'في خطر — عدّل الاستراتيجية';
+  document.getElementById('ph-roi-lbl').textContent = roi > 150 ? 'Excellent potential' : roi > 50 ? 'Strong potential' : roi > 0 ? 'Marginal — review inputs' : 'At risk — adjust strategy';
 }
 
 /* ─── Channels ─── */
@@ -916,7 +912,7 @@ function initChannels() {
     };
     grid.appendChild(d);
   });
-  document.getElementById('ch-count').textContent = selectedChannels.size + ' مختارة';
+  document.getElementById('ch-count').textContent = selectedChannels.size + ' selected';
   updateChannelAlloc();
   drawChannelChart();
 }
@@ -925,7 +921,7 @@ function updateChannelAlloc() {
   const b = getBudget();
   const sel = [...selectedChannels];
   const alloc = document.getElementById('channel-alloc');
-  if (!sel.length) { alloc.innerHTML = '<div style="color:var(--text3);font-size:13px">لم يتم تحديد أي قنوات.</div>'; return; }
+  if (!sel.length) { alloc.innerHTML = '<div style="color:var(--text3);font-size:13px">No channels selected.</div>'; return; }
   const share = Math.round(b / sel.length);
   alloc.innerHTML = sel.map(i => {
     const ch = CHANNELS[i];
@@ -984,7 +980,7 @@ function updateAudience() {
   const daily  = Math.round(reach / getDuration());
   document.getElementById('aud-size').textContent  = (size / 1000000).toFixed(1) + 'M';
   document.getElementById('aud-reach').textContent = fmt(reach);
-  document.getElementById('aud-pct').textContent   = pct + '% من الجمهور';
+  document.getElementById('aud-pct').textContent   = pct + '% of audience';
   document.getElementById('aud-daily').textContent = fmt(daily);
 
   document.getElementById('segments-wrap').innerHTML =
@@ -994,7 +990,7 @@ function updateAudience() {
       <div class="stat-block">
         <div style="font-size:11px;color:${s.color};font-weight:600;margin-bottom:4px;text-transform:uppercase;letter-spacing:.06em">${s.name}</div>
         <div class="stat-num" style="color:var(--text)">${fmt(Math.round(reach * s.pct / 100))}</div>
-        <div class="stat-lbl">وصول متوقع</div>
+        <div class="stat-lbl">projected reach</div>
       </div>`).join('');
 }
 
@@ -1004,12 +1000,12 @@ function updateFunnel() {
   const emSeq  = parseInt(document.getElementById('em-seq').value)  || 3;
   const offerS = parseInt(document.getElementById('offer-s').value) || 3;
   const ret    = parseInt(document.getElementById('retarget').value)|| 0;
-  const lpL    = ['ضعيف','مقبول','جيد','ممتاز','رائع'];
-  const ofL    = ['ضعيف','دون المتوسط','متوسط','قوي','مقنع'];
+  const lpL    = ['Poor','Fair','Good','Great','Excellent'];
+  const ofL    = ['Weak','Below avg','Medium','Strong','Compelling'];
   document.getElementById('lp-val').textContent    = lpL[lpQ - 1];
   document.getElementById('em-val').textContent    = emSeq + ' email' + (emSeq > 1 ? 's' : '');
   document.getElementById('offer-val').textContent = ofL[offerS - 1];
-  document.getElementById('ret-val').textContent   = ret ? 'مفعّل' : 'معطّل';
+  document.getElementById('ret-val').textContent   = ret ? 'Enabled' : 'Disabled';
 
   const reach     = Math.round(getBudget() / 4);
   const ctr       = 0.02 + lpQ * 0.008;
@@ -1022,11 +1018,11 @@ function updateFunnel() {
   const conv      = Math.round(nurtured * 0.2 * retBonus);
 
   const steps = [
-    {label:'الجمهور الوصول', count:reach,   color:'#7c6fff'},
-    {label:'النقرات',           count:clicks,  color:'#4b9cf7'},
-    {label:'العملاء المحتملون',   count:leads,   color:'#1ecc8b'},
-    {label:'المرعيون',         count:nurtured,color:'#f5a623'},
-    {label:'التحويلات',      count:conv,    color:'#f05c5c'},
+    {label:'Audience reached', count:reach,   color:'#7c6fff'},
+    {label:'Clicks',           count:clicks,  color:'#4b9cf7'},
+    {label:'Leads captured',   count:leads,   color:'#1ecc8b'},
+    {label:'Nurtured',         count:nurtured,color:'#f5a623'},
+    {label:'Conversions',      count:conv,    color:'#f05c5c'},
   ];
   const maxC = steps[0].count || 1;
   document.getElementById('funnel-steps').innerHTML = steps.map((s, idx) => {
@@ -1045,11 +1041,11 @@ function updateFunnel() {
   }).join('');
 
   const rates = [
-    {label:'معدل النقر',     val:(ctr * 100).toFixed(1) + '%'},
-    {label:'معدل استحواذ العملاء',      val:(lpConv * 100).toFixed(1) + '%'},
-    {label:'معدل الرعاية',           val:(nurtureR * 100).toFixed(0) + '%'},
-    {label:'معدل إغلاق المبيعات',       val:((0.2 * retBonus) * 100).toFixed(0) + '%'},
-    {label:'معدل التحويل الإجمالي',     val:reach > 0 ? (conv / reach * 100).toFixed(2) + '%' : '0%'},
+    {label:'Click-through rate',     val:(ctr * 100).toFixed(1) + '%'},
+    {label:'Lead capture rate',      val:(lpConv * 100).toFixed(1) + '%'},
+    {label:'Nurture rate',           val:(nurtureR * 100).toFixed(0) + '%'},
+    {label:'Sales close rate',       val:((0.2 * retBonus) * 100).toFixed(0) + '%'},
+    {label:'Overall conversion',     val:reach > 0 ? (conv / reach * 100).toFixed(2) + '%' : '0%'},
   ];
   document.getElementById('conv-rates').innerHTML = rates.map(r =>
     `<div class="rate-row"><span style="color:var(--text2)">${r.label}</span><span style="font-weight:600">${r.val}</span></div>`
@@ -1057,12 +1053,12 @@ function updateFunnel() {
 
   const d = getDuration();
   const tl = [
-    {day:0,                       event:'إطلاق الحملة — تبدأ الإعلانات على جميع القنوات',          color:'#7c6fff'},
-    {day:Math.round(d * 0.15),    event:'أول عملاء محتملين، تبدأ سلسلة البريد الإلكتروني',           color:'#1ecc8b'},
-    {day:Math.round(d * 0.30),    event:'نتائج اختبار أ/ب متاحة — تفعيل النسخة الفائزة',           color:'#f5a623'},
-    {day:Math.round(d * 0.50),    event:'مراجعة منتصف الحملة — إعادة توزيع الميزانية',       color:'#4b9cf7'},
-    {day:Math.round(d * 0.75),    event:'تفعيل موجة إعادة الاستهداف للزوار غير المحولين',           color:'#d45fa0'},
-    {day:d,                       event:'إغلاق الحملة — حساب وتقرير التحويلات النهائية',       color:'#f05c5c'},
+    {day:0,                       event:'Campaign launched — ads go live across all channels',          color:'#7c6fff'},
+    {day:Math.round(d * 0.15),    event:'First leads captured, email nurture sequence begins',           color:'#1ecc8b'},
+    {day:Math.round(d * 0.30),    event:'A/B test results available — deploy winning variant',           color:'#f5a623'},
+    {day:Math.round(d * 0.50),    event:'Mid-campaign review — reallocate budget to top channels',       color:'#4b9cf7'},
+    {day:Math.round(d * 0.75),    event:'Retargeting wave activated for unconverted visitors',           color:'#d45fa0'},
+    {day:d,                       event:'Campaign closes — final conversions tallied and reported',       color:'#f05c5c'},
   ];
   document.getElementById('timeline').innerHTML = tl.map((t, idx) => `
     <div class="tl-item">
@@ -1083,7 +1079,7 @@ function updateAB() {
   const split  = parseInt(document.getElementById('ab-split').value) || 50;
   const dur    = parseInt(document.getElementById('ab-dur-in').value) || 14;
   document.getElementById('ab-split-val').textContent = split + ' / ' + (100 - split);
-  document.getElementById('ab-dur-val').textContent   = dur + ' أيام';
+  document.getElementById('ab-dur-val').textContent   = dur + ' days';
 
   const sample  = Math.round(getBudget() / 3 * dur / 14);
   const conf    = Math.min(99, Math.round(68 + dur * 1.5 + split * 0.2));
@@ -1111,11 +1107,11 @@ function updateAB() {
   document.getElementById('ab-b-stats').innerHTML = renderStats(bM);
 
   const entries = [
-    `[اليوم 01]  بدء الاختبار — المتغير: ${v}`,
-    `[اليوم 03]  النسخة ب تُظهر تحسناً +${Math.round(uplift * 0.4)}% في معدل النقر`,
-    `[اليوم 07]  الثقة الإحصائية وصلت ${Math.round(conf * 0.7)}%`,
-    `[Day ${String(dur).padStart(2,'0')}]  انتهى الاختبار — النسخة ب فائزة بثقة ${conf}%`,
-    `[تلقائي]  تم تطبيق النسخة ب على 100% من الزيارات`,
+    `[Day 01]  Test initialized — variable: ${v}`,
+    `[Day 03]  Variant B showing +${Math.round(uplift * 0.4)}% CTR advantage`,
+    `[Day 07]  Statistical confidence reached ${Math.round(conf * 0.7)}%`,
+    `[Day ${String(dur).padStart(2,'0')}]  Test concluded — Variant B wins with ${conf}% confidence`,
+    `[Auto  ]  Variant B deployed to 100% of traffic`,
   ];
   document.getElementById('ab-log').innerHTML = entries.map(e => `<div class="log-line">${e}</div>`).join('');
 }
@@ -1133,7 +1129,7 @@ function initResults() {
   document.getElementById('r-reach').textContent    = fmt(reach);
   document.getElementById('r-leads').textContent    = fmt(leads);
   document.getElementById('r-conv').textContent     = fmt(conv);
-  document.getElementById('r-conv-rate').textContent= Math.round(conv/leads*100) + '% معدل تحويل';
+  document.getElementById('r-conv-rate').textContent= Math.round(conv/leads*100) + '% conv rate';
   document.getElementById('r-rev').textContent      = '$' + fmt(rev);
   document.getElementById('r-roi').textContent      = roi + '%';
   document.getElementById('r-cpl').textContent      = '$' + cpl;
@@ -1148,8 +1144,8 @@ function initResults() {
   resultsChart = new Chart(rc, {
     type: 'line',
     data: { labels: wLabels, datasets: [
-      {label:'عملاء محتملون', data:wLeads, borderColor:'#7c6fff', backgroundColor:'rgba(124,111,255,.12)', fill:true, tension:0.4, borderWidth:2, pointBackgroundColor:'#7c6fff'},
-      {label:'التحويلات', data:wConv, borderColor:'#1ecc8b', backgroundColor:'rgba(30,204,139,.10)', fill:true, tension:0.4, borderWidth:2, borderDash:[5,4], pointBackgroundColor:'#1ecc8b'},
+      {label:'Leads', data:wLeads, borderColor:'#7c6fff', backgroundColor:'rgba(124,111,255,.12)', fill:true, tension:0.4, borderWidth:2, pointBackgroundColor:'#7c6fff'},
+      {label:'Conversions', data:wConv, borderColor:'#1ecc8b', backgroundColor:'rgba(30,204,139,.10)', fill:true, tension:0.4, borderWidth:2, borderDash:[5,4], pointBackgroundColor:'#1ecc8b'},
     ]},
     options: {
       responsive: true, maintainAspectRatio: false,
@@ -1181,13 +1177,13 @@ function initResults() {
 
   // Recommendations
   const recs = [
-    roi > 150 ? {type:'green', icon:'↑', text:'عائد قوي — فكر في زيادة الميزانية بنسبة 20-30% في دورة الحملة القادمة.'} :
-                {type:'amber', icon:'!', text:'العائد أقل من المستهدف — راجع مزيج القنوات وقوة العرض وافتراضات حجم الصفقة.'},
-    leads > 200 ? {type:'green', icon:'✓', text:'حجم العملاء المحتملين في المسار الصحيح. حافظ على الاستراتيجية الحالية.'} :
-                  {type:'blue',  icon:'→', text:'حجم العملاء المحتملين محدود — وسّع شرائح الجمهور أو أضف قنوات أعلى وصولاً.'},
-    {type:'blue',  icon:'→', text:'طبّق النسخة الفائزة من اختبار أ/ب كإعلان افتراضي للحملة القادمة.'},
-    d < 21 ? {type:'amber', icon:'!', text:'تم اكتشاف مدة قصيرة للحملة — الحملات التي تزيد عن 30 يومًا تتفوق بنسبة 40% في المتوسط.'} :
-             {type:'green', icon:'✓', text:'مدة الحملة مناسبة لنتائج موثوقة إحصائيًا وتحسين مستمر.'},
+    roi > 150 ? {type:'green', icon:'↑', text:'Strong ROI — consider scaling budget by 20–30% in the next campaign cycle.'} :
+                {type:'amber', icon:'!', text:'ROI is below target — revisit channel mix, offer strength, and deal size assumptions.'},
+    leads > 200 ? {type:'green', icon:'✓', text:'Lead volume is on track. Maintain current targeting and creative strategy.'} :
+                  {type:'blue',  icon:'→', text:'Lead volume is modest — expand audience segments or add higher-reach channels.'},
+    {type:'blue',  icon:'→', text:'Apply A/B test winning variant as the default creative for your next campaign.'},
+    d < 21 ? {type:'amber', icon:'!', text:'Short campaign duration detected — campaigns of 30+ days outperform by ~40% on average.'} :
+             {type:'green', icon:'✓', text:'Campaign duration is adequate for statistically reliable results and optimization.'},
   ];
   document.getElementById('recommendations').innerHTML = recs.map(r =>
     `<div class="rec rec-${r.type}"><strong style="flex-shrink:0">${r.icon}</strong><span>${r.text}</span></div>`
