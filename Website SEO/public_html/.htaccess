@@ -1,3 +1,8 @@
+# Basic Server Configuration
+Options +FollowSymLinks
+Options -MultiViews
+DirectoryIndex index
+
 # Enable Rewriting
 RewriteEngine On
 RewriteBase /
