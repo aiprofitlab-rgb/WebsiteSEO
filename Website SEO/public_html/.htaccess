@@ -14,6 +14,7 @@ RewriteEngine On
 RewriteBase /
 
 # Force trailing slash on hub directories to ensure index.html loads
+RewriteRule ^en$ /en/ [R=301,L]
 RewriteRule ^academy$ /academy/ [R=301,L]
 RewriteRule ^blog$ /blog/ [R=301,L]
 RewriteRule ^academy-ar$ /academy-ar/ [R=301,L]
