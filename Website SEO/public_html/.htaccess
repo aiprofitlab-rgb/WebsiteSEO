@@ -2,7 +2,7 @@
 Options +FollowSymLinks
 Options -MultiViews
 Options -Indexes
-DirectoryIndex index.html index
+DirectoryIndex index.html
 
 # Allow access
 <Files "*">
@@ -12,6 +12,12 @@ DirectoryIndex index.html index
 # Enable Rewriting
 RewriteEngine On
 RewriteBase /
+
+# Force trailing slash on hub directories to ensure index.html loads
+RewriteRule ^academy$ /academy/ [R=301,L]
+RewriteRule ^blog$ /blog/ [R=301,L]
+RewriteRule ^academy-ar$ /academy-ar/ [R=301,L]
+RewriteRule ^blog-ar$ /blog-ar/ [R=301,L]
 
 # Standardized URL Slug Redirects
 RewriteRule ^Missed-Call-Simulator-en$ /missed-call-simulator-en [R=301,L]
@@ -36,7 +42,7 @@ RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /(.+)\.html\ HTTP/
 RewriteRule ^(.+)\.html$ /$1 [R=301,L]
 
 # 3. Handle Directory Index
-DirectoryIndex index
+# (Handled by the DirectoryIndex directive at the top)
 
 # 4. Serve extensionless files as HTML
 # We only want to force HTML if the file exists on disk as an extensionless file
