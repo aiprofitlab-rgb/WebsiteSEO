@@ -15,7 +15,7 @@ When the user asks you to write an article for a given keyword/topic, follow the
 - **Factual Density**: Eliminate adjectives (e.g., "amazing", "incredible") and replace with hard data (e.g., "30% increase"). AI prioritizes data over fluff. When discussing boosting ROI, back it up.
 - **Data Tables**: Add HTML Data Tables within the content showing ROI, time savings, or tool comparisons.
 - **High-Authority Links**: Link out to high-authority tech docs (e.g., OpenAI docs, Omani Gov Tech portals) whenever it is related.
-- **Internal Links**: Ensure all internal links point to the clean URL version (e.g., `/blog/en/my-article.html`). Interlink with the ROI data pages (e.g., linking to `../../roi-calculator.html` or similar relevant pages).
+- **Internal Links**: Ensure all internal links point to the clean URL version (e.g., `/blog/en/my-article-slug/`). Interlink with the ROI data pages (e.g., linking to `/campaign-roi-simulator/` or similar relevant pages).
 - **Video-to-Text Synergy**: Embed relevant, energetic, high-retention YouTube videos directly into the written posts.
 - The article must be a rich, highly SEO-friendly article at least 1000 words long.
 - Include a specific section for References at the end (verify that references exist and are not broken).
@@ -31,12 +31,12 @@ Save it to: `public_html/blog/en/YYYY-MM-DD-[slug-title].html` (use the current 
 ## Step 3: Generate the Arabic Version
 Translate and adapt the article into Arabic. Make sure the tone remains professional and culturally relevant for the GCC/Oman market.
 Set `lang="ar"` and `dir="rtl"`.
-In the navbar, change "Back to Hub" to "العودة إلى المركز" and link to `../../blog_ar.html`.
+In the navbar, change "Back to Hub" to "العودة إلى المركز" and link to `/blog-ar/`.
 Save it to: `public_html/blog/ar/YYYY-MM-DD-[slug-title-in-english].html`.
 
 ## Step 4: Generate the Image
 Use your `generate_image` tool to create the hero image based on the designated concept.
-Save the generated image to: `public_html/blog/images/[image_name].png`. Make sure both HTML files point to this exact relative path (`../../blog/images/[image_name].png`).
+Save the generated image to: `public_html/blog/images/[image_name].png`. Make sure both HTML files point to this exact absolute path (`/blog/images/[image_name].png`).
 
 ## Step 5: Update the Blog Hub
 After generating and saving the images and HTML files, use your `run_command` tool to execute the python script that automatically updates the hub pages with the new content:
@@ -66,9 +66,9 @@ Whenever you generate the files, use the following HTML template. Do NOT deviate
     <title>[SEO Title] | AI Profit Lab</title>
     <meta name="description" content="[Energetic, unique SEO Description (exactly 150 characters)]">
     <meta name="keywords" content="[SEO Keywords]">
-    <link rel="canonical" href="https://aiprofitlab.io/blog/en/YYYY-MM-DD-[slug-title].html"> <!-- Note: Update path for Arabic: /blog/ar/... -->
-    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
-    <link rel="apple-touch-icon" href="../../favicon.svg">
+    <link rel="canonical" href="https://aiprofitlab.io/blog/en/YYYY-MM-DD-[slug-title]/"> <!-- Note: Update path for Arabic: /blog/ar/... -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="apple-touch-icon" href="/favicon.svg">
     
     <!-- JSON-LD Schema Markup -->
     <script type="application/ld+json">
@@ -138,7 +138,7 @@ Whenever you generate the files, use the following HTML template. Do NOT deviate
       "name": "AI Profit Lab",
       "url": "https://aiprofitlab.io",
       "logo": "https://aiprofitlab.io/logo.webp",
-      "image": "https://aiprofitlab.io/Nahid_Business_Banner.png",
+      "image": "https://aiprofitlab.io/nahid-business-banner.png",
       "description": "Helping non-technical managers leverage AI, automation, and technology to increase ROI and business efficiency.",
       "address": {
         "@type": "PostalAddress",
@@ -170,11 +170,11 @@ Whenever you generate the files, use the following HTML template. Do NOT deviate
 <body class="antialiased">
     <!-- Navbar -->
     <nav class="flex justify-between items-center px-6 md:px-12 py-8 w-full z-50 glass sticky top-0 bg-black/30">
-        <a href="../../en.html" class="font-extrabold text-3xl md:text-4xl tracking-tighter hover:opacity-80 transition">
+        <a href="/en/" class="font-extrabold text-3xl md:text-4xl tracking-tighter hover:opacity-80 transition">
             <span class="text-blue-500">A</span><span class="text-red-500">I</span> <span class="text-white text-2xl md:text-3xl">Profit Lab</span>
         </a>
-        <a href="../../blog.html" class="text-gray-300 hover:text-white font-semibold transition">Back to Hub</a>
-    </nav> <!-- Note: update links to ar.html and blog_ar.html for the Arabic translation -->
+        <a href="/blog/" class="text-gray-300 hover:text-white font-semibold transition">Back to Hub</a>
+    </nav> <!-- Note: update links to /ar/ and /blog-ar/ for the Arabic translation -->
 
     <!-- Main Content -->
     <main class="max-w-4xl mx-auto px-6 py-16">
@@ -185,7 +185,7 @@ Whenever you generate the files, use the following HTML template. Do NOT deviate
                 <p class="text-xl text-gray-400 max-w-2xl mx-auto">[Subtitle / Hook]</p>
             </div>
 
-            <img src="../../blog/images/[image_name].png" alt="[Image alt description]" class="w-full rounded-3xl mb-16 shadow-[0_0_50px_rgba(59,130,246,0.15)] border border-white/5 object-cover h-[500px]">
+            <img src="/blog/images/[image_name].png" alt="[Image alt description]" class="w-full rounded-3xl mb-16 shadow-[0_0_50px_rgba(59,130,246,0.15)] border border-white/5 object-cover h-[500px]">
 
             <div class="prose max-w-none">
                 [PARAGRAPHS, HEADINGS, BLOCKQUOTES. MUST BE AT LEAST 1000 WORDS TOTAL, USING STORYTELLING NARRATIVE]

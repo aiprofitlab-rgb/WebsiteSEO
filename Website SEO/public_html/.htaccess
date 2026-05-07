@@ -32,7 +32,13 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^en/([^/]+)/$ $1.html [L]
 
-# 4. Map clean directory URLs to root .html files (for Arabic/General)
+# 4. Map Clean URLs for Blog and Academy subdirectories
+# Example: /blog/en/post/ -> blog/en/post.html
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(blog|academy)/(en|ar)/([^/]+)/$ $1/$2/$3.html [L]
+
+# 5. Map clean directory URLs to root .html files (for Arabic/General)
 # Example: /services/ -> services.html
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
