@@ -13,8 +13,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Latest Articles & News | AI Profit Lab</title>
-    <link rel="icon" type="image/svg+xml" href="favicon.svg">
-    <link rel="apple-touch-icon" href="favicon.svg">
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link rel="apple-touch-icon" href="../favicon.svg">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <style>
@@ -171,16 +171,16 @@
     <!-- ======================= Navigation ======================= -->
     <!-- ======================= Navigation ======================= -->
     <nav class="flex justify-between items-center px-6 md:px-12 py-8 fixed w-full z-50 glass bg-black/30">
-        <a href="en.html" class="font-extrabold text-3xl md:text-4xl tracking-tighter">
+        <a href="../en.html" class="font-extrabold text-3xl md:text-4xl tracking-tighter">
             <span class="text-blue-500">A</span><span class="text-red-500">I</span> <span class="text-white text-2xl md:text-3xl">Profit Lab</span>
         </a>
         
         <!-- Desktop Menu -->
         <div class="hidden md:flex items-center gap-8">
             <div class="desktop-nav-links">
-                <a href="en.html">Home</a>
-                <a href="services-en.html">Services</a>
-                <a href="process-en.html">How It Works</a>
+                <a href="../en.html">Home</a>
+                <a href="../services-en.html">Services</a>
+                <a href="../process-en.html">How It Works</a>
                 
                 <!-- Resources Dropdown -->
                 <div class="relative group cursor-pointer h-full flex items-center">
@@ -195,8 +195,8 @@
                                 <svg class="w-4 h-4 transform -rotate-90" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                             </div>
                             <div class="submenu-content absolute left-full top-0 w-64 bg-[#0a0a0a] border border-gray-800 rounded-xl shadow-2xl opacity-0 invisible transition-all duration-300 flex flex-col z-50">
-                                <a href="Customized_CEO_Dashboard_demo.html" class="px-5 py-4 hover:bg-gray-800 hover:text-blue-400 border-b border-gray-800 transition text-[15px] font-bold tracking-wide">CEO Dashboard</a>
-                                <a href="whatsapp_receptionist_demo.html" class="px-5 py-4 hover:bg-gray-800 hover:text-blue-400 transition text-[15px] font-bold tracking-wide">WhatsApp Receptionist</a>
+                                <a href="../Customized_CEO_Dashboard_demo.html" class="px-5 py-4 hover:bg-gray-800 hover:text-blue-400 border-b border-gray-800 transition text-[15px] font-bold tracking-wide">CEO Dashboard</a>
+                                <a href="../whatsapp_receptionist_demo.html" class="px-5 py-4 hover:bg-gray-800 hover:text-blue-400 transition text-[15px] font-bold tracking-wide">WhatsApp Receptionist</a>
                             </div>
                         </div>
                         <div class="relative group-submenu">
@@ -205,17 +205,17 @@
                                 <svg class="w-4 h-4 transform -rotate-90" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                             </div>
                             <div class="submenu-content absolute left-full top-0 w-64 bg-[#0a0a0a] border border-gray-800 rounded-xl shadow-2xl opacity-0 invisible transition-all duration-300 flex flex-col z-50">
-                                <a href="Missed-Call-Simulator-en.html" class="px-5 py-4 hover:bg-gray-800 hover:text-blue-400 border-b border-gray-800 transition text-[15px] font-bold tracking-wide">Missed-Call Simulator</a>
-                                <a href="Campaign_ROI_Simulator.html" class="px-5 py-4 hover:bg-gray-800 hover:text-blue-400 transition text-[15px] font-bold tracking-wide">Campaign Simulator</a>
+                                <a href="../Missed-Call-Simulator-en.html" class="px-5 py-4 hover:bg-gray-800 hover:text-blue-400 border-b border-gray-800 transition text-[15px] font-bold tracking-wide">Missed-Call Simulator</a>
+                                <a href="../Campaign_ROI_Simulator.html" class="px-5 py-4 hover:bg-gray-800 hover:text-blue-400 transition text-[15px] font-bold tracking-wide">Campaign Simulator</a>
                             </div>
                         </div>
-                        <a href="blog.html" class="px-5 py-4 hover:bg-gray-800 hover:text-blue-400 border-b border-gray-800 transition text-[15px] font-bold tracking-wide">Articles</a>
+                        <a href="../blog.html" class="px-5 py-4 hover:bg-gray-800 hover:text-blue-400 border-b border-gray-800 transition text-[15px] font-bold tracking-wide">Articles</a>
                         <a href="https://www.youtube.com/@AI_for_Managers" class="px-5 py-4 hover:bg-gray-800 hover:text-blue-400 border-b border-gray-800 transition text-[15px] font-bold tracking-wide">YouTube</a>
-                        <a href="about-en.html" class="px-5 py-4 hover:bg-gray-800 hover:text-blue-400 transition text-[15px] font-bold tracking-wide">About</a>
+                        <a href="../about-en.html" class="px-5 py-4 hover:bg-gray-800 hover:text-blue-400 transition text-[15px] font-bold tracking-wide">About</a>
                     </div>
                 </div>
                 
-                <a href="contact-en.html">Contact</a>
+                <a href="../contact-en.html">Contact</a>
             </div>
             <!-- Language Switch -->
             <a href="/" class="bg-blue-600/20 hover:bg-blue-600/30 text-white px-4 py-2 rounded-full text-sm font-bold transition border border-blue-500/30">
@@ -233,21 +233,21 @@
         
         <!-- Mobile Dropdown Menu -->
         <div id="mobileDropdownMenu" class="mobile-dropdown-menu">
-            <a href="en.html">Home</a>
-            <a href="services-en.html">Services</a>
-            <a href="process-en.html">How It Works</a>
+            <a href="../en.html">Home</a>
+            <a href="../services-en.html">Services</a>
+            <a href="../process-en.html">How It Works</a>
             
             <div class="flex flex-col text-center w-full py-2 bg-black/40 rounded-lg">
                 <span class="text-xs text-gray-500 font-bold uppercase tracking-widest mb-2">Resources</span>
-                <a href="Customized_CEO_Dashboard_demo.html" class="py-2 text-sm text-gray-300 border-none">CEO Dashboard</a>
-                <a href="whatsapp_receptionist_demo.html" class="py-2 text-sm text-gray-300 border-none">WhatsApp Receptionist</a>
-                <a href="Missed-Call-Simulator-en.html" class="py-2 text-sm text-gray-300 border-none">Missed-Call Simulator</a>
-                <a href="Campaign_ROI_Simulator.html" class="py-2 text-sm text-gray-300 border-none">Campaign Simulator</a>
-                <a href="blog.html" class="py-2 text-sm text-gray-300 border-none">Articles</a>
-                <a href="about-en.html" class="py-2 text-sm text-gray-300 border-none">About</a>
+                <a href="../Customized_CEO_Dashboard_demo.html" class="py-2 text-sm text-gray-300 border-none">CEO Dashboard</a>
+                <a href="../whatsapp_receptionist_demo.html" class="py-2 text-sm text-gray-300 border-none">WhatsApp Receptionist</a>
+                <a href="../Missed-Call-Simulator-en.html" class="py-2 text-sm text-gray-300 border-none">Missed-Call Simulator</a>
+                <a href="../Campaign_ROI_Simulator.html" class="py-2 text-sm text-gray-300 border-none">Campaign Simulator</a>
+                <a href="../blog.html" class="py-2 text-sm text-gray-300 border-none">Articles</a>
+                <a href="../about-en.html" class="py-2 text-sm text-gray-300 border-none">About</a>
             </div>
             
-            <a href="contact-en.html">Contact</a>
+            <a href="../contact-en.html">Contact</a>
             <a href="/" style="color: #3B82F6; font-weight: bold;">العربية</a>
         </div>
     </nav>
@@ -279,8 +279,8 @@
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 
-            <a href="blog/en/2026-05-06-oman-lens-ol2-ai-satellite-launch.html" class="article-card glass-card rounded-2xl overflow-hidden block relative group" data-category="cat_2">
-                <img src="blog/images/oman-lens-ol2-satellite-hero.png" alt="Oman Lens OL-2: The 400 TOPS AI Satellite Revolutionizing Earth Observation" class="w-full h-48 object-cover">
+            <a href="../blog/en/2026-05-06-oman-lens-ol2-ai-satellite-launch.html" class="article-card glass-card rounded-2xl overflow-hidden block relative group" data-category="cat_2">
+                <img src="../blog/images/oman-lens-ol2-satellite-hero.png" alt="Oman Lens OL-2: The 400 TOPS AI Satellite Revolutionizing Earth Observation" class="w-full h-48 object-cover">
                 <div class="p-6">
                     <div class="flex justify-between items-center mb-3">
                         <span class="bg-blue-500/10 text-blue-400 text-xs px-3 py-1 rounded-full border border-blue-500/20">Space Tech</span>
@@ -292,8 +292,8 @@
                 </div>
             </a>
 
-            <a href="blog/en/2026-05-06-maeen-ai-oman-national-llm.html" class="article-card glass-card rounded-2xl overflow-hidden block relative group" data-category="cat_2">
-                <img src="blog/images/maeen-ai-oman-hero.png" alt="Ma’een AI: Oman’s Sovereign LLM for Government Efficiency" class="w-full h-48 object-cover">
+            <a href="../blog/en/2026-05-06-maeen-ai-oman-national-llm.html" class="article-card glass-card rounded-2xl overflow-hidden block relative group" data-category="cat_2">
+                <img src="../blog/images/maeen-ai-oman-hero.png" alt="Ma’een AI: Oman’s Sovereign LLM for Government Efficiency" class="w-full h-48 object-cover">
                 <div class="p-6">
                     <div class="flex justify-between items-center mb-3">
                         <span class="bg-blue-500/10 text-blue-400 text-xs px-3 py-1 rounded-full border border-blue-500/20">Government AI</span>
@@ -305,8 +305,8 @@
                 </div>
             </a>
 
-            <a href="blog/en/2026-05-05-oman-vision-2040-ai-goals.html" class="article-card glass-card rounded-2xl overflow-hidden block relative group" data-category="cat_2">
-                <img src="blog/images/oman-vision-2040-ai.png" alt="Oman Vision 2040 AI Goals: A Guide for Businesses" class="w-full h-48 object-cover">
+            <a href="../blog/en/2026-05-05-oman-vision-2040-ai-goals.html" class="article-card glass-card rounded-2xl overflow-hidden block relative group" data-category="cat_2">
+                <img src="../blog/images/oman-vision-2040-ai.png" alt="Oman Vision 2040 AI Goals: A Guide for Businesses" class="w-full h-48 object-cover">
                 <div class="p-6">
                     <div class="flex justify-between items-center mb-3">
                         <span class="bg-blue-500/10 text-blue-400 text-xs px-3 py-1 rounded-full border border-blue-500/20">Business Strategy</span>
@@ -318,8 +318,8 @@
                 </div>
             </a>
 
-            <a href="blog/en/2026-05-05-omantel-otech-sovereign-cloud.html" class="article-card glass-card rounded-2xl overflow-hidden block relative group" data-category="cat_2">
-                <img src="blog/images/omantel-otech-sovereign-cloud.png" alt="Omantel Otech Sovereign Cloud: Middle East's First AWS Hub" class="w-full h-48 object-cover">
+            <a href="../blog/en/2026-05-05-omantel-otech-sovereign-cloud.html" class="article-card glass-card rounded-2xl overflow-hidden block relative group" data-category="cat_2">
+                <img src="../blog/images/omantel-otech-sovereign-cloud.png" alt="Omantel Otech Sovereign Cloud: Middle East's First AWS Hub" class="w-full h-48 object-cover">
                 <div class="p-6">
                     <div class="flex justify-between items-center mb-3">
                         <span class="bg-blue-500/10 text-blue-400 text-xs px-3 py-1 rounded-full border border-blue-500/20">Cloud Computing</span>
@@ -331,8 +331,8 @@
                 </div>
             </a>
 
-            <a href="blog/en/2026-05-02-oman-gpt-national-ai-model.html" class="article-card glass-card rounded-2xl overflow-hidden block relative group" data-category="cat_2">
-                <img src="blog/images/oman-gpt-national-ai.png" alt="Oman GPT: The National AI Model Trained on Omani Culture" class="w-full h-48 object-cover">
+            <a href="../blog/en/2026-05-02-oman-gpt-national-ai-model.html" class="article-card glass-card rounded-2xl overflow-hidden block relative group" data-category="cat_2">
+                <img src="../blog/images/oman-gpt-national-ai.png" alt="Oman GPT: The National AI Model Trained on Omani Culture" class="w-full h-48 object-cover">
                 <div class="p-6">
                     <div class="flex justify-between items-center mb-3">
                         <span class="bg-blue-500/10 text-blue-400 text-xs px-3 py-1 rounded-full border border-blue-500/20">AI Innovations</span>
@@ -344,8 +344,8 @@
                 </div>
             </a>
 
-            <a href="blog/en/2026-05-02-ai-special-zone-muscat-royal-decree.html" class="article-card glass-card rounded-2xl overflow-hidden block relative group" data-category="cat_2">
-                <img src="blog/images/ai-special-zone-muscat.png" alt="Artificial Intelligence Special Zone Muscat: Royal Decree 50/2026 Guide" class="w-full h-48 object-cover">
+            <a href="../blog/en/2026-05-02-ai-special-zone-muscat-royal-decree.html" class="article-card glass-card rounded-2xl overflow-hidden block relative group" data-category="cat_2">
+                <img src="../blog/images/ai-special-zone-muscat.png" alt="Artificial Intelligence Special Zone Muscat: Royal Decree 50/2026 Guide" class="w-full h-48 object-cover">
                 <div class="p-6">
                     <div class="flex justify-between items-center mb-3">
                         <span class="bg-blue-500/10 text-blue-400 text-xs px-3 py-1 rounded-full border border-blue-500/20">AI News & Updates</span>
@@ -357,8 +357,8 @@
                 </div>
             </a>
 
-            <a href="blog/en/2026-04-30-ai-insurance-oman-roi-costs.html" class="article-card glass-card rounded-2xl overflow-hidden block relative group" data-category="cat_2">
-                <img src="blog/images/oman-insurance-hero.png" alt="AI in Omani Insurance: How Automation Increases ROI and Reduces Costs" class="w-full h-48 object-cover">
+            <a href="../blog/en/2026-04-30-ai-insurance-oman-roi-costs.html" class="article-card glass-card rounded-2xl overflow-hidden block relative group" data-category="cat_2">
+                <img src="../blog/images/oman-insurance-hero.png" alt="AI in Omani Insurance: How Automation Increases ROI and Reduces Costs" class="w-full h-48 object-cover">
                 <div class="p-6">
                     <div class="flex justify-between items-center mb-3">
                         <span class="bg-blue-500/10 text-blue-400 text-xs px-3 py-1 rounded-full border border-blue-500/20">Business ROI</span>
@@ -370,8 +370,8 @@
                 </div>
             </a>
 
-            <a href="blog/en/2026-04-28-ai-automation-ROI-2025-guide.html" class="article-card glass-card rounded-2xl overflow-hidden block relative group" data-category="cat_2">
-                <img src="blog/images/oman-roi-hero.png" alt="AI Automation in Oman: 2025 Guide for Business Owners" class="w-full h-48 object-cover">
+            <a href="../blog/en/2026-04-28-ai-automation-ROI-2025-guide.html" class="article-card glass-card rounded-2xl overflow-hidden block relative group" data-category="cat_2">
+                <img src="../blog/images/oman-roi-hero.png" alt="AI Automation in Oman: 2025 Guide for Business Owners" class="w-full h-48 object-cover">
                 <div class="p-6">
                     <div class="flex justify-between items-center mb-3">
                         <span class="bg-blue-500/10 text-blue-400 text-xs px-3 py-1 rounded-full border border-blue-500/20">Business ROI</span>
@@ -383,8 +383,8 @@
                 </div>
             </a>
 
-            <a href="blog/en/2026-04-28-qatar-businesses-ai-automation.html" class="article-card glass-card rounded-2xl overflow-hidden block relative group" data-category="cat_2">
-                <img src="blog/images/qatar-ai-automation.png" alt="How Qatar Businesses Are Using AI Automation in 2026" class="w-full h-48 object-cover">
+            <a href="../blog/en/2026-04-28-qatar-businesses-ai-automation.html" class="article-card glass-card rounded-2xl overflow-hidden block relative group" data-category="cat_2">
+                <img src="../blog/images/qatar-ai-automation.png" alt="How Qatar Businesses Are Using AI Automation in 2026" class="w-full h-48 object-cover">
                 <div class="p-6">
                     <div class="flex justify-between items-center mb-3">
                         <span class="bg-blue-500/10 text-blue-400 text-xs px-3 py-1 rounded-full border border-blue-500/20">Business ROI</span>
@@ -396,8 +396,8 @@
                 </div>
             </a>
 
-            <a href="blog/en/2026-04-28-ai-automation-cost-uae-businesses.html" class="article-card glass-card rounded-2xl overflow-hidden block relative group" data-category="cat_2">
-                <img src="blog/images/ai-automation-cost-uae.png" alt="AI Automation Cost for UAE Businesses (2026 Prices)" class="w-full h-48 object-cover">
+            <a href="../blog/en/2026-04-28-ai-automation-cost-uae-businesses.html" class="article-card glass-card rounded-2xl overflow-hidden block relative group" data-category="cat_2">
+                <img src="../blog/images/ai-automation-cost-uae.png" alt="AI Automation Cost for UAE Businesses (2026 Prices)" class="w-full h-48 object-cover">
                 <div class="p-6">
                     <div class="flex justify-between items-center mb-3">
                         <span class="bg-blue-500/10 text-blue-400 text-xs px-3 py-1 rounded-full border border-blue-500/20">Business ROI</span>
@@ -409,8 +409,8 @@
                 </div>
             </a>
 
-            <a href="blog/en/2026-04-28-ai-automation-saudi-sme-worth-it.html" class="article-card glass-card rounded-2xl overflow-hidden block relative group" data-category="cat_2">
-                <img src="blog/images/ai-automation-saudi-sme.png" alt="AI Automation for Saudi SMEs: Is It Worth It? (Vision 2030 Guide)" class="w-full h-48 object-cover">
+            <a href="../blog/en/2026-04-28-ai-automation-saudi-sme-worth-it.html" class="article-card glass-card rounded-2xl overflow-hidden block relative group" data-category="cat_2">
+                <img src="../blog/images/ai-automation-saudi-sme.png" alt="AI Automation for Saudi SMEs: Is It Worth It? (Vision 2030 Guide)" class="w-full h-48 object-cover">
                 <div class="p-6">
                     <div class="flex justify-between items-center mb-3">
                         <span class="bg-blue-500/10 text-blue-400 text-xs px-3 py-1 rounded-full border border-blue-500/20">Business ROI</span>
@@ -422,8 +422,8 @@
                 </div>
             </a>
 
-            <a href="blog/en/2026-04-26-ai-automation-oman-2025-guide.html" class="article-card glass-card rounded-2xl overflow-hidden block relative group" data-category="cat_0">
-                <img src="blog/images/oman-roi-hero.png" alt="AI Automation in Oman: 2025 Guide for Business Owners" class="w-full h-48 object-cover">
+            <a href="../blog/en/2026-04-26-ai-automation-oman-2025-guide.html" class="article-card glass-card rounded-2xl overflow-hidden block relative group" data-category="cat_0">
+                <img src="../blog/images/oman-roi-hero.png" alt="AI Automation in Oman: 2025 Guide for Business Owners" class="w-full h-48 object-cover">
                 <div class="p-6">
                     <div class="flex justify-between items-center mb-3">
                         <span class="bg-blue-500/10 text-blue-400 text-xs px-3 py-1 rounded-full border border-blue-500/20">AI Business Strategy</span>
@@ -435,8 +435,8 @@
                 </div>
             </a>
 
-            <a href="blog/en/2026-04-25-custom-api-vs-native-integrations.html" class="article-card glass-card rounded-2xl overflow-hidden block relative group" data-category="cat_0">
-                <img src="blog/images/custom-api-vs-native.png" alt="Why Custom API Integrations Are Better Than Native App Connections" class="w-full h-48 object-cover">
+            <a href="../blog/en/2026-04-25-custom-api-vs-native-integrations.html" class="article-card glass-card rounded-2xl overflow-hidden block relative group" data-category="cat_0">
+                <img src="../blog/images/custom-api-vs-native.png" alt="Why Custom API Integrations Are Better Than Native App Connections" class="w-full h-48 object-cover">
                 <div class="p-6">
                     <div class="flex justify-between items-center mb-3">
                         <span class="bg-blue-500/10 text-blue-400 text-xs px-3 py-1 rounded-full border border-blue-500/20">AI Business Strategy</span>
@@ -448,8 +448,8 @@
                 </div>
             </a>
 
-            <a href="blog/en/2026-04-23-n8n-vs-make-automation-scaling.html" class="article-card glass-card rounded-2xl overflow-hidden block relative group" data-category="cat_0">
-                <img src="blog/images/n8n-vs-make-automation.png" alt="n8n vs. Make.com: Which Automation Platform is Best for Scaling Your Business?" class="w-full h-48 object-cover">
+            <a href="../blog/en/2026-04-23-n8n-vs-make-automation-scaling.html" class="article-card glass-card rounded-2xl overflow-hidden block relative group" data-category="cat_0">
+                <img src="../blog/images/n8n-vs-make-automation.png" alt="n8n vs. Make.com: Which Automation Platform is Best for Scaling Your Business?" class="w-full h-48 object-cover">
                 <div class="p-6">
                     <div class="flex justify-between items-center mb-3">
                         <span class="bg-blue-500/10 text-blue-400 text-xs px-3 py-1 rounded-full border border-blue-500/20">AI Business Strategy</span>
@@ -461,8 +461,8 @@
                 </div>
             </a>
 
-            <a href="blog/en/2026-04-23-logistics-automation-fleet-managers.html" class="article-card glass-card rounded-2xl overflow-hidden block relative group" data-category="cat_0">
-                <img src="blog/images/logistics-automation-tasks.png" alt="Top 5 Repetitive Tasks Logistics Companies Can Automate Today" class="w-full h-48 object-cover">
+            <a href="../blog/en/2026-04-23-logistics-automation-fleet-managers.html" class="article-card glass-card rounded-2xl overflow-hidden block relative group" data-category="cat_0">
+                <img src="../blog/images/logistics-automation-tasks.png" alt="Top 5 Repetitive Tasks Logistics Companies Can Automate Today" class="w-full h-48 object-cover">
                 <div class="p-6">
                     <div class="flex justify-between items-center mb-3">
                         <span class="bg-blue-500/10 text-blue-400 text-xs px-3 py-1 rounded-full border border-blue-500/20">AI Business Strategy</span>
@@ -474,8 +474,8 @@
                 </div>
             </a>
 
-            <a href="blog/en/2026-04-22-b2b-lead-generation-automation-civil-engineering.html" class="article-card glass-card rounded-2xl overflow-hidden block relative group" data-category="cat_0">
-                <img src="blog/images/civil-engineering-lead-automation.png" alt="The Ultimate Guide to B2B Lead Generation Automation for Civil Engineering Firms" class="w-full h-48 object-cover">
+            <a href="../blog/en/2026-04-22-b2b-lead-generation-automation-civil-engineering.html" class="article-card glass-card rounded-2xl overflow-hidden block relative group" data-category="cat_0">
+                <img src="../blog/images/civil-engineering-lead-automation.png" alt="The Ultimate Guide to B2B Lead Generation Automation for Civil Engineering Firms" class="w-full h-48 object-cover">
                 <div class="p-6">
                     <div class="flex justify-between items-center mb-3">
                         <span class="bg-blue-500/10 text-blue-400 text-xs px-3 py-1 rounded-full border border-blue-500/20">AI Business Strategy</span>
@@ -487,8 +487,8 @@
                 </div>
             </a>
 
-            <a href="blog/en/2026-04-21-ai-oil-gas-workflow-automation.html" class="article-card glass-card rounded-2xl overflow-hidden block relative group" data-category="cat_2">
-                <img src="blog/images/ai-logistics-roi.png" alt="AI Workflow Automation in Middle East Oil & Gas" class="w-full h-48 object-cover">
+            <a href="../blog/en/2026-04-21-ai-oil-gas-workflow-automation.html" class="article-card glass-card rounded-2xl overflow-hidden block relative group" data-category="cat_2">
+                <img src="../blog/images/ai-logistics-roi.png" alt="AI Workflow Automation in Middle East Oil & Gas" class="w-full h-48 object-cover">
                 <div class="p-6">
                     <div class="flex justify-between items-center mb-3">
                         <span class="bg-blue-500/10 text-blue-400 text-xs px-3 py-1 rounded-full border border-blue-500/20">Implementation & Automation</span>
@@ -500,8 +500,8 @@
                 </div>
             </a>
 
-            <a href="blog/en/2026-04-20-whatsapp-api-vs-ai-automation.html" class="article-card glass-card rounded-2xl overflow-hidden block relative group" data-category="cat_2">
-                <img src="blog/images/whatsapp-ai-receptionist.png" alt="WhatsApp Business API vs. AI Automation" class="w-full h-48 object-cover">
+            <a href="../blog/en/2026-04-20-whatsapp-api-vs-ai-automation.html" class="article-card glass-card rounded-2xl overflow-hidden block relative group" data-category="cat_2">
+                <img src="../blog/images/whatsapp-ai-receptionist.png" alt="WhatsApp Business API vs. AI Automation" class="w-full h-48 object-cover">
                 <div class="p-6">
                     <div class="flex justify-between items-center mb-3">
                         <span class="bg-blue-500/10 text-blue-400 text-xs px-3 py-1 rounded-full border border-blue-500/20">Implementation & Automation</span>
@@ -513,8 +513,8 @@
                 </div>
             </a>
 
-            <a href="blog/en/2026-04-19-ai-automation-agency-worth-it.html" class="article-card glass-card rounded-2xl overflow-hidden block relative group" data-category="cat_0">
-                <img src="blog/images/ai-agency-vs-inhouse.png" alt="Is Hiring an AI Automation Agency Worth It? A Guide for Middle Eastern Enterprises" class="w-full h-48 object-cover">
+            <a href="../blog/en/2026-04-19-ai-automation-agency-worth-it.html" class="article-card glass-card rounded-2xl overflow-hidden block relative group" data-category="cat_0">
+                <img src="../blog/images/ai-agency-vs-inhouse.png" alt="Is Hiring an AI Automation Agency Worth It? A Guide for Middle Eastern Enterprises" class="w-full h-48 object-cover">
                 <div class="p-6">
                     <div class="flex justify-between items-center mb-3">
                         <span class="bg-blue-500/10 text-blue-400 text-xs px-3 py-1 rounded-full border border-blue-500/20">AI Business Strategy</span>
@@ -526,8 +526,8 @@
                 </div>
             </a>
 
-            <a href="blog/en/2026-04-19-build-ai-whatsapp-receptionist.html" class="article-card glass-card rounded-2xl overflow-hidden block relative group" data-category="cat_0">
-                <img src="blog/images/whatsapp-ai-receptionist.png" alt="How to Build an AI WhatsApp Receptionist for Your Business in 2026" class="w-full h-48 object-cover">
+            <a href="../blog/en/2026-04-19-build-ai-whatsapp-receptionist.html" class="article-card glass-card rounded-2xl overflow-hidden block relative group" data-category="cat_0">
+                <img src="../blog/images/whatsapp-ai-receptionist.png" alt="How to Build an AI WhatsApp Receptionist for Your Business in 2026" class="w-full h-48 object-cover">
                 <div class="p-6">
                     <div class="flex justify-between items-center mb-3">
                         <span class="bg-blue-500/10 text-blue-400 text-xs px-3 py-1 rounded-full border border-blue-500/20">AI Business Strategy</span>
@@ -539,8 +539,8 @@
                 </div>
             </a>
 
-            <a href="blog/en/2026-04-19-ai-logistics-roi-oman-uae.html" class="article-card glass-card rounded-2xl overflow-hidden block relative group" data-category="cat_0">
-                <img src="blog/images/ai-logistics-roi.png" alt="What is the ROI of AI Automation for Logistics and Supply Chain Firms in Oman and the UAE?" class="w-full h-48 object-cover">
+            <a href="../blog/en/2026-04-19-ai-logistics-roi-oman-uae.html" class="article-card glass-card rounded-2xl overflow-hidden block relative group" data-category="cat_0">
+                <img src="../blog/images/ai-logistics-roi.png" alt="What is the ROI of AI Automation for Logistics and Supply Chain Firms in Oman and the UAE?" class="w-full h-48 object-cover">
                 <div class="p-6">
                     <div class="flex justify-between items-center mb-3">
                         <span class="bg-blue-500/10 text-blue-400 text-xs px-3 py-1 rounded-full border border-blue-500/20">AI Business Strategy</span>
@@ -552,8 +552,8 @@
                 </div>
             </a>
 
-            <a href="blog/en/2026-04-19-stop-losing-leads-whatsapp-ai.html" class="article-card glass-card rounded-2xl overflow-hidden block relative group" data-category="cat_0">
-                <img src="blog/images/whatsapp-ai-receptionist.png" alt="Stop Losing Leads: Why GCC Businesses Need AI to Automate WhatsApp Inquiries" class="w-full h-48 object-cover">
+            <a href="../blog/en/2026-04-19-stop-losing-leads-whatsapp-ai.html" class="article-card glass-card rounded-2xl overflow-hidden block relative group" data-category="cat_0">
+                <img src="../blog/images/whatsapp-ai-receptionist.png" alt="Stop Losing Leads: Why GCC Businesses Need AI to Automate WhatsApp Inquiries" class="w-full h-48 object-cover">
                 <div class="p-6">
                     <div class="flex justify-between items-center mb-3">
                         <span class="bg-blue-500/10 text-blue-400 text-xs px-3 py-1 rounded-full border border-blue-500/20">AI Business Strategy</span>
@@ -565,8 +565,8 @@
                 </div>
             </a>
 
-            <a href="blog/en/2026-04-19-b2b-ai-automation-cost-roi.html" class="article-card glass-card rounded-2xl overflow-hidden block relative group" data-category="cat_0">
-                <img src="blog/images/ai-automation-cost.png" alt="How Much Does AI Automation Cost for B2B Companies in the GCC?" class="w-full h-48 object-cover">
+            <a href="../blog/en/2026-04-19-b2b-ai-automation-cost-roi.html" class="article-card glass-card rounded-2xl overflow-hidden block relative group" data-category="cat_0">
+                <img src="../blog/images/ai-automation-cost.png" alt="How Much Does AI Automation Cost for B2B Companies in the GCC?" class="w-full h-48 object-cover">
                 <div class="p-6">
                     <div class="flex justify-between items-center mb-3">
                         <span class="bg-blue-500/10 text-blue-400 text-xs px-3 py-1 rounded-full border border-blue-500/20">AI Business Strategy</span>
@@ -578,8 +578,8 @@
                 </div>
             </a>
 
-            <a href="blog/en/2026-04-14-sovereign-ai-data-borders.html" class="article-card glass-card rounded-2xl overflow-hidden block relative group" data-category="cat_1">
-                <img src="blog/images/sovereign-ai-hero.png" alt="The Rise of Sovereign AI: Why Nations and Companies are Locking Down Their Data in 2026" class="w-full h-48 object-cover">
+            <a href="../blog/en/2026-04-14-sovereign-ai-data-borders.html" class="article-card glass-card rounded-2xl overflow-hidden block relative group" data-category="cat_1">
+                <img src="../blog/images/sovereign-ai-hero.png" alt="The Rise of Sovereign AI: Why Nations and Companies are Locking Down Their Data in 2026" class="w-full h-48 object-cover">
                 <div class="p-6">
                     <div class="flex justify-between items-center mb-3">
                         <span class="bg-blue-500/10 text-blue-400 text-xs px-3 py-1 rounded-full border border-blue-500/20">AI Security & Governance</span>
@@ -591,8 +591,8 @@
                 </div>
             </a>
 
-            <a href="blog/en/2026-04-14-ai-ethics-sharia-compliance.html" class="article-card glass-card rounded-2xl overflow-hidden block relative group" data-category="cat_1">
-                <img src="blog/images/ai-ethics-sharia.png" alt="AI Ethics and Sharia Compliance: The Future of Responsible Development in 2026" class="w-full h-48 object-cover">
+            <a href="../blog/en/2026-04-14-ai-ethics-sharia-compliance.html" class="article-card glass-card rounded-2xl overflow-hidden block relative group" data-category="cat_1">
+                <img src="../blog/images/ai-ethics-sharia.png" alt="AI Ethics and Sharia Compliance: The Future of Responsible Development in 2026" class="w-full h-48 object-cover">
                 <div class="p-6">
                     <div class="flex justify-between items-center mb-3">
                         <span class="bg-blue-500/10 text-blue-400 text-xs px-3 py-1 rounded-full border border-blue-500/20">AI Security & Governance</span>
@@ -604,8 +604,8 @@
                 </div>
             </a>
 
-            <a href="blog/en/2026-04-06-ai-admin-automation.html" class="article-card glass-card rounded-2xl overflow-hidden block relative group" data-category="cat_2">
-                <img src="blog/images/ai-admin-automation.png" alt="The End of Busywork: How AI is Definitively Replacing Administrative Tasks in 2026" class="w-full h-48 object-cover">
+            <a href="../blog/en/2026-04-06-ai-admin-automation.html" class="article-card glass-card rounded-2xl overflow-hidden block relative group" data-category="cat_2">
+                <img src="../blog/images/ai-admin-automation.png" alt="The End of Busywork: How AI is Definitively Replacing Administrative Tasks in 2026" class="w-full h-48 object-cover">
                 <div class="p-6">
                     <div class="flex justify-between items-center mb-3">
                         <span class="bg-blue-500/10 text-blue-400 text-xs px-3 py-1 rounded-full border border-blue-500/20">Implementation & Automation</span>
@@ -617,8 +617,8 @@
                 </div>
             </a>
 
-            <a href="blog/en/2026-04-06-gcc-ai-search-trends.html" class="article-card glass-card rounded-2xl overflow-hidden block relative group" data-category="cat_3">
-                <img src="blog/images/gcc-ai-search-trends.png" alt="What the GCC Is Asking Google About AI in 2026" class="w-full h-48 object-cover">
+            <a href="../blog/en/2026-04-06-gcc-ai-search-trends.html" class="article-card glass-card rounded-2xl overflow-hidden block relative group" data-category="cat_3">
+                <img src="../blog/images/gcc-ai-search-trends.png" alt="What the GCC Is Asking Google About AI in 2026" class="w-full h-48 object-cover">
                 <div class="p-6">
                     <div class="flex justify-between items-center mb-3">
                         <span class="bg-blue-500/10 text-blue-400 text-xs px-3 py-1 rounded-full border border-blue-500/20">Middle East AI</span>
@@ -630,8 +630,8 @@
                 </div>
             </a>
 
-            <a href="blog/en/2026-04-04-ai-receptionist-your-business-needs.html" class="article-card glass-card rounded-2xl overflow-hidden block relative group" data-category="cat_2">
-                <img src="blog/images/ai-receptionist-hero.png" alt="AI Receptionist: The 24/7 Front Desk Your Business Didn't Know It Needed" class="w-full h-48 object-cover">
+            <a href="../blog/en/2026-04-04-ai-receptionist-your-business-needs.html" class="article-card glass-card rounded-2xl overflow-hidden block relative group" data-category="cat_2">
+                <img src="../blog/images/ai-receptionist-hero.png" alt="AI Receptionist: The 24/7 Front Desk Your Business Didn't Know It Needed" class="w-full h-48 object-cover">
                 <div class="p-6">
                     <div class="flex justify-between items-center mb-3">
                         <span class="bg-blue-500/10 text-blue-400 text-xs px-3 py-1 rounded-full border border-blue-500/20">Implementation & Automation</span>
@@ -643,8 +643,8 @@
                 </div>
             </a>
 
-            <a href="blog/en/2026-04-01-notebooklm-guide-for-busy-managers.html" class="article-card glass-card rounded-2xl overflow-hidden block relative group" data-category="cat_2">
-                <img src="blog/images/ceo-dashboard-story-1774720867978.png" alt="NotebookLM for Busy Managers: The Practical No-Nonsense Guide" class="w-full h-48 object-cover">
+            <a href="../blog/en/2026-04-01-notebooklm-guide-for-busy-managers.html" class="article-card glass-card rounded-2xl overflow-hidden block relative group" data-category="cat_2">
+                <img src="../blog/images/ceo-dashboard-story-1774720867978.png" alt="NotebookLM for Busy Managers: The Practical No-Nonsense Guide" class="w-full h-48 object-cover">
                 <div class="p-6">
                     <div class="flex justify-between items-center mb-3">
                         <span class="bg-blue-500/10 text-blue-400 text-xs px-3 py-1 rounded-full border border-blue-500/20">Implementation & Automation</span>
@@ -656,8 +656,8 @@
                 </div>
             </a>
 
-            <a href="blog/en/2026-04-01-how-companies-data-leaks-through-ai.html" class="article-card glass-card rounded-2xl overflow-hidden block relative group" data-category="cat_2">
-                <img src="blog/images/ai-data-leak-companies.png" alt="How Company Data Leaks Through AI — And How to Stop It" class="w-full h-48 object-cover">
+            <a href="../blog/en/2026-04-01-how-companies-data-leaks-through-ai.html" class="article-card glass-card rounded-2xl overflow-hidden block relative group" data-category="cat_2">
+                <img src="../blog/images/ai-data-leak-companies.png" alt="How Company Data Leaks Through AI — And How to Stop It" class="w-full h-48 object-cover">
                 <div class="p-6">
                     <div class="flex justify-between items-center mb-3">
                         <span class="bg-blue-500/10 text-blue-400 text-xs px-3 py-1 rounded-full border border-blue-500/20">Implementation & Automation</span>
@@ -669,8 +669,8 @@
                 </div>
             </a>
 
-            <a href="blog/en/2026-03-31-arabic-vs-global-ai-models.html" class="article-card glass-card rounded-2xl overflow-hidden block relative group" data-category="cat_2">
-                <img src="blog/images/arabic-vs-global-ai.png" alt="Arabic-First AIs vs. Global AIs: A Simple Comparison" class="w-full h-48 object-cover">
+            <a href="../blog/en/2026-03-31-arabic-vs-global-ai-models.html" class="article-card glass-card rounded-2xl overflow-hidden block relative group" data-category="cat_2">
+                <img src="../blog/images/arabic-vs-global-ai.png" alt="Arabic-First AIs vs. Global AIs: A Simple Comparison" class="w-full h-48 object-cover">
                 <div class="p-6">
                     <div class="flex justify-between items-center mb-3">
                         <span class="bg-blue-500/10 text-blue-400 text-xs px-3 py-1 rounded-full border border-blue-500/20">Implementation & Automation</span>
@@ -682,8 +682,8 @@
                 </div>
             </a>
 
-            <a href="blog/en/2026-03-31-arabic-first-ai-models.html" class="article-card glass-card rounded-2xl overflow-hidden block relative group" data-category="cat_2">
-                <img src="blog/images/arabic-first-ai.png" alt="The Rise of Arabic-First AI Models: Reclaiming the Digital Narrative" class="w-full h-48 object-cover">
+            <a href="../blog/en/2026-03-31-arabic-first-ai-models.html" class="article-card glass-card rounded-2xl overflow-hidden block relative group" data-category="cat_2">
+                <img src="../blog/images/arabic-first-ai.png" alt="The Rise of Arabic-First AI Models: Reclaiming the Digital Narrative" class="w-full h-48 object-cover">
                 <div class="p-6">
                     <div class="flex justify-between items-center mb-3">
                         <span class="bg-blue-500/10 text-blue-400 text-xs px-3 py-1 rounded-full border border-blue-500/20">Implementation & Automation</span>
@@ -695,8 +695,8 @@
                 </div>
             </a>
 
-            <a href="blog/en/2026-03-30-ai-automation-oman-vision.html" class="article-card glass-card rounded-2xl overflow-hidden block relative group" data-category="cat_2">
-                <img src="blog/images/oman-vision-ai.png" alt="How AI Automation Fulfills the Goals of Oman Vision 2040" class="w-full h-48 object-cover">
+            <a href="../blog/en/2026-03-30-ai-automation-oman-vision.html" class="article-card glass-card rounded-2xl overflow-hidden block relative group" data-category="cat_2">
+                <img src="../blog/images/oman-vision-ai.png" alt="How AI Automation Fulfills the Goals of Oman Vision 2040" class="w-full h-48 object-cover">
                 <div class="p-6">
                     <div class="flex justify-between items-center mb-3">
                         <span class="bg-blue-500/10 text-blue-400 text-xs px-3 py-1 rounded-full border border-blue-500/20">Implementation & Automation</span>
@@ -708,8 +708,8 @@
                 </div>
             </a>
 
-            <a href="blog/en/2026-03-28-ceo-dashboard.html" class="article-card glass-card rounded-2xl overflow-hidden block relative group" data-category="cat_2">
-                <img src="blog/images/ceo-dashboard-story-1774720867978.png" alt="The Copilot at the Helm: 2026 CEO Dashboards" class="w-full h-48 object-cover">
+            <a href="../blog/en/2026-03-28-ceo-dashboard.html" class="article-card glass-card rounded-2xl overflow-hidden block relative group" data-category="cat_2">
+                <img src="../blog/images/ceo-dashboard-story-1774720867978.png" alt="The Copilot at the Helm: 2026 CEO Dashboards" class="w-full h-48 object-cover">
                 <div class="p-6">
                     <div class="flex justify-between items-center mb-3">
                         <span class="bg-blue-500/10 text-blue-400 text-xs px-3 py-1 rounded-full border border-blue-500/20">Implementation & Automation</span>
@@ -721,8 +721,8 @@
                 </div>
             </a>
 
-            <a href="blog/en/2026-03-28-google-alert.html" class="article-card glass-card rounded-2xl overflow-hidden block relative group" data-category="cat_2">
-                <img src="blog/images/google-alert-hero-1774722949162.png" alt="The Evolution of Google Alerts: Staying Ahead in 2026" class="w-full h-48 object-cover">
+            <a href="../blog/en/2026-03-28-google-alert.html" class="article-card glass-card rounded-2xl overflow-hidden block relative group" data-category="cat_2">
+                <img src="../blog/images/google-alert-hero-1774722949162.png" alt="The Evolution of Google Alerts: Staying Ahead in 2026" class="w-full h-48 object-cover">
                 <div class="p-6">
                     <div class="flex justify-between items-center mb-3">
                         <span class="bg-blue-500/10 text-blue-400 text-xs px-3 py-1 rounded-full border border-blue-500/20">Implementation & Automation</span>
