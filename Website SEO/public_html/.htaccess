@@ -1,0 +1,39 @@
+# Enable Rewriting
+RewriteEngine On
+RewriteBase /
+
+# Standardized URL Slug Redirects
+RewriteRule ^Missed-Call-Simulator-en$ /missed-call-simulator-en [R=301,L]
+RewriteRule ^Campaign_ROI_Simulator-ar$ /campaign-roi-simulator-ar [R=301,L]
+RewriteRule ^academy_ar$ /academy-ar [R=301,L]
+RewriteRule ^Campaign_ROI_Simulator$ /campaign-roi-simulator [R=301,L]
+RewriteRule ^whatsapp_receptionist_demo$ /whatsapp-receptionist-demo [R=301,L]
+RewriteRule ^Missed-Call-Simulator-ar$ /missed-call-simulator-ar [R=301,L]
+RewriteRule ^Customized_CEO_Dashboard_demo$ /customized-ceo-dashboard-demo [R=301,L]
+RewriteRule ^blog_ar$ /blog-ar [R=301,L]
+RewriteRule ^Customized_CEO_Dashboard_demo-ar$ /customized-ceo-dashboard-demo-ar [R=301,L]
+RewriteRule ^whatsapp_receptionist_demo_ar$ /whatsapp-receptionist-demo-ar [R=301,L]
+RewriteRule ^blog/ar/2026-04-28-ai-automation-ROI-2025-guide$ /blog/ar/2026-04-28-ai-automation-roi-2025-guide [R=301,L]
+RewriteRule ^blog/en/2026-04-28-ai-automation-ROI-2025-guide$ /blog/en/2026-04-28-ai-automation-roi-2025-guide [R=301,L]
+
+# 1. Redirect /index.html to /
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /index\.html\ HTTP/
+RewriteRule ^index\.html$ https://aiprofitlab.io/ [R=301,L]
+
+# 2. Redirect other .html files to clean URLs
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /(.+)\.html\ HTTP/
+RewriteRule ^(.+)\.html$ /$1 [R=301,L]
+
+# 3. Handle Directory Index
+DirectoryIndex index
+
+# 4. Serve extensionless files as HTML
+# We only want to force HTML if the file exists on disk as an extensionless file
+RewriteCond %{REQUEST_FILENAME} -f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^[^.]+$ - [T=text/html,L]
+
+# Fallback for subdirectories if index file is used
+<FilesMatch "^[^.]+$">
+    ForceType text/html
+</FilesMatch>
