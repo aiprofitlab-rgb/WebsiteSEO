@@ -10,7 +10,7 @@
 <meta name="keywords" content="Campaign Simulator, Marketing ROI Simulator, Business Marketing Suite, AI Profit Lab, Oman Marketing, GCC Campaign ROI">
 <meta property="og:title" content="Campaign Simulator — Business Marketing Suite | AI Profit Lab">
 <meta property="og:description" content="Use the AI Profit Lab Campaign Simulator to forecast and optimize your marketing budget, channels, and ROI. Tailored for businesses in Oman and the GCC.">
-<meta property="og:url" content="https://aiprofitlab.io/Campaign_ROI_Simulator.html">
+<meta property="og:url" content="campaign-roi-simulator.html">
 <meta property="og:type" content="website">
 
 <!-- Local Business Schema -->
@@ -21,7 +21,7 @@
   "name": "AI Profit Lab",
   "url": "https://aiprofitlab.io",
   "logo": "https://aiprofitlab.io/logo.webp",
-  "image": "https://aiprofitlab.io/Nahid_Business_Banner.png",
+  "image": "https://aiprofitlab.io/nahid-business-banner.png",
   "description": "Helping non-technical managers leverage AI, automation, and technology to increase ROI and business efficiency.",
   "address": {
     "@type": "PostalAddress",
@@ -944,7 +944,7 @@ function drawChannelChart() {
   const labels = sel.map(i => CHANNELS[i].name);
   const data   = sel.map(i => Math.round(share / CHANNELS[i].cpc));
   const colors = sel.map(i => CHANNELS[i].color);
-  / legend
+  // legend
   document.getElementById('ch-legend').innerHTML = sel.map(i =>
     `<div class="legend-item"><div class="legend-swatch" style="background:${CHANNELS[i].color}"></div>${CHANNELS[i].name}</div>`
   ).join('');
@@ -1134,7 +1134,7 @@ function initResults() {
   document.getElementById('r-roi').textContent      = roi + '%';
   document.getElementById('r-cpl').textContent      = '$' + cpl;
 
-  / Weekly chart
+  // Weekly chart
   const weeks     = Math.ceil(d / 7);
   const wLabels   = Array.from({length: weeks}, (_, i) => 'W' + (i + 1));
   const wLeads    = wLabels.map((_, i) => Math.round(leads / weeks * (0.5 + i * 0.15)));
@@ -1157,7 +1157,7 @@ function initResults() {
     }
   });
 
-  / Contrib donut
+  // Contrib donut
   const sel = [...selectedChannels];
   const cc = document.getElementById('contrib-chart');
   if (contribChart) { contribChart.destroy(); contribChart = null; }
@@ -1175,7 +1175,7 @@ function initResults() {
     ).join('');
   }
 
-  / Recommendations
+  // Recommendations
   const recs = [
     roi > 150 ? {type:'green', icon:'↑', text:'Strong ROI — consider scaling budget by 20–30% in the next campaign cycle.'} :
                 {type:'amber', icon:'!', text:'ROI is below target — revisit channel mix, offer strength, and deal size assumptions.'},

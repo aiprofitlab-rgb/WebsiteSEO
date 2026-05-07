@@ -16,7 +16,7 @@
     "name": "AI Profit Lab",
     "logo": {
       "@type": "ImageObject",
-      "url": "https://aiprofitlab.com/logo.webp"
+      "url": "https://aiprofitlab.io/logo.webp"
 
 
 
@@ -51,15 +51,15 @@
     <!-- Open Graph / Social Media -->
     <meta property="og:title" content="AI Profit Lab | Smart Business Solutions for Oman">
     <meta property="og:description" content="Save time and increase profits with simple smart systems. No tech skills needed.">
-    <meta property="og:image" content="https://aiprofitlab.io/og-image.jpg">
-    <meta property="og:url" content="https://aiprofitlab.io/en">
+    <meta property="og:image" content="og-image.jpg">
+    <meta property="og:url" content="en">
     <meta property="og:type" content="website">
     
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="AI Profit Lab">
     <meta name="twitter:description" content="Smart Business Solutions for Oman">
-    <meta name="twitter:image" content="https://aiprofitlab.io/twitter-image.jpg">
+    <meta name="twitter:image" content="twitter-image.jpg">
     
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -238,7 +238,7 @@
       "name": "AI Profit Lab",
       "url": "https://aiprofitlab.io",
       "logo": "https://aiprofitlab.io/logo.webp",
-      "image": "https://aiprofitlab.io/Nahid_Business_Banner.png",
+      "image": "https://aiprofitlab.io/nahid-business-banner.png",
       "description": "Helping non-technical managers leverage AI, automation, and technology to increase ROI and business efficiency.",
       "address": {
         "@type": "PostalAddress",
@@ -907,7 +907,7 @@
 
         });
 
-        / Slider for AI Comfort
+        // Slider for AI Comfort
         const comfortSlider = document.getElementById('aiComfort');
         const comfortOutput = document.getElementById('aiComfortOutput');
         if (comfortSlider && comfortOutput) {
@@ -916,7 +916,7 @@
                 comfortOutput.innerText = this.value;
             });
 
-        / FORM SUBMIT - FIXED VERSION (from your code)
+        // FORM SUBMIT - FIXED VERSION (from your code)
         form.addEventListener('submit', async function(event) {
             event.preventDefault();
 
@@ -929,9 +929,9 @@
             submitBtn.textContent = 'Sending...';
             submitBtn.disabled = true;
 
-            / Collect ALL form data including checkboxes
+            // Collect ALL form data including checkboxes
             const formData = {
-                / Step 1
+                // Step 1
                 fullName: document.getElementById('fullName')?.value || '',
                 email: document.getElementById('email')?.value || '',
                 phone: document.getElementById('phone')?.value || '',
@@ -939,19 +939,19 @@
                 role: document.getElementById('role')?.value || '',
                 website: document.getElementById('website')?.value || '',
                 
-                / Step 2
+                // Step 2
                 industry: document.getElementById('industry')?.value || '',
                 employees: document.getElementById('employees')?.value || '',
                 revenue: document.getElementById('revenue')?.value || '',
                 revenueStreams: document.getElementById('revenueStreams')?.value || '',
                 
-                / Step 3
+                // Step 3
                 challenges: document.getElementById('challenges')?.value || '',
                 goals: document.getElementById('goals')?.value || '',
                 pastExperience: document.getElementById('pastExperience')?.value || '',
                 aiComfort: document.getElementById('aiComfort')?.value || '',
                 
-                / Step 4 - Process checkboxes (collect all checked)
+                // Step 4 - Process checkboxes (collect all checked)
                 processes: Array.from(document.querySelectorAll('input[name="process"]:checked')).map(cb => cb.value).join(', '),
                 source: Array.from(document.querySelectorAll('input[name="source"]:checked')).map(cb => cb.value).join(', '),
                 otherSource: document.getElementById('otherSource')?.value || '',
@@ -959,7 +959,7 @@
                 timeline: document.getElementById('timeline')?.value || '',
                 keyQuestion: document.getElementById('keyQuestion')?.value || '',
                 
-                / Metadata
+                // Metadata
                 submittedAt: new Date().toISOString(),
                 language: lang,
                 page: window.location.pathname,
@@ -967,7 +967,7 @@
             };
 
             try {
-                / Try main endpoint
+                // Try main endpoint
                 const response = await fetch("https://aiden-backend-aiden.up.railway.app/audit", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
@@ -980,7 +980,7 @@
                     alert('Form submitted successfully! Redirecting to Calendly...');
                     window.location.href = "https://calendly.com/ai-profit-lab2026";
                 } else {
-                    / Try alternative endpoint
+                    // Try alternative endpoint
                     const altResponse = await fetch("https://aiden-backend-aiden.up.railway.app/api/audit", {
                         method: "POST",
                         headers: { "Content-Type": "application/json" },
@@ -1004,7 +1004,7 @@
 
         });
 
-        / Close modal when clicking outside
+        // Close modal when clicking outside
         modal.addEventListener('click', (event) => {
             if (event.target === modal) closeAuditForm();
         });
@@ -1070,7 +1070,7 @@
             const box = document.getElementById('chat-messages');
             const lang = 'en';
             
-            / Get or create visitor data
+            // Get or create visitor data
             let visitorId = localStorage.getItem('aidenVisitorId');
             let visitCount = localStorage.getItem('aidenVisitCount');
             let firstVisit = localStorage.getItem('aidenFirstVisit');
@@ -1086,22 +1086,22 @@
                 visitCount = (parseInt(visitCount) + 1).toString();
                 localStorage.setItem('aidenVisitCount', visitCount);
 
-            / Get country data
+            // Get country data
             const country = localStorage.getItem('visitorCountry') || 'Oman';
             const countryCode = localStorage.getItem('visitorCountryCode') || 'OM';
             
-            / Get or create email
+            // Get or create email
             let chatEmail = localStorage.getItem('aidenVisitorEmail');
             if (!chatEmail) {
                 chatEmail = `visitor_${visitorId}@aiprofitlab.local`;
                 localStorage.setItem('aidenVisitorEmail', chatEmail);
 
-            / Add user message
+            // Add user message
             box.innerHTML += `<div class="bg-blue-900/50 ml-auto p-3 rounded-2xl rounded-br-none max-w-[85%] text-white">${message}</div>`;
             input.value = '';
             box.scrollTop = box.scrollHeight;
             
-            / Show typing indicator
+            // Show typing indicator
             box.innerHTML += `<div id="typing-indicator" class="bg-gray-800 p-3 rounded-2xl rounded-tl-none max-w-[85%] text-gray-300">...</div>`;
             
             try {
@@ -1142,26 +1142,26 @@
             const chat = document.getElementById('aiden-ui');
             chat.classList.toggle('active');
             
-            / Update greeting when chat opens
+            // Update greeting when chat opens
             if (chat.classList.contains('active')) {
                 const chatMessages = document.getElementById('chat-messages');
                 const greeting = getPageSpecificGreeting();
                 const welcomeMsg = document.getElementById('welcome-message').textContent;
                 
-                / Only update if it's the first message
+                // Only update if it's the first message
                 if (chatMessages.children.length === 1) {
                     chatMessages.innerHTML = `<div class="bg-gray-800 p-4 rounded-2xl rounded-tl-none max-w-[85%]">${greeting} <span class="block text-xs text-gray-500 mt-1">${welcomeMsg}</span></div>`;
 
 
 
-                / Close menu when clicking a link
+                // Close menu when clicking a link
                 mobileMenu.querySelectorAll('a').forEach(link => {
                     link.addEventListener('click', function() {
                         mobileMenu.classList.remove('active');
                     });
                 });
 
-                / Close menu when clicking outside
+                // Close menu when clicking outside
                 document.addEventListener('click', function(event) {
                     if (!mobileToggle.contains(event.target) && !mobileMenu.contains(event.target)) {
                         mobileMenu.classList.remove('active');
@@ -1174,7 +1174,7 @@
         window.onload = async function() {
             await detectCountry();
             
-            / Auto-pop chat for new visitors (after 10 seconds)
+            // Auto-pop chat for new visitors (after 10 seconds)
             if (!sessionStorage.getItem('aidenPopped')) {
                 setTimeout(() => {
                     const chat = document.getElementById('aiden-ui');
@@ -1187,7 +1187,7 @@
         };
     </script>
     <script>
-        / YouTube Facade Logic for Speed
+        // YouTube Facade Logic for Speed
         document.addEventListener('DOMContentLoaded', () => {
             const facade = document.querySelector('.youtube-facade');
             if(facade) {
@@ -1207,7 +1207,7 @@
     </script>
 
     <script>
-        / FIXED: MOBILE MENU TOGGLE (Unified System)
+        // FIXED: MOBILE MENU TOGGLE (Unified System)
         document.addEventListener('DOMContentLoaded', function() {
             const mobileToggleBtn = document.getElementById('mobileMenuToggle');
             const mobileMenuDropdown = document.getElementById('mobileDropdownMenu');
@@ -1218,14 +1218,14 @@
                     mobileMenuDropdown.classList.toggle('open');
                 });
                 
-                / Close menu when clicking any link inside
+                // Close menu when clicking any link inside
                 mobileMenuDropdown.querySelectorAll('a').forEach(link => {
                     link.addEventListener('click', () => {
                         mobileMenuDropdown.classList.remove('open');
                     });
                 });
                 
-                / Close if user clicks outside
+                // Close if user clicks outside
                 document.addEventListener('click', function(event) {
                     if (!mobileToggleBtn.contains(event.target) && !mobileMenuDropdown.contains(event.target)) {
                         mobileMenuDropdown.classList.remove('open');

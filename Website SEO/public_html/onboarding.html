@@ -422,7 +422,7 @@
       "name": "AI Profit Lab",
       "url": "https://aiprofitlab.io",
       "logo": "https://aiprofitlab.io/logo.webp",
-      "image": "https://aiprofitlab.io/Nahid_Business_Banner.png",
+      "image": "https://aiprofitlab.io/nahid-business-banner.png",
       "description": "Helping non-technical managers leverage AI, automation, and technology to increase ROI and business efficiency.",
       "address": {
         "@type": "PostalAddress",
@@ -837,7 +837,7 @@
 
     <script>
         / ==================== CONFIGURATION ====================
-        / YOUR GOOGLE APPS SCRIPT URL - REPLACE WITH YOUR NEW URL
+        // YOUR GOOGLE APPS SCRIPT URL - REPLACE WITH YOUR NEW URL
         const GOOGLE_SHEET_URL = "https://script.google.com/macros/s/AKfycbzdqebnEkTwzniLCq0rPevQvbwebGib2qII9vi08dVSgSh10TxXwuvwsAb0DrIl97QnOQ/exec";
         
         / ==================== STATE ====================
@@ -846,7 +846,7 @@
         
         / ==================== INITIALIZATION ====================
         function init() {
-            / Step click handlers (allow going back to previous steps)
+            // Step click handlers (allow going back to previous steps)
             document.querySelectorAll('.step-dot').forEach(dot => {
                 dot.addEventListener('click', () => {
                     const step = parseInt(dot.dataset.step);
@@ -857,7 +857,7 @@
                 });
             });
             
-            / Radio card handlers
+            // Radio card handlers
             document.querySelectorAll('.radio-card').forEach(card => {
                 card.addEventListener('click', function() {
                     const group = this.parentElement;
@@ -869,7 +869,7 @@
                 });
             });
             
-            / Checkbox card handlers
+            // Checkbox card handlers
             document.querySelectorAll('.checkbox-card').forEach(card => {
                 card.addEventListener('click', function() {
                     this.classList.toggle('selected');
@@ -1031,7 +1031,7 @@
             
             const data = collectFormData();
             
-            / Convert data to URL-encoded format (avoids CORS preflight)
+            // Convert data to URL-encoded format (avoids CORS preflight)
             const formBody = new URLSearchParams();
             for (const [key, value] of Object.entries(data)) {
                 formBody.append(key, value);
@@ -1049,14 +1049,14 @@
                 const result = await response.text();
                 console.log("Response from Google Script:", result);
                 
-                / Show success view
+                // Show success view
                 document.getElementById('onboardingForm').style.display = 'none';
                 document.getElementById('successView').classList.add('active');
                 document.getElementById('successName').innerText = data.fullName.split(' ')[0] || 'there';
                 
             } catch (error) {
                 console.error('Submission error:', error);
-                / Still show success view for good UX, but log error
+                // Still show success view for good UX, but log error
                 document.getElementById('onboardingForm').style.display = 'none';
                 document.getElementById('successView').classList.add('active');
                 document.getElementById('successName').innerText = data.fullName.split(' ')[0] || 'there';
@@ -1066,7 +1066,7 @@
             }
         }
         
-        / Initialize on page load
+        // Initialize on page load
         init();
     </script>
 </body>

@@ -145,7 +145,7 @@
       "name": "AI Profit Lab",
       "url": "https://aiprofitlab.io",
       "logo": "https://aiprofitlab.io/logo.webp",
-      "image": "https://aiprofitlab.io/Nahid_Business_Banner.png",
+      "image": "https://aiprofitlab.io/nahid-business-banner.png",
       "description": "Helping non-technical managers leverage AI, automation, and technology to increase ROI and business efficiency.",
       "address": {
         "@type": "PostalAddress",
@@ -654,21 +654,21 @@
     <script>
         
 
-                / Close menu when clicking a link
+                // Close menu when clicking a link
                 mobileMenu.querySelectorAll('a').forEach(link => {
                     link.addEventListener('click', function() {
                         mobileMenu.classList.remove('active');
                     });
                 });
 
-                / Close when clicking outside
+                // Close when clicking outside
                 document.addEventListener('click', function(event) {
                     if (!mobileMenu.contains(event.target) && !toggleBtn.contains(event.target)) {
                         mobileMenu.classList.remove('active');
 
                 });
 
-                / Optional: close on escape key
+                // Optional: close on escape key
                 document.addEventListener('keydown', function(e) {
                     if (e.key === 'Escape' && mobileMenu.classList.contains('active')) {
                         mobileMenu.classList.remove('active');
@@ -730,7 +730,7 @@
 
         });
 
-        / Slider
+        // Slider
         const comfortSlider = document.getElementById('aiComfort');
         const comfortOutput = document.getElementById('aiComfortOutput');
         if (comfortSlider && comfortOutput) {
@@ -739,7 +739,7 @@
                 comfortOutput.innerText = this.value;
             });
 
-        / Form Submit
+        // Form Submit
         form.addEventListener('submit', async function(event) {
             event.preventDefault();
             if (!validateStep(currentStep)) return;
@@ -868,7 +868,7 @@
     </script>
 
     <script>
-        / FIXED: MOBILE MENU TOGGLE (Unified System)
+        // FIXED: MOBILE MENU TOGGLE (Unified System)
         document.addEventListener('DOMContentLoaded', function() {
             const mobileToggleBtn = document.getElementById('mobileMenuToggle');
             const mobileMenuDropdown = document.getElementById('mobileDropdownMenu');
@@ -879,14 +879,14 @@
                     mobileMenuDropdown.classList.toggle('open');
                 });
                 
-                / Close menu when clicking any link inside
+                // Close menu when clicking any link inside
                 mobileMenuDropdown.querySelectorAll('a').forEach(link => {
                     link.addEventListener('click', () => {
                         mobileMenuDropdown.classList.remove('open');
                     });
                 });
                 
-                / Close if user clicks outside
+                // Close if user clicks outside
                 document.addEventListener('click', function(event) {
                     if (!mobileToggleBtn.contains(event.target) && !mobileMenuDropdown.contains(event.target)) {
                         mobileMenuDropdown.classList.remove('open');

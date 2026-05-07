@@ -24,7 +24,7 @@
 <!-- Open Graph / Social Media -->
 <meta property="og:title" content="عرض مساعد واتساب الذكي | AI Profit Lab">
 <meta property="og:description" content="جرّب مساعد واتساب الذكي. وفّر الوقت وأهّل العملاء تلقائيًا على مدار الساعة.">
-<meta property="og:url" content="https://aiprofitlab.io/whatsapp_receptionist_demo_ar.html">
+<meta property="og:url" content="whatsapp-receptionist-demo-ar.html">
 <meta property="og:type" content="website">
 
 <!-- Twitter Card -->
@@ -503,7 +503,7 @@ async function sendMsg() {
   activeLead.messages.push({ role: 'user', text, time: now });
   renderChat();
 
-  / Show typing indicator
+  // Show typing indicator
   const box = document.getElementById('messages');
   const typing = document.createElement('div');
   typing.className = 'msg ai';
@@ -620,14 +620,14 @@ function buildCalendar() {
   const days = ['أحد','اثن','ثلا','أرب','خمي','جمع','سبت'];
   const apptDays = [9, 14, 17, 21, 25, 28];
   grid.innerHTML = days.map(d => `<div class="cal-day header">${d}</div>`).join('');
-  / March 2026 starts on Sunday (day 0)
+  // March 2026 starts on Sunday (day 0)
   for (let i = 1; i <= 31; i++) {
     const cls = i === 21 ? 'today' : apptDays.includes(i) ? 'has-appt' : '';
     grid.innerHTML += `<div class="cal-day ${cls}">${i}</div>`;
   }
 }
 
-/ Init
+// Init
 renderLeadList();
 selectLead('sara');
 buildCalendar();

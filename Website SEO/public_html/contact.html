@@ -145,7 +145,7 @@
       "name": "AI Profit Lab",
       "url": "https://aiprofitlab.io",
       "logo": "https://aiprofitlab.io/logo.webp",
-      "image": "https://aiprofitlab.io/Nahid_Business_Banner.png",
+      "image": "https://aiprofitlab.io/nahid-business-banner.png",
       "description": "Helping non-technical managers leverage AI, automation, and technology to increase ROI and business efficiency.",
       "address": {
         "@type": "PostalAddress",
@@ -586,7 +586,7 @@
 
         });
 
-        / Slider
+        // Slider
         const comfortSlider = document.getElementById('aiComfort');
         const comfortOutput = document.getElementById('aiComfortOutput');
         if (comfortSlider && comfortOutput) {
@@ -595,7 +595,7 @@
                 comfortOutput.innerText = this.value;
             });
 
-        / Main Audit Form Submit
+        // Main Audit Form Submit
         form.addEventListener('submit', async function(event) {
             event.preventDefault();
             if (!validateStep(currentStep)) return;
@@ -652,7 +652,7 @@
 
         });
 
-        / Quick Contact Form
+        // Quick Contact Form
         const quickForm = document.getElementById('quickContactForm');
         if (quickForm) {
             quickForm.addEventListener('submit', async function(e) {
@@ -729,7 +729,7 @@
                 visitorId = 'visitor_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
                 localStorage.setItem('aidenVisitorId', visitorId);
 
-            / RTL: user message on the right (mr-auto)
+            // RTL: user message on the right (mr-auto)
             box.innerHTML += `<div class="bg-blue-900/50 mr-auto p-3 rounded-2xl rounded-bl-none max-w-[85%] text-white">${message}</div>`;
             input.value = '';
             box.scrollTop = box.scrollHeight;
@@ -770,14 +770,14 @@
                 mobileMenuDropdown.classList.toggle('open');
             });
             
-            / Close menu when clicking any link inside
+            // Close menu when clicking any link inside
             mobileMenuDropdown.querySelectorAll('a').forEach(link => {
                 link.addEventListener('click', () => {
                     mobileMenuDropdown.classList.remove('open');
                 });
             });
             
-            / Close if user clicks outside
+            // Close if user clicks outside
             document.addEventListener('click', function(event) {
                 if (!mobileToggleBtn.contains(event.target) && !mobileMenuDropdown.contains(event.target)) {
                     mobileMenuDropdown.classList.remove('open');

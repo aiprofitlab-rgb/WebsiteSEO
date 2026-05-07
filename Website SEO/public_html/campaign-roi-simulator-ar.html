@@ -10,7 +10,7 @@
 <meta name="keywords" content="محاكي الحملات، محاكي عائد التسويق، حزمة التسويق، AI Profit Lab، تسويق عُمان، عائد الحملات في الخليج">
 <meta property="og:title" content="محاكي الحملات — حزمة التسويق | AI Profit Lab">
 <meta property="og:description" content="استخدم محاكي حملات AI Profit Lab لتوقع ميزانيتك التسويقية وتحسين قنواتك وعائدك. مصمم لأعمال عُمان ومنطقة الخليج.">
-<meta property="og:url" content="https://aiprofitlab.io/Campaign_ROI_Simulator-ar.html">
+<meta property="og:url" content="campaign-roi-simulator-ar.html">
 <meta property="og:type" content="website">
 
 <!-- Local Business Schema -->
@@ -21,7 +21,7 @@
   "name": "AI Profit Lab",
   "url": "https://aiprofitlab.io",
   "logo": "https://aiprofitlab.io/logo.webp",
-  "image": "https://aiprofitlab.io/Nahid_Business_Banner.png",
+  "image": "https://aiprofitlab.io/nahid-business-banner.png",
   "description": "Helping non-technical managers leverage AI, automation, and technology to increase ROI and business efficiency.",
   "address": {
     "@type": "PostalAddress",
@@ -948,7 +948,7 @@ function drawChannelChart() {
   const labels = sel.map(i => CHANNELS[i].name);
   const data   = sel.map(i => Math.round(share / CHANNELS[i].cpc));
   const colors = sel.map(i => CHANNELS[i].color);
-  / legend
+  // legend
   document.getElementById('ch-legend').innerHTML = sel.map(i =>
     `<div class="legend-item"><div class="legend-swatch" style="background:${CHANNELS[i].color}"></div>${CHANNELS[i].name}</div>`
   ).join('');
@@ -1138,7 +1138,7 @@ function initResults() {
   document.getElementById('r-roi').textContent      = roi + '%';
   document.getElementById('r-cpl').textContent      = '$' + cpl;
 
-  / Weekly chart
+  // Weekly chart
   const weeks     = Math.ceil(d / 7);
   const wLabels   = Array.from({length: weeks}, (_, i) => 'W' + (i + 1));
   const wLeads    = wLabels.map((_, i) => Math.round(leads / weeks * (0.5 + i * 0.15)));
@@ -1161,7 +1161,7 @@ function initResults() {
     }
   });
 
-  / Contrib donut
+  // Contrib donut
   const sel = [...selectedChannels];
   const cc = document.getElementById('contrib-chart');
   if (contribChart) { contribChart.destroy(); contribChart = null; }
@@ -1179,7 +1179,7 @@ function initResults() {
     ).join('');
   }
 
-  / Recommendations
+  // Recommendations
   const recs = [
     roi > 150 ? {type:'green', icon:'↑', text:'عائد قوي — فكر في زيادة الميزانية بنسبة 20-30% في دورة الحملة القادمة.'} :
                 {type:'amber', icon:'!', text:'العائد أقل من المستهدف — راجع مزيج القنوات وقوة العرض وافتراضات حجم الصفقة.'},
