@@ -18,23 +18,25 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_URI} !(.*)/$
 RewriteRule ^(.*)$ https://aiprofitlab.io/$1/ [L,R=301]
 
-# 2. Map /en/ subpaths to root -en.html files
+# 2. Specific Hub & English Hub Redirects (PRIORITY)
+# Ensure /en/blog/ and /en/academy/ go to the actual folders
+RewriteRule ^en/blog/$ /blog/ [L,R=301]
+RewriteRule ^en/academy/$ /academy/ [L,R=301]
+RewriteRule ^en/blog-ar/$ /blog-ar/ [L,R=301]
+RewriteRule ^en/academy-ar/$ /academy-ar/ [L,R=301]
+
+# 3. Map /en/ subpaths to root -en.html files
 # Example: /en/services-en/ -> services-en.html
+# We use [L] so it stops here if it matches
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^en/([^/]+)/$ $1.html [L]
 
-# 3. Map clean directory URLs to root .html files (for Arabic/General)
+# 4. Map clean directory URLs to root .html files (for Arabic/General)
 # Example: /services/ -> services.html
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^([^/]+)/$ $1.html [L]
-
-# 4. Handle Hub Directories (Academy, Blog, etc.)
-# If the requested directory exists and has an index.html, Apache serves it.
-# We just need to make sure /en/blog/ and /en/academy/ work.
-RewriteRule ^en/blog/$ /blog/ [L,R=301]
-RewriteRule ^en/academy/$ /academy/ [L,R=301]
 
 # 5. Standardized URL Slug Redirects (Legacy to New Slugs)
 RewriteRule ^Missed-Call-Simulator-en/?$ /en/missed-call-simulator-en/ [R=301,L]
