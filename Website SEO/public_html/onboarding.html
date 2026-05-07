@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-2GPVY4Z5KR"></script>
+<script async src="https:/www.googletagmanager.com/gtag/js?id=G-2GPVY4Z5KR"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
@@ -20,8 +20,8 @@
     <link rel="apple-touch-icon" href="/favicon.svg">
     
     <!-- Fonts matching AI Profit Lab brand -->
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https:/fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https:/cdn.tailwindcss.com"></script>
     
     <style>
         /* Brand Colors - Matching AI Profit Lab */
@@ -412,17 +412,17 @@
     </style>
 
     <!-- Canonical URL -->
-    <link rel="canonical" href="https://aiprofitlab.io/onboarding/">
+    <link rel="canonical" href="https:/aiprofitlab.io/onboarding/">
 
     <!-- Local Business Schema -->
     <script type="application/ld+json">
     {
-      "@context": "https://schema.org",
+      "@context": "https:/schema.org",
       "@type": "ProfessionalService",
       "name": "AI Profit Lab",
-      "url": "https://aiprofitlab.io",
-      "logo": "https://aiprofitlab.io/logo.webp",
-      "image": "https://aiprofitlab.io/Nahid_Business_Banner.png",
+      "url": "https:/aiprofitlab.io",
+      "logo": "https:/aiprofitlab.io/logo.webp",
+      "image": "https:/aiprofitlab.io/Nahid_Business_Banner.png",
       "description": "Helping non-technical managers leverage AI, automation, and technology to increase ROI and business efficiency.",
       "address": {
         "@type": "PostalAddress",
@@ -445,8 +445,8 @@
         "availableLanguage": ["en", "ar"]
       },
       "sameAs": [
-        "https://www.youtube.com/@AI_for_Managers",
-        "https://www.linkedin.com/in/nahid-aby"
+        "https:/www.youtube.com/@AI_for_Managers",
+        "https:/www.linkedin.com/in/nahid-aby"
       ]
     }
     </script>
@@ -639,7 +639,7 @@
                         </div>
                         <div class="field-group">
                             <label>Company Website</label>
-                            <input type="url" id="website" placeholder="https://...">
+                            <input type="url" id="website" placeholder="https:/...">
                         </div>
                     </div>
                     <div class="flex justify-end mt-8">
@@ -836,17 +836,17 @@
     </footer>
 
     <script>
-        // ==================== CONFIGURATION ====================
-        // YOUR GOOGLE APPS SCRIPT URL - REPLACE WITH YOUR NEW URL
-        const GOOGLE_SHEET_URL = "https://script.google.com/macros/s/AKfycbzdqebnEkTwzniLCq0rPevQvbwebGib2qII9vi08dVSgSh10TxXwuvwsAb0DrIl97QnOQ/exec";
+        / ==================== CONFIGURATION ====================
+        / YOUR GOOGLE APPS SCRIPT URL - REPLACE WITH YOUR NEW URL
+        const GOOGLE_SHEET_URL = "https:/script.google.com/macros/s/AKfycbzdqebnEkTwzniLCq0rPevQvbwebGib2qII9vi08dVSgSh10TxXwuvwsAb0DrIl97QnOQ/exec";
         
-        // ==================== STATE ====================
+        / ==================== STATE ====================
         let currentStep = 1;
         const totalSteps = 5;
         
-        // ==================== INITIALIZATION ====================
+        / ==================== INITIALIZATION ====================
         function init() {
-            // Step click handlers (allow going back to previous steps)
+            / Step click handlers (allow going back to previous steps)
             document.querySelectorAll('.step-dot').forEach(dot => {
                 dot.addEventListener('click', () => {
                     const step = parseInt(dot.dataset.step);
@@ -857,7 +857,7 @@
                 });
             });
             
-            // Radio card handlers
+            / Radio card handlers
             document.querySelectorAll('.radio-card').forEach(card => {
                 card.addEventListener('click', function() {
                     const group = this.parentElement;
@@ -869,7 +869,7 @@
                 });
             });
             
-            // Checkbox card handlers
+            / Checkbox card handlers
             document.querySelectorAll('.checkbox-card').forEach(card => {
                 card.addEventListener('click', function() {
                     this.classList.toggle('selected');
@@ -1031,7 +1031,7 @@
             
             const data = collectFormData();
             
-            // Convert data to URL-encoded format (avoids CORS preflight)
+            / Convert data to URL-encoded format (avoids CORS preflight)
             const formBody = new URLSearchParams();
             for (const [key, value] of Object.entries(data)) {
                 formBody.append(key, value);
@@ -1049,14 +1049,14 @@
                 const result = await response.text();
                 console.log("Response from Google Script:", result);
                 
-                // Show success view
+                / Show success view
                 document.getElementById('onboardingForm').style.display = 'none';
                 document.getElementById('successView').classList.add('active');
                 document.getElementById('successName').innerText = data.fullName.split(' ')[0] || 'there';
                 
             } catch (error) {
                 console.error('Submission error:', error);
-                // Still show success view for good UX, but log error
+                / Still show success view for good UX, but log error
                 document.getElementById('onboardingForm').style.display = 'none';
                 document.getElementById('successView').classList.add('active');
                 document.getElementById('successName').innerText = data.fullName.split(' ')[0] || 'there';
@@ -1066,7 +1066,7 @@
             }
         }
         
-        // Initialize on page load
+        / Initialize on page load
         init();
     </script>
 </body>

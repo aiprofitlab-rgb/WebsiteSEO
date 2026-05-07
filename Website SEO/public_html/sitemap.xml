@@ -1,201 +1,201 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+<urlset xmlns="http:/www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http:/www.w3.org/1999/xhtml">
   <url>
-    <loc>https://aiprofitlab.io/</loc>
+    <loc>https:/aiprofitlab.io/</loc>
     <lastmod>2026-05-06</lastmod>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://aiprofitlab.io/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://aiprofitlab.io/en/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://aiprofitlab.io/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https:/aiprofitlab.io/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https:/aiprofitlab.io/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https:/aiprofitlab.io/"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://aiprofitlab.io/about-en/</loc>
+    <loc>https:/aiprofitlab.io/about-en/</loc>
     <lastmod>2026-05-06</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://aiprofitlab.io/about-en/"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://aiprofitlab.io/about/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://aiprofitlab.io/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https:/aiprofitlab.io/about-en/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https:/aiprofitlab.io/about/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https:/aiprofitlab.io/"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://aiprofitlab.io/about/</loc>
+    <loc>https:/aiprofitlab.io/about/</loc>
     <lastmod>2026-05-06</lastmod>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://aiprofitlab.io/about/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://aiprofitlab.io/about-en/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://aiprofitlab.io/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https:/aiprofitlab.io/about/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https:/aiprofitlab.io/about-en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https:/aiprofitlab.io/"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://aiprofitlab.io/academy-ar/</loc>
+    <loc>https:/aiprofitlab.io/academy-ar/</loc>
     <lastmod>2026-05-06</lastmod>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://aiprofitlab.io/academy-ar/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://aiprofitlab.io/academy/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://aiprofitlab.io/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https:/aiprofitlab.io/academy-ar/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https:/aiprofitlab.io/academy/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https:/aiprofitlab.io/"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://aiprofitlab.io/academy/</loc>
+    <loc>https:/aiprofitlab.io/academy/</loc>
     <lastmod>2026-05-06</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://aiprofitlab.io/academy/"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://aiprofitlab.io/academy-ar/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://aiprofitlab.io/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https:/aiprofitlab.io/academy/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https:/aiprofitlab.io/academy-ar/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https:/aiprofitlab.io/"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://aiprofitlab.io/blog-ar/</loc>
+    <loc>https:/aiprofitlab.io/blog-ar/</loc>
     <lastmod>2026-05-06</lastmod>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://aiprofitlab.io/blog-ar/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://aiprofitlab.io/blog/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://aiprofitlab.io/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https:/aiprofitlab.io/blog-ar/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https:/aiprofitlab.io/blog/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https:/aiprofitlab.io/"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://aiprofitlab.io/blog/</loc>
+    <loc>https:/aiprofitlab.io/blog/</loc>
     <lastmod>2026-05-06</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://aiprofitlab.io/blog/"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://aiprofitlab.io/blog-ar/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://aiprofitlab.io/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https:/aiprofitlab.io/blog/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https:/aiprofitlab.io/blog-ar/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https:/aiprofitlab.io/"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://aiprofitlab.io/campaign-roi-simulator-ar/</loc>
+    <loc>https:/aiprofitlab.io/campaign-roi-simulator-ar/</loc>
     <lastmod>2026-05-06</lastmod>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://aiprofitlab.io/campaign-roi-simulator-ar/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://aiprofitlab.io/campaign-roi-simulator/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://aiprofitlab.io/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https:/aiprofitlab.io/campaign-roi-simulator-ar/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https:/aiprofitlab.io/campaign-roi-simulator/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https:/aiprofitlab.io/"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://aiprofitlab.io/campaign-roi-simulator/</loc>
+    <loc>https:/aiprofitlab.io/campaign-roi-simulator/</loc>
     <lastmod>2026-05-06</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://aiprofitlab.io/campaign-roi-simulator/"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://aiprofitlab.io/campaign-roi-simulator-ar/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://aiprofitlab.io/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https:/aiprofitlab.io/campaign-roi-simulator/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https:/aiprofitlab.io/campaign-roi-simulator-ar/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https:/aiprofitlab.io/"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://aiprofitlab.io/contact-en/</loc>
+    <loc>https:/aiprofitlab.io/contact-en/</loc>
     <lastmod>2026-05-06</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://aiprofitlab.io/contact-en/"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://aiprofitlab.io/contact/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://aiprofitlab.io/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https:/aiprofitlab.io/contact-en/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https:/aiprofitlab.io/contact/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https:/aiprofitlab.io/"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://aiprofitlab.io/contact/</loc>
+    <loc>https:/aiprofitlab.io/contact/</loc>
     <lastmod>2026-05-06</lastmod>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://aiprofitlab.io/contact/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://aiprofitlab.io/contact-en/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://aiprofitlab.io/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https:/aiprofitlab.io/contact/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https:/aiprofitlab.io/contact-en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https:/aiprofitlab.io/"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://aiprofitlab.io/customized-ceo-dashboard-demo-ar/</loc>
+    <loc>https:/aiprofitlab.io/customized-ceo-dashboard-demo-ar/</loc>
     <lastmod>2026-05-06</lastmod>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://aiprofitlab.io/customized-ceo-dashboard-demo-ar/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://aiprofitlab.io/customized-ceo-dashboard-demo/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://aiprofitlab.io/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https:/aiprofitlab.io/customized-ceo-dashboard-demo-ar/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https:/aiprofitlab.io/customized-ceo-dashboard-demo/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https:/aiprofitlab.io/"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://aiprofitlab.io/customized-ceo-dashboard-demo/</loc>
+    <loc>https:/aiprofitlab.io/customized-ceo-dashboard-demo/</loc>
     <lastmod>2026-05-06</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://aiprofitlab.io/customized-ceo-dashboard-demo/"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://aiprofitlab.io/customized-ceo-dashboard-demo-ar/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://aiprofitlab.io/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https:/aiprofitlab.io/customized-ceo-dashboard-demo/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https:/aiprofitlab.io/customized-ceo-dashboard-demo-ar/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https:/aiprofitlab.io/"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://aiprofitlab.io/en/</loc>
+    <loc>https:/aiprofitlab.io/en/</loc>
     <lastmod>2026-05-06</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://aiprofitlab.io/en/"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://aiprofitlab.io/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://aiprofitlab.io/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https:/aiprofitlab.io/en/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https:/aiprofitlab.io/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https:/aiprofitlab.io/"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://aiprofitlab.io/missed-call-simulator-ar/</loc>
+    <loc>https:/aiprofitlab.io/missed-call-simulator-ar/</loc>
     <lastmod>2026-05-06</lastmod>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://aiprofitlab.io/missed-call-simulator-ar/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://aiprofitlab.io/missed-call-simulator-en/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://aiprofitlab.io/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https:/aiprofitlab.io/missed-call-simulator-ar/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https:/aiprofitlab.io/missed-call-simulator-en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https:/aiprofitlab.io/"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://aiprofitlab.io/missed-call-simulator-en/</loc>
+    <loc>https:/aiprofitlab.io/missed-call-simulator-en/</loc>
     <lastmod>2026-05-06</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://aiprofitlab.io/missed-call-simulator-en/"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://aiprofitlab.io/missed-call-simulator-ar/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://aiprofitlab.io/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https:/aiprofitlab.io/missed-call-simulator-en/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https:/aiprofitlab.io/missed-call-simulator-ar/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https:/aiprofitlab.io/"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://aiprofitlab.io/process-en/</loc>
+    <loc>https:/aiprofitlab.io/process-en/</loc>
     <lastmod>2026-05-06</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://aiprofitlab.io/process-en/"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://aiprofitlab.io/process/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://aiprofitlab.io/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https:/aiprofitlab.io/process-en/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https:/aiprofitlab.io/process/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https:/aiprofitlab.io/"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://aiprofitlab.io/process/</loc>
+    <loc>https:/aiprofitlab.io/process/</loc>
     <lastmod>2026-05-06</lastmod>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://aiprofitlab.io/process/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://aiprofitlab.io/process-en/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://aiprofitlab.io/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https:/aiprofitlab.io/process/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https:/aiprofitlab.io/process-en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https:/aiprofitlab.io/"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://aiprofitlab.io/services-en/</loc>
+    <loc>https:/aiprofitlab.io/services-en/</loc>
     <lastmod>2026-05-06</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://aiprofitlab.io/services-en/"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://aiprofitlab.io/services/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://aiprofitlab.io/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https:/aiprofitlab.io/services-en/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https:/aiprofitlab.io/services/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https:/aiprofitlab.io/"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://aiprofitlab.io/services/</loc>
+    <loc>https:/aiprofitlab.io/services/</loc>
     <lastmod>2026-05-06</lastmod>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://aiprofitlab.io/services/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://aiprofitlab.io/services-en/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://aiprofitlab.io/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https:/aiprofitlab.io/services/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https:/aiprofitlab.io/services-en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https:/aiprofitlab.io/"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://aiprofitlab.io/whatsapp-receptionist-demo-ar/</loc>
+    <loc>https:/aiprofitlab.io/whatsapp-receptionist-demo-ar/</loc>
     <lastmod>2026-05-06</lastmod>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://aiprofitlab.io/whatsapp-receptionist-demo-ar/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://aiprofitlab.io/whatsapp-receptionist-demo/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://aiprofitlab.io/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https:/aiprofitlab.io/whatsapp-receptionist-demo-ar/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https:/aiprofitlab.io/whatsapp-receptionist-demo/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https:/aiprofitlab.io/"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://aiprofitlab.io/whatsapp-receptionist-demo/</loc>
+    <loc>https:/aiprofitlab.io/whatsapp-receptionist-demo/</loc>
     <lastmod>2026-05-06</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://aiprofitlab.io/whatsapp-receptionist-demo/"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://aiprofitlab.io/whatsapp-receptionist-demo-ar/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://aiprofitlab.io/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https:/aiprofitlab.io/whatsapp-receptionist-demo/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https:/aiprofitlab.io/whatsapp-receptionist-demo-ar/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https:/aiprofitlab.io/"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>

@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   
   <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-2GPVY4Z5KR"></script>
+  <script async src="https:/www.googletagmanager.com/gtag/js?id=G-2GPVY4Z5KR"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
@@ -19,14 +19,14 @@
   <meta name="keywords" content="حاسبة المكالمات الفائتة، خسارة الأرباح، أتمتة المكالمات، ذكاء اصطناعي للأعمال، سلطنة عُمان، مسقط، الإمارات، قطر، أتمتة المبيعات">
   <meta name="author" content="AI Profit Lab">
   <meta name="robots" content="index, follow">
-  <link rel="canonical" href="https://aiprofitlab.io/Missed-Call-Simulator-ar/" />
+  <link rel="canonical" href="https:/aiprofitlab.io/Missed-Call-Simulator-ar/" />
 
   <!-- Open Graph / Social Media -->
   <meta property="og:title" content="حاسبة خسائر المكالمات الفائتة | شاهد خسائرك الحقيقية">
   <meta property="og:description" content="هل تعلم كم تكلفك المكالمات الفائتة؟ احسب خسائرك الآن مع حاسبة AI Profit Lab الذكية.">
-  <meta property="og:url" content="https://aiprofitlab.io/Missed-Call-Simulator-ar.html">
+  <meta property="og:url" content="https:/aiprofitlab.io/Missed-Call-Simulator-ar.html">
   <meta property="og:type" content="website">
-  <meta property="og:image" content="https://aiprofitlab.io/IMG_7275.webp">
+  <meta property="og:image" content="https:/aiprofitlab.io/IMG_7275.webp">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
@@ -36,11 +36,11 @@
   <!-- LocalBusiness Schema -->
   <script type="application/ld+json">
   {
-    "@context": "https://schema.org",
+    "@context": "https:/schema.org",
     "@type": "LocalBusiness",
     "name": "AI Profit Lab",
-    "image": "https://aiprofitlab.io/og-image.jpg",
-    "url": "https://aiprofitlab.io",
+    "image": "https:/aiprofitlab.io/og-image.jpg",
+    "url": "https:/aiprofitlab.io",
     "telephone": "+96890000000", 
     "address": {
       "@type": "PostalAddress",
@@ -59,8 +59,8 @@
   </script>
 
   <!-- Google Fonts & Font Awesome 6 -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800;14..32,900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https:/fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800;14..32,900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https:/cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
     .input-group label { text-align: right; flex-direction: row-reverse; }
     .metric-label { flex-direction: row-reverse; justify-content: flex-end; }
@@ -351,7 +351,7 @@
 
     <link rel="alternate" hreflang="ar" href="https:/aiprofitlab.io/missed-call-simulator-ar/">
     <link rel="alternate" hreflang="en" href="https:/aiprofitlab.io/missed-call-simulator-en/">
-    <link rel="alternate" hreflang="x-default" href="https://aiprofitlab.io/">
+    <link rel="alternate" hreflang="x-default" href="https:/aiprofitlab.io/">
 </head>
 <body>
 
@@ -464,7 +464,7 @@
 </div>
 
 <script>
-  // DOM elements
+  / DOM elements
   const callsInput = document.getElementById('callsPerDay');
   const missedRateSlider = document.getElementById('missedRate');
   const missedRateVal = document.getElementById('missedRateVal');
@@ -472,20 +472,20 @@
   const convRateVal = document.getElementById('convRateVal');
   const ticketInput = document.getElementById('avgTicket');
 
-  // result fields
+  / result fields
   const missedDaySpan = document.getElementById('missedDayNum');
   const missedMonthSpan = document.getElementById('missedMonthNum');
   const lostCustomersSpan = document.getElementById('lostCustomersNum');
   const monthlyLossSpan = document.getElementById('monthlyLoss');
   const annualLossSpan = document.getElementById('annualLoss');
 
-  // label syncs
+  / label syncs
   const dailyCallsLabel = document.getElementById('dailyCallsVal');
   const missRateLabel = document.getElementById('missRateLabel');
   const convRateLabel = document.getElementById('convRateLabel');
   const ticketLabelSpan = document.getElementById('ticketLabel');
 
-  // helper: add pulse class on important numbers
+  / helper: add pulse class on important numbers
   function pulseElement(el) {
     if (!el) return;
     el.classList.add('pulse-effect');
@@ -497,13 +497,13 @@
   }
 
   function updateCalculator() {
-    // get values
+    / get values
     let dailyCalls = Math.max(1, parseInt(callsInput.value) || 0);
     let missRatePercent = parseFloat(missedRateSlider.value);
     let convRatePercent = parseFloat(convRateSlider.value);
     let ticket = Math.max(1, parseFloat(ticketInput.value) || 0);
 
-    // update labels
+    / update labels
     dailyCallsLabel.innerText = dailyCalls;
     missRateLabel.innerText = missRatePercent + '%';
     convRateLabel.innerText = convRatePercent + '%';
@@ -511,14 +511,14 @@
     missedRateVal.innerText = missRatePercent + '%';
     convRateVal.innerText = convRatePercent + '%';
 
-    // calculate core metrics
+    / calculate core metrics
     const missedPerDay = Math.round(dailyCalls * (missRatePercent / 100));
-    const missedPerMonth = missedPerDay * 30;   // standard month
+    const missedPerMonth = missedPerDay * 30;   / standard month
     const lostCustomers = Math.round(missedPerMonth * (convRatePercent / 100));
     const monthlyLostRev = lostCustomers * ticket;
     const annualLostRev = monthlyLostRev * 12;
 
-    // update DOM with animations on critical fields
+    / update DOM with animations on critical fields
     if (missedDaySpan.innerText !== missedPerDay.toLocaleString()) {
       pulseElement(missedDaySpan);
     }
@@ -539,7 +539,7 @@
     monthlyLossSpan.innerHTML = formatMoney(monthlyLostRev);
     annualLossSpan.innerHTML = formatMoney(annualLostRev);
 
-    // optional: add extra red glow effect if monthly loss is high
+    / optional: add extra red glow effect if monthly loss is high
     const lossElement = monthlyLossSpan;
     if (monthlyLostRev > 50000) {
       lossElement.style.textShadow = "0 0 12px #ff4d4d";
@@ -548,13 +548,13 @@
     }
   }
 
-  // event listeners for all interactive elements
+  / event listeners for all interactive elements
   callsInput.addEventListener('input', updateCalculator);
   missedRateSlider.addEventListener('input', updateCalculator);
   convRateSlider.addEventListener('input', updateCalculator);
   ticketInput.addEventListener('input', updateCalculator);
 
-  // also sync number input for slider values label display
+  / also sync number input for slider values label display
   missedRateSlider.addEventListener('input', function(e) {
     missedRateVal.innerText = e.target.value + '%';
     missRateLabel.innerText = e.target.value + '%';
@@ -571,19 +571,19 @@
     dailyCallsLabel.innerText = e.target.value;
   });
 
-  // call initial update
+  / call initial update
   updateCalculator();
 
-  // CTA button interactive alert with strong conversion hook
+  / CTA button interactive alert with strong conversion hook
   const ctaBtn = document.getElementById('mainCtaBtn');
   ctaBtn.addEventListener('click', () => {
-    // dynamic message showing current monthly loss to make it urgent
+    / dynamic message showing current monthly loss to make it urgent
     const currentLossText = document.getElementById('monthlyLoss').innerText;
     alert(`⚠️ أنت تخسر ${currentLossText} كل شهر بسبب المكالمات الفائتة.\n\nاحجز تدقيقًا مجانيًا لاستعادة الإيرادات لمدة ١٥ دقيقة → سيوضح لك فريقنا كيفية استرداد ما يصل إلى ٨٥٪ من المكالمات المفقودة. بدون التزام.`);
-    window.location.href = 'https://calendly.com/ai-profit-lab2026';
+    window.location.href = 'https:/calendly.com/ai-profit-lab2026';
   });
 
-  // extra: style for range thumb dynamic (optional)
+  / extra: style for range thumb dynamic (optional)
   const style = document.createElement('style');
   style.textContent = `
     input[type="range"]::-webkit-slider-thumb {
@@ -599,7 +599,7 @@
   `;
   document.head.appendChild(style);
 
-  // add small floating "missed call counter" animation? just for scroll-stop effect
+  / add small floating "missed call counter" animation? just for scroll-stop effect
   const container = document.querySelector('.container');
   const heroBadge = document.querySelector('.badge-loss');
   if (heroBadge) {
@@ -609,12 +609,12 @@
     }, 3000);
   }
 
-  // bonus: update URL? Not needed, but ensure window load smooth
+  / bonus: update URL? Not needed, but ensure window load smooth
   window.addEventListener('load', () => {
     updateCalculator();
-    // prefill some eye-catching values to show massive loss potential
+    / prefill some eye-catching values to show massive loss potential
     if (parseInt(callsInput.value) === 62 && parseFloat(ticketInput.value) === 395 && parseFloat(missedRateSlider.value) === 44) {
-      // already default, fine. But show strong copy
+      / already default, fine. But show strong copy
     }
   });
 </script>
