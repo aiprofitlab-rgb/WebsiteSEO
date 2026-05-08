@@ -159,18 +159,17 @@
         "https://www.youtube.com/@AI_for_Managers",
         "https://www.linkedin.com/in/nahid-aby"
       ]
-
+    }
     </script>
 
     <style>
         .group-submenu:hover .submenu-content {
             opacity: 1;
             visibility: visible;
-
+        }
     </style>
 </head>
 <body class="antialiased">
-    <!-- ======================= Navigation ======================= -->
     <!-- ======================= Navigation ======================= -->
     <nav class="flex justify-between items-center px-6 md:px-12 py-8 fixed w-full z-50 glass bg-black/30">
         <a href="/en/" class="font-extrabold text-3xl md:text-4xl tracking-tighter">
@@ -280,6 +279,19 @@
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+            <a href="/blog/en/2026-05-08-rise-of-agentic-ai-oman.html" class="article-card glass-card rounded-2xl overflow-hidden block relative group" data-category="cat_2">
+                <img src="/blog/images/rise-of-agentic-ai-oman-logistics.png" alt="The Rise of Agentic AI: Moving Beyond Simple Chatbots" class="w-full h-48 object-cover">
+                <div class="p-6">
+                    <div class="flex justify-between items-center mb-3">
+                        <span class="bg-blue-500/10 text-blue-400 text-xs px-3 py-1 rounded-full border border-blue-500/20">AI Technology</span>
+                        <p class="text-sm text-gray-500 font-semibold">2026-05-08</p>
+                    </div>
+                    <h2 class="text-xl font-bold mb-3 text-white group-hover:text-blue-400 transition">The Rise of Agentic AI: Moving Beyond Simple Chatbots</h2>
+                    <p class="text-gray-400 line-clamp-3 mb-4">From answering questions to executing complex workflows: Why "AI Agents" are the next frontier for Omani businesses.</p>
+                    <span class="text-blue-500 font-bold text-sm inline-block">Read More →</span>
+                </div>
+            </a>
 
             <a href="/blog/en/2026-05-07-oman-10-percent-gdp-digital-economy-target.html" class="article-card glass-card rounded-2xl overflow-hidden block relative group" data-category="cat_3">
                 <img src="/blog/images/oman-10-percent-gdp-target-2040.png" alt="Oman's 10% GDP Digital Target: A 2040 Vision Roadmap" class="w-full h-48 object-cover">
@@ -811,23 +823,17 @@
                 mobileToggleBtn.addEventListener('click', function(e) {
                     e.stopPropagation();
                     mobileMenuDropdown.classList.toggle('open');
-                });
-                
-                // Close menu when clicking any link inside
-                mobileMenuDropdown.querySelectorAll('a').forEach(link => {
-                    link.addEventListener('click', () => {
-                        mobileMenuDropdown.classList.remove('open');
-                    });
-                });
-                
-                // Close if user clicks outside
-                document.addEventListener('click', function(event) {
-                    if (!mobileToggleBtn.contains(event.target) && !mobileMenuDropdown.contains(event.target)) {
-                        mobileMenuDropdown.classList.remove('open');
-
+                    mobileToggleBtn.innerText = mobileMenuDropdown.classList.contains('open') ? '✕' : '☰';
                 });
 
+                document.addEventListener('click', function(e) {
+                    if (!mobileMenuDropdown.contains(e.target) && !mobileToggleBtn.contains(e.target)) {
+                        mobileMenuDropdown.classList.remove('open');
+                        mobileToggleBtn.innerText = '☰';
+                    }
+                });
+            }
         });
     </script>
-    </body>
+</body>
 </html>

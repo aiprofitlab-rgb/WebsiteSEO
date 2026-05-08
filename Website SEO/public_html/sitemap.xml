@@ -83,7 +83,7 @@
   </url>
   <url>
     <loc>https://aiprofitlab.io/blog-ar/</loc>
-    <lastmod>2026-05-07</lastmod>
+    <lastmod>2026-05-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   
@@ -812,7 +812,7 @@
   </url>
   <url>
     <loc>https://aiprofitlab.io/en/blog/</loc>
-    <lastmod>2026-05-07</lastmod>
+    <lastmod>2026-05-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   
@@ -899,5 +899,21 @@
   
     <xhtml:link rel="alternate" hreflang="ar" href="https://aiprofitlab.io/whatsapp-receptionist-demo-ar/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://aiprofitlab.io/en/whatsapp-receptionist-demo/"/>
+  </url>
+  <url>
+    <loc>https://aiprofitlab.io/blog/ar/2026-05-08-rise-of-agentic-ai-oman.html</loc>
+    <lastmod>2026-05-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://aiprofitlab.io/blog/ar/2026-05-08-rise-of-agentic-ai-oman.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://aiprofitlab.io/blog/en/2026-05-08-rise-of-agentic-ai-oman.html"/>
+  </url>
+  <url>
+    <loc>https://aiprofitlab.io/blog/en/2026-05-08-rise-of-agentic-ai-oman.html</loc>
+    <lastmod>2026-05-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://aiprofitlab.io/blog/en/2026-05-08-rise-of-agentic-ai-oman.html"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://aiprofitlab.io/blog/ar/2026-05-08-rise-of-agentic-ai-oman.html"/>
   </url>
 </urlset>
