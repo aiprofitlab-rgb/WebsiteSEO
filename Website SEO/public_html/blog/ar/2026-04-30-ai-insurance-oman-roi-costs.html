@@ -107,7 +107,74 @@
         table { width: 100%; border-collapse: collapse; margin-bottom: 2rem; background: rgba(255, 255, 255, 0.02); }
         th, td { border: 1px solid rgba(255, 255, 255, 0.1); padding: 1rem; text-align: right; }
         th { background: rgba(59, 130, 246, 0.1); color: #60A5FA; font-weight: 600; }
-    </style>
+    
+        /* STANDARD NAV FIX */
+        #header {
+            display: flex !important;
+            justify-content: space-between !important;
+            align-items: center !important;
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            width: 100% !important;
+            z-index: 10000 !important;
+            box-sizing: border-box !important;
+            background: rgba(5, 5, 5, 0.98) !important;
+            backdrop-filter: blur(15px) !important;
+            border-bottom: 1px solid rgba(255,255,255,0.05) !important;
+        }
+
+        @media (min-width: 1025px) {
+            #header { height: 90px !important; padding: 0 5% !important; }
+            #desktopMenu { display: flex !important; align-items: center !important; gap: 2.5rem !important; }
+            .desktop-nav-links { display: flex !important; align-items: center !important; gap: 2rem !important; }
+            .mobile-controls, #mobileMenu { display: none !important; }
+            [dir="rtl"] #header { direction: rtl !important; }
+            [dir="ltr"] #header { direction: ltr !important; }
+        }
+
+        @media (max-width: 1024px) {
+            #header { height: 75px !important; padding: 0 1.5rem !important; overflow: visible !important; }
+            #desktopMenu { display: none !important; }
+            .mobile-controls { 
+                display: flex !important; 
+                align-items: center !important; 
+                gap: 1.25rem !important; 
+                z-index: 10002 !important; 
+                position: relative !important; 
+                pointer-events: auto !important;
+            }
+            #mobileToggle { 
+                display: flex !important; 
+                background: transparent !important;
+                border: none !important;
+                color: white !important;
+                font-size: 2.4rem !important;
+                cursor: pointer !important;
+                pointer-events: auto !important;
+                padding: 10px !important;
+                z-index: 10003 !important;
+                line-height: 1 !important;
+            }
+            #mobileMenu { 
+                display: none !important; 
+                position: absolute !important;
+                top: 75px !important;
+                left: 0 !important;
+                right: 0 !important;
+                background: rgba(10, 10, 10, 0.99) !important;
+                flex-direction: column !important;
+                padding: 2.5rem 1.5rem !important;
+                gap: 1.5rem !important;
+                z-index: 10001 !important;
+                max-height: calc(100vh - 75px) !important;
+                overflow-y: auto !important;
+                text-align: center !important;
+                border-bottom: 1px solid rgba(255,255,255,0.1) !important;
+            }
+            #mobileMenu.open { display: flex !important; }
+        }
+</style>
 
     <!-- Local Business Schema -->
     <script type="application/ld+json">
@@ -148,7 +215,7 @@
 </head>
 <body class="antialiased">
     <!-- Navbar -->
-    <nav class="flex justify-between items-center px-6 md:px-12 py-8 w-full z-50 glass sticky top-0 bg-black/30">
+    <nav class="flex justify-between items-center px-6 md:px-12 py-8 w-full z-50 glass sticky top-0 bg-black/30" id="header">
         <a href="/" class="font-extrabold text-3xl md:text-4xl tracking-tighter hover:opacity-80 transition">
             <span class="text-blue-500">A</span><span class="text-red-500">I</span> <span class="text-white text-2xl md:text-3xl">Profit Lab</span>
         </a>
@@ -272,5 +339,35 @@
             </div>
         </article>
     </main>
-</body>
+<script>
+        // STANDARD NAV JS
+        (function() {
+            function initNav() {
+                const btn = document.getElementById('mobileToggle');
+                const m = document.getElementById('mobileMenu');
+                if (!btn || !m) return;
+                
+                const toggleAction = (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    m.classList.toggle('open');
+                };
+                
+                btn.onclick = toggleAction;
+                btn.ontouchstart = toggleAction;
+                
+                document.addEventListener('click', (e) => {
+                    if (m.classList.contains('open') && !btn.contains(e.target) && !m.contains(e.target)) {
+                        m.classList.remove('open');
+                    }
+                });
+            }
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', initNav);
+            } else {
+                initNav();
+            }
+            window.addEventListener('load', initNav);
+        })();
+</script></body>
 </html>
