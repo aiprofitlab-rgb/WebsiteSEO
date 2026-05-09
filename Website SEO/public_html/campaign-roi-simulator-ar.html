@@ -1,19 +1,39 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <link rel="alternate" hreflang="ar" href="https://aiprofitlab.io/campaign-roi-simulator-ar/" />
-    <link rel="alternate" hreflang="en" href="https://aiprofitlab.io/en/campaign-roi-simulator/" />
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>محاكي الحملات — حزمة التسويق للأعمال</title>
 
-<!-- SEO & GEO Tags -->
-<meta name="description" content="استخدم محاكي حملات AI Profit Lab لتوقع ميزانيتك التسويقية وتحسين قنواتك وعائدك. مصمم لأعمال عُمان ومنطقة الخليج.">
-<meta name="keywords" content="محاكي الحملات، محاكي عائد التسويق، حزمة التسويق، AI Profit Lab، تسويق عُمان، عائد الحملات في الخليج">
-<meta property="og:title" content="محاكي الحملات — حزمة التسويق | AI Profit Lab">
-<meta property="og:description" content="استخدم محاكي حملات AI Profit Lab لتوقع ميزانيتك التسويقية وتحسين قنواتك وعائدك. مصمم لأعمال عُمان ومنطقة الخليج.">
-<meta property="og:url" content="campaign-roi-simulator-ar.html">
+<!-- SEO Meta Tags -->
+<title>محاكي عائد استثمار الحملات | AI Profit Lab عُمان</title>
+<meta name="description" content="احسب عائد استثمار حملتك التسويقية باستخدام محاكينا المتقدم. مصمم للشركات العُمانية لتحسين الإنفاق التسويقي وزيادة توليد العملاء المحتملين باستخدام الذكاء الاصطناعي.">
+<meta name="keywords" content="محاكي ROI، أتمتة التسويق عُمان، AI Profit Lab، نمو الأعمال مسقط، حاسبة الحملات، أدوات الشركات الصغيرة والمتوسطة العُمانية">
+<meta name="author" content="AI Profit Lab">
+<meta name="robots" content="index, follow">
+
+<!-- Open Graph / Social Media -->
+<meta property="og:title" content="محاكي عائد استثمار الحملات | AI Profit Lab عُمان">
+<meta property="og:description" content="حسن إنفاقك التسويقي باستخدام محاكي العائد المتقدم المدعوم بالذكاء الاصطناعي.">
+<meta property="og:image" content="https://aiprofitlab.io/nahid-business-banner.png">
+<meta property="og:url" content="https://aiprofitlab.io/campaign-roi-simulator-ar/">
 <meta property="og:type" content="website">
+
+<!-- Favicon -->
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/favicon.svg">
+
+<!-- Hreflang -->
+<link rel="alternate" hreflang="en" href="https://aiprofitlab.io/en/campaign-roi-simulator/" />
+<link rel="alternate" hreflang="ar" href="https://aiprofitlab.io/campaign-roi-simulator-ar/" />
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2GPVY4Z5KR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-2GPVY4Z5KR');
+</script>
 
 <!-- Local Business Schema -->
 <script type="application/ld+json">
@@ -24,12 +44,12 @@
   "url": "https://aiprofitlab.io",
   "logo": "https://aiprofitlab.io/logo.webp",
   "image": "https://aiprofitlab.io/nahid-business-banner.png",
-  "description": "Helping non-technical managers leverage AI, automation, and technology to increase ROI and business efficiency.",
+  "description": "مساعدة المديرين غير التقنيين على الاستفادة من الذكاء الاصطناعي والأتمتة والتكنولوجيا لزيادة العائد وكفاءة الأعمال في عُمان.",
   "address": {
     "@type": "PostalAddress",
-    "streetAddress": "Al Seeb",
-    "addressLocality": "Muscat",
-    "addressRegion": "Muscat Governorate",
+    "streetAddress": "السيب",
+    "addressLocality": "مسقط",
+    "addressRegion": "محافظة مسقط",
     "postalCode": "000",
     "addressCountry": "OM"
   },
@@ -41,395 +61,289 @@
 }
 </script>
 
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-2GPVY4Z5KR"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-2GPVY4Z5KR');
-</script>
-
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --bg: #0f0f13;
-    --bg2: #16161d;
-    --bg3: #1e1e28;
-    --surface: #232330;
-    --surface2: #2a2a3a;
-    --border: rgba(255,255,255,0.07);
-    --border2: rgba(255,255,255,0.12);
-    --text: #f0f0f5;
-    --text2: #9999b0;
-    --text3: #5f5f78;
-    --accent: #7c6fff;
-    --accent2: #5b4ef8;
-    --green: #1ecc8b;
-    --amber: #f5a623;
-    --red: #f05c5c;
-    --blue: #4b9cf7;
-    --pink: #d45fa0;
-    --teal: #2dd4bf;
-    --radius: 10px;
-    --radius-lg: 14px;
-    --font: 'DM Sans', sans-serif;
-    --mono: 'DM Mono', monospace;
-  }
+/* ─── Reset & tokens ─── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0f0f13;--bg2:#16161d;--bg3:#1e1e28;
+  --surface:#232330;--surf2:#2a2a3a;
+  --border:rgba(255,255,255,.07);--border2:rgba(255,255,255,.13);
+  --text:#f0f0f5;--text2:#9999b0;--text3:#5f5f78;
+  --accent:#7c6fff;--accent2:#5b4ef8;
+  --green:#1ecc8b;--amber:#f5a623;--red:#f05c5c;--blue:#4b9cf7;--pink:#d45fa0;
+  --r:10px;--rlg:14px;
+  --font:'DM Sans',sans-serif;--mono:'DM Mono',monospace;
+  --sidebar-w:220px;--topbar-h:56px;--mobnav-h:62px;
+}
+html{height:100%}
+body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:100%;line-height:1.6;-webkit-text-size-adjust:100%}
+::-webkit-scrollbar{width:4px;height:4px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--surf2);border-radius:99px}
 
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+/* ══ LAYOUT ══ */
+.app{display:flex;min-height:100svh}
 
-  body {
-    font-family: var(--font);
-    background: var(--bg);
-    color: var(--text);
-    min-height: 100vh;
-    line-height: 1.6;
-  }
+/* Sidebar */
+.sidebar{
+  width:var(--sidebar-w);flex-shrink:0;
+  background:var(--bg2);border-left:1px solid var(--border);
+  display:flex;flex-direction:column;
+  position:fixed;top:0;right:0;height:100svh;z-index:100;
+  transition:transform .25s ease;
+}
+.logo{padding:20px 18px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;flex-shrink:0}
+.logo-mark{width:32px;height:32px;flex-shrink:0;background:#3B82F6;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700;color:#fff}
+.logo-name{font-size:13px;font-weight:600;line-height:1.2}
+.logo-sub{font-size:10px;color:var(--text3)}
+.nav{padding:10px 0;flex:1;overflow-y:auto}
+.nav-label{font-size:10px;font-weight:600;letter-spacing:.08em;color:var(--text3);text-transform:uppercase;padding:10px 18px 4px}
+.nav-item{display:flex;align-items:center;gap:10px;padding:9px 18px;font-size:13px;color:var(--text2);cursor:pointer;border-right:2px solid transparent;transition:all .13s;user-select:none}
+.nav-item:hover{color:var(--text);background:var(--surface)}
+.nav-item.active{color:var(--accent);background:rgba(124,111,255,.08);border-right-color:var(--accent);font-weight:500}
+.nav-icon{font-size:15px;width:20px;text-align:center;flex-shrink:0}
+.sidebar-footer{padding:14px 18px;border-top:1px solid var(--border);font-size:10px;color:var(--text3);flex-shrink:0}
 
-  /* ── Layout ── */
-  .app { display: flex; min-height: 100vh; }
+/* Main */
+.main{flex:1;min-width:0;display:flex;flex-direction:column;margin-right:var(--sidebar-w)}
 
-  .sidebar {
-    width: 220px;
-    flex-shrink: 0;
-    background: var(--bg2);
-    border-right: 1px solid var(--border);
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    position: sticky;
-    top: 0;
-    height: 100vh;
-  }
+/* Topbar */
+.topbar{height:var(--topbar-h);background:var(--bg2);border-bottom:1px solid var(--border);padding:0 24px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50;gap:12px}
+.topbar-left{min-width:0;flex:1}
+.page-title{font-size:15px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.page-sub{font-size:11px;color:var(--text3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.topbar-right{display:flex;gap:8px;flex-shrink:0}
+.hamburger{display:none;background:none;border:none;color:var(--text2);cursor:pointer;padding:6px;border-radius:var(--r);font-size:20px;line-height:1;margin-left:4px;transition:color .15s}
+.hamburger:hover{color:var(--text)}
 
-  .logo {
-    padding: 24px 20px 20px;
-    border-bottom: 1px solid var(--border);
-  }
-  .logo-mark {
-    width: 32px; height: 32px;
-    background: var(--accent);
-    border-radius: 8px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 16px; font-weight: 600; color: #fff;
-    margin-bottom: 10px;
-  }
-  .logo-name { font-size: 14px; font-weight: 600; color: var(--text); }
-  .logo-sub  { font-size: 11px; color: var(--text3); }
+/* Mobile bottom nav */
+.mobile-nav{display:none;position:fixed;bottom:0;left:0;right:0;height:var(--mobnav-h);background:var(--bg2);border-top:1px solid var(--border);z-index:200;padding:6px 4px env(safe-area-inset-bottom,0)}
+.mobile-nav-inner{display:flex;height:100%}
+.mob-tab{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font-size:10px;color:var(--text3);cursor:pointer;border-radius:8px;transition:all .13s;padding:4px 2px;-webkit-tap-highlight-color:transparent}
+.mob-tab:hover{background:var(--surface)}
+.mob-tab.active{color:var(--accent)}
+.mob-tab-icon{font-size:18px;line-height:1}
+.mob-tab-label{font-size:9px;font-weight:500;letter-spacing:.02em}
 
-  .nav { padding: 12px 0; flex: 1; }
-  .nav-label {
-    font-size: 10px; font-weight: 600; letter-spacing: .08em;
-    color: var(--text3); text-transform: uppercase;
-    padding: 8px 20px 4px;
-  }
-  .nav-item {
-    display: flex; align-items: center; gap: 10px;
-    padding: 9px 20px;
-    font-size: 13px; font-weight: 400; color: var(--text2);
-    cursor: pointer; border-right: 2px solid transparent; border-left: none;
-    transition: all .15s;
-  }
-  .nav-item:hover { color: var(--text); background: var(--surface); }
-  .nav-item.active {
-    color: var(--accent); background: rgba(124,111,255,.08);
-    border-right-color: var(--accent); border-left-color: transparent; font-weight: 500;
-  }
-  .nav-icon { font-size: 14px; width: 18px; text-align: center; }
+/* Overlay */
+.sidebar-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:99}
+.sidebar-overlay.visible{display:block}
 
-  .sidebar-footer {
-    padding: 16px 20px;
-    border-top: 1px solid var(--border);
-    font-size: 11px; color: var(--text3);
-  }
+/* Content */
+.content{padding:24px;flex:1}
 
-  /* ── Main ── */
-  .main { flex: 1; overflow-y: auto; }
+/* Sections */
+.section{display:none;animation:fadeUp .2s ease}
+.section.active{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 
-  .topbar {
-    background: var(--bg2);
-    border-bottom: 1px solid var(--border);
-    padding: 14px 28px;
-    display: flex; align-items: center; justify-content: space-between;
-    position: sticky; top: 0; z-index: 10;
-  }
-  .page-title { font-size: 15px; font-weight: 500; }
-  .page-sub   { font-size: 12px; color: var(--text3); }
-  .topbar-actions { display: flex; gap: 8px; }
+/* ══ COMPONENTS ══ */
+.metrics{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px;margin-bottom:20px}
+.metric{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:14px}
+.metric-label{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.07em;margin-bottom:5px}
+.metric-value{font-size:22px;font-weight:600}
+.metric-delta{font-size:10px;margin-top:3px}
+.up{color:var(--green)}.down{color:var(--red)}
 
-  .content { padding: 28px; }
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--rlg);padding:18px 20px;margin-bottom:14px}
+.card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.card-title{font-size:10px;font-weight:700;letter-spacing:.08em;color:var(--text3);text-transform:uppercase;margin-bottom:14px}
+.card-header .card-title{margin-bottom:0}
 
-  /* ── Sections ── */
-  .section { display: none; }
-  .section.active { display: block; }
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
 
-  /* ── Metric cards ── */
-  .metrics {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    gap: 12px;
-    margin-bottom: 24px;
-  }
-  .metric {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 16px;
-  }
-  .metric-label { font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 6px; }
-  .metric-value { font-size: 24px; font-weight: 600; color: var(--text); }
-  .metric-delta { font-size: 11px; margin-top: 4px; }
-  .up   { color: var(--green); }
-  .down { color: var(--red);   }
+label{font-size:12px;color:var(--text2);display:block;margin-bottom:5px}
+.val{color:var(--text);font-weight:600}
+input[type=range]{width:100%;accent-color:var(--accent);cursor:pointer;height:20px;touch-action:manipulation}
+select,input[type=text],input[type=number]{width:100%;padding:9px 11px;border-radius:var(--r);border:1px solid var(--border2);background:var(--bg3);color:var(--text);font-size:13px;font-family:var(--font);outline:none;transition:border-color .15s;-webkit-appearance:none;appearance:none}
+select:focus,input:focus{border-color:var(--accent)}
+select option{background:var(--bg3)}
 
-  /* ── Cards ── */
-  .card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-    padding: 20px 22px;
-    margin-bottom: 16px;
-  }
-  .card-header {
-    display: flex; align-items: center; justify-content: space-between;
-    margin-bottom: 16px;
-  }
-  .card-title {
-    font-size: 11px; font-weight: 600; letter-spacing: .07em;
-    color: var(--text3); text-transform: uppercase;
-  }
+.btn{padding:8px 16px;border-radius:var(--r);border:1px solid var(--border2);background:var(--surface);color:var(--text);font-size:13px;font-weight:500;cursor:pointer;font-family:var(--font);transition:all .13s;white-space:nowrap;-webkit-tap-highlight-color:transparent}
+.btn:hover{background:var(--surf2)}
+.btn-primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn-primary:hover{background:var(--accent2);border-color:var(--accent2)}
+.btn-sm{padding:5px 12px;font-size:11px}
 
-  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-  .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+.progress-track{background:var(--bg3);border-radius:999px;height:7px;overflow:hidden;margin:6px 0}
+.progress-fill{height:100%;border-radius:999px;transition:width .4s}
 
-  /* ── Form controls ── */
-  label { font-size: 12px; color: var(--text2); display: block; margin-bottom: 5px; }
-  .val  { color: var(--text); font-weight: 500; }
+.health-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+.health-label{font-size:12px;color:var(--text2);margin-bottom:4px}
+.health-sub{font-size:10px;color:var(--text3);margin-top:2px}
 
-  input[type=range] {
-    width: 100%; accent-color: var(--accent);
-    cursor: pointer; height: 18px;
-  }
-  select, input[type=text], input[type=number] {
-    width: 100%; padding: 8px 11px;
-    border-radius: var(--radius);
-    border: 1px solid var(--border2);
-    background: var(--bg3);
-    color: var(--text); font-size: 13px;
-    font-family: var(--font);
-    outline: none;
-    transition: border-color .15s;
-  }
-  select:focus, input:focus { border-color: var(--accent); }
-  select option { background: var(--bg3); }
+.funnel-step{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--border)}
+.funnel-step:last-child{border-bottom:none}
+.funnel-label{width:108px;font-size:12px;color:var(--text2);flex-shrink:0}
+.funnel-bar-wrap{flex:1;background:var(--bg3);border-radius:999px;height:20px;overflow:hidden}
+.funnel-bar{height:100%;border-radius:999px;display:flex;align-items:center;padding-right:9px;font-size:11px;color:#fff;font-weight:600;transition:width .6s cubic-bezier(.4,0,.2,1);min-width:4px}
+.funnel-count{width:72px;text-align:left;font-size:13px;font-weight:600;flex-shrink:0}
+.funnel-pct{width:42px;text-align:left;font-size:10px;color:var(--text3);flex-shrink:0}
 
-  /* ── Buttons ── */
-  .btn {
-    padding: 8px 18px;
-    border-radius: var(--radius);
-    border: 1px solid var(--border2);
-    background: var(--surface);
-    color: var(--text); font-size: 13px; font-weight: 500;
-    cursor: pointer; font-family: var(--font);
-    transition: all .15s;
-  }
-  .btn:hover { background: var(--surface2); border-color: rgba(255,255,255,.2); }
-  .btn-primary {
-    background: var(--accent); border-color: var(--accent); color: #fff;
-  }
-  .btn-primary:hover { background: var(--accent2); border-color: var(--accent2); }
-  .btn-sm { padding: 5px 12px; font-size: 12px; }
+.channel-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;margin-bottom:14px}
+.channel-card{border:1px solid var(--border);border-radius:var(--r);padding:12px 13px;cursor:pointer;position:relative;background:var(--bg3);transition:all .13s;-webkit-tap-highlight-color:transparent}
+.channel-card:hover{border-color:var(--border2);background:var(--surface)}
+.channel-card.selected{border-color:var(--accent);background:rgba(124,111,255,.1)}
+.ch-icon{font-size:18px;font-weight:700;margin-bottom:4px;font-family:var(--mono)}
+.ch-name{font-size:13px;font-weight:500;margin-bottom:2px}
+.ch-meta{font-size:10px;color:var(--text3)}
+.ch-check{position:absolute;top:8px;left:9px;color:var(--accent);font-size:12px;display:none}
+.channel-card.selected .ch-check{display:block}
 
-  /* ── Progress ── */
-  .progress-track {
-    background: var(--bg3); border-radius: 999px; height: 7px; overflow: hidden; margin: 6px 0;
-  }
-  .progress-fill { height: 100%; border-radius: 999px; transition: width .4s; }
+.alloc-row{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.alloc-name{width:88px;font-size:12px;color:var(--text2);flex-shrink:0}
+.alloc-bar-wrap{flex:1;background:var(--bg3);border-radius:999px;height:7px;overflow:hidden}
+.alloc-bar{height:100%;border-radius:999px}
+.alloc-amt{width:68px;text-align:left;font-size:12px;font-weight:500;flex-shrink:0}
 
-  /* ── Funnel ── */
-  .funnel-step {
-    display: flex; align-items: center; gap: 14px;
-    padding: 11px 0; border-bottom: 1px solid var(--border);
-  }
-  .funnel-step:last-child { border-bottom: none; }
-  .funnel-label { width: 110px; font-size: 13px; color: var(--text2); }
-  .funnel-bar-wrap { flex: 1; background: var(--bg3); border-radius: 999px; height: 22px; overflow: hidden; }
-  .funnel-bar {
-    height: 100%; border-radius: 999px;
-    display: flex; align-items: center; padding-left: 10px;
-    font-size: 11px; color: #fff; font-weight: 600;
-    transition: width .6s cubic-bezier(.4,0,.2,1);
-    min-width: 4px;
-  }
-  .funnel-count { width: 80px; text-align: right; font-size: 13px; font-weight: 600; color: var(--text); }
-  .funnel-pct   { width: 48px; text-align: right; font-size: 11px; color: var(--text3); }
+.seg-pill{display:inline-block;padding:4px 12px;border-radius:999px;font-size:11px;margin:3px;border:1px solid transparent;font-weight:500;cursor:default}
 
-  /* ── Channels ── */
-  .channel-grid {
-    display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    gap: 10px; margin-bottom: 16px;
-  }
-  .channel-card {
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 12px 14px; cursor: pointer;
-    transition: all .15s; position: relative;
-    background: var(--bg3);
-  }
-  .channel-card:hover { border-color: var(--border2); background: var(--surface); }
-  .channel-card.selected { border-color: var(--accent); background: rgba(124,111,255,.1); }
-  .channel-icon  { font-size: 20px; font-weight: 700; margin-bottom: 5px; font-family: var(--mono); }
-  .channel-name  { font-size: 13px; font-weight: 500; color: var(--text); margin-bottom: 2px; }
-  .channel-meta  { font-size: 11px; color: var(--text3); }
-  .ch-check { position: absolute; top: 8px; right: 10px; color: var(--accent); font-size: 13px; display: none; }
-  .channel-card.selected .ch-check { display: block; }
+.stat-block{background:var(--bg3);border-radius:var(--r);padding:12px;text-align:center}
+.stat-num{font-size:24px;font-weight:600}
+.stat-lbl{font-size:10px;color:var(--text3);margin-top:2px}
 
-  /* ── Segments ── */
-  .seg-pill {
-    display: inline-block; padding: 4px 12px;
-    border-radius: 999px; font-size: 12px; margin: 3px;
-    border: 1px solid transparent; cursor: pointer;
-    transition: all .15s; font-weight: 500;
-  }
+.rate-row{display:flex;justify-content:space-between;align-items:center;font-size:13px;padding:7px 0;border-bottom:1px solid var(--border)}
+.rate-row:last-child{border-bottom:none}
 
-  /* ── Timeline ── */
-  .tl-item { display: flex; gap: 14px; padding-bottom: 16px; }
-  .tl-left  { display: flex; flex-direction: column; align-items: center; }
-  .tl-dot   { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; margin-top: 3px; }
-  .tl-line  { width: 1px; flex: 1; background: var(--border); margin: 6px 0 0 0; }
-  .tl-date  { font-size: 11px; color: var(--text3); margin-bottom: 1px; font-family: var(--mono); }
-  .tl-event { font-size: 13px; color: var(--text2); }
+.tl-item{display:flex;gap:12px;padding-bottom:14px}
+.tl-left{display:flex;flex-direction:column;align-items:center}
+.tl-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;margin-top:3px}
+.tl-line{width:1px;flex:1;background:var(--border);margin:6px 0 0}
+.tl-date{font-size:10px;color:var(--text3);margin-bottom:1px;font-family:var(--mono)}
+.tl-event{font-size:13px;color:var(--text2)}
 
-  /* ── A/B ── */
-  .ab-card { border-radius: var(--radius-lg); padding: 18px; border: 1px solid var(--border); background: var(--bg3); }
-  .ab-winner { border-color: var(--green) !important; background: rgba(30,204,139,.06) !important; }
-  .score-bar { height: 5px; border-radius: 999px; background: var(--bg); margin-top: 5px; overflow: hidden; }
-  .score-fill { height: 100%; border-radius: 999px; background: var(--accent); }
+.ab-card{border-radius:var(--rlg);padding:16px;border:1px solid var(--border);background:var(--bg3)}
+.ab-winner{border-color:var(--green)!important;background:rgba(30,204,139,.06)!important}
+.score-bar{height:5px;border-radius:999px;background:var(--bg);margin-top:5px;overflow:hidden}
+.score-fill{height:100%;border-radius:999px;background:var(--accent)}
 
-  /* ── Log ── */
-  .log {
-    background: var(--bg); border-radius: var(--radius);
-    padding: 12px; font-size: 12px; color: var(--text3);
-    max-height: 130px; overflow-y: auto;
-    font-family: var(--mono); line-height: 1.8;
-    border: 1px solid var(--border);
-  }
-  .log-line { border-bottom: 1px solid var(--border); padding: 2px 0; }
+.log{background:var(--bg);border-radius:var(--r);padding:10px;font-size:12px;color:var(--text3);max-height:130px;overflow-y:auto;font-family:var(--mono);line-height:1.9;border:1px solid var(--border)}
+.log-line{border-bottom:1px solid var(--border);padding:1px 0}
 
-  /* ── Badges ── */
-  .badge {
-    display: inline-block; padding: 3px 9px;
-    border-radius: 999px; font-size: 11px; font-weight: 600;
-  }
-  .badge-green  { background: rgba(30,204,139,.15); color: var(--green); }
-  .badge-amber  { background: rgba(245,166,35,.15);  color: var(--amber); }
-  .badge-blue   { background: rgba(75,156,247,.15);  color: var(--blue); }
-  .badge-red    { background: rgba(240,92,92,.15);   color: var(--red); }
-  .badge-accent { background: rgba(124,111,255,.15); color: var(--accent); }
+.badge{display:inline-block;padding:2px 9px;border-radius:999px;font-size:11px;font-weight:600}
+.badge-green{background:rgba(30,204,139,.15);color:var(--green)}
+.badge-amber{background:rgba(245,166,35,.15);color:var(--amber)}
+.badge-blue{background:rgba(75,156,247,.15);color:var(--blue)}
+.badge-accent{background:rgba(124,111,255,.15);color:var(--accent)}
 
-  /* ── Recommendations ── */
-  .rec {
-    display: flex; align-items: flex-start; gap: 10px;
-    padding: 12px 14px; border-radius: var(--radius);
-    margin-bottom: 8px; font-size: 13px;
-  }
-  .rec-green  { background: rgba(30,204,139,.08);  color: #7ae8c2; border-left: 3px solid var(--green); }
-  .rec-amber  { background: rgba(245,166,35,.08);  color: #f5c97a; border-left: 3px solid var(--amber); }
-  .rec-blue   { background: rgba(75,156,247,.08);  color: #9bc8fb; border-left: 3px solid var(--blue); }
+.rec{display:flex;align-items:flex-start;gap:10px;padding:11px 13px;border-radius:var(--r);margin-bottom:8px;font-size:13px}
+.rec-green{background:rgba(30,204,139,.08);color:#7ae8c2;border-right:3px solid var(--green);border-left:none}
+.rec-amber{background:rgba(245,166,35,.08);color:#f5c97a;border-right:3px solid var(--amber);border-left:none}
+.rec-blue{background:rgba(75,156,247,.08);color:#9bc8fb;border-right:3px solid var(--blue);border-left:none}
 
-  /* ── Chart wrapper ── */
-  .chart-wrap { position: relative; width: 100%; height: 200px; }
-  .chart-wrap-lg { position: relative; width: 100%; height: 240px; }
+.chart-wrap{position:relative;width:100%;height:190px}
+.chart-wrap-lg{position:relative;width:100%;height:220px}
 
-  /* ── Custom legend ── */
-  .legend { display: flex; flex-wrap: wrap; gap: 14px; margin-bottom: 10px; }
-  .legend-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text2); }
-  .legend-swatch { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; }
+.legend{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:10px}
+.legend-item{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--text2)}
+.legend-swatch{width:10px;height:10px;border-radius:2px;flex-shrink:0}
 
-  /* ── Health bars ── */
-  .health-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
-  .health-item { }
-  .health-label { font-size: 12px; color: var(--text2); margin-bottom: 4px; }
-  .health-sub   { font-size: 11px; color: var(--text3); margin-top: 2px; }
+.result-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
 
-  /* ── Alloc row ── */
-  .alloc-row {
-    display: flex; align-items: center; gap: 10px; margin-bottom: 8px;
-  }
-  .alloc-name { width: 90px; font-size: 12px; color: var(--text2); }
-  .alloc-bar-wrap { flex: 1; background: var(--bg3); border-radius: 999px; height: 7px; overflow: hidden; }
-  .alloc-bar  { height: 100%; border-radius: 999px; }
-  .alloc-amt  { width: 72px; text-align: right; font-size: 12px; font-weight: 500; color: var(--text); }
+/* ══ TABLET 641–1024px ══ */
+@media(max-width:1024px)and(min-width:641px){
+  :root{--sidebar-w:190px}
+  .content{padding:18px}
+  .topbar{padding:0 18px}
+  .metrics{grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:8px}
+  .metric-value{font-size:20px}
+  .grid3{grid-template-columns:1fr 1fr}
+  .health-row{grid-template-columns:1fr 1fr;gap:10px}
+  .channel-grid{grid-template-columns:repeat(auto-fill,minmax(130px,1fr))}
+  .funnel-label{width:90px}
+  .funnel-count{width:60px}
+  .funnel-pct{display:none}
+  .chart-wrap{height:170px}
+  .chart-wrap-lg{height:200px}
+}
 
-  /* ── Stat block ── */
-  .stat-block {
-    background: var(--bg3); border-radius: var(--radius);
-    padding: 12px; text-align: center;
-  }
-  .stat-num { font-size: 28px; font-weight: 600; }
-  .stat-lbl { font-size: 11px; color: var(--text3); margin-top: 2px; }
+/* ══ MOBILE ≤640px ══ */
+@media(max-width:640px){
+  .sidebar{transform:translateX(100%);width:240px;box-shadow:-4px 0 24px rgba(0,0,0,.5);left:auto;right:0}
+  .sidebar.open{transform:translateX(0)}
+  .main{margin-right:0}
+  .topbar{padding:0 12px;height:52px}
+  .hamburger{display:flex;margin-left:4px;margin-right:0}
+  .page-sub{display:none}
+  .page-title{font-size:14px}
+  .topbar-right .btn-sm:not(.btn-primary){display:none}
+  .mobile-nav{display:flex;flex-direction:column}
+  .content{padding:14px 12px calc(var(--mobnav-h) + 20px)}
+  .metrics{grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:14px}
+  .metric{padding:11px 12px}
+  .metric-value{font-size:18px}
+  .metric-delta{font-size:10px}
+  .card{padding:13px 13px;border-radius:var(--r)}
+  .grid2,.grid3{grid-template-columns:1fr;gap:12px}
+  .health-row{grid-template-columns:1fr;gap:10px}
+  .funnel-label{width:80px;font-size:11px}
+  .funnel-count{width:52px;font-size:12px}
+  .funnel-pct{display:none}
+  .funnel-bar{font-size:10px}
+  .channel-grid{grid-template-columns:repeat(2,1fr);gap:8px}
+  .ch-name{font-size:12px}
+  .chart-wrap{height:155px}
+  .chart-wrap-lg{height:175px}
+  .ab-row{display:flex!important;flex-direction:column;gap:10px}
+  #aud-size{font-size:36px!important}
+  #aud-reach{font-size:26px!important}
+  .seg-stats-grid{grid-template-columns:1fr!important}
+  .result-actions .btn{flex:1;min-width:100px;text-align:center;justify-content:center}
+}
 
-  /* ── Rate rows ── */
-  .rate-row {
-    display: flex; justify-content: space-between; align-items: center;
-    font-size: 13px; padding: 7px 0; border-bottom: 1px solid var(--border);
-  }
-  .rate-row:last-child { border-bottom: none; }
-
-  /* ── Scrollbar ── */
-  ::-webkit-scrollbar { width: 5px; height: 5px; }
-  ::-webkit-scrollbar-track { background: transparent; }
-  ::-webkit-scrollbar-thumb { background: var(--surface2); border-radius: 99px; }
-
-  @media (max-width: 768px) {
-    .sidebar { display: none; }
-    .grid2, .grid3 { grid-template-columns: 1fr; }
-    .content { padding: 16px; }
-    .health-row { grid-template-columns: 1fr; }
-  }
-
+@media(max-width:360px){
+  .metrics{grid-template-columns:1fr 1fr}
+  .metric-value{font-size:16px}
+  .channel-grid{grid-template-columns:repeat(2,1fr)}
+  .funnel-label{width:68px;font-size:10px}
+}
 </style>
 </head>
 <body>
 
+<div class="sidebar-overlay" id="sidebar-overlay" onclick="closeSidebar()"></div>
 
 <div class="app">
 
-  <!-- Sidebar -->
-  <aside class="sidebar">
+  <!-- ── Sidebar ── -->
+  <aside class="sidebar" id="sidebar">
     <div class="logo">
-      <div class="logo-mark">C</div>
-      <div class="logo-name">محاكي الحملات</div>
-      <div class="logo-sub">حزمة الذكاء التسويقي</div>
+      <a href="/" style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 10px;">
+        <div class="logo-mark" style="background: #3B82F6; font-weight: 800;">A</div>
+        <div style="text-align: right;">
+          <div class="logo-name"><span style="color: #3B82F6;">A</span><span style="color: #EF4444;">I</span> Profit Lab</div>
+          <div class="logo-sub">محاكي عائد الاستثمار</div>
+        </div>
+      </a>
     </div>
     <nav class="nav">
       <div class="nav-label">الحملة</div>
-      <div class="nav-item active" onclick="switchTab('setup',this)"><span class="nav-icon">⚙</span>الإعداد</div>
-      <div class="nav-item" onclick="switchTab('channels',this)"><span class="nav-icon">📡</span>القنوات</div>
-      <div class="nav-item" onclick="switchTab('audience',this)"><span class="nav-icon">🎯</span>الجمهور</div>
+      <div class="nav-item active" data-tab="setup"    onclick="switchTab('setup',this)"><span class="nav-icon">⚙</span>الإعداد</div>
+      <div class="nav-item"        data-tab="channels" onclick="switchTab('channels',this)"><span class="nav-icon">📡</span>القنوات</div>
+      <div class="nav-item"        data-tab="audience" onclick="switchTab('audience',this)"><span class="nav-icon">🎯</span>الجمهور</div>
       <div class="nav-label">التنفيذ</div>
-      <div class="nav-item" onclick="switchTab('funnel',this)"><span class="nav-icon">▽</span>المسار</div>
-      <div class="nav-item" onclick="switchTab('ab',this)"><span class="nav-icon">⚖</span>اختبار أ/ب</div>
+      <div class="nav-item"        data-tab="funnel"   onclick="switchTab('funnel',this)"><span class="nav-icon">▽</span>المسار</div>
+      <div class="nav-item"        data-tab="ab"       onclick="switchTab('ab',this)"><span class="nav-icon">⚖</span>اختبار A/B</div>
       <div class="nav-label">التحليل</div>
-      <div class="nav-item" onclick="switchTab('results',this)"><span class="nav-icon">📊</span>النتائج</div>
+      <div class="nav-item"        data-tab="results"  onclick="switchTab('results',this)"><span class="nav-icon">📊</span>النتائج</div>
     </nav>
-    <div class="sidebar-footer">
-      محاكي الحملات v1.0<br>
-      جميع التوقعات تقريبية
-    </div>
+    <div class="sidebar-footer">© 2025 AI Profit Lab · مسقط، عُمان</div>
   </aside>
 
-  <!-- Main content -->
+  <!-- ── Main ── -->
   <div class="main">
+
     <div class="topbar">
-      <div>
+      <button class="hamburger" onclick="toggleSidebar()" aria-label="Open menu">☰</button>
+      <div class="topbar-left">
         <div class="page-title" id="page-title">إعداد الحملة</div>
-        <div class="page-sub" id="page-sub">ضبط معاملات الحملة</div>
+        <div class="page-sub"   id="page-sub">تكوين معاملات حملتك</div>
       </div>
-      <div class="topbar-actions">
+      <div class="topbar-right">
         <button class="btn btn-sm" onclick="resetSim()">↺ إعادة تعيين</button>
-        <button class="btn btn-sm btn-primary" onclick="switchTab('results', document.querySelectorAll('.nav-item')[5])">← عرض النتائج</button>
+        <button class="btn btn-sm btn-primary" onclick="switchTab('results')">النتائج ←</button>
       </div>
     </div>
 
@@ -437,74 +351,42 @@
 
       <!-- ═══ SETUP ═══ -->
       <div id="tab-setup" class="section active">
-        <div class="metrics" id="setup-metrics">
-          <div class="metric">
-            <div class="metric-label">الميزانية</div>
-            <div class="metric-value" id="m-budget">$10,000</div>
-          </div>
-          <div class="metric">
-            <div class="metric-label">المدة</div>
-            <div class="metric-value" id="m-duration">30d</div>
-          </div>
-          <div class="metric">
-            <div class="metric-label">العملاء المستهدفون</div>
-            <div class="metric-value" id="m-leads">1,250</div>
-          </div>
-          <div class="metric">
-            <div class="metric-label">الإيرادات المتوقعة</div>
-            <div class="metric-value" id="m-rev">$37,500</div>
-          </div>
-          <div class="metric">
-            <div class="metric-label">العائد المتوقع</div>
-            <div class="metric-value up" id="m-roi">275%</div>
-          </div>
+        <div class="metrics">
+          <div class="metric"><div class="metric-label">الميزانية</div><div class="metric-value" id="m-budget">$10,000</div></div>
+          <div class="metric"><div class="metric-label">المدة</div><div class="metric-value" id="m-duration">30 يوماً</div></div>
+          <div class="metric"><div class="metric-label">العملاء المستهدفون</div><div class="metric-value" id="m-leads">1,250</div></div>
+          <div class="metric"><div class="metric-label">الإيرادات المقدرة</div><div class="metric-value" id="m-rev">$37,500</div></div>
+          <div class="metric"><div class="metric-label">العائد المتوقع</div><div class="metric-value up" id="m-roi">275%</div></div>
         </div>
 
         <div class="grid2">
           <div class="card">
             <div class="card-title">أساسيات الحملة</div>
-            <div style="display:flex;flex-direction:column;gap:14px">
-              <div>
-                <label>اسم الحملة</label>
-                <input type="text" id="camp-name" value="إطلاق الربيع 2025">
-              </div>
-              <div>
-                <label>نوع الحملة</label>
+            <div style="display:flex;flex-direction:column;gap:13px">
+              <div><label>اسم الحملة</label><input type="text" id="camp-name" value="إطلاق الربيع 2025"></div>
+              <div><label>نوع الحملة</label>
                 <select id="camp-type" onchange="updateSetup()">
-                  <option>الوعي بالعلامة التجارية</option>
-                  <option>توليد العملاء المحتملين</option>
-                  <option selected>إطلاق منتج</option>
-                  <option>الاحتفاظ بالعملاء</option>
-                  <option>عرض موسمي</option>
+                  <option>الوعي بالعلامة التجارية</option><option>توليد العملاء المحتملين</option>
+                  <option selected>إطلاق منتج</option><option>الاحتفاظ بالعملاء</option><option>عرض موسمي</option>
                 </select>
               </div>
-              <div>
-                <label>الهدف الرئيسي</label>
+              <div><label>الهدف الرئيسي</label>
                 <select id="camp-goal" onchange="updateSetup()">
-                  <option>تعظيم الوصول</option>
-                  <option selected>تعظيم التحويلات</option>
-                  <option>تعظيم الإيرادات</option>
-                  <option>تقليل تكلفة العميل</option>
+                  <option>تعظيم الوصول</option><option selected>تعظيم التحويلات</option>
+                  <option>تعظيم الإيرادات</option><option>تقليل تكلفة العميل</option>
                 </select>
               </div>
             </div>
           </div>
-
           <div class="card">
             <div class="card-title">الميزانية والجدول الزمني</div>
-            <div style="display:flex;flex-direction:column;gap:16px">
-              <div>
-                <label>إجمالي الميزانية — <span class="val" id="budget-val">$10,000</span></label>
-                <input type="range" min="1000" max="100000" step="500" value="10000" id="budget" oninput="updateSetup()">
-              </div>
-              <div>
-                <label>المدة — <span class="val" id="dur-val">30 أيام</span></label>
-                <input type="range" min="7" max="90" step="1" value="30" id="duration" oninput="updateSetup()">
-              </div>
-              <div>
-                <label>متوسط قيمة الصفقة — <span class="val" id="deal-val">$200</span></label>
-                <input type="range" min="10" max="5000" step="10" value="200" id="dealsize" oninput="updateSetup()">
-              </div>
+            <div style="display:flex;flex-direction:column;gap:15px">
+              <div><label>إجمالي الميزانية — <span class="val" id="budget-val">$10,000</span></label>
+                <input type="range" min="1000" max="100000" step="500" value="10000" id="budget" oninput="updateSetup()"></div>
+              <div><label>المدة — <span class="val" id="dur-val">30 يوماً</span></label>
+                <input type="range" min="7" max="90" step="1" value="30" id="duration" oninput="updateSetup()"></div>
+              <div><label>متوسط قيمة الصفقة — <span class="val" id="deal-val">$200</span></label>
+                <input type="range" min="10" max="5000" step="10" value="200" id="dealsize" oninput="updateSetup()"></div>
             </div>
           </div>
         </div>
@@ -512,25 +394,19 @@
         <div class="card">
           <div class="card-title">مؤشرات صحة الحملة</div>
           <div class="health-row">
-            <div class="health-item">
+            <div>
               <div class="health-label">كفاية الميزانية</div>
-              <div class="progress-track">
-                <div class="progress-fill" id="ph-budget" style="width:65%;background:var(--accent)"></div>
-              </div>
-              <div class="health-sub" id="ph-budget-lbl">Adequate for 30 أيام</div>
+              <div class="progress-track"><div class="progress-fill" id="ph-budget" style="width:65%;background:var(--accent)"></div></div>
+              <div class="health-sub" id="ph-budget-lbl">كافية للمدة المختارة</div>
             </div>
-            <div class="health-item">
+            <div>
               <div class="health-label">جدوى الجدول الزمني</div>
-              <div class="progress-track">
-                <div class="progress-fill" id="ph-time" style="width:80%;background:var(--green)"></div>
-              </div>
-              <div class="health-sub" id="ph-time-lbl">مدة مناسبة</div>
+              <div class="progress-track"><div class="progress-fill" id="ph-time" style="width:80%;background:var(--green)"></div></div>
+              <div class="health-sub" id="ph-time-lbl">مدة جيدة للنتائج</div>
             </div>
-            <div class="health-item">
+            <div>
               <div class="health-label">إمكانية العائد</div>
-              <div class="progress-track">
-                <div class="progress-fill" id="ph-roi" style="width:70%;background:var(--amber)"></div>
-              </div>
+              <div class="progress-track"><div class="progress-fill" id="ph-roi" style="width:70%;background:var(--amber)"></div></div>
               <div class="health-sub" id="ph-roi-lbl">إمكانية قوية</div>
             </div>
           </div>
@@ -541,22 +417,20 @@
       <div id="tab-channels" class="section">
         <div class="card">
           <div class="card-header">
-            <div class="card-title">اختر القنوات</div>
+            <div class="card-title" style="margin:0">اختر القنوات</div>
             <span class="badge badge-accent" id="ch-count">3 مختارة</span>
           </div>
           <div class="channel-grid" id="channel-grid"></div>
-          <div style="font-size:12px;color:var(--text3)">يتم تقسيم الميزانية بالتساوي بين القنوات المختارة. انقر للتبديل.</div>
+          <div style="font-size:11px;color:var(--text3)">تُقسم الميزانية بالتساوي بين القنوات المختارة. انقر للتبديل.</div>
         </div>
-
         <div class="card">
           <div class="card-title">توزيع الميزانية</div>
           <div id="channel-alloc"></div>
         </div>
-
         <div class="card">
-          <div class="card-title">الوصول المتوقع لكل قناة</div>
+          <div class="card-title">الوصول المقدر لكل قناة</div>
           <div class="legend" id="ch-legend"></div>
-          <div class="chart-wrap-lg"><canvas id="channel-chart" role="img" aria-label="مخطط شريطي للوصول المتوقع لكل قناة">الوصول المتوقع لكل قناة</canvas></div>
+          <div class="chart-wrap-lg"><canvas id="channel-chart" role="img" aria-label="مخطط شريطي للوصول المقدر لكل قناة">الوصول المقدر لكل قناة</canvas></div>
         </div>
       </div>
 
@@ -565,59 +439,48 @@
         <div class="grid2">
           <div class="card">
             <div class="card-title">معاملات الاستهداف</div>
-            <div style="display:flex;flex-direction:column;gap:16px">
+            <div style="display:flex;flex-direction:column;gap:14px">
               <div>
                 <label>الفئة العمرية — <span class="val" id="age-val">25 – 44</span></label>
                 <input type="range" min="18" max="65" step="1" value="25" id="age-min" oninput="updateAudience()">
-                <input type="range" min="18" max="65" step="1" value="44" id="age-max" oninput="updateAudience()" style="margin-top:4px">
+                <input type="range" min="18" max="65" step="1" value="44" id="age-max" oninput="updateAudience()" style="margin-top:5px">
               </div>
-              <div>
-                <label>الجغرافيا</label>
+              <div><label>الجغرافيا</label>
                 <select id="geo" onchange="updateAudience()">
-                  <option>عالمي</option><option selected>وطني</option>
-                  <option>إقليمي</option><option>محلي (مدينة)</option>
+                  <option>عالمي</option><option selected>وطني</option><option>إقليمي</option><option>محلي (مدينة)</option>
                 </select>
               </div>
-              <div>
-                <label>شريحة الدخل</label>
+              <div><label>شريحة الدخل</label>
                 <select id="income" onchange="updateAudience()">
-                  <option>الكل</option><option>أقل من 50,000$</option>
-                  <option selected>50,000$–100,000$</option>
-                  <option>100,000$–200,000$</option><option>200,000$+</option>
+                  <option>الكل</option><option>أقل من $50k</option><option selected>$50k–$100k</option><option>$100k–$200k</option><option>$200k+</option>
                 </select>
               </div>
-              <div>
-                <label>التركيز الصناعي</label>
+              <div><label>التركيز الصناعي</label>
                 <select id="industry" onchange="updateAudience()">
-                  <option selected>جميع الصناعات</option><option>التكنولوجيا</option>
-                  <option>الرعاية الصحية</option><option>المالية</option>
-                  <option>التجزئة</option><option>التعليم</option>
+                  <option selected>جميع الصناعات</option><option>التكنولوجيا</option><option>الرعاية الصحية</option>
+                  <option>المالية</option><option>التجزئة</option><option>التعليم</option>
                 </select>
               </div>
             </div>
           </div>
-
           <div class="card" style="text-align:center">
             <div class="card-title">تقدير حجم الجمهور</div>
-            <div style="padding:16px 0">
-              <div style="font-size:48px;font-weight:700;color:var(--accent)" id="aud-size">2.4M</div>
-              <div style="font-size:13px;color:var(--text3);margin-top:4px;margin-bottom:20px">الجمهور المستهدف المقدر</div>
-              <div style="background:var(--bg3);border-radius:var(--radius);padding:14px;margin-bottom:10px">
-                <div style="font-size:11px;color:var(--text3);margin-bottom:4px">قابل للوصول بالميزانية</div>
-                <div style="font-size:32px;font-weight:600;color:var(--green)" id="aud-reach">48,000</div>
+            <div style="padding:12px 0">
+              <div style="font-size:44px;font-weight:700;color:var(--accent)" id="aud-size">2.4M</div>
+              <div style="font-size:12px;color:var(--text3);margin-top:3px;margin-bottom:16px">الجمهور المستهدف المقدر</div>
+              <div style="background:var(--bg3);border-radius:var(--r);padding:14px;margin-bottom:10px">
+                <div style="font-size:10px;color:var(--text3);margin-bottom:4px;letter-spacing:.06em">قابل للوصول بالميزانية</div>
+                <div style="font-size:30px;font-weight:600;color:var(--green)" id="aud-reach">48,000</div>
                 <div style="font-size:12px;color:var(--text3)" id="aud-pct">2.0% من الجمهور</div>
               </div>
-              <div style="font-size:12px;color:var(--text3)">
-                الوصول اليومي: <span style="color:var(--text);font-weight:500" id="aud-daily">1,600</span>
-              </div>
+              <div style="font-size:12px;color:var(--text3)">الوصول اليومي: <span style="color:var(--text);font-weight:500" id="aud-daily">1,600</span></div>
             </div>
           </div>
         </div>
-
         <div class="card">
           <div class="card-title">شرائح الجمهور</div>
           <div id="segments-wrap" style="margin-bottom:14px"></div>
-          <div class="grid3" id="seg-stats"></div>
+          <div class="grid3 seg-stats-grid" id="seg-stats"></div>
         </div>
       </div>
 
@@ -627,36 +490,25 @@
           <div class="card-title">مسار التحويل</div>
           <div id="funnel-steps"></div>
         </div>
-
         <div class="grid2">
           <div class="card">
-            <div class="card-title">روافع تحسين المسار</div>
-            <div style="display:flex;flex-direction:column;gap:14px">
-              <div>
-                <label>جودة الصفحة المقصودة — <span class="val" id="lp-val">Good</span></label>
-                <input type="range" min="1" max="5" step="1" value="3" id="lp-q" oninput="updateFunnel()">
-              </div>
-              <div>
-                <label>سلسلة البريد الإلكتروني — <span class="val" id="em-val">3 emails</span></label>
-                <input type="range" min="1" max="10" step="1" value="3" id="em-seq" oninput="updateFunnel()">
-              </div>
-              <div>
-                <label>قوة العرض — <span class="val" id="offer-val">Medium</span></label>
-                <input type="range" min="1" max="5" step="1" value="3" id="offer-s" oninput="updateFunnel()">
-              </div>
-              <div>
-                <label>إعادة الاستهداف — <span class="val" id="ret-val">Enabled</span></label>
-                <input type="range" min="0" max="1" step="1" value="1" id="retarget" oninput="updateFunnel()">
-              </div>
+            <div class="card-title">روافع التحسين</div>
+            <div style="display:flex;flex-direction:column;gap:13px">
+              <div><label>جودة الصفحة المقصودة — <span class="val" id="lp-val">جيدة</span></label>
+                <input type="range" min="1" max="5" step="1" value="3" id="lp-q" oninput="updateFunnel()"></div>
+              <div><label>تسلسل البريد الإلكتروني — <span class="val" id="em-val">3 رسائل</span></label>
+                <input type="range" min="1" max="10" step="1" value="3" id="em-seq" oninput="updateFunnel()"></div>
+              <div><label>قوة العرض — <span class="val" id="offer-val">متوسط</span></label>
+                <input type="range" min="1" max="5" step="1" value="3" id="offer-s" oninput="updateFunnel()"></div>
+              <div><label>إعادة الاستهداف — <span class="val" id="ret-val">مفعل</span></label>
+                <input type="range" min="0" max="1" step="1" value="1" id="retarget" oninput="updateFunnel()"></div>
             </div>
           </div>
-
           <div class="card">
-            <div class="card-title">معدلات التحويل</div>
+            <div class="card-title">معدلات التحويل للمراحل</div>
             <div id="conv-rates"></div>
           </div>
         </div>
-
         <div class="card">
           <div class="card-title">الجدول الزمني للحملة</div>
           <div id="timeline"></div>
@@ -666,33 +518,20 @@
       <!-- ═══ A/B TESTING ═══ -->
       <div id="tab-ab" class="section">
         <div class="metrics">
-          <div class="metric">
-            <div class="metric-label">الثقة</div>
-            <div class="metric-value" id="ab-conf">87%</div>
-          </div>
-          <div class="metric">
-            <div class="metric-label">حجم العينة</div>
-            <div class="metric-value" id="ab-sample">5,200</div>
-          </div>
-          <div class="metric">
-            <div class="metric-label">مدة الاختبار</div>
-            <div class="metric-value" id="ab-dur">14d</div>
-          </div>
-          <div class="metric">
-            <div class="metric-label">التحسن (ب مقابل أ)</div>
-            <div class="metric-value up" id="ab-uplift">+18%</div>
-          </div>
+          <div class="metric"><div class="metric-label">الثقة</div><div class="metric-value" id="ab-conf">87%</div></div>
+          <div class="metric"><div class="metric-label">حجم العينة</div><div class="metric-value" id="ab-sample">5,200</div></div>
+          <div class="metric"><div class="metric-label">مدة الاختبار</div><div class="metric-value" id="ab-dur">14 يوماً</div></div>
+          <div class="metric"><div class="metric-label">التحسن (ب مقابل أ)</div><div class="metric-value up" id="ab-uplift">+18%</div></div>
         </div>
-
-        <div class="grid2" style="margin-bottom:16px">
-          <div class="ab-card" id="ab-a-card">
+        <div class="ab-row grid2">
+          <div class="ab-card">
             <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
               <div style="font-size:14px;font-weight:600">النسخة أ — التحكم</div>
               <span class="badge badge-blue">جارٍ</span>
             </div>
             <div id="ab-a-stats"></div>
           </div>
-          <div class="ab-card ab-winner" id="ab-b-card">
+          <div class="ab-card ab-winner">
             <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
               <div style="font-size:14px;font-weight:600">النسخة ب — الاختبار</div>
               <span class="badge badge-green">فائز ✓</span>
@@ -700,29 +539,21 @@
             <div id="ab-b-stats"></div>
           </div>
         </div>
-
-        <div class="card">
+        <div class="card" style="margin-top:14px">
           <div class="card-title">إعداد الاختبار</div>
           <div class="grid3">
-            <div>
-              <label>المتغير المراد اختباره</label>
+            <div><label>المتغير المراد اختباره</label>
               <select id="ab-var" onchange="updateAB()">
-                <option>نص العنوان</option><option selected>زر الدعوة للعمل</option>
-                <option>الصورة الرئيسية</option><option>عرض الأسعار</option>
-                <option>موضوع البريد</option>
+                <option>نص العنوان</option><option selected>زر الدعوة للعمل (CTA)</option>
+                <option>الصورة الرئيسية</option><option>عرض السعر</option><option>موضوع البريد</option>
               </select>
             </div>
-            <div>
-              <label>توزيع الزيارات — <span class="val" id="ab-split-val">50 / 50</span></label>
-              <input type="range" min="10" max="50" step="5" value="50" id="ab-split" oninput="updateAB()">
-            </div>
-            <div>
-              <label>مدة الاختبار — <span class="val" id="ab-dur-val">14 أيام</span></label>
-              <input type="range" min="3" max="30" step="1" value="14" id="ab-dur-in" oninput="updateAB()">
-            </div>
+            <div><label>تقسيم الزيارات — <span class="val" id="ab-split-val">50 / 50</span></label>
+              <input type="range" min="10" max="50" step="5" value="50" id="ab-split" oninput="updateAB()"></div>
+            <div><label>المدة — <span class="val" id="ab-dur-val">14 يوماً</span></label>
+              <input type="range" min="3" max="30" step="1" value="14" id="ab-dur-in" oninput="updateAB()"></div>
           </div>
         </div>
-
         <div class="card">
           <div class="card-title">سجل النشاط</div>
           <div class="log" id="ab-log"></div>
@@ -732,63 +563,36 @@
       <!-- ═══ RESULTS ═══ -->
       <div id="tab-results" class="section">
         <div class="metrics">
-          <div class="metric">
-            <div class="metric-label">إجمالي الوصول</div>
-            <div class="metric-value" id="r-reach">48,200</div>
-            <div class="metric-delta up">↑ في المسار</div>
-          </div>
-          <div class="metric">
-            <div class="metric-label">العملاء المحتملون</div>
-            <div class="metric-value" id="r-leads">963</div>
-            <div class="metric-delta up">↑ 14% فوق الهدف</div>
-          </div>
-          <div class="metric">
-            <div class="metric-label">التحويلات</div>
-            <div class="metric-value" id="r-conv">144</div>
-            <div class="metric-delta" id="r-conv-rate">معدل تحويل 15%</div>
-          </div>
-          <div class="metric">
-            <div class="metric-label">الإيرادات</div>
-            <div class="metric-value" id="r-rev">$28,800</div>
-            <div class="metric-delta up">↑ 6.7% مقابل التوقعات</div>
-          </div>
-          <div class="metric">
-            <div class="metric-label">ROI</div>
-            <div class="metric-value up" id="r-roi">188%</div>
-            <div class="metric-delta up">↑ 18 نقطة مقابل الخطة</div>
-          </div>
-          <div class="metric">
-            <div class="metric-label">تكلفة العميل المحتمل</div>
-            <div class="metric-value" id="r-cpl">$10.39</div>
-            <div class="metric-delta up">أقل من المستهدف</div>
-          </div>
+          <div class="metric"><div class="metric-label">إجمالي الوصول</div><div class="metric-value" id="r-reach">48,200</div><div class="metric-delta up">↑ ضمن الهدف</div></div>
+          <div class="metric"><div class="metric-label">العملاء المحتملون</div><div class="metric-value" id="r-leads">963</div><div class="metric-delta up">↑ 14% فوق الهدف</div></div>
+          <div class="metric"><div class="metric-label">التحويلات</div><div class="metric-value" id="r-conv">144</div><div class="metric-delta" id="r-conv-rate">15% معدل</div></div>
+          <div class="metric"><div class="metric-label">الإيرادات</div><div class="metric-value" id="r-rev">$28,800</div><div class="metric-delta up">↑ 6.7% مقابل التقدير</div></div>
+          <div class="metric"><div class="metric-label">ROI</div><div class="metric-value up" id="r-roi">188%</div><div class="metric-delta up">↑ 18 نقطة فوق الخطة</div></div>
+          <div class="metric"><div class="metric-label">تكلفة العميل</div><div class="metric-value" id="r-cpl">$10.39</div><div class="metric-delta up">أقل من المستهدف</div></div>
         </div>
-
         <div class="grid2">
           <div class="card">
             <div class="card-title">الأداء الأسبوعي</div>
             <div class="legend">
-              <div class="legend-item"><div class="legend-swatch" style="background:var(--accent)"></div>Leads</div>
-              <div class="legend-item"><div class="legend-swatch" style="background:var(--green);border-style:dashed"></div>التحويلات</div>
+              <div class="legend-item"><div class="legend-swatch" style="background:var(--accent)"></div>العملاء المحتملون</div>
+              <div class="legend-item"><div class="legend-swatch" style="background:var(--green)"></div>التحويلات</div>
             </div>
-            <div class="chart-wrap"><canvas id="results-chart" role="img" aria-label="مخطط خطي للعملاء والتحويلات الأسبوعية">العملاء والتحويلات الأسبوعية</canvas></div>
+            <div class="chart-wrap"><canvas id="results-chart" role="img" aria-label="مخطط خطي للعملاء المحتملين والتحويلات الأسبوعية">الأداء الأسبوعي</canvas></div>
           </div>
           <div class="card">
-            <div class="card-title">مساهمة العملاء لكل قناة</div>
-            <div class="chart-wrap" style="height:190px"><canvas id="contrib-chart" role="img" aria-label="مخطط دائري لنسبة العملاء لكل قناة">توزيع مساهمة القنوات</canvas></div>
+            <div class="card-title">مساهمة القنوات</div>
+            <div class="chart-wrap" style="height:175px"><canvas id="contrib-chart" role="img" aria-label="مخطط دائري لمساهمة القنوات في العملاء المحتملين">توزيع القنوات</canvas></div>
             <div class="legend" id="contrib-legend" style="margin-top:10px;margin-bottom:0"></div>
           </div>
         </div>
-
         <div class="card">
-          <div class="card-title">توصيات الذكاء الاصطناعي</div>
+          <div class="card-title">التوصيات</div>
           <div id="recommendations"></div>
         </div>
-
-        <div style="margin-top:16px;display:flex;gap:8px;flex-wrap:wrap">
-          <button class="btn btn-primary" onclick="alert('في التطوير الكامل سيتصل هذا بمساعد ذكاء اصطناعي. أضف مفتاح API لتفعيل هذه الميزة.')">← احصل على رؤى الذكاء الاصطناعي</button>
+        <div class="result-actions">
+          <button class="btn btn-primary" onclick="alert('قم بتوصيل مفتاح AI API الخاص بك لتمكين الرؤى في الوقت الفعلي.')">احصل على رؤى الذكاء الاصطناعي ←</button>
           <button class="btn" onclick="window.print()">تصدير التقرير</button>
-          <button class="btn" onclick="resetSim()">↺ تشغيل حملة أخرى</button>
+          <button class="btn" onclick="resetSim()">↺ حملة جديدة</button>
         </div>
       </div>
 
@@ -796,435 +600,314 @@
   </div><!-- /main -->
 </div><!-- /app -->
 
+<!-- ── Mobile bottom nav ── -->
+<nav class="mobile-nav" role="navigation" aria-label="Main navigation">
+  <div class="mobile-nav-inner">
+    <div class="mob-tab active" data-tab="setup"    onclick="switchTab('setup')"><span class="mob-tab-icon">⚙</span><span class="mob-tab-label">إعداد</span></div>
+    <div class="mob-tab"        data-tab="channels" onclick="switchTab('channels')"><span class="mob-tab-icon">📡</span><span class="mob-tab-label">القنوات</span></div>
+    <div class="mob-tab"        data-tab="audience" onclick="switchTab('audience')"><span class="mob-tab-icon">🎯</span><span class="mob-tab-label">الجمهور</span></div>
+    <div class="mob-tab"        data-tab="funnel"   onclick="switchTab('funnel')"><span class="mob-tab-icon">▽</span><span class="mob-tab-label">المسار</span></div>
+    <div class="mob-tab"        data-tab="ab"       onclick="switchTab('ab')"><span class="mob-tab-icon">⚖</span><span class="mob-tab-label">A/B</span></div>
+    <div class="mob-tab"        data-tab="results"  onclick="switchTab('results')"><span class="mob-tab-icon">📊</span><span class="mob-tab-label">النتائج</span></div>
+  </div>
+</nav>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <script>
-/* ─── Data ─── */
-const CHANNELS = [
-  {name:'إعلانات جوجل',  icon:'G',  cpc:2.5,  reach:15000, color:'#4b9cf7'},
-  {name:'إعلانات ميتا',    icon:'M',  cpc:1.8,  reach:22000, color:'#7c6fff'},
-  {name:'لينكد إن',    icon:'Li', cpc:6.0,  reach:5000,  color:'#2dd4bf'},
-  {name:'البريد الإلكتروني',       icon:'@',  cpc:0.3,  reach:12000, color:'#1ecc8b'},
-  {name:'تحسين محركات البحث', icon:'S',  cpc:0.5,  reach:8000,  color:'#f5a623'},
-  {name:'المؤثرون',  icon:'I',  cpc:4.0,  reach:18000, color:'#d45fa0'},
-  {name:'يوتيوب',     icon:'▶',  cpc:3.2,  reach:10000, color:'#f05c5c'},
-  {name:'الرسائل النصية',         icon:'~',  cpc:0.8,  reach:6000,  color:'#a78bfa'},
+const CHANNELS=[
+  {name:'إعلانات جوجل', icon:'G',  cpc:2.5, reach:15000,color:'#4b9cf7'},
+  {name:'إعلانات ميتا',   icon:'M',  cpc:1.8, reach:22000,color:'#7c6fff'},
+  {name:'لينكد إن',   icon:'Li', cpc:6.0, reach:5000, color:'#2dd4bf'},
+  {name:'البريد الإلكتروني',      icon:'@',  cpc:0.3, reach:12000,color:'#1ecc8b'},
+  {name:'SEO/عضوي',icon:'S',  cpc:0.5, reach:8000, color:'#f5a623'},
+  {name:'المؤثرون', icon:'I',  cpc:4.0, reach:18000,color:'#d45fa0'},
+  {name:'يوتيوب',    icon:'▶',  cpc:3.2, reach:10000,color:'#f05c5c'},
+  {name:'الرسائل النصية',        icon:'~',  cpc:0.8, reach:6000, color:'#a78bfa'},
 ];
-
-const SEGMENTS = [
-  {name:'المتبنون الأوائل',  color:'#7c6fff', pct:22},
-  {name:'الباحثون عن القيمة',   color:'#1ecc8b', pct:35},
-  {name:'المخلصون للعلامة', color:'#f5a623', pct:18},
-  {name:'المشترون الاندفاعيون',  color:'#d45fa0', pct:15},
-  {name:'الباحثون',     color:'#4b9cf7', pct:10},
+const SEGMENTS=[
+  {name:'المتبنون الأوائل', color:'#7c6fff',pct:22},
+  {name:'الباحثون عن القيمة',  color:'#1ecc8b',pct:35},
+  {name:'المخلصون للعلامة',color:'#f5a623',pct:18},
+  {name:'المشترون المندفعون', color:'#d45fa0',pct:15},
+  {name:'الباحثون',    color:'#4b9cf7',pct:10},
 ];
-
-const PAGE_META = {
-  setup:    {title:'إعداد الحملة',    sub:'ضبط معاملات الحملة'},
-  channels: {title:'اختيار القنوات', sub:'اختر وخصص قنوات التسويق'},
-  audience: {title:'استهداف الجمهور',sub:'تحديد حجم جمهورك المستهدف'},
-  funnel:   {title:'مسار التحويل', sub:'نمذجة أداء مسار التحويل بالكامل'},
-  ab:       {title:'اختبار أ/ب',       sub:'محاكاة ومقارنة النسخ الإبداعية'},
-  results:  {title:'نتائج الحملة',  sub:'مراجعة الأداء المتوقع والتوصيات'},
+const PAGE_META={
+  setup:   {title:'إعداد الحملة',    sub:'تكوين معاملات حملتك'},
+  channels:{title:'اختيار القنوات', sub:'اختيار وتوزيع القنوات التسويقية'},
+  audience:{title:'استهداف الجمهور',sub:'تعريف وحجم جمهورك المستهدف'},
+  funnel:  {title:'مسار التحويل', sub:'نمذجة مسار التحويل النهائي'},
+  ab:      {title:'اختبار A/B',       sub:'محاكاة ومقارنة متغيرات الإبداع'},
+  results: {title:'نتائج الحملة',  sub:'مراجعة الأداء والتوصيات'},
 };
+let selectedChannels=new Set([0,1,3]);
+let channelChart=null,resultsChart=null,contribChart=null;
 
-let selectedChannels = new Set([0,1,3]);
-let channelChart = null, resultsChart = null, contribChart = null;
+/* ── Mobile sidebar ── */
+function toggleSidebar(){
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('sidebar-overlay').classList.toggle('visible');
+}
+function closeSidebar(){
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('sidebar-overlay').classList.remove('visible');
+}
 
-/* ─── Tab switching ─── */
-function switchTab(t, navEl) {
-  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+/* ── Tab switching ── */
+function switchTab(t){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
   document.getElementById('tab-'+t).classList.add('active');
-  if(navEl) navEl.classList.add('active');
-  document.getElementById('page-title').textContent = PAGE_META[t].title;
-  document.getElementById('page-sub').textContent   = PAGE_META[t].sub;
+  // sidebar nav items
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.toggle('active',n.dataset.tab===t));
+  // mobile nav
+  document.querySelectorAll('.mob-tab').forEach(n=>n.classList.toggle('active',n.dataset.tab===t));
+  // topbar text
+  document.getElementById('page-title').textContent=PAGE_META[t].title;
+  document.getElementById('page-sub').textContent=PAGE_META[t].sub;
+  closeSidebar();
   if(t==='channels') initChannels();
   if(t==='funnel')   updateFunnel();
   if(t==='results')  initResults();
   if(t==='ab')       updateAB();
   if(t==='audience') updateAudience();
+  document.querySelector('.main').scrollTo(0,0);
 }
 
-/* ─── Helpers ─── */
-const getBudget   = () => parseInt(document.getElementById('budget').value)   || 10000;
-const getDuration = () => parseInt(document.getElementById('duration').value) || 30;
-const getDealSize = () => parseInt(document.getElementById('dealsize').value) || 200;
-const fmt = n => n.toLocaleString();
+/* ── Helpers ── */
+const getBudget  =()=>parseInt(document.getElementById('budget').value)||10000;
+const getDuration=()=>parseInt(document.getElementById('duration').value)||30;
+const getDealSize=()=>parseInt(document.getElementById('dealsize').value)||200;
+const fmt=n=>Number(n).toLocaleString('ar-EG');
 
-/* ─── Setup ─── */
-function updateSetup() {
-  const b = getBudget(), d = getDuration(), deal = getDealSize();
-  document.getElementById('budget-val').textContent = '$'+fmt(b);
-  document.getElementById('dur-val').textContent    = d+' أيام';
-  document.getElementById('deal-val').textContent   = '$'+deal;
-
-  const leads = Math.round(b / 8);
-  const conv  = Math.round(leads * 0.15);
-  const rev   = conv * deal;
-  const roi   = Math.round((rev - b) / b * 100);
-
-  document.getElementById('m-budget').textContent   = '$'+fmt(b);
-  document.getElementById('m-duration').textContent = d+'d';
-  document.getElementById('m-leads').textContent    = fmt(leads);
-  document.getElementById('m-rev').textContent      = '$'+fmt(rev);
-  document.getElementById('m-roi').textContent      = roi+'%';
-
-  const bPct = Math.min(95, Math.round(b / 100000 * 100));
-  document.getElementById('ph-budget').style.width  = bPct+'%';
-  document.getElementById('ph-budget-lbl').textContent = b > 5000 ? 'مناسبة للمدة المختارة' : 'فكر في زيادة الميزانية';
-
-  const tPct = Math.min(95, Math.round(d / 90 * 100));
-  document.getElementById('ph-time').style.width  = tPct+'%';
-  document.getElementById('ph-time-lbl').textContent = d > 21 ? 'مدة مناسبة for results' : 'قصيرة — فكر في التمديد';
-
-  const rPct = Math.min(95, Math.max(5, Math.round(roi / 4)));
-  document.getElementById('ph-roi').style.width  = rPct+'%';
-  document.getElementById('ph-roi-lbl').textContent = roi > 150 ? 'إمكانية ممتازة' : roi > 50 ? 'إمكانية قوية' : roi > 0 ? 'هامشي — راجع المدخلات' : 'في خطر — عدّل الاستراتيجية';
+/* ── Setup ── */
+function updateSetup(){
+  const b=getBudget(),d=getDuration(),deal=getDealSize();
+  document.getElementById('budget-val').textContent='$'+fmt(b);
+  document.getElementById('dur-val').textContent=fmt(d)+' يوماً';
+  document.getElementById('deal-val').textContent='$'+fmt(deal);
+  const leads=Math.round(b/8),conv=Math.round(leads*.15);
+  const rev=conv*deal,roi=Math.round((rev-b)/b*100);
+  document.getElementById('m-budget').textContent='$'+fmt(b);
+  document.getElementById('m-duration').textContent=fmt(d)+' ي';
+  document.getElementById('m-leads').textContent=fmt(leads);
+  document.getElementById('m-rev').textContent='$'+fmt(rev);
+  document.getElementById('m-roi').textContent=fmt(roi)+'%';
+  const bPct=Math.min(95,Math.round(b/100000*100));
+  document.getElementById('ph-budget').style.width=bPct+'%';
+  document.getElementById('ph-budget-lbl').textContent=b>5000?'كافية للمدة المختارة':'فكر في زيادة الميزانية';
+  document.getElementById('ph-time').style.width=Math.min(95,Math.round(d/90*100))+'%';
+  document.getElementById('ph-time-lbl').textContent=d>21?'مدة جيدة للنتائج':'قصيرة - فكر في التمديد';
+  const rPct=Math.min(95,Math.max(5,Math.round(roi/4)));
+  document.getElementById('ph-roi').style.width=rPct+'%';
+  document.getElementById('ph-roi-lbl').textContent=roi>150?'إمكانية ممتازة':roi>50?'إمكانية قوية':roi>0?'هامشية - راجع المدخلات':'في خطر - عدل الاستراتيجية';
 }
 
-/* ─── Channels ─── */
-function initChannels() {
-  const grid = document.getElementById('channel-grid');
-  grid.innerHTML = '';
-  CHANNELS.forEach((ch, i) => {
-    const d = document.createElement('div');
-    d.className = 'channel-card' + (selectedChannels.has(i) ? ' selected' : '');
-    d.innerHTML = `<div class="channel-icon" style="color:${ch.color}">${ch.icon}</div>
-      <div class="channel-name">${ch.name}</div>
-      <div class="channel-meta">CPC $${ch.cpc.toFixed(2)} · Reach ${fmt(ch.reach)}</div>
+/* ── Channels ── */
+function initChannels(){
+  const grid=document.getElementById('channel-grid');
+  grid.innerHTML='';
+  CHANNELS.forEach((ch,i)=>{
+    const d=document.createElement('div');
+    d.className='channel-card'+(selectedChannels.has(i)?' selected':'');
+    d.innerHTML=`<div class="ch-icon" style="color:${ch.color}">${ch.icon}</div>
+      <div class="ch-name">${ch.name}</div>
+      <div class="ch-meta">CPC $${ch.cpc.toFixed(2)} · ${fmt(ch.reach)}</div>
       <div class="ch-check">✓</div>`;
-    d.onclick = () => {
-      selectedChannels.has(i) ? selectedChannels.delete(i) : selectedChannels.add(i);
-      initChannels();
-    };
+    d.onclick=()=>{selectedChannels.has(i)?selectedChannels.delete(i):selectedChannels.add(i);initChannels();};
     grid.appendChild(d);
   });
-  document.getElementById('ch-count').textContent = selectedChannels.size + ' مختارة';
-  updateChannelAlloc();
-  drawChannelChart();
+  document.getElementById('ch-count').textContent=fmt(selectedChannels.size)+' مختارة';
+  updateChannelAlloc();drawChannelChart();
 }
-
-function updateChannelAlloc() {
-  const b = getBudget();
-  const sel = [...selectedChannels];
-  const alloc = document.getElementById('channel-alloc');
-  if (!sel.length) { alloc.innerHTML = '<div style="color:var(--text3);font-size:13px">لم يتم تحديد أي قنوات.</div>'; return; }
-  const share = Math.round(b / sel.length);
-  alloc.innerHTML = sel.map(i => {
-    const ch = CHANNELS[i];
-    const pct = Math.round(100 / sel.length);
-    return `<div class="alloc-row">
-      <div class="alloc-name">${ch.name}</div>
+function updateChannelAlloc(){
+  const b=getBudget(),sel=[...selectedChannels];
+  const alloc=document.getElementById('channel-alloc');
+  if(!sel.length){alloc.innerHTML='<div style="color:var(--text3);font-size:13px">لم يتم اختيار قنوات.</div>';return;}
+  const share=Math.round(b/sel.length);
+  alloc.innerHTML=sel.map(i=>{
+    const ch=CHANNELS[i],pct=Math.round(100/sel.length);
+    return`<div class="alloc-row"><div class="alloc-name">${ch.name}</div>
       <div class="alloc-bar-wrap"><div class="alloc-bar" style="width:${pct}%;background:${ch.color}"></div></div>
-      <div class="alloc-amt">$${fmt(share)}</div>
-    </div>`;
+      <div class="alloc-amt">$${fmt(share)}</div></div>`;
   }).join('');
 }
-
-function drawChannelChart() {
-  const ctx = document.getElementById('channel-chart');
-  if (!ctx) return;
-  if (channelChart) { channelChart.destroy(); channelChart = null; }
-  const sel = [...selectedChannels];
-  if (!sel.length) return;
-  const b = getBudget(), share = b / sel.length;
-  const labels = sel.map(i => CHANNELS[i].name);
-  const data   = sel.map(i => Math.round(share / CHANNELS[i].cpc));
-  const colors = sel.map(i => CHANNELS[i].color);
-  // legend
-  document.getElementById('ch-legend').innerHTML = sel.map(i =>
+function drawChannelChart(){
+  const ctx=document.getElementById('channel-chart');
+  if(!ctx)return;
+  if(channelChart){channelChart.destroy();channelChart=null;}
+  const sel=[...selectedChannels];if(!sel.length)return;
+  const b=getBudget(),share=b/sel.length;
+  document.getElementById('ch-legend').innerHTML=sel.map(i=>
     `<div class="legend-item"><div class="legend-swatch" style="background:${CHANNELS[i].color}"></div>${CHANNELS[i].name}</div>`
   ).join('');
-  channelChart = new Chart(ctx, {
-    type: 'bar',
-    data: { labels, datasets: [{ label: 'Est. reach', data, backgroundColor: colors, borderRadius: 6 }] },
-    options: {
-      responsive: true, maintainAspectRatio: false,
-      plugins: { legend: { display: false } },
-      scales: {
-        x: { ticks: { color: '#9999b0', font: { family: 'DM Sans' } }, grid: { color: 'rgba(255,255,255,.04)' } },
-        y: { beginAtZero: true, ticks: { color: '#9999b0', font: { family: 'DM Sans' }, callback: v => fmt(v) }, grid: { color: 'rgba(255,255,255,.04)' } }
-      }
-    }
+  channelChart=new Chart(ctx,{
+    type:'bar',
+    data:{labels:sel.map(i=>CHANNELS[i].name),datasets:[{label:'الوصول المقدر',data:sel.map(i=>Math.round(share/CHANNELS[i].cpc)),backgroundColor:sel.map(i=>CHANNELS[i].color),borderRadius:5}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{
+      x:{ticks:{color:'#9999b0',font:{family:'DM Sans',size:11}},grid:{color:'rgba(255,255,255,.04)'}},
+      y:{beginAtZero:true,ticks:{color:'#9999b0',font:{family:'DM Sans',size:11},callback:v=>fmt(v)},grid:{color:'rgba(255,255,255,.04)'}},
+    }}
   });
 }
 
-/* ─── Audience ─── */
-function updateAudience() {
-  const amin = parseInt(document.getElementById('age-min').value) || 25;
-  const amax = Math.max(amin + 1, parseInt(document.getElementById('age-max').value) || 44);
-  document.getElementById('age-val').textContent = amin + ' – ' + amax;
-  const geoM   = { Global: 10, National: 3, Regional: 0.8, 'Local (city)': 0.2 };
-  const incM   = { All: 1, 'Under $50k': 0.8, '$50k–$100k': 0.7, '$100k–$200k': 0.4, '$200k+': 0.15 };
-  const indM   = { 'All industries': 1, Technology: 0.4, Healthcare: 0.35, Finance: 0.3, Retail: 0.6, Education: 0.25 };
-  const geo    = document.getElementById('geo').value;
-  const inc    = document.getElementById('income').value;
-  const ind    = document.getElementById('industry').value;
-  const ageR   = amax - amin;
-  const size   = Math.round((geoM[geo] || 3) * (ageR / 10) * (incM[inc] || 0.7) * (indM[ind] || 1) * 100000) * 10;
-  const reach  = Math.round(getBudget() / 4);
-  const pct    = Math.round(reach / size * 1000) / 10;
-  const daily  = Math.round(reach / getDuration());
-  document.getElementById('aud-size').textContent  = (size / 1000000).toFixed(1) + 'M';
-  document.getElementById('aud-reach').textContent = fmt(reach);
-  document.getElementById('aud-pct').textContent   = pct + '% من الجمهور';
-  document.getElementById('aud-daily').textContent = fmt(daily);
-
-  document.getElementById('segments-wrap').innerHTML =
-    SEGMENTS.map(s => `<span class="seg-pill" style="background:${s.color}22;border-color:${s.color};color:${s.color}">${s.name} · ${s.pct}%</span>`).join('');
-  document.getElementById('seg-stats').innerHTML =
-    SEGMENTS.slice(0, 3).map(s => `
-      <div class="stat-block">
-        <div style="font-size:11px;color:${s.color};font-weight:600;margin-bottom:4px;text-transform:uppercase;letter-spacing:.06em">${s.name}</div>
-        <div class="stat-num" style="color:var(--text)">${fmt(Math.round(reach * s.pct / 100))}</div>
-        <div class="stat-lbl">وصول متوقع</div>
-      </div>`).join('');
+/* ── Audience ── */
+function updateAudience(){
+  const amin=parseInt(document.getElementById('age-min').value)||25;
+  const amax=Math.max(amin+1,parseInt(document.getElementById('age-max').value)||44);
+  document.getElementById('age-val').textContent=fmt(amin)+' – '+fmt(amax);
+  const geoM={Global:10,National:3,Regional:.8,'Local (city)':.2};
+  const incM={All:1,'Under $50k':.8,'$50k–$100k':.7,'$100k–$200k':.4,'$200k+':.15};
+  const indM={'All industries':1,Technology:.4,Healthcare:.35,Finance:.3,Retail:.6,Education:.25};
+  const geo=document.getElementById('geo').value,inc=document.getElementById('income').value,ind=document.getElementById('industry').value;
+  const size=Math.round((geoM[geo]||3)*((amax-amin)/10)*(incM[inc]||.7)*(indM[ind]||1)*100000)*10;
+  const reach=Math.round(getBudget()/4);
+  document.getElementById('aud-size').textContent=fmt((size/1000000).toFixed(1))+'M';
+  document.getElementById('aud-reach').textContent=fmt(reach);
+  document.getElementById('aud-pct').textContent=fmt(Math.round(reach/size*1000)/10)+'% من الجمهور';
+  document.getElementById('aud-daily').textContent=fmt(Math.round(reach/getDuration()));
+  document.getElementById('segments-wrap').innerHTML=SEGMENTS.map(s=>
+    `<span class="seg-pill" style="background:${s.color}22;border-color:${s.color};color:${s.color}">${s.name} · ${fmt(s.pct)}%</span>`
+  ).join('');
+  document.getElementById('seg-stats').innerHTML=SEGMENTS.slice(0,3).map(s=>`
+    <div class="stat-block">
+      <div class="stat-num" style="color:${s.color}">${fmt(s.pct)}%</div>
+      <div class="stat-lbl">${s.name}</div>
+    </div>
+  `).join('');
 }
 
-/* ─── Funnel ─── */
-function updateFunnel() {
-  const lpQ    = parseInt(document.getElementById('lp-q').value)    || 3;
-  const emSeq  = parseInt(document.getElementById('em-seq').value)  || 3;
-  const offerS = parseInt(document.getElementById('offer-s').value) || 3;
-  const ret    = parseInt(document.getElementById('retarget').value)|| 0;
-  const lpL    = ['ضعيف','مقبول','جيد','ممتاز','رائع'];
-  const ofL    = ['ضعيف','دون المتوسط','متوسط','قوي','مقنع'];
-  document.getElementById('lp-val').textContent    = lpL[lpQ - 1];
-  document.getElementById('em-val').textContent    = emSeq + ' email' + (emSeq > 1 ? 's' : '');
-  document.getElementById('offer-val').textContent = ofL[offerS - 1];
-  document.getElementById('ret-val').textContent   = ret ? 'مفعّل' : 'معطّل';
-
-  const reach     = Math.round(getBudget() / 4);
-  const ctr       = 0.02 + lpQ * 0.008;
-  const clicks    = Math.round(reach * ctr);
-  const lpConv    = 0.1 + lpQ * 0.04 + offerS * 0.02;
-  const leads     = Math.round(clicks * lpConv);
-  const nurtureR  = Math.min(0.75, 0.2 + emSeq * 0.05);
-  const nurtured  = Math.round(leads * nurtureR);
-  const retBonus  = ret ? 1.25 : 1;
-  const conv      = Math.round(nurtured * 0.2 * retBonus);
-
-  const steps = [
-    {label:'الجمهور الوصول', count:reach,   color:'#7c6fff'},
-    {label:'النقرات',           count:clicks,  color:'#4b9cf7'},
-    {label:'العملاء المحتملون',   count:leads,   color:'#1ecc8b'},
-    {label:'المرعيون',         count:nurtured,color:'#f5a623'},
-    {label:'التحويلات',      count:conv,    color:'#f05c5c'},
+/* ── Funnel ── */
+function updateFunnel(){
+  const b=getBudget(),sel=[...selectedChannels];
+  if(!sel.length)return;
+  const reach=Math.round(b/4),lpQ=parseInt(document.getElementById('lp-q').value),em=parseInt(document.getElementById('em-seq').value),off=parseInt(document.getElementById('offer-s').value),ret=parseInt(document.getElementById('retarget').value);
+  const rates=[.08+(lpQ*.02),.15+(em*.02),.10+(off*.03)];
+  if(ret)rates[1]*=1.2;
+  const steps=[
+    {name:'الوعي', count:reach,color:CHANNELS[sel[0]].color},
+    {name:'الاهتمام', count:Math.round(reach*rates[0]),color:CHANNELS[sel[1]||sel[0]].color},
+    {name:'الرغبة', count:Math.round(reach*rates[0]*rates[1]),color:CHANNELS[sel[2]||sel[0]].color},
+    {name:'الإجراء', count:Math.round(reach*rates[0]*rates[1]*rates[2]),color:varColor('--accent')},
   ];
-  const maxC = steps[0].count || 1;
-  document.getElementById('funnel-steps').innerHTML = steps.map((s, idx) => {
-    const prev = idx === 0 ? maxC : steps[idx - 1].count || 1;
-    const drop = idx === 0 ? 100 : Math.round(s.count / prev * 100);
-    return `<div class="funnel-step">
-      <div class="funnel-label">${s.label}</div>
+  document.getElementById('funnel-steps').innerHTML=steps.map((s,i)=>`
+    <div class="funnel-step">
+      <div class="funnel-label">${s.name}</div>
       <div class="funnel-bar-wrap">
-        <div class="funnel-bar" style="width:${Math.max(2, Math.round(s.count / maxC * 100))}%;background:${s.color}">
-          ${Math.round(s.count / maxC * 100) > 15 ? Math.round(s.count / maxC * 100) + '%' : ''}
-        </div>
+        <div class="funnel-bar" style="width:${Math.max(5,s.count/reach*100)}%;background:${s.color}">${fmt(s.count)}</div>
       </div>
-      <div class="funnel-count">${fmt(s.count)}</div>
-      <div class="funnel-pct">${idx === 0 ? '' : drop + '%'}</div>
-    </div>`;
-  }).join('');
-
-  const rates = [
-    {label:'معدل النقر',     val:(ctr * 100).toFixed(1) + '%'},
-    {label:'معدل استحواذ العملاء',      val:(lpConv * 100).toFixed(1) + '%'},
-    {label:'معدل الرعاية',           val:(nurtureR * 100).toFixed(0) + '%'},
-    {label:'معدل إغلاق المبيعات',       val:((0.2 * retBonus) * 100).toFixed(0) + '%'},
-    {label:'معدل التحويل الإجمالي',     val:reach > 0 ? (conv / reach * 100).toFixed(2) + '%' : '0%'},
+      <div class="funnel-pct">${i==0?'100%':fmt(Math.round(s.count/reach*100))+'%'}</div>
+    </div>
+  `).join('');
+  document.getElementById('conv-rates').innerHTML=`
+    <div class="rate-row"><span>الوصول إلى الزيارة</span><span class="badge badge-accent">${fmt(Math.round(rates[0]*100))}%</span></div>
+    <div class="rate-row"><span>الزيارة إلى العميل المحتمل</span><span class="badge badge-blue">${fmt(Math.round(rates[1]*100))}%</span></div>
+    <div class="rate-row"><span>العميل المحتمل إلى البيع</span><span class="badge badge-green">${fmt(Math.round(rates[2]*100))}%</span></div>
+  `;
+  const lpLabels=['سيئة','ضعيفة','متوسطة','جيدة','ممتازة'];
+  document.getElementById('lp-val').textContent=lpLabels[lpQ-1];
+  document.getElementById('em-val').textContent=fmt(em)+' رسائل';
+  const offLabels=['ضعيف','مقبول','متوسط','قوي','لا يقاوم'];
+  document.getElementById('offer-val').textContent=offLabels[off-1];
+  document.getElementById('ret-val').textContent=ret?'مفعل':'معطل';
+  const timeline=[
+    {date:'اليوم 1', event:'إطلاق الحملة والإعداد'},
+    {date:'اليوم 7', event:'تحليل البيانات الأولية وتحسين المزايدة'},
+    {date:'اليوم 14', event:'بدء اختبار A/B للعناوين'},
+    {date:'اليوم 21', event:'توسيع القنوات الناجحة'},
+    {date:'اليوم 30', event:'مراجعة الأداء النهائية والتقرير'},
   ];
-  document.getElementById('conv-rates').innerHTML = rates.map(r =>
-    `<div class="rate-row"><span style="color:var(--text2)">${r.label}</span><span style="font-weight:600">${r.val}</span></div>`
-  ).join('');
-
-  const d = getDuration();
-  const tl = [
-    {day:0,                       event:'إطلاق الحملة — تبدأ الإعلانات على جميع القنوات',          color:'#7c6fff'},
-    {day:Math.round(d * 0.15),    event:'أول عملاء محتملين، تبدأ سلسلة البريد الإلكتروني',           color:'#1ecc8b'},
-    {day:Math.round(d * 0.30),    event:'نتائج اختبار أ/ب متاحة — تفعيل النسخة الفائزة',           color:'#f5a623'},
-    {day:Math.round(d * 0.50),    event:'مراجعة منتصف الحملة — إعادة توزيع الميزانية',       color:'#4b9cf7'},
-    {day:Math.round(d * 0.75),    event:'تفعيل موجة إعادة الاستهداف للزوار غير المحولين',           color:'#d45fa0'},
-    {day:d,                       event:'إغلاق الحملة — حساب وتقرير التحويلات النهائية',       color:'#f05c5c'},
-  ];
-  document.getElementById('timeline').innerHTML = tl.map((t, idx) => `
+  document.getElementById('timeline').innerHTML=timeline.map(t=>`
     <div class="tl-item">
-      <div class="tl-left">
-        <div class="tl-dot" style="background:${t.color}"></div>
-        ${idx < tl.length - 1 ? '<div class="tl-line"></div>' : ''}
-      </div>
-      <div>
-        <div class="tl-date">Day ${t.day}</div>
-        <div class="tl-event">${t.event}</div>
-      </div>
-    </div>`).join('');
+      <div class="tl-left"><div class="tl-dot" style="background:var(--accent)"></div><div class="tl-line"></div></div>
+      <div><div class="tl-date">${t.date}</div><div class="tl-event">${t.event}</div></div>
+    </div>
+  `).join('');
 }
 
-/* ─── A/B Testing ─── */
-function updateAB() {
-  const v      = document.getElementById('ab-var').value;
-  const split  = parseInt(document.getElementById('ab-split').value) || 50;
-  const dur    = parseInt(document.getElementById('ab-dur-in').value) || 14;
-  document.getElementById('ab-split-val').textContent = split + ' / ' + (100 - split);
-  document.getElementById('ab-dur-val').textContent   = dur + ' أيام';
-
-  const sample  = Math.round(getBudget() / 3 * dur / 14);
-  const conf    = Math.min(99, Math.round(68 + dur * 1.5 + split * 0.2));
-  const uplift  = Math.round(10 + split * 0.3 + dur * 0.4);
-
-  document.getElementById('ab-conf').textContent   = conf + '%';
-  document.getElementById('ab-sample').textContent = fmt(sample);
-  document.getElementById('ab-dur').textContent    = dur + 'd';
-  document.getElementById('ab-uplift').textContent = '+' + uplift + '%';
-
-  const aM = {CTR:'2.1%', CVR:'3.4%', CPL:'$12.40', ROAS:'2.1x'};
-  const bM = {
-    CTR:  (2.1 * (1 + uplift / 200)).toFixed(1) + '%',
-    CVR:  (3.4 * (1 + uplift / 200)).toFixed(1) + '%',
-    CPL:  '$' + (12.4 / (1 + uplift / 200)).toFixed(2),
-    ROAS: (2.1 * (1 + uplift / 200)).toFixed(1) + 'x',
-  };
-  const renderStats = m => Object.entries(m).map(([k, v]) => `
-    <div style="margin-bottom:10px">
-      <div style="font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.06em">${k}</div>
-      <div style="font-size:20px;font-weight:600">${v}</div>
-      <div class="score-bar"><div class="score-fill" style="width:${Math.min(95, Math.round(parseFloat(v) * 20))}%"></div></div>
-    </div>`).join('');
-  document.getElementById('ab-a-stats').innerHTML = renderStats(aM);
-  document.getElementById('ab-b-stats').innerHTML = renderStats(bM);
-
-  const entries = [
-    `[اليوم 01]  بدء الاختبار — المتغير: ${v}`,
-    `[اليوم 03]  النسخة ب تُظهر تحسناً +${Math.round(uplift * 0.4)}% في معدل النقر`,
-    `[اليوم 07]  الثقة الإحصائية وصلت ${Math.round(conf * 0.7)}%`,
-    `[Day ${String(dur).padStart(2,'0')}]  انتهى الاختبار — النسخة ب فائزة بثقة ${conf}%`,
-    `[تلقائي]  تم تطبيق النسخة ب على 100% من الزيارات`,
+/* ── A/B Testing ── */
+function updateAB(){
+  const v=document.getElementById('ab-var').value,s=parseInt(document.getElementById('ab-split').value),d=parseInt(document.getElementById('ab-dur-in').value);
+  document.getElementById('ab-split-val').textContent=fmt(s)+' / '+fmt(100-s);
+  document.getElementById('ab-dur-val').textContent=fmt(d)+' يوماً';
+  const statsA={reach:2500,conv:120,rate:4.8},statsB={reach:2700,conv:158,rate:5.85};
+  document.getElementById('ab-a-stats').innerHTML=`
+    <div class="rate-row"><span>الوصول</span><span>${fmt(statsA.reach)}</span></div>
+    <div class="rate-row"><span>التحويلات</span><span>${fmt(statsA.conv)}</span></div>
+    <div class="rate-row"><span>معدل التحويل</span><span class="val">${fmt(statsA.rate)}%</span></div>
+    <div class="score-bar"><div class="score-fill" style="width:70%"></div></div>
+  `;
+  document.getElementById('ab-b-stats').innerHTML=`
+    <div class="rate-row"><span>الوصول</span><span>${fmt(statsB.reach)}</span></div>
+    <div class="rate-row"><span>التحويلات</span><span>${fmt(statsB.conv)}</span></div>
+    <div class="rate-row"><span>معدل التحويل</span><span class="val" style="color:var(--green)">${fmt(statsB.rate)}%</span></div>
+    <div class="score-bar"><div class="score-fill" style="width:90%;background:var(--green)"></div></div>
+  `;
+  const logs=[
+    `[${fmt(new Date().toLocaleTimeString('ar-EG'))}] بدء الاختبار لـ: ${v}`,
+    `[${fmt(new Date().toLocaleTimeString('ar-EG'))}] النسخة ب تظهر تحسناً بنسبة 18% في التحويلات`,
+    `[${fmt(new Date().toLocaleTimeString('ar-EG'))}] حجم العينة كافٍ للثقة الإحصائية`,
   ];
-  document.getElementById('ab-log').innerHTML = entries.map(e => `<div class="log-line">${e}</div>`).join('');
+  document.getElementById('ab-log').innerHTML=logs.map(l=>`<div class="log-line">${l}</div>`).join('');
 }
 
-/* ─── Results ─── */
-function initResults() {
-  const b = getBudget(), d = getDuration(), deal = getDealSize();
-  const leads = Math.round(b / 8);
-  const conv  = Math.round(leads * 0.15);
-  const rev   = conv * deal;
-  const roi   = Math.round((rev - b) / b * 100);
-  const cpl   = (b / leads).toFixed(2);
-  const reach = Math.round(b / 4);
-
-  document.getElementById('r-reach').textContent    = fmt(reach);
-  document.getElementById('r-leads').textContent    = fmt(leads);
-  document.getElementById('r-conv').textContent     = fmt(conv);
-  document.getElementById('r-conv-rate').textContent= Math.round(conv/leads*100) + '% معدل تحويل';
-  document.getElementById('r-rev').textContent      = '$' + fmt(rev);
-  document.getElementById('r-roi').textContent      = roi + '%';
-  document.getElementById('r-cpl').textContent      = '$' + cpl;
-
-  // Weekly chart
-  const weeks     = Math.ceil(d / 7);
-  const wLabels   = Array.from({length: weeks}, (_, i) => 'W' + (i + 1));
-  const wLeads    = wLabels.map((_, i) => Math.round(leads / weeks * (0.5 + i * 0.15)));
-  const wConv     = wLeads.map(v => Math.round(v * 0.15));
-  const rc = document.getElementById('results-chart');
-  if (resultsChart) { resultsChart.destroy(); resultsChart = null; }
-  resultsChart = new Chart(rc, {
-    type: 'line',
-    data: { labels: wLabels, datasets: [
-      {label:'عملاء محتملون', data:wLeads, borderColor:'#7c6fff', backgroundColor:'rgba(124,111,255,.12)', fill:true, tension:0.4, borderWidth:2, pointBackgroundColor:'#7c6fff'},
-      {label:'التحويلات', data:wConv, borderColor:'#1ecc8b', backgroundColor:'rgba(30,204,139,.10)', fill:true, tension:0.4, borderWidth:2, borderDash:[5,4], pointBackgroundColor:'#1ecc8b'},
+/* ── Results ── */
+function initResults(){
+  const b=getBudget(),deal=getDealSize();
+  const leads=Math.round(b/10.4),conv=Math.round(leads*.15),rev=conv*deal,roi=Math.round((rev-b)/b*100);
+  document.getElementById('r-reach').textContent=fmt(Math.round(b/0.2));
+  document.getElementById('r-leads').textContent=fmt(leads);
+  document.getElementById('r-conv').textContent=fmt(conv);
+  document.getElementById('r-rev').textContent='$'+fmt(rev);
+  document.getElementById('r-roi').textContent=fmt(roi)+'%';
+  document.getElementById('r-cpl').textContent='$'+fmt((b/leads).toFixed(2));
+  drawResultsChart();drawContribChart();
+  const recs=[
+    {type:'green', text:'زيادة ميزانية "إعلانات جوجل" بنسبة 20% لتوسيع نطاق النجاح.'},
+    {type:'amber', text:'تحسين معدل تحويل الصفحة المقصودة للهواتف المحمولة.'},
+    {type:'blue', text:'إعادة استهداف زوار الموقع الذين لم يكملوا التحويل.'},
+  ];
+  document.getElementById('recommendations').innerHTML=recs.map(r=>`
+    <div class="rec rec-${r.type}">${r.text}</div>
+  `).join('');
+}
+function drawResultsChart(){
+  const ctx=document.getElementById('results-chart');
+  if(!ctx)return;
+  if(resultsChart){resultsChart.destroy();resultsChart=null;}
+  resultsChart=new Chart(ctx,{
+    type:'line',
+    data:{labels:['أسبوع 1','أسبوع 2','أسبوع 3','أسبوع 4'],datasets:[
+      {label:'العملاء',data:[120,250,480,963],borderColor:'#7c6fff',tension:.3,fill:false},
+      {label:'التحويلات',data:[18,40,75,144],borderColor:'#1ecc8b',tension:.3,fill:false},
     ]},
-    options: {
-      responsive: true, maintainAspectRatio: false,
-      plugins: { legend: { display: false } },
-      scales: {
-        x: { ticks:{color:'#9999b0', font:{family:'DM Sans'}}, grid:{color:'rgba(255,255,255,.04)'} },
-        y: { beginAtZero:true, ticks:{color:'#9999b0', font:{family:'DM Sans'}}, grid:{color:'rgba(255,255,255,.04)'} }
-      }
-    }
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{
+      x:{ticks:{color:'#9999b0',font:{size:11}},grid:{color:'rgba(255,255,255,.04)'}},
+      y:{beginAtZero:true,ticks:{color:'#9999b0',font:{size:11}},grid:{color:'rgba(255,255,255,.04)'}}
+    }}
   });
-
-  // Contrib donut
-  const sel = [...selectedChannels];
-  const cc = document.getElementById('contrib-chart');
-  if (contribChart) { contribChart.destroy(); contribChart = null; }
-  if (sel.length) {
-    const cLabels = sel.map(i => CHANNELS[i].name);
-    const rawData = sel.map(i => Math.round(100 / sel.length + (Math.sin(i * 7) * 8)));
-    const cColors = sel.map(i => CHANNELS[i].color);
-    contribChart = new Chart(cc, {
-      type: 'doughnut',
-      data: { labels: cLabels, datasets: [{ data: rawData, backgroundColor: cColors, borderWidth: 0, hoverOffset: 8 }] },
-      options: { responsive:true, maintainAspectRatio:false, plugins:{ legend:{display:false} }, cutout:'62%' }
-    });
-    document.getElementById('contrib-legend').innerHTML = sel.map(i =>
-      `<div class="legend-item"><div class="legend-swatch" style="background:${CHANNELS[i].color}"></div>${CHANNELS[i].name}</div>`
-    ).join('');
-  }
-
-  // Recommendations
-  const recs = [
-    roi > 150 ? {type:'green', icon:'↑', text:'عائد قوي — فكر في زيادة الميزانية بنسبة 20-30% في دورة الحملة القادمة.'} :
-                {type:'amber', icon:'!', text:'العائد أقل من المستهدف — راجع مزيج القنوات وقوة العرض وافتراضات حجم الصفقة.'},
-    leads > 200 ? {type:'green', icon:'✓', text:'حجم العملاء المحتملين في المسار الصحيح. حافظ على الاستراتيجية الحالية.'} :
-                  {type:'blue',  icon:'→', text:'حجم العملاء المحتملين محدود — وسّع شرائح الجمهور أو أضف قنوات أعلى وصولاً.'},
-    {type:'blue',  icon:'→', text:'طبّق النسخة الفائزة من اختبار أ/ب كإعلان افتراضي للحملة القادمة.'},
-    d < 21 ? {type:'amber', icon:'!', text:'تم اكتشاف مدة قصيرة للحملة — الحملات التي تزيد عن 30 يومًا تتفوق بنسبة 40% في المتوسط.'} :
-             {type:'green', icon:'✓', text:'مدة الحملة مناسبة لنتائج موثوقة إحصائيًا وتحسين مستمر.'},
-  ];
-  document.getElementById('recommendations').innerHTML = recs.map(r =>
-    `<div class="rec rec-${r.type}"><strong style="flex-shrink:0">${r.icon}</strong><span>${r.text}</span></div>`
-  ).join('');
+}
+function drawContribChart(){
+  const ctx=document.getElementById('contrib-chart');
+  if(!ctx)return;
+  if(contribChart){contribChart.destroy();contribChart=null;}
+  const sel=[...selectedChannels];
+  const data=sel.map(()=>Math.floor(Math.random()*40)+10);
+  document.getElementById('contrib-legend').innerHTML=sel.map((i,idx)=>`
+    <div class="legend-item"><div class="legend-swatch" style="background:${CHANNELS[i].color}"></div>${CHANNELS[i].name}</div>
+  `).join('');
+  contribChart=new Chart(ctx,{
+    type:'doughnut',
+    data:{labels:sel.map(i=>CHANNELS[i].name),datasets:[{data,backgroundColor:sel.map(i=>CHANNELS[i].color),borderWidth:0}]},
+    options:{responsive:true,maintainAspectRatio:false,cutout:'75%',plugins:{legend:{display:false}}}
+  });
 }
 
-/* ─── Reset ─── */
-function resetSim() {
-  document.getElementById('budget').value   = 10000;
-  document.getElementById('duration').value = 30;
-  document.getElementById('dealsize').value = 200;
-  selectedChannels = new Set([0, 1, 3]);
+function varColor(v){return getComputedStyle(document.documentElement).getPropertyValue(v).trim();}
+function resetSim(){location.reload();}
+
+window.onload=()=>{
   updateSetup();
-  const firstNav = document.querySelector('.nav-item');
-  switchTab('setup', firstNav);
-}
-
-/* ─── Init ─── */
-updateSetup();
-setTimeout(() => {
-  updateAB();
-  updateAudience();
-  updateFunnel();
-}, 80);
+  initChannels();
+};
 </script>
-<script>
-        // STANDARD NAV JS
-        (function() {
-            function initNav() {
-                const btn = document.getElementById('mobileToggle');
-                const m = document.getElementById('mobileMenu');
-                if (!btn || !m) return;
-                
-                const toggleAction = (e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    m.classList.toggle('open');
-                };
-                
-                btn.onclick = toggleAction;
-                btn.ontouchstart = toggleAction;
-                
-                document.addEventListener('click', (e) => {
-                    if (m.classList.contains('open') && !btn.contains(e.target) && !m.contains(e.target)) {
-                        m.classList.remove('open');
-                    }
-                });
-            }
-            if (document.readyState === 'loading') {
-                document.addEventListener('DOMContentLoaded', initNav);
-            } else {
-                initNav();
-            }
-            window.addEventListener('load', initNav);
-        })();
-</script></body>
+</body>
 </html>
