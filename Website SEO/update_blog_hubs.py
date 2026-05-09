@@ -11,7 +11,9 @@ CATEGORY_MAP = {
     "Implementation & Automation": "cat_2",
     "التنفيذ والأتمتة": "cat_2",
     "Middle East AI": "cat_3",
-    "الذكاء الاصطناعي في الشرق الأوسط": "cat_3"
+    "الذكاء الاصطناعي في الشرق الأوسط": "cat_3",
+    "Business Efficiency": "cat_2",
+    "كفاءة الأعمال": "cat_2"
 }
 
 def extract_metadata(filepath):
