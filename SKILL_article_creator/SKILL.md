@@ -21,6 +21,7 @@ When the user asks you to write an article for a given keyword/topic, follow the
 - Include a specific section for References at the end (verify that references exist and are not broken).
 - Generate an extensive FAQ section at the end containing AT LEAST 10 Frequently Asked Questions optimized for AI search engines.
 - Designate a hero image concept that matches the futuristic, semi-realistic AI vibe of the other articles, and ensure you write descriptive Alt Text for all images.
+- **SEO & GEO Friendliness**: Every article must be optimized for search engines and localized for the **Oman/GCC market**. Include local keywords (e.g., "Muscat", "Oman Vision 2040", "GCC Business Automation") and ensure all meta tags, structured data, and content reflect this regional focus.
 - **Forum Snippet**: Generate a short promotional snippet (or pitch) for a local GCC business forum at the end of the generation process, related to the article topic.
 
 ## Step 2: Generate the English Version
@@ -31,7 +32,7 @@ Save it to: `public_html/blog/en/YYYY-MM-DD-[slug-title].html` (use the current 
 ## Step 3: Generate the Arabic Version
 Translate and adapt the article into Arabic. Make sure the tone remains professional and culturally relevant for the GCC/Oman market.
 Set `lang="ar"` and `dir="rtl"`.
-In the navbar, change "Back to Hub" to "العودة إلى المركز" and link to `/blog-ar/`.
+In the navbar, change "Back to Hub" to "العودة إلى المدونة" and link to `/blog-ar/`.
 Save it to: `public_html/blog/ar/YYYY-MM-DD-[slug-title-in-english].html`.
 
 ## Step 4: Generate the Image
@@ -174,7 +175,7 @@ Whenever you generate the files, use the following HTML template. Do NOT deviate
             <span class="text-blue-500">A</span><span class="text-red-500">I</span> <span class="text-white text-2xl md:text-3xl">Profit Lab</span>
         </a>
         <a href="/blog/" class="text-gray-300 hover:text-white font-semibold transition">Back to Hub</a>
-    </nav> <!-- Note: update links to /ar/ and /blog-ar/ for the Arabic translation -->
+    </nav> <!-- Note: update links to /ar/ and /blog-ar/ for the Arabic translation. ENSURE ARABIC LINKS TO /blog-ar/ -->
 
     <!-- Main Content -->
     <main class="max-w-4xl mx-auto px-6 py-16">
