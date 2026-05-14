@@ -122,6 +122,7 @@ Whenever you generate the files, use the following HTML template. Do NOT deviate
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Outfit', sans-serif; background-color: #050505; color: #ffffff; }
+        .logo-font { font-family: 'Outfit', sans-serif !important; }
         .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.05); }
         .glass-card { background: rgba(255, 255, 255, 0.02); backdrop-filter: blur(8px); border: 1px solid rgba(255, 255, 255, 0.05); transition: all 0.3s ease; }
         .glass-card:hover { border-color: #3B82F6; transform: translateY(-5px); box-shadow: 0 20px 40px rgba(59, 130, 246, 0.1); }
@@ -169,13 +170,13 @@ Whenever you generate the files, use the following HTML template. Do NOT deviate
     </script>
 </head>
 <body class="antialiased">
-    <!-- Navbar -->
-    <nav class="flex justify-between items-center px-6 md:px-12 py-8 w-full z-50 glass sticky top-0 bg-black/30">
-        <a href="/en/" class="font-extrabold text-3xl md:text-4xl tracking-tighter hover:opacity-80 transition">
+    <!-- Navigation -->
+    <nav class="flex justify-between items-center px-6 md:px-12 py-8 w-full z-50 glass sticky top-0 bg-black/30" id="header">
+        <a href="/en/" class="font-extrabold text-3xl md:text-4xl tracking-tighter hover:opacity-80 transition logo-font">
             <span class="text-blue-500">A</span><span class="text-red-500">I</span> <span class="text-white text-2xl md:text-3xl">Profit Lab</span>
         </a>
         <a href="/blog/" class="text-gray-300 hover:text-white font-semibold transition">Back to Hub</a>
-    </nav> <!-- Note: update links to /ar/ and /blog-ar/ for the Arabic translation. ENSURE ARABIC LINKS TO /blog-ar/ -->
+    </nav> <!-- Note: update links to /blog-ar/ for the Arabic translation. ENSURE ARABIC LINKS TO /blog-ar/. And use logo-font class. -->
 
     <!-- Main Content -->
     <main class="max-w-4xl mx-auto px-6 py-16">
