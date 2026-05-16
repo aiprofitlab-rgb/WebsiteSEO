@@ -32,7 +32,7 @@ Save it to: `public_html/blog/en/YYYY-MM-DD-[slug-title].html` (use the current 
 ## Step 3: Generate the Arabic Version
 Translate and adapt the article into Arabic. Make sure the tone remains professional and culturally relevant for the GCC/Oman market.
 Set `lang="ar"` and `dir="rtl"`.
-In the navbar, change "Back to Hub" to "العودة إلى المدونة" and link to `/blog-ar/`.
+In the navbar, change "Back to Hub" to "العودة إلى المدونة" and link to `/blog-ar/`. Also, ensure the logo in the Arabic version links to `/` (the Arabic home page).
 Save it to: `public_html/blog/ar/YYYY-MM-DD-[slug-title-in-english].html`.
 
 ## Step 4: Generate the Image
@@ -176,7 +176,7 @@ Whenever you generate the files, use the following HTML template. Do NOT deviate
             <span class="text-blue-500">A</span><span class="text-red-500">I</span> <span class="text-white text-2xl md:text-3xl">Profit Lab</span>
         </a>
         <a href="/blog/" class="text-gray-300 hover:text-white font-semibold transition">Back to Hub</a>
-    </nav> <!-- Note: update links to /blog-ar/ for the Arabic translation. ENSURE ARABIC LINKS TO /blog-ar/. And use logo-font class. -->
+    </nav> <!-- Note: For ARABIC, update Logo link to "/" and "Back to Hub" to "/blog-ar/". -->
 
     <!-- Main Content -->
     <main class="max-w-4xl mx-auto px-6 py-16">
