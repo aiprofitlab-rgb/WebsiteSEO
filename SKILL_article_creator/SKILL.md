@@ -19,8 +19,8 @@ When the user asks you to write an article for a given keyword/topic, follow the
 - The article must be a rich, highly SEO-friendly article between 800 to 1000 words long.
 - **External Links & References**: Each article MUST have links to outside source(s) in the text, and you must mention all those references at the end in the References section, linking them to the source. Verify that references exist and are not broken.
 - Generate an extensive FAQ section at the end containing AT LEAST 10 Frequently Asked Questions. These should be questions that people in Oman and the GCC actually ask about the subject from LLMs.
-- Designate a hero image concept that matches the futuristic, semi-realistic AI vibe of the other articles, and ensure you write descriptive Alt Text for all images.
-- **SEO & GEO Friendliness**: Every article must be optimized for search engines and localized for the **Oman/GCC market**. Include local keywords (e.g., "Muscat", "Oman Vision 2040", "GCC Business Automation") and ensure all meta tags, structured data, and content reflect this regional focus.
+- Designate a hero image concept that matches the futuristic, semi-realistic AI vibe of the other articles. Add Alt Text for all images describing its value to the brand (e.g., "[Image Name] - Empowering AI Solutions by AI Profit Lab to scale your business operations." for English, and "[Image Name] - حلول الذكاء الاصطناعي المبتكرة من AI Profit Lab لتطوير أعمالك." for Arabic).
+- **SEO & GEO Friendliness**: Every article must be optimized for search engines and localized for the **Oman/GCC market**. Generate energetic, unique Meta Descriptions (under 150 chars) starting with "Supercharge your business with [Title]" for English, and "ارتقِ بعملك مع [Title]" for Arabic. Include local keywords (e.g., "Muscat", "Oman Vision 2040", "GCC Business Automation") and ensure all meta tags, structured data, and content reflect this regional focus.
 - **Forum Snippet**: Generate a short promotional snippet (or pitch) for a local GCC business forum at the end of the generation process, related to the article topic.
 
 ## Step 2: Generate the English Version
@@ -65,7 +65,7 @@ Whenever you generate the files, use the following HTML template. Do NOT deviate
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="category" content="[Category]">
     <title>[SEO Title] | AI Profit Lab</title>
-    <meta name="description" content="[Energetic, unique SEO Description (exactly 150 characters)]">
+    <meta name="description" content="[Energetic, unique SEO Description starting with 'Supercharge your business with [Title]...' (max 150 chars)]"> <!-- Note: For Arabic use 'ارتقِ بعملك مع [Title]...' -->
     <meta name="keywords" content="[SEO Keywords]">
     <link rel="canonical" href="https://aiprofitlab.io/blog/en/YYYY-MM-DD-[slug-title]/"> <!-- Note: Update path for Arabic: /blog/ar/... -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -187,7 +187,7 @@ Whenever you generate the files, use the following HTML template. Do NOT deviate
                 <p class="text-xl text-gray-400 max-w-2xl mx-auto">[Subtitle / Hook]</p>
             </div>
 
-            <img src="/blog/images/[image_name].png" alt="[Image alt description]" class="w-full rounded-3xl mb-16 shadow-[0_0_50px_rgba(59,130,246,0.15)] border border-white/5 object-cover h-[500px]">
+            <img src="/blog/images/[image_name].png" alt="[Image Name] - Empowering AI Solutions by AI Profit Lab to scale your business operations." class="w-full rounded-3xl mb-16 shadow-[0_0_50px_rgba(59,130,246,0.15)] border border-white/5 object-cover h-[500px]"> <!-- Note: For Arabic Alt use '[Image Name] - حلول الذكاء الاصطناعي المبتكرة من AI Profit Lab لتطوير أعمالك.' -->
 
             <div class="prose max-w-none">
                 [PARAGRAPHS, HEADINGS, BLOCKQUOTES. MUST BE 800 TO 1000 WORDS TOTAL, USING STORYTELLING NARRATIVE]

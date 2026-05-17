@@ -1,4 +1,5 @@
 import os
+import subprocess
 from datetime import datetime
 
 public_html = "public_html"
@@ -83,3 +84,10 @@ with open(os.path.join(public_html, "sitemap.xml"), "w", encoding="utf-8") as f:
     f.write(xml_content)
 
 print(f"Generated sitemap.xml with {len(urls)} URLs.")
+
+# Automatically submit to IndexNow
+print("Calling IndexNow submission script...")
+try:
+    subprocess.run(["python3", "execution/submit_indexnow.py"], check=True)
+except Exception as e:
+    print(f"Failed to submit to IndexNow: {e}")
