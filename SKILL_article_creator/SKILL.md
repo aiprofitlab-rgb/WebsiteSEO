@@ -13,13 +13,12 @@ When the user asks you to write an article for a given keyword/topic, follow the
 - **Transform H2 Headers into Questions**: Transform all `<h2>` headers into specific business questions.
 - **Direct Answers**: Write a concise, 40-word direct answer immediately below each `<h2>`.
 - **Factual Density**: Eliminate adjectives (e.g., "amazing", "incredible") and replace with hard data (e.g., "30% increase"). AI prioritizes data over fluff. When discussing boosting ROI, back it up.
-- **Data Tables**: Add HTML Data Tables within the content showing ROI, time savings, or tool comparisons.
-- **High-Authority Links**: Link out to high-authority tech docs (e.g., OpenAI docs, Omani Gov Tech portals) whenever it is related.
-- **Internal Links**: Ensure all internal links point to the clean URL version (e.g., `/blog/en/my-article-slug/`). Interlink with the ROI data pages (e.g., linking to `/campaign-roi-simulator/` or similar relevant pages).
-- **Video-to-Text Synergy**: Embed relevant, energetic, high-retention YouTube videos directly into the written posts.
-- The article must be a rich, highly SEO-friendly article at least 1000 words long.
-- Include a specific section for References at the end (verify that references exist and are not broken).
-- Generate an extensive FAQ section at the end containing AT LEAST 10 Frequently Asked Questions optimized for AI search engines.
+- **Data Tables**: Add HTML Data Tables within the content showing ROI, time savings, or tool comparisons or .
+- **High-Authority Links**: Link out to high-authority tech docs (e.g., OpenAI docs, Omani Gov Tech portals, strong news) whenever it is related.
+- **Internal Links**: Each article should be linked to other website pages only if it seems natural, not deliberately forced. Ensure all internal links point to the clean URL version.
+- The article must be a rich, highly SEO-friendly article between 800 to 1000 words long.
+- **External Links & References**: Each article MUST have links to outside source(s) in the text, and you must mention all those references at the end in the References section, linking them to the source. Verify that references exist and are not broken.
+- Generate an extensive FAQ section at the end containing AT LEAST 10 Frequently Asked Questions. These should be questions that people in Oman and the GCC actually ask about the subject from LLMs.
 - Designate a hero image concept that matches the futuristic, semi-realistic AI vibe of the other articles, and ensure you write descriptive Alt Text for all images.
 - **SEO & GEO Friendliness**: Every article must be optimized for search engines and localized for the **Oman/GCC market**. Include local keywords (e.g., "Muscat", "Oman Vision 2040", "GCC Business Automation") and ensure all meta tags, structured data, and content reflect this regional focus.
 - **Forum Snippet**: Generate a short promotional snippet (or pitch) for a local GCC business forum at the end of the generation process, related to the article topic.
@@ -27,12 +26,13 @@ When the user asks you to write an article for a given keyword/topic, follow the
 ## Step 2: Generate the English Version
 Draft the English article content. Then wrap it in the exact HTML structure expected for the blog. Ensure it follows the dark-mode glassmorphism style.
 Ensure you strictly populate the embedded JSON-LD Schema Markup in the `<head>` with the article's specific `Article` data, the 10+ `FAQPage` data, and the `Organization` details, as AI search engines prioritize highly structured schema paths.
+In the navbar, ensure the logo is identical to the one on the blog page. For the English version, the logo is linked to the English home page (`/en/`), and the "Back to Hub" button in the header is linked to the English blog (`/blog/`).
 Save it to: `public_html/blog/en/YYYY-MM-DD-[slug-title].html` (use the current date).
 
 ## Step 3: Generate the Arabic Version
 Translate and adapt the article into Arabic. Make sure the tone remains professional and culturally relevant for the GCC/Oman market.
 Set `lang="ar"` and `dir="rtl"`.
-In the navbar, change "Back to Hub" to "العودة إلى المدونة" and link to `/blog-ar/`. Also, ensure the logo in the Arabic version links to `/` (the Arabic home page).
+In the navbar, change "Back to Hub" to "العودة إلى المدونة" and link to the Arabic blog (`/blog/ar/`). Also, ensure the logo in the Arabic version is identical to the English one but retains `dir="ltr"` to display correctly, and links to the Arabic home page (`/ar/`).
 Save it to: `public_html/blog/ar/YYYY-MM-DD-[slug-title-in-english].html`.
 
 ## Step 4: Generate the Image
@@ -176,7 +176,7 @@ Whenever you generate the files, use the following HTML template. Do NOT deviate
             <span class="text-blue-500">A</span><span class="text-red-500">I</span> <span class="text-white text-2xl md:text-3xl">Profit Lab</span>
         </a>
         <a href="/blog/" class="text-gray-300 hover:text-white font-semibold transition">Back to Hub</a>
-    </nav> <!-- Note: For ARABIC, update Logo link to "/" and "Back to Hub" to "/blog-ar/". -->
+    </nav> <!-- Note: For ARABIC, update Logo link to "/ar/" with dir="ltr", and "Back to Hub" to "العودة إلى المدونة" linking to "/blog/ar/". -->
 
     <!-- Main Content -->
     <main class="max-w-4xl mx-auto px-6 py-16">
@@ -190,7 +190,7 @@ Whenever you generate the files, use the following HTML template. Do NOT deviate
             <img src="/blog/images/[image_name].png" alt="[Image alt description]" class="w-full rounded-3xl mb-16 shadow-[0_0_50px_rgba(59,130,246,0.15)] border border-white/5 object-cover h-[500px]">
 
             <div class="prose max-w-none">
-                [PARAGRAPHS, HEADINGS, BLOCKQUOTES. MUST BE AT LEAST 1000 WORDS TOTAL, USING STORYTELLING NARRATIVE]
+                [PARAGRAPHS, HEADINGS, BLOCKQUOTES. MUST BE 800 TO 1000 WORDS TOTAL, USING STORYTELLING NARRATIVE]
             </div>
 
             <!-- FAQ Section ( MUST CONTAIN AT LEAST 10 FAQs optimized for AI Search / LLMs ) -->
