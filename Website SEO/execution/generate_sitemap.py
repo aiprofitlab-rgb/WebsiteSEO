@@ -79,7 +79,7 @@ def generate_sitemap():
         {"ar": "/whatsapp-receptionist-demo-ar/", "en": "/en/whatsapp-receptionist-demo/"},
         {"ar": "/missed-call-simulator-ar/", "en": "/missed-call-simulator-en/"},
         {"ar": "/campaign-roi-simulator-ar/", "en": "/campaign-roi-simulator/"},
-        {"ar": "/medflow-sales-automation-demo.html", "en": "/medflow-sales-automation-demo.html"},
+        {"ar": "/medflow-sales-automation-demo-ar.html", "en": "/medflow-sales-automation-demo.html"},
     ]
     for d in demos:
         urls.append({
