@@ -527,8 +527,8 @@ nav{
 }
 .inv-card.show{display:block;}
 .inv-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;}
-.inv-brو{font-family:var(--font-serif);font-size:17px;color:#0c0f0e;letter-spacing:-0.01em;}
-.inv-brو span{color:#2a7a4a;}
+.inv-brand{font-family:var(--font-serif);font-size:17px;color:#0c0f0e;letter-spacing:-0.01em;}
+.inv-brand span{color:#2a7a4a;}
 .inv-sub{font-size:11px;color:#7a9e87;margin-top:1px;}
 .inv-sent{font-size:10px;font-weight:700;background:#0c0f0e;color:var(--lime);padding:4px 10px;border-radius:20px;}
 .inv-line{height:1px;background:#e8efec;margin:10px 0;}
@@ -948,7 +948,7 @@ function mobileAdvance(n){ if(window.innerWidth<=960) switchTab(n); }
 /* ─── Helpers ─── */
 const $  = id => document.getElementById(id);
 const T  = (ms, fn) => setTimeout(fn, ms);
-const now = () => { const d=new التاريخ(); return d.getHours().toString().padStart(2,'0')+':'+d.getMinutes().toString().padStart(2,'0'); };
+const now = () => { const d=new Date(); return d.getHours().toString().padStart(2,'0')+':'+d.getMinutes().toString().padStart(2,'0'); };
 
 function fill(t){ $('wa-in').value=t; $('wa-in').focus(); }
 
@@ -1005,7 +1005,7 @@ function send(){
   const iid = 'INV-'+ordN;
   ordN++;
   const lines = txt.split(',').length;
-  const subtotal = Math.round((lines*200 + Math.rوom()*1000)/5)*5;
+  const subtotal = Math.round((lines*200 + Math.random()*1000)/5)*5;
   const vat      = Math.round(subtotal*0.05);
   const total    = subtotal+vat;
 
@@ -1079,7 +1079,7 @@ function send(){
     ic.innerHTML = `
       <div class="inv-top">
         <div>
-          <div class="inv-brو">AI Profit <span>Lab</span></div>
+          <div class="inv-brand">AI Profit <span>Lab</span></div>
           <div class="inv-sub">Tax فاتورة</div>
         </div>
         <span class="inv-sent">أرسلت ✓</span>
@@ -1101,7 +1101,7 @@ function send(){
   /* ── STEP 4: reminders ── */
   T(7200, ()=>{
     setStep(4,'active','جاري الجدولة...');
-    setProgress(85,'تمت جدولة التذكيرات','Arming overتستحق في escalation…');
+    setProgress(85,'تمت جدولة التذكيرات','تجهيز تصعيد التأخير...');
   });
 
   T(8400, ()=>{
@@ -1113,13 +1113,13 @@ function send(){
   /* ── STEP 5: overتستحق في ── */
   T(9100, ()=>{
     setStep(5,'active','تجهيز التصعيد...');
-    setProgress(95,'تجهيز التصعيد','Configuring overتستحق في manager alert…');
+    setProgress(95,'تجهيز التصعيد','إعداد تنبيه المدير للتأخير...');
   });
 
   T(10400, ()=>{
     setStep(5,'done','تم تجهيز التصعيد ✓');
     setProgress(100,'اكتمل المسار','الخطوات الـ 5 اكتملت — بدون عمل يدوي');
-    addBubble('🚨 Overتستحق في alert armed — manager will be notified if unpaid after مايو 30', 'sys');
+    addBubble('🚨 تنبيه التأخير جاهز — سيتم إخطار المدير في حال عدم الدفع بعد مايو 30', 'sys');
     setPipeBadge('اكتمل ✓');
     setOutBadge('انتهى ✓');
     setStatus('✓ اكتملت جميع الخطوات الخمس — انتهى المسار');
@@ -1129,7 +1129,7 @@ function send(){
       <span style="font-size:20px;flex-shrink:0">🚨</span>
       <div>
         <div class="od-title">تم تفعيل تصعيد المدير</div>
-        <div class="od-text">إذا لم يتم استلام الدفع بحلول 30 مايو 2026, your sales manager will automatically receive a WhatsApp message with the customer name, invoice number, amount, و days overتستحق في. No one needs to remember to follow up.</div>
+        <div class="od-text">إذا لم يتم استلام الدفع بحلول 30 مايو 2026، سيتلقى مدير المبيعات تلقائياً رسالة واتساب باسم العميل ورقم الفاتورة والمبلغ وأيام التأخير. لا حاجة لأي شخص لتذكر المتابعة.</div>
       </div>`;
     od.classList.add('show');
     $('reset-area').classList.add('show');
