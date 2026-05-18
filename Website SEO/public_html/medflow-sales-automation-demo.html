@@ -1,0 +1,1184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="canonical" href="https://aiprofitlab.io/medflow-sales-automation-demo.html" />
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2GPVY4Z5KR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-2GPVY4Z5KR');
+</script>
+
+<title>MedFlow Sales & Invoice Automation Demo | AI Profit Lab</title>
+<meta name="description" content="Experience MedFlow Sales & Invoice Automation. Discover how AI Profit Lab delivers 10x ROI for medical businesses in Oman and the GCC.">
+<meta name="keywords" content="medical sales automation, invoice automation, MedFlow, AI Profit Lab, Oman business automation, GCC">
+<meta name="author" content="AI Profit Lab">
+<meta name="robots" content="index, follow">
+
+<!-- Open Graph / Social Media -->
+<meta property="og:title" content="MedFlow Sales & Invoice Automation Demo | AI Profit Lab">
+<meta property="og:description" content="Watch how orders turn into invoices automatically without manual work.">
+<meta property="og:url" content="https://aiprofitlab.io/medflow-sales-automation-demo.html">
+<meta property="og:type" content="website">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="MedFlow Sales & Invoice Automation Demo | AI Profit Lab">
+<meta name="twitter:description" content="Automate medical sales and invoice processing.">
+
+<!-- LocalBusiness Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "AI Profit Lab",
+  "image": "https://aiprofitlab.io/og-image.jpg",
+  "url": "https://aiprofitlab.io",
+  "telephone": "+96899245250", 
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Muscat",
+    "addressRegion": "Muscat Governorate",
+    "addressCountry": "OM"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 23.5880,
+    "longitude": 58.3829
+  },
+  "description": "AI Profit Lab specializes in AI automation solutions for businesses in Oman, Qatar, UAE and the GCC. We provide smart medical sales automation and workflow automation.",
+  "priceRange": "$$"
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+/* ─── TOKENS ─── */
+:root {
+  --ink:       #0c0f0e;
+  --ink2:      #1a2820;
+  --ink3:      #1f3028;
+  --surface:   #f4f7f5;
+  --surface2:  #eaf1ec;
+  --surface3:  #ddeee2;
+  --lime:      #b8f241;
+  --lime2:     #9fd926;
+  --lime-dim:  rgba(184,242,65,0.12);
+  --lime-glow: rgba(184,242,65,0.25);
+  --red:       #ff5252;
+  --amber:     #ffb020;
+  --sky:       #5bb8f5;
+  --text:      #0c0f0e;
+  --text2:     #3d5a48;
+  --text3:     #7a9e87;
+  --text4:     #b0c9b8;
+  --border:    rgba(12,15,14,0.1);
+  --border2:   rgba(12,15,14,0.18);
+  --font-serif: 'Instrument Serif', Georgia, serif;
+  --font-sans:  'Geist', sans-serif;
+  --font-mono:  'Geist Mono', monospace;
+}
+
+/* ─── RESET ─── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--surface);
+  color:var(--text);
+  font-family:var(--font-sans);
+  font-size:16px;
+  line-height:1.6;
+  overflow-x:hidden;
+}
+
+/* ─── SUBTLE TEXTURE ─── */
+body::before{
+  content:'';
+  position:fixed;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events:none;z-index:0;opacity:0.4;
+}
+
+.page{position:relative;z-index:1;}
+
+/* ─── NAV ─── */
+nav{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1rem 5vw;
+  border-bottom:1px solid var(--border);
+  background:rgba(244,247,245,0.92);
+  backdrop-filter:blur(20px);
+  position:sticky;top:0;z-index:300;
+}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.logo-mark{
+  width:32px;height:32px;background:var(--ink);border-radius:8px;
+  display:flex;align-items:center;justify-content:center;
+}
+.logo-mark svg{width:16px;height:16px;fill:var(--lime);}
+.logo-type{font-family:var(--font-serif);font-size:19px;color:var(--ink);letter-spacing:-0.01em;}
+.logo-type em{font-style:italic;color:var(--text2);}
+
+.nav-right{display:flex;align-items:center;gap:12px;}
+.nav-pill{
+  font-size:12px;font-weight:500;padding:6px 14px;
+  border-radius:20px;border:1px solid var(--border2);
+  color:var(--text2);background:transparent;
+  font-family:var(--font-sans);cursor:pointer;
+  text-decoration:none;
+  transition:background .15s,color .15s;
+}
+.nav-pill:hover{background:var(--ink);color:var(--surface);}
+.nav-cta{
+  font-size:12px;font-weight:600;padding:7px 16px;
+  border-radius:20px;border:none;
+  color:var(--ink);background:var(--lime);
+  font-family:var(--font-sans);cursor:pointer;
+  text-decoration:none;
+  transition:background .15s,transform .1s;
+}
+.nav-cta:hover{background:var(--lime2);transform:translateY(-1px);}
+
+/* ─── HERO ─── */
+.hero{
+  padding:clamp(5rem,12vw,9rem) 5vw clamp(3rem,6vw,5rem);
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:3rem;
+  align-items:center;
+  max-width:1280px;
+  margin:0 auto;
+}
+@media(max-width:900px){.hero{grid-template-columns:1fr;gap:2.5rem;}}
+
+.hero-left{}
+.hero-tag{
+  display:inline-flex;align-items:center;gap:7px;
+  font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;
+  color:var(--text2);margin-bottom:1.5rem;
+  padding:5px 12px;border:1px solid var(--border2);border-radius:20px;
+}
+.tag-dot{width:6px;height:6px;border-radius:50%;background:var(--lime2);animation:blink 2s infinite;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:0.3;}}
+
+.hero-h1{
+  font-family:var(--font-serif);
+  font-size:clamp(2.8rem,5.5vw,4.5rem);
+  line-height:1.07;
+  letter-spacing:-0.02em;
+  color:var(--ink);
+  margin-bottom:1.4rem;
+}
+.hero-h1 em{font-style:italic;color:var(--text2);}
+
+.hero-body{
+  font-size:1.05rem;color:var(--text2);max-width:440px;
+  line-height:1.75;margin-bottom:2rem;font-weight:300;
+}
+
+.hero-actions{display:flex;gap:10px;flex-wrap:wrap;}
+.btn-dark{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--ink);color:var(--lime);
+  font-family:var(--font-sans);font-weight:600;font-size:14px;
+  padding:13px 24px;border-radius:10px;border:none;
+  cursor:pointer;text-decoration:none;
+  transition:background .15s,transform .1s;
+}
+.btn-dark:hover{background:var(--ink2);transform:translateY(-1px);}
+.btn-light{
+  display:inline-flex;align-items:center;gap:8px;
+  background:transparent;color:var(--text2);
+  font-family:var(--font-sans);font-weight:500;font-size:14px;
+  padding:13px 24px;border-radius:10px;border:1px solid var(--border2);
+  cursor:pointer;text-decoration:none;
+  transition:all .15s;
+}
+.btn-light:hover{background:var(--ink);color:var(--surface);border-color:var(--ink);}
+
+/* Hero right — mini stats */
+.hero-stats{
+  display:grid;grid-template-columns:1fr 1fr;gap:1px;
+  background:var(--border);border:1px solid var(--border);border-radius:16px;overflow:hidden;
+}
+.hs-cell{
+  background:var(--surface);padding:1.6rem 1.4rem;
+  display:flex;flex-direction:column;gap:6px;
+  transition:background .15s;
+}
+.hs-cell:hover{background:var(--surface2);}
+.hs-num{
+  font-family:var(--font-serif);font-size:2.4rem;
+  color:var(--ink);line-height:1;letter-spacing:-0.03em;
+}
+.hs-num .unit{font-size:1.3rem;color:var(--text3);}
+.hs-label{font-size:12px;color:var(--text3);font-weight:400;line-height:1.4;}
+.hs-pill{
+  display:inline-block;font-size:10px;font-weight:600;
+  padding:2px 8px;border-radius:20px;margin-top:2px;
+  background:var(--lime-dim);color:var(--lime2);border:1px solid rgba(184,242,65,0.3);
+}
+
+/* ─── SECTION ─── */
+.sec{padding:clamp(3rem,7vw,5.5rem) 5vw;max-width:1280px;margin:0 auto;}
+.sec-eyebrow{
+  font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;
+  color:var(--text3);margin-bottom:0.75rem;
+}
+.sec-h2{
+  font-family:var(--font-serif);
+  font-size:clamp(2rem,4vw,3rem);
+  line-height:1.1;letter-spacing:-0.02em;
+  color:var(--ink);margin-bottom:0.85rem;
+}
+.sec-h2 em{font-style:italic;color:var(--text2);}
+.sec-sub{font-size:1rem;color:var(--text2);max-width:500px;line-height:1.7;font-weight:300;}
+
+/* ─── DIVIDER ─── */
+.divider{height:1px;background:var(--border);max-width:100%;margin:0;}
+
+/* ═══════════════════════════════════
+   INTERACTIVE APP SECTION
+═══════════════════════════════════ */
+.app-section{
+  background:var(--ink);
+  padding:clamp(3rem,7vw,5rem) 5vw;
+  position:relative;overflow:hidden;
+}
+
+.app-section::before{
+  content:'';position:absolute;
+  top:-200px;right:-200px;
+  width:600px;height:600px;
+  background:radial-gradient(circle,rgba(184,242,65,0.08) 0%,transparent 65%);
+  pointer-events:none;
+}
+
+.app-label{
+  font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;
+  color:var(--lime);margin-bottom:0.75rem;
+  display:flex;align-items:center;gap:8px;
+}
+.app-label::before{content:'';width:24px;height:1px;background:var(--lime);}
+
+.app-title{
+  font-family:var(--font-serif);
+  font-size:clamp(2rem,4vw,2.8rem);
+  color:#fff;line-height:1.1;
+  letter-spacing:-0.02em;margin-bottom:0.6rem;
+}
+.app-title em{font-style:italic;color:var(--lime);}
+
+.app-subtitle{font-size:.95rem;color:rgba(255,255,255,0.45);max-width:500px;line-height:1.65;margin-bottom:2.5rem;font-weight:300;}
+
+/* APP SHELL */
+.app-shell{
+  background:#0e1a14;
+  border:1px solid rgba(255,255,255,0.08);
+  border-radius:20px;
+  overflow:hidden;
+  max-width:1100px;
+  margin:0 auto;
+  box-shadow:0 40px 80px rgba(0,0,0,0.5);
+}
+
+/* App chrome */
+.app-chrome{
+  background:#0a1310;
+  border-bottom:1px solid rgba(255,255,255,0.07);
+  padding:10px 16px;
+  display:flex;align-items:center;gap:10px;
+}
+.chrome-dots{display:flex;gap:6px;}
+.chrome-dot{width:10px;height:10px;border-radius:50%;}
+.cd-r{background:#ff5f57;} .cd-y{background:#febc2e;} .cd-g{background:#28c840;}
+.chrome-title{
+  flex:1;text-align:center;font-size:12px;color:rgba(255,255,255,0.35);
+  font-family:var(--font-mono);
+}
+
+/* App body: 3 panes */
+.app-body{
+  display:grid;
+  grid-template-columns:1fr 1.1fr 1fr;
+  min-height:580px;
+}
+@media(max-width:960px){
+  .app-body{grid-template-columns:1fr;min-height:auto;}
+  .pane{display:none;}
+  .pane.mobile-active{display:flex;}
+}
+
+/* Mobile tab bar */
+.mobile-tabs{
+  display:none;
+  background:#0a1310;
+  border-bottom:1px solid rgba(255,255,255,0.07);
+}
+@media(max-width:960px){
+  .mobile-tabs{display:grid;grid-template-columns:repeat(3,1fr);}
+}
+.mtab{
+  padding:10px 6px;font-size:11px;font-weight:600;
+  color:rgba(255,255,255,0.35);text-align:center;
+  border:none;background:transparent;cursor:pointer;
+  font-family:var(--font-sans);
+  border-bottom:2px solid transparent;
+  transition:color .15s,border-color .15s;
+  display:flex;flex-direction:column;align-items:center;gap:3px;
+}
+.mtab .mtab-icon{font-size:14px;}
+.mtab.active{color:var(--lime);border-bottom-color:var(--lime);}
+
+
+/* Pane shared */
+.pane{
+  border-right:1px solid rgba(255,255,255,0.06);
+  display:flex;flex-direction:column;
+}
+.pane:last-child{border-right:none;}
+
+.pane-header{
+  padding:14px 16px;
+  border-bottom:1px solid rgba(255,255,255,0.06);
+  display:flex;align-items:center;gap:8px;
+}
+.pane-icon{font-size:14px;}
+.pane-title{font-size:12px;font-weight:600;color:rgba(255,255,255,0.7);font-family:var(--font-sans);}
+.pane-badge{
+  margin-left:auto;font-size:10px;font-weight:600;
+  padding:2px 8px;border-radius:10px;
+  background:rgba(184,242,65,0.15);color:var(--lime);
+}
+
+/* ── PANE 1: WhatsApp ── */
+.wa-body{
+  flex:1;padding:14px;display:flex;flex-direction:column;gap:8px;
+  overflow-y:auto;max-height:420px;
+  scrollbar-width:thin;scrollbar-color:rgba(255,255,255,0.1) transparent;
+}
+@media(max-width:960px){.wa-body{max-height:320px;}}
+.bubble{
+  max-width:82%;padding:9px 12px;
+  border-radius:12px;font-size:13px;line-height:1.55;
+  animation:pop .25s cubic-bezier(.34,1.56,.64,1);
+}
+@keyframes pop{from{opacity:0;transform:scale(.92) translateY(6px);}to{opacity:1;transform:none;}}
+.b-in{background:#1a2e24;border:1px solid rgba(255,255,255,0.07);color:rgba(255,255,255,0.75);align-self:flex-start;}
+.b-out{background:var(--lime);color:var(--ink);align-self:flex-end;font-weight:500;}
+.b-sys{
+  background:rgba(184,242,65,0.07);border:1px solid rgba(184,242,65,0.15);
+  color:rgba(184,242,65,0.8);font-size:11.5px;
+  text-align:center;align-self:center;width:100%;
+  border-radius:8px;padding:7px 12px;
+  font-family:var(--font-mono);
+}
+.b-time{font-size:10px;opacity:0.45;margin-top:3px;display:block;}
+.b-in .b-time{text-align:left;} .b-out .b-time{text-align:right;}
+
+.typing-dots{
+  display:none;align-self:flex-start;
+  background:#1a2e24;border:1px solid rgba(255,255,255,0.07);
+  padding:10px 14px;border-radius:12px;gap:4px;
+}
+.typing-dots.on{display:flex;}
+.tdot{width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,0.4);animation:tb 1.2s infinite;}
+.tdot:nth-child(2){animation-delay:.2s;}.tdot:nth-child(3){animation-delay:.4s;}
+@keyframes tb{0%,80%,100%{transform:translateY(0);opacity:.35;}40%{transform:translateY(-5px);opacity:1;}}
+
+.wa-input-row{
+  padding:10px 12px;
+  border-top:1px solid rgba(255,255,255,0.06);
+  display:flex;gap:8px;background:#0a1310;
+}
+.wa-input{
+  flex:1;background:#1a2e24;border:1px solid rgba(255,255,255,0.1);
+  border-radius:20px;padding:8px 14px;
+  font-family:var(--font-sans);font-size:13px;color:#fff;outline:none;
+  transition:border-color .2s;
+}
+.wa-input:focus{border-color:rgba(184,242,65,0.4);}
+.wa-input::placeholder{color:rgba(255,255,255,0.2);}
+.wa-send{
+  width:34px;height:34px;background:var(--lime);border:none;
+  border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;transition:background .15s,transform .1s;
+}
+.wa-send:hover{background:var(--lime2);transform:scale(1.06);}
+.wa-send svg{width:14px;height:14px;fill:var(--ink);}
+
+/* Quick fills */
+.quick-row{
+  padding:10px 12px 12px;
+  display:flex;flex-direction:column;gap:6px;
+  border-top:1px solid rgba(255,255,255,0.04);
+}
+.quick-label{font-size:10px;color:rgba(255,255,255,0.25);font-family:var(--font-mono);text-transform:uppercase;letter-spacing:0.08em;}
+.quick-btns{display:flex;flex-wrap:wrap;gap:5px;}
+.qbtn{
+  font-size:11px;padding:4px 10px;border-radius:20px;
+  border:1px solid rgba(255,255,255,0.12);background:transparent;
+  color:rgba(255,255,255,0.5);cursor:pointer;
+  font-family:var(--font-sans);transition:all .15s;
+}
+.qbtn:hover{border-color:var(--lime);color:var(--lime);background:rgba(184,242,65,0.07);}
+
+/* ── PANE 2: Pipeline ── */
+.pipeline-body{flex:1;padding:14px;display:flex;flex-direction:column;gap:6px;overflow-y:auto;max-height:460px;}
+@media(max-width:960px){.pipeline-body{max-height:420px;}}
+
+/* Progress ring area */
+.prog-area{
+  display:flex;align-items:center;gap:14px;
+  padding:12px 14px;
+  background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);
+  border-radius:12px;margin-bottom:2px;
+}
+.prog-ring-wrap{position:relative;width:52px;height:52px;flex-shrink:0;}
+.prog-ring-wrap svg{transform:rotate(-90deg);}
+.pr-bg{fill:none;stroke:rgba(255,255,255,0.07);stroke-width:4;}
+.pr-fill{fill:none;stroke:var(--lime);stroke-width:4;stroke-linecap:round;stroke-dasharray:132;stroke-dashoffset:132;transition:stroke-dashoffset .7s cubic-bezier(.4,0,.2,1);}
+.prog-ring-pct{
+  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-mono);font-size:11px;font-weight:600;color:var(--lime);
+}
+.prog-text{flex:1;}
+.prog-status{font-size:13px;font-weight:600;color:#fff;margin-bottom:2px;}
+.prog-sub{font-size:11px;color:rgba(255,255,255,0.35);}
+
+/* Step rows */
+.step-row{
+  display:flex;align-items:flex-start;gap:10px;
+  padding:10px 12px;border-radius:10px;
+  border:1px solid transparent;
+  background:transparent;
+  transition:all .3s ease;
+}
+.step-row.active{
+  background:rgba(184,242,65,0.06);
+  border-color:rgba(184,242,65,0.18);
+}
+.step-row.done{
+  background:rgba(255,255,255,0.03);
+  border-color:rgba(255,255,255,0.07);
+}
+
+.sr-check{
+  width:22px;height:22px;border-radius:50%;flex-shrink:0;
+  border:1.5px solid rgba(255,255,255,0.15);
+  display:flex;align-items:center;justify-content:center;
+  margin-top:1px;transition:all .3s;
+}
+.step-row.active .sr-check{border-color:var(--lime);animation:ring-pulse 1.5s infinite;}
+.step-row.done .sr-check{background:var(--lime);border-color:var(--lime);}
+@keyframes ring-pulse{0%,100%{box-shadow:0 0 0 0 rgba(184,242,65,.4);}50%{box-shadow:0 0 0 6px rgba(184,242,65,0);}}
+.sr-check svg{width:10px;height:10px;fill:var(--ink);display:none;}
+.step-row.done .sr-check svg{display:block;}
+
+.sr-icon{font-size:16px;margin-top:0px;}
+.sr-body{flex:1;}
+.sr-name{font-size:12.5px;font-weight:600;color:rgba(255,255,255,0.8);}
+.sr-desc{font-size:11px;color:rgba(255,255,255,0.3);margin-top:2px;line-height:1.4;}
+.sr-status{font-size:10.5px;font-weight:600;font-family:var(--font-mono);margin-top:4px;color:rgba(255,255,255,0.2);text-transform:uppercase;letter-spacing:.05em;}
+.step-row.active .sr-status{color:var(--lime);}
+.step-row.done .sr-status{color:rgba(184,242,65,0.5);}
+
+/* ── PANE 3: Output ── */
+.output-body{flex:1;padding:14px;display:flex;flex-direction:column;gap:8px;overflow-y:auto;max-height:460px;}
+
+.out-placeholder{
+  flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:8px;text-align:center;padding:2rem;
+}
+.out-placeholder-icon{font-size:32px;opacity:0.2;}
+.out-placeholder-text{font-size:12px;color:rgba(255,255,255,0.2);line-height:1.5;}
+
+/* Order card */
+.out-card{
+  background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.09);
+  border-radius:12px;padding:14px;display:none;
+  animation:fade-up .35s ease;
+}
+.out-card.show{display:block;}
+@keyframes fade-up{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
+
+.oc-toprow{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:10px;}
+.oc-id{font-family:var(--font-mono);font-size:11px;color:rgba(255,255,255,0.3);background:rgba(255,255,255,0.05);padding:3px 7px;border-radius:4px;}
+.oc-amount{font-family:var(--font-serif);font-size:20px;color:#fff;letter-spacing:-0.02em;}
+.oc-items{font-size:12px;color:rgba(255,255,255,0.45);line-height:1.5;margin-bottom:10px;}
+.oc-chips{display:flex;flex-wrap:wrap;gap:5px;}
+.chip{font-size:10.5px;font-weight:500;padding:3px 9px;border-radius:20px;border:1px solid;}
+.chip-g{color:var(--lime);background:rgba(184,242,65,0.1);border-color:rgba(184,242,65,0.2);}
+.chip-a{color:var(--amber);background:rgba(255,176,32,0.1);border-color:rgba(255,176,32,0.2);}
+.chip-b{color:var(--sky);background:rgba(91,184,245,0.1);border-color:rgba(91,184,245,0.2);}
+
+/* Invoice card */
+.inv-card{
+  background:#fff;border-radius:12px;padding:16px;
+  display:none;animation:fade-up .35s ease;
+}
+.inv-card.show{display:block;}
+.inv-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;}
+.inv-brand{font-family:var(--font-serif);font-size:17px;color:#0c0f0e;letter-spacing:-0.01em;}
+.inv-brand span{color:#2a7a4a;}
+.inv-sub{font-size:11px;color:#7a9e87;margin-top:1px;}
+.inv-sent{font-size:10px;font-weight:700;background:#0c0f0e;color:var(--lime);padding:4px 10px;border-radius:20px;}
+.inv-line{height:1px;background:#e8efec;margin:10px 0;}
+.inv-row{display:flex;justify-content:space-between;font-size:12px;color:#3d5a48;padding:3px 0;}
+.inv-row.bold{font-weight:700;font-size:13.5px;color:#0c0f0e;margin-top:4px;}
+.inv-footer{font-size:11px;color:#a0baa8;margin-top:10px;line-height:1.5;}
+
+/* Overdue card */
+.od-card{
+  background:rgba(255,82,82,0.07);border:1px solid rgba(255,82,82,0.2);
+  border-radius:12px;padding:14px;
+  display:none;animation:fade-up .35s ease;
+}
+.od-card.show{display:flex;gap:10px;align-items:flex-start;}
+.od-title{font-size:13px;font-weight:600;color:var(--red);margin-bottom:3px;}
+.od-text{font-size:12px;color:rgba(255,130,130,0.7);line-height:1.5;}
+
+/* Reset button */
+.reset-area{
+  padding:12px;border-top:1px solid rgba(255,255,255,0.06);
+  display:none;
+}
+.reset-area.show{display:block;}
+.reset-btn{
+  width:100%;padding:9px;border-radius:8px;
+  border:1px solid rgba(255,255,255,0.1);background:transparent;
+  color:rgba(255,255,255,0.4);font-family:var(--font-sans);
+  font-size:12px;cursor:pointer;transition:all .15s;
+}
+.reset-btn:hover{border-color:rgba(255,255,255,0.2);color:rgba(255,255,255,0.7);}
+
+/* App bottom bar */
+.app-bottom{
+  border-top:1px solid rgba(255,255,255,0.06);
+  padding:10px 16px;
+  display:flex;align-items:center;justify-content:space-between;
+  background:#0a1310;
+}
+.ab-left{font-size:11px;color:rgba(255,255,255,0.2);font-family:var(--font-mono);}
+.ab-steps{display:flex;gap:4px;}
+.ab-step{
+  width:7px;height:7px;border-radius:50%;
+  background:rgba(255,255,255,0.1);transition:background .3s;
+}
+.ab-step.done{background:var(--lime);}
+.ab-step.active{background:var(--lime);animation:blink 1s infinite;}
+
+/* ─── BEFORE/AFTER ─── */
+.ba-wrap{
+  padding:clamp(3rem,7vw,5.5rem) 5vw;
+  background:var(--surface2);
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+}
+.ba-inner{max-width:1280px;margin:0 auto;}
+.ba-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:2.5rem;}
+@media(max-width:640px){.ba-grid{grid-template-columns:1fr;}}
+
+.ba-card{border-radius:16px;padding:1.75rem;border:1px solid;}
+.ba-card.bef{background:#fff;border-color:rgba(255,82,82,0.2);}
+.ba-card.aft{background:var(--ink);border-color:rgba(184,242,65,0.25);}
+
+.ba-head{display:flex;align-items:center;gap:8px;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:1.25rem;}
+.ba-card.bef .ba-head{color:var(--red);}
+.ba-card.aft .ba-head{color:var(--lime);}
+.ba-hdot{width:8px;height:8px;border-radius:50%;}
+.ba-card.bef .ba-hdot{background:var(--red);}
+.ba-card.aft .ba-hdot{background:var(--lime);animation:blink 2s infinite;}
+
+.ba-list{list-style:none;display:flex;flex-direction:column;gap:9px;}
+.ba-list li{display:flex;align-items:flex-start;gap:10px;font-size:13.5px;line-height:1.5;}
+.ba-card.bef .ba-list li{color:#8a5050;}
+.ba-card.aft .ba-list li{color:rgba(255,255,255,0.6);}
+.li-ico{width:18px;height:18px;border-radius:50%;flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:800;}
+.ba-card.bef .li-ico{background:rgba(255,82,82,0.12);color:var(--red);}
+.ba-card.aft .li-ico{background:rgba(184,242,65,0.15);color:var(--lime);}
+
+
+
+/* ─── CTA ─── */
+.cta-wrap{
+  background:var(--ink);padding:clamp(4rem,10vw,7rem) 5vw;
+  text-align:center;position:relative;overflow:hidden;
+}
+.cta-wrap::before{
+  content:'';position:absolute;top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  width:700px;height:400px;
+  background:radial-gradient(ellipse,rgba(184,242,65,0.1) 0%,transparent 65%);
+  pointer-events:none;
+}
+.cta-h2{
+  font-family:var(--font-serif);
+  font-size:clamp(2.2rem,5vw,4rem);
+  color:#fff;line-height:1.1;letter-spacing:-0.025em;
+  margin-bottom:1.2rem;
+}
+.cta-h2 em{font-style:italic;color:var(--lime);}
+.cta-body{font-size:1.05rem;color:rgba(255,255,255,0.45);max-width:460px;margin:0 auto 2.5rem;line-height:1.7;font-weight:300;}
+
+/* ─── FOOTER ─── */
+footer{
+  padding:1.75rem 5vw;border-top:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;
+}
+.f-logo{font-family:var(--font-serif);font-size:16px;color:var(--text2);}
+.f-copy{font-size:12px;color:var(--text3);}
+
+/* ─── FADE ANIMATION ─── */
+.fu{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease;}
+.fu.vis{opacity:1;transform:none;}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:480px){
+  nav .nav-right .nav-pill{display:none;}
+  .sec,.app-section,.ba-wrap,.cta-wrap{padding-left:4vw;padding-right:4vw;}
+  footer{flex-direction:column;text-align:center;}
+  .hero{padding-top:3.5rem;}
+  .app-shell{border-radius:14px;}
+  .ab-left{font-size:10px;}
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- ── NAV ── -->
+<nav>
+  <a href="/en/" class="logo" style="text-decoration:none;">
+    <span style="font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 24px; letter-spacing: -0.05em; color: #0c0f0e;">
+        <span style="color: #3B82F6;">A</span><span style="color: #EF4444;">I</span> <span style="font-size: 18px;">Profit Lab</span>
+    </span>
+  </a>
+  <div class="nav-right">
+    <a class="nav-pill" href="#how">How it works</a>
+    <a class="nav-cta" href="#demo">Try the demo</a>
+  </div>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero fu">
+  <div class="hero-left">
+    <div class="hero-tag"><span class="tag-dot"></span>Medical sales automation</div>
+    <h1 class="hero-h1">Orders in.<br>Invoices out.<br><em>Automatically.</em></h1>
+    <p class="hero-body">From WhatsApp order to paid invoice without a single manual step. Your team closes deals — the system handles everything else.</p>
+    <div class="hero-actions">
+      <a class="btn-dark" href="#demo">↓ Try the live demo</a>
+      <a class="btn-light" href="#how">See how it works</a>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="hs-cell">
+      <div class="hs-num" id="hn1">0</div>
+      <div class="hs-label">Orders processed<br>this month</div>
+      <span class="hs-pill">↑ 23% vs last month</span>
+    </div>
+    <div class="hs-cell">
+      <div class="hs-num">&lt;<span class="unit">2m</span></div>
+      <div class="hs-label">Invoice sent after<br>order arrives</div>
+      <span class="hs-pill">Fully automatic</span>
+    </div>
+    <div class="hs-cell">
+      <div class="hs-num" id="hn2">0<span class="unit">h</span></div>
+      <div class="hs-label">Saved per week<br>per sales rep</div>
+      <span class="hs-pill">Zero data entry</span>
+    </div>
+    <div class="hs-cell">
+      <div class="hs-num" id="hn3">0<span class="unit">%</span></div>
+      <div class="hs-label">Improvement in<br>on-time collections</div>
+      <span class="hs-pill">Avg across clients</span>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ══════════════════════════════════
+     INTERACTIVE APP DEMO
+══════════════════════════════════ -->
+<section class="app-section" id="demo">
+  <div style="max-width:1100px;margin:0 auto;">
+    <div class="app-label">Interactive simulation</div>
+    <h2 class="app-title">Be the sales rep.<br><em>Watch it automate.</em></h2>
+    <p class="app-subtitle">Type a real order below — exactly like a customer would WhatsApp you. Then watch the system process every step live across all three panels.</p>
+
+    <div class="app-shell">
+      <!-- Chrome bar -->
+      <div class="app-chrome">
+        <div class="chrome-dots">
+          <div class="chrome-dot cd-r"></div>
+          <div class="chrome-dot cd-y"></div>
+          <div class="chrome-dot cd-g"></div>
+        </div>
+        <div class="chrome-title">AI Profit Lab — Sales Dashboard</div>
+      </div>
+
+      <!-- Mobile tab switcher (hidden on desktop) -->
+      <div class="mobile-tabs">
+        <button class="mtab active" id="mtab1" onclick="switchTab(1)"><span class="mtab-icon">💬</span>Order</button>
+        <button class="mtab" id="mtab2" onclick="switchTab(2)"><span class="mtab-icon">⚡</span>Pipeline</button>
+        <button class="mtab" id="mtab3" onclick="switchTab(3)"><span class="mtab-icon">📋</span>Output</button>
+      </div>
+
+      <!-- Three panes -->
+      <div class="app-body">
+
+        <!-- PANE 1: WhatsApp -->
+        <div class="pane mobile-active" id="pane1">
+          <div class="pane-header">
+            <span class="pane-icon">💬</span>
+            <span class="pane-title">WhatsApp — Al Shifa Pharmacy</span>
+            <span class="pane-badge" id="wa-badge">online</span>
+          </div>
+          <div class="wa-body" id="chat">
+            <div class="bubble b-in">
+              Salam! We need our monthly order please 🙏
+              <span class="b-time">10:21 AM</span>
+            </div>
+          </div>
+          <div id="typing" class="typing-dots">
+            <div class="tdot"></div><div class="tdot"></div><div class="tdot"></div>
+          </div>
+          <div class="wa-input-row">
+            <input class="wa-input" id="wa-in" placeholder="Type order (e.g. 100x Paracetamol, 50x Amoxicillin)…"/>
+            <button class="wa-send" id="send-btn" onclick="send()">
+              <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+            </button>
+          </div>
+          <div class="quick-row">
+            <div class="quick-label">Quick fill</div>
+            <div class="quick-btns">
+              <button class="qbtn" onclick="fill('100x Paracetamol 500mg, 50x Amoxicillin, 30x ORS sachets')">💊 Pharmacy order</button>
+              <button class="qbtn" onclick="fill('200x Surgical Gloves L, 500x Face Masks, 10x BP Monitors')">🧤 Clinic order</button>
+              <button class="qbtn" onclick="fill('60x Insulin 100IU, 200x Glucose Strips, 24x IV Cannula 18G')">💉 Hospital order</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- PANE 2: Pipeline -->
+        <div class="pane" id="pane2">
+          <div class="pane-header">
+            <span class="pane-icon">⚡</span>
+            <span class="pane-title">Automation Pipeline</span>
+            <span class="pane-badge" id="pipe-badge">idle</span>
+          </div>
+          <div class="pipeline-body">
+            <div class="prog-area">
+              <div class="prog-ring-wrap">
+                <svg width="52" height="52" viewBox="0 0 52 52">
+                  <circle class="pr-bg" cx="26" cy="26" r="21"/>
+                  <circle class="pr-fill" id="pr-fill" cx="26" cy="26" r="21"/>
+                </svg>
+                <div class="prog-ring-pct" id="pr-pct">0%</div>
+              </div>
+              <div class="prog-text">
+                <div class="prog-status" id="prog-status">Waiting for order</div>
+                <div class="prog-sub" id="prog-sub">Send an order to begin the workflow</div>
+              </div>
+            </div>
+
+            <div class="step-row" id="sr1">
+              <div class="sr-check"><svg viewBox="0 0 12 9"><polyline points="1,5 4,8 11,1" stroke="#0c0f0e" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              <span class="sr-icon">💬</span>
+              <div class="sr-body">
+                <div class="sr-name">Order received</div>
+                <div class="sr-desc">WhatsApp message parsed and captured</div>
+                <div class="sr-status" id="sr1-s">waiting</div>
+              </div>
+            </div>
+
+            <div class="step-row" id="sr2">
+              <div class="sr-check"><svg viewBox="0 0 12 9"><polyline points="1,5 4,8 11,1" stroke="#0c0f0e" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              <span class="sr-icon">📊</span>
+              <div class="sr-body">
+                <div class="sr-name">Logged to Google Sheet</div>
+                <div class="sr-desc">Row added with ID, items, customer, rep</div>
+                <div class="sr-status" id="sr2-s">waiting</div>
+              </div>
+            </div>
+
+            <div class="step-row" id="sr3">
+              <div class="sr-check"><svg viewBox="0 0 12 9"><polyline points="1,5 4,8 11,1" stroke="#0c0f0e" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              <span class="sr-icon">📄</span>
+              <div class="sr-body">
+                <div class="sr-name">Invoice generated & sent</div>
+                <div class="sr-desc">PDF delivered via email + WhatsApp</div>
+                <div class="sr-status" id="sr3-s">waiting</div>
+              </div>
+            </div>
+
+            <div class="step-row" id="sr4">
+              <div class="sr-check"><svg viewBox="0 0 12 9"><polyline points="1,5 4,8 11,1" stroke="#0c0f0e" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              <span class="sr-icon">⏰</span>
+              <div class="sr-body">
+                <div class="sr-name">Payment reminders scheduled</div>
+                <div class="sr-desc">Auto-sends at D-3 and D-1</div>
+                <div class="sr-status" id="sr4-s">waiting</div>
+              </div>
+            </div>
+
+            <div class="step-row" id="sr5">
+              <div class="sr-check"><svg viewBox="0 0 12 9"><polyline points="1,5 4,8 11,1" stroke="#0c0f0e" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              <span class="sr-icon">🚨</span>
+              <div class="sr-body">
+                <div class="sr-name">Overdue escalation armed</div>
+                <div class="sr-desc">Manager WhatsApp alert if payment missed</div>
+                <div class="sr-status" id="sr5-s">waiting</div>
+              </div>
+            </div>
+          </div>
+          <div class="reset-area" id="reset-area">
+            <button class="reset-btn" onclick="reset()">↺ Reset and try again</button>
+          </div>
+        </div>
+
+        <!-- PANE 3: Output -->
+        <div class="pane" id="pane3">
+          <div class="pane-header">
+            <span class="pane-icon">📋</span>
+            <span class="pane-title">Order & Invoice Output</span>
+            <span class="pane-badge" id="out-badge">waiting</span>
+          </div>
+          <div class="output-body" id="output-body">
+            <div class="out-placeholder" id="placeholder">
+              <div class="out-placeholder-icon">📋</div>
+              <div class="out-placeholder-text">Order details, invoice preview, and alerts will appear here as the workflow runs.</div>
+            </div>
+            <div class="out-card" id="order-card"></div>
+            <div class="inv-card" id="inv-card"></div>
+            <div class="od-card" id="od-card"></div>
+          </div>
+        </div>
+
+      </div><!-- app-body -->
+
+      <!-- Bottom bar -->
+      <div class="app-bottom">
+        <div class="ab-left" id="ab-status">Ready — type or pick a quick fill to begin</div>
+        <div class="ab-steps">
+          <div class="ab-step" id="abs1"></div>
+          <div class="ab-step" id="abs2"></div>
+          <div class="ab-step" id="abs3"></div>
+          <div class="ab-step" id="abs4"></div>
+          <div class="ab-step" id="abs5"></div>
+        </div>
+      </div>
+    </div><!-- app-shell -->
+  </div>
+</section>
+
+<!-- ── BEFORE/AFTER ── -->
+<div class="ba-wrap fu" id="how">
+  <div class="ba-inner">
+    <div class="sec-eyebrow">The transformation</div>
+    <h2 class="sec-h2">What your team's day looks like<br><em>before and after</em></h2>
+    <div class="ba-grid">
+      <div class="ba-card bef">
+        <div class="ba-head"><span class="ba-hdot"></span>Without Automation</div>
+        <ul class="ba-list">
+          <li><span class="li-ico">✕</span>Rep takes order on WhatsApp, details get lost or misread</li>
+          <li><span class="li-ico">✕</span>Admin manually types into Tally — takes 15–30 min per order</li>
+          <li><span class="li-ico">✕</span>Invoice created late, sent to wrong contact, or not at all</li>
+          <li><span class="li-ico">✕</span>Payment chased by phone — no one owns due-date tracking</li>
+          <li><span class="li-ico">✕</span>Manager hears about overdue invoices only at month-end review</li>
+          <li><span class="li-ico">✕</span>Zero visibility into the sales pipeline or collection rate</li>
+        </ul>
+      </div>
+      <div class="ba-card aft">
+        <div class="ba-head"><span class="ba-hdot"></span>With Automation</div>
+        <ul class="ba-list">
+          <li><span class="li-ico">✓</span>Order auto-captured the moment it arrives on WhatsApp or email</li>
+          <li><span class="li-ico">✓</span>Instantly logged to Google Sheet — zero manual entry, zero errors</li>
+          <li><span class="li-ico">✓</span>Branded PDF invoice generated and sent in under 2 minutes</li>
+          <li><span class="li-ico">✓</span>Automated reminders go out at D-3 and D-1 without lifting a finger</li>
+          <li><span class="li-ico">✓</span>Manager gets a WhatsApp alert the same day an invoice goes overdue</li>
+          <li><span class="li-ico">✓</span>Live dashboard — full order, invoice, and payment visibility</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ── CTA ── -->
+<div class="cta-wrap fu">
+  <h2 class="cta-h2">Stop chasing.<br>Start <em>collecting.</em></h2>
+  <p class="cta-body">Set up in under a week. Works with your existing WhatsApp number and Google account. No disruption to how your reps work today.</p>
+  <div class="btn-row" style="justify-content:center;display:flex;gap:12px;flex-wrap:wrap;">
+    <a class="btn-dark" href="/en/contact-en/">Request a demo</a>
+    <a href="/en/services-en/" style="display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.07);color:rgba(255,255,255,0.6);font-family:var(--font-sans);font-weight:500;font-size:14px;padding:13px 24px;border-radius:10px;border:1px solid rgba(255,255,255,0.1);text-decoration:none;transition:all .15s;" onmouseover="this.style.background='rgba(255,255,255,0.12)'" onmouseout="this.style.background='rgba(255,255,255,0.07)'">See pricing</a>
+  </div>
+</div>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <span class="f-logo" style="font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 20px; letter-spacing: -0.05em; color: #0c0f0e;">
+    <span style="color: #3B82F6;">A</span><span style="color: #EF4444;">I</span> <span style="font-size: 16px;">Profit Lab</span>
+  </span>
+  <span class="f-copy">© 2026 AI Profit Lab · Sales & Invoice Automation for Medical Teams · Muscat, Oman</span>
+</footer>
+
+</div><!-- page -->
+
+<script>
+/* ─── State ─── */
+let running = false, ordN = 1048;
+
+/* ─── Mobile tab switcher ─── */
+function switchTab(n){
+  [1,2,3].forEach(i=>{
+    document.getElementById('pane'+i).classList.toggle('mobile-active', i===n);
+    document.getElementById('mtab'+i).classList.toggle('active', i===n);
+  });
+}
+function mobileAdvance(n){ if(window.innerWidth<=960) switchTab(n); }
+
+/* ─── Helpers ─── */
+const $  = id => document.getElementById(id);
+const T  = (ms, fn) => setTimeout(fn, ms);
+const now = () => { const d=new Date(); return d.getHours().toString().padStart(2,'0')+':'+d.getMinutes().toString().padStart(2,'0'); };
+
+function fill(t){ $('wa-in').value=t; $('wa-in').focus(); }
+
+function addBubble(txt, type){
+  const chat = $('chat');
+  // remove typing node if present (it's outside chat but let's scroll anyway)
+  const d = document.createElement('div');
+  d.className = 'bubble ' + ({out:'b-out', sys:'b-sys', in:'b-in'}[type]||'b-in');
+  d.innerHTML = txt + (type!=='sys' ? `<span class="b-time">${now()}</span>` : '');
+  chat.appendChild(d);
+  chat.scrollTop = chat.scrollHeight;
+}
+
+function showTyping(on){
+  $('typing').classList.toggle('on', on);
+  const c=$('chat'); c.scrollTop=c.scrollHeight;
+}
+
+function setStep(n, state, label){
+  const el=$('sr'+n);
+  el.classList.remove('active','done');
+  if(state) el.classList.add(state);
+  $('sr'+n+'-s').textContent = label;
+  // bottom dots
+  const dot=$('abs'+n);
+  dot.classList.remove('active','done');
+  if(state==='active') dot.classList.add('active');
+  if(state==='done') dot.classList.add('done');
+}
+
+function setProgress(pct, status, sub){
+  const offset = 132 - (132 * pct / 100);
+  $('pr-fill').style.strokeDashoffset = offset;
+  $('pr-pct').textContent = pct+'%';
+  if(status) $('prog-status').textContent = status;
+  if(sub) $('prog-sub').textContent = sub;
+}
+
+function setPipeBadge(txt){ $('pipe-badge').textContent = txt; }
+function setOutBadge(txt){  $('out-badge').textContent  = txt; }
+function setStatus(txt){    $('ab-status').textContent  = txt; }
+
+/* ─── Main send ─── */
+function send(){
+  if(running) return;
+  const inp = $('wa-in');
+  const txt = inp.value.trim();
+  if(!txt){ inp.focus(); return; }
+  running = true;
+  inp.disabled = true;
+  $('send-btn').disabled = true;
+
+  const oid = 'ORD-'+ordN;
+  const iid = 'INV-'+ordN;
+  ordN++;
+  const lines = txt.split(',').length;
+  const subtotal = Math.round((lines*200 + Math.random()*1000)/5)*5;
+  const vat      = Math.round(subtotal*0.05);
+  const total    = subtotal+vat;
+
+  addBubble(txt, 'out');
+  $('placeholder').style.display='none';
+
+  setPipeBadge('running');
+  setStatus('Processing order…');
+  mobileAdvance(2);
+
+  /* ── STEP 1: received ── */
+  T(600, ()=>{
+    setStep(1,'active','capturing…');
+    setProgress(5,'Capturing order','Reading WhatsApp message…');
+    showTyping(true);
+  });
+
+  T(2000, ()=>{
+    showTyping(false);
+    addBubble('✅ Got it! Processing your order now…', 'sys');
+    setStep(1,'done','captured ✓');
+    setProgress(20,'Order captured','Logging to Google Sheet…');
+    setOutBadge('order logged');
+    setStatus('Step 1 complete — order captured');
+    mobileAdvance(3);
+
+    // show order card
+    const oc = $('order-card');
+    oc.innerHTML = `
+      <div class="oc-toprow">
+        <span class="oc-id">${oid}</span>
+        <span class="oc-amount">OMR ${subtotal.toLocaleString()}</span>
+      </div>
+      <div class="oc-items">${txt}</div>
+      <div class="oc-chips">
+        <span class="chip chip-g">Al Shifa Pharmacy</span>
+        <span class="chip chip-b">WhatsApp</span>
+        <span class="chip chip-a">Due: 30 May 2026</span>
+      </div>`;
+    oc.classList.add('show');
+  });
+
+  /* ── STEP 2: sheet ── */
+  T(2700, ()=>{
+    setStep(2,'active','writing to sheet…');
+    setProgress(35,'Logging to Google Sheet','Adding row with order details…');
+  });
+
+  T(4100, ()=>{
+    setStep(2,'done','row added ✓');
+    setProgress(50,'Sheet updated','Generating invoice PDF…');
+    addBubble(`📊 Logged to Google Sheet as ${oid}`, 'sys');
+    setStatus('Step 2 complete — logged to sheet');
+  });
+
+  /* ── STEP 3: invoice ── */
+  T(4800, ()=>{
+    setStep(3,'active','generating PDF…');
+    setProgress(60,'Generating invoice','Building PDF from your template…');
+  });
+
+  T(6500, ()=>{
+    setStep(3,'done','invoice sent ✓');
+    setProgress(75,'Invoice sent','Scheduling payment reminders…');
+    addBubble(`📄 Invoice ${iid} sent — OMR ${total.toLocaleString()} due 30 May`, 'sys');
+    setOutBadge('invoice sent');
+    setStatus('Step 3 complete — invoice delivered');
+
+    const ic = $('inv-card');
+    const itemsShort = txt.length > 45 ? txt.slice(0,45)+'…' : txt;
+    ic.innerHTML = `
+      <div class="inv-top">
+        <div>
+          <div class="inv-brand">AI Profit <span>Lab</span></div>
+          <div class="inv-sub">Tax Invoice</div>
+        </div>
+        <span class="inv-sent">SENT ✓</span>
+      </div>
+      <div class="inv-line"></div>
+      <div class="inv-row"><span>Bill to</span><span style="font-weight:600">Al Shifa Pharmacy</span></div>
+      <div class="inv-row"><span>Invoice #</span><span>${iid}</span></div>
+      <div class="inv-row"><span>Date</span><span>08 May 2026</span></div>
+      <div class="inv-row"><span>Due date</span><span style="font-weight:600;color:#b35a00">30 May 2026</span></div>
+      <div class="inv-line"></div>
+      <div class="inv-row"><span>Items</span><span style="text-align:right;max-width:55%">${itemsShort}</span></div>
+      <div class="inv-row"><span>Subtotal</span><span>OMR ${subtotal.toLocaleString()}</span></div>
+      <div class="inv-row"><span>VAT 5%</span><span>OMR ${vat.toLocaleString()}</span></div>
+      <div class="inv-row bold"><span>Total</span><span>OMR ${total.toLocaleString()}</span></div>
+      <div class="inv-footer">📧 alshifa@example.com &nbsp;·&nbsp; 💬 WhatsApp delivered</div>`;
+    ic.classList.add('show');
+  });
+
+  /* ── STEP 4: reminders ── */
+  T(7200, ()=>{
+    setStep(4,'active','scheduling reminders…');
+    setProgress(85,'Reminders scheduled','Arming overdue escalation…');
+  });
+
+  T(8400, ()=>{
+    setStep(4,'done','reminders set ✓');
+    addBubble('⏰ Reminders set for May 27 (D-3) and May 29 (D-1)', 'sys');
+    setStatus('Step 4 complete — reminders scheduled');
+  });
+
+  /* ── STEP 5: overdue ── */
+  T(9100, ()=>{
+    setStep(5,'active','arming escalation…');
+    setProgress(95,'Arming escalation','Configuring overdue manager alert…');
+  });
+
+  T(10400, ()=>{
+    setStep(5,'done','escalation armed ✓');
+    setProgress(100,'Workflow complete','All 5 steps done — zero manual work');
+    addBubble('🚨 Overdue alert armed — manager will be notified if unpaid after May 30', 'sys');
+    setPipeBadge('complete ✓');
+    setOutBadge('all done ✓');
+    setStatus('✓ All 5 steps complete — workflow done');
+
+    const od = $('od-card');
+    od.innerHTML = `
+      <span style="font-size:20px;flex-shrink:0">🚨</span>
+      <div>
+        <div class="od-title">Manager escalation armed</div>
+        <div class="od-text">If payment is not received by 30 May 2026, your sales manager will automatically receive a WhatsApp message with the customer name, invoice number, amount, and days overdue. No one needs to remember to follow up.</div>
+      </div>`;
+    od.classList.add('show');
+    $('reset-area').classList.add('show');
+    running = false;
+  });
+}
+
+function reset(){
+  running = false;
+  for(let i=1;i<=5;i++){ setStep(i,'','waiting'); $('abs'+i).classList.remove('active','done'); }
+  $('chat').innerHTML = '<div class="bubble b-in">Salam! We need our monthly order please 🙏<span class="b-time">10:21 AM</span></div>';
+  showTyping(false);
+  setProgress(0,'Waiting for order','Send an order to begin the workflow');
+  ['order-card','inv-card','od-card'].forEach(id=>{ const el=$(id); el.classList.remove('show'); el.innerHTML=''; });
+  $('placeholder').style.display='';
+  $('reset-area').classList.remove('show');
+  setPipeBadge('idle');
+  setOutBadge('waiting');
+  setStatus('Ready — type or pick a quick fill to begin');
+  switchTab(1);
+  const inp=$('wa-in'); inp.disabled=false; $('send-btn').disabled=false; inp.focus();
+}
+
+$('wa-in').addEventListener('keydown', e=>{ if(e.key==='Enter') send(); });
+
+/* ─── Counter animation ─── */
+function countUp(el, target, suffix, ms){
+  let v=0; const step=target/(ms/16);
+  const t=setInterval(()=>{ v=Math.min(v+step,target); el.innerHTML=Math.round(v)+(suffix||''); if(v>=target) clearInterval(t); },16);
+}
+
+/* ─── Intersection Observer ─── */
+const io = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('vis'); });
+},{threshold:0.07});
+document.querySelectorAll('.fu').forEach(el=>io.observe(el));
+
+let counted=false;
+const mio=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting && !counted){
+      counted=true;
+      countUp($('hn1'),47,'',1200);
+      countUp($('hn2'),12,'<span class="unit">h</span>',1400);
+      countUp($('hn3'),34,'<span class="unit">%</span>',1600);
+    }
+  });
+},{threshold:0.4});
+mio.observe(document.querySelector('.hero-stats'));
+</script>
+</body>
+</html>
