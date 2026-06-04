@@ -70,14 +70,14 @@ Be pragmatic. Be reliable. Self-anneal.
 
 ## Branding & Legal Entity Guidelines (CRITICAL)
 
-When creating or modifying ANY new pages, components, or JSON-LD schemas for the website, you MUST properly connect the marketing brand ("AI Profit Lab") with the registered legal entity ("International Gulf Lotus LLC").
+When creating or modifying ANY new pages, components, or JSON-LD schemas for the website, you MUST properly connect the marketing brand ("AI Profit Lab") with the registered legal entity ("International Gulf Lotus SPC").
 
 1. **Footer Copyrights**: All new pages must include the exact legal footer:
-   - *English*: `© 2025 AI Profit Lab — a brand of International Gulf Lotus LLC • All Rights Reserved`
-   - *Arabic*: `© ٢٠٢٥ AI Profit Lab — علامة تجارية لشركة International Gulf Lotus LLC • جميع الحقوق محفوظة`
+   - *English*: `© 2025 AI Profit Lab — a brand of International Gulf Lotus SPC • All Rights Reserved`
+   - *Arabic*: `© ٢٠٢٥ AI Profit Lab — علامة تجارية لشركة International Gulf Lotus SPC • جميع الحقوق محفوظة`
 2. **Schema.org Data**: When injecting `LocalBusiness` or `ProfessionalService` JSON-LD schema, you must include the `legalName` property:
    ```json
    "name": "AI Profit Lab",
-   "legalName": "International Gulf Lotus LLC"
+   "legalName": "International Gulf Lotus SPC"
    ```
-3. **About / Legal Pages**: Any new pages describing the company structure must clarify that AI Profit Lab is the technology consulting brand of International Gulf Lotus LLC, registered in the Sultanate of Oman.
+3. **About / Legal Pages**: Any new pages describing the company structure must clarify that AI Profit Lab is the technology consulting brand of International Gulf Lotus SPC, registered in the Sultanate of Oman.

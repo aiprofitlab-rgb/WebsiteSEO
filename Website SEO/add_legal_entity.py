@@ -1,6 +1,6 @@
 """
 add_legal_entity.py
-Adds "International Gulf Lotus LLC" legal entity branding across the site:
+Adds "International Gulf Lotus SPC" legal entity branding across the site:
 1. Footer copyright lines (English & Arabic variants)
 2. Schema.org JSON-LD legalName property
 """
@@ -24,13 +24,13 @@ def process_file(filepath):
     # Pattern A: "Profit Lab • All Rights Reserved • Muscat, Oman"
     content = content.replace(
         'Profit Lab • All Rights Reserved • Muscat, Oman',
-        'Profit Lab — a brand of International Gulf Lotus LLC • All Rights Reserved • Muscat, Oman'
+        'Profit Lab — a brand of International Gulf Lotus SPC • All Rights Reserved • Muscat, Oman'
     )
 
     # Pattern B: "Profit Lab • All Rights Reserved • Serving the GCC"
     content = content.replace(
         'Profit Lab • All Rights Reserved • Serving the GCC',
-        'Profit Lab — a brand of International Gulf Lotus LLC • All Rights Reserved • Serving the GCC'
+        'Profit Lab — a brand of International Gulf Lotus SPC • All Rights Reserved • Serving the GCC'
     )
 
     # =========================================================================
@@ -40,13 +40,13 @@ def process_file(filepath):
     # Pattern A: "Profit Lab • جميع الحقوق محفوظة • مسقط، عمان"
     content = content.replace(
         'Profit Lab • جميع الحقوق محفوظة • مسقط، عمان',
-        'Profit Lab — علامة تجارية لشركة International Gulf Lotus LLC • جميع الحقوق محفوظة • مسقط، عمان'
+        'Profit Lab — علامة تجارية لشركة International Gulf Lotus SPC • جميع الحقوق محفوظة • مسقط، عمان'
     )
 
     # Pattern B: "Profit Lab • جميع الحقوق محفوظة • نخدم دول الخليج"
     content = content.replace(
         'Profit Lab • جميع الحقوق محفوظة • نخدم دول الخليج',
-        'Profit Lab — علامة تجارية لشركة International Gulf Lotus LLC • جميع الحقوق محفوظة • نخدم دول الخليج'
+        'Profit Lab — علامة تجارية لشركة International Gulf Lotus SPC • جميع الحقوق محفوظة • نخدم دول الخليج'
     )
 
     # =========================================================================
@@ -61,7 +61,7 @@ def process_file(filepath):
         # We match it in the context of ProfessionalService or Organization schemas
         content = re.sub(
             r'("@type":\s*"ProfessionalService",\s*\n\s*"name":\s*"AI Profit Lab")',
-            r'\1,\n  "legalName": "International Gulf Lotus LLC"',
+            r'\1,\n  "legalName": "International Gulf Lotus SPC"',
             content
         )
 
