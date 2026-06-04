@@ -138,6 +138,7 @@ Whenever you generate the files, use the following HTML template. Do NOT deviate
       "@context": "https://schema.org",
       "@type": "ProfessionalService",
       "name": "AI Profit Lab",
+      "legalName": "International Gulf Lotus LLC",
       "url": "https://aiprofitlab.io",
       "logo": "https://aiprofitlab.io/logo.webp",
       "image": "https://aiprofitlab.io/nahid-business-banner.png",
@@ -217,6 +218,11 @@ Whenever you generate the files, use the following HTML template. Do NOT deviate
             </div>
         </article>
     </main>
+
+    <!-- Footer -->
+    <footer class="py-8 border-t border-gray-900 text-center text-sm text-gray-600">
+        © 2025 <span class="text-blue-500">A</span><span class="text-red-500">I</span> Profit Lab — a brand of International Gulf Lotus LLC • All Rights Reserved
+    </footer> <!-- Note: For ARABIC, use: © ٢٠٢٥ AI Profit Lab — علامة تجارية لشركة International Gulf Lotus LLC • جميع الحقوق محفوظة -->
 </body>
 </html>
 ```

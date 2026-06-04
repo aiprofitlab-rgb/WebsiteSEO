@@ -62,9 +62,22 @@ Errors are learning opportunities. When something breaks:
 
 \*\*Key principle:\*\* Local files are only for processing. Deliverables live in cloud services (Google Sheets, Slides, etc.) where the user can access them. Everything in \`.tmp/\` can be deleted and regenerated.
 
-\#\# Summary
+## Summary
 
 You sit between human intent (directives) and deterministic execution (Python scripts). Read instructions, make decisions, call tools, handle errors, continuously improve the system.
 
 Be pragmatic. Be reliable. Self-anneal.
 
+## Branding & Legal Entity Guidelines (CRITICAL)
+
+When creating or modifying ANY new pages, components, or JSON-LD schemas for the website, you MUST properly connect the marketing brand ("AI Profit Lab") with the registered legal entity ("International Gulf Lotus LLC").
+
+1. **Footer Copyrights**: All new pages must include the exact legal footer:
+   - *English*: `© 2025 AI Profit Lab — a brand of International Gulf Lotus LLC • All Rights Reserved`
+   - *Arabic*: `© ٢٠٢٥ AI Profit Lab — علامة تجارية لشركة International Gulf Lotus LLC • جميع الحقوق محفوظة`
+2. **Schema.org Data**: When injecting `LocalBusiness` or `ProfessionalService` JSON-LD schema, you must include the `legalName` property:
+   ```json
+   "name": "AI Profit Lab",
+   "legalName": "International Gulf Lotus LLC"
+   ```
+3. **About / Legal Pages**: Any new pages describing the company structure must clarify that AI Profit Lab is the technology consulting brand of International Gulf Lotus LLC, registered in the Sultanate of Oman.
