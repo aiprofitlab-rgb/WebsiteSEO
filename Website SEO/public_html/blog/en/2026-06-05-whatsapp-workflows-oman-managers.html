@@ -22,37 +22,122 @@
     
     <!-- JSON-LD Schema Markup -->
     <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@graph": [
+{
+    "@context": "https://schema.org",
+    "@graph": [
         {
-          "@type": "Organization",
-          "@id": "https://aiprofitlab.io/#organization",
-          "name": "AI Profit Lab",
-          "legalName": "International Gulf Lotus SPC",
-          "url": "https://aiprofitlab.io/",
-          "logo": {
-            "@type": "ImageObject",
-            "url": "https://aiprofitlab.io/favicon.svg"
-          }
+            "@type": "Organization",
+            "@id": "https://aiprofitlab.io/#organization",
+            "name": "AI Profit Lab",
+            "legalName": "International Gulf Lotus SPC",
+            "url": "https://aiprofitlab.io/",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://aiprofitlab.io/favicon.svg"
+            }
         },
         {
-          "@type": "Article",
-          "headline": "Automating the 'Invisible' Work: 3 WhatsApp Workflows for Omani Service Managers",
-          "description": "Discover 3 powerful WhatsApp automation workflows designed for Omani service managers to eliminate manual tasks, capture leads instantly, and boost ROI.",
-          "image": "https://aiprofitlab.io/blog/images/whatsapp-automation-oman.png",
-          "author": {
-            "@type": "Organization",
-            "name": "AI Profit Lab"
-          },
-          "publisher": {
-            "@id": "https://aiprofitlab.io/#organization"
-          },
-          "datePublished": "2026-06-05"
+            "@type": "Article",
+            "headline": "Automating the 'Invisible' Work: 3 WhatsApp Workflows for Omani Service Managers",
+            "description": "Discover 3 powerful WhatsApp automation workflows designed for Omani service managers to eliminate manual tasks, capture leads instantly, and boost ROI.",
+            "image": "https://aiprofitlab.io/blog/images/whatsapp-automation-oman.png",
+            "author": {
+                "@type": "Organization",
+                "name": "AI Profit Lab"
+            },
+            "publisher": {
+                "@id": "https://aiprofitlab.io/#organization"
+            },
+            "datePublished": "2026-06-05"
+        },
+        {
+            "@type": "FAQPage",
+            "mainEntity": [
+                {
+                    "@type": "Question",
+                    "name": "Why is WhatsApp automation crucial for businesses in Oman?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "WhatsApp is the primary communication channel in the GCC. Automating it ensures immediate responses to inquiries, preventing leads from going to competitors who respond faster."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "How does AI qualify leads on WhatsApp?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "An AI chatbot can engage prospects instantly, ask them predefined qualifying questions (like budget and location), and route the structured data directly into your CRM."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Can WhatsApp automation handle appointment bookings?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Yes, by integrating the WhatsApp Cloud API with your calendar system, clients can select available time slots directly in the chat, which then automatically updates your schedule."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "How can I automate Google Reviews using WhatsApp?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "You can trigger an automated message a few hours after a service is completed, asking the client to rate their experience. Positive ratings trigger a link to your Google Business profile."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Do I need technical skills to build these workflows?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "While tools like Make.com offer visual builders, properly integrating APIs, AI models, and CRMs requires structural planning and technical expertise, often provided by an automation agency."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Is WhatsApp automation secure for sensitive data?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Yes, the WhatsApp Cloud API uses end-to-end encryption for transmission, and deterministic backend rules ensure data is routed securely without public exposure."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Can WhatsApp workflows integrate with local Omani payment gateways?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Yes, via webhooks, you can connect WhatsApp bots to payment processors like Thawani to automatically send payment links to customers."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "How does AI handle Arabic dialects on WhatsApp?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Modern LLMs integrated with WhatsApp are highly proficient in understanding Omani and Khaleeji dialects, ensuring smooth and natural customer interactions."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Will WhatsApp ban my business number for using automation?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "As long as you use the official WhatsApp Cloud API and adhere to Meta's commerce policies and opt-in rules, your number will not be banned."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Can I send mass marketing broadcasts using this automation?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Yes, but WhatsApp requires pre-approved template messages for outbound marketing, which can be triggered automatically based on CRM data."
+                    }
+                }
+            ]
         }
-      ]
-    }
-    </script>
+    ]
+}
+</script>
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
@@ -73,41 +158,44 @@
     </style>
     <!-- Local Business Schema -->
     <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "ProfessionalService",
-      "name": "AI Profit Lab",
-      "legalName": "International Gulf Lotus SPC",
-      "url": "https://aiprofitlab.io",
-      "logo": "https://aiprofitlab.io/logo.webp",
-      "image": "https://aiprofitlab.io/nahid-business-banner.png",
-      "description": "Helping non-technical managers leverage AI, automation, and technology to increase ROI and business efficiency.",
-      "address": {
+{
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "AI Profit Lab",
+    "legalName": "International Gulf Lotus SPC",
+    "url": "https://aiprofitlab.io",
+    "logo": "https://aiprofitlab.io/logo.webp",
+    "image": "https://aiprofitlab.io/nahid-business-banner.png",
+    "description": "Helping non-technical managers leverage AI, automation, and technology to increase ROI and business efficiency.",
+    "address": {
         "@type": "PostalAddress",
         "streetAddress": "Al Seeb",
         "addressLocality": "Muscat",
         "addressRegion": "Muscat Governorate",
         "postalCode": "000",
         "addressCountry": "OM"
-      },
-      "geo": {
+    },
+    "geo": {
         "@type": "GeoCoordinates",
-        "latitude": 23.635950490475295, 
+        "latitude": 23.635950490475295,
         "longitude": 58.207628165445385
-      },
-      "contactPoint": {
+    },
+    "contactPoint": {
         "@type": "ContactPoint",
         "telephone": "+968-99245250",
         "contactType": "customer service",
         "areaServed": "GCC",
-        "availableLanguage": ["en", "ar"]
-      },
-      "sameAs": [
+        "availableLanguage": [
+            "en",
+            "ar"
+        ]
+    },
+    "sameAs": [
         "https://www.youtube.com/@AI_for_Managers",
         "https://www.linkedin.com/in/nahid-aby"
-      ]
-    }
-    </script>
+    ]
+}
+</script>
 </head>
 <body class="antialiased flex flex-col min-h-screen">
     <!-- Navigation -->
@@ -168,12 +256,72 @@
 
                 <p>By automating the 'invisible' work, Omani managers can finally stop being reactive to notifications and start proactively growing their businesses.</p>
             </div>
+        
+
+            <!-- FAQ Section -->
+            <section class="mt-16 pt-8 border-t border-white/10" id="faq">
+                <h2 class="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-cyan-400 mb-8">Frequently Asked Questions</h2>
+                <div class="space-y-6">
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">Why is WhatsApp automation crucial for businesses in Oman?</h3>
+                        <p class="text-gray-400 mb-0">WhatsApp is the primary communication channel in the GCC. Automating it ensures immediate responses to inquiries, preventing leads from going to competitors who respond faster.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">How does AI qualify leads on WhatsApp?</h3>
+                        <p class="text-gray-400 mb-0">An AI chatbot can engage prospects instantly, ask them predefined qualifying questions (like budget and location), and route the structured data directly into your CRM.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">Can WhatsApp automation handle appointment bookings?</h3>
+                        <p class="text-gray-400 mb-0">Yes, by integrating the WhatsApp Cloud API with your calendar system, clients can select available time slots directly in the chat, which then automatically updates your schedule.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">How can I automate Google Reviews using WhatsApp?</h3>
+                        <p class="text-gray-400 mb-0">You can trigger an automated message a few hours after a service is completed, asking the client to rate their experience. Positive ratings trigger a link to your Google Business profile.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">Do I need technical skills to build these workflows?</h3>
+                        <p class="text-gray-400 mb-0">While tools like Make.com offer visual builders, properly integrating APIs, AI models, and CRMs requires structural planning and technical expertise, often provided by an automation agency.</p>
+                    </div>
+                
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">Is WhatsApp automation secure for sensitive data?</h3>
+                        <p class="text-gray-400 mb-0">Yes, the WhatsApp Cloud API uses end-to-end encryption for transmission, and deterministic backend rules ensure data is routed securely without public exposure.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">Can WhatsApp workflows integrate with local Omani payment gateways?</h3>
+                        <p class="text-gray-400 mb-0">Yes, via webhooks, you can connect WhatsApp bots to payment processors like Thawani to automatically send payment links to customers.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">How does AI handle Arabic dialects on WhatsApp?</h3>
+                        <p class="text-gray-400 mb-0">Modern LLMs integrated with WhatsApp are highly proficient in understanding Omani and Khaleeji dialects, ensuring smooth and natural customer interactions.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">Will WhatsApp ban my business number for using automation?</h3>
+                        <p class="text-gray-400 mb-0">As long as you use the official WhatsApp Cloud API and adhere to Meta's commerce policies and opt-in rules, your number will not be banned.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">Can I send mass marketing broadcasts using this automation?</h3>
+                        <p class="text-gray-400 mb-0">Yes, but WhatsApp requires pre-approved template messages for outbound marketing, which can be triggered automatically based on CRM data.</p>
+                    </div>
+                </div>
+            </section>
+
+            <hr class="border-gray-800 my-10">
+
+            <!-- References -->
+            <div class="mt-8">
+                <h3 class="text-xl font-bold mb-4 text-white">References</h3>
+                <ul class="list-disc list-inside text-gray-500 space-y-2 text-sm max-w-full overflow-hidden">
+                    <li><a href="https://business.whatsapp.com/developers/developer-hub" class="hover:text-blue-400 break-words" target="_blank">WhatsApp Cloud API Documentation</a></li>
+                    <li><a href="https://www.make.com/" class="hover:text-blue-400 break-words" target="_blank">Make.com Automation Workflows</a></li>
+                </ul>
+            </div>
         </article>
     </main>
 
     <!-- Footer -->
     <footer class="border-t border-white/10 bg-black py-8 text-center text-gray-500 text-sm mt-auto">
-        <p>&copy; 2025 AI Profit Lab &mdash; a brand of International Gulf Lotus SPC &bull; All Rights Reserved</p>
+        <p>© 2025 AI Profit Lab — a brand of International Gulf Lotus SPC • All Rights Reserved</p>
     </footer>
 </body>
 </html>

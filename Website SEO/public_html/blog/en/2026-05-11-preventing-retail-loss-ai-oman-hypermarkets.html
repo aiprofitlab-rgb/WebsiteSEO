@@ -30,65 +30,122 @@
     
     <!-- JSON-LD Schema Markup -->
     <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@graph": [
+{
+    "@context": "https://schema.org",
+    "@graph": [
         {
-          "@type": "Organization",
-          "@id": "https://aiprofitlab.io/#organization",
-          "name": "AI Profit Lab",
-          "url": "https://aiprofitlab.io/",
-          "logo": {
-            "@type": "ImageObject",
-            "url": "https://aiprofitlab.io/favicon.svg"
-          }
-        },
-        {
-          "@type": "Article",
-          "headline": "Preventing Retail Loss: The Future of AI in Omani Hypermarkets",
-          "description": "How integrating POS data with video monitoring can identify fraud and shrinkage in real-time for Omani retailers.",
-          "image": "https://aiprofitlab.io/blog/images/retail-loss-prevention-ai-oman.png",
-          "author": {
             "@type": "Organization",
-            "name": "AI Profit Lab"
-          },
-          "publisher": {
-            "@id": "https://aiprofitlab.io/#organization"
-          },
-          "datePublished": "2026-05-11"
+            "@id": "https://aiprofitlab.io/#organization",
+            "name": "AI Profit Lab",
+            "url": "https://aiprofitlab.io/",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://aiprofitlab.io/favicon.svg"
+            },
+            "legalName": "International Gulf Lotus SPC"
         },
         {
-          "@type": "FAQPage",
-          "mainEntity": [
-            {
-              "@type": "Question",
-              "name": "What is POS-Video synchronization?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "POS-Video synchronization is a technology that overlays real-time transaction data (like scanned items and prices) directly onto the corresponding security camera footage, allowing for instant verification of every sale."
-              }
+            "@type": "Article",
+            "headline": "Preventing Retail Loss: The Future of AI in Omani Hypermarkets",
+            "description": "How integrating POS data with video monitoring can identify fraud and shrinkage in real-time for Omani retailers.",
+            "image": "https://aiprofitlab.io/blog/images/retail-loss-prevention-ai-oman.png",
+            "author": {
+                "@type": "Organization",
+                "name": "AI Profit Lab"
             },
-            {
-              "@type": "Question",
-              "name": "How does AI detect retail 'shrinkage'?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "AI algorithms analyze video feeds to detect suspicious patterns, such as 'sweethearting' (scanning one item but bagging two), ticket switching, or items leaving the store without a recorded transaction at the POS."
-              }
+            "publisher": {
+                "@id": "https://aiprofitlab.io/#organization"
             },
-            {
-              "@type": "Question",
-              "name": "Is this technology compliant with Omani privacy laws?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Yes, when implemented with edge-processing and proper data governance, these systems comply with the Omani Personal Data Protection Law (PDPL) by focusing on behavioral patterns and transaction integrity rather than invasive personal tracking."
-              }
-            }
-          ]
+            "datePublished": "2026-05-11"
+        },
+        {
+            "@type": "FAQPage",
+            "mainEntity": [
+                {
+                    "@type": "Question",
+                    "name": "What is POS-Video synchronization?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "POS-Video synchronization is a technology that overlays real-time transaction data (like scanned items and prices) directly onto the corresponding security camera footage, allowing for instant verification of every sale."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "How does AI detect retail 'shrinkage'?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "AI algorithms analyze video feeds to detect suspicious patterns, such as 'sweethearting' (scanning one item but bagging two), ticket switching, or items leaving the store without a recorded transaction at the POS."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Is this technology compliant with Omani privacy laws?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Yes, when implemented with edge-processing and proper data governance, these systems comply with the Omani Personal Data Protection Law (PDPL) by focusing on behavioral patterns and transaction integrity rather than invasive personal tracking."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Are there local AI agencies in Muscat?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Yes, local agencies like AI Profit Lab specialize in bringing global AI automation standards to Omani businesses with localized context."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Can small SMEs afford AI technology?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Yes, the rise of no-code/low-code platforms has democratized AI, making it highly affordable for SMEs compared to hiring full-time developers."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "How long does it take to see ROI from AI implementation?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Many businesses in the GCC report seeing a positive Return on Investment within 3 to 6 months of deploying targeted AI workflow automations."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "What if the AI makes a mistake with a customer?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Proper AI implementations use deterministic guardrails and RAG (Retrieval-Augmented Generation) to prevent hallucinations, often keeping a 'human-in-the-loop' for sensitive interactions."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "How much does it cost to implement AI in an Omani business?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Costs vary depending on the scope. A simple workflow automation might cost a few hundred Omani Rials, while a full enterprise AI infrastructure can require a larger investment."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Does AI automation align with Oman Vision 2040?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Absolutely. AI and digital transformation are key pillars of Oman Vision 2040, aimed at diversifying the economy and increasing operational efficiency."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "What is the first step to integrating AI into my business?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "The first step is a thorough operational audit to identify repetitive bottlenecks and data silos that can be easily automated for quick wins."
+                    }
+                }
+            ]
         }
-      ]
-    }
-    </script>
+    ]
+}
+</script>
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
@@ -135,6 +192,45 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "AI Profit Lab",
+    "legalName": "International Gulf Lotus SPC",
+    "url": "https://aiprofitlab.io",
+    "logo": "https://aiprofitlab.io/logo.webp",
+    "image": "https://aiprofitlab.io/nahid-business-banner.png",
+    "description": "Helping non-technical managers leverage AI, automation, and technology to increase ROI and business efficiency.",
+    "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Al Seeb",
+        "addressLocality": "Muscat",
+        "addressRegion": "Muscat Governorate",
+        "postalCode": "000",
+        "addressCountry": "OM"
+    },
+    "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 23.635950490475295,
+        "longitude": 58.207628165445385
+    },
+    "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+968-99245250",
+        "contactType": "customer service",
+        "areaServed": "GCC",
+        "availableLanguage": [
+            "en",
+            "ar"
+        ]
+    },
+    "sameAs": [
+        "https://www.youtube.com/@AI_for_Managers",
+        "https://www.linkedin.com/in/nahid-aby"
+    ]
+}
+</script>
 </head>
 <body class="antialiased">
     <!-- Navbar -->
@@ -236,7 +332,36 @@
                             <h3 class="text-lg font-bold text-white mb-2">Is this technology compliant with Omani privacy laws?</h3>
                             <p class="text-gray-400 mb-0">Yes, when implemented with edge-processing and proper data governance, these systems comply with the Omani Personal Data Protection Law (PDPL) by focusing on behavioral patterns and transaction integrity rather than invasive personal tracking.</p>
                         </div>
+                    
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">Are there local AI agencies in Muscat?</h3>
+                        <p class="text-gray-400 mb-0">Yes, local agencies like AI Profit Lab specialize in bringing global AI automation standards to Omani businesses with localized context.</p>
                     </div>
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">Can small SMEs afford AI technology?</h3>
+                        <p class="text-gray-400 mb-0">Yes, the rise of no-code/low-code platforms has democratized AI, making it highly affordable for SMEs compared to hiring full-time developers.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">How long does it take to see ROI from AI implementation?</h3>
+                        <p class="text-gray-400 mb-0">Many businesses in the GCC report seeing a positive Return on Investment within 3 to 6 months of deploying targeted AI workflow automations.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">What if the AI makes a mistake with a customer?</h3>
+                        <p class="text-gray-400 mb-0">Proper AI implementations use deterministic guardrails and RAG (Retrieval-Augmented Generation) to prevent hallucinations, often keeping a 'human-in-the-loop' for sensitive interactions.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">How much does it cost to implement AI in an Omani business?</h3>
+                        <p class="text-gray-400 mb-0">Costs vary depending on the scope. A simple workflow automation might cost a few hundred Omani Rials, while a full enterprise AI infrastructure can require a larger investment.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">Does AI automation align with Oman Vision 2040?</h3>
+                        <p class="text-gray-400 mb-0">Absolutely. AI and digital transformation are key pillars of Oman Vision 2040, aimed at diversifying the economy and increasing operational efficiency.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">What is the first step to integrating AI into my business?</h3>
+                        <p class="text-gray-400 mb-0">The first step is a thorough operational audit to identify repetitive bottlenecks and data silos that can be easily automated for quick wins.</p>
+                    </div>
+                </div>
                 </section>
 
                 <div class="mt-16 glass-card p-8 rounded-3xl border border-blue-500/20">
@@ -258,10 +383,8 @@
         </article>
     </main>
 
-    <footer class="py-12 border-t border-white/10 mt-20">
-        <div class="max-w-4xl mx-auto px-6 text-center">
-            <p class="text-gray-500 text-sm">&copy; 2026 AI Profit Lab. All rights reserved. Empowering Omani Retail with Intelligence.</p>
-        </div>
+    <footer class="border-t border-white/10 bg-black py-8 text-center text-gray-500 text-sm mt-auto">
+        <p>© 2025 AI Profit Lab — a brand of International Gulf Lotus SPC • All Rights Reserved</p>
     </footer>
 </body>
 </html>

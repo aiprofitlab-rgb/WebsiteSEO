@@ -22,37 +22,122 @@
     
     <!-- JSON-LD Schema Markup -->
     <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@graph": [
+{
+    "@context": "https://schema.org",
+    "@graph": [
         {
-          "@type": "Organization",
-          "@id": "https://aiprofitlab.io/#organization",
-          "name": "AI Profit Lab",
-          "legalName": "International Gulf Lotus SPC",
-          "url": "https://aiprofitlab.io/",
-          "logo": {
-            "@type": "ImageObject",
-            "url": "https://aiprofitlab.io/favicon.svg"
-          }
+            "@type": "Organization",
+            "@id": "https://aiprofitlab.io/#organization",
+            "name": "AI Profit Lab",
+            "legalName": "International Gulf Lotus SPC",
+            "url": "https://aiprofitlab.io/",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://aiprofitlab.io/favicon.svg"
+            }
         },
         {
-          "@type": "Article",
-          "headline": "لوحة تحكم المدير: لماذا الاعتماد على مراجعة الأرباح شهرياً يدمر عملك",
-          "description": "توقف عن إدارة عملك بالنظر إلى مرآة الرؤية الخلفية. اكتشف لماذا أصبحت التقارير المالية الشهرية قديمة وكيف تمنع لوحات تحكم الذكاء الاصطناعي الحية تسرب الإيرادات.",
-          "image": "https://aiprofitlab.io/blog/images/ceo_dashboard_revenue_loss.png",
-          "author": {
-            "@type": "Organization",
-            "name": "AI Profit Lab"
-          },
-          "publisher": {
-            "@id": "https://aiprofitlab.io/#organization"
-          },
-          "datePublished": "2026-06-05"
+            "@type": "Article",
+            "headline": "لوحة تحكم المدير: لماذا الاعتماد على مراجعة الأرباح شهرياً يدمر عملك",
+            "description": "توقف عن إدارة عملك بالنظر إلى مرآة الرؤية الخلفية. اكتشف لماذا أصبحت التقارير المالية الشهرية قديمة وكيف تمنع لوحات تحكم الذكاء الاصطناعي الحية تسرب الإيرادات.",
+            "image": "https://aiprofitlab.io/blog/images/ceo_dashboard_revenue_loss.png",
+            "author": {
+                "@type": "Organization",
+                "name": "AI Profit Lab"
+            },
+            "publisher": {
+                "@id": "https://aiprofitlab.io/#organization"
+            },
+            "datePublished": "2026-06-05"
+        },
+        {
+            "@type": "FAQPage",
+            "mainEntity": [
+                {
+                    "@type": "Question",
+                    "name": "ما هي لوحة تحكم المدير التنفيذي المباشرة؟",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "لوحة تحكم المدير التنفيذي المباشرة هي أداة تصور بيانات في الوقت الفعلي تدمج المقاييس من نظام CRM وبرامج المحاسبة ومنصات الإعلانات في واجهة واحدة يمكن الوصول إليها على الفور."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "لماذا يعتبر الاعتماد على بيانات الأرباح والخسائر الشهرية أمراً خطيراً؟",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "بيانات الأرباح والخسائر الشهرية تنظر إلى الماضي. بحلول الوقت الذي ترى فيه البيانات، يكون الضرر المالي الناجم عن الاختناقات التشغيلية أو الحملات التسويقية الفاشلة قد حدث بالفعل."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "ما هي تكلفة اكتساب العملاء (CAC) ولماذا يجب تتبعها مباشرة؟",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "CAC هي التكلفة الإجمالية لاكتساب عميل جديد. يتيح لك تتبعها مباشرة إيقاف الحملات الإعلانية غير المربحة فوراً وتوسيع نطاق الحملات المربحة، مما يوفر ميزانية تسويقية كبيرة."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "هل يمكن دمج لوحات التحكم هذه مع برامج مثل Zoho أو HubSpot؟",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "نعم، تستخدم لوحات التحكم المباشرة تكاملات API وخطاطيف الويب (Webhooks) لسحب البيانات بأمان وتلقائياً من منصات مثل Zoho و HubSpot و Xero و QuickBooks."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "كيف يعزز الذكاء الاصطناعي لوحة التحكم المباشرة؟",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "يذهب الذكاء الاصطناعي إلى ما هو أبعد من مجرد عرض البيانات؛ فهو يحلل الاتجاهات بنشاط ويمكنه تنبيه المديرين إلى الأسباب المحددة لضعف أداء مقياس معين، مثل زيادة أوقات الاستجابة."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "كيف يتعامل الذكاء الاصطناعي مع دعم العملاء خارج ساعات العمل؟",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "توفر روبوتات الدردشة والوكلاء الصوتيون استجابات فورية على مدار الساعة، مما يجذب العملاء المحتملين ويحل المشكلات الشائعة حتى عندما يكون مكتبك مغلقاً."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "هل الذكاء الاصطناعي السحابي قانوني للمقاولين الحكوميين في عُمان؟",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "يجب على المقاولين الحكوميين الالتزام بإرشادات وزارة النقل والاتصالات وتقنية المعلومات، والتي غالباً ما تتطلب سيادة البيانات واستضافة البيانات الحساسة على خوادم عمانية محلية."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "ما هو التوليد المعزز بالاسترجاع (RAG)؟",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "تقنية يبحث فيها نموذج الذكاء الاصطناعي بأمان في مستندات شركتك الخاصة قبل الإجابة على سؤال، مما يضمن الدقة والسياق."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "كيف ندرب موظفينا على استخدام أنظمة الذكاء الاصطناعي الجديدة؟",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "توفر وكالة الذكاء الاصطناعي ذات السمعة الطيبة تدريباً شاملاً وإجراءات تشغيل قياسية ودعماً مستمراً لضمان تبني المستخدم بسلاسة."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "ماذا لو ارتكب الذكاء الاصطناعي خطأ مع عميل؟",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "تستخدم تطبيقات الذكاء الاصطناعي السليمة حواجز حتمية وتقنية RAG لمنع الهلوسة، وغالباً ما تبقي على 'الإشراف البشري' للتفاعلات الحساسة."
+                    }
+                }
+            ]
         }
-      ]
-    }
-    </script>
+    ]
+}
+</script>
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
@@ -73,41 +158,44 @@
     </style>
     <!-- Local Business Schema -->
     <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "ProfessionalService",
-      "name": "AI Profit Lab",
-      "legalName": "International Gulf Lotus SPC",
-      "url": "https://aiprofitlab.io",
-      "logo": "https://aiprofitlab.io/logo.webp",
-      "image": "https://aiprofitlab.io/nahid-business-banner.png",
-      "description": "Helping non-technical managers leverage AI, automation, and technology to increase ROI and business efficiency.",
-      "address": {
+{
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "AI Profit Lab",
+    "legalName": "International Gulf Lotus SPC",
+    "url": "https://aiprofitlab.io",
+    "logo": "https://aiprofitlab.io/logo.webp",
+    "image": "https://aiprofitlab.io/nahid-business-banner.png",
+    "description": "مساعدة المديرين غير التقنيين على الاستفادة من الذكاء الاصطناعي والأتمتة والتكنولوجيا لزيادة عائد الاستثمار وكفاءة الأعمال.",
+    "address": {
         "@type": "PostalAddress",
         "streetAddress": "Al Seeb",
         "addressLocality": "Muscat",
         "addressRegion": "Muscat Governorate",
         "postalCode": "000",
         "addressCountry": "OM"
-      },
-      "geo": {
+    },
+    "geo": {
         "@type": "GeoCoordinates",
-        "latitude": 23.635950490475295, 
+        "latitude": 23.635950490475295,
         "longitude": 58.207628165445385
-      },
-      "contactPoint": {
+    },
+    "contactPoint": {
         "@type": "ContactPoint",
         "telephone": "+968-99245250",
         "contactType": "customer service",
         "areaServed": "GCC",
-        "availableLanguage": ["en", "ar"]
-      },
-      "sameAs": [
+        "availableLanguage": [
+            "en",
+            "ar"
+        ]
+    },
+    "sameAs": [
         "https://www.youtube.com/@AI_for_Managers",
         "https://www.linkedin.com/in/nahid-aby"
-      ]
-    }
-    </script>
+    ]
+}
+</script>
 </head>
 <body class="antialiased flex flex-col min-h-screen">
     <!-- Navigation -->
@@ -168,12 +256,72 @@
 
                 <p>لقد حان الوقت للتوقف عن قيادة عملك وأنت تنظر في مرآة الرؤية الخلفية. قم بترقية بنيتك التحتية التشغيلية وتحكم في إيراداتك في الوقت الفعلي.</p>
             </div>
+        
+
+            <!-- FAQ Section -->
+            <section class="mt-16 pt-8 border-t border-white/10" id="faq">
+                <h2 class="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-cyan-400 mb-8">الأسئلة الشائعة</h2>
+                <div class="space-y-6">
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">ما هي لوحة تحكم المدير التنفيذي المباشرة؟</h3>
+                        <p class="text-gray-400 mb-0">لوحة تحكم المدير التنفيذي المباشرة هي أداة تصور بيانات في الوقت الفعلي تدمج المقاييس من نظام CRM وبرامج المحاسبة ومنصات الإعلانات في واجهة واحدة يمكن الوصول إليها على الفور.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">لماذا يعتبر الاعتماد على بيانات الأرباح والخسائر الشهرية أمراً خطيراً؟</h3>
+                        <p class="text-gray-400 mb-0">بيانات الأرباح والخسائر الشهرية تنظر إلى الماضي. بحلول الوقت الذي ترى فيه البيانات، يكون الضرر المالي الناجم عن الاختناقات التشغيلية أو الحملات التسويقية الفاشلة قد حدث بالفعل.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">ما هي تكلفة اكتساب العملاء (CAC) ولماذا يجب تتبعها مباشرة؟</h3>
+                        <p class="text-gray-400 mb-0">CAC هي التكلفة الإجمالية لاكتساب عميل جديد. يتيح لك تتبعها مباشرة إيقاف الحملات الإعلانية غير المربحة فوراً وتوسيع نطاق الحملات المربحة، مما يوفر ميزانية تسويقية كبيرة.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">هل يمكن دمج لوحات التحكم هذه مع برامج مثل Zoho أو HubSpot؟</h3>
+                        <p class="text-gray-400 mb-0">نعم، تستخدم لوحات التحكم المباشرة تكاملات API وخطاطيف الويب (Webhooks) لسحب البيانات بأمان وتلقائياً من منصات مثل Zoho و HubSpot و Xero و QuickBooks.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">كيف يعزز الذكاء الاصطناعي لوحة التحكم المباشرة؟</h3>
+                        <p class="text-gray-400 mb-0">يذهب الذكاء الاصطناعي إلى ما هو أبعد من مجرد عرض البيانات؛ فهو يحلل الاتجاهات بنشاط ويمكنه تنبيه المديرين إلى الأسباب المحددة لضعف أداء مقياس معين، مثل زيادة أوقات الاستجابة.</p>
+                    </div>
+                
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">كيف يتعامل الذكاء الاصطناعي مع دعم العملاء خارج ساعات العمل؟</h3>
+                        <p class="text-gray-400 mb-0">توفر روبوتات الدردشة والوكلاء الصوتيون استجابات فورية على مدار الساعة، مما يجذب العملاء المحتملين ويحل المشكلات الشائعة حتى عندما يكون مكتبك مغلقاً.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">هل الذكاء الاصطناعي السحابي قانوني للمقاولين الحكوميين في عُمان؟</h3>
+                        <p class="text-gray-400 mb-0">يجب على المقاولين الحكوميين الالتزام بإرشادات وزارة النقل والاتصالات وتقنية المعلومات، والتي غالباً ما تتطلب سيادة البيانات واستضافة البيانات الحساسة على خوادم عمانية محلية.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">ما هو التوليد المعزز بالاسترجاع (RAG)؟</h3>
+                        <p class="text-gray-400 mb-0">تقنية يبحث فيها نموذج الذكاء الاصطناعي بأمان في مستندات شركتك الخاصة قبل الإجابة على سؤال، مما يضمن الدقة والسياق.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">كيف ندرب موظفينا على استخدام أنظمة الذكاء الاصطناعي الجديدة؟</h3>
+                        <p class="text-gray-400 mb-0">توفر وكالة الذكاء الاصطناعي ذات السمعة الطيبة تدريباً شاملاً وإجراءات تشغيل قياسية ودعماً مستمراً لضمان تبني المستخدم بسلاسة.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">ماذا لو ارتكب الذكاء الاصطناعي خطأ مع عميل؟</h3>
+                        <p class="text-gray-400 mb-0">تستخدم تطبيقات الذكاء الاصطناعي السليمة حواجز حتمية وتقنية RAG لمنع الهلوسة، وغالباً ما تبقي على 'الإشراف البشري' للتفاعلات الحساسة.</p>
+                    </div>
+                </div>
+            </section>
+
+            <hr class="border-gray-800 my-10">
+
+            <!-- References -->
+            <div class="mt-8">
+                <h3 class="text-xl font-bold mb-4 text-white">المراجع</h3>
+                <ul class="list-disc list-inside text-gray-500 space-y-2 text-sm max-w-full overflow-hidden">
+                    <li><a href="https://www.hubspot.com/" class="hover:text-blue-400 break-words" target="_blank">HubSpot CRM وأتمتة التسويق</a></li>
+                    <li><a href="https://powerbi.microsoft.com/" class="hover:text-blue-400 break-words" target="_blank">منصة Microsoft Power BI لتصور البيانات</a></li>
+                </ul>
+            </div>
         </article>
     </main>
 
     <!-- Footer -->
     <footer class="border-t border-white/10 bg-black py-8 text-center text-gray-500 text-sm mt-auto">
-        <p>&copy; ٢٠٢٥ AI Profit Lab &mdash; علامة تجارية لشركة International Gulf Lotus SPC &bull; جميع الحقوق محفوظة</p>
+        <p>© ٢٠٢٥ AI Profit Lab — علامة تجارية لشركة International Gulf Lotus SPC • جميع الحقوق محفوظة</p>
     </footer>
 </body>
 </html>

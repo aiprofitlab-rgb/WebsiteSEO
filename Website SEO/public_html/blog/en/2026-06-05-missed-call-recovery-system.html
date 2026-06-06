@@ -22,37 +22,122 @@
     
     <!-- JSON-LD Schema Markup -->
     <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@graph": [
+{
+    "@context": "https://schema.org",
+    "@graph": [
         {
-          "@type": "Organization",
-          "@id": "https://aiprofitlab.io/#organization",
-          "name": "AI Profit Lab",
-          "legalName": "International Gulf Lotus SPC",
-          "url": "https://aiprofitlab.io/",
-          "logo": {
-            "@type": "ImageObject",
-            "url": "https://aiprofitlab.io/favicon.svg"
-          }
+            "@type": "Organization",
+            "@id": "https://aiprofitlab.io/#organization",
+            "name": "AI Profit Lab",
+            "legalName": "International Gulf Lotus SPC",
+            "url": "https://aiprofitlab.io/",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://aiprofitlab.io/favicon.svg"
+            }
         },
         {
-          "@type": "Article",
-          "headline": "Stop Losing Leads: How to Build a Simple 'Missed-Call' Recovery System for Your Business",
-          "description": "Learn how to build a simple, automated missed-call recovery system to instantly capture lost leads, engage customers via WhatsApp, and boost your business ROI in Oman.",
-          "image": "https://aiprofitlab.io/blog/images/missed-call-recovery-oman.png",
-          "author": {
-            "@type": "Organization",
-            "name": "AI Profit Lab"
-          },
-          "publisher": {
-            "@id": "https://aiprofitlab.io/#organization"
-          },
-          "datePublished": "2026-06-05"
+            "@type": "Article",
+            "headline": "Stop Losing Leads: How to Build a Simple 'Missed-Call' Recovery System for Your Business",
+            "description": "Learn how to build a simple, automated missed-call recovery system to instantly capture lost leads, engage customers via WhatsApp, and boost your business ROI in Oman.",
+            "image": "https://aiprofitlab.io/blog/images/missed-call-recovery-oman.png",
+            "author": {
+                "@type": "Organization",
+                "name": "AI Profit Lab"
+            },
+            "publisher": {
+                "@id": "https://aiprofitlab.io/#organization"
+            },
+            "datePublished": "2026-06-05"
+        },
+        {
+            "@type": "FAQPage",
+            "mainEntity": [
+                {
+                    "@type": "Question",
+                    "name": "What is a missed-call recovery system?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "It is an automated sequence that instantly sends a customized WhatsApp message to any potential customer whose call to your business was missed or unanswered."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "How fast does the automated system reply to a missed call?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "The system relies on webhook triggers from your VoIP provider and typically sends the WhatsApp message within 5 to 10 seconds of the call being disconnected."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Do I need a special phone system to set this up?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Yes, you need a Cloud Telephony or VoIP system (like Twilio) that supports webhooks and API integrations. Traditional analog landlines cannot trigger digital automations."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Can the system answer customer questions automatically?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Yes, if you integrate a conversational AI assistant into the workflow, it can take over the WhatsApp chat to answer FAQs, provide pricing, and even book appointments."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Is the WhatsApp Cloud API required for this automation?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Yes, to programmatically send messages triggered by external events (like a missed call), you must use the official WhatsApp Cloud API rather than the standard app."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Can I customize the WhatsApp message for missed calls?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Yes, you can personalize the message based on the time of day, day of the week, or even recognize if the caller is a returning customer."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Does this work with Omani telecom providers like Omantel or Ooredoo?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "It works best with Cloud Telephony/VoIP systems. Traditional landlines require a SIP trunk gateway to convert analog signals to digital webhooks."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "What happens if a customer replies to the automated message?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "A conversational AI chatbot can immediately take over the conversation, or it can route the chat to a live human agent via a shared inbox."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Can the system differentiate between business hours and after-hours?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Absolutely. The automation workflow can send a different message (e.g., 'We are currently closed') if the call is received outside working hours."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "How does this system impact overall sales?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "By engaging leads instantly when their purchase intent is highest, missed-call recovery systems typically boost conversion rates by 15-30%."
+                    }
+                }
+            ]
         }
-      ]
-    }
-    </script>
+    ]
+}
+</script>
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
@@ -73,41 +158,44 @@
     </style>
     <!-- Local Business Schema -->
     <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "ProfessionalService",
-      "name": "AI Profit Lab",
-      "legalName": "International Gulf Lotus SPC",
-      "url": "https://aiprofitlab.io",
-      "logo": "https://aiprofitlab.io/logo.webp",
-      "image": "https://aiprofitlab.io/nahid-business-banner.png",
-      "description": "Helping non-technical managers leverage AI, automation, and technology to increase ROI and business efficiency.",
-      "address": {
+{
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "AI Profit Lab",
+    "legalName": "International Gulf Lotus SPC",
+    "url": "https://aiprofitlab.io",
+    "logo": "https://aiprofitlab.io/logo.webp",
+    "image": "https://aiprofitlab.io/nahid-business-banner.png",
+    "description": "Helping non-technical managers leverage AI, automation, and technology to increase ROI and business efficiency.",
+    "address": {
         "@type": "PostalAddress",
         "streetAddress": "Al Seeb",
         "addressLocality": "Muscat",
         "addressRegion": "Muscat Governorate",
         "postalCode": "000",
         "addressCountry": "OM"
-      },
-      "geo": {
+    },
+    "geo": {
         "@type": "GeoCoordinates",
-        "latitude": 23.635950490475295, 
+        "latitude": 23.635950490475295,
         "longitude": 58.207628165445385
-      },
-      "contactPoint": {
+    },
+    "contactPoint": {
         "@type": "ContactPoint",
         "telephone": "+968-99245250",
         "contactType": "customer service",
         "areaServed": "GCC",
-        "availableLanguage": ["en", "ar"]
-      },
-      "sameAs": [
+        "availableLanguage": [
+            "en",
+            "ar"
+        ]
+    },
+    "sameAs": [
         "https://www.youtube.com/@AI_for_Managers",
         "https://www.linkedin.com/in/nahid-aby"
-      ]
-    }
-    </script>
+    ]
+}
+</script>
 </head>
 <body class="antialiased flex flex-col min-h-screen">
     <!-- Navigation -->
@@ -169,12 +257,72 @@
                 <h2>The ROI is Immediate</h2>
                 <p>For businesses in Muscat—clinics, real estate agencies, home maintenance services, and law firms—every missed lead has a tangible cost. Implementing a missed-call recovery system plugs the most common leak in the sales funnel. It operates silently 24/7, requires zero human intervention, and consistently delivers an ROI that vastly outweighs its setup cost.</p>
             </div>
+        
+
+            <!-- FAQ Section -->
+            <section class="mt-16 pt-8 border-t border-white/10" id="faq">
+                <h2 class="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-cyan-400 mb-8">Frequently Asked Questions</h2>
+                <div class="space-y-6">
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">What is a missed-call recovery system?</h3>
+                        <p class="text-gray-400 mb-0">It is an automated sequence that instantly sends a customized WhatsApp message to any potential customer whose call to your business was missed or unanswered.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">How fast does the automated system reply to a missed call?</h3>
+                        <p class="text-gray-400 mb-0">The system relies on webhook triggers from your VoIP provider and typically sends the WhatsApp message within 5 to 10 seconds of the call being disconnected.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">Do I need a special phone system to set this up?</h3>
+                        <p class="text-gray-400 mb-0">Yes, you need a Cloud Telephony or VoIP system (like Twilio) that supports webhooks and API integrations. Traditional analog landlines cannot trigger digital automations.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">Can the system answer customer questions automatically?</h3>
+                        <p class="text-gray-400 mb-0">Yes, if you integrate a conversational AI assistant into the workflow, it can take over the WhatsApp chat to answer FAQs, provide pricing, and even book appointments.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">Is the WhatsApp Cloud API required for this automation?</h3>
+                        <p class="text-gray-400 mb-0">Yes, to programmatically send messages triggered by external events (like a missed call), you must use the official WhatsApp Cloud API rather than the standard app.</p>
+                    </div>
+                
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">Can I customize the WhatsApp message for missed calls?</h3>
+                        <p class="text-gray-400 mb-0">Yes, you can personalize the message based on the time of day, day of the week, or even recognize if the caller is a returning customer.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">Does this work with Omani telecom providers like Omantel or Ooredoo?</h3>
+                        <p class="text-gray-400 mb-0">It works best with Cloud Telephony/VoIP systems. Traditional landlines require a SIP trunk gateway to convert analog signals to digital webhooks.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">What happens if a customer replies to the automated message?</h3>
+                        <p class="text-gray-400 mb-0">A conversational AI chatbot can immediately take over the conversation, or it can route the chat to a live human agent via a shared inbox.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">Can the system differentiate between business hours and after-hours?</h3>
+                        <p class="text-gray-400 mb-0">Absolutely. The automation workflow can send a different message (e.g., 'We are currently closed') if the call is received outside working hours.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">How does this system impact overall sales?</h3>
+                        <p class="text-gray-400 mb-0">By engaging leads instantly when their purchase intent is highest, missed-call recovery systems typically boost conversion rates by 15-30%.</p>
+                    </div>
+                </div>
+            </section>
+
+            <hr class="border-gray-800 my-10">
+
+            <!-- References -->
+            <div class="mt-8">
+                <h3 class="text-xl font-bold mb-4 text-white">References</h3>
+                <ul class="list-disc list-inside text-gray-500 space-y-2 text-sm max-w-full overflow-hidden">
+                    <li><a href="https://www.twilio.com/" class="hover:text-blue-400 break-words" target="_blank">Twilio Cloud Communications Platform</a></li>
+                    <li><a href="https://business.whatsapp.com/" class="hover:text-blue-400 break-words" target="_blank">WhatsApp Business Platform</a></li>
+                </ul>
+            </div>
         </article>
     </main>
 
     <!-- Footer -->
     <footer class="border-t border-white/10 bg-black py-8 text-center text-gray-500 text-sm mt-auto">
-        <p>&copy; 2025 AI Profit Lab &mdash; a brand of International Gulf Lotus SPC &bull; All Rights Reserved</p>
+        <p>© 2025 AI Profit Lab — a brand of International Gulf Lotus SPC • All Rights Reserved</p>
     </footer>
 </body>
 </html>

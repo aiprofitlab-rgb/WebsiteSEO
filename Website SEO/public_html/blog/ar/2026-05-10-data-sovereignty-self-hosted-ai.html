@@ -30,81 +30,122 @@
     
     <!-- JSON-LD Schema Markup -->
     <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@graph": [
+{
+    "@context": "https://schema.org",
+    "@graph": [
         {
-          "@type": "Organization",
-          "@id": "https://aiprofitlab.io/#organization",
-          "name": "AI Profit Lab",
-          "url": "https://aiprofitlab.io/",
-          "logo": {
-            "@type": "ImageObject",
-            "url": "https://aiprofitlab.io/favicon.svg"
-          }
-        },
-        {
-          "@type": "Article",
-          "headline": "سيادة البيانات: لماذا يجب أن تبقى بيانات عملك داخل مكتبك",
-          "description": "لماذا أصبحت استضافة الذكاء الاصطناعي المحلي هي المعيار الذهبي للشركات العمانية. اكتشف كيف تحمي النماذج المستضافة ذاتياً المعلومات الحساسة.",
-          "image": "https://aiprofitlab.io/blog/images/data-sovereignty-local-ai.png",
-          "author": {
             "@type": "Organization",
-            "name": "AI Profit Lab"
-          },
-          "publisher": {
-            "@id": "https://aiprofitlab.io/#organization"
-          },
-          "datePublished": "2026-05-10"
+            "@id": "https://aiprofitlab.io/#organization",
+            "name": "AI Profit Lab",
+            "url": "https://aiprofitlab.io/",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://aiprofitlab.io/favicon.svg"
+            },
+            "legalName": "International Gulf Lotus SPC"
         },
         {
-          "@type": "FAQPage",
-          "mainEntity": [
-            {
-              "@type": "Question",
-              "name": "ما هي سيادة البيانات في سياق الذكاء الاصطناعي؟",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "تشير سيادة البيانات إلى المبدأ القائل بأن البيانات الرقمية تخضع لقوانين الدولة التي توجد فيها. بالنسبة للذكاء الاصطناعي، يعني ذلك ضمان بقاء بيانات عملك تحت سيطرتك المادية أو الرقمية، بدلاً من إرسالها إلى خوادم سحابية أجنبية."
-              }
+            "@type": "Article",
+            "headline": "سيادة البيانات: لماذا يجب أن تبقى بيانات عملك داخل مكتبك",
+            "description": "لماذا أصبحت استضافة الذكاء الاصطناعي المحلي هي المعيار الذهبي للشركات العمانية. اكتشف كيف تحمي النماذج المستضافة ذاتياً المعلومات الحساسة.",
+            "image": "https://aiprofitlab.io/blog/images/data-sovereignty-local-ai.png",
+            "author": {
+                "@type": "Organization",
+                "name": "AI Profit Lab"
             },
-            {
-              "@type": "Question",
-              "name": "كيف يختلف الذكاء الاصطناعي المستضاف ذاتياً عن الذكاء الاصطناعي السحابي مثل ChatGPT؟",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "يرسل الذكاء الاصطناعي السحابي مدخلاتك وبياناتك إلى خوادم مملوكة لأطراف ثالثة (مثل OpenAI). أما الذكاء الاصطناعي المستضاف ذاتياً فيعمل على خوادم مكتبك الخاصة أو سحابتك الخاصة، مما يعني عدم خروج أي بيانات من شبكتك."
-              }
+            "publisher": {
+                "@id": "https://aiprofitlab.io/#organization"
             },
-            {
-              "@type": "Question",
-              "name": "هل الذكاء الاصطناعي المحلي قوي مثل النماذج السحابية؟",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "مع الأجهزة والنماذج الحديثة مثل Llama 3 أو Mistral، أصبح الذكاء الاصطناعي المحلي الآن قادراً على التعامل مع أكثر من 90٪ من مهام الأعمال - بما في ذلك البرمجة، وتحليل المستندات، ودعم العملاء - بدقة متناهية."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "هل يساعد الذكاء الاصطناعي المحلي في الامتثال لقانون حماية البيانات الشخصية العماني؟",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "نعم. من خلال الاحتفاظ بالبيانات الشخصية داخل بنيتك التحتية الخاصة، فإنك تقضي على المخاطر المرتبطة بنقل البيانات عبر الحدود، مما يسهل كثيراً الامتثال لقانون حماية البيانات الشخصية العماني."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "ما هي الأجهزة التي أحتاجها لتشغيل الذكاء الاصطناعي محلياً؟",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "بالنسبة لمعظم الشركات الصغيرة والمتوسطة، يكفي وجود محطة عمل متطورة مع وحدة معالجة رسومات NVIDIA حديثة أو خادم محلي مخصص لتشغيل نماذج مثل Ollama للفريق بأكمله."
-              }
-            }
-          ]
+            "datePublished": "2026-05-10"
+        },
+        {
+            "@type": "FAQPage",
+            "mainEntity": [
+                {
+                    "@type": "Question",
+                    "name": "ما هي سيادة البيانات في سياق الذكاء الاصطناعي؟",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "تشير سيادة البيانات إلى المبدأ القائل بأن البيانات الرقمية تخضع لقوانين الدولة التي توجد فيها. بالنسبة للذكاء الاصطناعي، يعني ذلك ضمان بقاء بيانات عملك تحت سيطرتك المادية أو الرقمية، بدلاً من إرسالها إلى خوادم سحابية أجنبية."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "كيف يختلف الذكاء الاصطناعي المستضاف ذاتياً عن الذكاء الاصطناعي السحابي مثل ChatGPT؟",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "يرسل الذكاء الاصطناعي السحابي مدخلاتك وبياناتك إلى خوادم مملوكة لأطراف ثالثة (مثل OpenAI). أما الذكاء الاصطناعي المستضاف ذاتياً فيعمل على خوادم مكتبك الخاصة أو سحابتك الخاصة، مما يعني عدم خروج أي بيانات من شبكتك."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "هل الذكاء الاصطناعي المحلي قوي مثل النماذج السحابية؟",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "مع الأجهزة والنماذج الحديثة مثل Llama 3 أو Mistral، أصبح الذكاء الاصطناعي المحلي الآن قادراً على التعامل مع أكثر من 90٪ من مهام الأعمال - بما في ذلك البرمجة، وتحليل المستندات، ودعم العملاء - بدقة متناهية."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "هل يساعد الذكاء الاصطناعي المحلي في الامتثال لقانون حماية البيانات الشخصية العماني؟",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "نعم. من خلال الاحتفاظ بالبيانات الشخصية داخل بنيتك التحتية الخاصة، فإنك تقضي على المخاطر المرتبطة بنقل البيانات عبر الحدود، مما يسهل كثيراً الامتثال لقانون حماية البيانات الشخصية العماني."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "ما هي الأجهزة التي أحتاجها لتشغيل الذكاء الاصطناعي محلياً؟",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "بالنسبة لمعظم الشركات الصغيرة والمتوسطة، يكفي وجود محطة عمل متطورة مع وحدة معالجة رسومات NVIDIA حديثة أو خادم محلي مخصص لتشغيل نماذج مثل Ollama للفريق بأكمله."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "هل بيانات شركتي آمنة عند استخدام الذكاء الاصطناعي؟",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "نعم، شريطة استخدام نماذج مؤسسية مع اتفاقيات صارمة لخصوصية البيانات أو نشر حلول محلية تتوافق مع قوانين حماية البيانات في عُمان."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "هل تستطيع الشركات الصغيرة والمتوسطة تحمل تكاليف تكنولوجيا الذكاء الاصطناعي؟",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "نعم، أدى ظهور منصات البرمجة بدون كود/منخفضة الكود إلى إضفاء الطابع الديمقراطي على الذكاء الاصطناعي، مما جعله في متناول الشركات الصغيرة والمتوسطة بشكل كبير مقارنة بتوظيف مطورين بدوام كامل."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "كم تكلفة تطبيق الذكاء الاصطناعي في شركة عمانية؟",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "تختلف التكاليف حسب النطاق. قد تكلف أتمتة سير العمل البسيطة بضع مئات من الريالات العمانية، بينما تتطلب البنية التحتية الكاملة للذكاء الاصطناعي استثماراً أكبر."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "كم من الوقت يستغرق رؤية عائد الاستثمار من الذكاء الاصطناعي؟",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "تبلغ العديد من الشركات في دول مجلس التعاون الخليجي عن رؤية عائد استثمار إيجابي في غضون 3 إلى 6 أشهر من نشر أتمتة سير العمل."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "هل الذكاء الاصطناعي السحابي قانوني للمقاولين الحكوميين في عُمان؟",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "يجب على المقاولين الحكوميين الالتزام بإرشادات وزارة النقل والاتصالات وتقنية المعلومات، والتي غالباً ما تتطلب سيادة البيانات واستضافة البيانات الحساسة على خوادم عمانية محلية."
+                    }
+                }
+            ]
         }
-      ]
-    }
-    </script>
+    ]
+}
+</script>
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
@@ -151,6 +192,45 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "AI Profit Lab",
+    "legalName": "International Gulf Lotus SPC",
+    "url": "https://aiprofitlab.io",
+    "logo": "https://aiprofitlab.io/logo.webp",
+    "image": "https://aiprofitlab.io/nahid-business-banner.png",
+    "description": "مساعدة المديرين غير التقنيين على الاستفادة من الذكاء الاصطناعي والأتمتة والتكنولوجيا لزيادة عائد الاستثمار وكفاءة الأعمال.",
+    "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Al Seeb",
+        "addressLocality": "Muscat",
+        "addressRegion": "Muscat Governorate",
+        "postalCode": "000",
+        "addressCountry": "OM"
+    },
+    "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 23.635950490475295,
+        "longitude": 58.207628165445385
+    },
+    "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+968-99245250",
+        "contactType": "customer service",
+        "areaServed": "GCC",
+        "availableLanguage": [
+            "en",
+            "ar"
+        ]
+    },
+    "sameAs": [
+        "https://www.youtube.com/@AI_for_Managers",
+        "https://www.linkedin.com/in/nahid-aby"
+    ]
+}
+</script>
 </head>
 <body class="antialiased">
     <!-- Navbar -->
@@ -259,7 +339,28 @@
                             <h3 class="text-lg font-bold text-white mb-2">ما هي الأجهزة المطلوبة؟</h3>
                             <p class="text-gray-400 mb-0">للشركات الصغيرة والمتوسطة، يكفي خادم محلي مخصص أو محطة عمل بمواصفات عالية مزودة بمعالج رسومات NVIDIA حديث.</p>
                         </div>
+                    
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">هل بيانات شركتي آمنة عند استخدام الذكاء الاصطناعي؟</h3>
+                        <p class="text-gray-400 mb-0">نعم، شريطة استخدام نماذج مؤسسية مع اتفاقيات صارمة لخصوصية البيانات أو نشر حلول محلية تتوافق مع قوانين حماية البيانات في عُمان.</p>
                     </div>
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">هل تستطيع الشركات الصغيرة والمتوسطة تحمل تكاليف تكنولوجيا الذكاء الاصطناعي؟</h3>
+                        <p class="text-gray-400 mb-0">نعم، أدى ظهور منصات البرمجة بدون كود/منخفضة الكود إلى إضفاء الطابع الديمقراطي على الذكاء الاصطناعي، مما جعله في متناول الشركات الصغيرة والمتوسطة بشكل كبير مقارنة بتوظيف مطورين بدوام كامل.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">كم تكلفة تطبيق الذكاء الاصطناعي في شركة عمانية؟</h3>
+                        <p class="text-gray-400 mb-0">تختلف التكاليف حسب النطاق. قد تكلف أتمتة سير العمل البسيطة بضع مئات من الريالات العمانية، بينما تتطلب البنية التحتية الكاملة للذكاء الاصطناعي استثماراً أكبر.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">كم من الوقت يستغرق رؤية عائد الاستثمار من الذكاء الاصطناعي؟</h3>
+                        <p class="text-gray-400 mb-0">تبلغ العديد من الشركات في دول مجلس التعاون الخليجي عن رؤية عائد استثمار إيجابي في غضون 3 إلى 6 أشهر من نشر أتمتة سير العمل.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">هل الذكاء الاصطناعي السحابي قانوني للمقاولين الحكوميين في عُمان؟</h3>
+                        <p class="text-gray-400 mb-0">يجب على المقاولين الحكوميين الالتزام بإرشادات وزارة النقل والاتصالات وتقنية المعلومات، والتي غالباً ما تتطلب سيادة البيانات واستضافة البيانات الحساسة على خوادم عمانية محلية.</p>
+                    </div>
+                </div>
                 </section>
 
                 <div class="mt-16 glass-card p-8 rounded-3xl border border-blue-500/20">
@@ -282,10 +383,8 @@
         </article>
     </main>
 
-    <footer class="py-12 border-t border-white/10 mt-20">
-        <div class="max-w-4xl mx-auto px-6 text-center">
-            <p class="text-gray-500 text-sm">© 2026 AI Profit Lab. جميع الحقوق محفوظة. قيادة التميز الرقمي في عمان.</p>
-        </div>
+    <footer class="border-t border-white/10 bg-black py-8 text-center text-gray-500 text-sm mt-auto">
+        <p>© ٢٠٢٥ AI Profit Lab — علامة تجارية لشركة International Gulf Lotus SPC • جميع الحقوق محفوظة</p>
     </footer>
 </body>
 </html>

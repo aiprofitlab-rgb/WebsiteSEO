@@ -30,65 +30,122 @@
     
     <!-- JSON-LD Schema Markup -->
     <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@graph": [
+{
+    "@context": "https://schema.org",
+    "@graph": [
         {
-          "@type": "Organization",
-          "@id": "https://aiprofitlab.io/#organization",
-          "name": "AI Profit Lab",
-          "url": "https://aiprofitlab.io/ar/",
-          "logo": {
-            "@type": "ImageObject",
-            "url": "https://aiprofitlab.io/favicon.svg"
-          }
-        },
-        {
-          "@type": "Article",
-          "headline": "منع خسائر التجزئة: مستقبل الذكاء الاصطناعي في الهايبرماركت العمانية",
-          "description": "كيف يمكن لدمج بيانات نقاط البيع مع مراقبة الفيديو تحديد الاحتيال والانكماش في الوقت الفعلي لتجار التجزئة في عُمان.",
-          "image": "https://aiprofitlab.io/blog/images/retail-loss-prevention-ai-oman.png",
-          "author": {
             "@type": "Organization",
-            "name": "AI Profit Lab"
-          },
-          "publisher": {
-            "@id": "https://aiprofitlab.io/#organization"
-          },
-          "datePublished": "2026-05-11"
+            "@id": "https://aiprofitlab.io/#organization",
+            "name": "AI Profit Lab",
+            "url": "https://aiprofitlab.io/",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://aiprofitlab.io/favicon.svg"
+            },
+            "legalName": "International Gulf Lotus SPC"
         },
         {
-          "@type": "FAQPage",
-          "mainEntity": [
-            {
-              "@type": "Question",
-              "name": "ما هي مزامنة الفيديو ونقاط البيع (POS-Video synchronization)؟",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "هي تقنية تقوم بدمج بيانات المعاملات في الوقت الفعلي (مثل العناصر الممسوحة ضوئياً والأسعار) مباشرة على لقطات كاميرا الأمن المقابلة، مما يسمح بالتحقق الفوري من كل عملية بيع."
-              }
+            "@type": "Article",
+            "headline": "منع خسائر التجزئة: مستقبل الذكاء الاصطناعي في الهايبرماركت العمانية",
+            "description": "كيف يمكن لدمج بيانات نقاط البيع مع مراقبة الفيديو تحديد الاحتيال والانكماش في الوقت الفعلي لتجار التجزئة في عُمان.",
+            "image": "https://aiprofitlab.io/blog/images/retail-loss-prevention-ai-oman.png",
+            "author": {
+                "@type": "Organization",
+                "name": "AI Profit Lab"
             },
-            {
-              "@type": "Question",
-              "name": "كيف يكتشف الذكاء الاصطناعي 'انكماش' المخزون؟",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "تحلل خوارزميات الذكاء الاصطناعي خلاصات الفيديو لاكتشاف الأنماط المشبوهة، مثل مسح عنصر واحد ووضع عنصرين في الكيس، أو تبديل الملصقات، أو خروج العناصر دون تسجيلها في نقطة البيع."
-              }
+            "publisher": {
+                "@id": "https://aiprofitlab.io/#organization"
             },
-            {
-              "@type": "Question",
-              "name": "هل تتوافق هذه التقنية مع قوانين الخصوصية العمانية؟",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "نعم، عند تنفيذها مع معالجة البيانات محلياً (Edge Computing) وحوكمة البيانات المناسبة، تتوافق هذه الأنظمة مع قانون حماية البيانات الشخصية العماني (PDPL) من خلال التركيز على الأنماط السلوكية وسلامة المعاملات بدلاً من التتبع الشخصي الغازي."
-              }
-            }
-          ]
+            "datePublished": "2026-05-11"
+        },
+        {
+            "@type": "FAQPage",
+            "mainEntity": [
+                {
+                    "@type": "Question",
+                    "name": "ما هي مزامنة الفيديو ونقاط البيع (POS-Video synchronization)؟",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "هي تقنية تقوم بدمج بيانات المعاملات في الوقت الفعلي (مثل العناصر الممسوحة ضوئياً والأسعار) مباشرة على لقطات كاميرا الأمن المقابلة، مما يسمح بالتحقق الفوري من كل عملية بيع."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "كيف يكتشف الذكاء الاصطناعي 'انكماش' المخزون؟",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "تحلل خوارزميات الذكاء الاصطناعي خلاصات الفيديو لاكتشاف الأنماط المشبوهة، مثل مسح عنصر واحد ووضع عنصرين في الكيس، أو تبديل الملصقات، أو خروج العناصر دون تسجيلها في نقطة البيع."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "هل تتوافق هذه التقنية مع قوانين الخصوصية العمانية؟",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "نعم، عند تنفيذها مع معالجة البيانات محلياً (Edge Computing) وحوكمة البيانات المناسبة، تتوافق هذه الأنظمة مع قانون حماية البيانات الشخصية العماني (PDPL) من خلال التركيز على الأنماط السلوكية وسلامة المعاملات بدلاً من التتبع الشخصي الغازي."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "هل ستدعم أدوات الذكاء الاصطناعي اللغة العربية بشكل مثالي؟",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "أدت التطورات الأخيرة في النماذج اللغوية الكبيرة إلى تحسين الفهم العربي بشكل كبير، بما في ذلك اللهجات الخليجية، مما يجعلها فعالة للغاية للسوق العماني."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "هل يمكن دمج الذكاء الاصطناعي مع نظام ERP أو CRM الحالي لدي؟",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "نعم، عبر واجهات برمجة التطبيقات وخطاطيف الويب، يمكن لأدوات الذكاء الاصطناعي التكامل بسلاسة مع الأنظمة القديمة مثل SAP و Oracle و Zoho و Salesforce."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "هل الذكاء الاصطناعي السحابي قانوني للمقاولين الحكوميين في عُمان؟",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "يجب على المقاولين الحكوميين الالتزام بإرشادات وزارة النقل والاتصالات، والتي غالباً ما تتطلب سيادة البيانات واستضافتها على خوادم عمانية محلية."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "هل يمكن للذكاء الاصطناعي أن يحل محل الموظفين البشريين؟",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "صُمم الذكاء الاصطناعي لتعزيز قدرات العمال البشريين وليس استبدالهم. فهو يتولى المهام الإدارية المتكررة، مما يتيح لفريقك التركيز على الاستراتيجية وعلاقات العملاء."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "هل تستطيع الشركات الصغيرة والمتوسطة تحمل تكاليف تكنولوجيا الذكاء الاصطناعي؟",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "نعم، أدى ظهور منصات البرمجة بدون كود إلى إضفاء الطابع الديمقراطي على الذكاء الاصطناعي، مما جعله في متناول الشركات الصغيرة والمتوسطة."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "هل يمكن للذكاء الاصطناعي المساعدة في التسويق وتوليد العملاء المحتملين؟",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "نعم، يمكن للذكاء الاصطناعي تحليل اتجاهات السوق، وإنشاء نصوص إعلانية مخصصة، وتسجيل العملاء المحتملين الواردين تلقائياً."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "ما هي الخطوة الأولى لدمج الذكاء الاصطناعي في عملي؟",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "الخطوة الأولى هي إجراء تدقيق تشغيلي شامل لتحديد الاختناقات المتكررة وصوامع البيانات التي يمكن أتمتتها بسهولة لتحقيق مكاسب سريعة."
+                    }
+                }
+            ]
         }
-      ]
-    }
-    </script>
+    ]
+}
+</script>
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=Noto+Sans+Arabic:wght@300;400;600;700;800&display=swap" rel="stylesheet">
@@ -135,6 +192,45 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "AI Profit Lab",
+    "legalName": "International Gulf Lotus SPC",
+    "url": "https://aiprofitlab.io",
+    "logo": "https://aiprofitlab.io/logo.webp",
+    "image": "https://aiprofitlab.io/nahid-business-banner.png",
+    "description": "مساعدة المديرين غير التقنيين على الاستفادة من الذكاء الاصطناعي والأتمتة والتكنولوجيا لزيادة عائد الاستثمار وكفاءة الأعمال.",
+    "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Al Seeb",
+        "addressLocality": "Muscat",
+        "addressRegion": "Muscat Governorate",
+        "postalCode": "000",
+        "addressCountry": "OM"
+    },
+    "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 23.635950490475295,
+        "longitude": 58.207628165445385
+    },
+    "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+968-99245250",
+        "contactType": "customer service",
+        "areaServed": "GCC",
+        "availableLanguage": [
+            "en",
+            "ar"
+        ]
+    },
+    "sameAs": [
+        "https://www.youtube.com/@AI_for_Managers",
+        "https://www.linkedin.com/in/nahid-aby"
+    ]
+}
+</script>
 </head>
 <body class="antialiased">
     <!-- Navbar -->
@@ -236,7 +332,36 @@
                             <h3 class="text-lg font-bold text-white mb-2">هل هذا النظام متوافق مع قوانين عُمان؟</h3>
                             <p class="text-gray-400 mb-0">نعم، النظام مصمم للتركيز على المعاملات والأنماط التجارية، ويلتزم بمعايير قانون حماية البيانات الشخصية العماني من خلال معالجة البيانات المشفرة والمجهولة.</p>
                         </div>
+                    
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">كيف يتعامل الذكاء الاصطناعي مع دعم العملاء خارج ساعات العمل؟</h3>
+                        <p class="text-gray-400 mb-0">توفر روبوتات الدردشة والوكلاء الصوتيون استجابات فورية على مدار الساعة، مما يجذب العملاء المحتملين ويحل المشكلات الشائعة حتى عندما يكون مكتبك مغلقاً.</p>
                     </div>
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">كم تكلفة تطبيق الذكاء الاصطناعي في شركة عمانية؟</h3>
+                        <p class="text-gray-400 mb-0">تختلف التكاليف حسب النطاق. قد تكلف أتمتة سير العمل البسيطة بضع مئات من الريالات العمانية، بينما تتطلب البنية التحتية الكاملة للذكاء الاصطناعي استثماراً أكبر.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">كيف ندرب موظفينا على استخدام أنظمة الذكاء الاصطناعي الجديدة؟</h3>
+                        <p class="text-gray-400 mb-0">توفر وكالة الذكاء الاصطناعي ذات السمعة الطيبة تدريباً شاملاً وإجراءات تشغيل قياسية ودعماً مستمراً لضمان تبني المستخدم بسلاسة.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">هل تتماشى أتمتة الذكاء الاصطناعي مع رؤية عمان 2040؟</h3>
+                        <p class="text-gray-400 mb-0">بالتأكيد. يعد الذكاء الاصطناعي والتحول الرقمي من الركائز الأساسية لرؤية عمان 2040، بهدف تنويع الاقتصاد وزيادة الكفاءة التشغيلية.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">كيف يؤثر الذكاء الاصطناعي على التوظيف المحلي؟</h3>
+                        <p class="text-gray-400 mb-0">من خلال أتمتة المهام العادية، يمكن للشركات توظيف عمال ذوي مهارات أعلى لأدوار استراتيجية، مما يرفع من القدرة الإجمالية للقوى العاملة المحلية.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">ماذا لو ارتكب الذكاء الاصطناعي خطأ مع عميل؟</h3>
+                        <p class="text-gray-400 mb-0">تستخدم تطبيقات الذكاء الاصطناعي السليمة حواجز حتمية وتقنية RAG لمنع الهلوسة، وغالباً ما تبقي على 'الإشراف البشري' للتفاعلات الحساسة.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">هل بيانات شركتي آمنة عند استخدام الذكاء الاصطناعي؟</h3>
+                        <p class="text-gray-400 mb-0">نعم، شريطة استخدام نماذج مؤسسية مع اتفاقيات صارمة لخصوصية البيانات أو نشر حلول محلية تتوافق مع قوانين حماية البيانات في عُمان.</p>
+                    </div>
+                </div>
                 </section>
 
                 <div class="mt-16 glass-card p-8 rounded-3xl border border-blue-500/20">
@@ -258,10 +383,8 @@
         </article>
     </main>
 
-    <footer class="py-12 border-t border-white/10 mt-20">
-        <div class="max-w-4xl mx-auto px-6 text-center">
-            <p class="text-gray-500 text-sm">&copy; 2026 AI Profit Lab. جميع الحقوق محفوظة. تمكين التجزئة العمانية بالذكاء.</p>
-        </div>
+    <footer class="border-t border-white/10 bg-black py-8 text-center text-gray-500 text-sm mt-auto">
+        <p>© ٢٠٢٥ AI Profit Lab — علامة تجارية لشركة International Gulf Lotus SPC • جميع الحقوق محفوظة</p>
     </footer>
 </body>
 </html>

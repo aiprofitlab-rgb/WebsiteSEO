@@ -22,37 +22,122 @@
     
     <!-- JSON-LD Schema Markup -->
     <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@graph": [
+{
+    "@context": "https://schema.org",
+    "@graph": [
         {
-          "@type": "Organization",
-          "@id": "https://aiprofitlab.io/#organization",
-          "name": "AI Profit Lab",
-          "legalName": "International Gulf Lotus SPC",
-          "url": "https://aiprofitlab.io/",
-          "logo": {
-            "@type": "ImageObject",
-            "url": "https://aiprofitlab.io/favicon.svg"
-          }
+            "@type": "Organization",
+            "@id": "https://aiprofitlab.io/#organization",
+            "name": "AI Profit Lab",
+            "legalName": "International Gulf Lotus SPC",
+            "url": "https://aiprofitlab.io/",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://aiprofitlab.io/favicon.svg"
+            }
         },
         {
-          "@type": "Article",
-          "headline": "Why Most AI Agencies in Oman Are Selling You a Pipe Dream (and What Actually Works)",
-          "description": "Many AI agencies in Oman are promising the moon but delivering simple ChatGPT wrappers. Learn how to spot a fake AI agency and what real AI automation looks like.",
-          "image": "https://aiprofitlab.io/blog/images/pipe-dream-agencies-oman.png",
-          "author": {
-            "@type": "Organization",
-            "name": "AI Profit Lab"
-          },
-          "publisher": {
-            "@id": "https://aiprofitlab.io/#organization"
-          },
-          "datePublished": "2026-06-05"
+            "@type": "Article",
+            "headline": "Why Most AI Agencies in Oman Are Selling You a Pipe Dream (and What Actually Works)",
+            "description": "Many AI agencies in Oman are promising the moon but delivering simple ChatGPT wrappers. Learn how to spot a fake AI agency and what real AI automation looks like.",
+            "image": "https://aiprofitlab.io/blog/images/pipe-dream-agencies-oman.png",
+            "author": {
+                "@type": "Organization",
+                "name": "AI Profit Lab"
+            },
+            "publisher": {
+                "@id": "https://aiprofitlab.io/#organization"
+            },
+            "datePublished": "2026-06-05"
+        },
+        {
+            "@type": "FAQPage",
+            "mainEntity": [
+                {
+                    "@type": "Question",
+                    "name": "What is an AI Automation Agency (AAA)?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "An AI Automation Agency is a consulting firm that helps businesses implement artificial intelligence and automation tools to streamline workflows, reduce costs, and increase revenue."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "How can I spot a fake AI agency in Oman?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Look for agencies that only offer basic ChatGPT wrappers or chatbots without integration into your CRM, ERP, or existing databases. Real agencies focus on deterministic code and backend infrastructure."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Why is RAG (Retrieval-Augmented Generation) important?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "RAG ensures that the AI model only answers questions based on your specific internal data and SOPs, completely eliminating hallucinations and brand damage."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "What is deterministic versus probabilistic AI?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Probabilistic AI (like LLMs) guesses the next word, which can lead to errors. Deterministic AI uses hardcoded logic (APIs, webhooks) to guarantee a specific action happens every time."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Which platforms are best for workflow automation?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Platforms like Make.com and n8n are enterprise-grade tools used to connect different software silos securely and build robust automation pipelines."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Can small SMEs afford AI technology?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Yes, the rise of no-code/low-code platforms has democratized AI, making it highly affordable for SMEs compared to hiring full-time developers."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "How much does it cost to implement AI in an Omani business?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Costs vary depending on the scope. A simple workflow automation might cost a few hundred Omani Rials, while a full enterprise AI infrastructure can require a larger investment."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Are there local AI agencies in Muscat?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Yes, local agencies like AI Profit Lab specialize in bringing global AI automation standards to Omani businesses with localized context."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Can AI help with marketing and lead generation?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Yes, AI can analyze market trends, generate personalized ad copy, and automatically score incoming leads based on their likelihood to convert."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Will AI tools support the Arabic language perfectly?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Recent advancements in LLMs have significantly improved Arabic comprehension, including Khaleeji dialects, making them highly effective for the Omani market."
+                    }
+                }
+            ]
         }
-      ]
-    }
-    </script>
+    ]
+}
+</script>
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
@@ -73,41 +158,44 @@
     </style>
     <!-- Local Business Schema -->
     <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "ProfessionalService",
-      "name": "AI Profit Lab",
-      "legalName": "International Gulf Lotus SPC",
-      "url": "https://aiprofitlab.io",
-      "logo": "https://aiprofitlab.io/logo.webp",
-      "image": "https://aiprofitlab.io/nahid-business-banner.png",
-      "description": "Helping non-technical managers leverage AI, automation, and technology to increase ROI and business efficiency.",
-      "address": {
+{
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "AI Profit Lab",
+    "legalName": "International Gulf Lotus SPC",
+    "url": "https://aiprofitlab.io",
+    "logo": "https://aiprofitlab.io/logo.webp",
+    "image": "https://aiprofitlab.io/nahid-business-banner.png",
+    "description": "Helping non-technical managers leverage AI, automation, and technology to increase ROI and business efficiency.",
+    "address": {
         "@type": "PostalAddress",
         "streetAddress": "Al Seeb",
         "addressLocality": "Muscat",
         "addressRegion": "Muscat Governorate",
         "postalCode": "000",
         "addressCountry": "OM"
-      },
-      "geo": {
+    },
+    "geo": {
         "@type": "GeoCoordinates",
-        "latitude": 23.635950490475295, 
+        "latitude": 23.635950490475295,
         "longitude": 58.207628165445385
-      },
-      "contactPoint": {
+    },
+    "contactPoint": {
         "@type": "ContactPoint",
         "telephone": "+968-99245250",
         "contactType": "customer service",
         "areaServed": "GCC",
-        "availableLanguage": ["en", "ar"]
-      },
-      "sameAs": [
+        "availableLanguage": [
+            "en",
+            "ar"
+        ]
+    },
+    "sameAs": [
         "https://www.youtube.com/@AI_for_Managers",
         "https://www.linkedin.com/in/nahid-aby"
-      ]
-    }
-    </script>
+    ]
+}
+</script>
 </head>
 <body class="antialiased flex flex-col min-h-screen">
     <!-- Navigation -->
@@ -175,12 +263,72 @@
 
                 <p>Don't buy a pipe dream. Invest in infrastructure that actually works.</p>
             </div>
+        
+
+            <!-- FAQ Section -->
+            <section class="mt-16 pt-8 border-t border-white/10" id="faq">
+                <h2 class="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-cyan-400 mb-8">Frequently Asked Questions</h2>
+                <div class="space-y-6">
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">What is an AI Automation Agency (AAA)?</h3>
+                        <p class="text-gray-400 mb-0">An AI Automation Agency is a consulting firm that helps businesses implement artificial intelligence and automation tools to streamline workflows, reduce costs, and increase revenue.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">How can I spot a fake AI agency in Oman?</h3>
+                        <p class="text-gray-400 mb-0">Look for agencies that only offer basic ChatGPT wrappers or chatbots without integration into your CRM, ERP, or existing databases. Real agencies focus on deterministic code and backend infrastructure.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">Why is RAG (Retrieval-Augmented Generation) important?</h3>
+                        <p class="text-gray-400 mb-0">RAG ensures that the AI model only answers questions based on your specific internal data and SOPs, completely eliminating hallucinations and brand damage.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">What is deterministic versus probabilistic AI?</h3>
+                        <p class="text-gray-400 mb-0">Probabilistic AI (like LLMs) guesses the next word, which can lead to errors. Deterministic AI uses hardcoded logic (APIs, webhooks) to guarantee a specific action happens every time.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">Which platforms are best for workflow automation?</h3>
+                        <p class="text-gray-400 mb-0">Platforms like Make.com and n8n are enterprise-grade tools used to connect different software silos securely and build robust automation pipelines.</p>
+                    </div>
+                
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">Can small SMEs afford AI technology?</h3>
+                        <p class="text-gray-400 mb-0">Yes, the rise of no-code/low-code platforms has democratized AI, making it highly affordable for SMEs compared to hiring full-time developers.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">How much does it cost to implement AI in an Omani business?</h3>
+                        <p class="text-gray-400 mb-0">Costs vary depending on the scope. A simple workflow automation might cost a few hundred Omani Rials, while a full enterprise AI infrastructure can require a larger investment.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">Are there local AI agencies in Muscat?</h3>
+                        <p class="text-gray-400 mb-0">Yes, local agencies like AI Profit Lab specialize in bringing global AI automation standards to Omani businesses with localized context.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">Can AI help with marketing and lead generation?</h3>
+                        <p class="text-gray-400 mb-0">Yes, AI can analyze market trends, generate personalized ad copy, and automatically score incoming leads based on their likelihood to convert.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">Will AI tools support the Arabic language perfectly?</h3>
+                        <p class="text-gray-400 mb-0">Recent advancements in LLMs have significantly improved Arabic comprehension, including Khaleeji dialects, making them highly effective for the Omani market.</p>
+                    </div>
+                </div>
+            </section>
+
+            <hr class="border-gray-800 my-10">
+
+            <!-- References -->
+            <div class="mt-8">
+                <h3 class="text-xl font-bold mb-4 text-white">References</h3>
+                <ul class="list-disc list-inside text-gray-500 space-y-2 text-sm max-w-full overflow-hidden">
+                    <li><a href="https://www.make.com/" class="hover:text-blue-400 break-words" target="_blank">Make.com - Advanced Visual Automation Platform</a></li>
+                    <li><a href="https://n8n.io/" class="hover:text-blue-400 break-words" target="_blank">n8n - Workflow Automation Tool</a></li>
+                </ul>
+            </div>
         </article>
     </main>
 
     <!-- Footer -->
     <footer class="border-t border-white/10 bg-black py-8 text-center text-gray-500 text-sm mt-auto">
-        <p>&copy; 2025 AI Profit Lab &mdash; a brand of International Gulf Lotus SPC &bull; All Rights Reserved</p>
+        <p>© 2025 AI Profit Lab — a brand of International Gulf Lotus SPC • All Rights Reserved</p>
     </footer>
 </body>
 </html>

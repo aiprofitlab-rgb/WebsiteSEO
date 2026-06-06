@@ -22,37 +22,122 @@
     
     <!-- JSON-LD Schema Markup -->
     <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@graph": [
+{
+    "@context": "https://schema.org",
+    "@graph": [
         {
-          "@type": "Organization",
-          "@id": "https://aiprofitlab.io/#organization",
-          "name": "AI Profit Lab",
-          "legalName": "International Gulf Lotus SPC",
-          "url": "https://aiprofitlab.io/",
-          "logo": {
-            "@type": "ImageObject",
-            "url": "https://aiprofitlab.io/favicon.svg"
-          }
+            "@type": "Organization",
+            "@id": "https://aiprofitlab.io/#organization",
+            "name": "AI Profit Lab",
+            "legalName": "International Gulf Lotus SPC",
+            "url": "https://aiprofitlab.io/",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://aiprofitlab.io/favicon.svg"
+            }
         },
         {
-          "@type": "Article",
-          "headline": "The CEO Dashboard: Why Looking at Your Revenue Once a Month is Killing Your Business",
-          "description": "Stop running your business looking in the rearview mirror. Discover why month-end financial reporting is outdated and how real-time AI dashboards prevent revenue leaks.",
-          "image": "https://aiprofitlab.io/blog/images/ceo_dashboard_revenue_loss.png",
-          "author": {
-            "@type": "Organization",
-            "name": "AI Profit Lab"
-          },
-          "publisher": {
-            "@id": "https://aiprofitlab.io/#organization"
-          },
-          "datePublished": "2026-06-05"
+            "@type": "Article",
+            "headline": "The CEO Dashboard: Why Looking at Your Revenue Once a Month is Killing Your Business",
+            "description": "Stop running your business looking in the rearview mirror. Discover why month-end financial reporting is outdated and how real-time AI dashboards prevent revenue leaks.",
+            "image": "https://aiprofitlab.io/blog/images/ceo_dashboard_revenue_loss.png",
+            "author": {
+                "@type": "Organization",
+                "name": "AI Profit Lab"
+            },
+            "publisher": {
+                "@id": "https://aiprofitlab.io/#organization"
+            },
+            "datePublished": "2026-06-05"
+        },
+        {
+            "@type": "FAQPage",
+            "mainEntity": [
+                {
+                    "@type": "Question",
+                    "name": "What is a Live CEO Dashboard?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "A Live CEO Dashboard is a real-time data visualization tool that consolidates metrics from your CRM, accounting software, and ad platforms into a single, instantly accessible interface."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Why is relying on monthly P&L statements dangerous?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Monthly P&L statements are backward-looking. By the time you see the data, the financial damage from operational bottlenecks or failed marketing campaigns has already occurred."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "What is Customer Acquisition Cost (CAC) and why track it live?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "CAC is the total cost of acquiring a new customer. Tracking it live allows you to immediately pause unprofitable ad campaigns and scale profitable ones, saving significant marketing budget."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Can these dashboards integrate with software like Zoho or HubSpot?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Yes, live dashboards use API integrations and webhooks to pull data securely and automatically from platforms like Zoho, HubSpot, Xero, and QuickBooks."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "How does AI enhance a live dashboard?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "AI goes beyond simply displaying data; it actively analyzes trends and can alert managers to the specific reasons why a metric is underperforming, such as increased response times."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Do I need a technical background to use AI automation?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "No, modern AI automation platforms and custom dashboards are built for non-technical managers, with intuitive interfaces and clear ROI tracking."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Does AI automation align with Oman Vision 2040?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Absolutely. AI and digital transformation are key pillars of Oman Vision 2040, aimed at diversifying the economy and increasing operational efficiency."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Can AI integrate with my existing ERP or CRM?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Yes, via APIs and webhooks, AI tools can seamlessly integrate with legacy systems like SAP, Oracle, Zoho, and Salesforce."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "How does AI handle customer support outside of business hours?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "AI chatbots and voice agents provide 24/7 instant responses, capturing leads and resolving common issues even when your physical office is closed."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "What is the first step to integrating AI into my business?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "The first step is a thorough operational audit to identify repetitive bottlenecks and data silos that can be easily automated for quick wins."
+                    }
+                }
+            ]
         }
-      ]
-    }
-    </script>
+    ]
+}
+</script>
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
@@ -73,41 +158,44 @@
     </style>
     <!-- Local Business Schema -->
     <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "ProfessionalService",
-      "name": "AI Profit Lab",
-      "legalName": "International Gulf Lotus SPC",
-      "url": "https://aiprofitlab.io",
-      "logo": "https://aiprofitlab.io/logo.webp",
-      "image": "https://aiprofitlab.io/nahid-business-banner.png",
-      "description": "Helping non-technical managers leverage AI, automation, and technology to increase ROI and business efficiency.",
-      "address": {
+{
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "AI Profit Lab",
+    "legalName": "International Gulf Lotus SPC",
+    "url": "https://aiprofitlab.io",
+    "logo": "https://aiprofitlab.io/logo.webp",
+    "image": "https://aiprofitlab.io/nahid-business-banner.png",
+    "description": "Helping non-technical managers leverage AI, automation, and technology to increase ROI and business efficiency.",
+    "address": {
         "@type": "PostalAddress",
         "streetAddress": "Al Seeb",
         "addressLocality": "Muscat",
         "addressRegion": "Muscat Governorate",
         "postalCode": "000",
         "addressCountry": "OM"
-      },
-      "geo": {
+    },
+    "geo": {
         "@type": "GeoCoordinates",
-        "latitude": 23.635950490475295, 
+        "latitude": 23.635950490475295,
         "longitude": 58.207628165445385
-      },
-      "contactPoint": {
+    },
+    "contactPoint": {
         "@type": "ContactPoint",
         "telephone": "+968-99245250",
         "contactType": "customer service",
         "areaServed": "GCC",
-        "availableLanguage": ["en", "ar"]
-      },
-      "sameAs": [
+        "availableLanguage": [
+            "en",
+            "ar"
+        ]
+    },
+    "sameAs": [
         "https://www.youtube.com/@AI_for_Managers",
         "https://www.linkedin.com/in/nahid-aby"
-      ]
-    }
-    </script>
+    ]
+}
+</script>
 </head>
 <body class="antialiased flex flex-col min-h-screen">
     <!-- Navigation -->
@@ -168,12 +256,72 @@
 
                 <p>It's time to stop driving your business while looking in the rearview mirror. Upgrade your operational infrastructure and take control of your revenue in real-time.</p>
             </div>
+        
+
+            <!-- FAQ Section -->
+            <section class="mt-16 pt-8 border-t border-white/10" id="faq">
+                <h2 class="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-cyan-400 mb-8">Frequently Asked Questions</h2>
+                <div class="space-y-6">
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">What is a Live CEO Dashboard?</h3>
+                        <p class="text-gray-400 mb-0">A Live CEO Dashboard is a real-time data visualization tool that consolidates metrics from your CRM, accounting software, and ad platforms into a single, instantly accessible interface.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">Why is relying on monthly P&L statements dangerous?</h3>
+                        <p class="text-gray-400 mb-0">Monthly P&L statements are backward-looking. By the time you see the data, the financial damage from operational bottlenecks or failed marketing campaigns has already occurred.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">What is Customer Acquisition Cost (CAC) and why track it live?</h3>
+                        <p class="text-gray-400 mb-0">CAC is the total cost of acquiring a new customer. Tracking it live allows you to immediately pause unprofitable ad campaigns and scale profitable ones, saving significant marketing budget.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">Can these dashboards integrate with software like Zoho or HubSpot?</h3>
+                        <p class="text-gray-400 mb-0">Yes, live dashboards use API integrations and webhooks to pull data securely and automatically from platforms like Zoho, HubSpot, Xero, and QuickBooks.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">How does AI enhance a live dashboard?</h3>
+                        <p class="text-gray-400 mb-0">AI goes beyond simply displaying data; it actively analyzes trends and can alert managers to the specific reasons why a metric is underperforming, such as increased response times.</p>
+                    </div>
+                
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">Do I need a technical background to use AI automation?</h3>
+                        <p class="text-gray-400 mb-0">No, modern AI automation platforms and custom dashboards are built for non-technical managers, with intuitive interfaces and clear ROI tracking.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">Does AI automation align with Oman Vision 2040?</h3>
+                        <p class="text-gray-400 mb-0">Absolutely. AI and digital transformation are key pillars of Oman Vision 2040, aimed at diversifying the economy and increasing operational efficiency.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">Can AI integrate with my existing ERP or CRM?</h3>
+                        <p class="text-gray-400 mb-0">Yes, via APIs and webhooks, AI tools can seamlessly integrate with legacy systems like SAP, Oracle, Zoho, and Salesforce.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">How does AI handle customer support outside of business hours?</h3>
+                        <p class="text-gray-400 mb-0">AI chatbots and voice agents provide 24/7 instant responses, capturing leads and resolving common issues even when your physical office is closed.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">What is the first step to integrating AI into my business?</h3>
+                        <p class="text-gray-400 mb-0">The first step is a thorough operational audit to identify repetitive bottlenecks and data silos that can be easily automated for quick wins.</p>
+                    </div>
+                </div>
+            </section>
+
+            <hr class="border-gray-800 my-10">
+
+            <!-- References -->
+            <div class="mt-8">
+                <h3 class="text-xl font-bold mb-4 text-white">References</h3>
+                <ul class="list-disc list-inside text-gray-500 space-y-2 text-sm max-w-full overflow-hidden">
+                    <li><a href="https://www.hubspot.com/" class="hover:text-blue-400 break-words" target="_blank">HubSpot CRM & Marketing Automation</a></li>
+                    <li><a href="https://powerbi.microsoft.com/" class="hover:text-blue-400 break-words" target="_blank">Microsoft Power BI Data Visualization</a></li>
+                </ul>
+            </div>
         </article>
     </main>
 
     <!-- Footer -->
     <footer class="border-t border-white/10 bg-black py-8 text-center text-gray-500 text-sm mt-auto">
-        <p>&copy; 2025 AI Profit Lab &mdash; a brand of International Gulf Lotus SPC &bull; All Rights Reserved</p>
+        <p>© 2025 AI Profit Lab — a brand of International Gulf Lotus SPC • All Rights Reserved</p>
     </footer>
 </body>
 </html>

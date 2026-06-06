@@ -30,81 +30,122 @@
     
     <!-- JSON-LD Schema Markup -->
     <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@graph": [
+{
+    "@context": "https://schema.org",
+    "@graph": [
         {
-          "@type": "Organization",
-          "@id": "https://aiprofitlab.io/#organization",
-          "name": "AI Profit Lab",
-          "url": "https://aiprofitlab.io/",
-          "logo": {
-            "@type": "ImageObject",
-            "url": "https://aiprofitlab.io/favicon.svg"
-          }
-        },
-        {
-          "@type": "Article",
-          "headline": "Data Sovereignty: Why Your Business Data Should Stay in Your Office",
-          "description": "Why local AI hosting is becoming the gold standard for Omani businesses. Discover how self-hosted models protect sensitive information.",
-          "image": "https://aiprofitlab.io/blog/images/data-sovereignty-local-ai.png",
-          "author": {
             "@type": "Organization",
-            "name": "AI Profit Lab"
-          },
-          "publisher": {
-            "@id": "https://aiprofitlab.io/#organization"
-          },
-          "datePublished": "2026-05-10"
+            "@id": "https://aiprofitlab.io/#organization",
+            "name": "AI Profit Lab",
+            "url": "https://aiprofitlab.io/",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://aiprofitlab.io/favicon.svg"
+            },
+            "legalName": "International Gulf Lotus SPC"
         },
         {
-          "@type": "FAQPage",
-          "mainEntity": [
-            {
-              "@type": "Question",
-              "name": "What is Data Sovereignty in the context of AI?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Data sovereignty refers to the principle that digital data is subject to the laws of the country in which it is located. For AI, it means ensuring your business data remains within your physical or digital control, rather than being sent to foreign cloud servers."
-              }
+            "@type": "Article",
+            "headline": "Data Sovereignty: Why Your Business Data Should Stay in Your Office",
+            "description": "Why local AI hosting is becoming the gold standard for Omani businesses. Discover how self-hosted models protect sensitive information.",
+            "image": "https://aiprofitlab.io/blog/images/data-sovereignty-local-ai.png",
+            "author": {
+                "@type": "Organization",
+                "name": "AI Profit Lab"
             },
-            {
-              "@type": "Question",
-              "name": "How does self-hosted AI differ from cloud AI like ChatGPT?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Cloud AI sends your prompts and data to servers owned by third parties (like OpenAI). Self-hosted AI runs on your own office servers or private cloud, meaning no data ever leaves your network."
-              }
+            "publisher": {
+                "@id": "https://aiprofitlab.io/#organization"
             },
-            {
-              "@type": "Question",
-              "name": "Is local AI as powerful as cloud-based models?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "With modern hardware and models like Llama 3 or Mistral, local AI is now capable of handling over 90% of business tasks—including coding, document analysis, and customer support—with extreme accuracy."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "Does local AI help with Oman PDPL compliance?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Yes. By keeping personal data within your own infrastructure, you eliminate the risks associated with cross-border data transfers, making it much easier to comply with the Omani Personal Data Protection Law."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "What hardware do I need to run AI locally?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "For most SMEs, a high-end workstation with a modern NVIDIA GPU or a dedicated local server is sufficient to run models like Ollama for the entire team."
-              }
-            }
-          ]
+            "datePublished": "2026-05-10"
+        },
+        {
+            "@type": "FAQPage",
+            "mainEntity": [
+                {
+                    "@type": "Question",
+                    "name": "What is Data Sovereignty in the context of AI?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Data sovereignty refers to the principle that digital data is subject to the laws of the country in which it is located. For AI, it means ensuring your business data remains within your physical or digital control, rather than being sent to foreign cloud servers."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "How does self-hosted AI differ from cloud AI like ChatGPT?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Cloud AI sends your prompts and data to servers owned by third parties (like OpenAI). Self-hosted AI runs on your own office servers or private cloud, meaning no data ever leaves your network."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Is local AI as powerful as cloud-based models?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "With modern hardware and models like Llama 3 or Mistral, local AI is now capable of handling over 90% of business tasks—including coding, document analysis, and customer support—with extreme accuracy."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Does local AI help with Oman PDPL compliance?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Yes. By keeping personal data within your own infrastructure, you eliminate the risks associated with cross-border data transfers, making it much easier to comply with the Omani Personal Data Protection Law."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "What hardware do I need to run AI locally?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "For most SMEs, a high-end workstation with a modern NVIDIA GPU or a dedicated local server is sufficient to run models like Ollama for the entire team."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Can small SMEs afford AI technology?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Yes, the rise of no-code/low-code platforms has democratized AI, making it highly affordable for SMEs compared to hiring full-time developers."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "How do we train our staff to use new AI systems?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "A reputable AI agency provides comprehensive onboarding, standard operating procedures (SOPs), and ongoing support to ensure smooth user adoption."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "What is 'deterministic' vs 'probabilistic' AI?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Probabilistic AI generates text based on patterns (like ChatGPT), while deterministic AI follows strict, hard-coded rules. Business automations require a mix of both for reliability."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Is my company's data safe when using AI?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Yes, provided you use enterprise-grade AI models with strict data privacy agreements or deploy on-premise solutions that comply with Oman's data protection laws."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "How does AI improve supply chain management?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "AI predicts demand fluctuations, optimizes delivery routes in real-time, and automates inventory reordering, significantly reducing logistical costs."
+                    }
+                }
+            ]
         }
-      ]
-    }
-    </script>
+    ]
+}
+</script>
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
@@ -151,6 +192,45 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "AI Profit Lab",
+    "legalName": "International Gulf Lotus SPC",
+    "url": "https://aiprofitlab.io",
+    "logo": "https://aiprofitlab.io/logo.webp",
+    "image": "https://aiprofitlab.io/nahid-business-banner.png",
+    "description": "Helping non-technical managers leverage AI, automation, and technology to increase ROI and business efficiency.",
+    "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Al Seeb",
+        "addressLocality": "Muscat",
+        "addressRegion": "Muscat Governorate",
+        "postalCode": "000",
+        "addressCountry": "OM"
+    },
+    "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 23.635950490475295,
+        "longitude": 58.207628165445385
+    },
+    "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+968-99245250",
+        "contactType": "customer service",
+        "areaServed": "GCC",
+        "availableLanguage": [
+            "en",
+            "ar"
+        ]
+    },
+    "sameAs": [
+        "https://www.youtube.com/@AI_for_Managers",
+        "https://www.linkedin.com/in/nahid-aby"
+    ]
+}
+</script>
 </head>
 <body class="antialiased">
     <!-- Navbar -->
@@ -259,7 +339,28 @@
                             <h3 class="text-lg font-bold text-white mb-2">What hardware do I need to run AI locally?</h3>
                             <p class="text-gray-400 mb-0">For most SMEs, a high-end workstation with a modern NVIDIA GPU or a dedicated local server is sufficient to run models like Ollama for the entire team.</p>
                         </div>
+                    
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">Can small SMEs afford AI technology?</h3>
+                        <p class="text-gray-400 mb-0">Yes, the rise of no-code/low-code platforms has democratized AI, making it highly affordable for SMEs compared to hiring full-time developers.</p>
                     </div>
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">How do we train our staff to use new AI systems?</h3>
+                        <p class="text-gray-400 mb-0">A reputable AI agency provides comprehensive onboarding, standard operating procedures (SOPs), and ongoing support to ensure smooth user adoption.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">What is 'deterministic' vs 'probabilistic' AI?</h3>
+                        <p class="text-gray-400 mb-0">Probabilistic AI generates text based on patterns (like ChatGPT), while deterministic AI follows strict, hard-coded rules. Business automations require a mix of both for reliability.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">Is my company's data safe when using AI?</h3>
+                        <p class="text-gray-400 mb-0">Yes, provided you use enterprise-grade AI models with strict data privacy agreements or deploy on-premise solutions that comply with Oman's data protection laws.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">How does AI improve supply chain management?</h3>
+                        <p class="text-gray-400 mb-0">AI predicts demand fluctuations, optimizes delivery routes in real-time, and automates inventory reordering, significantly reducing logistical costs.</p>
+                    </div>
+                </div>
                 </section>
 
                 <div class="mt-16 glass-card p-8 rounded-3xl border border-blue-500/20">
@@ -282,10 +383,8 @@
         </article>
     </main>
 
-    <footer class="py-12 border-t border-white/10 mt-20">
-        <div class="max-w-4xl mx-auto px-6 text-center">
-            <p class="text-gray-500 text-sm">© 2026 AI Profit Lab. All rights reserved. Driving digital excellence in Oman.</p>
-        </div>
+    <footer class="border-t border-white/10 bg-black py-8 text-center text-gray-500 text-sm mt-auto">
+        <p>© 2025 AI Profit Lab — a brand of International Gulf Lotus SPC • All Rights Reserved</p>
     </footer>
 </body>
 </html>
