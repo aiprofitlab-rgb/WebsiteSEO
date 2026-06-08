@@ -47,9 +47,14 @@ def extract_metadata(filepath):
         hook_match = re.search(r'<p class="[^"]*text-xl[^"]*text-gray-400[^"]*">(.*?)</p>', content, re.IGNORECASE | re.DOTALL)
         desc = hook_match.group(1).strip() if hook_match else "Read our latest updates and news."
 
-    # Image
-    img_match = re.search(r'<img[^>]+src=["\'](.*?)["\']', content, re.IGNORECASE)
-    img_src = img_match.group(1) if img_match else "/blog/images/default.png"
+    # Image — use hero/article img tag specifically (skip favicon/logo refs in <head>)
+    # Match the first <img> that lives inside <main> / <body> by looking for the hero pattern
+    hero_match = re.search(r'<img[^>]+src=["\']([^"\']+)["\'][^>]*class=["\'][^"\']*rounded-3xl[^"\']*["\']', content, re.IGNORECASE)
+    if hero_match:
+        img_src = hero_match.group(1)
+    else:
+        img_match = re.search(r'<img[^>]+src=["\']([^"\']+)["\']', content, re.IGNORECASE)
+        img_src = img_match.group(1) if img_match else "/blog/images/default.png"
 
     return {
         "filename": filename,
