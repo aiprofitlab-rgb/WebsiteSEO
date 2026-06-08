@@ -909,15 +909,15 @@
     </footer>
 
     <script>
-        / ==================== CONFIGURATION ====================
+        // ==================== CONFIGURATION ====================
         // YOUR GOOGLE APPS SCRIPT URL - REPLACE WITH YOUR NEW URL
         const GOOGLE_SHEET_URL = "https://script.google.com/macros/s/AKfycbzdqebnEkTwzniLCq0rPevQvbwebGib2qII9vi08dVSgSh10TxXwuvwsAb0DrIl97QnOQ/exec";
         
-        / ==================== STATE ====================
+        // ==================== STATE ====================
         let currentStep = 1;
         const totalSteps = 5;
         
-        / ==================== INITIALIZATION ====================
+        // ==================== INITIALIZATION ====================
         function init() {
             // Step click handlers (allow going back to previous steps)
             document.querySelectorAll('.step-dot').forEach(dot => {

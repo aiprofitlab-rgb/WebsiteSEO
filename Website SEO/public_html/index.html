@@ -762,7 +762,7 @@
 
     <script>
 
-        / ==================== MULTI-STEP FORM LOGIC (preserved) ====================
+        // ==================== MULTI-STEP FORM LOGIC (preserved) ====================
         const modal = document.getElementById('auditModal');
         const form = document.getElementById('auditForm');
         const steps = Array.from(form.querySelectorAll('.form-step'));
@@ -801,7 +801,7 @@
                     this.innerHTML = '';
                     this.appendChild(iframe);
                 });
-
+            }
         });
     </script>
 
@@ -828,9 +828,9 @@
                 document.addEventListener('click', function(event) {
                     if (!mobileToggleBtn.contains(event.target) && !mobileMenuDropdown.contains(event.target)) {
                         mobileMenuDropdown.classList.remove('open');
-
+                    }
                 });
-
+            }
         });
     </script>
     <script>
