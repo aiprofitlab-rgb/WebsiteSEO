@@ -684,6 +684,7 @@
             comfortSlider.addEventListener('input', function() {
                 comfortOutput.innerText = this.value;
             });
+        }
 
         // Main Audit Form Submit
         form.addEventListener('submit', async function(event) {
@@ -779,14 +780,14 @@
                     } else {
                         alert('Something went wrong. Please try again or use the call booking form.');
                     }
-                }
                 } catch (error) {
                     alert('Connection error. Please try again.');
                 } finally {
                     submitBtn.textContent = originalText;
                     submitBtn.disabled = false;
-
+                }
             });
+        }  // end if (quickForm)
 
         modal.addEventListener('click', (event) => {
             if (event.target === modal) closeAuditForm();
@@ -805,7 +806,8 @@
                 document.getElementById('welcome-message').textContent = `Welcome from ${country}!`;
             } catch (error) {
                 console.log('Country detection failed');
-
+            }
+        }
 
         // ==================== CHAT FUNCTIONS ====================
         async function handleSend() {
@@ -819,6 +821,7 @@
             if (!visitorId) {
                 visitorId = 'visitor_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
                 localStorage.setItem('aidenVisitorId', visitorId);
+            }
 
             box.innerHTML += `<div class="bg-blue-900/50 ml-auto p-3 rounded-2xl rounded-br-none max-w-[85%] text-white">${message}</div>`;
             input.value = '';

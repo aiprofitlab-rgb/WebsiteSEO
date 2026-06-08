@@ -673,6 +673,7 @@
             comfortSlider.addEventListener('input', function() {
                 comfortOutput.innerText = this.value;
             });
+        }
 
         // Main Audit Form Submit
         form.addEventListener('submit', async function(event) {
@@ -794,7 +795,8 @@
                 document.getElementById('welcome-message').textContent = `مرحباً بك من ${country}!`;
             } catch (error) {
                 console.log('Country detection failed');
-
+            }
+        }
 
         // ==================== CHAT FUNCTIONS ====================
         async function handleSend() {
@@ -808,6 +810,7 @@
             if (!visitorId) {
                 visitorId = 'visitor_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
                 localStorage.setItem('aidenVisitorId', visitorId);
+            }
 
             // RTL: user message on the right (mr-auto)
             box.innerHTML += `<div class="bg-blue-900/50 mr-auto p-3 rounded-2xl rounded-bl-none max-w-[85%] text-white">${message}</div>`;
@@ -853,7 +856,7 @@
                     }
                 }, 10000);
             }
-        };
+        });
 
         // ==================== FIXED: MOBILE MENU TOGGLE (Unified System) ====================
         const mobileToggleBtn = document.getElementById('mobileMenuToggle');
@@ -869,16 +872,15 @@
             mobileMenuDropdown.querySelectorAll('a').forEach(link => {
                 link.addEventListener('click', () => {
                     mobileMenuDropdown.classList.remove('open');
-                    }
                 });
-            }
-        });
-            
+            });
+        }
+
             // Close if user clicks outside
             document.addEventListener('click', function(event) {
                 if (!mobileToggleBtn.contains(event.target) && !mobileMenuDropdown.contains(event.target)) {
                     mobileMenuDropdown.classList.remove('open');
-
+                }
             });
 
         // ==================== INIT ====================
@@ -889,10 +891,11 @@
                     if (!document.getElementById('aiden-ui').classList.contains('active')) {
                         toggleChat();
                         sessionStorage.setItem('aidenPopped', 'true');
-
+                    }
                 }, 10000);
-
+            }
         });
+        }  // end if (quickForm)
     </script>
 <script>
         // STANDARD NAV JS

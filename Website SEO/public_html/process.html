@@ -728,31 +728,6 @@
 
     <!-- ======================= SCRIPT (Fixed Mobile Menu Logic) ======================= -->
     <script>
-        
-
-                // Close menu when clicking a link
-                mobileMenu.querySelectorAll('a').forEach(link => {
-                    link.addEventListener('click', function() {
-                        mobileMenu.classList.remove('active');
-                    });
-                });
-
-                // Close when clicking outside
-                document.addEventListener('click', function(event) {
-                    if (!mobileMenu.contains(event.target) && !toggleBtn.contains(event.target)) {
-                        mobileMenu.classList.remove('active');
-                    }
-                });
-
-                // Optional: close on escape key
-                document.addEventListener('keydown', function(e) {
-                    if (e.key === 'Escape' && mobileMenu.classList.contains('active')) {
-                        mobileMenu.classList.remove('active');
-                    }
-                });
-
-        });
-
         // ==================== MULTI-STEP FORM LOGIC ====================
         const modal = document.getElementById('auditModal');
         const form = document.getElementById('auditForm');
@@ -799,14 +774,14 @@
                     if (currentStep < steps.length - 1) {
                         currentStep++;
                         showStep(currentStep);
-
-
+                    }
+                }
             } else if (e.target.matches('.prev')) {
                 if (currentStep > 0) {
                     currentStep--;
                     showStep(currentStep);
-
-
+                }
+            }
         });
 
         // Slider
@@ -817,6 +792,7 @@
             comfortSlider.addEventListener('input', function() {
                 comfortOutput.innerText = this.value;
             });
+        }
 
         // Form Submit
         form.addEventListener('submit', async function(event) {
@@ -866,13 +842,13 @@
                     window.location.href = "https://calendly.com/ai-profit-lab2026";
                 } else {
                     alert("حدث خطأ. الرجاء المحاولة مرة أخرى.");
-
+                }
             } catch (error) {
                 alert("خطأ في الاتصال. تحقق من اتصالك بالإنترنت.");
             } finally {
                 submitBtn.textContent = originalText;
                 submitBtn.disabled = false;
-
+            }
         });
 
         modal.addEventListener('click', (event) => {
@@ -892,7 +868,8 @@
                 document.getElementById('welcome-message').textContent = `مرحباً بك من ${country}!`;
             } catch (error) {
                 console.log('Country detection failed');
-
+            }
+        }
 
         // ==================== CHAT FUNCTIONS ====================
         async function handleSend() {
@@ -906,6 +883,7 @@
             if (!visitorId) {
                 visitorId = 'visitor_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
                 localStorage.setItem('aidenVisitorId', visitorId);
+            }
 
             box.innerHTML += `<div class="bg-blue-900/50 mr-auto p-3 rounded-2xl rounded-bl-none max-w-[85%] text-white">${message}</div>`;
             input.value = '';

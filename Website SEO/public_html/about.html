@@ -740,6 +740,7 @@
             comfortSlider.addEventListener('input', function() {
                 comfortOutput.innerText = this.value;
             });
+        }
 
         // Main Audit Form Submit
         form.addEventListener('submit', async function(event) {
@@ -816,7 +817,8 @@
                 document.getElementById('welcome-message').textContent = `مرحباً بك من ${country}!`;
             } catch (error) {
                 console.log('Country detection failed');
-
+            }
+        }
 
         // ==================== CHAT FUNCTIONS ====================
         async function handleSend() {
@@ -830,6 +832,7 @@
             if (!visitorId) {
                 visitorId = 'visitor_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
                 localStorage.setItem('aidenVisitorId', visitorId);
+            }
 
             box.innerHTML += `<div class="bg-blue-900/50 mr-auto p-3 rounded-2xl rounded-bl-none max-w-[85%] text-white">${message}</div>`;
             input.value = '';
