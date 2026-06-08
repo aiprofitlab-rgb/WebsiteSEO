@@ -854,7 +854,7 @@
         }
 
         // ==================== INIT ====================
-        window.onload = async function() {
+        window.addEventListener('load', async function() {
             await detectCountry();
             if (!sessionStorage.getItem('aidenPopped')) {
                 setTimeout(() => {
@@ -865,7 +865,7 @@
                     }
                 }, 10000);
             }
-        };
+        });
 </script>
 
     <script>

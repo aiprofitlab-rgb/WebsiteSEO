@@ -935,7 +935,7 @@
         </div>
     </div>
 
-    <!-- ======    <script>
+    <script>
         // ==================== MULTI-STEP FORM LOGIC ====================
         const modal = document.getElementById('auditModal');
         const form = document.getElementById('auditForm');
@@ -1206,7 +1206,7 @@
         }
 
         // ==================== INIT ====================
-        window.onload = async function() {
+        window.addEventListener('load', async function() {
             await detectCountry();
             if (!sessionStorage.getItem('aidenPopped')) {
                 setTimeout(() => {
@@ -1217,7 +1217,7 @@
                     }
                 }, 10000);
             }
-        };
+        });
     </script>
 
     <script>

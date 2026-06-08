@@ -868,7 +868,7 @@ async function handleSend(){ const input=document.getElementById('user-input'), 
 function toggleChat(){ document.getElementById('aiden-ui').classList.toggle('active'); }
 
 
-window.onload=async()=>{ await detectCountry(); if(!sessionStorage.getItem('aidenPopped')){ setTimeout(()=>{ if(!document.getElementById('aiden-ui').classList.contains('active')){ toggleChat(); sessionStorage.setItem('aidenPopped','true'); } },10000); } };
+window.addEventListener('load', async () => { await detectCountry(); if(!sessionStorage.getItem('aidenPopped')){ setTimeout(()=>{ if(!document.getElementById('aiden-ui').classList.contains('active')){ toggleChat(); sessionStorage.setItem('aidenPopped','true'); } },10000); } });
 </script>
 
     <script>
