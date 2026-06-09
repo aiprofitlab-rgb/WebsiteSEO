@@ -1,42 +1,27 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-    <link rel="canonical" href="https://aiprofitlab.io/campaign-roi-simulator/" />
-    
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+<link href="https://aiprofitlab.io/campaign-roi-simulator/" rel="canonical"/>
 
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <!-- SEO Meta Tags -->
 <title>Campaign ROI Simulator | AI Profit Lab Oman</title>
-<meta name="description" content="Supercharge your business with Campaign ROI Simulator. Discover how AI Profit Lab delivers 10x ROI, eliminates bottlenecks, and drives unstoppable gro">
-<meta name="keywords" content="ROI Simulator, Marketing Automation Oman, AI Profit Lab, Business Growth Muscat, Campaign Calculator, Omani SME tools">
-<meta name="author" content="AI Profit Lab">
-<meta name="robots" content="index, follow">
-
+<meta content="Supercharge your business with Campaign ROI Simulator. Discover how AI Profit Lab delivers 10x ROI, eliminates bottlenecks, and drives unstoppable gro" name="description"/>
+<meta content="ROI Simulator, Marketing Automation Oman, AI Profit Lab, Business Growth Muscat, Campaign Calculator, Omani SME tools" name="keywords"/>
+<meta content="AI Profit Lab" name="author"/>
+<meta content="index, follow" name="robots"/>
 <!-- Open Graph / Social Media -->
-<meta property="og:title" content="Campaign ROI Simulator | AI Profit Lab Oman">
-<meta property="og:description" content="Optimize your marketing spend with our advanced AI-driven ROI simulator.">
-<meta property="og:image" content="https://aiprofitlab.io/nahid-business-banner.png">
-<meta property="og:url" content="https://aiprofitlab.io/en/campaign-roi-simulator/">
-<meta property="og:type" content="website">
-
+<meta content="Campaign ROI Simulator | AI Profit Lab Oman" property="og:title"/>
+<meta content="Optimize your marketing spend with our advanced AI-driven ROI simulator." property="og:description"/>
+<meta content="https://aiprofitlab.io/nahid-business-banner.png" property="og:image"/>
+<meta content="https://aiprofitlab.io/en/campaign-roi-simulator/" property="og:url"/>
+<meta content="website" property="og:type"/>
 <!-- Favicon -->
-<link rel="icon" type="image/svg+xml" href="/favicon.svg">
-<link rel="apple-touch-icon" href="/favicon.svg">
-
+<link href="/favicon.svg" rel="icon" type="image/svg+xml"/>
+<link href="/favicon.svg" rel="apple-touch-icon"/>
 <!-- Hreflang -->
-
-
-
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-2GPVY4Z5KR"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-2GPVY4Z5KR');
-</script>
-
 <!-- Local Business Schema -->
 <script type="application/ld+json">
 {
@@ -63,8 +48,8 @@
   }
 }
 </script>
-
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link as="style" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&amp;family=DM+Mono:wght@400;500&amp;display=swap" onload="this.onload=null;this.rel='stylesheet'" rel="preload"/>
+<noscript><link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&amp;family=DM+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/></noscript>
 <style>
 /* ─── Reset & tokens ─── */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -332,322 +317,308 @@ select option{background:var(--bg3)}
   .funnel-label{width:68px;font-size:10px}
 }
 </style>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 </head>
 <body>
-
 <div class="sidebar-overlay" id="sidebar-overlay" onclick="closeSidebar()"></div>
-
 <div class="app">
-
-  <!-- ── Sidebar ── -->
-  <aside class="sidebar" id="sidebar">
-    <div class="logo">
-      <a href="/en/" style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 10px;">
-        <div class="logo-mark" style="background: #3B82F6; font-weight: 800;">A</div>
-        <div>
-          <div class="logo-name"><span style="color: #3B82F6;">A</span><span style="color: #EF4444;">I</span> Profit Lab</div>
-          <div class="logo-sub">ROI Simulator</div>
-        </div>
-      </a>
-    </div>
-    <nav class="nav">
-      <div class="nav-label">Campaign</div>
-      <div class="nav-item active" data-tab="setup"    onclick="switchTab('setup',this)"><span class="nav-icon">⚙</span>Setup</div>
-      <div class="nav-item"        data-tab="channels" onclick="switchTab('channels',this)"><span class="nav-icon">📡</span>Channels</div>
-      <div class="nav-item"        data-tab="audience" onclick="switchTab('audience',this)"><span class="nav-icon">🎯</span>Audience</div>
-      <div class="nav-label">Execution</div>
-      <div class="nav-item"        data-tab="funnel"   onclick="switchTab('funnel',this)"><span class="nav-icon">▽</span>Funnel</div>
-      <div class="nav-item"        data-tab="ab"       onclick="switchTab('ab',this)"><span class="nav-icon">⚖</span>A/B Testing</div>
-      <div class="nav-label">Analysis</div>
-      <div class="nav-item"        data-tab="results"  onclick="switchTab('results',this)"><span class="nav-icon">📊</span>Results</div>
-    </nav>
-    <div class="sidebar-footer">© 2025 AI Profit Lab · Muscat, Oman</div>
-  </aside>
-
-  <!-- ── Main ── -->
-  <div class="main">
-
-    <div class="topbar">
-      <button class="hamburger" onclick="toggleSidebar()" aria-label="Open menu">☰</button>
-      <div class="topbar-left">
-        <div class="page-title" id="page-title">Campaign Setup</div>
-        <div class="page-sub"   id="page-sub">Configure your campaign parameters</div>
-      </div>
-      <div class="topbar-right">
-        <button class="btn btn-sm" onclick="resetSim()">↺ Reset</button>
-        <button class="btn btn-sm btn-primary" onclick="switchTab('results')">Results →</button>
-      </div>
-    </div>
-
-    <div class="content">
-
-      <!-- ═══ SETUP ═══ -->
-      <div id="tab-setup" class="section active">
-        <div class="metrics">
-          <div class="metric"><div class="metric-label">Budget</div><div class="metric-value" id="m-budget">$10,000</div></div>
-          <div class="metric"><div class="metric-label">Duration</div><div class="metric-value" id="m-duration">30d</div></div>
-          <div class="metric"><div class="metric-label">Target leads</div><div class="metric-value" id="m-leads">1,250</div></div>
-          <div class="metric"><div class="metric-label">Est. revenue</div><div class="metric-value" id="m-rev">$37,500</div></div>
-          <div class="metric"><div class="metric-label">Expected ROI</div><div class="metric-value up" id="m-roi">275%</div></div>
-        </div>
-
-        <div class="grid2">
-          <div class="card">
-            <div class="card-title">Campaign basics</div>
-            <div style="display:flex;flex-direction:column;gap:13px">
-              <div><label>Campaign name</label><input type="text" id="camp-name" value="Spring Launch 2025"></div>
-              <div><label>Campaign type</label>
-                <select id="camp-type" onchange="updateSetup()">
-                  <option>Brand awareness</option><option>Lead generation</option>
-                  <option selected>Product launch</option><option>Retention</option><option>Seasonal promo</option>
-                </select>
-              </div>
-              <div><label>Primary goal</label>
-                <select id="camp-goal" onchange="updateSetup()">
-                  <option>Maximize reach</option><option selected>Maximize conversions</option>
-                  <option>Maximize revenue</option><option>Minimize cost per lead</option>
-                </select>
-              </div>
-            </div>
-          </div>
-          <div class="card">
-            <div class="card-title">Budget &amp; timeline</div>
-            <div style="display:flex;flex-direction:column;gap:15px">
-              <div><label>Total budget — <span class="val" id="budget-val">$10,000</span></label>
-                <input type="range" min="1000" max="100000" step="500" value="10000" id="budget" oninput="updateSetup()"></div>
-              <div><label>Duration — <span class="val" id="dur-val">30 days</span></label>
-                <input type="range" min="7" max="90" step="1" value="30" id="duration" oninput="updateSetup()"></div>
-              <div><label>Avg deal size — <span class="val" id="deal-val">$200</span></label>
-                <input type="range" min="10" max="5000" step="10" value="200" id="dealsize" oninput="updateSetup()"></div>
-            </div>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="card-title">Campaign health indicators</div>
-          <div class="health-row">
-            <div>
-              <div class="health-label">Budget sufficiency</div>
-              <div class="progress-track"><div class="progress-fill" id="ph-budget" style="width:65%;background:var(--accent)"></div></div>
-              <div class="health-sub" id="ph-budget-lbl">Adequate for 30 days</div>
-            </div>
-            <div>
-              <div class="health-label">Timeline feasibility</div>
-              <div class="progress-track"><div class="progress-fill" id="ph-time" style="width:80%;background:var(--green)"></div></div>
-              <div class="health-sub" id="ph-time-lbl">Good runway</div>
-            </div>
-            <div>
-              <div class="health-label">ROI potential</div>
-              <div class="progress-track"><div class="progress-fill" id="ph-roi" style="width:70%;background:var(--amber)"></div></div>
-              <div class="health-sub" id="ph-roi-lbl">Strong potential</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ═══ CHANNELS ═══ -->
-      <div id="tab-channels" class="section">
-        <div class="card">
-          <div class="card-header">
-            <div class="card-title" style="margin:0">Select channels</div>
-            <span class="badge badge-accent" id="ch-count">3 selected</span>
-          </div>
-          <div class="channel-grid" id="channel-grid"></div>
-          <div style="font-size:11px;color:var(--text3)">Budget split equally among selected channels. Tap to toggle.</div>
-        </div>
-        <div class="card">
-          <div class="card-title">Budget allocation</div>
-          <div id="channel-alloc"></div>
-        </div>
-        <div class="card">
-          <div class="card-title">Estimated reach per channel</div>
-          <div class="legend" id="ch-legend"></div>
-          <div class="chart-wrap-lg"><canvas id="channel-chart" role="img" aria-label="Bar chart estimated reach per channel">Estimated reach by channel</canvas></div>
-        </div>
-      </div>
-
-      <!-- ═══ AUDIENCE ═══ -->
-      <div id="tab-audience" class="section">
-        <div class="grid2">
-          <div class="card">
-            <div class="card-title">Targeting parameters</div>
-            <div style="display:flex;flex-direction:column;gap:14px">
-              <div>
-                <label>Age range — <span class="val" id="age-val">25 – 44</span></label>
-                <input type="range" min="18" max="65" step="1" value="25" id="age-min" oninput="updateAudience()">
-                <input type="range" min="18" max="65" step="1" value="44" id="age-max" oninput="updateAudience()" style="margin-top:5px">
-              </div>
-              <div><label>Geography</label>
-                <select id="geo" onchange="updateAudience()">
-                  <option>Global</option><option selected>National</option><option>Regional</option><option>Local (city)</option>
-                </select>
-              </div>
-              <div><label>Income bracket</label>
-                <select id="income" onchange="updateAudience()">
-                  <option>All</option><option>Under $50k</option><option selected>$50k–$100k</option><option>$100k–$200k</option><option>$200k+</option>
-                </select>
-              </div>
-              <div><label>Industry focus</label>
-                <select id="industry" onchange="updateAudience()">
-                  <option selected>All industries</option><option>Technology</option><option>Healthcare</option>
-                  <option>Finance</option><option>Retail</option><option>Education</option>
-                </select>
-              </div>
-            </div>
-          </div>
-          <div class="card" style="text-align:center">
-            <div class="card-title">Audience size estimate</div>
-            <div style="padding:12px 0">
-              <div style="font-size:44px;font-weight:700;color:var(--accent)" id="aud-size">2.4M</div>
-              <div style="font-size:12px;color:var(--text3);margin-top:3px;margin-bottom:16px">estimated addressable audience</div>
-              <div style="background:var(--bg3);border-radius:var(--r);padding:14px;margin-bottom:10px">
-                <div style="font-size:10px;color:var(--text3);margin-bottom:4px;letter-spacing:.06em">REACHABLE WITH BUDGET</div>
-                <div style="font-size:30px;font-weight:600;color:var(--green)" id="aud-reach">48,000</div>
-                <div style="font-size:12px;color:var(--text3)" id="aud-pct">2.0% of audience</div>
-              </div>
-              <div style="font-size:12px;color:var(--text3)">Daily reach: <span style="color:var(--text);font-weight:500" id="aud-daily">1,600</span></div>
-            </div>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-title">Audience segments</div>
-          <div id="segments-wrap" style="margin-bottom:14px"></div>
-          <div class="grid3 seg-stats-grid" id="seg-stats"></div>
-        </div>
-      </div>
-
-      <!-- ═══ FUNNEL ═══ -->
-      <div id="tab-funnel" class="section">
-        <div class="card">
-          <div class="card-title">Conversion funnel</div>
-          <div id="funnel-steps"></div>
-        </div>
-        <div class="grid2">
-          <div class="card">
-            <div class="card-title">Optimization levers</div>
-            <div style="display:flex;flex-direction:column;gap:13px">
-              <div><label>Landing page quality — <span class="val" id="lp-val">Good</span></label>
-                <input type="range" min="1" max="5" step="1" value="3" id="lp-q" oninput="updateFunnel()"></div>
-              <div><label>Email sequence — <span class="val" id="em-val">3 emails</span></label>
-                <input type="range" min="1" max="10" step="1" value="3" id="em-seq" oninput="updateFunnel()"></div>
-              <div><label>Offer strength — <span class="val" id="offer-val">Medium</span></label>
-                <input type="range" min="1" max="5" step="1" value="3" id="offer-s" oninput="updateFunnel()"></div>
-              <div><label>Retargeting — <span class="val" id="ret-val">Enabled</span></label>
-                <input type="range" min="0" max="1" step="1" value="1" id="retarget" oninput="updateFunnel()"></div>
-            </div>
-          </div>
-          <div class="card">
-            <div class="card-title">Stage conversion rates</div>
-            <div id="conv-rates"></div>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-title">Campaign timeline</div>
-          <div id="timeline"></div>
-        </div>
-      </div>
-
-      <!-- ═══ A/B TESTING ═══ -->
-      <div id="tab-ab" class="section">
-        <div class="metrics">
-          <div class="metric"><div class="metric-label">Confidence</div><div class="metric-value" id="ab-conf">87%</div></div>
-          <div class="metric"><div class="metric-label">Sample size</div><div class="metric-value" id="ab-sample">5,200</div></div>
-          <div class="metric"><div class="metric-label">Test duration</div><div class="metric-value" id="ab-dur">14d</div></div>
-          <div class="metric"><div class="metric-label">Uplift B vs A</div><div class="metric-value up" id="ab-uplift">+18%</div></div>
-        </div>
-        <div class="ab-row grid2">
-          <div class="ab-card">
-            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
-              <div style="font-size:14px;font-weight:600">Variant A — Control</div>
-              <span class="badge badge-blue">Running</span>
-            </div>
-            <div id="ab-a-stats"></div>
-          </div>
-          <div class="ab-card ab-winner">
-            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
-              <div style="font-size:14px;font-weight:600">Variant B — Test</div>
-              <span class="badge badge-green">Winning ✓</span>
-            </div>
-            <div id="ab-b-stats"></div>
-          </div>
-        </div>
-        <div class="card" style="margin-top:14px">
-          <div class="card-title">Test configuration</div>
-          <div class="grid3">
-            <div><label>Variable to test</label>
-              <select id="ab-var" onchange="updateAB()">
-                <option>Headline copy</option><option selected>CTA button</option>
-                <option>Hero image</option><option>Pricing display</option><option>Email subject</option>
-              </select>
-            </div>
-            <div><label>Traffic split — <span class="val" id="ab-split-val">50 / 50</span></label>
-              <input type="range" min="10" max="50" step="5" value="50" id="ab-split" oninput="updateAB()"></div>
-            <div><label>Duration — <span class="val" id="ab-dur-val">14 days</span></label>
-              <input type="range" min="3" max="30" step="1" value="14" id="ab-dur-in" oninput="updateAB()"></div>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-title">Activity log</div>
-          <div class="log" id="ab-log"></div>
-        </div>
-      </div>
-
-      <!-- ═══ RESULTS ═══ -->
-      <div id="tab-results" class="section">
-        <div class="metrics">
-          <div class="metric"><div class="metric-label">Total reach</div><div class="metric-value" id="r-reach">48,200</div><div class="metric-delta up">↑ on target</div></div>
-          <div class="metric"><div class="metric-label">Leads</div><div class="metric-value" id="r-leads">963</div><div class="metric-delta up">↑ 14% over goal</div></div>
-          <div class="metric"><div class="metric-label">Conversions</div><div class="metric-value" id="r-conv">144</div><div class="metric-delta" id="r-conv-rate">15% rate</div></div>
-          <div class="metric"><div class="metric-label">Revenue</div><div class="metric-value" id="r-rev">$28,800</div><div class="metric-delta up">↑ 6.7% vs est</div></div>
-          <div class="metric"><div class="metric-label">ROI</div><div class="metric-value up" id="r-roi">188%</div><div class="metric-delta up">↑ 18pts vs plan</div></div>
-          <div class="metric"><div class="metric-label">Cost / lead</div><div class="metric-value" id="r-cpl">$10.39</div><div class="metric-delta up">Below target</div></div>
-        </div>
-        <div class="grid2">
-          <div class="card">
-            <div class="card-title">Weekly performance</div>
-            <div class="legend">
-              <div class="legend-item"><div class="legend-swatch" style="background:var(--accent)"></div>Leads</div>
-              <div class="legend-item"><div class="legend-swatch" style="background:var(--green)"></div>Conversions</div>
-            </div>
-            <div class="chart-wrap"><canvas id="results-chart" role="img" aria-label="Weekly leads and conversions line chart">Weekly performance</canvas></div>
-          </div>
-          <div class="card">
-            <div class="card-title">Channel contribution</div>
-            <div class="chart-wrap" style="height:175px"><canvas id="contrib-chart" role="img" aria-label="Doughnut chart channel lead contribution">Channel breakdown</canvas></div>
-            <div class="legend" id="contrib-legend" style="margin-top:10px;margin-bottom:0"></div>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-title">Recommendations</div>
-          <div id="recommendations"></div>
-        </div>
-        <div class="result-actions">
-          <button class="btn btn-primary" onclick="alert('Connect your AI API key to enable real-time insights.')">Get AI insights →</button>
-          <button class="btn" onclick="window.print()">Export report</button>
-          <button class="btn" onclick="resetSim()">↺ New campaign</button>
-        </div>
-      </div>
-
-    </div><!-- /content -->
-  </div><!-- /main -->
-</div><!-- /app -->
-
-<!-- ── Mobile bottom nav ── -->
-<nav class="mobile-nav" role="navigation" aria-label="Main navigation">
-  <div class="mobile-nav-inner">
-    <div class="mob-tab active" data-tab="setup"    onclick="switchTab('setup')"><span class="mob-tab-icon">⚙</span><span class="mob-tab-label">Setup</span></div>
-    <div class="mob-tab"        data-tab="channels" onclick="switchTab('channels')"><span class="mob-tab-icon">📡</span><span class="mob-tab-label">Channels</span></div>
-    <div class="mob-tab"        data-tab="audience" onclick="switchTab('audience')"><span class="mob-tab-icon">🎯</span><span class="mob-tab-label">Audience</span></div>
-    <div class="mob-tab"        data-tab="funnel"   onclick="switchTab('funnel')"><span class="mob-tab-icon">▽</span><span class="mob-tab-label">Funnel</span></div>
-    <div class="mob-tab"        data-tab="ab"       onclick="switchTab('ab')"><span class="mob-tab-icon">⚖</span><span class="mob-tab-label">A/B</span></div>
-    <div class="mob-tab"        data-tab="results"  onclick="switchTab('results')"><span class="mob-tab-icon">📊</span><span class="mob-tab-label">Results</span></div>
-  </div>
+<!-- ── Sidebar ── -->
+<aside class="sidebar" id="sidebar">
+<div class="logo">
+<a href="/en/" style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 10px;">
+<div class="logo-mark" style="background: #3B82F6; font-weight: 800;">A</div>
+<div>
+<div class="logo-name"><span style="color: #3B82F6;">A</span><span style="color: #EF4444;">I</span> Profit Lab</div>
+<div class="logo-sub">ROI Simulator</div>
+</div>
+</a>
+</div>
+<nav class="nav">
+<div class="nav-label">Campaign</div>
+<div class="nav-item active" data-tab="setup" onclick="switchTab('setup',this)"><span class="nav-icon">⚙</span>Setup</div>
+<div class="nav-item" data-tab="channels" onclick="switchTab('channels',this)"><span class="nav-icon">📡</span>Channels</div>
+<div class="nav-item" data-tab="audience" onclick="switchTab('audience',this)"><span class="nav-icon">🎯</span>Audience</div>
+<div class="nav-label">Execution</div>
+<div class="nav-item" data-tab="funnel" onclick="switchTab('funnel',this)"><span class="nav-icon">▽</span>Funnel</div>
+<div class="nav-item" data-tab="ab" onclick="switchTab('ab',this)"><span class="nav-icon">⚖</span>A/B Testing</div>
+<div class="nav-label">Analysis</div>
+<div class="nav-item" data-tab="results" onclick="switchTab('results',this)"><span class="nav-icon">📊</span>Results</div>
 </nav>
+<div class="sidebar-footer">© 2025 AI Profit Lab · Muscat, Oman</div>
+</aside>
+<!-- ── Main ── -->
+<div class="main">
+<div class="topbar">
+<button aria-label="Open menu" class="hamburger" onclick="toggleSidebar()">☰</button>
+<div class="topbar-left">
+<div class="page-title" id="page-title">Campaign Setup</div>
+<div class="page-sub" id="page-sub">Configure your campaign parameters</div>
+</div>
+<div class="topbar-right">
+<button class="btn btn-sm" onclick="resetSim()">↺ Reset</button>
+<button class="btn btn-sm btn-primary" onclick="switchTab('results')">Results →</button>
+</div>
+</div>
+<div class="content">
+<!-- ═══ SETUP ═══ -->
+<div class="section active" id="tab-setup">
+<div class="metrics">
+<div class="metric"><div class="metric-label">Budget</div><div class="metric-value" id="m-budget">$10,000</div></div>
+<div class="metric"><div class="metric-label">Duration</div><div class="metric-value" id="m-duration">30d</div></div>
+<div class="metric"><div class="metric-label">Target leads</div><div class="metric-value" id="m-leads">1,250</div></div>
+<div class="metric"><div class="metric-label">Est. revenue</div><div class="metric-value" id="m-rev">$37,500</div></div>
+<div class="metric"><div class="metric-label">Expected ROI</div><div class="metric-value up" id="m-roi">275%</div></div>
+</div>
+<div class="grid2">
+<div class="card">
+<div class="card-title">Campaign basics</div>
+<div style="display:flex;flex-direction:column;gap:13px">
+<div><label>Campaign name</label><input id="camp-name" type="text" value="Spring Launch 2025"/></div>
+<div><label>Campaign type</label>
+<select id="camp-type" onchange="updateSetup()">
+<option>Brand awareness</option><option>Lead generation</option>
+<option selected="">Product launch</option><option>Retention</option><option>Seasonal promo</option>
+</select>
+</div>
+<div><label>Primary goal</label>
+<select id="camp-goal" onchange="updateSetup()">
+<option>Maximize reach</option><option selected="">Maximize conversions</option>
+<option>Maximize revenue</option><option>Minimize cost per lead</option>
+</select>
+</div>
+</div>
+</div>
+<div class="card">
+<div class="card-title">Budget &amp; timeline</div>
+<div style="display:flex;flex-direction:column;gap:15px">
+<div><label>Total budget — <span class="val" id="budget-val">$10,000</span></label>
+<input id="budget" max="100000" min="1000" oninput="updateSetup()" step="500" type="range" value="10000"/></div>
+<div><label>Duration — <span class="val" id="dur-val">30 days</span></label>
+<input id="duration" max="90" min="7" oninput="updateSetup()" step="1" type="range" value="30"/></div>
+<div><label>Avg deal size — <span class="val" id="deal-val">$200</span></label>
+<input id="dealsize" max="5000" min="10" oninput="updateSetup()" step="10" type="range" value="200"/></div>
+</div>
+</div>
+</div>
+<div class="card">
+<div class="card-title">Campaign health indicators</div>
+<div class="health-row">
+<div>
+<div class="health-label">Budget sufficiency</div>
+<div class="progress-track"><div class="progress-fill" id="ph-budget" style="width:65%;background:var(--accent)"></div></div>
+<div class="health-sub" id="ph-budget-lbl">Adequate for 30 days</div>
+</div>
+<div>
+<div class="health-label">Timeline feasibility</div>
+<div class="progress-track"><div class="progress-fill" id="ph-time" style="width:80%;background:var(--green)"></div></div>
+<div class="health-sub" id="ph-time-lbl">Good runway</div>
+</div>
+<div>
+<div class="health-label">ROI potential</div>
+<div class="progress-track"><div class="progress-fill" id="ph-roi" style="width:70%;background:var(--amber)"></div></div>
+<div class="health-sub" id="ph-roi-lbl">Strong potential</div>
+</div>
+</div>
+</div>
+</div>
+<!-- ═══ CHANNELS ═══ -->
+<div class="section" id="tab-channels">
+<div class="card">
+<div class="card-header">
+<div class="card-title" style="margin:0">Select channels</div>
+<span class="badge badge-accent" id="ch-count">3 selected</span>
+</div>
+<div class="channel-grid" id="channel-grid"></div>
+<div style="font-size:11px;color:var(--text3)">Budget split equally among selected channels. Tap to toggle.</div>
+</div>
+<div class="card">
+<div class="card-title">Budget allocation</div>
+<div id="channel-alloc"></div>
+</div>
+<div class="card">
+<div class="card-title">Estimated reach per channel</div>
+<div class="legend" id="ch-legend"></div>
+<div class="chart-wrap-lg"><canvas aria-label="Bar chart estimated reach per channel" id="channel-chart" role="img">Estimated reach by channel</canvas></div>
+</div>
+</div>
+<!-- ═══ AUDIENCE ═══ -->
+<div class="section" id="tab-audience">
+<div class="grid2">
+<div class="card">
+<div class="card-title">Targeting parameters</div>
+<div style="display:flex;flex-direction:column;gap:14px">
+<div>
+<label>Age range — <span class="val" id="age-val">25 – 44</span></label>
+<input id="age-min" max="65" min="18" oninput="updateAudience()" step="1" type="range" value="25"/>
+<input id="age-max" max="65" min="18" oninput="updateAudience()" step="1" style="margin-top:5px" type="range" value="44"/>
+</div>
+<div><label>Geography</label>
+<select id="geo" onchange="updateAudience()">
+<option>Global</option><option selected="">National</option><option>Regional</option><option>Local (city)</option>
+</select>
+</div>
+<div><label>Income bracket</label>
+<select id="income" onchange="updateAudience()">
+<option>All</option><option>Under $50k</option><option selected="">$50k–$100k</option><option>$100k–$200k</option><option>$200k+</option>
+</select>
+</div>
+<div><label>Industry focus</label>
+<select id="industry" onchange="updateAudience()">
+<option selected="">All industries</option><option>Technology</option><option>Healthcare</option>
+<option>Finance</option><option>Retail</option><option>Education</option>
+</select>
+</div>
+</div>
+</div>
+<div class="card" style="text-align:center">
+<div class="card-title">Audience size estimate</div>
+<div style="padding:12px 0">
+<div id="aud-size" style="font-size:44px;font-weight:700;color:var(--accent)">2.4M</div>
+<div style="font-size:12px;color:var(--text3);margin-top:3px;margin-bottom:16px">estimated addressable audience</div>
+<div style="background:var(--bg3);border-radius:var(--r);padding:14px;margin-bottom:10px">
+<div style="font-size:10px;color:var(--text3);margin-bottom:4px;letter-spacing:.06em">REACHABLE WITH BUDGET</div>
+<div id="aud-reach" style="font-size:30px;font-weight:600;color:var(--green)">48,000</div>
+<div id="aud-pct" style="font-size:12px;color:var(--text3)">2.0% of audience</div>
+</div>
+<div style="font-size:12px;color:var(--text3)">Daily reach: <span id="aud-daily" style="color:var(--text);font-weight:500">1,600</span></div>
+</div>
+</div>
+</div>
+<div class="card">
+<div class="card-title">Audience segments</div>
+<div id="segments-wrap" style="margin-bottom:14px"></div>
+<div class="grid3 seg-stats-grid" id="seg-stats"></div>
+</div>
+</div>
+<!-- ═══ FUNNEL ═══ -->
+<div class="section" id="tab-funnel">
+<div class="card">
+<div class="card-title">Conversion funnel</div>
+<div id="funnel-steps"></div>
+</div>
+<div class="grid2">
+<div class="card">
+<div class="card-title">Optimization levers</div>
+<div style="display:flex;flex-direction:column;gap:13px">
+<div><label>Landing page quality — <span class="val" id="lp-val">Good</span></label>
+<input id="lp-q" max="5" min="1" oninput="updateFunnel()" step="1" type="range" value="3"/></div>
+<div><label>Email sequence — <span class="val" id="em-val">3 emails</span></label>
+<input id="em-seq" max="10" min="1" oninput="updateFunnel()" step="1" type="range" value="3"/></div>
+<div><label>Offer strength — <span class="val" id="offer-val">Medium</span></label>
+<input id="offer-s" max="5" min="1" oninput="updateFunnel()" step="1" type="range" value="3"/></div>
+<div><label>Retargeting — <span class="val" id="ret-val">Enabled</span></label>
+<input id="retarget" max="1" min="0" oninput="updateFunnel()" step="1" type="range" value="1"/></div>
+</div>
+</div>
+<div class="card">
+<div class="card-title">Stage conversion rates</div>
+<div id="conv-rates"></div>
+</div>
+</div>
+<div class="card">
+<div class="card-title">Campaign timeline</div>
+<div id="timeline"></div>
+</div>
+</div>
+<!-- ═══ A/B TESTING ═══ -->
+<div class="section" id="tab-ab">
+<div class="metrics">
+<div class="metric"><div class="metric-label">Confidence</div><div class="metric-value" id="ab-conf">87%</div></div>
+<div class="metric"><div class="metric-label">Sample size</div><div class="metric-value" id="ab-sample">5,200</div></div>
+<div class="metric"><div class="metric-label">Test duration</div><div class="metric-value" id="ab-dur">14d</div></div>
+<div class="metric"><div class="metric-label">Uplift B vs A</div><div class="metric-value up" id="ab-uplift">+18%</div></div>
+</div>
+<div class="ab-row grid2">
+<div class="ab-card">
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+<div style="font-size:14px;font-weight:600">Variant A — Control</div>
+<span class="badge badge-blue">Running</span>
+</div>
+<div id="ab-a-stats"></div>
+</div>
+<div class="ab-card ab-winner">
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+<div style="font-size:14px;font-weight:600">Variant B — Test</div>
+<span class="badge badge-green">Winning ✓</span>
+</div>
+<div id="ab-b-stats"></div>
+</div>
+</div>
+<div class="card" style="margin-top:14px">
+<div class="card-title">Test configuration</div>
+<div class="grid3">
+<div><label>Variable to test</label>
+<select id="ab-var" onchange="updateAB()">
+<option>Headline copy</option><option selected="">CTA button</option>
+<option>Hero image</option><option>Pricing display</option><option>Email subject</option>
+</select>
+</div>
+<div><label>Traffic split — <span class="val" id="ab-split-val">50 / 50</span></label>
+<input id="ab-split" max="50" min="10" oninput="updateAB()" step="5" type="range" value="50"/></div>
+<div><label>Duration — <span class="val" id="ab-dur-val">14 days</span></label>
+<input id="ab-dur-in" max="30" min="3" oninput="updateAB()" step="1" type="range" value="14"/></div>
+</div>
+</div>
+<div class="card">
+<div class="card-title">Activity log</div>
+<div class="log" id="ab-log"></div>
+</div>
+</div>
+<!-- ═══ RESULTS ═══ -->
+<div class="section" id="tab-results">
+<div class="metrics">
+<div class="metric"><div class="metric-label">Total reach</div><div class="metric-value" id="r-reach">48,200</div><div class="metric-delta up">↑ on target</div></div>
+<div class="metric"><div class="metric-label">Leads</div><div class="metric-value" id="r-leads">963</div><div class="metric-delta up">↑ 14% over goal</div></div>
+<div class="metric"><div class="metric-label">Conversions</div><div class="metric-value" id="r-conv">144</div><div class="metric-delta" id="r-conv-rate">15% rate</div></div>
+<div class="metric"><div class="metric-label">Revenue</div><div class="metric-value" id="r-rev">$28,800</div><div class="metric-delta up">↑ 6.7% vs est</div></div>
+<div class="metric"><div class="metric-label">ROI</div><div class="metric-value up" id="r-roi">188%</div><div class="metric-delta up">↑ 18pts vs plan</div></div>
+<div class="metric"><div class="metric-label">Cost / lead</div><div class="metric-value" id="r-cpl">$10.39</div><div class="metric-delta up">Below target</div></div>
+</div>
+<div class="grid2">
+<div class="card">
+<div class="card-title">Weekly performance</div>
+<div class="legend">
+<div class="legend-item"><div class="legend-swatch" style="background:var(--accent)"></div>Leads</div>
+<div class="legend-item"><div class="legend-swatch" style="background:var(--green)"></div>Conversions</div>
+</div>
+<div class="chart-wrap"><canvas aria-label="Weekly leads and conversions line chart" id="results-chart" role="img">Weekly performance</canvas></div>
+</div>
+<div class="card">
+<div class="card-title">Channel contribution</div>
+<div class="chart-wrap" style="height:175px"><canvas aria-label="Doughnut chart channel lead contribution" id="contrib-chart" role="img">Channel breakdown</canvas></div>
+<div class="legend" id="contrib-legend" style="margin-top:10px;margin-bottom:0"></div>
+</div>
+</div>
+<div class="card">
+<div class="card-title">Recommendations</div>
+<div id="recommendations"></div>
+</div>
+<div class="result-actions">
+<button class="btn btn-primary" onclick="alert('Connect your AI API key to enable real-time insights.')">Get AI insights →</button>
+<button class="btn" onclick="window.print()">Export report</button>
+<button class="btn" onclick="resetSim()">↺ New campaign</button>
+</div>
+</div>
+</div><!-- /content -->
+</div><!-- /main -->
+</div><!-- /app -->
+<!-- ── Mobile bottom nav ── -->
+<nav aria-label="Main navigation" class="mobile-nav" role="navigation">
+<div class="mobile-nav-inner">
+<div class="mob-tab active" data-tab="setup" onclick="switchTab('setup')"><span class="mob-tab-icon">⚙</span><span class="mob-tab-label">Setup</span></div>
+<div class="mob-tab" data-tab="channels" onclick="switchTab('channels')"><span class="mob-tab-icon">📡</span><span class="mob-tab-label">Channels</span></div>
+<div class="mob-tab" data-tab="audience" onclick="switchTab('audience')"><span class="mob-tab-icon">🎯</span><span class="mob-tab-label">Audience</span></div>
+<div class="mob-tab" data-tab="funnel" onclick="switchTab('funnel')"><span class="mob-tab-icon">▽</span><span class="mob-tab-label">Funnel</span></div>
+<div class="mob-tab" data-tab="ab" onclick="switchTab('ab')"><span class="mob-tab-icon">⚖</span><span class="mob-tab-label">A/B</span></div>
+<div class="mob-tab" data-tab="results" onclick="switchTab('results')"><span class="mob-tab-icon">📊</span><span class="mob-tab-label">Results</span></div>
+</div>
+</nav>
+<main id="main-content">
 
-<script defer src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script defer="" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+
+</main>
 <script>
 const CHANNELS=[
   {name:'Google Ads', icon:'G',  cpc:2.5, reach:15000,color:'#4b9cf7'},
