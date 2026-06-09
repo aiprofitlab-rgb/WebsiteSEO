@@ -722,7 +722,7 @@
 </footer>
 
 <!-- CHATBOT -->
-<div class="fixed bottom-8 left-8 z-[1000]">
+<div class="fixed bottom-8 left-8 z-[10005]">
     <button onclick="toggleChat()" class="pulse w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center shadow-2xl">
         <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path></svg>
     </button>
@@ -854,7 +854,8 @@ async function detectCountry(){ try{ const res=await fetch('https://ipwhois.app/
 async function handleSend(){ const input=document.getElementById('user-input'), msg=input.value.trim(); if(!msg) return; const box=document.getElementById('chat-messages'); let vid=localStorage.getItem('aidenVisitorId')||('visitor_'+Date.now()+'_'+Math.random().toString(36).substr(2,9)); if(!localStorage.getItem('aidenVisitorId')) localStorage.setItem('aidenVisitorId',vid); const country=localStorage.getItem('visitorCountry')||'Oman', code=localStorage.getItem('visitorCountryCode')||'OM'; box.innerHTML+=`<div class="bg-blue-900/50 mr-auto p-3 rounded-2xl rounded-bl-none max-w-[85%] text-white text-right">${msg}</div>`; input.value=''; box.scrollTop=box.scrollHeight; box.innerHTML+=`<div id="typing-indicator" class="bg-gray-800 p-3 rounded-2xl rounded-tr-none max-w-[85%] text-gray-300 ml-auto">...</div>`; try{ const res=await fetch('https://aiden-backend-aiden.up.railway.app/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:msg,sessionId:vid,language:'ar',country:country,countryCode:code})}); const result=await res.json(); document.getElementById('typing-indicator')?.remove(); const reply=result.reply||result.response||'شكراً لرسالتك!'; box.innerHTML+=`<div class="bg-gray-800 p-3 rounded-2xl rounded-tr-none max-w-[85%] text-gray-300 ml-auto">${reply}</div>`; } catch(err){ document.getElementById('typing-indicator')?.remove(); box.innerHTML+=`<div class="bg-gray-800 p-3 rounded-2xl rounded-tr-none max-w-[85%] text-red-300 ml-auto">عذراً، يرجى المحاولة مرة أخرى</div>`; } box.scrollTop=box.scrollHeight; }
 function toggleChat(){ document.getElementById('aiden-ui').classList.toggle('active'); }
 
-window.addEventListener('load', async () => { await detectCountry(); if(!sessionStorage.getItem('aidenPopped')){ setTimeout(()=>{ if(!document.getElementById('aiden-ui').classList.contains('active')){ toggleChat(); sessionStorage.setItem('aidenPopped','true'); } },10000); } });
+window.addEventListener('load', () => {
+            detectCountry(); setTimeout(() => toggleChat(), 10000); });
 </script>
 
     <script>
