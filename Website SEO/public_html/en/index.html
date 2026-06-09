@@ -89,7 +89,7 @@
             display: none; position: absolute; top: 100%; left: 0; right: 0;
             background-color: #0a0a0a; padding: 1.25rem; flex-direction: column; gap: 1rem;
             border-top: 1px solid rgba(255,255,255,0.1); border-bottom: 1px solid rgba(255,255,255,0.05);
-            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.5); z-index: 1000;
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.5); z-index: 10005;
         }
         .mobile-dropdown-menu a {
             padding: 0.75rem 0; text-align: center; font-weight: 600; font-size: 1.1rem;
@@ -140,7 +140,7 @@
         .product-card:hover { border-color: #22C55E; transform: translateY(-4px); box-shadow: 0 10px 30px rgba(34, 197, 94, 0.08); }
 
         /* ========== CHATBOT STYLES ========== */
-        #aiden-ui { transform: translateY(120%); transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1); visibility: hidden; z-index: 1000; right: 8px; left: auto; }
+        #aiden-ui { transform: translateY(120%); transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1); visibility: hidden; z-index: 10005; right: 8px; left: auto; }
         #aiden-ui.active { transform: translateY(0); visibility: visible; }
         .pulse { animation: pulse-animation 2s infinite; }
         @keyframes pulse-animation { 0% { box-shadow: 0 0 0 0px rgba(59, 130, 246, 0.4); } 100% { box-shadow: 0 0 0 20px rgba(59, 130, 246, 0); } }
