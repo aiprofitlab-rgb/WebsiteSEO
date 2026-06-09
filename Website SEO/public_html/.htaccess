@@ -53,9 +53,7 @@ Options +FollowSymLinks -MultiViews -Indexes
 DirectoryIndex index.html
 
 # Allow access
-<Files "*">
-    Require all granted
-</Files>
+# (Removed <Files "*"> directive to prevent 403 errors with bots/crawlers)
 
 # --- URL Rewriting ---
 RewriteEngine On
