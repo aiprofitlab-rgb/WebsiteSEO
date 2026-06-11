@@ -1,86 +1,14 @@
-<!DOCTYPE html>
+import os
+import glob
+import re
+from bs4 import BeautifulSoup
 
-<html dir="ltr" lang="en">
-<head>
-<meta charset="utf-8">
-<link href="https://aiprofitlab.io/blog/en/2026-04-23-n8n-vs-make-automation-scaling/" rel="canonical">
-<link href="https://aiprofitlab.io/blog/en/2026-04-23-n8n-vs-make-automation-scaling/" hreflang="en" rel="alternate">
-<link href="https://aiprofitlab.io/blog/ar/2026-04-23-n8n-vs-make-automation-scaling/" hreflang="ar" rel="alternate">
-<meta content="width=device-width, initial-scale=1.0" name="viewport">
-<meta content="AI Business Strategy" name="category">
-<meta content="وفر وقتك وزد أرباحك مع AI Profit Lab - منصة الذكاء الاصطناعي للتداول الآلي" name="description">
-<meta content="n8n vs Make.com, automation platforms, self-hosting automation, API limits, n8n security, Make.com pricing, business automation scale" name="keywords">
-<title>n8n vs. Make.com: Which Automation Platform is Best for Scaling Your Business? | AI Profit Lab</title>
-<link href="/favicon.svg" rel="icon" type="image/svg+xml">
-<link href="/favicon.svg" rel="apple-touch-icon">
-<!-- JSON-LD Schema Markup -->
-<!-- Unified Performance Optimized Scripts Loader -->
-<script defer src="/js/main.js"></script>
-<script>
-        // Placeholder tracking queue to prevent reference errors during lazy-load
-        window.dataLayer = window.dataLayer || [];
-        window.gtag = window.gtag || function(){ dataLayer.push(arguments); };
-        
-        function loadScript(src) {
-            return new Promise((resolve, reject) => {
-                const s = document.createElement('script');
-                s.src = src;
-                s.async = true;
-                s.onload = resolve;
-                s.onerror = reject;
-                document.body.appendChild(s);
-            });
-        }
-        
-        let chatLoading = false;
-        window.toggleChat = function() {
-            if (window.aidenChat) {
-                window.aidenChat.toggle();
-            } else if (!chatLoading) {
-                chatLoading = true;
-                loadScript('/js/aiden-chat.js').then(() => {
-                    window.aidenChat.init();
-                    window.aidenChat.toggle();
-                });
-            }
-        };
-        
-        window.handleSend = function() {
-            if (window.aidenChat) {
-                window.aidenChat.send();
-            }
-        };
-        
-        let formLoading = false;
-        window.openAuditForm = function() {
-            if (window.auditForm) {
-                window.auditForm.open();
-            } else if (!formLoading) {
-                formLoading = true;
-                loadScript('/js/audit-form.js').then(() => {
-                    window.auditForm.init();
-                    window.auditForm.open();
-                });
-            }
-        };
-        
-        window.closeAuditForm = function() {
-            if (window.auditForm) {
-                window.auditForm.close();
-            }
-        };
-        
-        // Lazy-load chatbot after 10s delay to keep initial load completely clean
-        setTimeout(() => {
-            if (!chatLoading && !window.aidenChat) {
-                chatLoading = true;
-                loadScript('/js/aiden-chat.js').then(() => {
-                    window.aidenChat.init();
-                });
-            }
-        }, 10000);
-    </script>
-</meta><style>img, video, iframe { aspect-ratio: attr(width) / attr(height); } .youtube-facade, #aiden-ui, .dynamic-content { min-height: 200px; }</style><style>
+PUBLIC_HTML = "/Users/nahid/Desktop/Nahid/AI Profit Lab/Website/Website SEO/public_html"
+html_files = glob.glob(os.path.join(PUBLIC_HTML, "**/*.html"), recursive=True)
+# ignore files starting with test
+html_files = [f for f in html_files if not os.path.basename(f).startswith("test")]
+
+CRITICAL_CSS = """
 /* === ANTI-BLACK-SCREEN: Critical layout fallback (pre-Tailwind) === */
 .text-white { color: #fff; }
 .text-gray-300 { color: #d1d5db; }
@@ -182,4 +110,54 @@ svg { max-width: 100%; height: auto; overflow: hidden; }
 svg:not([width]) { width: 24px; height: 24px; }
 /* Nav chevron SVGs: lock to exact inline dimensions */
 nav svg[width="16"][height="16"] { width: 16px !important; height: 16px !important; max-width: 16px !important; max-height: 16px !important; }
-</style></head></html>
+"""
+
+updated_files = []
+
+for filepath in html_files:
+    if "index.html" in filepath and filepath.endswith("index.html") and len(filepath.split("/")) <= 9:
+        # Already manually fixed the main index and en/index
+        pass
+        
+    rel_path = os.path.relpath(filepath, PUBLIC_HTML)
+    with open(filepath, 'r', encoding='utf-8') as f:
+        content = f.read()
+
+    soup = BeautifulSoup(content, 'html.parser')
+    modified = False
+
+    # 1. Add CRITICAL_CSS to head if not present
+    if not soup.find(string=re.compile(r"ANTI-BLACK-SCREEN")):
+        style_tag = soup.new_tag("style")
+        style_tag.string = CRITICAL_CSS
+        # Find where to insert it: after the tailwind noscript or just at end of head
+        if soup.head:
+            # Just append to the end of head
+            soup.head.append(style_tag)
+            modified = True
+            
+    # 2. Add fetchpriority to preload images if present
+    for preload in soup.find_all('link', rel='preload', as_='image'):
+        if not preload.has_attr('fetchpriority'):
+            preload['fetchpriority'] = 'high'
+            modified = True
+
+    # 3. Clean up the duplicate generic SVG style block if it exists
+    for style in soup.find_all('style'):
+        if style.string and "svg { max-width: 100%; height: auto; overflow: hidden; } svg:not([width]) { width: 24px; height: 24px; }" in style.string:
+            if "ANTI-BLACK-SCREEN" not in style.string: # keep the critical css one
+                style.decompose()
+                modified = True
+
+    if modified:
+        with open(filepath, 'w', encoding='utf-8') as f:
+            # Prevent bs4 from messing up script tags formatting too much
+            # We use a formatter to keep it similar
+            html_str = soup.encode(formatter="html5").decode('utf-8')
+            # Fix duplicate html tags if bs4 added them
+            html_str = html_str.replace("<html>\n<html>", "<html>").replace("</html>\n</html>", "</html>")
+            
+            f.write(html_str)
+        updated_files.append(rel_path)
+
+print(f"Total HTML files updated with critical CSS and fixes: {len(updated_files)}")
