@@ -2,6 +2,16 @@
 
 <html lang="en">
 <head>
+<style>
+  #fouc-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 999999;
+    background: #050505;
+    transition: opacity 0.3s ease;
+  }
+</style>
+
 <meta charset="utf-8">
 <link href="https://aiprofitlab.io/customized-ceo-dashboard-demo/" rel="canonical">
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -426,6 +436,8 @@ svg:not([width]) { width: 24px; height: 24px; }
 nav svg[width="16"][height="16"] { width: 16px !important; height: 16px !important; max-width: 16px !important; max-height: 16px !important; }
 </style></head>
 <body>
+<div id="fouc-overlay"></div>
+
 <!-- AI Profit Lab Logo -->
 <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 28px;background:#ffffff;border-bottom:1px solid rgba(60,80,160,0.10);box-shadow:0 1px 4px rgba(60,80,160,0.06);position:sticky;top:0;z-index:200;">
 <a href="/" style="text-decoration:none;">
@@ -1081,6 +1093,30 @@ setTimeout(animateBars,300);
 drawDonut();
 </script>
 <script defer src="/js/main.js"></script>
+
+
+<script>
+  (function() {
+    var overlay = document.getElementById('fouc-overlay');
+    function removeOverlay() {
+      if (overlay) {
+        overlay.style.opacity = '0';
+        setTimeout(function() {
+          if (overlay && overlay.parentNode) {
+            overlay.parentNode.removeChild(overlay);
+          }
+        }, 320);
+      }
+    }
+    if (document.readyState === 'complete') {
+      setTimeout(removeOverlay, 100);
+    } else {
+      window.addEventListener('load', function() {
+        setTimeout(removeOverlay, 100);
+      });
+    }
+  })();
+</script>
 
 </body>
 </html>

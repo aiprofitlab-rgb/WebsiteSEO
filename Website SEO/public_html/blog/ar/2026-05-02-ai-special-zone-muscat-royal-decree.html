@@ -2,6 +2,16 @@
 
 <html dir="rtl" lang="ar">
 <head>
+<style>
+  #fouc-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 999999;
+    background: #050505;
+    transition: opacity 0.3s ease;
+  }
+</style>
+
 <meta charset="utf-8">
 <link href="https://aiprofitlab.io/blog/ar/2026-05-02-ai-special-zone-muscat-royal-decree/" rel="canonical">
 <link href="https://aiprofitlab.io/blog/ar/2026-05-02-ai-special-zone-muscat-royal-decree/" hreflang="ar" rel="alternate">
@@ -131,7 +141,7 @@
     ]
 }
 </script>
-<link rel="stylesheet" href="/assets/css/tailwind.min.css">
+<script src="https://cdn.tailwindcss.com"></script>
 <link as="style" href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&family=Outfit:wght@300;400;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'" rel="preload">
 <noscript><link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet"></noscript>
 <style>
@@ -366,6 +376,8 @@ svg:not([width]) { width: 24px; height: 24px; }
 nav svg[width="16"][height="16"] { width: 16px !important; height: 16px !important; max-width: 16px !important; max-height: 16px !important; }
 </style></head>
 <body class="antialiased text-right">
+<div id="fouc-overlay"></div>
+
 <!-- Navbar -->
 <nav class="flex justify-between items-center px-6 md:px-12 py-8 w-full z-50 glass sticky top-0 bg-black/30 flex-row-reverse" id="header">
 <a class="font-extrabold text-3xl md:text-4xl tracking-tighter hover:opacity-80 transition logo-font logo-font" dir="ltr" href="/">
@@ -501,6 +513,30 @@ nav svg[width="16"][height="16"] { width: 16px !important; height: 16px !importa
 </article>
 </main>
 <script defer src="/js/main.js"></script>
+
+
+<script>
+  (function() {
+    var overlay = document.getElementById('fouc-overlay');
+    function removeOverlay() {
+      if (overlay) {
+        overlay.style.opacity = '0';
+        setTimeout(function() {
+          if (overlay && overlay.parentNode) {
+            overlay.parentNode.removeChild(overlay);
+          }
+        }, 320);
+      }
+    }
+    if (document.readyState === 'complete') {
+      setTimeout(removeOverlay, 100);
+    } else {
+      window.addEventListener('load', function() {
+        setTimeout(removeOverlay, 100);
+      });
+    }
+  })();
+</script>
 
 </body>
 </html>

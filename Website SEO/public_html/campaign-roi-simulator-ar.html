@@ -2,6 +2,16 @@
 
 <html dir="rtl" lang="ar">
 <head>
+<style>
+  #fouc-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 999999;
+    background: #050505;
+    transition: opacity 0.3s ease;
+  }
+</style>
+
 <meta charset="utf-8">
 <link href="https://aiprofitlab.io/campaign-roi-simulator-ar/" rel="canonical">
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -1285,6 +1295,8 @@ svg:not([width]) { width: 24px; height: 24px; }
 nav svg[width="16"][height="16"] { width: 16px !important; height: 16px !important; max-width: 16px !important; max-height: 16px !important; }
 </style></head>
 <body>
+<div id="fouc-overlay"></div>
+
 <div class="sidebar-overlay" id="sidebar-overlay" onclick="closeSidebar()"></div>
 <div class="app">
 <!-- ── Sidebar ── -->
@@ -1979,6 +1991,30 @@ nav svg[width="16"][height="16"] { width: 16px !important; height: 16px !importa
       initChannels();
     };
   </script>
+
+
+<script>
+  (function() {
+    var overlay = document.getElementById('fouc-overlay');
+    function removeOverlay() {
+      if (overlay) {
+        overlay.style.opacity = '0';
+        setTimeout(function() {
+          if (overlay && overlay.parentNode) {
+            overlay.parentNode.removeChild(overlay);
+          }
+        }, 320);
+      }
+    }
+    if (document.readyState === 'complete') {
+      setTimeout(removeOverlay, 100);
+    } else {
+      window.addEventListener('load', function() {
+        setTimeout(removeOverlay, 100);
+      });
+    }
+  })();
+</script>
 
 </body>
 </html>

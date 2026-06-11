@@ -1,6 +1,16 @@
 <!DOCTYPE html>
 
 <html class="dark" lang="en"><head>
+<style>
+  #fouc-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 999999;
+    background: #050505;
+    transition: opacity 0.3s ease;
+  }
+</style>
+
 <meta charset="UTF-8">
 <link href="https://aiprofitlab.io/test/" rel="canonical"/>
 
@@ -129,6 +139,8 @@
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 </head>
 <body class="bg-background text-on-background font-body antialiased selection:bg-primary-container selection:text-on-primary">
+<div id="fouc-overlay"></div>
+
 <!-- TopAppBar -->
 <nav class="fixed top-0 w-full z-50 bg-[#131313]/70 backdrop-blur-lg shadow-[0_20px_40px_rgba(0,0,0,0.06)] border-none" id="header">
 <div class="flex justify-between items-center px-8 py-6 max-w-screen-2xl mx-auto">
@@ -375,4 +387,28 @@
             window.addEventListener('load', initNav);
         })();
 </script>
+
+<script>
+  (function() {
+    var overlay = document.getElementById('fouc-overlay');
+    function removeOverlay() {
+      if (overlay) {
+        overlay.style.opacity = '0';
+        setTimeout(function() {
+          if (overlay && overlay.parentNode) {
+            overlay.parentNode.removeChild(overlay);
+          }
+        }, 320);
+      }
+    }
+    if (document.readyState === 'complete') {
+      setTimeout(removeOverlay, 100);
+    } else {
+      window.addEventListener('load', function() {
+        setTimeout(removeOverlay, 100);
+      });
+    }
+  })();
+</script>
+
 </body></html>

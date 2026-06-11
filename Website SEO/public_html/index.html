@@ -2,6 +2,16 @@
 
 <html dir="rtl" lang="ar">
 <head>
+<style>
+  #fouc-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 999999;
+    background: #050505;
+    transition: opacity 0.3s ease;
+  }
+</style>
+
 <meta charset="utf-8"/>
 <link href="https://aiprofitlab.io/" rel="canonical"/>
 <link href="https://aiprofitlab.io/" hreflang="ar" rel="alternate"/>
@@ -50,7 +60,7 @@
 <link href="/favicon.svg" rel="apple-touch-icon"/>
 <!-- Canonical URL -->
 <!-- Hreflang -->
-<link rel="stylesheet" href="/assets/css/tailwind.min.css">
+<script src="https://cdn.tailwindcss.com"></script>
 <link as="style" href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&amp;display=swap" onload="this.onload=null;this.rel='stylesheet'" rel="preload"/>
 <noscript><link as="style" href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&amp;display=swap" onload="this.onload=null;this.rel='stylesheet'" rel="preload"/>
 <noscript><link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&amp;display=swap" rel="stylesheet"/></noscript></noscript>
@@ -424,6 +434,8 @@ nav svg[width="16"][height="16"] { width: 16px !important; height: 16px !importa
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 </meta><style>img, video, iframe { aspect-ratio: attr(width) / attr(height); } .youtube-facade, #aiden-ui, .dynamic-content { min-height: 200px; }</style></head>
 <body>
+<div id="fouc-overlay"></div>
+
 <!-- ======================= FIXED: SINGLE NAVIGATION SYSTEM ======================= -->
 <!-- ======================= Navigation ======================= -->
 <!-- ======================= Navigation ======================= -->
@@ -863,6 +875,30 @@ nav svg[width="16"][height="16"] { width: 16px !important; height: 16px !importa
             }
         }, 10000);
     </script>
+
+
+<script>
+  (function() {
+    var overlay = document.getElementById('fouc-overlay');
+    function removeOverlay() {
+      if (overlay) {
+        overlay.style.opacity = '0';
+        setTimeout(function() {
+          if (overlay && overlay.parentNode) {
+            overlay.parentNode.removeChild(overlay);
+          }
+        }, 320);
+      }
+    }
+    if (document.readyState === 'complete') {
+      setTimeout(removeOverlay, 100);
+    } else {
+      window.addEventListener('load', function() {
+        setTimeout(removeOverlay, 100);
+      });
+    }
+  })();
+</script>
 
 </body>
 </html>
