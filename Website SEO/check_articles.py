@@ -26,7 +26,7 @@ for path in files_to_check:
     
     # 1. Check HTML lang and dir
     html_tag = soup.find("html")
-    is_ar = "ar" in path
+    is_ar = "/ar/" in path.replace("\\", "/")
     if is_ar:
         if html_tag.get("lang") != "ar" or html_tag.get("dir") != "rtl":
             issues.append("HTML lang/dir incorrect for Arabic")

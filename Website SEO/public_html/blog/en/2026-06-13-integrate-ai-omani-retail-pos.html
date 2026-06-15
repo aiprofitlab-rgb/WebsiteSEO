@@ -1,6 +1,6 @@
 @
 <!DOCTYPE html>
-<html dir="ltr" lang="en">
+<html lang="en" dir="ltr">
 
 <head>
   <style>
@@ -33,45 +33,122 @@
 
   <!-- JSON-LD Schema Markup -->
   <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@graph": [
+{
+    "@context": "https://schema.org",
+    "@graph": [
         {
-          "@type": "Organization",
-          "@id": "https://aiprofitlab.io/#organization",
-          "name": "AI Profit Lab",
-          "legalName": "International Gulf Lotus SPC",
-          "url": "https://aiprofitlab.io/",
-          "logo": {
-            "@type": "ImageObject",
-            "url": "https://aiprofitlab.io/favicon.svg"
-          }
-        },
-        {
-          "@type": "Article",
-          "headline": "Step-by-Step: How to Integrate AI into Your Omani Retail POS System",
-          "description": "A complete step-by-step guide for Omani retail businesses on how to seamlessly integrate AI into existing Point of Sale (POS) systems to boost efficiency and sales.",
-          "image": "https://aiprofitlab.io/blog/images/ai-pos-integration.png",
-          "author": {
             "@type": "Organization",
-            "name": "AI Profit Lab"
-          },
-          "publisher": {
-            "@id": "https://aiprofitlab.io/#organization"
-          },
-          "datePublished": "2026-06-13"
+            "@id": "https://aiprofitlab.io/#organization",
+            "name": "AI Profit Lab",
+            "legalName": "International Gulf Lotus SPC",
+            "url": "https://aiprofitlab.io/",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://aiprofitlab.io/favicon.svg"
+            }
         },
         {
-          "@type": "FAQPage",
-          "mainEntity": [
-            { "@type": "Question", "name": "Do I need to replace my current POS system to use AI?", "acceptedAnswer": { "@type": "Answer", "text": "In most cases, no. Modern AI tools can integrate directly with existing POS systems like Square, Shopify POS, or custom setups using API connections." } },
-            { "@type": "Question", "name": "How does AI in a POS system help increase sales?", "acceptedAnswer": { "@type": "Answer", "text": "AI analyzes purchase history at checkout to recommend upsells to cashiers in real-time, and can automatically sync customer data for targeted WhatsApp or email marketing." } },
-            { "@type": "Question", "name": "Is integrating AI into my POS expensive?", "acceptedAnswer": { "@type": "Answer", "text": "Integration costs vary, but cloud-based AI solutions and middleware platforms have made it highly affordable for SMEs in Oman, often delivering ROI within the first few months." } }
-          ]
+            "@type": "Article",
+            "headline": "Step-by-Step: How to Integrate AI into Your Omani Retail POS System",
+            "description": "A complete step-by-step guide for Omani retail businesses on how to seamlessly integrate AI into existing Point of Sale (POS) systems to boost efficiency and sales.",
+            "image": "https://aiprofitlab.io/blog/images/ai-pos-integration.png",
+            "author": {
+                "@type": "Organization",
+                "name": "AI Profit Lab"
+            },
+            "publisher": {
+                "@id": "https://aiprofitlab.io/#organization"
+            },
+            "datePublished": "2026-06-13"
+        },
+        {
+            "@type": "FAQPage",
+            "mainEntity": [
+                {
+                    "@type": "Question",
+                    "name": "Do I need to replace my current POS system to use AI?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "In most cases, no. Modern AI tools can integrate directly with existing POS systems like Square, Shopify POS, or custom setups using API connections."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "How does AI in a POS system help increase sales?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "AI analyzes purchase history at checkout to recommend upsells to cashiers in real-time, and can automatically sync customer data for targeted WhatsApp or email marketing."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Is integrating AI into my POS expensive?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Integration costs vary, but cloud-based AI solutions and middleware platforms have made it highly affordable for SMEs in Oman, often delivering ROI within the first few months."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "What if the AI makes a mistake with a customer?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Proper AI implementations use deterministic guardrails and RAG (Retrieval-Augmented Generation) to prevent hallucinations, often keeping a 'human-in-the-loop' for sensitive interactions."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Are there local AI agencies in Muscat?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Yes, local agencies like AI Profit Lab specialize in bringing global AI automation standards to Omani businesses with localized context."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Is my company's data safe when using AI?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Yes, provided you use enterprise-grade AI models with strict data privacy agreements or deploy on-premise solutions that comply with Oman's data protection laws."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Does AI automation align with Oman Vision 2040?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Absolutely. AI and digital transformation are key pillars of Oman Vision 2040, aimed at diversifying the economy and increasing operational efficiency."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "What is the first step to integrating AI into my business?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "The first step is a thorough operational audit to identify repetitive bottlenecks and data silos that can be easily automated for quick wins."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Is cloud-based AI legal for government contractors in Oman?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Government contractors must adhere to MTCIT guidelines, which often require data sovereignty and hosting sensitive data on local Omani servers."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Will AI tools support the Arabic language perfectly?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Recent advancements in LLMs have significantly improved Arabic comprehension, including Khaleeji dialects, making them highly effective for the Omani market."
+                    }
+                }
+            ]
         }
-      ]
-    }
-    </script>
+    ]
+}
+</script>
 
   <link rel="preconnect" href="https://cdn.tailwindcss.com">
   <link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
@@ -148,41 +225,44 @@
 
   <!-- Local Business Schema -->
   <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "ProfessionalService",
-      "name": "AI Profit Lab",
-      "legalName": "International Gulf Lotus SPC",
-      "url": "https://aiprofitlab.io",
-      "logo": "https://aiprofitlab.io/logo.webp",
-      "image": "https://aiprofitlab.io/nahid-business-banner.png",
-      "description": "Helping non-technical managers leverage AI, automation, and technology to increase ROI and business efficiency.",
-      "address": {
+{
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "AI Profit Lab",
+    "legalName": "International Gulf Lotus SPC",
+    "url": "https://aiprofitlab.io",
+    "logo": "https://aiprofitlab.io/logo.webp",
+    "image": "https://aiprofitlab.io/nahid-business-banner.png",
+    "description": "Helping non-technical managers leverage AI, automation, and technology to increase ROI and business efficiency.",
+    "address": {
         "@type": "PostalAddress",
         "streetAddress": "Al Seeb",
         "addressLocality": "Muscat",
         "addressRegion": "Muscat Governorate",
         "postalCode": "000",
         "addressCountry": "OM"
-      },
-      "geo": {
+    },
+    "geo": {
         "@type": "GeoCoordinates",
-        "latitude": 23.635950490475295, 
+        "latitude": 23.635950490475295,
         "longitude": 58.207628165445385
-      },
-      "contactPoint": {
+    },
+    "contactPoint": {
         "@type": "ContactPoint",
         "telephone": "+968-99245250",
         "contactType": "customer service",
         "areaServed": "GCC",
-        "availableLanguage": ["en", "ar"]
-      },
-      "sameAs": [
+        "availableLanguage": [
+            "en",
+            "ar"
+        ]
+    },
+    "sameAs": [
         "https://www.youtube.com/@AI_for_Managers",
         "https://www.linkedin.com/in/nahid-aby"
-      ]
-    }
-    </script>
+    ]
+}
+</script>
 </head>
 
 <body class="antialiased">
@@ -303,7 +383,36 @@
             <p class="text-gray-400 mb-0">Integration costs vary, but cloud-based AI solutions and middleware platforms
               have made it highly affordable for SMEs in Oman, often delivering ROI within the first few months.</p>
           </div>
-        </div>
+        
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">What if the AI makes a mistake with a customer?</h3>
+                        <p class="text-gray-400 mb-0">Proper AI implementations use deterministic guardrails and RAG (Retrieval-Augmented Generation) to prevent hallucinations, often keeping a 'human-in-the-loop' for sensitive interactions.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">Are there local AI agencies in Muscat?</h3>
+                        <p class="text-gray-400 mb-0">Yes, local agencies like AI Profit Lab specialize in bringing global AI automation standards to Omani businesses with localized context.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">Is my company's data safe when using AI?</h3>
+                        <p class="text-gray-400 mb-0">Yes, provided you use enterprise-grade AI models with strict data privacy agreements or deploy on-premise solutions that comply with Oman's data protection laws.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">Does AI automation align with Oman Vision 2040?</h3>
+                        <p class="text-gray-400 mb-0">Absolutely. AI and digital transformation are key pillars of Oman Vision 2040, aimed at diversifying the economy and increasing operational efficiency.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">What is the first step to integrating AI into my business?</h3>
+                        <p class="text-gray-400 mb-0">The first step is a thorough operational audit to identify repetitive bottlenecks and data silos that can be easily automated for quick wins.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">Is cloud-based AI legal for government contractors in Oman?</h3>
+                        <p class="text-gray-400 mb-0">Government contractors must adhere to MTCIT guidelines, which often require data sovereignty and hosting sensitive data on local Omani servers.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">Will AI tools support the Arabic language perfectly?</h3>
+                        <p class="text-gray-400 mb-0">Recent advancements in LLMs have significantly improved Arabic comprehension, including Khaleeji dialects, making them highly effective for the Omani market.</p>
+                    </div>
+                </div>
       </section>
 
       <hr class="border-gray-800 my-10">
@@ -311,10 +420,9 @@
   </main>
 
   <!-- Footer -->
-  <footer class="py-8 border-t border-gray-900 text-center text-sm text-gray-400">
-    &copy; 2025 <span class="text-blue-500">A</span><span class="text-red-500">I</span> Profit Lab &mdash; a brand of
-    International Gulf Lotus SPC &bull; All Rights Reserved
-  </footer>
+  <footer class="border-t border-white/10 bg-black py-8 text-center text-gray-500 text-sm mt-auto">
+        <p>© 2025 AI Profit Lab — a brand of International Gulf Lotus SPC • All Rights Reserved</p>
+    </footer>
 
   <script>
     (function () {

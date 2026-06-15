@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html dir="rtl" lang="ar">
+<html lang="ar" dir="rtl">
 <head>
 <style>
   #fouc-overlay {
@@ -27,45 +27,122 @@
 
 <!-- JSON-LD Schema Markup -->
 <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@graph": [
+{
+    "@context": "https://schema.org",
+    "@graph": [
         {
-          "@type": "Organization",
-          "@id": "https://aiprofitlab.io/#organization",
-          "name": "AI Profit Lab",
-          "legalName": "International Gulf Lotus SPC",
-          "url": "https://aiprofitlab.io/ar/",
-          "logo": {
-            "@type": "ImageObject",
-            "url": "https://aiprofitlab.io/favicon.svg"
-          }
-        },
-        {
-          "@type": "Article",
-          "headline": "كيف قمنا بأتمتة استرداد العملاء المحتملين لهايبر ماركت في مسقط: دراسة حالة",
-          "description": "اقرأ دراسة الحالة حول كيف قمنا بأتمتة استرداد العملاء المحتملين لهايبر ماركت رئيسي في مسقط، وتقليل المبيعات المفقودة وزيادة الإيرادات بنظام مدعوم بالذكاء الاصطناعي.",
-          "image": "https://aiprofitlab.io/blog/images/muscat_hypermarket_automation.png",
-          "author": {
             "@type": "Organization",
-            "name": "AI Profit Lab"
-          },
-          "publisher": {
-            "@id": "https://aiprofitlab.io/#organization"
-          },
-          "datePublished": "2026-06-13"
+            "@id": "https://aiprofitlab.io/#organization",
+            "name": "AI Profit Lab",
+            "legalName": "International Gulf Lotus SPC",
+            "url": "https://aiprofitlab.io/",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://aiprofitlab.io/favicon.svg"
+            }
         },
         {
-          "@type": "FAQPage",
-          "mainEntity": [
-            { "@type": "Question", "name": "ما هو التحدي الرئيسي الذي واجهه الهايبر ماركت في مسقط؟", "acceptedAnswer": { "@type": "Answer", "text": "كانوا يخسرون آلاف الريالات شهريًا بسبب الاستفسارات الفائتة للعملاء وعربات التسوق المتروكة غير المستردة عبر وسائل التواصل الاجتماعي وواتساب." } },
-            { "@type": "Question", "name": "كيف حلت أتمتة الذكاء الاصطناعي المشكلة؟", "acceptedAnswer": { "@type": "Answer", "text": "قمنا بنشر نظام ذكي عبر واجهة برمجة تطبيقات واتساب (WhatsApp API) والذي قام بالرد الفوري على الرسائل الفائتة، وتأهيل العملاء المحتملين، وتقديم خصومات آلية لاسترداد الطلبات المتروكة." } },
-            { "@type": "Question", "name": "ما هي نتائج تطبيق الذكاء الاصطناعي؟", "acceptedAnswer": { "@type": "Answer", "text": "استرد النظام 45٪ من العملاء المحتملين الذين تم فقدانهم سابقًا خلال الشهر الأول، مما أدى إلى زيادة بنسبة 20٪ في الإيرادات المدفوعة عبر الإنترنت دون تعيين موظفين إضافيين." } }
-          ]
+            "@type": "Article",
+            "headline": "كيف قمنا بأتمتة استرداد العملاء المحتملين لهايبر ماركت في مسقط: دراسة حالة",
+            "description": "اقرأ دراسة الحالة حول كيف قمنا بأتمتة استرداد العملاء المحتملين لهايبر ماركت رئيسي في مسقط، وتقليل المبيعات المفقودة وزيادة الإيرادات بنظام مدعوم بالذكاء الاصطناعي.",
+            "image": "https://aiprofitlab.io/blog/images/muscat_hypermarket_automation.png",
+            "author": {
+                "@type": "Organization",
+                "name": "AI Profit Lab"
+            },
+            "publisher": {
+                "@id": "https://aiprofitlab.io/#organization"
+            },
+            "datePublished": "2026-06-13"
+        },
+        {
+            "@type": "FAQPage",
+            "mainEntity": [
+                {
+                    "@type": "Question",
+                    "name": "ما هو التحدي الرئيسي الذي واجهه الهايبر ماركت في مسقط؟",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "كانوا يخسرون آلاف الريالات شهريًا بسبب الاستفسارات الفائتة للعملاء وعربات التسوق المتروكة غير المستردة عبر وسائل التواصل الاجتماعي وواتساب."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "كيف حلت أتمتة الذكاء الاصطناعي المشكلة؟",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "قمنا بنشر نظام ذكي عبر واجهة برمجة تطبيقات واتساب (WhatsApp API) والذي قام بالرد الفوري على الرسائل الفائتة، وتأهيل العملاء المحتملين، وتقديم خصومات آلية لاسترداد الطلبات المتروكة."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "ما هي نتائج تطبيق الذكاء الاصطناعي؟",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "استرد النظام 45٪ من العملاء المحتملين الذين تم فقدانهم سابقًا خلال الشهر الأول، مما أدى إلى زيادة بنسبة 20٪ في الإيرادات المدفوعة عبر الإنترنت دون تعيين موظفين إضافيين."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "هل يمكن دمج الذكاء الاصطناعي مع نظام ERP أو CRM الحالي لدي؟",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "نعم، عبر واجهات برمجة التطبيقات وخطاطيف الويب، يمكن لأدوات الذكاء الاصطناعي التكامل بسلاسة مع الأنظمة القديمة مثل SAP و Oracle و Zoho و Salesforce."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "هل يمكن للذكاء الاصطناعي أن يحل محل الموظفين البشريين؟",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "صُمم الذكاء الاصطناعي لتعزيز قدرات العمال البشريين وليس استبدالهم. فهو يتولى المهام الإدارية المتكررة، مما يتيح لفريقك التركيز على الاستراتيجية وعلاقات العملاء."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "هل هناك وكالات ذكاء اصطناعي محلية في مسقط؟",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "نعم، تتخصص الوكالات المحلية مثل AI Profit Lab في جلب معايير أتمتة الذكاء الاصطناعي العالمية إلى الشركات العمانية بسياق محلي."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "كم تكلفة تطبيق الذكاء الاصطناعي في شركة عمانية؟",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "تختلف التكاليف حسب النطاق. قد تكلف أتمتة سير العمل البسيطة بضع مئات من الريالات العمانية، بينما تتطلب البنية التحتية الكاملة للذكاء الاصطناعي استثماراً أكبر."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "هل تتماشى أتمتة الذكاء الاصطناعي مع رؤية عمان 2040؟",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "بالتأكيد. يعد الذكاء الاصطناعي والتحول الرقمي من الركائز الأساسية لرؤية عمان 2040، بهدف تنويع الاقتصاد وزيادة الكفاءة التشغيلية."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "هل الذكاء الاصطناعي السحابي قانوني للمقاولين الحكوميين في عُمان؟",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "يجب على المقاولين الحكوميين الالتزام بإرشادات وزارة النقل والاتصالات وتقنية المعلومات، والتي غالباً ما تتطلب سيادة البيانات واستضافة البيانات الحساسة على خوادم عمانية محلية."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "ما هي الخطوة الأولى لدمج الذكاء الاصطناعي في عملي؟",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "الخطوة الأولى هي إجراء تدقيق تشغيلي شامل لتحديد الاختناقات المتكررة وصوامع البيانات التي يمكن أتمتتها بسهولة لتحقيق مكاسب سريعة."
+                    }
+                }
+            ]
         }
-      ]
-    }
-    </script>
+    ]
+}
+</script>
 
 <link rel="preconnect" href="https://cdn.tailwindcss.com">
 <link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
@@ -87,41 +164,44 @@
 
 <!-- Local Business Schema -->
 <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "ProfessionalService",
-      "name": "AI Profit Lab",
-      "legalName": "International Gulf Lotus SPC",
-      "url": "https://aiprofitlab.io/ar",
-      "logo": "https://aiprofitlab.io/logo.webp",
-      "image": "https://aiprofitlab.io/nahid-business-banner.png",
-      "description": "مساعدة المديرين غير التقنيين على الاستفادة من الذكاء الاصطناعي والأتمتة والتكنولوجيا لزيادة عائد الاستثمار وكفاءة الأعمال.",
-      "address": {
+{
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "AI Profit Lab",
+    "legalName": "International Gulf Lotus SPC",
+    "url": "https://aiprofitlab.io",
+    "logo": "https://aiprofitlab.io/logo.webp",
+    "image": "https://aiprofitlab.io/nahid-business-banner.png",
+    "description": "مساعدة المديرين غير التقنيين على الاستفادة من الذكاء الاصطناعي والأتمتة والتكنولوجيا لزيادة عائد الاستثمار وكفاءة الأعمال.",
+    "address": {
         "@type": "PostalAddress",
-        "streetAddress": "السيب",
-        "addressLocality": "مسقط",
-        "addressRegion": "محافظة مسقط",
+        "streetAddress": "Al Seeb",
+        "addressLocality": "Muscat",
+        "addressRegion": "Muscat Governorate",
         "postalCode": "000",
         "addressCountry": "OM"
-      },
-      "geo": {
+    },
+    "geo": {
         "@type": "GeoCoordinates",
-        "latitude": 23.635950490475295, 
+        "latitude": 23.635950490475295,
         "longitude": 58.207628165445385
-      },
-      "contactPoint": {
+    },
+    "contactPoint": {
         "@type": "ContactPoint",
         "telephone": "+968-99245250",
         "contactType": "customer service",
         "areaServed": "GCC",
-        "availableLanguage": ["en", "ar"]
-      },
-      "sameAs": [
+        "availableLanguage": [
+            "en",
+            "ar"
+        ]
+    },
+    "sameAs": [
         "https://www.youtube.com/@AI_for_Managers",
         "https://www.linkedin.com/in/nahid-aby"
-      ]
-    }
-    </script>
+    ]
+}
+</script>
 </head>
 <body class="antialiased">
 <div id="fouc-overlay"></div>
@@ -207,7 +287,65 @@
 <h3 class="text-lg font-bold text-white mb-2">ما هي نتائج تطبيق الذكاء الاصطناعي؟</h3>
 <p class="text-gray-400 mb-0">استرد النظام 45٪ من العملاء المحتملين الذين تم فقدانهم سابقًا خلال الشهر الأول، مما أدى إلى زيادة بنسبة 20٪ في الإيرادات المدفوعة عبر الإنترنت دون تعيين موظفين إضافيين.</p>
 </div>
-</div>
+
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">هل يمكن للذكاء الاصطناعي المساعدة في التسويق وتوليد العملاء المحتملين؟</h3>
+                        <p class="text-gray-400 mb-0">نعم، يمكن للذكاء الاصطناعي تحليل اتجاهات السوق، وإنشاء نصوص إعلانية مخصصة، وتسجيل العملاء المحتملين الواردين تلقائياً بناءً على احتمالية تحولهم.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">ما هي الخطوة الأولى لدمج الذكاء الاصطناعي في عملي؟</h3>
+                        <p class="text-gray-400 mb-0">الخطوة الأولى هي إجراء تدقيق تشغيلي شامل لتحديد الاختناقات المتكررة وصوامع البيانات التي يمكن أتمتتها بسهولة لتحقيق مكاسب سريعة.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">هل أحتاج إلى خلفية تقنية لاستخدام أتمتة الذكاء الاصطناعي؟</h3>
+                        <p class="text-gray-400 mb-0">لا، تم تصميم منصات الأتمتة الحديثة ولوحات التحكم للمديرين غير التقنيين، مع واجهات بديهية وتتبع واضح لعائد الاستثمار.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">هل ستدعم أدوات الذكاء الاصطناعي اللغة العربية بشكل مثالي؟</h3>
+                        <p class="text-gray-400 mb-0">أدت التطورات الأخيرة في النماذج اللغوية الكبيرة إلى تحسين الفهم العربي بشكل كبير، بما في ذلك اللهجات الخليجية، مما يجعلها فعالة للغاية للسوق العماني.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">هل الذكاء الاصطناعي السحابي قانوني للمقاولين الحكوميين في عُمان؟</h3>
+                        <p class="text-gray-400 mb-0">يجب على المقاولين الحكوميين الالتزام بإرشادات وزارة النقل والاتصالات وتقنية المعلومات، والتي غالباً ما تتطلب سيادة البيانات واستضافة البيانات الحساسة على خوادم عمانية محلية.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">هل يمكن للذكاء الاصطناعي أن يحل محل الموظفين البشريين؟</h3>
+                        <p class="text-gray-400 mb-0">صُمم الذكاء الاصطناعي لتعزيز قدرات العمال البشريين وليس استبدالهم. فهو يتولى المهام الإدارية المتكررة، مما يتيح لفريقك التركيز على الاستراتيجية وعلاقات العملاء.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">هل تتماشى أتمتة الذكاء الاصطناعي مع رؤية عمان 2040؟</h3>
+                        <p class="text-gray-400 mb-0">بالتأكيد. يعد الذكاء الاصطناعي والتحول الرقمي من الركائز الأساسية لرؤية عمان 2040، بهدف تنويع الاقتصاد وزيادة الكفاءة التشغيلية.</p>
+                    </div>
+                
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">هل يمكن دمج الذكاء الاصطناعي مع نظام ERP أو CRM الحالي لدي؟</h3>
+                        <p class="text-gray-400 mb-0">نعم، عبر واجهات برمجة التطبيقات وخطاطيف الويب، يمكن لأدوات الذكاء الاصطناعي التكامل بسلاسة مع الأنظمة القديمة مثل SAP و Oracle و Zoho و Salesforce.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">هل يمكن للذكاء الاصطناعي أن يحل محل الموظفين البشريين؟</h3>
+                        <p class="text-gray-400 mb-0">صُمم الذكاء الاصطناعي لتعزيز قدرات العمال البشريين وليس استبدالهم. فهو يتولى المهام الإدارية المتكررة، مما يتيح لفريقك التركيز على الاستراتيجية وعلاقات العملاء.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">هل هناك وكالات ذكاء اصطناعي محلية في مسقط؟</h3>
+                        <p class="text-gray-400 mb-0">نعم، تتخصص الوكالات المحلية مثل AI Profit Lab في جلب معايير أتمتة الذكاء الاصطناعي العالمية إلى الشركات العمانية بسياق محلي.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">كم تكلفة تطبيق الذكاء الاصطناعي في شركة عمانية؟</h3>
+                        <p class="text-gray-400 mb-0">تختلف التكاليف حسب النطاق. قد تكلف أتمتة سير العمل البسيطة بضع مئات من الريالات العمانية، بينما تتطلب البنية التحتية الكاملة للذكاء الاصطناعي استثماراً أكبر.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">هل تتماشى أتمتة الذكاء الاصطناعي مع رؤية عمان 2040؟</h3>
+                        <p class="text-gray-400 mb-0">بالتأكيد. يعد الذكاء الاصطناعي والتحول الرقمي من الركائز الأساسية لرؤية عمان 2040، بهدف تنويع الاقتصاد وزيادة الكفاءة التشغيلية.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">هل الذكاء الاصطناعي السحابي قانوني للمقاولين الحكوميين في عُمان؟</h3>
+                        <p class="text-gray-400 mb-0">يجب على المقاولين الحكوميين الالتزام بإرشادات وزارة النقل والاتصالات وتقنية المعلومات، والتي غالباً ما تتطلب سيادة البيانات واستضافة البيانات الحساسة على خوادم عمانية محلية.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">ما هي الخطوة الأولى لدمج الذكاء الاصطناعي في عملي؟</h3>
+                        <p class="text-gray-400 mb-0">الخطوة الأولى هي إجراء تدقيق تشغيلي شامل لتحديد الاختناقات المتكررة وصوامع البيانات التي يمكن أتمتتها بسهولة لتحقيق مكاسب سريعة.</p>
+                    </div>
+                </div>
 </section>
 
 <hr class="border-gray-800 my-10">
@@ -215,9 +353,9 @@
 </main>
 
 <!-- Footer -->
-<footer class="py-8 border-t border-gray-900 text-center text-sm text-gray-400">
-        &copy; ٢٠٢٥ <span class="text-blue-500">A</span><span class="text-red-500">I</span> Profit Lab &mdash; علامة تجارية لشركة International Gulf Lotus SPC &bull; جميع الحقوق محفوظة
-</footer>
+<footer class="border-t border-white/10 bg-black py-8 text-center text-gray-500 text-sm mt-auto">
+        <p>© ٢٠٢٥ AI Profit Lab — علامة تجارية لشركة International Gulf Lotus SPC • جميع الحقوق محفوظة</p>
+    </footer>
 
 <script>
   (function() {

@@ -137,8 +137,8 @@ for path in files_to_fix:
         content = re.sub(r'<html[^>]*>', '<html lang="en" dir="ltr">', content)
 
     # 2. Footers
-    en_footer = '<footer class="border-t border-white/10 bg-black py-8 text-center text-gray-500 text-sm mt-auto">\n        <p>&copy; 2025 AI Profit Lab &mdash; a brand of International Gulf Lotus SPC &bull; All Rights Reserved</p>\n    </footer>'
-    ar_footer = '<footer class="border-t border-white/10 bg-black py-8 text-center text-gray-500 text-sm mt-auto">\n        <p dir="ltr">&copy; ٢٠٢٥ AI Profit Lab &mdash; علامة تجارية لشركة International Gulf Lotus SPC &bull; جميع الحقوق محفوظة</p>\n    </footer>'
+    en_footer = '<footer class="py-8 border-t border-gray-900 text-center text-sm text-gray-600">\n        © 2025 <span class="text-blue-500">A</span><span class="text-red-500">I</span> Profit Lab — a brand of International Gulf Lotus SPC • All Rights Reserved\n    </footer>'
+    ar_footer = '<footer class="py-8 border-t border-gray-900 text-center text-sm text-gray-600">\n        © ٢٠٢٥ AI Profit Lab — علامة تجارية لشركة International Gulf Lotus SPC • جميع الحقوق محفوظة\n    </footer>'
     footer_regex = r'<footer.*?</footer>'
     if re.search(footer_regex, content, re.DOTALL):
         content = re.sub(footer_regex, ar_footer if lang=="ar" else en_footer, content, flags=re.DOTALL)

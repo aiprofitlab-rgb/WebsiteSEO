@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html dir="rtl" lang="ar">
+<html lang="ar" dir="rtl">
 <head>
 <style>
   #fouc-overlay {
@@ -27,45 +27,122 @@
 
 <!-- JSON-LD Schema Markup -->
 <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@graph": [
+{
+    "@context": "https://schema.org",
+    "@graph": [
         {
-          "@type": "Organization",
-          "@id": "https://aiprofitlab.io/#organization",
-          "name": "AI Profit Lab",
-          "legalName": "International Gulf Lotus SPC",
-          "url": "https://aiprofitlab.io/",
-          "logo": {
-            "@type": "ImageObject",
-            "url": "https://aiprofitlab.io/favicon.svg"
-          }
-        },
-        {
-          "@type": "Article",
-          "headline": "تدقيق 2026: 5 مهام يجب على عملك التوقف عن القيام بها يدوياً",
-          "description": "دليل للشركات في عُمان ودول مجلس التعاون الخليجي حول أهم 5 مهام يجب التوقف عن القيام بها يدوياً في عام 2026 للبقاء في المنافسة وتقليل التكاليف.",
-          "image": "https://aiprofitlab.io/blog/images/2026_audit_automation.png",
-          "author": {
             "@type": "Organization",
-            "name": "AI Profit Lab"
-          },
-          "publisher": {
-            "@id": "https://aiprofitlab.io/#organization"
-          },
-          "datePublished": "2026-06-13"
+            "@id": "https://aiprofitlab.io/#organization",
+            "name": "AI Profit Lab",
+            "legalName": "International Gulf Lotus SPC",
+            "url": "https://aiprofitlab.io/",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://aiprofitlab.io/favicon.svg"
+            }
         },
         {
-          "@type": "FAQPage",
-          "mainEntity": [
-            { "@type": "Question", "name": "ما هي التكلفة الخفية الأكبر في الأعمال التجارية؟", "acceptedAnswer": { "@type": "Answer", "text": "غالباً ما يكون إدخال البيانات اليدوي والمهام الإدارية المتكررة هي أكبر التكاليف الخفية، مما يستنزف وقت الموظفين وموارد الشركة." } },
-            { "@type": "Question", "name": "كيف يمكن للذكاء الاصطناعي المساعدة في دعم العملاء؟", "acceptedAnswer": { "@type": "Answer", "text": "يمكن للذكاء الاصطناعي التعامل مع الأسئلة الشائعة الروتينية، وتأهيل العملاء المحتملين، وفرز تذاكر الدعم، مما يتيح لفريقك البشري التركيز على احتياجات العملاء المعقدة." } },
-            { "@type": "Question", "name": "هل الأتمتة مكلفة بالنسبة لشركة صغيرة؟", "acceptedAnswer": { "@type": "Answer", "text": "لا، بفضل الأدوات التي لا تحتاج إلى برمجة (No-code) وتكاملات API ذات الأسعار المعقولة، أصبحت أتمتة المهام المتكررة الآن فعالة للغاية من حيث التكلفة وتوفر عائداً فورياً على الاستثمار." } }
-          ]
+            "@type": "Article",
+            "headline": "تدقيق 2026: 5 مهام يجب على عملك التوقف عن القيام بها يدوياً",
+            "description": "دليل للشركات في عُمان ودول مجلس التعاون الخليجي حول أهم 5 مهام يجب التوقف عن القيام بها يدوياً في عام 2026 للبقاء في المنافسة وتقليل التكاليف.",
+            "image": "https://aiprofitlab.io/blog/images/2026_audit_automation.png",
+            "author": {
+                "@type": "Organization",
+                "name": "AI Profit Lab"
+            },
+            "publisher": {
+                "@id": "https://aiprofitlab.io/#organization"
+            },
+            "datePublished": "2026-06-13"
+        },
+        {
+            "@type": "FAQPage",
+            "mainEntity": [
+                {
+                    "@type": "Question",
+                    "name": "ما هي التكلفة الخفية الأكبر في الأعمال التجارية؟",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "غالباً ما يكون إدخال البيانات اليدوي والمهام الإدارية المتكررة هي أكبر التكاليف الخفية، مما يستنزف وقت الموظفين وموارد الشركة."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "كيف يمكن للذكاء الاصطناعي المساعدة في دعم العملاء؟",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "يمكن للذكاء الاصطناعي التعامل مع الأسئلة الشائعة الروتينية، وتأهيل العملاء المحتملين، وفرز تذاكر الدعم، مما يتيح لفريقك البشري التركيز على احتياجات العملاء المعقدة."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "هل الأتمتة مكلفة بالنسبة لشركة صغيرة؟",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "لا، بفضل الأدوات التي لا تحتاج إلى برمجة (No-code) وتكاملات API ذات الأسعار المعقولة، أصبحت أتمتة المهام المتكررة الآن فعالة للغاية من حيث التكلفة وتوفر عائداً فورياً على الاستثمار."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "كيف يتعامل الذكاء الاصطناعي مع دعم العملاء خارج ساعات العمل؟",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "توفر روبوتات الدردشة والوكلاء الصوتيون استجابات فورية على مدار الساعة، مما يجذب العملاء المحتملين ويحل المشكلات الشائعة حتى عندما يكون مكتبك مغلقاً."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "كيف يؤثر الذكاء الاصطناعي على التوظيف المحلي؟",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "من خلال أتمتة المهام العادية، يمكن للشركات توظيف عمال ذوي مهارات أعلى لأدوار استراتيجية، مما يرفع من القدرة الإجمالية للقوى العاملة المحلية."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "هل الذكاء الاصطناعي السحابي قانوني للمقاولين الحكوميين في عُمان؟",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "يجب على المقاولين الحكوميين الالتزام بإرشادات وزارة النقل والاتصالات وتقنية المعلومات، والتي غالباً ما تتطلب سيادة البيانات واستضافة البيانات الحساسة على خوادم عمانية محلية."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "ما هي الخطوة الأولى لدمج الذكاء الاصطناعي في عملي؟",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "الخطوة الأولى هي إجراء تدقيق تشغيلي شامل لتحديد الاختناقات المتكررة وصوامع البيانات التي يمكن أتمتتها بسهولة لتحقيق مكاسب سريعة."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "كيف يحسن الذكاء الاصطناعي إدارة سلسلة التوريد؟",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "يتنبأ الذكاء الاصطناعي بتقلبات الطلب، ويحسن طرق التسليم في الوقت الفعلي، ويؤتمت إعادة طلب المخزون، مما يقلل بشكل كبير من التكاليف اللوجستية."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "كم من الوقت يستغرق رؤية عائد الاستثمار من الذكاء الاصطناعي؟",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "تبلغ العديد من الشركات في دول مجلس التعاون الخليجي عن رؤية عائد استثمار إيجابي في غضون 3 إلى 6 أشهر من نشر أتمتة سير العمل."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "ما هو التوليد المعزز بالاسترجاع (RAG)؟",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "تقنية يبحث فيها نموذج الذكاء الاصطناعي بأمان في مستندات شركتك الخاصة قبل الإجابة على سؤال، مما يضمن الدقة والسياق."
+                    }
+                }
+            ]
         }
-      ]
-    }
-    </script>
+    ]
+}
+</script>
 
 <link rel="preconnect" href="https://cdn.tailwindcss.com">
 <link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
@@ -87,41 +164,44 @@
 
 <!-- Local Business Schema -->
 <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "ProfessionalService",
-      "name": "AI Profit Lab",
-      "legalName": "International Gulf Lotus SPC",
-      "url": "https://aiprofitlab.io",
-      "logo": "https://aiprofitlab.io/logo.webp",
-      "image": "https://aiprofitlab.io/nahid-business-banner.png",
-      "description": "نساعد المديرين التنفيذيين على استغلال الذكاء الاصطناعي والأتمتة لزيادة الأرباح.",
-      "address": {
+{
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "AI Profit Lab",
+    "legalName": "International Gulf Lotus SPC",
+    "url": "https://aiprofitlab.io",
+    "logo": "https://aiprofitlab.io/logo.webp",
+    "image": "https://aiprofitlab.io/nahid-business-banner.png",
+    "description": "مساعدة المديرين غير التقنيين على الاستفادة من الذكاء الاصطناعي والأتمتة والتكنولوجيا لزيادة عائد الاستثمار وكفاءة الأعمال.",
+    "address": {
         "@type": "PostalAddress",
         "streetAddress": "Al Seeb",
         "addressLocality": "Muscat",
         "addressRegion": "Muscat Governorate",
         "postalCode": "000",
         "addressCountry": "OM"
-      },
-      "geo": {
+    },
+    "geo": {
         "@type": "GeoCoordinates",
-        "latitude": 23.635950490475295, 
+        "latitude": 23.635950490475295,
         "longitude": 58.207628165445385
-      },
-      "contactPoint": {
+    },
+    "contactPoint": {
         "@type": "ContactPoint",
         "telephone": "+968-99245250",
         "contactType": "customer service",
         "areaServed": "GCC",
-        "availableLanguage": ["en", "ar"]
-      },
-      "sameAs": [
+        "availableLanguage": [
+            "en",
+            "ar"
+        ]
+    },
+    "sameAs": [
         "https://www.youtube.com/@AI_for_Managers",
         "https://www.linkedin.com/in/nahid-aby"
-      ]
-    }
-    </script>
+    ]
+}
+</script>
 </head>
 <body class="antialiased">
 <div id="fouc-overlay"></div>
@@ -205,7 +285,36 @@
 <h3 class="text-lg font-bold text-white mb-2">هل الأتمتة مكلفة بالنسبة لشركة صغيرة؟</h3>
 <p class="text-gray-400 mb-0">لا، بفضل الأدوات التي لا تحتاج إلى برمجة (No-code) وتكاملات API ذات الأسعار المعقولة، أصبحت أتمتة المهام المتكررة الآن فعالة للغاية من حيث التكلفة وتوفر عائداً فورياً على الاستثمار.</p>
 </div>
-</div>
+
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">كيف يتعامل الذكاء الاصطناعي مع دعم العملاء خارج ساعات العمل؟</h3>
+                        <p class="text-gray-400 mb-0">توفر روبوتات الدردشة والوكلاء الصوتيون استجابات فورية على مدار الساعة، مما يجذب العملاء المحتملين ويحل المشكلات الشائعة حتى عندما يكون مكتبك مغلقاً.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">كيف يؤثر الذكاء الاصطناعي على التوظيف المحلي؟</h3>
+                        <p class="text-gray-400 mb-0">من خلال أتمتة المهام العادية، يمكن للشركات توظيف عمال ذوي مهارات أعلى لأدوار استراتيجية، مما يرفع من القدرة الإجمالية للقوى العاملة المحلية.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">هل الذكاء الاصطناعي السحابي قانوني للمقاولين الحكوميين في عُمان؟</h3>
+                        <p class="text-gray-400 mb-0">يجب على المقاولين الحكوميين الالتزام بإرشادات وزارة النقل والاتصالات وتقنية المعلومات، والتي غالباً ما تتطلب سيادة البيانات واستضافة البيانات الحساسة على خوادم عمانية محلية.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">ما هي الخطوة الأولى لدمج الذكاء الاصطناعي في عملي؟</h3>
+                        <p class="text-gray-400 mb-0">الخطوة الأولى هي إجراء تدقيق تشغيلي شامل لتحديد الاختناقات المتكررة وصوامع البيانات التي يمكن أتمتتها بسهولة لتحقيق مكاسب سريعة.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">كيف يحسن الذكاء الاصطناعي إدارة سلسلة التوريد؟</h3>
+                        <p class="text-gray-400 mb-0">يتنبأ الذكاء الاصطناعي بتقلبات الطلب، ويحسن طرق التسليم في الوقت الفعلي، ويؤتمت إعادة طلب المخزون، مما يقلل بشكل كبير من التكاليف اللوجستية.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">كم من الوقت يستغرق رؤية عائد الاستثمار من الذكاء الاصطناعي؟</h3>
+                        <p class="text-gray-400 mb-0">تبلغ العديد من الشركات في دول مجلس التعاون الخليجي عن رؤية عائد استثمار إيجابي في غضون 3 إلى 6 أشهر من نشر أتمتة سير العمل.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">ما هو التوليد المعزز بالاسترجاع (RAG)؟</h3>
+                        <p class="text-gray-400 mb-0">تقنية يبحث فيها نموذج الذكاء الاصطناعي بأمان في مستندات شركتك الخاصة قبل الإجابة على سؤال، مما يضمن الدقة والسياق.</p>
+                    </div>
+                </div>
 </section>
 
 <hr class="border-gray-800 my-10">
@@ -213,9 +322,9 @@
 </main>
 
 <!-- Footer -->
-<footer class="py-8 border-t border-gray-900 text-center text-sm text-gray-400" dir="ltr">
-        &copy; 2025 <span class="text-blue-500">A</span><span class="text-red-500">I</span> Profit Lab &mdash; علامة تجارية لشركة International Gulf Lotus SPC &bull; جميع الحقوق محفوظة
-</footer>
+<footer class="border-t border-white/10 bg-black py-8 text-center text-gray-500 text-sm mt-auto">
+        <p>© ٢٠٢٥ AI Profit Lab — علامة تجارية لشركة International Gulf Lotus SPC • جميع الحقوق محفوظة</p>
+    </footer>
 
 <script>
   (function() {
