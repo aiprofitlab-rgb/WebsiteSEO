@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<style>
+  #fouc-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 999999;
+    background: #050505;
+    transition: opacity 0.3s ease;
+  }
+</style>
+
+<meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta content="WhatsApp Tools" name="category">
+<title>WhatsApp Business API vs. WhatsApp Business App: What Every Oman Business Owner Needs to Know [2026 Guide] | AI Profit Lab</title>
+<meta content="Supercharge your business with the definitive 2026 guide on WhatsApp Business API vs App — features, costs, and which is right for Oman SMEs." name="description">
+<meta content="WhatsApp Business API vs App Oman, WhatsApp API Oman, WhatsApp Business App vs API GCC, WhatsApp API pricing Oman 2026, WhatsApp automation Muscat, WhatsApp BSP Oman" name="keywords">
+<link href="https://aiprofitlab.io/blog/en/2026-06-17-whatsapp-business-api-vs-app-oman-guide/" rel="canonical">
+<link href="/favicon.svg" rel="icon" type="image/svg+xml">
+<link href="/favicon.svg" rel="apple-touch-icon">
+
+<!-- JSON-LD Schema Markup -->
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@graph": [
+        {
+            "@type": "Organization",
+            "@id": "https://aiprofitlab.io/#organization",
+            "name": "AI Profit Lab",
+            "legalName": "International Gulf Lotus SPC",
+            "url": "https://aiprofitlab.io/",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://aiprofitlab.io/favicon.svg"
+            }
+        },
+        {
+            "@type": "Article",
+            "headline": "WhatsApp Business API vs. WhatsApp Business App: What Every Oman Business Owner Needs to Know [2026 Guide]",
+            "description": "The definitive 2026 guide on WhatsApp Business API vs App — features, costs, automation capabilities, and which is the right choice for Oman and GCC SMEs.",
+            "image": "https://aiprofitlab.io/blog/images/whatsapp-api-vs-app-oman-guide.png",
+            "author": {
+                "@type": "Organization",
+                "name": "AI Profit Lab"
+            },
+            "publisher": {
+                "@id": "https://aiprofitlab.io/#organization"
+            },
+            "datePublished": "2026-06-17"
+        },
+        {
+            "@type": "FAQPage",
+            "mainEntity": [
+                {
+                    "@type": "Question",
+                    "name": "What is the difference between WhatsApp Business App and WhatsApp Business API?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "The WhatsApp Business App is a free mobile application for small businesses managing low conversation volumes (under 50/day) from a single device. The WhatsApp Business API (now called the WhatsApp Business Platform) is a paid, developer-accessible interface that enables multiple agents, advanced automation, AI chatbots, CRM integration, and unlimited broadcasting — designed for scaling businesses."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Is the WhatsApp Business API available in Oman?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Yes. The WhatsApp Business API is fully operational in Oman. Businesses in Muscat, Sohar, and Salalah can access it through Meta-authorized Business Solution Providers (BSPs) such as Twilio, 360dialog, WATI, and Interakt. Many providers offer Arabic language support and data handling aligned with Oman's PDPL regulations."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "How much does the WhatsApp Business API cost in Oman in 2026?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Meta moved to per-message billing in July 2025. Marketing template messages cost approximately $0.04–$0.08 per delivered message. Utility templates are free within an open 24-hour customer service window. Businesses also pay BSP platform fees, typically $30–$150/month, plus any AI or CRM integration costs."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "What is a WhatsApp Business Solution Provider (BSP)?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "A Business Solution Provider (BSP) is a Meta-authorized company that provides access to the WhatsApp Business API, since businesses cannot connect directly to Meta's servers without going through an official partner. BSPs supply the shared inbox dashboard, chatbot builder, template management, and analytics layer on top of the raw API. Examples include Twilio, 360dialog, WATI, and Interakt."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Can I use the WhatsApp Business App for automation in Oman?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Only to a very limited extent. The WhatsApp Business App supports basic auto-replies (greeting messages, away messages) and quick replies. It does not support AI chatbots, CRM integration, multi-agent shared inboxes, or large-scale broadcasting. For serious automation, you need the WhatsApp Business API."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "What is the broadcast limit on the WhatsApp Business App?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "The WhatsApp Business App limits broadcast lists to 256 contacts per list, and recipients must have your number saved in their contacts. The WhatsApp Business API has no such limit — you can send pre-approved template messages to thousands of opted-in contacts simultaneously."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Do I need a developer to use the WhatsApp Business API?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Not necessarily. Many BSP platforms like WATI and Interakt provide no-code drag-and-drop interfaces for building chatbot flows and sending broadcasts without writing code. However, for custom CRM integrations, AI-powered automations, or webhook-based workflows, developer involvement significantly expands what you can build."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "What is the WhatsApp Green Tick verification and how can Oman businesses get it?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "The WhatsApp Green Tick (Official Business Account) is a verified badge from Meta that signals your account is the authentic brand. Only businesses using the WhatsApp Business API are eligible to apply. To get it, you must complete Meta Business Verification, have a strong brand presence, and submit an application through your BSP. Approval typically takes 2–4 weeks."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Is the WhatsApp Business API compliant with Oman's PDPL data protection law?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Compliance depends on your BSP's data residency and security practices. To align with Oman's Personal Data Protection Law (PDPL), ensure your BSP stores customer data in GCC-region data centers or on-premise, maintains consent logs, and signs a Data Processing Agreement (DPA) with your business. Always verify these specifics before onboarding."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Can the WhatsApp Business API integrate with a CRM like Salesforce or Zoho?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Yes. The WhatsApp Business API connects to virtually any CRM, ERP, or booking system via API webhooks. This means incoming leads can be automatically captured in Salesforce, HubSpot, Zoho, or Odoo in real time, with conversation history synced. This is one of the most powerful advantages over the WhatsApp Business App, which has no native integration capabilities."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Which type of Oman business should use the WhatsApp Business App vs. the API?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Use the WhatsApp Business App if you handle fewer than 50 conversations per day, operate as a solo freelancer or micro-business, and don't need CRM integration or automation. Upgrade to the WhatsApp Business API if you receive 100+ messages daily, need multiple agents, want to build chatbots, require broadcast marketing, or need CRM sync — which describes most growing Omani SMEs in retail, healthcare, real estate, and logistics."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "What are the template message categories in the WhatsApp Business API?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Meta classifies API template messages into three categories: Marketing (promotions, offers, re-engagement campaigns — always billed), Utility (order confirmations, appointment reminders, shipping updates — free within a 24-hour service window), and Authentication (OTP codes for identity verification — always billed). Each category has different pricing and approval requirements."
+                    }
+                }
+            ]
+        }
+    ]
+}
+</script>
+
+<link rel="preconnect" href="https://cdn.tailwindcss.com">
+<link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
+<script src="https://cdn.tailwindcss.com"></script>
+<link as="style" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'" rel="preload">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet"></noscript>
+<style>
+    body { font-family: 'Outfit', sans-serif; background-color: #050505; color: #ffffff; }
+    .logo-font { font-family: 'Outfit', sans-serif !important; }
+    .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.05); }
+    .glass-card { background: rgba(255, 255, 255, 0.02); backdrop-filter: blur(8px); border: 1px solid rgba(255, 255, 255, 0.05); transition: all 0.3s ease; }
+    .glass-card:hover { border-color: #3B82F6; transform: translateY(-5px); box-shadow: 0 20px 40px rgba(59, 130, 246, 0.1); }
+    .prose h2 { color: #60A5FA; margin-top: 2.5em; margin-bottom: 1em; font-weight: 800; font-size: 1.875rem; }
+    .prose h3 { color: #93C5FD; margin-top: 2em; margin-bottom: 1em; font-weight: 700; font-size: 1.5rem; }
+    .prose p { margin-bottom: 1.5em; line-height: 1.8; color: #D1D5DB; }
+    .prose strong { color: #F3F4F6; }
+    .prose blockquote { border-left: 4px solid #3B82F6; padding-left: 1rem; font-style: italic; color: #9CA3AF; margin-left: 0; }
+    .prose table { width: 100%; border-collapse: collapse; margin: 2em 0; }
+    .prose th { background: rgba(59,130,246,0.15); color: #60A5FA; padding: 0.75rem 1rem; text-align: left; font-weight: 700; border: 1px solid rgba(255,255,255,0.08); }
+    .prose td { padding: 0.75rem 1rem; border: 1px solid rgba(255,255,255,0.06); color: #D1D5DB; }
+    .prose tr:nth-child(even) td { background: rgba(255,255,255,0.02); }
+</style>
+<!-- Local Business Schema -->
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "AI Profit Lab",
+    "legalName": "International Gulf Lotus SPC",
+    "url": "https://aiprofitlab.io",
+    "logo": "https://aiprofitlab.io/logo.webp",
+    "image": "https://aiprofitlab.io/nahid-business-banner.png",
+    "description": "Helping non-technical managers leverage AI, automation, and technology to increase ROI and business efficiency.",
+    "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Al Seeb",
+        "addressLocality": "Muscat",
+        "addressRegion": "Muscat Governorate",
+        "postalCode": "000",
+        "addressCountry": "OM"
+    },
+    "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 23.635950490475295,
+        "longitude": 58.207628165445385
+    },
+    "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+968-99245250",
+        "contactType": "customer service",
+        "areaServed": "GCC",
+        "availableLanguage": ["en", "ar"]
+    },
+    "sameAs": [
+        "https://www.youtube.com/@AI_for_Managers",
+        "https://www.linkedin.com/in/nahid-aby"
+    ]
+}
+</script>
+</head>
+<body class="antialiased">
+<div id="fouc-overlay"></div>
+
+<!-- Navigation -->
+<nav class="flex justify-between items-center px-6 md:px-12 py-8 w-full z-50 glass sticky top-0 bg-black/30" id="header">
+<a class="font-extrabold text-3xl md:text-4xl tracking-tighter hover:opacity-80 transition logo-font" href="/en/">
+<span class="text-blue-500">A</span><span class="text-red-500">I</span> <span class="text-white text-2xl md:text-3xl">Profit Lab</span>
+</a>
+<a class="text-gray-300 hover:text-white font-semibold transition" href="/blog/">Back to Hub</a>
+</nav>
+
+<!-- Main Content -->
+<main class="max-w-4xl mx-auto px-6 py-16">
+<article>
+<div class="mb-12 text-center text-left">
+<span class="bg-blue-500/10 text-blue-400 text-sm font-bold px-4 py-2 rounded-full border border-blue-500/20 mb-6 inline-block">WhatsApp Tools</span>
+<h1 class="text-4xl md:text-6xl font-extrabold mb-6 leading-tight">WhatsApp Business API vs. WhatsApp Business App: <span class="text-blue-400">What Every Oman Business Owner Needs to Know</span></h1>
+<p class="text-xl text-gray-400 max-w-2xl mx-auto">Same green icon. Completely different tools. One is a phone app for small shops. The other is a business infrastructure. Here's how to tell which one your Omani business actually needs — with real numbers.</p>
+</div>
+
+<img src="/blog/images/whatsapp-api-vs-app-oman-guide.png" alt="WhatsApp Business API vs WhatsApp Business App Oman Guide - Empowering AI Solutions by AI Profit Lab to scale your business operations." class="w-full rounded-3xl mb-16 shadow-[0_0_50px_rgba(59,130,246,0.15)] border border-white/5 object-cover h-[500px]" width="1024" height="1024">
+
+<div class="prose max-w-none">
+
+<p>Salim owns a mid-sized real estate agency in Muscat. He downloaded the WhatsApp Business App two years ago and set up a basic greeting message. Today, his team of 6 agents share credentials on one phone, broadcast to 256 contacts at a time, and manually forward every inquiry to the right person. Leads slip through daily. He's heard "upgrade to the WhatsApp Business API" but has no idea what that actually means — or costs.</p>
+
+<p>This guide answers that question precisely. The <strong>WhatsApp Business App</strong> is a free mobile application — a consumer-grade tool built for sole traders and micro-businesses managing fewer than 50 conversations per day from a single smartphone. The <strong>WhatsApp Business API</strong> (officially the WhatsApp Business Platform) is a programmatic interface — a set of HTTP endpoints that allow businesses to connect WhatsApp to their own servers, CRMs, AI systems, and custom dashboards, enabling unlimited scale and automation.</p>
+
+<h2>What Are the Core Differences Between the App and the API?</h2>
+
+<p>The distinction is not about size alone — it's about infrastructure. The App is consumer software. The API is a business communication protocol. Here's a direct comparison every Oman business owner should review before choosing:</p>
+
+<table>
+    <thead>
+        <tr>
+            <th>Feature</th>
+            <th>WhatsApp Business App</th>
+            <th>WhatsApp Business API</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>Cost</strong></td>
+            <td>Free</td>
+            <td>Per-message fees + BSP platform costs</td>
+        </tr>
+        <tr>
+            <td><strong>Devices / Agents</strong></td>
+            <td>1 primary phone + up to 4 linked devices</td>
+            <td>Unlimited concurrent agents via shared inbox</td>
+        </tr>
+        <tr>
+            <td><strong>Broadcast Limit</strong></td>
+            <td>256 contacts per list (must have your number saved)</td>
+            <td>Unlimited (pre-approved templates, opted-in contacts)</td>
+        </tr>
+        <tr>
+            <td><strong>Automation</strong></td>
+            <td>Basic auto-replies and quick replies only</td>
+            <td>Full AI chatbots, multi-step workflows, webhooks</td>
+        </tr>
+        <tr>
+            <td><strong>CRM / ERP Integration</strong></td>
+            <td>None</td>
+            <td>Full integration via API (Zoho, Salesforce, Odoo, etc.)</td>
+        </tr>
+        <tr>
+            <td><strong>Green Tick Verification</strong></td>
+            <td>Not eligible</td>
+            <td>Eligible (requires Meta Business Verification)</td>
+        </tr>
+        <tr>
+            <td><strong>Analytics</strong></td>
+            <td>Basic message statistics</td>
+            <td>Delivery rates, read rates, conversion tracking</td>
+        </tr>
+        <tr>
+            <td><strong>Setup Complexity</strong></td>
+            <td>Download and configure in minutes</td>
+            <td>Requires a BSP partner and technical setup</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>What Does the WhatsApp Business API Actually Cost in Oman?</h2>
+
+<p>In July 2025, Meta transitioned from a conversation-based billing model to a <strong>per-message pricing model</strong> — meaning you now pay for each delivered template message. There are three categories: <strong>Marketing</strong> (promotional campaigns, offers — always billed, approximately $0.04–$0.08 per message), <strong>Utility</strong> (order confirmations, appointment reminders — free if sent within an open 24-hour customer service window), and <strong>Authentication</strong> (OTP codes — always billed at a lower rate).</p>
+
+<p>Beyond Meta's fees, you must work with a <strong>Business Solution Provider (BSP)</strong> — a Meta-authorized company that acts as the layer between your business and the raw API. BSPs like <a href="https://www.wati.io/" target="_blank" class="text-blue-400 hover:underline">WATI</a>, <a href="https://www.360dialog.com/" target="_blank" class="text-blue-400 hover:underline">360dialog</a>, and <a href="https://www.twilio.com/en-us/whatsapp" target="_blank" class="text-blue-400 hover:underline">Twilio</a> provide the inbox interface, template management tools, chatbot builders, and analytics dashboards. Platform fees typically run $30–$150 per month depending on features and message volume.</p>
+
+<blockquote>"The API itself is just a pipe. The BSP is the dashboard, the automation engine, and the support layer. Your total cost is Meta fees + BSP fees + any AI or CRM integration costs on top."</blockquote>
+
+<h2>How Do Oman Businesses Access the WhatsApp Business API?</h2>
+
+<p>You cannot sign up for the API directly through WhatsApp. The process requires: (1) creating a verified <strong>Meta Business Account</strong> at <a href="https://business.facebook.com" target="_blank" class="text-blue-400 hover:underline">business.facebook.com</a>, (2) completing <strong>Meta Business Verification</strong> by submitting your Commercial Registration from the Oman Ministry of Commerce, and (3) choosing a BSP that will provision your WhatsApp Business Account (WABA) and phone number. For most Omani SMEs, this process takes 5–10 business days if documentation is in order.</p>
+
+<p>The key insight for GCC businesses: several BSPs now have regional Arabic support and understand the specific requirements of the Oman Personal Data Protection Law (PDPL). According to <a href="https://www.ita.gov.om/ITAPortal/MediaCenter/NewsDetail.aspx?NID=531" target="_blank" class="text-blue-400 hover:underline">Oman's Information Technology Authority</a>, any system processing personal data of Omani residents must comply with PDPL — which means ensuring your BSP's data centers are in approved regions and that a Data Processing Agreement (DPA) is in place.</p>
+
+<h2>What Is the Green Tick and Does Your Business Need It?</h2>
+
+<p>The WhatsApp Green Tick — officially called the <strong>Official Business Account (OBA)</strong> badge — is a verified checkmark that appears next to your business name in all customer conversations. It signals to recipients that Meta has authenticated your brand identity. In Oman and the GCC, where scam messages via WhatsApp are common, the Green Tick dramatically improves trust and open rates.</p>
+
+<p>Only API-connected businesses can apply. Eligibility requires: a verified Meta Business Account, a notable brand presence (media coverage, social media following, or brand recognition), and a clean messaging history. Approval rates improve significantly for businesses with a verified commercial registration and an established digital presence. For real estate agencies, clinics, and logistics companies in Muscat handling hundreds of inbound inquiries, the Green Tick can measurably reduce unread-message rates.</p>
+
+<h2>Which Should Your Oman Business Choose?</h2>
+
+<p>The decision matrix is straightforward. If you are a solo consultant, freelancer, or a micro-shop in Muscat handling fewer than 50 conversations per day with no plans to expand, the <strong>WhatsApp Business App is sufficient</strong>. It is free, easy, and covers basic catalog display, auto-greeting, and quick reply templates.</p>
+
+<p>If any of the following are true, you need the <strong>WhatsApp Business API</strong>: your team has more than one person responding to WhatsApp, you want to automate responses with an AI chatbot, you run marketing campaigns via broadcast, you need WhatsApp conversations logged in your CRM, or you're losing leads because messages go unanswered outside working hours. A recent <a href="/blog/en/2026-06-05-whatsapp-workflows-oman-managers/" class="text-blue-400 hover:underline">analysis of WhatsApp workflows for Oman managers</a> found that businesses handling 200+ monthly conversations recoup their API costs within the first 30 days through recovered leads alone.</p>
+
+<table>
+    <thead>
+        <tr>
+            <th>Business Profile</th>
+            <th>Recommended Tool</th>
+            <th>Monthly Budget (OMR)</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Solo freelancer / micro-shop (&lt;50 chats/day)</td>
+            <td>WhatsApp Business App</td>
+            <td>0</td>
+        </tr>
+        <tr>
+            <td>Small SME (50–200 chats/day, 1–3 agents)</td>
+            <td>API via WATI or Interakt</td>
+            <td>15 – 50</td>
+        </tr>
+        <tr>
+            <td>Growing SME (200–1,000 chats/day, AI bot)</td>
+            <td>API + custom automation (n8n / Make)</td>
+            <td>50 – 150</td>
+        </tr>
+        <tr>
+            <td>Enterprise / multi-branch (1,000+ chats/day)</td>
+            <td>API + custom CRM + AI agent</td>
+            <td>200 – 500+</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>What Is the Right First Step for an Oman Business Owner?</h2>
+
+<p>Start with an honest audit of your current WhatsApp volume. Count how many messages your business receives in an average week. If it's under 350 per week (50 per day), test the WhatsApp Business App for 30 days and measure how many leads you miss after hours or on weekends. That number — multiplied by your average deal value — is your cost of staying on the App.</p>
+
+<p>If the math points to the API, <a href="/en/contact/" class="text-blue-400 hover:underline font-bold">book a free consultation with AI Profit Lab</a>. We help Oman businesses navigate BSP selection, Meta verification, PDPL compliance, and AI chatbot integration — so you're not just switching tools, but building a scalable messaging infrastructure aligned with <a href="/blog/en/2026-05-05-oman-vision-2040-ai-goals/" class="text-blue-400 hover:underline">Oman Vision 2040's digital economy goals</a>.</p>
+
+</div>
+
+<!-- CTA Block -->
+<div class="glass-card rounded-2xl p-8 mt-12 mb-8 text-center border-blue-500/30 border">
+<h3 class="text-2xl font-bold text-white mb-4">Not Sure Which WhatsApp Tool Your Business Needs?</h3>
+<p class="text-gray-300 mb-6">AI Profit Lab provides a free, no-obligation WhatsApp audit — we analyze your current conversation volume, identify automation gaps, and recommend the exact setup (App vs. API) that will generate measurable ROI for your Omani business.</p>
+<a class="inline-block bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 px-8 rounded-full transition shadow-[0_0_15px_rgba(37,99,235,0.5)]" href="/en/contact/">Get a Free WhatsApp Audit</a>
+</div>
+
+<!-- FAQ Section -->
+<section class="mt-16 pt-8 border-t border-white/10" id="faq">
+<h2 class="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-cyan-400 mb-8">Frequently Asked Questions</h2>
+<div class="space-y-6">
+
+    <div class="glass-card rounded-2xl p-6">
+        <h3 class="text-lg font-bold text-white mb-2">What is the difference between the WhatsApp Business App and the WhatsApp Business API?</h3>
+        <p class="text-gray-400 mb-0">The WhatsApp Business App is a free mobile application for small businesses handling low conversation volumes from a single device. The WhatsApp Business API is a paid, developer-accessible interface enabling multiple agents, AI chatbots, CRM integration, unlimited broadcasting, and full business automation — designed for scaling operations.</p>
+    </div>
+
+    <div class="glass-card rounded-2xl p-6">
+        <h3 class="text-lg font-bold text-white mb-2">Is the WhatsApp Business API available in Oman?</h3>
+        <p class="text-gray-400 mb-0">Yes. The WhatsApp Business API is fully operational in Oman. Businesses in Muscat, Sohar, and Salalah can access it through Meta-authorized BSPs like Twilio, 360dialog, WATI, and Interakt. Many providers support Arabic language templates and data handling compliant with Oman's PDPL.</p>
+    </div>
+
+    <div class="glass-card rounded-2xl p-6">
+        <h3 class="text-lg font-bold text-white mb-2">How much does the WhatsApp Business API cost in Oman in 2026?</h3>
+        <p class="text-gray-400 mb-0">Meta moved to per-message billing in July 2025. Marketing templates cost approximately $0.04–$0.08 per delivered message. Utility templates are free within an open 24-hour customer service window. BSP platform fees add $30–$150/month. Total costs for a small Omani SME typically range from OMR 15–60/month.</p>
+    </div>
+
+    <div class="glass-card rounded-2xl p-6">
+        <h3 class="text-lg font-bold text-white mb-2">What is a WhatsApp Business Solution Provider (BSP)?</h3>
+        <p class="text-gray-400 mb-0">A BSP is a Meta-authorized company that provides access to the WhatsApp Business API, since businesses cannot connect directly to Meta's infrastructure. BSPs provide the shared inbox dashboard, chatbot builder, template management, and analytics layer. Examples include Twilio, 360dialog, WATI, and Interakt.</p>
+    </div>
+
+    <div class="glass-card rounded-2xl p-6">
+        <h3 class="text-lg font-bold text-white mb-2">Can I use the WhatsApp Business App for automation in Oman?</h3>
+        <p class="text-gray-400 mb-0">Only to a very limited extent. The App supports basic auto-replies (greeting and away messages) and quick replies. It does not support AI chatbots, CRM integration, multi-agent shared inboxes, or large-scale broadcasting. For serious automation, you need the WhatsApp Business API.</p>
+    </div>
+
+    <div class="glass-card rounded-2xl p-6">
+        <h3 class="text-lg font-bold text-white mb-2">What is the broadcast limit on the WhatsApp Business App?</h3>
+        <p class="text-gray-400 mb-0">The App limits broadcast lists to 256 contacts, and recipients must have your number saved. The API has no such limit — you can send pre-approved template messages to thousands of opted-in contacts simultaneously, making it ideal for marketing campaigns across Oman and the GCC.</p>
+    </div>
+
+    <div class="glass-card rounded-2xl p-6">
+        <h3 class="text-lg font-bold text-white mb-2">Do I need a developer to use the WhatsApp Business API?</h3>
+        <p class="text-gray-400 mb-0">Not necessarily. Platforms like WATI and Interakt offer no-code interfaces. However, for custom CRM integrations, AI-powered automations, or webhook-based workflows, developer involvement significantly expands what you can build and automate.</p>
+    </div>
+
+    <div class="glass-card rounded-2xl p-6">
+        <h3 class="text-lg font-bold text-white mb-2">What is the WhatsApp Green Tick and how can Oman businesses get it?</h3>
+        <p class="text-gray-400 mb-0">The Green Tick (Official Business Account) is a verified badge from Meta authenticating your brand. Only API-connected businesses can apply. Requirements include a verified Meta Business Account, notable brand presence, and a clean messaging history. Approval typically takes 2–4 weeks after submission through your BSP.</p>
+    </div>
+
+    <div class="glass-card rounded-2xl p-6">
+        <h3 class="text-lg font-bold text-white mb-2">Is the WhatsApp Business API compliant with Oman's PDPL data protection law?</h3>
+        <p class="text-gray-400 mb-0">Compliance depends on your BSP's data residency and security practices. To align with Oman's PDPL, ensure your BSP stores customer data in GCC-region data centers, maintains consent logs, and signs a Data Processing Agreement (DPA) with your business before onboarding.</p>
+    </div>
+
+    <div class="glass-card rounded-2xl p-6">
+        <h3 class="text-lg font-bold text-white mb-2">Can the WhatsApp Business API integrate with a CRM like Salesforce or Zoho?</h3>
+        <p class="text-gray-400 mb-0">Yes. The API connects to virtually any CRM, ERP, or booking system via API webhooks. Incoming leads can be automatically captured in Salesforce, HubSpot, Zoho, or Odoo in real time, with conversation history synced — eliminating the manual copy-paste that costs Omani sales teams hours per week.</p>
+    </div>
+
+    <div class="glass-card rounded-2xl p-6">
+        <h3 class="text-lg font-bold text-white mb-2">Which type of Oman business should use the App vs. the API?</h3>
+        <p class="text-gray-400 mb-0">Use the App if you handle fewer than 50 conversations per day as a solo or micro-business. Upgrade to the API if you have multiple agents, want AI chatbots, need broadcast marketing, require CRM sync, or are losing leads outside working hours — which applies to most growing SMEs in Muscat's retail, healthcare, real estate, and logistics sectors.</p>
+    </div>
+
+    <div class="glass-card rounded-2xl p-6">
+        <h3 class="text-lg font-bold text-white mb-2">What are the three WhatsApp API template message categories?</h3>
+        <p class="text-gray-400 mb-0">Meta classifies API templates into: Marketing (promotions, offers — always billed at ~$0.04–$0.08/msg), Utility (confirmations, reminders — free within a 24-hour service window), and Authentication (OTP codes — always billed at a lower rate). Each category requires separate template approval from Meta before sending.</p>
+    </div>
+
+</div>
+</section>
+
+<hr class="border-gray-800 my-10">
+
+<!-- References -->
+<div class="mt-8">
+    <h3 class="text-xl font-bold mb-4 text-white">References</h3>
+    <ul class="list-disc list-inside text-gray-500 space-y-2 text-sm max-w-full overflow-hidden">
+        <li><a href="https://developers.facebook.com/docs/whatsapp/pricing/" class="hover:text-blue-400 break-words" target="_blank">Meta Developers — WhatsApp Business Platform Pricing (Per-Message, 2025)</a></li>
+        <li><a href="https://business.whatsapp.com/products/business-platform" class="hover:text-blue-400 break-words" target="_blank">Meta — WhatsApp Business Platform Official Overview</a></li>
+        <li><a href="https://www.twilio.com/en-us/whatsapp" class="hover:text-blue-400 break-words" target="_blank">Twilio — WhatsApp Business API Integration</a></li>
+        <li><a href="https://www.wati.io/pricing/" class="hover:text-blue-400 break-words" target="_blank">WATI — WhatsApp Team Inbox Pricing Plans</a></li>
+        <li><a href="https://www.ita.gov.om/ITAPortal/MediaCenter/NewsDetail.aspx?NID=531" class="hover:text-blue-400 break-words" target="_blank">Oman ITA — Personal Data Protection Law (PDPL) Overview</a></li>
+        <li><a href="https://aiprofitlab.io/blog/en/2026-06-07-pdpl-what-it-means-for-your-ai-chatbots/" class="hover:text-blue-400 break-words" target="_blank">AI Profit Lab — What Oman's PDPL Means for Your AI Chatbots</a></li>
+        <li><a href="https://aiprofitlab.io/blog/en/2026-06-05-whatsapp-workflows-oman-managers/" class="hover:text-blue-400 break-words" target="_blank">AI Profit Lab — WhatsApp Workflows for Oman Managers</a></li>
+    </ul>
+</div>
+
+</article>
+</main>
+
+<!-- Footer -->
+<footer class="border-t border-white/10 bg-black py-8 text-center text-gray-500 text-sm mt-auto">
+    <p>© 2025 <span class="text-blue-500">A</span><span class="text-red-500">I</span> Profit Lab — a brand of International Gulf Lotus SPC • All Rights Reserved</p>
+</footer>
+
+<script>
+  (function() {
+    var overlay = document.getElementById('fouc-overlay');
+    function removeOverlay() {
+      if (overlay) {
+        overlay.style.opacity = '0';
+        setTimeout(function() {
+          if (overlay && overlay.parentNode) {
+            overlay.parentNode.removeChild(overlay);
+          }
+        }, 320);
+      }
+    }
+    if (document.readyState === 'complete') {
+      setTimeout(removeOverlay, 100);
+    } else {
+      window.addEventListener('load', function() {
+        setTimeout(removeOverlay, 100);
+      });
+    }
+  })();
+</script>
+</body>
+</html>
