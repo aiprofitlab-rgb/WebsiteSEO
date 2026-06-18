@@ -43,6 +43,69 @@ Save the generated image to: `public_html/blog/images/[image_name].png`. Make su
 After generating and saving the images and HTML files, use your `run_command` tool to execute the python script that automatically updates the hub pages with the new content:
 `python3 update_blog_hubs.py` (run this from the `Website SEO` directory or use `python3 "Website SEO/update_blog_hubs.py"` relative to your current workspace root).
 
+## Step 6: Regenerate the Sitemap
+After the blog hub is updated, **always** regenerate the `sitemap.xml` by running the following inline Python script from the `public_html` directory. This ensures all new English and Arabic article pages are properly indexed by search engines with accurate `lastmod` dates.
+
+```bash
+python3 -c "
+import os, datetime
+
+base_dir = '.'
+base_url = 'https://aiprofitlab.io'
+priority_map = {
+    'index.html_root': '1.0',
+    'root': '0.8',
+    'blog_hub': '0.8',
+    'blog_article': '0.6',
+    'academy': '0.6',
+    'other': '0.7',
+}
+
+urls = []
+for root, dirs, files in os.walk(base_dir):
+    dirs[:] = [d for d in dirs if d not in ['.git', 'assets', 'js', 'images']]
+    for file in files:
+        if not file.endswith('.html') or file in ['test.html']:
+            continue
+        file_path = os.path.join(root, file)
+        rel_path = os.path.relpath(file_path, base_dir).replace(os.sep, '/')
+        mtime = os.path.getmtime(file_path)
+        lastmod = datetime.datetime.fromtimestamp(mtime).strftime('%Y-%m-%d')
+
+        if file == 'index.html':
+            dir_part = os.path.dirname(rel_path)
+            url = base_url + '/' + (dir_part + '/' if dir_part and dir_part != '.' else '')
+            priority = '1.0' if dir_part in ['', '.'] else '0.8'
+        else:
+            slug = rel_path[:-5]  # strip .html
+            url = base_url + '/' + slug + '/'
+            if '/blog/en/' in url or '/blog/ar/' in url:
+                priority = '0.6'
+            elif '/blog' in url or '/academy' in url:
+                priority = '0.8'
+            else:
+                priority = '0.7'
+
+        url = url.replace('//', '/').replace('https:/', 'https://')
+        urls.append({'loc': url, 'lastmod': lastmod, 'changefreq': 'weekly', 'priority': priority})
+
+urls.sort(key=lambda x: x['loc'])
+xml = '<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\" xmlns:xhtml=\"http://www.w3.org/1999/xhtml\">\n'
+for u in urls:
+    xml += f'  <url>\n    <loc>{u[\"loc\"]}</loc>\n    <lastmod>{u[\"lastmod\"]}</lastmod>\n    <changefreq>{u[\"changefreq\"]}</changefreq>\n    <priority>{u[\"priority\"]}</priority>\n  </url>\n'
+xml += '</urlset>'
+with open('sitemap.xml', 'w', encoding='utf-8') as f:
+    f.write(xml)
+print(f'sitemap.xml updated — {len(urls)} URLs indexed.')
+"
+```
+
+Run this from the `public_html` directory:
+```bash
+cd "Website SEO/public_html" && python3 -c "[above script]"
+```
+Or use the equivalent `run_command` invocation. After running, confirm the output shows the updated URL count.
+
 ---
 
 ## HTML Template Requirements
