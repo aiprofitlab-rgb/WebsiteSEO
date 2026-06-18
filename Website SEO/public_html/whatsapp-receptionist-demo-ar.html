@@ -38,8 +38,9 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "LocalBusiness",
+  "@type": "ProfessionalService",
   "name": "AI Profit Lab",
+  "legalName": "International Gulf Lotus SPC",
   "image": "https://aiprofitlab.io/og-image.jpg",
   "url": "https://aiprofitlab.io",
   "telephone": "+96890000000", 
@@ -71,7 +72,7 @@
   .nav-tab.active, .nav-tab:hover { background: rgba(255,255,255,0.2); }
 
   /* ── Layout ── */
-  .layout { display: grid; grid-template-columns: 320px 1fr; gap: 0; height: calc(100vh - 56px); }
+  .layout { display: grid; grid-template-columns: 320px 1fr; gap: 0; height: calc(100vh - 90px); }
 
   /* ── Lead Sidebar ── */
   .sidebar { background: #fff; border-right: 1px solid #e9ecef; overflow-y: auto; }
@@ -184,180 +185,150 @@
   #tab-dashboard, #tab-appointments { display: none; overflow: auto; }
   #tab-dashboard.active, #tab-appointments.active { display: block; }
 
-        /* STANDARD NAV FIX */
-        #header {
-            display: flex !important;
-            justify-content: space-between !important;
-            align-items: center !important;
-            position: fixed !important;
-            top: 0 !important;
-            left: 0 !important;
-            width: 100% !important;
-            z-index: 10000 !important;
-            box-sizing: border-box !important;
-            background: rgba(255, 255, 255, 0.05) !important;
-            backdrop-filter: blur(30px) saturate(150%) !important;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
-        }
-
-        @media (min-width: 1025px) {
-            #header { height: 90px !important; padding: 0 5% !important; }
-            #desktopMenu { display: flex !important; align-items: center !important; gap: 2.5rem !important; }
-            .desktop-nav-links { display: flex !important; align-items: center !important; gap: 2rem !important; }
-            .mobile-controls, #mobileMenu { display: none !important; }
-            [dir="rtl"] #header { direction: rtl !important; }
-            [dir="ltr"] #header { direction: ltr !important; }
-        }
-
-        @media (max-width: 1024px) {
-            #header { height: 75px !important; padding: 0 1.5rem !important; overflow: visible !important; }
-            #desktopMenu { display: none !important; }
-            .mobile-controls { 
-                display: flex !important; 
-                align-items: center !important; 
-                gap: 1.25rem !important; 
-                z-index: 10002 !important; 
-                position: relative !important; 
-                pointer-events: auto !important;
-            }
-            #mobileToggle { 
-                display: flex !important; 
-                background: transparent !important;
-                border: none !important;
-                color: white !important;
-                font-size: 2.4rem !important;
-                cursor: pointer !important;
-                pointer-events: auto !important;
-                padding: 10px !important;
-                z-index: 10003 !important;
-                line-height: 1 !important;
-            }
-            #mobileMenu { 
-                display: none !important; 
-                position: absolute !important;
-                top: 75px !important;
-                left: 0 !important;
-                right: 0 !important;
-                background: rgba(10, 10, 10, 0.98) !important; backdrop-filter: blur(20px) !important;
-                flex-direction: column !important;
-                padding: 2.5rem 1.5rem !important;
-                gap: 1.5rem !important;
-                z-index: 10001 !important;
-                max-height: calc(100vh - 75px) !important;
-                overflow-y: auto !important;
-                text-align: center !important;
-                border-bottom: 1px solid rgba(255,255,255,0.1) !important;
-            }
-            #mobileMenu.open { display: flex !important; }
+        /* wa-demo: standard nav fix intentionally omitted */
         }
 </style>
 </meta><style>img, video, iframe { aspect-ratio: attr(width) / attr(height); } .youtube-facade, #aiden-ui, .dynamic-content { min-height: 200px; }</style><style>
-/* === ANTI-BLACK-SCREEN: Critical layout fallback (pre-Tailwind) === */
-.text-white { color: #fff; }
-.text-gray-300 { color: #d1d5db; }
-.text-gray-400 { color: #9ca3af; }
-.text-blue-500 { color: #3b82f6; }
-.text-red-500 { color: #ef4444; }
-.text-red-400 { color: #f87171; }
-.text-green-400 { color: #4ade80; }
-.text-green-500 { color: #22c55e; }
-.text-purple-400 { color: #c084fc; }
-.text-transparent { color: transparent; }
-.bg-clip-text { -webkit-background-clip: text; background-clip: text; }
-.bg-gradient-to-r { background-image: linear-gradient(to right, var(--tw-gradient-stops, #3b82f6, #22c55e)); }
-.from-blue-500 { --tw-gradient-from: #3b82f6; --tw-gradient-stops: #3b82f6, #22c55e; }
-.text-sm { font-size: 0.875rem; }
-.text-lg { font-size: 1.125rem; }
-.text-xl { font-size: 1.25rem; }
-.text-2xl { font-size: 1.5rem; }
-.text-3xl { font-size: 1.875rem; }
-.text-4xl { font-size: 2.25rem; }
-.text-5xl { font-size: 3rem; }
-.font-bold { font-weight: 700; }
-.font-extrabold { font-weight: 800; }
-.flex { display: flex; }
-.hidden { display: none; }
-.block { display: block; }
-.grid { display: grid; }
-.items-center { align-items: center; }
-.justify-center { justify-content: center; }
-.justify-between { justify-content: space-between; }
-.flex-col { flex-direction: column; }
-.flex-wrap { flex-wrap: wrap; }
-.text-center { text-align: center; }
-.text-left { text-align: left; }
-.mx-auto { margin-left: auto; margin-right: auto; }
-.px-4 { padding-left: 1rem; padding-right: 1rem; }
-.px-6 { padding-left: 1.5rem; padding-right: 1.5rem; }
-.py-4 { padding-top: 1rem; padding-bottom: 1rem; }
-.py-8 { padding-top: 2rem; padding-bottom: 2rem; }
-.py-16 { padding-top: 4rem; padding-bottom: 4rem; }
-.py-24 { padding-top: 6rem; padding-bottom: 6rem; }
-.pt-16 { padding-top: 4rem; }
-.pt-24 { padding-top: 6rem; }
-.pb-8 { padding-bottom: 2rem; }
-.mt-2 { margin-top: 0.5rem; }
-.mt-6 { margin-top: 1.5rem; }
-.mt-8 { margin-top: 2rem; }
-.mt-10 { margin-top: 2.5rem; }
-.mb-3 { margin-bottom: 0.75rem; }
-.mb-4 { margin-bottom: 1rem; }
-.mb-6 { margin-bottom: 1.5rem; }
-.gap-4 { gap: 1rem; }
-.gap-8 { gap: 2rem; }
-.gap-12 { gap: 3rem; }
-.max-w-4xl { max-width: 56rem; }
-.max-w-6xl { max-width: 72rem; }
-.min-h-screen { min-height: 100vh; }
-.w-full { width: 100%; }
-.fixed { position: fixed; }
-.relative { position: relative; }
-.absolute { position: absolute; }
-.z-50 { z-index: 50; }
-.rounded-xl { border-radius: 0.75rem; }
-.rounded-2xl { border-radius: 1rem; }
-.rounded-3xl { border-radius: 1.5rem; }
-.overflow-hidden { overflow: hidden; }
-.shadow-lg { box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); }
-.leading-relaxed { line-height: 1.625; }
-.leading-tight { line-height: 1.25; }
-.transition { transition-property: all; transition-duration: 0.15s; }
-.inline-block { display: inline-block; }
-.inline-flex { display: inline-flex; }
-@media (min-width: 768px) {
-  .md\:flex { display: flex; }
-  .md\:hidden { display: none; }
-  .md\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .md\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  .md\:grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-  .md\:px-12 { padding-left: 3rem; padding-right: 3rem; }
-  .md\:text-3xl { font-size: 1.875rem; }
-  .md\:text-4xl { font-size: 2.25rem; }
-  .md\:text-5xl { font-size: 3rem; }
-  .md\:text-7xl { font-size: 4.5rem; }
-  .md\:w-1\/2 { width: 50%; }
-  .md\:flex-row { flex-direction: row; }
-  .md\:col-span-2 { grid-column: span 2; }
+/* wa-demo: utility CSS omitted */
+
+/* ── LANGUAGE SWITCHER BAR ── */
+#wa-topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 20px;
+  background: #f8f9fa;
+  border-bottom: 1px solid #dee2e6;
+  font-size: 12px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
-@media (min-width: 640px) {
-  .sm\:text-6xl { font-size: 3.75rem; }
-  .sm\:flex-row { flex-direction: row; }
+.wa-topbar-logo {
+  font-weight: 900;
+  font-size: 14px;
+  text-decoration: none;
+  letter-spacing: -0.5px;
 }
-/* === CLS FIX: Constrain all chevron/arrow/scroll SVGs === */
-.chevron, [class*="chevron"], [class*="arrow"], [class*="scroll"] svg,
-.swiper-button-next, .swiper-button-prev {
-  width: 40px !important; height: 40px !important;
-  max-width: 40px !important; max-height: 40px !important;
+.wa-topbar-links { display: flex; align-items: center; gap: 10px; }
+.wa-topbar-link {
+  color: #495057;
+  text-decoration: none;
+  padding: 3px 10px;
+  border: 1px solid #dee2e6;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 500;
+  transition: background 0.15s;
 }
-svg { max-width: 100%; height: auto; overflow: hidden; }
-svg:not([width]) { width: 24px; height: 24px; }
-/* Nav chevron SVGs: lock to exact inline dimensions */
-nav svg[width="16"][height="16"] { width: 16px !important; height: 16px !important; max-width: 16px !important; max-height: 16px !important; }
+.wa-topbar-link:hover { background: #e9ecef; }
+
+/* ── MOBILE NAV (hamburger for WA tabs) ── */
+#wa-mobile-toggle {
+  display: none;
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.35);
+  border-radius: 6px;
+  color: #fff;
+  cursor: pointer;
+  padding: 5px 9px;
+  font-size: 18px;
+  line-height: 1;
+}
+.nav-tabs-mobile-open { flex-direction: column !important; position: absolute !important;
+  top: 100% !important; left: 0 !important; right: 0 !important;
+  background: #075E54 !important; padding: 8px 16px 16px !important; gap: 6px !important;
+  z-index: 200 !important; }
+
+/* ── LEGAL FOOTER ── */
+.wa-footer {
+  text-align: center;
+  font-size: 11px;
+  color: #6c757d;
+  padding: 14px 20px;
+  border-top: 1px solid #e9ecef;
+  background: #fff;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  line-height: 1.7;
+}
+
+/* ── MOBILE LEAD TOGGLE ── */
+#mobile-lead-toggle {
+  display: none;
+  width: 100%;
+  padding: 10px 16px;
+  background: #f8f9fa;
+  border: none;
+  border-bottom: 1px solid #dee2e6;
+  font-size: 13px;
+  font-weight: 600;
+  color: #075E54;
+  cursor: pointer;
+  text-align: left;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  /* Nav tabs: stack on mobile */
+  .nav { position: relative; flex-wrap: wrap; height: auto !important; min-height: 52px; padding: 0 14px; }
+  .nav-brand { font-size: 14px; }
+  .nav-tabs { display: none; width: 100%; }
+  .nav-tabs.open { display: flex; flex-direction: column; gap: 6px; padding: 8px 0 14px; width: 100%; }
+  .nav-tab { width: 100%; text-align: center; border-radius: 8px; }
+  #wa-mobile-toggle { display: block; }
+
+  /* Layout: stack sidebar above chat */
+  .layout { grid-template-columns: 1fr !important; grid-template-rows: auto 1fr; height: auto !important; }
+  .sidebar { max-height: 220px; overflow-y: auto; display: none; }
+  .sidebar.open { display: block; }
+  #mobile-lead-toggle { display: block; }
+
+  /* Full height chat on mobile */
+  #tab-chat { height: calc(100vh - 52px) !important; flex-direction: column !important; }
+  #tab-chat .layout { height: 100% !important; grid-template-rows: auto 1fr; }
+  #tab-chat .layout > div:last-child { flex: 1; min-height: 0; }
+
+  /* Dashboard: 2-col KPI → 1-col */
+  .dash-grid { grid-template-columns: 1fr 1fr !important; gap: 10px !important; }
+  .dash-row { grid-template-columns: 1fr !important; gap: 10px !important; }
+
+  /* Messages don't overflow */
+  .msg { max-width: 90% !important; }
+
+  /* Quick replies wrap nicely */
+  .quick-replies { gap: 6px; }
+  .qr-btn { font-size: 12px; padding: 5px 10px; }
+
+  /* Chat header stack */
+  .chat-header { flex-wrap: wrap; gap: 8px; padding: 10px 14px; }
+  .chat-header-actions { width: 100%; display: flex; gap: 6px; }
+  .chat-header-actions .btn { flex: 1; text-align: center; font-size: 12px; }
+
+  .dashboard { padding: 14px; }
+  .appt-view { padding: 14px; }
+  .time-slots { grid-template-columns: 1fr 1fr !important; }
+}
+
+@media (max-width: 480px) {
+  .dash-grid { grid-template-columns: 1fr !important; }
+  .nav-brand { font-size: 13px; gap: 6px; }
+  .stat-value { font-size: 22px !important; }
+}
+
 </style></head>
 <body>
 <div id="fouc-overlay"></div>
 
-<nav class="nav" id="header">
+<!-- AI Profit Lab Topbar -->
+<div id="wa-topbar">
+  <a href="/" class="wa-topbar-logo" title="AI Profit Lab">
+    <span style="color:#3B82F6;">A</span><span style="color:#EF4444;">I</span><span style="color:#181c2e;"> Profit Lab</span>
+  </a>
+  <div class="wa-topbar-links">
+    <a href="/whatsapp-receptionist-demo/" class="wa-topbar-link">English</a>
+    <a href="/" class="wa-topbar-link">العودة إلى الموقع →</a>
+  </div>
+</div>
+
+<nav class="nav" id="wa-nav">
 <div class="nav-brand">
 <a href="/" style="color:#fff; text-decoration:none; display:flex; align-items:center; gap: 8px; margin-right: 15px; border-right: 1px solid rgba(255,255,255,0.3); padding-right: 15px;">
 <span style="font-weight:900; letter-spacing:-0.5px;"><span style="color:#3B82F6;">A</span><span style="color:#EF4444;">I</span> Profit Lab</span>
@@ -370,13 +341,13 @@ nav svg[width="16"][height="16"] { width: 16px !important; height: 16px !importa
     العقارات AI &mdash; مساعد واتساب
     <span class="nav-badge">مباشر</span>
 </div>
+<button id="wa-mobile-toggle" aria-label="Toggle navigation">☰</button>
 <div class="nav-tabs">
 <button class="nav-tab active" onclick="switchTab('chat')">المحادثات</button>
 <button class="nav-tab" onclick="switchTab('dashboard')">لوحة التحكم</button>
 <button class="nav-tab" onclick="switchTab('appointments')">المواعيد</button>
 </div>
 </nav>
-<main id="main-content">
 <!-- CHAT TAB -->
 <div class="tab-content active" id="tab-chat">
 <div class="layout" style="width:100%; height:100%;">
@@ -386,7 +357,7 @@ nav svg[width="16"][height="16"] { width: 16px !important; height: 16px !importa
 <h1>العملاء النشطون</h1>
 <span class="lead-count">6</span>
 </div>
-<div id="lead-list"></div>
+<button id="mobile-lead-toggle">▼ Show Leads (6)</button><div id="lead-list"></div>
 </div>
 <!-- Chat + panel -->
 <div style="display:flex; flex-direction:column; height:100%; overflow:hidden; flex:1;">
@@ -736,7 +707,7 @@ function showLeadPanel() {
   const scoreColor = activeLead.score > 75 ? '#25D366' : activeLead.score > 50 ? '#ffc107' : '#6c757d';
   const panel = document.createElement('div');
   panel.id = 'lead-panel-modal';
-  panel.style.cssText = 'position:fixed;top:56px;right:0;width:320px;height:calc(100vh - 56px);background:#f8f9fa;border-left:1px solid #e9ecef;overflow-y:auto;z-index:100;';
+  panel.style.cssText = 'position:fixed;top:90px;right:0;width:320px;height:calc(100vh - 90px);background:#f8f9fa;border-left:1px solid #e9ecef;overflow-y:auto;z-index:100;';
   panel.innerHTML = `
     <div style="padding:16px;background:#fff;border-bottom:1px solid #e9ecef;display:flex;justify-content:space-between;align-items:center;">
       <span style="font-weight:600;font-size:14px;">ملف العميل</span>
@@ -795,7 +766,6 @@ renderLeadList();
 selectLead('sara');
 buildCalendar();
 </script>
-</main>
 <script defer src="/js/main.js"></script>
 
 
@@ -822,5 +792,37 @@ buildCalendar();
   })();
 </script>
 
+<footer class="wa-footer" dir="rtl">
+  © ٢٠٢٥ AI Profit Lab — علامة تجارية لشركة International Gulf Lotus SPC • جميع الحقوق محفوظة<br>
+  <small>هذه نسخة تجريبية تفاعلية. البيانات المعروضة للتوضيح فقط.</small>
+</footer>
+<script>
+/* ── WA DEMO MOBILE JS ── */
+(function(){
+  // Tab nav hamburger
+  var toggle = document.getElementById('wa-mobile-toggle');
+  var tabs = document.querySelector('.nav-tabs');
+  if (toggle && tabs) {
+    toggle.addEventListener('click', function() {
+      tabs.classList.toggle('open');
+    });
+    // Close after tab click
+    tabs.querySelectorAll('.nav-tab').forEach(function(t) {
+      t.addEventListener('click', function() { tabs.classList.remove('open'); });
+    });
+  }
+
+  // Lead sidebar mobile toggle
+  var leadToggle = document.getElementById('mobile-lead-toggle');
+  var sidebar = document.querySelector('.sidebar');
+  if (leadToggle && sidebar) {
+    leadToggle.addEventListener('click', function() {
+      sidebar.classList.toggle('open');
+      leadToggle.textContent = sidebar.classList.contains('open')
+        ? '▲ Hide Leads' : '▼ Show Leads (6)';
+    });
+  }
+})();
+</script>
 </body>
 </html>
