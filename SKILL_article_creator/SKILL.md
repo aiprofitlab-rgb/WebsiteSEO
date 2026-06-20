@@ -10,29 +10,69 @@ This skill automates the end-to-end creation of high-quality, story-driven, full
 When the user asks you to write an article for a given keyword/topic, follow these steps exactly:
 
 ## Step 1: Research and Outline
-- **Transform H2 Headers into Questions**: Transform all `<h2>` headers into specific business questions.
-- **Direct Answers**: Write a concise, 40-word direct answer immediately below each `<h2>`.
-- **Factual Density**: Eliminate adjectives (e.g., "amazing", "incredible") and replace with hard data (e.g., "30% increase"). AI prioritizes data over fluff. When discussing boosting ROI, back it up.
-- **Data Tables**: Add HTML Data Tables within the content showing ROI, time savings, or tool comparisons or .
-- **High-Authority Links**: Link out to high-authority tech docs (e.g., OpenAI docs, Omani Gov Tech portals, strong news) whenever it is related.
-- **Internal Links**: Each article should be linked to other website pages only if it seems natural, not deliberately forced. Ensure all internal links point to the clean URL version.
-- The article must be a rich, highly SEO-friendly article between 800 to 1000 words long.
-- **External Links & References**: Each article MUST have links to outside source(s) in the text, and you must mention all those references at the end in the References section, linking them to the source. Verify that references exist and are not broken.
-- Generate an extensive FAQ section at the end containing AT LEAST 10 Frequently Asked Questions. These should be questions that people in Oman and the GCC actually ask about the subject from LLMs.
-- Designate a hero image concept that matches the futuristic, semi-realistic AI vibe of the other articles. Add Alt Text for all images describing its value to the brand (e.g., "[Image Name] - Empowering AI Solutions by AI Profit Lab to scale your business operations." for English, and "[Image Name] - حلول الذكاء الاصطناعي المبتكرة من AI Profit Lab لتطوير أعمالك." for Arabic).
-- **SEO & GEO Friendliness**: Every article must be optimized for search engines and localized for the **Oman/GCC market**. Generate energetic, unique Meta Descriptions (under 150 chars) starting with "Supercharge your business with [Title]" for English, and "ارتقِ بعملك مع [Title]" for Arabic. Include local keywords (e.g., "Muscat", "Oman Vision 2040", "GCC Business Automation") and ensure all meta tags, structured data, and content reflect this regional focus.
-- **Forum Snippet**: Generate a short promotional snippet (or pitch) for a local GCC business forum at the end of the generation process, related to the article topic.
+To ensure all generated articles achieve a **STRONG** rating under the quality audit suite, you must strictly satisfy all the following criteria during the research and outlining phase:
+
+1. **Title & H1 Match (Strength and Specifics)**:
+   - The `<title>` tag and the main `<h1>` tag inside the body must be identical (or the title must start with the first 30 characters of the H1).
+   - The title must NOT be generic (e.g. avoid patterns like "supercharge your business", "ai for business", "unlock the power of ai", "revolutionize your", "transform your business", "take your business to the next level").
+   - The title must contain a specific number, location, or outcome (e.g. including Muscat, Oman, GCC, or outcomes/topics like "how to", "why", "cost", "roi", "guide", "free", "best", "top").
+   - Title tag length must be >20 characters.
+
+2. **Opening Hook (No Self-Promotion)**:
+   - The first paragraph (first 100 words of the body) must NOT be self-promotional. It must NOT contain phrases like "we are", "we provide", "our company", "ai profit lab is", "welcome to", or "at ai profit lab".
+   - The hook must speak directly to the reader's business problems, pain points, or questions.
+
+3. **Word Count & Depth**:
+   - The main body text (visible text inside the `<article>` tag, excluding navigation, header, footer, references, and schema) must be between **900 to 1200 words** to guarantee depth.
+   - The text must contain at least **3+ concrete examples, step-by-step guides, or specific data points/numbers** (e.g. specific OMR/USD pricing, % growth, hours/days saved).
+
+4. **GCC / Oman Local Relevance**:
+   - You must weave in at least **3+ unique local GCC or Oman references** (from keywords like Muscat, Oman, GCC, UAE, Saudi, Vision 2040, Omani PDPL, Sohar, Salalah, Royal Decree, Omantel, Ma'een, otech, etc.) naturally in the body text (do not limit them only to the title).
+
+5. **Structured for LLM Citation (LLM SEO)**:
+   - Every article must contain at least **3+ `<h2>` subheadings** structured as questions.
+   - Immediately below each `<h2>`, write a concise, direct answer (~40 words) in an "X is Y" or "To do X, you need Y" format.
+   - The article body must contain at least **1 statistic/percentage/number** (using %, percent, OMR, USD, Rial, hours, days, etc.).
+
+6. **Call to Action (CTA) Card**:
+   - Every article must end with a styled glassmorphism CTA card encouraging readers to book an audit or consultation.
+   - **CRITICAL:** The CTA block must be placed **inside the `<article>` tag**, right before the FAQ section, or before the closing `</article>` tag. This is because the quality auditor only parses text within the `<article>` tag, and the CTA must fall within the last 200 words of the parsed article body.
+   - The CTA must have a clickable link (English: `/en/contact-en/`, Arabic: `/contact/`) and a strong action verb (e.g., "Book a Free 30-Minute AI Consultation").
+
+7. **SEO Meta Description (CRITICAL)**:
+   - Write unique meta descriptions that strictly follow these rules:
+     - **140–155 characters exactly** in length.
+     - Must include a specific business pain point or question the article answers.
+     - Must include at least one GCC or Oman reference.
+     - Must end with a concrete benefit or outcome.
+     - Must **NOT** start with "AI Profit Lab", "Learn how", "Discover", or "Supercharge your business with".
+     - Must be a complete sentence (no cut-offs).
+     - *Arabic Version Meta Rules:* Must start with a specific regional business pain point (e.g., "هل تعاني من...") and be between 140–155 characters, ending with a clear benefit.
+
+8. **FAQ Section**:
+   - Generate an extensive FAQ section at the end of the article containing **exactly 10 Frequently Asked Questions** that people in Oman and the GCC actually ask about the subject.
+
+9. **Duplicate Prevention**:
+   - Ensure the new article has a unique strategic angle to avoid overlapping more than 30% Jaccard similarity with existing articles.
+
+10. **JSON-LD Schema Markup**:
+    - Embedded JSON-LD schema in `<head>` must include the article's `Article` data, the `FAQPage` data with all 10 FAQs, and `Organization` details.
+    - Ensure the Organization schema and LocalBusiness/ProfessionalService schema have the correct properties:
+      - `name`: "AI Profit Lab"
+      - `legalName`: "International Gulf Lotus SPC"
+      - `url`: "https://aiprofitlab.io"
+
+11. **Legal Footer Copyright**:
+    - English: `© 2025 AI Profit Lab — a brand of International Gulf Lotus SPC • All Rights Reserved`
+    - Arabic: `© ٢٠٢٥ AI Profit Lab — علامة تجارية لشركة International Gulf Lotus SPC • جميع الحقوق محفوظة`
 
 ## Step 2: Generate the English Version
-Draft the English article content. Then wrap it in the exact HTML structure expected for the blog. Ensure it follows the dark-mode glassmorphism style.
-Ensure you strictly populate the embedded JSON-LD Schema Markup in the `<head>` with the article's specific `Article` data, the 10+ `FAQPage` data, and the `Organization` details, as AI search engines prioritize highly structured schema paths.
-In the navbar, ensure the logo is identical to the one on the blog page. For the English version, the logo is linked to the English home page (`/en/`), and the "Back to Hub" button in the header is linked to the English blog (`/blog/`).
+Draft the English article content. Wrap it in the exact HTML structure expected for the blog. Ensure it follows the dark-mode glassmorphism style.
 Save it to: `public_html/blog/en/YYYY-MM-DD-[slug-title].html` (use the current date).
 
 ## Step 3: Generate the Arabic Version
 Translate and adapt the article into Arabic. Make sure the tone remains professional and culturally relevant for the GCC/Oman market.
 Set `lang="ar"` and `dir="rtl"`.
-In the navbar, change "Back to Hub" to "العودة إلى المدونة" and link to the Arabic blog (`/blog-ar/`). Also, ensure the logo in the Arabic version is identical to the English one but retains `dir="ltr"` to display correctly, and links to the Arabic home page (`/`).
 Save it to: `public_html/blog/ar/YYYY-MM-DD-[slug-title-in-english].html`.
 
 ## Step 4: Generate the Image
@@ -41,79 +81,23 @@ Save the generated image to: `public_html/blog/images/[image_name].png`. Make su
 
 ## Step 5: Update the Blog Hub
 After generating and saving the images and HTML files, use your `run_command` tool to execute the python script that automatically updates the hub pages with the new content:
-`python3 update_blog_hubs.py` (run this from the `Website SEO` directory or use `python3 "Website SEO/update_blog_hubs.py"` relative to your current workspace root).
+`python3 update_blog_hubs.py` (run this from the `Website SEO` directory).
 
 ## Step 6: Regenerate the Sitemap
-After the blog hub is updated, **always** regenerate the `sitemap.xml` by running the following inline Python script from the `public_html` directory. This ensures all new English and Arabic article pages are properly indexed by search engines with accurate `lastmod` dates.
-
+After the blog hub is updated, **always** regenerate the `sitemap.xml` by running the following inline Python script from the `public_html` directory:
 ```bash
-python3 -c "
-import os, datetime
-
-base_dir = '.'
-base_url = 'https://aiprofitlab.io'
-priority_map = {
-    'index.html_root': '1.0',
-    'root': '0.8',
-    'blog_hub': '0.8',
-    'blog_article': '0.6',
-    'academy': '0.6',
-    'other': '0.7',
-}
-
-urls = []
-for root, dirs, files in os.walk(base_dir):
-    dirs[:] = [d for d in dirs if d not in ['.git', 'assets', 'js', 'images']]
-    for file in files:
-        if not file.endswith('.html') or file in ['test.html']:
-            continue
-        file_path = os.path.join(root, file)
-        rel_path = os.path.relpath(file_path, base_dir).replace(os.sep, '/')
-        mtime = os.path.getmtime(file_path)
-        lastmod = datetime.datetime.fromtimestamp(mtime).strftime('%Y-%m-%d')
-
-        if file == 'index.html':
-            dir_part = os.path.dirname(rel_path)
-            url = base_url + '/' + (dir_part + '/' if dir_part and dir_part != '.' else '')
-            priority = '1.0' if dir_part in ['', '.'] else '0.8'
-        else:
-            slug = rel_path[:-5]  # strip .html
-            url = base_url + '/' + slug + '/'
-            if '/blog/en/' in url or '/blog/ar/' in url:
-                priority = '0.6'
-            elif '/blog' in url or '/academy' in url:
-                priority = '0.8'
-            else:
-                priority = '0.7'
-
-        url = url.replace('//', '/').replace('https:/', 'https://')
-        urls.append({'loc': url, 'lastmod': lastmod, 'changefreq': 'weekly', 'priority': priority})
-
-urls.sort(key=lambda x: x['loc'])
-xml = '<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\" xmlns:xhtml=\"http://www.w3.org/1999/xhtml\">\n'
-for u in urls:
-    xml += f'  <url>\n    <loc>{u[\"loc\"]}</loc>\n    <lastmod>{u[\"lastmod\"]}</lastmod>\n    <changefreq>{u[\"changefreq\"]}</changefreq>\n    <priority>{u[\"priority\"]}</priority>\n  </url>\n'
-xml += '</urlset>'
-with open('sitemap.xml', 'w', encoding='utf-8') as f:
-    f.write(xml)
-print(f'sitemap.xml updated — {len(urls)} URLs indexed.')
-"
+cd "Website SEO/public_html" && python3 generate_sitemap.py
 ```
-
-Run this from the `public_html` directory:
-```bash
-cd "Website SEO/public_html" && python3 -c "[above script]"
-```
-Or use the equivalent `run_command` invocation. After running, confirm the output shows the updated URL count.
+Or use the sitemap command. Confirm that sitemap output shows the updated URL count.
 
 ---
 
 ## HTML Template Requirements
-Whenever you generate the files, use the following HTML template. Do NOT deviate from this structure, as it maintains the site's dark-mode glassmorphism design:
 
+### 1. English HTML Template
 ```html
 <!DOCTYPE html>
-<html lang="en" dir="ltr"> <!-- Change to ar and rtl for Arabic -->
+<html lang="en" dir="ltr">
 <head>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-2GPVY4Z5KR"></script>
@@ -121,16 +105,15 @@ Whenever you generate the files, use the following HTML template. Do NOT deviate
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-
       gtag('config', 'G-2GPVY4Z5KR');
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="category" content="[Category]">
-    <title>[SEO Title] | AI Profit Lab</title>
-    <meta name="description" content="[Energetic, unique SEO Description starting with 'Supercharge your business with [Title]...' (max 150 chars)]"> <!-- Note: For Arabic use 'ارتقِ بعملك مع [Title]...' -->
+    <title>[SEO Title matching H1] | AI Profit Lab</title>
+    <meta name="description" content="[140-155 chars unique description: start with pain point, include GCC/Oman ref, end with outcome, no forbidden start words]">
     <meta name="keywords" content="[SEO Keywords]">
-    <link rel="canonical" href="https://aiprofitlab.io/blog/en/YYYY-MM-DD-[slug-title]/"> <!-- Note: Update path for Arabic: /blog/ar/... -->
+    <link rel="canonical" href="https://aiprofitlab.io/blog/en/YYYY-MM-DD-[slug-title]/">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="apple-touch-icon" href="/favicon.svg">
     
@@ -143,6 +126,7 @@ Whenever you generate the files, use the following HTML template. Do NOT deviate
           "@type": "Organization",
           "@id": "https://aiprofitlab.io/#organization",
           "name": "AI Profit Lab",
+          "legalName": "International Gulf Lotus SPC",
           "url": "https://aiprofitlab.io/",
           "logo": {
             "@type": "ImageObject",
@@ -152,7 +136,7 @@ Whenever you generate the files, use the following HTML template. Do NOT deviate
         {
           "@type": "Article",
           "headline": "[SEO Title]",
-          "description": "[SEO Description]",
+          "description": "[140-155 chars unique description]",
           "image": "https://aiprofitlab.io/blog/images/[image_name].png",
           "author": {
             "@type": "Organization",
@@ -174,7 +158,7 @@ Whenever you generate the files, use the following HTML template. Do NOT deviate
                 "text": "[Answer 1]"
               }
             }
-            // Generate for ALL 10+ FAQs sequentially
+            // Generate for ALL 10 FAQs sequentially
           ]
         }
       ]
@@ -195,84 +179,48 @@ Whenever you generate the files, use the following HTML template. Do NOT deviate
         .prose strong { color: #F3F4F6; }
         .prose blockquote { border-left: 4px solid #3B82F6; padding-left: 1rem; font-style: italic; color: #9CA3AF; margin-left: 0; }
     </style>
-    <!-- Local Business Schema -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "ProfessionalService",
-      "name": "AI Profit Lab",
-      "legalName": "International Gulf Lotus SPC",
-      "url": "https://aiprofitlab.io",
-      "logo": "https://aiprofitlab.io/logo.webp",
-      "image": "https://aiprofitlab.io/nahid-business-banner.png",
-      "description": "Helping non-technical managers leverage AI, automation, and technology to increase ROI and business efficiency.",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "Al Seeb",
-        "addressLocality": "Muscat",
-        "addressRegion": "Muscat Governorate",
-        "postalCode": "000",
-        "addressCountry": "OM"
-      },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": 23.635950490475295, 
-        "longitude": 58.207628165445385
-      },
-      "contactPoint": {
-        "@type": "ContactPoint",
-        "telephone": "+968-99245250",
-        "contactType": "customer service",
-        "areaServed": "GCC",
-        "availableLanguage": ["en", "ar"]
-      },
-      "sameAs": [
-        "https://www.youtube.com/@AI_for_Managers",
-        "https://www.linkedin.com/in/nahid-aby"
-      ]
-    }
-    </script>
 </head>
 <body class="antialiased">
-    <!-- Navigation -->
     <nav class="flex justify-between items-center px-6 md:px-12 py-8 w-full z-50 glass sticky top-0 bg-black/30" id="header">
         <a href="/en/" class="font-extrabold text-3xl md:text-4xl tracking-tighter hover:opacity-80 transition logo-font">
             <span class="text-blue-500">A</span><span class="text-red-500">I</span> <span class="text-white text-2xl md:text-3xl">Profit Lab</span>
         </a>
         <a href="/blog/" class="text-gray-300 hover:text-white font-semibold transition">Back to Hub</a>
-    </nav> <!-- Note: For ARABIC, update Logo link to "/" with dir="ltr", and "Back to Hub" to "العودة إلى المدونة" linking to "/blog-ar/". -->
+    </nav>
 
-    <!-- Main Content -->
     <main class="max-w-4xl mx-auto px-6 py-16">
         <article>
-            <div class="mb-12 text-center text-right-ar"> <!-- Use appropriate text-align for rtl reading -->
+            <div class="mb-12 text-center">
                 <span class="bg-blue-500/10 text-blue-400 text-sm font-bold px-4 py-2 rounded-full border border-blue-500/20 mb-6 inline-block">[Category]</span>
-                <h1 class="text-4xl md:text-6xl font-extrabold mb-6 leading-tight">[Article Title]</h1>
+                <h1 class="text-4xl md:text-6xl font-extrabold mb-6 leading-tight">[Article Title matching SEO Title]</h1>
                 <p class="text-xl text-gray-400 max-w-2xl mx-auto">[Subtitle / Hook]</p>
             </div>
 
-            <img src="/blog/images/[image_name].png" alt="[Image Name] - Empowering AI Solutions by AI Profit Lab to scale your business operations." class="w-full rounded-3xl mb-16 shadow-[0_0_50px_rgba(59,130,246,0.15)] border border-white/5 object-cover h-[500px]"> <!-- Note: For Arabic Alt use '[Image Name] - حلول الذكاء الاصطناعي المبتكرة من AI Profit Lab لتطوير أعمالك.' -->
+            <img src="/blog/images/[image_name].png" alt="[image_name] - Empowering AI Solutions by AI Profit Lab to scale your business operations." class="w-full rounded-3xl mb-16 shadow-[0_0_50px_rgba(59,130,246,0.15)] border border-white/5 object-cover h-[500px]">
 
             <div class="prose max-w-none">
-                [PARAGRAPHS, HEADINGS, BLOCKQUOTES. MUST BE 800 TO 1000 WORDS TOTAL, USING STORYTELLING NARRATIVE]
+                [PARAGRAPHS, HEADINGS, BLOCKQUOTES]
             </div>
 
-            <!-- FAQ Section ( MUST CONTAIN AT LEAST 10 FAQs optimized for AI Search / LLMs ) -->
+            <!-- CTA Block (MUST be inside <article> at the very end to pass word analysis) -->
+            <div class="glass-card rounded-2xl p-8 mt-12 mb-8 text-center border-blue-500/30 border">
+                <h3 class="text-2xl font-bold text-white mb-4">Ready to Automate Your Business Operations?</h3>
+                <p class="text-gray-300 mb-6">AI Profit Lab helps non-technical managers in Oman and the GCC deploy custom AI solutions, automated customer service systems, and real-time dashboards to slash overhead costs and eliminate manual busywork.</p>
+                <a class="inline-block bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 px-8 rounded-full transition shadow-[0_0_15px_rgba(37,99,235,0.5)]" href="/en/contact-en/">Book a Free 30-Minute AI Consultation</a>
+            </div>
+
             <section class="mt-16 pt-8 border-t border-white/10" id="faq">
                 <h2 class="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-cyan-400 mb-8">Frequently Asked Questions</h2>
                 <div class="space-y-6">
-                    <!-- Repeat this glass-card block at least 10 times -->
                     <div class="glass-card rounded-2xl p-6">
                         <h3 class="text-lg font-bold text-white mb-2">[Question 1]</h3>
                         <p class="text-gray-400 mb-0">[Answer 1]</p>
                     </div>
-                    <!-- ... -->
                 </div>
             </section>
 
             <hr class="border-gray-800 my-10">
 
-            <!-- References -->
             <div class="mt-8">
                 <h3 class="text-xl font-bold mb-4 text-white">References</h3>
                 <ul class="list-disc list-inside text-gray-500 space-y-2 text-sm max-w-full overflow-hidden">
@@ -282,10 +230,151 @@ Whenever you generate the files, use the following HTML template. Do NOT deviate
         </article>
     </main>
 
-    <!-- Footer -->
-    <footer class="py-8 border-t border-gray-900 text-center text-sm text-gray-600">
-        © 2025 <span class="text-blue-500">A</span><span class="text-red-500">I</span> Profit Lab — a brand of International Gulf Lotus SPC • All Rights Reserved
-    </footer> <!-- Note: For ARABIC, use: © ٢٠٢٥ AI Profit Lab — علامة تجارية لشركة International Gulf Lotus SPC • جميع الحقوق محفوظة -->
+    <footer class="border-t border-white/10 bg-black py-8 text-center text-gray-500 text-sm mt-auto">
+        <p>© 2025 <span class="text-blue-500">A</span><span class="text-red-500">I</span> Profit Lab — a brand of International Gulf Lotus SPC • All Rights Reserved</p>
+    </footer>
+</body>
+</html>
+```
+
+### 2. Arabic HTML Template
+```html
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-2GPVY4Z5KR"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-2GPVY4Z5KR');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="category" content="[Category in Arabic]">
+    <title>[SEO Title in Arabic matching H1] | AI Profit Lab</title>
+    <meta name="description" content="[140-155 chars unique description: start with regional pain point 'هل تعاني من...', include GCC/Oman ref, end with outcome, no forbidden start words]">
+    <meta name="keywords" content="[SEO Keywords in Arabic and English]">
+    <link rel="canonical" href="https://aiprofitlab.io/blog/ar/YYYY-MM-DD-[slug-title-in-english]/">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="apple-touch-icon" href="/favicon.svg">
+    
+    <!-- JSON-LD Schema Markup -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": "https://aiprofitlab.io/#organization",
+          "name": "AI Profit Lab",
+          "legalName": "International Gulf Lotus SPC",
+          "url": "https://aiprofitlab.io/",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://aiprofitlab.io/favicon.svg"
+          }
+        },
+        {
+          "@type": "Article",
+          "headline": "[SEO Title in Arabic]",
+          "description": "[140-155 chars unique description in Arabic]",
+          "image": "https://aiprofitlab.io/blog/images/[image_name].png",
+          "author": {
+            "@type": "Organization",
+            "name": "AI Profit Lab"
+          },
+          "publisher": {
+            "@id": "https://aiprofitlab.io/#organization"
+          },
+          "datePublished": "YYYY-MM-DD"
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "[Question 1 in Arabic]",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "[Answer 1 in Arabic]"
+              }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Outfit', sans-serif; background-color: #050505; color: #ffffff; text-align: right; }
+        .logo-font { font-family: 'Outfit', sans-serif !important; }
+        .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.05); }
+        .glass-card { background: rgba(255, 255, 255, 0.02); backdrop-filter: blur(8px); border: 1px solid rgba(255, 255, 255, 0.05); transition: all 0.3s ease; }
+        .glass-card:hover { border-color: #3B82F6; transform: translateY(-5px); box-shadow: 0 20px 40px rgba(59, 130, 246, 0.1); }
+        .prose h2 { color: #60A5FA; margin-top: 2.5em; margin-bottom: 1em; font-weight: 800; font-size: 1.875rem; }
+        .prose h3 { color: #93C5FD; margin-top: 2em; margin-bottom: 1em; font-weight: 700; font-size: 1.5rem; }
+        .prose p { margin-bottom: 1.5em; line-height: 1.8; color: #D1D5DB; }
+        .prose strong { color: #F3F4F6; }
+        .prose blockquote { border-right: 4px solid #3B82F6; border-left: none; padding-right: 1rem; padding-left: 0; font-style: italic; color: #9CA3AF; margin-right: 0; }
+        .text-right-ar { text-align: right; }
+    </style>
+</head>
+<body class="antialiased">
+    <nav class="flex justify-between items-center px-6 md:px-12 py-8 w-full z-50 glass sticky top-0 bg-black/30" id="header" dir="ltr">
+        <a href="/" class="font-extrabold text-3xl md:text-4xl tracking-tighter hover:opacity-80 transition logo-font">
+            <span class="text-blue-500">A</span><span class="text-red-500">I</span> <span class="text-white text-2xl md:text-3xl">Profit Lab</span>
+        </a>
+        <a href="/blog-ar/" class="text-gray-300 hover:text-white font-semibold transition" dir="rtl">العودة إلى المدونة</a>
+    </nav>
+
+    <main class="max-w-4xl mx-auto px-6 py-16">
+        <article>
+            <div class="mb-12 text-center text-right-ar">
+                <span class="bg-blue-500/10 text-blue-400 text-sm font-bold px-4 py-2 rounded-full border border-blue-500/20 mb-6 inline-block">[Category in Arabic]</span>
+                <h1 class="text-4xl md:text-6xl font-extrabold mb-6 leading-tight">[Article Title in Arabic matching SEO Title]</h1>
+                <p class="text-xl text-gray-400 max-w-2xl mx-auto">[Subtitle / Hook in Arabic]</p>
+            </div>
+
+            <img src="/blog/images/[image_name].png" alt="[image_name] - حلول الذكاء الاصطناعي المبتكرة من AI Profit Lab لتطوير أعمالك." class="w-full rounded-3xl mb-16 shadow-[0_0_50px_rgba(59,130,246,0.15)] border border-white/5 object-cover h-[500px]">
+
+            <div class="prose max-w-none text-right-ar">
+                [PARAGRAPHS, HEADINGS, BLOCKQUOTES IN ARABIC]
+            </div>
+
+            <div class="glass-card rounded-2xl p-8 mt-12 mb-8 text-center border-blue-500/30 border">
+                <h3 class="text-2xl font-bold text-white mb-4">هل أنت مستعد لأتمتة عمليات شركتك؟</h3>
+                <p class="text-gray-300 mb-6">تساعد AI Profit Lab المديرين غير التقنيين في عُمان ودول الخليج على نشر حلول الذكاء الاصطناعي المخصصة، وأنظمة خدمة العملاء المؤتمتة، ولوحات المعلومات الفورية لتقليل النفقات العامة والتخلص من المهام اليدوية المكررة.</p>
+                <a class="inline-block bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 px-8 rounded-full transition shadow-[0_0_15px_rgba(37,99,235,0.5)]" href="/contact/">احجز استشارة مجانية في الذكاء الاصطناعي لمدة 30 دقيقة</a>
+            </div>
+
+            <section class="mt-16 pt-8 border-t border-white/10" id="faq">
+                <h2 class="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-cyan-400 mb-8">الأسئلة الشائعة</h2>
+                <div class="space-y-6">
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">[Question 1 in Arabic]</h3>
+                        <p class="text-gray-400 mb-0">[Answer 1 in Arabic]</p>
+                    </div>
+                </div>
+            </section>
+
+            <hr class="border-gray-800 my-10">
+
+            <div class="mt-8">
+                <h3 class="text-xl font-bold mb-4 text-white">المراجع</h3>
+                <ul class="list-disc list-inside text-gray-500 space-y-2 text-sm max-w-full overflow-hidden">
+                    <li><a href="[URL]" class="hover:text-blue-400 break-words" target="_blank">[Reference Citation in Arabic]</a></li>
+                </ul>
+            </div>
+        </article>
+    </main>
+
+    <footer class="border-t border-white/10 bg-black py-8 text-center text-gray-500 text-sm mt-auto">
+        <p>© ٢٠٢٥ <span class="text-blue-500">A</span><span class="text-red-500">I</span> Profit Lab — علامة تجارية لشركة International Gulf Lotus SPC • جميع الحقوق محفوظة</p>
+    </footer>
 </body>
 </html>
 ```
