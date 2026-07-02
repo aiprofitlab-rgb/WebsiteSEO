@@ -1,7 +1,7 @@
 import sys
 
-src = "/Users/nahid/.gemini/antigravity-ide/brain/c4b665a4-65c8-41db-b224-14ab98a36cb2/whatsapp_ai_receptionist_timeline_1782886512382.png"
-dst = "/Users/nahid/Desktop/Nahid/AI Profit Lab/Website/Website SEO/public_html/blog/images/whatsapp_ai_receptionist_timeline.png"
+src = "/Users/nahid/.gemini/antigravity-ide/brain/4ea40db2-e2ca-4522-8ddf-29dc21e66dc7/ai_automation_scams_gcc_1782965793935.png"
+dst = "/Users/nahid/Desktop/Nahid/AI Profit Lab/Website/Website SEO/public_html/blog/images/ai_automation_scams_gcc.png"
 try:
     with open(src, 'rb') as fsrc:
         with open(dst, 'wb') as fdst:
