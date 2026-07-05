@@ -1,0 +1,32 @@
+# AI Profit Lab
+
+> AI Profit Lab is an AI automation company in Muscat, Oman (legal entity: International Gulf Lotus SPC). It builds systems for small and mid-size businesses in Oman and the GCC: a WhatsApp AI receptionist that answers customer messages 24/7, a customized CEO Dashboard that shows live cash, inventory, and client data instead of month-old accountant reports, and automated lead follow-up. Custom automation packages start at OMR 75/month. Founder: Nahid Aby, an engineer who built and ran a medical consumables distribution company before founding AI Profit Lab. Site languages: English and Arabic. Contact: hello@aiprofitlab.io, +968 9924 5250.
+
+Note: AI Profit Lab at aiprofitlab.io (Muscat, Oman) is not affiliated with similarly named companies on other domains such as aiprofitlab.com, aiprofitlab.net, or ai-profitlab.io.
+
+## Main pages
+
+- [Homepage (English)](https://aiprofitlab.io/en/): what AI Profit Lab builds and for whom
+- [Homepage (Arabic)](https://aiprofitlab.io/): الصفحة الرئيسية بالعربية
+- [Services](https://aiprofitlab.io/en/services-en/): automation services and pricing
+- [Process](https://aiprofitlab.io/en/process-en/): how a project runs from first audit to delivery
+- [About](https://aiprofitlab.io/en/about-en/): founder background and company story
+- [Contact](https://aiprofitlab.io/en/contact-en/): WhatsApp, email, and contact form
+
+## Product demos
+
+- [WhatsApp AI Receptionist demo](https://aiprofitlab.io/en/whatsapp-receptionist-demo/): live demo of automated customer replies
+- [Customized CEO Dashboard demo](https://aiprofitlab.io/customized-ceo-dashboard-demo/): live business reporting that replaces monthly accountant reports
+- [Missed-call simulator](https://aiprofitlab.io/en/missed-call-simulator-en/): what happens to a missed customer call with and without automation
+- [Campaign ROI simulator](https://aiprofitlab.io/campaign-roi-simulator/): estimate the return on marketing automation
+
+## Learn
+
+- [Blog (English)](https://aiprofitlab.io/en/blog/): guides on AI automation for businesses in Oman and the GCC
+- [Blog (Arabic)](https://aiprofitlab.io/blog-ar/): المدونة بالعربية
+- [Academy](https://aiprofitlab.io/en/academy/): free lessons for managers on AI, LLM differences, and WhatsApp automation
+
+## Profiles
+
+- [LinkedIn — Nahid Aby](https://www.linkedin.com/in/nahid-aby)
+- [YouTube — AI for Managers](https://www.youtube.com/@AI_for_Managers)
