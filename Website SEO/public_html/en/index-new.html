@@ -145,19 +145,19 @@ nav{position:sticky;top:0;z-index:50;background:rgba(241,239,232,.92);backdrop-f
 .hero-trust{font-family:var(--mono);font-size:.74rem;letter-spacing:.06em;color:rgba(241,239,232,.55);margin-top:26px}
 
 /* hero evidence collage */
-.evidence{position:relative;min-height:560px}
+.evidence{position:relative;min-height:700px}
 .arch{width:min(320px,78%);margin-left:auto;background:var(--cream);padding:10px;border-radius:999px 999px 14px 14px;box-shadow:0 30px 60px -25px rgba(0,0,0,.45)}
 .arch img{width:100%;height:auto;aspect-ratio:4/5.4;object-fit:cover;object-position:top center;border-radius:989px 989px 8px 8px}
 .name-tag{position:absolute;top:18px;right:-14px;background:var(--cream);color:var(--teal-900);font-family:var(--mono);font-size:.64rem;letter-spacing:.1em;padding:9px 14px;border-radius:8px;box-shadow:0 12px 24px -10px rgba(0,0,0,.4)}
 .ticket{position:absolute;background:var(--white);color:var(--ink);border-radius:12px;box-shadow:0 24px 48px -20px rgba(0,0,0,.5);padding:16px 18px;font-size:.83rem;line-height:1.5}
 .ticket .tk-label{font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;display:flex;justify-content:space-between;gap:12px}
-.tk-chat{left:-30px;bottom:150px;width:290px;animation:rise .7s ease .5s both}
+.tk-chat{left:-30px;top:295px;width:290px;animation:rise .7s ease .5s both}
 .bubble{border-radius:10px;padding:9px 12px;margin-bottom:8px;max-width:95%}
 .bubble .t{font-family:var(--mono);font-size:.62rem;color:var(--muted);display:block;margin-top:4px}
 .bubble.in{background:#F0EEE6}
 .bubble.out{background:#E4F4EA;margin-left:auto}
 .tk-meta{font-family:var(--mono);font-size:.66rem;color:var(--teal);border-top:1px dashed var(--line);padding-top:9px;margin-top:2px}
-.tk-dash{right:-8px;bottom:-26px;width:270px;animation:rise .7s ease .9s both}
+.tk-dash{right:-8px;top:512px;width:270px;animation:rise .7s ease .9s both}
 .tk-row{display:flex;justify-content:space-between;align-items:baseline;gap:10px;padding:5px 0;border-bottom:1px solid #F0EDE4}
 .tk-row:last-child{border-bottom:none}
 .tk-row .k{color:var(--muted);font-size:.78rem}
@@ -237,8 +237,8 @@ nav{position:sticky;top:0;z-index:50;background:rgba(241,239,232,.92);backdrop-f
 /* ── Founder ── */
 .founder{background:var(--panel);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
 .founder-grid{display:grid;grid-template-columns:4fr 7fr;gap:64px;align-items:start}
-.f-photo{width:min(300px,100%);background:var(--white);padding:9px 9px 0;border-radius:999px 999px 12px 12px;border:1px solid var(--line);box-shadow:0 24px 48px -28px rgba(15,110,86,.4)}
-.f-photo img{width:100%;height:auto;aspect-ratio:4/5.2;object-fit:cover;object-position:top center;border-radius:989px 989px 6px 6px}
+.f-photo{width:min(380px,100%);background:var(--white);padding:9px 9px 0;border-radius:999px 999px 12px 12px;border:1px solid var(--line);box-shadow:0 24px 48px -28px rgba(15,110,86,.4)}
+.f-photo img{width:100%;height:auto;aspect-ratio:5/8;object-fit:cover;object-position:top center;border-radius:989px 989px 6px 6px}
 .f-photo .plate{font-family:var(--mono);font-size:.68rem;letter-spacing:.08em;color:var(--teal-900);text-align:center;padding:10px 6px}
 .founder .big{font-family:var(--display);font-size:1.65rem;line-height:1.4;color:var(--teal-950)}
 .founder .rest p{color:var(--muted)}
@@ -283,10 +283,10 @@ footer .brandline .star{color:var(--amber-bright);margin-right:7px}
   section{padding:60px 0}
   .hero{padding:52px 0 140px}
   .hero-grid{grid-template-columns:1fr;gap:46px}
-  .evidence{min-height:0;margin-top:8px}
+  .evidence{min-height:700px;margin-top:8px}
   .arch{margin:0 auto}
-  .tk-chat{left:0;bottom:96px}
-  .tk-dash{right:0;bottom:-56px}
+  .tk-chat{left:0;top:250px}
+  .tk-dash{right:0;top:500px}
   .quote-stack{grid-template-columns:1fr;gap:34px}
   .quote:nth-child(n){grid-column:auto;margin-top:0}
   .quote p{font-size:1.25rem}
@@ -356,7 +356,7 @@ footer .brandline .star{color:var(--amber-bright);margin-right:7px}
         <div class="tk-label"><span>WhatsApp receptionist</span><span>demo</span></div>
         <div class="bubble in">How much is delivery to Sohar?<span class="t">9:47 PM</span></div>
         <div class="bubble out">OMR 2, arrives next day. Shall I book your order?<span class="t">9:47 PM</span></div>
-        <div class="tk-meta">answered in 8 seconds &middot; booking captured &#10003;</div>
+        <div class="tk-meta">answered in 8 seconds &middot; booking&nbsp;captured&nbsp;&#10003;</div>
       </div>
       <div class="ticket tk-dash" aria-label="Example CEO dashboard summary">
         <div class="tk-label"><span>CEO dashboard &middot; today</span><span>demo</span></div>
