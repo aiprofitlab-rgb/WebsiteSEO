@@ -1,7 +1,7 @@
 #!/bin/bash
 # Copies latest article hero images into the blog images folder
 
-cp "/Users/nahid/.gemini/antigravity-ide/brain/fb55f2c2-92d5-49ef-b1d3-dd0abba21cd3/muscat_restaurant_whatsapp_booking_1783396949347.png" \
-   "/Users/nahid/Desktop/Nahid/AI Profit Lab/Website/Website SEO/public_html/blog/images/muscat_restaurant_whatsapp_booking.png" \
+cp "/Users/nahid/.gemini/antigravity-ide/brain/ab56a448-d3f7-466c-b9c5-647f96787dad/real_estate_ai_muscat_1783397798556.png" \
+   "/Users/nahid/Desktop/Nahid/AI Profit Lab/Website/Website SEO/public_html/blog/images/real_estate_ai_muscat.png" \
    && echo "✅ Timeline image copied successfully!" \
    || echo "❌ Copy failed — check the source path."
