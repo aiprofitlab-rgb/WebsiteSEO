@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
 <style>
@@ -11,13 +10,11 @@
     transition: opacity 0.3s ease;
   }
 </style>
-
 <meta charset="utf-8">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
-<link href="https://aiprofitlab.io/medflow-sales-automation-demo.html" rel="canonical">
 <title>MedFlow Sales & Invoice Automation Demo | AI Profit Lab</title>
 <meta content="وفر وقتك وزد أرباحك مع AI Profit Lab - منصة الذكاء الاصطناعي للتداول الآلي" name="description">
 <meta content="medical sales automation, invoice automation, MedFlow, AI Profit Lab, Oman business automation, GCC" name="keywords">
@@ -26,7 +23,7 @@
 <!-- Open Graph / Social Media -->
 <meta content="MedFlow Sales & Invoice Automation Demo | AI Profit Lab" property="og:title">
 <meta content="Watch how orders turn into invoices automatically without manual work." property="og:description">
-<meta content="https://aiprofitlab.io/medflow-sales-automation-demo.html" property="og:url">
+<meta content="https://aiprofitlab.io/medflow-sales-automation-demo/" property="og:url">
 <meta content="website" property="og:type">
 <!-- Twitter Card -->
 <meta content="summary_large_image" name="twitter:card">
@@ -85,7 +82,6 @@
   --font-sans:  'Geist', sans-serif;
   --font-mono:  'Geist Mono', monospace;
 }
-
 /* ─── RESET ─── */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
@@ -97,7 +93,6 @@ body{
   line-height:1.6;
   overflow-x:hidden;
 }
-
 /* ─── SUBTLE TEXTURE ─── */
 body::before{
   content:'';
@@ -105,9 +100,7 @@ body::before{
   background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
   pointer-events:none;z-index:0;opacity:0.4;
 }
-
 .page{position:relative;z-index:1;}
-
 /* ─── NAV ─── */
 nav{
   display:flex;align-items:center;justify-content:space-between;
@@ -125,7 +118,6 @@ nav{
 .logo-mark svg{width:16px;height:16px;fill:var(--lime);}
 .logo-type{font-family:var(--font-serif);font-size:19px;color:var(--ink);letter-spacing:-0.01em;}
 .logo-type em{font-style:italic;color:var(--text2);}
-
 .nav-right{display:flex;align-items:center;gap:12px;}
 .nav-pill{
   font-size:12px;font-weight:500;padding:6px 14px;
@@ -145,7 +137,6 @@ nav{
   transition:background .15s,transform .1s;
 }
 .nav-cta:hover{background:var(--lime2);transform:translateY(-1px);}
-
 /* ─── HERO ─── */
 .hero{
   padding:clamp(5rem,12vw,9rem) 5vw clamp(3rem,6vw,5rem);
@@ -157,7 +148,6 @@ nav{
   margin:0 auto;
 }
 @media(max-width:900px){.hero{grid-template-columns:1fr;gap:2.5rem;}}
-
 .hero-left{}
 .hero-tag{
   display:inline-flex;align-items:center;gap:7px;
@@ -167,7 +157,6 @@ nav{
 }
 .tag-dot{width:6px;height:6px;border-radius:50%;background:var(--lime2);animation:blink 2s infinite;}
 @keyframes blink{0%,100%{opacity:1;}50%{opacity:0.3;}}
-
 .hero-h1{
   font-family:var(--font-serif);
   font-size:clamp(2.8rem,5.5vw,4.5rem);
@@ -177,12 +166,10 @@ nav{
   margin-bottom:1.4rem;
 }
 .hero-h1 em{font-style:italic;color:var(--text2);}
-
 .hero-body{
   font-size:1.05rem;color:var(--text2);max-width:440px;
   line-height:1.75;margin-bottom:2rem;font-weight:300;
 }
-
 .hero-actions{display:flex;gap:10px;flex-wrap:wrap;}
 .btn-dark{
   display:inline-flex;align-items:center;gap:8px;
@@ -202,7 +189,6 @@ nav{
   transition:all .15s;
 }
 .btn-light:hover{background:var(--ink);color:var(--surface);border-color:var(--ink);}
-
 /* Hero right — mini stats */
 .hero-stats{
   display:grid;grid-template-columns:1fr 1fr;gap:1px;
@@ -225,7 +211,6 @@ nav{
   padding:2px 8px;border-radius:20px;margin-top:2px;
   background:var(--lime-dim);color:var(--lime2);border:1px solid rgba(184,242,65,0.3);
 }
-
 /* ─── SECTION ─── */
 .sec{padding:clamp(3rem,7vw,5.5rem) 5vw;max-width:1280px;margin:0 auto;}
 .sec-eyebrow{
@@ -240,10 +225,8 @@ nav{
 }
 .sec-h2 em{font-style:italic;color:var(--text2);}
 .sec-sub{font-size:1rem;color:var(--text2);max-width:500px;line-height:1.7;font-weight:300;}
-
 /* ─── DIVIDER ─── */
 .divider{height:1px;background:var(--border);max-width:100%;margin:0;}
-
 /* ═══════════════════════════════════
    INTERACTIVE APP SECTION
 ═══════════════════════════════════ */
@@ -252,7 +235,6 @@ nav{
   padding:clamp(3rem,7vw,5rem) 5vw;
   position:relative;overflow:hidden;
 }
-
 .app-section::before{
   content:'';position:absolute;
   top:-200px;right:-200px;
@@ -260,14 +242,12 @@ nav{
   background:radial-gradient(circle,rgba(184,242,65,0.08) 0%,transparent 65%);
   pointer-events:none;
 }
-
 .app-label{
   font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;
   color:var(--lime);margin-bottom:0.75rem;
   display:flex;align-items:center;gap:8px;
 }
 .app-label::before{content:'';width:24px;height:1px;background:var(--lime);}
-
 .app-title{
   font-family:var(--font-serif);
   font-size:clamp(2rem,4vw,2.8rem);
@@ -275,9 +255,7 @@ nav{
   letter-spacing:-0.02em;margin-bottom:0.6rem;
 }
 .app-title em{font-style:italic;color:var(--lime);}
-
 .app-subtitle{font-size:.95rem;color:rgba(255,255,255,0.45);max-width:500px;line-height:1.65;margin-bottom:2.5rem;font-weight:300;}
-
 /* APP SHELL */
 .app-shell{
   background:#0e1a14;
@@ -288,7 +266,6 @@ nav{
   margin:0 auto;
   box-shadow:0 40px 80px rgba(0,0,0,0.5);
 }
-
 /* App chrome */
 .app-chrome{
   background:#0a1310;
@@ -303,7 +280,6 @@ nav{
   flex:1;text-align:center;font-size:12px;color:rgba(255,255,255,0.35);
   font-family:var(--font-mono);
 }
-
 /* App body: 3 panes */
 .app-body{
   display:grid;
@@ -315,7 +291,6 @@ nav{
   .pane{display:none;}
   .pane.mobile-active{display:flex;}
 }
-
 /* Mobile tab bar */
 .mobile-tabs{
   display:none;
@@ -336,15 +311,12 @@ nav{
 }
 .mtab .mtab-icon{font-size:14px;}
 .mtab.active{color:var(--lime);border-bottom-color:var(--lime);}
-
-
 /* Pane shared */
 .pane{
   border-right:1px solid rgba(255,255,255,0.06);
   display:flex;flex-direction:column;
 }
 .pane:last-child{border-right:none;}
-
 .pane-header{
   padding:14px 16px;
   border-bottom:1px solid rgba(255,255,255,0.06);
@@ -357,7 +329,6 @@ nav{
   padding:2px 8px;border-radius:10px;
   background:rgba(184,242,65,0.15);color:var(--lime);
 }
-
 /* ── PANE 1: WhatsApp ── */
 .wa-body{
   flex:1;padding:14px;display:flex;flex-direction:column;gap:8px;
@@ -382,7 +353,6 @@ nav{
 }
 .b-time{font-size:10px;opacity:0.45;margin-top:3px;display:block;}
 .b-in .b-time{text-align:left;} .b-out .b-time{text-align:right;}
-
 .typing-dots{
   display:none;align-self:flex-start;
   background:#1a2e24;border:1px solid rgba(255,255,255,0.07);
@@ -392,7 +362,6 @@ nav{
 .tdot{width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,0.4);animation:tb 1.2s infinite;}
 .tdot:nth-child(2){animation-delay:.2s;}.tdot:nth-child(3){animation-delay:.4s;}
 @keyframes tb{0%,80%,100%{transform:translateY(0);opacity:.35;}40%{transform:translateY(-5px);opacity:1;}}
-
 .wa-input-row{
   padding:10px 12px;
   border-top:1px solid rgba(255,255,255,0.06);
@@ -413,7 +382,6 @@ nav{
 }
 .wa-send:hover{background:var(--lime2);transform:scale(1.06);}
 .wa-send svg{width:14px;height:14px;fill:var(--ink);}
-
 /* Quick fills */
 .quick-row{
   padding:10px 12px 12px;
@@ -429,11 +397,9 @@ nav{
   font-family:var(--font-sans);transition:all .15s;
 }
 .qbtn:hover{border-color:var(--lime);color:var(--lime);background:rgba(184,242,65,0.07);}
-
 /* ── PANE 2: Pipeline ── */
 .pipeline-body{flex:1;padding:14px;display:flex;flex-direction:column;gap:6px;overflow-y:auto;max-height:460px;}
 @media(max-width:960px){.pipeline-body{max-height:420px;}}
-
 /* Progress ring area */
 .prog-area{
   display:flex;align-items:center;gap:14px;
@@ -452,7 +418,6 @@ nav{
 .prog-text{flex:1;}
 .prog-status{font-size:13px;font-weight:600;color:#fff;margin-bottom:2px;}
 .prog-sub{font-size:11px;color:rgba(255,255,255,0.35);}
-
 /* Step rows */
 .step-row{
   display:flex;align-items:flex-start;gap:10px;
@@ -469,7 +434,6 @@ nav{
   background:rgba(255,255,255,0.03);
   border-color:rgba(255,255,255,0.07);
 }
-
 .sr-check{
   width:22px;height:22px;border-radius:50%;flex-shrink:0;
   border:1.5px solid rgba(255,255,255,0.15);
@@ -481,7 +445,6 @@ nav{
 @keyframes ring-pulse{0%,100%{box-shadow:0 0 0 0 rgba(184,242,65,.4);}50%{box-shadow:0 0 0 6px rgba(184,242,65,0);}}
 .sr-check svg{width:10px;height:10px;fill:var(--ink);display:none;}
 .step-row.done .sr-check svg{display:block;}
-
 .sr-icon{font-size:16px;margin-top:0px;}
 .sr-body{flex:1;}
 .sr-name{font-size:12.5px;font-weight:600;color:rgba(255,255,255,0.8);}
@@ -489,17 +452,14 @@ nav{
 .sr-status{font-size:10.5px;font-weight:600;font-family:var(--font-mono);margin-top:4px;color:rgba(255,255,255,0.2);text-transform:uppercase;letter-spacing:.05em;}
 .step-row.active .sr-status{color:var(--lime);}
 .step-row.done .sr-status{color:rgba(184,242,65,0.5);}
-
 /* ── PANE 3: Output ── */
 .output-body{flex:1;padding:14px;display:flex;flex-direction:column;gap:8px;overflow-y:auto;max-height:460px;}
-
 .out-placeholder{
   flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
   gap:8px;text-align:center;padding:2rem;
 }
 .out-placeholder-icon{font-size:32px;opacity:0.2;}
 .out-placeholder-text{font-size:12px;color:rgba(255,255,255,0.2);line-height:1.5;}
-
 /* Order card */
 .out-card{
   background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.09);
@@ -508,7 +468,6 @@ nav{
 }
 .out-card.show{display:block;}
 @keyframes fade-up{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
-
 .oc-toprow{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:10px;}
 .oc-id{font-family:var(--font-mono);font-size:11px;color:rgba(255,255,255,0.3);background:rgba(255,255,255,0.05);padding:3px 7px;border-radius:4px;}
 .oc-amount{font-family:var(--font-serif);font-size:20px;color:#fff;letter-spacing:-0.02em;}
@@ -518,7 +477,6 @@ nav{
 .chip-g{color:var(--lime);background:rgba(184,242,65,0.1);border-color:rgba(184,242,65,0.2);}
 .chip-a{color:var(--amber);background:rgba(255,176,32,0.1);border-color:rgba(255,176,32,0.2);}
 .chip-b{color:var(--sky);background:rgba(91,184,245,0.1);border-color:rgba(91,184,245,0.2);}
-
 /* Invoice card */
 .inv-card{
   background:#fff;border-radius:12px;padding:16px;
@@ -534,7 +492,6 @@ nav{
 .inv-row{display:flex;justify-content:space-between;font-size:12px;color:#3d5a48;padding:3px 0;}
 .inv-row.bold{font-weight:700;font-size:13.5px;color:#0c0f0e;margin-top:4px;}
 .inv-footer{font-size:11px;color:#a0baa8;margin-top:10px;line-height:1.5;}
-
 /* Overdue card */
 .od-card{
   background:rgba(255,82,82,0.07);border:1px solid rgba(255,82,82,0.2);
@@ -544,7 +501,6 @@ nav{
 .od-card.show{display:flex;gap:10px;align-items:flex-start;}
 .od-title{font-size:13px;font-weight:600;color:var(--red);margin-bottom:3px;}
 .od-text{font-size:12px;color:rgba(255,130,130,0.7);line-height:1.5;}
-
 /* Reset button */
 .reset-area{
   padding:12px;border-top:1px solid rgba(255,255,255,0.06);
@@ -558,7 +514,6 @@ nav{
   font-size:12px;cursor:pointer;transition:all .15s;
 }
 .reset-btn:hover{border-color:rgba(255,255,255,0.2);color:rgba(255,255,255,0.7);}
-
 /* App bottom bar */
 .app-bottom{
   border-top:1px solid rgba(255,255,255,0.06);
@@ -574,7 +529,6 @@ nav{
 }
 .ab-step.done{background:var(--lime);}
 .ab-step.active{background:var(--lime);animation:blink 1s infinite;}
-
 /* ─── BEFORE/AFTER ─── */
 .ba-wrap{
   padding:clamp(3rem,7vw,5.5rem) 5vw;
@@ -585,18 +539,15 @@ nav{
 .ba-inner{max-width:1280px;margin:0 auto;}
 .ba-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:2.5rem;}
 @media(max-width:640px){.ba-grid{grid-template-columns:1fr;}}
-
 .ba-card{border-radius:16px;padding:1.75rem;border:1px solid;}
 .ba-card.bef{background:#fff;border-color:rgba(255,82,82,0.2);}
 .ba-card.aft{background:var(--ink);border-color:rgba(184,242,65,0.25);}
-
 .ba-head{display:flex;align-items:center;gap:8px;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:1.25rem;}
 .ba-card.bef .ba-head{color:var(--red);}
 .ba-card.aft .ba-head{color:var(--lime);}
 .ba-hdot{width:8px;height:8px;border-radius:50%;}
 .ba-card.bef .ba-hdot{background:var(--red);}
 .ba-card.aft .ba-hdot{background:var(--lime);animation:blink 2s infinite;}
-
 .ba-list{list-style:none;display:flex;flex-direction:column;gap:9px;}
 .ba-list li{display:flex;align-items:flex-start;gap:10px;font-size:13.5px;line-height:1.5;}
 .ba-card.bef .ba-list li{color:#8a5050;}
@@ -604,9 +555,6 @@ nav{
 .li-ico{width:18px;height:18px;border-radius:50%;flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:800;}
 .ba-card.bef .li-ico{background:rgba(255,82,82,0.12);color:var(--red);}
 .ba-card.aft .li-ico{background:rgba(184,242,65,0.15);color:var(--lime);}
-
-
-
 /* ─── CTA ─── */
 .cta-wrap{
   background:var(--ink);padding:clamp(4rem,10vw,7rem) 5vw;
@@ -627,7 +575,6 @@ nav{
 }
 .cta-h2 em{font-style:italic;color:var(--lime);}
 .cta-body{font-size:1.05rem;color:rgba(255,255,255,0.45);max-width:460px;margin:0 auto 2.5rem;line-height:1.7;font-weight:300;}
-
 /* ─── FOOTER ─── */
 footer{
   padding:1.75rem 5vw;border-top:1px solid var(--border);
@@ -635,11 +582,9 @@ footer{
 }
 .f-logo{font-family:var(--font-serif);font-size:16px;color:var(--text2);}
 .f-copy{font-size:12px;color:var(--text3);}
-
 /* ─── FADE ANIMATION ─── */
 .fu{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease;}
 .fu.vis{opacity:1;transform:none;}
-
 /* ─── RESPONSIVE ─── */
 @media(max-width:480px){
   nav .nav-right .nav-pill{display:none;}
@@ -760,10 +705,11 @@ nav svg[width="16"][height="16"] { width: 16px !important; height: 16px !importa
   gtag('js', new Date());
   gtag('config', 'G-SLR9GD3MJP');
 </script>
+    <link rel="canonical" href="https://aiprofitlab.io/medflow-sales-automation-demo" />
+  <meta name="description" content="MedFlow Sales & Invoice Automation Demo - أتمتة الذكاء الاصطناعي في عمان. اكتشف كيف يمكننا مساعدة عملك في مسقط ودعم رؤية عمان 2040.">
 </head>
 <body>
 <div id="fouc-overlay"></div>
-
 <div class="page">
 <!-- ── NAV ── -->
 <nav>
@@ -1025,7 +971,6 @@ nav svg[width="16"][height="16"] { width: 16px !important; height: 16px !importa
 <script>
 /* ─── State ─── */
 let running = false, ordN = 1048;
-
 /* ─── Mobile tab switcher ─── */
 function switchTab(n){
   [1,2,3].forEach(i=>{
@@ -1034,14 +979,11 @@ function switchTab(n){
   });
 }
 function mobileAdvance(n){ if(window.innerWidth<=960) switchTab(n); }
-
 /* ─── Helpers ─── */
 const $  = id => document.getElementById(id);
 const T  = (ms, fn) => setTimeout(fn, ms);
 const now = () => { const d=new Date(); return d.getHours().toString().padStart(2,'0')+':'+d.getMinutes().toString().padStart(2,'0'); };
-
 function fill(t){ $('wa-in').value=t; $('wa-in').focus(); }
-
 function addBubble(txt, type){
   const chat = $('chat');
   // remove typing node if present (it's outside chat but let's scroll anyway)
@@ -1051,12 +993,10 @@ function addBubble(txt, type){
   chat.appendChild(d);
   requestAnimationFrame(() => { chat.scrollTop = chat.scrollHeight; });
 }
-
 function showTyping(on){
   $('typing').classList.toggle('on', on);
   const c=$('chat'); requestAnimationFrame(() => { c.scrollTop=c.scrollHeight; });
 }
-
 function setStep(n, state, label){
   const el=$('sr'+n);
   el.classList.remove('active','done');
@@ -1068,7 +1008,6 @@ function setStep(n, state, label){
   if(state==='active') dot.classList.add('active');
   if(state==='done') dot.classList.add('done');
 }
-
 function setProgress(pct, status, sub){
   const offset = 132 - (132 * pct / 100);
   $('pr-fill').style.strokeDashoffset = offset;
@@ -1076,11 +1015,9 @@ function setProgress(pct, status, sub){
   if(status) $('prog-status').textContent = status;
   if(sub) $('prog-sub').textContent = sub;
 }
-
 function setPipeBadge(txt){ $('pipe-badge').textContent = txt; }
 function setOutBadge(txt){  $('out-badge').textContent  = txt; }
 function setStatus(txt){    $('ab-status').textContent  = txt; }
-
 /* ─── Main send ─── */
 function send(){
   if(running) return;
@@ -1090,7 +1027,6 @@ function send(){
   running = true;
   inp.disabled = true;
   $('send-btn').disabled = true;
-
   const oid = 'ORD-'+ordN;
   const iid = 'INV-'+ordN;
   ordN++;
@@ -1098,21 +1034,17 @@ function send(){
   const subtotal = Math.round((lines*200 + Math.random()*1000)/5)*5;
   const vat      = Math.round(subtotal*0.05);
   const total    = subtotal+vat;
-
   addBubble(txt, 'out');
   $('placeholder').style.display='none';
-
   setPipeBadge('running');
   setStatus('Processing order…');
   mobileAdvance(2);
-
   /* ── STEP 1: received ── */
   T(600, ()=>{
     setStep(1,'active','capturing…');
     setProgress(5,'Capturing order','Reading WhatsApp message…');
     showTyping(true);
   });
-
   T(2000, ()=>{
     showTyping(false);
     addBubble('✅ Got it! Processing your order now…', 'sys');
@@ -1121,7 +1053,6 @@ function send(){
     setOutBadge('order logged');
     setStatus('Step 1 complete — order captured');
     mobileAdvance(3);
-
     // show order card
     const oc = $('order-card');
     oc.innerHTML = `
@@ -1137,33 +1068,28 @@ function send(){
       </div>`;
     oc.classList.add('show');
   });
-
   /* ── STEP 2: sheet ── */
   T(2700, ()=>{
     setStep(2,'active','writing to sheet…');
     setProgress(35,'Logging to Google Sheet','Adding row with order details…');
   });
-
   T(4100, ()=>{
     setStep(2,'done','row added ✓');
     setProgress(50,'Sheet updated','Generating invoice PDF…');
     addBubble(`📊 Logged to Google Sheet as ${oid}`, 'sys');
     setStatus('Step 2 complete — logged to sheet');
   });
-
   /* ── STEP 3: invoice ── */
   T(4800, ()=>{
     setStep(3,'active','generating PDF…');
     setProgress(60,'Generating invoice','Building PDF from your template…');
   });
-
   T(6500, ()=>{
     setStep(3,'done','invoice sent ✓');
     setProgress(75,'Invoice sent','Scheduling payment reminders…');
     addBubble(`📄 Invoice ${iid} sent — OMR ${total.toLocaleString()} due 30 May`, 'sys');
     setOutBadge('invoice sent');
     setStatus('Step 3 complete — invoice delivered');
-
     const ic = $('inv-card');
     const itemsShort = txt.length > 45 ? txt.slice(0,45)+'…' : txt;
     ic.innerHTML = `
@@ -1187,25 +1113,21 @@ function send(){
       <div class="inv-footer">📧 alshifa@example.com &nbsp;·&nbsp; 💬 WhatsApp delivered</div>`;
     ic.classList.add('show');
   });
-
   /* ── STEP 4: reminders ── */
   T(7200, ()=>{
     setStep(4,'active','scheduling reminders…');
     setProgress(85,'Reminders scheduled','Arming overdue escalation…');
   });
-
   T(8400, ()=>{
     setStep(4,'done','reminders set ✓');
     addBubble('⏰ Reminders set for May 27 (D-3) and May 29 (D-1)', 'sys');
     setStatus('Step 4 complete — reminders scheduled');
   });
-
   /* ── STEP 5: overdue ── */
   T(9100, ()=>{
     setStep(5,'active','arming escalation…');
     setProgress(95,'Arming escalation','Configuring overdue manager alert…');
   });
-
   T(10400, ()=>{
     setStep(5,'done','escalation armed ✓');
     setProgress(100,'Workflow complete','All 5 steps done — zero manual work');
@@ -1213,7 +1135,6 @@ function send(){
     setPipeBadge('complete ✓');
     setOutBadge('all done ✓');
     setStatus('✓ All 5 steps complete — workflow done');
-
     const od = $('od-card');
     od.innerHTML = `
       <span style="font-size:20px;flex-shrink:0">🚨</span>
@@ -1226,7 +1147,6 @@ function send(){
     running = false;
   });
 }
-
 function reset(){
   running = false;
   for(let i=1;i<=5;i++){ setStep(i,'','waiting'); $('abs'+i).classList.remove('active','done'); }
@@ -1242,9 +1162,7 @@ function reset(){
   switchTab(1);
   const inp=$('wa-in'); inp.disabled=false; $('send-btn').disabled=false; inp.focus();
 }
-
 $('wa-in').addEventListener('keydown', function(e){ if(e.key==='Enter') send(); });
-
 /* ─── Deferred observers and animations (reduces TBT) ─── */
 (function() {
   var initObservers = function() {
@@ -1253,13 +1171,11 @@ $('wa-in').addEventListener('keydown', function(e){ if(e.key==='Enter') send(); 
       var v=0, step=target/(ms/16);
       var t=setInterval(function(){ v=Math.min(v+step,target); el.innerHTML=Math.round(v)+(suffix||''); if(v>=target) clearInterval(t); },16);
     }
-
     /* Intersection Observer for fade-up animations */
     var io = new IntersectionObserver(function(entries){
       entries.forEach(function(e){ if(e.isIntersecting) e.target.classList.add('vis'); });
     },{threshold:0.07});
     document.querySelectorAll('.fu').forEach(function(el){ io.observe(el); });
-
     /* Hero stats counter - fires once when visible */
     var counted=false;
     var mio=new IntersectionObserver(function(entries){
@@ -1274,7 +1190,6 @@ $('wa-in').addEventListener('keydown', function(e){ if(e.key==='Enter') send(); 
     },{threshold:0.4});
     mio.observe(document.querySelector('.hero-stats'));
   };
-
   if ('requestIdleCallback' in window) {
     requestIdleCallback(initObservers, { timeout: 2000 });
   } else {
@@ -1282,8 +1197,6 @@ $('wa-in').addEventListener('keydown', function(e){ if(e.key==='Enter') send(); 
   }
 })();
 </script>
-
-
 <script>
   (function() {
     var overlay = document.getElementById('fouc-overlay');
@@ -1306,6 +1219,5 @@ $('wa-in').addEventListener('keydown', function(e){ if(e.key==='Enter') send(); 
     }
   })();
 </script>
-
 </body>
 </html>

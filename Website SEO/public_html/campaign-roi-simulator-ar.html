@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html dir="rtl" lang="ar">
 <head>
 <style>
@@ -11,1186 +10,11 @@
     transition: opacity 0.3s ease;
   }
 </style>
-
 <meta charset="utf-8">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://aiprofitlab.io/campaign-roi-simulator-ar/" rel="canonical">
-<meta content="width=device-width, initial-scale=1.0" name="viewport">
-<!-- SEO Meta Tags -->
-<title>محاكي عائد استثمار الحملات | AI Profit Lab عُمان</title>
-<meta content="وفر وقتك وزد أرباحك مع AI Profit Lab - منصة الذكاء الاصطناعي للتداول الآلي" name="description">
-<meta content="محاكي ROI، أتمتة التسويق عُمان، AI Profit Lab، نمو الأعمال مسقط، حاسبة الحملات، أدوات الشركات الصغيرة والمتوسطة العُمانية" name="keywords">
-<meta content="AI Profit Lab" name="author">
-<meta content="index, follow" name="robots">
-<!-- Open Graph / Social Media -->
-<meta content="محاكي عائد استثمار الحملات | AI Profit Lab عُمان" property="og:title">
-<meta content="حسن إنفاقك التسويقي باستخدام محاكي العائد المتقدم المدعوم بالذكاء الاصطناعي." property="og:description">
-<meta content="https://aiprofitlab.io/nahid-business-banner.png" property="og:image">
-<meta content="https://aiprofitlab.io/campaign-roi-simulator-ar/" property="og:url">
-<meta content="website" property="og:type">
-<!-- Favicon -->
-<link href="/favicon.svg" rel="icon" type="image/svg+xml">
-<link href="/favicon.svg" rel="apple-touch-icon">
-<!-- Hreflang -->
-<!-- Local Business Schema -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "ProfessionalService",
-  "name": "AI Profit Lab",
-  "legalName": "International Gulf Lotus SPC",
-  "url": "https://aiprofitlab.io",
-  "logo": "https://aiprofitlab.io/logo.webp",
-  "image": "https://aiprofitlab.io/nahid-business-banner.png",
-  "description": "مساعدة المديرين غير التقنيين على الاستفادة من الذكاء الاصطناعي والأتمتة والتكنولوجيا لزيادة العائد وكفاءة الأعمال في عُمان.",
-  "address": {
-    "@type": "PostalAddress",
-    "streetAddress": "السيب",
-    "addressLocality": "مسقط",
-    "addressRegion": "محافظة مسقط",
-    "postalCode": "000",
-    "addressCountry": "OM"
-  },
-  "geo": {
-    "@type": "GeoCoordinates",
-    "latitude": 23.635950490475295, 
-    "longitude": 58.207628165445385
-  }
-}
-</script>
-<link as="style" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=DM+Mono:wght@400;500&display=swap" onload="this.onload=null;this.rel='stylesheet'" rel="preload">
-<noscript><link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"></noscript>
-<style>
-    /* ─── Reset & tokens ─── */
-    *,
-    *::before,
-    *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0
-    }
 
-    :root {
-      --bg: #0f0f13;
-      --bg2: #16161d;
-      --bg3: #1e1e28;
-      --surface: #232330;
-      --surf2: #2a2a3a;
-      --border: rgba(255, 255, 255, .07);
-      --border2: rgba(255, 255, 255, .13);
-      --text: #f0f0f5;
-      --text2: #9999b0;
-      --text3: #5f5f78;
-      --accent: #7c6fff;
-      --accent2: #5b4ef8;
-      --green: #1ecc8b;
-      --amber: #f5a623;
-      --red: #f05c5c;
-      --blue: #4b9cf7;
-      --pink: #d45fa0;
-      --r: 10px;
-      --rlg: 14px;
-      --font: 'DM Sans', sans-serif;
-      --mono: 'DM Mono', monospace;
-      --sidebar-w: 220px;
-      --topbar-h: 56px;
-      --mobnav-h: 62px;
-    }
 
-    html {
-      height: 100%
-    }
-
-    body {
-      font-family: var(--font);
-      background: var(--bg);
-      color: var(--text);
-      min-height: 100%;
-      line-height: 1.6;
-      -webkit-text-size-adjust: 100%
-    }
-
-    ::-webkit-scrollbar {
-      width: 4px;
-      height: 4px
-    }
-
-    ::-webkit-scrollbar-track {
-      background: transparent
-    }
-
-    ::-webkit-scrollbar-thumb {
-      background: var(--surf2);
-      border-radius: 99px
-    }
-
-    /* ══ LAYOUT ══ */
-    .app {
-      display: flex;
-      min-height: 100svh
-    }
-
-    /* Sidebar */
-    .sidebar {
-      width: var(--sidebar-w);
-      flex-shrink: 0;
-      background: var(--bg2);
-      border-left: 1px solid var(--border);
-      display: flex;
-      flex-direction: column;
-      position: fixed;
-      top: 0;
-      right: 0;
-      height: 100svh;
-      z-index: 100;
-      transition: transform .25s ease;
-    }
-
-    .logo {
-      padding: 20px 18px 16px;
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-shrink: 0
-    }
-
-    .logo-mark {
-      width: 32px;
-      height: 32px;
-      flex-shrink: 0;
-      background: #3B82F6;
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 15px;
-      font-weight: 700;
-      color: #fff
-    }
-
-    .logo-name {
-      font-size: 13px;
-      font-weight: 600;
-      line-height: 1.2
-    }
-
-    .logo-sub {
-      font-size: 10px;
-      color: var(--text3)
-    }
-
-    .nav {
-      padding: 10px 0;
-      flex: 1;
-      overflow-y: auto
-    }
-
-    .nav-label {
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: .08em;
-      color: var(--text3);
-      text-transform: uppercase;
-      padding: 10px 18px 4px
-    }
-
-    .nav-item {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 9px 18px;
-      font-size: 13px;
-      color: var(--text2);
-      cursor: pointer;
-      border-right: 2px solid transparent;
-      transition: all .13s;
-      user-select: none
-    }
-
-    .nav-item:hover {
-      color: var(--text);
-      background: var(--surface)
-    }
-
-    .nav-item.active {
-      color: var(--accent);
-      background: rgba(124, 111, 255, .08);
-      border-right-color: var(--accent);
-      font-weight: 500
-    }
-
-    .nav-icon {
-      font-size: 15px;
-      width: 20px;
-      text-align: center;
-      flex-shrink: 0
-    }
-
-    .sidebar-footer {
-      padding: 14px 18px;
-      border-top: 1px solid var(--border);
-      font-size: 10px;
-      color: var(--text3);
-      flex-shrink: 0
-    }
-
-    /* Main */
-    .main {
-      flex: 1;
-      min-width: 0;
-      display: flex;
-      flex-direction: column;
-      margin-right: var(--sidebar-w)
-    }
-
-    /* Topbar */
-    .topbar {
-      height: var(--topbar-h);
-      background: var(--bg2);
-      border-bottom: 1px solid var(--border);
-      padding: 0 24px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      gap: 12px
-    }
-
-    .topbar-left {
-      min-width: 0;
-      flex: 1
-    }
-
-    .page-title {
-      font-size: 15px;
-      font-weight: 600;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis
-    }
-
-    .page-sub {
-      font-size: 11px;
-      color: var(--text3);
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis
-    }
-
-    .topbar-right {
-      display: flex;
-      gap: 8px;
-      flex-shrink: 0
-    }
-
-    .hamburger {
-      display: none;
-      background: none;
-      border: none;
-      color: var(--text2);
-      cursor: pointer;
-      padding: 6px;
-      border-radius: var(--r);
-      font-size: 20px;
-      line-height: 1;
-      margin-left: 4px;
-      transition: color .15s
-    }
-
-    .hamburger:hover {
-      color: var(--text)
-    }
-
-    /* Mobile bottom nav */
-    .mobile-nav {
-      display: none;
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: var(--mobnav-h);
-      background: var(--bg2);
-      border-top: 1px solid var(--border);
-      z-index: 200;
-      padding: 6px 4px env(safe-area-inset-bottom, 0)
-    }
-
-    .mobile-nav-inner {
-      display: flex;
-      height: 100%
-    }
-
-    .mob-tab {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 3px;
-      font-size: 10px;
-      color: var(--text3);
-      cursor: pointer;
-      border-radius: 8px;
-      transition: all .13s;
-      padding: 4px 2px;
-      -webkit-tap-highlight-color: transparent
-    }
-
-    .mob-tab:hover {
-      background: var(--surface)
-    }
-
-    .mob-tab.active {
-      color: var(--accent)
-    }
-
-    .mob-tab-icon {
-      font-size: 18px;
-      line-height: 1
-    }
-
-    .mob-tab-label {
-      font-size: 9px;
-      font-weight: 500;
-      letter-spacing: .02em
-    }
-
-    /* Overlay */
-    .sidebar-overlay {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, .55);
-      z-index: 99
-    }
-
-    .sidebar-overlay.visible {
-      display: block
-    }
-
-    /* Content */
-    .content {
-      padding: 24px;
-      flex: 1
-    }
-
-    /* Sections */
-    .section {
-      display: none;
-      animation: fadeUp .2s ease
-    }
-
-    .section.active {
-      display: block
-    }
-
-    @keyframes fadeUp {
-      from {
-        opacity: 0;
-        transform: translateY(8px)
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0)
-      }
-    }
-
-    /* ══ COMPONENTS ══ */
-    .metrics {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-      gap: 10px;
-      margin-bottom: 20px
-    }
-
-    .metric {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--r);
-      padding: 14px
-    }
-
-    .metric-label {
-      font-size: 10px;
-      color: var(--text3);
-      text-transform: uppercase;
-      letter-spacing: .07em;
-      margin-bottom: 5px
-    }
-
-    .metric-value {
-      font-size: 22px;
-      font-weight: 600
-    }
-
-    .metric-delta {
-      font-size: 10px;
-      margin-top: 3px
-    }
-
-    .up {
-      color: var(--green)
-    }
-
-    .down {
-      color: var(--red)
-    }
-
-    .card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--rlg);
-      padding: 18px 20px;
-      margin-bottom: 14px
-    }
-
-    .card-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 14px
-    }
-
-    .card-title {
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: .08em;
-      color: var(--text3);
-      text-transform: uppercase;
-      margin-bottom: 14px
-    }
-
-    .card-header .card-title {
-      margin-bottom: 0
-    }
-
-    .grid2 {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px
-    }
-
-    .grid3 {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 14px
-    }
-
-    label {
-      font-size: 12px;
-      color: var(--text2);
-      display: block;
-      margin-bottom: 5px
-    }
-
-    .val {
-      color: var(--text);
-      font-weight: 600
-    }
-
-    input[type=range] {
-      width: 100%;
-      accent-color: var(--accent);
-      cursor: pointer;
-      height: 20px;
-      touch-action: manipulation
-    }
-
-    select,
-    input[type=text],
-    input[type=number] {
-      width: 100%;
-      padding: 9px 11px;
-      border-radius: var(--r);
-      border: 1px solid var(--border2);
-      background: var(--bg3);
-      color: var(--text);
-      font-size: 13px;
-      font-family: var(--font);
-      outline: none;
-      transition: border-color .15s;
-      -webkit-appearance: none;
-      appearance: none
-    }
-
-    select:focus,
-    input:focus {
-      border-color: var(--accent)
-    }
-
-    select option {
-      background: var(--bg3)
-    }
-
-    .btn {
-      padding: 8px 16px;
-      border-radius: var(--r);
-      border: 1px solid var(--border2);
-      background: var(--surface);
-      color: var(--text);
-      font-size: 13px;
-      font-weight: 500;
-      cursor: pointer;
-      font-family: var(--font);
-      transition: all .13s;
-      white-space: nowrap;
-      -webkit-tap-highlight-color: transparent
-    }
-
-    .btn:hover {
-      background: var(--surf2)
-    }
-
-    .btn-primary {
-      background: var(--accent);
-      border-color: var(--accent);
-      color: #fff
-    }
-
-    .btn-primary:hover {
-      background: var(--accent2);
-      border-color: var(--accent2)
-    }
-
-    .btn-sm {
-      padding: 5px 12px;
-      font-size: 11px
-    }
-
-    .progress-track {
-      background: var(--bg3);
-      border-radius: 999px;
-      height: 7px;
-      overflow: hidden;
-      margin: 6px 0
-    }
-
-    .progress-fill {
-      height: 100%;
-      border-radius: 999px;
-      transition: width .4s
-    }
-
-    .health-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 14px
-    }
-
-    .health-label {
-      font-size: 12px;
-      color: var(--text2);
-      margin-bottom: 4px
-    }
-
-    .health-sub {
-      font-size: 10px;
-      color: var(--text3);
-      margin-top: 2px
-    }
-
-    .funnel-step {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 10px 0;
-      border-bottom: 1px solid var(--border)
-    }
-
-    .funnel-step:last-child {
-      border-bottom: none
-    }
-
-    .funnel-label {
-      width: 108px;
-      font-size: 12px;
-      color: var(--text2);
-      flex-shrink: 0
-    }
-
-    .funnel-bar-wrap {
-      flex: 1;
-      background: var(--bg3);
-      border-radius: 999px;
-      height: 20px;
-      overflow: hidden
-    }
-
-    .funnel-bar {
-      height: 100%;
-      border-radius: 999px;
-      display: flex;
-      align-items: center;
-      padding-right: 9px;
-      font-size: 11px;
-      color: #fff;
-      font-weight: 600;
-      transition: width .6s cubic-bezier(.4, 0, .2, 1);
-      min-width: 4px
-    }
-
-    .funnel-count {
-      width: 72px;
-      text-align: left;
-      font-size: 13px;
-      font-weight: 600;
-      flex-shrink: 0
-    }
-
-    .funnel-pct {
-      width: 42px;
-      text-align: left;
-      font-size: 10px;
-      color: var(--text3);
-      flex-shrink: 0
-    }
-
-    .channel-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-      gap: 10px;
-      margin-bottom: 14px
-    }
-
-    .channel-card {
-      border: 1px solid var(--border);
-      border-radius: var(--r);
-      padding: 12px 13px;
-      cursor: pointer;
-      position: relative;
-      background: var(--bg3);
-      transition: all .13s;
-      -webkit-tap-highlight-color: transparent
-    }
-
-    .channel-card:hover {
-      border-color: var(--border2);
-      background: var(--surface)
-    }
-
-    .channel-card.selected {
-      border-color: var(--accent);
-      background: rgba(124, 111, 255, .1)
-    }
-
-    .ch-icon {
-      font-size: 18px;
-      font-weight: 700;
-      margin-bottom: 4px;
-      font-family: var(--mono)
-    }
-
-    .ch-name {
-      font-size: 13px;
-      font-weight: 500;
-      margin-bottom: 2px
-    }
-
-    .ch-meta {
-      font-size: 10px;
-      color: var(--text3)
-    }
-
-    .ch-check {
-      position: absolute;
-      top: 8px;
-      left: 9px;
-      color: var(--accent);
-      font-size: 12px;
-      display: none
-    }
-
-    .channel-card.selected .ch-check {
-      display: block
-    }
-
-    .alloc-row {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 8px
-    }
-
-    .alloc-name {
-      width: 88px;
-      font-size: 12px;
-      color: var(--text2);
-      flex-shrink: 0
-    }
-
-    .alloc-bar-wrap {
-      flex: 1;
-      background: var(--bg3);
-      border-radius: 999px;
-      height: 7px;
-      overflow: hidden
-    }
-
-    .alloc-bar {
-      height: 100%;
-      border-radius: 999px
-    }
-
-    .alloc-amt {
-      width: 68px;
-      text-align: left;
-      font-size: 12px;
-      font-weight: 500;
-      flex-shrink: 0
-    }
-
-    .seg-pill {
-      display: inline-block;
-      padding: 4px 12px;
-      border-radius: 999px;
-      font-size: 11px;
-      margin: 3px;
-      border: 1px solid transparent;
-      font-weight: 500;
-      cursor: default
-    }
-
-    .stat-block {
-      background: var(--bg3);
-      border-radius: var(--r);
-      padding: 12px;
-      text-align: center
-    }
-
-    .stat-num {
-      font-size: 24px;
-      font-weight: 600
-    }
-
-    .stat-lbl {
-      font-size: 10px;
-      color: var(--text3);
-      margin-top: 2px
-    }
-
-    .rate-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 13px;
-      padding: 7px 0;
-      border-bottom: 1px solid var(--border)
-    }
-
-    .rate-row:last-child {
-      border-bottom: none
-    }
-
-    .tl-item {
-      display: flex;
-      gap: 12px;
-      padding-bottom: 14px
-    }
-
-    .tl-left {
-      display: flex;
-      flex-direction: column;
-      align-items: center
-    }
-
-    .tl-dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      flex-shrink: 0;
-      margin-top: 3px
-    }
-
-    .tl-line {
-      width: 1px;
-      flex: 1;
-      background: var(--border);
-      margin: 6px 0 0
-    }
-
-    .tl-date {
-      font-size: 10px;
-      color: var(--text3);
-      margin-bottom: 1px;
-      font-family: var(--mono)
-    }
-
-    .tl-event {
-      font-size: 13px;
-      color: var(--text2)
-    }
-
-    .ab-card {
-      border-radius: var(--rlg);
-      padding: 16px;
-      border: 1px solid var(--border);
-      background: var(--bg3)
-    }
-
-    .ab-winner {
-      border-color: var(--green) !important;
-      background: rgba(30, 204, 139, .06) !important
-    }
-
-    .score-bar {
-      height: 5px;
-      border-radius: 999px;
-      background: var(--bg);
-      margin-top: 5px;
-      overflow: hidden
-    }
-
-    .score-fill {
-      height: 100%;
-      border-radius: 999px;
-      background: var(--accent)
-    }
-
-    .log {
-      background: var(--bg);
-      border-radius: var(--r);
-      padding: 10px;
-      font-size: 12px;
-      color: var(--text3);
-      max-height: 130px;
-      overflow-y: auto;
-      font-family: var(--mono);
-      line-height: 1.9;
-      border: 1px solid var(--border)
-    }
-
-    .log-line {
-      border-bottom: 1px solid var(--border);
-      padding: 1px 0
-    }
-
-    .badge {
-      display: inline-block;
-      padding: 2px 9px;
-      border-radius: 999px;
-      font-size: 11px;
-      font-weight: 600
-    }
-
-    .badge-green {
-      background: rgba(30, 204, 139, .15);
-      color: var(--green)
-    }
-
-    .badge-amber {
-      background: rgba(245, 166, 35, .15);
-      color: var(--amber)
-    }
-
-    .badge-blue {
-      background: rgba(75, 156, 247, .15);
-      color: var(--blue)
-    }
-
-    .badge-accent {
-      background: rgba(124, 111, 255, .15);
-      color: var(--accent)
-    }
-
-    .rec {
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      padding: 11px 13px;
-      border-radius: var(--r);
-      margin-bottom: 8px;
-      font-size: 13px
-    }
-
-    .rec-green {
-      background: rgba(30, 204, 139, .08);
-      color: #7ae8c2;
-      border-right: 3px solid var(--green);
-      border-left: none
-    }
-
-    .rec-amber {
-      background: rgba(245, 166, 35, .08);
-      color: #f5c97a;
-      border-right: 3px solid var(--amber);
-      border-left: none
-    }
-
-    .rec-blue {
-      background: rgba(75, 156, 247, .08);
-      color: #9bc8fb;
-      border-right: 3px solid var(--blue);
-      border-left: none
-    }
-
-    .chart-wrap {
-      position: relative;
-      width: 100%;
-      height: 190px
-    }
-
-    .chart-wrap-lg {
-      position: relative;
-      width: 100%;
-      height: 220px
-    }
-
-    .legend {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-bottom: 10px
-    }
-
-    .legend-item {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 12px;
-      color: var(--text2)
-    }
-
-    .legend-swatch {
-      width: 10px;
-      height: 10px;
-      border-radius: 2px;
-      flex-shrink: 0
-    }
-
-    .result-actions {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      margin-top: 14px
-    }
-
-    /* ══ TABLET 641–1024px ══ */
-    @media(max-width:1024px)and(min-width:641px) {
-      :root {
-        --sidebar-w: 190px
-      }
-
-      .content {
-        padding: 18px
-      }
-
-      .topbar {
-        padding: 0 18px
-      }
-
-      .metrics {
-        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-        gap: 8px
-      }
-
-      .metric-value {
-        font-size: 20px
-      }
-
-      .grid3 {
-        grid-template-columns: 1fr 1fr
-      }
-
-      .health-row {
-        grid-template-columns: 1fr 1fr;
-        gap: 10px
-      }
-
-      .channel-grid {
-        grid-template-columns: repeat(auto-fill, minmax(130px, 1fr))
-      }
-
-      .funnel-label {
-        width: 90px
-      }
-
-      .funnel-count {
-        width: 60px
-      }
-
-      .funnel-pct {
-        display: none
-      }
-
-      .chart-wrap {
-        height: 170px
-      }
-
-      .chart-wrap-lg {
-        height: 200px
-      }
-    }
-
-    /* ══ MOBILE ≤640px ══ */
-    @media(max-width:640px) {
-      .sidebar {
-        transform: translateX(100%);
-        width: 240px;
-        box-shadow: -4px 0 24px rgba(0, 0, 0, .5);
-        left: auto;
-        right: 0
-      }
-
-      .sidebar.open {
-        transform: translateX(0)
-      }
-
-      .main {
-        margin-right: 0
-      }
-
-      .topbar {
-        padding: 0 12px;
-        height: 52px
-      }
-
-      .hamburger {
-        display: flex;
-        margin-left: 4px;
-        margin-right: 0
-      }
-
-      .page-sub {
-        display: none
-      }
-
-      .page-title {
-        font-size: 14px
-      }
-
-      .topbar-right .btn-sm:not(.btn-primary) {
-        display: none
-      }
-
-      .mobile-nav {
-        display: flex;
-        flex-direction: column
-      }
-
-      .content {
-        padding: 14px 12px calc(var(--mobnav-h) + 20px)
-      }
-
-      .metrics {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 8px;
-        margin-bottom: 14px
-      }
-
-      .metric {
-        padding: 11px 12px
-      }
-
-      .metric-value {
-        font-size: 18px
-      }
-
-      .metric-delta {
-        font-size: 10px
-      }
-
-      .card {
-        padding: 13px 13px;
-        border-radius: var(--r)
-      }
-
-      .grid2,
-      .grid3 {
-        grid-template-columns: 1fr;
-        gap: 12px
-      }
-
-      .health-row {
-        grid-template-columns: 1fr;
-        gap: 10px
-      }
-
-      .funnel-label {
-        width: 80px;
-        font-size: 11px
-      }
-
-      .funnel-count {
-        width: 52px;
-        font-size: 12px
-      }
-
-      .funnel-pct {
-        display: none
-      }
-
-      .funnel-bar {
-        font-size: 10px
-      }
-
-      .channel-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 8px
-      }
-
-      .ch-name {
-        font-size: 12px
-      }
-
-      .chart-wrap {
-        height: 155px
-      }
-
-      .chart-wrap-lg {
-        height: 175px
-      }
-
-      .ab-row {
-        display: flex !important;
-        flex-direction: column;
-        gap: 10px
-      }
-
-      #aud-size {
-        font-size: 36px !important
-      }
-
-      #aud-reach {
-        font-size: 26px !important
-      }
-
-      .seg-stats-grid {
-        grid-template-columns: 1fr !important
-      }
-
-      .result-actions .btn {
-        flex: 1;
-        min-width: 100px;
-        text-align: center;
-        justify-content: center
-      }
-    }
-
-    @media(max-width:360px) {
-      .metrics {
-        grid-template-columns: 1fr 1fr
-      }
-
-      .metric-value {
-        font-size: 16px
-      }
-
-      .channel-grid {
-        grid-template-columns: repeat(2, 1fr)
-      }
-
-      .funnel-label {
-        width: 68px;
-        font-size: 10px
-      }
-    }
-  </style>
-<meta content="ارتقِ بعملك مع محاكي عائد استثمار الحملات. اكتشف كيف يحقق مختبر الذكاء الاصطناعي (AI Profit Lab) عائداً استثمارياً مضاعفاً 10 مرات ويدفع عجلة النمو في" name="description">
 <link href="https://fonts.googleapis.com" rel="preconnect">
 <link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
 </meta><style>img, video, iframe { aspect-ratio: attr(width) / attr(height); } .youtube-facade, #aiden-ui, .dynamic-content { min-height: 200px; }</style><style>
@@ -1303,10 +127,36 @@ nav svg[width="16"][height="16"] { width: 16px !important; height: 16px !importa
   gtag('js', new Date());
   gtag('config', 'G-SLR9GD3MJP');
 </script>
+    <link rel="canonical" href="https://aiprofitlab.io/campaign-roi-simulator-ar/" />
+    <link rel="alternate" hreflang="en" href="https://aiprofitlab.io/en/campaign-roi-simulator" />
+    <link rel="alternate" hreflang="ar" href="https://aiprofitlab.io/ar/campaign-roi-simulator" />
+    <link rel="alternate" hreflang="x-default" href="https://aiprofitlab.io/en/campaign-roi-simulator" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- SEO Meta Tags -->
+<title>محاكي عائد استثمار الحملات | AI Profit Lab عمان</title>
+<meta cont...">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "AI Profit Lab",
+  "legalName": "International Gulf Lotus SPC",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Muscat",
+    "addressCountry": "OM"
+  },
+  "areaServed": [
+    "Oman",
+    "GCC"
+  ]
+}
+</script>
+  <meta name="description" content="محاكي عائد استثمار الحملات - أتمتة الذكاء الاصطناعي في عمان. اكتشف كيف يمكننا مساعدة عملك في مسقط ودعم رؤية عمان 2040.">
 </head>
 <body>
 <div id="fouc-overlay"></div>
-
 <div class="sidebar-overlay" id="sidebar-overlay" onclick="closeSidebar()"></div>
 <div class="app">
 <!-- ── Sidebar ── -->
@@ -1727,7 +577,6 @@ nav svg[width="16"][height="16"] { width: 16px !important; height: 16px !importa
     };
     let selectedChannels = new Set([0, 1, 3]);
     let channelChart = null, resultsChart = null, contribChart = null;
-
     /* ── Mobile sidebar ── */
     function toggleSidebar() {
       document.getElementById('sidebar').classList.toggle('open');
@@ -1737,7 +586,6 @@ nav svg[width="16"][height="16"] { width: 16px !important; height: 16px !importa
       document.getElementById('sidebar').classList.remove('open');
       document.getElementById('sidebar-overlay').classList.remove('visible');
     }
-
     /* ── Tab switching ── */
     function switchTab(t) {
       document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
@@ -1757,13 +605,11 @@ nav svg[width="16"][height="16"] { width: 16px !important; height: 16px !importa
       if (t === 'audience') updateAudience();
       document.querySelector('.main').scrollTo(0, 0);
     }
-
     /* ── Helpers ── */
     const getBudget = () => parseInt(document.getElementById('budget').value) || 10000;
     const getDuration = () => parseInt(document.getElementById('duration').value) || 30;
     const getDealSize = () => parseInt(document.getElementById('dealsize').value) || 200;
     const fmt = n => Number(n).toLocaleString('ar-EG');
-
     /* ── Setup ── */
     function updateSetup() {
       const b = getBudget(), d = getDuration(), deal = getDealSize();
@@ -1786,7 +632,6 @@ nav svg[width="16"][height="16"] { width: 16px !important; height: 16px !importa
       document.getElementById('ph-roi').style.width = rPct + '%';
       document.getElementById('ph-roi-lbl').textContent = roi > 150 ? 'إمكانية ممتازة' : roi > 50 ? 'إمكانية قوية' : roi > 0 ? 'هامشية - راجع المدخلات' : 'في خطر - عدل الاستراتيجية';
     }
-
     /* ── Channels ── */
     function initChannels() {
       const grid = document.getElementById('channel-grid');
@@ -1836,7 +681,6 @@ nav svg[width="16"][height="16"] { width: 16px !important; height: 16px !importa
         }
       });
     }
-
     /* ── Audience ── */
     function updateAudience() {
       const amin = parseInt(document.getElementById('age-min').value) || 25;
@@ -1862,7 +706,6 @@ nav svg[width="16"][height="16"] { width: 16px !important; height: 16px !importa
     </div>
   `).join('');
     }
-
     /* ── Funnel ── */
     function updateFunnel() {
       const b = getBudget(), sel = [...selectedChannels];
@@ -1910,7 +753,6 @@ nav svg[width="16"][height="16"] { width: 16px !important; height: 16px !importa
     </div>
   `).join('');
     }
-
     /* ── A/B Testing ── */
     function updateAB() {
       const v = document.getElementById('ab-var').value, s = parseInt(document.getElementById('ab-split').value), d = parseInt(document.getElementById('ab-dur-in').value);
@@ -1936,7 +778,6 @@ nav svg[width="16"][height="16"] { width: 16px !important; height: 16px !importa
       ];
       document.getElementById('ab-log').innerHTML = logs.map(l => `<div class="log-line">${l}</div>`).join('');
     }
-
     /* ── Results ── */
     function initResults() {
       const b = getBudget(), deal = getDealSize();
@@ -1992,17 +833,13 @@ nav svg[width="16"][height="16"] { width: 16px !important; height: 16px !importa
         options: { responsive: true, maintainAspectRatio: false, cutout: '75%', plugins: { legend: { display: false } } }
       });
     }
-
     function varColor(v) { return getComputedStyle(document.documentElement).getPropertyValue(v).trim(); }
     function resetSim() { location.reload(); }
-
     window.onload = () => {
       updateSetup();
       initChannels();
     };
   </script>
-
-
 <script>
   (function() {
     var overlay = document.getElementById('fouc-overlay');
@@ -2025,6 +862,5 @@ nav svg[width="16"][height="16"] { width: 16px !important; height: 16px !importa
     }
   })();
 </script>
-
 </body>
 </html>

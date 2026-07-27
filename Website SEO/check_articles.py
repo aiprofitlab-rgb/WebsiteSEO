@@ -4,7 +4,7 @@ import re
 from bs4 import BeautifulSoup
 import sys
 
-base_dir = "/Users/nahid/Desktop/Nahid/AI Profit Lab/Website/Website SEO/public_html/blog"
+base_dir = "public_html/blog"
 en_dir = os.path.join(base_dir, "en")
 ar_dir = os.path.join(base_dir, "ar")
 
@@ -81,10 +81,10 @@ for path in files_to_check:
     if footer:
         footer_text = footer.get_text().strip()
         if is_ar:
-            if "© ٢٠٢٥ AI Profit Lab — علامة تجارية لشركة International Gulf Lotus SPC • جميع الحقوق محفوظة" not in content and "© ٢٠٢٥ AI Profit Lab" not in content:
+            if "© ٢٠٢٥ AI Profit Lab — علامة تجارية لشركة International Gulf Lotus SPC • جميع الحقوق محفوظة" not in footer_text and "© ٢٠٢٥ AI Profit Lab" not in footer_text:
                 issues.append("Arabic footer incorrect")
         else:
-            if "© 2025 AI Profit Lab — a brand of International Gulf Lotus SPC • All Rights Reserved" not in content and "© 2025 AI Profit Lab" not in content:
+            if "© 2025 AI Profit Lab — a brand of International Gulf Lotus SPC • All Rights Reserved" not in footer_text and "© 2025 AI Profit Lab" not in footer_text:
                 issues.append("English footer incorrect")
     else:
         issues.append("Missing footer")

@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
 <style>
@@ -11,11 +10,9 @@
     transition: opacity 0.3s ease;
   }
 </style>
-
 <meta charset="utf-8">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://aiprofitlab.io/customized-ceo-dashboard-demo/" rel="canonical">
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
 <title>FitFlow &mdash; Management Intelligence Platform</title>
 <!-- SEO & GEO Tags -->
@@ -23,7 +20,7 @@
 <meta content="CEO Dashboard, Management Intelligence, Business Automation, P&L Automation, AI Profit Lab, Oman AI, GCC Business Dashboard" name="keywords">
 <meta content="FitFlow &mdash; Management Intelligence Platform Demo | AI Profit Lab" property="og:title">
 <meta content="Explore our Customized CEO Dashboard Demo. See how AI Profit Lab's Management Intelligence Platform helps businesses in Oman and the GCC automate P&L, inventory, and client profitability." property="og:description">
-<meta content="customized-ceo-dashboard-demo.html" property="og:url">
+<meta content="customized-ceo-dashboard-demo/" property="og:url">
 <meta content="website" property="og:type">
 <!-- Local Business Schema -->
 <script type="application/ld+json">
@@ -103,7 +100,6 @@ body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-si
 .content{padding:24px 28px}
 .section{display:none}
 .section.active{display:block}
-
 /* KPI */
 .kpi-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px;margin-bottom:20px}
 .kpi{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r2);padding:17px 19px;box-shadow:var(--shadow);position:relative;overflow:hidden;transition:box-shadow .2s,transform .15s}
@@ -117,13 +113,11 @@ body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-si
 .kpi-delta.neu{color:var(--amber-dark);background:var(--amber-bg)}
 .kpi-delta.info{color:var(--indigo-dark);background:var(--indigo-bg)}
 .kpi-sub{font-size:11px;color:var(--muted);margin-top:4px}
-
 /* GRIDS */
 .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:15px;margin-bottom:16px}
 .grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:15px;margin-bottom:16px}
 .grid-60-40{display:grid;grid-template-columns:1.5fr 1fr;gap:15px;margin-bottom:16px}
 .grid-40-60{display:grid;grid-template-columns:1fr 1.5fr;gap:15px;margin-bottom:16px}
-
 /* CARDS */
 .card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r2);padding:18px 20px;box-shadow:var(--shadow)}
 .card-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
@@ -133,7 +127,6 @@ body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-si
 .card-badge.red{background:var(--red-bg);color:var(--red);border-color:rgba(220,38,38,0.2)}
 .card-badge.amber{background:var(--amber-bg);color:var(--amber-dark);border-color:rgba(245,158,11,0.2)}
 .card-badge.indigo{background:var(--indigo-bg);color:var(--indigo-dark);border-color:rgba(76,95,247,0.2)}
-
 /* WATERFALL */
 .wf-row{display:flex;align-items:center;gap:9px;margin-bottom:8px}
 .wf-label{font-size:12px;color:var(--muted2);width:130px;flex-shrink:0}
@@ -141,14 +134,12 @@ body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-si
 .wf-fill{height:100%;border-radius:6px;display:flex;align-items:center;padding:0 9px;transition:width 1s cubic-bezier(.4,0,.2,1)}
 .wf-num{font-size:11px;font-family:var(--font-mono);font-weight:500;white-space:nowrap}
 .wf-pct{font-size:10px;color:var(--muted);font-family:var(--font-mono);min-width:36px;text-align:right}
-
 /* BAR CHART */
 .bar-chart{display:flex;align-items:flex-end;gap:7px;height:110px;margin-bottom:7px}
 .bar-col{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;height:100%;justify-content:flex-end}
 .bar-fill{width:100%;border-radius:5px 5px 0 0;transition:height 1s cubic-bezier(.4,0,.2,1);min-height:4px}
 .bar-lbl{font-size:10px;color:var(--muted);font-family:var(--font-mono)}
 .bar-val{font-size:10px;color:var(--muted2);font-family:var(--font-mono)}
-
 /* TABLES */
 .data-table{width:100%;border-collapse:collapse}
 .data-table th{font-size:10px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;padding:7px 9px;border-bottom:1px solid var(--border);font-weight:500;text-align:left;background:var(--bg3)}
@@ -159,7 +150,6 @@ body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-si
 .data-table tr:hover td{background:var(--bg3)}
 .data-table .mono{font-family:var(--font-mono)}
 .data-table .right{text-align:right}
-
 /* PILLS */
 .pill{display:inline-flex;align-items:center;font-size:10px;font-family:var(--font-mono);padding:2px 8px;border-radius:20px;white-space:nowrap;font-weight:500}
 .pill.hi{background:var(--green-bg);color:var(--green-dark)}
@@ -167,18 +157,15 @@ body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-si
 .pill.lo{background:var(--red-bg);color:var(--red)}
 .pill.info{background:var(--sky-bg);color:#0369a1}
 .pill.purple{background:var(--violet-bg);color:var(--violet)}
-
 /* PROGRESS */
 .progress-row{display:flex;align-items:center;gap:9px;margin-bottom:9px}
 .progress-label{font-size:12px;color:var(--muted2);flex:1}
 .progress-track{width:120px;height:7px;background:var(--bg3);border-radius:4px;overflow:hidden}
 .progress-fill{height:100%;border-radius:4px;transition:width 1s}
 .progress-val{font-size:11px;font-family:var(--font-mono);color:var(--muted2);min-width:52px;text-align:right}
-
 /* MARGIN BAR */
 .margin-bar{display:flex;height:6px;border-radius:3px;background:var(--bg3);overflow:hidden;margin-top:3px}
 .margin-fill{border-radius:3px;transition:width 1s}
-
 /* ALERTS */
 .alert{display:flex;align-items:flex-start;gap:11px;padding:11px 13px;border-radius:var(--r);margin-bottom:8px;border:1px solid transparent}
 .alert.red{background:var(--red-bg);border-color:rgba(220,38,38,0.18)}
@@ -195,12 +182,10 @@ body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-si
 .alert.sky .alert-title{color:#0369a1}
 .alert-body{font-size:11px;color:var(--muted2);line-height:1.5}
 .alert-action{font-size:10px;font-family:var(--font-mono);color:var(--indigo);margin-top:5px;font-weight:500}
-
 /* INSIGHT BOX */
 .insight-box{background:linear-gradient(135deg,var(--indigo-bg),var(--teal-bg));border:1px solid rgba(76,95,247,0.2);border-radius:var(--r);padding:14px 18px;margin-bottom:14px}
 .insight-box .ib-title{color:var(--indigo);font-weight:600;font-size:12px;margin-bottom:3px}
 .insight-box .ib-body{font-size:12px;color:var(--muted2);line-height:1.55}
-
 /* STORY CARD */
 .story-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r2);padding:16px 18px;box-shadow:var(--shadow);margin-bottom:12px}
 .story-card .sc-label{font-size:10px;font-family:var(--font-mono);letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px;font-weight:500}
@@ -211,14 +196,12 @@ body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-si
 .sc-action-btn.primary{background:var(--indigo-bg);color:var(--indigo-dark);border:1px solid rgba(76,95,247,0.2)}
 .sc-action-btn.success{background:var(--green-bg);color:var(--green-dark);border:1px solid rgba(16,185,129,0.2)}
 .sc-action-btn.warn{background:var(--amber-bg);color:var(--amber-dark);border:1px solid rgba(245,158,11,0.2)}
-
 /* AUTOMATION CARDS */
 .auto-card{background:var(--bg3);border:1px solid var(--border);border-radius:var(--r);padding:13px 15px;display:flex;align-items:flex-start;gap:13px;margin-bottom:10px}
 .auto-icon{font-size:20px;flex-shrink:0;margin-top:2px}
 .auto-title{font-size:13px;font-weight:600;color:var(--text);margin-bottom:3px}
 .auto-body{font-size:11px;color:var(--muted2)}
 .auto-tag{display:inline-flex;font-size:10px;font-family:var(--font-mono);padding:1px 7px;border-radius:20px;margin-top:5px;font-weight:500;background:var(--indigo-bg);color:var(--indigo-dark)}
-
 /* TIER CARDS */
 .tier-card{background:var(--bg3);border:1px solid var(--border);border-radius:var(--r);padding:13px 15px;margin-bottom:9px;display:flex;align-items:center;gap:13px;transition:box-shadow .15s}
 .tier-card:hover{box-shadow:var(--shadow2)}
@@ -228,34 +211,28 @@ body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-si
 .tier-range{font-size:11px;color:var(--muted)}
 .tier-count{font-size:21px;font-family:var(--font-display)}
 .tier-count-lbl{font-size:10px;color:var(--muted)}
-
 /* CLIENT AVATAR */
 .client-avatar{width:29px;height:29px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;flex-shrink:0}
-
 /* SECTION HEADER */
 .section-header{margin-bottom:20px}
 .section-header h1{font-family:var(--font-display);font-size:26px;color:var(--text);margin-bottom:3px}
 .section-header p{font-size:13px;color:var(--muted2)}
-
 /* SLIDER */
 .slider-wrap{display:flex;align-items:center;gap:10px;margin:8px 0}
 .slider-wrap label{font-size:11px;color:var(--muted2);width:120px;flex-shrink:0}
 .slider-wrap input[type=range]{flex:1}
 .slider-wrap .val{font-size:12px;font-family:var(--font-mono);font-weight:500;min-width:50px;text-align:right;color:var(--text)}
-
 /* DONUT */
 .donut-wrap{display:flex;align-items:center;gap:18px}
 .donut-legend{display:flex;flex-direction:column;gap:8px}
 .legend-item{display:flex;align-items:center;gap:7px;font-size:12px}
 .legend-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
-
 /* FLOW */
 .flow-row{display:flex;align-items:center;gap:0;padding:14px 0;overflow-x:auto}
 .flow-step{display:flex;flex-direction:column;align-items:center;gap:7px;min-width:86px}
 .flow-icon{width:48px;height:48px;border-radius:var(--r);background:var(--bg3);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:20px;box-shadow:var(--shadow)}
 .flow-lbl{font-size:11px;color:var(--muted2);text-align:center;max-width:76px;line-height:1.3}
 .flow-arrow{font-size:16px;color:var(--indigo);padding:0 5px;margin-top:-18px}
-
 /* ANIMATIONS */
 @keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 .section.active .kpi{animation:fadeUp .35s both}
@@ -264,7 +241,6 @@ body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-si
 .section.active .kpi:nth-child(3){animation-delay:.14s}
 .section.active .kpi:nth-child(4){animation-delay:.19s}
 .section.active .card,.section.active .story-card{animation:fadeUp .38s .1s both}
-
         /* dashboard page — standard nav fix intentionally omitted */
         }
 </style>
@@ -365,7 +341,6 @@ body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-si
 /* === CLS FIX === */
 svg { max-width: 100%; height: auto; overflow: hidden; }
 svg:not([width]) { width: 24px; height: 24px; }
-
 /* ── DASHBOARD HEADER BAR ── */
 #dash-header {
   display: flex;
@@ -408,7 +383,6 @@ svg:not([width]) { width: 24px; height: 24px; }
   transition: background 0.15s;
 }
 #dash-header .dh-link:hover { background: #f4f6fb; }
-
 /* ── HAMBURGER (mobile only) ── */
 #sidebar-toggle {
   display: none;
@@ -419,7 +393,6 @@ svg:not([width]) { width: 24px; height: 24px; }
   color: #181c2e;
 }
 #sidebar-toggle svg { display: block; }
-
 /* ── SIDEBAR OVERLAY (mobile) ── */
 #sidebar-overlay {
   display: none;
@@ -429,7 +402,6 @@ svg:not([width]) { width: 24px; height: 24px; }
   z-index: 99;
 }
 #sidebar-overlay.open { display: block; }
-
 /* ── RESPONSIVE ── */
 @media (max-width: 900px) {
   .sidebar {
@@ -467,7 +439,6 @@ svg:not([width]) { width: 24px; height: 24px; }
   #dash-header { padding: 10px 14px; }
   #dash-header .dh-logo { font-size: 17px; }
 }
-
 /* ── LEGAL FOOTER ── */
 .dash-footer {
   text-align: center;
@@ -487,10 +458,11 @@ svg:not([width]) { width: 24px; height: 24px; }
   gtag('js', new Date());
   gtag('config', 'G-SLR9GD3MJP');
 </script>
+    <link rel="canonical" href="https://aiprofitlab.io/customized-ceo-dashboard-demo/" />
+  <meta name="description" content="FitFlow &mdash; Management Intelligence Platform - أتمتة الذكاء الاصطناعي في عمان. اكتشف كيف يمكننا مساعدة عملك في مسقط ودعم رؤية عمان 2040.">
 </head>
 <body>
 <div id="fouc-overlay"></div>
-
 <!-- AI Profit Lab Logo -->
 <!-- AI Profit Lab Header Bar -->
 <header id="dash-header">
@@ -1057,7 +1029,6 @@ svg:not([width]) { width: 24px; height: 24px; }
 </div>
 </div>
 </div>
-
 <footer class="dash-footer">
   © 2025 AI Profit Lab — a brand of International Gulf Lotus SPC • All Rights Reserved<br>
   <small>This is a customized CEO dashboard demo. Data shown is illustrative only.</small>
@@ -1067,7 +1038,6 @@ svg:not([width]) { width: 24px; height: 24px; }
 </div><!-- /shell -->
 <script>
 const titles={overview:'Executive Summary',pl:'P&L · CM1 CM2 CM3',products:'Product Profitability',inventory:'Inventory & Dead Stock',clients:'Client Profitability',loyalty:'Loyalty Program',cashflow:'Cash Flow Forecast — 90 Days',automation:'Automation Setup'};
-
 function go(id,btn){
   document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
   document.querySelectorAll('.nav-item').forEach(b=>b.classList.remove('active'));
@@ -1077,14 +1047,12 @@ function go(id,btn){
   setTimeout(animateBars,80);
   if(id==='pl') setTimeout(drawDonut,200);
 }
-
 function animateBars(){
   document.querySelectorAll('.wf-fill,.margin-fill,.progress-fill').forEach(b=>{
     const w=b.style.width; b.style.width='0%';
     setTimeout(()=>{b.style.width=w;},60);
   });
 }
-
 /* DONUT CHART */
 function drawDonut(){
   const c=document.getElementById('donutCost');
@@ -1116,7 +1084,6 @@ function drawDonut(){
   ctx.fillText('Costs',cx,cy-6);
   ctx.fillText('OMR 93K',cx,cy+8);
 }
-
 /* LOYALTY SIMULATOR */
 function calcLoyalty(){
   const plat=+document.getElementById('s_plat').value;
@@ -1125,19 +1092,16 @@ function calcLoyalty(){
   const goldCM3=+document.getElementById('s_gold_cm3').value;
   const rebate=+document.getElementById('s_rebate').value/100;
   const ret=+document.getElementById('s_ret').value/100;
-
   document.getElementById('v_plat').textContent=plat;
   document.getElementById('v_plat_cm3').textContent='OMR '+platCM3.toLocaleString();
   document.getElementById('v_gold').textContent=gold;
   document.getElementById('v_gold_cm3').textContent='OMR '+goldCM3.toLocaleString();
   document.getElementById('v_rebate').textContent=(rebate*100).toFixed(1)+'%';
   document.getElementById('v_ret').textContent=Math.round(ret*100)+'%';
-
   const totalRev=(plat*platCM3/0.215)+(gold*goldCM3/0.20);
   const rebateCost=Math.round(totalRev*rebate);
   const protected_rev=Math.round(totalRev*ret);
   const roi=protected_rev-rebateCost;
-
   document.getElementById('sim_cost').textContent='OMR '+rebateCost.toLocaleString();
   document.getElementById('sim_prot').textContent='OMR '+protected_rev.toLocaleString();
   document.getElementById('sim_roi').textContent='OMR '+roi.toLocaleString();
@@ -1145,18 +1109,14 @@ function calcLoyalty(){
   document.getElementById('sim_story').textContent=
     `With ${plat} Platinum and ${gold} Gold clients, your loyalty program costs OMR ${rebateCost.toLocaleString()}/month in rebates but protects OMR ${protected_rev.toLocaleString()} in monthly revenue through ${Math.round(ret*100)}% improved retention — a net gain of OMR ${roi.toLocaleString()} every month.`;
 }
-
 /* DATE */
 const d=new Date();
 document.getElementById('date-display').textContent=d.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric',year:'numeric'});
-
 /* INIT */
 setTimeout(animateBars,300);
 drawDonut();
 </script>
 <script defer src="/js/main.js"></script>
-
-
 <script>
   (function() {
     var overlay = document.getElementById('fouc-overlay');
@@ -1179,7 +1139,6 @@ drawDonut();
     }
   })();
 </script>
-
 <script>
 /* ── SIDEBAR TOGGLE ── */
 (function(){

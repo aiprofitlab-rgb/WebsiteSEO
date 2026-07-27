@@ -55,7 +55,6 @@ body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-si
 .content{padding:24px 28px}
 .section{display:none}
 .section.active{display:block}
-
 /* KPI */
 .kpi-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px;margin-bottom:20px}
 .kpi{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r2);padding:17px 19px;box-shadow:var(--shadow);position:relative;overflow:hidden;transition:box-shadow .2s,transform .15s}
@@ -69,13 +68,11 @@ body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-si
 .kpi-delta.neu{color:var(--amber-dark);background:var(--amber-bg)}
 .kpi-delta.info{color:var(--indigo-dark);background:var(--indigo-bg)}
 .kpi-sub{font-size:11px;color:var(--muted);margin-top:4px}
-
 /* GRIDS */
 .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:15px;margin-bottom:16px}
 .grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:15px;margin-bottom:16px}
 .grid-60-40{display:grid;grid-template-columns:1.5fr 1fr;gap:15px;margin-bottom:16px}
 .grid-40-60{display:grid;grid-template-columns:1fr 1.5fr;gap:15px;margin-bottom:16px}
-
 /* CARDS */
 .card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r2);padding:18px 20px;box-shadow:var(--shadow)}
 .card-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
@@ -85,7 +82,6 @@ body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-si
 .card-badge.red{background:var(--red-bg);color:var(--red);border-color:rgba(220,38,38,0.2)}
 .card-badge.amber{background:var(--amber-bg);color:var(--amber-dark);border-color:rgba(245,158,11,0.2)}
 .card-badge.indigo{background:var(--indigo-bg);color:var(--indigo-dark);border-color:rgba(76,95,247,0.2)}
-
 /* WATERFALL */
 .wf-row{display:flex;align-items:center;gap:9px;margin-bottom:8px}
 .wf-label{font-size:12px;color:var(--muted2);width:130px;flex-shrink:0}
@@ -93,14 +89,12 @@ body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-si
 .wf-fill{height:100%;border-radius:6px;display:flex;align-items:center;padding:0 9px;transition:width 1s cubic-bezier(.4,0,.2,1)}
 .wf-num{font-size:11px;font-family:var(--font-mono);font-weight:500;white-space:nowrap}
 .wf-pct{font-size:10px;color:var(--muted);font-family:var(--font-mono);min-width:36px;text-align:right}
-
 /* BAR CHART */
 .bar-chart{display:flex;align-items:flex-end;gap:7px;height:110px;margin-bottom:7px}
 .bar-col{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;height:100%;justify-content:flex-end}
 .bar-fill{width:100%;border-radius:5px 5px 0 0;transition:height 1s cubic-bezier(.4,0,.2,1);min-height:4px}
 .bar-lbl{font-size:10px;color:var(--muted);font-family:var(--font-mono)}
 .bar-val{font-size:10px;color:var(--muted2);font-family:var(--font-mono)}
-
 /* TABLES */
 .data-table{width:100%;border-collapse:collapse}
 .data-table th{font-size:10px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;padding:7px 9px;border-bottom:1px solid var(--border);font-weight:500;text-align:left;background:var(--bg3)}
@@ -111,7 +105,6 @@ body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-si
 .data-table tr:hover td{background:var(--bg3)}
 .data-table .mono{font-family:var(--font-mono)}
 .data-table .right{text-align:right}
-
 /* PILLS */
 .pill{display:inline-flex;align-items:center;font-size:10px;font-family:var(--font-mono);padding:2px 8px;border-radius:20px;white-space:nowrap;font-weight:500}
 .pill.hi{background:var(--green-bg);color:var(--green-dark)}
@@ -119,18 +112,15 @@ body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-si
 .pill.lo{background:var(--red-bg);color:var(--red)}
 .pill.info{background:var(--sky-bg);color:#0369a1}
 .pill.purple{background:var(--violet-bg);color:var(--violet)}
-
 /* PROGRESS */
 .progress-row{display:flex;align-items:center;gap:9px;margin-bottom:9px}
 .progress-label{font-size:12px;color:var(--muted2);flex:1}
 .progress-track{width:120px;height:7px;background:var(--bg3);border-radius:4px;overflow:hidden}
 .progress-fill{height:100%;border-radius:4px;transition:width 1s}
 .progress-val{font-size:11px;font-family:var(--font-mono);color:var(--muted2);min-width:52px;text-align:right}
-
 /* MARGIN BAR */
 .margin-bar{display:flex;height:6px;border-radius:3px;background:var(--bg3);overflow:hidden;margin-top:3px}
 .margin-fill{border-radius:3px;transition:width 1s}
-
 /* ALERTS */
 .alert{display:flex;align-items:flex-start;gap:11px;padding:11px 13px;border-radius:var(--r);margin-bottom:8px;border:1px solid transparent}
 .alert.red{background:var(--red-bg);border-color:rgba(220,38,38,0.18)}
@@ -147,12 +137,10 @@ body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-si
 .alert.sky .alert-title{color:#0369a1}
 .alert-body{font-size:11px;color:var(--muted2);line-height:1.5}
 .alert-action{font-size:10px;font-family:var(--font-mono);color:var(--indigo);margin-top:5px;font-weight:500}
-
 /* INSIGHT BOX */
 .insight-box{background:linear-gradient(135deg,var(--indigo-bg),var(--teal-bg));border:1px solid rgba(76,95,247,0.2);border-radius:var(--r);padding:14px 18px;margin-bottom:14px}
 .insight-box .ib-title{color:var(--indigo);font-weight:600;font-size:12px;margin-bottom:3px}
 .insight-box .ib-body{font-size:12px;color:var(--muted2);line-height:1.55}
-
 /* STORY CARD */
 .story-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r2);padding:16px 18px;box-shadow:var(--shadow);margin-bottom:12px}
 .story-card .sc-label{font-size:10px;font-family:var(--font-mono);letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px;font-weight:500}
@@ -163,14 +151,12 @@ body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-si
 .sc-action-btn.primary{background:var(--indigo-bg);color:var(--indigo-dark);border:1px solid rgba(76,95,247,0.2)}
 .sc-action-btn.success{background:var(--green-bg);color:var(--green-dark);border:1px solid rgba(16,185,129,0.2)}
 .sc-action-btn.warn{background:var(--amber-bg);color:var(--amber-dark);border:1px solid rgba(245,158,11,0.2)}
-
 /* AUTOMATION CARDS */
 .auto-card{background:var(--bg3);border:1px solid var(--border);border-radius:var(--r);padding:13px 15px;display:flex;align-items:flex-start;gap:13px;margin-bottom:10px}
 .auto-icon{font-size:20px;flex-shrink:0;margin-top:2px}
 .auto-title{font-size:13px;font-weight:600;color:var(--text);margin-bottom:3px}
 .auto-body{font-size:11px;color:var(--muted2)}
 .auto-tag{display:inline-flex;font-size:10px;font-family:var(--font-mono);padding:1px 7px;border-radius:20px;margin-top:5px;font-weight:500;background:var(--indigo-bg);color:var(--indigo-dark)}
-
 /* TIER CARDS */
 .tier-card{background:var(--bg3);border:1px solid var(--border);border-radius:var(--r);padding:13px 15px;margin-bottom:9px;display:flex;align-items:center;gap:13px;transition:box-shadow .15s}
 .tier-card:hover{box-shadow:var(--shadow2)}
@@ -180,34 +166,28 @@ body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-si
 .tier-range{font-size:11px;color:var(--muted)}
 .tier-count{font-size:21px;font-family:var(--font-display)}
 .tier-count-lbl{font-size:10px;color:var(--muted)}
-
 /* CLIENT AVATAR */
 .client-avatar{width:29px;height:29px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;flex-shrink:0}
-
 /* SECTION HEADER */
 .section-header{margin-bottom:20px}
 .section-header h1{font-family:var(--font-display);font-size:26px;color:var(--text);margin-bottom:3px}
 .section-header p{font-size:13px;color:var(--muted2)}
-
 /* SLIDER */
 .slider-wrap{display:flex;align-items:center;gap:10px;margin:8px 0}
 .slider-wrap label{font-size:11px;color:var(--muted2);width:120px;flex-shrink:0}
 .slider-wrap input[type=range]{flex:1}
 .slider-wrap .val{font-size:12px;font-family:var(--font-mono);font-weight:500;min-width:50px;text-align:right;color:var(--text)}
-
 /* DONUT */
 .donut-wrap{display:flex;align-items:center;gap:18px}
 .donut-legend{display:flex;flex-direction:column;gap:8px}
 .legend-item{display:flex;align-items:center;gap:7px;font-size:12px}
 .legend-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
-
 /* FLOW */
 .flow-row{display:flex;align-items:center;gap:0;padding:14px 0;overflow-x:auto}
 .flow-step{display:flex;flex-direction:column;align-items:center;gap:7px;min-width:86px}
 .flow-icon{width:48px;height:48px;border-radius:var(--r);background:var(--bg3);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:20px;box-shadow:var(--shadow)}
 .flow-lbl{font-size:11px;color:var(--muted2);text-align:center;max-width:76px;line-height:1.3}
 .flow-arrow{font-size:16px;color:var(--indigo);padding:0 5px;margin-top:-18px}
-
 /* ANIMATIONS */
 @keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 .section.active .kpi{animation:fadeUp .35s both}
@@ -225,10 +205,11 @@ body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-si
   gtag('js', new Date());
   gtag('config', 'G-SLR9GD3MJP');
 </script>
+    <link rel="canonical" href="https://aiprofitlab.io/customized-ceo-dashboard-demo/" />
+  <meta name="description" content="FitFlow — Management Intelligence Platform - أتمتة الذكاء الاصطناعي في عمان. اكتشف كيف يمكننا مساعدة عملك في مسقط ودعم رؤية عمان 2040.">
 </head>
 <body>
 <div class="shell">
-
 <!-- SIDEBAR -->
 <aside class="sidebar">
   <div class="logo">
@@ -279,7 +260,6 @@ body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-si
     <div class="powered"><span>● Google Sheets</span>&nbsp;via Make.com</div>
   </div>
 </aside>
-
 <div class="main">
 <div class="topbar">
   <div class="topbar-title" id="page-title">Executive Summary</div>
@@ -289,23 +269,19 @@ body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-si
     <button class="refresh-btn" onclick="animateBars()">↻ Refresh</button>
   </div>
 </div>
-
 <div class="content">
-
 <!-- ══════════════════════════════════════════════════ OVERVIEW -->
 <div class="section active" id="sec-overview">
   <div class="section-header">
     <h1>Good morning, Khalid.</h1>
     <p>Here is what happened in your business yesterday — and what needs your attention today.</p>
   </div>
-
   <div class="kpi-grid">
     <div class="kpi"><div class="kpi-accent" style="background:linear-gradient(90deg,var(--indigo),var(--sky))"></div><div class="kpi-label">Revenue MTD</div><div class="kpi-val">OMR 109K</div><span class="kpi-delta up">↑ +12%</span><div class="kpi-sub">vs OMR 97K last month</div></div>
     <div class="kpi"><div class="kpi-accent" style="background:linear-gradient(90deg,var(--teal),var(--green))"></div><div class="kpi-label">Gross Profit (CM1)</div><div class="kpi-val">OMR 41.9K</div><span class="kpi-delta neu">38.4% margin</span><div class="kpi-sub">Target 42% — 3.6% gap</div></div>
     <div class="kpi"><div class="kpi-accent" style="background:linear-gradient(90deg,var(--violet),var(--coral))"></div><div class="kpi-label">Net Profit (CM3)</div><div class="kpi-val">OMR 15.8K</div><span class="kpi-delta up">14.4% ✓ on target</span><div class="kpi-sub">Target was 12%</div></div>
     <div class="kpi"><div class="kpi-accent" style="background:linear-gradient(90deg,var(--amber),var(--coral))"></div><div class="kpi-label">SKUs below margin floor</div><div class="kpi-val">16 / 47</div><span class="kpi-delta dn">urgent review</span><div class="kpi-sub">3 are actively losing money</div></div>
   </div>
-
   <!-- STORY CARDS -->
   <div class="story-card" style="border-left:4px solid var(--red)">
     <div class="sc-label" style="color:var(--red)">⚡ Critical — Act today</div>
@@ -316,7 +292,6 @@ body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-si
       <button class="sc-action-btn warn">💬 WhatsApp alert sent to you</button>
     </div>
   </div>
-
   <div class="story-card" style="border-left:4px solid var(--amber)">
     <div class="sc-label" style="color:var(--amber-dark)">◈ Opportunity — This week</div>
     <div class="sc-headline">OMR 6,900 of cash is sitting idle in 4 dead-stock SKUs — costing OMR 350/month in warehouse fees</div>
@@ -326,7 +301,6 @@ body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-si
       <button class="sc-action-btn primary">📧 Draft client offer email</button>
     </div>
   </div>
-
   <div class="story-card" style="border-left:4px solid var(--teal)">
     <div class="sc-label" style="color:var(--teal-dark)">✓ Good news — double down</div>
     <div class="sc-headline">Shaker Bottle and Resistance Bands are your highest-margin products — and stock is running low</div>
@@ -336,7 +310,6 @@ body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-si
       <button class="sc-action-btn primary">💰 View margin analysis</button>
     </div>
   </div>
-
   <div class="grid-3">
     <div class="card">
       <div class="card-header"><div class="card-title">Revenue 6-month trend</div><div class="card-badge green">+12% MoM</div></div>
@@ -366,18 +339,15 @@ body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-si
     </div>
   </div>
 </div>
-
 <!-- ══════════════════════════════════════════════════ P&L -->
 <div class="section" id="sec-pl">
   <div class="section-header"><h1>P&amp;L · Contribution Margins</h1><p>From revenue to net profit — every cost made visible · auto-calculated from Google Sheets</p></div>
-
   <div class="kpi-grid">
     <div class="kpi"><div class="kpi-accent" style="background:var(--indigo)"></div><div class="kpi-label">Revenue</div><div class="kpi-val">OMR 109K</div><span class="kpi-delta info">baseline</span></div>
     <div class="kpi"><div class="kpi-accent" style="background:var(--teal)"></div><div class="kpi-label">CM1 Gross Profit</div><div class="kpi-val">OMR 41.9K</div><span class="kpi-delta up">38.4%</span><div class="kpi-sub">After product cost only</div></div>
     <div class="kpi"><div class="kpi-accent" style="background:var(--sky)"></div><div class="kpi-label">CM2 After Variables</div><div class="kpi-val">OMR 21.9K</div><span class="kpi-delta up">20.1%</span><div class="kpi-sub">After logistics & commissions</div></div>
     <div class="kpi"><div class="kpi-accent" style="background:var(--green)"></div><div class="kpi-label">CM3 Net Profit</div><div class="kpi-val">OMR 15.8K</div><span class="kpi-delta up">14.4%</span><div class="kpi-sub">After all fixed overhead</div></div>
   </div>
-
   <div class="grid-60-40">
     <div class="card">
       <div class="card-header"><div class="card-title">P&amp;L Waterfall — Feb 2026</div><div class="card-badge green">Full breakdown</div></div>
@@ -393,7 +363,6 @@ body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-si
       <div class="wf-row"><div class="wf-label">− Software &amp; admin</div><div class="wf-track"><div class="wf-fill" style="width:1%;background:var(--red-bg);border:1px solid rgba(220,38,38,0.15)"><span class="wf-num" style="color:var(--red)">−OMR 770</span></div></div><div class="wf-pct" style="color:var(--red)">0.7%</div></div>
       <div class="wf-row"><div class="wf-label" style="font-weight:700;color:var(--green-dark);font-size:13px">= CM3 Net profit</div><div class="wf-track" style="height:30px;background:transparent"><div class="wf-fill" style="width:14%;background:var(--green-bg);border:2px solid rgba(16,185,129,0.4)"><span class="wf-num" style="color:var(--green-dark)">OMR 15,800</span></div></div><div class="wf-pct" style="color:var(--green-dark)">14.4%</div></div>
     </div>
-
     <div style="display:flex;flex-direction:column;gap:14px">
       <!-- DONUT: cost breakdown -->
       <div class="card">
@@ -428,7 +397,6 @@ body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-si
       </div>
     </div>
   </div>
-
   <!-- Margin by category -->
   <div class="card">
     <div class="card-header"><div class="card-title">Margin by product category</div><div class="card-badge">CM1 · CM2 · CM3 per category</div></div>
@@ -480,7 +448,6 @@ body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-si
     </div>
   </div>
 </div>
-
 <!-- ══════════════════════════════════════════════════ PRODUCTS -->
 <div class="section" id="sec-products">
   <div class="section-header"><h1>Product Profitability</h1><p>Per-SKU CM1, CM2, CM3 breakdown — auto-synced from Google Sheets every 60 seconds</p></div>
@@ -509,7 +476,6 @@ body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-si
     </table>
   </div>
 </div>
-
 <!-- ══════════════════════════════════════════════════ INVENTORY -->
 <div class="section" id="sec-inventory">
   <div class="section-header"><h1>Inventory &amp; Dead Stock</h1><p>Sell-through rates, slow movers &amp; cash locked in warehouse</p></div>
@@ -548,7 +514,6 @@ body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-si
     </div>
   </div>
 </div>
-
 <!-- ══════════════════════════════════════════════════ CLIENTS -->
 <div class="section" id="sec-clients">
   <div class="section-header"><h1>Client Profitability</h1><p>Who is actually making you money — after delivery, returns &amp; payment terms</p></div>
@@ -558,7 +523,6 @@ body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-si
     <div class="kpi"><div class="kpi-accent" style="background:var(--amber)"></div><div class="kpi-label">Top 5 clients share</div><div class="kpi-val">61%</div><span class="kpi-delta neu">concentration risk</span></div>
     <div class="kpi"><div class="kpi-accent" style="background:var(--coral)"></div><div class="kpi-label">Unprofitable clients</div><div class="kpi-val">3</div><span class="kpi-delta dn">costing you money</span></div>
   </div>
-
   <div class="grid-60-40">
     <div class="card">
       <div class="card-header"><div class="card-title">Client ranking — net profit after all costs</div><div class="card-badge">24 clients</div></div>
@@ -578,7 +542,6 @@ body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-si
         <div class="ib-body">Deep discounts + 45-day payment = capital tied up for nearly 2 months generating 4% return. Recommend: minimum price increase of 8% or exit this client. SportPlus is worse — actively losing OMR 323/month after delivery costs.</div>
       </div>
     </div>
-
     <!-- Revenue vs Profit chart -->
     <div class="card">
       <div class="card-header"><div class="card-title">Revenue vs profit per client</div><div class="card-badge indigo">Bubble = profit OMR</div></div>
@@ -616,7 +579,6 @@ body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-si
     </div>
   </div>
 </div>
-
 <!-- ══════════════════════════════════════════════════ LOYALTY -->
 <div class="section" id="sec-loyalty">
   <div class="section-header"><h1>Loyalty Program</h1><p>Tier structure built from profitability data + interactive ROI simulator</p></div>
@@ -644,12 +606,10 @@ body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-si
         <div style="text-align:right"><div class="tier-count">6</div><div class="tier-count-lbl">clients</div></div>
       </div>
     </div>
-
     <!-- LOYALTY ROI SIMULATOR -->
     <div class="card">
       <div class="card-header"><div class="card-title">💡 Loyalty ROI Simulator</div><div class="card-badge indigo">Interactive</div></div>
       <div style="font-size:12px;color:var(--muted2);margin-bottom:14px">Adjust the sliders to see how your loyalty program pays off.</div>
-
       <div class="slider-wrap">
         <label>Platinum clients</label>
         <input type="range" id="s_plat" min="1" max="8" value="2" oninput="calcLoyalty()">
@@ -680,7 +640,6 @@ body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-si
         <input type="range" id="s_ret" min="5" max="25" value="15" oninput="calcLoyalty()">
         <span class="val" id="v_ret">15%</span>
       </div>
-
       <div style="border-top:1px solid var(--border);margin-top:14px;padding-top:14px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px">
         <div style="text-align:center;background:var(--red-bg);border-radius:var(--r);padding:10px"><div style="font-size:10px;color:var(--red);margin-bottom:4px">Rebate cost</div><div style="font-size:16px;font-family:var(--font-display);color:var(--red)" id="sim_cost">OMR 1,094</div></div>
         <div style="text-align:center;background:var(--green-bg);border-radius:var(--r);padding:10px"><div style="font-size:10px;color:var(--green-dark);margin-bottom:4px">Protected revenue</div><div style="font-size:16px;font-family:var(--font-display);color:var(--green-dark)" id="sim_prot">OMR 8,250</div></div>
@@ -690,7 +649,6 @@ body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-si
     </div>
   </div>
 </div>
-
 <!-- ══════════════════════════════════════════════════ CASH FLOW -->
 <div class="section" id="sec-cashflow">
   <div class="section-header"><h1>Cash Flow Forecast — 90 Days</h1><p>Forward view based on current orders, inventory levels &amp; client payment terms</p></div>
@@ -700,7 +658,6 @@ body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-si
     <div class="kpi"><div class="kpi-accent" style="background:var(--coral)"></div><div class="kpi-label">Expected outflows (30d)</div><div class="kpi-val">OMR 28.5K</div><span class="kpi-delta neu">COGS + overheads</span></div>
     <div class="kpi"><div class="kpi-accent" style="background:var(--green)"></div><div class="kpi-label">Net position (30d)</div><div class="kpi-val">+OMR 37.3K</div><span class="kpi-delta up">strong</span></div>
   </div>
-
   <div class="grid-60-40">
     <div class="card">
       <div class="card-header"><div class="card-title">90-day cash flow projection</div><div class="card-badge green">Positive all 3 months ✓</div></div>
@@ -729,7 +686,6 @@ body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-si
         <div style="display:flex;justify-content:space-between;margin-top:5px;font-size:11px;font-family:var(--font-mono)"><span style="color:var(--muted)">Apr</span><span style="color:var(--muted)">May</span><span style="color:var(--green-dark);font-weight:500">+OMR 42,700 total</span></div>
       </div>
     </div>
-
     <div class="card">
       <div class="card-header"><div class="card-title">Payment risk — outstanding invoices</div><div class="card-badge amber">OMR 25.8K out</div></div>
       <table class="data-table">
@@ -746,16 +702,13 @@ body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-si
     </div>
   </div>
 </div>
-
 <!-- ══════════════════════════════════════════════════ AUTOMATION -->
 <div class="section" id="sec-automation">
   <div class="section-header"><h1>Automation Setup</h1><p>Your Google Sheets become a live financial intelligence system — powered by Make.com</p></div>
-
   <div class="insight-box" style="margin-bottom:20px">
     <div class="ib-title">✓ No new software. No accountant required. Built on Google Sheets you already use.</div>
     <div class="ib-body">We add automation on top of your existing sheet. You enter a sale or a purchase — everything else calculates, alerts, and reports automatically within 60 seconds.</div>
   </div>
-
   <div class="card" style="margin-bottom:16px">
     <div class="card-header"><div class="card-title">How it works — end to end</div></div>
     <div class="flow-row">
@@ -770,7 +723,6 @@ body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-si
       <div class="flow-step"><div class="flow-icon">🔔</div><div class="flow-lbl">Right alert sent instantly</div></div>
     </div>
   </div>
-
   <div class="grid-2">
     <div>
       <div class="auto-card"><div class="auto-icon">📧</div><div><div class="auto-title">Daily morning email — 8:00 AM every day</div><div class="auto-body">Revenue yesterday vs target. Top 3 margin alerts. Cash position. Any overdue clients. Sent before you start your day so you know what to focus on.</div><div class="auto-tag">Triggered: daily 08:00</div></div></div>
@@ -806,14 +758,11 @@ body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-si
     </div>
   </div>
 </div>
-
 </div><!-- /content -->
 </div><!-- /main -->
 </div><!-- /shell -->
-
 <script>
 const titles={overview:'Executive Summary',pl:'P&L · CM1 CM2 CM3',products:'Product Profitability',inventory:'Inventory & Dead Stock',clients:'Client Profitability',loyalty:'Loyalty Program',cashflow:'Cash Flow Forecast — 90 Days',automation:'Automation Setup'};
-
 function go(id,btn){
   document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
   document.querySelectorAll('.nav-item').forEach(b=>b.classList.remove('active'));
@@ -823,14 +772,12 @@ function go(id,btn){
   setTimeout(animateBars,80);
   if(id==='pl') setTimeout(drawDonut,200);
 }
-
 function animateBars(){
   document.querySelectorAll('.wf-fill,.margin-fill,.progress-fill').forEach(b=>{
     const w=b.style.width; b.style.width='0%';
     setTimeout(()=>{b.style.width=w;},60);
   });
 }
-
 /* DONUT CHART */
 function drawDonut(){
   const c=document.getElementById('donutCost');
@@ -862,7 +809,6 @@ function drawDonut(){
   ctx.fillText('Costs',cx,cy-6);
   ctx.fillText('OMR 93K',cx,cy+8);
 }
-
 /* LOYALTY SIMULATOR */
 function calcLoyalty(){
   const plat=+document.getElementById('s_plat').value;
@@ -871,19 +817,16 @@ function calcLoyalty(){
   const goldCM3=+document.getElementById('s_gold_cm3').value;
   const rebate=+document.getElementById('s_rebate').value/100;
   const ret=+document.getElementById('s_ret').value/100;
-
   document.getElementById('v_plat').textContent=plat;
   document.getElementById('v_plat_cm3').textContent='OMR '+platCM3.toLocaleString();
   document.getElementById('v_gold').textContent=gold;
   document.getElementById('v_gold_cm3').textContent='OMR '+goldCM3.toLocaleString();
   document.getElementById('v_rebate').textContent=(rebate*100).toFixed(1)+'%';
   document.getElementById('v_ret').textContent=Math.round(ret*100)+'%';
-
   const totalRev=(plat*platCM3/0.215)+(gold*goldCM3/0.20);
   const rebateCost=Math.round(totalRev*rebate);
   const protected_rev=Math.round(totalRev*ret);
   const roi=protected_rev-rebateCost;
-
   document.getElementById('sim_cost').textContent='OMR '+rebateCost.toLocaleString();
   document.getElementById('sim_prot').textContent='OMR '+protected_rev.toLocaleString();
   document.getElementById('sim_roi').textContent='OMR '+roi.toLocaleString();
@@ -891,11 +834,9 @@ function calcLoyalty(){
   document.getElementById('sim_story').textContent=
     `With ${plat} Platinum and ${gold} Gold clients, your loyalty program costs OMR ${rebateCost.toLocaleString()}/month in rebates but protects OMR ${protected_rev.toLocaleString()} in monthly revenue through ${Math.round(ret*100)}% improved retention — a net gain of OMR ${roi.toLocaleString()} every month.`;
 }
-
 /* DATE */
 const d=new Date();
 document.getElementById('date-display').textContent=d.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric',year:'numeric'});
-
 /* INIT */
 setTimeout(animateBars,300);
 drawDonut();
