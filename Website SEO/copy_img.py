@@ -1,13 +1,8 @@
+import shutil
 import os
 
-src = "/Users/nahid/.gemini/antigravity-ide/brain/bc4e7af3-355a-4d67-bb56-3fd3026f6df1/process_customer_data_oman_ai_pdpl_1785325905759.png"
-dst = "public_html/blog/images/process_customer_data_oman_ai_pdpl.png"
+src = "/Users/nahid/.gemini/antigravity-ide/brain/d9254ccf-fcba-4c2b-bf39-f5616567cd3e/cloud_ai_compliance_omani_transport_telecom_guidelines_1785327770817.png"
+dst = "/Users/nahid/Desktop/Nahid/AI Profit Lab/Website/Website SEO/public_html/blog/images/cloud_ai_compliance_omani_transport_telecom_guidelines.png"
 
-try:
-    with open(src, "rb") as f_in:
-        data = f_in.read()
-    with open(dst, "wb") as f_out:
-        f_out.write(data)
-    print(f"SUCCESS: Copied {len(data)} bytes to {dst}")
-except Exception as e:
-    print(f"ERROR: {e}")
+shutil.copyfile(src, dst)
+print("Copied successfully to", dst)

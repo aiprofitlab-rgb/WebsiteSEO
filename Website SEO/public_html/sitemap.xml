@@ -793,6 +793,12 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://aiprofitlab.io/blog/ar/2026-07-29-cloud-ai-compliance-omani-transport-telecom-guidelines/</loc>
+    <lastmod>2026-07-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://aiprofitlab.io/blog/ar/2026-07-29-process-customer-data-oman-ai-pdpl-compliance/</loc>
     <lastmod>2026-07-29</lastmod>
     <changefreq>weekly</changefreq>
@@ -1533,6 +1539,12 @@
   <url>
     <loc>https://aiprofitlab.io/blog/en/2026-07-10-whatsapp-business-api-guide-gcc/</loc>
     <lastmod>2026-07-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://aiprofitlab.io/blog/en/2026-07-29-cloud-ai-compliance-omani-transport-telecom-guidelines/</loc>
+    <lastmod>2026-07-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
