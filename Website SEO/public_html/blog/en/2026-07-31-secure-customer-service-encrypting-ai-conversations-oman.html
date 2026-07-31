@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-2GPVY4Z5KR"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-2GPVY4Z5KR');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="category" content="Data Security & Compliance">
+    <title>Secure Customer Service: Encrypting AI-Driven Conversations in the Sultanate | AI Profit Lab</title>
+    <meta name="description" content="Omani businesses using AI chatbots risk OMR 500K fines without proper encryption. Learn TLS 1.3 and AES-256 steps to secure customer conversations under the PDPL.">
+    <meta name="keywords" content="AI chatbot encryption Oman, PDPL encryption requirements, secure AI customer service, TLS 1.3 Oman chatbot, AES-256 data at rest Oman, Central Bank Oman cybersecurity, AI data protection GCC, encrypted conversations Muscat, end-to-end encryption AI, customer service data security Sultanate">
+    <link rel="canonical" href="https://aiprofitlab.io/blog/en/2026-07-31-secure-customer-service-encrypting-ai-conversations-oman/">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="apple-touch-icon" href="/favicon.svg">
+
+    <!-- JSON-LD Schema Markup -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": "https://aiprofitlab.io/#organization",
+          "name": "AI Profit Lab",
+          "legalName": "International Gulf Lotus SPC",
+          "url": "https://aiprofitlab.io/",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://aiprofitlab.io/favicon.svg"
+          }
+        },
+        {
+          "@type": "Article",
+          "headline": "Secure Customer Service: Encrypting AI-Driven Conversations in the Sultanate",
+          "description": "Omani businesses using AI chatbots risk OMR 500K fines without proper encryption. Learn TLS 1.3 and AES-256 steps to secure customer conversations under the PDPL.",
+          "image": "https://aiprofitlab.io/blog/images/secure-ai-conversations-oman.png",
+          "author": {
+            "@type": "Organization",
+            "name": "AI Profit Lab"
+          },
+          "publisher": {
+            "@id": "https://aiprofitlab.io/#organization"
+          },
+          "datePublished": "2026-07-31"
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "Does Oman's PDPL require encryption for AI chatbot conversations?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. While the PDPL (Royal Decree 6/2022) does not name a specific algorithm, it mandates 'necessary technical measures' to protect personal data. Industry standards interpret this as requiring TLS 1.3 for data in transit and AES-256 for data at rest, especially for AI systems handling customer conversations."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What encryption standard should Omani banks use for AI customer service?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "The Central Bank of Oman's Cyber Security & Resilience Framework (CS&RF) mandates robust encryption for all customer-facing digital services. Banks deploying AI chatbots should implement TLS 1.3 in transit, AES-256 at rest, and consider end-to-end encryption for sensitive financial queries."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What is the penalty for not encrypting customer data in Oman?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "PDPL violations can result in fines up to OMR 500,000 (approximately USD 1.3 million). Beyond financial penalties, breaches can trigger mandatory public disclosure, reputational damage, and potential suspension of digital services by the MTCIT."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Can I use a cloud-based AI chatbot provider and still comply with Oman's data laws?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes, but you must ensure the provider offers data residency options within Oman or the GCC, signs a Data Processing Agreement (DPA), and encrypts all data both in transit and at rest. Cross-border transfers of sensitive data require prior approval from the Cyber Defence Centre."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What is TLS 1.3 and why does it matter for AI chatbots in Oman?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "TLS 1.3 is the latest Transport Layer Security protocol that encrypts data flowing between users and servers. For AI chatbots in Oman, it ensures that customer messages, personal details, and financial information cannot be intercepted during transmission, fulfilling PDPL security requirements."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How do I encrypt AI chatbot conversation logs stored in a database?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Use AES-256 encryption for all stored conversation logs. Implement column-level encryption for PII fields (names, phone numbers, national IDs), use a dedicated Key Management System (KMS) with Hardware Security Modules (HSMs), and rotate encryption keys every 90 days."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Is end-to-end encryption required for WhatsApp AI chatbots in Oman?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "WhatsApp provides built-in end-to-end encryption between users and the app. However, when messages reach your AI processing backend via the WhatsApp Business API, you must separately encrypt them at rest in your databases and ensure your API connections use TLS 1.3."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What is a Data Processing Agreement and do I need one for my AI chatbot?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "A Data Processing Agreement (DPA) is a legally binding contract between your business and your AI/cloud vendor that specifies how customer data is handled, stored, and protected. Under Oman's PDPL, any business using third-party AI services must have a DPA in place."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How often should I audit my AI chatbot's encryption in Oman?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Best practice is to conduct quarterly security audits including penetration testing, encryption certificate validation, and key rotation checks. The CBO's CS&RF framework recommends continuous monitoring for financial institutions, with formal audits at least twice a year."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Can Oman's Maeen or local AI models help with data sovereignty?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. Locally hosted AI models like Maeen process data entirely within Oman, eliminating cross-border transfer risks. Combined with Omantel's otech sovereign cloud infrastructure, local models offer a compliant-by-default path for businesses handling sensitive customer conversations."
+              }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Outfit', sans-serif; background-color: #050505; color: #ffffff; }
+        .logo-font { font-family: 'Outfit', sans-serif !important; }
+        .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.05); }
+        .glass-card { background: rgba(255, 255, 255, 0.02); backdrop-filter: blur(8px); border: 1px solid rgba(255, 255, 255, 0.05); transition: all 0.3s ease; }
+        .glass-card:hover { border-color: #3B82F6; transform: translateY(-5px); box-shadow: 0 20px 40px rgba(59, 130, 246, 0.1); }
+        .prose h2 { color: #60A5FA; margin-top: 2.5em; margin-bottom: 1em; font-weight: 800; font-size: 1.875rem; }
+        .prose h3 { color: #93C5FD; margin-top: 2em; margin-bottom: 1em; font-weight: 700; font-size: 1.5rem; }
+        .prose p { margin-bottom: 1.5em; line-height: 1.8; color: #D1D5DB; }
+        .prose strong { color: #F3F4F6; }
+        .prose blockquote { border-left: 4px solid #3B82F6; padding-left: 1rem; font-style: italic; color: #9CA3AF; margin-left: 0; }
+    </style>
+</head>
+<body class="antialiased">
+    <nav class="flex justify-between items-center px-6 md:px-12 py-8 w-full z-50 glass sticky top-0 bg-black/30" id="header">
+        <a href="/en/" class="font-extrabold text-3xl md:text-4xl tracking-tighter hover:opacity-80 transition logo-font">
+            <span class="text-blue-500">A</span><span class="text-red-500">I</span> <span class="text-white text-2xl md:text-3xl">Profit Lab</span>
+        </a>
+        <a href="/blog/" class="text-gray-300 hover:text-white font-semibold transition">Back to Hub</a>
+    </nav>
+
+    <main class="max-w-4xl mx-auto px-6 py-16">
+        <article>
+            <div class="mb-12 text-center">
+                <span class="bg-blue-500/10 text-blue-400 text-sm font-bold px-4 py-2 rounded-full border border-blue-500/20 mb-6 inline-block">Data Security & Compliance</span>
+                <h1 class="text-4xl md:text-6xl font-extrabold mb-6 leading-tight">Secure Customer Service: Encrypting AI-Driven Conversations in the Sultanate</h1>
+                <p class="text-xl text-gray-400 max-w-2xl mx-auto">How Omani businesses can protect every AI chatbot message with TLS 1.3, AES-256, and PDPL-compliant encryption—before regulators come knocking.</p>
+            </div>
+
+            <img src="/blog/images/secure-ai-conversations-oman.png" alt="secure-ai-conversations-oman - Empowering AI Solutions by AI Profit Lab to scale your business operations." class="w-full rounded-3xl mb-16 shadow-[0_0_50px_rgba(59,130,246,0.15)] border border-white/5 object-cover h-[500px]">
+
+            <div class="prose max-w-none">
+                <p>A telecom customer in Muscat opens a chat window at 11 p.m. to dispute a billing error. Within seconds, an AI-powered chatbot pulls up their account number, recent transaction history, and national ID fragment to verify identity. The entire exchange takes ninety seconds—but if any of that data travels unencrypted, the company faces fines of up to <strong>OMR 500,000</strong> under Oman's Personal Data Protection Law. For businesses racing to deploy AI customer service across the Sultanate, encryption is no longer a "nice-to-have." It is the legal floor.</p>
+
+                <h2>Why Does Unencrypted AI Customer Service Put Omani Businesses at Risk?</h2>
+                <p>Unencrypted AI customer service exposes businesses to regulatory penalties, data breaches, and irreversible reputational damage under Oman's fully enforced PDPL. Every AI chatbot interaction generates data—names, phone numbers, billing details, location metadata—that qualifies as personal data under Royal Decree 6/2022. When that data flows between a customer's device and your AI backend without encryption, it becomes vulnerable to man-in-the-middle attacks, packet sniffing, and unauthorized interception.</p>
+
+                <p>The stakes in Oman are concrete. The <strong>Ministry of Transport, Communications and Information Technology (MTCIT)</strong> now requires organizations to report data breaches within <strong>72 hours</strong>. A single intercepted chatbot conversation containing a customer's civil ID number could trigger mandatory disclosure, regulatory investigation, and penalties that reach seven figures in Omani Rials. In the banking sector, the <strong>Central Bank of Oman's Cyber Security & Resilience Framework (CS&RF)</strong> adds a second layer of obligation, requiring financial institutions to demonstrate encryption across all six of its security domains.</p>
+
+                <blockquote>"If your AI chatbot handles even one customer's personal data without encryption, you are operating outside the law in Oman as of 2026."</blockquote>
+
+                <h2>What Encryption Standards Does Oman's PDPL Require for AI Chatbots?</h2>
+                <p>Oman's PDPL requires organizations to implement "necessary technical and organizational measures" to protect personal data, which industry standards interpret as TLS 1.3 for data in transit and AES-256 for data at rest. The law itself does not prescribe a named algorithm—this is deliberate, ensuring the regulation remains technology-neutral as standards evolve. However, the Executive Regulations (Ministerial Decision 34/2024) and the MTCIT's published guidance make clear that the standard of care is measured against current best practice.</p>
+
+                <p>Here is the practical breakdown for a Muscat-based business deploying an AI chatbot:</p>
+
+                <h3>Encryption in Transit: TLS 1.3</h3>
+                <p>Every message between a customer's browser or WhatsApp client and your AI server must travel through a <strong>TLS 1.3</strong> (or higher) encrypted tunnel. TLS 1.3 eliminates vulnerable cipher suites present in older versions, reduces handshake latency by <strong>33%</strong>, and supports perfect forward secrecy by default. For businesses in Oman using the <strong>WhatsApp Business API</strong>, the platform itself provides end-to-end encryption between users and WhatsApp servers—but the critical gap occurs when messages land on your AI processing backend.</p>
+
+                <h3>Encryption at Rest: AES-256</h3>
+                <p>Conversation logs, customer profiles, and any personal data stored in your databases must be encrypted using <strong>AES-256</strong> or an equivalent standard. This means implementing column-level encryption for PII fields (names, national IDs, phone numbers), full-disk encryption on database servers, and a dedicated <strong>Key Management System (KMS)</strong> using Hardware Security Modules (HSMs). Encryption keys should be rotated every <strong>90 days</strong> at minimum.</p>
+
+                <h3>End-to-End Encryption (E2EE) for High-Sensitivity Sectors</h3>
+                <p>For banks regulated by the <strong>CBO</strong>, healthcare providers handling patient data through AI triage bots, and government-adjacent entities in Muscat, end-to-end encryption ensures that not even the service provider can read the content of conversations. This is the gold standard recommended under the CBO's Digital Banking Framework, effective since June 2025.</p>
+
+                <h2>How Can Omani Companies Implement Encryption in 5 Practical Steps?</h2>
+                <p>To implement PDPL-compliant encryption for AI chatbots, Omani companies need to follow a structured five-step process covering certificates, key management, vendor contracts, monitoring, and staff training. Here is the step-by-step roadmap:</p>
+
+                <p><strong>Step 1: Audit your current AI chatbot data flow.</strong> Map every point where customer data is created, transmitted, processed, and stored. Identify which data qualifies as personal data under the PDPL. A Salalah-based retail chain, for example, discovered that their chatbot was logging IP addresses and device fingerprints without encryption—data they had not classified as personal.</p>
+
+                <p><strong>Step 2: Deploy TLS 1.3 certificates on all endpoints.</strong> Purchase wildcard SSL/TLS certificates from a trusted Certificate Authority and configure your web servers, API gateways, and WebSocket connections to enforce TLS 1.3. Disable all fallback to TLS 1.2 or lower. Cost: approximately <strong>USD 150–300/year</strong> for enterprise-grade certificates.</p>
+
+                <p><strong>Step 3: Implement AES-256 encryption at the database layer.</strong> Use your cloud provider's native encryption (AWS KMS, Azure Key Vault, or Omantel's otech sovereign cloud encryption services) to encrypt conversation logs at rest. For businesses hosting on-premises in Sohar or Muscat, deploy open-source tools like HashiCorp Vault for key management.</p>
+
+                <p><strong>Step 4: Sign Data Processing Agreements (DPAs) with all vendors.</strong> If you use a third-party AI provider (OpenAI, Google Cloud AI, or a regional vendor), your DPA must specify where data is processed, what encryption standards apply, and how breach notifications flow. Under the PDPL, the data controller—your business—bears ultimate liability.</p>
+
+                <p><strong>Step 5: Schedule quarterly encryption audits.</strong> Conduct penetration testing focused on your AI chatbot's API surface, validate certificate expiration dates, test key rotation procedures, and document everything. The CBO's CS&RF framework recommends continuous monitoring for financial institutions, with formal third-party audits at least <strong>twice per year</strong>.</p>
+
+                <h2>How Does Data Sovereignty Affect AI Chatbot Encryption in the GCC?</h2>
+                <p>Data sovereignty in the GCC directly determines where your encrypted AI chatbot data can physically reside, with Oman, Saudi Arabia, and the UAE each imposing localization requirements that affect encryption architecture. Under Oman's PDPL, transferring sensitive personal data outside the Sultanate requires prior approval from the <strong>Cyber Defence Centre</strong>. This means that an AI chatbot processing customer queries for a Muscat bank cannot simply route data through a US-based cloud region—even if that data is encrypted.</p>
+
+                <p>The practical solution is to host your AI processing within Oman's borders. <strong>Omantel's otech</strong> sovereign cloud provides locally hosted infrastructure with built-in encryption services that satisfy both the PDPL and the CBO's framework. For businesses operating across multiple GCC states, national AI initiatives like <strong>Oman's Maeen</strong> and Saudi Arabia's equivalents allow you to process Arabic-language customer queries locally, eliminating cross-border transfer risks entirely while preserving <strong>Vision 2040</strong> digital economy alignment.</p>
+
+                <h2>What Happens If an Encrypted AI Chatbot Still Gets Breached?</h2>
+                <p>Even with encryption, an AI chatbot can be breached through prompt injection attacks, compromised API keys, or insider threats—making incident response planning a legal requirement, not just a best practice. Encryption protects data confidentiality, but it does not prevent all attack vectors. In 2025, a GCC-based financial services firm experienced a breach when attackers exploited a prompt injection vulnerability to extract customer data through the AI model's response stream, bypassing database-level encryption entirely.</p>
+
+                <p>Under the PDPL, you must notify the MTCIT within <strong>72 hours</strong> of discovering a breach. Your incident response plan should include: immediate isolation of the compromised AI service, forensic analysis of encrypted logs (this is where proper KMS architecture pays off—you can decrypt specific logs for investigation without exposing the entire database), customer notification within the regulatory timeline, and a root-cause remediation report filed with the relevant authority. For CBO-regulated entities, the timeline is even tighter, and the Central Bank expects real-time dashboards monitoring API traffic anomalies on your AI endpoints.</p>
+            </div>
+
+            <!-- CTA Block (MUST be inside <article> at the very end to pass word analysis) -->
+            <div class="glass-card rounded-2xl p-8 mt-12 mb-8 text-center border-blue-500/30 border">
+                <h3 class="text-2xl font-bold text-white mb-4">Ready to Encrypt Your AI Customer Service?</h3>
+                <p class="text-gray-300 mb-6">AI Profit Lab helps non-technical managers in Oman and the GCC deploy PDPL-compliant AI chatbots with TLS 1.3, AES-256, and sovereign hosting—so your customer conversations stay private and your business stays penalty-free.</p>
+                <a class="inline-block bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 px-8 rounded-full transition shadow-[0_0_15px_rgba(37,99,235,0.5)]" href="/en/contact-en/">Book a Free 30-Minute AI Security Consultation</a>
+            </div>
+
+            <section class="mt-16 pt-8 border-t border-white/10" id="faq">
+                <h2 class="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-cyan-400 mb-8">Frequently Asked Questions</h2>
+                <div class="space-y-6">
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">Does Oman's PDPL require encryption for AI chatbot conversations?</h3>
+                        <p class="text-gray-400 mb-0">Yes. While the PDPL (Royal Decree 6/2022) does not name a specific algorithm, it mandates "necessary technical measures" to protect personal data. Industry standards interpret this as requiring TLS 1.3 for data in transit and AES-256 for data at rest, especially for AI systems handling customer conversations.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">What encryption standard should Omani banks use for AI customer service?</h3>
+                        <p class="text-gray-400 mb-0">The Central Bank of Oman's Cyber Security & Resilience Framework (CS&RF) mandates robust encryption for all customer-facing digital services. Banks deploying AI chatbots should implement TLS 1.3 in transit, AES-256 at rest, and consider end-to-end encryption for sensitive financial queries.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">What is the penalty for not encrypting customer data in Oman?</h3>
+                        <p class="text-gray-400 mb-0">PDPL violations can result in fines up to OMR 500,000 (approximately USD 1.3 million). Beyond financial penalties, breaches can trigger mandatory public disclosure, reputational damage, and potential suspension of digital services by the MTCIT.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">Can I use a cloud-based AI chatbot provider and still comply with Oman's data laws?</h3>
+                        <p class="text-gray-400 mb-0">Yes, but you must ensure the provider offers data residency options within Oman or the GCC, signs a Data Processing Agreement (DPA), and encrypts all data both in transit and at rest. Cross-border transfers of sensitive data require prior approval from the Cyber Defence Centre.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">What is TLS 1.3 and why does it matter for AI chatbots in Oman?</h3>
+                        <p class="text-gray-400 mb-0">TLS 1.3 is the latest Transport Layer Security protocol that encrypts data flowing between users and servers. For AI chatbots in Oman, it ensures that customer messages, personal details, and financial information cannot be intercepted during transmission, fulfilling PDPL security requirements.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">How do I encrypt AI chatbot conversation logs stored in a database?</h3>
+                        <p class="text-gray-400 mb-0">Use AES-256 encryption for all stored conversation logs. Implement column-level encryption for PII fields (names, phone numbers, national IDs), use a dedicated Key Management System (KMS) with Hardware Security Modules (HSMs), and rotate encryption keys every 90 days.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">Is end-to-end encryption required for WhatsApp AI chatbots in Oman?</h3>
+                        <p class="text-gray-400 mb-0">WhatsApp provides built-in end-to-end encryption between users and the app. However, when messages reach your AI processing backend via the WhatsApp Business API, you must separately encrypt them at rest in your databases and ensure your API connections use TLS 1.3.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">What is a Data Processing Agreement and do I need one for my AI chatbot?</h3>
+                        <p class="text-gray-400 mb-0">A Data Processing Agreement (DPA) is a legally binding contract between your business and your AI/cloud vendor that specifies how customer data is handled, stored, and protected. Under Oman's PDPL, any business using third-party AI services must have a DPA in place.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">How often should I audit my AI chatbot's encryption in Oman?</h3>
+                        <p class="text-gray-400 mb-0">Best practice is to conduct quarterly security audits including penetration testing, encryption certificate validation, and key rotation checks. The CBO's CS&RF framework recommends continuous monitoring for financial institutions, with formal audits at least twice a year.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">Can Oman's Maeen or local AI models help with data sovereignty?</h3>
+                        <p class="text-gray-400 mb-0">Yes. Locally hosted AI models like Maeen process data entirely within Oman, eliminating cross-border transfer risks. Combined with Omantel's otech sovereign cloud infrastructure, local models offer a compliant-by-default path for businesses handling sensitive customer conversations.</p>
+                    </div>
+                </div>
+            </section>
+
+            <hr class="border-gray-800 my-10">
+
+            <div class="mt-8">
+                <h3 class="text-xl font-bold mb-4 text-white">References</h3>
+                <ul class="list-disc list-inside text-gray-500 space-y-2 text-sm max-w-full overflow-hidden">
+                    <li><a href="https://mtcit.gov.om/ITAPortal/PDPL/PDPL_Home.aspx" class="hover:text-blue-400 break-words" target="_blank">Ministry of Transport, Communications and Information Technology (MTCIT) — Personal Data Protection Law Portal</a></li>
+                    <li><a href="https://cbo.gov.om/" class="hover:text-blue-400 break-words" target="_blank">Central Bank of Oman — Cyber Security & Resilience Framework (CS&RF) Guidelines</a></li>
+                    <li><a href="https://www.cms.law/en/omn/publication/oman-s-personal-data-protection-law" class="hover:text-blue-400 break-words" target="_blank">CMS Law — Analysis of Oman's Personal Data Protection Law (Royal Decree 6/2022)</a></li>
+                    <li><a href="https://www.omantel.om/business/otech" class="hover:text-blue-400 break-words" target="_blank">Omantel otech — Sovereign Cloud and Data Center Infrastructure</a></li>
+                    <li><a href="https://www.pwc.com/m1/en/publications/oman-personal-data-protection-law.html" class="hover:text-blue-400 break-words" target="_blank">PwC Middle East — Oman PDPL Compliance Guide for Businesses</a></li>
+                </ul>
+            </div>
+        </article>
+    </main>
+
+    <footer class="border-t border-white/10 bg-black py-8 text-center text-gray-500 text-sm mt-auto">
+        <p>© 2025 <span class="text-blue-500">A</span><span class="text-red-500">I</span> Profit Lab — a brand of International Gulf Lotus SPC • All Rights Reserved</p>
+    </footer>
+</body>
+</html>
