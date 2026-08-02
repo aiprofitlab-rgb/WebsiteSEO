@@ -3,8 +3,8 @@ import json
 import re
 
 paths = [
-    "public_html/blog/en/2026-07-31-whatsapp-business-api-vs-app-oman.html",
-    "public_html/blog/ar/2026-07-31-whatsapp-business-api-vs-app-oman.html"
+    "public_html/blog/en/2026-07-10-what-is-an-ai-agent-oman.html",
+    "public_html/blog/ar/2026-07-10-what-is-an-ai-agent-oman.html"
 ]
 
 results = []
