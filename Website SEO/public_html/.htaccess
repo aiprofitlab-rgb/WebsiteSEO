@@ -48,6 +48,33 @@
 </IfModule>
 FileETag None
 
+# --- Block Non-Public Files ---
+# These are already on the server from earlier deploys. The workflow's
+# `exclude` stops NEW ones being uploaded, but excluded files are also
+# skipped by the delete pass, so the existing copies must be blocked here.
+# Verified publicly readable (HTTP 200) on 2026-08-04 before this block.
+<FilesMatch "(^\.|\.(py|pyc|log|bak|orig|sh|zip|sql|ini)$)">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order allow,deny
+        Deny from all
+    </IfModule>
+</FilesMatch>
+
+# Explicit: the FTP deploy state file is a full inventory of every file on
+# the server (names, sizes, SHA-256 hashes). Never serve it.
+<Files ".ftp-deploy-sync-state.json">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order allow,deny
+        Deny from all
+    </IfModule>
+</Files>
+
 # --- Basic Server Configuration ---
 Options +FollowSymLinks -MultiViews -Indexes
 DirectoryIndex index.html

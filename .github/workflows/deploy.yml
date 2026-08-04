@@ -24,5 +24,19 @@ jobs:
           # Local source
           local-dir: "./Website SEO/public_html/"
           # Destination: The dot means "The main entrance"
-          server-dir: "./" 
+          server-dir: "./"
           port: 21
+          # Hostinger's FTP control socket is slow to answer; the action's
+          # 30s default caused "Error: Timeout (control socket)" and a
+          # silent no-op deploy (run 30883760289, 2026-08-04).
+          timeout: 120000
+          # NOTE: setting `exclude` replaces the action's defaults, so the
+          # first three patterns re-specify them. The rest keep dev-only
+          # files out of the public web root.
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/node_modules/**
+            **/.DS_Store
+            **/*.py
+            **/__pycache__/**
