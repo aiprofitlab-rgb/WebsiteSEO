@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-2GPVY4Z5KR"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-2GPVY4Z5KR');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="category" content="Enterprise Automation">
+    <title>How to Connect Webhooks, Make.com, and n8n with Enterprise ERPs in Oman | AI Profit Lab</title>
+    <meta name="description" content="Struggling with SAP or Oracle integration in Muscat? Learn how to connect webhooks, Make.com, and n8n to enterprise ERPs securely under Oman PDPL rules.">
+    <meta name="keywords" content="Enterprise ERP Oman, Webhooks SAP Oracle, Make.com n8n ERP integration, Oman PDPL ERP automation, Muscat Enterprise Integration">
+    <link rel="canonical" href="https://aiprofitlab.io/blog/en/2026-08-04-connect-webhooks-make-n8n-enterprise-erp-oman/">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="apple-touch-icon" href="/favicon.svg">
+    
+    <!-- JSON-LD Schema Markup -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": "https://aiprofitlab.io/#organization",
+          "name": "AI Profit Lab",
+          "legalName": "International Gulf Lotus SPC",
+          "url": "https://aiprofitlab.io/",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://aiprofitlab.io/favicon.svg"
+          }
+        },
+        {
+          "@type": "Article",
+          "headline": "How to Connect Webhooks, Make.com, and n8n with Enterprise ERPs in Oman",
+          "description": "Struggling with SAP or Oracle integration in Muscat? Learn how to connect webhooks, Make.com, and n8n to enterprise ERPs securely under Oman PDPL rules.",
+          "image": "https://aiprofitlab.io/blog/images/connect-webhooks-make-n8n-enterprise-erp-oman.png",
+          "author": {
+            "@type": "Organization",
+            "name": "AI Profit Lab"
+          },
+          "publisher": {
+            "@id": "https://aiprofitlab.io/#organization"
+          },
+          "datePublished": "2026-08-04"
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "What is the fastest way to stream real-time data out of SAP or Oracle ERP in Oman?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "The fastest method is configuring event-driven HTTP Webhooks or REST API event listeners in SAP Business Technology Platform (BTP) or Oracle Cloud ERP, routing payloads instantly to middleware like n8n or Make.com."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Is Make.com compliant with the Omani Personal Data Protection Law (PDPL) for Enterprise ERP data?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Make.com processes data on cloud infrastructure outside Oman. For non-PII operations like stock level updates, it is suitable; however, for sensitive PII or financial data, local enterprise policies require self-hosted n8n."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Why do enterprise IT teams in Muscat prefer n8n over Zapier for ERP integration?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "n8n can be self-hosted on local Omani infrastructure (such as Omantel Cloud or local data centers), ensuring 100% data sovereignty, full compliance with Omani PDPL, and execution of complex custom code nodes."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How do webhooks differ from traditional API polling in enterprise ERP systems?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "API polling repeatedly queries the ERP server every few minutes, consuming high CPU and network resources, whereas webhooks send real-time event notifications only when a specific trigger occurs."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Can Microsoft Dynamics 365 send webhooks to Make.com scenarios?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes, Microsoft Dynamics 365 can push real-time webhooks via Power Automate HTTP webhooks or Azure Event Grid into Make.com Custom Webhook listeners for immediate workflow automation."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What security mechanisms protect ERP webhooks in Oman from unauthorized access?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Enterprise webhooks must use HMAC SHA256 signature verification, IP whitelisting, TLS 1.3 encryption, and bearer token authentication headers to guarantee data integrity."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How does self-hosted n8n handle high-volume ERP inventory updates in Sohar or Salalah industrial zones?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Self-hosted n8n in queue mode uses Redis and worker nodes to process thousands of concurrent ERP inventory webhooks asynchronously without dropping transactions."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What is the typical deployment timeline for an n8n-ERP middleware connection in Muscat?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Setting up the n8n environment, configuring ERP webhook triggers, parsing JSON schemas, and verifying security endpoints typically takes between 5 to 10 business days."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Can legacy Omani ERP systems without native webhook support be integrated into modern workflows?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes, legacy SQL-based ERPs can be connected using database log triggers or lightweight Python microservices that poll local tables and emit webhooks to n8n."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How do automation platforms handle ERP rate limits and request retries?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Both n8n and Make.com include built-in retry mechanisms, exponential backoff handling, and rate-limiting modules to prevent ERP system lockouts during peak operational traffic."
+              }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Outfit', sans-serif; background-color: #050505; color: #ffffff; }
+        .logo-font { font-family: 'Outfit', sans-serif !important; }
+        .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.05); }
+        .glass-card { background: rgba(255, 255, 255, 0.02); backdrop-filter: blur(8px); border: 1px solid rgba(255, 255, 255, 0.05); transition: all 0.3s ease; }
+        .glass-card:hover { border-color: #3B82F6; transform: translateY(-5px); box-shadow: 0 20px 40px rgba(59, 130, 246, 0.1); }
+        .prose h2 { color: #60A5FA; margin-top: 2.5em; margin-bottom: 1em; font-weight: 800; font-size: 1.875rem; }
+        .prose h3 { color: #93C5FD; margin-top: 2em; margin-bottom: 1em; font-weight: 700; font-size: 1.5rem; }
+        .prose p { margin-bottom: 1.5em; line-height: 1.8; color: #D1D5DB; }
+        .prose strong { color: #F3F4F6; }
+        .prose blockquote { border-left: 4px solid #3B82F6; padding-left: 1rem; font-style: italic; color: #9CA3AF; margin-left: 0; }
+    </style>
+</head>
+<body class="antialiased">
+    <nav class="flex justify-between items-center px-6 md:px-12 py-8 w-full z-50 glass sticky top-0 bg-black/30" id="header">
+        <a href="/en/" class="font-extrabold text-3xl md:text-4xl tracking-tighter hover:opacity-80 transition logo-font">
+            <span class="text-blue-500">A</span><span class="text-red-500">I</span> <span class="text-white text-2xl md:text-3xl">Profit Lab</span>
+        </a>
+        <a href="/blog/" class="text-gray-300 hover:text-white font-semibold transition">Back to Hub</a>
+    </nav>
+
+    <main class="max-w-4xl mx-auto px-6 py-16">
+        <article>
+            <div class="mb-12 text-center">
+                <span class="bg-blue-500/10 text-blue-400 text-sm font-bold px-4 py-2 rounded-full border border-blue-500/20 mb-6 inline-block">Enterprise Automation</span>
+                <h1 class="text-4xl md:text-6xl font-extrabold mb-6 leading-tight">How to Connect Webhooks, Make.com, and n8n with Enterprise ERPs in Oman</h1>
+                <p class="text-xl text-gray-400 max-w-2xl mx-auto">A comprehensive technical architecture guide for integrating legacy and cloud ERP systems like SAP, Oracle, and Microsoft Dynamics with modern workflow automation engines while staying strictly compliant with Omani PDPL regulations.</p>
+            </div>
+
+            <img src="/blog/images/connect-webhooks-make-n8n-enterprise-erp-oman.png" alt="connect-webhooks-make-n8n-enterprise-erp-oman - Empowering AI Solutions by AI Profit Lab to scale your business operations." class="w-full rounded-3xl mb-16 shadow-[0_0_50px_rgba(59,130,246,0.15)] border border-white/5 object-cover h-[500px]">
+
+            <div class="prose max-w-none">
+                <p>Modern enterprises operating in Muscat, Sohar, and Salalah rely on Enterprise Resource Planning (ERP) systems such as SAP S/4HANA, Oracle Fusion, and Microsoft Dynamics 365 to run core logistics, finance, and supply chain operations. However, legacy batch processing and rigid custom ABAP or PL/SQL scripts often lock critical business data in data silos. When sales teams in Muscat need instant updates on incoming shipment containers or finance teams require real-time invoice matching, traditional polling methods waste immense server bandwidth and create costly operational delays.</p>
+
+                <p>Connecting event-driven Webhooks with modern middleware platforms like Make.com and n8n bridges the gap between massive ERP legacy databases and modern business applications. By routing real-time HTTP payloads through visual workflow orchestrators, enterprise IT directors across Oman can automate multi-step business logic in seconds rather than months. In this technical blueprint, we detail exact architectural patterns, payload structures, security protocols, and Omani Personal Data Protection Law (PDPL) compliance frameworks required to connect webhooks to enterprise ERPs effectively.</p>
+
+                <h2>How do webhooks enable real-time ERP data streaming in Omani enterprises?</h2>
+                <p>To enable real-time ERP data streaming in Omani enterprises, webhooks act as event-driven HTTP callbacks that push JSON payloads instantly when a database mutation occurs, eliminating wasteful API polling cycles.</p>
+
+                <p>Traditional ERP integrations rely on scheduled cron jobs that poll REST or SOAP endpoints every 15 to 30 minutes. For an industrial distributor in Sohar handling 5,000 inventory items daily, polling drains system resources and causes latency. Webhooks invert this architecture: whenever a warehouse worker updates a stock level in SAP, the ERP immediately pushes a lightweight HTTP POST request to an external listening endpoint hosted on Make.com or n8n.</p>
+
+                <p>Below is a typical JSON payload emitted by an enterprise ERP webhook when a purchase order is updated in Muscat:</p>
+
+                <pre class="bg-slate-900 p-4 rounded-xl border border-white/10 text-cyan-300 text-sm overflow-x-auto"><code>{
+  "event": "purchase_order.updated",
+  "timestamp": "2026-08-04T10:15:30Z",
+  "organization_id": "OM-MUSCAT-8840",
+  "data": {
+    "po_number": "PO-994021",
+    "vendor": "Al-Hassan Logistics LLC",
+    "total_value_omr": 42500.500,
+    "status": "APPROVED",
+    "line_items": 14
+  },
+  "signature": "sha256=d3b07384d113edec49eaa6238ad5ff00"
+}</code></pre>
+
+                <p>Because webhooks only fire when actual work happens, compute consumption drops by up to 85% compared to constant polling cycles. This enables real-time synchronization between core financial databases and operational dashboards across GCC branch offices.</p>
+
+                <h2>Make.com vs. n8n: Which integration platform fits your Omani ERP architecture?</h2>
+                <p>To choose between Make.com and n8n for your Omani ERP architecture, evaluate data residency constraints under the Omani PDPL, workflow complexity, and your internal IT team's coding capability.</p>
+
+                <p>Both Make.com and n8n excel at receiving webhook triggers, parsing multi-level JSON bodies, transforming schemas, and routing requests to downstream services like PostgreSQL databases, WhatsApp Business APIs, or BI dashboards. However, their underlying deployment models differ fundamentally, impacting how enterprise IT leaders in Oman evaluate risk and costs.</p>
+
+                <div class="glass rounded-2xl p-6 my-8 border border-white/10 overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="border-b border-white/10 text-blue-400">
+                                <th class="py-3 px-4">Architectural Feature</th>
+                                <th class="py-3 px-4">Make.com (Cloud Middleware)</th>
+                                <th class="py-3 px-4">n8n (Self-Hosted / Fair-Code)</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-white/5 text-gray-300">
+                            <tr>
+                                <td class="py-3 px-4 font-bold text-white">Primary Hosting Location</td>
+                                <td class="py-3 px-4">US & EU Cloud Infrastructure</td>
+                                <td class="py-3 px-4 text-cyan-400 font-semibold">Local On-Premise or Omantel Cloud</td>
+                            </tr>
+                            <tr>
+                                <td class="py-3 px-4 font-bold text-white">PDPL Data Sovereignty</td>
+                                <td class="py-3 px-4">Requires Cross-Border Transfer Audit</td>
+                                <td class="py-3 px-4 text-cyan-400 font-semibold">100% In-Country Compliance (Oman)</td>
+                            </tr>
+                            <tr>
+                                <td class="py-3 px-4 font-bold text-white">Custom Code Support</td>
+                                <td class="py-3 px-4">Basic JavaScript Functions</td>
+                                <td class="py-3 px-4 text-cyan-400 font-semibold">Full Node.js & Python Execution</td>
+                            </tr>
+                            <tr>
+                                <td class="py-3 px-4 font-bold text-white">Pricing Structure</td>
+                                <td class="py-3 px-4">Per Operation (~$10.59 per 10k ops)</td>
+                                <td class="py-3 px-4 text-cyan-400 font-semibold">Flat Server Compute (Fixed Monthly)</td>
+                            </tr>
+                            <tr>
+                                <td class="py-3 px-4 font-bold text-white">Best Use Case</td>
+                                <td class="py-3 px-4">Rapid SME SaaS Automation</td>
+                                <td class="py-3 px-4 text-cyan-400 font-semibold">Enterprise ERPs, Banking & Defense</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <p>For non-sensitive operations such as public marketing syncs or non-PII inventory status broadcasts, Make.com offers an intuitive visual drag-and-drop scenario builder with 1,500+ pre-built SaaS app modules. Conversely, for financial transactions, medical records, or government-linked enterprises governed by Royal Decree No. 6/2022 (Oman PDPL), self-hosting n8n inside a local virtual private cloud (VPC) in Muscat ensures zero data leaves Omani jurisdiction.</p>
+
+                <h2>Step-by-step guide to configuring SAP & Oracle webhooks with n8n and Make.com</h2>
+                <p>To configure SAP and Oracle webhooks with n8n and Make.com, you must set up HTTP trigger nodes, register webhook endpoints within ERP Event Mesh, implement authentication verification, and parse data payloads.</p>
+
+                <p>Integrating enterprise platforms requires a structured four-phase workflow to avoid broken transactions or unhandled exception loops:</p>
+
+                <h3>1. Provisioning the Webhook Receiver Node</h3>
+                <p>In Make.com, add a <strong>Custom Webhook</strong> module to your scenario, copy the generated target URL, and configure response headers. In n8n, create a <strong>Webhook Trigger</strong> node, select <code>POST</code> method, and set authentication to <code>Header Auth</code> or <code>HMAC Signature Verification</code>.</p>
+
+                <h3>2. Registering Event Subscriptions in SAP / Oracle</h3>
+                <p>For SAP S/4HANA, navigate to the <strong>SAP Business Technology Platform (BTP) Event Mesh</strong> cockpit. Create an Outbound Event Subscription linked to your entity (e.g., <code>sap.s4.bef.purchaseorder.v1.PurchaseOrder.Created.v1</code>) and paste the webhook URL generated by n8n or Make.com as the target destination. For Oracle Cloud ERP, configure REST Event Notifications in Oracle Integration Cloud (OIC).</p>
+
+                <h3>3. Validating Payload Signatures for Security</h3>
+                <p>Enterprise endpoints must verify incoming requests to prevent spoofing attack vectors. In n8n, insert a Crypto Node immediately after the Webhook node to compute an HMAC SHA-256 hash using your shared secret key and compare it against the HTTP header signature:</p>
+
+                <pre class="bg-slate-900 p-4 rounded-xl border border-white/10 text-cyan-300 text-sm overflow-x-auto"><code>// n8n Code Node snippet verifying HMAC SHA-256
+const crypto = require('crypto');
+const signature = $request.headers['x-erp-signature'];
+const secret = $node["Webhook"].parameter["secretKey"];
+const computedHash = crypto.createHmac('sha256', secret)
+                           .update(JSON.stringify($json.body))
+                           .digest('hex');
+
+if (signature !== `sha256=${computedHash}`) {
+  throw new Error("Unauthorized Webhook Request: Signature Mismatch");
+}
+return $input.all();</code></pre>
+
+                <h3>4. Transforming Data & Triggering Downstream Services</h3>
+                <p>Once validated, use Make.com dynamic mappers or n8n Set nodes to reformat nested ERP JSON arrays into flat schemas suitable for CRM syncs, automated WhatsApp payment links, or SQL database upserts.</p>
+
+                <h2>How to enforce Omani PDPL compliance during ERP data integration?</h2>
+                <p>To enforce Omani PDPL compliance during ERP data integration, encrypt all webhooks in transit using TLS 1.3, isolate personally identifiable information (PII), host middleware in local data centers, and keep immutable access audit logs.</p>
+
+                <p>Executive IT teams in Oman face strict compliance penalties under the Omani Personal Data Protection Law (PDPL). Handling employee IDs, customer civil numbers, or local bank routing details through unencrypted webhooks poses severe regulatory liability. Enforce the following governance rules across all integration scenarios:</p>
+
+                <blockquote class="my-6">"Under Omani PDPL guidelines, enterprise automated workflows processing personal data must implement strict data minimization, end-to-end TLS 1.3 encryption, and localized data retention within sovereign borders."</blockquote>
+
+                <ul>
+                    <li><strong>In-Flight Encryption:</strong> Enforce strict HTTPS enforcement with mandatory TLS 1.3 ciphers for all webhook endpoints. Webhooks using insecure HTTP must be rejected at the API gateway layer.</li>
+                    <li><strong>PII Tokenization:</strong> Before emitting webhooks from SAP or Dynamics 365, redact or hash sensitive fields like Omani Civil ID numbers using SHA-256 algorithms. Only transmit non-sensitive operational primary keys across cloud middleware.</li>
+                    <li><strong>Local Gateway Infrastructure:</strong> Deploy n8n Docker containers on localized Omani cloud hosting providers (e.g., Omantel Cloud or Otech data facilities) so data processing remains strictly within Muscat jurisdiction.</li>
+                    <li><strong>Detailed Audit Logging:</strong> Maintain centralized immutable execution logs containing event IDs, timestamp headers, and HTTP status codes to satisfy annual regulatory security compliance audits.</li>
+                </ul>
+
+                <h2>What are the cost savings and ROI of webhook-driven ERP integration in Oman?</h2>
+                <p>Webhook-driven ERP integration in Oman yields an ROI within 90 days by reducing custom API development costs by up to 70% and eliminating manual data entry labor across business operations.</p>
+
+                <p>Building legacy point-to-point Java or C# connectors between an enterprise SAP system and custom internal tools traditionally costs upwards of 15,000 OMR ($39,000 USD) in developer hours, requiring weeks of testing. Modern webhook middleware slashes deployment timelines from months down to a few days, delivering immediate financial impact:</p>
+
+                <ul>
+                    <li><strong>75% Reduction in Custom Code Maintenance:</strong> Visual automation platforms remove the need to maintain fragile legacy integration scripts.</li>
+                    <li><strong>Zero Missed Inventory Transactions:</strong> Asynchronous webhooks queue bursts of up to 10,000 concurrent transactions without dropping packets during high-volume sales events.</li>
+                    <li><strong>120+ Hours Saved Monthly per Branch:</strong> Eliminating manual copy-paste invoice transfers frees administrative staff in Muscat to focus on customer-facing operations.</li>
+                </ul>
+            </div>
+
+            <!-- CTA Block -->
+            <div class="glass-card rounded-2xl p-8 mt-12 mb-8 text-center border-blue-500/30 border">
+                <h3 class="text-2xl font-bold text-white mb-4">Ready to Automate Your Enterprise ERP Workflows in Oman?</h3>
+                <p class="text-gray-300 mb-6">AI Profit Lab helps enterprise directors and IT leaders in Muscat build secure, PDPL-compliant webhook pipelines connecting SAP, Oracle, and Dynamics 365 with n8n and Make.com middleware.</p>
+                <a class="inline-block bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 px-8 rounded-full transition shadow-[0_0_15px_rgba(37,99,235,0.5)]" href="/en/contact-en/">Book a Free 30-Minute AI & ERP Consultation</a>
+            </div>
+
+            <section class="mt-16 pt-8 border-t border-white/10" id="faq">
+                <h2 class="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-cyan-400 mb-8">Frequently Asked Questions</h2>
+                <div class="space-y-6">
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">What is the fastest way to stream real-time data out of SAP or Oracle ERP in Oman?</h3>
+                        <p class="text-gray-400 mb-0">The fastest method is configuring event-driven HTTP Webhooks or REST API event listeners in SAP Business Technology Platform (BTP) or Oracle Cloud ERP, routing payloads instantly to middleware like n8n or Make.com.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">Is Make.com compliant with the Omani Personal Data Protection Law (PDPL) for Enterprise ERP data?</h3>
+                        <p class="text-gray-400 mb-0">Make.com processes data on cloud infrastructure outside Oman. For non-PII operations like stock level updates, it is suitable; however, for sensitive PII or financial data, local enterprise policies require self-hosted n8n.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">Why do enterprise IT teams in Muscat prefer n8n over Zapier for ERP integration?</h3>
+                        <p class="text-gray-400 mb-0">n8n can be self-hosted on local Omani infrastructure (such as Omantel Cloud or local data centers), ensuring 100% data sovereignty, full compliance with Omani PDPL, and execution of complex custom code nodes.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">How do webhooks differ from traditional API polling in enterprise ERP systems?</h3>
+                        <p class="text-gray-400 mb-0">API polling repeatedly queries the ERP server every few minutes, consuming high CPU and network resources, whereas webhooks send real-time event notifications only when a specific trigger occurs.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">Can Microsoft Dynamics 365 send webhooks to Make.com scenarios?</h3>
+                        <p class="text-gray-400 mb-0">Yes, Microsoft Dynamics 365 can push real-time webhooks via Power Automate HTTP webhooks or Azure Event Grid into Make.com Custom Webhook listeners for immediate workflow automation.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">What security mechanisms protect ERP webhooks in Oman from unauthorized access?</h3>
+                        <p class="text-gray-400 mb-0">Enterprise webhooks must use HMAC SHA256 signature verification, IP whitelisting, TLS 1.3 encryption, and bearer token authentication headers to guarantee data integrity.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">How does self-hosted n8n handle high-volume ERP inventory updates in Sohar or Salalah industrial zones?</h3>
+                        <p class="text-gray-400 mb-0">Self-hosted n8n in queue mode uses Redis and worker nodes to process thousands of concurrent ERP inventory webhooks asynchronously without dropping transactions.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">What is the typical deployment timeline for an n8n-ERP middleware connection in Muscat?</h3>
+                        <p class="text-gray-400 mb-0">Setting up the n8n environment, configuring ERP webhook triggers, parsing JSON schemas, and verifying security endpoints typically takes between 5 to 10 business days.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">Can legacy Omani ERP systems without native webhook support be integrated into modern workflows?</h3>
+                        <p class="text-gray-400 mb-0">Yes, legacy SQL-based ERPs can be connected using database log triggers or lightweight Python microservices that poll local tables and emit webhooks to n8n.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-2">How do automation platforms handle ERP rate limits and request retries?</h3>
+                        <p class="text-gray-400 mb-0">Both n8n and Make.com include built-in retry mechanisms, exponential backoff handling, and rate-limiting modules to prevent ERP system lockouts during peak operational traffic.</p>
+                    </div>
+                </div>
+            </section>
+
+            <hr class="border-gray-800 my-10">
+
+            <div class="mt-8">
+                <h3 class="text-xl font-bold mb-4 text-white">References</h3>
+                <ul class="list-disc list-inside text-gray-500 space-y-2 text-sm max-w-full overflow-hidden">
+                    <li><a href="https://n8n.io/docs/" class="hover:text-blue-400 break-words" target="_blank">n8n Documentation & Enterprise Deployment Guide</a></li>
+                    <li><a href="https://www.make.com/en/help/tools/webhooks" class="hover:text-blue-400 break-words" target="_blank">Make.com Webhook Integration Standards</a></li>
+                    <li><a href="https://help.sap.com/docs/SAP_BUSINESSOBJECTS_BUSINESS_INTELLIGENCE_PLATFORM/webhooks" class="hover:text-blue-400 break-words" target="_blank">SAP Event Mesh and Webhooks Architecture</a></li>
+                </ul>
+            </div>
+        </article>
+    </main>
+
+    <footer class="border-t border-white/10 bg-black py-8 text-center text-gray-500 text-sm mt-auto">
+        <p>© 2025 <span class="text-blue-500">A</span><span class="text-red-500">I</span> Profit Lab — a brand of International Gulf Lotus SPC • All Rights Reserved</p>
+    </footer>
+</body>
+</html>

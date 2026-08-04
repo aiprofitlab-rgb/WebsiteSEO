@@ -1,21 +1,17 @@
 import os
-import re
+import sys
 
-base_dir = os.path.dirname(os.path.abspath(__file__))
+# Add parent directory to path
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
-# 1. Update EN Hub
-blog_en_html_path = os.path.join(base_dir, "public_html", "blog", "index.html")
-blog_en_dir = os.path.join(base_dir, "public_html", "blog", "en")
+import update_blog_hubs
+import generate_final_sitemap
 
-# 2. Update AR Hub
-blog_ar_html_path = os.path.join(base_dir, "public_html", "blog-ar", "index.html")
-blog_ar_dir = os.path.join(base_dir, "public_html", "blog", "ar")
+print("Running update_blog_hubs...")
+update_blog_hubs.main() if hasattr(update_blog_hubs, 'main') else None
 
-# Import functions from update_blog_hubs
-from update_blog_hubs import update_hub
-update_hub(blog_en_html_path, "en", blog_en_dir)
-update_hub(blog_ar_html_path, "ar", blog_ar_dir)
-
-# 3. Generate sitemap
-from process_new_article import *
-print("Hubs updated and sitemap generated successfully.")
+print("Running sitemap generation...")
+if hasattr(generate_final_sitemap, 'main'):
+    generate_final_sitemap.main()
+elif hasattr(generate_final_sitemap, 'generate_sitemap'):
+    generate_final_sitemap.generate_sitemap()
