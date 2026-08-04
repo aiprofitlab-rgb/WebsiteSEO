@@ -87,7 +87,13 @@ RewriteEngine On
 RewriteBase /
 
 # 1. Force trailing slash on ALL URLs (except real files)
+# The !\.html$ guard is load-bearing: without it a MISSING .html file gets a
+# slash appended (/x.html -> /x.html/), rule 4 then maps that to x.html.html,
+# and the request redirects forever instead of 404ing. A failed deploy on
+# 2026-08-04 left that infinite chain cached in Hostinger's CDN. Requests
+# ending in .html are handled by rule 7 instead.
 RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_URI} !\.html$
 RewriteCond %{REQUEST_URI} !(.*)/$
 RewriteRule ^(.*)$ https://aiprofitlab.io/$1/ [L,R=301]
 
