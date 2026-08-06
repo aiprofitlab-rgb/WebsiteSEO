@@ -5,10 +5,12 @@
 
 ## Product Overview
 **One-liner:** AI automation agency that builds simple, affordable automation systems for SMEs in Oman and the GCC.
-**What it does:** AI Profit Lab designs and implements custom AI/automation workflows (WhatsApp AI receptionist, missed-call recovery, lead capture, sales & invoice automation, CEO dashboards) that replace repetitive manual admin work with 24/7 automated systems, typically live within 14–30 days.
+**What it does:** AI Profit Lab designs and implements custom AI/automation workflows (WhatsApp AI receptionist, missed-call recovery, lead capture, sales & invoice automation, CEO dashboards) that replace repetitive manual admin work with 24/7 automated systems.
+**Delivery timeline (corrected 2026-08-04):** live services page states **3–6 weeks (Starter), 6–12 weeks (Growth), 10–14 weeks (Scale)**; About page says "first version in days, not months." ⚠️ The previously stated "14–30 days" was **not found anywhere on the live site** — do not use it in copy.
 **Product category:** AI automation / business process automation consulting (not a self-serve SaaS product — a done-for-you service/implementation).
 **Product type:** Service / consulting + custom software builds (built on enterprise automation platforms — GoHighLevel branding appears in assets — plus custom API integrations).
-**Business model:** Monthly retainer/subscription for the automation system, custom packages starting at OMR 75/month; sales driven by a free 30-minute "AI Strategy Call" audit booked via a multi-step qualification form.
+**Business model:** Setup fee + monthly managed retainer; sales driven by a free 30-minute "AI Strategy Call" audit booked via a multi-step qualification form.
+**Actual published pricing (verified 2026-08-04 from `services-en.html`):** Starter OMR 500 setup + OMR 75/mo (annual prepay OMR 750) · Growth OMR 1,200 + OMR 150/mo (annual OMR 1,500) · Scale OMR 2,500 + OMR 300/mo (annual OMR 3,000). Standalone products: website OMR 800 + optional OMR 100/mo · dashboard OMR 300 + optional OMR 50/mo · Arabic chatbot add-on OMR 150 · custom automation OMR 200 each · staff training OMR 100/session. ⚠️ Quoting "from OMR 75/month" alone understates first-year cost (~OMR 1,400) — always state the setup fee.
 
 ## Target Audience
 **Target companies:** SMEs in Oman and the wider GCC (UAE, Saudi Arabia, Qatar, Kuwait, Bahrain) — local and expat-owned businesses, not enterprise/Silicon-Valley-scale companies.
@@ -41,10 +43,27 @@
 **Emotional tension:** Overwhelm and distrust of "tech" — fear of being oversold complicated, jargon-heavy solutions they won't understand or maintain.
 
 ## Competitive Landscape
-**Direct:** Generic automation/CRM platforms (e.g., GoHighLevel-type tools sold directly to end users) — fall short because they require the business owner to configure and maintain the system themselves; no hand-holding, no local context.
-**Secondary:** Hiring additional administrative/customer-service staff — falls short on cost, availability (8h/5d vs 24/7), and error rate, per the site's own comparison table.
-**Indirect:** Doing nothing / continuing manual processes — falls short because it caps growth and keeps leaking revenue through missed leads.
-*(Named regional competitors not yet documented — see Open Questions.)*
+
+*Named competitors researched 2026-08-04. Full profiles: `.agents/competitors/*.yml`. Page plan: `.agents/competitors/PAGE-PLAN.md`.*
+
+**Direct — named local competitors (Oman):**
+| Competitor | Model | Pricing | Threat |
+|---|---|---|---|
+| [QwicLink](https://www.qwiclink.com/) | Self-serve CRM + messaging automation for Omani service businesses | **Published:** OMR 15 / 29 / 49 per month + small setup | **High** — same ICP, undercuts us ~2:1 |
+| [Nuqta](https://nuqtai.com/en) | Applied AI lab: Gulf-Arabic dialect models, on-premise private AI, model handover | Not published | **High** — publishes 6 named clients; deeper Arabic |
+| [WIYA](https://wiya.ai/en) | WhatsApp storefront with in-chat payments/invoicing; secure local GPT | Not published | **Med-high** — strong national press presence |
+| [4Ys](https://4ys.org/) | Enterprise platform: ERP/CRM/HR/POS (120+ modules) + own AI models | Bespoke | **Medium** — different weight class |
+| [Qurban Tech](https://qurbantech.com/services/ai-engineering-oman) | Agentic AI engineering, Muscat/Salalah/Sohar | Not published | Medium |
+| Autonoly, INZINT, VOLIOM, Muscat Audit | Platform / on-prem / analytics / finance-automation angles | Not published | Low–medium |
+
+**Secondary:** Hiring additional administrative/customer-service staff — OMR 350–500/mo plus visa, insurance, leave, covering ~40 of 168 hours. **Note:** the site's replace-a-human framing is a strategic risk with Omani owners; recommended reframe to *capacity, not replacement* — see `.agents/competitors/pages/02-vs-hiring-admin-staff.md`.
+**Also direct:** DIY platforms (Zapier/Make/n8n), chatbot SaaS (ManyChat/Tidio), and freelancers — see `non-agency-alternatives.yml`.
+**Indirect:** Doing nothing — still the largest single competitor.
+
+### ⚠️ Three competitive realities that change positioning
+1. **We are not the affordable option locally.** QwicLink's AI tier ≈ OMR 617 year one vs our Starter ≈ OMR 1,400. The "affordable for GCC SMEs" claim holds against *enterprise/global* tools and against hiring — **not** against local rivals. Differentiate on done-for-you scope.
+2. **Our proof gap is the binding constraint.** We publish zero named clients or testimonials; Nuqta publishes six. Do not publish named-competitor "vs" pages until 2–3 references exist.
+3. **Several headline stats are unsourced** (0.01% error rate, 40% capacity gain, 78% overhead cut, 99.9% uptime). Source or soften before using them anywhere a competitor might challenge them.
 
 ## Differentiation
 **Key differentiators:**
@@ -111,8 +130,8 @@
 ---
 
 ## Open Questions (please review/fill in)
-1. Are there any named direct competitors in the Oman/GCC AI-automation space worth tracking?
-2. Do you have real customer testimonials/quotes or case studies to add to Proof Points? (Site currently only asks visitors to leave a Google Review.)
+1. ~~Are there any named direct competitors in the Oman/GCC AI-automation space worth tracking?~~ **✅ Answered 2026-08-04** — six named local competitors researched and profiled in `.agents/competitors/`. See Competitive Landscape above.
+2. **🔴 NOW THE HIGHEST-PRIORITY GAP.** Do you have real customer testimonials/quotes or case studies to add to Proof Points? (Site currently only asks visitors to leave a Google Review.) Nuqta publishes six named clients; we publish none. This blocks the named-competitor comparison pages and weakens every page on the site.
 3. Who is explicitly *not* a good fit — e.g. minimum company size, industries you turn away, budget floor?
 4. Any specific verbatim quotes from sales calls/WhatsApp that describe how customers talk about their problem or about you?
 5. Is GoHighLevel (or another platform) the actual delivery backend worth naming internally, or should that stay unstated externally?

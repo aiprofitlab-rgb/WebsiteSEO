@@ -1,0 +1,85 @@
+---
+# Secondary players — track, don't build dedicated pages yet
+verified: 2026-08-04
+confidence: low-medium
+
+competitors:
+  - slug: qurban-tech
+    name: Qurban Tech
+    url: https://qurbantech.com/services/ai-engineering-oman
+    positioning: '"Agentic AI engineering" for Oman'
+    geography: Muscat, Salalah, Sohar
+    sectors: [logistics, government, tourism, healthcare]
+    pricing: unknown
+    threat_level: medium
+    note: >
+      Multi-city Omani footprint and sector depth. Engineering-services framing,
+      likely project-priced above our SME entry point.
+
+  - slug: autonoly
+    name: Autonoly
+    url: https://www.autonoly.com/locations/muscat/workflow-automation
+    positioning: Workflow/AI agent automation platform with a stated Muscat implementation team
+    claims: "deployed AI workflows for 250+ businesses"
+    pricing: unknown
+    threat_level: medium
+    note: >
+      Programmatic location-page SEO play — they rank for "Muscat workflow
+      automation" via templated city pages. Their claim volume dwarfs ours.
+      Also a direct model for our own programmatic-seo opportunity.
+
+  - slug: inzint
+    name: INZINT LLC Oman
+    url: https://www.inzint.om/services/chatbot
+    positioning: On-premises AI chatbot with complete privacy
+    pricing: unknown
+    threat_level: low-medium
+    note: Competes on the privacy/on-prem axis alongside Nuqta.
+
+  - slug: voliom
+    name: VOLIOM Automate
+    url: https://automate.voliom.com/gulf/muscat/ai-data-analytics
+    positioning: AI data & analytics for Muscat businesses
+    pricing: unknown
+    threat_level: low
+    note: Analytics-led; overlaps our CEO Dashboard product only.
+
+  - slug: muscat-audit
+    name: Muscat Audit (MAAS)
+    url: https://muscataudit.com/digitalization-automation-services-in-oman/
+    positioning: Financial process automation, ERP integration, AI audit
+    claims: cuts manual work by 70%
+    pricing: unknown
+    threat_level: low
+    note: Finance/audit-led entry to automation. Overlaps invoice automation only.
+
+  - slug: fusion-informatics
+    name: Fusion Informatics
+    url: https://www.fusioninformatics.com/top-artificial-intelligence-ai-company-in-muscat-oman.html
+    positioning: Offshore AI development company targeting Muscat via SEO landing pages
+    pricing: unknown
+    threat_level: low
+    note: India-based offshore dev shop ranking on Muscat terms. Not a local peer.
+
+  - slug: mint-digital
+    name: Mint Digital Solutions
+    url: https://mintdigitalsolutions.ae/ai-automation/
+    positioning: WhatsApp AI chatbot and automation services for SME business
+    geography: UAE
+    pricing: unknown
+    threat_level: low
+    note: UAE-based; relevant only for our GCC expansion pages.
+
+directories_to_claim:
+  - name: TechBehemoths
+    url: https://techbehemoths.com/companies/artificial-intelligence/oman
+    why: Ranks for "AI companies in Oman/Muscat". Listing = backlink + referral traffic.
+    status: not claimed — verify
+  - name: AI in Oman
+    url: https://aiinoman.com/
+    why: Local AI ecosystem publication — PR and backlink target.
+    status: not approached
+  - name: Enterprise AI Expo
+    url: https://aienterpriseexpo.com/
+    why: Largest AI conference in Oman — speaking/exhibit opportunity.
+    status: not approached

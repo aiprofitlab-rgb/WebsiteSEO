@@ -1,0 +1,114 @@
+---
+# The alternatives buyers actually weigh most often — and where the search volume is.
+verified: 2026-08-04
+
+alternatives:
+  - slug: hiring-admin-staff
+    name: Hiring an administrator / receptionist
+    category: Status quo (human hire)
+    why_considered: The default reflex when enquiries outgrow the owner's capacity
+    our_source: Homepage + services comparison table (live site)
+    cost: OMR 350–500/month plus visa, insurance, paid leave
+    coverage: ~8 hours/day, 5 days/week
+    error_rate_claim: 4–6% (our figure — source unverified, label as our estimate)
+    strengths:
+      - Judgement, empathy, and handling genuine exceptions
+      - Can do physical and off-system tasks automation cannot
+      - Culturally and linguistically native by default
+      - No integration project required
+    weaknesses:
+      - Cost scales linearly with volume; automation does not
+      - No nights, weekends or holidays
+      - Turnover, notice periods, visa and leave admin
+      - Ramp-up time on every new hire
+    honest_position: >
+      This is not either/or and we should stop implying it is. The strongest
+      honest frame: automation absorbs the repetitive volume so the person you
+      already employ handles the work that needs a human. Beating a human on a
+      cost table is easy; it is also the argument most likely to feel wrong to
+      an Omani owner with obligations to staff. Lead with capacity, not replacement.
+    threat_level: highest      # most common reason a deal doesn't happen
+    search_note: Real volume — "cost of hiring receptionist Oman", "virtual assistant Oman cost"
+
+  - slug: diy-automation-platforms
+    name: DIY automation platforms (Zapier, Make, n8n)
+    category: Self-build tooling
+    pricing_note: Priced in USD, low monthly cost, high time cost
+    strengths:
+      - Cheap in licence terms
+      - Total control and full flexibility
+      - Huge template and community ecosystem
+      - No vendor dependency
+    weaknesses:
+      - The owner becomes the maintainer, debugger and on-call engineer
+      - USD pricing and card-only billing is friction for some GCC buyers
+      - Breakages are silent; nobody is watching
+      - Arabic handling requires deliberate engineering
+      - Time cost dwarfs licence cost for a non-technical owner
+    honest_position: >
+      If the buyer enjoys building and has time, these are excellent and we
+      should say so. Our value is that nobody in the business has to become
+      the automation engineer.
+    existing_content:
+      - blog/en/2026-07-03-make-vs-n8n-vs-zapier-oman.html
+      - blog/en/2026-04-23-n8n-vs-make-automation-scaling.html
+      - blog/en/2026-04-25-custom-api-vs-native-integrations.html
+    threat_level: medium
+    search_note: Strong volume on "Zapier alternative", "n8n vs Make" — already partly captured in blog
+
+  - slug: chatbot-saas
+    name: Off-the-shelf chatbot SaaS (ManyChat, Tidio, Intercom)
+    category: Point-solution SaaS
+    pricing_note: USD monthly, per-contact or per-seat
+    strengths:
+      - Fast to switch on, cheap to trial
+      - Mature products with polished interfaces
+      - Good template libraries
+    weaknesses:
+      - Conversation-layer only — no back-office automation
+      - Weak Gulf-Arabic handling out of the box
+      - Per-contact pricing punishes growth
+      - No local support, timezone or context
+      - No integration with the business's existing systems
+    honest_position: >
+      Fine for a simple FAQ bot. They break down when the answer depends on
+      the business's own data, or when the workflow continues past the chat.
+    existing_content:
+      - blog/en/2026-07-03-tidio-vs-manychat-vs-custom-whatsapp-ai-gcc.html
+      - blog/en/2026-04-20-whatsapp-api-vs-ai-automation.html
+    threat_level: medium
+    search_note: '"ManyChat alternative", "Tidio alternative" have real global volume'
+
+  - slug: freelancers
+    name: Freelancers (Upwork, Fiverr, local contractors)
+    category: Low-cost custom build
+    pricing_note: Low one-off project fees
+    strengths:
+      - Cheapest route to a custom build
+      - No retainer commitment
+    weaknesses:
+      - Disappears after delivery; no monitoring or ownership
+      - Undocumented builds nobody can maintain
+      - Quality variance is extreme
+      - No accountability when revenue depends on the system
+    honest_position: >
+      The real risk is not the build quality, it is month four when it breaks
+      and the freelancer is unreachable. Sell continuity, not superiority.
+    threat_level: medium-high  # very common in the GCC SME market
+
+  - slug: do-nothing
+    name: Doing nothing / staying manual
+    category: Status quo
+    strengths:
+      - Zero cost, zero risk, zero change management
+    weaknesses:
+      - Caps growth at the owner's personal capacity
+      - Leaks revenue invisibly through missed enquiries
+    honest_position: >
+      The true default competitor. This is beaten with a quantified cost of
+      inaction, not with feature lists — which is what the Missed Call
+      Simulator and Campaign ROI Simulator already exist to do.
+    existing_content:
+      - missed-call-simulator-en.html
+      - campaign-roi-simulator.html
+    threat_level: highest

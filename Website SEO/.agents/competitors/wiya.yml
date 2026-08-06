@@ -1,0 +1,75 @@
+---
+# WIYA — press-visible local competitor
+slug: wiya
+name: WIYA
+url: https://wiya.ai/en
+verified: 2026-08-04
+verified_source: wiya.ai/en (thin — JS-rendered) + Oman Observer, Zawya, Omanet, Economy Middle East coverage
+confidence: low            # site content largely unreadable to crawlers; data is press-derived
+threat_level: medium-high # strong earned-media presence in exactly our market
+
+positioning: >
+  Omani AI firm whose central product is the WhatsApp storefront — AI-driven
+  WhatsApp commerce with payment and invoicing folded into the conversation.
+
+category: AI chatbot / WhatsApp commerce platform
+model: unknown
+geography: Oman; stated coverage across UAE, Saudi Arabia, Qatar, Kuwait, Bahrain
+founder: Talal bin Khalid Al Marhoon
+headquarters: Muscat
+
+services:
+  - AI chatbot across WhatsApp + Instagram + website (unified inbox)
+  - WhatsApp e-commerce storefront
+  - Payment and invoicing inside the chat conversation
+  - Locally-deployed secure GPT for government / sensitive-data organisations
+  - Per-sector model customisation rather than a single general model
+
+pricing:
+  currency: unknown
+  published: false
+  notes: Not published; site is JS-rendered and did not expose pricing to fetch.
+
+strengths:
+  - Real earned media — Oman Observer, Zawya, Omanet, Economy Middle East
+  - Founder-led Omani brand with a national narrative ("WhatsApp as Oman's shopfront")
+  - In-conversation payments and invoicing — a genuine capability we do not match
+  - Sector-specific model tailoring
+  - Secure local GPT deployment for sensitive/government data
+  - Strongest e-commerce angle of any local player
+
+weaknesses:
+  - Opaque: no public pricing, thin crawlable site content
+  - Heavy e-commerce/storefront focus — weaker for non-retail service businesses
+  - No published implementation timeline
+  - No published SME-sized packaged entry point
+  - Website is not crawler-friendly, which limits their organic search footprint (our opening)
+
+best_for: >
+  Retail and e-commerce businesses that want to sell, take payment and invoice
+  directly inside WhatsApp.
+
+not_ideal_for: >
+  Service businesses whose problem is missed enquiries, follow-up and
+  back-office admin rather than selling products in chat.
+
+how_we_win:
+  - We automate the whole operation, not primarily the storefront
+  - Transparent published OMR pricing against their opaque quoting
+  - Packaged plans with stated delivery windows
+  - Their weak crawlable site means we can outrank them on shared terms
+honest_loss_case: >
+  For a product retailer wanting WhatsApp checkout, WIYA is a better fit and
+  has more press credibility than we do. Concede e-commerce checkout cleanly.
+
+do_not_claim:
+  - Do not claim in-chat payment/invoicing parity until we actually ship it
+  - Do not state their pricing — it is unknown; never estimate it on a public page
+  - Treat all WIYA specifics as press-derived and re-verify before publishing
+
+common_complaints: []
+migration_notes: unknown
+
+research_todo:
+  - Re-verify via rendered browser fetch; the raw HTML fetch returned only headers
+  - Confirm whether they publish any pricing behind a form

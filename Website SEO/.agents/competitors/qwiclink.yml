@@ -1,0 +1,95 @@
+---
+# QwicLink — most direct local competitor to AI Profit Lab
+slug: qwiclink
+name: QwicLink
+url: https://www.qwiclink.com/
+verified: 2026-08-04
+verified_source: qwiclink.com homepage + /pricing
+confidence: high            # pricing is publicly published
+threat_level: high          # overlaps our exact ICP and undercuts us on price
+
+positioning: >
+  "Organize customer enquiries, contact records, appointments, reminders, and
+  follow-up in one connected system." A self-serve, subscription CRM +
+  messaging-automation product built for Oman-based service businesses.
+
+category: Self-serve SaaS (GoHighLevel-pattern CRM + multichannel inbox)
+model: Low-cost monthly subscription, small one-time setup fee, no long contract
+geography: Oman, wider Gulf
+founded: unknown
+
+target_audience:
+  - Clinics
+  - Real estate teams
+  - Salons and cafés
+  - Gyms, coaches, course creators
+  - Service businesses generally
+
+pricing:
+  currency: OMR
+  published: true
+  tiers:
+    - name: Social Presence
+      monthly: 15
+      setup: 19
+      year_one_total: 199
+      includes: Social publishing/scheduling, shared FB+IG inbox, guided auto comment/DM replies, basic reporting
+    - name: Customer Journey Starter
+      monthly: 29
+      setup: 29
+      year_one_total: 377
+      includes: + CRM with one pipeline, lead form, booking calendar, WhatsApp shared inbox, 1 reminder, no-show follow-up, mobile app
+    - name: Auto-Pilot
+      monthly: 49
+      setup: 29          # site states "29+"
+      year_one_total: 617
+      includes: + Bilingual AI conversation, AI-assisted booking, approved FAQ handling, lead qualification, AI-to-human escalation
+    - name: Custom Growth System
+      monthly: custom
+      setup: custom
+      includes: Custom pipelines, integrations, advanced workflow logic, operational dashboards
+  contract: No long-term contract required
+
+strengths:
+  - Genuinely cheap entry point — OMR 15/mo start, OMR 49/mo for AI
+  - Publishes transparent pricing (we can be compared to them instantly)
+  - Bilingual Arabic/English positioning, same as ours
+  - Multi-channel inbox (WhatsApp + IG + Messenger + forms) out of the box
+  - Explicitly "built for Oman" — removes our local-relevance edge
+  - Mobile app access
+  - Low commitment reduces buyer risk
+
+weaknesses:
+  - "Self-serve: the owner still configures, maintains and fixes the system"
+  - Scope is confined to enquiries/CRM/booking — not back-office automation
+  - No custom API integration between existing business systems
+  - No invoice/finance automation, no executive dashboards at low tiers
+  - No staff training included
+  - No named client case studies (site uses illustrative personas, e.g. "Ahmed Al Balushi")
+  - '"AI only when it adds clear value" reads as limited AI depth'
+  - Conservative AI claim (approved FAQ handling) = narrower than a trained custom assistant
+
+best_for: >
+  A small service business that wants cheap, fast, do-it-yourself lead capture
+  and booking, and has someone in-house willing to own the tool.
+
+not_ideal_for: >
+  Owners who want the system designed, built, monitored and improved for them,
+  or who need automation beyond conversations — invoicing, data sync between
+  existing apps, reporting dashboards.
+
+how_we_win:
+  - Done-for-you build and ongoing management vs. a tool you operate yourself
+  - Custom automations across the whole business, not just the inbox
+  - Custom dashboards and staff training included in scope
+  - Discovery audit before building — the system fits the actual bottleneck
+honest_loss_case: >
+  On first-year cash cost we lose clearly and should never argue price.
+  Auto-Pilot ≈ OMR 617 year one vs our Starter ≈ OMR 1,400 (OMR 1,250 prepaid).
+  If the buyer's real need is only booking + FAQ replies, QwicLink is the
+  right answer and we should say so.
+
+common_complaints: []   # no third-party reviews located — do not invent
+migration_notes: >
+  Overlapping stack pattern (both GoHighLevel-family), so contacts, pipelines
+  and calendars usually export cleanly via CSV. Confirm before promising.

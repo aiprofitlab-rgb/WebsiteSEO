@@ -1,0 +1,85 @@
+---
+# 4Ys — enterprise platform competitor
+slug: 4ys
+name: 4Ys
+url: https://4ys.org/
+verified: 2026-08-04
+verified_source: 4ys.org homepage + pricing page
+confidence: medium          # bespoke pricing, no public numbers
+threat_level: medium        # different weight class, but overlaps on "AI + WhatsApp in Oman"
+
+positioning: >
+  "We build the digital backbone for Gulf businesses." Omani enterprise
+  software vendor with an integrated ERP/CRM/HR platform plus in-house AI.
+
+category: Enterprise software platform (ERP/CRM/HR) + proprietary AI
+model: Bespoke monthly, rolling billing, 30-day termination notice
+geography: Oman and wider Gulf
+contact: WhatsApp +968 7600 3510 · sales@4ys.org
+
+target_audience:
+  - Real estate, retail, hospitality, F&B, construction
+  - Healthcare, education, trading, manufacturing
+  - Logistics, oil & gas, professional services, automotive, non-profits
+
+products:
+  platform: ERP, CRM, HR, payroll, finance, inventory, manufacturing, procurement, POS (claims 120+ modules)
+  ai:
+    - Midnight — core business AI agent
+    - Trinity — self-improving tenant-private AI
+    - Fora family — reasoning model, code assistant, OCR, image generation
+    - WhatsApp automation, voice AI receptionist, analytics
+  operations: Workflow automation, approval chains, document parsing, helpdesk, fleet, field service, e-commerce, projects
+
+pricing:
+  currency: unknown
+  published: false
+  notes: >
+    "Pricing is bespoke. It depends on the modules, integrations, and AI engines
+    you select." Monthly rolling. Self-hosting costs extra. Fees non-refundable
+    subject to Omani law. 30-day termination notice.
+
+claims:
+  - 40–70% software cost savings
+  - 25+ staff hours saved per week
+
+strengths:
+  - Enormous functional surface — 120+ modules replaces many separate tools
+  - Proprietary in-house AI models rather than reselling third-party APIs
+  - Single-tenant deployments by default; self-host or dedicated VPS available
+  - Omani-owned, strong ICV/local-content story
+  - Credible for a business that wants one vendor for everything
+
+weaknesses:
+  - Platform replacement is a heavy, disruptive project for a small business
+  - No published pricing; bespoke quoting slows and inflates small deals
+  - 120+ modules is overwhelming for an owner who wants one problem solved
+  - Self-hosting fee adds cost
+  - All fees non-refundable is a buyer-unfriendly term worth noting factually
+  - No named clients or implementation timeline published
+
+best_for: >
+  A mid-sized or multi-department Gulf company ready to replace its whole
+  software stack with one integrated ERP-grade platform.
+
+not_ideal_for: >
+  An owner-operated SME that wants one workflow fixed quickly without
+  migrating the entire business onto a new platform.
+
+how_we_win:
+  - We solve one bottleneck fast; they ask you to adopt a platform
+  - Published, predictable OMR pricing vs. bespoke quotes
+  - We integrate with the tools you already use instead of replacing them
+  - Weeks to a working system, not a multi-month ERP rollout
+honest_loss_case: >
+  If the buyer genuinely needs ERP, payroll, inventory or POS, we do not
+  compete — 4Ys is the correct choice and we should refer rather than fight.
+
+do_not_claim:
+  - Do not claim we match their module breadth or ERP depth
+  - Do not present their "non-refundable" term as anything but a factual quote
+
+common_complaints: []
+migration_notes: >
+  Buyers leaving 4Ys are usually leaving an ERP; extraction is non-trivial and
+  we should scope carefully before promising anything.

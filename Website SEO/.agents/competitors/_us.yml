@@ -1,0 +1,99 @@
+---
+# AI Profit Lab — our own verified facts. Use THESE numbers on comparison pages.
+slug: ai-profit-lab
+name: AI Profit Lab
+url: https://aiprofitlab.io/en/
+verified: 2026-08-04
+verified_source: public_html/services-en.html, about-en.html, llms.txt (live repo)
+
+positioning: >
+  Done-for-you AI automation for SMEs in Oman and the GCC. We audit the
+  bottleneck, build the system, run it, and train your team — in plain language,
+  priced in OMR.
+
+category: AI automation agency (done-for-you implementation + managed service)
+legal_entity: International Gulf Lotus SPC
+location: Al Seeb, Muscat, Oman
+phone: "+968 9924 5250"
+geography: Oman, Saudi Arabia, UAE, Qatar, Kuwait, Bahrain
+
+pricing:
+  currency: OMR
+  published: true
+  service_plans:
+    - name: STARTER
+      setup: 500
+      monthly: 75
+      annual_prepay: 750
+      year_one_monthly_billing: 1400     # 500 + (75 x 12)
+      year_one_annual_prepay: 1250       # 500 + 750
+      delivery: 3–6 weeks
+      includes: WhatsApp or website chatbot, lead follow-up automation
+    - name: GROWTH
+      setup: 1200
+      monthly: 150
+      annual_prepay: 1500
+      year_one_monthly_billing: 3000
+      year_one_annual_prepay: 2700
+      delivery: 6–12 weeks
+      includes: Up to 3 connected automations
+    - name: SCALE
+      setup: 2500
+      monthly: 300
+      annual_prepay: 3000
+      year_one_monthly_billing: 6100
+      year_one_annual_prepay: 5500
+      delivery: 10–14 weeks
+      includes: Up to 10 automations across sales, ops, service, admin
+  products:
+    - name: Website with built-in AI
+      price: 800 one-time + 100/month optional maintenance
+    - name: Custom Dashboard
+      price: 300 one-time + 50/month optional maintenance
+    - name: Arabic-Optimized Chatbot
+      price: 150 one-time (add-on)
+    - name: Custom Automation
+      price: 200 per automation
+    - name: Staff Training Session
+      price: 100 per 2-hour session
+  entry_offer: Free 30-minute AI Strategy Call
+
+real_differentiators:            # defensible, verifiable
+  - "Done-for-you: we design, build, run and improve it — client operates nothing"
+  - "Scope spans the whole operation: enquiries, follow-up, invoicing, dashboards"
+  - Custom API integration with the tools the business already uses
+  - Published, predictable OMR pricing with stated delivery windows
+  - Plain-language delivery plus hands-on staff training
+  - Discovery audit first, so the build targets the actual bottleneck
+  - Bilingual Arabic + English
+  - Founder-led accountability; human support, no ticket queues
+
+verified_claims:                 # safe to publish
+  - '"First version in days, not months" (about-en.html)'
+  - "Delivery windows: 3–6 / 6–12 / 10–14 weeks by plan (services-en.html)"
+  - Pricing in OMR, GCC-budget oriented (about-en.html)
+
+claims_needing_care:
+  - '"~40% increase in operational capacity" — source unknown, cannot substantiate publicly'
+  - '"~78% lower overhead vs hiring" — derived from our own cost table, label it as such'
+  - '"~0.01% error rate vs 4–6% human" — source unknown; soften or cite'
+  - '"99.9% uptime" — no SLA document located; do not promise contractually'
+
+do_not_publish:
+  - '"Live within 14–30 days" — appears in .agents/product-marketing.md but is
+    CONTRADICTED by the live services page (3–14 weeks). Stale. Do not use.'
+  - Any competitor pricing we have not verified (WIYA, Nuqta, 4Ys, Qurban Tech)
+
+known_gaps:                      # what a comparison page must work around
+  - No named clients, case studies or testimonials published anywhere on site
+    (Nuqta publishes six named clients — this is our single biggest credibility gap)
+  - "We are NOT the local price leader: QwicLink Auto-Pilot ≈ OMR 617 year one
+    vs our Starter ≈ OMR 1,400. Never argue price against QwicLink."
+  - No in-chat payment/invoicing (WIYA has it)
+  - No on-premise hosting or dialect-trained proprietary models (Nuqta has both)
+  - No ERP/payroll/inventory/POS (4Ys has all of it)
+
+price_ladder_context:
+  hiring_admin_staff: 350–500/month plus visa, insurance, paid leave
+  qwiclink_autopilot: 49/month + 29 setup
+  our_starter: 75/month + 500 setup

@@ -2,7 +2,8 @@ import os
 import subprocess
 from datetime import datetime
 
-public_html = "public_html"
+base_dir = os.path.dirname(os.path.abspath(__file__))
+public_html = os.path.join(base_dir, "public_html")
 base_url = "https://aiprofitlab.io"
 
 urls = [

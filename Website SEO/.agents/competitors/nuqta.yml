@@ -1,0 +1,90 @@
+---
+# Nuqta — strongest local credibility competitor
+slug: nuqta
+name: Nuqta
+url: https://nuqtai.com/en
+verified: 2026-08-04
+verified_source: nuqtai.com/en homepage
+confidence: medium          # no pricing published
+threat_level: high          # out-credentials us on proof and Arabic depth
+
+positioning: >
+  "AI that speaks your dialect. On your servers." An Omani applied AI lab
+  building Gulf-Arabic WhatsApp automation and private AI infrastructure.
+
+category: Applied AI lab / private AI infrastructure
+model: Project builds + model handover (explicitly anti-subscription)
+geography: Muscat, Oman; serves GCC
+operating_since: 2024
+
+target_audience:
+  - Enterprises in banking, government, health, retail, education, services
+  - Also states SMBs and agencies
+
+products:
+  - name: Al-Dhaki
+    what: Gulf Arabic WhatsApp automation platform
+    status: launching 2026
+  - name: Private AI
+    what: Custom model training + hosting on client infrastructure
+    status: available now
+  - name: AutomAPI
+    what: Social scheduling + WhatsApp Cloud messaging (automapi.com)
+    status: live
+  - name: Services
+    what: WhatsApp automation, custom agents, web/app dev, consulting
+
+pricing:
+  currency: unknown
+  published: false
+  notes: No pricing on site. Positions full model handover instead of subscription.
+
+named_clients:                # published on their site — real social proof
+  - Oman Flour Mills
+  - Khawla Bint Al-Hakim School
+  - Amtes
+  - Bluetech Oman
+  - Al-Masar International Academy
+  - Raffles Resthouse
+
+strengths:
+  - Six named, checkable clients including a well-known Omani industrial name
+  - Dialect-native Arabic ("not translated") — deeper than our Arabic add-on
+  - On-premise / client-hosted deployment answers data-sovereignty objections
+  - Model handover means no vendor lock-in — attractive to cautious buyers
+  - Credible technical/lab framing; operating since 2024
+  - Enterprise sector references (banking, government, health)
+
+weaknesses:
+  - Flagship Al-Dhaki platform not yet launched (stated 2026)
+  - No published pricing — slow, opaque sales cycle for a small buyer
+  - Enterprise/infrastructure framing likely intimidating and costly for a small SME
+  - Private AI hosting implies client-side infrastructure the SME must own and run
+  - Technical positioning conflicts with a non-technical owner's needs
+  - Nothing offered as a fast, packaged, low-commitment entry point
+
+best_for: >
+  Larger or regulated organisations that need Arabic-dialect models, on-premise
+  data residency, and to own the model outright.
+
+not_ideal_for: >
+  A small business that wants a fixed monthly price, a fast start, and someone
+  else to run the whole thing.
+
+how_we_win:
+  - Packaged, priced, fast entry point vs. bespoke infrastructure project
+  - Fully managed operations — the SME owns no servers and no model
+  - Non-technical, plain-language delivery and staff training
+  - Business-outcome scope (leads, invoices, dashboards) vs. AI-capability scope
+honest_loss_case: >
+  We lose on data sovereignty, dialect-model depth, and demonstrable client
+  proof. If the buyer's binding requirement is on-premise hosting, government
+  data, or owning the model, Nuqta is the better fit — concede it plainly.
+
+do_not_claim:
+  - Do not claim deeper Arabic dialect capability than Nuqta
+  - Do not claim on-premise/data-residency parity
+  - Do not imply they lack clients — they publish more named clients than we do
+
+common_complaints: []
+migration_notes: unknown
