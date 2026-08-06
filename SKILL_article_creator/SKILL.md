@@ -9,6 +9,21 @@ This skill automates the end-to-end creation of high-quality, story-driven, full
 
 When the user asks you to write an article for a given keyword/topic, follow these steps exactly:
 
+## Step 0: Title Similarity & Overlap Pre-Check (MANDATORY PRE-CHECK)
+Before starting any research or outlining, perform a strict similarity/overlap check against all existing published articles on the website:
+1. **Scan Existing Articles**: Check all `.html` files in `public_html/blog/en/` and `public_html/blog/ar/` (or inspect `blog_hub_data.json` / hub lists).
+2. **Calculate Similarity/Overlap**: Compare the proposed article title/topic against existing article titles and target keywords using token overlap / Jaccard similarity / character n-gram overlap.
+3. **Pushback Rule (>65% Similarity)**:
+   - If the similarity or overlap with any existing article title/topic is **greater than 65%**, **STOP IMMEDIATELY**.
+   - Do NOT proceed to research, outline, image generation, or HTML creation.
+   - Output a clear pushback message stating:
+     > 🛑 **Article Generation Pushed Back**: An article with >65% similarity/overlap already exists on the website.
+     > - **Proposed Title/Topic**: "[Proposed Title]"
+     > - **Existing Article**: "[Existing Article Title]" (`[file_path]`)
+     > - **Similarity Score**: [Calculated %]
+     >
+     > Please provide a different topic or a unique strategic angle before proceeding.
+
 ## Step 1: Research and Outline
 To ensure all generated articles achieve a **STRONG** rating under the quality audit suite, you must strictly satisfy all the following criteria during the research and outlining phase:
 
@@ -52,8 +67,8 @@ To ensure all generated articles achieve a **STRONG** rating under the quality a
 8. **FAQ Section**:
    - Generate an extensive FAQ section at the end of the article containing **exactly 10 Frequently Asked Questions** that people in Oman and the GCC actually ask about the subject.
 
-9. **Duplicate Prevention**:
-   - Ensure the new article has a unique strategic angle to avoid overlapping more than 30% Jaccard similarity with existing articles.
+9. **Duplicate & Similarity Pushback (Strict >65% Limit)**:
+   - Enforce the Step 0 Pre-Check: Do not generate an article if title/topic similarity with an existing article exceeds 65%. If passed, ensure the new article maintains a unique strategic angle.
 
 10. **JSON-LD Schema Markup**:
     - Embedded JSON-LD schema in `<head>` must include the article's `Article` data, the `FAQPage` data with all 10 FAQs, and `Organization` details.
