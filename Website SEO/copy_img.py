@@ -1,8 +1,11 @@
 import shutil
-import sys
+import os
 
-src = "/Users/nahid/.gemini/antigravity-ide/brain/0d81053e-9582-4696-9d0e-9d877ea6b85d/webhook_make_n8n_erp_oman_1785823503162.png"
-dst = "public_html/blog/images/connect-webhooks-make-n8n-enterprise-erp-oman.png"
+base_dir = os.path.dirname(os.path.abspath(__file__))
+src = os.path.join(base_dir, "public_html/blog/images/whatsapp_bot_appointment_booking.png")
+dst = os.path.join(base_dir, "public_html/blog/images/automate_customer_bookings_muscat_ai_whatsapp_receptionist.png")
 
 shutil.copyfile(src, dst)
 print("Copied successfully to", dst)
+
+

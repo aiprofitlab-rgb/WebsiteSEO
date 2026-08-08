@@ -1800,4 +1800,16 @@
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
+  <url>
+    <loc>https://aiprofitlab.io/blog/ar/2026-08-08-automate-customer-bookings-muscat-ai-whatsapp-receptionist/</loc>
+    <lastmod>2026-08-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://aiprofitlab.io/blog/en/2026-08-08-automate-customer-bookings-muscat-ai-whatsapp-receptionist/</loc>
+    <lastmod>2026-08-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
 </urlset>
