@@ -1812,4 +1812,16 @@
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
+  <url>
+    <loc>https://aiprofitlab.io/blog/ar/2026-08-08-ai-agents-vs-traditional-chatbots-enterprise/</loc>
+    <lastmod>2026-08-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://aiprofitlab.io/blog/en/2026-08-08-ai-agents-vs-traditional-chatbots-enterprise/</loc>
+    <lastmod>2026-08-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
 </urlset>

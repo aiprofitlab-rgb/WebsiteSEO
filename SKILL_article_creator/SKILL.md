@@ -1,11 +1,11 @@
 ---
 name: article-creator
-description: Automatically writes dual-language (English and Arabic) SEO articles for the AI Profit Lab blog when given a keyword. Generates an image and applies the website's dark-mode glassmorphism HTML structure. Triggers when the user asks to "write an article about [keyword]" or "generate blog post for [keyword]".
+description: Automatically writes dual-language (English and Arabic) SEO articles for the AI Profit Lab blog when given a keyword. Supports Compact Keywords and Reddit-focused community curation strategies. Generates an image and applies the website's dark-mode glassmorphism HTML structure. Triggers when the user asks to "write an article about [keyword]" or "generate blog post for [keyword]".
 ---
 
 # AI Profit Lab Article Creator
 
-This skill automates the end-to-end creation of high-quality, story-driven, fully formatted SEO articles for the AI Profit Lab website.
+This skill automates the end-to-end creation of high-quality, story-driven, fully formatted SEO articles for the AI Profit Lab website, with specialized optimization for "Compact Keywords" and "Reddit Thread" search queries to rank against community discussions and capture LLM query fan-outs (Perplexity, ChatGPT, Gemini).
 
 When the user asks you to write an article for a given keyword/topic, follow these steps exactly:
 
@@ -27,57 +27,74 @@ Before starting any research or outlining, perform a strict similarity/overlap c
 ## Step 1: Research and Outline
 To ensure all generated articles achieve a **STRONG** rating under the quality audit suite, you must strictly satisfy all the following criteria during the research and outlining phase:
 
+### Core Requirements & Quality Audit Criteria
+
 1. **Title & H1 Match (Strength and Specifics)**:
    - The `<title>` tag and the main `<h1>` tag inside the body must be identical (or the title must start with the first 30 characters of the H1).
    - The title must NOT be generic (e.g. avoid patterns like "supercharge your business", "ai for business", "unlock the power of ai", "revolutionize your", "transform your business", "take your business to the next level").
    - The title must contain a specific number, location, or outcome (e.g. including Muscat, Oman, GCC, or outcomes/topics like "how to", "why", "cost", "roi", "guide", "free", "best", "top").
    - Title tag length must be >20 characters.
 
-2. **Opening Hook (No Self-Promotion)**:
+2. **Compact Keywords & Reddit Search Strategy**:
+   - **Target Keyword Formulation**: When targeting search queries containing "Reddit" or community discussion intent, format the target keyword with the word "Reddit" and the current/upcoming year (e.g., `[Niche Topic] Reddit 2026`) to capture "query fan outs" used by LLMs (Perplexity, ChatGPT, Gemini).
+   - **Slug & Title Alignment**: The page `<title>` tag and URL slug must be nearly identical to the target keyword. This provides ~90% of document relevance for low-competition terms.
+   - **Avoid Over-Optimization**: Do NOT repeat the exact target keyword in the first line of text. Focus on document-level topical relevance rather than artificial keyword density.
+
+3. **Opening Hook (No Self-Promotion)**:
    - The first paragraph (first 100 words of the body) must NOT be self-promotional. It must NOT contain phrases like "we are", "we provide", "our company", "ai profit lab is", "welcome to", or "at ai profit lab".
    - The hook must speak directly to the reader's business problems, pain points, or questions.
 
-3. **Word Count & Depth**:
-   - The main body text (visible text inside the `<article>` tag, excluding navigation, header, footer, references, and schema) must be between **900 to 1200 words** to guarantee depth.
+4. **Word Count & Compact Depth**:
+   - The main body text (visible text inside the `<article>` tag, excluding navigation, header, footer, references, and schema) must be between **800 to 1200 words** (keeping it "Compact").
    - The text must contain at least **3+ concrete examples, step-by-step guides, or specific data points/numbers** (e.g. specific OMR/USD pricing, % growth, hours/days saved).
 
-4. **GCC / Oman Local Relevance**:
-   - You must weave in at least **3+ unique local GCC or Oman references** (from keywords like Muscat, Oman, GCC, UAE, Saudi, Vision 2040, Omani PDPL, Sohar, Salalah, Royal Decree, Omantel, Ma'een, otech, etc.) naturally in the body text (do not limit them only to the title).
+5. **Table of Contents (TOC)**:
+   - **Mandatory TOC Component**: Every article must include a styled glassmorphism Table of Contents (TOC) right after the hero image / header area to give the page a well-thought-out, structured appearance.
+   - Anchor links must map directly to each `<h2>` section ID (e.g. `#section-1`, `#section-2`, `#section-3`) and the `#faq` section.
 
-5. **Structured for LLM Citation (LLM SEO)**:
+6. **Headings & LLM Citation Structure**:
+   - Use `<h2>` subheadings based on primary keyword variations, related questions from People Also Ask (PAA) data, or key Reddit thread topics.
    - Every article must contain at least **3+ `<h2>` subheadings** structured as questions.
-   - Immediately below each `<h2>`, write a concise, direct answer (~40 words) in an "X is Y" or "To do X, you need Y" format.
+   - Immediately below each `<h2>`, write a concise, direct answer (~40 words) in an "X is Y" or "To do X, you need Y" format for LLM SEO indexing.
    - The article body must contain at least **1 statistic/percentage/number** (using %, percent, OMR, USD, Rial, hours, days, etc.).
 
-6. **Call to Action (CTA) Card**:
+7. **Writing Style, Curation & Authentic Voice**:
+   - **Resource & Curation Focus**: Position the article as a "Resources Page" or compilation of "Lessons from Reddit". Instead of standard long-winded definitions, compile the best responses/threads from community discussions and provide definitive takeaways or links.
+   - **Proprietary Insight**: Incorporate proprietary observations, founder statements, or distinct ("spicy") titles to stand out from generic listicles.
+   - **Anti-AI Tone (No Slop)**: Ensure an authentic human voice. Edit out generic AI giveaways and fluff (e.g., avoid "in today's fast-paced digital world", "delve", "tapestry", "supercharge", "game-changer", "unleash", "seamless").
+
+8. **GCC / Oman Local Relevance**:
+   - You must weave in at least **3+ unique local GCC or Oman references** (from keywords like Muscat, Oman, GCC, UAE, Saudi, Vision 2040, Omani PDPL, Sohar, Salalah, Royal Decree, Omantel, Ma'een, otech, etc.) naturally in the body text (do not limit them only to the title).
+
+9. **Call to Action (CTA) Card**:
    - Every article must end with a styled glassmorphism CTA card encouraging readers to book an audit or consultation.
    - **CRITICAL:** The CTA block must be placed **inside the `<article>` tag**, right before the FAQ section, or before the closing `</article>` tag. This is because the quality auditor only parses text within the `<article>` tag, and the CTA must fall within the last 200 words of the parsed article body.
    - The CTA must have a clickable link (English: `/en/contact-en/`, Arabic: `/contact/`) and a strong action verb (e.g., "Book a Free 30-Minute AI Consultation").
 
-7. **SEO Meta Description (CRITICAL)**:
-   - Write unique meta descriptions that strictly follow these rules:
-     - **140–155 characters exactly** in length.
-     - Must include a specific business pain point or question the article answers.
-     - Must include at least one GCC or Oman reference.
-     - Must end with a concrete benefit or outcome.
-     - Must **NOT** start with "AI Profit Lab", "Learn how", "Discover", or "Supercharge your business with".
-     - Must be a complete sentence (no cut-offs).
-     - *Arabic Version Meta Rules:* Must start with a specific regional business pain point (e.g., "هل تعاني من...") and be between 140–155 characters, ending with a clear benefit.
+10. **SEO Meta Description (CRITICAL)**:
+    - Write unique meta descriptions that strictly follow these rules:
+      - **140–155 characters exactly** in length.
+      - Must include a specific business pain point or question the article answers.
+      - Must include at least one GCC or Oman reference.
+      - Must end with a concrete benefit or outcome.
+      - Must **NOT** start with "AI Profit Lab", "Learn how", "Discover", or "Supercharge your business with".
+      - Must be a complete sentence (no cut-offs).
+      - *Arabic Version Meta Rules:* Must start with a specific regional business pain point (e.g., "هل تعاني من...") and be between 140–155 characters, ending with a clear benefit.
 
-8. **FAQ Section**:
-   - Generate an extensive FAQ section at the end of the article containing **exactly 10 Frequently Asked Questions** that people in Oman and the GCC actually ask about the subject.
+11. **FAQ Section**:
+    - Generate an extensive FAQ section at the end of the article containing **exactly 10 Frequently Asked Questions** that people in Oman and the GCC actually ask about the subject.
 
-9. **Duplicate & Similarity Pushback (Strict >65% Limit)**:
-   - Enforce the Step 0 Pre-Check: Do not generate an article if title/topic similarity with an existing article exceeds 65%. If passed, ensure the new article maintains a unique strategic angle.
+12. **Duplicate & Similarity Pushback (Strict >65% Limit)**:
+    - Enforce the Step 0 Pre-Check: Do not generate an article if title/topic similarity with an existing article exceeds 65%. If passed, ensure the new article maintains a unique strategic angle.
 
-10. **JSON-LD Schema Markup**:
+13. **JSON-LD Schema Markup**:
     - Embedded JSON-LD schema in `<head>` must include the article's `Article` data, the `FAQPage` data with all 10 FAQs, and `Organization` details.
     - Ensure the Organization schema and LocalBusiness/ProfessionalService schema have the correct properties:
       - `name`: "AI Profit Lab"
       - `legalName`: "International Gulf Lotus SPC"
       - `url`: "https://aiprofitlab.io"
 
-11. **Legal Footer Copyright**:
+14. **Legal Footer Copyright**:
     - English: `© 2025 AI Profit Lab — a brand of International Gulf Lotus SPC • All Rights Reserved`
     - Arabic: `© ٢٠٢٥ AI Profit Lab — علامة تجارية لشركة International Gulf Lotus SPC • جميع الحقوق محفوظة`
 
@@ -93,6 +110,12 @@ Save it to: `public_html/blog/ar/YYYY-MM-DD-[slug-title-in-english].html`.
 ## Step 4: Generate the Image
 Use your `generate_image` tool to create the hero image based on the designated concept.
 Save the generated image to: `public_html/blog/images/[image_name].png`. Make sure both HTML files point to this exact absolute path (`/blog/images/[image_name].png`).
+
+## Step 4.5: Internal Linking & Cornerstoning Workflow
+- **Cornerstoning**: Target low-competition keywords first. Once ranked, insert internal links to higher-competition "money" pages on the site to pass domain authority.
+- **Bi-Directional Interlinking**:
+  1. Add internal contextual links within the new article pointing to existing related blog posts on the site.
+  2. Locate an existing high-ranking page on `aiprofitlab.io` and insert a contextual link pointing to the newly published article so search engine crawlers easily discover and index it.
 
 ## Step 5: Update the Blog Hub
 After generating and saving the images and HTML files, use your `run_command` tool to execute the python script that automatically updates the hub pages with the new content:
@@ -212,6 +235,17 @@ Or use the sitemap command. Confirm that sitemap output shows the updated URL co
             </div>
 
             <img src="/blog/images/[image_name].png" alt="[image_name] - Empowering AI Solutions by AI Profit Lab to scale your business operations." class="w-full rounded-3xl mb-16 shadow-[0_0_50px_rgba(59,130,246,0.15)] border border-white/5 object-cover h-[500px]">
+
+            <!-- Table of Contents -->
+            <nav class="glass-card rounded-2xl p-6 mb-12 border border-blue-500/20" id="table-of-contents">
+                <h2 class="text-xl font-bold text-white mb-4 mt-0 border-b border-white/10 pb-2">Table of Contents</h2>
+                <ul class="space-y-2 text-gray-300 text-sm">
+                    <li><a href="#section-1" class="hover:text-blue-400 transition flex items-center gap-2"><span class="text-blue-500">1.</span> [H2 Section 1 Question/Heading]</a></li>
+                    <li><a href="#section-2" class="hover:text-blue-400 transition flex items-center gap-2"><span class="text-blue-500">2.</span> [H2 Section 2 Question/Heading]</a></li>
+                    <li><a href="#section-3" class="hover:text-blue-400 transition flex items-center gap-2"><span class="text-blue-500">3.</span> [H2 Section 3 Question/Heading]</a></li>
+                    <li><a href="#faq" class="hover:text-blue-400 transition flex items-center gap-2"><span class="text-blue-500">4.</span> Frequently Asked Questions</a></li>
+                </ul>
+            </nav>
 
             <div class="prose max-w-none">
                 [PARAGRAPHS, HEADINGS, BLOCKQUOTES]
@@ -355,6 +389,17 @@ Or use the sitemap command. Confirm that sitemap output shows the updated URL co
             </div>
 
             <img src="/blog/images/[image_name].png" alt="[image_name] - حلول الذكاء الاصطناعي المبتكرة من AI Profit Lab لتطوير أعمالك." class="w-full rounded-3xl mb-16 shadow-[0_0_50px_rgba(59,130,246,0.15)] border border-white/5 object-cover h-[500px]">
+
+            <!-- جدول المحتويات -->
+            <nav class="glass-card rounded-2xl p-6 mb-12 border border-blue-500/20 text-right-ar" id="table-of-contents">
+                <h2 class="text-xl font-bold text-white mb-4 mt-0 border-b border-white/10 pb-2">جدول المحتويات</h2>
+                <ul class="space-y-2 text-gray-300 text-sm">
+                    <li><a href="#section-1" class="hover:text-blue-400 transition flex items-center gap-2"><span class="text-blue-500">١.</span> [عنوان القسم الأول]</a></li>
+                    <li><a href="#section-2" class="hover:text-blue-400 transition flex items-center gap-2"><span class="text-blue-500">٢.</span> [عنوان القسم الثاني]</a></li>
+                    <li><a href="#section-3" class="hover:text-blue-400 transition flex items-center gap-2"><span class="text-blue-500">٣.</span> [عنوان القسم الثالث]</a></li>
+                    <li><a href="#faq" class="hover:text-blue-400 transition flex items-center gap-2"><span class="text-blue-500">٤.</span> الأسئلة الشائعة</a></li>
+                </ul>
+            </nav>
 
             <div class="prose max-w-none text-right-ar">
                 [PARAGRAPHS, HEADINGS, BLOCKQUOTES IN ARABIC]
