@@ -4,16 +4,21 @@ import re
 CATEGORY_MAP = {
     "AI Business Strategy": "cat_0",
     "استراتيجية الذكاء الاصطناعي للأعمال": "cat_0",
+    "Energy & AI": "cat_0",
+    "الطاقة والذكاء الاصطناعي": "cat_0",
+    "AI Strategy & Digital Transformation": "cat_0",
     "AI Security & Governance": "cat_1",
     "أمن وحوكمة الذكاء الاصطناعي": "cat_1",
     "AI Compliance & Governance": "cat_1",
     "الحوكمة والامتثال للذكاء الاصطناعي": "cat_1",
+    "AI Governance & Compliance": "cat_1",
+    "حوكمة الذكاء الاصطناعي والامتثال": "cat_1",
     "Implementation & Automation": "cat_2",
     "التنفيذ والأتمتة": "cat_2",
-    "Middle East AI": "cat_3",
-    "الذكاء الاصطناعي في الشرق الأوسط": "cat_3",
     "Business Efficiency": "cat_2",
-    "كفاءة الأعمال": "cat_2"
+    "كفاءة الأعمال": "cat_2",
+    "Middle East AI": "cat_3",
+    "الذكاء الاصطناعي في الشرق الأوسط": "cat_3"
 }
 
 def extract_metadata(filepath):
