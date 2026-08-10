@@ -98,6 +98,7 @@ RewriteCond %{REQUEST_URI} !(.*)/$
 RewriteRule ^(.*)$ https://aiprofitlab.io/$1/ [L,R=301]
 
 # 2. Specific Hub Redirects (PRIORITY)
+RewriteRule ^en/smart-website-offer/?$ smart-website-offer-en.html [L]
 RewriteRule ^en/blog/$ blog/index.html [L]
 RewriteRule ^en/academy/$ academy/index.html [L]
 
