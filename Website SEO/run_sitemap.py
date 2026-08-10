@@ -18,8 +18,11 @@ urls = [
     ("/missed-call-simulator-ar/", 0.7),
     ("/whatsapp-receptionist-demo-ar/", 0.7),
 
+    ("/smart-website-offer.html", 0.9),
+
     # Static pages (English)
     ("/en/", 0.9),
+    ("/en/smart-website-offer.html", 0.9),
     ("/en/about-en/", 0.8),
     ("/en/contact-en/", 0.8),
     ("/en/process-en/", 0.8),
