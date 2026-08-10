@@ -43,6 +43,10 @@
     <FilesMatch "\.html$">
         Header set Cache-Control "public, max-age=600, must-revalidate"
     </FilesMatch>
+    # Smart Website offer pages: bypass cache to reflect instant updates
+    <FilesMatch "smart-website-offer.*\.html$">
+        Header set Cache-Control "no-cache, no-store, must-revalidate, max-age=0"
+    </FilesMatch>
     # Remove ETag to avoid conditional-GET overhead on shared hosting
     Header unset ETag
 </IfModule>
