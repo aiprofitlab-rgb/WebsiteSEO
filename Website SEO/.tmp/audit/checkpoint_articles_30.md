@@ -53,16 +53,16 @@ SCORES:
 4. LLM Citation:        NEEDS WORK — no stats/numbers
 5. Call to Action:      PASS — Clear specific CTA with action verb and working link
 6. Meta Description:    PASS — 154 chars, contains specific keyword/benefit
-7. Duplicate Risk:      PASS — Unique angle, no substantial topic overlap detected
+7. Duplicate Risk:      NEEDS WORK — Overlaps with 2026-08-06-ai-automation-oman-vision-204 (56% similarity)
 
-OVERALL: STRONG
+OVERALL: ACCEPTABLE
 #1 FIX:  [Word Count] 810 words — below 900 threshold
 ---
 ARTICLE #4
 File: blog/en/2026-03-31-arabic-first-ai-models.html
-Title tag: The Rise of Arabic-First AI Models: Reclaiming the Digital Narrative
+Title tag: The Rise of Arabic | AI Profit Lab عمان
 H1: The Rise of Arabic-First AI Models: Reclaiming the Digital Narrative
-Meta description: Why do standard Western AI models fail with local dialects? GCC enterprises are adopting Arabic-first LLMs to enhance customer trust and local relevance.
+Meta description: Why do standard Western AI models fail with local dialects? GCC enterprises are adopting Arabic-first LLMs to enhance customer trust and local relevance...
 Word count: 801
 
 SCORES:
@@ -71,17 +71,17 @@ SCORES:
 3. GCC/Oman Relevance:  PASS — 9 local terms woven naturally (17 total mentions)
 4. LLM Citation:        NEEDS WORK — no stats/numbers
 5. Call to Action:      PASS — Clear specific CTA with action verb and working link
-6. Meta Description:    PASS — 153 chars, contains specific keyword/benefit
-7. Duplicate Risk:      PASS — Unique angle, no substantial topic overlap detected
+6. Meta Description:    PASS — 155 chars, contains specific keyword/benefit
+7. Duplicate Risk:      NEEDS WORK — Overlaps with 2026-03-31-arabic-vs-global-ai-models.ht (75% similarity)
 
 OVERALL: ACCEPTABLE
 #1 FIX:  [Word Count] 801 words — below 900 threshold
 ---
 ARTICLE #5
 File: blog/en/2026-03-31-arabic-vs-global-ai-models.html
-Title tag: Arabic-First AIs vs. Global AIs: A Simple Comparison
+Title tag: Arabic | AI Profit Lab عمان
 H1: Arabic-First AIs vs. Global AIs: A Simple Comparison
-Meta description: Are you unsure whether to choose ChatGPT or Jais in Oman and UAE? Compare global and regional models to secure your data sovereignty and dialect fit.
+Meta description: Are you unsure whether to choose ChatGPT or Jais in Oman and UAE? Compare global and regional models to secure your data sovereignty and dialect fit. -....
 Word count: 730
 
 SCORES:
@@ -90,8 +90,8 @@ SCORES:
 3. GCC/Oman Relevance:  PASS — 6 local terms woven naturally (14 total mentions)
 4. LLM Citation:        NEEDS WORK — no stats/numbers
 5. Call to Action:      PASS — Clear specific CTA with action verb and working link
-6. Meta Description:    PASS — 149 chars, contains specific keyword/benefit
-7. Duplicate Risk:      PASS — Unique angle, no substantial topic overlap detected
+6. Meta Description:    PASS — 155 chars, contains specific keyword/benefit
+7. Duplicate Risk:      NEEDS WORK — Overlaps with 2026-03-31-arabic-first-ai-models.html (75% similarity)
 
 OVERALL: ACCEPTABLE
 #1 FIX:  [Word Count] 730 words — below 900 threshold
@@ -338,10 +338,10 @@ SCORES:
 4. LLM Citation:        NEEDS WORK — no stats/numbers
 5. Call to Action:      PASS — Clear specific CTA with action verb and working link
 6. Meta Description:    PASS — 150 chars, contains specific keyword/benefit
-7. Duplicate Risk:      NEEDS WORK — Overlaps with 2026-06-08-whatsapp-automation-lead-fix. (50% similarity)
+7. Duplicate Risk:      FAIL — Overlaps with 2 articles; highest: 2026-06-08-whatsapp-automation (50%)
 
 OVERALL: ACCEPTABLE
-#1 FIX:  [Word Count] 827 words — below 900 threshold
+#1 FIX:  [Duplicate Risk] Overlaps with 2 articles; highest: 2026-06-08-whatsapp-automation (50%)
 ---
 ARTICLE #19
 File: blog/en/2026-04-21-ai-oil-gas-workflow-automation.html
@@ -452,10 +452,10 @@ SCORES:
 4. LLM Citation:        PASS — 6 H2s, 2 quotable answers, 3 stats
 5. Call to Action:      PASS — Clear specific CTA with action verb and working link
 6. Meta Description:    PASS — 148 chars, contains specific keyword/benefit
-7. Duplicate Risk:      NEEDS WORK — Overlaps with 2026-04-28-ai-automation-roi-2025-guide. (62% similarity)
+7. Duplicate Risk:      FAIL — Overlaps with 3 articles; highest: 2026-04-28-ai-automation-roi-2 (62%)
 
-OVERALL: STRONG
-#1 FIX:  [Duplicate Risk] Overlaps with 2026-04-28-ai-automation-roi-2025-guide. (62% similarity)
+OVERALL: ACCEPTABLE
+#1 FIX:  [Duplicate Risk] Overlaps with 3 articles; highest: 2026-04-28-ai-automation-roi-2 (62%)
 ---
 ARTICLE #25
 File: blog/en/2026-04-28-ai-automation-cost-uae-businesses.html
@@ -471,10 +471,10 @@ SCORES:
 4. LLM Citation:        PASS — 7 H2s, 1 quotable answers, 12 stats
 5. Call to Action:      PASS — Clear specific CTA with action verb and working link
 6. Meta Description:    PASS — 149 chars, contains specific keyword/benefit
-7. Duplicate Risk:      NEEDS WORK — Overlaps with 2026-04-28-qatar-businesses-ai-automatio (50% similarity)
+7. Duplicate Risk:      FAIL — Overlaps with 2 articles; highest: 2026-04-28-qatar-businesses-ai (50%)
 
-OVERALL: STRONG
-#1 FIX:  [Duplicate Risk] Overlaps with 2026-04-28-qatar-businesses-ai-automatio (50% similarity)
+OVERALL: ACCEPTABLE
+#1 FIX:  [Duplicate Risk] Overlaps with 2 articles; highest: 2026-04-28-qatar-businesses-ai (50%)
 ---
 ARTICLE #26
 File: blog/en/2026-04-28-ai-automation-roi-2025-guide.html
@@ -509,10 +509,10 @@ SCORES:
 4. LLM Citation:        PASS — 7 H2s, 1 quotable answers, 10 stats
 5. Call to Action:      PASS — Clear specific CTA with action verb and working link
 6. Meta Description:    PASS — 147 chars, contains specific keyword/benefit
-7. Duplicate Risk:      PASS — Unique angle, no substantial topic overlap detected
+7. Duplicate Risk:      NEEDS WORK — Overlaps with 2026-07-07-how-saudi-smes-start-ai-autom (64% similarity)
 
 OVERALL: STRONG
-#1 FIX:  All criteria passing — minor polish only
+#1 FIX:  [Duplicate Risk] Overlaps with 2026-07-07-how-saudi-smes-start-ai-autom (64% similarity)
 ---
 ARTICLE #28
 File: blog/en/2026-04-28-qatar-businesses-ai-automation.html

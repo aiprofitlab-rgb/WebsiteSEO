@@ -1,4 +1,4 @@
-# Article Audit Checkpoint — Articles 1–70
+# Article Audit Checkpoint — Articles 1–120
 
 ---
 ARTICLE #1
@@ -1330,3 +1330,954 @@ SCORES:
 
 OVERALL: STRONG
 #1 FIX:  [Duplicate Risk] Overlaps with 2026-06-14-how-we-automated-lead-recover (100% similarity)
+---
+ARTICLE #71
+File: blog/en/2026-06-13-integrate-ai-omani-retail-pos.html
+Title tag: Step-by-Step: How to Integrate AI into Your Omani Retail POS System | AI Profit Lab
+H1: Step-by-Step: How to Integrate AI into Your
+          Omani Retail POS System
+Meta description: Is manual inventory tracking causing stockouts at checkout? Omani retailers integrate predictive POS databases to automate orders and predict peak hours.
+Word count: 1040
+
+SCORES:
+1. Title & Hook:        PASS — Title contains specific benefit/keyword; hook addresses reader
+2. Word Count & Depth:  PASS — 1040 words with 15 concrete examples/steps/data points
+3. GCC/Oman Relevance:  PASS — 8 local terms woven naturally (25 total mentions)
+4. LLM Citation:        NEEDS WORK — no stats/numbers
+5. Call to Action:      PASS — Clear specific CTA with action verb and working link
+6. Meta Description:    PASS — 153 chars, contains specific keyword/benefit
+7. Duplicate Risk:      PASS — Unique angle, no substantial topic overlap detected
+
+OVERALL: STRONG
+#1 FIX:  [LLM Citation Structure] no stats/numbers
+---
+ARTICLE #72
+File: blog/en/2026-06-13-the-2026-audit-5-tasks-to-stop-doing-manually.html
+Title tag: The 2026 Audit: 5 Tasks Your Business Should Stop Doing Manually | AI Profit Lab
+H1: The 2026 Audit: 5 Tasks Your Business Should Stop Doing Manually
+Meta description: Are your team members spending hours checking spreadsheets? Oman managers automate 5 administrative tasks to cut human error and reclaim 15 hours.
+Word count: 862
+
+SCORES:
+1. Title & Hook:        PASS — Title contains specific benefit/keyword; hook addresses reader
+2. Word Count & Depth:  NEEDS WORK — 862 words — below 900 threshold
+3. GCC/Oman Relevance:  PASS — 5 local terms woven naturally (14 total mentions)
+4. LLM Citation:        PASS — 6 H2s, 1 quotable answers, 1 stats
+5. Call to Action:      PASS — Clear specific CTA with action verb and working link
+6. Meta Description:    PASS — 146 chars, contains specific keyword/benefit
+7. Duplicate Risk:      PASS — Unique angle, no substantial topic overlap detected
+
+OVERALL: STRONG
+#1 FIX:  [Word Count] 862 words — below 900 threshold
+---
+ARTICLE #73
+File: blog/en/2026-06-14-automation-workflow-slowing-down.html
+Title tag: Is Your Current Automation Workflow Slowing You Down? Here’s How to Tell | AI Profit Lab
+H1: Is Your Current Automation Workflow Slowing You Down? Here’s How to Tell
+Meta description: Are your current automation workflows lagging or breaking? GCC operations directors deploy error checks to stabilize data sync and restore system speed.
+Word count: 1476
+
+SCORES:
+1. Title & Hook:        PASS — Title contains specific benefit/keyword; hook addresses reader
+2. Word Count & Depth:  PASS — 1476 words with 23 concrete examples/steps/data points
+3. GCC/Oman Relevance:  PASS — 5 local terms woven naturally (15 total mentions)
+4. LLM Citation:        PASS — 7 H2s, 2 quotable answers, 13 stats
+5. Call to Action:      PASS — Clear specific CTA with action verb and working link
+6. Meta Description:    PASS — 152 chars, contains specific keyword/benefit
+7. Duplicate Risk:      PASS — Unique angle, no substantial topic overlap detected
+
+OVERALL: STRONG
+#1 FIX:  All criteria passing — minor polish only
+---
+ARTICLE #74
+File: blog/en/2026-06-14-how-we-automated-lead-recovery-muscat-hypermarket-case-study.html
+Title tag: How We Automated Lead Recovery for a Muscat Hypermarket: A Case Study | AI Profit Lab
+H1: How We Automated Lead Recovery for a Muscat Hypermarket: A Case Study
+Meta description: Are your online leads going cold before sales reach them? Our Muscat hypermarket case study shows how automated WhatsApp replies boost checkout rates.
+Word count: 987
+
+SCORES:
+1. Title & Hook:        PASS — Title contains specific benefit/keyword; hook addresses reader
+2. Word Count & Depth:  PASS — 987 words with 16 concrete examples/steps/data points
+3. GCC/Oman Relevance:  PASS — 6 local terms woven naturally (21 total mentions)
+4. LLM Citation:        PASS — 5 H2s, 1 quotable answers, 8 stats
+5. Call to Action:      PASS — Clear specific CTA with action verb and working link
+6. Meta Description:    PASS — 150 chars, contains specific keyword/benefit
+7. Duplicate Risk:      NEEDS WORK — Overlaps with 2026-06-13-automated-lead-recovery-musca (100% similarity)
+
+OVERALL: STRONG
+#1 FIX:  [Duplicate Risk] Overlaps with 2026-06-13-automated-lead-recovery-musca (100% similarity)
+---
+ARTICLE #75
+File: blog/en/2026-06-14-stop-using-chatgpt-business-strategy.html
+Title tag: Stop Using ChatGPT for Your Business Strategy (Do This Instead) | AI Profit Lab
+H1: Stop Using ChatGPT for Your Business Strategy (Do This Instead)
+Meta description: Are generic ChatGPT answers failing to solve operational gaps? GCC executives combine local market research with custom databases to plan growth stable.
+Word count: 940
+
+SCORES:
+1. Title & Hook:        PASS — Title contains specific benefit/keyword; hook addresses reader
+2. Word Count & Depth:  PASS — 940 words with 6 concrete examples/steps/data points
+3. GCC/Oman Relevance:  PASS — 6 local terms woven naturally (15 total mentions)
+4. LLM Citation:        NEEDS WORK — no stats/numbers
+5. Call to Action:      PASS — Clear specific CTA with action verb and working link
+6. Meta Description:    PASS — 152 chars, contains specific keyword/benefit
+7. Duplicate Risk:      PASS — Unique angle, no substantial topic overlap detected
+
+OVERALL: STRONG
+#1 FIX:  [LLM Citation Structure] no stats/numbers
+---
+ARTICLE #76
+File: blog/en/2026-06-14-the-set-and-forget-myth-ai-human-pilot.html
+Title tag: The 'Set and Forget' Myth: Why AI Needs a Human Pilot in Oman | AI Profit Lab
+H1: The 'Set and Forget' Myth: Why AI Needs a Human Pilot in Oman
+Meta description: Are your digital workflows failing silently? Oman operations managers establish human-in-the-loop checkpoints to secure data sync and stop errors.
+Word count: 1462
+
+SCORES:
+1. Title & Hook:        PASS — Title contains specific benefit/keyword; hook addresses reader
+2. Word Count & Depth:  PASS — 1462 words with 17 concrete examples/steps/data points
+3. GCC/Oman Relevance:  PASS — 5 local terms woven naturally (31 total mentions)
+4. LLM Citation:        PASS — 6 H2s, 2 quotable answers, 12 stats
+5. Call to Action:      PASS — Clear specific CTA with action verb and working link
+6. Meta Description:    PASS — 146 chars, contains specific keyword/benefit
+7. Duplicate Risk:      PASS — Unique angle, no substantial topic overlap detected
+
+OVERALL: STRONG
+#1 FIX:  All criteria passing — minor polish only
+---
+ARTICLE #77
+File: blog/en/2026-06-14-why-most-ai-consultants-gcc-selling-air.html
+Title tag: Why Most AI Consultants in the GCC Are Selling You 'Air' | AI Profit Lab
+H1: Why Most AI Consultants in the GCC Are Selling You 'Air'
+Meta description: Tired of tech consultants promising growth with no proof? Learn how GCC business owners audit provider code to ensure highly profitable automation.
+Word count: 1006
+
+SCORES:
+1. Title & Hook:        PASS — Title contains specific benefit/keyword; hook addresses reader
+2. Word Count & Depth:  PASS — 1006 words with 5 concrete examples/steps/data points
+3. GCC/Oman Relevance:  PASS — 4 local terms woven naturally (13 total mentions)
+4. LLM Citation:        NEEDS WORK — no stats/numbers
+5. Call to Action:      PASS — Clear specific CTA with action verb and working link
+6. Meta Description:    PASS — 147 chars, contains specific keyword/benefit
+7. Duplicate Risk:      PASS — Unique angle, no substantial topic overlap detected
+
+OVERALL: STRONG
+#1 FIX:  [LLM Citation Structure] no stats/numbers
+---
+ARTICLE #78
+File: blog/en/2026-06-16-whatsapp-ai-receptionist-cost-oman-2026.html
+Title tag: How Much Does a WhatsApp AI Receptionist Cost in Oman? [2026 Pricing Guide] | AI Profit Lab
+H1: How Much Does a WhatsApp AI Receptionist Cost in Oman? [2026 Honest Pricing Guide]
+Meta description: Unsure of the setup costs for custom messaging bots? Review the 2026 WhatsApp API pricing for Oman to choose the best automation provider.
+Word count: 1554
+
+SCORES:
+1. Title & Hook:        PASS — Title contains specific benefit/keyword; hook addresses reader
+2. Word Count & Depth:  PASS — 1554 words with 21 concrete examples/steps/data points
+3. GCC/Oman Relevance:  PASS — 9 local terms woven naturally (41 total mentions)
+4. LLM Citation:        PASS — 7 H2s, 1 quotable answers, 11 stats
+5. Call to Action:      PASS — Clear specific CTA with action verb and working link
+6. Meta Description:    PASS — 138 chars, contains specific keyword/benefit
+7. Duplicate Risk:      NEEDS WORK — Overlaps with 2026-07-07-whatsapp-ai-receptionist-uae- (50% similarity)
+
+OVERALL: STRONG
+#1 FIX:  [Duplicate Risk] Overlaps with 2026-07-07-whatsapp-ai-receptionist-uae- (50% similarity)
+---
+ARTICLE #79
+File: blog/en/2026-06-17-7-whatsapp-messages-costing-omani-businesses.html
+Title tag: 7 WhatsApp Messages Costing Your Omani Business Money [2026 Update] | AI Profit Lab
+H1: 7 WhatsApp Messages Costing Your Omani Business Money [2026 Update]
+Meta description: Are Meta's conversation fees eating your customer service budget? Omani businesses restructure templates to cut costs and save messaging fees.
+Word count: 1258
+
+SCORES:
+1. Title & Hook:        PASS — Title contains specific benefit/keyword; hook addresses reader
+2. Word Count & Depth:  PASS — 1258 words with 26 concrete examples/steps/data points
+3. GCC/Oman Relevance:  PASS — 6 local terms woven naturally (18 total mentions)
+4. LLM Citation:        PASS — 8 H2s, 1 quotable answers, 20 stats
+5. Call to Action:      PASS — Clear specific CTA with action verb and working link
+6. Meta Description:    PASS — 142 chars, contains specific keyword/benefit
+7. Duplicate Risk:      PASS — Unique angle, no substantial topic overlap detected
+
+OVERALL: STRONG
+#1 FIX:  All criteria passing — minor polish only
+---
+ARTICLE #80
+File: blog/en/2026-06-17-whatsapp-ai-beauty-salons-spas-oman-guide.html
+Title tag: WhatsApp AI for Beauty Salons and Spas in Oman: The Complete Guide [2026 Update] | AI Profit Lab
+H1: WhatsApp AI for Beauty Salons and Spas in Oman: The Complete Guide [2026 Update]
+Meta description: Are empty scheduling hours reducing your beauty salon margins? Oman spas deploy WhatsApp AI booking assistants to handle inquiries and fill calendars.
+Word count: 949
+
+SCORES:
+1. Title & Hook:        PASS — Title contains specific benefit/keyword; hook addresses reader
+2. Word Count & Depth:  PASS — 949 words with 14 concrete examples/steps/data points
+3. GCC/Oman Relevance:  PASS — 6 local terms woven naturally (24 total mentions)
+4. LLM Citation:        PASS — 5 H2s, 2 quotable answers, 11 stats
+5. Call to Action:      PASS — Clear specific CTA with action verb and working link
+6. Meta Description:    PASS — 150 chars, contains specific keyword/benefit
+7. Duplicate Risk:      PASS — Unique angle, no substantial topic overlap detected
+
+OVERALL: STRONG
+#1 FIX:  All criteria passing — minor polish only
+---
+ARTICLE #81
+File: blog/en/2026-06-17-whatsapp-ai-car-workshop-muscat.html
+Title tag: WhatsApp AI for Car Workshops in Muscat: Boost Booking by 300% | AI Profit Lab
+H1: How a Car Workshop in Muscat Can Use WhatsApp AI to Fill Its Booking Calendar
+Meta description: Are empty service bays reducing workshop revenue in Muscat? Automate customer check-ins via WhatsApp to confirm arrivals and double bay bookings.
+Word count: 965
+
+SCORES:
+1. Title & Hook:        NEEDS WORK — Title specific but H1 and title tag differ
+2. Word Count & Depth:  PASS — 965 words with 20 concrete examples/steps/data points
+3. GCC/Oman Relevance:  PASS — 4 local terms woven naturally (16 total mentions)
+4. LLM Citation:        PASS — 5 H2s, 1 quotable answers, 13 stats
+5. Call to Action:      PASS — Clear specific CTA with action verb and working link
+6. Meta Description:    PASS — 145 chars, contains specific keyword/benefit
+7. Duplicate Risk:      PASS — Unique angle, no substantial topic overlap detected
+
+OVERALL: STRONG
+#1 FIX:  [Title & Hook] Title specific but H1 and title tag differ
+---
+ARTICLE #82
+File: blog/en/2026-06-17-whatsapp-ai-real-estate-oman-guide.html
+Title tag: WhatsApp AI for Real Estate Agents in Oman: How to Never Miss a Property Inquiry Again [2026 Guide] | AI Profit Lab
+H1: WhatsApp AI for Real Estate Agents in Oman: How to Never Miss a Property Inquiry Again [2026 Guide]
+Meta description: Are property agents losing potential tenants due to slow replies? Oman agencies deploy WhatsApp AI to capture 100% of incoming property inquiries.
+Word count: 1089
+
+SCORES:
+1. Title & Hook:        PASS — Title contains specific benefit/keyword; hook addresses reader
+2. Word Count & Depth:  PASS — 1089 words with 16 concrete examples/steps/data points
+3. GCC/Oman Relevance:  PASS — 4 local terms woven naturally (18 total mentions)
+4. LLM Citation:        PASS — 5 H2s, 1 quotable answers, 6 stats
+5. Call to Action:      PASS — Clear specific CTA with action verb and working link
+6. Meta Description:    PASS — 146 chars, contains specific keyword/benefit
+7. Duplicate Risk:      PASS — Unique angle, no substantial topic overlap detected
+
+OVERALL: STRONG
+#1 FIX:  All criteria passing — minor polish only
+---
+ARTICLE #83
+File: blog/en/2026-06-17-whatsapp-auto-reply-clinic-oman-setup-guide.html
+Title tag: How to Set Up WhatsApp Auto-Reply for a Clinic in Oman [2026 Step-by-Step Guide] | AI Profit Lab
+H1: How to Set Up WhatsApp Auto-Reply for a Clinic in Oman
+Meta description: Are patient bookings lost during clinic off-hours? Oman medical centers deploy automated WhatsApp replies to capture inquiries and secure consultations.
+Word count: 1801
+
+SCORES:
+1. Title & Hook:        PASS — Title contains specific benefit/keyword; hook addresses reader
+2. Word Count & Depth:  PASS — 1801 words with 40 concrete examples/steps/data points
+3. GCC/Oman Relevance:  PASS — 6 local terms woven naturally (67 total mentions)
+4. LLM Citation:        PASS — 9 H2s, 1 quotable answers, 12 stats
+5. Call to Action:      PASS — Clear specific CTA with action verb and working link
+6. Meta Description:    PASS — 152 chars, contains specific keyword/benefit
+7. Duplicate Risk:      PASS — Unique angle, no substantial topic overlap detected
+
+OVERALL: STRONG
+#1 FIX:  All criteria passing — minor polish only
+---
+ARTICLE #84
+File: blog/en/2026-06-17-whatsapp-bot-appointment-booking.html
+Title tag: Can a WhatsApp Bot Book Appointments Automatically? [2026 Guide] | AI Profit Lab
+H1: Can a WhatsApp Bot Book Appointments Automatically? (Yes — Here's Exactly How) [2026 Guide]
+Meta description: Are scheduling errors and double bookings wasting admin time? Oman businesses integrate CRM-linked bots to automate scheduling and routing stably.
+Word count: 1059
+
+SCORES:
+1. Title & Hook:        PASS — Title contains specific benefit/keyword; hook addresses reader
+2. Word Count & Depth:  PASS — 1059 words with 11 concrete examples/steps/data points
+3. GCC/Oman Relevance:  PASS — 3 local terms woven naturally (11 total mentions)
+4. LLM Citation:        NEEDS WORK — no quotable answers
+5. Call to Action:      PASS — Clear specific CTA with action verb and working link
+6. Meta Description:    PASS — 146 chars, contains specific keyword/benefit
+7. Duplicate Risk:      PASS — Unique angle, no substantial topic overlap detected
+
+OVERALL: STRONG
+#1 FIX:  [LLM Citation Structure] no quotable answers
+---
+ARTICLE #85
+File: blog/en/2026-06-17-whatsapp-business-api-vs-app-oman-guide.html
+Title tag: WhatsApp Business API vs. WhatsApp Business App: What Every Oman Business Owner Needs to Know [2026 Guide] | AI Profit Lab
+H1: WhatsApp Business API vs. WhatsApp Business App: What Every Oman Business Owner Needs to Know
+Meta description: Is the five-device limit on WhatsApp Business stalling your team? Oman companies migrate to Meta's API to enable unlimited agent access and automations.
+Word count: 1918
+
+SCORES:
+1. Title & Hook:        PASS — Title contains specific benefit/keyword; hook addresses reader
+2. Word Count & Depth:  PASS — 1918 words with 7 concrete examples/steps/data points
+3. GCC/Oman Relevance:  PASS — 8 local terms woven naturally (53 total mentions)
+4. LLM Citation:        NEEDS WORK — no stats/numbers
+5. Call to Action:      PASS — Clear specific CTA with action verb and working link
+6. Meta Description:    PASS — 152 chars, contains specific keyword/benefit
+7. Duplicate Risk:      NEEDS WORK — Overlaps with 2026-07-27-oman-pdpl-explained-whatsapp- (62% similarity)
+
+OVERALL: STRONG
+#1 FIX:  [LLM Citation Structure] no stats/numbers
+---
+ARTICLE #86
+File: blog/en/2026-06-19-which-ai-model-oman-gpt.html
+Title tag: Oman GPT and Beyond: Which AI Model is Best for Your Muscat Business in 2026?
+H1: Oman GPT and Beyond: Which AI Model is Best for Your Muscat Business in 2026?
+Meta description: Struggling to choose the right AI platform under the Omani PDPL? Compare Oman GPT and global models to find the perfect solution to boost your team's ROI.
+Word count: 1175
+
+SCORES:
+1. Title & Hook:        FAIL — Opening paragraph is self-promotional
+2. Word Count & Depth:  PASS — 1175 words with 12 concrete examples/steps/data points
+3. GCC/Oman Relevance:  PASS — 7 local terms woven naturally (36 total mentions)
+4. LLM Citation:        PASS — 4 H2s, 1 quotable answers, 4 stats
+5. Call to Action:      FAIL — No CTA found in last 200 words of article
+6. Meta Description:    PASS — 154 chars, contains specific keyword/benefit
+7. Duplicate Risk:      PASS — Unique angle, no substantial topic overlap detected
+
+OVERALL: NEEDS REVISION
+#1 FIX:  [Call to Action] No CTA found in last 200 words of article
+---
+ARTICLE #87
+File: blog/en/2026-06-20-ai-automation-catering-events-muscat.html
+Title tag: AI Automation for Catering and Events Businesses in Muscat: From Inquiry to Invoice | AI Profit Lab
+H1: AI Automation for Catering and Events Businesses in Muscat: From Inquiry to Invoice
+Meta description: Are manual event inquiries and delayed invoicing hurting your Muscat catering business? Automate workflows to secure bookings and increase monthly ROI.
+Word count: 1179
+
+SCORES:
+1. Title & Hook:        PASS — Title contains specific benefit/keyword; hook addresses reader
+2. Word Count & Depth:  PASS — 1179 words with 12 concrete examples/steps/data points
+3. GCC/Oman Relevance:  PASS — 8 local terms woven naturally (33 total mentions)
+4. LLM Citation:        NEEDS WORK — no quotable answers
+5. Call to Action:      NEEDS WORK — CTA present but text is vague or generic
+6. Meta Description:    PASS — 151 chars, contains specific keyword/benefit
+7. Duplicate Risk:      PASS — Unique angle, no substantial topic overlap detected
+
+OVERALL: STRONG
+#1 FIX:  [LLM Citation Structure] no quotable answers
+---
+ARTICLE #88
+File: blog/en/2026-06-20-private-schools-oman-ai-enrollment.html
+Title tag: How Private Schools in Oman Can Use AI to Handle Enrollment Inquiries [2026 Guide] | AI Profit Lab
+H1: How Private Schools in Oman Can Use AI to Handle Enrollment Inquiries [2026 Guide]
+Meta description: Are overwhelming parent inquiries delaying school registrations? Muscat private schools deploy AI to resolve inquiries, securing enrollments 24/7.
+Word count: 1515
+
+SCORES:
+1. Title & Hook:        PASS — Title contains specific benefit/keyword; hook addresses reader
+2. Word Count & Depth:  PASS — 1515 words with 19 concrete examples/steps/data points
+3. GCC/Oman Relevance:  PASS — 8 local terms woven naturally (35 total mentions)
+4. LLM Citation:        PASS — 5 H2s, 1 quotable answers, 8 stats
+5. Call to Action:      NEEDS WORK — CTA present but text is vague or generic
+6. Meta Description:    PASS — 146 chars, contains specific keyword/benefit
+7. Duplicate Risk:      PASS — Unique angle, no substantial topic overlap detected
+
+OVERALL: STRONG
+#1 FIX:  [Call to Action] CTA present but text is vague or generic
+---
+ARTICLE #89
+File: blog/en/2026-06-21-ai-automation-cost-small-business-oman.html
+Title tag: How Much Does AI Automation Cost for a Small Business in Oman? (Real Prices, 2026) | AI Profit Lab
+H1: How Much Does AI Automation Cost for a Small Business in Oman? (Real Prices, 2026)
+Meta description: Struggling with high overhead costs? Find out exactly how much AI automation costs for small businesses in Oman in 2026 to boost margins by 40%.
+Word count: 1228
+
+SCORES:
+1. Title & Hook:        PASS — Title contains specific benefit/keyword; hook addresses reader
+2. Word Count & Depth:  PASS — 1228 words with 28 concrete examples/steps/data points
+3. GCC/Oman Relevance:  PASS — 10 local terms woven naturally (31 total mentions)
+4. LLM Citation:        PASS — 6 H2s, 1 quotable answers, 18 stats
+5. Call to Action:      NEEDS WORK — CTA present but text is vague or generic
+6. Meta Description:    PASS — 144 chars, contains specific keyword/benefit
+7. Duplicate Risk:      NEEDS WORK — Overlaps with 2026-04-28-ai-automation-cost-uae-busine (45% similarity)
+
+OVERALL: STRONG
+#1 FIX:  [Call to Action] CTA present but text is vague or generic
+---
+ARTICLE #90
+File: blog/en/2026-06-22-whatsapp-ai-mistakes-how-to-prevent.html
+Title tag: What Happens When a WhatsApp AI Makes a Mistake? (And How to Prevent It) | AI Profit Lab
+H1: What Happens When a WhatsApp AI Makes a Mistake? (And How to Prevent It)
+Meta description: WhatsApp AI bots in Oman and the GCC do make mistakes — wrong prices, missed bookings, rude replies. Here's exactly how to catch errors and prevent them.
+Word count: 1928
+
+SCORES:
+1. Title & Hook:        PASS — Title contains specific benefit/keyword; hook addresses reader
+2. Word Count & Depth:  PASS — 1928 words with 10 concrete examples/steps/data points
+3. GCC/Oman Relevance:  PASS — 13 local terms woven naturally (59 total mentions)
+4. LLM Citation:        PASS — 5 H2s, 2 quotable answers, 3 stats
+5. Call to Action:      NEEDS WORK — CTA present but text is vague or generic
+6. Meta Description:    PASS — 153 chars, contains specific keyword/benefit
+7. Duplicate Risk:      PASS — Unique angle, no substantial topic overlap detected
+
+OVERALL: STRONG
+#1 FIX:  [Call to Action] CTA present but text is vague or generic
+---
+ARTICLE #91
+File: blog/en/2026-06-23-ai-automation-roi-calculator-90-days.html
+Title tag: AI Automation ROI Calculator: What Results Should You Expect in 90 Days? | AI Profit Lab
+H1: AI Automation ROI Calculator: What Results Should You Expect in 90 Days?
+Meta description: Struggling to justify AI costs in Oman or the GCC? Use our 90-day ROI framework to calculate real savings, hours recovered, and revenue gains before committing.
+Word count: 1913
+
+SCORES:
+1. Title & Hook:        PASS — Title contains specific benefit/keyword; hook addresses reader
+2. Word Count & Depth:  PASS — 1913 words with 59 concrete examples/steps/data points
+3. GCC/Oman Relevance:  PASS — 12 local terms woven naturally (72 total mentions)
+4. LLM Citation:        PASS — 6 H2s, 2 quotable answers, 23 stats
+5. Call to Action:      FAIL — No CTA found in last 200 words of article
+6. Meta Description:    PASS — 160 chars, contains specific keyword/benefit
+7. Duplicate Risk:      PASS — Unique angle, no substantial topic overlap detected
+
+OVERALL: ACCEPTABLE
+#1 FIX:  [Call to Action] No CTA found in last 200 words of article
+---
+ARTICLE #92
+File: blog/en/2026-06-25-true-cost-missed-whatsapp-inquiries-oman.html
+Title tag: How to Calculate the True Cost of Missed WhatsApp Inquiries for Your Oman Business | AI Profit Lab
+H1: How to Calculate the True Cost of Missed WhatsApp Inquiries for Your Oman Business
+Meta description: Missed WhatsApp inquiries are costing Oman SMEs thousands of OMR every month. Use this step-by-step formula to calculate your true revenue loss and fix it.
+Word count: 1969
+
+SCORES:
+1. Title & Hook:        PASS — Title contains specific benefit/keyword; hook addresses reader
+2. Word Count & Depth:  PASS — 1969 words with 37 concrete examples/steps/data points
+3. GCC/Oman Relevance:  PASS — 13 local terms woven naturally (66 total mentions)
+4. LLM Citation:        PASS — 6 H2s, 2 quotable answers, 12 stats
+5. Call to Action:      PASS — Clear specific CTA with action verb and working link
+6. Meta Description:    PASS — 155 chars, contains specific keyword/benefit
+7. Duplicate Risk:      PASS — Unique angle, no substantial topic overlap detected
+
+OVERALL: STRONG
+#1 FIX:  All criteria passing — minor polish only
+---
+ARTICLE #93
+File: blog/en/2026-06-25-whatsapp-ai-receptionist-2000-worth-it.html
+Title tag: Is $2,000 Worth It? Honest Breakdown of What a WhatsApp AI Receptionist Delivers | AI Profit Lab
+H1: Is $2,000 Worth It? Honest Breakdown of What a WhatsApp AI Receptionist Delivers
+Meta description: Paying $2,000 for a WhatsApp AI receptionist in Oman? Break down exactly what you get, what ROI to expect in 90 days, and when it genuinely pays for itself.
+Word count: 1851
+
+SCORES:
+1. Title & Hook:        PASS — Title contains specific benefit/keyword; hook addresses reader
+2. Word Count & Depth:  PASS — 1851 words with 39 concrete examples/steps/data points
+3. GCC/Oman Relevance:  PASS — 13 local terms woven naturally (58 total mentions)
+4. LLM Citation:        PASS — 6 H2s, 1 quotable answers, 18 stats
+5. Call to Action:      NEEDS WORK — CTA present but text is vague or generic
+6. Meta Description:    PASS — 156 chars, contains specific keyword/benefit
+7. Duplicate Risk:      PASS — Unique angle, no substantial topic overlap detected
+
+OVERALL: STRONG
+#1 FIX:  [Call to Action] CTA present but text is vague or generic
+---
+ARTICLE #94
+File: blog/en/2026-06-26-pay-per-use-vs-one-time-fee-vs-monthly-retainer-ai-automation.html
+Title tag: Pay-Per-Use vs. One-Time Fee vs. Monthly Retainer: Which AI Automation Model Fits Oman Businesses? | AI Profit Lab
+H1: Pay-Per-Use vs. One-Time Fee vs. Monthly Retainer: Which AI Automation Model Fits Oman Businesses?
+Meta description: Struggling to pick an AI automation pricing model in Oman or the GCC? Compare pay-per-use, one-time fee, and monthly retainer costs, risks, and ROI to make t...
+Word count: 1962
+
+SCORES:
+1. Title & Hook:        PASS — Title contains specific benefit/keyword; hook addresses reader
+2. Word Count & Depth:  PASS — 1962 words with 34 concrete examples/steps/data points
+3. GCC/Oman Relevance:  PASS — 14 local terms woven naturally (63 total mentions)
+4. LLM Citation:        PASS — 6 H2s, 1 quotable answers, 8 stats
+5. Call to Action:      NEEDS WORK — CTA present but text is vague or generic
+6. Meta Description:    NEEDS WORK — Too long at 171 chars — over 170
+7. Duplicate Risk:      PASS — Unique angle, no substantial topic overlap detected
+
+OVERALL: STRONG
+#1 FIX:  [Meta Description] Too long at 171 chars — over 170
+---
+ARTICLE #95
+File: blog/en/2026-06-27-whats-included-in-an-ai-automation-build.html
+Title tag: What's Included in an AI Automation Build? (And What Should NOT Be) For GCC Businesses | AI Profit Lab
+H1: What's Included in an AI Automation Build? (And What Should NOT Be) For GCC Businesses
+Meta description: Tired of paying for disjointed software? Learn what a true AI automation build includes for Oman and GCC companies to guarantee operational efficiency and ROI.
+Word count: 1626
+
+SCORES:
+1. Title & Hook:        PASS — Title contains specific benefit/keyword; hook addresses reader
+2. Word Count & Depth:  PASS — 1626 words with 12 concrete examples/steps/data points
+3. GCC/Oman Relevance:  PASS — 9 local terms woven naturally (20 total mentions)
+4. LLM Citation:        PASS — 4 H2s, 2 quotable answers, 1 stats
+5. Call to Action:      FAIL — No CTA found in last 200 words of article
+6. Meta Description:    PASS — 159 chars, contains specific keyword/benefit
+7. Duplicate Risk:      PASS — Unique angle, no substantial topic overlap detected
+
+OVERALL: ACCEPTABLE
+#1 FIX:  [Call to Action] No CTA found in last 200 words of article
+---
+ARTICLE #96
+File: blog/en/2026-06-28-im-not-technical-can-i-still-use-ai-for-my-business-in-oman.html
+Title tag: I'm Not Technical — Can I Still Use AI for My Business in Oman? (Honest Answer) | AI Profit Lab
+H1: I'm Not Technical — Can I Still Use AI for My Business in Oman? (Honest Answer)
+Meta description: Are you overwhelmed by manual operations but lack coding skills? See how non-technical business owners in Oman deploy AI to cut overhead costs.
+Word count: 1742
+
+SCORES:
+1. Title & Hook:        PASS — Title contains specific benefit/keyword; hook addresses reader
+2. Word Count & Depth:  PASS — 1742 words with 17 concrete examples/steps/data points
+3. GCC/Oman Relevance:  PASS — 12 local terms woven naturally (33 total mentions)
+4. LLM Citation:        PASS — 6 H2s, 1 quotable answers, 7 stats
+5. Call to Action:      FAIL — No CTA found in last 200 words of article
+6. Meta Description:    PASS — 143 chars, contains specific keyword/benefit
+7. Duplicate Risk:      PASS — Unique angle, no substantial topic overlap detected
+
+OVERALL: ACCEPTABLE
+#1 FIX:  [Call to Action] No CTA found in last 200 words of article
+---
+ARTICLE #97
+File: blog/en/2026-06-29-5-questions-to-ask-before-hiring-an-ai-automation-company-in-oman.html
+Title tag: 5 Questions to Ask Before Hiring an AI Automation Company in Oman | AI Profit Lab
+H1: 5 Questions to Ask Before Hiring an AI Automation Company in Oman
+Meta description: Overwhelmed by manual tasks? Before choosing an AI agency in Muscat, ask these 5 vital questions to ensure high ROI and eliminate operational busywork.
+Word count: 1488
+
+SCORES:
+1. Title & Hook:        FAIL — Opening paragraph is self-promotional
+2. Word Count & Depth:  PASS — 1488 words with 19 concrete examples/steps/data points
+3. GCC/Oman Relevance:  PASS — 7 local terms woven naturally (23 total mentions)
+4. LLM Citation:        PASS — 6 H2s, 2 quotable answers, 3 stats
+5. Call to Action:      FAIL — No CTA found in last 200 words of article
+6. Meta Description:    PASS — 151 chars, contains specific keyword/benefit
+7. Duplicate Risk:      PASS — Unique angle, no substantial topic overlap detected
+
+OVERALL: NEEDS REVISION
+#1 FIX:  [Call to Action] No CTA found in last 200 words of article
+---
+ARTICLE #98
+File: blog/en/2026-06-30-how-long-does-it-take-to-build-a-whatsapp-ai-receptionist-realistic-timeline.html
+Title tag: How Long Does It Take to Build a WhatsApp AI Receptionist? (Realistic Timeline) | AI Profit Lab
+H1: How Long Does It Take to Build a WhatsApp AI Receptionist? (Realistic Timeline)
+Meta description: Worried about delays building a WhatsApp AI receptionist? Learn the realistic timeline for Oman businesses to launch a qualified system in 2 to 4 weeks.
+Word count: 1365
+
+SCORES:
+1. Title & Hook:        NEEDS WORK — Title acceptable but lacks strong hook or specificity
+2. Word Count & Depth:  PASS — 1365 words with 20 concrete examples/steps/data points
+3. GCC/Oman Relevance:  PASS — 10 local terms woven naturally (23 total mentions)
+4. LLM Citation:        PASS — 4 H2s, 2 quotable answers, 1 stats
+5. Call to Action:      NEEDS WORK — CTA present but text is vague or generic
+6. Meta Description:    PASS — 152 chars, contains specific keyword/benefit
+7. Duplicate Risk:      PASS — Unique angle, no substantial topic overlap detected
+
+OVERALL: STRONG
+#1 FIX:  [Call to Action] CTA present but text is vague or generic
+---
+ARTICLE #99
+File: blog/en/2026-07-01-whatsapp-automation-rules.html
+Title tag: What Can and Cannot Be Automated on WhatsApp in 2026 (WhatsApp's Official Rules Explained) | AI Profit Lab
+H1: What Can and Cannot Be Automated on WhatsApp in 2026 (WhatsApp's Official Rules Explained)
+Meta description: Are you risking a permanent WhatsApp ban in Oman? Understand the exact 2026 automation rules to safely scale your GCC customer support and ROI.
+Word count: 1553
+
+SCORES:
+1. Title & Hook:        PASS — Title contains specific benefit/keyword; hook addresses reader
+2. Word Count & Depth:  PASS — 1553 words with 14 concrete examples/steps/data points
+3. GCC/Oman Relevance:  PASS — 8 local terms woven naturally (15 total mentions)
+4. LLM Citation:        PASS — 5 H2s, 1 quotable answers, 5 stats
+5. Call to Action:      NEEDS WORK — CTA present but text is vague or generic
+6. Meta Description:    PASS — 143 chars, contains specific keyword/benefit
+7. Duplicate Risk:      PASS — Unique angle, no substantial topic overlap detected
+
+OVERALL: STRONG
+#1 FIX:  [Call to Action] CTA present but text is vague or generic
+---
+ARTICLE #100
+File: blog/en/2026-07-02-ai-automation-scams-gcc.html
+Title tag: 5 AI Automation Scams in the GCC: Red Flags for Hiring | AI Profit Lab
+H1: 5 AI Automation Scams in the GCC: Red Flags for Hiring
+Meta description: Worried about hiring the wrong AI agency? Discover 5 red flags to spot AI automation scams in Oman and the GCC to protect your business data and ROI.
+Word count: 1412
+
+SCORES:
+1. Title & Hook:        PASS — Title contains specific benefit/keyword; hook addresses reader
+2. Word Count & Depth:  PASS — 1412 words with 13 concrete examples/steps/data points
+3. GCC/Oman Relevance:  PASS — 9 local terms woven naturally (30 total mentions)
+4. LLM Citation:        PASS — 6 H2s, 1 quotable answers, 7 stats
+5. Call to Action:      FAIL — No CTA found in last 200 words of article
+6. Meta Description:    PASS — 149 chars, contains specific keyword/benefit
+7. Duplicate Risk:      PASS — Unique angle, no substantial topic overlap detected
+
+OVERALL: ACCEPTABLE
+#1 FIX:  [Call to Action] No CTA found in last 200 words of article
+---
+ARTICLE #101
+File: blog/en/2026-07-02-do-i-need-a-whatsapp-business-api-account-a-plain-language-guide-for-oman-smes.html
+Title tag: Do I Need a WhatsApp Business API Account? A Plain-Language Guide for Oman SMEs | AI Profit Lab
+H1: Do I Need a WhatsApp Business API Account? A Plain-Language Guide for Oman SMEs
+Meta description: Confused about standard WhatsApp Business vs the API in Oman? Learn exactly when an upgrade is necessary to automate your customer service and cut costs.
+Word count: 1764
+
+SCORES:
+1. Title & Hook:        PASS — Title contains specific benefit/keyword; hook addresses reader
+2. Word Count & Depth:  PASS — 1764 words with 7 concrete examples/steps/data points
+3. GCC/Oman Relevance:  PASS — 8 local terms woven naturally (25 total mentions)
+4. LLM Citation:        PASS — 6 H2s, 3 quotable answers, 1 stats
+5. Call to Action:      NEEDS WORK — CTA present but text is vague or generic
+6. Meta Description:    PASS — 153 chars, contains specific keyword/benefit
+7. Duplicate Risk:      PASS — Unique angle, no substantial topic overlap detected
+
+OVERALL: STRONG
+#1 FIX:  [Call to Action] CTA present but text is vague or generic
+---
+ARTICLE #102
+File: blog/en/2026-07-02-what-happens-to-my-business-data-when-i-use-ai-a-guide-for-oman-business-owners.html
+Title tag: What Happens to My Business Data When I Use AI? A Guide for Oman Business Owners | AI Profit Lab
+H1: What Happens to My Business Data When I Use AI? A Guide for Oman Business Owners
+Meta description: Are you worried about data leaks when using AI? Understand how AI tools handle your sensitive information and stay compliant with Oman's PDPL regulations.
+Word count: 1718
+
+SCORES:
+1. Title & Hook:        PASS — Title contains specific benefit/keyword; hook addresses reader
+2. Word Count & Depth:  PASS — 1718 words with 11 concrete examples/steps/data points
+3. GCC/Oman Relevance:  PASS — 11 local terms woven naturally (43 total mentions)
+4. LLM Citation:        PASS — 5 H2s, 2 quotable answers, 3 stats
+5. Call to Action:      NEEDS WORK — CTA present but text is vague or generic
+6. Meta Description:    PASS — 154 chars, contains specific keyword/benefit
+7. Duplicate Risk:      NEEDS WORK — Overlaps with 2026-04-26-ai-automation-oman-2025-guide (56% similarity)
+
+OVERALL: STRONG
+#1 FIX:  [Call to Action] CTA present but text is vague or generic
+---
+ARTICLE #103
+File: blog/en/2026-07-03-chatgpt-vs-claude-vs-gemini-oman.html
+Title tag: ChatGPT vs. Claude vs. Gemini: Which AI Should Your Omani Business Actually Use? | AI Profit Lab
+H1: ChatGPT vs. Claude vs. Gemini: Which AI Should Your Omani Business Actually Use?
+Meta description: Confused by the crowded AI market? Compare ChatGPT, Claude, and Gemini to find the perfect LLM for your Omani business and lower overheads.
+Word count: 1670
+
+SCORES:
+1. Title & Hook:        PASS — Title contains specific benefit/keyword; hook addresses reader
+2. Word Count & Depth:  PASS — 1670 words with 13 concrete examples/steps/data points
+3. GCC/Oman Relevance:  PASS — 8 local terms woven naturally (32 total mentions)
+4. LLM Citation:        PASS — 5 H2s, 1 quotable answers, 6 stats
+5. Call to Action:      NEEDS WORK — CTA present but text is vague or generic
+6. Meta Description:    PASS — 139 chars, contains specific keyword/benefit
+7. Duplicate Risk:      PASS — Unique angle, no substantial topic overlap detected
+
+OVERALL: STRONG
+#1 FIX:  [Call to Action] CTA present but text is vague or generic
+---
+ARTICLE #104
+File: blog/en/2026-07-03-make-vs-n8n-vs-zapier-oman.html
+Title tag: Make.com vs. n8n vs. Zapier: Which is Best for Small Businesses in Oman (2026) | AI Profit Lab
+H1: Make.com vs. n8n vs. Zapier: Which is Best for Small Businesses in Oman (2026)
+Meta description: Wondering which automation tool is right for you? Compare Make.com, n8n, and Zapier for Oman SMEs to cut costs and scale your GCC operations efficiently.
+Word count: 2290
+
+SCORES:
+1. Title & Hook:        PASS — Title contains specific benefit/keyword; hook addresses reader
+2. Word Count & Depth:  PASS — 2290 words with 12 concrete examples/steps/data points
+3. GCC/Oman Relevance:  PASS — 13 local terms woven naturally (54 total mentions)
+4. LLM Citation:        PASS — 6 H2s, 1 quotable answers, 1 stats
+5. Call to Action:      NEEDS WORK — CTA present but text is vague or generic
+6. Meta Description:    PASS — 153 chars, contains specific keyword/benefit
+7. Duplicate Risk:      PASS — Unique angle, no substantial topic overlap detected
+
+OVERALL: STRONG
+#1 FIX:  [Call to Action] CTA present but text is vague or generic
+---
+ARTICLE #105
+File: blog/en/2026-07-03-tidio-vs-manychat-vs-custom-whatsapp-ai-gcc.html
+Title tag: Tidio vs. ManyChat vs. Custom WhatsApp AI: Best for GCC Businesses in 2026 | AI Profit Lab
+H1: Tidio vs. ManyChat vs. Custom WhatsApp AI: Best for GCC Businesses in 2026
+Meta description: Struggling to choose between Tidio, ManyChat, and custom WhatsApp AI? Compare costs and features to build the ultimate sales engine for your GCC business.
+Word count: 1636
+
+SCORES:
+1. Title & Hook:        PASS — Title contains specific benefit/keyword; hook addresses reader
+2. Word Count & Depth:  PASS — 1636 words with 22 concrete examples/steps/data points
+3. GCC/Oman Relevance:  PASS — 12 local terms woven naturally (28 total mentions)
+4. LLM Citation:        PASS — 5 H2s, 1 quotable answers, 15 stats
+5. Call to Action:      NEEDS WORK — CTA present but text is vague or generic
+6. Meta Description:    PASS — 154 chars, contains specific keyword/benefit
+7. Duplicate Risk:      PASS — Unique angle, no substantial topic overlap detected
+
+OVERALL: STRONG
+#1 FIX:  [Call to Action] CTA present but text is vague or generic
+---
+ARTICLE #106
+File: blog/en/2026-07-04-ai-agency-vs-saas-tool-oman.html
+Title tag: Hiring an AI Agency vs. Buying a SaaS Tool: What Makes More Sense for Your Business in Oman? | AI Profit Lab
+H1: Hiring an AI Agency vs. Buying a SaaS Tool: What Makes More Sense for Your Business in Oman?
+Meta description: Struggling to choose between a custom AI agency and a monthly SaaS tool in Oman? Compare costs, PDPL compliance, and ROI to scale operations faster.
+Word count: 1836
+
+SCORES:
+1. Title & Hook:        PASS — Title contains specific benefit/keyword; hook addresses reader
+2. Word Count & Depth:  PASS — 1836 words with 14 concrete examples/steps/data points
+3. GCC/Oman Relevance:  PASS — 7 local terms woven naturally (34 total mentions)
+4. LLM Citation:        PASS — 5 H2s, 1 quotable answers, 7 stats
+5. Call to Action:      FAIL — No CTA found in last 200 words of article
+6. Meta Description:    PASS — 148 chars, contains specific keyword/benefit
+7. Duplicate Risk:      PASS — Unique angle, no substantial topic overlap detected
+
+OVERALL: ACCEPTABLE
+#1 FIX:  [Call to Action] No CTA found in last 200 words of article
+---
+ARTICLE #107
+File: blog/en/2026-07-04-ai-receptionist-vs-virtual-assistant-oman.html
+Title tag: AI Receptionist vs. Virtual Assistant: Which Is Best for Oman Businesses? | AI Profit Lab
+H1: AI Receptionist vs. Virtual Assistant: Which Is Best for Oman Businesses?
+Meta description: Missed calls costing you clients in Muscat? Compare AI receptionists and virtual assistants to find the most cost-effective solution for your business.
+Word count: 1449
+
+SCORES:
+1. Title & Hook:        PASS — Title contains specific benefit/keyword; hook addresses reader
+2. Word Count & Depth:  PASS — 1449 words with 12 concrete examples/steps/data points
+3. GCC/Oman Relevance:  PASS — 8 local terms woven naturally (23 total mentions)
+4. LLM Citation:        PASS — 6 H2s, 2 quotable answers, 1 stats
+5. Call to Action:      NEEDS WORK — CTA present but text is vague or generic
+6. Meta Description:    PASS — 151 chars, contains specific keyword/benefit
+7. Duplicate Risk:      PASS — Unique angle, no substantial topic overlap detected
+
+OVERALL: STRONG
+#1 FIX:  [Call to Action] CTA present but text is vague or generic
+---
+ARTICLE #108
+File: blog/en/2026-07-05-muscat-dental-clinic-whatsapp-ai-case-study.html
+Title tag: How a Muscat Dental Clinic Went From 40% to 85% Appointment Fill Rate Using WhatsApp AI | AI Profit Lab
+H1: How a Muscat Dental Clinic Went From 40% to 85% Appointment Fill Rate Using WhatsApp AI
+Meta description: Are empty dental chairs costing your clinic? See how a Muscat clinic used WhatsApp AI automation to stop no-shows and increase revenue by 112%.
+Word count: 1544
+
+SCORES:
+1. Title & Hook:        PASS — Title contains specific benefit/keyword; hook addresses reader
+2. Word Count & Depth:  PASS — 1544 words with 35 concrete examples/steps/data points
+3. GCC/Oman Relevance:  PASS — 7 local terms woven naturally (52 total mentions)
+4. LLM Citation:        PASS — 5 H2s, 1 quotable answers, 18 stats
+5. Call to Action:      NEEDS WORK — CTA present but text is vague or generic
+6. Meta Description:    PASS — 143 chars, contains specific keyword/benefit
+7. Duplicate Risk:      PASS — Unique angle, no substantial topic overlap detected
+
+OVERALL: STRONG
+#1 FIX:  [Call to Action] CTA present but text is vague or generic
+---
+ARTICLE #109
+File: blog/en/2026-07-05-shopify-ai-tools-vs-custom-automation.html
+Title tag: 5 Crucial Differences: Shopify AI Tools vs. Custom AI Automation for Omani E-Commerce | AI Profit Lab
+H1: 5 Crucial Differences: Shopify AI Tools vs. Custom AI Automation for Omani E-Commerce
+Meta description: Are generic Shopify AI tools enough, or do you need custom AI automation? Discover the true ROI for Omani e-commerce stores and reduce costs today.
+Word count: 1604
+
+SCORES:
+1. Title & Hook:        PASS — Title contains specific benefit/keyword; hook addresses reader
+2. Word Count & Depth:  PASS — 1604 words with 10 concrete examples/steps/data points
+3. GCC/Oman Relevance:  PASS — 7 local terms woven naturally (27 total mentions)
+4. LLM Citation:        PASS — 6 H2s, 1 quotable answers, 3 stats
+5. Call to Action:      FAIL — No CTA found in last 200 words of article
+6. Meta Description:    PASS — 147 chars, contains specific keyword/benefit
+7. Duplicate Risk:      PASS — Unique angle, no substantial topic overlap detected
+
+OVERALL: ACCEPTABLE
+#1 FIX:  [Call to Action] No CTA found in last 200 words of article
+---
+ARTICLE #110
+File: blog/en/2026-07-05-sohar-trading-company-automation-case-study.html
+Title tag: How a Sohar Trading Company Saved 3 Hours Daily With Automation | AI Profit Lab
+H1: How a Sohar Trading Company Saved 3 Hours Daily With Automation
+Meta description: Struggling with manual data entry? Learn how a Sohar trading company eliminated 3 hours of daily work using custom AI automation, boosting ROI instantly.
+Word count: 1381
+
+SCORES:
+1. Title & Hook:        PASS — Title contains specific benefit/keyword; hook addresses reader
+2. Word Count & Depth:  PASS — 1381 words with 24 concrete examples/steps/data points
+3. GCC/Oman Relevance:  PASS — 9 local terms woven naturally (26 total mentions)
+4. LLM Citation:        PASS — 4 H2s, 1 quotable answers, 3 stats
+5. Call to Action:      NEEDS WORK — CTA present but text is vague or generic
+6. Meta Description:    PASS — 153 chars, contains specific keyword/benefit
+7. Duplicate Risk:      PASS — Unique angle, no substantial topic overlap detected
+
+OVERALL: STRONG
+#1 FIX:  [Call to Action] CTA present but text is vague or generic
+---
+ARTICLE #111
+File: blog/en/2026-07-06-muscat-gym-whatsapp-ai-results.html
+Title tag: The 30-Day Results: What Happened After We Installed a WhatsApp AI for a Muscat Gym | AI Profit Lab
+H1: The 30-Day Results: What Happened After We Installed a WhatsApp AI for a Muscat Gym
+Meta description: Struggling with missed messages during peak gym hours? See how a Muscat fitness center boosted memberships by 45% using a custom WhatsApp AI receptionist.
+Word count: 1631
+
+SCORES:
+1. Title & Hook:        PASS — Title contains specific benefit/keyword; hook addresses reader
+2. Word Count & Depth:  PASS — 1631 words with 28 concrete examples/steps/data points
+3. GCC/Oman Relevance:  PASS — 6 local terms woven naturally (30 total mentions)
+4. LLM Citation:        PASS — 4 H2s, 1 quotable answers, 4 stats
+5. Call to Action:      NEEDS WORK — CTA present but text is vague or generic
+6. Meta Description:    PASS — 154 chars, contains specific keyword/benefit
+7. Duplicate Risk:      PASS — Unique angle, no substantial topic overlap detected
+
+OVERALL: STRONG
+#1 FIX:  [Call to Action] CTA present but text is vague or generic
+---
+ARTICLE #112
+File: blog/en/2026-07-06-muscat-real-estate-ai-receptionist.html
+Title tag: What a Real Estate Agency in Muscat Learned After 6 Months With an AI Receptionist | AI Profit Lab
+H1: What a Real Estate Agency in Muscat Learned After 6 Months With an AI Receptionist
+Meta description: Missing late-night property inquiries in Oman? See how a Muscat real estate agency used an AI receptionist to boost leads and save 40 hours a week.
+Word count: 1333
+
+SCORES:
+1. Title & Hook:        PASS — Title contains specific benefit/keyword; hook addresses reader
+2. Word Count & Depth:  PASS — 1333 words with 17 concrete examples/steps/data points
+3. GCC/Oman Relevance:  PASS — 6 local terms woven naturally (24 total mentions)
+4. LLM Citation:        PASS — 5 H2s, 1 quotable answers, 1 stats
+5. Call to Action:      NEEDS WORK — CTA present but text is vague or generic
+6. Meta Description:    PASS — 147 chars, contains specific keyword/benefit
+7. Duplicate Risk:      PASS — Unique angle, no substantial topic overlap detected
+
+OVERALL: STRONG
+#1 FIX:  [Call to Action] CTA present but text is vague or generic
+---
+ARTICLE #113
+File: blog/en/2026-07-06-muscat-restaurant-whatsapp-booking-reminders.html
+Title tag: How a Muscat Restaurant Cut No-Shows by 60% | AI Profit Lab
+H1: How a Muscat Restaurant Cut No-Shows by 60% Using WhatsApp Booking Reminders
+Meta description: Struggling with empty tables and lost revenue? Discover how a Muscat restaurant cut no-shows by 60% using automated WhatsApp booking reminders.
+Word count: 1393
+
+SCORES:
+1. Title & Hook:        PASS — Title contains specific benefit/keyword; hook addresses reader
+2. Word Count & Depth:  PASS — 1393 words with 15 concrete examples/steps/data points
+3. GCC/Oman Relevance:  PASS — 6 local terms woven naturally (25 total mentions)
+4. LLM Citation:        PASS — 4 H2s, 1 quotable answers, 7 stats
+5. Call to Action:      NEEDS WORK — CTA present but text is vague or generic
+6. Meta Description:    PASS — 143 chars, contains specific keyword/benefit
+7. Duplicate Risk:      PASS — Unique angle, no substantial topic overlap detected
+
+OVERALL: STRONG
+#1 FIX:  [Call to Action] CTA present but text is vague or generic
+---
+ARTICLE #114
+File: blog/en/2026-07-07-how-saudi-smes-start-ai-automation-vision-2030-2026.html
+Title tag: How Saudi SMEs Can Start AI Automation Under Vision 2030 (2026 Guide) | AI Profit Lab
+H1: How Saudi SMEs Can Start AI Automation Under Vision 2030 (2026 Guide)
+Meta description: Are manual tasks draining your team's energy? Read exactly how Saudi SMEs can launch AI automation under Vision 2030 in 2026 to boost operational ROI.
+Word count: 1392
+
+SCORES:
+1. Title & Hook:        PASS — Title contains specific benefit/keyword; hook addresses reader
+2. Word Count & Depth:  PASS — 1392 words with 11 concrete examples/steps/data points
+3. GCC/Oman Relevance:  PASS — 9 local terms woven naturally (36 total mentions)
+4. LLM Citation:        PASS — 4 H2s, 2 quotable answers, 2 stats
+5. Call to Action:      NEEDS WORK — CTA present but text is vague or generic
+6. Meta Description:    PASS — 150 chars, contains specific keyword/benefit
+7. Duplicate Risk:      NEEDS WORK — Overlaps with 2026-04-28-ai-automation-saudi-sme-worth (64% similarity)
+
+OVERALL: STRONG
+#1 FIX:  [Call to Action] CTA present but text is vague or generic
+---
+ARTICLE #115
+File: blog/en/2026-07-07-whatsapp-ai-receptionist-uae-vs-oman-guide.html
+Title tag: WhatsApp AI Receptionist for UAE Businesses: What's Different From Oman (2026 Guide) | AI Profit Lab
+H1: WhatsApp AI Receptionist for UAE Businesses: What's Different From Oman (2026 Guide)
+Meta description: Struggling with 24/7 customer inquiries in Dubai or Muscat? Compare WhatsApp AI receptionists across the UAE and Oman to automate operations.
+Word count: 1312
+
+SCORES:
+1. Title & Hook:        PASS — Title contains specific benefit/keyword; hook addresses reader
+2. Word Count & Depth:  PASS — 1312 words with 12 concrete examples/steps/data points
+3. GCC/Oman Relevance:  PASS — 10 local terms woven naturally (74 total mentions)
+4. LLM Citation:        PASS — 5 H2s, 1 quotable answers, 5 stats
+5. Call to Action:      NEEDS WORK — CTA present but text is vague or generic
+6. Meta Description:    PASS — 141 chars, contains specific keyword/benefit
+7. Duplicate Risk:      NEEDS WORK — Overlaps with 2026-06-16-whatsapp-ai-receptionist-cost (50% similarity)
+
+OVERALL: STRONG
+#1 FIX:  [Call to Action] CTA present but text is vague or generic
+---
+ARTICLE #116
+File: blog/en/2026-07-08-dubai-whatsapp-ai-arabic-english-inquiries.html
+Title tag: How Businesses in Dubai Are Using Wh... | AI Profit Lab عمان
+H1: How Businesses in Dubai Are Using WhatsApp AI to Handle Arabic and English Inquiries Simultaneously
+Meta description: Are language barriers costing you sales? See how Dubai and GCC businesses use WhatsApp AI to handle Arabic and English inquiries instantly for more ROI....
+Word count: 1419
+
+SCORES:
+1. Title & Hook:        NEEDS WORK — Title acceptable but lacks strong hook or specificity
+2. Word Count & Depth:  PASS — 1419 words with 8 concrete examples/steps/data points
+3. GCC/Oman Relevance:  PASS — 13 local terms woven naturally (44 total mentions)
+4. LLM Citation:        PASS — 6 H2s, 2 quotable answers, 3 stats
+5. Call to Action:      NEEDS WORK — CTA present but text is vague or generic
+6. Meta Description:    PASS — 155 chars, contains specific keyword/benefit
+7. Duplicate Risk:      PASS — Unique angle, no substantial topic overlap detected
+
+OVERALL: STRONG
+#1 FIX:  [Call to Action] CTA present but text is vague or generic
+---
+ARTICLE #117
+File: blog/en/2026-07-08-enterprise-ai-smb-whatsapp-receptionist-ceo-dashboard.html
+Title tag: Enterprise AI for SMBs: The Engineering Behind the WhatsApp Receptionist and Live CEO Dashboard | AI Profit Lab
+H1: Enterprise AI for SMBs: The Engineering Behind the WhatsApp Receptionist and Live CEO Dashboard
+Meta description: Supercharge your business with proven AI systems: drop response latency to 60s, boost lead conversion 35%, and compress SaaS costs 40% — no enterprise budget...
+Word count: 2234
+
+SCORES:
+1. Title & Hook:        NEEDS WORK — Title acceptable but lacks strong hook or specificity
+2. Word Count & Depth:  PASS — 2234 words with 45 concrete examples/steps/data points
+3. GCC/Oman Relevance:  PASS — 9 local terms woven naturally (32 total mentions)
+4. LLM Citation:        PASS — 6 H2s, 1 quotable answers, 17 stats
+5. Call to Action:      NEEDS WORK — CTA present but text is vague or generic
+6. Meta Description:    FAIL — Contains 'Supercharge your business' — flagged generic filler
+7. Duplicate Risk:      PASS — Unique angle, no substantial topic overlap detected
+
+OVERALL: ACCEPTABLE
+#1 FIX:  [Meta Description] Contains 'Supercharge your business' — flagged generic filler
+---
+ARTICLE #118
+File: blog/en/2026-07-08-kuwait-family-business-ai-automation-guide.html
+Title tag: AI Automation for Kuwaiti Family Businesses: A Practical Starting Guide | AI Profit Lab
+H1: AI Automation for Kuwaiti Family Businesses: A Practical Starting Guide
+Meta description: Running a family business in Kuwait with manual processes? This practical guide shows 5 automation wins for Kuwaiti SMEs to cut costs and scale in 2026.
+Word count: 1807
+
+SCORES:
+1. Title & Hook:        PASS — Title contains specific benefit/keyword; hook addresses reader
+2. Word Count & Depth:  PASS — 1807 words with 29 concrete examples/steps/data points
+3. GCC/Oman Relevance:  PASS — 11 local terms woven naturally (48 total mentions)
+4. LLM Citation:        PASS — 5 H2s, 1 quotable answers, 3 stats
+5. Call to Action:      NEEDS WORK — CTA present but text is vague or generic
+6. Meta Description:    PASS — 152 chars, contains specific keyword/benefit
+7. Duplicate Risk:      PASS — Unique angle, no substantial topic overlap detected
+
+OVERALL: STRONG
+#1 FIX:  [Call to Action] CTA present but text is vague or generic
+---
+ARTICLE #119
+File: blog/en/2026-07-10-oman-pdpl-whatsapp-ai-2026.html
+Title tag: Oman PDPL 2026: 5 Steps to WhatsApp & AI Compliance | AI Profit Lab
+H1: Oman PDPL 2026: 5 Steps to WhatsApp & AI Compliance
+Meta description: Are you risking OMR 500k in fines under the Oman PDPL? Learn how businesses using WhatsApp and AI in Muscat can ensure compliance and protect customer data.
+Word count: 1125
+
+SCORES:
+1. Title & Hook:        PASS — Title contains specific benefit/keyword; hook addresses reader
+2. Word Count & Depth:  PASS — 1125 words with 14 concrete examples/steps/data points
+3. GCC/Oman Relevance:  PASS — 8 local terms woven naturally (35 total mentions)
+4. LLM Citation:        PASS — 4 H2s, 1 quotable answers, 1 stats
+5. Call to Action:      NEEDS WORK — CTA present but text is vague or generic
+6. Meta Description:    PASS — 156 chars, contains specific keyword/benefit
+7. Duplicate Risk:      PASS — Unique angle, no substantial topic overlap detected
+
+OVERALL: STRONG
+#1 FIX:  [Call to Action] CTA present but text is vague or generic
+---
+ARTICLE #120
+File: blog/en/2026-07-10-what-is-ai-automation-oman.html
+Title tag: What Is AI Automation? A Jargon-Free Explanation for Oman Business Owners | AI Profit Lab
+H1: What Is AI Automation? A Jargon-Free Explanation for Oman Business Owners
+Meta description: Struggling with manual tasks? Discover what AI automation actually means for your Muscat business, how to cut costs, and boost ROI instantly.
+Word count: 1768
+
+SCORES:
+1. Title & Hook:        PASS — Title contains specific benefit/keyword; hook addresses reader
+2. Word Count & Depth:  PASS — 1768 words with 14 concrete examples/steps/data points
+3. GCC/Oman Relevance:  PASS — 8 local terms woven naturally (31 total mentions)
+4. LLM Citation:        PASS — 5 H2s, 1 quotable answers, 3 stats
+5. Call to Action:      FAIL — No CTA found in last 200 words of article
+6. Meta Description:    PASS — 141 chars, contains specific keyword/benefit
+7. Duplicate Risk:      NEEDS WORK — Overlaps with 2026-04-26-ai-automation-oman-2025-guide (56% similarity)
+
+OVERALL: ACCEPTABLE
+#1 FIX:  [Call to Action] No CTA found in last 200 words of article

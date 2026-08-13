@@ -53,16 +53,16 @@ SCORES:
 4. LLM Citation:        NEEDS WORK — no stats/numbers
 5. Call to Action:      PASS — Clear specific CTA with action verb and working link
 6. Meta Description:    PASS — 154 chars, contains specific keyword/benefit
-7. Duplicate Risk:      PASS — Unique angle, no substantial topic overlap detected
+7. Duplicate Risk:      NEEDS WORK — Overlaps with 2026-08-06-ai-automation-oman-vision-204 (56% similarity)
 
-OVERALL: STRONG
+OVERALL: ACCEPTABLE
 #1 FIX:  [Word Count] 810 words — below 900 threshold
 ---
 ARTICLE #4
 File: blog/en/2026-03-31-arabic-first-ai-models.html
-Title tag: The Rise of Arabic-First AI Models: Reclaiming the Digital Narrative
+Title tag: The Rise of Arabic | AI Profit Lab عمان
 H1: The Rise of Arabic-First AI Models: Reclaiming the Digital Narrative
-Meta description: Why do standard Western AI models fail with local dialects? GCC enterprises are adopting Arabic-first LLMs to enhance customer trust and local relevance.
+Meta description: Why do standard Western AI models fail with local dialects? GCC enterprises are adopting Arabic-first LLMs to enhance customer trust and local relevance...
 Word count: 801
 
 SCORES:
@@ -71,17 +71,17 @@ SCORES:
 3. GCC/Oman Relevance:  PASS — 9 local terms woven naturally (17 total mentions)
 4. LLM Citation:        NEEDS WORK — no stats/numbers
 5. Call to Action:      PASS — Clear specific CTA with action verb and working link
-6. Meta Description:    PASS — 153 chars, contains specific keyword/benefit
-7. Duplicate Risk:      PASS — Unique angle, no substantial topic overlap detected
+6. Meta Description:    PASS — 155 chars, contains specific keyword/benefit
+7. Duplicate Risk:      NEEDS WORK — Overlaps with 2026-03-31-arabic-vs-global-ai-models.ht (75% similarity)
 
 OVERALL: ACCEPTABLE
 #1 FIX:  [Word Count] 801 words — below 900 threshold
 ---
 ARTICLE #5
 File: blog/en/2026-03-31-arabic-vs-global-ai-models.html
-Title tag: Arabic-First AIs vs. Global AIs: A Simple Comparison
+Title tag: Arabic | AI Profit Lab عمان
 H1: Arabic-First AIs vs. Global AIs: A Simple Comparison
-Meta description: Are you unsure whether to choose ChatGPT or Jais in Oman and UAE? Compare global and regional models to secure your data sovereignty and dialect fit.
+Meta description: Are you unsure whether to choose ChatGPT or Jais in Oman and UAE? Compare global and regional models to secure your data sovereignty and dialect fit. -....
 Word count: 730
 
 SCORES:
@@ -90,8 +90,8 @@ SCORES:
 3. GCC/Oman Relevance:  PASS — 6 local terms woven naturally (14 total mentions)
 4. LLM Citation:        NEEDS WORK — no stats/numbers
 5. Call to Action:      PASS — Clear specific CTA with action verb and working link
-6. Meta Description:    PASS — 149 chars, contains specific keyword/benefit
-7. Duplicate Risk:      PASS — Unique angle, no substantial topic overlap detected
+6. Meta Description:    PASS — 155 chars, contains specific keyword/benefit
+7. Duplicate Risk:      NEEDS WORK — Overlaps with 2026-03-31-arabic-first-ai-models.html (75% similarity)
 
 OVERALL: ACCEPTABLE
 #1 FIX:  [Word Count] 730 words — below 900 threshold
