@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+<title>The Smart Storefront — AI Profit Lab</title>
+<meta name="description" content="A bilingual website that answers your buyers at 2am, sends the serious ones to your WhatsApp, and tells you who is about to buy. One-time price, one year of hosting and care included."/>
+<!-- Runs alongside the existing offer page. Flip to index,follow at handover. -->
+<meta name="robots" content="noindex, follow"/>
+<meta name="author" content="AI Profit Lab"/>
+<meta name="theme-color" content="#0A3D30"/>
+
+<meta property="og:title" content="The Smart Storefront — AI Profit Lab"/>
+<meta property="og:description" content="You scanned the paper one. Here is what the paper becomes."/>
+<meta property="og:url" content="https://aiprofitlab.io/en/smart-storefront/"/>
+<meta property="og:type" content="website"/>
+<meta property="og:image" content="https://aiprofitlab.io/nahid-business-banner.png"/>
+<meta name="twitter:card" content="summary_large_image"/>
+
+<link href="/favicon.svg" rel="icon" type="image/svg+xml"/>
+<link href="/favicon.svg" rel="apple-touch-icon"/>
+
+<script>document.documentElement.className += " js";</script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SLR9GD3MJP"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-SLR9GD3MJP');
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --teal-950:#072B22;
+  --teal-900:#0A3D30;
+  --teal:#0F6E56;
+  --amber:#BA7517;
+  --amber-bright:#D89234;
+  --amber-pale:#E8C98F;
+  --cream:#F1EFE8;
+  --panel:#FAF8F2;
+  --panel-2:#EAE4D5;
+  --white:#FFFFFF;
+  --ink:#232B26;
+  --muted:#5A665D;
+  --line:#DED8C8;
+  --wa:#1FAF5E;
+  --display:'Marcellus',Georgia,serif;
+  --sans:'IBM Plex Sans',-apple-system,'Segoe UI',sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--cream);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{max-width:100%;display:block}
+a{color:var(--teal)}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--amber-bright);outline-offset:3px;border-radius:2px}
+h1,h2{font-family:var(--display);font-weight:400;letter-spacing:.005em;text-wrap:balance;line-height:1.14;margin:0 0 .45em}
+h3{font-weight:700;font-size:1.02rem;margin:0 0 .4em}
+p{margin:0 0 1em}
+.wrap{max-width:1080px;margin:0 auto;padding:0 22px}
+.narrow{max-width:760px}
+section{padding:76px 0}
+.eyebrow{font-family:var(--mono);font-size:.7rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--amber);margin:0 0 16px}
+.eyebrow .star{color:var(--amber-bright);display:inline-block;animation:spin 14s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.lede{font-size:1.1rem;color:var(--muted);max-width:38em}
+.mono{font-family:var(--mono)}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;font-family:var(--sans);font-weight:600;font-size:1rem;text-decoration:none;border:0;border-radius:8px;padding:15px 26px;cursor:pointer;transition:transform .15s,background .15s,box-shadow .15s}
+.btn:hover{transform:translateY(-1px)}
+.btn-primary{background:var(--teal);color:#fff}
+.btn-primary:hover{background:var(--teal-900)}
+.btn-cream{background:var(--cream);color:var(--teal-900)}
+.btn-cream:hover{background:var(--white)}
+.btn-outline{border:1.5px solid rgba(241,239,232,.5);color:var(--cream);background:transparent}
+.btn-outline:hover{border-color:var(--cream);background:rgba(241,239,232,.08)}
+.btn-wa{background:var(--wa);color:#fff}
+.wa-icon{width:19px;height:19px;fill:currentColor;flex:none}
+
+/* ── scroll reveal (same kit as the -new templates) ── */
+.js .rv{opacity:0;transform:translateY(16px);transition:opacity .7s cubic-bezier(.2,.7,.3,1),transform .7s cubic-bezier(.2,.7,.3,1)}
+.js .rv.vis{opacity:1;transform:none}
+
+/* ── nav ── */
+nav{position:sticky;top:0;z-index:60;background:rgba(241,239,232,.93);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.nav-in{display:flex;align-items:center;gap:16px;padding:13px 22px;max-width:1080px;margin:0 auto}
+.brand{font-family:var(--display);font-size:1.2rem;color:var(--teal-900);text-decoration:none;margin-right:auto;white-space:nowrap}
+.brand .star{color:var(--amber);margin-right:6px;display:inline-block;animation:spin 14s linear infinite}
+.nav-cta{background:var(--teal);color:#fff !important;border-radius:8px;padding:9px 16px;text-decoration:none;font-size:.88rem;font-weight:600}
+
+/* ── hero ── */
+.hero{background:
+  radial-gradient(70rem 34rem at 82% -12%, rgba(216,146,52,.13), transparent 62%),
+  linear-gradient(168deg, var(--teal) 0%, var(--teal-900) 84%);
+  color:var(--cream);padding:66px 0 78px;position:relative;overflow:hidden}
+.hero .eyebrow{color:var(--amber-pale)}
+.hero h1{font-size:clamp(2rem,5.4vw,3.3rem);color:var(--white);max-width:15em}
+.hero .sub{font-size:1.1rem;line-height:1.7;color:rgba(241,239,232,.84);max-width:34em}
+.hero-grid{display:grid;grid-template-columns:1fr 340px;gap:52px;align-items:center}
+.hero-ctas{display:flex;gap:12px;flex-wrap:wrap;margin:28px 0 0}
+
+/* the paper-to-screen handshake */
+.stage{position:relative;height:430px;display:flex;align-items:center;justify-content:center}
+.flyer{position:absolute;width:230px;height:326px;border-radius:4px;transform:rotate(-4deg);
+  box-shadow:0 22px 50px -16px rgba(0,0,0,.55);transition:opacity .3s}
+.strip{position:absolute;inset:0;overflow:hidden;will-change:transform,opacity}
+.paper{position:absolute;inset:0;width:230px;height:326px;background:
+  repeating-linear-gradient(0deg,rgba(35,43,38,.022) 0 2px,transparent 2px 4px),
+  linear-gradient(178deg,#FBF9F3,#EFEADC);
+  border-radius:4px;padding:20px 18px;color:var(--ink);font-size:11px;line-height:1.45;text-align:left}
+.paper .pbrand{font-family:var(--display);font-size:13px;color:var(--teal-900)}
+.paper .pbrand i{color:var(--amber);font-style:normal}
+.paper .ph{font-family:var(--display);font-size:19px;line-height:1.15;margin:16px 0 8px;color:var(--teal-900)}
+.paper .pm{color:#6B7268;font-size:10px}
+.paper .pqr{width:74px;height:74px;margin:14px 0 8px;background:var(--ink);border-radius:3px;position:relative;overflow:hidden}
+.paper .pqr::before{content:"";position:absolute;inset:7px;background:
+  repeating-conic-gradient(#FBF9F3 0 25%, var(--ink) 0 50%) 0 0/12px 12px}
+.paper .pscan{font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--amber)}
+.paper .pcut{position:absolute;left:18px;right:18px;bottom:44px;border-top:1px dashed #C9C3B2}
+
+.phone{position:absolute;width:236px;height:412px;border-radius:30px;background:#0A1613;
+  border:7px solid #16261F;box-shadow:0 26px 60px -18px rgba(0,0,0,.6);overflow:hidden;
+  opacity:0;transform:scale(.9) translateY(14px);transition:opacity .7s .35s,transform .7s .35s cubic-bezier(.2,.8,.3,1)}
+.phone.on{opacity:1;transform:none}
+.pscreen{position:absolute;inset:0;background:var(--cream);display:flex;flex-direction:column}
+.ptop{background:var(--teal-900);color:var(--cream);padding:11px 12px;display:flex;align-items:center;gap:6px;font-size:10px}
+.ptop b{font-family:var(--display);font-weight:400;font-size:12px;margin-right:auto}
+.ptag{font-family:var(--mono);font-size:8px;border:1px solid rgba(241,239,232,.35);border-radius:4px;padding:2px 5px}
+.pbody{padding:13px 12px;flex:1;font-size:10px;color:var(--ink)}
+.pbody .pht{font-family:var(--display);font-size:15px;line-height:1.2;color:var(--teal-900);margin-bottom:7px}
+.pchips{display:flex;gap:4px;flex-wrap:wrap;margin:9px 0}
+.pchip{background:var(--panel-2);border-radius:20px;padding:3px 8px;font-size:8.5px;color:var(--muted)}
+.pbtn{background:var(--teal);color:#fff;border-radius:6px;padding:7px;text-align:center;font-size:9.5px;font-weight:600;margin-top:8px}
+.pbtn.wa{background:var(--wa)}
+.pfoot{margin-top:10px;text-align:center;font-size:8.5px;color:var(--muted);letter-spacing:.04em}
+.pchat{position:absolute;left:10px;right:10px;bottom:10px;background:var(--white);border:1px solid var(--line);
+  border-radius:10px;padding:8px 9px;font-size:9px;box-shadow:0 8px 20px -10px rgba(0,0,0,.3)}
+.pchat .pa{direction:rtl;text-align:right;color:var(--teal-900);font-size:9.5px}
+.pchat .pe{color:var(--muted);margin-top:2px}
+.ptoast{position:absolute;bottom:78px;left:10px;right:10px;background:var(--amber);color:#2A1B04;border-radius:7px;
+  padding:6px 8px;font-size:9px;font-weight:600;box-shadow:0 8px 18px -8px rgba(0,0,0,.4)}
+
+.hero-trust{font-family:var(--mono);font-size:.7rem;letter-spacing:.05em;color:rgba(241,239,232,.6);margin-top:26px;
+  display:flex;flex-wrap:wrap;gap:6px 18px}
+.knows{margin-top:30px;padding:16px 18px;border-left:2px solid var(--amber);background:rgba(241,239,232,.07);
+  border-radius:0 8px 8px 0;font-size:.95rem;color:rgba(241,239,232,.9);max-width:36em}
+
+/* ── roast ── */
+.roast{background:var(--panel)}
+.qcard{background:var(--white);border:1px solid var(--line);border-radius:14px;padding:24px 22px;box-shadow:0 18px 44px -34px rgba(10,61,48,.5)}
+.qstep{font-family:var(--mono);font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--amber);margin-bottom:9px}
+.qtitle{font-family:var(--display);font-size:1.4rem;color:var(--teal-900);margin:0 0 16px}
+.opts{display:grid;gap:9px}
+.opt{text-align:left;background:var(--panel);border:1px solid var(--line);border-radius:9px;padding:13px 15px;
+  font-family:var(--sans);font-size:.97rem;color:var(--ink);cursor:pointer;transition:border-color .15s,background .15s,transform .1s}
+.opt:hover{border-color:var(--teal);background:var(--white)}
+.opt:active{transform:scale(.99)}
+.qprog{display:flex;gap:5px;margin-top:18px}
+.qdot{height:3px;flex:1;background:var(--line);border-radius:2px}
+.qdot.on{background:var(--teal)}
+.say:empty{display:none}
+.say{min-height:2.6em;font-size:1rem;color:var(--teal-900);background:var(--panel-2);border-radius:10px;padding:13px 15px;margin-top:16px}
+.say .caret{display:inline-block;width:7px;background:var(--amber);animation:blink 1s steps(2) infinite;margin-left:1px}
+@keyframes blink{50%{opacity:0}}
+.result{display:none;gap:34px;align-items:center;grid-template-columns:250px 1fr}
+.result.on{display:grid}
+.mockup{position:relative;width:236px;height:412px;border-radius:30px;background:#0A1613;border:7px solid #16261F;
+  overflow:hidden;box-shadow:0 26px 60px -22px rgba(10,61,48,.55);margin:0 auto}
+.mockup[data-vibe="expensive"] .pscreen{background:#11201B}
+.mockup[data-vibe="expensive"] .pbody{color:var(--cream)}
+.mockup[data-vibe="expensive"] .pbody .pht{color:var(--amber-pale)}
+.mockup[data-vibe="expensive"] .pchip{background:rgba(241,239,232,.12);color:rgba(241,239,232,.75)}
+.mockup[data-vibe="modern"] .ptop{background:var(--teal)}
+.mockup[data-vibe="plain"] .ptop{background:var(--ink)}
+.mockup[data-vibe="plain"] .pbtn{background:var(--ink)}
+
+/* ── generic cards ── */
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:22px 20px;position:relative;overflow:hidden}
+.card .ic{font-size:1.2rem;margin-bottom:9px;display:block}
+.card p{margin:0;font-size:.94rem;color:var(--muted)}
+.card h3{color:var(--teal-900)}
+
+.dark{background:var(--teal-900);color:var(--cream)}
+.dark h2{color:var(--white)}
+.dark .eyebrow{color:var(--amber-pale)}
+.dark .lede{color:rgba(241,239,232,.8)}
+.notlist{list-style:none;padding:0;margin:0;display:grid;gap:11px;max-width:44em}
+.notlist li{display:flex;gap:12px;align-items:flex-start;padding:13px 16px;background:rgba(241,239,232,.06);border-radius:9px;font-size:.96rem}
+.notlist .x{color:var(--amber-pale);font-family:var(--mono);flex:none}
+
+.promise{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--amber);border-radius:0 14px 14px 0;padding:28px 26px;max-width:44em}
+.promise q{font-family:var(--display);font-size:1.24rem;line-height:1.45;color:var(--teal-900);quotes:none;display:block}
+
+/* ── ladder ── */
+.ladder{display:grid;gap:12px;max-width:560px}
+.rung{border:1px solid var(--line);border-radius:12px;padding:18px 20px;background:var(--panel);display:flex;align-items:center;gap:16px}
+.rung.live{background:var(--white);border:1.5px solid var(--teal);box-shadow:0 16px 40px -30px rgba(10,61,48,.7)}
+.rung.next{opacity:.62}
+.rung .price{font-family:var(--display);font-size:1.7rem;color:var(--teal-900);line-height:1;white-space:nowrap}
+.rung .meta{flex:1;font-size:.9rem;color:var(--muted)}
+.rung .flag{font-family:var(--mono);font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);display:block;margin-bottom:3px}
+.seatbar{height:5px;background:var(--panel-2);border-radius:3px;overflow:hidden;margin-top:8px}
+.seatbar i{display:block;height:100%;background:var(--teal);border-radius:3px;transition:width .6s}
+.ladder-note{font-size:.9rem;color:var(--muted);max-width:40em;margin-top:20px;padding-top:18px;border-top:1px solid var(--line)}
+.skel{display:inline-block;min-width:3.4em;height:.85em;background:var(--panel-2);border-radius:3px;vertical-align:middle;animation:pulse 1.2s ease-in-out infinite}
+@keyframes pulse{50%{opacity:.45}}
+.offline{display:none;background:#FBF3E4;border:1px solid var(--amber-pale);border-radius:10px;padding:15px 17px;font-size:.93rem;max-width:44em}
+.offline.on{display:block}
+
+/* ── pledges ── */
+.pledges{display:grid;gap:11px;max-width:640px}
+.pledge{display:flex;gap:14px;align-items:flex-start;background:var(--panel);border:1px solid var(--line);
+  border-radius:11px;padding:15px 17px;cursor:pointer;transition:border-color .15s,background .15s}
+.pledge:hover{border-color:var(--teal)}
+.pledge input{margin:3px 0 0;width:19px;height:19px;accent-color:var(--teal);flex:none;cursor:pointer}
+.pledge.on{background:var(--white);border-color:var(--teal)}
+.pledge .pct{font-family:var(--display);font-size:1.25rem;color:var(--amber);line-height:1;white-space:nowrap}
+.pledge .txt{flex:1}
+.pledge .txt b{display:block;font-weight:600;font-size:.98rem}
+.pledge .txt span{font-size:.86rem;color:var(--muted)}
+.maths{margin-top:22px;background:var(--teal-900);color:var(--cream);border-radius:13px;padding:22px 24px;max-width:640px}
+.mrow{display:flex;justify-content:space-between;align-items:baseline;padding:7px 0;font-size:.98rem}
+.mrow+.mrow{border-top:1px solid rgba(241,239,232,.14)}
+.mrow b{font-family:var(--display);font-size:1.35rem;color:var(--white);font-weight:400}
+.mrow .lbl{color:rgba(241,239,232,.75)}
+.mrow.total b{color:var(--amber-pale)}
+.allfour{display:none;margin-top:14px;font-size:.92rem;color:var(--amber-pale);border-top:1px solid rgba(241,239,232,.14);padding-top:14px}
+.allfour.on{display:block}
+
+/* ── runaway ── */
+/* min-height reserves the button's space so the box doesn't collapse when it goes position:fixed */
+.chase{position:relative;margin-top:34px;padding:26px 22px;border:1px dashed var(--line);border-radius:12px;text-align:center;background:var(--panel);min-height:148px}
+#runaway-btn{position:relative;background:var(--amber);color:#2A1B04;font-weight:700;border:0;border-radius:8px;
+  padding:14px 26px;font-size:1rem;font-family:var(--sans);cursor:pointer;z-index:70}
+#runaway-btn.loose{position:fixed}
+#runaway-btn.caught{background:var(--teal);color:#fff}
+.chase-note{font-size:.9rem;color:var(--muted);margin:0 0 15px}
+.trophy{display:none;margin-top:18px;background:var(--white);border:1px solid var(--teal);border-radius:11px;padding:18px 20px;text-align:left}
+.trophy.on{display:block}
+.trophy .badge{font-family:var(--mono);font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--teal);display:block;margin-bottom:6px}
+
+/* ── founder ── */
+.founder{display:grid;grid-template-columns:190px 1fr;gap:32px;align-items:center;background:var(--panel);
+  border:1px solid var(--line);border-radius:15px;padding:30px}
+.founder img{border-radius:12px;width:190px;height:auto;object-fit:cover}
+.sig{font-family:var(--display);font-size:1.05rem;color:var(--teal-900);margin-top:14px}
+
+/* ── form ── */
+.form{background:var(--panel);border:1px solid var(--line);border-radius:15px;padding:30px 28px;max-width:680px}
+.fgrid{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+.field{display:flex;flex-direction:column;gap:6px}
+.field.full{grid-column:1/-1}
+.field label{font-size:.86rem;font-weight:600;color:var(--teal-900)}
+.field label .opt-tag{font-weight:400;color:var(--muted)}
+.field input,.field select{font-family:var(--sans);font-size:1rem;padding:12px 13px;border:1px solid var(--line);
+  border-radius:8px;background:var(--white);color:var(--ink)}
+.field input:focus,.field select:focus{border-color:var(--teal)}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.consent{display:flex;gap:11px;align-items:flex-start;font-size:.88rem;color:var(--muted);margin-top:16px}
+.consent input{width:19px;height:19px;accent-color:var(--teal);flex:none;margin-top:1px}
+.fsummary{background:var(--white);border:1px solid var(--line);border-radius:10px;padding:14px 16px;font-size:.92rem;margin-bottom:20px}
+.fsummary b{color:var(--teal-900)}
+.formerr{display:none;background:#FBEDE9;border:1px solid #E5B4A6;color:#8A3B22;border-radius:9px;padding:12px 14px;font-size:.92rem;margin-top:14px}
+.formerr.on{display:block}
+
+/* ── faq ── */
+details{background:var(--panel);border:1px solid var(--line);border-radius:11px;padding:15px 18px;margin-bottom:10px}
+details[open]{background:var(--white)}
+summary{font-weight:600;cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:14px;color:var(--teal-900)}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font-family:var(--mono);color:var(--amber);flex:none}
+details[open] summary::after{content:"–"}
+details p{margin:12px 0 0;font-size:.95rem;color:var(--muted)}
+
+/* ── footer + cat ── */
+footer{background:var(--teal-950);color:rgba(241,239,232,.72);padding:44px 0 96px;font-size:.87rem;position:relative}
+footer a{color:var(--amber-pale)}
+.footgrid{display:flex;gap:20px;align-items:flex-end;justify-content:space-between;flex-wrap:wrap}
+.uptime{display:flex;align-items:center;gap:11px;font-family:var(--mono);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(241,239,232,.55)}
+.catbtn{background:none;border:0;padding:0;cursor:pointer;line-height:0}
+.catbtn svg{width:56px;height:42px;overflow:visible}
+.cat-z{opacity:0;animation:zzz 3.4s ease-in-out infinite}
+.cat-z:nth-of-type(2){animation-delay:1.1s}
+@keyframes zzz{0%{opacity:0;transform:translate(0,0) scale(.7)}30%{opacity:.9}100%{opacity:0;transform:translate(5px,-11px) scale(1.1)}}
+.awake .cat-eye{opacity:1}
+.awake .cat-z{display:none}
+.cat-eye{opacity:0}
+.curtain{position:fixed;inset:0;z-index:90;background:
+  repeating-linear-gradient(45deg,#D89234 0 22px,#2A1B04 22px 44px);
+  display:none;align-items:center;justify-content:center;padding:24px}
+.curtain.on{display:flex}
+.curtain .sign{background:var(--panel);border:3px solid var(--ink);border-radius:6px;padding:26px 28px;max-width:330px;
+  text-align:center;transform:rotate(-2deg);box-shadow:0 26px 60px -18px rgba(0,0,0,.6)}
+.curtain .sign h3{font-family:var(--display);font-size:1.3rem;color:var(--ink);margin-bottom:8px}
+.curtain .sign p{font-size:.92rem;color:var(--muted);margin-bottom:16px}
+
+/* ── sticky bar ── */
+.sticky{position:fixed;left:0;right:0;bottom:0;z-index:65;background:rgba(10,61,48,.97);backdrop-filter:blur(8px);
+  border-top:1px solid rgba(241,239,232,.16);padding:9px 14px}
+.sticky-in{max-width:1080px;margin:0 auto;display:flex;align-items:center;gap:12px}
+.sticky .info{color:var(--cream);font-size:.8rem;line-height:1.3;margin-right:auto}
+.sticky .info b{font-family:var(--display);font-weight:400;font-size:1rem;color:var(--amber-pale);display:block}
+.sticky .btn{padding:11px 20px;font-size:.92rem;flex:none}
+
+@media (max-width:900px){
+  .hero-grid{grid-template-columns:1fr;gap:12px}
+  .stage{height:390px;order:-1}
+  .grid3{grid-template-columns:1fr 1fr}
+  .result{grid-template-columns:1fr;gap:24px}
+  .founder{grid-template-columns:1fr;text-align:left}
+  .founder img{width:150px}
+}
+@media (max-width:640px){
+  body{font-size:16px}
+  section{padding:56px 0}
+  .grid3,.grid2,.fgrid{grid-template-columns:1fr}
+  .hero{padding:44px 0 60px}
+  .rung{flex-wrap:wrap;gap:10px}
+  .sticky .info{font-size:.72rem}
+  .sticky .info b{font-size:.9rem}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important}
+  html{scroll-behavior:auto}
+  .js .rv{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-in">
+    <a class="brand" href="/en/"><span class="star">✼</span>AI Profit Lab</a>
+    <a class="nav-cta" href="#claim">Claim a seat</a>
+  </div>
+</nav>
+
+<!-- ═══ 1. THE PAPER HANDSHAKE ═══ -->
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <p class="eyebrow"><span class="star">✼</span> You scanned the paper one</p>
+      <h1>That flyer in your hand can't answer a buyer at 11pm.</h1>
+      <p class="sub">This is what the paper becomes: a bilingual storefront that greets your buyers, answers them in Arabic or English, and hands the serious ones straight to your WhatsApp.</p>
+
+      <div class="hero-ctas">
+        <a class="btn btn-cream" href="#roast">Show me what mine looks like</a>
+        <a class="btn btn-outline" href="#ladder">See the price</a>
+      </div>
+
+      <div class="knows">
+        <strong>This page knows exactly one thing about you: you scanned a flyer.</strong>
+        No camera, no location, no pop-up demanding your email before you've read a sentence. If that's a low bar — it is. Most pages you'll scan this month won't clear it.
+      </div>
+
+      <div class="hero-trust">
+        <span>One-time price</span><span>·</span>
+        <span>1 year hosting &amp; care included</span><span>·</span>
+        <span>Arabic + English</span><span>·</span>
+        <span>No monthly retainer</span>
+      </div>
+    </div>
+
+    <div class="stage" id="stage">
+      <div class="flyer" id="flyer" aria-hidden="true"></div>
+      <div class="phone" id="phone" role="img" aria-label="A phone showing the bilingual storefront the flyer becomes: an Arabic and English site with a bulk quote button, a WhatsApp button, a chat reply, and a new-inquiry notification.">
+        <div class="pscreen">
+          <div class="ptop"><b>YOUR BUSINESS</b><span class="ptag">AR</span><span class="ptag">EN</span></div>
+          <div class="pbody">
+            <div class="pht">Supplying Oman, since the day you started.</div>
+            <div class="pchips"><span class="pchip">Bulk pricing</span><span class="pchip">Delivery</span><span class="pchip">Datasheets</span></div>
+            <div class="pbtn">Request a bulk quote</div>
+            <div class="pbtn wa">Talk on WhatsApp</div>
+            <div class="pfoot">Answers in Arabic &amp; English · 24/7</div>
+          </div>
+          <div class="ptoast">New inquiry → sent to your phone</div>
+          <div class="pchat">
+            <div class="pa">مرحباً! تحتاج تسعيرة بالجملة؟</div>
+            <div class="pe">Hello! Need a bulk quote? I can help right now.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ═══ 2. THREE TAPS ═══ -->
+<section class="roast" id="roast">
+  <div class="wrap narrow">
+    <p class="eyebrow rv"><span class="star">✼</span> Three taps, about ten seconds</p>
+    <h2 class="rv">Let's see what yours would look like.</h2>
+    <p class="lede rv" style="margin-bottom:30px">No email, no sign-up, no "book a discovery call to see the demo." Just tap three things.</p>
+
+    <div class="qcard rv" id="qcard">
+      <div id="qwrap">
+        <p class="qstep" id="qstep">Question 1 of 3</p>
+        <h3 class="qtitle" id="qtitle">What do you sell?</h3>
+        <div class="opts" id="qopts"></div>
+        <div class="qprog" id="qprog"><i class="qdot on"></i><i class="qdot"></i><i class="qdot"></i></div>
+      </div>
+      <p class="say" id="say" aria-live="polite"></p>
+
+      <div class="result" id="qresult">
+        <div class="mockup" id="mockup" data-vibe="serious">
+          <div class="pscreen">
+            <div class="ptop"><b>YOUR BUSINESS</b><span class="ptag">AR</span><span class="ptag">EN</span></div>
+            <div class="pbody">
+              <div class="pht" id="mkhead">Supplying Oman, since the day you started.</div>
+              <div class="pchips" id="mkchips"></div>
+              <div class="pbtn">Request a bulk quote</div>
+              <div class="pbtn wa">Talk on WhatsApp</div>
+              <div class="pfoot">Answers in Arabic &amp; English · 24/7</div>
+            </div>
+            <div class="ptoast">New inquiry → sent to your phone</div>
+            <div class="pchat">
+              <div class="pa" id="mkar">مرحباً! تحتاج تسعيرة بالجملة؟</div>
+              <div class="pe" id="mken">Hello! Need a bulk quote?</div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <p class="qstep">The honest caption</p>
+          <h3 style="font-family:var(--display);font-weight:400;font-size:1.5rem;color:var(--teal-900);margin-bottom:12px">That's a mockup, not a promise.</h3>
+          <p style="color:var(--muted);font-size:.97rem">It took a phone and ten seconds, so treat it as exactly that much proof. The real one takes about a week, has your actual products in it, and is written in both languages by someone who asked you questions first.</p>
+          <p style="margin-top:16px"><a class="btn btn-primary" href="#ladder">What does it cost?</a></p>
+          <p><button type="button" class="opt" id="qagain" style="margin-top:10px;width:auto">Start again</button></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 3. WHAT YOU ACTUALLY GET ═══ -->
+<section>
+  <div class="wrap">
+    <p class="eyebrow rv"><span class="star">✼</span> What you actually get</p>
+    <h2 class="rv">Six things, and they all do a job.</h2>
+    <div class="grid3" style="margin-top:34px">
+      <div class="card rv"><span class="ic">🕐</span><h3>The employee who never sleeps</h3><p>A bilingual AI sales agent inside the site. It greets buyers, answers them in Arabic or English, and works out who is serious — at 2am, on a Friday, during Eid.</p></div>
+      <div class="card rv"><span class="ic">📲</span><h3>Every hot lead lands in your pocket</h3><p>Serious buyers get handed straight to WhatsApp to close. No lead sits in an inbox nobody opens.</p></div>
+      <div class="card rv"><span class="ic">📋</span><h3>Built for how you actually get asked for prices</h3><p>A wholesale and bulk quote-request flow — not a generic "contact us" box designed for a retail shop.</p></div>
+      <div class="card rv"><span class="ic">👀</span><h3>Know who's about to buy before they call</h3><p>A short summary of who visited and what they asked, sent to your phone. Not buried in a dashboard you'll open twice.</p></div>
+      <div class="card rv"><span class="ic">🔎</span><h3>Found when a buyer asks Google — or ChatGPT</h3><p>Built for both traditional search and AI answers, so you turn up when someone asks who supplies this in Oman.</p></div>
+      <div class="card rv"><span class="ic">🛠️</span><h3>Zero maintenance headache</h3><p>A full year of hosting, security and care included. Keeping a website alive was never supposed to be your job.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 4. WHAT'S NOT INCLUDED ═══ -->
+<section class="dark">
+  <div class="wrap">
+    <p class="eyebrow rv"><span class="star">✼</span> The unflattering part, first</p>
+    <h2 class="rv">What you're <em>not</em> getting.</h2>
+    <p class="lede rv" style="margin-bottom:28px">Written down before you've paid anything. It's the fastest way for you to work out whether to believe the rest of the page.</p>
+    <ul class="notlist">
+      <li class="rv"><span class="x">not incl.</span><span>Paid ad management. I'm not running your Google or Meta ads.</span></li>
+      <li class="rv"><span class="x">not incl.</span><span>Ongoing content writing after the initial site copy is written.</span></li>
+      <li class="rv"><span class="x">not incl.</span><span>Online payments and e-commerce checkout. If you need it, we scope it separately and it costs more.</span></li>
+      <li class="rv"><span class="x">not incl.</span><span>Social media management. Nobody should be paying a website company for that.</span></li>
+      <li class="rv"><span class="x">not incl.</span><span>A dashboard with forty charts on it. You'd open it twice. The useful parts come to your phone instead.</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ═══ 5. THE GUARANTEE ═══ -->
+<section>
+  <div class="wrap">
+    <p class="eyebrow rv"><span class="star">✼</span> The named guarantee</p>
+    <h2 class="rv">The First Inquiry Promise</h2>
+    <div class="promise rv">
+      <q>If your Storefront hasn't produced one real, verifiable buyer inquiry within 30 days of going live, I rebuild whatever isn't working — free — until it does. If you still don't have one, you don't pay.</q>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 6. THE LADDER ═══ -->
+<section class="roast" id="ladder">
+  <div class="wrap">
+    <p class="eyebrow rv"><span class="star">✼</span> The price, and where it's going</p>
+    <h2 class="rv">The price climbs as seats fill. Here's the real counter.</h2>
+    <p class="lede rv" style="margin-bottom:30px">Not a countdown timer that resets when you reload the page. This number comes from a ledger, and it only moves when a deposit actually clears.</p>
+
+    <div class="offline" id="ladderOffline">
+      <strong>The live count isn't loading right now.</strong>
+      I'd rather show you nothing than a number I made up. Message me on WhatsApp and I'll tell you exactly where the ladder stands today.
+    </div>
+
+    <div class="ladder rv" id="ladderList">
+      <div class="rung live">
+        <div class="price">OMR <span class="skel"></span></div>
+        <div class="meta"><span class="flag">Loading the ledger</span><span class="skel" style="min-width:9em"></span></div>
+      </div>
+    </div>
+
+    <p class="ladder-note rv">
+      <strong>Why it climbs:</strong> I build these personally, one at a time, so the queue is a real constraint rather than a marketing device. The early seats are cheaper because early clients are taking a risk on someone with no published local track record yet — that's a fair trade, and it stops being available once the proof exists.<br><br>
+      <strong>What counts as a seat:</strong> one taken seat = one 50% deposit that has actually cleared. Filling in the form below doesn't take a seat from anyone, and it doesn't hold the price forever — the deposit does.
+    </p>
+  </div>
+</section>
+
+<!-- ═══ 7. PLEDGES ═══ -->
+<section id="pledges">
+  <div class="wrap">
+    <p class="eyebrow rv"><span class="star">✼</span> Pay less, later</p>
+    <h2 class="rv">Four ways to pay less. None of them due today.</h2>
+    <p class="lede rv" style="margin-bottom:28px">Tick anything you'd genuinely be willing to do <em>after</em> your site is live and you actually like it. Each one comes back to you as money — paid after you've delivered it, not deducted up front. Change your mind and you simply don't get the rebate. Nothing is clawed back, nothing is chased.</p>
+
+    <div class="pledges rv" id="pledgeList"></div>
+
+    <div class="maths rv" id="maths">
+      <div class="mrow"><span class="lbl">Your price today</span><b id="mPrice">—</b></div>
+      <div class="mrow"><span class="lbl">You get back, once you've delivered</span><b id="mRebate">OMR 0.00</b></div>
+      <div class="mrow total"><span class="lbl">What it ends up costing you</span><b id="mNet">—</b></div>
+      <div class="allfour" id="allFour">
+        All four. That's half the price back. I've done the maths and I'm still saying yes — right now a real testimonial from a real distributor is worth more to me than the margin is.
+      </div>
+    </div>
+
+    <div class="chase rv">
+      <p class="chase-note">Some people will now look for the button that gives them even more.</p>
+      <button type="button" id="runaway-btn">More Discount</button>
+      <div class="trophy" id="trophy">
+        <span class="badge">✼ Certified Button Catcher</span>
+        <strong>Fine. You win.</strong>
+        <p style="margin:8px 0 0;color:var(--muted);font-size:.94rem">There is genuinely no more discount — I'd be lying to invent one, and lying is the one thing this whole page is trying not to do. But you just chased a button across a screen seven times, which is the exact persistence needed to collect a late invoice. I've noted it on your claim. Screenshot this; you earned it.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 8. FOUNDER ═══ -->
+<section class="roast">
+  <div class="wrap">
+    <div class="founder rv">
+      <img src="/nahid-founder.jpg" alt="Nahid Abyari, founder of AI Profit Lab" width="190" height="240" loading="lazy" onerror="this.style.display='none'"/>
+      <div>
+        <p class="eyebrow" style="margin-bottom:10px"><span class="star">✼</span> Who builds it</p>
+        <p style="font-size:1.05rem">AI Profit Lab is built by an engineer who has designed and run a real distribution business — the same slow invoices, missed WhatsApp messages, and "wait, what's our cash position?" phone calls you deal with. That's the business this was built to fix first.</p>
+        <p style="color:var(--muted);font-size:.95rem;margin-bottom:0">One person builds these. That's why the queue is short, why the price climbs, and why you'll be talking to the person doing the work rather than an account manager relaying messages.</p>
+        <p class="sig">— Nahid Abyari</p>
+        <p class="mono" style="font-size:.75rem;color:var(--muted);margin:0">International Gulf Lotus SPC · Al Seeb, Muscat</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 9. CLAIM FORM ═══ -->
+<section id="claim">
+  <div class="wrap">
+    <p class="eyebrow rv"><span class="star">✼</span> Claim a seat</p>
+    <h2 class="rv">Seven fields. Then I email you the agreement.</h2>
+    <p class="lede rv" style="margin-bottom:28px">This holds your place in the queue at today's price. The full brief — your products, colours, pages, Arabic copy — comes later, once the deposit has cleared and you're actually committed. No point making you write an essay on your phone in a car park.</p>
+
+    <form class="form rv" id="claimForm" novalidate>
+      <div class="fsummary">
+        Price today: <b id="fPrice">—</b> · 50% deposit to hold a seat: <b id="fDeposit">—</b> · Pledged back to you: <b id="fRebate">OMR 0.00</b>
+        <div style="color:var(--muted);font-size:.85rem;margin-top:5px">Change your pledges in <a href="#pledges">the section above</a>.</div>
+      </div>
+
+      <div class="fgrid">
+        <div class="field"><label for="f-name">Your name</label><input id="f-name" name="name" autocomplete="name" required/></div>
+        <div class="field"><label for="f-business">Business name</label><input id="f-business" name="business" autocomplete="organization" required/></div>
+        <div class="field full"><label for="f-sector">What do you sell?</label><input id="f-sector" name="sector" placeholder="e.g. building materials, medical supplies, auto parts" required/></div>
+        <div class="field"><label for="f-whatsapp">WhatsApp number</label><input id="f-whatsapp" name="whatsapp" type="tel" inputmode="tel" autocomplete="tel" placeholder="+968 …" required/></div>
+        <div class="field"><label for="f-email">Email</label><input id="f-email" name="email" type="email" inputmode="email" autocomplete="email" required/></div>
+        <div class="field full"><label for="f-site">Current website <span class="opt-tag">— optional, and "none" is a perfectly good answer</span></label><input id="f-site" name="currentSite" placeholder="none"/></div>
+      </div>
+
+      <div class="hp" aria-hidden="true"><label for="f-companyurl">Company URL</label><input id="f-companyurl" name="companyUrl" tabindex="-1" autocomplete="off"/></div>
+
+      <label class="consent"><input type="checkbox" id="f-consent" required/>
+        <span>I'm happy for AI Profit Lab to contact me about this claim by email and WhatsApp, and to store these details to prepare my agreement. Nothing else, no lists. <a href="/privacy/" target="_blank" rel="noopener">Privacy</a>.</span>
+      </label>
+
+      <div class="formerr" id="formErr"></div>
+
+      <p style="margin:20px 0 0"><button type="submit" class="btn btn-primary" id="fSubmit" style="width:100%">Hold my seat at this price</button></p>
+      <p style="font-size:.84rem;color:var(--muted);margin:12px 0 0">No payment on this page. You'll get an agreement and an invoice by email within one business day, and you pay after you've read them.</p>
+    </form>
+  </div>
+</section>
+
+<!-- ═══ 10. FAQ ═══ -->
+<section class="roast">
+  <div class="wrap narrow">
+    <p class="eyebrow rv"><span class="star">✼</span> Reasonable questions</p>
+    <h2 class="rv" style="margin-bottom:26px">Things worth asking a stranger with a flyer.</h2>
+
+    <details class="rv"><summary>Is the "seats left" number real, or is it theatre?</summary><p>Real. It's read live from a ledger every time this page loads, and a seat only counts when a 50% deposit has actually cleared into the company account. Submitting the form doesn't move it. If the ledger is unreachable, the page shows you nothing rather than a made-up number — you may have already seen that happen.</p></details>
+
+    <details class="rv"><summary>Why does the price go up? That feels like pressure.</summary><p>Because one person builds these, one at a time. Early clients get a lower price for taking a risk on someone without a published local track record; once that proof exists, the discount has done its job. If the ladder ever stops reflecting real capacity, it stops being honest, and the whole point of this business is being the one you can believe.</p></details>
+
+    <details class="rv"><summary>What happens after I submit the form?</summary><p>You get an email straight away with your reference and the deposit amount. Then, within one business day, I send the agreement and the invoice with payment details. You pay the 50% deposit, upload the transfer receipt on your claim page, and I confirm your seat once the money lands. The balance is due when the site goes live.</p></details>
+
+    <details class="rv"><summary>How do the pledge discounts actually work?</summary><p>You tick what you're willing to do after the site is live. Nothing comes off the invoice up front — you pay the full price, and each pledge you deliver is paid back to you. If you don't like the site, or change your mind, you keep your money and I don't chase you. The pledge is written into your agreement so both sides know exactly what was promised.</p></details>
+
+    <details class="rv"><summary>Are there monthly fees?</summary><p>No. It's a one-time price, and it includes a full year of hosting, security and care. After that year you can renew the care plan or not — the site is yours either way.</p></details>
+
+    <details class="rv"><summary>How long does it take?</summary><p>About a week from the point I have your content and answers. The delay is almost never the building; it's waiting for photos and product lists.</p></details>
+
+    <details class="rv"><summary>Is the site really in Arabic and English?</summary><p>Yes — the whole interface, and the AI agent answers in whichever language the buyer writes in. The Arabic is written properly, not run through a translator and left there.</p></details>
+  </div>
+</section>
+
+<!-- ═══ 11. FOOTER + CAT ═══ -->
+<footer>
+  <div class="wrap footgrid">
+    <div>
+      <p style="font-family:var(--display);font-size:1.1rem;color:var(--cream);margin-bottom:4px"><span style="color:var(--amber)">✼</span> AI Profit Lab</p>
+      <p style="margin:0">Every success starts with insight.</p>
+      <p style="margin:10px 0 0;font-size:.8rem">© 2026 AI Profit Lab — a brand of International Gulf Lotus SPC · <a href="/privacy/">Privacy</a></p>
+    </div>
+
+    <div class="uptime">
+      <span>100% AI uptime guarantee<sup>*</sup></span>
+      <button class="catbtn" id="catBtn" aria-label="Wake the server cat" title="Do not wake the server cat">
+        <svg viewBox="0 0 70 52" id="catSvg" aria-hidden="true">
+          <rect x="4" y="26" width="62" height="9" rx="2" fill="#16261F" stroke="#3FAE8A" stroke-width="1"/>
+          <rect x="4" y="37" width="62" height="9" rx="2" fill="#16261F" stroke="#3FAE8A" stroke-width="1"/>
+          <circle cx="60" cy="30.5" r="1.6" fill="#3FAE8A"/><circle cx="60" cy="41.5" r="1.6" fill="#D89234"/>
+          <path d="M14 26c0-6 5-10 11-10s11 4 11 10z" fill="#D89234"/>
+          <!-- tail, curling off the right of the rack rather than sprouting from its head -->
+          <path d="M36 25c7 1 9-2 8-6" stroke="#D89234" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          <path d="M18 17.5l1.5-5 3.5 4z" fill="#BA7517"/><path d="M31 16.5l2-4 1.5 5z" fill="#BA7517"/>
+          <circle cx="22" cy="21" r="1.3" fill="#2A1B04" class="cat-eye"/><circle cx="29" cy="21" r="1.3" fill="#2A1B04" class="cat-eye"/>
+          <path d="M20.5 21.5h3M27.5 21.5h3" stroke="#2A1B04" stroke-width="1.1" stroke-linecap="round" class="cat-shut"/>
+          <text x="40" y="16" class="cat-z" font-size="9" fill="#E8C98F" font-family="monospace">z</text>
+          <text x="46" y="10" class="cat-z" font-size="7" fill="#E8C98F" font-family="monospace">z</text>
+        </svg>
+      </button>
+    </div>
+  </div>
+  <div class="wrap"><p style="font-size:.72rem;color:rgba(241,239,232,.4);margin:18px 0 0">* The cat is decorative. The uptime is not — it's a real hosting SLA, and the cat has never been near a server.</p></div>
+</footer>
+
+<div class="curtain" id="curtain">
+  <div class="sign">
+    <h3>Under Construction</h3>
+    <p>The cat is awake and has opinions about your reading. Nothing is actually broken.</p>
+    <button class="btn btn-primary" id="curtainClose" style="width:100%">Tap to remove cat</button>
+  </div>
+</div>
+
+<div class="sticky">
+  <div class="sticky-in">
+    <div class="info">Today's price<b id="sPrice">—</b></div>
+    <a class="btn btn-primary" href="#claim">Claim a seat</a>
+  </div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  var API = "https://storefront-offer-api-989128855797.me-central1.run.app";
+  var WA  = "https://wa.me/96899245250";
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var track = function(name, params){ if (window.gtag) gtag("event", name, params || {}); };
+
+  /* ─────────── scroll reveal ─────────── */
+  var revealables = document.querySelectorAll(".rv");
+  if ("IntersectionObserver" in window && !reduce) {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (!e.isIntersecting) return;
+        e.target.classList.add("vis");
+        io.unobserve(e.target);
+      });
+    }, { rootMargin: "0px 0px -8% 0px" });
+    revealables.forEach(function(el, i){ el.style.transitionDelay = (i % 6) * 45 + "ms"; io.observe(el); });
+  } else {
+    revealables.forEach(function(el){ el.classList.add("vis"); });
+  }
+
+  /* ─────────── 1. flyer → storefront ───────────
+     The flyer is rebuilt as N vertical strips of the same card, each clipped to its own
+     band, so they can fall independently. Reduced motion skips straight to the phone. */
+  var flyer = document.getElementById("flyer");
+  var phone = document.getElementById("phone");
+  var STRIPS = 12;
+
+  var paperHTML =
+    '<div class="paper">' +
+      '<div class="pbrand">✼ AI Prof<i>i</i>t Lab</div>' +
+      '<div class="ph">A website that sells while you sleep.</div>' +
+      '<div class="pm">Bilingual · Arabic &amp; English<br>Built in Muscat</div>' +
+      '<div class="pqr"></div>' +
+      '<div class="pscan">Scan me →</div>' +
+      '<div class="pcut"></div>' +
+    '</div>';
+
+  for (var s = 0; s < STRIPS; s++) {
+    var strip = document.createElement("div");
+    strip.className = "strip";
+    strip.style.clipPath = "inset(0 " + (100 - (s + 1) * (100 / STRIPS)) + "% 0 " + (s * (100 / STRIPS)) + "%)";
+    strip.innerHTML = paperHTML;
+    flyer.appendChild(strip);
+  }
+
+  function upgrade() {
+    if (reduce) { flyer.style.display = "none"; phone.classList.add("on"); return; }
+    var strips = flyer.querySelectorAll(".strip");
+    strips.forEach(function(el, i){
+      var drift = (i - STRIPS / 2) * 5;
+      el.style.transition = "transform .95s cubic-bezier(.5,0,.75,0), opacity .8s ease-in";
+      el.style.transitionDelay = (i * 32) + "ms";
+      el.style.transform = "translate(" + drift + "px," + (150 + Math.random() * 90) + "px) rotate(" + drift + "deg)";
+      el.style.opacity = "0";
+    });
+    setTimeout(function(){ phone.classList.add("on"); }, 430);
+    setTimeout(function(){ flyer.style.display = "none"; }, 1600);
+  }
+  setTimeout(upgrade, reduce ? 0 : 900);
+
+  /* ─────────── 2. three taps ─────────── */
+  var QUESTIONS = [
+    { title: "What do you sell?", key: "sector", options: [
+      { label: "Building materials",  say: "Building materials. Your buyers ring three suppliers and go with whoever answers first. That's the whole game." },
+      { label: "Medical supplies",    say: "Medical supplies. Your buyers need spec sheets and they need them at odd hours. A page that just says \"quality products\" is not going to cut it." },
+      { label: "Auto parts",          say: "Auto parts. Half your inquiries are someone holding a broken thing, asking if you have it. Fastest answer wins." },
+      { label: "Food & FMCG",         say: "Food and FMCG. Reorders, price lists, delivery days. Boring, repetitive, and exactly what a machine should be handling." },
+      { label: "Something else",      say: "Something else. Good — the generic template industry hates that, and it's the reason your site shouldn't be one." }
+    ]},
+    { title: "What's your website situation?", key: "site", options: [
+      { label: "I don't have one",        say: "Honest. And a lot of your competitors have one that's worse than nothing, so you're further ahead than you think." },
+      { label: "I have one, from 2019",   say: "A 2019 site loads a four-megabyte photo and then asks a stranger to fill in a form. We can beat that before lunch." },
+      { label: "My nephew built it",      say: "Every nephew in Oman has built exactly one website. Genuine respect to him. He is not, however, answering your buyers at midnight." },
+      { label: "We just use WhatsApp",    say: "WhatsApp is honestly the right place to close a deal. The problem is being found at all before that conversation starts." }
+    ]},
+    { title: "What should it feel like?", key: "vibe", options: [
+      { label: "Serious and solid",  vibe: "serious",   say: "Serious and solid. Translation: no stock photo of a handshake in front of a glass building." },
+      { label: "Modern and clean",   vibe: "modern",    say: "Modern and clean. Achievable. It mostly means removing things, which nobody wants to bill you for." },
+      { label: "Expensive",          vibe: "expensive", say: "Expensive. Dark background, a lot of empty space, one very confident sentence. It works because it looks like restraint." },
+      { label: "Just make it work",  vibe: "plain",     say: "Just make it work. My favourite brief. Fewer opinions, faster launch, more inquiries." }
+    ]}
+  ];
+
+  var HEADLINES = {
+    "Building materials": { h: "Cement, steel and blocks — delivered across Oman.", chips: ["Bulk pricing","Site delivery","Stock check"], en: "Need a delivered price for site?" },
+    "Medical supplies":   { h: "Medical supplies, with the paperwork in order.",     chips: ["Spec sheets","Cold chain","Tenders"],     en: "Need specs or a tender quote?" },
+    "Auto parts":         { h: "The part you need, in stock, today.",                chips: ["Part lookup","Trade pricing","Same day"],  en: "Send me the part number?" },
+    "Food & FMCG":        { h: "Wholesale supply your shelves can rely on.",         chips: ["Price list","Reorders","Delivery days"],   en: "Want this week's price list?" },
+    "Something else":     { h: "Supplying Oman, since the day you started.",         chips: ["Bulk pricing","Delivery","Datasheets"],    en: "Need a bulk quote?" }
+  };
+
+  // `busy` locks input while the commentary is typing. Without it, two quick taps on the
+  // same question advance the counter twice, run finish() with unanswered questions, and
+  // throw before the result panel is ever shown.
+  var qi = 0, answers = {}, busy = false;
+  var qwrap = document.getElementById("qwrap"), qstep = document.getElementById("qstep"),
+      qtitle = document.getElementById("qtitle"), qopts = document.getElementById("qopts"),
+      qprog = document.getElementById("qprog"), say = document.getElementById("say"),
+      qresult = document.getElementById("qresult");
+
+  function type(text, done) {
+    if (reduce) { say.textContent = text; if (done) done(); return; }
+    say.textContent = "";
+    var caret = document.createElement("span");
+    caret.className = "caret";
+    caret.textContent = " ";
+    say.appendChild(caret);
+    var i = 0;
+    var timer = setInterval(function(){
+      i += 2;
+      caret.insertAdjacentText("beforebegin", text.slice(i - 2, i));
+      if (i >= text.length) { clearInterval(timer); caret.remove(); if (done) done(); }
+    }, 16);
+  }
+
+  function renderQuestion() {
+    var q = QUESTIONS[qi];
+    qstep.textContent = "Question " + (qi + 1) + " of " + QUESTIONS.length;
+    qtitle.textContent = q.title;
+    qopts.innerHTML = "";
+    q.options.forEach(function(o){
+      var b = document.createElement("button");
+      b.type = "button";
+      b.className = "opt";
+      b.textContent = o.label;
+      b.addEventListener("click", function(){ answer(q, o); });
+      qopts.appendChild(b);
+    });
+    Array.prototype.forEach.call(qprog.children, function(d, i){ d.classList.toggle("on", i <= qi); });
+  }
+
+  function answer(q, o) {
+    if (busy) return;
+    busy = true;
+    answers[q.key] = o;
+    track("roast_answer", { step: q.key, choice: o.label });
+    type(o.say, function(){
+      qi++;
+      if (qi < QUESTIONS.length) { setTimeout(function(){ renderQuestion(); busy = false; }, 320); }
+      else { setTimeout(finish, 420); }
+    });
+  }
+
+  function finish() {
+    var sector = answers.sector ? answers.sector.label : "Something else";
+    var vibe = answers.vibe ? answers.vibe.vibe : "serious";
+    var data = HEADLINES[sector] || HEADLINES["Something else"];
+    document.getElementById("mkhead").textContent = data.h;
+    document.getElementById("mken").textContent = data.en;
+    document.getElementById("mkchips").innerHTML = data.chips
+      .map(function(c){ return '<span class="pchip">' + c + "</span>"; }).join("");
+    document.getElementById("mockup").setAttribute("data-vibe", vibe);
+
+    // Pre-fill the claim form so nobody types the same thing twice.
+    var sectorField = document.getElementById("f-sector");
+    if (!sectorField.value) sectorField.value = sector === "Something else" ? "" : sector;
+
+    qwrap.style.display = "none";
+    qresult.classList.add("on");
+    track("roast_complete", { sector: sector, vibe: vibe });
+  }
+
+  document.getElementById("qagain").addEventListener("click", function(){
+    qi = 0; answers = {}; busy = false; say.textContent = "";
+    qresult.classList.remove("on"); qwrap.style.display = "";
+    renderQuestion();
+  });
+  renderQuestion();
+
+  /* ─────────── 3. the ledger ─────────── */
+  var state = null, chosen = [];
+
+  var money = function(n){ return "OMR " + Number(n).toFixed(2); };
+
+  function renderLadder() {
+    var list = document.getElementById("ladderList");
+    if (state.soldOut) {
+      list.innerHTML = '<div class="rung live"><div class="meta"><span class="flag">All seats taken</span>' +
+        'Every seat in this campaign is gone. Message me and I\'ll tell you honestly when the next one opens.</div></div>';
+      // Nothing left to sell: don't leave a form that would only reject them.
+      document.getElementById("pledgeList").innerHTML = "";
+      document.getElementById("maths").style.display = "none";
+      document.getElementById("claimForm").style.display = "none";
+      document.getElementById("sPrice").textContent = "sold out";
+      return;
+    }
+    list.innerHTML = state.published.map(function(r){
+      if (r.state === "live") {
+        var pct = Math.round(((r.seats - r.seatsLeft) / r.seats) * 100);
+        return '<div class="rung live"><div class="price">OMR ' + r.price + '</div>' +
+          '<div class="meta"><span class="flag">Today\'s price</span>' +
+          '<strong>' + r.seatsLeft + ' seat' + (r.seatsLeft === 1 ? "" : "s") + ' left</strong> at this price' +
+          '<div class="seatbar"><i style="width:' + pct + '%"></i></div></div></div>';
+      }
+      return '<div class="rung next"><div class="price">OMR ' + r.price + '</div>' +
+        '<div class="meta"><span class="flag">Then</span>the next ' + r.seats + ' seats</div></div>';
+    }).join("") + (state.moreRungsAfter
+      ? '<p style="font-size:.86rem;color:var(--muted);margin:2px 0 0">…and it keeps climbing after that.</p>' : "");
+  }
+
+  function renderPledges() {
+    document.getElementById("pledgeList").innerHTML = state.pledges.map(function(p){
+      return '<label class="pledge" data-id="' + p.id + '">' +
+        '<input type="checkbox" value="' + p.id + '"/>' +
+        '<span class="txt"><b>' + p.label + '</b><span>' + p.detail + '</span></span>' +
+        '<span class="pct">' + p.pct + '%</span></label>';
+    }).join("");
+
+    document.querySelectorAll(".pledge input").forEach(function(cb){
+      cb.addEventListener("change", function(){
+        cb.closest(".pledge").classList.toggle("on", cb.checked);
+        chosen = Array.prototype.map.call(
+          document.querySelectorAll(".pledge input:checked"), function(x){ return x.value; });
+        track("pledge_toggle", { pledge: cb.value, on: cb.checked });
+        renderMaths();
+      });
+    });
+  }
+
+  function renderMaths() {
+    if (!state || !state.activeTier) return;
+    var price = state.activeTier.price;
+    var pct = state.pledges
+      .filter(function(p){ return chosen.indexOf(p.id) > -1; })
+      .reduce(function(sum, p){ return sum + p.pct; }, 0);
+    var rebate = price * pct / 100;
+
+    document.getElementById("mPrice").textContent  = money(price);
+    document.getElementById("mRebate").textContent = money(rebate) + (pct ? "  (" + pct + "%)" : "");
+    document.getElementById("mNet").textContent    = money(price - rebate);
+    document.getElementById("allFour").classList.toggle("on", pct >= 50);
+
+    document.getElementById("fPrice").textContent   = money(price);
+    document.getElementById("fDeposit").textContent = money(state.activeTier.deposit);
+    document.getElementById("fRebate").textContent  = money(rebate);
+    document.getElementById("sPrice").textContent   = money(price);
+  }
+
+  function ledgerOffline() {
+    document.getElementById("ladderOffline").classList.add("on");
+    document.getElementById("ladderList").style.display = "none";
+    document.getElementById("pledgeList").innerHTML =
+      '<p style="color:var(--muted)">The pledge board needs the live price to show you real numbers, and it isn\'t reachable right now. ' +
+      '<a href="' + WA + '" target="_blank" rel="noopener">Ask me on WhatsApp</a> and I\'ll walk you through it.</p>';
+    document.getElementById("maths").style.display = "none";
+    document.getElementById("sPrice").textContent = "ask me";
+    document.getElementById("claimForm").style.display = "none";
+  }
+
+  fetch(API + "/status")
+    .then(function(r){ if (!r.ok) throw new Error("status " + r.status); return r.json(); })
+    .then(function(data){
+      if (!data.ok) throw new Error("not ok");
+      state = data;
+      renderLadder(); renderPledges(); renderMaths();
+    })
+    .catch(function(err){ console.warn("ledger unavailable:", err); ledgerOffline(); });
+
+  /* ─────────── 4. the button that runs away ─────────── */
+  var btn = document.getElementById("runaway-btn");
+  var dodges = 0, caught = false, lastDodge = 0, DODGE_LIMIT = 7;
+
+  function flee(e) {
+    if (caught) return;
+    if (e) e.preventDefault();
+    // Without a cooldown the button lands under the moving cursor, fires mouseover again,
+    // and burns all seven dodges in one flick of the wrist. Each dodge should be earned.
+    if (Date.now() - lastDodge < 260) return;
+    lastDodge = Date.now();
+    dodges++;
+
+    if (dodges > DODGE_LIMIT) { surrender(); return; }
+
+    var w = btn.offsetWidth, h = btn.offsetHeight;
+    var pad = 8;
+    // Keep it clear of the sticky bar at the bottom and the nav at the top.
+    var x = pad + Math.random() * Math.max(0, window.innerWidth  - w - pad * 2);
+    var y = 70 + Math.random() * Math.max(0, window.innerHeight - h - 160);
+
+    btn.classList.add("loose");
+    btn.style.left = x + "px";
+    btn.style.top  = y + "px";
+    btn.textContent = ["Nope.","Not today.","Try again.","Getting warmer.","Cold.","Almost!","Last one…"][dodges - 1] || "More Discount";
+  }
+
+  function surrender() {
+    caught = true;
+    btn.classList.remove("loose");
+    btn.classList.add("caught");
+    btn.style.left = btn.style.top = "";
+    btn.textContent = "🏆 Caught me";
+    document.getElementById("trophy").classList.add("on");
+    document.getElementById("trophy").scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "center" });
+    track("button_caught", { dodges: dodges });
+  }
+
+  btn.addEventListener("mouseover", flee);
+  // Touch is the whole audience here — a mouseover-only version would be inert on a phone.
+  btn.addEventListener("touchstart", flee, { passive: false });
+  // Keyboard users get the joke without the chase: focus doesn't trigger flight, and
+  // activating it simply surrenders. An unreachable control is not a joke, it's a trap.
+  btn.addEventListener("click", function(){ if (!caught) surrender(); });
+
+  /* ─────────── 5. the claim ─────────── */
+  var form = document.getElementById("claimForm");
+  var submit = document.getElementById("fSubmit");
+  var formErr = document.getElementById("formErr");
+
+  function fail(msg) {
+    formErr.textContent = msg;
+    formErr.classList.add("on");
+    submit.disabled = false;
+    submit.textContent = "Hold my seat at this price";
+  }
+
+  form.addEventListener("submit", function(e){
+    e.preventDefault();
+    formErr.classList.remove("on");
+
+    var payload = {
+      name:        document.getElementById("f-name").value.trim(),
+      business:    document.getElementById("f-business").value.trim(),
+      sector:      document.getElementById("f-sector").value.trim(),
+      whatsapp:    document.getElementById("f-whatsapp").value.trim(),
+      email:       document.getElementById("f-email").value.trim(),
+      currentSite: document.getElementById("f-site").value.trim(),
+      companyUrl:  document.getElementById("f-companyurl").value.trim(),
+      consent:     document.getElementById("f-consent").checked,
+      pledges:     chosen,
+      caughtButton: caught
+    };
+
+    if (!payload.name || !payload.business || !payload.sector || !payload.whatsapp || !payload.email) {
+      return fail("A few fields are still empty — name, business, what you sell, WhatsApp and email are all needed to write your agreement.");
+    }
+    if (!payload.consent) {
+      return fail("I need your permission to store these details and contact you, or I can't send you an agreement.");
+    }
+
+    submit.disabled = true;
+    submit.textContent = "Holding your seat…";
+
+    fetch(API + "/claim", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+    })
+      .then(function(r){ return r.json().then(function(body){ return { ok: r.ok, body: body }; }); })
+      .then(function(res){
+        if (!res.ok || !res.body.ok) {
+          if (res.body && res.body.error === "sold_out") {
+            return fail("Every seat has just gone. I'm not going to pretend otherwise — message me on WhatsApp and I'll tell you when the next one opens.");
+          }
+          return fail("Something went wrong saving your claim. Rather than lose it, message me on WhatsApp and I'll take the details myself.");
+        }
+        track("claim_submitted", { pledges: chosen.length, caught_button: caught });
+        window.location.href = "/en/claim/?ref=" + encodeURIComponent(res.body.ref) + "&new=1";
+      })
+      .catch(function(){
+        fail("I couldn't reach the server. Your connection or my server — either way, message me on WhatsApp and nothing is lost.");
+      });
+  });
+
+  /* ─────────── 6. the cat ─────────── */
+  var cat = document.getElementById("catBtn");
+  var catSvg = document.getElementById("catSvg");
+  var curtain = document.getElementById("curtain");
+
+  function wake() {
+    catSvg.classList.add("awake");
+    catSvg.querySelectorAll(".cat-shut").forEach(function(e){ e.style.display = "none"; });
+    curtain.classList.add("on");
+    document.getElementById("curtainClose").focus();
+    track("cat_woken");
+  }
+  function sleep() {
+    catSvg.classList.remove("awake");
+    catSvg.querySelectorAll(".cat-shut").forEach(function(e){ e.style.display = ""; });
+    curtain.classList.remove("on");
+    cat.focus();
+  }
+  cat.addEventListener("click", function(){ curtain.classList.contains("on") ? sleep() : wake(); });
+  document.getElementById("curtainClose").addEventListener("click", sleep);
+  document.addEventListener("keydown", function(e){ if (e.key === "Escape" && curtain.classList.contains("on")) sleep(); });
+})();
+</script>
+</body>
+</html>

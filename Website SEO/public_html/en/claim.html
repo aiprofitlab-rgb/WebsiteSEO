@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+<title>Your seat — AI Profit Lab</title>
+<meta name="robots" content="noindex, nofollow"/>
+<meta name="theme-color" content="#0A3D30"/>
+<link href="/favicon.svg" rel="icon" type="image/svg+xml"/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --teal-900:#0A3D30;--teal:#0F6E56;--amber:#BA7517;--amber-bright:#D89234;--amber-pale:#E8C98F;
+  --cream:#F1EFE8;--panel:#FAF8F2;--panel-2:#EAE4D5;--white:#FFF;--ink:#232B26;--muted:#5A665D;--line:#DED8C8;--wa:#1FAF5E;
+  --display:'Marcellus',Georgia,serif;--sans:'IBM Plex Sans',-apple-system,sans-serif;--mono:'IBM Plex Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--cream);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased}
+a{color:var(--teal)}
+a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--amber-bright);outline-offset:3px}
+h1{font-family:var(--display);font-weight:400;font-size:clamp(1.8rem,4.6vw,2.6rem);line-height:1.15;margin:0 0 .4em;color:var(--white)}
+h2{font-family:var(--display);font-weight:400;font-size:1.4rem;color:var(--teal-900);margin:0 0 .5em}
+p{margin:0 0 1em}
+.wrap{max-width:680px;margin:0 auto;padding:0 22px}
+.top{background:linear-gradient(168deg,var(--teal),var(--teal-900));color:var(--cream);padding:26px 0 46px}
+.brand{font-family:var(--display);font-size:1.15rem;color:var(--cream);text-decoration:none;display:inline-block;margin-bottom:30px}
+.brand span{color:var(--amber-pale)}
+.eyebrow{font-family:var(--mono);font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--amber-pale);margin:0 0 12px}
+.top p.sub{color:rgba(241,239,232,.85);margin:0}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:26px 24px;margin:-28px 0 20px;position:relative;box-shadow:0 22px 50px -38px rgba(10,61,48,.7)}
+.refbox{display:flex;align-items:center;gap:14px;flex-wrap:wrap;border-bottom:1px solid var(--line);padding-bottom:18px;margin-bottom:18px}
+.ref{font-family:var(--mono);font-size:1.5rem;color:var(--teal-900);letter-spacing:.06em}
+.pill{font-family:var(--mono);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;padding:5px 11px;border-radius:20px;background:var(--panel-2);color:var(--muted)}
+.pill.wait{background:#FBF3E4;color:#8A6215}
+.pill.sent{background:#E7F0EC;color:var(--teal-900)}
+.pill.done{background:var(--teal);color:#fff}
+.row{display:flex;justify-content:space-between;gap:14px;padding:8px 0;font-size:.98rem}
+.row+.row{border-top:1px solid var(--line)}
+.row b{font-family:var(--display);font-weight:400;font-size:1.2rem;color:var(--teal-900)}
+.steps{list-style:none;padding:0;margin:22px 0 0;counter-reset:s}
+.steps li{counter-increment:s;position:relative;padding:0 0 20px 42px;font-size:.97rem;color:var(--muted)}
+.steps li::before{content:counter(s);position:absolute;left:0;top:-1px;width:27px;height:27px;border-radius:50%;
+  background:var(--panel-2);color:var(--teal-900);font-family:var(--mono);font-size:.8rem;display:flex;align-items:center;justify-content:center}
+.steps li.now::before{background:var(--teal);color:#fff}
+.steps li strong{color:var(--ink);display:block;font-weight:600}
+.up{background:var(--white);border:1px dashed var(--line);border-radius:12px;padding:22px 20px;margin-top:8px;text-align:center}
+.up.drop{border-color:var(--teal);background:#F4FAF7}
+input[type=file]{display:none}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;font-family:var(--sans);font-weight:600;font-size:1rem;
+  border:0;border-radius:8px;padding:14px 24px;cursor:pointer;text-decoration:none;transition:transform .15s,background .15s}
+.btn:hover{transform:translateY(-1px)}
+.btn-primary{background:var(--teal);color:#fff}
+.btn-wa{background:var(--wa);color:#fff}
+.note{font-size:.86rem;color:var(--muted)}
+.msg{display:none;border-radius:9px;padding:13px 15px;font-size:.93rem;margin-top:14px}
+.msg.on{display:block}
+.msg.err{background:#FBEDE9;border:1px solid #E5B4A6;color:#8A3B22}
+.msg.ok{background:#E7F0EC;border:1px solid #A9CFC0;color:#0A3D30}
+.wa-icon{width:19px;height:19px;fill:currentColor}
+footer{padding:36px 0 50px;text-align:center;font-size:.82rem;color:var(--muted)}
+@media (prefers-reduced-motion:reduce){*{transition:none !important;animation:none !important}}
+</style>
+</head>
+<body>
+
+<div class="top">
+  <div class="wrap">
+    <a class="brand" href="/en/smart-storefront/"><span>✼</span> AI Profit Lab</a>
+    <p class="eyebrow" id="eyebrow">Your claim</p>
+    <h1 id="headline">Looking up your seat…</h1>
+    <p class="sub" id="subline">One moment.</p>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="card" id="card" hidden>
+    <div class="refbox">
+      <span class="ref" id="ref">—</span>
+      <span class="pill" id="statusPill">—</span>
+    </div>
+    <div class="row"><span>Business</span><span id="business">—</span></div>
+    <div class="row"><span>Price held for you</span><b id="price">—</b></div>
+    <div class="row"><span>Deposit to lock the seat (50%)</span><b id="deposit">—</b></div>
+    <div class="row" id="rebateRow" hidden><span>Pledged back to you, after delivery</span><b id="rebate">—</b></div>
+
+    <ol class="steps" id="steps">
+      <li id="s1"><strong>You claimed a seat</strong>Done — your details are with me.</li>
+      <li id="s2"><strong>I send your agreement and invoice</strong>By email, within one business day, with the payment details on it.</li>
+      <li id="s3"><strong>You pay the 50% deposit and upload the receipt</strong>Use the box below once you've transferred it.</li>
+      <li id="s4"><strong>I confirm your seat</strong>Once the transfer actually lands. That's the moment the public counter moves.</li>
+    </ol>
+
+    <div class="up" id="up">
+      <p style="margin:0 0 6px"><strong>Paid the deposit? Upload the receipt.</strong></p>
+      <p class="note" style="margin:0 0 16px">A photo or PDF of the transfer confirmation. Up to 5&nbsp;MB. It's stored privately and only I can open it.</p>
+      <input type="file" id="file" accept="image/jpeg,image/png,image/heic,application/pdf"/>
+      <button class="btn btn-primary" id="pick">Choose the receipt</button>
+      <p class="note" id="fname" style="margin:12px 0 0"></p>
+      <div class="msg err" id="err"></div>
+      <div class="msg ok" id="ok"></div>
+    </div>
+
+    <p style="margin:22px 0 0;text-align:center">
+      <a class="btn btn-wa" id="wa" href="https://wa.me/96899245250" target="_blank" rel="noopener">
+        <svg class="wa-icon" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
+        Ask me anything about this
+      </a>
+    </p>
+  </div>
+
+  <div class="card" id="missing" hidden>
+    <h2>I can't find that reference.</h2>
+    <p>Either the link got cut in half somewhere between the email and here, or the reference has a typo in it. Both are easily fixed.</p>
+    <p style="margin-bottom:0"><a class="btn btn-wa" href="https://wa.me/96899245250" target="_blank" rel="noopener">Send me the reference on WhatsApp</a></p>
+  </div>
+</div>
+
+<footer>
+  <p>AI Profit Lab — a brand of International Gulf Lotus SPC · Al Seeb, Muscat<br>
+  <a href="/en/smart-storefront/">Back to the offer</a> · <a href="/privacy/">Privacy</a></p>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  var API = "https://storefront-offer-api-989128855797.me-central1.run.app";
+  var params = new URLSearchParams(location.search);
+  var ref = (params.get("ref") || "").trim();
+  var isNew = params.get("new") === "1";
+
+  var $ = function(id){ return document.getElementById(id); };
+  var money = function(n){ return n == null ? "—" : "OMR " + Number(n).toFixed(2); };
+
+  var LABELS = {
+    Awaiting_Deposit:  { pill: "Awaiting deposit",  cls: "wait", step: "s3" },
+    Deposit_Submitted: { pill: "Receipt received",  cls: "sent", step: "s4" },
+    Confirmed:         { pill: "Seat confirmed",    cls: "done", step: "s4" },
+    Void:              { pill: "Closed",            cls: "",     step: "s1" }
+  };
+
+  if (!ref) { $("headline").textContent = "No reference in this link."; $("subline").textContent = "Check the link in your email, or message me and I'll find you."; $("missing").hidden = false; return; }
+
+  fetch(API + "/claim/" + encodeURIComponent(ref))
+    .then(function(r){ if (r.status === 404) return null; if (!r.ok) throw new Error("http " + r.status); return r.json(); })
+    .then(function(data){
+      if (!data || !data.ok) { $("headline").textContent = "I can't find that seat."; $("subline").textContent = "The reference didn't match anything in the ledger."; $("missing").hidden = false; return; }
+
+      var meta = LABELS[data.status] || { pill: data.status, cls: "", step: "s2" };
+
+      $("headline").textContent = isNew ? "Your seat is held." : "Your seat.";
+      $("subline").textContent  = data.status === "Confirmed"
+        ? "Confirmed. The build queue is yours — I'll be in touch about the brief."
+        : "Keep this page. It's where you upload your deposit receipt.";
+      $("eyebrow").textContent = isNew ? "That's done" : "Your claim";
+
+      $("ref").textContent = data.ref;
+      $("statusPill").textContent = meta.pill;
+      $("statusPill").className = "pill " + meta.cls;
+      $("business").textContent = data.business || "—";
+      $("price").textContent = money(data.price);
+      $("deposit").textContent = money(data.deposit);
+
+      if (data.pledgePct > 0) {
+        $("rebateRow").hidden = false;
+        $("rebate").textContent = money(data.rebate) + " (" + data.pledgePct + "%)";
+      }
+
+      var active = $(meta.step);
+      if (active) active.classList.add("now");
+
+      if (data.status === "Confirmed") { $("up").style.display = "none"; }
+      if (data.hasReceipt && data.status !== "Confirmed") {
+        $("ok").textContent = "A receipt is already on file. I'm checking the transfer — you don't need to do anything else. Upload again only if you sent the wrong file.";
+        $("ok").classList.add("on");
+      }
+
+      $("wa").href = "https://wa.me/96899245250?text=" +
+        encodeURIComponent("Hello — about my Smart Storefront seat, reference " + data.ref + ".");
+
+      $("card").hidden = false;
+    })
+    .catch(function(){
+      $("headline").textContent = "I can't reach the ledger right now.";
+      $("subline").textContent = "Your claim is safe — this page just can't read it at the moment.";
+      $("missing").hidden = false;
+    });
+
+  /* receipt upload */
+  var file = $("file");
+  $("pick").addEventListener("click", function(){ file.click(); });
+
+  file.addEventListener("change", function(){
+    var f = file.files && file.files[0];
+    if (!f) return;
+
+    $("err").classList.remove("on"); $("ok").classList.remove("on");
+    $("fname").textContent = f.name;
+
+    if (f.size > 5 * 1024 * 1024) {
+      $("err").textContent = "That file is over 5 MB. A photo of the screen is usually plenty — no need for the full-resolution one.";
+      $("err").classList.add("on");
+      return;
+    }
+
+    $("pick").disabled = true;
+    $("pick").textContent = "Uploading…";
+
+    var fd = new FormData();
+    fd.append("receipt", f);
+
+    fetch(API + "/claim/" + encodeURIComponent(ref) + "/receipt", { method: "POST", body: fd })
+      .then(function(r){ return r.json(); })
+      .then(function(res){
+        $("pick").disabled = false;
+        if (!res.ok) {
+          $("pick").textContent = "Try another file";
+          $("err").textContent = res.error === "bad_file_type"
+            ? "That file type won't open for me. A JPG, PNG or PDF works."
+            : "The upload didn't go through. Send it to me on WhatsApp instead and I'll attach it myself.";
+          $("err").classList.add("on");
+          return;
+        }
+        $("pick").textContent = "Upload another";
+        $("statusPill").textContent = "Receipt received";
+        $("statusPill").className = "pill sent";
+        $("s3").classList.remove("now"); $("s4").classList.add("now");
+        $("ok").textContent = "Got it. I'll check the transfer has landed and confirm your seat — you'll get an email when I do. Nothing else needed from you.";
+        $("ok").classList.add("on");
+        if (window.gtag) gtag("event", "receipt_uploaded", { ref: ref });
+      })
+      .catch(function(){
+        $("pick").disabled = false;
+        $("pick").textContent = "Try again";
+        $("err").textContent = "The upload couldn't reach the server. Send the receipt on WhatsApp and I'll take it from there.";
+        $("err").classList.add("on");
+      });
+  });
+})();
+</script>
+</body>
+</html>
