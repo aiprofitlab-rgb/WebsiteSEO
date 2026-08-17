@@ -106,7 +106,20 @@ RewriteRule ^en/smart-website-offer/?$ smart-website-offer-en.html [L]
 RewriteRule ^en/blog/$ blog/index.html [L]
 RewriteRule ^en/academy/$ academy/index.html [L]
 
-# 3. Map /en/ subpaths to root -en.html files
+# 3. Serve pages that genuinely live INSIDE public_html/en/
+# Must come before rule 3b. That rule encodes the site's older convention,
+# where English pages sat at the document root as <name>-en.html, so it sends
+# /en/foo/ to /foo.html at the ROOT. Any page that actually lives in
+# public_html/en/ is therefore unreachable: the .html form 301s to the clean
+# form (rule 7), and the clean form looks for a root file that isn't there and
+# 404s. That is what broke /en/index-cinematic/ and every /en/*-new/ template.
+# The -f test means this fires only when the file really exists, so nothing
+# that resolves today can change behaviour.
+RewriteCond %{REQUEST_URI} ^/en/([^/]+)/$
+RewriteCond %{DOCUMENT_ROOT}/en/%1.html -f
+RewriteRule ^en/([^/]+)/$ en/$1.html [L]
+
+# 3b. Map /en/ subpaths to root -en.html files (older convention)
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^en/([^/]+)/$ $1.html [L]

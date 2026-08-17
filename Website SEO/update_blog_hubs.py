@@ -6,6 +6,8 @@ from datetime import datetime
 CATEGORY_MAP = {
     "AI Business Strategy": "cat_0",
     "استراتيجية الذكاء الاصطناعي للأعمال": "cat_0",
+    "AI Strategy": "cat_0",
+    "استراتيجية الذكاء الاصطناعي": "cat_0",
     "Energy & AI": "cat_0",
     "الطاقة والذكاء الاصطناعي": "cat_0",
     "AI Strategy & Digital Transformation": "cat_0",
@@ -19,6 +21,11 @@ CATEGORY_MAP = {
     "التنفيذ والأتمتة": "cat_2",
     "Business Efficiency": "cat_2",
     "كفاءة الأعمال": "cat_2",
+    "AI Customer Service": "cat_2",
+    "خدمة العملاء بالذكاء الاصطناعي": "cat_2",
+    "AI in Higher Education": "cat_2",
+    "الذكاء الاصطناعي في التعليم العالي": "cat_2",
+    "API Automation & FinTech": "cat_2",
     "Middle East AI": "cat_3",
     "الذكاء الاصطناعي في الشرق الأوسط": "cat_3"
 }
