@@ -1,2 +1,7 @@
 node_modules/
 .DS_Store
+
+# large source media — never deploy or commit
+media/
+*.mp4
+*.mov

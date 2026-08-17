@@ -1,0 +1,1438 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport" />
+  <meta content="noindex, nofollow" name="robots" />
+  <title>Cinematic concept — Smart Storefront | AI Profit Lab (internal)</title>
+  <meta content="Internal design concept. Scroll-driven cinematic hero for the Smart Storefront System."
+    name="description" />
+
+  <link href="/favicon.svg" rel="icon" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- Non-blocking font load. A plain stylesheet link here costs a
+     render-blocking round trip to fonts.googleapis.com, which on a slow
+     connection delays first paint AND pushes back the load event that the
+     frame sequence waits on. display=swap means text shows immediately in the
+     fallback and swaps when the webfont lands. -->
+  <link rel="preload" as="style"
+    href="https://fonts.googleapis.com/css2?family=Marcellus&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" media="print" onload="this.media='all'"
+    href="https://fonts.googleapis.com/css2?family=Marcellus&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+  <noscript>
+    <link rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Marcellus&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+  </noscript>
+
+  <!-- Frame 0 is the LCP image. Everything else is fetched only once the
+     observer fires, so this is the one byte-cost on first paint. -->
+  <link rel="preload" as="image" href="/assets/cinematic/poster.webp" fetchpriority="high">
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-SLR9GD3MJP"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-SLR9GD3MJP');
+  </script>
+
+  <style>
+    :root {
+      --teal-950: #072B22;
+      --teal-900: #0A3D30;
+      --teal: #0F6E56;
+      --amber: #BA7517;
+      --amber-bright: #D89234;
+      --cream: #F1EFE8;
+      --panel: #FAF8F2;
+      --white: #FFFFFF;
+      --ink: #232B26;
+      --muted: #5A665D;
+      --line: #DED8C8;
+      --wa: #1FAF5E;
+      /* Sampled from the delivered footage's own background (edge average across
+     all 90 frames) so the stage never shows a seam against the video. */
+      --taupe: #9F9683;
+      --display: 'Marcellus', Georgia, serif;
+      --sans: 'IBM Plex Sans', -apple-system, 'Segoe UI', sans-serif;
+      --mono: 'IBM Plex Mono', ui-monospace, monospace;
+    }
+
+    * {
+      box-sizing: border-box
+    }
+
+    /* clip, NOT hidden. overflow-x:hidden silently makes this a scroll container
+   and position:sticky stops working everywhere on the page. */
+    html,
+    body {
+      overflow-x: clip
+    }
+
+    html {
+      scroll-behavior: smooth
+    }
+
+    body {
+      margin: 0;
+      background: var(--cream);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: 17px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-family: var(--display);
+      font-weight: 400;
+      margin: 0;
+      text-wrap: balance
+    }
+
+    a {
+      color: inherit
+    }
+
+    img,
+    canvas {
+      max-width: 100%
+    }
+
+    .wrap {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 24px
+    }
+
+    .eyebrow {
+      font-family: var(--mono);
+      font-size: .7rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin: 0 0 14px;
+    }
+
+    /* ---------------------------------------------------------------- top bar */
+    .top {
+      position: fixed;
+      inset: 0 0 auto 0;
+      z-index: 60;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 14px clamp(16px, 3vw, 28px);
+      transition: background .3s ease, border-color .3s ease;
+      border-bottom: 1px solid transparent;
+    }
+
+    .top.solid {
+      background: rgba(241, 239, 232, .9);
+      backdrop-filter: blur(10px);
+      border-bottom-color: var(--line);
+    }
+
+    .top .mark {
+      display: block;
+      width: clamp(120px, 15vw, 158px);
+      height: auto
+    }
+
+    .top-wa {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--mono);
+      font-size: .7rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--teal-900);
+      border: 1px solid rgba(35, 43, 38, .22);
+      background: rgba(250, 248, 242, .82);
+      padding: 9px 14px;
+      border-radius: 99px;
+      transition: border-color .2s, background .2s;
+    }
+
+    .top-wa:hover {
+      border-color: var(--teal);
+      background: var(--white)
+    }
+
+    .wa-icon {
+      width: 15px;
+      height: 15px;
+      fill: currentColor;
+      flex: none
+    }
+
+    /* --------------------------------------------------------- cinematic hero */
+    .cine {
+      position: relative;
+      height: 320vh;
+      background: var(--cream)
+    }
+
+    .cine-stage {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      height: 100svh;
+      overflow: hidden;
+      background: var(--cream);
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* The media box. Stacked layout by default (phones + tablets); the wide
+   layout below promotes it to full-bleed. */
+    .cine-media {
+      position: relative;
+      width: 100%;
+      height: clamp(260px, 54svh, 560px);
+      flex: none;
+      background: var(--taupe);
+      overflow: hidden;
+    }
+
+    .cine-poster,
+    .cine-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .cine-canvas {
+      z-index: 2;
+      opacity: 0;
+      transition: opacity .4s ease
+    }
+
+    .cine-canvas.ready {
+      opacity: 1
+    }
+
+    .cine-poster {
+      z-index: 1
+    }
+
+    /* Copy area. Children are absolutely centred inside it so swapping between
+   lead / beat / endcard cannot shift layout. */
+    .cine-ui {
+      position: relative;
+      flex: 1 1 auto;
+      min-height: 0
+    }
+
+    .cine-ui a {
+      pointer-events: auto
+    }
+
+    .lead,
+    .endcard,
+    .beat {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: min(620px, 88vw);
+      text-align: center;
+      opacity: 0;
+      transition: opacity .45s ease;
+      pointer-events: none;
+    }
+
+    .lead.on,
+    .endcard.on,
+    .beat.on {
+      opacity: 1;
+      pointer-events: auto
+    }
+
+    .lead h1 {
+      font-size: clamp(1.9rem, 6.2vw, 2.9rem);
+      line-height: 1.1;
+      color: var(--teal-950);
+      margin: 0 0 14px;
+    }
+
+    .lead p.sub {
+      margin: 0 auto;
+      max-width: 44ch;
+      color: var(--muted);
+      font-size: 1rem
+    }
+
+    .beat {
+      font-family: var(--mono);
+      font-size: clamp(.82rem, 3.4vw, .95rem);
+      line-height: 1.55;
+      color: var(--teal-900);
+    }
+
+    .beat span {
+      display: inline-block;
+      border-top: 2px solid var(--amber);
+      padding-top: 12px;
+    }
+
+    .endcard p {
+      font-family: var(--display);
+      font-size: clamp(1.4rem, 5vw, 2rem);
+      color: var(--teal-950);
+      margin: 0 0 20px;
+      line-height: 1.25;
+    }
+
+    .scroll-hint {
+      position: absolute;
+      left: 50%;
+      bottom: 10px;
+      transform: translateX(-50%);
+      font-family: var(--mono);
+      font-size: .6rem;
+      letter-spacing: .24em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin: 0;
+      opacity: 0;
+      transition: opacity .4s ease;
+    }
+
+    .scroll-hint.on {
+      opacity: .8
+    }
+
+    .cine-progress {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 2px;
+      background: rgba(35, 43, 38, .1);
+      z-index: 5;
+    }
+
+    .cine-progress i {
+      display: block;
+      height: 100%;
+      width: 100%;
+      background: var(--amber);
+      transform: scaleX(0);
+      transform-origin: 0 50%;
+    }
+
+    /* Honest disclosure. A child of the stage, not of the media box — inside the
+   media box it sat on top of the subject's shoulder on every narrow layout. */
+    .illus-note {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 10px;
+      z-index: 5;
+      font-family: var(--mono);
+      font-size: .55rem;
+      letter-spacing: .05em;
+      color: rgba(35, 43, 38, .55);
+      margin: 0;
+      text-align: center;
+      padding: 0 20px;
+    }
+
+    /* Side washes — only used in the wide layout, declared here so the tokens
+   stay in one place. */
+    .wash-l,
+    .wash-r {
+      display: none;
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+      pointer-events: none
+    }
+
+    /* ------------------------------------------------------------- buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--sans);
+      font-size: .95rem;
+      font-weight: 500;
+      text-decoration: none;
+      padding: 13px 22px;
+      border-radius: 99px;
+      transition: transform .18s ease, box-shadow .18s ease;
+    }
+
+    .btn-solid {
+      background: var(--wa);
+      color: #fff;
+      box-shadow: 0 14px 30px -16px rgba(31, 175, 94, .9)
+    }
+
+    .btn-solid:hover {
+      transform: translateY(-2px)
+    }
+
+    .btn .wa-icon {
+      width: 18px;
+      height: 18px
+    }
+
+    /* ------------------------------------------------------- founder proof */
+    .proof {
+      background: var(--teal-950);
+      color: var(--cream);
+      padding: clamp(64px, 9vw, 120px) 0
+    }
+
+    .proof .eyebrow {
+      color: var(--amber-bright)
+    }
+
+    .proof-grid {
+      display: grid;
+      grid-template-columns: 1fr .82fr;
+      gap: clamp(32px, 6vw, 84px);
+      align-items: center
+    }
+
+    .proof h2 {
+      font-size: clamp(1.7rem, 3.6vw, 2.7rem);
+      color: var(--cream);
+      margin: 0 0 20px;
+      line-height: 1.2
+    }
+
+    .proof p {
+      color: #C3D2C9;
+      max-width: 52ch
+    }
+
+    .proof .kicker {
+      font-family: var(--mono);
+      font-size: .74rem;
+      letter-spacing: .1em;
+      color: var(--amber-bright);
+      margin-top: 26px
+    }
+
+    .evidence {
+      position: relative;
+      min-height: 680px
+    }
+
+    .arch {
+      width: min(300px, 74%);
+      margin: 0 auto;
+      background: var(--cream);
+      padding: 10px;
+      border-radius: 999px 999px 14px 14px;
+      box-shadow: 0 30px 60px -25px rgba(0, 0, 0, .55);
+    }
+
+    .arch img {
+      width: 100%;
+      height: auto;
+      aspect-ratio: 4/5.4;
+      object-fit: cover;
+      object-position: top center;
+      border-radius: 989px 989px 8px 8px;
+    }
+
+    .name-tag {
+      position: absolute;
+      top: 18px;
+      right: 0;
+      background: var(--cream);
+      color: var(--teal-900);
+      font-family: var(--mono);
+      font-size: .62rem;
+      letter-spacing: .1em;
+      padding: 9px 14px;
+      border-radius: 8px;
+      box-shadow: 0 12px 24px -10px rgba(0, 0, 0, .45);
+    }
+
+    .ticket {
+      position: absolute;
+      background: var(--white);
+      color: var(--ink);
+      border-radius: 12px;
+      box-shadow: 0 24px 48px -20px rgba(0, 0, 0, .55);
+      padding: 16px 18px;
+      font-size: .83rem;
+      line-height: 1.5;
+    }
+
+    .ticket .tk-label {
+      font-family: var(--mono);
+      font-size: .6rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .tk-chat {
+      left: 0;
+      top: 238px;
+      width: min(280px, 80%)
+    }
+
+    .tk-dash {
+      right: 0;
+      top: 448px;
+      width: min(262px, 76%)
+    }
+
+    .bubble {
+      border-radius: 10px;
+      padding: 9px 12px;
+      margin-bottom: 8px;
+      max-width: 95%
+    }
+
+    .bubble .t {
+      font-family: var(--mono);
+      font-size: .6rem;
+      color: var(--muted);
+      display: block;
+      margin-top: 4px
+    }
+
+    .bubble.in {
+      background: #F0EEE6
+    }
+
+    .bubble.out {
+      background: #E4F4EA;
+      margin-left: auto
+    }
+
+    .tk-meta {
+      font-family: var(--mono);
+      font-size: .64rem;
+      color: var(--teal);
+      border-top: 1px dashed var(--line);
+      padding-top: 9px;
+      margin-top: 2px;
+    }
+
+    .tk-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 10px;
+      padding: 5px 0;
+      border-bottom: 1px solid #F0EDE4
+    }
+
+    .tk-row:last-child {
+      border-bottom: none
+    }
+
+    .tk-row .k {
+      color: var(--muted);
+      font-size: .78rem
+    }
+
+    .tk-row .v {
+      font-family: var(--mono);
+      font-weight: 500;
+      font-variant-numeric: tabular-nums
+    }
+
+    .tk-row .v.good {
+      color: var(--teal)
+    }
+
+    .tk-row .v.alert {
+      color: #A6431F
+    }
+
+    .spark {
+      width: 64px;
+      height: 18px
+    }
+
+    /* ------------------------------------------------------------ systems */
+    .systems {
+      padding: clamp(64px, 9vw, 120px) 0
+    }
+
+    .systems h2 {
+      font-size: clamp(1.7rem, 3.6vw, 2.7rem);
+      color: var(--teal-950);
+      margin: 0 0 14px
+    }
+
+    .systems .lede {
+      color: var(--muted);
+      max-width: 56ch;
+      margin: 0 0 44px
+    }
+
+    .sys-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px
+    }
+
+    .sys {
+      position: relative;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 28px 24px 30px;
+      overflow: hidden;
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+
+    .sys:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 26px 50px -30px rgba(15, 110, 86, .5)
+    }
+
+    .sys::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--teal), var(--amber));
+      transform: scaleX(0);
+      transform-origin: 0 50%;
+      transition: transform .3s ease;
+    }
+
+    .sys:hover::before {
+      transform: scaleX(1)
+    }
+
+    .sys .n {
+      font-family: var(--mono);
+      font-size: .66rem;
+      letter-spacing: .16em;
+      color: var(--amber)
+    }
+
+    .sys h3 {
+      font-size: 1.28rem;
+      color: var(--teal-950);
+      margin: 10px 0
+    }
+
+    .sys p {
+      margin: 0;
+      color: var(--muted);
+      font-size: .93rem
+    }
+
+    /* ------------------------------------------------------------ honesty */
+    .honesty {
+      padding: 0 0 clamp(64px, 9vw, 120px)
+    }
+
+    .honesty-in {
+      background: linear-gradient(0deg, rgba(216, 146, 52, .09), rgba(216, 146, 52, .09)), var(--panel);
+      border: 1px solid #E5D3B0;
+      border-left: 4px solid var(--amber-bright);
+      border-radius: 14px;
+      padding: clamp(24px, 4vw, 44px);
+    }
+
+    .honesty h2 {
+      font-size: clamp(1.35rem, 2.6vw, 1.9rem);
+      color: var(--teal-900);
+      margin: 0 0 8px
+    }
+
+    .honesty p {
+      color: var(--muted);
+      max-width: 56ch;
+      margin: 0 0 22px
+    }
+
+    .honesty ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 12px
+    }
+
+    .honesty li {
+      position: relative;
+      padding-left: 26px;
+      font-size: .95rem
+    }
+
+    .honesty li::before {
+      content: "\2715";
+      position: absolute;
+      left: 0;
+      top: 1px;
+      color: var(--amber);
+      font-size: .8rem
+    }
+
+    .honesty .close {
+      margin: 26px 0 0;
+      font-family: var(--mono);
+      font-size: .8rem;
+      color: var(--teal-900);
+      border-top: 1px dashed var(--line);
+      padding-top: 20px;
+      max-width: none;
+    }
+
+    /* ------------------------------------------------------------- footer */
+    .foot {
+      background: var(--teal-950);
+      color: #B9CBC1;
+      padding: 56px 0 48px;
+      text-align: center
+    }
+
+    .foot .mark {
+      width: min(190px, 55vw);
+      height: auto;
+      margin: 0 auto 18px;
+      display: block
+    }
+
+    .foot .slogan {
+      font-family: var(--display);
+      font-size: 1.2rem;
+      color: var(--cream);
+      margin: 0 0 24px
+    }
+
+    .foot .meta {
+      font-family: var(--mono);
+      font-size: .64rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      margin: 0
+    }
+
+    .foot a {
+      color: var(--amber-bright)
+    }
+
+    /* ==========================================================================
+   WIDE LAYOUT — full-bleed video with the copy in the left band.
+
+   1100px, not 900px: at 1024x768 the 16:9 source covers to ~75% of frame
+   width, which leaves only ~200px of clean band beside the subject. Tablets
+   in landscape therefore keep the stacked layout, where the copy has room.
+
+   Column positions come from measuring all 90 frames: the subject occupies
+   x 33-66% at every point in the sequence, and the outer bands stay light
+   (luminance 148-186), which is why the type here is dark ink, not cream.
+   ========================================================================== */
+    @media (min-width:1100px) {
+      .cine {
+        height: 360vh
+      }
+
+      .cine-media {
+        position: absolute;
+        inset: 0;
+        height: 100%;
+        width: 100%
+      }
+
+      .cine-ui {
+        position: absolute;
+        inset: 0;
+        z-index: 4;
+        flex: none
+      }
+
+      .wash-l {
+        display: block;
+        background: linear-gradient(90deg,
+            rgba(241, 239, 232, .90) 0%, rgba(241, 239, 232, .62) 30%,
+            rgba(241, 239, 232, .16) 50%, rgba(241, 239, 232, 0) 64%);
+      }
+
+      .wash-r {
+        display: block;
+        background: linear-gradient(270deg,
+            rgba(241, 239, 232, .72) 0%, rgba(241, 239, 232, .34) 22%,
+            rgba(241, 239, 232, 0) 44%);
+      }
+
+      /* The copy column must end before x=25% of the frame — that is where the
+     subject's silhouette begins at head height in every frame. Wider than
+     this and the last line of the headline lands on the cheek. */
+      .lead,
+      .endcard {
+        left: clamp(32px, 4.5vw, 80px);
+        right: auto;
+        top: 46%;
+        transform: translateY(-50%);
+        width: min(340px, 25vw);
+        text-align: left;
+      }
+
+      .lead h1 {
+        font-size: clamp(1.9rem, 2.6vw, 2.5rem)
+      }
+
+      .lead p.sub {
+        margin: 0;
+        max-width: 30ch;
+        font-size: .95rem
+      }
+
+      .beat {
+        left: auto;
+        right: clamp(32px, 4.5vw, 80px);
+        top: 50%;
+        transform: translateY(-50%);
+        width: min(300px, 24vw);
+        text-align: left;
+        font-size: .9rem;
+      }
+
+      .scroll-hint {
+        left: clamp(32px, 4.5vw, 80px);
+        transform: none;
+        bottom: 38px
+      }
+
+      .illus-note {
+        left: auto;
+        right: 20px;
+        bottom: 14px;
+        text-align: right;
+        font-size: .58rem;
+        padding: 0
+      }
+    }
+
+    /* --------------------------------------------------------- tablet & phone */
+    @media (max-width:1099px) {
+      .cine {
+        height: 300vh
+      }
+
+      .cine-ui {
+        padding: clamp(18px, 4vw, 32px) 20px 30px
+      }
+    }
+
+    @media (max-width:900px) {
+      .proof-grid {
+        grid-template-columns: 1fr
+      }
+
+      .evidence {
+        min-height: 560px;
+        margin-top: 24px
+      }
+
+      .sys-grid {
+        grid-template-columns: 1fr
+      }
+    }
+
+    @media (max-width:560px) {
+      .cine {
+        height: 280vh
+      }
+
+      .cine-media {
+        height: clamp(240px, 48svh, 420px)
+      }
+
+      .top-wa span {
+        display: none
+      }
+
+      .top-wa {
+        padding: 9px 11px
+      }
+
+      .tk-chat,
+      .tk-dash {
+        position: relative;
+        left: auto;
+        right: auto;
+        top: auto;
+        width: 100%;
+        margin-top: 16px
+      }
+
+      .evidence {
+        min-height: 0
+      }
+
+      .name-tag {
+        position: relative;
+        top: auto;
+        right: auto;
+        display: inline-block;
+        margin: 14px 0 0
+      }
+    }
+
+    /* Landscape phones: the stage is short, so give the media less of it. */
+    @media (max-height:520px) and (max-width:1099px) {
+      .cine-media {
+        height: 52svh
+      }
+
+      .lead h1 {
+        font-size: clamp(1.4rem, 4.4vw, 1.9rem)
+      }
+
+      .scroll-hint {
+        display: none
+      }
+    }
+
+    /* Reduced motion: the sequence is never fetched, and the hero collapses into
+   ordinary flow. The six beats carry the story, so they must stack readably —
+   leaving them absolutely centred would pile all six on one another. */
+    @media (prefers-reduced-motion:reduce) {
+      html {
+        scroll-behavior: auto
+      }
+
+      .cine {
+        height: auto
+      }
+
+      .cine-stage {
+        position: relative;
+        height: auto;
+        overflow: visible;
+        padding-bottom: 48px
+      }
+
+      .cine-canvas,
+      .cine-progress,
+      .scroll-hint,
+      .wash-l,
+      .wash-r {
+        display: none
+      }
+
+      .cine-media {
+        position: relative;
+        inset: auto;
+        height: auto;
+        aspect-ratio: 16/9;
+        margin-top: 64px
+      }
+
+      .cine-ui {
+        position: relative;
+        inset: auto;
+        flex: none;
+        padding: 28px 20px 0
+      }
+
+      .lead,
+      .endcard,
+      .beat {
+        position: relative;
+        left: auto;
+        right: auto;
+        top: auto;
+        transform: none;
+        opacity: 1;
+        transition: none;
+        width: auto;
+        max-width: 640px;
+        margin: 0 auto;
+        text-align: center;
+        pointer-events: auto;
+      }
+
+      .beat {
+        margin-top: 18px;
+        max-width: 520px
+      }
+
+      .endcard {
+        margin-top: 32px
+      }
+
+      .illus-note {
+        position: relative;
+        left: auto;
+        right: auto;
+        bottom: auto;
+        text-align: center;
+        margin: 26px auto 0;
+      }
+
+      .sys:hover,
+      .btn:hover {
+        transform: none
+      }
+
+      .sys::before {
+        transition: none
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="top" id="top">
+    <a href="/en/" aria-label="AI Profit Lab home">
+      <img class="mark" src="/assets/brand/wordmark-primary.svg" alt="AI Profit Lab" width="158" height="27">
+    </a>
+    <a class="top-wa"
+      href="https://wa.me/96899245250?text=Hello%20Nahid%2C%20I%20saw%20the%20Smart%20Storefront%20page.">
+      <svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true">
+        <path
+          d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 1.8a8.2 8.2 0 1 1-4.2 15.3l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8zm-3.1 4c-.2 0-.5 0-.7.3-.2.3-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.8 2.8 4.4 3.8 2.2.9 2.6.7 3.1.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2-.1-.1-.2-.2-.5-.3l-1.7-.8c-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.1-.2 0-.4.1-.5l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5L10 8.2c-.2-.4-.4-.4-.6-.4h-.5z" />
+      </svg>
+      <span>WhatsApp</span>
+    </a>
+  </header>
+
+  <!-- ============================================================ HERO -->
+  <section class="cine" id="cine">
+    <div class="cine-stage" id="cineStage">
+
+      <div class="cine-media" id="cineMedia">
+        <img class="cine-poster" id="cinePoster" src="/assets/cinematic/poster.webp"
+          alt="An illustration of the AI assistant: a machine form that becomes a person and begins working."
+          width="1440" height="810" fetchpriority="high" decoding="async">
+        <canvas class="cine-canvas" id="cineCanvas" aria-hidden="true"></canvas>
+        <div class="wash-l"></div>
+        <div class="wash-r"></div>
+      </div>
+
+      <div class="cine-ui">
+        <div class="lead on" id="lead">
+          <p class="eyebrow">AI Profit Lab &middot; Muscat, Oman</p>
+          <h1>Never lose a buyer to silence again.</h1>
+          <p class="sub">A bilingual storefront that answers buyers while you sleep.</p>
+        </div>
+
+        <p class="beat" data-at="0.16"><span>9:47 PM. A buyer asks if you deliver to Sohar.</span></p>
+        <p class="beat" data-at="0.28"><span>Your office closed four hours ago.</span></p>
+        <p class="beat" data-at="0.40"><span>Something answers anyway.</span></p>
+        <p class="beat" data-at="0.52"><span>It knows your stock. It knows your delivery times.</span></p>
+        <p class="beat" data-at="0.64"><span>It books the order and logs the lead.</span></p>
+        <p class="beat" data-at="0.76"><span>You read about it in the morning.</span></p>
+
+        <div class="endcard" id="endcard">
+          <p>Every success starts with insight.</p>
+          <a class="btn btn-solid"
+            href="https://wa.me/96899245250?text=Hello%20Nahid%2C%20I%20want%20to%20ask%20about%20a%20Smart%20Storefront%20for%20my%20business.">
+            <svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 1.8a8.2 8.2 0 1 1-4.2 15.3l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8zm-3.1 4c-.2 0-.5 0-.7.3-.2.3-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.8 2.8 4.4 3.8 2.2.9 2.6.7 3.1.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2-.1-.1-.2-.2-.5-.3l-1.7-.8c-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.1-.2 0-.4.1-.5l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5L10 8.2c-.2-.4-.4-.4-.6-.4h-.5z" />
+            </svg>
+            Message me on WhatsApp
+          </a>
+        </div>
+
+        <p class="scroll-hint on" id="hint">Scroll</p>
+      </div>
+
+      <p class="illus-note">Illustration of the system. Not a photograph of a person.</p>
+      <div class="cine-progress"><i id="cineBar"></i></div>
+    </div>
+  </section>
+
+  <!-- ==================================================== FOUNDER PROOF -->
+  <section class="proof">
+    <div class="wrap proof-grid">
+      <div>
+        <p class="eyebrow">Who actually builds it</p>
+        <h2>The animation is the idea. This is the proof.</h2>
+        <p>The system above is illustrated, so here is the part that isn&rsquo;t: a real person who has run a real
+          distribution business, and two working demos you can try before you pay for anything.</p>
+        <p>Same slow invoices, same missed WhatsApp messages, same &ldquo;wait, what&rsquo;s our cash position?&rdquo;
+          phone calls you deal with. That&rsquo;s the business this was built to fix first.</p>
+        <p class="kicker">Built by an operator, not a vendor.</p>
+      </div>
+
+      <div class="evidence">
+        <div class="arch">
+          <img src="/nahid-aby.jpg" alt="Nahid Aby, founder of AI Profit Lab" width="1000" height="1250" loading="lazy"
+            decoding="async" />
+        </div>
+        <div class="name-tag">NAHID ABY &middot; FOUNDER &middot; ENGINEER</div>
+
+        <div class="ticket tk-chat" aria-label="Example WhatsApp conversation handled by the system">
+          <div class="tk-label"><span>WhatsApp receptionist</span><span>demo</span></div>
+          <div class="bubble in">Can you deliver to Sohar?<span class="t">9:47 PM</span></div>
+          <div class="bubble out">Yes &mdash; arrives next day. Shall I book your order?<span class="t">9:47 PM</span>
+          </div>
+          <div class="tk-meta">answered in 8 seconds &middot; booking&nbsp;captured&nbsp;&#10003;</div>
+        </div>
+
+        <div class="ticket tk-dash" aria-label="Example CEO dashboard summary">
+          <div class="tk-label"><span>CEO dashboard &middot; today</span><span>demo</span></div>
+          <div class="tk-row"><span class="k">Cash position</span><span class="v">OMR 12,480</span></div>
+          <div class="tk-row"><span class="k">Invoices chased</span><span class="v good">3 today</span></div>
+          <div class="tk-row"><span class="k">Client slowdown</span><span class="v alert">1 alert</span></div>
+          <div class="tk-row"><span class="k">Last 7 days</span>
+            <svg class="spark" viewBox="0 0 64 18" aria-hidden="true">
+              <polyline points="0,14 10,12 20,13 30,9 40,10 50,5 64,3" fill="none" stroke="#0F6E56" stroke-width="2" />
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================== SYSTEMS -->
+  <section class="systems" id="systems">
+    <div class="wrap">
+      <p class="eyebrow">What gets built</p>
+      <h2>Three systems. Each one solves the problem the last one creates.</h2>
+      <p class="lede">You start where the pain is. Nothing here is a bundle you have to buy all at once, and nothing
+        locks you into a monthly fee to keep working.</p>
+
+      <div class="sys-grid">
+        <article class="sys">
+          <span class="n">01</span>
+          <h3>The Smart Storefront System</h3>
+          <p>A bilingual website that answers buyers in Arabic and English, records who they are and what they asked,
+            and hands the live ones to your WhatsApp. Built once, yours to keep.</p>
+        </article>
+        <article class="sys">
+          <span class="n">02</span>
+          <h3>The Command Center</h3>
+          <p>Buyers are coming through the site now &mdash; so the next question is whether you know your cash position,
+            stock and open leads when one of them calls. This is the dashboard that answers that without you phoning
+            three people.</p>
+        </article>
+        <article class="sys">
+          <span class="n">03</span>
+          <h3>The Full Autopilot</h3>
+          <p>Now that inquiries are flowing in, something has to chase the quotes and the invoices. This follows up on
+            both, on schedule, without anyone remembering to.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================== HONESTY -->
+  <section class="honesty">
+    <div class="wrap">
+      <div class="honesty-in">
+        <p class="eyebrow">Before you ask</p>
+        <h2>What&rsquo;s not included</h2>
+        <p>The fastest way to be believed is to say the unflattering part first, so here it is, before any money changes
+          hands.</p>
+        <ul>
+          <li>This is not an ERP. If you need full multi-branch inventory and finance in one system, that&rsquo;s a
+            different weight class and I&rsquo;ll say so.</li>
+          <li>This does not replace your accountant. It shows you what&rsquo;s happening now; they still close your
+            books.</li>
+          <li>No monthly subscription is required to keep what&rsquo;s built. Ongoing optimization exists, but
+            it&rsquo;s opt-in and sold separately, never bundled in.</li>
+          <li>No prices are published here. Cost is one quote, after a free discovery conversation, once I know what you
+            actually need.</li>
+        </ul>
+        <p class="close">If your problem isn&rsquo;t worth automating, I&rsquo;ll tell you that too.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <div class="wrap">
+      <img class="mark" src="/assets/brand/wordmark-reversed.svg" alt="AI Profit Lab" width="190" height="33"
+        loading="lazy" decoding="async">
+      <p class="slogan">Every success starts with insight.</p>
+      <p class="meta">International Gulf Lotus SPC &middot; Al Seeb, Muscat &middot; <a
+          href="https://wa.me/96899245250">+968 9924 5250</a></p>
+    </div>
+  </footer>
+
+  <noscript>
+    <style>
+      /* Same collapse as reduced-motion. Without this the beats sit stacked on
+       one another and the stage has no height. */
+      .cine {
+        height: auto
+      }
+
+      .cine-stage {
+        position: relative;
+        height: auto;
+        overflow: visible;
+        padding-bottom: 48px
+      }
+
+      .cine-canvas,
+      .cine-progress,
+      .scroll-hint,
+      .wash-l,
+      .wash-r {
+        display: none
+      }
+
+      .cine-media {
+        position: relative;
+        inset: auto;
+        height: auto;
+        aspect-ratio: 16/9;
+        margin-top: 64px
+      }
+
+      .cine-ui {
+        position: relative;
+        inset: auto;
+        flex: none;
+        padding: 28px 20px 0
+      }
+
+      .lead,
+      .endcard,
+      .beat {
+        position: relative;
+        left: auto;
+        right: auto;
+        top: auto;
+        transform: none;
+        opacity: 1;
+        width: auto;
+        max-width: 640px;
+        margin: 0 auto;
+        text-align: center;
+        pointer-events: auto;
+      }
+
+      .beat {
+        margin-top: 18px;
+        max-width: 520px
+      }
+
+      .endcard {
+        margin-top: 32px
+      }
+
+      .illus-note {
+        position: relative;
+        left: auto;
+        right: auto;
+        bottom: auto;
+        text-align: center;
+        margin: 26px auto 0;
+      }
+    </style>
+  </noscript>
+
+  <script>
+    /* --------------------------------------------------------------------------
+       Scroll-scrubbed image sequence.
+    
+       Canvas rather than <video>: no +faststart, no every-frame keyframe encode,
+       no Baseline re-encode for iOS, and none of the iOS Safari blanking that
+       happens when currentTime is set repeatedly on a paused <video>. Scrubs the
+       same on desktop, tablet and iPhone.
+    
+       Canvas rather than swapping <img> src: no decode flash between frames.
+    
+       Payload: 1.9 MB desktop / 0.5 MB mobile, versus 15.5 MB for the source mp4.
+    -------------------------------------------------------------------------- */
+    (function () {
+      "use strict";
+
+      /* Must match tools/build_cinematic_frames.py. That script prints replacement
+         values if you rebuild with a different --frames. */
+      const FRAMES_DESKTOP = 90;
+      const FRAMES_MOBILE = 45;
+
+      const sect = document.getElementById("cine");
+      const stage = document.getElementById("cineStage");
+      const media = document.getElementById("cineMedia");
+      const canvas = document.getElementById("cineCanvas");
+      const poster = document.getElementById("cinePoster");
+      const bar = document.getElementById("cineBar");
+      const lead = document.getElementById("lead");
+      const hint = document.getElementById("hint");
+      const endcard = document.getElementById("endcard");
+      const beats = [].slice.call(document.querySelectorAll(".beat"));
+      const topbar = document.getElementById("top");
+
+      const clamp = (v, a, b) => (v < a ? a : v > b ? b : v);
+
+      const onTopbar = () => topbar.classList.toggle("solid", window.scrollY > 40);
+      onTopbar();
+      addEventListener("scroll", onTopbar, { passive: true });
+
+      if (!sect || !canvas) return;
+
+      /* Reduced motion: never fetch the sequence. Swap in the closing still, since
+         one image has to carry the whole story, and reveal all copy statically. */
+      if (matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        poster.src = "/assets/cinematic/still.webp";
+        lead.classList.add("on");
+        endcard.classList.add("on");
+        beats.forEach(b => b.classList.add("on"));
+        hint.classList.remove("on");
+        return;
+      }
+
+      const isMobile = matchMedia("(max-width: 768px)").matches;
+      const DIR = isMobile ? "mobile" : "desktop";
+      const N = isMobile ? FRAMES_MOBILE : FRAMES_DESKTOP;
+
+      const ctx = canvas.getContext("2d", { alpha: false });
+      const imgs = new Array(N);
+      let current = 0;
+      let inView = false;
+      let painted = false;
+      let started = false;
+
+      function resize() {
+        const dpr = Math.min(devicePixelRatio || 1, 2);   // capping at 2 matters
+        const w = media.clientWidth;
+        const h = media.clientHeight;
+        if (!w || !h) return;
+        canvas.width = Math.round(w * dpr);
+        canvas.height = Math.round(h * dpr);
+        canvas.style.width = w + "px";
+        canvas.style.height = h + "px";
+        ctx.fillStyle = "#9F9683";      // sampled from the footage
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        paint(true);
+      }
+
+      /* Frames arrive coarse-to-fine, so the array has holes. Fall back to the
+         closest frame that has arrived rather than refusing to paint — this is
+         what lets the whole scrub range work after the first dozen frames. */
+      function nearest(idx) {
+        if (imgs[idx]) return imgs[idx];
+        for (let d = 1; d < N; d++) {
+          if (imgs[idx - d]) return imgs[idx - d];
+          if (imgs[idx + d]) return imgs[idx + d];
+        }
+        return null;
+      }
+
+      /* cover, never contain — contain letterboxes a 16:9 source in a tall box */
+      function paint(force) {
+        const idx = clamp(Math.round(current), 0, N - 1);
+        const im = nearest(idx);
+        if (!im) return;
+        const cw = canvas.width, ch = canvas.height;
+        const s = Math.max(cw / im.naturalWidth, ch / im.naturalHeight);
+        const w = im.naturalWidth * s, h = im.naturalHeight * s;
+        ctx.drawImage(im, (cw - w) / 2, (ch - h) / 2, w, h);
+        if (!painted || force) { painted = true; canvas.classList.add("ready"); }
+      }
+
+      /* Coarse-to-fine fetch order. Loading 0,1,2,3… in strict sequence means a
+         visitor who flicks to the middle of the hero sees frame 12 while 78 more
+         are still queued. Passing over the range at stride 8, then 4, 2, 1 makes
+         the entire scrub usable after ~12 frames (~250 KB) and refines from
+         there. */
+      function fetchOrder(n) {
+        const seen = new Set(), out = [];
+        for (const stride of [8, 4, 2, 1]) {
+          for (let i = 0; i < n; i += stride) {
+            if (!seen.has(i)) { seen.add(i); out.push(i); }
+          }
+        }
+        if (!seen.has(n - 1)) out.push(n - 1);
+        return out;
+      }
+
+      const order = fetchOrder(N);
+      let qi = 0;
+      function loadNext() {
+        if (qi >= order.length) return;
+        const i = order[qi++];
+        const im = new Image();
+        im.decoding = "async";
+        // keep frames behind fonts, poster and document in the network queue
+        if ("fetchPriority" in im) im.fetchPriority = "low";
+        im.onload = () => { imgs[i] = im; paint(!painted); loadNext(); };
+        im.onerror = loadNext;            // a gap must not stall the chain
+        im.src = "/assets/cinematic/" + DIR + "/f-" + String(i).padStart(3, "0") + ".webp";
+      }
+
+      /* Deferred start. The hero is the first section, so the observer fires
+         instantly and the sequence would otherwise compete with the fonts and the
+         LCP poster for bandwidth on the very first paint. */
+      function startLoading() {
+        if (started) return;
+        started = true;
+        const go = () => { for (let k = 0; k < 4; k++) loadNext(); };   // 4 in flight
+        const idle = fn => (window.requestIdleCallback
+          ? requestIdleCallback(fn, { timeout: 1200 }) : setTimeout(fn, 300));
+        if (document.readyState === "complete") idle(go);
+        else addEventListener("load", () => idle(go), { once: true });
+      }
+
+      function progress() {
+        const travel = sect.offsetHeight - stage.offsetHeight;
+        if (travel <= 0) return 0;
+        return clamp(-sect.getBoundingClientRect().top / travel, 0, 1);
+      }
+
+      function overlays(p) {
+        bar.style.transform = "scaleX(" + p + ")";
+        lead.classList.toggle("on", p < 0.12);
+        hint.classList.toggle("on", p < 0.06);
+        endcard.classList.toggle("on", p > 0.86);
+        for (let i = 0; i < beats.length; i++) {
+          const at = parseFloat(beats[i].dataset.at);
+          beats[i].classList.toggle("on", p > at - 0.055 && p < at + 0.075);
+        }
+      }
+
+      function tick() {
+        const p = progress();
+        current += (p * (N - 1) - current) * 0.14;   /* weighted, not twitchy */
+        if (Math.abs(p * (N - 1) - current) < 0.01) current = p * (N - 1);
+        paint(false);
+        overlays(p);
+        if (inView) requestAnimationFrame(tick);
+      }
+
+      /* Fires well before the section arrives so frames are in place on entry. */
+      new IntersectionObserver(entries => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            startLoading();
+            if (!inView) { inView = true; tick(); }
+          } else {
+            inView = false;
+          }
+        });
+      }, { rootMargin: "200% 0px 200% 0px" }).observe(sect);
+
+      let rt = 0;
+      addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(resize, 150); });
+      addEventListener("orientationchange", () => setTimeout(resize, 250));
+
+      resize();
+      overlays(0);
+    })();
+  </script>
+
+</body>
+
+</html>
