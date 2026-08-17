@@ -77,3 +77,20 @@ with open(sitemap_file, "w", encoding="utf-8") as f:
     f.write(xml_content)
 
 print(f"Generated sitemap.xml with {len(urls)} URLs.")
+
+# 3. Make the new article visible to Aiden.
+#    add_aiden_widget puts the chat widget on the new page; build_aiden_index
+#    refreshes the knowledge file the chatbot backend reads, so Aiden can cite
+#    the article as soon as the site is deployed.
+import subprocess
+import sys
+
+for script in ("add_aiden_widget.py", "build_aiden_index.py"):
+    result = subprocess.run(
+        [sys.executable, os.path.join(base_dir, "tools", script)],
+        capture_output=True,
+        text=True,
+    )
+    print(result.stdout.strip() or result.stderr.strip())
+    if result.returncode != 0:
+        print(f"WARNING: {script} failed — Aiden may not know about the new article.")
