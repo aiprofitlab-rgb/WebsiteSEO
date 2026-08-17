@@ -37,7 +37,9 @@ OUT = REPO / "public_html" / "assets" / "cinematic"
 PAGE = REPO / "public_html" / "en" / "index-cinematic.html"
 
 # Frame counts. Mobile is every 2nd desktop frame.
-FRAMES = 90
+# 150 samples the 14.5s source at ~10 fps. 90 (~6 fps) was visibly steppy under
+# the scrub even with cross-fade blending on the page side.
+FRAMES = 150
 DESKTOP_W, DESKTOP_H = 1440, 810
 MOBILE_W, MOBILE_H = 900, 506
 QUALITY_DESKTOP = 72

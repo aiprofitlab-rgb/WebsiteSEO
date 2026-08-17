@@ -54,7 +54,7 @@
       --line: #DED8C8;
       --wa: #1FAF5E;
       /* Sampled from the delivered footage's own background (edge average across
-     all 90 frames) so the stage never shows a seam against the video. */
+     the whole sequence) so the stage never shows a seam against the video. */
       --taupe: #9F9683;
       --display: 'Marcellus', Georgia, serif;
       --sans: 'IBM Plex Sans', -apple-system, 'Segoe UI', sans-serif;
@@ -175,9 +175,12 @@
     }
 
     /* --------------------------------------------------------- cinematic hero */
+    /* Height is the playback speed control: travel = height - 100vh stage, and
+       that travel is what the 150 frames are spread across. More height = the
+       same footage over more scroll = slower, softer motion. */
     .cine {
       position: relative;
-      height: 320vh;
+      height: 500vh;
       background: var(--cream)
     }
 
@@ -741,13 +744,13 @@
    width, which leaves only ~200px of clean band beside the subject. Tablets
    in landscape therefore keep the stacked layout, where the copy has room.
 
-   Column positions come from measuring all 90 frames: the subject occupies
+   Column positions come from measuring the whole sequence: the subject occupies
    x 33-66% at every point in the sequence, and the outer bands stay light
    (luminance 148-186), which is why the type here is dark ink, not cream.
    ========================================================================== */
     @media (min-width:1100px) {
       .cine {
-        height: 360vh
+        height: 560vh
       }
 
       .cine-media {
@@ -830,7 +833,7 @@
     /* --------------------------------------------------------- tablet & phone */
     @media (max-width:1099px) {
       .cine {
-        height: 300vh
+        height: 460vh
       }
 
       .cine-ui {
@@ -855,7 +858,7 @@
 
     @media (max-width:560px) {
       .cine {
-        height: 280vh
+        height: 420vh
       }
 
       .cine-media {
@@ -1253,15 +1256,15 @@
     
        Canvas rather than swapping <img> src: no decode flash between frames.
     
-       Payload: 1.9 MB desktop / 0.5 MB mobile, versus 15.5 MB for the source mp4.
+       Payload: 3.2 MB desktop / 0.9 MB mobile, versus 15.5 MB for the source mp4.
     -------------------------------------------------------------------------- */
     (function () {
       "use strict";
 
       /* Must match tools/build_cinematic_frames.py. That script prints replacement
          values if you rebuild with a different --frames. */
-      const FRAMES_DESKTOP = 90;
-      const FRAMES_MOBILE = 45;
+      const FRAMES_DESKTOP = 150;
+      const FRAMES_MOBILE = 75;
 
       const sect = document.getElementById("cine");
       const stage = document.getElementById("cineStage");
@@ -1332,21 +1335,45 @@
       }
 
       /* cover, never contain — contain letterboxes a 16:9 source in a tall box */
-      function paint(force) {
-        const idx = clamp(Math.round(current), 0, N - 1);
-        const im = nearest(idx);
-        if (!im) return;
+      function draw(im, alpha) {
         const cw = canvas.width, ch = canvas.height;
         const s = Math.max(cw / im.naturalWidth, ch / im.naturalHeight);
         const w = im.naturalWidth * s, h = im.naturalHeight * s;
+        ctx.globalAlpha = alpha;
         ctx.drawImage(im, (cw - w) / 2, (ch - h) / 2, w, h);
+        ctx.globalAlpha = 1;
+      }
+
+      /* Cross-dissolve the two frames `current` sits between rather than snapping
+         to Math.round. The sequence samples a 14.5s source at ~10 fps, so a hard
+         cut steps visibly from frame to frame; blending makes sub-frame scroll
+         positions render as real intermediate images and the motion reads
+         continuous.
+
+         Only blends when BOTH neighbours have arrived. During the coarse-to-fine
+         load the array has holes, and dissolving frame 0 into frame 8 would ghost
+         rather than smooth — in that case fall back to the nearest single frame. */
+      function paint(force) {
+        const pos = clamp(current, 0, N - 1);
+        const i0 = Math.floor(pos);
+        const f = pos - i0;
+        const a = imgs[i0], b = imgs[i0 + 1];
+
+        if (a && b && f > 0.001) {
+          draw(a, 1);
+          draw(b, f);
+        } else {
+          const im = nearest(Math.round(pos));
+          if (!im) return;
+          draw(im, 1);
+        }
         if (!painted || force) { painted = true; canvas.classList.add("ready"); }
       }
 
       /* Coarse-to-fine fetch order. Loading 0,1,2,3… in strict sequence means a
          visitor who flicks to the middle of the hero sees frame 12 while 78 more
          are still queued. Passing over the range at stride 8, then 4, 2, 1 makes
-         the entire scrub usable after ~12 frames (~250 KB) and refines from
+         the entire scrub usable after ~19 frames (~420 KB) and refines from
          there. */
       function fetchOrder(n) {
         const seen = new Set(), out = [];
@@ -1403,10 +1430,22 @@
         }
       }
 
-      function tick() {
+      /* Frame-rate independent smoothing. The previous fixed 0.14-per-frame lerp
+         converged twice as fast on a 120 Hz ProMotion display as on a 60 Hz one,
+         so the identical scroll felt twitchy on one machine and weighted on
+         another. TAU is a time constant in ms: the canvas closes ~63% of the
+         remaining distance to the scroll position every TAU, whatever the refresh
+         rate. Raise it for more drift, lower it to track the scroll more tightly. */
+      const TAU = 190;
+      let last = 0;
+
+      function tick(now) {
+        const dt = last ? Math.min(now - last, 64) : 16;   // cap across tab switches
+        last = now;
         const p = progress();
-        current += (p * (N - 1) - current) * 0.14;   /* weighted, not twitchy */
-        if (Math.abs(p * (N - 1) - current) < 0.01) current = p * (N - 1);
+        const target = p * (N - 1);
+        current += (target - current) * (1 - Math.exp(-dt / TAU));
+        if (Math.abs(target - current) < 0.004) current = target;
         paint(false);
         overlays(p);
         if (inView) requestAnimationFrame(tick);
@@ -1417,7 +1456,9 @@
         entries.forEach(e => {
           if (e.isIntersecting) {
             startLoading();
-            if (!inView) { inView = true; tick(); }
+            /* last=0 so the first tick after a long absence uses the nominal
+               16ms step instead of a huge dt that would snap the scrub. */
+            if (!inView) { inView = true; last = 0; requestAnimationFrame(tick); }
           } else {
             inView = false;
           }
