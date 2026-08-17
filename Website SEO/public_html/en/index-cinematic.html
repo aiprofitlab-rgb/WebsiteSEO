@@ -27,8 +27,12 @@
   </noscript>
 
   <!-- Frame 0 is the LCP image. Everything else is fetched only once the
-     observer fires, so this is the one byte-cost on first paint. -->
-  <link rel="preload" as="image" href="/assets/cinematic/poster.webp" fetchpriority="high">
+     observer fires, so this is the one byte-cost on first paint.
+
+     ?v= must match ASSET_V in the scrub script below, or the preload is a
+     wasted request instead of a warm cache hit. See ASSET_V for why it is
+     there at all. -->
+  <link rel="preload" as="image" href="/assets/cinematic/poster.webp?v=20260817" fetchpriority="high">
 
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-SLR9GD3MJP"></script>
@@ -1021,7 +1025,7 @@
     <div class="cine-stage" id="cineStage">
 
       <div class="cine-media" id="cineMedia">
-        <img class="cine-poster" id="cinePoster" src="/assets/cinematic/poster.webp"
+        <img class="cine-poster" id="cinePoster" src="/assets/cinematic/poster.webp?v=20260817"
           alt="An illustration of the AI assistant: a machine form that becomes a person and begins working."
           width="1440" height="810" fetchpriority="high" decoding="async">
         <canvas class="cine-canvas" id="cineCanvas" aria-hidden="true"></canvas>
@@ -1266,6 +1270,20 @@
       const FRAMES_DESKTOP = 150;
       const FRAMES_MOBILE = 75;
 
+      /* Cache-busting token for the frame set. MUST be bumped whenever the
+         frames are rebuilt — build_cinematic_frames.py stamps it automatically.
+
+         Why it is needed: the host serves these with
+         `cache-control: public, max-age=31536000, immutable` and the filenames
+         are positional (f-000.webp … f-149.webp), so a rebuilt frame keeps the
+         URL it had before. Edge nodes then hold whichever build they happened
+         to cache first, independently of each other. On 2026-08-17 that
+         produced a hero assembled from two different cuts of the source at
+         once, and the closing dissolve appeared to play, reset and play again.
+         A version token gives every build its own URL, so the CDN cannot mix
+         two builds and old bytes expire on their own. */
+      const ASSET_V = "20260817";
+
       const sect = document.getElementById("cine");
       const stage = document.getElementById("cineStage");
       const media = document.getElementById("cineMedia");
@@ -1289,7 +1307,7 @@
       /* Reduced motion: never fetch the sequence. Swap in the closing still, since
          one image has to carry the whole story, and reveal all copy statically. */
       if (matchMedia("(prefers-reduced-motion: reduce)").matches) {
-        poster.src = "/assets/cinematic/still.webp";
+        poster.src = "/assets/cinematic/still.webp?v=" + ASSET_V;
         lead.classList.add("on");
         endcard.classList.add("on");
         beats.forEach(b => b.classList.add("on"));
@@ -1397,7 +1415,8 @@
         if ("fetchPriority" in im) im.fetchPriority = "low";
         im.onload = () => { imgs[i] = im; paint(!painted); loadNext(); };
         im.onerror = loadNext;            // a gap must not stall the chain
-        im.src = "/assets/cinematic/" + DIR + "/f-" + String(i).padStart(3, "0") + ".webp";
+        im.src = "/assets/cinematic/" + DIR + "/f-" + String(i).padStart(3, "0")
+               + ".webp?v=" + ASSET_V;
       }
 
       /* Deferred start. The hero is the first section, so the observer fires

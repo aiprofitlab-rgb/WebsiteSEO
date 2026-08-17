@@ -423,6 +423,7 @@ def encode_sets(src_dir: Path, frames: int, recolor: bool = True) -> None:
     if recolor:
         print(f"HUD recolour: {recoloured} frame(s) remapped cyan -> teal/amber.")
     check_page_constants(frames, mobile_n)
+    stamp_asset_version()
     report()
 
 
@@ -440,6 +441,46 @@ def check_page_constants(desktop_n: int, mobile_n: int) -> None:
         f"      const FRAMES_DESKTOP = {desktop_n};\n"
         f"      const FRAMES_MOBILE  = {mobile_n};"
     )
+
+
+def stamp_asset_version() -> None:
+    """
+    Give this build its own asset URLs.
+
+    The host serves /assets/cinematic/** with `max-age=31536000, immutable` and
+    the filenames are positional, so f-093.webp from a new build lands on the
+    URL the old f-093.webp already owns. CDN edges then keep whichever build
+    they cached first, independently of one another, and a visitor can be
+    served frames from two different cuts of the source in the same scrub. That
+    is what produced the "the ending plays twice" report on 2026-08-17: the
+    frames on disk were correct, the bytes on the edge were half a build old.
+
+    Bumping ?v= on every rebuild gives the new frames URLs nothing has cached.
+    """
+    if not PAGE.exists():
+        return
+    html = PAGE.read_text(encoding="utf8")
+    old = re.search(r'const ASSET_V\s*=\s*"([^"]+)"', html)
+    if not old:
+        print("\n  ! No ASSET_V constant in the page — frame URLs are not "
+              "cache-busted. Rebuilt frames may not reach visitors.")
+        return
+
+    # Date, plus a letter when rebuilding more than once in a day.
+    from datetime import date
+    stem = date.today().strftime("%Y%m%d")
+    prev = old.group(1)
+    if prev == stem or prev.startswith(stem):
+        suffix = prev[len(stem):]
+        new = stem + (chr(ord(suffix) + 1) if suffix else "b")
+    else:
+        new = stem
+
+    html = re.sub(r'(const ASSET_V\s*=\s*")[^"]+(")', rf"\g<1>{new}\g<2>", html)
+    html = re.sub(r"(/assets/cinematic/[^\"'\s]*\.webp\?v=)[^\"'\s]+",
+                  rf"\g<1>{new}", html)
+    PAGE.write_text(html, encoding="utf8")
+    print(f"Asset version: {prev} -> {new} (frame URLs cache-busted).")
 
 
 # ------------------------------------------------------------------- report
