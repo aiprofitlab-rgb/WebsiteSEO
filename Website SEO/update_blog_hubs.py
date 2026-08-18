@@ -26,6 +26,8 @@ CATEGORY_MAP = {
     "AI in Higher Education": "cat_2",
     "الذكاء الاصطناعي في التعليم العالي": "cat_2",
     "API Automation & FinTech": "cat_2",
+    "Real Estate Automation": "cat_2",
+    "أتمتة العقارات": "cat_2",
     "Middle East AI": "cat_3",
     "الذكاء الاصطناعي في الشرق الأوسط": "cat_3"
 }
