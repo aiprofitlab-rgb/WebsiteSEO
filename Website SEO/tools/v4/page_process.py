@@ -66,7 +66,7 @@ html:not(.js) .step-rail .ln{transform:none}
   content:"";position:absolute;left:2px;top:1.15em;width:13px;height:7px;border-left:2px solid var(--wa);
   border-bottom:2px solid var(--wa);transform:rotate(-45deg);
 }
-.board{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}
+.board{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}
 .board .col{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px}
 .board .col b{display:block;font-family:var(--mono);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
 .board .t{background:var(--white);border:1px solid var(--line);border-radius:6px;padding:7px 8px;font-size:.74rem;line-height:1.35;margin-bottom:6px;color:var(--ink)}
@@ -81,7 +81,10 @@ html:not(.js) .step-rail .ln{transform:none}
 .give .t{font-family:var(--mono);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--amber-bright);display:block;margin-bottom:12px}
 
 @media (max-width:900px){
-  .step-row{grid-template-columns:56px 1fr}
+  /* minmax(0,1fr): the automatic minimum of a plain 1fr track is the widest
+     thing inside it, so the 3-column .board held this row at ~430px and the
+     right edge of every step was clipped on a phone. */
+  .step-row{grid-template-columns:56px minmax(0,1fr)}
   .step-row .art{grid-column:2}
   .wb,.wbl{grid-template-columns:1fr 1fr}
   .wbl span:nth-child(n+3){margin-top:6px}

@@ -1,0 +1,1021 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<!-- Stays noindex until Nahid approves this set for launch. When it launches,
+     remove this tag AND add the noindex to the page it replaces in the SAME
+     deploy - never separately, or both versions compete in the index. -->
+<meta name="robots" content="noindex, nofollow">
+<title>What silence costs: pricing the WhatsApp messages you never answered | AI Profit Lab</title>
+<meta name="description" content="The four-term formula for what missed WhatsApp inquiries cost an Omani business each month, worked through with real figures - and what it does not prove.">
+<link rel="canonical" href="https://aiprofitlab.io/en/article-v4/">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="What silence costs: pricing the WhatsApp messages you never answered | AI Profit Lab">
+<meta property="og:description" content="The four-term formula for what missed WhatsApp inquiries cost an Omani business each month, worked through with real figures - and what it does not prove.">
+<meta property="og:url" content="https://aiprofitlab.io/en/article-v4/">
+<meta property="og:image" content="https://aiprofitlab.io/og-aiprofitlab-2026.jpg">
+<meta property="og:locale" content="en_OM">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Non-blocking font load: a plain stylesheet link costs a render-blocking
+     round trip to fonts.googleapis.com. display=swap paints fallback text
+     immediately and swaps when the webfont lands. -->
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Marcellus&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" media="print" onload="this.media='all'" href="https://fonts.googleapis.com/css2?family=Marcellus&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap"></noscript>
+
+<!-- Sets .js before first paint so the reveal styles apply only when there is
+     JS to un-apply them. Without it, a no-JS visitor gets a blank page. -->
+<script>document.documentElement.className+=" js"</script>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SLR9GD3MJP"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-SLR9GD3MJP');</script>
+
+<style>
+:root{
+  --teal-950:#072B22; --teal-900:#0A3D30; --teal:#0F6E56; --teal-600:#158268;
+  --amber:#BA7517;    --amber-bright:#D89234; --amber-pale:#E8C98F;
+  /* Amber for SMALL TEXT on light grounds only. #BA7517 on cream measures
+     3.19:1, under the 4.5:1 floor for body-size text; this tint measures
+     4.97:1. The brand accent itself is unchanged - shapes, rules, marks and
+     large display type all keep --amber. */
+  --amber-text:#8F5A11;
+  --cream:#F1EFE8;    --panel:#FAF8F2;    --panel-2:#EAE4D5;  --white:#FFFFFF;
+  --ink:#232B26;      --muted:#5A665D;    --line:#DED8C8;
+  --wa:#1FAF5E;       --alert:#A6431F;
+  /* sampled from the hero footage's own background so the stage never seams */
+  --taupe:#9F9683;
+  /* cream at 62% — the readable tint for hairlines on dark grounds */
+  --line-dark:rgba(241,239,232,.16);
+  --display:'Marcellus',Georgia,'Times New Roman',serif;
+  --sans:'IBM Plex Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+  --ease:cubic-bezier(.22,.7,.25,1);
+}
+
+.skip{position:absolute;left:-9999px;top:0;z-index:200;background:var(--teal-950);color:var(--cream);
+  padding:12px 20px;border-radius:0 0 8px 0;font-family:var(--mono);font-size:.85rem;text-decoration:none}
+.skip:focus{left:0}
+
+*{box-sizing:border-box}
+/* clip, NOT hidden — overflow-x:hidden silently makes this a scroll container
+   and position:sticky stops working on every page that uses it. */
+html,body{overflow-x:clip}
+html{scroll-behavior:smooth;font-size:17px;-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--cream);color:var(--ink);
+  font-family:var(--sans);font-size:19px;line-height:1.7;
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+}
+img{max-width:100%;height:auto;display:block}
+h1,h2,h3,h4{font-family:var(--display);font-weight:400;margin:0;text-wrap:balance;letter-spacing:-.005em}
+p{margin:0 0 1.1em}
+a{color:var(--teal);text-underline-offset:3px}
+::selection{background:var(--amber-pale);color:var(--teal-950)}
+:focus-visible{outline:2px solid var(--amber);outline-offset:3px;border-radius:3px}
+
+/* ---------------------------------------------------------------- layout */
+.wrap{width:min(1180px,92vw);margin-inline:auto}
+.wrap-n{width:min(780px,92vw);margin-inline:auto}
+section{position:relative;padding:clamp(74px,9vw,138px) 0}
+.pad-s{padding:clamp(48px,6vw,84px) 0}
+
+/* Paper grain. Two-octave fractal noise at 3.5% — visible as texture on a
+   large cream field, invisible as pattern. Painted on a pseudo-element so it
+   never intercepts a pointer event. */
+.grain::before{
+  content:"";position:absolute;inset:0;pointer-events:none;z-index:0;opacity:.038;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.grain>*{position:relative;z-index:1}
+
+/* ------------------------------------------------------------- surfaces */
+.s-cream{background:var(--cream)}
+.s-panel{background:var(--panel)}
+.s-white{background:var(--white)}
+.s-panel2{background:var(--panel-2)}
+.s-dark{background:var(--teal-950);color:var(--cream)}
+.s-teal{background:var(--teal-900);color:var(--cream)}
+.s-dark h1,.s-dark h2,.s-dark h3,.s-teal h1,.s-teal h2,.s-teal h3{color:var(--cream)}
+.s-dark .eyebrow,.s-teal .eyebrow{color:var(--amber-pale)}
+.s-dark .lede,.s-teal .lede{color:rgba(241,239,232,.76)}
+.s-dark a,.s-teal a{color:var(--amber-bright)}
+.s-dark .rule,.s-teal .rule{background:var(--line-dark)}
+
+/* ----------------------------------------------------------------- type */
+.eyebrow{
+  font-family:var(--mono);font-size:.85rem;font-weight:500;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--muted);margin:0 0 18px;
+  display:flex;align-items:center;gap:10px;
+}
+.eyebrow .star{color:var(--amber);font-size:1.05em;line-height:1}
+.h1{font-size:clamp(2.7rem,6.2vw,5rem);line-height:1.02;color:var(--teal-950)}
+.h2{font-size:clamp(2rem,4.4vw,3.4rem);line-height:1.08;color:var(--teal-950);margin:0 0 20px}
+.h3{font-size:clamp(1.35rem,2.4vw,1.75rem);line-height:1.2;color:var(--teal-950)}
+.lede{font-size:clamp(1.06rem,1.6vw,1.25rem);color:var(--muted);max-width:60ch;line-height:1.65}
+.mono{font-family:var(--mono)}
+.num{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.rule{height:1px;background:var(--line);border:0;margin:0}
+.star{color:var(--amber)}
+.dot{width:.42em;height:.42em;border-radius:50%;background:var(--amber);display:inline-block;vertical-align:.12em}
+
+/* A section divider that is a mark, not a line: hairline — asterism — hairline */
+.asterism{display:flex;align-items:center;gap:18px;color:var(--amber);margin:0 0 clamp(34px,5vw,58px)}
+.asterism::before,.asterism::after{content:"";flex:1;height:1px;background:var(--line)}
+.s-dark .asterism::before,.s-dark .asterism::after,
+.s-teal .asterism::before,.s-teal .asterism::after{background:var(--line-dark)}
+
+/* -------------------------------------------------------------- buttons */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  font-family:var(--sans);font-size:1.02rem;font-weight:500;text-decoration:none;
+  padding:15px 26px;border-radius:99px;border:1px solid transparent;cursor:pointer;
+  position:relative;overflow:hidden;
+  transition:transform .2s var(--ease),box-shadow .2s var(--ease),background .2s,border-color .2s,color .2s;
+}
+/* travelling sheen — a single pass on hover, not a loop */
+.btn::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(105deg,transparent 38%,rgba(255,255,255,.28) 50%,transparent 62%);
+  transform:translateX(-130%);transition:transform .65s var(--ease);
+}
+.btn:hover::after{transform:translateX(130%)}
+.btn:hover{transform:translateY(-2px)}
+.btn-teal{background:var(--teal);color:#fff;box-shadow:0 14px 30px -16px rgba(15,110,86,.9)}
+.btn-teal:hover{background:var(--teal-600)}
+.btn-wa{background:var(--wa);color:#fff;box-shadow:0 14px 30px -16px rgba(31,175,94,.9)}
+.btn-amber{background:var(--amber);color:var(--teal-950);font-weight:600;box-shadow:0 14px 30px -16px rgba(186,117,23,.9)}
+.btn-ghost{background:transparent;color:var(--teal-900);border-color:rgba(35,43,38,.28)}
+.btn-ghost:hover{border-color:var(--teal);background:var(--white)}
+.s-dark .btn-ghost,.s-teal .btn-ghost{color:var(--cream);border-color:var(--line-dark)}
+.s-dark .btn-ghost:hover,.s-teal .btn-ghost:hover{background:rgba(241,239,232,.08);border-color:var(--amber-bright)}
+/* Button text colour has to out-specify `.s-dark a` / `.s-teal a` (0,1,1),
+   which otherwise repaints every button label on a dark section amber - and
+   an amber label on an amber pill is invisible. A lone `.btn-amber` (0,1,0)
+   loses that cascade, so the dark-section variants are restated here. */
+.s-dark .btn-amber,.s-teal .btn-amber{color:var(--teal-950)}
+.s-dark .btn-teal,.s-teal .btn-teal,
+.s-dark .btn-wa,.s-teal .btn-wa{color:#fff}
+.btn .wa-icon{width:19px;height:19px}
+.wa-icon{width:17px;height:17px;fill:currentColor;flex:none}
+.btn-row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+
+/* Inline text link that draws its own underline on hover */
+.tlink{
+  font-family:var(--mono);font-size:.9rem;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--teal);text-decoration:none;display:inline-flex;align-items:center;gap:9px;
+  padding-bottom:3px;background-image:linear-gradient(var(--amber),var(--amber));
+  background-size:0 1px;background-position:0 100%;background-repeat:no-repeat;
+  transition:background-size .35s var(--ease),color .2s;
+}
+.tlink:hover{background-size:100% 1px;color:var(--amber-text)}
+.tlink .arw{transition:transform .3s var(--ease)}
+.tlink:hover .arw{transform:translateX(4px)}
+.s-dark .tlink,.s-teal .tlink{color:var(--amber-pale)}
+
+/* ---------------------------------------------------------------- cards */
+.card{
+  position:relative;background:var(--panel);border:1px solid var(--line);
+  border-radius:16px;padding:clamp(24px,3vw,34px);overflow:hidden;
+  transition:transform .35s var(--ease),box-shadow .35s var(--ease),border-color .35s;
+}
+.card::before{
+  content:"";position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--amber),var(--amber-pale));
+  transform:scaleX(0);transform-origin:0 50%;transition:transform .5s var(--ease);
+}
+.card:hover{transform:translateY(-4px);box-shadow:0 26px 50px -34px rgba(7,43,34,.55);border-color:var(--panel-2)}
+.card:hover::before{transform:scaleX(1)}
+.card .n{font-family:var(--mono);font-size:.9rem;letter-spacing:.14em;color:var(--amber-text);display:block;margin-bottom:14px}
+.card h3{margin:0 0 10px}
+.card p{color:var(--muted);font-size:1rem;margin:0}
+.s-dark .card,.s-teal .card{background:rgba(241,239,232,.045);border-color:var(--line-dark)}
+.s-dark .card p,.s-teal .card p{color:rgba(241,239,232,.72)}
+.s-dark .card .n,.s-teal .card .n{color:var(--amber-bright)}
+
+.grid{display:grid;gap:clamp(16px,2vw,24px)}
+.g2{grid-template-columns:repeat(2,1fr)}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g4{grid-template-columns:repeat(4,1fr)}
+
+.chip{
+  display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:.82rem;
+  letter-spacing:.06em;text-transform:uppercase;color:var(--teal-900);
+  background:var(--white);border:1px solid var(--line);border-radius:99px;padding:7px 14px;
+}
+.chip b{color:var(--amber-text);font-weight:500}
+.s-dark .chip,.s-teal .chip{background:rgba(241,239,232,.07);border-color:var(--line-dark);color:var(--cream)}
+.s-dark .chip b,.s-teal .chip b{color:var(--amber-bright)}
+
+/* ------------------------------------------------------------ page hero */
+.phero{padding:clamp(150px,17vw,220px) 0 clamp(56px,7vw,90px);position:relative;overflow:hidden}
+.phero .h1{margin:0 0 22px}
+.phero .lede{font-size:clamp(1.12rem,1.9vw,1.4rem);color:var(--muted)}
+
+/* ------------------------------------------------------------ marquee */
+.facts{
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  background:var(--panel-2);overflow:hidden;padding:15px 0;
+}
+.facts .track{display:flex;width:max-content;animation:mq 42s linear infinite}
+.facts .half{display:flex;gap:0;flex:none}
+.facts span{
+  font-family:var(--mono);font-size:.86rem;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--teal-900);white-space:nowrap;display:inline-flex;align-items:center;gap:12px;padding:0 26px;
+}
+.facts .star{opacity:.9}
+@keyframes mq{to{transform:translateX(-50%)}}
+.facts:hover .track{animation-play-state:paused}
+
+/* ------------------------------------------------------------- header */
+.top{
+  position:fixed;inset:0 0 auto 0;z-index:80;display:flex;align-items:center;
+  justify-content:space-between;gap:16px;padding:13px clamp(16px,3vw,30px);
+  border-bottom:1px solid transparent;transition:background .3s,border-color .3s,padding .3s;
+}
+.top.solid{background:rgba(241,239,232,.93);backdrop-filter:blur(12px);border-bottom-color:var(--line);padding-top:9px;padding-bottom:9px}
+.top .mark{display:block;width:clamp(128px,15vw,160px);height:auto}
+.nav{display:flex;align-items:center;gap:clamp(12px,1.9vw,24px)}
+.nav a.lnk{
+  position:relative;font-family:var(--mono);font-size:.85rem;letter-spacing:.1em;
+  text-transform:uppercase;text-decoration:none;color:var(--teal-900);white-space:nowrap;opacity:.86;
+  transition:opacity .2s,color .2s;padding:4px 0;
+}
+.nav a.lnk::after{
+  content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--amber);
+  transform:scaleX(0);transform-origin:0 50%;transition:transform .35s var(--ease);
+}
+.nav a.lnk:hover{opacity:1;color:var(--teal)}
+.nav a.lnk:hover::after,.nav a.lnk[aria-current=page]::after{transform:scaleX(1)}
+.nav a.lnk[aria-current=page]{opacity:1;color:var(--teal-950)}
+.top-wa{
+  display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:.85rem;
+  letter-spacing:.1em;text-transform:uppercase;text-decoration:none;color:var(--teal-900);
+  border:1px solid rgba(35,43,38,.22);background:rgba(250,248,242,.82);
+  padding:10px 16px;border-radius:99px;transition:border-color .2s,background .2s,transform .2s;
+}
+.top-wa:hover{border-color:var(--teal);background:var(--white);transform:translateY(-1px)}
+
+/* Mobile menu. The v3 header simply hid its links below 1100px, which on a
+   phone left the site with no way to reach any other page — the exact
+   opposite of what this set is for. */
+.burger{
+  display:none;width:44px;height:44px;border-radius:50%;border:1px solid rgba(35,43,38,.22);
+  background:rgba(250,248,242,.82);cursor:pointer;padding:0;align-items:center;justify-content:center;
+}
+.burger i{display:block;width:18px;height:1.5px;background:var(--teal-900);position:relative;transition:background .2s}
+.burger i::before,.burger i::after{content:"";position:absolute;left:0;width:18px;height:1.5px;background:var(--teal-900);transition:transform .3s var(--ease)}
+.burger i::before{top:-6px}.burger i::after{top:6px}
+.menu-open .burger i{background:transparent}
+.menu-open .burger i::before{transform:translateY(6px) rotate(45deg)}
+.menu-open .burger i::after{transform:translateY(-6px) rotate(-45deg)}
+.mmenu{
+  position:fixed;inset:0;z-index:75;background:var(--teal-950);color:var(--cream);
+  display:flex;flex-direction:column;justify-content:center;gap:6px;padding:96px clamp(24px,7vw,64px) 40px;
+  opacity:0;visibility:hidden;transform:translateY(-12px);
+  transition:opacity .35s var(--ease),transform .35s var(--ease),visibility .35s;
+}
+.menu-open .mmenu{opacity:1;visibility:visible;transform:none}
+.mmenu a{
+  font-family:var(--display);font-size:clamp(2rem,8vw,3rem);color:var(--cream);text-decoration:none;
+  padding:10px 0;border-bottom:1px solid var(--line-dark);display:flex;align-items:baseline;gap:16px;
+}
+.mmenu a:hover{color:var(--amber-bright)}
+.mmenu a em{font-family:var(--mono);font-size:.8rem;font-style:normal;letter-spacing:.14em;color:var(--amber-bright);opacity:.8}
+.mmenu .mfoot{margin-top:28px;font-family:var(--mono);font-size:.85rem;letter-spacing:.08em;color:rgba(241,239,232,.6)}
+
+/* --------------------------------------------------------------- pager */
+.pager{border-top:1px solid var(--line);background:var(--panel)}
+.pager a{
+  display:flex;align-items:center;justify-content:space-between;gap:24px;text-decoration:none;
+  padding:clamp(34px,5vw,62px) 0;color:var(--teal-950);
+}
+.pager .pl{font-family:var(--mono);font-size:.85rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:10px}
+.pager .pt{font-family:var(--display);font-size:clamp(1.7rem,4.4vw,3rem);line-height:1.08;display:block;transition:color .25s}
+.pager a:hover .pt{color:var(--teal)}
+.pager .parw{font-size:clamp(1.8rem,4vw,2.6rem);color:var(--amber);transition:transform .35s var(--ease);flex:none}
+.pager a:hover .parw{transform:translateX(10px)}
+
+/* -------------------------------------------------------------- footer */
+.foot{background:var(--teal-950);color:rgba(241,239,232,.74);padding:clamp(58px,7vw,92px) 0 40px;font-size:1rem}
+.foot .fmark{width:170px;margin-bottom:20px}
+.foot .slogan{font-family:var(--display);font-size:clamp(1.25rem,2.4vw,1.7rem);color:var(--cream);margin:0 0 8px}
+.foot .slogan-ar{font-size:1.15rem;color:var(--amber-pale);margin:0}
+.foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:clamp(26px,4vw,56px);align-items:start}
+.foot h4{font-family:var(--mono);font-size:.82rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--amber-pale);margin:0 0 16px}
+.foot ul{list-style:none;margin:0;padding:0}
+.foot li{margin-bottom:11px}
+.foot a{color:rgba(241,239,232,.74);text-decoration:none;transition:color .2s}
+.foot a:hover{color:var(--amber-bright)}
+.foot .legal{
+  margin-top:clamp(34px,5vw,58px);padding-top:26px;border-top:1px solid var(--line-dark);
+  font-family:var(--mono);font-size:.79rem;letter-spacing:.05em;line-height:2;color:rgba(241,239,232,.5);
+}
+
+/* WhatsApp float */
+.fab{
+  position:fixed;right:18px;bottom:18px;z-index:70;display:inline-flex;align-items:center;gap:9px;
+  background:var(--wa);color:#fff;text-decoration:none;padding:13px 20px;border-radius:99px;
+  font-family:var(--mono);font-size:.84rem;letter-spacing:.08em;text-transform:uppercase;
+  box-shadow:0 16px 34px -14px rgba(31,175,94,.75);transition:transform .2s var(--ease);
+}
+.fab:hover{transform:translateY(-3px)}
+.fab .wa-icon{width:19px;height:19px}
+
+/* ----------------------------------------------------------- motion kit */
+.js .rv{opacity:0;transform:translateY(24px);transition:opacity .8s var(--ease),transform .8s var(--ease);transition-delay:var(--d,0s)}
+.js .rv.vis{opacity:1;transform:none}
+/* Heading wipe. Done with overflow on the heading and a transform on an inner
+   span that the motion script injects - NOT with clip-path:inset(), whose
+   negative offsets are dropped by the parser, which left every h2 on the page
+   permanently clipped to nothing. The padding-bottom gives descenders room so
+   the hidden overflow does not shave a "g" once the wipe has finished. */
+.js .rvw{display:block;overflow:hidden;padding-bottom:.14em}
+.js .rvw .wi{display:block;transform:translateY(106%);transition:transform 1s var(--ease);transition-delay:var(--d,0s)}
+.js .rvw.vis .wi{transform:none}
+.js .drawn path,.js .drawn line,.js .drawn polyline,.js .drawn circle,.js .drawn rect.dr{
+  stroke-dasharray:var(--len,1000);stroke-dashoffset:var(--len,1000);
+  transition:stroke-dashoffset 1.5s var(--ease);transition-delay:var(--d,0s);
+}
+.js .drawn.vis path,.js .drawn.vis line,.js .drawn.vis polyline,.js .drawn.vis circle,.js .drawn.vis rect.dr{stroke-dashoffset:0}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
+  .js .rv{opacity:1;transform:none}
+  .js .rvw .wi{transform:none}
+  .facts .track{animation:none}
+}
+
+/* -------------------------------------------------------- breakpoints */
+@media (max-width:1080px){
+  .g4{grid-template-columns:repeat(2,1fr)}
+  .g3{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:900px){
+  .nav a.lnk,.nav .top-wa{display:none}
+  .burger{display:inline-flex}
+  .foot-grid{grid-template-columns:1fr 1fr}
+}
+@media (max-width:640px){
+  body{font-size:18px}
+  .g2,.g3,.g4{grid-template-columns:1fr}
+  .foot-grid{grid-template-columns:1fr}
+  .fab span{display:none}
+  .fab{padding:15px;border-radius:50%}
+  .pager .parw{display:none}
+}
+
+/* ---------------------------------------------------------- reading bar */
+/* Sits above the fixed header (z-80) so it reads as chrome of the window,
+   not of the page. Width is set by JS; with no JS it simply stays at 0. */
+.prog{position:fixed;top:0;left:0;height:2px;width:0;z-index:90;background:var(--amber);will-change:width}
+
+/* ---------------------------------------------------------------- hero */
+/* Two measures: the headline column is narrow (880) so a long title breaks
+   into readable lines; the figure and the body grid use the site's own 1180. */
+.artwrap{width:min(1180px,92vw);margin-inline:auto}
+.wrap-a{width:min(880px,92vw);margin-inline:auto}
+.ahero{padding:clamp(126px,15vw,178px) 0 clamp(26px,3.5vw,40px);background:var(--panel);position:relative;overflow:hidden}
+.crumbs{
+  font-family:var(--mono);font-size:.76rem;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--muted);margin:0 0 20px;display:flex;gap:9px;flex-wrap:wrap;align-items:center;
+}
+.crumbs a{color:var(--muted);text-decoration:none;transition:color .2s}
+.crumbs a:hover{color:var(--amber-text)}
+.crumbs i{color:var(--amber);font-style:normal}
+.ahero .h1{font-size:clamp(2rem,4.4vw,3.35rem);line-height:1.06;margin:0 0 20px}
+.ahero .lede{font-size:clamp(1.1rem,1.8vw,1.32rem);max-width:62ch}
+
+.byline{
+  display:flex;align-items:center;gap:15px;flex-wrap:wrap;
+  margin-top:clamp(26px,3.5vw,38px);padding-top:20px;border-top:1px solid var(--line);
+}
+.byline .face{width:46px;height:46px;border-radius:50%;object-fit:cover;flex:none;filter:saturate(.94)}
+.byline .who{line-height:1.35}
+.byline .who b{display:block;font-weight:500;font-size:1rem;color:var(--teal-950)}
+.byline .who span,.byline .stamp{
+  font-family:var(--mono);font-size:.76rem;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);
+}
+.byline .sp{flex:1 1 40px}
+
+/* share — icon buttons, no third-party script and therefore no third-party
+   cookie. Each is a plain link except copy, which needs one clipboard call. */
+.share{display:flex;gap:9px;align-items:center}
+.share a,.share button{
+  width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:var(--white);
+  display:inline-flex;align-items:center;justify-content:center;color:var(--teal-900);cursor:pointer;
+  padding:0;transition:border-color .2s,color .2s,transform .2s,background .2s;
+}
+.share a:hover,.share button:hover{border-color:var(--teal);color:var(--teal);transform:translateY(-2px)}
+.share svg{width:17px;height:17px;fill:currentColor}
+.share .done{border-color:var(--wa);color:var(--wa)}
+
+/* hero figure */
+.afig{margin:0;position:relative;background:var(--panel-2);border:1px solid var(--line);
+  border-radius:20px;padding:clamp(10px,1.2vw,16px)}
+.afig img{width:100%;aspect-ratio:16/7;object-fit:cover;border-radius:12px}
+.afig figcaption{
+  font-family:var(--mono);font-size:.76rem;letter-spacing:.07em;color:var(--muted);
+  margin:12px 4px 4px;padding-left:14px;border-left:2px solid var(--amber);
+}
+
+/* ---------------------------------------------------------- body layout */
+.artgrid{display:grid;grid-template-columns:206px minmax(0,1fr);gap:clamp(28px,5vw,68px);align-items:start}
+.toc{position:sticky;top:106px}
+.toc h4{
+  font-family:var(--mono);font-size:.74rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--muted);margin:0 0 14px;
+}
+.toc ol{list-style:none;margin:0;padding:0}
+.toc a{
+  display:block;font-size:.9rem;line-height:1.35;color:var(--muted);text-decoration:none;
+  padding:8px 0 8px 15px;border-left:1px solid var(--line);transition:color .25s,border-color .25s;
+}
+.toc a:hover{color:var(--teal)}
+.toc a.on{color:var(--teal-950);border-left-color:var(--amber)}
+.toc .back{margin-top:20px}
+
+/* ---------------------------------------------------------------- prose */
+.prose{counter-reset:sec;max-width:68ch}
+.prose p{font-size:clamp(1.04rem,1.4vw,1.13rem);line-height:1.72;margin:0 0 1.25em;color:var(--ink)}
+.prose p.open::first-letter{
+  float:left;font-family:var(--display);font-size:3.5em;line-height:.82;padding:.06em .1em 0 0;color:var(--teal);
+}
+.prose h2{
+  font-size:clamp(1.55rem,2.9vw,2.2rem);line-height:1.15;color:var(--teal-950);
+  margin:clamp(46px,6vw,74px) 0 18px;scroll-margin-top:104px;
+}
+/* Section numerals come from a counter, not from markup: the TOC reads
+   heading.textContent, and a numeral in the markup would end up in every
+   entry. ::before is not a child node, so the motion script's wipe wrapper
+   leaves it alone and it holds still while the words rise. */
+.prose h2::before{
+  content:counter(sec,decimal-leading-zero);counter-increment:sec;display:block;
+  font-family:var(--mono);font-size:.76rem;letter-spacing:.18em;color:var(--amber-text);margin-bottom:11px;
+}
+.prose h3{font-size:clamp(1.18rem,1.9vw,1.4rem);color:var(--teal-950);margin:clamp(30px,3.5vw,44px) 0 12px;scroll-margin-top:104px}
+.prose a{color:var(--teal);text-decoration:none;background-image:linear-gradient(var(--amber),var(--amber));
+  background-size:100% 1px;background-position:0 100%;background-repeat:no-repeat;padding-bottom:2px;
+  transition:color .2s,background-size .3s var(--ease)}
+.prose a:hover{color:var(--amber-text)}
+/* A button inside the prose is not a prose link. `.prose a` (0,2,0) outranks
+   `.btn-wa` (0,1,0), which repainted the pill's own label teal and drew the
+   link underline straight through it. */
+.prose .btn{background-image:none;padding-bottom:15px}
+.prose .btn-wa,.prose .btn-teal{color:#fff}
+.prose .btn-amber{color:var(--teal-950)}
+.prose .btn-ghost{color:var(--teal-900)}
+.icta .btn-ghost{color:var(--cream);border-color:var(--line-dark)}
+.prose strong{font-weight:600;color:var(--teal-950)}
+.prose em{font-style:italic}
+.prose code{
+  font-family:var(--mono);font-size:.88em;background:var(--panel-2);border:1px solid var(--line);
+  border-radius:5px;padding:1px 6px;color:var(--teal-900);
+}
+.prose ul,.prose ol{margin:0 0 1.35em;padding-left:0;list-style:none}
+.prose li{position:relative;padding-left:30px;margin-bottom:.7em;font-size:clamp(1.02rem,1.35vw,1.1rem);line-height:1.65}
+.prose ul>li::before{
+  content:"";position:absolute;left:6px;top:.62em;width:7px;height:7px;border-radius:50%;background:var(--amber);
+}
+.prose ol{counter-reset:li}
+.prose ol>li::before{
+  counter-increment:li;content:counter(li,decimal-leading-zero);position:absolute;left:0;top:.16em;
+  font-family:var(--mono);font-size:.8rem;color:var(--amber-text);
+}
+
+/* ------------------------------------------------------------ takeaways */
+.keybox{
+  background:var(--white);border:1px solid var(--line);border-left:3px solid var(--amber);
+  border-radius:0 14px 14px 0;padding:clamp(22px,3vw,30px) clamp(22px,3vw,32px);margin:0 0 clamp(34px,4vw,48px);
+}
+.keybox h4{
+  font-family:var(--mono);font-size:.76rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--amber-text);margin:0 0 16px;display:flex;align-items:center;gap:9px;
+}
+.keybox ul{margin:0;padding:0;list-style:none}
+.keybox li{position:relative;padding-left:26px;margin:0 0 .65em;font-size:1.02rem;line-height:1.6;color:var(--ink)}
+.keybox li:last-child{margin-bottom:0}
+.keybox li::before{content:"\2727";position:absolute;left:0;top:0;color:var(--amber);font-size:.95em}
+
+/* -------------------------------------------------------------- quotes */
+.prose blockquote{
+  margin:clamp(34px,4vw,50px) 0;padding:0 0 0 clamp(20px,3vw,30px);border-left:2px solid var(--amber);
+}
+.prose blockquote p{
+  font-family:var(--display);font-size:clamp(1.3rem,2.2vw,1.65rem);line-height:1.35;color:var(--teal-950);margin:0 0 .5em;
+}
+.prose blockquote cite{
+  font-family:var(--mono);font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-style:normal;
+}
+/* A pull quote is a break in the column, not a citation: hairline above and
+   below, no rule on the side, so it reads as a held breath. */
+.pull{
+  margin:clamp(38px,5vw,58px) 0;padding:clamp(24px,3vw,32px) 0;
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line);text-align:center;
+}
+.pull p{font-family:var(--display);font-size:clamp(1.4rem,2.6vw,1.9rem);line-height:1.3;color:var(--teal);margin:0}
+
+/* ------------------------------------------------------------ callouts */
+.callout{
+  background:var(--panel);border:1px solid var(--line);border-radius:14px;
+  padding:clamp(20px,2.6vw,26px) clamp(20px,2.6vw,28px);margin:clamp(30px,3.6vw,42px) 0;position:relative;
+}
+.callout b{
+  display:block;font-family:var(--mono);font-size:.75rem;font-weight:500;letter-spacing:.16em;
+  text-transform:uppercase;margin-bottom:10px;color:var(--teal);
+}
+.callout p{margin:0;font-size:1.02rem;line-height:1.65}
+.callout p+p{margin-top:.8em}
+.callout.warn{background:rgba(166,67,31,.05);border-color:rgba(166,67,31,.28)}
+.callout.warn b{color:var(--alert)}
+.callout.tip{background:rgba(186,117,23,.06);border-color:rgba(186,117,23,.3)}
+.callout.tip b{color:var(--amber-text)}
+
+/* the arithmetic itself, set as a plate rather than a sentence */
+.formula{
+  background:var(--teal-950);color:var(--cream);border-radius:14px;
+  padding:clamp(22px,3vw,30px);margin:clamp(30px,3.6vw,42px) 0;text-align:center;
+}
+.formula span{
+  font-family:var(--mono);font-size:clamp(.92rem,1.6vw,1.08rem);line-height:1.9;letter-spacing:.02em;
+  color:var(--cream);display:block;
+}
+.formula em{color:var(--amber-bright);font-style:normal}
+.formula .lbl{
+  font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(241,239,232,.55);margin-bottom:12px;
+}
+
+/* ---------------------------------------------------------------- steps */
+.steps{margin:clamp(26px,3vw,38px) 0;border-top:1px solid var(--line)}
+/* > div, not div: the row holds a second div for its text, and a bare
+   descendant selector turned that inner wrapper into a grid too. */
+.steps>div{display:grid;grid-template-columns:56px 1fr;gap:clamp(14px,2vw,22px);padding:22px 0;border-bottom:1px solid var(--line)}
+.steps b{font-family:var(--mono);font-size:.82rem;letter-spacing:.1em;color:var(--amber-text);padding-top:.32em}
+.steps h4{font-family:var(--display);font-size:clamp(1.12rem,1.8vw,1.3rem);font-weight:400;color:var(--teal-950);margin:0 0 7px}
+.steps p{margin:0;font-size:1rem;color:var(--muted);line-height:1.62}
+
+/* ---------------------------------------------------------------- table */
+/* Wide tables scroll inside their own container - the page body never does. */
+.tblwrap{margin:clamp(30px,3.6vw,44px) 0;overflow-x:auto;border:1px solid var(--line);border-radius:14px;background:var(--white)}
+.tbl{border-collapse:collapse;width:100%;min-width:520px;font-size:.97rem}
+.tbl th{
+  text-align:left;font-family:var(--mono);font-size:.74rem;font-weight:500;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--muted);background:var(--panel);padding:14px 18px;border-bottom:1px solid var(--line);
+}
+.tbl td{padding:14px 18px;border-bottom:1px solid var(--line);color:var(--ink);vertical-align:top}
+.tbl tr:last-child td{border-bottom:0}
+.tbl td.n{font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap;color:var(--teal-900)}
+.tbl tbody tr:hover{background:var(--panel)}
+.tblcap{font-family:var(--mono);font-size:.75rem;letter-spacing:.07em;color:var(--muted);margin:-24px 0 34px;padding-left:16px;border-left:2px solid var(--amber)}
+
+/* --------------------------------------------------------------- figure */
+.pfig{margin:clamp(30px,3.6vw,44px) 0}
+.pfig img{width:100%;border-radius:14px;border:1px solid var(--line)}
+.pfig figcaption{font-family:var(--mono);font-size:.75rem;letter-spacing:.07em;color:var(--muted);margin-top:11px;padding-left:16px;border-left:2px solid var(--amber)}
+
+/* ---------------------------------------------------------------- stats */
+.pstats{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,2vw,20px);margin:clamp(30px,3.6vw,44px) 0}
+.pstats div{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px 20px}
+.pstats b{display:block;font-family:var(--mono);font-size:clamp(1.5rem,3vw,2rem);color:var(--teal);line-height:1;margin-bottom:9px;font-weight:500}
+.pstats span{font-size:.88rem;color:var(--muted);line-height:1.45;display:block}
+
+/* ------------------------------------------------------------ inline CTA */
+.icta{
+  background:var(--teal-900);color:var(--cream);border-radius:16px;
+  padding:clamp(26px,3.4vw,38px);margin:clamp(38px,4.5vw,56px) 0;position:relative;overflow:hidden;
+}
+.icta::after{
+  content:"";position:absolute;right:-40px;bottom:-40px;width:150px;height:150px;border-radius:50%;
+  background:rgba(186,117,23,.16);
+}
+.icta h3{font-size:clamp(1.25rem,2.2vw,1.6rem);color:var(--cream);margin:0 0 10px;position:relative}
+.icta p{color:rgba(241,239,232,.78);font-size:1rem;margin:0 0 20px;max-width:52ch;position:relative}
+.icta .btn-row{position:relative}
+
+/* ------------------------------------------------------------------ FAQ */
+.faq{border-top:1px solid var(--line)}
+.faq details{border-bottom:1px solid var(--line)}
+.faq summary{
+  cursor:pointer;list-style:none;padding:20px 44px 20px 0;position:relative;
+  font-family:var(--display);font-size:clamp(1.05rem,1.7vw,1.24rem);color:var(--teal-950);
+  transition:color .2s;
+}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary:hover{color:var(--teal)}
+.faq summary::after{
+  content:"";position:absolute;right:8px;top:50%;width:13px;height:1.5px;background:var(--amber);
+}
+.faq summary::before{
+  content:"";position:absolute;right:14px;top:50%;width:1.5px;height:13px;margin-top:-6px;background:var(--amber);
+  transition:transform .3s var(--ease),opacity .3s;
+}
+.faq details[open] summary::before{transform:rotate(90deg);opacity:0}
+.faq details p{margin:0 0 20px;color:var(--muted);font-size:1.01rem;line-height:1.68;max-width:66ch;padding-right:44px}
+
+/* ------------------------------------------------------------ references */
+.refs{margin-top:clamp(34px,4vw,50px);padding-top:26px;border-top:1px solid var(--line)}
+.refs h4{font-family:var(--mono);font-size:.75rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin:0 0 14px}
+.refs ol{list-style:none;margin:0;padding:0;counter-reset:r}
+.refs li{position:relative;padding-left:32px;margin-bottom:.6em;font-size:.94rem;line-height:1.5}
+.refs li::before{counter-increment:r;content:counter(r,decimal-leading-zero);position:absolute;left:0;top:.15em;font-family:var(--mono);font-size:.76rem;color:var(--amber-text)}
+.refs a{color:var(--teal);text-decoration:none;border-bottom:1px solid var(--line)}
+.refs a:hover{color:var(--amber-text);border-bottom-color:var(--amber)}
+
+/* --------------------------------------------------------------- author */
+.author{
+  display:grid;grid-template-columns:104px 1fr;gap:clamp(18px,3vw,30px);align-items:start;
+  background:var(--panel-2);border-radius:16px;padding:clamp(24px,3vw,34px);margin-top:clamp(40px,5vw,60px);
+}
+.author img{width:104px;height:104px;border-radius:50%;object-fit:cover;filter:saturate(.94)}
+.author .rolelbl{font-family:var(--mono);font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;color:var(--amber-text);margin:0 0 8px}
+.author h3{font-size:clamp(1.2rem,2vw,1.45rem);margin:0 0 10px}
+.author p{font-size:.99rem;color:var(--muted);margin:0 0 16px;line-height:1.62}
+
+/* -------------------------------------------------------------- related */
+.related .card h3{font-size:clamp(1.08rem,1.6vw,1.25rem);line-height:1.28}
+.related a.card{text-decoration:none;display:block}
+.related .card .n{color:var(--amber-text)}
+.related .card .rd{font-family:var(--mono);font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:16px;display:block}
+
+/* --------------------------------------------------------- breakpoints */
+@media (max-width:1080px){
+  /* minmax(0,1fr), never 1fr: a grid item's automatic minimum is its
+     min-content width, so the 520px min-width on a wide table stretched the
+     whole column past the viewport and every line of prose was clipped with
+     it. The table still scrolls inside .tblwrap. */
+  .artgrid{grid-template-columns:minmax(0,1fr)}
+  /* The rail becomes a plate above the article: still one tap to any
+     section, but no longer competing with the text for width. */
+  .toc{position:static;border:1px solid var(--line);border-radius:14px;padding:22px 24px;background:var(--panel);margin-bottom:34px}
+  .toc ol{columns:2;column-gap:26px}
+  .toc a{padding:6px 0 6px 13px;break-inside:avoid}
+  .toc .back{display:none}
+  .prose{max-width:none}
+}
+@media (max-width:640px){
+  .toc ol{columns:1}
+  .pstats{grid-template-columns:1fr}
+  .author{grid-template-columns:1fr;text-align:left}
+  .author img{width:84px;height:84px}
+  .steps>div{grid-template-columns:1fr;gap:4px}
+  .afig img{aspect-ratio:4/3}
+  .byline .sp{display:none}
+  .byline .share{width:100%;margin-top:6px}
+}
+</style>
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@graph":[
+    {"@type":"Article",
+     "headline":"What silence costs: putting a number on the messages you never answered",
+     "description":"Twelve unread WhatsApp messages on a Sunday morning is not a customer service problem. It is a number. Here is the arithmetic that produces it — using your figures, not mine.",
+     "image":"https://aiprofitlab.io/blog/images/whatsapp_missed_inquiries_cost_oman.png",
+     "datePublished":"2026-06-25","dateModified":"2026-08-19",
+     "author":{"@type":"Person","name":"Nahid Abyari","url":"https://aiprofitlab.io/en/about-v4/"},
+     "publisher":{"@type":"Organization","name":"AI Profit Lab","legalName":"Lotus Gulf International"},
+     "mainEntityOfPage":{"@type":"WebPage","@id":"https://aiprofitlab.io/en/article-v4/"},
+     "articleSection":"The cost of silence",
+     "inLanguage":"en"},
+    {"@type":"BreadcrumbList","itemListElement":[
+      {"@type":"ListItem","position":1,"name":"Home","item":"https://aiprofitlab.io/en/index-v4/"},
+      {"@type":"ListItem","position":2,"name":"Articles","item":"https://aiprofitlab.io/en/blog-v4/"},
+      {"@type":"ListItem","position":3,"name":"What silence costs: putting a number on the messages you never answered","item":"https://aiprofitlab.io/en/article-v4/"}
+    ]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I calculate what missed WhatsApp inquiries cost my business in Oman?","acceptedAnswer":{"@type":"Answer","text":"Count the distinct people who message you in a normal week, multiply by 4.33 for a month, multiply by the share arriving outside working hours, then by the share of answered inquiries you normally win, then by your average order value in OMR. The result is the revenue at stake each month in messages you did not answer."}},{"@type":"Question","name":"Is that figure the revenue I would recover with automation?","acceptedAnswer":{"@type":"Answer","text":"No. It is what is at stake, not what is recoverable. Some of those buyers were never going to order and some return anyway. Treat any vendor who converts it into a guaranteed recovery figure with suspicion — that conversion rate is invented."}},{"@type":"Question","name":"Why is after-hours the part that matters most?","acceptedAnswer":{"@type":"Answer","text":"Because it is the only part a faster human cannot fix. Daytime volume can be answered by hiring. A message at 9:40pm on a Friday can only be answered by something that does not sleep, or by nobody."}},{"@type":"Question","name":"Does a WhatsApp Business auto-reply solve this?","acceptedAnswer":{"@type":"Answer","text":"It reduces the feeling of being ignored and nothing else. A buyer asking whether you carry a part needs the answer, not a promise of one. If the real reply still arrives on Monday, the buyer has already bought elsewhere."}},{"@type":"Question","name":"What does it cost to close the gap?","acceptedAnswer":{"@type":"Answer","text":"The Smart Storefront — a bilingual site with a buyer agent that answers in Arabic and English and hands live buyers to WhatsApp — is OMR 950 one-time at the founding price, with no required monthly fee. Optional care is OMR 75 a month and can be cancelled."}},{"@type":"Question","name":"Does answering buyers automatically create a data protection problem in Oman?","acceptedAnswer":{"@type":"Answer","text":"It creates a data protection responsibility. Under the Personal Data Protection Law (Royal Decree 6/2022) you need a stated purpose for collecting the data, a consent mechanism, and secure handling. That is designed in from the start rather than added later."}}]}
+  ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="top" id="top">
+  <a href="/en/index-v4/" aria-label="AI Profit Lab home">
+    <img class="mark" src="/assets/brand/wordmark-primary.svg" alt="AI Profit Lab" width="160" height="28">
+  </a>
+  <nav class="nav" aria-label="Primary">
+        <a class="lnk" href="/en/services-v4/">What I Build</a>
+    <a class="lnk" href="/en/process-v4/">How It Works</a>
+    <a class="lnk" href="/en/about-v4/">About</a>
+    <a class="lnk" href="/en/contact-v4/">Contact</a>
+    <a class="lnk" href="/en/blog-v4/" aria-current="page">Articles</a>
+    <a class="lnk" href="/" lang="ar">&#1593;&#1585;&#1576;&#1610;</a>
+    <a class="top-wa" href="https://wa.me/96899245250?text=Hello%20Nahid%2C%20I%20have%20a%20question%20about%20my%20business."><svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 1.8a8.2 8.2 0 1 1-4.2 15.3l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8zm-3.1 4c-.2 0-.5 0-.7.3-.2.3-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.8 2.8 4.4 3.8 2.2.9 2.6.7 3.1.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2-.1-.1-.2-.2-.5-.3l-1.7-.8c-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.1-.2 0-.4.1-.5l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5L10 8.2c-.2-.4-.4-.4-.6-.4h-.5z"/></svg><span>WhatsApp</span></a>
+    <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="mmenu"><i></i></button>
+  </nav>
+</header>
+<div class="mmenu" id="mmenu" aria-hidden="true">
+    <a href="/en/index-v4/"><em>01</em>Home</a>
+  <a href="/en/services-v4/"><em>02</em>What I Build</a>
+  <a href="/en/process-v4/"><em>03</em>How It Works</a>
+  <a href="/en/about-v4/"><em>04</em>About</a>
+  <a href="/en/contact-v4/"><em>05</em>Contact</a>
+  <a href="/en/blog-v4/"><em>06</em>Articles</a>
+  <p class="mfoot">hello@aiprofitlab.io &middot; <span dir="ltr">+968 9924 5250</span><br>Muscat, Oman</p>
+</div>
+<div class="prog" id="prog" aria-hidden="true"></div>
+<main id="main">
+
+<section class="ahero grain">
+  <div class="wrap-a">
+    <p class="crumbs">
+      <a href="/en/index-v4/">Home</a><i>&#10038;</i><a href="/en/blog-v4/">Articles</a><i>&#10038;</i>
+      <span>The cost of silence</span>
+    </p>
+    <h1 class="h1">What silence costs: putting a number on the messages you never answered</h1>
+    <p class="lede">Twelve unread WhatsApp messages on a Sunday morning is not a customer service problem. It is a number. Here is the arithmetic that produces it &mdash; using your figures, not mine.</p>
+    <div class="byline">
+      <img class="face" src="/nahid-founder-2026.webp" alt="Nahid Abyari" width="46" height="46" loading="lazy">
+      <div class="who"><b>Nahid Abyari</b><span>Founder &middot; writes every word</span></div>
+      <span class="sp"></span>
+      <span class="stamp">25 June 2026 &middot; updated 19 August 2026 &middot; 6 min read</span>
+      <div class="share">
+      <a href="https://wa.me/?text=What%20silence%20costs%3A%20putting%20a%20number%20on%20the%20messages%20you%20never%20answered%20%E2%80%94%20https%3A//aiprofitlab.io/en/article-v4/" target="_blank" rel="noopener" aria-label="Share on WhatsApp" title="Share on WhatsApp"><svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 1.8a8.2 8.2 0 1 1-4.2 15.3l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8zm-3.1 4c-.2 0-.5 0-.7.3-.2.3-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.8 2.8 4.4 3.8 2.2.9 2.6.7 3.1.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2-.1-.1-.2-.2-.5-.3l-1.7-.8c-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.1-.2 0-.4.1-.5l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5L10 8.2c-.2-.4-.4-.4-.6-.4h-.5z"/></svg></a>
+      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aiprofitlab.io/en/article-v4/" target="_blank" rel="noopener" aria-label="Share on LinkedIn" title="Share on LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-.95 1.83-1.95 3.77-1.95 4.03 0 4.78 2.5 4.78 5.76V21h-4v-5.6c0-1.34-.03-3.06-1.9-3.06-1.9 0-2.2 1.45-2.2 2.96V21H9z"/></svg></a>
+      <button type="button" id="copyLink" aria-label="Copy link" title="Copy link"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10.6 13.4a1 1 0 0 1 0-1.4l1.4-1.4a1 1 0 0 1 1.4 1.4l-1.4 1.4a1 1 0 0 1-1.4 0zm-3 4.4a3.5 3.5 0 0 1 0-5l2.2-2.1 1.4 1.4-2.2 2.1a1.5 1.5 0 0 0 2.2 2.2l2.1-2.2 1.4 1.4-2.1 2.2a3.5 3.5 0 0 1-5 0zm9-9a3.5 3.5 0 0 0-5 0l-2.1 2.2 1.4 1.4 2.1-2.2a1.5 1.5 0 0 1 2.2 2.2l-2.2 2.1 1.4 1.4 2.2-2.1a3.5 3.5 0 0 0 0-5z"/></svg></button>
+    </div><!-- What silence costs: putting a number on the messages you never answered -->
+    </div>
+  </div>
+  <div class="artwrap" style="margin-top:clamp(32px,4.5vw,58px)">
+    <figure class="afig">
+      <img src="/blog/images/whatsapp_missed_inquiries_cost_oman.png" alt="Unanswered WhatsApp inquiries stacking up overnight for an Omani business" width="1180" height="516" fetchpriority="high">
+      <figcaption>Every unanswered message was a buyer who had already chosen you, right up until the silence.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="s-cream">
+  <div class="artwrap">
+    <div class="artgrid">
+      <nav class="toc" aria-label="On this page">
+        <h4>On this page</h4>
+        <ol><li><a href="#a-missed-message-is-not-a-missed-call">A missed message is not a missed call</a></li><li><a href="#the-four-numbers-you-already-have">The four numbers you already have</a></li><li><a href="#run-the-arithmetic">Run the arithmetic</a></li><li><a href="#the-leak-is-wider-than-the-formula">The leak is wider than the formula</a></li><li><a href="#what-actually-closes-the-gap">What actually closes the gap</a></li><li><a href="#do-the-sum-before-you-buy-anything">Do the sum before you buy anything</a></li><li><a href="#questions">Questions people ask</a></li></ol>
+        <p class="back"><a class="tlink" href="/en/blog-v4/"><span class="arw">&larr;</span><span>All articles</span></a></p>
+      </nav>
+      <div id="art">
+        <div class="keybox"><h4><span class="star">&#10038;</span>The short version</h4><ul><li>A missed inquiry is not a service failure. It is a paid-for lead you already bought and then dropped.</li><li>The formula needs four numbers and every one of them is yours: weekly inquiries, the share that arrive after hours, your win rate on the ones you do answer, and your average order.</li><li>Multiply, and you get one monthly figure. Compare that figure to whatever the fix costs, once.</li><li>The number is what is <em>at stake</em> in those messages &mdash; not a promise of recovery. Treat any vendor who tells you otherwise with suspicion.</li></ul></div>
+        <article class="prose">
+<p class="open">You open WhatsApp on a Sunday morning and there are twelve messages from Friday night. One asking whether you carry a part. One asking for a price on forty cartons. One that is just <em>Hello</em>, sent at 9:40pm, from a number you do not recognise. You reply to all twelve. Two reply back. The other ten already bought somewhere else.</p>
+<p>Every owner I meet in Muscat knows this happens. Almost none of them can tell me what it costs. And a leak you cannot put a number on is a leak nobody ever fixes, because it never has to compete for budget against the things that do have numbers &mdash; the rent, the van, the salary. So let us produce the number.</p>
+<h2 id="a-missed-message-is-not-a-missed-call">A missed message is not a missed call</h2>
+<p>A missed call is a moment. A missed WhatsApp message is a decision that stays on the buyer's screen. They can see, hours later, that you did not reply. They can see the two grey ticks. And sitting directly above your unanswered message in their chat list is the competitor who did answer.</p>
+<p>That is the first thing to be precise about: you did not lose a conversation, you lost a lead you had already paid for. The Instagram spend that put your number in front of them, the sign on the warehouse, the years of being the name people pass on &mdash; all of that was spent to produce that message. The silence is where the money leaves, and it leaves after you have already paid to acquire it.</p>
+<div class="pull"><p>You are not losing customers. You are paying full price for leads and then dropping them after midnight.</p></div>
+<h2 id="the-four-numbers-you-already-have">The four numbers you already have</h2>
+<p>You do not need analytics for this. You need four figures, and you can get all four from your own phone in about twenty minutes.</p>
+<div class="steps"><div><b>01</b><div><h4>Inquiries in a normal week</h4><p>Scroll back seven days in WhatsApp and count the distinct people who asked you something. Not messages &mdash; people. A normal week, not your best one.</p></div></div><div><b>02</b><div><h4>The share that landed outside working hours</h4><p>Of those, how many arrived after you closed, on a Friday, or during a prayer break? This is the portion where speed was never possible, only automation was.</p></div></div><div><b>03</b><div><h4>Your win rate on the ones you did answer</h4><p>Of the inquiries you replied to promptly, how many turned into an order? For a workshop this might be one in four. For project quotes, one in ten. Use your own record and round down.</p></div></div><div><b>04</b><div><h4>Your average order value</h4><p>Not your best invoice. The middle one. If you sell to both walk-ins and trade accounts, run the arithmetic twice rather than averaging two different businesses together.</p></div></div></div>
+<h2 id="run-the-arithmetic">Run the arithmetic</h2>
+<p>With those four numbers the formula is one line, and it contains no assumption of mine:</p>
+<div class="formula"><span class="lbl">Monthly revenue at stake</span><span>weekly inquiries &times; <em>4.33</em> &times; after-hours share &times; win rate &times; average order</span></div>
+<p>The 4.33 is just weeks in a month. Everything else came from your phone. Three worked examples, with the kind of figures owners in Oman actually give me &mdash; substitute your own:</p>
+<div class="tblwrap"><table class="tbl"><thead><tr><th>Business</th><th>Inquiries / week</th><th>After hours</th><th>Win rate</th><th>Avg order</th><th>At stake / month</th></tr></thead><tbody><tr><td>Auto workshop, Ghala</td><td class="n">30</td><td class="n">35%</td><td class="n">25%</td><td class="n">OMR 90</td><td class="n">OMR 1,023</td></tr><tr><td>Building-materials trader, Rusayl</td><td class="n">22</td><td class="n">45%</td><td class="n">15%</td><td class="n">OMR 420</td><td class="n">OMR 2,701</td></tr><tr><td>Villa rentals, Al Khuwair</td><td class="n">18</td><td class="n">50%</td><td class="n">10%</td><td class="n">OMR 800</td><td class="n">OMR 3,118</td></tr></tbody></table></div><p class="tblcap">Illustrations, not benchmarks. The formula is the point; the inputs must be yours.</p>
+<div class="callout"><b>What this number is and is not</b><p>This is the revenue <em>at stake</em> in the messages you did not answer &mdash; not revenue you are guaranteed to recover. Some of those buyers were never going to order. Some will come back on Monday regardless. Recovering even a third of it changes the year.</p><p>I am deliberately not multiplying it by a recovery rate, because I would be inventing that rate and you would have no way to check it. Anyone quoting you a fixed recovery percentage is doing exactly that.</p></div>
+<h2 id="the-leak-is-wider-than-the-formula">The leak is wider than the formula</h2>
+<p>The four-term formula only counts the first order. Three costs sit outside it, and in a relationship market they are often larger than the sum you just calculated:</p>
+<ul><li><strong>The advertising you already spent.</strong> If you spend on ads to make the phone ring, every unanswered message is that spend, delivered and then thrown away. Divide monthly ad spend by inquiries generated and you have the exact cost of each dropped one.</li><li><strong>The lifetime, not the invoice.</strong> A distributor who orders monthly is not worth one order. The formula prices the first transaction only, which is the most conservative reading available.</li><li><strong>What gets said about you.</strong> In a market this small, the buyer who was ignored on a Friday evening tells people. That cost never appears on any statement and never stops.</li></ul>
+<div class="icta"><h3>Rather not do the arithmetic by hand?</h3><p>The simulator runs this exact formula on four sliders you set yourself, and shows the monthly figure against the one-time cost of closing the gap. Nothing is stored and nothing is sent.</p><div class="btn-row"><a class="btn btn-wa" href="https://wa.me/96899245250?text=Hello%20Nahid%2C%20I%20ran%20the%20numbers%20on%20missed%20inquiries%20and%20want%20to%20talk%20about%20them."><svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 1.8a8.2 8.2 0 1 1-4.2 15.3l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8zm-3.1 4c-.2 0-.5 0-.7.3-.2.3-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.8 2.8 4.4 3.8 2.2.9 2.6.7 3.1.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2-.1-.1-.2-.2-.5-.3l-1.7-.8c-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.1-.2 0-.4.1-.5l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5L10 8.2c-.2-.4-.4-.4-.6-.4h-.5z"/></svg><span>Open the simulator on WhatsApp</span></a></div></div>
+<h2 id="what-actually-closes-the-gap">What actually closes the gap</h2>
+<p>Once you have a monthly figure, the decision stops being a matter of taste. It is one number against another. There are three honest ways to close an after-hours gap, and they are not equivalent:</p>
+<div class="tblwrap"><table class="tbl"><thead><tr><th>Approach</th><th>What it costs</th><th>What it fixes</th><th>What it does not</th></tr></thead><tbody><tr><td>Another person on the phone</td><td class="n">Monthly, forever</td><td>Daytime volume when one person is not enough</td><td>The 9pm message, Fridays, and two buyers at once</td></tr><tr><td>WhatsApp auto-reply template</td><td class="n">Free</td><td>Tells the buyer you exist</td><td>Answers nothing &mdash; a holding message is still silence with better manners</td></tr><tr><td>A buyer agent that answers</td><td class="n">OMR 950 once</td><td>Answers in Arabic or English at any hour, then hands a live buyer to you on WhatsApp</td><td>Judgement calls &mdash; those are routed to you deliberately, not guessed at</td></tr></tbody></table></div><p class="tblcap">The Smart Storefront price is the founding one-time figure published on the services page. Care is optional at OMR 75/month and cancellable.</p>
+<p>The comparison that matters is not between the three rows. It is between your monthly figure and the one-time one. If the arithmetic says OMR 1,023 a month is walking away, a one-time OMR 950 stops being an expense and becomes a payback period &mdash; in that case, twenty-eight days.</p>
+<div class="callout warn"><b>Before you automate anything, read this</b><p>Anything that answers your buyers is now handling personal data under Oman's Personal Data Protection Law (Royal Decree 6/2022). That means a stated purpose, a way to consent, and somewhere defensible for the data to live. It is not onerous, but it is not optional, and it is the part most vendors skip in the demo.</p></div>
+<h2 id="do-the-sum-before-you-buy-anything">Do the sum before you buy anything</h2>
+<p>I would rather you ran this formula and concluded that your leak is OMR 90 a month than bought anything from me. At OMR 90 a month, do not automate &mdash; answer faster and keep your money.</p>
+<p>But most owners who actually sit down and count are surprised by the size of it, because the messages arrive one at a time and the loss only exists in aggregate. Twelve unanswered messages is not twelve moments of poor service. It is one number, once a month, every month, until somebody puts it on a page.</p>
+<blockquote><p>Every success starts with insight. The number is the insight. What you do about it is a separate decision &mdash; but you cannot make it without the number.</p><cite>AI Profit Lab</cite></blockquote>
+        </article>
+        <section class="faq" id="questions" style="margin-top:clamp(48px,6vw,74px)"><h2 style="scroll-margin-top:104px">Questions people ask</h2><details><summary>How do I calculate what missed WhatsApp inquiries cost my business in Oman?</summary><p>Count the distinct people who message you in a normal week, multiply by 4.33 for a month, multiply by the share arriving outside working hours, then by the share of answered inquiries you normally win, then by your average order value in OMR. The result is the revenue at stake each month in messages you did not answer.</p></details><details><summary>Is that figure the revenue I would recover with automation?</summary><p>No. It is what is at stake, not what is recoverable. Some of those buyers were never going to order and some return anyway. Treat any vendor who converts it into a guaranteed recovery figure with suspicion &mdash; that conversion rate is invented.</p></details><details><summary>Why is after-hours the part that matters most?</summary><p>Because it is the only part a faster human cannot fix. Daytime volume can be answered by hiring. A message at 9:40pm on a Friday can only be answered by something that does not sleep, or by nobody.</p></details><details><summary>Does a WhatsApp Business auto-reply solve this?</summary><p>It reduces the feeling of being ignored and nothing else. A buyer asking whether you carry a part needs the answer, not a promise of one. If the real reply still arrives on Monday, the buyer has already bought elsewhere.</p></details><details><summary>What does it cost to close the gap?</summary><p>The Smart Storefront &mdash; a bilingual site with a buyer agent that answers in Arabic and English and hands live buyers to WhatsApp &mdash; is OMR 950 one-time at the founding price, with no required monthly fee. Optional care is OMR 75 a month and can be cancelled.</p></details><details><summary>Does answering buyers automatically create a data protection problem in Oman?</summary><p>It creates a data protection responsibility. Under the Personal Data Protection Law (Royal Decree 6/2022) you need a stated purpose for collecting the data, a consent mechanism, and secure handling. That is designed in from the start rather than added later.</p></details></section>
+        <div class="refs"><h4>Sources</h4><ol><li><a href="https://www.mtcit.gov.om/" target="_blank" rel="noopener nofollow">Oman Personal Data Protection Law &mdash; Royal Decree 6/2022 (MTCIT)</a></li><li><a href="https://business.whatsapp.com/" target="_blank" rel="noopener nofollow">WhatsApp Business Platform &mdash; official documentation</a></li><li><a href="https://aiprofitlab.io/en/services-v4/#price" target="_blank" rel="noopener nofollow">AI Profit Lab &mdash; published prices for the Smart Storefront</a></li></ol></div>
+        <div class="author">
+          <img src="/nahid-founder-2026.webp" alt="Nahid Abyari" width="104" height="104" loading="lazy">
+          <div>
+            <p class="rolelbl">Who wrote this</p>
+            <h3>Nahid Abyari</h3>
+            <p>I build the systems I write about — one operator in Muscat, not an agency. Everything
+              here comes out of work done for trading and distribution owners in Oman. If a number in
+              this article does not match your business, send me yours and I will run it with you.</p>
+            <div class="btn-row">
+              <a class="btn btn-wa" href="https://wa.me/96899245250?text=Hello%20Nahid%2C%20I%20read%20your%20article%20and%20have%20a%20question."><svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 1.8a8.2 8.2 0 1 1-4.2 15.3l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8zm-3.1 4c-.2 0-.5 0-.7.3-.2.3-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.8 2.8 4.4 3.8 2.2.9 2.6.7 3.1.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2-.1-.1-.2-.2-.5-.3l-1.7-.8c-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.1-.2 0-.4.1-.5l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5L10 8.2c-.2-.4-.4-.4-.6-.4h-.5z"/></svg><span>Ask me directly</span></a>
+              <a class="tlink" href="/en/about-v4/">More about me <span class="arw">&rarr;</span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="s-panel related grain">
+  <div class="wrap">
+    <p class="eyebrow"><span class="star">&#10038;</span>Keep reading</p>
+    <div class="grid g3" data-stagger><a class="card" href="/en/contact-v4/#sbt"><span class="n">Silence</span><h3>The Silent Buyer Test: what a real buyer sees when they message you</h3><span class="rd">Read &rarr;</span></a><a class="card" href="/en/simulator-v4/"><span class="n">Arithmetic</span><h3>Run your own numbers in the revenue leak simulator</h3><span class="rd">Read &rarr;</span></a><a class="card" href="/en/demo-v4/"><span class="n">Demo</span><h3>Watch the buyer agent answer at 9:40pm, in Arabic</h3><span class="rd">Read &rarr;</span></a></div>
+  </div>
+</section>
+</main>
+<nav class="pager" aria-label="Next page">
+  <div class="wrap"><a href="/en/simulator-v4/">
+    <span><span class="pl">Next</span><span class="pt">Run your own numbers</span></span>
+    <span class="parw" aria-hidden="true">&rarr;</span>
+  </a></div>
+</nav>
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <img class="fmark" src="/assets/brand/wordmark-reversed.svg" alt="AI Profit Lab" width="170" height="29">
+        <p class="slogan">Every success starts with insight.</p>
+        <p class="slogan-ar" lang="ar" dir="rtl">&#1603;&#1604; &#1606;&#1580;&#1575;&#1581; &#1610;&#1576;&#1583;&#1571; &#1576;&#1585;&#1572;&#1610;&#1577;</p>
+      </div>
+      <div>
+        <h4>The work</h4>
+        <ul>
+          <li><a href="/en/services-v4/">What I build</a></li>
+          <li><a href="/en/process-v4/">How it works</a></li>
+          <li><a href="/en/services-v4/#price">Prices</a></li>
+          <li><a href="/en/demo-v4/#dash">Dashboard demo</a></li>
+          <li><a href="/en/demo-v4/">WhatsApp demo</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Talk to me</h4>
+        <ul>
+          <li><a href="https://wa.me/96899245250?text=Hello%20Nahid">WhatsApp <span dir="ltr">+968 9924 5250</span></a></li>
+          <li><a href="mailto:hello@aiprofitlab.io">hello@aiprofitlab.io</a></li>
+          <li><a href="/en/contact-v4/">Contact page</a></li>
+          <li><a href="/en/about-v4/">About Nahid</a></li>
+          <li><a href="/en/blog-v4/">Articles</a></li>
+          <li><a href="/en/simulator-v4/">Revenue leak simulator</a></li>
+          <li><a href="/privacy/">Privacy</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="legal">
+      &copy; 2026 AI Profit Lab &mdash; a brand of Lotus Gulf International (CR <span dir="ltr">1570092</span>)<br>
+      South Al Khuwair, Bousher, Muscat, Oman &middot; Not VAT registered (TIN <span dir="ltr">2317725</span>)
+    </p>
+  </div>
+</footer>
+<a class="fab" href="https://wa.me/96899245250?text=Hello%20Nahid%2C%20I%20have%20a%20question%20about%20my%20business." aria-label="Chat on WhatsApp"><svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 1.8a8.2 8.2 0 1 1-4.2 15.3l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8zm-3.1 4c-.2 0-.5 0-.7.3-.2.3-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.8 2.8 4.4 3.8 2.2.9 2.6.7 3.1.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2-.1-.1-.2-.2-.5-.3l-1.7-.8c-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.1-.2 0-.4.1-.5l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5L10 8.2c-.2-.4-.4-.4-.6-.4h-.5z"/></svg><span>WhatsApp</span></a>
+<script>
+/* ---------------------------------------------------------------------------
+   Shared page behaviour: sticky header state, mobile menu, scroll reveals,
+   SVG draw-in, and count-up numbers. Everything degrades to "visible and
+   static" when JS or IntersectionObserver is missing, and is skipped wholesale
+   under prefers-reduced-motion.
+--------------------------------------------------------------------------- */
+(function(){
+  "use strict";
+  var root = document.documentElement;
+  var reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* header ---------------------------------------------------------------- */
+  var top = document.getElementById("top");
+  function onScroll(){ top.classList.toggle("solid", scrollY > 40); }
+  onScroll(); addEventListener("scroll", onScroll, {passive:true});
+
+  /* mobile menu ----------------------------------------------------------- */
+  var burger = document.getElementById("burger"), mm = document.getElementById("mmenu");
+  if (burger && mm){
+    var setMenu = function(open){
+      root.classList.toggle("menu-open", open);
+      burger.setAttribute("aria-expanded", open ? "true" : "false");
+      mm.setAttribute("aria-hidden", open ? "false" : "true");
+      document.body.style.overflow = open ? "hidden" : "";
+    };
+    burger.addEventListener("click", function(){ setMenu(!root.classList.contains("menu-open")); });
+    mm.addEventListener("click", function(e){ if (e.target.tagName === "A") setMenu(false); });
+    addEventListener("keydown", function(e){ if (e.key === "Escape") setMenu(false); });
+  }
+
+  /* auto-tag the standard blocks so pages don't have to repeat class="rv" --- */
+  document.querySelectorAll("section:not(.cine) .eyebrow, section:not(.cine) .lede").forEach(function(el){ el.classList.add("rv"); });
+  /* The wipe needs an inner block to move inside the heading's own overflow,
+     so the script supplies one rather than every page repeating it. */
+  document.querySelectorAll("section:not(.cine) h2, section:not(.cine) .h1").forEach(function(el){
+    var inner = document.createElement("span");
+    inner.className = "wi";
+    while (el.firstChild) inner.appendChild(el.firstChild);
+    el.appendChild(inner);
+    el.classList.add("rvw");
+  });
+  /* [data-stagger] children reveal in sequence, capped so a long grid does not
+     end up waiting a second and a half for its last card. */
+  document.querySelectorAll("[data-stagger]").forEach(function(g){
+    Array.prototype.forEach.call(g.children, function(c,i){
+      c.classList.add("rv"); c.style.setProperty("--d", Math.min(i*0.075, 0.45) + "s");
+    });
+  });
+
+  /* SVG draw-in: measure each stroked path so the dash length is its own
+     length, not a guessed constant that under- or over-shoots. */
+  document.querySelectorAll(".drawn").forEach(function(svg){
+    svg.querySelectorAll("path,line,polyline,circle,rect.dr").forEach(function(p,i){
+      var len = 1000;
+      try { if (p.getTotalLength) len = Math.ceil(p.getTotalLength()) || 1000; } catch(e){}
+      p.style.setProperty("--len", len);
+      p.style.setProperty("--d", Math.min(i*0.09, 0.7) + "s");
+    });
+  });
+
+  var els = document.querySelectorAll(".rv,.rvw,.drawn,[data-count]");
+  function showAll(){ els.forEach(function(e){ e.classList.add("vis"); countUp(e, true); }); }
+  if (reduce || !("IntersectionObserver" in window)){ showAll(); return; }
+
+  /* count-up -------------------------------------------------------------- */
+  function countUp(el, instant){
+    var raw = el.getAttribute("data-count"); if (raw === null || el.dataset.counted) return;
+    el.dataset.counted = "1";
+    var to = parseFloat(raw), pre = el.getAttribute("data-pre") || "", post = el.getAttribute("data-post") || "";
+    var dp = parseInt(el.getAttribute("data-dp") || "0", 10);
+    if (instant){ el.textContent = pre + to.toFixed(dp) + post; return; }
+    var t0 = 0, dur = 1250;
+    (function step(now){
+      if (!t0) t0 = now;
+      var k = Math.min((now - t0)/dur, 1);
+      var e = 1 - Math.pow(1 - k, 3);                       /* easeOutCubic */
+      var v = to * e;
+      el.textContent = pre + (dp ? v.toFixed(dp) : Math.round(v).toLocaleString("en-US")) + post;
+      if (k < 1) requestAnimationFrame(step);
+    })(0);
+  }
+
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){
+      if (!en.isIntersecting) return;
+      en.target.classList.add("vis"); countUp(en.target, false); io.unobserve(en.target);
+    });
+  }, {threshold:0.12, rootMargin:"0px 0px -60px 0px"});
+  els.forEach(function(e){ io.observe(e); });
+})();
+
+/* ---------------------------------------------------------------------------
+   Article behaviour. The table of contents is rendered server-side and every
+   link works without this script; what runs here is only the progress bar,
+   the "you are here" highlight, and the copy-link button.
+--------------------------------------------------------------------------- */
+(function(){
+  "use strict";
+  var art = document.getElementById("art");
+  if (!art) return;
+
+  /* progress ------------------------------------------------------------- */
+  var bar = document.getElementById("prog");
+  if (bar){
+    var tick = function(){
+      var box = art.getBoundingClientRect();
+      var total = box.height - innerHeight;
+      var done = total > 0 ? (-box.top) / total : 1;
+      bar.style.width = (Math.min(Math.max(done, 0), 1) * 100).toFixed(2) + "%";
+    };
+    tick(); addEventListener("scroll", tick, {passive:true}); addEventListener("resize", tick);
+  }
+
+  /* scrollspy ------------------------------------------------------------ */
+  var links = [].slice.call(document.querySelectorAll(".toc a[href^='#']"));
+  var heads = links.map(function(a){ return document.getElementById(a.getAttribute("href").slice(1)); })
+                   .filter(Boolean);
+  if (heads.length && "IntersectionObserver" in window){
+    var seen = {};
+    var mark = function(){
+      /* The topmost heading that has already crossed the reading line wins;
+         intersection alone would light up two entries on a long section. */
+      var best = null;
+      heads.forEach(function(h){ if (h.getBoundingClientRect().top < 140) best = h; });
+      links.forEach(function(a){
+        a.classList.toggle("on", !!best && a.getAttribute("href") === "#" + best.id);
+      });
+    };
+    mark(); addEventListener("scroll", mark, {passive:true});
+    void seen;
+  }
+
+  /* copy link ------------------------------------------------------------ */
+  var copy = document.getElementById("copyLink");
+  if (copy){
+    copy.addEventListener("click", function(){
+      var url = location.href.split("#")[0];
+      var ok = function(){
+        copy.classList.add("done");
+        copy.setAttribute("aria-label", "Link copied");
+        setTimeout(function(){ copy.classList.remove("done"); copy.setAttribute("aria-label","Copy link"); }, 1800);
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(url).then(ok, function(){});
+      } else {
+        var t = document.createElement("textarea");
+        t.value = url; document.body.appendChild(t); t.select();
+        try { document.execCommand("copy"); ok(); } catch(e){}
+        document.body.removeChild(t);
+      }
+    });
+  }
+})();
+</script>
+</body>
+</html>

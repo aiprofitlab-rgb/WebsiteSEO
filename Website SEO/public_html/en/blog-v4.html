@@ -7,15 +7,15 @@
      remove this tag AND add the noindex to the page it replaces in the SAME
      deploy - never separately, or both versions compete in the index. -->
 <meta name="robots" content="noindex, nofollow">
-<title>Contact | AI Profit Lab — talk to the person who builds it</title>
-<meta name="description" content="WhatsApp, email or phone - all reaching the same person in Muscat. Or start with the free Silent Buyer Test and see what a buyer sees when they message your business.">
-<link rel="canonical" href="https://aiprofitlab.io/en/contact-v4/">
+<title>Articles | AI Profit Lab — notes from the work in Oman</title>
+<meta name="description" content="Practical writing on WhatsApp response gaps, owner dashboards, automation cost and Oman's PDPL - from the operator who builds the systems, not a content team.">
+<link rel="canonical" href="https://aiprofitlab.io/en/blog-v4/">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 
 <meta property="og:type" content="website">
-<meta property="og:title" content="Contact | AI Profit Lab — talk to the person who builds it">
-<meta property="og:description" content="WhatsApp, email or phone - all reaching the same person in Muscat. Or start with the free Silent Buyer Test and see what a buyer sees when they message your business.">
-<meta property="og:url" content="https://aiprofitlab.io/en/contact-v4/">
+<meta property="og:title" content="Articles | AI Profit Lab — notes from the work in Oman">
+<meta property="og:description" content="Practical writing on WhatsApp response gaps, owner dashboards, automation cost and Oman's PDPL - from the operator who builds the systems, not a content team.">
+<meta property="og:url" content="https://aiprofitlab.io/en/blog-v4/">
 <meta property="og:image" content="https://aiprofitlab.io/og-aiprofitlab-2026.jpg">
 <meta property="og:locale" content="en_OM">
 <meta name="twitter:card" content="summary_large_image">
@@ -372,99 +372,86 @@ section{position:relative;padding:clamp(74px,9vw,138px) 0}
   .pager .parw{display:none}
 }
 
-/* ------------------------------------------------------------- channels */
-.chan{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,2vw,24px)}
-.chan a{
-  position:relative;display:flex;flex-direction:column;gap:12px;text-decoration:none;overflow:hidden;
-  background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:clamp(22px,2.6vw,32px);
-  transition:transform .35s var(--ease),border-color .35s,background .35s,box-shadow .35s;
+/* --------------------------------------------------------------- filter */
+.filters{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:clamp(24px,3vw,34px)}
+.filters button{
+  font-family:var(--mono);font-size:.8rem;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--teal-900);background:var(--white);border:1px solid var(--line);border-radius:99px;
+  padding:9px 17px;cursor:pointer;transition:border-color .2s,background .2s,color .2s,transform .2s;
 }
-.chan a:hover{transform:translateY(-5px);border-color:var(--amber-pale);background:var(--white);box-shadow:0 30px 54px -40px rgba(7,43,34,.5)}
-.chan a.primary{background:var(--teal-950);border-color:var(--teal-900)}
-.chan a.primary:hover{background:var(--teal-900);border-color:var(--amber-bright)}
-.chan .ic{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:var(--white);border:1px solid var(--line);color:var(--teal)}
-.chan a.primary .ic{background:var(--wa);border-color:var(--wa);color:#fff}
-.chan .ic svg{width:21px;height:21px;fill:currentColor}
-.chan h3{font-size:1.35rem;color:var(--teal-950);margin:0}
-.chan a.primary h3{color:var(--cream)}
-.chan .val{font-family:var(--mono);font-size:.95rem;color:var(--teal);word-break:break-word}
-.chan a.primary .val{color:var(--amber-bright)}
-.chan p{margin:0;font-size:.94rem;color:var(--muted)}
-.chan a.primary p{color:rgba(241,239,232,.7)}
-.chan .when{
-  font-family:var(--mono);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);
-  margin-top:auto;padding-top:10px;display:flex;align-items:center;gap:8px;
-}
-.chan a.primary .when{color:var(--amber-pale)}
-.chan .when i{width:7px;height:7px;border-radius:50%;background:var(--wa);flex:none}
+.filters button:hover{border-color:var(--teal);transform:translateY(-1px)}
+.filters button[aria-pressed=true]{background:var(--teal-950);border-color:var(--teal-950);color:var(--cream)}
+.filters .count{font-family:var(--mono);font-size:.78rem;letter-spacing:.08em;color:var(--muted);margin-left:auto}
 
-/* ----------------------------------------------------------------- form */
-.capture-grid{display:grid;grid-template-columns:.95fr 1.05fr;gap:clamp(28px,5vw,64px);align-items:start}
-/* five lines of display type in the narrow column read as a wall */
-.capture-grid .h2{font-size:clamp(1.75rem,3.1vw,2.5rem)}
-.form-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
-.field{display:flex;flex-direction:column;gap:8px}
-.field.full{grid-column:1/-1}
-.field label{font-family:var(--mono);font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(241,239,232,.68)}
-.field input{
-  font-family:var(--sans);font-size:1rem;color:var(--cream);background:rgba(241,239,232,.06);
-  border:1px solid var(--line-dark);border-radius:10px;padding:14px 16px;transition:border-color .2s,background .2s;
+/* ------------------------------------------------------------- featured */
+.feat{
+  display:grid;grid-template-columns:1.05fr .95fr;gap:0;background:var(--white);
+  border:1px solid var(--line);border-radius:18px;overflow:hidden;text-decoration:none;
+  transition:transform .4s var(--ease),box-shadow .4s var(--ease);
 }
-.field input::placeholder{color:rgba(241,239,232,.34)}
-.field input:focus{outline:none;border-color:var(--amber-bright);background:rgba(241,239,232,.1)}
-.formnote{font-size:.88rem;color:rgba(241,239,232,.55);margin:12px 0 0;line-height:1.55}
-.getlist{list-style:none;margin:22px 0 0;padding:0;display:grid;gap:13px}
-.getlist li{position:relative;padding-left:30px;font-size:1rem;color:rgba(241,239,232,.82);line-height:1.5}
-.getlist li::before{
-  content:"";position:absolute;left:3px;top:.5em;width:13px;height:7px;
-  border-left:2px solid var(--amber-bright);border-bottom:2px solid var(--amber-bright);transform:rotate(-45deg);
+.feat:hover{transform:translateY(-4px);box-shadow:0 30px 60px -40px rgba(7,43,34,.6)}
+.feat .shot{position:relative;background:var(--panel-2);min-height:340px}
+.feat .shot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.feat .txt{padding:clamp(26px,3.4vw,44px);display:flex;flex-direction:column;justify-content:center}
+.feat .tagline{
+  font-family:var(--mono);font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--amber-text);margin:0 0 14px;display:flex;align-items:center;gap:9px;
 }
+.feat h3{font-size:clamp(1.4rem,2.6vw,2.05rem);line-height:1.14;color:var(--teal-950);margin:0 0 14px}
+.feat p{color:var(--muted);font-size:1.02rem;margin:0 0 20px}
+.feat .stamp{font-family:var(--mono);font-size:.76rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
 
-/* -------------------------------------------------------------- next up */
-.next4{display:grid;grid-template-columns:repeat(4,1fr);gap:0}
-.next4 div{position:relative;padding:clamp(20px,2.4vw,28px) clamp(14px,1.8vw,24px) clamp(20px,2.4vw,28px) 0}
-.next4 div+div{padding-left:clamp(14px,1.8vw,24px);border-left:1px solid var(--line)}
-.next4 b{display:block;font-family:var(--mono);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--amber-text);margin-bottom:11px}
-.next4 h3{font-size:1.15rem;margin:0 0 6px}
-.next4 p{margin:0;font-size:.93rem;color:var(--muted)}
+/* ---------------------------------------------------------------- cards */
+.posts{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(18px,2.4vw,28px)}
+.post{
+  display:flex;flex-direction:column;background:var(--panel);border:1px solid var(--line);
+  border-radius:16px;overflow:hidden;text-decoration:none;
+  transition:transform .35s var(--ease),box-shadow .35s var(--ease),border-color .35s;
+}
+.post:hover{transform:translateY(-4px);box-shadow:0 26px 50px -34px rgba(7,43,34,.5);border-color:var(--panel-2)}
+.post .shot{aspect-ratio:16/9;background:var(--panel-2);overflow:hidden}
+.post .shot img{width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease)}
+.post:hover .shot img{transform:scale(1.04)}
+.post .txt{padding:clamp(20px,2.2vw,26px);display:flex;flex-direction:column;flex:1}
+.post .kicker{font-family:var(--mono);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--amber-text);margin:0 0 11px}
+.post h3{font-size:clamp(1.06rem,1.5vw,1.22rem);line-height:1.26;color:var(--teal-950);margin:0 0 10px}
+.post p{color:var(--muted);font-size:.95rem;line-height:1.55;margin:0 0 18px}
+.post .stamp{
+  margin-top:auto;padding-top:14px;border-top:1px solid var(--line);
+  font-family:var(--mono);font-size:.73rem;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);
+  display:flex;justify-content:space-between;gap:10px;
+}
+.post .stamp .old{color:var(--taupe)}
+.post[hidden]{display:none}
+.empty{
+  border:1px dashed var(--line);border-radius:16px;padding:clamp(30px,5vw,60px);text-align:center;color:var(--muted);
+}
+.empty b{display:block;font-family:var(--display);font-size:1.3rem;color:var(--teal-950);font-weight:400;margin-bottom:8px}
 
-/* ------------------------------------------------------------------ faq */
-.faq{border-top:1px solid var(--line)}
-.faq details{border-bottom:1px solid var(--line)}
-.faq summary{
-  cursor:pointer;list-style:none;padding:22px 44px 22px 0;position:relative;
-  font-family:var(--display);font-size:clamp(1.15rem,2vw,1.45rem);color:var(--teal-950);
+@media (max-width:1080px){
+  /* minmax(0,…) everywhere: a card's <img> carries a width attribute, so the
+     automatic minimum of a plain 1fr track is that image's own width and the
+     grid quietly grows past a phone viewport. */
+  .posts{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .feat{grid-template-columns:minmax(0,1fr)}
+  /* min-height with aspect-ratio sets an automatic minimum in the INLINE
+     axis too (220 x 16/8 = 440px), which overrode the grid track and
+     pushed the card off a phone screen. The ratio alone sizes it. */
+  .feat .shot{min-height:0;aspect-ratio:16/8}
 }
-.faq summary::-webkit-details-marker{display:none}
-.faq summary::after{
-  content:"";position:absolute;right:8px;top:50%;width:12px;height:12px;margin-top:-8px;
-  border-right:1.5px solid var(--amber);border-bottom:1.5px solid var(--amber);
-  transform:rotate(45deg);transition:transform .3s var(--ease);
+@media (max-width:640px){
+  .posts{grid-template-columns:minmax(0,1fr)}
+  .filters .count{width:100%;margin:4px 0 0}
 }
-.faq details[open] summary::after{transform:rotate(-135deg);margin-top:-3px}
-.faq .ans{padding:0 0 24px;color:var(--muted);font-size:1.02rem;max-width:70ch;margin:0}
-.faq summary:hover{color:var(--teal)}
-
-@media (max-width:900px){
-  .chan,.capture-grid{grid-template-columns:1fr}
-  .next4{grid-template-columns:repeat(2,1fr)}
-  .next4 div:nth-child(3){border-left:0;padding-left:0}
-  .next4 div:nth-child(3),.next4 div:nth-child(4){border-top:1px solid var(--line)}
-}
-@media (max-width:560px){ .form-grid{grid-template-columns:1fr} }
 </style>
 <script type="application/ld+json">
 {
   "@context":"https://schema.org",
-  "@type":"FAQPage",
-  "mainEntity":[
-    {"@type":"Question","name":"How much does it cost?","acceptedAnswer":{"@type":"Answer","text":"The Smart Storefront is OMR 950 one-time at the founding price, OMR 1,450 standard. The dashboard adds OMR 650, the autopilot adds OMR 900, and all three together are OMR 2,200."}},
-    {"@type":"Question","name":"Is there a monthly fee?","acceptedAnswer":{"@type":"Answer","text":"Not to keep anything working. The first year of hosting, security and care is included in the build price. The Growth Desk at OMR 75 a month is optional and never required."}},
-    {"@type":"Question","name":"Do you have clients I can speak to?","acceptedAnswer":{"@type":"Answer","text":"Not yet. That is why there is a named guarantee and why the dashboard and buyer-agent demos are open to click without asking for anything."}},
-    {"@type":"Question","name":"What if it doesn't work?","acceptedAnswer":{"@type":"Answer","text":"The First Inquiry Promise: no real buyer inquiry within 30 days of going live and it gets rebuilt free until you get one. If you still don't, you get your money back."}},
-    {"@type":"Question","name":"Do you work in Arabic?","acceptedAnswer":{"@type":"Answer","text":"Yes. Both English and Arabic are treated as first-class, and Arabic copy is checked by a native reader before it ships."}},
-    {"@type":"Question","name":"Who am I actually contracting with?","acceptedAnswer":{"@type":"Answer","text":"Lotus Gulf International, CR 1570092, South Al Khuwair, Bousher, Muscat. AI Profit Lab is the brand. Not VAT registered, so invoices carry no VAT line."}}
-  ]
+  "@type":"Blog",
+  "name":"AI Profit Lab — Articles",
+  "url":"https://aiprofitlab.io/en/blog-v4/",
+  "inLanguage":"en",
+  "publisher":{"@type":"Organization","name":"AI Profit Lab","legalName":"Lotus Gulf International"}
 }
 </script>
 </head>
@@ -478,8 +465,8 @@ section{position:relative;padding:clamp(74px,9vw,138px) 0}
         <a class="lnk" href="/en/services-v4/">What I Build</a>
     <a class="lnk" href="/en/process-v4/">How It Works</a>
     <a class="lnk" href="/en/about-v4/">About</a>
-    <a class="lnk" href="/en/contact-v4/" aria-current="page">Contact</a>
-    <a class="lnk" href="/en/blog-v4/">Articles</a>
+    <a class="lnk" href="/en/contact-v4/">Contact</a>
+    <a class="lnk" href="/en/blog-v4/" aria-current="page">Articles</a>
     <a class="lnk" href="/" lang="ar">&#1593;&#1585;&#1576;&#1610;</a>
     <a class="top-wa" href="https://wa.me/96899245250?text=Hello%20Nahid%2C%20I%20have%20a%20question%20about%20my%20business."><svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 1.8a8.2 8.2 0 1 1-4.2 15.3l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8zm-3.1 4c-.2 0-.5 0-.7.3-.2.3-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.8 2.8 4.4 3.8 2.2.9 2.6.7 3.1.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2-.1-.1-.2-.2-.5-.3l-1.7-.8c-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.1-.2 0-.4.1-.5l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5L10 8.2c-.2-.4-.4-.4-.6-.4h-.5z"/></svg><span>WhatsApp</span></a>
     <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="mmenu"><i></i></button>
@@ -490,163 +477,169 @@ section{position:relative;padding:clamp(74px,9vw,138px) 0}
   <a href="/en/services-v4/"><em>02</em>What I Build</a>
   <a href="/en/process-v4/"><em>03</em>How It Works</a>
   <a href="/en/about-v4/"><em>04</em>About</a>
-  <a href="/en/contact-v4/" aria-current="page"><em>05</em>Contact</a>
-  <a href="/en/blog-v4/" aria-current="page"><em>06</em>Articles</a>
+  <a href="/en/contact-v4/"><em>05</em>Contact</a>
+  <a href="/en/blog-v4/"><em>06</em>Articles</a>
   <p class="mfoot">hello@aiprofitlab.io &middot; <span dir="ltr">+968 9924 5250</span><br>Muscat, Oman</p>
 </div>
 <main id="main">
 
-<header class="phero s-cream grain">
+<section class="phero s-panel grain">
   <div class="wrap">
-    <p class="eyebrow"><span class="star">&#10038;</span> Talk to me</p>
-    <h1 class="h1">You will be talking to<br>the person who builds it.</h1>
-    <p class="lede">There is no sales team, no ticket queue and no account manager. Whichever way you get in
-      touch, it reaches the same phone.</p>
-  </div>
-</header>
-
-<section class="s-cream grain" style="padding-top:0">
-  <div class="wrap">
-    <div class="chan" data-stagger>
-      <a class="primary" href="https://wa.me/96899245250?text=Hello%20Nahid%2C%20I%20have%20a%20question%20about%20my%20business.">
-        <span class="ic"><svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 1.8a8.2 8.2 0 1 1-4.2 15.3l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8zm-3.1 4c-.2 0-.5 0-.7.3-.2.3-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.8 2.8 4.4 3.8 2.2.9 2.6.7 3.1.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2-.1-.1-.2-.2-.5-.3l-1.7-.8c-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.1-.2 0-.4.1-.5l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5L10 8.2c-.2-.4-.4-.4-.6-.4h-.5z"/></svg></span>
-        <h3>WhatsApp</h3>
-        <span class="val" dir="ltr">+968 9924 5250</span>
-        <p>The fastest route, and the one I actually watch. Voice notes are fine.</p>
-        <span class="when"><i></i>Usually same day</span>
-      </a>
-      <a href="mailto:hello@aiprofitlab.io">
-        <span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 5.5A1.5 1.5 0 0 1 3.5 4h17A1.5 1.5 0 0 1 22 5.5v13a1.5 1.5 0 0 1-1.5 1.5h-17A1.5 1.5 0 0 1 2 18.5v-13zm2.2.5 7.8 5.9L19.8 6H4.2zM20 7.9l-7.4 5.6a1 1 0 0 1-1.2 0L4 7.9V18h16V7.9z"/></svg></span>
-        <h3>Email</h3>
-        <span class="val">hello@aiprofitlab.io</span>
-        <p>Best if you want to attach a catalogue, a price list or a brief.</p>
-        <span class="when"><i></i>Within one business day</span>
-      </a>
-      <a href="tel:+96899245250">
-        <span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 2h3.1l1.6 4-2.1 1.5a12.6 12.6 0 0 0 5.9 5.9L16.6 11l4 1.6v3.1a2.3 2.3 0 0 1-2.5 2.3A16.4 16.4 0 0 1 4.3 4.5 2.3 2.3 0 0 1 6.6 2z"/></svg></span>
-        <h3>Phone</h3>
-        <span class="val" dir="ltr">+968 9924 5250</span>
-        <p>If you would rather just say it out loud. Sunday to Thursday.</p>
-        <span class="when"><i></i>9am &ndash; 6pm Muscat</span>
-      </a>
+    <p class="eyebrow"><span class="star">&#10038;</span>Articles</p>
+    <h1 class="h1">Notes from the work</h1>
+    <p class="lede">Everything here comes out of a system I actually built for someone in Oman. No trend
+      pieces, no borrowed statistics &mdash; if a number appears, you can see where it came from or how to
+      produce it yourself.</p>
+    <div class="filters" id="filters">
+      <button type="button" data-cat="all" aria-pressed="true">Everything</button><button type="button" data-cat="silence" aria-pressed="false">Silence &amp; speed</button><button type="button" data-cat="money" aria-pressed="false">Money &amp; ROI</button><button type="button" data-cat="law" aria-pressed="false">Data &amp; the law</button><button type="button" data-cat="systems" aria-pressed="false">Systems &amp; tools</button>
+      <span class="count" id="fcount">11 articles</span>
     </div>
   </div>
 </section>
 
-<!-- ================================================== SILENT BUYER TEST -->
-<section class="s-dark" id="test">
+<section class="s-cream pad-s">
   <div class="wrap">
-    <div class="capture-grid">
-      <div>
-        <p class="eyebrow"><span class="star">&#10038;</span> Free &#183; no obligation &#183; five a week</p>
-        <h2 class="h2">Before you buy anything, let me show you what a buyer sees.</h2>
-        <p class="lede">I contact your business the way a real buyer would &mdash; WhatsApp, your website form,
-          email and phone, at a normal buying hour in the evening.</p>
-        <ul class="getlist">
-          <li>How long each channel took to answer &mdash; measured, not guessed</li>
-          <li>What a buyer actually saw, including in Arabic</li>
-          <li>Where that buyer would have gone instead</li>
-          <li>No pitch attached. If everything answers fast, I will tell you so and you should keep your money.</li>
-        </ul>
+    <a class="feat rv" href="/en/article-v4/">
+      <div class="shot"><img src="/blog/images/whatsapp_missed_inquiries_cost_oman.png" alt="" width="620" height="420" fetchpriority="high"></div>
+      <div class="txt">
+        <p class="tagline"><span class="star">&#10038;</span>Start here</p>
+        <h3>What silence costs: putting a number on the messages you never answered</h3>
+        <p>Twelve unread messages on a Sunday morning is not a service problem. It is a number, and this is the arithmetic that produces it.</p>
+        <span class="stamp">25 June 2026 &middot; 6 min read</span>
       </div>
-
-      <form id="sbtForm" class="form-grid" novalidate>
-        <div class="field">
-          <label for="f-name">Your name</label>
-          <input id="f-name" name="name" type="text" required placeholder="Your name">
-        </div>
-        <div class="field">
-          <label for="f-biz">Business name</label>
-          <input id="f-biz" name="business" type="text" required placeholder="Gulf Lotus Trading">
-        </div>
-        <div class="field">
-          <label for="f-wa">WhatsApp number</label>
-          <input id="f-wa" name="whatsapp" type="tel" required placeholder="+968 &hellip;" inputmode="tel">
-        </div>
-        <div class="field">
-          <label for="f-sell">What do you sell?</label>
-          <input id="f-sell" name="sells" type="text" required placeholder="Medical consumables, wholesale">
-        </div>
-        <div class="field full">
-          <button class="btn btn-wa" type="submit" style="width:100%"><svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 1.8a8.2 8.2 0 1 1-4.2 15.3l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8zm-3.1 4c-.2 0-.5 0-.7.3-.2.3-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.8 2.8 4.4 3.8 2.2.9 2.6.7 3.1.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2-.1-.1-.2-.2-.5-.3l-1.7-.8c-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.1-.2 0-.4.1-.5l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5L10 8.2c-.2-.4-.4-.4-.6-.4h-.5z"/></svg>Send my details on WhatsApp</button>
-          <p class="formnote">This opens WhatsApp with your message ready &mdash; nothing is sent until you press
-            send there. I run five of these a week, because each one takes me about forty minutes to do properly.</p>
-        </div>
-      </form>
-    </div>
+    </a>
   </div>
 </section>
 
-<!-- ==================================================== WHAT HAPPENS NEXT -->
-<section class="s-panel">
+<section class="s-cream" style="padding-top:0">
   <div class="wrap">
-    <p class="eyebrow"><span class="star">&#10038;</span> What happens next</p>
-    <h2 class="h2">No funnel. Four things, in this order.</h2>
-
-    <div class="next4" style="margin-top:clamp(22px,3vw,38px)" data-stagger>
-      <div><b>Step 1</b><h3>I reply</h3><p>Usually the same day, from the same number you messaged.</p></div>
-      <div><b>Step 2</b><h3>I run the test</h3><p>About forty minutes of my time. You do nothing.</p></div>
-      <div><b>Step 3</b><h3>You get the scorecard</h3><p>One page. Yours to keep whatever you decide next.</p></div>
-      <div><b>Step 4</b><h3>Only if it&#8217;s useful</h3><p>Thirty minutes on what to fix &mdash; or nothing at all, with no chasing.</p></div>
+    <div class="asterism"><span>&#10038;</span></div>
+    <div class="posts" data-stagger>
+<a class="post" href="/blog/en/2026-06-16-whatsapp-ai-receptionist-cost-oman-2026.html" data-cat="money">
+      <div class="shot"><img src="/blog/images/whatsapp-ai-receptionist-pricing-oman.png" alt="" loading="lazy" decoding="async" width="420" height="236"></div>
+      <div class="txt">
+        <p class="kicker">Money &amp; ROI</p>
+        <h3>How much a WhatsApp AI receptionist costs in Oman</h3>
+        <p>What the setup actually involves, what Meta charges on top, and how to tell a real quote from a subscription trap.</p>
+        <span class="stamp"><time datetime="2026-06-16">16 June 2026</time><span><span class="old">Older skin</span> &middot; 7 min</span></span>
+      </div>
+    </a>
+<a class="post" href="/blog/en/2026-06-17-whatsapp-business-api-vs-app-oman-guide.html" data-cat="systems">
+      <div class="shot"><img src="/blog/images/whatsapp-api-vs-app-oman-guide.png" alt="" loading="lazy" decoding="async" width="420" height="236"></div>
+      <div class="txt">
+        <p class="kicker">Systems &amp; tools</p>
+        <h3>WhatsApp Business API vs the Business app</h3>
+        <p>The five-device ceiling is where most Omani teams hit the wall. What migrating to the API changes, and what it costs you in flexibility.</p>
+        <span class="stamp"><time datetime="2026-06-17">17 June 2026</time><span><span class="old">Older skin</span> &middot; 9 min</span></span>
+      </div>
+    </a>
+<a class="post" href="/blog/en/2026-07-27-oman-pdpl-explained-whatsapp-ai-2026.html" data-cat="law">
+      <div class="shot"><img src="/blog/images/oman-pdpl-explained-whatsapp-ai-2026.png" alt="" loading="lazy" decoding="async" width="420" height="236"></div>
+      <div class="txt">
+        <p class="kicker">Data &amp; the law</p>
+        <h3>Oman's PDPL, explained for anyone using WhatsApp or AI</h3>
+        <p>Royal Decree 6/2022 in plain language: what counts as personal data, what consent has to look like, and where the line actually sits.</p>
+        <span class="stamp"><time datetime="2026-07-27">27 July 2026</time><span><span class="old">Older skin</span> &middot; 7 min</span></span>
+      </div>
+    </a>
+<a class="post" href="/blog/en/2026-07-31-cost-of-non-compliance-oman-pdpl.html" data-cat="law">
+      <div class="shot"><img src="/blog/images/oman_pdpl_penalties.png" alt="" loading="lazy" decoding="async" width="420" height="236"></div>
+      <div class="txt">
+        <p class="kicker">Data &amp; the law</p>
+        <h3>The cost of non-compliance: penalties under the PDPL</h3>
+        <p>The fines are not theoretical and they are not small. What triggers them, and the cheapest way to stay on the right side of them.</p>
+        <span class="stamp"><time datetime="2026-07-31">31 July 2026</time><span><span class="old">Older skin</span> &middot; 5 min</span></span>
+      </div>
+    </a>
+<a class="post" href="/blog/en/2026-03-28-ceo-dashboard.html" data-cat="systems">
+      <div class="shot"><img src="/blog/images/ceo-dashboard-story-1774720867978.png" alt="" loading="lazy" decoding="async" width="420" height="236"></div>
+      <div class="txt">
+        <p class="kicker">Systems &amp; tools</p>
+        <h3>The copilot at the helm: what a 2026 CEO dashboard is for</h3>
+        <p>A monthly report tells you what already happened. This is the argument for a screen that tells you what is happening while you can still act on it.</p>
+        <span class="stamp"><time datetime="2026-03-28">28 March 2026</time><span><span class="old">Older skin</span> &middot; 4 min</span></span>
+      </div>
+    </a>
+<a class="post" href="/blog/en/2026-07-08-enterprise-ai-smb-whatsapp-receptionist-ceo-dashboard.html" data-cat="money">
+      <div class="shot"><img src="/blog/images/boss_today_enterprise_ai_smb.png" alt="" loading="lazy" decoding="async" width="420" height="236"></div>
+      <div class="txt">
+        <p class="kicker">Money &amp; ROI</p>
+        <h3>The engineering behind the receptionist and the dashboard</h3>
+        <p>The technical brief the press feature did not have room for: the two-stage pipeline, the handover rule, and the measured outcomes.</p>
+        <span class="stamp"><time datetime="2026-07-08">8 July 2026</time><span><span class="old">Older skin</span> &middot; 10 min</span></span>
+      </div>
+    </a>
+<a class="post" href="/blog/en/2026-06-17-whatsapp-ai-real-estate-oman-guide.html" data-cat="silence">
+      <div class="shot"><img src="/blog/images/whatsapp_ai_real_estate_oman.png" alt="" loading="lazy" decoding="async" width="420" height="236"></div>
+      <div class="txt">
+        <p class="kicker">Silence &amp; speed</p>
+        <h3>Never missing a property inquiry again</h3>
+        <p>Real estate is the clearest case of the leak: high order value, impatient buyers, and every viewing request arriving after six.</p>
+        <span class="stamp"><time datetime="2026-06-17">17 June 2026</time><span><span class="old">Older skin</span> &middot; 5 min</span></span>
+      </div>
+    </a>
+<a class="post" href="/blog/en/2026-08-12-automating-internal-operations-replacing-manual-data-entry-omani-enterprises.html" data-cat="systems">
+      <div class="shot"><img src="/blog/images/automating-internal-operations-oman.png" alt="" loading="lazy" decoding="async" width="420" height="236"></div>
+      <div class="txt">
+        <p class="kicker">Systems &amp; tools</p>
+        <h3>Replacing manual data entry inside an Omani enterprise</h3>
+        <p>The work nobody bills for: re-typing the same figures between a supplier's sheet, the ERP, and the invoice. What it costs and how it goes away.</p>
+        <span class="stamp"><time datetime="2026-08-12">12 August 2026</time><span><span class="old">Older skin</span> &middot; 6 min</span></span>
+      </div>
+    </a>
+<a class="post" href="/blog/en/2026-04-01-how-companies-data-leaks-through-ai.html" data-cat="law">
+      <div class="shot"><img src="/blog/images/ai-data-leak-companies.png" alt="" loading="lazy" decoding="async" width="420" height="236"></div>
+      <div class="txt">
+        <p class="kicker">Data &amp; the law</p>
+        <h3>How company data leaks through AI &mdash; and how to stop it</h3>
+        <p>Your staff are already pasting your pricing into public chatbots. The fix is a policy and a boundary, not a ban nobody follows.</p>
+        <span class="stamp"><time datetime="2026-04-01">1 April 2026</time><span><span class="old">Older skin</span> &middot; 7 min</span></span>
+      </div>
+    </a>
+<a class="post" href="/blog/en/2026-04-23-n8n-vs-make-automation-scaling.html" data-cat="systems">
+      <div class="shot"><img src="/blog/images/n8n-vs-make-automation.png" alt="" loading="lazy" decoding="async" width="420" height="236"></div>
+      <div class="txt">
+        <p class="kicker">Systems &amp; tools</p>
+        <h3>n8n vs Make: which one survives scale</h3>
+        <p>Both are fine at ten runs a day. The bill and the data-control question are what separate them at ten thousand.</p>
+        <span class="stamp"><time datetime="2026-04-23">23 April 2026</time><span><span class="old">Older skin</span> &middot; 7 min</span></span>
+      </div>
+    </a>
+<a class="post" href="/blog/en/2026-06-13-integrate-ai-omani-retail-pos.html" data-cat="systems">
+      <div class="shot"><img src="/blog/images/ai-pos-integration.png" alt="" loading="lazy" decoding="async" width="420" height="236"></div>
+      <div class="txt">
+        <p class="kicker">Systems &amp; tools</p>
+        <h3>Putting AI into an Omani retail POS, step by step</h3>
+        <p>Stockouts at the till are a data problem before they are a buying problem. How the predictive layer attaches to a POS you already run.</p>
+        <span class="stamp"><time datetime="2026-06-13">13 June 2026</time><span><span class="old">Older skin</span> &middot; 5 min</span></span>
+      </div>
+    </a>
+    </div>
+    <div class="empty" id="empty" hidden style="margin-top:24px">
+      <b>Nothing filed under that yet.</b>
+      <p style="margin:0">Ask me the question directly and I will answer it &mdash; and probably write it up afterwards.</p>
     </div>
   </div>
 </section>
 
-<!-- ================================================================ FAQ -->
-<section class="s-cream grain">
-  <div class="wrap-n">
-    <p class="eyebrow"><span class="star">&#10038;</span> The awkward questions</p>
-    <h2 class="h2">Asked and answered.</h2>
-
-    <div class="faq" style="margin-top:clamp(22px,3vw,38px)">
-      <details>
-        <summary>How much does it cost?</summary>
-        <p class="ans">The Smart Storefront is OMR 950 one-time at the founding price, OMR 1,450 standard. The
-          dashboard adds OMR 650, the autopilot adds OMR 900, and all three together are OMR 2,200. Every number
-          is on <a href="/en/services-v4/#price">the price list</a> &mdash; you do not need to call to find out.</p>
-      </details>
-      <details>
-        <summary>Is there a monthly fee?</summary>
-        <p class="ans">Not to keep anything working. The first year of hosting, security and care is included in
-          the build price. The Growth Desk at OMR 75/month is optional, sold after delivery, and never required.</p>
-      </details>
-      <details>
-        <summary>Do you have clients I can speak to?</summary>
-        <p class="ans">Not yet, and I am not going to pretend otherwise. That is exactly why there is a named
-          guarantee and why the demos are open to click without asking me for anything: the
-          <a href="/customized-ceo-dashboard-demo/">dashboard</a> and the
-          <a href="/whatsapp-receptionist-demo/">buyer agent</a> are both running on this site right now.</p>
-      </details>
-      <details>
-        <summary>What if it doesn&#8217;t work?</summary>
-        <p class="ans">The First Inquiry Promise: no real buyer inquiry within 30 days of going live and I rebuild
-          it free until you get one. If you still don&#8217;t, you get your money back.</p>
-      </details>
-      <details>
-        <summary>Do you work in Arabic?</summary>
-        <p class="ans">Yes &mdash; both languages are treated as first-class, because your buyers write in Arabic
-          while your datasheets are in English. Arabic copy is checked by a native reader before it ships.</p>
-      </details>
-      <details>
-        <summary>Who am I actually contracting with?</summary>
-        <p class="ans">Lotus Gulf International, CR <span dir="ltr">1570092</span>, South Al Khuwair, Bousher, Muscat.
-          AI Profit Lab is the brand; the invoice comes from the company. Not VAT registered, so invoices carry no
-          VAT line.</p>
-      </details>
-      <details>
-        <summary>How do I pay?</summary>
-        <p class="ans">Bank transfer, in OMR. There are three structures &mdash; pay on start, three payments, or pay
-          only once it has produced a real inquiry. They are described on
-          <a href="/en/services-v4/#price">the services page</a>. No payment is ever taken on this website.</p>
-      </details>
+<section class="s-dark grain">
+  <div class="wrap-n" style="text-align:center">
+    <p class="eyebrow" style="justify-content:center"><span class="star">&#10038;</span>Not covered here</p>
+    <h2 class="h2">Ask the question you actually have</h2>
+    <p class="lede" style="margin-inline:auto">The articles answer what people ask most often. Yours is
+      probably more specific than that &mdash; send it and you get an answer from the person who builds the
+      thing, not a form reply.</p>
+    <div class="btn-row" style="justify-content:center;margin-top:26px">
+      <a class="btn btn-wa" href="https://wa.me/96899245250?text=Hello%20Nahid%2C%20I%20have%20a%20question%20I%20did%20not%20find%20an%20article%20about."><svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 1.8a8.2 8.2 0 1 1-4.2 15.3l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8zm-3.1 4c-.2 0-.5 0-.7.3-.2.3-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.8 2.8 4.4 3.8 2.2.9 2.6.7 3.1.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2-.1-.1-.2-.2-.5-.3l-1.7-.8c-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.1-.2 0-.4.1-.5l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5L10 8.2c-.2-.4-.4-.4-.6-.4h-.5z"/></svg><span>Ask on WhatsApp</span></a>
+      <a class="btn btn-ghost" href="/en/simulator-v4/">Run the numbers instead</a>
     </div>
   </div>
 </section>
 
 </main>
 <nav class="pager" aria-label="Next page">
-  <div class="wrap"><a href="/en/index-v4/">
-    <span><span class="pl">Back to the start</span><span class="pt">Never lose a buyer to silence again</span></span>
+  <div class="wrap"><a href="/en/article-v4/">
+    <span><span class="pl">Start here</span><span class="pt">What silence costs</span></span>
     <span class="parw" aria-hidden="true">&rarr;</span>
   </a></div>
 </nav>
@@ -781,36 +774,32 @@ section{position:relative;padding:clamp(74px,9vw,138px) 0}
 })();
 
 /* ---------------------------------------------------------------------------
-   Silent Buyer Test capture.
-
-   Composes a WhatsApp message rather than posting to a backend, so nothing is
-   transmitted until the visitor presses send inside WhatsApp - which is what
-   the note under the button promises. Same pattern as en/index-v3.html.
+   Category filter. Server-rendered cards, hidden and shown in place - there is
+   no second list and no fetch, so the page works identically with the filter
+   never touched.
 --------------------------------------------------------------------------- */
 (function(){
   "use strict";
-  var form = document.getElementById("sbtForm");
-  if (!form) return;
+  var bar = document.getElementById("filters");
+  if (!bar) return;
+  var cards = [].slice.call(document.querySelectorAll(".post"));
+  var count = document.getElementById("fcount");
+  var empty = document.getElementById("empty");
 
-  form.addEventListener("submit", function(e){
-    e.preventDefault();
-    var get = function(n){ return (form.elements[n].value || "").trim(); };
-    var required = ["name","business","whatsapp","sells"];
-    for (var i = 0; i < required.length; i++){
-      var n = required[i];
-      if (!get(n)){
-        form.elements[n].focus();
-        if (form.elements[n].reportValidity) form.elements[n].reportValidity();
-        return;
-      }
-    }
-    var msg = "Hello Nahid \u2014 I'd like the free Silent Buyer Test.\n\n" +
-      "Name: " + get("name") + "\n" +
-      "Business: " + get("business") + "\n" +
-      "WhatsApp: " + get("whatsapp") + "\n" +
-      "We sell: " + get("sells");
-    if (typeof gtag === "function") gtag("event","generate_lead",{method:"silent_buyer_test"});
-    window.open("https://wa.me/96899245250?text=" + encodeURIComponent(msg), "_blank", "noopener");
+  bar.addEventListener("click", function(e){
+    var b = e.target.closest("button"); if (!b) return;
+    var key = b.getAttribute("data-cat");
+    [].forEach.call(bar.querySelectorAll("button"), function(x){
+      x.setAttribute("aria-pressed", x === b ? "true" : "false");
+    });
+    var shown = 0;
+    cards.forEach(function(c){
+      var on = key === "all" || c.getAttribute("data-cat") === key;
+      c.hidden = !on; if (on) shown++;
+    });
+    if (count) count.textContent = shown + (shown === 1 ? " article" : " articles");
+    if (empty) empty.hidden = shown > 0;
+    if (typeof gtag === "function") gtag("event","filter_articles",{category:key});
   });
 })();
 </script>

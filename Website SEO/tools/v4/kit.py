@@ -434,14 +434,15 @@ def header(active_href):
     for label, href, _ in NAV[1:]:
         cur = ' aria-current="page"' if href == active_href else ""
         links.append(f'<a class="lnk" href="{href}"{cur}>{label}</a>')
-    links.append('<a class="lnk" href="/en/blog/">Articles</a>')
+    cur = ' aria-current="page"' if active_href == "/en/blog-v4/" else ""
+    links.append(f'<a class="lnk" href="/en/blog-v4/"{cur}>Articles</a>')
     links.append('<a class="lnk" href="/" lang="ar">&#1593;&#1585;&#1576;&#1610;</a>')
 
     m = []
     for label, href, n in NAV:
         cur = ' aria-current="page"' if href == active_href else ""
         m.append(f'<a href="{href}"{cur}><em>{n}</em>{label}</a>')
-    m.append('<a href="/en/blog/"><em>06</em>Articles</a>')
+    m.append(f'<a href="/en/blog-v4/"{cur}><em>06</em>Articles</a>')
 
     return f"""<header class="top" id="top">
   <a href="/en/index-v4/" aria-label="AI Profit Lab home">
@@ -484,8 +485,8 @@ FOOTER = f"""<footer class="foot">
           <li><a href="/en/services-v4/">What I build</a></li>
           <li><a href="/en/process-v4/">How it works</a></li>
           <li><a href="/en/services-v4/#price">Prices</a></li>
-          <li><a href="/customized-ceo-dashboard-demo/">Dashboard demo</a></li>
-          <li><a href="/whatsapp-receptionist-demo/">WhatsApp demo</a></li>
+          <li><a href="/en/demo-v4/#dash">Dashboard demo</a></li>
+          <li><a href="/en/demo-v4/">WhatsApp demo</a></li>
         </ul>
       </div>
       <div>
@@ -495,7 +496,8 @@ FOOTER = f"""<footer class="foot">
           <li><a href="mailto:hello@aiprofitlab.io">hello@aiprofitlab.io</a></li>
           <li><a href="/en/contact-v4/">Contact page</a></li>
           <li><a href="/en/about-v4/">About Nahid</a></li>
-          <li><a href="/en/blog/">Articles</a></li>
+          <li><a href="/en/blog-v4/">Articles</a></li>
+          <li><a href="/en/simulator-v4/">Revenue leak simulator</a></li>
           <li><a href="/privacy/">Privacy</a></li>
         </ul>
       </div>

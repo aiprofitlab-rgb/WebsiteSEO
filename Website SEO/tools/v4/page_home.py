@@ -259,7 +259,7 @@ def body():
         </div>
 
         <span class="bignum-cap">Revenue walking away, per month</span>
-        <span class="bignum" id="leak">OMR 1,559</span>
+        <span class="bignum" id="leakNum">OMR 1,559</span>
 
         <!-- Two bars, one scale: the monthly leak against the one-time cost of
              fixing it. The comparison is the whole argument. -->
@@ -476,7 +476,7 @@ def body():
         <span><h3>Who builds it</h3><p>One operator, not an agency. Including who I turn away.</p></span>
         <span class="go">Open <span aria-hidden="true">&rarr;</span></span>
       </a>
-      <a class="rcard" href="/en/blog/">
+      <a class="rcard" href="/en/blog-v4/">
         <span class="rn">04</span>
         <span><h3>Articles</h3><p>Plain-language writing on AI for Omani and GCC trading businesses.</p></span>
         <span class="go">Open <span aria-hidden="true">&rarr;</span></span>

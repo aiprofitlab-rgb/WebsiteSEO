@@ -253,7 +253,7 @@ CALC_JS = r'''
     $("o4").textContent = win + "%";
 
     const leak = perWeek * WEEKS_PER_MONTH * (pct / 100) * (win / 100) * order;
-    $("leak").textContent = fmt(leak);
+    $("leakNum").textContent = fmt(leak);
 
     /* Both bars share one scale so the comparison is honest. The leak bar is
        full width whenever it exceeds the build cost, and the cost bar shrinks

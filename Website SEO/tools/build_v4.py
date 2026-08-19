@@ -20,7 +20,8 @@ sys.path.insert(0, str(HERE / "v4"))
 
 import kit  # noqa: E402
 
-MODULES = ["page_home", "page_services", "page_process", "page_about", "page_contact"]
+MODULES = ["page_home", "page_services", "page_process", "page_about", "page_contact",
+           "page_blog", "page_article", "page_simulator", "page_demo"]
 
 
 def render(mod):
