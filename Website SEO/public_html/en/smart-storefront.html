@@ -174,7 +174,6 @@ nav{position:sticky;top:0;z-index:60;background:rgba(241,239,232,.93);backdrop-f
 @keyframes dToast{0%,50%{opacity:0;transform:translateY(-10px) scale(.95)}56%,88%{opacity:1;transform:none}94%,100%{opacity:0;transform:translateY(-6px)}}
 
 .hero-trust{font-family:var(--mono);font-size:.7rem;letter-spacing:.05em;color:rgba(241,239,232,.6);margin-top:26px;display:flex;flex-wrap:wrap;gap:6px 18px}
-.knows{margin-top:30px;padding:16px 18px;border-left:2px solid var(--amber);background:rgba(241,239,232,.07);border-radius:0 8px 8px 0;font-size:.95rem;color:rgba(241,239,232,.9);max-width:36em}
 
 /* ══ mascot ══ */
 .mascot{width:64px;height:64px;flex:none}
@@ -239,39 +238,54 @@ nav{position:sticky;top:0;z-index:60;background:rgba(241,239,232,.93);backdrop-f
 .card p{margin:0;font-size:.94rem;color:var(--muted)}
 .card h3{color:var(--teal-900)}
 
-.dark{background:var(--teal-900);color:var(--cream)}
-.dark h2{color:var(--white)}
-.dark .eyebrow{color:var(--amber-pale)}
-.dark .lede{color:rgba(241,239,232,.8)}
-.notlist{list-style:none;padding:0;margin:0;display:grid;gap:11px;max-width:44em}
-.notlist li{display:flex;gap:12px;align-items:flex-start;padding:13px 16px;background:rgba(241,239,232,.06);border-radius:9px;font-size:.96rem;transition:background .2s,transform .2s}
-.notlist li:hover{background:rgba(241,239,232,.11);transform:translateX(4px)}
-.notlist .x{color:var(--amber-pale);font-family:var(--mono);flex:none}
+/* ══ the vow: the guarantee and the face behind it, in one block ══ */
+.vow{display:grid;grid-template-columns:200px 1fr;gap:30px;align-items:center;max-width:900px;
+  background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--amber);border-radius:0 16px 16px 0;padding:28px 30px}
+.vow img{border-radius:12px;width:200px;height:auto;object-fit:cover}
+.vow q{font-family:var(--display);font-size:clamp(1.1rem,2.5vw,1.4rem);line-height:1.42;color:var(--teal-900);quotes:none;display:block;margin:0}
+.sig{font-family:var(--display);font-size:1.02rem;color:var(--teal-900);margin:16px 0 2px}
+.sigsub{font-family:var(--mono);font-size:.74rem;color:var(--muted);margin:0}
 
-.promise{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--amber);border-radius:0 14px 14px 0;padding:28px 26px;max-width:44em}
-.promise q{font-family:var(--display);font-size:1.24rem;line-height:1.45;color:var(--teal-900);quotes:none;display:block}
-
-/* ══ ladder ══ */
-.ladder{display:grid;gap:12px;max-width:560px}
-.rung{position:relative;border:1px solid var(--line);border-radius:12px;padding:18px 20px;background:var(--panel);display:flex;align-items:center;gap:16px;
-  animation:popIn .5s var(--spring) backwards}
-.rung:nth-child(2){animation-delay:.09s}
-.rung:nth-child(3){animation-delay:.18s}
-.rung.live{background:var(--white);border:1.5px solid var(--teal);box-shadow:0 16px 40px -30px rgba(10,61,48,.7)}
-.rung.live::after{content:"";position:absolute;inset:-1.5px;border-radius:12px;border:1.5px solid var(--teal);opacity:0;
-  animation:halo 3.4s ease-out infinite;pointer-events:none}
-@keyframes halo{0%{opacity:.55;transform:scale(1)}70%,100%{opacity:0;transform:scale(1.035)}}
-.rung.next{opacity:.62}
-.rung .price{font-family:var(--display);font-size:1.7rem;color:var(--teal-900);line-height:1;white-space:nowrap}
-.rung .meta{flex:1;font-size:.9rem;color:var(--muted)}
-.rung .flag{font-family:var(--mono);font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);display:block;margin-bottom:3px}
-.seatbar{height:5px;background:var(--panel-2);border-radius:3px;overflow:hidden;margin-top:8px}
-.seatbar i{display:block;height:100%;background:linear-gradient(90deg,var(--teal),var(--amber));border-radius:3px;width:0;transition:width 1.1s var(--spring)}
-.ladder-note{font-size:.9rem;color:var(--muted);max-width:40em;margin-top:20px;padding-top:18px;border-top:1px solid var(--line)}
-.skel{display:inline-block;min-width:3.4em;height:.85em;background:var(--panel-2);border-radius:3px;vertical-align:middle;animation:pulse 1.2s ease-in-out infinite}
+/* ══ scarcity: deliberately the loudest block on the page ══ */
+.scarcity{background:var(--teal-900);color:var(--cream);position:relative;overflow:hidden}
+.scarcity::before{content:"";position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(46rem 24rem at 86% -20%,rgba(216,146,52,.28),transparent 62%)}
+.scarcity .wrap{position:relative;z-index:1}
+.scarcity h2{color:var(--white)}
+.scarcity .eyebrow{color:var(--amber-pale)}
+.scard{max-width:660px;background:linear-gradient(180deg,rgba(241,239,232,.1),rgba(241,239,232,.04));
+  border:1px solid rgba(232,201,143,.34);border-radius:18px;padding:24px 26px 26px;
+  box-shadow:0 30px 70px -34px rgba(0,0,0,.8)}
+.sc-badge{display:inline-flex;align-items:center;gap:9px;font-family:var(--mono);font-size:.63rem;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--amber-pale);background:rgba(216,146,52,.2);border-radius:99px;padding:6px 13px;margin-bottom:20px}
+.sc-badge i{width:7px;height:7px;border-radius:50%;background:#5FD68F;animation:beat 1.9s ease-out infinite}
+@keyframes beat{0%{box-shadow:0 0 0 0 rgba(95,214,143,.6)}70%,100%{box-shadow:0 0 0 10px rgba(95,214,143,0)}}
+.sc-count{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap}
+.sc-count b{font-family:var(--display);font-weight:400;letter-spacing:-.02em;line-height:.78;
+  font-size:clamp(3.8rem,15vw,6rem);color:var(--amber-bright)}
+.sc-count span{font-size:1.06rem;color:var(--white);flex:1;min-width:8em;max-width:13em;line-height:1.3}
+.sc-pips{display:flex;gap:8px;margin:20px 0 22px}
+.sc-pips i{flex:1;height:12px;border-radius:99px;background:rgba(241,239,232,.13);
+  animation:pipIn .5s var(--spring) backwards}
+.sc-pips i.open{background:linear-gradient(90deg,var(--amber-bright),var(--amber-pale));
+  box-shadow:0 0 20px -4px rgba(216,146,52,.9)}
+@keyframes pipIn{0%{opacity:0;transform:scaleX(.15)}100%{opacity:1;transform:none}}
+.seatbar{height:12px;background:rgba(241,239,232,.13);border-radius:99px;overflow:hidden;margin:20px 0 22px}
+.seatbar i{display:block;height:100%;width:0;border-radius:99px;
+  background:linear-gradient(90deg,var(--amber-bright),var(--amber-pale));transition:width 1.2s var(--spring)}
+.sc-prices{display:flex;align-items:center;gap:18px;flex-wrap:wrap;border-top:1px solid rgba(241,239,232,.16);padding-top:20px}
+.sc-cell .k{font-family:var(--mono);font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(241,239,232,.6);display:block;margin-bottom:5px}
+.sc-cell .v{font-family:var(--display);font-size:2.1rem;line-height:1;color:var(--white);white-space:nowrap}
+.sc-cell.then .v{font-size:1.45rem;color:rgba(241,239,232,.55)}
+.sc-rise{font-family:var(--mono);font-size:1.5rem;color:var(--amber-bright);line-height:1}
+.sc-after{font-size:.83rem;color:rgba(241,239,232,.55);margin:14px 0 0}
+.sc-sold{font-family:var(--display);font-size:1.5rem;color:var(--amber-pale);margin:0 0 6px}
+.sc-note{font-size:.88rem;color:rgba(241,239,232,.62);max-width:38em;margin:22px 0 0}
+.skel{display:inline-block;min-width:3.4em;height:.85em;background:rgba(241,239,232,.18);border-radius:3px;vertical-align:middle;animation:pulse 1.2s ease-in-out infinite}
 @keyframes pulse{50%{opacity:.45}}
-.offline{display:none;background:#FBF3E4;border:1px solid var(--amber-pale);border-radius:10px;padding:15px 17px;font-size:.93rem;max-width:44em}
+.offline{display:none;background:rgba(241,239,232,.08);border:1px solid var(--amber-pale);color:var(--cream);border-radius:12px;padding:16px 18px;font-size:.93rem;max-width:44em}
 .offline.on{display:block}
+.offline a{color:var(--amber-pale)}
 
 /* ══ pledges — the percentage stays hidden until a tap earns it ══ */
 .pledges{display:grid;gap:11px;max-width:640px}
@@ -306,13 +320,14 @@ nav{position:sticky;top:0;z-index:60;background:rgba(241,239,232,.93);backdrop-f
 
 /* ══ the button that runs away ══ */
 .chase{position:relative;margin-top:34px;padding:26px 22px;border:1px dashed var(--line);border-radius:12px;text-align:center;background:var(--panel);min-height:158px}
+/* It sits perfectly still until it is actually chased. An idle wobble on an
+   untouched button reads as a broken layout, not as a joke. */
 #runaway-btn{position:relative;background:var(--amber);color:#2A1B04;font-weight:700;border:0;border-radius:8px;
   padding:14px 26px;font-size:1rem;font-family:var(--sans);cursor:pointer;z-index:70;
-  box-shadow:0 10px 22px -12px rgba(186,117,23,.9);animation:wobble 3.2s ease-in-out infinite}
-@keyframes wobble{0%,92%,100%{transform:rotate(0) scale(1)}94%{transform:rotate(-2.5deg) scale(1.03)}97%{transform:rotate(2.5deg) scale(1.03)}}
-#runaway-btn.loose{position:fixed;animation:none;transition:left .22s var(--spring),top .22s var(--spring),transform .18s}
+  box-shadow:0 10px 22px -12px rgba(186,117,23,.9)}
+#runaway-btn.loose{position:fixed;transition:left .22s var(--spring),top .22s var(--spring),transform .18s}
 #runaway-btn.squash{transform:scale(1.16,.82)}
-#runaway-btn.caught{background:var(--teal);color:#fff;animation:none}
+#runaway-btn.caught{background:var(--teal);color:#fff}
 .puff{position:fixed;width:9px;height:9px;border-radius:50%;background:var(--amber-pale);opacity:.75;pointer-events:none;z-index:69;animation:puff .55s ease-out forwards}
 @keyframes puff{to{transform:translate(var(--dx),var(--dy)) scale(0);opacity:0}}
 .confetti{position:fixed;width:8px;height:12px;border-radius:2px;pointer-events:none;z-index:95;animation:fall 1.5s ease-in forwards}
@@ -321,11 +336,6 @@ nav{position:sticky;top:0;z-index:60;background:rgba(241,239,232,.93);backdrop-f
 .trophy{display:none;margin-top:18px;background:var(--white);border:1px solid var(--teal);border-radius:11px;padding:18px 20px;text-align:left}
 .trophy.on{display:block;animation:popIn .55s var(--spring)}
 .trophy .badge{font-family:var(--mono);font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--teal);display:block;margin-bottom:6px}
-
-/* ══ founder ══ */
-.founder{display:grid;grid-template-columns:190px 1fr;gap:32px;align-items:center;background:var(--panel);border:1px solid var(--line);border-radius:15px;padding:30px}
-.founder img{border-radius:12px;width:190px;height:auto;object-fit:cover}
-.sig{font-family:var(--display);font-size:1.05rem;color:var(--teal-900);margin-top:14px}
 
 /* ══ form ══ */
 .form{background:var(--panel);border:1px solid var(--line);border-radius:15px;padding:30px 28px;max-width:680px}
@@ -344,16 +354,6 @@ nav{position:sticky;top:0;z-index:60;background:rgba(241,239,232,.93);backdrop-f
 .formerr{display:none;background:#FBEDE9;border:1px solid #E5B4A6;color:#8A3B22;border-radius:9px;padding:12px 14px;font-size:.92rem;margin-top:14px}
 .formerr.on{display:block;animation:shake .4s}
 @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
-
-/* ══ faq ══ */
-details{background:var(--panel);border:1px solid var(--line);border-radius:11px;padding:15px 18px;margin-bottom:10px;transition:background .2s,border-color .2s}
-details:hover{border-color:var(--amber-pale)}
-details[open]{background:var(--white)}
-summary{font-weight:600;cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:14px;color:var(--teal-900)}
-summary::-webkit-details-marker{display:none}
-summary::after{content:"+";font-family:var(--mono);color:var(--amber);flex:none;transition:transform .25s var(--spring)}
-details[open] summary::after{content:"–";transform:rotate(180deg)}
-details p{margin:12px 0 0;font-size:.95rem;color:var(--muted);animation:popIn .3s}
 
 /* ══ footer + cat ══ */
 footer{background:var(--teal-950);color:rgba(241,239,232,.72);padding:44px 0 96px;font-size:.87rem;position:relative}
@@ -386,6 +386,9 @@ footer a{color:var(--amber-pale)}
 .sticky-in{max-width:1080px;margin:0 auto;display:flex;align-items:center;gap:12px}
 .sticky .info{color:var(--cream);font-size:.8rem;line-height:1.3;margin-right:auto}
 .sticky .info b{font-family:var(--display);font-weight:400;font-size:1rem;color:var(--amber-pale);display:block}
+.sticky .seats{font-family:var(--mono);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:#2A1B04;
+  background:var(--amber-bright);border-radius:99px;padding:5px 11px;flex:none;white-space:nowrap}
+.sticky .seats:empty{display:none}
 .sticky .btn{padding:11px 20px;font-size:.92rem;flex:none}
 
 @media (max-width:900px){
@@ -393,8 +396,8 @@ footer a{color:var(--amber-pale)}
   .stage{height:390px;order:-1}
   .grid3{grid-template-columns:1fr 1fr}
   .result{grid-template-columns:1fr;gap:24px}
-  .founder{grid-template-columns:1fr}
-  .founder img{width:150px}
+  .vow{grid-template-columns:1fr;gap:22px;padding:26px 24px}
+  .vow img{width:160px}
 }
 @media (max-width:640px){
   body{font-size:16px}
@@ -404,6 +407,7 @@ footer a{color:var(--amber-pale)}
   .rung{flex-wrap:wrap;gap:10px}
   .sticky .info{font-size:.72rem}
   .sticky .info b{font-size:.9rem}
+  .sticky .seats{font-size:.58rem;padding:4px 8px;letter-spacing:.06em}
   .mascot{width:52px;height:52px}
 }
 @media (prefers-reduced-motion:reduce){
@@ -433,24 +437,19 @@ footer a{color:var(--amber-pale)}
   <div class="wrap hero-grid">
     <div>
       <p class="eyebrow"><span class="star">✼</span> You scanned the paper one</p>
-      <h1>That flyer in your hand can't answer a buyer at 11pm.</h1>
-      <p class="sub">This is what the paper becomes: a bilingual storefront that greets your buyers, answers them in Arabic or English, and hands the serious ones straight to your WhatsApp.</p>
+      <h1>That flyer can't answer a buyer at 11pm.</h1>
+      <p class="sub">This is what it becomes: a bilingual storefront that answers your buyers in Arabic or English and hands the serious ones to your WhatsApp.</p>
 
       <div class="hero-ctas">
-        <a class="btn btn-cream" href="#roast">Show me what mine looks like</a>
+        <a class="btn btn-cream" href="#roast">Show me mine</a>
         <a class="btn btn-outline" href="#ladder">See the price</a>
-      </div>
-
-      <div class="knows">
-        <strong>This page knows exactly one thing about you: you scanned a flyer.</strong>
-        No camera, no location, no pop-up demanding your email before you've read a sentence. If that's a low bar — it is. Most pages you'll scan this month won't clear it.
       </div>
 
       <div class="hero-trust">
         <span>One-time price</span><span>·</span>
-        <span>1 year hosting &amp; care included</span><span>·</span>
+        <span>1 year hosting &amp; care</span><span>·</span>
         <span>Arabic + English</span><span>·</span>
-        <span>No monthly retainer</span>
+        <span>No retainer</span>
       </div>
     </div>
 
@@ -478,12 +477,30 @@ footer a{color:var(--amber-pale)}
   </div>
 </header>
 
-<!-- ═══ 2. THREE TAPS ═══ -->
+<!-- ═══ 2. THE GUARANTEE, AND THE FACE BEHIND IT ═══ -->
+<section>
+  <div class="wrap">
+    <p class="eyebrow rv"><span class="star">✼</span> The First Inquiry Promise</p>
+    <div class="vow rv">
+      <picture>
+        <source srcset="/nahid-founder-2026.webp" type="image/webp"/>
+        <img src="/nahid-founder-2026.jpg" alt="Nahid Abyari, founder of AI Profit Lab" width="200" height="236" decoding="async"/>
+      </picture>
+      <div>
+        <q>No real buyer inquiry within 30 days of going live? I rebuild it free until you get one. If you still don't, you get your money back.</q>
+        <p class="sig">— Nahid Abyari</p>
+        <p class="sigsub">I build every Storefront myself · Lotus Gulf International, Muscat</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 3. THREE TAPS ═══ -->
 <section class="roast" id="roast">
   <div class="wrap narrow">
-    <p class="eyebrow rv"><span class="star">✼</span> Three taps, about ten seconds</p>
-    <h2 class="rv">Let's see what yours would look like.</h2>
-    <p class="lede rv" style="margin-bottom:30px">No email, no sign-up, no "book a discovery call to see the demo." Just tap three things.</p>
+    <p class="eyebrow rv"><span class="star">✼</span> Ten seconds</p>
+    <h2 class="rv">See what yours would look like.</h2>
+    <p class="lede rv" style="margin-bottom:30px">Three taps. No email, no sign-up.</p>
 
     <div class="qcard rv" id="qcard">
       <div id="qwrap">
@@ -526,9 +543,8 @@ footer a{color:var(--amber-pale)}
           </div>
         </div>
         <div>
-          <p class="qstep">The honest caption</p>
-          <h3 style="font-family:var(--display);font-weight:400;font-size:1.5rem;color:var(--teal-900);margin-bottom:12px">That's a mockup, not a promise.</h3>
-          <p style="color:var(--muted);font-size:.97rem">It took a phone and ten seconds, so treat it as exactly that much proof. The real one takes about a week, has your actual products in it, and is written in both languages by someone who asked you questions first.</p>
+          <h3 style="font-family:var(--display);font-weight:400;font-size:1.5rem;color:var(--teal-900);margin-bottom:12px">A mockup, not a promise.</h3>
+          <p style="color:var(--muted);font-size:.97rem">Ten seconds of proof, worth exactly that much. The real one takes about a week and has your actual products in it, in both languages.</p>
           <p style="margin-top:16px"><a class="btn btn-primary" href="#ladder">What does it cost?</a></p>
           <p><button type="button" class="opt" id="qagain" style="margin-top:10px;width:auto">Start again</button></p>
         </div>
@@ -537,82 +553,50 @@ footer a{color:var(--amber-pale)}
   </div>
 </section>
 
-<!-- ═══ 3. WHAT YOU ACTUALLY GET ═══ -->
+<!-- ═══ 4. WHAT YOU GET ═══ -->
 <section>
   <div class="wrap">
-    <p class="eyebrow rv"><span class="star">✼</span> What you actually get</p>
-    <h2 class="rv">Six things, and they all do a job.</h2>
+    <p class="eyebrow rv"><span class="star">✼</span> What you get</p>
+    <h2 class="rv">Six things. Each one does a job.</h2>
     <div class="grid3" style="margin-top:34px">
-      <div class="card rv"><span class="ic">🕐</span><h3>The employee who never sleeps</h3><p>A bilingual AI sales agent inside the site. It greets buyers, answers them in Arabic or English, and works out who is serious — at 2am, on a Friday, during Eid.</p></div>
-      <div class="card rv"><span class="ic">📲</span><h3>Every hot lead lands in your pocket</h3><p>Serious buyers get handed straight to WhatsApp to close. No lead sits in an inbox nobody opens.</p></div>
-      <div class="card rv"><span class="ic">📋</span><h3>Built for how you actually get asked for prices</h3><p>A wholesale and bulk quote-request flow — not a generic "contact us" box designed for a retail shop.</p></div>
-      <div class="card rv"><span class="ic">👀</span><h3>Know who's about to buy before they call</h3><p>A short summary of who visited and what they asked, sent to your phone. Not buried in a dashboard you'll open twice.</p></div>
-      <div class="card rv"><span class="ic">🔎</span><h3>Found when a buyer asks Google — or ChatGPT</h3><p>Built for both traditional search and AI answers, so you turn up when someone asks who supplies this in Oman.</p></div>
-      <div class="card rv"><span class="ic">🛠️</span><h3>Zero maintenance headache</h3><p>A full year of hosting, security and care included. Keeping a website alive was never supposed to be your job.</p></div>
+      <div class="card rv"><span class="ic">🕐</span><h3>An employee who never sleeps</h3><p>A bilingual AI agent that answers buyers at 2am, on a Friday, during Eid.</p></div>
+      <div class="card rv"><span class="ic">📲</span><h3>Hot leads in your pocket</h3><p>Serious buyers get handed straight to your WhatsApp.</p></div>
+      <div class="card rv"><span class="ic">📋</span><h3>Built for bulk quotes</h3><p>A wholesale quote-request flow, not a retail "contact us" box.</p></div>
+      <div class="card rv"><span class="ic">👀</span><h3>Know who's about to buy</h3><p>A short summary of who visited and what they asked, sent to your phone.</p></div>
+      <div class="card rv"><span class="ic">🔎</span><h3>Found on Google and ChatGPT</h3><p>Built for traditional search and AI answers alike.</p></div>
+      <div class="card rv"><span class="ic">🛠️</span><h3>Nothing to maintain</h3><p>A full year of hosting, security and care included.</p></div>
     </div>
   </div>
 </section>
 
-<!-- ═══ 4. WHAT'S NOT INCLUDED ═══ -->
-<section class="dark">
+<!-- ═══ 5. SCARCITY ═══ -->
+<section class="scarcity" id="ladder">
   <div class="wrap">
-    <p class="eyebrow rv"><span class="star">✼</span> The unflattering part, first</p>
-    <h2 class="rv">What you're <em>not</em> getting.</h2>
-    <p class="lede rv" style="margin-bottom:28px">Written down before you've paid anything. It's the fastest way for you to work out whether to believe the rest of the page.</p>
-    <ul class="notlist">
-      <li class="rv"><span class="x">not incl.</span><span>Paid ad management. I'm not running your Google or Meta ads.</span></li>
-      <li class="rv"><span class="x">not incl.</span><span>Ongoing content writing after the initial site copy is written.</span></li>
-      <li class="rv"><span class="x">not incl.</span><span>Online payments and e-commerce checkout. If you need it, we scope it separately and it costs more.</span></li>
-      <li class="rv"><span class="x">not incl.</span><span>Social media management. Nobody should be paying a website company for that.</span></li>
-      <li class="rv"><span class="x">not incl.</span><span>A dashboard with forty charts on it. You'd open it twice. The useful parts come to your phone instead.</span></li>
-    </ul>
-  </div>
-</section>
-
-<!-- ═══ 5. THE GUARANTEE ═══ -->
-<section>
-  <div class="wrap">
-    <p class="eyebrow rv"><span class="star">✼</span> The named guarantee</p>
-    <h2 class="rv">The First Inquiry Promise</h2>
-    <div class="promise rv">
-      <q>If your Storefront hasn't produced one real, verifiable buyer inquiry within 30 days of going live, I rebuild whatever isn't working — free — until it does. If you still don't have one, you get your money back.</q>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ 6. THE LADDER ═══ -->
-<section class="roast" id="ladder">
-  <div class="wrap">
-    <p class="eyebrow rv"><span class="star">✼</span> The price, and where it's going</p>
-    <h2 class="rv">The price climbs as seats fill. Here's the real counter.</h2>
-    <p class="lede rv" style="margin-bottom:30px">Not a countdown timer that resets when you reload the page. This number comes from a ledger, and it only moves when a deposit actually clears.</p>
+    <p class="eyebrow rv"><span class="star">✼</span> The price climbs as seats fill</p>
+    <h2 class="rv">Seats left at today's price:</h2>
 
     <div class="offline" id="ladderOffline">
       <strong>The live count isn't loading right now.</strong>
-      I'd rather show you nothing than a number I made up. Message me on WhatsApp and I'll tell you exactly where the ladder stands today.
+      I'd rather show you nothing than a number I made up. <a href="https://wa.me/96899245250" target="_blank" rel="noopener">Ask me on WhatsApp</a>.
     </div>
 
-    <div class="ladder rv" id="ladderList">
-      <div class="rung live">
-        <div class="price">OMR <span class="skel"></span></div>
-        <div class="meta"><span class="flag">Loading the ledger</span><span class="skel" style="min-width:9em"></span></div>
-      </div>
+    <div class="scard rv" id="ladderList">
+      <div class="sc-badge"><i></i> Reading the ledger</div>
+      <div class="sc-count"><b><span class="skel" style="min-width:1.1em"></span></b><span>seats left at this price</span></div>
+      <div class="sc-pips"><i></i><i></i><i></i></div>
     </div>
 
-    <p class="ladder-note rv">
-      <strong>Why it climbs:</strong> I build these personally, one at a time, so the queue is a real constraint rather than a marketing device. The early seats are cheaper because early clients are taking a risk on someone with no published local track record yet — that's a fair trade, and it stops being available once the proof exists.<br><br>
-      <strong>What counts as a seat:</strong> one taken seat = one 50% deposit that has actually cleared. Filling in the form below doesn't take a seat from anyone, and it doesn't hold the price forever — the deposit does.
-    </p>
+    <p class="sc-note rv">One seat = one 50% deposit that has actually cleared. Not a timer that resets when you reload. Sending the form doesn't take a seat — the deposit does.</p>
   </div>
 </section>
 
-<!-- ═══ 7. PLEDGES ═══ -->
+<!-- ═══ 6. PLEDGES ═══ -->
 <section id="pledges">
   <div class="wrap">
     <p class="eyebrow rv"><span class="star">✼</span> Pay less, later</p>
-    <h2 class="rv">Four ways to pay less. None of them due today.</h2>
-    <p class="lede rv" style="margin-bottom:22px">Tick anything you'd genuinely be willing to do <em>after</em> your site is live and you actually like it. Each one comes back to you as money — paid after you've delivered it, not deducted up front. Change your mind and you simply don't get the rebate. Nothing is clawed back, nothing is chased.</p>
-    <p class="tapme rv">Each one is worth a different amount, and I'm not telling you which. Tap one to find out. ↓</p>
+    <h2 class="rv">Four ways to pay less.</h2>
+    <p class="lede rv" style="margin-bottom:22px">Tick what you'd genuinely do <em>after</em> your site is live. Each one is paid back to you — nothing is deducted up front, nothing is clawed back if you change your mind.</p>
+    <p class="tapme rv">Each is worth a different amount. Tap one to find out. ↓</p>
 
     <div class="pledges rv" id="pledgeList"></div>
 
@@ -621,7 +605,7 @@ footer a{color:var(--amber-pale)}
       <div class="mrow"><span class="lbl">You get back, once you've delivered</span><b id="mRebate">OMR 0.00</b></div>
       <div class="mrow total"><span class="lbl">What it ends up costing you</span><b id="mNet">—</b></div>
       <div class="allfour" id="allFour">
-        All four. That's half the price back. I've done the maths and I'm still saying yes — right now a real testimonial from a real distributor is worth more to me than the margin is.
+        All four — half the price back. Right now a real testimonial from a real distributor is worth more to me than the margin.
       </div>
     </div>
 
@@ -631,37 +615,18 @@ footer a{color:var(--amber-pale)}
       <div class="trophy" id="trophy">
         <span class="badge">✼ Certified Button Catcher</span>
         <strong>Fine. You win.</strong>
-        <p style="margin:8px 0 0;color:var(--muted);font-size:.94rem">There is genuinely no more discount — I'd be lying to invent one, and lying is the one thing this whole page is trying not to do. But you just chased a button across a screen seven times, which is the exact persistence needed to collect a late invoice. I've noted it on your claim. Screenshot this; you earned it.</p>
+        <p style="margin:8px 0 0;color:var(--muted);font-size:.94rem">There's genuinely no more discount. But you chased a button seven times — that's the exact persistence it takes to collect a late invoice. Screenshot this; you earned it.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══ 8. FOUNDER ═══ -->
-<section class="roast">
-  <div class="wrap">
-    <div class="founder rv">
-      <picture>
-        <source srcset="/nahid-founder-2026.webp" type="image/webp"/>
-        <img src="/nahid-founder-2026.jpg" alt="Nahid Abyari, founder of AI Profit Lab" width="190" height="224" loading="lazy" decoding="async"/>
-      </picture>
-      <div>
-        <p class="eyebrow" style="margin-bottom:10px"><span class="star">✼</span> Who builds it</p>
-        <p style="font-size:1.05rem">AI Profit Lab is built by an engineer who has designed and run a real distribution business — the same slow invoices, missed WhatsApp messages, and "wait, what's our cash position?" phone calls you deal with. That's the business this was built to fix first.</p>
-        <p style="color:var(--muted);font-size:.95rem;margin-bottom:0">One person builds these. That's why the queue is short, why the price climbs, and why you'll be talking to the person doing the work rather than an account manager relaying messages.</p>
-        <p class="sig">— Nahid Abyari</p>
-        <p style="font-family:var(--mono);font-size:.75rem;color:var(--muted);margin:0">Lotus Gulf International · South Al Khuwair, Bousher, Muscat</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ 9. CLAIM FORM ═══ -->
-<section id="claim">
+<!-- ═══ 7. CLAIM FORM ═══ -->
+<section class="roast" id="claim">
   <div class="wrap">
     <p class="eyebrow rv"><span class="star">✼</span> Claim a seat</p>
-    <h2 class="rv">Seven fields. Then I email you the agreement.</h2>
-    <p class="lede rv" style="margin-bottom:28px">This holds your place in the queue at today's price. The full brief — your products, colours, pages, Arabic copy — comes later, once the deposit has cleared and you're actually committed. No point making you write an essay on your phone in a car park.</p>
+    <h2 class="rv">Six fields. Then I email you the agreement.</h2>
+    <p class="lede rv" style="margin-bottom:28px">This holds your place at today's price. The full brief comes later, once the deposit has cleared.</p>
 
     <form class="form rv" id="claimForm" novalidate>
       <div class="fsummary">
@@ -692,29 +657,7 @@ footer a{color:var(--amber-pale)}
   </div>
 </section>
 
-<!-- ═══ 10. FAQ ═══ -->
-<section class="roast">
-  <div class="wrap narrow">
-    <p class="eyebrow rv"><span class="star">✼</span> Reasonable questions</p>
-    <h2 class="rv" style="margin-bottom:26px">Things worth asking a stranger with a flyer.</h2>
-
-    <details class="rv"><summary>Is the "seats left" number real, or is it theatre?</summary><p>Real. It's read live from a ledger every time this page loads, and a seat only counts when a 50% deposit has actually cleared into the company account. Submitting the form doesn't move it. If the ledger is unreachable, the page shows you nothing rather than a made-up number — you may have already seen that happen.</p></details>
-
-    <details class="rv"><summary>Why does the price go up? That feels like pressure.</summary><p>Because one person builds these, one at a time. Early clients get a lower price for taking a risk on someone without a published local track record; once that proof exists, the discount has done its job. If the ladder ever stops reflecting real capacity, it stops being honest, and the whole point of this business is being the one you can believe.</p></details>
-
-    <details class="rv"><summary>What happens after I submit the form?</summary><p>You get an email straight away with your reference and the deposit amount. Then, within one business day, I send the agreement and the invoice with payment details. You pay the 50% deposit, upload the transfer receipt on your claim page, and I confirm your seat once the money lands. The balance is due when the site goes live.</p></details>
-
-    <details class="rv"><summary>How do the pledge discounts actually work?</summary><p>You tick what you're willing to do after the site is live. Nothing comes off the invoice up front — you pay the full price, and each pledge you deliver is paid back to you. If you don't like the site, or change your mind, you keep your money and I don't chase you. The pledge is written into your agreement so both sides know exactly what was promised.</p></details>
-
-    <details class="rv"><summary>Are there monthly fees?</summary><p>No. It's a one-time price, and it includes a full year of hosting, security and care. After that year you can renew the care plan or not — the site is yours either way.</p></details>
-
-    <details class="rv"><summary>How long does it take?</summary><p>About a week from the point I have your content and answers. The delay is almost never the building; it's waiting for photos and product lists.</p></details>
-
-    <details class="rv"><summary>Is the site really in Arabic and English?</summary><p>Yes — the whole interface, and the AI agent answers in whichever language the buyer writes in. The Arabic is written properly, not run through a translator and left there.</p></details>
-  </div>
-</section>
-
-<!-- ═══ 11. FOOTER + CAT ═══ -->
+<!-- ═══ 8. FOOTER + CAT ═══ -->
 <footer>
   <div class="wrap footgrid">
     <div>
@@ -757,6 +700,7 @@ footer a{color:var(--amber-pale)}
 <div class="sticky">
   <div class="sticky-in">
     <div class="info">Today's price<b id="sPrice">—</b></div>
+    <span class="seats" id="sSeats"></span>
     <a class="btn btn-primary" href="#claim">Claim a seat</a>
   </div>
 </div>
@@ -1023,29 +967,46 @@ footer a{color:var(--amber-pale)}
 
   function renderLadder() {
     var list = document.getElementById("ladderList");
+    var stickySeats = document.getElementById("sSeats");
     if (state.soldOut) {
-      list.innerHTML = '<div class="rung live"><div class="meta"><span class="flag">All seats taken</span>' +
-        'Every seat in this campaign is gone. Message me and I\'ll tell you honestly when the next one opens.</div></div>';
+      list.innerHTML = '<div class="sc-badge"><i></i> Live from the ledger</div>' +
+        '<p class="sc-sold">Every seat is taken.</p>' +
+        '<p style="margin:0;color:rgba(241,239,232,.7)">Message me and I\'ll tell you honestly when the next one opens.</p>';
       document.getElementById("pledgeList").innerHTML = "";
       document.getElementById("maths").style.display = "none";
       document.getElementById("claimForm").style.display = "none";
       document.getElementById("sPrice").textContent = "sold out";
+      if (stickySeats) stickySeats.textContent = "sold out";
       return;
     }
-    list.innerHTML = state.published.map(function(r){
-      if (r.state === "live") {
-        return '<div class="rung live"><div class="price">OMR ' + r.price + '</div>' +
-          '<div class="meta"><span class="flag">Today\'s price</span>' +
-          '<strong><span id="seatCount">0</span> seat' + (r.seatsLeft === 1 ? "" : "s") + ' left</strong> at this price' +
-          '<div class="seatbar"><i id="seatBar"></i></div></div></div>';
-      }
-      return '<div class="rung next"><div class="price">OMR ' + r.price + '</div>' +
-        '<div class="meta"><span class="flag">Then</span>the next ' + r.seats + ' seats</div></div>';
-    }).join("") + (state.moreRungsAfter
-      ? '<p style="font-size:.86rem;color:var(--muted);margin:2px 0 0">…and it keeps climbing after that.</p>' : "");
+
+    // One rung is live; the first one after it is the price this buyer pays by waiting.
+    var live = null, next = null;
+    state.published.forEach(function(r){
+      if (!live) { if (r.state === "live") live = r; }
+      else if (!next) next = r;
+    });
+    if (!live) live = state.published[0];
+
+    list.innerHTML =
+      '<div class="sc-badge"><i></i> Live from the ledger</div>' +
+      '<div class="sc-count"><b id="seatCount">0</b><span>seat' + (live.seatsLeft === 1 ? "" : "s") +
+        ' left at this price</span></div>' +
+      seatMeter(live) +
+      '<div class="sc-prices">' +
+        '<div class="sc-cell"><span class="k">Today</span><span class="v">OMR ' + live.price + '</span></div>' +
+        (next
+          ? '<span class="sc-rise" aria-hidden="true">↗</span>' +
+            '<div class="sc-cell then"><span class="k">Once they\'re gone</span><span class="v">OMR ' + next.price + '</span></div>'
+          : "") +
+      '</div>' +
+      (state.moreRungsAfter ? '<p class="sc-after">…and it keeps climbing after that.</p>' : "");
+
+    if (stickySeats) {
+      stickySeats.textContent = live.seatsLeft + " seat" + (live.seatsLeft === 1 ? "" : "s") + " left";
+    }
 
     // Count the seats up rather than snapping — it reads as a live reading, not a static label.
-    var live = state.published[0];
     var countEl = document.getElementById("seatCount"), bar = document.getElementById("seatBar");
     if (countEl) {
       if (reduce) { countEl.textContent = live.seatsLeft; }
@@ -1062,6 +1023,19 @@ footer a{color:var(--amber-pale)}
     if (bar) setTimeout(function(){
       bar.style.width = Math.round((live.seatsLeft / live.seats) * 100) + "%";
     }, 140);
+  }
+
+  // One pip per seat in the tier, lit for the ones still open. Past a dozen seats the
+  // pips get too thin to count, so fall back to the draining bar.
+  function seatMeter(live) {
+    var total = live.seats, left = live.seatsLeft;
+    var label = left + " of " + total + " seat" + (total === 1 ? "" : "s") + " still open at this price";
+    if (total > 12) return '<div class="seatbar" role="img" aria-label="' + label + '"><i id="seatBar"></i></div>';
+    var pips = "";
+    for (var i = 0; i < total; i++) {
+      pips += '<i class="' + (i < left ? "open" : "taken") + '" style="animation-delay:' + (i * 90) + 'ms"></i>';
+    }
+    return '<div class="sc-pips" role="img" aria-label="' + label + '">' + pips + '</div>';
   }
 
   function renderPledges() {
@@ -1126,6 +1100,8 @@ footer a{color:var(--amber-pale)}
       '<a href="' + WA + '" target="_blank" rel="noopener">Ask me on WhatsApp</a> and I\'ll walk you through it.</p>';
     document.getElementById("maths").style.display = "none";
     document.getElementById("sPrice").textContent = "ask me";
+    var stickySeats = document.getElementById("sSeats");
+    if (stickySeats) stickySeats.textContent = "";
     document.getElementById("claimForm").style.display = "none";
   }
 
@@ -1134,7 +1110,10 @@ footer a{color:var(--amber-pale)}
     .then(function(data){
       if (!data.ok) throw new Error("not ok");
       state = data;
-      renderLadder(); renderPledges(); renderMaths();
+      renderLadder();
+      // A sold-out ledger has already stripped the pledge board and the form; running
+      // the maths afterwards would put a live price back into the sticky bar.
+      if (!state.soldOut) { renderPledges(); renderMaths(); }
     })
     .catch(function(err){ console.warn("ledger unavailable:", err); ledgerOffline(); });
 
