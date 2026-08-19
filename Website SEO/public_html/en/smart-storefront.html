@@ -25,6 +25,27 @@
 
 <script>document.documentElement.className += " js";</script>
 
+<!-- ══ pledge gate ══
+     The "Four ways to pay less" board (section 6) is hidden from every visitor by
+     default, so the published price is the price. Open the page with
+     ?pledges=open and the board appears, and stays open on that browser until
+     ?pledges=off puts it away again. Change UNLOCK below to change the link. -->
+<script>
+(function(){
+  var UNLOCK = "open", KEY = "apl_pledges", ON = " pledges-on";
+  var m = /[?&]pledges=([^&#]+)/.exec(location.search);
+  var v = m ? decodeURIComponent(m[1]).toLowerCase() : null;
+  try {
+    if (v === UNLOCK)      localStorage.setItem(KEY, "1");
+    else if (v === "off")  localStorage.removeItem(KEY);
+    if (localStorage.getItem(KEY) === "1") document.documentElement.className += ON;
+  } catch (e) {
+    // private mode / storage blocked — the link still works, it just won't stick
+    if (v === UNLOCK) document.documentElement.className += ON;
+  }
+})();
+</script>
+
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-SLR9GD3MJP"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -291,6 +312,12 @@ nav{position:sticky;top:0;z-index:60;background:rgba(241,239,232,.93);backdrop-f
 .offline{display:none;background:rgba(241,239,232,.08);border:1px solid var(--amber-pale);color:var(--cream);border-radius:12px;padding:16px 18px;font-size:.93rem;max-width:44em}
 .offline.on{display:block}
 .offline a{color:var(--amber-pale)}
+
+/* ══ pledges — off unless the gate script above opened them ══ */
+#pledges,.pledge-only,.pledge-only-b{display:none}
+html.pledges-on #pledges{display:block}
+html.pledges-on .pledge-only{display:inline}
+html.pledges-on .pledge-only-b{display:block}
 
 /* ══ pledges — the percentage stays hidden until a tap earns it ══ */
 .pledges{display:grid;gap:11px;max-width:640px}
@@ -636,8 +663,8 @@ footer a{color:var(--amber-pale)}
 
     <form class="form rv" id="claimForm" novalidate>
       <div class="fsummary">
-        Price today: <b id="fPrice">—</b> · 50% deposit to hold a seat: <b id="fDeposit">—</b> · Pledged back to you: <b id="fRebate">OMR 0.00</b>
-        <div style="color:var(--muted);font-size:.85rem;margin-top:5px">Change your pledges in <a href="#pledges">the section above</a>.</div>
+        Price today: <b id="fPrice">—</b> · 50% deposit to hold a seat: <b id="fDeposit">—</b> <span class="pledge-only">· Pledged back to you: <b id="fRebate">OMR 0.00</b></span>
+        <div class="pledge-only-b" style="color:var(--muted);font-size:.85rem;margin-top:5px">Change your pledges in <a href="#pledges">the section above</a>.</div>
       </div>
 
       <div class="fgrid">
@@ -969,6 +996,7 @@ footer a{color:var(--amber-pale)}
 
   /* ─────────── 3. the ledger ─────────── */
   var state = null, chosen = [];
+  var PLEDGES_ON = document.documentElement.className.indexOf("pledges-on") > -1;
   var money = function(n){ return "OMR " + Number(n).toFixed(2); };
 
   function renderLadder() {
@@ -1119,7 +1147,7 @@ footer a{color:var(--amber-pale)}
       renderLadder();
       // A sold-out ledger has already stripped the pledge board and the form; running
       // the maths afterwards would put a live price back into the sticky bar.
-      if (!state.soldOut) { renderPledges(); renderMaths(); }
+      if (!state.soldOut) { if (PLEDGES_ON) renderPledges(); renderMaths(); }
     })
     .catch(function(err){ console.warn("ledger unavailable:", err); ledgerOffline(); });
 
