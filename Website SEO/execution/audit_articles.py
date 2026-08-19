@@ -836,7 +836,7 @@ Articles where a small fix would have the highest impact (ranked by traffic pote
     
     final_report += f"""---
 
-*Report generated: {today} | AI Profit Lab — aiprofitlab.io | International Gulf Lotus SPC*
+*Report generated: {today} | AI Profit Lab — aiprofitlab.io | Lotus Gulf International*
 """
     
     # Save final report

@@ -114,14 +114,14 @@ lb_schema = {
     "@context": "https://schema.org",
     "@type": "ProfessionalService",
     "name": "AI Profit Lab",
-    "legalName": "International Gulf Lotus SPC",
+    "legalName": "Lotus Gulf International",
     "url": "https://aiprofitlab.io",
     "logo": "https://aiprofitlab.io/logo.webp",
     "image": "https://aiprofitlab.io/nahid-business-banner.png",
     "description": "Helping non-technical managers leverage AI, automation, and technology to increase ROI and business efficiency.",
     "address": {
     "@type": "PostalAddress",
-    "streetAddress": "Al Seeb",
+    "streetAddress": "South Al Khuwair, Bousher",
     "addressLocality": "Muscat",
     "addressRegion": "Muscat Governorate",
     "postalCode": "000",
@@ -129,8 +129,8 @@ lb_schema = {
     },
     "geo": {
     "@type": "GeoCoordinates",
-    "latitude": 23.635950490475295, 
-    "longitude": 58.207628165445385
+    "latitude": 23.5803, 
+    "longitude": 58.4310
     },
     "contactPoint": {
     "@type": "ContactPoint",
@@ -165,8 +165,8 @@ for slug, data in files_data.items():
             content = re.sub(r'<html[^>]*>', '<html lang="en" dir="ltr">', content)
 
         # Fix Footer
-        en_footer = '<footer class="border-t border-white/10 bg-black py-8 text-center text-gray-500 text-sm mt-auto">\n        <p>&copy; 2025 AI Profit Lab &mdash; a brand of International Gulf Lotus SPC &bull; All Rights Reserved</p>\n    </footer>'
-        ar_footer = '<footer class="border-t border-white/10 bg-black py-8 text-center text-gray-500 text-sm mt-auto">\n        <p dir="ltr">&copy; ٢٠٢٥ AI Profit Lab &mdash; علامة تجارية لشركة International Gulf Lotus SPC &bull; جميع الحقوق محفوظة</p>\n    </footer>'
+        en_footer = '<footer class="border-t border-white/10 bg-black py-8 text-center text-gray-500 text-sm mt-auto">\n        <p>&copy; 2025 AI Profit Lab &mdash; a brand of Lotus Gulf International &bull; All Rights Reserved</p>\n    </footer>'
+        ar_footer = '<footer class="border-t border-white/10 bg-black py-8 text-center text-gray-500 text-sm mt-auto">\n        <p dir="ltr">&copy; ٢٠٢٥ AI Profit Lab &mdash; علامة تجارية لشركة لوتس الخليج العالمية &bull; جميع الحقوق محفوظة</p>\n    </footer>'
         
         # Replace existing footer or append before </body>
         footer_regex = r'<footer.*?</footer>'
@@ -246,7 +246,7 @@ for slug, data in files_data.items():
                       "@type": "Organization",
                       "@id": "https://aiprofitlab.io/#organization",
                       "name": "AI Profit Lab",
-                      "legalName": "International Gulf Lotus SPC",
+                      "legalName": "Lotus Gulf International",
                       "url": "https://aiprofitlab.io/",
                       "logo": {
                         "@type": "ImageObject",
@@ -293,7 +293,7 @@ for slug, data in files_data.items():
                                         existing_faqs.append({"@type": "Question", "name": f_item["q"], "acceptedAnswer": {"@type": "Answer", "text": f_item["a"]}})
                                     item["mainEntity"] = existing_faqs
                                 if item.get("@type") == "Organization":
-                                    item["legalName"] = "International Gulf Lotus SPC"
+                                    item["legalName"] = "Lotus Gulf International"
                             new_s2 = json.dumps(d2, indent=4, ensure_ascii=False)
                             content = content.replace(s2.string, "\n" + new_s2 + "\n")
                     except Exception as e:

@@ -282,7 +282,7 @@ else:
 # 7. Add legal footer before </div><!-- /content --> closing
 LEGAL_FOOTER_EN = """
 <footer class="dash-footer">
-  © 2025 AI Profit Lab — a brand of International Gulf Lotus SPC • All Rights Reserved<br>
+  © 2025 AI Profit Lab — a brand of Lotus Gulf International • All Rights Reserved<br>
   <small>This is a customized CEO dashboard demo. Data shown is illustrative only.</small>
 </footer>
 """
@@ -441,7 +441,7 @@ else:
 # 7. Add legal footer (Arabic)
 LEGAL_FOOTER_AR = """
 <footer class="dash-footer" dir="rtl">
-  © ٢٠٢٥ AI Profit Lab — علامة تجارية لشركة International Gulf Lotus SPC • جميع الحقوق محفوظة<br>
+  © ٢٠٢٥ AI Profit Lab — علامة تجارية لشركة لوتس الخليج العالمية • جميع الحقوق محفوظة<br>
   <small>هذه لوحة قيادة تجريبية توضيحية. البيانات المعروضة للتوضيح فقط.</small>
 </footer>
 """

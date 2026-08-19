@@ -243,7 +243,7 @@ def fix_file(path, lang, home_href, other_demo_href, other_lang_label, is_ar=Fal
     if '"legalName"' not in content:
         content = content.replace(
             '"name": "AI Profit Lab",',
-            '"name": "AI Profit Lab",\n  "legalName": "International Gulf Lotus SPC",'
+            '"name": "AI Profit Lab",\n  "legalName": "Lotus Gulf International",'
         )
         print("  ✅ legalName added to JSON-LD schema")
 
@@ -259,10 +259,10 @@ def fix_file(path, lang, home_href, other_demo_href, other_lang_label, is_ar=Fal
 
     # 12. Add legal footer before </body>
     footer_en = """<footer class="wa-footer">
-  © 2025 AI Profit Lab — a brand of International Gulf Lotus SPC • All Rights Reserved<br>
+  © 2025 AI Profit Lab — a brand of Lotus Gulf International • All Rights Reserved<br>
   <small>This is an interactive demo. Data shown is illustrative only.</small>
 </footer>""" if not is_ar else """<footer class="wa-footer" dir="rtl">
-  © ٢٠٢٥ AI Profit Lab — علامة تجارية لشركة International Gulf Lotus SPC • جميع الحقوق محفوظة<br>
+  © ٢٠٢٥ AI Profit Lab — علامة تجارية لشركة لوتس الخليج العالمية • جميع الحقوق محفوظة<br>
   <small>هذه نسخة تجريبية تفاعلية. البيانات المعروضة للتوضيح فقط.</small>
 </footer>"""
 
@@ -336,7 +336,7 @@ for path, label in [
         ('Responsive CSS',               '@media (max-width: 768px)' in c),
         ('Mobile hamburger',             'wa-mobile-toggle' in c),
         ('Mobile lead toggle',           'mobile-lead-toggle' in c),
-        ('Legal footer',                 'International Gulf Lotus SPC' in c and 'wa-footer' in c),
+        ('Legal footer',                 'Lotus Gulf International' in c and 'wa-footer' in c),
         ('legalName in schema',          '"legalName"' in c),
         ('Canonical URL',                'rel="canonical"' in c),
         ('All 3 tab sections',           'tab-chat' in c and 'tab-dashboard' in c and 'tab-appointments' in c),

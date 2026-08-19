@@ -138,14 +138,14 @@ Whenever you generate the files, use the following HTML template. Do NOT deviate
       "@context": "https://schema.org",
       "@type": "ProfessionalService",
       "name": "AI Profit Lab",
-      "legalName": "International Gulf Lotus SPC",
+      "legalName": "Lotus Gulf International",
       "url": "https://aiprofitlab.io",
       "logo": "https://aiprofitlab.io/logo.webp",
       "image": "https://aiprofitlab.io/nahid-business-banner.png",
       "description": "Helping non-technical managers leverage AI, automation, and technology to increase ROI and business efficiency.",
       "address": {
         "@type": "PostalAddress",
-        "streetAddress": "Al Seeb",
+        "streetAddress": "South Al Khuwair, Bousher",
         "addressLocality": "Muscat",
         "addressRegion": "Muscat Governorate",
         "postalCode": "000",
@@ -153,8 +153,8 @@ Whenever you generate the files, use the following HTML template. Do NOT deviate
       },
       "geo": {
         "@type": "GeoCoordinates",
-        "latitude": 23.635950490475295, 
-        "longitude": 58.207628165445385
+        "latitude": 23.5803, 
+        "longitude": 58.4310
       },
       "contactPoint": {
         "@type": "ContactPoint",
@@ -221,8 +221,8 @@ Whenever you generate the files, use the following HTML template. Do NOT deviate
 
     <!-- Footer -->
     <footer class="py-8 border-t border-gray-900 text-center text-sm text-gray-600">
-        © 2025 <span class="text-blue-500">A</span><span class="text-red-500">I</span> Profit Lab — a brand of International Gulf Lotus SPC • All Rights Reserved
-    </footer> <!-- Note: For ARABIC, use: © ٢٠٢٥ AI Profit Lab — علامة تجارية لشركة International Gulf Lotus SPC • جميع الحقوق محفوظة -->
+        © 2025 <span class="text-blue-500">A</span><span class="text-red-500">I</span> Profit Lab — a brand of Lotus Gulf International • All Rights Reserved
+    </footer> <!-- Note: For ARABIC, use: © ٢٠٢٥ AI Profit Lab — علامة تجارية لشركة لوتس الخليج العالمية • جميع الحقوق محفوظة -->
 </body>
 </html>
 ```

@@ -66,8 +66,8 @@ for path in paths:
                 for item in data["@graph"]:
                     if item.get("@type") == "Organization":
                         has_org = True
-                        if item.get("legalName") != "International Gulf Lotus SPC":
-                            issues.append("Organization missing legalName: International Gulf Lotus SPC")
+                        if item.get("legalName") != "Lotus Gulf International":
+                            issues.append("Organization missing legalName: Lotus Gulf International")
                     if item.get("@type") == "Article":
                         has_article = True
                     if item.get("@type") == "FAQPage":
@@ -82,8 +82,8 @@ for path in paths:
     if faq_count_json < 10: issues.append(f"FAQ count in JSON is {faq_count_json} (needs >= 10)")
     
     # 5. Check Footer Legal Entity
-    if "International Gulf Lotus SPC" not in content:
-        issues.append("Footer missing legal entity International Gulf Lotus SPC")
+    if "Lotus Gulf International" not in content:
+        issues.append("Footer missing legal entity Lotus Gulf International")
 
     results.append({
         "file": os.path.basename(path),

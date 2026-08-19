@@ -66,14 +66,14 @@ lb_schema = {
     "@context": "https://schema.org",
     "@type": "ProfessionalService",
     "name": "AI Profit Lab",
-    "legalName": "International Gulf Lotus SPC",
+    "legalName": "Lotus Gulf International",
     "url": "https://aiprofitlab.io",
     "logo": "https://aiprofitlab.io/logo.webp",
     "image": "https://aiprofitlab.io/nahid-business-banner.png",
     "description": "Helping non-technical managers leverage AI, automation, and technology to increase ROI and business efficiency.",
     "address": {
     "@type": "PostalAddress",
-    "streetAddress": "Al Seeb",
+    "streetAddress": "South Al Khuwair, Bousher",
     "addressLocality": "Muscat",
     "addressRegion": "Muscat Governorate",
     "postalCode": "000",
@@ -81,8 +81,8 @@ lb_schema = {
     },
     "geo": {
     "@type": "GeoCoordinates",
-    "latitude": 23.635950490475295, 
-    "longitude": 58.207628165445385
+    "latitude": 23.5803, 
+    "longitude": 58.4310
     },
     "contactPoint": {
     "@type": "ContactPoint",
@@ -137,8 +137,8 @@ for path in files_to_fix:
         content = re.sub(r'<html[^>]*>', '<html lang="en" dir="ltr">', content)
 
     # 2. Footers
-    en_footer = '<footer class="py-8 border-t border-gray-900 text-center text-sm text-gray-600">\n        © 2025 <span class="text-blue-500">A</span><span class="text-red-500">I</span> Profit Lab — a brand of International Gulf Lotus SPC • All Rights Reserved\n    </footer>'
-    ar_footer = '<footer class="py-8 border-t border-gray-900 text-center text-sm text-gray-600">\n        © ٢٠٢٥ AI Profit Lab — علامة تجارية لشركة International Gulf Lotus SPC • جميع الحقوق محفوظة\n    </footer>'
+    en_footer = '<footer class="py-8 border-t border-gray-900 text-center text-sm text-gray-600">\n        © 2025 <span class="text-blue-500">A</span><span class="text-red-500">I</span> Profit Lab — a brand of Lotus Gulf International • All Rights Reserved\n    </footer>'
+    ar_footer = '<footer class="py-8 border-t border-gray-900 text-center text-sm text-gray-600">\n        © ٢٠٢٥ AI Profit Lab — علامة تجارية لشركة لوتس الخليج العالمية • جميع الحقوق محفوظة\n    </footer>'
     footer_regex = r'<footer.*?</footer>'
     if re.search(footer_regex, content, re.DOTALL):
         content = re.sub(footer_regex, ar_footer if lang=="ar" else en_footer, content, flags=re.DOTALL)
@@ -231,7 +231,7 @@ for path in files_to_fix:
                       "@type": "Organization",
                       "@id": "https://aiprofitlab.io/#organization",
                       "name": "AI Profit Lab",
-                      "legalName": "International Gulf Lotus SPC",
+                      "legalName": "Lotus Gulf International",
                       "url": "https://aiprofitlab.io/",
                       "logo": {
                         "@type": "ImageObject",
@@ -277,7 +277,7 @@ for path in files_to_fix:
                                         existing.append({"@type": "Question", "name": f_item["q"], "acceptedAnswer": {"@type": "Answer", "text": f_item["a"]}})
                                     item["mainEntity"] = existing
                                 if item.get("@type") == "Organization":
-                                    item["legalName"] = "International Gulf Lotus SPC"
+                                    item["legalName"] = "Lotus Gulf International"
                             new_s2 = json.dumps(d2, indent=4, ensure_ascii=False)
                             content = content.replace(s2.string, "\n" + new_s2 + "\n")
                     except: pass

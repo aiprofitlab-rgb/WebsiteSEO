@@ -28,7 +28,7 @@ EN_HTML = r"""<!DOCTYPE html>
           "@type": "Organization",
           "@id": "https://aiprofitlab.io/#organization",
           "name": "AI Profit Lab",
-          "legalName": "International Gulf Lotus SPC",
+          "legalName": "Lotus Gulf International",
           "url": "https://aiprofitlab.io/",
           "logo": { "@type": "ImageObject", "url": "https://aiprofitlab.io/favicon.svg" }
         },
@@ -206,7 +206,7 @@ EN_HTML = r"""<!DOCTYPE html>
     </main>
 
     <footer class="border-t border-white/10 bg-black py-8 text-center text-gray-500 text-sm mt-auto">
-        <p>&copy; 2025 <span class="text-blue-500">A</span><span class="text-red-500">I</span> Profit Lab &mdash; a brand of International Gulf Lotus SPC &bull; All Rights Reserved</p>
+        <p>&copy; 2025 <span class="text-blue-500">A</span><span class="text-red-500">I</span> Profit Lab &mdash; a brand of Lotus Gulf International &bull; All Rights Reserved</p>
     </footer>
 </body>
 </html>"""
@@ -239,7 +239,7 @@ AR_HTML = """<!DOCTYPE html>
           "@type": "Organization",
           "@id": "https://aiprofitlab.io/#organization",
           "name": "AI Profit Lab",
-          "legalName": "International Gulf Lotus SPC",
+          "legalName": "Lotus Gulf International",
           "url": "https://aiprofitlab.io/",
           "logo": { "@type": "ImageObject", "url": "https://aiprofitlab.io/favicon.svg" }
         },
@@ -415,7 +415,7 @@ AR_HTML = """<!DOCTYPE html>
     </main>
 
     <footer class="border-t border-white/10 bg-black py-8 text-center text-gray-500 text-sm mt-auto">
-        <p>&#169; &#x0662;&#x0660;&#x0662;&#x0665; <span class="text-blue-500">A</span><span class="text-red-500">I</span> Profit Lab &#x2014; &#x639;&#x644;&#x627;&#x645;&#x629; &#x62A;&#x62C;&#x627;&#x631;&#x64A;&#x629; &#x644;&#x634;&#x631;&#x643;&#x629; International Gulf Lotus SPC &#x2022; &#x62C;&#x645;&#x64A;&#x639; &#x627;&#x644;&#x62D;&#x642;&#x648;&#x642; &#x645;&#x62D;&#x641;&#x648;&#x638;&#x629;</p>
+        <p>&#169; &#x0662;&#x0660;&#x0662;&#x0665; <span class="text-blue-500">A</span><span class="text-red-500">I</span> Profit Lab &#x2014; &#x639;&#x644;&#x627;&#x645;&#x629; &#x62A;&#x62C;&#x627;&#x631;&#x64A;&#x629; &#x644;&#x634;&#x631;&#x643;&#x629; Lotus Gulf International &#x2022; &#x62C;&#x645;&#x64A;&#x639; &#x627;&#x644;&#x62D;&#x642;&#x648;&#x642; &#x645;&#x62D;&#x641;&#x648;&#x638;&#x629;</p>
     </footer>
 </body>
 </html>"""

@@ -57,7 +57,7 @@ for path in files_to_check:
                             faq_count_json = len(item.get("mainEntity", []))
                 elif data.get("@type") == "ProfessionalService" or data.get("@type") == "LocalBusiness":
                     has_localbusiness = True
-                    if data.get("legalName") != "International Gulf Lotus SPC":
+                    if data.get("legalName") != "Lotus Gulf International":
                         issues.append("LocalBusiness missing correct legalName")
         except:
             pass
@@ -81,10 +81,10 @@ for path in files_to_check:
     if footer:
         footer_text = footer.get_text().strip()
         if is_ar:
-            if "© ٢٠٢٥ AI Profit Lab — علامة تجارية لشركة International Gulf Lotus SPC • جميع الحقوق محفوظة" not in footer_text and "© ٢٠٢٥ AI Profit Lab" not in footer_text:
+            if "© ٢٠٢٥ AI Profit Lab — علامة تجارية لشركة لوتس الخليج العالمية • جميع الحقوق محفوظة" not in footer_text and "© ٢٠٢٥ AI Profit Lab" not in footer_text:
                 issues.append("Arabic footer incorrect")
         else:
-            if "© 2025 AI Profit Lab — a brand of International Gulf Lotus SPC • All Rights Reserved" not in footer_text and "© 2025 AI Profit Lab" not in footer_text:
+            if "© 2025 AI Profit Lab — a brand of Lotus Gulf International • All Rights Reserved" not in footer_text and "© 2025 AI Profit Lab" not in footer_text:
                 issues.append("English footer incorrect")
     else:
         issues.append("Missing footer")

@@ -96,10 +96,10 @@ for path in sorted(files_to_fix):
     )
 
     # 4. Fix footer — use plain text encoding to be robust
-    en_footer_plain = '© 2025 AI Profit Lab — a brand of International Gulf Lotus SPC • All Rights Reserved'
-    ar_footer_plain = '© ٢٠٢٥ AI Profit Lab — علامة تجارية لشركة International Gulf Lotus SPC • جميع الحقوق محفوظة'
-    en_footer_html = '<footer class="border-t border-white/10 bg-black py-8 text-center text-gray-500 text-sm mt-auto">\n        <p>© 2025 AI Profit Lab — a brand of International Gulf Lotus SPC • All Rights Reserved</p>\n    </footer>'
-    ar_footer_html = '<footer class="border-t border-white/10 bg-black py-8 text-center text-gray-500 text-sm mt-auto">\n        <p>© ٢٠٢٥ AI Profit Lab — علامة تجارية لشركة International Gulf Lotus SPC • جميع الحقوق محفوظة</p>\n    </footer>'
+    en_footer_plain = '© 2025 AI Profit Lab — a brand of Lotus Gulf International • All Rights Reserved'
+    ar_footer_plain = '© ٢٠٢٥ AI Profit Lab — علامة تجارية لشركة لوتس الخليج العالمية • جميع الحقوق محفوظة'
+    en_footer_html = '<footer class="border-t border-white/10 bg-black py-8 text-center text-gray-500 text-sm mt-auto">\n        <p>© 2025 AI Profit Lab — a brand of Lotus Gulf International • All Rights Reserved</p>\n    </footer>'
+    ar_footer_html = '<footer class="border-t border-white/10 bg-black py-8 text-center text-gray-500 text-sm mt-auto">\n        <p>© ٢٠٢٥ AI Profit Lab — علامة تجارية لشركة لوتس الخليج العالمية • جميع الحقوق محفوظة</p>\n    </footer>'
 
     # Replace any existing footer regardless of content
     footer_regex = r'<footer[^>]*>.*?</footer>'
@@ -153,7 +153,7 @@ for path in sorted(files_to_fix):
             schema_graph = {
                 "@context": "https://schema.org",
                 "@graph": [
-                    {"@type": "Organization", "@id": "https://aiprofitlab.io/#organization", "name": "AI Profit Lab", "legalName": "International Gulf Lotus SPC", "url": "https://aiprofitlab.io/", "logo": {"@type": "ImageObject", "url": "https://aiprofitlab.io/favicon.svg"}},
+                    {"@type": "Organization", "@id": "https://aiprofitlab.io/#organization", "name": "AI Profit Lab", "legalName": "Lotus Gulf International", "url": "https://aiprofitlab.io/", "logo": {"@type": "ImageObject", "url": "https://aiprofitlab.io/favicon.svg"}},
                     {"@type": "Article", "headline": title, "description": desc, "author": {"@type": "Organization", "name": "AI Profit Lab"}, "publisher": {"@id": "https://aiprofitlab.io/#organization"}, "datePublished": date_pub},
                     {"@type": "FAQPage", "mainEntity": faq_json_nodes}
                 ]
@@ -207,8 +207,8 @@ for path in sorted(files_to_fix):
                                 item["mainEntity"] = existing
                                 changed = True
                         if item.get("@type") == "Organization":
-                            if item.get("legalName") != "International Gulf Lotus SPC":
-                                item["legalName"] = "International Gulf Lotus SPC"
+                            if item.get("legalName") != "Lotus Gulf International":
+                                item["legalName"] = "Lotus Gulf International"
                                 changed = True
                 if changed:
                     new_str = "\n" + json.dumps(d, indent=4, ensure_ascii=False) + "\n"

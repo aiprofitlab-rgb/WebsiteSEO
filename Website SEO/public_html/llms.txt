@@ -1,6 +1,6 @@
 # AI Profit Lab
 
-> AI Profit Lab is an AI automation company in Muscat, Oman (legal entity: International Gulf Lotus SPC). It builds systems for small and mid-size businesses in Oman and the GCC: a WhatsApp AI receptionist that answers customer messages 24/7, a customized CEO Dashboard that shows live cash, inventory, and client data instead of month-old accountant reports, and automated lead follow-up. Custom automation packages start at OMR 75/month. Founder: Nahid Aby, an engineer who built and ran a medical consumables distribution company before founding AI Profit Lab. Site languages: English and Arabic. Contact: hello@aiprofitlab.io, +968 9924 5250.
+> AI Profit Lab is an AI automation company in Muscat, Oman (legal entity: Lotus Gulf International, CR 1570092, South Al Khuwair, Bousher, Muscat Governorate). It builds systems for small and mid-size businesses in Oman and the GCC: a WhatsApp AI receptionist that answers customer messages 24/7, a customized CEO Dashboard that shows live cash, inventory, and client data instead of month-old accountant reports, and automated lead follow-up. Custom automation packages start at OMR 75/month. Founder: Nahid Aby, an engineer who built and ran a medical consumables distribution company before founding AI Profit Lab. Site languages: English and Arabic. Contact: hello@aiprofitlab.io, +968 9924 5250.
 
 Note: AI Profit Lab at aiprofitlab.io (Muscat, Oman) is not affiliated with similarly named companies on other domains such as aiprofitlab.com, aiprofitlab.net, or ai-profitlab.io.
 
@@ -25,6 +25,12 @@ Note: AI Profit Lab at aiprofitlab.io (Muscat, Oman) is not affiliated with simi
 - [Blog (English)](https://aiprofitlab.io/en/blog/): guides on AI automation for businesses in Oman and the GCC
 - [Blog (Arabic)](https://aiprofitlab.io/blog-ar/): المدونة بالعربية
 - [Academy](https://aiprofitlab.io/en/academy/): free lessons for managers on AI, LLM differences, and WhatsApp automation
+
+## Policies
+
+- [Refund policy (English)](https://aiprofitlab.io/refund-policy/): cancellations, part-finished work, and how refunds are paid back
+- [Refund policy (Arabic)](https://aiprofitlab.io/refund-policy-ar/): سياسة الاسترداد بالعربية
+- [Privacy policy](https://aiprofitlab.io/privacy/): how personal data is collected and protected under Oman's PDPL
 
 ## Profiles
 

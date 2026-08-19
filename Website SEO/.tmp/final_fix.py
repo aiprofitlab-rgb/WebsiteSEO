@@ -118,8 +118,8 @@ def fix_file(file_path):
         geo_fix = """
       "geo": {
         "@type": "GeoCoordinates",
-        "latitude": 23.635950490475295, 
-        "longitude": 58.207628165445385
+        "latitude": 23.5803, 
+        "longitude": 58.4310
       },
       "contactPoint": {
         "@type": "ContactPoint",

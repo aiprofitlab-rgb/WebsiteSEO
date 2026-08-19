@@ -52,7 +52,7 @@ for path in files_to_check:
                             faq_c = len(item.get("mainEntity", []))
                 elif data.get("@type") in ["ProfessionalService", "LocalBusiness"]:
                     has_lb = True
-                    if data.get("legalName") != "International Gulf Lotus SPC":
+                    if data.get("legalName") != "Lotus Gulf International":
                         issue_counts["LocalBusiness missing legalName"] += 1
         except: pass
     if not has_org: issue_counts["Missing Organization schema"] += 1
@@ -73,10 +73,10 @@ for path in files_to_check:
     footer = soup.find("footer")
     if footer:
         if is_ar:
-            if "© ٢٠٢٥ AI Profit Lab — علامة تجارية لشركة International Gulf Lotus SPC • جميع الحقوق محفوظة" not in content and "© ٢٠٢٥ AI Profit Lab" not in content:
+            if "© ٢٠٢٥ AI Profit Lab — علامة تجارية لشركة لوتس الخليج العالمية • جميع الحقوق محفوظة" not in content and "© ٢٠٢٥ AI Profit Lab" not in content:
                 issue_counts["Arabic footer text incorrect"] += 1
         else:
-            if "© 2025 AI Profit Lab — a brand of International Gulf Lotus SPC • All Rights Reserved" not in content and "© 2025 AI Profit Lab" not in content:
+            if "© 2025 AI Profit Lab — a brand of Lotus Gulf International • All Rights Reserved" not in content and "© 2025 AI Profit Lab" not in content:
                 issue_counts["English footer text incorrect"] += 1
     else:
         issue_counts["Missing footer"] += 1

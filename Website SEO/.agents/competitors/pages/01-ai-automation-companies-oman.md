@@ -73,8 +73,8 @@ That gap is real and you should weigh it against what's included.
 
 *That's us. Read the rest of the list before deciding.*
 
-We're an Omani-registered automation agency (International Gulf Lotus SPC, Al Seeb,
-Muscat) working with SMEs across Oman and the GCC. Our model is deliberately
+We're an Omani-registered automation agency (Lotus Gulf International, South Al
+Khuwair, Bousher, Muscat) working with SMEs across Oman and the GCC. Our model is deliberately
 different from most of this list: we don't sell you software to operate. We run a
 discovery audit to find where your business is actually leaking time and money, build
 the system, then monitor and improve it every month. Your team gets trained; nobody

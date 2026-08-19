@@ -13,7 +13,7 @@ schema_script = """
       "description": "Helping non-technical managers leverage AI, automation, and technology to increase ROI and business efficiency.",
       "address": {
         "@type": "PostalAddress",
-        "streetAddress": "Al Seeb",
+        "streetAddress": "South Al Khuwair, Bousher",
         "addressLocality": "Muscat",
         "addressRegion": "Muscat Governorate",
         "postalCode": "000",
@@ -21,8 +21,8 @@ schema_script = """
       },
       "geo": {
         "@type": "GeoCoordinates",
-        "latitude": 23.635950490475295, 
-        "longitude": 58.207628165445385
+        "latitude": 23.5803, 
+        "longitude": 58.4310
       },
       "contactPoint": {
         "@type": "ContactPoint",
@@ -45,7 +45,7 @@ def process_file(filepath):
     with open(filepath, 'r', encoding='utf-8') as f:
         content = f.read()
     
-    if "ProfessionalService" in content and "Al Seeb" in content:
+    if "ProfessionalService" in content and "South Al Khuwair, Bousher" in content:
         # Already has the schema
         return
         

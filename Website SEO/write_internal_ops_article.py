@@ -38,7 +38,7 @@ en_html = """<!DOCTYPE html>
           "@type": "Organization",
           "@id": "https://aiprofitlab.io/#organization",
           "name": "AI Profit Lab",
-          "legalName": "International Gulf Lotus SPC",
+          "legalName": "Lotus Gulf International",
           "url": "https://aiprofitlab.io/",
           "logo": {
             "@type": "ImageObject",
@@ -294,7 +294,7 @@ en_html = """<!DOCTYPE html>
     </main>
 
     <footer class="border-t border-white/10 bg-black py-8 text-center text-gray-500 text-sm mt-auto">
-        <p>© 2025 <span class="text-blue-500">A</span><span class="text-red-500">I</span> Profit Lab — a brand of International Gulf Lotus SPC • All Rights Reserved</p>
+        <p>© 2025 <span class="text-blue-500">A</span><span class="text-red-500">I</span> Profit Lab — a brand of Lotus Gulf International • All Rights Reserved</p>
     </footer>
 </body>
 </html>"""
@@ -332,7 +332,7 @@ ar_html = """<!DOCTYPE html>
           "@type": "Organization",
           "@id": "https://aiprofitlab.io/#organization",
           "name": "AI Profit Lab",
-          "legalName": "International Gulf Lotus SPC",
+          "legalName": "Lotus Gulf International",
           "url": "https://aiprofitlab.io/",
           "logo": {
             "@type": "ImageObject",
@@ -585,7 +585,7 @@ ar_html = """<!DOCTYPE html>
     </main>
 
     <footer class="border-t border-white/10 bg-black py-8 text-center text-gray-500 text-sm mt-auto">
-        <p>© ٢٠٢٥ <span class="text-blue-500">A</span><span class="text-red-500">I</span> Profit Lab — علامة تجارية لشركة International Gulf Lotus SPC • جميع الحقوق محفوظة</p>
+        <p>© ٢٠٢٥ <span class="text-blue-500">A</span><span class="text-red-500">I</span> Profit Lab — علامة تجارية لشركة لوتس الخليج العالمية • جميع الحقوق محفوظة</p>
     </footer>
 </body>
 </html>"""

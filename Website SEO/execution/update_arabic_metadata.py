@@ -72,7 +72,7 @@ def inject_schema(content):
         "@context": "https://schema.org",
         "@type": "ProfessionalService",
         "name": "AI Profit Lab",
-        "legalName": "International Gulf Lotus SPC",
+        "legalName": "Lotus Gulf International",
         "address": {
             "@type": "PostalAddress",
             "addressLocality": "Muscat",
@@ -83,7 +83,7 @@ def inject_schema(content):
     
     schema_str = f'<script type="application/ld+json">\n{json.dumps(schema, indent=2, ensure_ascii=False)}\n</script>'
     
-    if '"ProfessionalService"' in content or '"International Gulf Lotus SPC"' in content:
+    if '"ProfessionalService"' in content or '"Lotus Gulf International"' in content:
         # Schema might already exist, don't inject again
         return content
         

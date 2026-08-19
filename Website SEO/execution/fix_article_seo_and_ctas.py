@@ -156,7 +156,7 @@ def inject_cta_if_missing(content):
 
 def fix_legal_footer(content):
     correct_footer = """<footer class="border-t border-white/10 bg-black py-8 text-center text-gray-500 text-sm mt-auto">
-    <p>© 2025 <span class="text-blue-500">A</span><span class="text-red-500">I</span> Profit Lab — a brand of International Gulf Lotus SPC • All Rights Reserved</p>
+    <p>© 2025 <span class="text-blue-500">A</span><span class="text-red-500">I</span> Profit Lab — a brand of Lotus Gulf International • All Rights Reserved</p>
 </footer>"""
     footer_regex = re.compile(r'<footer[^>]*>.*?</footer>', re.DOTALL | re.IGNORECASE)
     if re.search(footer_regex, content):
@@ -173,7 +173,7 @@ def fix_schema_legal_name(content):
     if '"legalName"' not in content:
         content = content.replace(
             '"name": "AI Profit Lab",',
-            '"name": "AI Profit Lab",\n            "legalName": "International Gulf Lotus SPC",'
+            '"name": "AI Profit Lab",\n            "legalName": "Lotus Gulf International",'
         )
     return content
 

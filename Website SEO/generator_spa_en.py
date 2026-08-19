@@ -169,14 +169,14 @@ en_html = f"""<!DOCTYPE html>
       "@context": "https://schema.org",
       "@type": "ProfessionalService",
       "name": "AI Profit Lab",
-      "legalName": "International Gulf Lotus SPC",
+      "legalName": "Lotus Gulf International",
       "url": "https://aiprofitlab.io",
       "logo": "https://aiprofitlab.io/logo.webp",
       "image": "https://aiprofitlab.io/nahid-business-banner.png",
       "description": "Helping non-technical managers leverage AI, automation, and technology to increase ROI and business efficiency.",
       "address": {{
         "@type": "PostalAddress",
-        "streetAddress": "Al Seeb",
+        "streetAddress": "South Al Khuwair, Bousher",
         "addressLocality": "Muscat",
         "addressRegion": "Muscat Governorate",
         "postalCode": "000",
@@ -184,8 +184,8 @@ en_html = f"""<!DOCTYPE html>
       }},
       "geo": {{
         "@type": "GeoCoordinates",
-        "latitude": 23.635950490475295, 
-        "longitude": 58.207628165445385
+        "latitude": 23.5803, 
+        "longitude": 58.4310
       }},
       "contactPoint": {{
         "@type": "ContactPoint",
@@ -349,7 +349,7 @@ en_html = f"""<!DOCTYPE html>
 
     <!-- Footer -->
     <footer class="py-8 border-t border-gray-900 text-center text-sm text-gray-600">
-        © 2025 <span class="text-blue-500">A</span><span class="text-red-500">I</span> Profit Lab — a brand of International Gulf Lotus SPC • All Rights Reserved
+        © 2025 <span class="text-blue-500">A</span><span class="text-red-500">I</span> Profit Lab — a brand of Lotus Gulf International • All Rights Reserved
     </footer>
 </body>
 </html>"""

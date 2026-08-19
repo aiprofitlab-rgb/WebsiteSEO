@@ -32,7 +32,7 @@ def audit(path, label):
     # 5. SEO
     checks.append(('Canonical URL', 'rel="canonical"' in content, ''))
     checks.append(('JSON-LD Schema', 'application/ld+json' in content, ''))
-    checks.append(('legalName in schema', '"legalName": "International Gulf Lotus SPC"' in content, ''))
+    checks.append(('legalName in schema', '"legalName": "Lotus Gulf International"' in content, ''))
     checks.append(('Meta title', '<title>' in content, ''))
     checks.append(('Meta description', 'name="description"' in content, ''))
     checks.append(('OG title tag', 'og:title' in content, ''))
@@ -57,7 +57,7 @@ def audit(path, label):
     checks.append(('Mobile sidebar JS', 'sidebar-toggle' in content and 'classList.add' in content, ''))
 
     # 10. Legal footer
-    checks.append(('Legal footer text', 'International Gulf Lotus SPC' in content, ''))
+    checks.append(('Legal footer text', 'Lotus Gulf International' in content, ''))
     checks.append(('dash-footer class', 'dash-footer' in content, ''))
 
     # 11. All 8 content sections
