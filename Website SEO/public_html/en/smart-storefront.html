@@ -4,7 +4,7 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
 <title>The Smart Storefront — AI Profit Lab</title>
-<meta name="description" content="A bilingual website that answers your buyers at 2am, sends the serious ones to your WhatsApp, and tells you who is about to buy. One-time price, one year of hosting and care included."/>
+<meta name="description" content="A bilingual website that answers your buyers at 4am, sends the serious ones to your WhatsApp, and tells you who is about to buy. One-time price, one year of hosting and care included."/>
 <!-- Runs alongside the existing offer page. Flip to index,follow at handover. -->
 <meta name="robots" content="noindex, follow"/>
 <meta name="author" content="AI Profit Lab"/>
@@ -14,7 +14,10 @@
 <meta property="og:description" content="You scanned the paper one. Here is what the paper becomes."/>
 <meta property="og:url" content="https://aiprofitlab.io/en/smart-storefront/"/>
 <meta property="og:type" content="website"/>
-<meta property="og:image" content="https://aiprofitlab.io/nahid-business-banner.png"/>
+<meta property="og:image" content="https://aiprofitlab.io/og-aiprofitlab-2026.jpg"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
+<meta property="og:image:alt" content="Nahid Abyari, founder of AI Profit Lab — AI automation for GCC businesses"/>
 <meta name="twitter:card" content="summary_large_image"/>
 
 <link href="/favicon.svg" rel="icon" type="image/svg+xml"/>
@@ -173,7 +176,9 @@ nav{position:sticky;top:0;z-index:60;background:rgba(241,239,232,.93);backdrop-f
   animation:dToast 9s ease-out infinite}
 @keyframes dToast{0%,50%{opacity:0;transform:translateY(-10px) scale(.95)}56%,88%{opacity:1;transform:none}94%,100%{opacity:0;transform:translateY(-6px)}}
 
-.hero-trust{font-family:var(--mono);font-size:.7rem;letter-spacing:.05em;color:rgba(241,239,232,.6);margin-top:26px;display:flex;flex-wrap:wrap;gap:6px 18px}
+.hero-trust{list-style:none;margin:26px 0 0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,max-content));gap:9px 30px;font-family:var(--mono);font-size:.72rem;letter-spacing:.05em;color:rgba(241,239,232,.72)}
+.hero-trust li{display:flex;align-items:baseline;gap:9px}
+.hero-trust li::before{content:"\273C";color:var(--amber-pale);font-size:.78rem;line-height:1;flex:none}
 
 /* ══ mascot ══ */
 .mascot{width:64px;height:64px;flex:none}
@@ -409,6 +414,7 @@ footer a{color:var(--amber-pale)}
   .sticky .info b{font-size:.9rem}
   .sticky .seats{font-size:.58rem;padding:4px 8px;letter-spacing:.06em}
   .mascot{width:52px;height:52px}
+  .hero-trust{grid-template-columns:1fr}
 }
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important}
@@ -437,7 +443,7 @@ footer a{color:var(--amber-pale)}
   <div class="wrap hero-grid">
     <div>
       <p class="eyebrow"><span class="star">✼</span> You scanned the paper one</p>
-      <h1>That flyer can't answer a buyer at 11pm.</h1>
+      <h1>That flyer can't answer a buyer at 4am.</h1>
       <p class="sub">This is what it becomes: a bilingual storefront that answers your buyers in Arabic or English and hands the serious ones to your WhatsApp.</p>
 
       <div class="hero-ctas">
@@ -445,12 +451,12 @@ footer a{color:var(--amber-pale)}
         <a class="btn btn-outline" href="#ladder">See the price</a>
       </div>
 
-      <div class="hero-trust">
-        <span>One-time price</span><span>·</span>
-        <span>1 year hosting &amp; care</span><span>·</span>
-        <span>Arabic + English</span><span>·</span>
-        <span>No retainer</span>
-      </div>
+      <ul class="hero-trust">
+        <li>One-time price</li>
+        <li>1 year hosting &amp; care included</li>
+        <li>Arabic + English</li>
+        <li>No monthly retainer</li>
+      </ul>
     </div>
 
     <div class="stage" id="stage">
@@ -483,8 +489,8 @@ footer a{color:var(--amber-pale)}
     <p class="eyebrow rv"><span class="star">✼</span> The First Inquiry Promise</p>
     <div class="vow rv">
       <picture>
-        <source srcset="/nahid-founder-2026.webp" type="image/webp"/>
-        <img src="/nahid-founder-2026.jpg" alt="Nahid Abyari, founder of AI Profit Lab" width="200" height="236" decoding="async"/>
+        <source srcset="/nahid-founder-seated-2026.webp" type="image/webp"/>
+        <img src="/nahid-founder-seated-2026.jpg" alt="Nahid Abyari, founder of AI Profit Lab" width="200" height="235" decoding="async"/>
       </picture>
       <div>
         <q>No real buyer inquiry within 30 days of going live? I rebuild it free until you get one. If you still don't, you get your money back.</q>
@@ -559,7 +565,7 @@ footer a{color:var(--amber-pale)}
     <p class="eyebrow rv"><span class="star">✼</span> What you get</p>
     <h2 class="rv">Six things. Each one does a job.</h2>
     <div class="grid3" style="margin-top:34px">
-      <div class="card rv"><span class="ic">🕐</span><h3>An employee who never sleeps</h3><p>A bilingual AI agent that answers buyers at 2am, on a Friday, during Eid.</p></div>
+      <div class="card rv"><span class="ic">🕐</span><h3>An employee who never sleeps</h3><p>A bilingual AI agent that answers buyers at 4am, on a Friday, during Eid.</p></div>
       <div class="card rv"><span class="ic">📲</span><h3>Hot leads in your pocket</h3><p>Serious buyers get handed straight to your WhatsApp.</p></div>
       <div class="card rv"><span class="ic">📋</span><h3>Built for bulk quotes</h3><p>A wholesale quote-request flow, not a retail "contact us" box.</p></div>
       <div class="card rv"><span class="ic">👀</span><h3>Know who's about to buy</h3><p>A short summary of who visited and what they asked, sent to your phone.</p></div>
