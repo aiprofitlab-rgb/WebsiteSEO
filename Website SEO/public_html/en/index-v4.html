@@ -1,0 +1,1403 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<!-- Stays noindex until Nahid approves this set for launch. When it launches,
+     remove this tag AND add the noindex to the page it replaces in the SAME
+     deploy - never separately, or both versions compete in the index. -->
+<meta name="robots" content="noindex, nofollow">
+<title>AI Profit Lab | Never lose a buyer to silence again — Muscat, Oman</title>
+<meta name="description" content="A bilingual storefront with an AI buyer agent that answers your buyers in Arabic and English while you sleep. One-time fee, no monthly lock-in, built by an operator in Muscat.">
+<link rel="canonical" href="https://aiprofitlab.io/en/index-v4/">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="AI Profit Lab | Never lose a buyer to silence again — Muscat, Oman">
+<meta property="og:description" content="A bilingual storefront with an AI buyer agent that answers your buyers in Arabic and English while you sleep. One-time fee, no monthly lock-in, built by an operator in Muscat.">
+<meta property="og:url" content="https://aiprofitlab.io/en/index-v4/">
+<meta property="og:image" content="https://aiprofitlab.io/og-aiprofitlab-2026.jpg">
+<meta property="og:locale" content="en_OM">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Non-blocking font load: a plain stylesheet link costs a render-blocking
+     round trip to fonts.googleapis.com. display=swap paints fallback text
+     immediately and swaps when the webfont lands. -->
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Marcellus&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" media="print" onload="this.media='all'" href="https://fonts.googleapis.com/css2?family=Marcellus&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap"></noscript>
+<link rel="preload" as="image" href="/assets/cinematic/poster.webp?v=20260817" fetchpriority="high">
+<!-- Sets .js before first paint so the reveal styles apply only when there is
+     JS to un-apply them. Without it, a no-JS visitor gets a blank page. -->
+<script>document.documentElement.className+=" js"</script>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SLR9GD3MJP"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-SLR9GD3MJP');</script>
+
+<style>
+:root{
+  --teal-950:#072B22; --teal-900:#0A3D30; --teal:#0F6E56; --teal-600:#158268;
+  --amber:#BA7517;    --amber-bright:#D89234; --amber-pale:#E8C98F;
+  /* Amber for SMALL TEXT on light grounds only. #BA7517 on cream measures
+     3.19:1, under the 4.5:1 floor for body-size text; this tint measures
+     4.97:1. The brand accent itself is unchanged - shapes, rules, marks and
+     large display type all keep --amber. */
+  --amber-text:#8F5A11;
+  --cream:#F1EFE8;    --panel:#FAF8F2;    --panel-2:#EAE4D5;  --white:#FFFFFF;
+  --ink:#232B26;      --muted:#5A665D;    --line:#DED8C8;
+  --wa:#1FAF5E;       --alert:#A6431F;
+  /* sampled from the hero footage's own background so the stage never seams */
+  --taupe:#9F9683;
+  /* cream at 62% — the readable tint for hairlines on dark grounds */
+  --line-dark:rgba(241,239,232,.16);
+  --display:'Marcellus',Georgia,'Times New Roman',serif;
+  --sans:'IBM Plex Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+  --ease:cubic-bezier(.22,.7,.25,1);
+}
+
+.skip{position:absolute;left:-9999px;top:0;z-index:200;background:var(--teal-950);color:var(--cream);
+  padding:12px 20px;border-radius:0 0 8px 0;font-family:var(--mono);font-size:.85rem;text-decoration:none}
+.skip:focus{left:0}
+
+*{box-sizing:border-box}
+/* clip, NOT hidden — overflow-x:hidden silently makes this a scroll container
+   and position:sticky stops working on every page that uses it. */
+html,body{overflow-x:clip}
+html{scroll-behavior:smooth;font-size:17px;-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--cream);color:var(--ink);
+  font-family:var(--sans);font-size:19px;line-height:1.7;
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+}
+img{max-width:100%;height:auto;display:block}
+h1,h2,h3,h4{font-family:var(--display);font-weight:400;margin:0;text-wrap:balance;letter-spacing:-.005em}
+p{margin:0 0 1.1em}
+a{color:var(--teal);text-underline-offset:3px}
+::selection{background:var(--amber-pale);color:var(--teal-950)}
+:focus-visible{outline:2px solid var(--amber);outline-offset:3px;border-radius:3px}
+
+/* ---------------------------------------------------------------- layout */
+.wrap{width:min(1180px,92vw);margin-inline:auto}
+.wrap-n{width:min(780px,92vw);margin-inline:auto}
+section{position:relative;padding:clamp(74px,9vw,138px) 0}
+.pad-s{padding:clamp(48px,6vw,84px) 0}
+
+/* Paper grain. Two-octave fractal noise at 3.5% — visible as texture on a
+   large cream field, invisible as pattern. Painted on a pseudo-element so it
+   never intercepts a pointer event. */
+.grain::before{
+  content:"";position:absolute;inset:0;pointer-events:none;z-index:0;opacity:.038;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.grain>*{position:relative;z-index:1}
+
+/* ------------------------------------------------------------- surfaces */
+.s-cream{background:var(--cream)}
+.s-panel{background:var(--panel)}
+.s-white{background:var(--white)}
+.s-panel2{background:var(--panel-2)}
+.s-dark{background:var(--teal-950);color:var(--cream)}
+.s-teal{background:var(--teal-900);color:var(--cream)}
+.s-dark h1,.s-dark h2,.s-dark h3,.s-teal h1,.s-teal h2,.s-teal h3{color:var(--cream)}
+.s-dark .eyebrow,.s-teal .eyebrow{color:var(--amber-pale)}
+.s-dark .lede,.s-teal .lede{color:rgba(241,239,232,.76)}
+.s-dark a,.s-teal a{color:var(--amber-bright)}
+.s-dark .rule,.s-teal .rule{background:var(--line-dark)}
+
+/* ----------------------------------------------------------------- type */
+.eyebrow{
+  font-family:var(--mono);font-size:.85rem;font-weight:500;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--muted);margin:0 0 18px;
+  display:flex;align-items:center;gap:10px;
+}
+.eyebrow .star{color:var(--amber);font-size:1.05em;line-height:1}
+.h1{font-size:clamp(2.7rem,6.2vw,5rem);line-height:1.02;color:var(--teal-950)}
+.h2{font-size:clamp(2rem,4.4vw,3.4rem);line-height:1.08;color:var(--teal-950);margin:0 0 20px}
+.h3{font-size:clamp(1.35rem,2.4vw,1.75rem);line-height:1.2;color:var(--teal-950)}
+.lede{font-size:clamp(1.06rem,1.6vw,1.25rem);color:var(--muted);max-width:60ch;line-height:1.65}
+.mono{font-family:var(--mono)}
+.num{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.rule{height:1px;background:var(--line);border:0;margin:0}
+.star{color:var(--amber)}
+.dot{width:.42em;height:.42em;border-radius:50%;background:var(--amber);display:inline-block;vertical-align:.12em}
+
+/* A section divider that is a mark, not a line: hairline — asterism — hairline */
+.asterism{display:flex;align-items:center;gap:18px;color:var(--amber);margin:0 0 clamp(34px,5vw,58px)}
+.asterism::before,.asterism::after{content:"";flex:1;height:1px;background:var(--line)}
+.s-dark .asterism::before,.s-dark .asterism::after,
+.s-teal .asterism::before,.s-teal .asterism::after{background:var(--line-dark)}
+
+/* -------------------------------------------------------------- buttons */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  font-family:var(--sans);font-size:1.02rem;font-weight:500;text-decoration:none;
+  padding:15px 26px;border-radius:99px;border:1px solid transparent;cursor:pointer;
+  position:relative;overflow:hidden;
+  transition:transform .2s var(--ease),box-shadow .2s var(--ease),background .2s,border-color .2s,color .2s;
+}
+/* travelling sheen — a single pass on hover, not a loop */
+.btn::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(105deg,transparent 38%,rgba(255,255,255,.28) 50%,transparent 62%);
+  transform:translateX(-130%);transition:transform .65s var(--ease);
+}
+.btn:hover::after{transform:translateX(130%)}
+.btn:hover{transform:translateY(-2px)}
+.btn-teal{background:var(--teal);color:#fff;box-shadow:0 14px 30px -16px rgba(15,110,86,.9)}
+.btn-teal:hover{background:var(--teal-600)}
+.btn-wa{background:var(--wa);color:#fff;box-shadow:0 14px 30px -16px rgba(31,175,94,.9)}
+.btn-amber{background:var(--amber);color:var(--teal-950);font-weight:600;box-shadow:0 14px 30px -16px rgba(186,117,23,.9)}
+.btn-ghost{background:transparent;color:var(--teal-900);border-color:rgba(35,43,38,.28)}
+.btn-ghost:hover{border-color:var(--teal);background:var(--white)}
+.s-dark .btn-ghost,.s-teal .btn-ghost{color:var(--cream);border-color:var(--line-dark)}
+.s-dark .btn-ghost:hover,.s-teal .btn-ghost:hover{background:rgba(241,239,232,.08);border-color:var(--amber-bright)}
+/* Button text colour has to out-specify `.s-dark a` / `.s-teal a` (0,1,1),
+   which otherwise repaints every button label on a dark section amber - and
+   an amber label on an amber pill is invisible. A lone `.btn-amber` (0,1,0)
+   loses that cascade, so the dark-section variants are restated here. */
+.s-dark .btn-amber,.s-teal .btn-amber{color:var(--teal-950)}
+.s-dark .btn-teal,.s-teal .btn-teal,
+.s-dark .btn-wa,.s-teal .btn-wa{color:#fff}
+.btn .wa-icon{width:19px;height:19px}
+.wa-icon{width:17px;height:17px;fill:currentColor;flex:none}
+.btn-row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+
+/* Inline text link that draws its own underline on hover */
+.tlink{
+  font-family:var(--mono);font-size:.9rem;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--teal);text-decoration:none;display:inline-flex;align-items:center;gap:9px;
+  padding-bottom:3px;background-image:linear-gradient(var(--amber),var(--amber));
+  background-size:0 1px;background-position:0 100%;background-repeat:no-repeat;
+  transition:background-size .35s var(--ease),color .2s;
+}
+.tlink:hover{background-size:100% 1px;color:var(--amber-text)}
+.tlink .arw{transition:transform .3s var(--ease)}
+.tlink:hover .arw{transform:translateX(4px)}
+.s-dark .tlink,.s-teal .tlink{color:var(--amber-pale)}
+
+/* ---------------------------------------------------------------- cards */
+.card{
+  position:relative;background:var(--panel);border:1px solid var(--line);
+  border-radius:16px;padding:clamp(24px,3vw,34px);overflow:hidden;
+  transition:transform .35s var(--ease),box-shadow .35s var(--ease),border-color .35s;
+}
+.card::before{
+  content:"";position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--amber),var(--amber-pale));
+  transform:scaleX(0);transform-origin:0 50%;transition:transform .5s var(--ease);
+}
+.card:hover{transform:translateY(-4px);box-shadow:0 26px 50px -34px rgba(7,43,34,.55);border-color:var(--panel-2)}
+.card:hover::before{transform:scaleX(1)}
+.card .n{font-family:var(--mono);font-size:.9rem;letter-spacing:.14em;color:var(--amber-text);display:block;margin-bottom:14px}
+.card h3{margin:0 0 10px}
+.card p{color:var(--muted);font-size:1rem;margin:0}
+.s-dark .card,.s-teal .card{background:rgba(241,239,232,.045);border-color:var(--line-dark)}
+.s-dark .card p,.s-teal .card p{color:rgba(241,239,232,.72)}
+.s-dark .card .n,.s-teal .card .n{color:var(--amber-bright)}
+
+.grid{display:grid;gap:clamp(16px,2vw,24px)}
+.g2{grid-template-columns:repeat(2,1fr)}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g4{grid-template-columns:repeat(4,1fr)}
+
+.chip{
+  display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:.82rem;
+  letter-spacing:.06em;text-transform:uppercase;color:var(--teal-900);
+  background:var(--white);border:1px solid var(--line);border-radius:99px;padding:7px 14px;
+}
+.chip b{color:var(--amber-text);font-weight:500}
+.s-dark .chip,.s-teal .chip{background:rgba(241,239,232,.07);border-color:var(--line-dark);color:var(--cream)}
+.s-dark .chip b,.s-teal .chip b{color:var(--amber-bright)}
+
+/* ------------------------------------------------------------ page hero */
+.phero{padding:clamp(150px,17vw,220px) 0 clamp(56px,7vw,90px);position:relative;overflow:hidden}
+.phero .h1{margin:0 0 22px}
+.phero .lede{font-size:clamp(1.12rem,1.9vw,1.4rem);color:var(--muted)}
+
+/* ------------------------------------------------------------ marquee */
+.facts{
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  background:var(--panel-2);overflow:hidden;padding:15px 0;
+}
+.facts .track{display:flex;width:max-content;animation:mq 42s linear infinite}
+.facts .half{display:flex;gap:0;flex:none}
+.facts span{
+  font-family:var(--mono);font-size:.86rem;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--teal-900);white-space:nowrap;display:inline-flex;align-items:center;gap:12px;padding:0 26px;
+}
+.facts .star{opacity:.9}
+@keyframes mq{to{transform:translateX(-50%)}}
+.facts:hover .track{animation-play-state:paused}
+
+/* ------------------------------------------------------------- header */
+.top{
+  position:fixed;inset:0 0 auto 0;z-index:80;display:flex;align-items:center;
+  justify-content:space-between;gap:16px;padding:13px clamp(16px,3vw,30px);
+  border-bottom:1px solid transparent;transition:background .3s,border-color .3s,padding .3s;
+}
+.top.solid{background:rgba(241,239,232,.93);backdrop-filter:blur(12px);border-bottom-color:var(--line);padding-top:9px;padding-bottom:9px}
+.top .mark{display:block;width:clamp(128px,15vw,160px);height:auto}
+.nav{display:flex;align-items:center;gap:clamp(12px,1.9vw,24px)}
+.nav a.lnk{
+  position:relative;font-family:var(--mono);font-size:.85rem;letter-spacing:.1em;
+  text-transform:uppercase;text-decoration:none;color:var(--teal-900);white-space:nowrap;opacity:.86;
+  transition:opacity .2s,color .2s;padding:4px 0;
+}
+.nav a.lnk::after{
+  content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--amber);
+  transform:scaleX(0);transform-origin:0 50%;transition:transform .35s var(--ease);
+}
+.nav a.lnk:hover{opacity:1;color:var(--teal)}
+.nav a.lnk:hover::after,.nav a.lnk[aria-current=page]::after{transform:scaleX(1)}
+.nav a.lnk[aria-current=page]{opacity:1;color:var(--teal-950)}
+.top-wa{
+  display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:.85rem;
+  letter-spacing:.1em;text-transform:uppercase;text-decoration:none;color:var(--teal-900);
+  border:1px solid rgba(35,43,38,.22);background:rgba(250,248,242,.82);
+  padding:10px 16px;border-radius:99px;transition:border-color .2s,background .2s,transform .2s;
+}
+.top-wa:hover{border-color:var(--teal);background:var(--white);transform:translateY(-1px)}
+
+/* Mobile menu. The v3 header simply hid its links below 1100px, which on a
+   phone left the site with no way to reach any other page — the exact
+   opposite of what this set is for. */
+.burger{
+  display:none;width:44px;height:44px;border-radius:50%;border:1px solid rgba(35,43,38,.22);
+  background:rgba(250,248,242,.82);cursor:pointer;padding:0;align-items:center;justify-content:center;
+}
+.burger i{display:block;width:18px;height:1.5px;background:var(--teal-900);position:relative;transition:background .2s}
+.burger i::before,.burger i::after{content:"";position:absolute;left:0;width:18px;height:1.5px;background:var(--teal-900);transition:transform .3s var(--ease)}
+.burger i::before{top:-6px}.burger i::after{top:6px}
+.menu-open .burger i{background:transparent}
+.menu-open .burger i::before{transform:translateY(6px) rotate(45deg)}
+.menu-open .burger i::after{transform:translateY(-6px) rotate(-45deg)}
+.mmenu{
+  position:fixed;inset:0;z-index:75;background:var(--teal-950);color:var(--cream);
+  display:flex;flex-direction:column;justify-content:center;gap:6px;padding:96px clamp(24px,7vw,64px) 40px;
+  opacity:0;visibility:hidden;transform:translateY(-12px);
+  transition:opacity .35s var(--ease),transform .35s var(--ease),visibility .35s;
+}
+.menu-open .mmenu{opacity:1;visibility:visible;transform:none}
+.mmenu a{
+  font-family:var(--display);font-size:clamp(2rem,8vw,3rem);color:var(--cream);text-decoration:none;
+  padding:10px 0;border-bottom:1px solid var(--line-dark);display:flex;align-items:baseline;gap:16px;
+}
+.mmenu a:hover{color:var(--amber-bright)}
+.mmenu a em{font-family:var(--mono);font-size:.8rem;font-style:normal;letter-spacing:.14em;color:var(--amber-bright);opacity:.8}
+.mmenu .mfoot{margin-top:28px;font-family:var(--mono);font-size:.85rem;letter-spacing:.08em;color:rgba(241,239,232,.6)}
+
+/* --------------------------------------------------------------- pager */
+.pager{border-top:1px solid var(--line);background:var(--panel)}
+.pager a{
+  display:flex;align-items:center;justify-content:space-between;gap:24px;text-decoration:none;
+  padding:clamp(34px,5vw,62px) 0;color:var(--teal-950);
+}
+.pager .pl{font-family:var(--mono);font-size:.85rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:10px}
+.pager .pt{font-family:var(--display);font-size:clamp(1.7rem,4.4vw,3rem);line-height:1.08;display:block;transition:color .25s}
+.pager a:hover .pt{color:var(--teal)}
+.pager .parw{font-size:clamp(1.8rem,4vw,2.6rem);color:var(--amber);transition:transform .35s var(--ease);flex:none}
+.pager a:hover .parw{transform:translateX(10px)}
+
+/* -------------------------------------------------------------- footer */
+.foot{background:var(--teal-950);color:rgba(241,239,232,.74);padding:clamp(58px,7vw,92px) 0 40px;font-size:1rem}
+.foot .fmark{width:170px;margin-bottom:20px}
+.foot .slogan{font-family:var(--display);font-size:clamp(1.25rem,2.4vw,1.7rem);color:var(--cream);margin:0 0 8px}
+.foot .slogan-ar{font-size:1.15rem;color:var(--amber-pale);margin:0}
+.foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:clamp(26px,4vw,56px);align-items:start}
+.foot h4{font-family:var(--mono);font-size:.82rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--amber-pale);margin:0 0 16px}
+.foot ul{list-style:none;margin:0;padding:0}
+.foot li{margin-bottom:11px}
+.foot a{color:rgba(241,239,232,.74);text-decoration:none;transition:color .2s}
+.foot a:hover{color:var(--amber-bright)}
+.foot .legal{
+  margin-top:clamp(34px,5vw,58px);padding-top:26px;border-top:1px solid var(--line-dark);
+  font-family:var(--mono);font-size:.79rem;letter-spacing:.05em;line-height:2;color:rgba(241,239,232,.5);
+}
+
+/* WhatsApp float */
+.fab{
+  position:fixed;right:18px;bottom:18px;z-index:70;display:inline-flex;align-items:center;gap:9px;
+  background:var(--wa);color:#fff;text-decoration:none;padding:13px 20px;border-radius:99px;
+  font-family:var(--mono);font-size:.84rem;letter-spacing:.08em;text-transform:uppercase;
+  box-shadow:0 16px 34px -14px rgba(31,175,94,.75);transition:transform .2s var(--ease);
+}
+.fab:hover{transform:translateY(-3px)}
+.fab .wa-icon{width:19px;height:19px}
+
+/* ----------------------------------------------------------- motion kit */
+.js .rv{opacity:0;transform:translateY(24px);transition:opacity .8s var(--ease),transform .8s var(--ease);transition-delay:var(--d,0s)}
+.js .rv.vis{opacity:1;transform:none}
+/* Heading wipe. Done with overflow on the heading and a transform on an inner
+   span that the motion script injects - NOT with clip-path:inset(), whose
+   negative offsets are dropped by the parser, which left every h2 on the page
+   permanently clipped to nothing. The padding-bottom gives descenders room so
+   the hidden overflow does not shave a "g" once the wipe has finished. */
+.js .rvw{display:block;overflow:hidden;padding-bottom:.14em}
+.js .rvw .wi{display:block;transform:translateY(106%);transition:transform 1s var(--ease);transition-delay:var(--d,0s)}
+.js .rvw.vis .wi{transform:none}
+.js .drawn path,.js .drawn line,.js .drawn polyline,.js .drawn circle,.js .drawn rect.dr{
+  stroke-dasharray:var(--len,1000);stroke-dashoffset:var(--len,1000);
+  transition:stroke-dashoffset 1.5s var(--ease);transition-delay:var(--d,0s);
+}
+.js .drawn.vis path,.js .drawn.vis line,.js .drawn.vis polyline,.js .drawn.vis circle,.js .drawn.vis rect.dr{stroke-dashoffset:0}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
+  .js .rv{opacity:1;transform:none}
+  .js .rvw .wi{transform:none}
+  .facts .track{animation:none}
+}
+
+/* -------------------------------------------------------- breakpoints */
+@media (max-width:1080px){
+  .g4{grid-template-columns:repeat(2,1fr)}
+  .g3{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:900px){
+  .nav a.lnk,.nav .top-wa{display:none}
+  .burger{display:inline-flex}
+  .foot-grid{grid-template-columns:1fr 1fr}
+}
+@media (max-width:640px){
+  body{font-size:18px}
+  .g2,.g3,.g4{grid-template-columns:1fr}
+  .foot-grid{grid-template-columns:1fr}
+  .fab span{display:none}
+  .fab{padding:15px;border-radius:50%}
+  .pager .parw{display:none}
+}
+
+/* ------------------------------------------------------- cost calculator */
+.leak-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:clamp(20px,3vw,40px);align-items:start}
+.panelcard{
+  background:rgba(241,239,232,.05);border:1px solid var(--line-dark);
+  border-radius:16px;padding:clamp(24px,3vw,36px);
+}
+.panelcard h3{color:var(--cream);margin:0 0 22px;font-size:1.5rem}
+/* the evening, as a timeline */
+.tl{list-style:none;margin:0;padding:0}
+.tl li{position:relative;padding:0 0 22px 26px;border-left:1px solid var(--line-dark)}
+.tl li:last-child{padding-bottom:0;border-left-color:transparent}
+.tl li::before{
+  content:"";position:absolute;left:-4.5px;top:8px;width:8px;height:8px;border-radius:50%;
+  background:var(--amber-pale);
+}
+.tl li.bad::before{background:var(--alert);box-shadow:0 0 0 4px rgba(166,67,31,.18)}
+.tl .t{display:block;font-family:var(--mono);font-size:.78rem;letter-spacing:.12em;color:var(--amber-pale);margin-bottom:5px}
+.tl .d{display:block;color:rgba(241,239,232,.8);font-size:.98rem;line-height:1.55}
+.tl .d b{color:var(--cream)}
+
+.fieldrow{margin-bottom:20px}
+.fieldrow label{
+  display:flex;justify-content:space-between;align-items:baseline;gap:12px;
+  font-size:.95rem;color:rgba(241,239,232,.8);margin-bottom:9px;
+}
+.fieldrow output{font-family:var(--mono);color:var(--amber-bright);font-size:1rem;white-space:nowrap}
+input[type=range]{
+  -webkit-appearance:none;appearance:none;width:100%;height:4px;border-radius:99px;
+  background:rgba(241,239,232,.16);outline:none;cursor:pointer;
+}
+input[type=range]::-webkit-slider-thumb{
+  -webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:var(--amber-bright);
+  border:3px solid var(--teal-950);cursor:grab;transition:transform .15s var(--ease);
+}
+input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.15)}
+input[type=range]::-moz-range-thumb{
+  width:18px;height:18px;border-radius:50%;background:var(--amber-bright);
+  border:3px solid var(--teal-950);cursor:grab;
+}
+.bignum-cap{
+  display:block;font-family:var(--mono);font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;
+  color:rgba(241,239,232,.55);margin:30px 0 4px;
+}
+.bignum{
+  display:block;font-family:var(--display);font-size:clamp(2.6rem,6vw,4.2rem);line-height:1;
+  color:var(--amber-bright);font-variant-numeric:tabular-nums;
+}
+.payback{margin:18px 0 0;color:rgba(241,239,232,.82);font-size:1.02rem}
+.payback b{color:var(--cream)}
+.assume{margin:14px 0 0;font-size:.88rem;line-height:1.6;color:rgba(241,239,232,.5)}
+
+/* ------------------------------------------------------------- staircase */
+.stair{width:100%;height:auto;display:block;margin:clamp(24px,4vw,44px) 0 clamp(28px,4vw,52px);overflow:visible}
+.stair .step{opacity:0;transform:translateY(26px);transition:opacity .7s var(--ease),transform .8s var(--ease);transition-delay:var(--d,0s)}
+.stair.vis .step{opacity:1;transform:none}
+.stair .anno{opacity:0;transition:opacity .6s var(--ease);transition-delay:var(--d,0s)}
+.stair.vis .anno{opacity:1}
+html:not(.js) .stair .step,html:not(.js) .stair .anno{opacity:1;transform:none}
+
+.sys-card{display:flex;flex-direction:column;gap:14px}
+.sys-card .tag{
+  font-family:var(--mono);font-size:.85rem;letter-spacing:.06em;color:var(--teal-900);
+  background:var(--white);border:1px solid var(--line);border-radius:99px;padding:7px 14px;align-self:flex-start;
+}
+.sys-card .tag b{color:var(--amber-text)}
+.sys-card .tlink{margin-top:auto}
+
+/* ----------------------------------------------------------- proof tiles */
+.tiles{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(16px,2.2vw,26px)}
+.tile{
+  position:relative;display:block;text-decoration:none;border-radius:16px;overflow:hidden;
+  border:1px solid var(--line-dark);background:rgba(241,239,232,.04);
+  transition:transform .4s var(--ease),border-color .4s,box-shadow .4s;
+}
+.tile:hover{transform:translateY(-5px);border-color:var(--amber-bright);box-shadow:0 34px 60px -40px rgba(0,0,0,.85)}
+.tile .shot{aspect-ratio:16/10;overflow:hidden;background:var(--teal-900)}
+.tile .shot img{width:100%;height:100%;object-fit:cover;object-position:top center;transition:transform .8s var(--ease)}
+.tile:hover .shot img{transform:scale(1.045)}
+.tile .cap{padding:22px clamp(18px,2vw,26px) 24px}
+.tile .cap h3{color:var(--cream);font-size:1.3rem;margin:0 0 7px}
+.tile .cap p{color:rgba(241,239,232,.66);font-size:.96rem;margin:0 0 14px}
+.tile .live{
+  position:absolute;top:14px;left:14px;z-index:2;display:inline-flex;align-items:center;gap:7px;
+  font-family:var(--mono);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;
+  background:rgba(7,43,34,.82);color:var(--cream);border:1px solid var(--line-dark);
+  padding:6px 11px;border-radius:99px;backdrop-filter:blur(6px);
+}
+.tile .live i{width:7px;height:7px;border-radius:50%;background:var(--wa);animation:pulse 2.2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.45;transform:scale(.8)}}
+.tile-wide{grid-column:1/-1;display:grid;grid-template-columns:1fr auto;align-items:center;gap:24px;padding:clamp(24px,3vw,36px)}
+.tile-wide h3{margin:0 0 8px}
+.tile-wide .cap{padding:0}
+
+/* --------------------------------------------------------- hours grid */
+.hours-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(18px,3vw,34px)}
+.hcard{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:clamp(22px,3vw,32px)}
+.hcard.win{background:var(--teal-950);border-color:var(--teal-900);color:var(--cream)}
+.hcard h3{margin:0 0 4px;font-size:1.4rem}
+.hcard.win h3{color:var(--cream)}
+.hcard .sub{font-family:var(--mono);font-size:.82rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:0 0 22px}
+.hcard.win .sub{color:var(--amber-pale)}
+/* 24 columns x 7 rows: one row per day, one cell per hour. Transposed from
+   7x24 because 24 narrow columns keep the cells small enough to read as a
+   texture; at 7 columns each cell was ~40px and the block ran a metre tall. */
+.hgrid{display:grid;grid-template-columns:repeat(24,1fr);gap:2px;margin-bottom:20px}
+.hgrid i{aspect-ratio:1;border-radius:1px;background:var(--panel-2);display:block}
+.hcard.win .hgrid i{background:rgba(241,239,232,.12)}
+.hgrid i.on{background:var(--alert)}
+.hcard.win .hgrid i.on{background:var(--wa)}
+.hcount{font-family:var(--display);font-size:clamp(1.9rem,4vw,2.7rem);line-height:1;color:var(--teal-950);display:block;margin-bottom:6px}
+.hcard.win .hcount{color:var(--amber-bright)}
+.hcard .note{font-size:.95rem;color:var(--muted);margin:0}
+.hcard.win .note{color:rgba(241,239,232,.72)}
+.hlegend{font-family:var(--mono);font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:0 0 8px}
+.hcard.win .hlegend{color:rgba(241,239,232,.55)}
+
+/* -------------------------------------------------------------- promise */
+.promise-grid{display:grid;grid-template-columns:auto 1fr;gap:clamp(24px,4vw,52px);align-items:center}
+.promise-photo{
+  width:clamp(150px,17vw,220px);aspect-ratio:1;border-radius:50%;object-fit:cover;
+  border:1px solid var(--line-dark);filter:saturate(.92);
+}
+.promise q{
+  display:block;font-family:var(--display);font-size:clamp(1.5rem,3.2vw,2.4rem);line-height:1.28;
+  color:var(--cream);quotes:none;margin:0 0 22px;
+}
+.promise q::before,.promise q::after{content:""}
+.promise .sig{font-family:var(--mono);font-size:.85rem;letter-spacing:.1em;text-transform:uppercase;color:var(--amber-pale);margin:0}
+
+/* -------------------------------------------------------- explore rail */
+.rail{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(14px,1.8vw,22px)}
+.rcard{
+  position:relative;display:flex;flex-direction:column;justify-content:space-between;gap:34px;
+  min-height:230px;text-decoration:none;background:var(--panel);border:1px solid var(--line);
+  border-radius:16px;padding:clamp(20px,2.4vw,28px);overflow:hidden;
+  transition:background .35s,transform .35s var(--ease),border-color .35s;
+}
+.rcard::after{
+  content:"";position:absolute;inset:auto -30% -60% -30%;height:70%;border-radius:50%;
+  background:radial-gradient(closest-side,rgba(186,117,23,.16),transparent);
+  opacity:0;transition:opacity .45s var(--ease);
+}
+.rcard:hover{transform:translateY(-5px);border-color:var(--amber-pale);background:var(--white)}
+.rcard:hover::after{opacity:1}
+.rcard .rn{font-family:var(--mono);font-size:.8rem;letter-spacing:.16em;color:var(--amber-text)}
+.rcard h3{font-size:clamp(1.25rem,2vw,1.55rem);color:var(--teal-950);margin:0 0 8px;position:relative}
+.rcard p{font-size:.94rem;color:var(--muted);margin:0;position:relative}
+.rcard .go{position:relative;font-family:var(--mono);font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);display:inline-flex;align-items:center;gap:8px}
+.rcard:hover .go{color:var(--amber-text)}
+
+@media (max-width:760px){ .stair{display:none} }
+@media (max-width:960px){
+  .leak-grid,.hours-grid,.tiles{grid-template-columns:1fr}
+  .rail{grid-template-columns:repeat(2,1fr)}
+  .promise-grid{grid-template-columns:1fr;text-align:left}
+  .tile-wide{grid-template-columns:1fr}
+}
+@media (max-width:560px){ .rail{grid-template-columns:1fr} }
+
+/* Section height IS the playback speed control: travel = height - 100vh
+   stage, and the frames are spread across that travel. */
+.cine{position:relative;height:500vh;background:var(--cream);padding:0}
+.cine-stage{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;background:var(--cream);display:flex;flex-direction:column}
+.cine-media{position:relative;width:100%;height:clamp(240px,46svh,520px);flex:none;background:var(--taupe);overflow:hidden}
+.cine-poster,.cine-canvas{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.cine-canvas{z-index:2;opacity:0;transition:opacity .4s ease}
+.cine-canvas.ready{opacity:1}
+.cine-poster{z-index:1}
+.cine-ui{position:relative;flex:1 1 auto;min-height:0}
+.cine-ui a{pointer-events:auto}
+.lead,.endcard,.beat{
+  position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(680px,90vw);
+  text-align:center;opacity:0;transition:opacity .45s ease;pointer-events:none;
+}
+.lead.on,.endcard.on,.beat.on{opacity:1;pointer-events:auto}
+.lead h1{font-size:clamp(2.6rem,5.6vw,4.5rem);line-height:1.04;color:var(--teal-950);margin:0 0 16px}
+.lead p.sub{margin:0 auto 22px;max-width:46ch;color:var(--ink);font-size:clamp(1.2rem,2.2vw,1.55rem);line-height:1.45}
+/* Two CTAs inside the first viewport. v3 learned this the hard way: with the
+   only button on the endcard at 86% scroll progress, a visitor who did not
+   scroll five screens never saw a call to action at all. */
+.lead-cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:18px}
+.trust-strip{font-family:var(--mono);font-size:.85rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:0;line-height:1.9}
+.beat{font-family:var(--mono);font-size:clamp(1rem,3.2vw,1.15rem);line-height:1.55;color:var(--teal-900)}
+.beat span{display:inline-block;border-top:2px solid var(--amber);padding-top:14px}
+.endcard p{font-family:var(--display);font-size:clamp(1.7rem,5vw,2.5rem);color:var(--teal-950);margin:0 0 22px;line-height:1.2}
+.scroll-hint{
+  position:absolute;left:50%;bottom:12px;transform:translateX(-50%);font-family:var(--mono);
+  font-size:.85rem;letter-spacing:.24em;text-transform:uppercase;color:var(--muted);
+  margin:0;opacity:0;transition:opacity .4s ease;
+}
+.scroll-hint.on{opacity:.8}
+.cine-progress{position:absolute;left:0;right:0;bottom:0;height:3px;background:rgba(35,43,38,.1);z-index:5}
+.cine-progress i{display:block;height:100%;width:100%;background:var(--amber);transform:scaleX(0);transform-origin:0 50%}
+.illus-note{
+  position:absolute;left:0;right:0;bottom:12px;z-index:5;font-family:var(--mono);font-size:.95rem;
+  letter-spacing:.05em;color:rgba(35,43,38,.6);margin:0;text-align:center;padding:0 20px;
+}
+.wash-l,.wash-r{display:none;position:absolute;inset:0;z-index:3;pointer-events:none}
+
+@media (min-width:1100px){
+  .cine{height:560vh}
+  .cine-media{position:absolute;inset:0;height:100%;width:100%}
+  .cine-ui{position:absolute;inset:0;z-index:4;flex:none}
+  .wash-l{display:block;background:linear-gradient(90deg,rgba(241,239,232,.95) 0%,rgba(241,239,232,.72) 32%,rgba(241,239,232,.18) 52%,rgba(241,239,232,0) 66%)}
+  .wash-r{display:block;background:linear-gradient(270deg,rgba(241,239,232,.72) 0%,rgba(241,239,232,.34) 22%,rgba(241,239,232,0) 44%)}
+  .lead,.endcard{left:clamp(32px,4.5vw,76px);right:auto;top:46%;transform:translateY(-50%);width:min(470px,34vw);text-align:left}
+  .lead h1{font-size:clamp(2.5rem,3.5vw,3.6rem)}
+  .lead p.sub{margin:0 0 22px;max-width:32ch;font-size:1.2rem}
+  .lead-cta{justify-content:flex-start}
+  .beat{left:auto;right:clamp(32px,4.5vw,76px);top:50%;transform:translateY(-50%);width:min(330px,25vw);text-align:left;font-size:1.1rem}
+  .scroll-hint{left:clamp(32px,4.5vw,76px);transform:none;bottom:38px}
+  .illus-note{left:auto;right:210px;bottom:14px;text-align:right;font-size:.95rem;padding:0}
+}
+@media (max-width:1099px){
+  .cine{height:460vh}
+  /* Bottom padding reserves room for the absolutely-positioned disclaimer at
+     the foot of the stage; without it the centred copy lands on top of it. */
+  .cine-ui{padding:clamp(18px,4vw,32px) 20px 88px}
+  .cine-media{height:clamp(220px,38svh,420px)}
+  /* Opposite corners: stacked, both of these default to bottom-centre and the
+     disclaimer wraps onto the scroll hint. */
+  .illus-note{left:16px;right:auto;max-width:62%;text-align:left;bottom:10px}
+  .scroll-hint{left:auto;right:16px;transform:none;bottom:10px}
+}
+@media (max-width:560px){
+  .cine{height:420vh}
+  .lead h1{font-size:clamp(2.1rem,8.6vw,2.7rem)}
+  .lead p.sub{font-size:1.05rem;margin-bottom:16px}
+  .trust-strip{font-size:.78rem}
+}
+</style>
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"ProfessionalService",
+  "name":"AI Profit Lab",
+  "description":"Done-for-you AI automation for trading and distribution SMEs in Oman and the GCC.",
+  "url":"https://aiprofitlab.io/en/index-v4/",
+  "email":"hello@aiprofitlab.io",
+  "telephone":"+968 9924 5250",
+  "slogan":"Every success starts with insight",
+  "areaServed":[{"@type":"Country","name":"Oman"}],
+  "address":{"@type":"PostalAddress","addressLocality":"Bousher","addressRegion":"Muscat","addressCountry":"OM","streetAddress":"South Al Khuwair"},
+  "parentOrganization":{"@type":"Organization","name":"Lotus Gulf International","identifier":"CR 1570092"},
+  "founder":{"@type":"Person","name":"Nahid Abyari"},
+  "priceRange":"OMR 950 - OMR 2200"
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="top" id="top">
+  <a href="/en/index-v4/" aria-label="AI Profit Lab home">
+    <img class="mark" src="/assets/brand/wordmark-primary.svg" alt="AI Profit Lab" width="160" height="28">
+  </a>
+  <nav class="nav" aria-label="Primary">
+        <a class="lnk" href="/en/services-v4/">What I Build</a>
+    <a class="lnk" href="/en/process-v4/">How It Works</a>
+    <a class="lnk" href="/en/about-v4/">About</a>
+    <a class="lnk" href="/en/contact-v4/">Contact</a>
+    <a class="lnk" href="/en/blog/">Articles</a>
+    <a class="lnk" href="/" lang="ar">&#1593;&#1585;&#1576;&#1610;</a>
+    <a class="top-wa" href="https://wa.me/96899245250?text=Hello%20Nahid%2C%20I%20have%20a%20question%20about%20my%20business."><svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 1.8a8.2 8.2 0 1 1-4.2 15.3l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8zm-3.1 4c-.2 0-.5 0-.7.3-.2.3-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.8 2.8 4.4 3.8 2.2.9 2.6.7 3.1.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2-.1-.1-.2-.2-.5-.3l-1.7-.8c-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.1-.2 0-.4.1-.5l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5L10 8.2c-.2-.4-.4-.4-.6-.4h-.5z"/></svg><span>WhatsApp</span></a>
+    <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="mmenu"><i></i></button>
+  </nav>
+</header>
+<div class="mmenu" id="mmenu" aria-hidden="true">
+    <a href="/en/index-v4/" aria-current="page"><em>01</em>Home</a>
+  <a href="/en/services-v4/"><em>02</em>What I Build</a>
+  <a href="/en/process-v4/"><em>03</em>How It Works</a>
+  <a href="/en/about-v4/"><em>04</em>About</a>
+  <a href="/en/contact-v4/"><em>05</em>Contact</a>
+  <a href="/en/blog/"><em>06</em>Articles</a>
+  <p class="mfoot">hello@aiprofitlab.io &middot; <span dir="ltr">+968 9924 5250</span><br>Muscat, Oman</p>
+</div>
+<main id="main">
+
+<section class="cine" id="cine">
+  <div class="cine-stage" id="cineStage">
+    <div class="cine-media" id="cineMedia">
+      <img class="cine-poster" id="cinePoster" src="/assets/cinematic/poster.webp?v=20260817"
+        alt="An illustration of the AI assistant: a machine form that becomes a person and begins working."
+        width="1440" height="810" fetchpriority="high" decoding="async">
+      <canvas class="cine-canvas" id="cineCanvas" aria-hidden="true"></canvas>
+      <div class="wash-l"></div><div class="wash-r"></div>
+    </div>
+
+    <div class="cine-ui">
+      <div class="lead on" id="lead">
+        <p class="eyebrow"><span class="star">&#10038;</span> AI Profit Lab &middot; Muscat, Oman</p>
+        <h1>Never lose a buyer to silence again.</h1>
+        <p class="sub">A bilingual storefront that answers your buyers in Arabic and English &mdash; at 9pm,
+          on a Friday, while you sleep. Built in days. Yours to keep.</p>
+        <div class="lead-cta">
+          <a class="btn btn-teal" href="#leak">What silence costs you &darr;</a>
+          <a class="btn btn-ghost" href="/en/services-v4/">See what I build</a>
+        </div>
+        <p class="trust-strip">One-time fee &middot; No monthly lock-in &middot; Priced in OMR<br>
+          Lotus Gulf International &middot; South Al Khuwair, Bousher, Muscat</p>
+      </div>
+
+      <p class="beat" data-at="0.16"><span>9:47 PM. A buyer asks if you deliver to Sohar.</span></p>
+      <p class="beat" data-at="0.28"><span>Your office closed four hours ago.</span></p>
+      <p class="beat" data-at="0.40"><span>Something answers anyway.</span></p>
+      <p class="beat" data-at="0.52"><span>It knows your stock. It knows your delivery times.</span></p>
+      <p class="beat" data-at="0.64"><span>It books the order and logs the lead.</span></p>
+      <p class="beat" data-at="0.76"><span>You read about it in the morning.</span></p>
+
+      <div class="endcard" id="endcard">
+        <p>Every success starts with insight.</p>
+        <a class="btn btn-wa" href="https://wa.me/96899245250?text=Hello%20Nahid%2C%20I%20want%20to%20ask%20about%20a%20Smart%20Storefront%20for%20my%20business."><svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 1.8a8.2 8.2 0 1 1-4.2 15.3l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8zm-3.1 4c-.2 0-.5 0-.7.3-.2.3-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.8 2.8 4.4 3.8 2.2.9 2.6.7 3.1.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2-.1-.1-.2-.2-.5-.3l-1.7-.8c-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.1-.2 0-.4.1-.5l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5L10 8.2c-.2-.4-.4-.4-.6-.4h-.5z"/></svg>Message me on WhatsApp</a>
+      </div>
+
+      <p class="scroll-hint on" id="hint">Scroll</p>
+    </div>
+
+    <p class="illus-note">Illustration of the system. Not a photograph of a person.</p>
+    <div class="cine-progress"><i id="cineBar"></i></div>
+  </div>
+</section>
+
+
+<div class="facts" aria-label="Key facts">
+  <div class="track">
+    <div class="half">
+      <span><span class="star">&#10038;</span>One-time fee</span>
+      <span><span class="star">&#10038;</span>No monthly lock-in</span>
+      <span><span class="star">&#10038;</span>Priced in OMR</span>
+      <span><span class="star">&#10038;</span>English + &#1575;&#1604;&#1593;&#1585;&#1576;&#1610;&#1577;</span>
+      <span><span class="star">&#10038;</span>Built in Muscat</span>
+      <span><span class="star">&#10038;</span>Live in about a week</span>
+      <span><span class="star">&#10038;</span>You keep what I build</span>
+    </div>
+    <div class="half" aria-hidden="true">
+      <span><span class="star">&#10038;</span>One-time fee</span>
+      <span><span class="star">&#10038;</span>No monthly lock-in</span>
+      <span><span class="star">&#10038;</span>Priced in OMR</span>
+      <span><span class="star">&#10038;</span>English + &#1575;&#1604;&#1593;&#1585;&#1576;&#1610;&#1577;</span>
+      <span><span class="star">&#10038;</span>Built in Muscat</span>
+      <span><span class="star">&#10038;</span>Live in about a week</span>
+      <span><span class="star">&#10038;</span>You keep what I build</span>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================ S2 - THE LEAK, IN YOUR NUMBERS -->
+<section class="s-dark" id="leak">
+  <div class="wrap">
+    <p class="eyebrow"><span class="star">&#10038;</span> The cost of silence</p>
+    <h2 class="h2">Move four sliders. See your own number.</h2>
+    <p class="lede">Nothing here is assumed. Every figure is one you set yourself.</p>
+
+    <div class="leak-grid" style="margin-top:clamp(30px,4vw,52px)">
+      <div class="panelcard rv">
+        <h3>One buyer. One evening.</h3>
+        <ol class="tl">
+          <li class="bad"><span class="t">21:47 THU</span><span class="d">A buyer asks if you deliver to Sohar, and what the bulk price is.</span></li>
+          <li class="bad"><span class="t">21:47 &rarr; 08:12</span><span class="d">Nothing. Your office closed at 5pm. The message sits <b>14 hours</b>.</span></li>
+          <li class="bad"><span class="t">22:10 THU</span><span class="d">He messages two more suppliers. One replies in four minutes.</span></li>
+          <li><span class="t">08:12 FRI</span><span class="d">You reply, politely, with a good price.</span></li>
+          <li class="bad"><span class="t">08:14 FRI</span><span class="d">Silence. You never got to compete.</span></li>
+        </ol>
+      </div>
+
+      <div class="panelcard rv" style="--d:.12s">
+        <h3>What that costs you every month</h3>
+
+        <div class="fieldrow">
+          <label for="q1">Buyer inquiries you get in a week <output id="o1">25</output></label>
+          <input type="range" id="q1" min="5" max="150" step="5" value="25">
+        </div>
+        <div class="fieldrow">
+          <label for="q2">Share arriving outside working hours <output id="o2">40%</output></label>
+          <input type="range" id="q2" min="5" max="80" step="5" value="40">
+        </div>
+        <div class="fieldrow">
+          <label for="q3">Your average order value <output id="o3">OMR 180</output></label>
+          <input type="range" id="q3" min="20" max="2000" step="20" value="180">
+        </div>
+        <div class="fieldrow">
+          <label for="q4">Share of answered inquiries you win <output id="o4">20%</output></label>
+          <input type="range" id="q4" min="5" max="60" step="5" value="20">
+        </div>
+
+        <span class="bignum-cap">Revenue walking away, per month</span>
+        <span class="bignum" id="leak">OMR 1,559</span>
+
+        <!-- Two bars, one scale: the monthly leak against the one-time cost of
+             fixing it. The comparison is the whole argument. -->
+        <svg id="bars" viewBox="0 0 420 132" role="img" style="width:100%;height:auto;margin-top:22px" aria-labelledby="barsTitle">
+          <title id="barsTitle">Monthly revenue lost to silence, compared with the one-time cost of the Smart Storefront</title>
+          <text x="0" y="14" fill="#A8BCB1" font-family="IBM Plex Mono, monospace" font-size="15">Lost each month</text>
+          <rect x="0" y="22" width="420" height="26" rx="5" fill="rgba(241,239,232,.10)"/>
+          <rect id="barLeak" x="0" y="22" width="420" height="26" rx="5" fill="#D89234"/>
+          <text id="barLeakT" x="410" y="40" fill="#072B22" font-family="IBM Plex Mono, monospace" font-size="15" font-weight="500" text-anchor="end">OMR 1,559</text>
+          <text x="0" y="82" fill="#A8BCB1" font-family="IBM Plex Mono, monospace" font-size="15">Smart Storefront, once</text>
+          <rect x="0" y="90" width="420" height="26" rx="5" fill="rgba(241,239,232,.10)"/>
+          <rect id="barCost" x="0" y="90" width="256" height="26" rx="5" fill="#1FAF5E"/>
+          <text x="10" y="108" fill="#072B22" font-family="IBM Plex Mono, monospace" font-size="15" font-weight="500">OMR 950</text>
+        </svg>
+
+        <p class="payback">At that rate the build pays for itself in <b id="days">19 days</b>.</p>
+        <p class="assume">After-hours inquiries per month &times; your win rate &times; your average order.
+          It shows what is <em>at stake</em> in those messages &mdash; not a promise of recovery.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="s-cream grain" id="build">
+  <div class="wrap">
+    <p class="eyebrow"><span class="star">&#10038;</span> What gets built</p>
+    <h2 class="h2">Three systems. Each one solves the problem the last one creates.</h2>
+    <p class="lede">Start where the pain is. Nothing is a bundle you must buy at once, and nothing
+      needs a monthly fee to keep working.</p>
+
+    <svg class="stair rv" viewBox="0 0 1000 400" role="img" aria-labelledby="stairT stairD">
+      <title id="stairT">The three systems as a staircase</title>
+      <desc id="stairD">Step one, the Smart Storefront at OMR 950, makes buyers arrive. That creates the next
+        question, answered by step two, the Live Owner Dashboard at plus OMR 650. That creates the next question,
+        answered by step three, the Full Autopilot at plus OMR 900.</desc>
+
+      <g class="step" style="--d:0s">
+        <rect x="30" y="270" width="280" height="90" rx="12" fill="#0F6E56"/>
+        <text x="54" y="308" fill="#F1EFE8" font-family="Marcellus, Georgia, serif" font-size="26">The Smart Storefront</text>
+        <text x="54" y="336" fill="#BFE3D5" font-family="IBM Plex Mono, monospace" font-size="17">01 &#183; OMR 950</text>
+      </g>
+
+      <g class="anno" style="--d:.55s">
+        <path d="M352 146 l-12 -7 v14 z" fill="#BA7517"/>
+        <text x="374" y="151" fill="#8F5A11" font-family="IBM Plex Mono, monospace" font-size="16">buyers start arriving</text>
+        <text x="352" y="177" fill="#232B26" font-family="IBM Plex Sans, sans-serif" font-size="18">&#8220;what&#8217;s my cash and stock?&#8221;</text>
+      </g>
+
+      <g class="step" style="--d:.18s">
+        <rect x="350" y="190" width="280" height="170" rx="12" fill="#0A3D30"/>
+        <text x="374" y="228" fill="#F1EFE8" font-family="Marcellus, Georgia, serif" font-size="26">The Live Owner</text>
+        <text x="374" y="256" fill="#F1EFE8" font-family="Marcellus, Georgia, serif" font-size="26">Dashboard</text>
+        <text x="374" y="284" fill="#BFE3D5" font-family="IBM Plex Mono, monospace" font-size="17">02 &#183; +OMR 650</text>
+      </g>
+
+      <g class="anno" style="--d:.75s">
+        <path d="M672 66 l-12 -7 v14 z" fill="#BA7517"/>
+        <text x="694" y="71" fill="#8F5A11" font-family="IBM Plex Mono, monospace" font-size="16">quotes pile up</text>
+        <text x="672" y="97" fill="#232B26" font-family="IBM Plex Sans, sans-serif" font-size="18">&#8220;who chases the invoice?&#8221;</text>
+      </g>
+
+      <g class="step" style="--d:.36s">
+        <rect x="670" y="110" width="300" height="250" rx="12" fill="#072B22"/>
+        <text x="694" y="148" fill="#F1EFE8" font-family="Marcellus, Georgia, serif" font-size="26">The Full Autopilot</text>
+        <text x="694" y="176" fill="#BFE3D5" font-family="IBM Plex Mono, monospace" font-size="17">03 &#183; +OMR 900</text>
+      </g>
+
+      <line x1="30" y1="372" x2="970" y2="372" stroke="#DED8C8" stroke-width="2"/>
+    </svg>
+
+    <div class="grid g3" data-stagger>
+      <article class="card sys-card">
+        <span class="n">01</span>
+        <h3>The Smart Storefront</h3>
+        <p>A bilingual site that answers buyers in Arabic and English, records who they are, and hands the live ones to your WhatsApp.</p>
+        <span class="tag">One-time &#183; <b>OMR 950</b></span>
+        <a class="tlink" href="/en/services-v4/#storefront">See what&#8217;s inside <span class="arw">&rarr;</span></a>
+      </article>
+      <article class="card sys-card">
+        <span class="n">02</span>
+        <h3>The Live Owner Dashboard</h3>
+        <p>Your cash position, stock and open leads on one screen &mdash; without phoning three people to assemble it.</p>
+        <span class="tag">Add-on &#183; <b>+OMR 650</b></span>
+        <a class="tlink" href="/customized-ceo-dashboard-demo/">Open the live demo <span class="arw">&rarr;</span></a>
+      </article>
+      <article class="card sys-card">
+        <span class="n">03</span>
+        <h3>The Full Autopilot</h3>
+        <p>Something has to chase the quotes and the invoices. This does it, on schedule, without anyone remembering to.</p>
+        <span class="tag">Add-on &#183; <b>+OMR 900</b></span>
+        <a class="tlink" href="/en/services-v4/#autopilot">See what&#8217;s inside <span class="arw">&rarr;</span></a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================= S4 - PROOF YOU CAN CLICK -->
+<section class="s-dark" id="proof">
+  <div class="wrap">
+    <p class="eyebrow"><span class="star">&#10038;</span> Proof, not testimonials</p>
+    <h2 class="h2">I have no client logos yet. So open the systems instead.</h2>
+    <p class="lede">These are the real builds, running on real demo data. Click into them &mdash; that is
+      a better test than a quote from someone you&#8217;ve never met.</p>
+
+    <div class="tiles" style="margin-top:clamp(28px,4vw,48px)" data-stagger>
+      <a class="tile" href="/customized-ceo-dashboard-demo/">
+        <span class="live"><i></i>Live demo</span>
+        <span class="shot"><img src="/assets/v4/demo-dashboard-960.webp" alt="The CEO dashboard demo: revenue, gross profit and margin cards above a list of ranked actions." width="960" height="600" loading="lazy" decoding="async"></span>
+        <span class="cap">
+          <h3>The Live Owner Dashboard</h3>
+          <p>Cash, margin, dead stock and what to do about it &mdash; ranked, in plain sentences.</p>
+          <span class="tlink">Open it <span class="arw">&rarr;</span></span>
+        </span>
+      </a>
+
+      <a class="tile" href="/whatsapp-receptionist-demo/">
+        <span class="live"><i></i>Live demo</span>
+        <span class="shot"><img src="/assets/v4/demo-whatsapp-960.webp" alt="The WhatsApp receptionist demo: a lead list beside a full buyer conversation handled by the AI agent." width="960" height="600" loading="lazy" decoding="async"></span>
+        <span class="cap">
+          <h3>The buyer agent, mid-conversation</h3>
+          <p>Watch it qualify a buyer, hold the thread, and book the appointment.</p>
+          <span class="tlink">Open it <span class="arw">&rarr;</span></span>
+        </span>
+      </a>
+
+      <a class="tile tile-wide" href="/en/contact-v4/#test">
+        <span class="cap">
+          <h3>Or point it at your own business: the Silent Buyer Test</h3>
+          <p>I message your business the way a buyer would, then send you the scorecard &mdash; how long you took,
+            what was missed, what it cost. Free, and you owe me nothing afterwards.</p>
+        </span>
+        <span class="chip">Free &#183; <b>5 a week</b></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ S5 - THE HONEST COMPARISON -->
+<section class="s-panel">
+  <div class="wrap">
+    <p class="eyebrow"><span class="star">&#10038;</span> Against the real alternative</p>
+    <h2 class="h2">A week has 168 hours. An administrator covers 40 of them.</h2>
+    <p class="lede">Each square is one hour of your week. This is not a claim about quality &mdash; a good
+      administrator does things no system can. It is only about coverage.</p>
+
+    <div class="hours-grid" style="margin-top:clamp(28px,4vw,48px)" data-stagger>
+      <div class="hcard">
+        <h3>Hiring an administrator</h3>
+        <p class="sub">OMR 350&ndash;500 / month, every month</p>
+        <p class="hlegend">Rows: Sun &rarr; Sat &#183; columns: 00:00 &rarr; 23:00</p>
+        <div class="hgrid" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        <span class="hcount"><span data-count="40">40</span> of 168 hours</span>
+        <p class="note">Plus visa, insurance, paid leave and sick days &mdash; and the cover stops when they do.</p>
+      </div>
+
+      <div class="hcard win">
+        <h3>The Smart Storefront</h3>
+        <p class="sub">OMR 950, once</p>
+        <p class="hlegend">Rows: Sun &rarr; Sat &#183; columns: 00:00 &rarr; 23:00</p>
+        <div class="hgrid" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></div>
+        <span class="hcount"><span data-count="168">168</span> of 168 hours</span>
+        <p class="note">It does not replace her. It covers the 128 hours she was never there for.</p>
+      </div>
+    </div>
+
+    <div class="btn-row" style="margin-top:clamp(26px,3vw,40px)">
+      <a class="btn btn-teal" href="/en/services-v4/#price">See the whole price list</a>
+      <a class="tlink" href="/en/services-v4/">Every system, in detail <span class="arw">&rarr;</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================== S6 - THE NAMED PROMISE -->
+<section class="s-teal promise">
+  <div class="wrap">
+    <p class="eyebrow"><span class="star">&#10038;</span> The First Inquiry Promise</p>
+    <div class="promise-grid" style="margin-top:14px">
+      <img class="promise-photo" src="/nahid-founder-2026.webp" alt="Nahid Abyari, founder of AI Profit Lab" width="220" height="220" loading="lazy" decoding="async">
+      <div>
+        <q>No real buyer inquiry within 30 days of going live? I rebuild it free until you get one.
+          If you still don&#8217;t, you get your money back.</q>
+        <p class="sig">Nahid Abyari &#183; Founder, AI Profit Lab</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================================================== S7 - EXPLORE RAIL -->
+<section class="s-cream grain">
+  <div class="wrap">
+    <p class="eyebrow"><span class="star">&#10038;</span> Keep going</p>
+    <h2 class="h2">Four places worth your next five minutes.</h2>
+
+    <div class="rail" style="margin-top:clamp(26px,3.5vw,44px)" data-stagger>
+      <a class="rcard" href="/en/services-v4/">
+        <span class="rn">01</span>
+        <span><h3>What I build</h3><p>Three systems, every price, and what is deliberately not included.</p></span>
+        <span class="go">Open <span aria-hidden="true">&rarr;</span></span>
+      </a>
+      <a class="rcard" href="/en/process-v4/">
+        <span class="rn">02</span>
+        <span><h3>How it works</h3><p>First message to live system, step by step, with the dates.</p></span>
+        <span class="go">Open <span aria-hidden="true">&rarr;</span></span>
+      </a>
+      <a class="rcard" href="/en/about-v4/">
+        <span class="rn">03</span>
+        <span><h3>Who builds it</h3><p>One operator, not an agency. Including who I turn away.</p></span>
+        <span class="go">Open <span aria-hidden="true">&rarr;</span></span>
+      </a>
+      <a class="rcard" href="/en/blog/">
+        <span class="rn">04</span>
+        <span><h3>Articles</h3><p>Plain-language writing on AI for Omani and GCC trading businesses.</p></span>
+        <span class="go">Open <span aria-hidden="true">&rarr;</span></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+</main>
+<nav class="pager" aria-label="Next page">
+  <div class="wrap"><a href="/en/services-v4/">
+    <span><span class="pl">Next</span><span class="pt">What I build</span></span>
+    <span class="parw" aria-hidden="true">&rarr;</span>
+  </a></div>
+</nav>
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <img class="fmark" src="/assets/brand/wordmark-reversed.svg" alt="AI Profit Lab" width="170" height="29">
+        <p class="slogan">Every success starts with insight.</p>
+        <p class="slogan-ar" lang="ar" dir="rtl">&#1603;&#1604; &#1606;&#1580;&#1575;&#1581; &#1610;&#1576;&#1583;&#1571; &#1576;&#1585;&#1572;&#1610;&#1577;</p>
+      </div>
+      <div>
+        <h4>The work</h4>
+        <ul>
+          <li><a href="/en/services-v4/">What I build</a></li>
+          <li><a href="/en/process-v4/">How it works</a></li>
+          <li><a href="/en/services-v4/#price">Prices</a></li>
+          <li><a href="/customized-ceo-dashboard-demo/">Dashboard demo</a></li>
+          <li><a href="/whatsapp-receptionist-demo/">WhatsApp demo</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Talk to me</h4>
+        <ul>
+          <li><a href="https://wa.me/96899245250?text=Hello%20Nahid">WhatsApp <span dir="ltr">+968 9924 5250</span></a></li>
+          <li><a href="mailto:hello@aiprofitlab.io">hello@aiprofitlab.io</a></li>
+          <li><a href="/en/contact-v4/">Contact page</a></li>
+          <li><a href="/en/about-v4/">About Nahid</a></li>
+          <li><a href="/en/blog/">Articles</a></li>
+          <li><a href="/privacy/">Privacy</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="legal">
+      &copy; 2026 AI Profit Lab &mdash; a brand of Lotus Gulf International (CR <span dir="ltr">1570092</span>)<br>
+      South Al Khuwair, Bousher, Muscat, Oman &middot; Not VAT registered (TIN <span dir="ltr">2317725</span>)
+    </p>
+  </div>
+</footer>
+<a class="fab" href="https://wa.me/96899245250?text=Hello%20Nahid%2C%20I%20have%20a%20question%20about%20my%20business." aria-label="Chat on WhatsApp"><svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 1.8a8.2 8.2 0 1 1-4.2 15.3l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8zm-3.1 4c-.2 0-.5 0-.7.3-.2.3-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.8 2.8 4.4 3.8 2.2.9 2.6.7 3.1.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2-.1-.1-.2-.2-.5-.3l-1.7-.8c-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.1-.2 0-.4.1-.5l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5L10 8.2c-.2-.4-.4-.4-.6-.4h-.5z"/></svg><span>WhatsApp</span></a>
+<script>
+/* ---------------------------------------------------------------------------
+   Shared page behaviour: sticky header state, mobile menu, scroll reveals,
+   SVG draw-in, and count-up numbers. Everything degrades to "visible and
+   static" when JS or IntersectionObserver is missing, and is skipped wholesale
+   under prefers-reduced-motion.
+--------------------------------------------------------------------------- */
+(function(){
+  "use strict";
+  var root = document.documentElement;
+  var reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* header ---------------------------------------------------------------- */
+  var top = document.getElementById("top");
+  function onScroll(){ top.classList.toggle("solid", scrollY > 40); }
+  onScroll(); addEventListener("scroll", onScroll, {passive:true});
+
+  /* mobile menu ----------------------------------------------------------- */
+  var burger = document.getElementById("burger"), mm = document.getElementById("mmenu");
+  if (burger && mm){
+    var setMenu = function(open){
+      root.classList.toggle("menu-open", open);
+      burger.setAttribute("aria-expanded", open ? "true" : "false");
+      mm.setAttribute("aria-hidden", open ? "false" : "true");
+      document.body.style.overflow = open ? "hidden" : "";
+    };
+    burger.addEventListener("click", function(){ setMenu(!root.classList.contains("menu-open")); });
+    mm.addEventListener("click", function(e){ if (e.target.tagName === "A") setMenu(false); });
+    addEventListener("keydown", function(e){ if (e.key === "Escape") setMenu(false); });
+  }
+
+  /* auto-tag the standard blocks so pages don't have to repeat class="rv" --- */
+  document.querySelectorAll("section:not(.cine) .eyebrow, section:not(.cine) .lede").forEach(function(el){ el.classList.add("rv"); });
+  /* The wipe needs an inner block to move inside the heading's own overflow,
+     so the script supplies one rather than every page repeating it. */
+  document.querySelectorAll("section:not(.cine) h2, section:not(.cine) .h1").forEach(function(el){
+    var inner = document.createElement("span");
+    inner.className = "wi";
+    while (el.firstChild) inner.appendChild(el.firstChild);
+    el.appendChild(inner);
+    el.classList.add("rvw");
+  });
+  /* [data-stagger] children reveal in sequence, capped so a long grid does not
+     end up waiting a second and a half for its last card. */
+  document.querySelectorAll("[data-stagger]").forEach(function(g){
+    Array.prototype.forEach.call(g.children, function(c,i){
+      c.classList.add("rv"); c.style.setProperty("--d", Math.min(i*0.075, 0.45) + "s");
+    });
+  });
+
+  /* SVG draw-in: measure each stroked path so the dash length is its own
+     length, not a guessed constant that under- or over-shoots. */
+  document.querySelectorAll(".drawn").forEach(function(svg){
+    svg.querySelectorAll("path,line,polyline,circle,rect.dr").forEach(function(p,i){
+      var len = 1000;
+      try { if (p.getTotalLength) len = Math.ceil(p.getTotalLength()) || 1000; } catch(e){}
+      p.style.setProperty("--len", len);
+      p.style.setProperty("--d", Math.min(i*0.09, 0.7) + "s");
+    });
+  });
+
+  var els = document.querySelectorAll(".rv,.rvw,.drawn,[data-count]");
+  function showAll(){ els.forEach(function(e){ e.classList.add("vis"); countUp(e, true); }); }
+  if (reduce || !("IntersectionObserver" in window)){ showAll(); return; }
+
+  /* count-up -------------------------------------------------------------- */
+  function countUp(el, instant){
+    var raw = el.getAttribute("data-count"); if (raw === null || el.dataset.counted) return;
+    el.dataset.counted = "1";
+    var to = parseFloat(raw), pre = el.getAttribute("data-pre") || "", post = el.getAttribute("data-post") || "";
+    var dp = parseInt(el.getAttribute("data-dp") || "0", 10);
+    if (instant){ el.textContent = pre + to.toFixed(dp) + post; return; }
+    var t0 = 0, dur = 1250;
+    (function step(now){
+      if (!t0) t0 = now;
+      var k = Math.min((now - t0)/dur, 1);
+      var e = 1 - Math.pow(1 - k, 3);                       /* easeOutCubic */
+      var v = to * e;
+      el.textContent = pre + (dp ? v.toFixed(dp) : Math.round(v).toLocaleString("en-US")) + post;
+      if (k < 1) requestAnimationFrame(step);
+    })(0);
+  }
+
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){
+      if (!en.isIntersecting) return;
+      en.target.classList.add("vis"); countUp(en.target, false); io.unobserve(en.target);
+    });
+  }, {threshold:0.12, rootMargin:"0px 0px -60px 0px"});
+  els.forEach(function(e){ io.observe(e); });
+})();
+
+/* --------------------------------------------------------------------------
+   Scroll-scrubbed image sequence.
+
+   Canvas rather than <video>: no +faststart, no every-frame keyframe encode,
+   no Baseline re-encode for iOS, and none of the iOS Safari blanking that
+   happens when currentTime is set repeatedly on a paused <video>. Scrubs the
+   same on desktop, tablet and iPhone.
+
+   Canvas rather than swapping <img> src: no decode flash between frames.
+
+   Payload: 3.2 MB desktop / 0.9 MB mobile, versus 15.5 MB for the source mp4.
+-------------------------------------------------------------------------- */
+(function () {
+  "use strict";
+
+  /* Must match tools/build_cinematic_frames.py. That script prints replacement
+     values if you rebuild with a different --frames. */
+  const FRAMES_DESKTOP = 150;
+  const FRAMES_MOBILE = 75;
+
+  /* Cache-busting token for the frame set. MUST be bumped whenever the
+     frames are rebuilt — build_cinematic_frames.py stamps it automatically.
+     The host serves these immutable with positional filenames, so without a
+     version token edge nodes can mix two builds of the same sequence. */
+  const ASSET_V = "20260817";
+
+  const sect = document.getElementById("cine");
+  const stage = document.getElementById("cineStage");
+  const media = document.getElementById("cineMedia");
+  const canvas = document.getElementById("cineCanvas");
+  const poster = document.getElementById("cinePoster");
+  const bar = document.getElementById("cineBar");
+  const lead = document.getElementById("lead");
+  const hint = document.getElementById("hint");
+  const endcard = document.getElementById("endcard");
+  const beats = [].slice.call(document.querySelectorAll(".beat"));
+  const topbar = document.getElementById("top");
+
+  const clamp = (v, a, b) => (v < a ? a : v > b ? b : v);
+
+  const onTopbar = () => topbar.classList.toggle("solid", window.scrollY > 40);
+  onTopbar();
+  addEventListener("scroll", onTopbar, { passive: true });
+
+  if (!sect || !canvas) return;
+
+  /* Reduced motion: never fetch the sequence. Swap in the closing still, since
+     one image has to carry the whole story, and reveal all copy statically. */
+  if (matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    poster.src = "/assets/cinematic/still.webp?v=" + ASSET_V;
+    lead.classList.add("on");
+    endcard.classList.add("on");
+    beats.forEach(b => b.classList.add("on"));
+    hint.classList.remove("on");
+    return;
+  }
+
+  const isMobile = matchMedia("(max-width: 768px)").matches;
+  const DIR = isMobile ? "mobile" : "desktop";
+  const N = isMobile ? FRAMES_MOBILE : FRAMES_DESKTOP;
+
+  const ctx = canvas.getContext("2d", { alpha: false });
+  const imgs = new Array(N);
+  let current = 0;
+  let inView = false;
+  let painted = false;
+  let started = false;
+
+  function resize() {
+    const dpr = Math.min(devicePixelRatio || 1, 2);   // capping at 2 matters
+    const w = media.clientWidth;
+    const h = media.clientHeight;
+    if (!w || !h) return;
+    canvas.width = Math.round(w * dpr);
+    canvas.height = Math.round(h * dpr);
+    canvas.style.width = w + "px";
+    canvas.style.height = h + "px";
+    ctx.fillStyle = "#9F9683";      // sampled from the footage
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    paint(true);
+  }
+
+  /* Frames arrive coarse-to-fine, so the array has holes. Fall back to the
+     closest frame that has arrived rather than refusing to paint. */
+  function nearest(idx) {
+    if (imgs[idx]) return imgs[idx];
+    for (let d = 1; d < N; d++) {
+      if (imgs[idx - d]) return imgs[idx - d];
+      if (imgs[idx + d]) return imgs[idx + d];
+    }
+    return null;
+  }
+
+  /* cover, never contain — contain letterboxes a 16:9 source in a tall box */
+  function draw(im, alpha) {
+    const cw = canvas.width, ch = canvas.height;
+    const s = Math.max(cw / im.naturalWidth, ch / im.naturalHeight);
+    const w = im.naturalWidth * s, h = im.naturalHeight * s;
+    ctx.globalAlpha = alpha;
+    ctx.drawImage(im, (cw - w) / 2, (ch - h) / 2, w, h);
+    ctx.globalAlpha = 1;
+  }
+
+  /* Cross-dissolve the two frames `current` sits between rather than snapping
+     to Math.round — the sequence samples a 14.5s source at ~10 fps, so a hard
+     cut steps visibly. Only blends when BOTH neighbours have arrived; during
+     the coarse-to-fine load, dissolving frame 0 into frame 8 would ghost. */
+  function paint(force) {
+    const pos = clamp(current, 0, N - 1);
+    const i0 = Math.floor(pos);
+    const f = pos - i0;
+    const a = imgs[i0], b = imgs[i0 + 1];
+
+    if (a && b && f > 0.001) {
+      draw(a, 1);
+      draw(b, f);
+    } else {
+      const im = nearest(Math.round(pos));
+      if (!im) return;
+      draw(im, 1);
+    }
+    if (!painted || force) { painted = true; canvas.classList.add("ready"); }
+  }
+
+  /* Coarse-to-fine fetch order. Passing over the range at stride 8, then 4, 2,
+     1 makes the entire scrub usable after ~19 frames (~420 KB). */
+  function fetchOrder(n) {
+    const seen = new Set(), out = [];
+    for (const stride of [8, 4, 2, 1]) {
+      for (let i = 0; i < n; i += stride) {
+        if (!seen.has(i)) { seen.add(i); out.push(i); }
+      }
+    }
+    if (!seen.has(n - 1)) out.push(n - 1);
+    return out;
+  }
+
+  const order = fetchOrder(N);
+  let qi = 0;
+  function loadNext() {
+    if (qi >= order.length) return;
+    const i = order[qi++];
+    const im = new Image();
+    im.decoding = "async";
+    // keep frames behind fonts, poster and document in the network queue
+    if ("fetchPriority" in im) im.fetchPriority = "low";
+    im.onload = () => { imgs[i] = im; paint(!painted); loadNext(); };
+    im.onerror = loadNext;            // a gap must not stall the chain
+    im.src = "/assets/cinematic/" + DIR + "/f-" + String(i).padStart(3, "0")
+      + ".webp?v=" + ASSET_V;
+  }
+
+  /* Deferred start. The hero is the first section, so the observer fires
+     instantly and the sequence would otherwise compete with the fonts and the
+     LCP poster for bandwidth on the very first paint. */
+  function startLoading() {
+    if (started) return;
+    started = true;
+    const go = () => { for (let k = 0; k < 4; k++) loadNext(); };   // 4 in flight
+    const idle = fn => (window.requestIdleCallback
+      ? requestIdleCallback(fn, { timeout: 1200 }) : setTimeout(fn, 300));
+    if (document.readyState === "complete") idle(go);
+    else addEventListener("load", () => idle(go), { once: true });
+  }
+
+  function progress() {
+    const travel = sect.offsetHeight - stage.offsetHeight;
+    if (travel <= 0) return 0;
+    return clamp(-sect.getBoundingClientRect().top / travel, 0, 1);
+  }
+
+  function overlays(p) {
+    bar.style.transform = "scaleX(" + p + ")";
+    lead.classList.toggle("on", p < 0.12);
+    hint.classList.toggle("on", p < 0.06);
+    endcard.classList.toggle("on", p > 0.86);
+    for (let i = 0; i < beats.length; i++) {
+      const at = parseFloat(beats[i].dataset.at);
+      beats[i].classList.toggle("on", p > at - 0.055 && p < at + 0.075);
+    }
+  }
+
+  /* Frame-rate independent smoothing. TAU is a time constant in ms: the canvas
+     closes ~63% of the remaining distance to the scroll position every TAU,
+     whatever the refresh rate. A fixed per-frame lerp converged twice as fast
+     on a 120 Hz display as on a 60 Hz one. */
+  const TAU = 190;
+  let last = 0;
+
+  function tick(now) {
+    const dt = last ? Math.min(now - last, 64) : 16;   // cap across tab switches
+    last = now;
+    const p = progress();
+    const target = p * (N - 1);
+    current += (target - current) * (1 - Math.exp(-dt / TAU));
+    if (Math.abs(target - current) < 0.004) current = target;
+    paint(false);
+    overlays(p);
+    if (inView) requestAnimationFrame(tick);
+  }
+
+  /* Fires well before the section arrives so frames are in place on entry. */
+  new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        startLoading();
+        /* last=0 so the first tick after a long absence uses the nominal
+           16ms step instead of a huge dt that would snap the scrub. */
+        if (!inView) { inView = true; last = 0; requestAnimationFrame(tick); }
+      } else {
+        inView = false;
+      }
+    });
+  }, { rootMargin: "200% 0px 200% 0px" }).observe(sect);
+
+  let rt = 0;
+  addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(resize, 150); });
+  addEventListener("orientationchange", () => setTimeout(resize, 250));
+
+  resize();
+  overlays(0);
+})();
+
+/* --------------------------------------------------------------------------
+   Cost-of-silence calculator.
+
+   Deliberately assumption-free: every term is a slider the visitor sets, so
+   the output is arithmetic on their own inputs rather than a claim of ours.
+   That matters — the site has a standing rule against unsourced statistics.
+-------------------------------------------------------------------------- */
+(function () {
+  "use strict";
+  const $ = id => document.getElementById(id);
+  const q1 = $("q1"), q2 = $("q2"), q3 = $("q3"), q4 = $("q4");
+  if (!q1) return;
+
+  const WEEKS_PER_MONTH = 4.33;
+  const STOREFRONT = 950;          // must match the price ladder above
+  const fmt = n => "OMR " + Math.round(n).toLocaleString("en-US");
+
+  function render() {
+    const perWeek = +q1.value, pct = +q2.value, order = +q3.value, win = +q4.value;
+
+    $("o1").textContent = perWeek;
+    $("o2").textContent = pct + "%";
+    $("o3").textContent = fmt(order);
+    $("o4").textContent = win + "%";
+
+    const leak = perWeek * WEEKS_PER_MONTH * (pct / 100) * (win / 100) * order;
+    $("leak").textContent = fmt(leak);
+
+    /* Both bars share one scale so the comparison is honest. The leak bar is
+       full width whenever it exceeds the build cost, and the cost bar shrinks
+       against it; below that the roles swap. */
+    const max = Math.max(leak, STOREFRONT) || 1;
+    const W = 420;
+    const leakW = Math.max(4, (leak / max) * W);
+    const costW = Math.max(4, (STOREFRONT / max) * W);
+    $("barLeak").setAttribute("width", leakW.toFixed(1));
+    $("barCost").setAttribute("width", costW.toFixed(1));
+
+    /* Keep the leak label inside its own bar; when the bar is short the label
+       would otherwise overhang the track and collide with the background. */
+    const lt = $("barLeakT");
+    lt.textContent = fmt(leak);
+    if (leakW > 120) {
+      lt.setAttribute("x", (leakW - 10).toFixed(1));
+      lt.setAttribute("text-anchor", "end");
+      lt.setAttribute("fill", "#072B22");
+    } else {
+      lt.setAttribute("x", (leakW + 10).toFixed(1));
+      lt.setAttribute("text-anchor", "start");
+      lt.setAttribute("fill", "#F1EFE8");
+    }
+
+    const perDay = leak / 30;
+    const days = perDay > 0 ? Math.ceil(STOREFRONT / perDay) : Infinity;
+    $("days").textContent = !isFinite(days) ? "—"
+      : days <= 1 ? "a single day"
+        : days < 400 ? days + " days"
+          : "over a year";
+  }
+
+  [q1, q2, q3, q4].forEach(el => el.addEventListener("input", render));
+  render();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<!-- Stays noindex until Nahid approves this set for launch. When it launches,
+     remove this tag AND add the noindex to the page it replaces in the SAME
+     deploy - never separately, or both versions compete in the index. -->
+<meta name="robots" content="noindex, nofollow">
+<title>About | AI Profit Lab — one operator, not an agency</title>
+<meta name="description" content="An engineer who has built and run a real distribution business, now building AI systems for trading and distribution owners in Oman. Including who I turn away.">
+<link rel="canonical" href="https://aiprofitlab.io/en/about-v4/">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="About | AI Profit Lab — one operator, not an agency">
+<meta property="og:description" content="An engineer who has built and run a real distribution business, now building AI systems for trading and distribution owners in Oman. Including who I turn away.">
+<meta property="og:url" content="https://aiprofitlab.io/en/about-v4/">
+<meta property="og:image" content="https://aiprofitlab.io/og-aiprofitlab-2026.jpg">
+<meta property="og:locale" content="en_OM">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Non-blocking font load: a plain stylesheet link costs a render-blocking
+     round trip to fonts.googleapis.com. display=swap paints fallback text
+     immediately and swaps when the webfont lands. -->
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Marcellus&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" media="print" onload="this.media='all'" href="https://fonts.googleapis.com/css2?family=Marcellus&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap"></noscript>
+
+<!-- Sets .js before first paint so the reveal styles apply only when there is
+     JS to un-apply them. Without it, a no-JS visitor gets a blank page. -->
+<script>document.documentElement.className+=" js"</script>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SLR9GD3MJP"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-SLR9GD3MJP');</script>
+
+<style>
+:root{
+  --teal-950:#072B22; --teal-900:#0A3D30; --teal:#0F6E56; --teal-600:#158268;
+  --amber:#BA7517;    --amber-bright:#D89234; --amber-pale:#E8C98F;
+  /* Amber for SMALL TEXT on light grounds only. #BA7517 on cream measures
+     3.19:1, under the 4.5:1 floor for body-size text; this tint measures
+     4.97:1. The brand accent itself is unchanged - shapes, rules, marks and
+     large display type all keep --amber. */
+  --amber-text:#8F5A11;
+  --cream:#F1EFE8;    --panel:#FAF8F2;    --panel-2:#EAE4D5;  --white:#FFFFFF;
+  --ink:#232B26;      --muted:#5A665D;    --line:#DED8C8;
+  --wa:#1FAF5E;       --alert:#A6431F;
+  /* sampled from the hero footage's own background so the stage never seams */
+  --taupe:#9F9683;
+  /* cream at 62% — the readable tint for hairlines on dark grounds */
+  --line-dark:rgba(241,239,232,.16);
+  --display:'Marcellus',Georgia,'Times New Roman',serif;
+  --sans:'IBM Plex Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+  --ease:cubic-bezier(.22,.7,.25,1);
+}
+
+.skip{position:absolute;left:-9999px;top:0;z-index:200;background:var(--teal-950);color:var(--cream);
+  padding:12px 20px;border-radius:0 0 8px 0;font-family:var(--mono);font-size:.85rem;text-decoration:none}
+.skip:focus{left:0}
+
+*{box-sizing:border-box}
+/* clip, NOT hidden — overflow-x:hidden silently makes this a scroll container
+   and position:sticky stops working on every page that uses it. */
+html,body{overflow-x:clip}
+html{scroll-behavior:smooth;font-size:17px;-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--cream);color:var(--ink);
+  font-family:var(--sans);font-size:19px;line-height:1.7;
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+}
+img{max-width:100%;height:auto;display:block}
+h1,h2,h3,h4{font-family:var(--display);font-weight:400;margin:0;text-wrap:balance;letter-spacing:-.005em}
+p{margin:0 0 1.1em}
+a{color:var(--teal);text-underline-offset:3px}
+::selection{background:var(--amber-pale);color:var(--teal-950)}
+:focus-visible{outline:2px solid var(--amber);outline-offset:3px;border-radius:3px}
+
+/* ---------------------------------------------------------------- layout */
+.wrap{width:min(1180px,92vw);margin-inline:auto}
+.wrap-n{width:min(780px,92vw);margin-inline:auto}
+section{position:relative;padding:clamp(74px,9vw,138px) 0}
+.pad-s{padding:clamp(48px,6vw,84px) 0}
+
+/* Paper grain. Two-octave fractal noise at 3.5% — visible as texture on a
+   large cream field, invisible as pattern. Painted on a pseudo-element so it
+   never intercepts a pointer event. */
+.grain::before{
+  content:"";position:absolute;inset:0;pointer-events:none;z-index:0;opacity:.038;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.grain>*{position:relative;z-index:1}
+
+/* ------------------------------------------------------------- surfaces */
+.s-cream{background:var(--cream)}
+.s-panel{background:var(--panel)}
+.s-white{background:var(--white)}
+.s-panel2{background:var(--panel-2)}
+.s-dark{background:var(--teal-950);color:var(--cream)}
+.s-teal{background:var(--teal-900);color:var(--cream)}
+.s-dark h1,.s-dark h2,.s-dark h3,.s-teal h1,.s-teal h2,.s-teal h3{color:var(--cream)}
+.s-dark .eyebrow,.s-teal .eyebrow{color:var(--amber-pale)}
+.s-dark .lede,.s-teal .lede{color:rgba(241,239,232,.76)}
+.s-dark a,.s-teal a{color:var(--amber-bright)}
+.s-dark .rule,.s-teal .rule{background:var(--line-dark)}
+
+/* ----------------------------------------------------------------- type */
+.eyebrow{
+  font-family:var(--mono);font-size:.85rem;font-weight:500;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--muted);margin:0 0 18px;
+  display:flex;align-items:center;gap:10px;
+}
+.eyebrow .star{color:var(--amber);font-size:1.05em;line-height:1}
+.h1{font-size:clamp(2.7rem,6.2vw,5rem);line-height:1.02;color:var(--teal-950)}
+.h2{font-size:clamp(2rem,4.4vw,3.4rem);line-height:1.08;color:var(--teal-950);margin:0 0 20px}
+.h3{font-size:clamp(1.35rem,2.4vw,1.75rem);line-height:1.2;color:var(--teal-950)}
+.lede{font-size:clamp(1.06rem,1.6vw,1.25rem);color:var(--muted);max-width:60ch;line-height:1.65}
+.mono{font-family:var(--mono)}
+.num{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.rule{height:1px;background:var(--line);border:0;margin:0}
+.star{color:var(--amber)}
+.dot{width:.42em;height:.42em;border-radius:50%;background:var(--amber);display:inline-block;vertical-align:.12em}
+
+/* A section divider that is a mark, not a line: hairline — asterism — hairline */
+.asterism{display:flex;align-items:center;gap:18px;color:var(--amber);margin:0 0 clamp(34px,5vw,58px)}
+.asterism::before,.asterism::after{content:"";flex:1;height:1px;background:var(--line)}
+.s-dark .asterism::before,.s-dark .asterism::after,
+.s-teal .asterism::before,.s-teal .asterism::after{background:var(--line-dark)}
+
+/* -------------------------------------------------------------- buttons */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  font-family:var(--sans);font-size:1.02rem;font-weight:500;text-decoration:none;
+  padding:15px 26px;border-radius:99px;border:1px solid transparent;cursor:pointer;
+  position:relative;overflow:hidden;
+  transition:transform .2s var(--ease),box-shadow .2s var(--ease),background .2s,border-color .2s,color .2s;
+}
+/* travelling sheen — a single pass on hover, not a loop */
+.btn::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(105deg,transparent 38%,rgba(255,255,255,.28) 50%,transparent 62%);
+  transform:translateX(-130%);transition:transform .65s var(--ease);
+}
+.btn:hover::after{transform:translateX(130%)}
+.btn:hover{transform:translateY(-2px)}
+.btn-teal{background:var(--teal);color:#fff;box-shadow:0 14px 30px -16px rgba(15,110,86,.9)}
+.btn-teal:hover{background:var(--teal-600)}
+.btn-wa{background:var(--wa);color:#fff;box-shadow:0 14px 30px -16px rgba(31,175,94,.9)}
+.btn-amber{background:var(--amber);color:var(--teal-950);font-weight:600;box-shadow:0 14px 30px -16px rgba(186,117,23,.9)}
+.btn-ghost{background:transparent;color:var(--teal-900);border-color:rgba(35,43,38,.28)}
+.btn-ghost:hover{border-color:var(--teal);background:var(--white)}
+.s-dark .btn-ghost,.s-teal .btn-ghost{color:var(--cream);border-color:var(--line-dark)}
+.s-dark .btn-ghost:hover,.s-teal .btn-ghost:hover{background:rgba(241,239,232,.08);border-color:var(--amber-bright)}
+/* Button text colour has to out-specify `.s-dark a` / `.s-teal a` (0,1,1),
+   which otherwise repaints every button label on a dark section amber - and
+   an amber label on an amber pill is invisible. A lone `.btn-amber` (0,1,0)
+   loses that cascade, so the dark-section variants are restated here. */
+.s-dark .btn-amber,.s-teal .btn-amber{color:var(--teal-950)}
+.s-dark .btn-teal,.s-teal .btn-teal,
+.s-dark .btn-wa,.s-teal .btn-wa{color:#fff}
+.btn .wa-icon{width:19px;height:19px}
+.wa-icon{width:17px;height:17px;fill:currentColor;flex:none}
+.btn-row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+
+/* Inline text link that draws its own underline on hover */
+.tlink{
+  font-family:var(--mono);font-size:.9rem;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--teal);text-decoration:none;display:inline-flex;align-items:center;gap:9px;
+  padding-bottom:3px;background-image:linear-gradient(var(--amber),var(--amber));
+  background-size:0 1px;background-position:0 100%;background-repeat:no-repeat;
+  transition:background-size .35s var(--ease),color .2s;
+}
+.tlink:hover{background-size:100% 1px;color:var(--amber-text)}
+.tlink .arw{transition:transform .3s var(--ease)}
+.tlink:hover .arw{transform:translateX(4px)}
+.s-dark .tlink,.s-teal .tlink{color:var(--amber-pale)}
+
+/* ---------------------------------------------------------------- cards */
+.card{
+  position:relative;background:var(--panel);border:1px solid var(--line);
+  border-radius:16px;padding:clamp(24px,3vw,34px);overflow:hidden;
+  transition:transform .35s var(--ease),box-shadow .35s var(--ease),border-color .35s;
+}
+.card::before{
+  content:"";position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--amber),var(--amber-pale));
+  transform:scaleX(0);transform-origin:0 50%;transition:transform .5s var(--ease);
+}
+.card:hover{transform:translateY(-4px);box-shadow:0 26px 50px -34px rgba(7,43,34,.55);border-color:var(--panel-2)}
+.card:hover::before{transform:scaleX(1)}
+.card .n{font-family:var(--mono);font-size:.9rem;letter-spacing:.14em;color:var(--amber-text);display:block;margin-bottom:14px}
+.card h3{margin:0 0 10px}
+.card p{color:var(--muted);font-size:1rem;margin:0}
+.s-dark .card,.s-teal .card{background:rgba(241,239,232,.045);border-color:var(--line-dark)}
+.s-dark .card p,.s-teal .card p{color:rgba(241,239,232,.72)}
+.s-dark .card .n,.s-teal .card .n{color:var(--amber-bright)}
+
+.grid{display:grid;gap:clamp(16px,2vw,24px)}
+.g2{grid-template-columns:repeat(2,1fr)}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g4{grid-template-columns:repeat(4,1fr)}
+
+.chip{
+  display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:.82rem;
+  letter-spacing:.06em;text-transform:uppercase;color:var(--teal-900);
+  background:var(--white);border:1px solid var(--line);border-radius:99px;padding:7px 14px;
+}
+.chip b{color:var(--amber-text);font-weight:500}
+.s-dark .chip,.s-teal .chip{background:rgba(241,239,232,.07);border-color:var(--line-dark);color:var(--cream)}
+.s-dark .chip b,.s-teal .chip b{color:var(--amber-bright)}
+
+/* ------------------------------------------------------------ page hero */
+.phero{padding:clamp(150px,17vw,220px) 0 clamp(56px,7vw,90px);position:relative;overflow:hidden}
+.phero .h1{margin:0 0 22px}
+.phero .lede{font-size:clamp(1.12rem,1.9vw,1.4rem);color:var(--muted)}
+
+/* ------------------------------------------------------------ marquee */
+.facts{
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  background:var(--panel-2);overflow:hidden;padding:15px 0;
+}
+.facts .track{display:flex;width:max-content;animation:mq 42s linear infinite}
+.facts .half{display:flex;gap:0;flex:none}
+.facts span{
+  font-family:var(--mono);font-size:.86rem;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--teal-900);white-space:nowrap;display:inline-flex;align-items:center;gap:12px;padding:0 26px;
+}
+.facts .star{opacity:.9}
+@keyframes mq{to{transform:translateX(-50%)}}
+.facts:hover .track{animation-play-state:paused}
+
+/* ------------------------------------------------------------- header */
+.top{
+  position:fixed;inset:0 0 auto 0;z-index:80;display:flex;align-items:center;
+  justify-content:space-between;gap:16px;padding:13px clamp(16px,3vw,30px);
+  border-bottom:1px solid transparent;transition:background .3s,border-color .3s,padding .3s;
+}
+.top.solid{background:rgba(241,239,232,.93);backdrop-filter:blur(12px);border-bottom-color:var(--line);padding-top:9px;padding-bottom:9px}
+.top .mark{display:block;width:clamp(128px,15vw,160px);height:auto}
+.nav{display:flex;align-items:center;gap:clamp(12px,1.9vw,24px)}
+.nav a.lnk{
+  position:relative;font-family:var(--mono);font-size:.85rem;letter-spacing:.1em;
+  text-transform:uppercase;text-decoration:none;color:var(--teal-900);white-space:nowrap;opacity:.86;
+  transition:opacity .2s,color .2s;padding:4px 0;
+}
+.nav a.lnk::after{
+  content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--amber);
+  transform:scaleX(0);transform-origin:0 50%;transition:transform .35s var(--ease);
+}
+.nav a.lnk:hover{opacity:1;color:var(--teal)}
+.nav a.lnk:hover::after,.nav a.lnk[aria-current=page]::after{transform:scaleX(1)}
+.nav a.lnk[aria-current=page]{opacity:1;color:var(--teal-950)}
+.top-wa{
+  display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:.85rem;
+  letter-spacing:.1em;text-transform:uppercase;text-decoration:none;color:var(--teal-900);
+  border:1px solid rgba(35,43,38,.22);background:rgba(250,248,242,.82);
+  padding:10px 16px;border-radius:99px;transition:border-color .2s,background .2s,transform .2s;
+}
+.top-wa:hover{border-color:var(--teal);background:var(--white);transform:translateY(-1px)}
+
+/* Mobile menu. The v3 header simply hid its links below 1100px, which on a
+   phone left the site with no way to reach any other page — the exact
+   opposite of what this set is for. */
+.burger{
+  display:none;width:44px;height:44px;border-radius:50%;border:1px solid rgba(35,43,38,.22);
+  background:rgba(250,248,242,.82);cursor:pointer;padding:0;align-items:center;justify-content:center;
+}
+.burger i{display:block;width:18px;height:1.5px;background:var(--teal-900);position:relative;transition:background .2s}
+.burger i::before,.burger i::after{content:"";position:absolute;left:0;width:18px;height:1.5px;background:var(--teal-900);transition:transform .3s var(--ease)}
+.burger i::before{top:-6px}.burger i::after{top:6px}
+.menu-open .burger i{background:transparent}
+.menu-open .burger i::before{transform:translateY(6px) rotate(45deg)}
+.menu-open .burger i::after{transform:translateY(-6px) rotate(-45deg)}
+.mmenu{
+  position:fixed;inset:0;z-index:75;background:var(--teal-950);color:var(--cream);
+  display:flex;flex-direction:column;justify-content:center;gap:6px;padding:96px clamp(24px,7vw,64px) 40px;
+  opacity:0;visibility:hidden;transform:translateY(-12px);
+  transition:opacity .35s var(--ease),transform .35s var(--ease),visibility .35s;
+}
+.menu-open .mmenu{opacity:1;visibility:visible;transform:none}
+.mmenu a{
+  font-family:var(--display);font-size:clamp(2rem,8vw,3rem);color:var(--cream);text-decoration:none;
+  padding:10px 0;border-bottom:1px solid var(--line-dark);display:flex;align-items:baseline;gap:16px;
+}
+.mmenu a:hover{color:var(--amber-bright)}
+.mmenu a em{font-family:var(--mono);font-size:.8rem;font-style:normal;letter-spacing:.14em;color:var(--amber-bright);opacity:.8}
+.mmenu .mfoot{margin-top:28px;font-family:var(--mono);font-size:.85rem;letter-spacing:.08em;color:rgba(241,239,232,.6)}
+
+/* --------------------------------------------------------------- pager */
+.pager{border-top:1px solid var(--line);background:var(--panel)}
+.pager a{
+  display:flex;align-items:center;justify-content:space-between;gap:24px;text-decoration:none;
+  padding:clamp(34px,5vw,62px) 0;color:var(--teal-950);
+}
+.pager .pl{font-family:var(--mono);font-size:.85rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:10px}
+.pager .pt{font-family:var(--display);font-size:clamp(1.7rem,4.4vw,3rem);line-height:1.08;display:block;transition:color .25s}
+.pager a:hover .pt{color:var(--teal)}
+.pager .parw{font-size:clamp(1.8rem,4vw,2.6rem);color:var(--amber);transition:transform .35s var(--ease);flex:none}
+.pager a:hover .parw{transform:translateX(10px)}
+
+/* -------------------------------------------------------------- footer */
+.foot{background:var(--teal-950);color:rgba(241,239,232,.74);padding:clamp(58px,7vw,92px) 0 40px;font-size:1rem}
+.foot .fmark{width:170px;margin-bottom:20px}
+.foot .slogan{font-family:var(--display);font-size:clamp(1.25rem,2.4vw,1.7rem);color:var(--cream);margin:0 0 8px}
+.foot .slogan-ar{font-size:1.15rem;color:var(--amber-pale);margin:0}
+.foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:clamp(26px,4vw,56px);align-items:start}
+.foot h4{font-family:var(--mono);font-size:.82rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--amber-pale);margin:0 0 16px}
+.foot ul{list-style:none;margin:0;padding:0}
+.foot li{margin-bottom:11px}
+.foot a{color:rgba(241,239,232,.74);text-decoration:none;transition:color .2s}
+.foot a:hover{color:var(--amber-bright)}
+.foot .legal{
+  margin-top:clamp(34px,5vw,58px);padding-top:26px;border-top:1px solid var(--line-dark);
+  font-family:var(--mono);font-size:.79rem;letter-spacing:.05em;line-height:2;color:rgba(241,239,232,.5);
+}
+
+/* WhatsApp float */
+.fab{
+  position:fixed;right:18px;bottom:18px;z-index:70;display:inline-flex;align-items:center;gap:9px;
+  background:var(--wa);color:#fff;text-decoration:none;padding:13px 20px;border-radius:99px;
+  font-family:var(--mono);font-size:.84rem;letter-spacing:.08em;text-transform:uppercase;
+  box-shadow:0 16px 34px -14px rgba(31,175,94,.75);transition:transform .2s var(--ease);
+}
+.fab:hover{transform:translateY(-3px)}
+.fab .wa-icon{width:19px;height:19px}
+
+/* ----------------------------------------------------------- motion kit */
+.js .rv{opacity:0;transform:translateY(24px);transition:opacity .8s var(--ease),transform .8s var(--ease);transition-delay:var(--d,0s)}
+.js .rv.vis{opacity:1;transform:none}
+/* Heading wipe. Done with overflow on the heading and a transform on an inner
+   span that the motion script injects - NOT with clip-path:inset(), whose
+   negative offsets are dropped by the parser, which left every h2 on the page
+   permanently clipped to nothing. The padding-bottom gives descenders room so
+   the hidden overflow does not shave a "g" once the wipe has finished. */
+.js .rvw{display:block;overflow:hidden;padding-bottom:.14em}
+.js .rvw .wi{display:block;transform:translateY(106%);transition:transform 1s var(--ease);transition-delay:var(--d,0s)}
+.js .rvw.vis .wi{transform:none}
+.js .drawn path,.js .drawn line,.js .drawn polyline,.js .drawn circle,.js .drawn rect.dr{
+  stroke-dasharray:var(--len,1000);stroke-dashoffset:var(--len,1000);
+  transition:stroke-dashoffset 1.5s var(--ease);transition-delay:var(--d,0s);
+}
+.js .drawn.vis path,.js .drawn.vis line,.js .drawn.vis polyline,.js .drawn.vis circle,.js .drawn.vis rect.dr{stroke-dashoffset:0}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
+  .js .rv{opacity:1;transform:none}
+  .js .rvw .wi{transform:none}
+  .facts .track{animation:none}
+}
+
+/* -------------------------------------------------------- breakpoints */
+@media (max-width:1080px){
+  .g4{grid-template-columns:repeat(2,1fr)}
+  .g3{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:900px){
+  .nav a.lnk,.nav .top-wa{display:none}
+  .burger{display:inline-flex}
+  .foot-grid{grid-template-columns:1fr 1fr}
+}
+@media (max-width:640px){
+  body{font-size:18px}
+  .g2,.g3,.g4{grid-template-columns:1fr}
+  .foot-grid{grid-template-columns:1fr}
+  .fab span{display:none}
+  .fab{padding:15px;border-radius:50%}
+  .pager .parw{display:none}
+}
+
+/* ----------------------------------------------------------- hero split */
+.about-hero{display:grid;grid-template-columns:1.25fr .75fr;gap:clamp(28px,5vw,64px);align-items:center}
+.about-hero .h1{font-size:clamp(2.2rem,4.3vw,3.5rem)}
+.portrait{position:relative}
+.portrait img{width:100%;border-radius:18px;object-fit:cover;aspect-ratio:4/5;filter:saturate(.94)}
+/* the brand's single mark, echoed at photo scale */
+.portrait::after{
+  content:"";position:absolute;right:-14px;bottom:-14px;width:64px;height:64px;border-radius:50%;
+  background:var(--amber);z-index:2;
+}
+.portrait figcaption{
+  position:absolute;left:0;right:0;bottom:0;padding:26px 22px 18px;border-radius:0 0 18px 18px;
+  background:linear-gradient(transparent,rgba(7,43,34,.86));
+  font-family:var(--mono);font-size:.76rem;letter-spacing:.1em;text-transform:uppercase;color:var(--cream);
+}
+
+/* ------------------------------------------------------------- the path */
+.path{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:clamp(28px,4vw,48px)}
+.path div{position:relative;padding:clamp(22px,2.6vw,32px) clamp(16px,2vw,26px) clamp(22px,2.6vw,32px) 0}
+.path div+div{padding-left:clamp(16px,2vw,26px);border-left:1px solid var(--line)}
+.s-dark .path div+div{border-left-color:var(--line-dark)}
+.path b{display:block;font-family:var(--mono);font-size:.76rem;letter-spacing:.14em;color:var(--amber-text);margin-bottom:12px}
+.path h3{font-size:clamp(1.15rem,1.9vw,1.45rem);margin:0 0 8px}
+.path p{margin:0;font-size:.95rem;color:var(--muted)}
+.s-dark .path p{color:rgba(241,239,232,.7)}
+.s-dark .path b{color:var(--amber-bright)}
+
+/* ---------------------------------------------------------- prose block */
+.prose p{font-size:clamp(1.1rem,1.7vw,1.3rem);line-height:1.65;color:var(--ink);max-width:60ch;margin:0 0 1.1em}
+.prose p.open::first-letter{
+  float:left;font-family:var(--display);font-size:3.6em;line-height:.82;padding:.06em .1em 0 0;color:var(--teal);
+}
+.sigline{display:flex;align-items:center;gap:14px;margin-top:34px}
+.sigline span{font-family:var(--mono);font-size:.82rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.sigline .mk{width:34px;height:1px;background:var(--amber)}
+
+/* ------------------------------------------------------------ say no to */
+.nope{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(14px,2vw,22px)}
+.nope div{background:rgba(241,239,232,.045);border:1px solid var(--line-dark);border-radius:14px;padding:22px 24px}
+.nope b{display:block;font-family:var(--display);font-size:1.2rem;color:var(--cream);font-weight:400;margin-bottom:7px;text-decoration:line-through;text-decoration-color:rgba(166,67,31,.75);text-decoration-thickness:2px}
+.nope p{margin:0;font-size:.95rem;color:rgba(241,239,232,.7)}
+
+/* ---------------------------------------------------------- facts sheet */
+.facts-sheet{border-top:1px solid var(--line)}
+.facts-sheet div{display:grid;grid-template-columns:minmax(150px,.32fr) 1fr;gap:clamp(14px,3vw,40px);padding:17px 0;border-bottom:1px solid var(--line);align-items:baseline}
+.facts-sheet dt{font-family:var(--mono);font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.facts-sheet dd{margin:0;font-size:1.02rem;color:var(--ink)}
+
+@media (max-width:900px){
+  .about-hero{grid-template-columns:1fr}
+  .portrait{max-width:400px}
+  .path{grid-template-columns:repeat(2,1fr)}
+  .path div:nth-child(3){border-left:0;padding-left:0}
+  .path div:nth-child(3),.path div:nth-child(4){border-top:1px solid var(--line)}
+  .nope{grid-template-columns:1fr}
+  .facts-sheet div{grid-template-columns:1fr;gap:4px}
+}
+</style>
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"AboutPage",
+  "mainEntity":{
+    "@type":"Person",
+    "name":"Nahid Abyari",
+    "jobTitle":"Founder",
+    "email":"hello@aiprofitlab.io",
+    "telephone":"+968 9924 5250",
+    "worksFor":{"@type":"Organization","name":"AI Profit Lab","parentOrganization":{"@type":"Organization","name":"Lotus Gulf International","identifier":"CR 1570092"}},
+    "address":{"@type":"PostalAddress","addressLocality":"Bousher","addressRegion":"Muscat","addressCountry":"OM"}
+  }
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="top" id="top">
+  <a href="/en/index-v4/" aria-label="AI Profit Lab home">
+    <img class="mark" src="/assets/brand/wordmark-primary.svg" alt="AI Profit Lab" width="160" height="28">
+  </a>
+  <nav class="nav" aria-label="Primary">
+        <a class="lnk" href="/en/services-v4/">What I Build</a>
+    <a class="lnk" href="/en/process-v4/">How It Works</a>
+    <a class="lnk" href="/en/about-v4/" aria-current="page">About</a>
+    <a class="lnk" href="/en/contact-v4/">Contact</a>
+    <a class="lnk" href="/en/blog/">Articles</a>
+    <a class="lnk" href="/" lang="ar">&#1593;&#1585;&#1576;&#1610;</a>
+    <a class="top-wa" href="https://wa.me/96899245250?text=Hello%20Nahid%2C%20I%20have%20a%20question%20about%20my%20business."><svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 1.8a8.2 8.2 0 1 1-4.2 15.3l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8zm-3.1 4c-.2 0-.5 0-.7.3-.2.3-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.8 2.8 4.4 3.8 2.2.9 2.6.7 3.1.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2-.1-.1-.2-.2-.5-.3l-1.7-.8c-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.1-.2 0-.4.1-.5l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5L10 8.2c-.2-.4-.4-.4-.6-.4h-.5z"/></svg><span>WhatsApp</span></a>
+    <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="mmenu"><i></i></button>
+  </nav>
+</header>
+<div class="mmenu" id="mmenu" aria-hidden="true">
+    <a href="/en/index-v4/"><em>01</em>Home</a>
+  <a href="/en/services-v4/"><em>02</em>What I Build</a>
+  <a href="/en/process-v4/"><em>03</em>How It Works</a>
+  <a href="/en/about-v4/" aria-current="page"><em>04</em>About</a>
+  <a href="/en/contact-v4/"><em>05</em>Contact</a>
+  <a href="/en/blog/"><em>06</em>Articles</a>
+  <p class="mfoot">hello@aiprofitlab.io &middot; <span dir="ltr">+968 9924 5250</span><br>Muscat, Oman</p>
+</div>
+<main id="main">
+
+<header class="phero s-cream grain">
+  <div class="wrap">
+    <div class="about-hero">
+      <div>
+        <p class="eyebrow"><span class="star">&#10038;</span> Who builds it</p>
+        <h1 class="h1">Not an agency.<br>One operator who has run a distribution business.</h1>
+        <p class="lede">Which is the only reason I know what a missed 9pm message actually costs, and why
+          nothing on this site is written in software vocabulary.</p>
+        <div class="btn-row" style="margin-top:30px">
+          <a class="btn btn-wa" href="https://wa.me/96899245250?text=Hello%20Nahid%2C%20I%20read%20your%20about%20page."><svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 1.8a8.2 8.2 0 1 1-4.2 15.3l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8zm-3.1 4c-.2 0-.5 0-.7.3-.2.3-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.8 2.8 4.4 3.8 2.2.9 2.6.7 3.1.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2-.1-.1-.2-.2-.5-.3l-1.7-.8c-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.1-.2 0-.4.1-.5l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5L10 8.2c-.2-.4-.4-.4-.6-.4h-.5z"/></svg>Message me directly</a>
+          <a class="tlink" href="/en/services-v4/">See what I build <span class="arw">&rarr;</span></a>
+        </div>
+      </div>
+      <figure class="portrait rv" style="margin:0">
+        <img src="/nahid-founder-seated-2026.webp" alt="Nahid Abyari, founder of AI Profit Lab, in Muscat" width="600" height="705" loading="eager" decoding="async">
+        <figcaption>Nahid Abyari &#183; Founder &#183; Muscat, Oman</figcaption>
+      </figure>
+    </div>
+  </div>
+</header>
+
+<!-- ================================================================ STORY -->
+<section class="s-panel">
+  <div class="wrap-n prose">
+    <p class="eyebrow"><span class="star">&#10038;</span> The short version</p>
+    <p class="open">I am an engineer who has built and run a real distribution business &mdash; importing, stocking,
+      quoting, chasing. Not a consultant who read about it.</p>
+    <p>The problem I kept hitting was never strategy. It was a message that arrived at 9pm and got answered
+      at 8 the next morning, by which time the buyer had already ordered somewhere else. Multiply that by a
+      year and it is not a small number.</p>
+    <p>So I started building the thing I wanted: something that answers in both languages, knows the stock
+      and the terms, and hands me only the buyers worth my time. AI Profit Lab is that, built for other
+      owners in the same position.</p>
+    <div class="sigline"><span class="mk"></span><span>Nahid Abyari &#183; Founder</span></div>
+  </div>
+</section>
+
+<!-- ================================================================= PATH -->
+<section class="s-dark">
+  <div class="wrap">
+    <p class="eyebrow"><span class="star">&#10038;</span> How I got here</p>
+    <h2 class="h2">Four steps, in order.</h2>
+
+    <div class="path" data-stagger>
+      <div><b>01</b><h3>Engineering</h3><p>Trained to take a system apart, find the constraint, and fix that one thing.</p></div>
+      <div><b>02</b><h3>Distribution</h3><p>Ran a real trading operation. Catalogues, tiers, freight, invoices, and the follow-up nobody has time for.</p></div>
+      <div><b>03</b><h3>The bottleneck</h3><p>Discovered the constraint was not price or product. It was response time.</p></div>
+      <div><b>04</b><h3>AI Profit Lab</h3><p>Now I build that fix for other owners &mdash; done for them, in plain language, priced in OMR.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================== PRINCIPLES -->
+<section class="s-cream grain">
+  <div class="wrap">
+    <p class="eyebrow"><span class="star">&#10038;</span> How I work</p>
+    <h2 class="h2">Four rules I do not bend.</h2>
+
+    <div class="grid g4" style="margin-top:clamp(26px,3.5vw,44px)" data-stagger>
+      <article class="card"><span class="n">01</span><h3>Plain language</h3><p>If a sentence needs software vocabulary to work, the sentence is wrong.</p></article>
+      <article class="card"><span class="n">02</span><h3>Prices in public</h3><p>Every number is on the site. You should never sit through a call to learn what something costs.</p></article>
+      <article class="card"><span class="n">03</span><h3>What&#8217;s not included, first</h3><p>Stated as clearly as what is &mdash; before any money moves.</p></article>
+      <article class="card"><span class="n">04</span><h3>No invented numbers</h3><p>If a figure can&#8217;t be sourced, it doesn&#8217;t go on the page. That is why you see no statistics here.</p></article>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================== SAY NO TO -->
+<section class="s-teal">
+  <div class="wrap">
+    <p class="eyebrow"><span class="star">&#10038;</span> Being useful about fit</p>
+    <h2 class="h2">Who I turn away.</h2>
+    <p class="lede">Saying this on a public page costs me enquiries. It also saves us both a wasted month.</p>
+
+    <div class="nope" style="margin-top:clamp(26px,3.5vw,44px)" data-stagger>
+      <div><b>Enterprise and ERP-scale buyers</b><p>Different weight class, long procurement. You want a systems integrator, and you should have one.</p></div>
+      <div><b>Anyone shopping purely on price</b><p>I am not the cheapest option in Oman and will not pretend to be. I compete on the work being done for you.</p></div>
+      <div><b>Businesses with nothing digital yet</b><p>If there is no WhatsApp presence and no buyer flow at all, there is nothing here to automate yet.</p></div>
+      <div><b>&ldquo;Make us go viral&rdquo;</b><p>Wrong problem and wrong measure. I build systems that answer buyers, not campaigns that chase attention.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================== FACTS -->
+<section class="s-panel">
+  <div class="wrap-n">
+    <p class="eyebrow"><span class="star">&#10038;</span> The unglamorous facts</p>
+    <h2 class="h2">Who you are actually dealing with.</h2>
+    <dl class="facts-sheet" style="margin-top:clamp(24px,3vw,38px)">
+      <div><dt>Brand</dt><dd>AI Profit Lab</dd></div>
+      <div><dt>Legal entity</dt><dd>Lotus Gulf International <span lang="ar" dir="rtl">&#1604;&#1608;&#1578;&#1587; &#1575;&#1604;&#1582;&#1604;&#1610;&#1580; &#1575;&#1604;&#1593;&#1575;&#1604;&#1605;&#1610;&#1577; &#1588; &#1588; &#1608;</span> &mdash; CR <span dir="ltr">1570092</span></dd></div>
+      <div><dt>VAT</dt><dd>Not VAT registered (TIN <span dir="ltr">2317725</span>). Invoices carry no VAT line.</dd></div>
+      <div><dt>Where</dt><dd>South Al Khuwair, Bousher, Muscat, Sultanate of Oman</dd></div>
+      <div><dt>Languages</dt><dd>English and Arabic, both delivered as first-class</dd></div>
+      <div><dt>Who does the work</dt><dd>Me. You will not be handed to an account manager.</dd></div>
+      <div><dt>Reach me</dt><dd><a href="https://wa.me/96899245250?text=Hello%20Nahid">WhatsApp <span dir="ltr">+968 9924 5250</span></a> &#183; <a href="mailto:hello@aiprofitlab.io">hello@aiprofitlab.io</a></dd></div>
+    </dl>
+  </div>
+</section>
+
+<!-- ================================================================ CTA -->
+<section class="s-dark pad-s">
+  <div class="wrap">
+    <div style="display:flex;gap:clamp(20px,4vw,50px);align-items:center;justify-content:space-between;flex-wrap:wrap">
+      <div style="flex:1 1 380px">
+        <h2 class="h2" style="margin-bottom:12px">Still reading? Then let&#8217;s test your business.</h2>
+        <p class="lede" style="margin:0">Free, takes me about forty minutes, and you keep the scorecard whatever you decide.</p>
+      </div>
+      <div class="btn-row">
+        <a class="btn btn-amber" href="/en/contact-v4/#test">Get the Silent Buyer Test</a>
+        <a class="btn btn-ghost" href="/en/services-v4/#price">See the prices</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+<nav class="pager" aria-label="Next page">
+  <div class="wrap"><a href="/en/contact-v4/">
+    <span><span class="pl">Next</span><span class="pt">Talk to me</span></span>
+    <span class="parw" aria-hidden="true">&rarr;</span>
+  </a></div>
+</nav>
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <img class="fmark" src="/assets/brand/wordmark-reversed.svg" alt="AI Profit Lab" width="170" height="29">
+        <p class="slogan">Every success starts with insight.</p>
+        <p class="slogan-ar" lang="ar" dir="rtl">&#1603;&#1604; &#1606;&#1580;&#1575;&#1581; &#1610;&#1576;&#1583;&#1571; &#1576;&#1585;&#1572;&#1610;&#1577;</p>
+      </div>
+      <div>
+        <h4>The work</h4>
+        <ul>
+          <li><a href="/en/services-v4/">What I build</a></li>
+          <li><a href="/en/process-v4/">How it works</a></li>
+          <li><a href="/en/services-v4/#price">Prices</a></li>
+          <li><a href="/customized-ceo-dashboard-demo/">Dashboard demo</a></li>
+          <li><a href="/whatsapp-receptionist-demo/">WhatsApp demo</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Talk to me</h4>
+        <ul>
+          <li><a href="https://wa.me/96899245250?text=Hello%20Nahid">WhatsApp <span dir="ltr">+968 9924 5250</span></a></li>
+          <li><a href="mailto:hello@aiprofitlab.io">hello@aiprofitlab.io</a></li>
+          <li><a href="/en/contact-v4/">Contact page</a></li>
+          <li><a href="/en/about-v4/">About Nahid</a></li>
+          <li><a href="/en/blog/">Articles</a></li>
+          <li><a href="/privacy/">Privacy</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="legal">
+      &copy; 2026 AI Profit Lab &mdash; a brand of Lotus Gulf International (CR <span dir="ltr">1570092</span>)<br>
+      South Al Khuwair, Bousher, Muscat, Oman &middot; Not VAT registered (TIN <span dir="ltr">2317725</span>)
+    </p>
+  </div>
+</footer>
+<a class="fab" href="https://wa.me/96899245250?text=Hello%20Nahid%2C%20I%20have%20a%20question%20about%20my%20business." aria-label="Chat on WhatsApp"><svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 1.8a8.2 8.2 0 1 1-4.2 15.3l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8zm-3.1 4c-.2 0-.5 0-.7.3-.2.3-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.8 2.8 4.4 3.8 2.2.9 2.6.7 3.1.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2-.1-.1-.2-.2-.5-.3l-1.7-.8c-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.1-.2 0-.4.1-.5l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5L10 8.2c-.2-.4-.4-.4-.6-.4h-.5z"/></svg><span>WhatsApp</span></a>
+<script>
+/* ---------------------------------------------------------------------------
+   Shared page behaviour: sticky header state, mobile menu, scroll reveals,
+   SVG draw-in, and count-up numbers. Everything degrades to "visible and
+   static" when JS or IntersectionObserver is missing, and is skipped wholesale
+   under prefers-reduced-motion.
+--------------------------------------------------------------------------- */
+(function(){
+  "use strict";
+  var root = document.documentElement;
+  var reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* header ---------------------------------------------------------------- */
+  var top = document.getElementById("top");
+  function onScroll(){ top.classList.toggle("solid", scrollY > 40); }
+  onScroll(); addEventListener("scroll", onScroll, {passive:true});
+
+  /* mobile menu ----------------------------------------------------------- */
+  var burger = document.getElementById("burger"), mm = document.getElementById("mmenu");
+  if (burger && mm){
+    var setMenu = function(open){
+      root.classList.toggle("menu-open", open);
+      burger.setAttribute("aria-expanded", open ? "true" : "false");
+      mm.setAttribute("aria-hidden", open ? "false" : "true");
+      document.body.style.overflow = open ? "hidden" : "";
+    };
+    burger.addEventListener("click", function(){ setMenu(!root.classList.contains("menu-open")); });
+    mm.addEventListener("click", function(e){ if (e.target.tagName === "A") setMenu(false); });
+    addEventListener("keydown", function(e){ if (e.key === "Escape") setMenu(false); });
+  }
+
+  /* auto-tag the standard blocks so pages don't have to repeat class="rv" --- */
+  document.querySelectorAll("section:not(.cine) .eyebrow, section:not(.cine) .lede").forEach(function(el){ el.classList.add("rv"); });
+  /* The wipe needs an inner block to move inside the heading's own overflow,
+     so the script supplies one rather than every page repeating it. */
+  document.querySelectorAll("section:not(.cine) h2, section:not(.cine) .h1").forEach(function(el){
+    var inner = document.createElement("span");
+    inner.className = "wi";
+    while (el.firstChild) inner.appendChild(el.firstChild);
+    el.appendChild(inner);
+    el.classList.add("rvw");
+  });
+  /* [data-stagger] children reveal in sequence, capped so a long grid does not
+     end up waiting a second and a half for its last card. */
+  document.querySelectorAll("[data-stagger]").forEach(function(g){
+    Array.prototype.forEach.call(g.children, function(c,i){
+      c.classList.add("rv"); c.style.setProperty("--d", Math.min(i*0.075, 0.45) + "s");
+    });
+  });
+
+  /* SVG draw-in: measure each stroked path so the dash length is its own
+     length, not a guessed constant that under- or over-shoots. */
+  document.querySelectorAll(".drawn").forEach(function(svg){
+    svg.querySelectorAll("path,line,polyline,circle,rect.dr").forEach(function(p,i){
+      var len = 1000;
+      try { if (p.getTotalLength) len = Math.ceil(p.getTotalLength()) || 1000; } catch(e){}
+      p.style.setProperty("--len", len);
+      p.style.setProperty("--d", Math.min(i*0.09, 0.7) + "s");
+    });
+  });
+
+  var els = document.querySelectorAll(".rv,.rvw,.drawn,[data-count]");
+  function showAll(){ els.forEach(function(e){ e.classList.add("vis"); countUp(e, true); }); }
+  if (reduce || !("IntersectionObserver" in window)){ showAll(); return; }
+
+  /* count-up -------------------------------------------------------------- */
+  function countUp(el, instant){
+    var raw = el.getAttribute("data-count"); if (raw === null || el.dataset.counted) return;
+    el.dataset.counted = "1";
+    var to = parseFloat(raw), pre = el.getAttribute("data-pre") || "", post = el.getAttribute("data-post") || "";
+    var dp = parseInt(el.getAttribute("data-dp") || "0", 10);
+    if (instant){ el.textContent = pre + to.toFixed(dp) + post; return; }
+    var t0 = 0, dur = 1250;
+    (function step(now){
+      if (!t0) t0 = now;
+      var k = Math.min((now - t0)/dur, 1);
+      var e = 1 - Math.pow(1 - k, 3);                       /* easeOutCubic */
+      var v = to * e;
+      el.textContent = pre + (dp ? v.toFixed(dp) : Math.round(v).toLocaleString("en-US")) + post;
+      if (k < 1) requestAnimationFrame(step);
+    })(0);
+  }
+
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){
+      if (!en.isIntersecting) return;
+      en.target.classList.add("vis"); countUp(en.target, false); io.unobserve(en.target);
+    });
+  }, {threshold:0.12, rootMargin:"0px 0px -60px 0px"});
+  els.forEach(function(e){ io.observe(e); });
+})();
+</script>
+</body>
+</html>

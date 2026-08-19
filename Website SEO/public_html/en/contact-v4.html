@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<!-- Stays noindex until Nahid approves this set for launch. When it launches,
+     remove this tag AND add the noindex to the page it replaces in the SAME
+     deploy - never separately, or both versions compete in the index. -->
+<meta name="robots" content="noindex, nofollow">
+<title>Contact | AI Profit Lab — talk to the person who builds it</title>
+<meta name="description" content="WhatsApp, email or phone - all reaching the same person in Muscat. Or start with the free Silent Buyer Test and see what a buyer sees when they message your business.">
+<link rel="canonical" href="https://aiprofitlab.io/en/contact-v4/">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Contact | AI Profit Lab — talk to the person who builds it">
+<meta property="og:description" content="WhatsApp, email or phone - all reaching the same person in Muscat. Or start with the free Silent Buyer Test and see what a buyer sees when they message your business.">
+<meta property="og:url" content="https://aiprofitlab.io/en/contact-v4/">
+<meta property="og:image" content="https://aiprofitlab.io/og-aiprofitlab-2026.jpg">
+<meta property="og:locale" content="en_OM">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Non-blocking font load: a plain stylesheet link costs a render-blocking
+     round trip to fonts.googleapis.com. display=swap paints fallback text
+     immediately and swaps when the webfont lands. -->
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Marcellus&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" media="print" onload="this.media='all'" href="https://fonts.googleapis.com/css2?family=Marcellus&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap"></noscript>
+
+<!-- Sets .js before first paint so the reveal styles apply only when there is
+     JS to un-apply them. Without it, a no-JS visitor gets a blank page. -->
+<script>document.documentElement.className+=" js"</script>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SLR9GD3MJP"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-SLR9GD3MJP');</script>
+
+<style>
+:root{
+  --teal-950:#072B22; --teal-900:#0A3D30; --teal:#0F6E56; --teal-600:#158268;
+  --amber:#BA7517;    --amber-bright:#D89234; --amber-pale:#E8C98F;
+  /* Amber for SMALL TEXT on light grounds only. #BA7517 on cream measures
+     3.19:1, under the 4.5:1 floor for body-size text; this tint measures
+     4.97:1. The brand accent itself is unchanged - shapes, rules, marks and
+     large display type all keep --amber. */
+  --amber-text:#8F5A11;
+  --cream:#F1EFE8;    --panel:#FAF8F2;    --panel-2:#EAE4D5;  --white:#FFFFFF;
+  --ink:#232B26;      --muted:#5A665D;    --line:#DED8C8;
+  --wa:#1FAF5E;       --alert:#A6431F;
+  /* sampled from the hero footage's own background so the stage never seams */
+  --taupe:#9F9683;
+  /* cream at 62% — the readable tint for hairlines on dark grounds */
+  --line-dark:rgba(241,239,232,.16);
+  --display:'Marcellus',Georgia,'Times New Roman',serif;
+  --sans:'IBM Plex Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+  --ease:cubic-bezier(.22,.7,.25,1);
+}
+
+.skip{position:absolute;left:-9999px;top:0;z-index:200;background:var(--teal-950);color:var(--cream);
+  padding:12px 20px;border-radius:0 0 8px 0;font-family:var(--mono);font-size:.85rem;text-decoration:none}
+.skip:focus{left:0}
+
+*{box-sizing:border-box}
+/* clip, NOT hidden — overflow-x:hidden silently makes this a scroll container
+   and position:sticky stops working on every page that uses it. */
+html,body{overflow-x:clip}
+html{scroll-behavior:smooth;font-size:17px;-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--cream);color:var(--ink);
+  font-family:var(--sans);font-size:19px;line-height:1.7;
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+}
+img{max-width:100%;height:auto;display:block}
+h1,h2,h3,h4{font-family:var(--display);font-weight:400;margin:0;text-wrap:balance;letter-spacing:-.005em}
+p{margin:0 0 1.1em}
+a{color:var(--teal);text-underline-offset:3px}
+::selection{background:var(--amber-pale);color:var(--teal-950)}
+:focus-visible{outline:2px solid var(--amber);outline-offset:3px;border-radius:3px}
+
+/* ---------------------------------------------------------------- layout */
+.wrap{width:min(1180px,92vw);margin-inline:auto}
+.wrap-n{width:min(780px,92vw);margin-inline:auto}
+section{position:relative;padding:clamp(74px,9vw,138px) 0}
+.pad-s{padding:clamp(48px,6vw,84px) 0}
+
+/* Paper grain. Two-octave fractal noise at 3.5% — visible as texture on a
+   large cream field, invisible as pattern. Painted on a pseudo-element so it
+   never intercepts a pointer event. */
+.grain::before{
+  content:"";position:absolute;inset:0;pointer-events:none;z-index:0;opacity:.038;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.grain>*{position:relative;z-index:1}
+
+/* ------------------------------------------------------------- surfaces */
+.s-cream{background:var(--cream)}
+.s-panel{background:var(--panel)}
+.s-white{background:var(--white)}
+.s-panel2{background:var(--panel-2)}
+.s-dark{background:var(--teal-950);color:var(--cream)}
+.s-teal{background:var(--teal-900);color:var(--cream)}
+.s-dark h1,.s-dark h2,.s-dark h3,.s-teal h1,.s-teal h2,.s-teal h3{color:var(--cream)}
+.s-dark .eyebrow,.s-teal .eyebrow{color:var(--amber-pale)}
+.s-dark .lede,.s-teal .lede{color:rgba(241,239,232,.76)}
+.s-dark a,.s-teal a{color:var(--amber-bright)}
+.s-dark .rule,.s-teal .rule{background:var(--line-dark)}
+
+/* ----------------------------------------------------------------- type */
+.eyebrow{
+  font-family:var(--mono);font-size:.85rem;font-weight:500;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--muted);margin:0 0 18px;
+  display:flex;align-items:center;gap:10px;
+}
+.eyebrow .star{color:var(--amber);font-size:1.05em;line-height:1}
+.h1{font-size:clamp(2.7rem,6.2vw,5rem);line-height:1.02;color:var(--teal-950)}
+.h2{font-size:clamp(2rem,4.4vw,3.4rem);line-height:1.08;color:var(--teal-950);margin:0 0 20px}
+.h3{font-size:clamp(1.35rem,2.4vw,1.75rem);line-height:1.2;color:var(--teal-950)}
+.lede{font-size:clamp(1.06rem,1.6vw,1.25rem);color:var(--muted);max-width:60ch;line-height:1.65}
+.mono{font-family:var(--mono)}
+.num{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.rule{height:1px;background:var(--line);border:0;margin:0}
+.star{color:var(--amber)}
+.dot{width:.42em;height:.42em;border-radius:50%;background:var(--amber);display:inline-block;vertical-align:.12em}
+
+/* A section divider that is a mark, not a line: hairline — asterism — hairline */
+.asterism{display:flex;align-items:center;gap:18px;color:var(--amber);margin:0 0 clamp(34px,5vw,58px)}
+.asterism::before,.asterism::after{content:"";flex:1;height:1px;background:var(--line)}
+.s-dark .asterism::before,.s-dark .asterism::after,
+.s-teal .asterism::before,.s-teal .asterism::after{background:var(--line-dark)}
+
+/* -------------------------------------------------------------- buttons */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  font-family:var(--sans);font-size:1.02rem;font-weight:500;text-decoration:none;
+  padding:15px 26px;border-radius:99px;border:1px solid transparent;cursor:pointer;
+  position:relative;overflow:hidden;
+  transition:transform .2s var(--ease),box-shadow .2s var(--ease),background .2s,border-color .2s,color .2s;
+}
+/* travelling sheen — a single pass on hover, not a loop */
+.btn::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(105deg,transparent 38%,rgba(255,255,255,.28) 50%,transparent 62%);
+  transform:translateX(-130%);transition:transform .65s var(--ease);
+}
+.btn:hover::after{transform:translateX(130%)}
+.btn:hover{transform:translateY(-2px)}
+.btn-teal{background:var(--teal);color:#fff;box-shadow:0 14px 30px -16px rgba(15,110,86,.9)}
+.btn-teal:hover{background:var(--teal-600)}
+.btn-wa{background:var(--wa);color:#fff;box-shadow:0 14px 30px -16px rgba(31,175,94,.9)}
+.btn-amber{background:var(--amber);color:var(--teal-950);font-weight:600;box-shadow:0 14px 30px -16px rgba(186,117,23,.9)}
+.btn-ghost{background:transparent;color:var(--teal-900);border-color:rgba(35,43,38,.28)}
+.btn-ghost:hover{border-color:var(--teal);background:var(--white)}
+.s-dark .btn-ghost,.s-teal .btn-ghost{color:var(--cream);border-color:var(--line-dark)}
+.s-dark .btn-ghost:hover,.s-teal .btn-ghost:hover{background:rgba(241,239,232,.08);border-color:var(--amber-bright)}
+/* Button text colour has to out-specify `.s-dark a` / `.s-teal a` (0,1,1),
+   which otherwise repaints every button label on a dark section amber - and
+   an amber label on an amber pill is invisible. A lone `.btn-amber` (0,1,0)
+   loses that cascade, so the dark-section variants are restated here. */
+.s-dark .btn-amber,.s-teal .btn-amber{color:var(--teal-950)}
+.s-dark .btn-teal,.s-teal .btn-teal,
+.s-dark .btn-wa,.s-teal .btn-wa{color:#fff}
+.btn .wa-icon{width:19px;height:19px}
+.wa-icon{width:17px;height:17px;fill:currentColor;flex:none}
+.btn-row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+
+/* Inline text link that draws its own underline on hover */
+.tlink{
+  font-family:var(--mono);font-size:.9rem;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--teal);text-decoration:none;display:inline-flex;align-items:center;gap:9px;
+  padding-bottom:3px;background-image:linear-gradient(var(--amber),var(--amber));
+  background-size:0 1px;background-position:0 100%;background-repeat:no-repeat;
+  transition:background-size .35s var(--ease),color .2s;
+}
+.tlink:hover{background-size:100% 1px;color:var(--amber-text)}
+.tlink .arw{transition:transform .3s var(--ease)}
+.tlink:hover .arw{transform:translateX(4px)}
+.s-dark .tlink,.s-teal .tlink{color:var(--amber-pale)}
+
+/* ---------------------------------------------------------------- cards */
+.card{
+  position:relative;background:var(--panel);border:1px solid var(--line);
+  border-radius:16px;padding:clamp(24px,3vw,34px);overflow:hidden;
+  transition:transform .35s var(--ease),box-shadow .35s var(--ease),border-color .35s;
+}
+.card::before{
+  content:"";position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--amber),var(--amber-pale));
+  transform:scaleX(0);transform-origin:0 50%;transition:transform .5s var(--ease);
+}
+.card:hover{transform:translateY(-4px);box-shadow:0 26px 50px -34px rgba(7,43,34,.55);border-color:var(--panel-2)}
+.card:hover::before{transform:scaleX(1)}
+.card .n{font-family:var(--mono);font-size:.9rem;letter-spacing:.14em;color:var(--amber-text);display:block;margin-bottom:14px}
+.card h3{margin:0 0 10px}
+.card p{color:var(--muted);font-size:1rem;margin:0}
+.s-dark .card,.s-teal .card{background:rgba(241,239,232,.045);border-color:var(--line-dark)}
+.s-dark .card p,.s-teal .card p{color:rgba(241,239,232,.72)}
+.s-dark .card .n,.s-teal .card .n{color:var(--amber-bright)}
+
+.grid{display:grid;gap:clamp(16px,2vw,24px)}
+.g2{grid-template-columns:repeat(2,1fr)}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g4{grid-template-columns:repeat(4,1fr)}
+
+.chip{
+  display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:.82rem;
+  letter-spacing:.06em;text-transform:uppercase;color:var(--teal-900);
+  background:var(--white);border:1px solid var(--line);border-radius:99px;padding:7px 14px;
+}
+.chip b{color:var(--amber-text);font-weight:500}
+.s-dark .chip,.s-teal .chip{background:rgba(241,239,232,.07);border-color:var(--line-dark);color:var(--cream)}
+.s-dark .chip b,.s-teal .chip b{color:var(--amber-bright)}
+
+/* ------------------------------------------------------------ page hero */
+.phero{padding:clamp(150px,17vw,220px) 0 clamp(56px,7vw,90px);position:relative;overflow:hidden}
+.phero .h1{margin:0 0 22px}
+.phero .lede{font-size:clamp(1.12rem,1.9vw,1.4rem);color:var(--muted)}
+
+/* ------------------------------------------------------------ marquee */
+.facts{
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  background:var(--panel-2);overflow:hidden;padding:15px 0;
+}
+.facts .track{display:flex;width:max-content;animation:mq 42s linear infinite}
+.facts .half{display:flex;gap:0;flex:none}
+.facts span{
+  font-family:var(--mono);font-size:.86rem;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--teal-900);white-space:nowrap;display:inline-flex;align-items:center;gap:12px;padding:0 26px;
+}
+.facts .star{opacity:.9}
+@keyframes mq{to{transform:translateX(-50%)}}
+.facts:hover .track{animation-play-state:paused}
+
+/* ------------------------------------------------------------- header */
+.top{
+  position:fixed;inset:0 0 auto 0;z-index:80;display:flex;align-items:center;
+  justify-content:space-between;gap:16px;padding:13px clamp(16px,3vw,30px);
+  border-bottom:1px solid transparent;transition:background .3s,border-color .3s,padding .3s;
+}
+.top.solid{background:rgba(241,239,232,.93);backdrop-filter:blur(12px);border-bottom-color:var(--line);padding-top:9px;padding-bottom:9px}
+.top .mark{display:block;width:clamp(128px,15vw,160px);height:auto}
+.nav{display:flex;align-items:center;gap:clamp(12px,1.9vw,24px)}
+.nav a.lnk{
+  position:relative;font-family:var(--mono);font-size:.85rem;letter-spacing:.1em;
+  text-transform:uppercase;text-decoration:none;color:var(--teal-900);white-space:nowrap;opacity:.86;
+  transition:opacity .2s,color .2s;padding:4px 0;
+}
+.nav a.lnk::after{
+  content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--amber);
+  transform:scaleX(0);transform-origin:0 50%;transition:transform .35s var(--ease);
+}
+.nav a.lnk:hover{opacity:1;color:var(--teal)}
+.nav a.lnk:hover::after,.nav a.lnk[aria-current=page]::after{transform:scaleX(1)}
+.nav a.lnk[aria-current=page]{opacity:1;color:var(--teal-950)}
+.top-wa{
+  display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:.85rem;
+  letter-spacing:.1em;text-transform:uppercase;text-decoration:none;color:var(--teal-900);
+  border:1px solid rgba(35,43,38,.22);background:rgba(250,248,242,.82);
+  padding:10px 16px;border-radius:99px;transition:border-color .2s,background .2s,transform .2s;
+}
+.top-wa:hover{border-color:var(--teal);background:var(--white);transform:translateY(-1px)}
+
+/* Mobile menu. The v3 header simply hid its links below 1100px, which on a
+   phone left the site with no way to reach any other page — the exact
+   opposite of what this set is for. */
+.burger{
+  display:none;width:44px;height:44px;border-radius:50%;border:1px solid rgba(35,43,38,.22);
+  background:rgba(250,248,242,.82);cursor:pointer;padding:0;align-items:center;justify-content:center;
+}
+.burger i{display:block;width:18px;height:1.5px;background:var(--teal-900);position:relative;transition:background .2s}
+.burger i::before,.burger i::after{content:"";position:absolute;left:0;width:18px;height:1.5px;background:var(--teal-900);transition:transform .3s var(--ease)}
+.burger i::before{top:-6px}.burger i::after{top:6px}
+.menu-open .burger i{background:transparent}
+.menu-open .burger i::before{transform:translateY(6px) rotate(45deg)}
+.menu-open .burger i::after{transform:translateY(-6px) rotate(-45deg)}
+.mmenu{
+  position:fixed;inset:0;z-index:75;background:var(--teal-950);color:var(--cream);
+  display:flex;flex-direction:column;justify-content:center;gap:6px;padding:96px clamp(24px,7vw,64px) 40px;
+  opacity:0;visibility:hidden;transform:translateY(-12px);
+  transition:opacity .35s var(--ease),transform .35s var(--ease),visibility .35s;
+}
+.menu-open .mmenu{opacity:1;visibility:visible;transform:none}
+.mmenu a{
+  font-family:var(--display);font-size:clamp(2rem,8vw,3rem);color:var(--cream);text-decoration:none;
+  padding:10px 0;border-bottom:1px solid var(--line-dark);display:flex;align-items:baseline;gap:16px;
+}
+.mmenu a:hover{color:var(--amber-bright)}
+.mmenu a em{font-family:var(--mono);font-size:.8rem;font-style:normal;letter-spacing:.14em;color:var(--amber-bright);opacity:.8}
+.mmenu .mfoot{margin-top:28px;font-family:var(--mono);font-size:.85rem;letter-spacing:.08em;color:rgba(241,239,232,.6)}
+
+/* --------------------------------------------------------------- pager */
+.pager{border-top:1px solid var(--line);background:var(--panel)}
+.pager a{
+  display:flex;align-items:center;justify-content:space-between;gap:24px;text-decoration:none;
+  padding:clamp(34px,5vw,62px) 0;color:var(--teal-950);
+}
+.pager .pl{font-family:var(--mono);font-size:.85rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:10px}
+.pager .pt{font-family:var(--display);font-size:clamp(1.7rem,4.4vw,3rem);line-height:1.08;display:block;transition:color .25s}
+.pager a:hover .pt{color:var(--teal)}
+.pager .parw{font-size:clamp(1.8rem,4vw,2.6rem);color:var(--amber);transition:transform .35s var(--ease);flex:none}
+.pager a:hover .parw{transform:translateX(10px)}
+
+/* -------------------------------------------------------------- footer */
+.foot{background:var(--teal-950);color:rgba(241,239,232,.74);padding:clamp(58px,7vw,92px) 0 40px;font-size:1rem}
+.foot .fmark{width:170px;margin-bottom:20px}
+.foot .slogan{font-family:var(--display);font-size:clamp(1.25rem,2.4vw,1.7rem);color:var(--cream);margin:0 0 8px}
+.foot .slogan-ar{font-size:1.15rem;color:var(--amber-pale);margin:0}
+.foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:clamp(26px,4vw,56px);align-items:start}
+.foot h4{font-family:var(--mono);font-size:.82rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--amber-pale);margin:0 0 16px}
+.foot ul{list-style:none;margin:0;padding:0}
+.foot li{margin-bottom:11px}
+.foot a{color:rgba(241,239,232,.74);text-decoration:none;transition:color .2s}
+.foot a:hover{color:var(--amber-bright)}
+.foot .legal{
+  margin-top:clamp(34px,5vw,58px);padding-top:26px;border-top:1px solid var(--line-dark);
+  font-family:var(--mono);font-size:.79rem;letter-spacing:.05em;line-height:2;color:rgba(241,239,232,.5);
+}
+
+/* WhatsApp float */
+.fab{
+  position:fixed;right:18px;bottom:18px;z-index:70;display:inline-flex;align-items:center;gap:9px;
+  background:var(--wa);color:#fff;text-decoration:none;padding:13px 20px;border-radius:99px;
+  font-family:var(--mono);font-size:.84rem;letter-spacing:.08em;text-transform:uppercase;
+  box-shadow:0 16px 34px -14px rgba(31,175,94,.75);transition:transform .2s var(--ease);
+}
+.fab:hover{transform:translateY(-3px)}
+.fab .wa-icon{width:19px;height:19px}
+
+/* ----------------------------------------------------------- motion kit */
+.js .rv{opacity:0;transform:translateY(24px);transition:opacity .8s var(--ease),transform .8s var(--ease);transition-delay:var(--d,0s)}
+.js .rv.vis{opacity:1;transform:none}
+/* Heading wipe. Done with overflow on the heading and a transform on an inner
+   span that the motion script injects - NOT with clip-path:inset(), whose
+   negative offsets are dropped by the parser, which left every h2 on the page
+   permanently clipped to nothing. The padding-bottom gives descenders room so
+   the hidden overflow does not shave a "g" once the wipe has finished. */
+.js .rvw{display:block;overflow:hidden;padding-bottom:.14em}
+.js .rvw .wi{display:block;transform:translateY(106%);transition:transform 1s var(--ease);transition-delay:var(--d,0s)}
+.js .rvw.vis .wi{transform:none}
+.js .drawn path,.js .drawn line,.js .drawn polyline,.js .drawn circle,.js .drawn rect.dr{
+  stroke-dasharray:var(--len,1000);stroke-dashoffset:var(--len,1000);
+  transition:stroke-dashoffset 1.5s var(--ease);transition-delay:var(--d,0s);
+}
+.js .drawn.vis path,.js .drawn.vis line,.js .drawn.vis polyline,.js .drawn.vis circle,.js .drawn.vis rect.dr{stroke-dashoffset:0}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
+  .js .rv{opacity:1;transform:none}
+  .js .rvw .wi{transform:none}
+  .facts .track{animation:none}
+}
+
+/* -------------------------------------------------------- breakpoints */
+@media (max-width:1080px){
+  .g4{grid-template-columns:repeat(2,1fr)}
+  .g3{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:900px){
+  .nav a.lnk,.nav .top-wa{display:none}
+  .burger{display:inline-flex}
+  .foot-grid{grid-template-columns:1fr 1fr}
+}
+@media (max-width:640px){
+  body{font-size:18px}
+  .g2,.g3,.g4{grid-template-columns:1fr}
+  .foot-grid{grid-template-columns:1fr}
+  .fab span{display:none}
+  .fab{padding:15px;border-radius:50%}
+  .pager .parw{display:none}
+}
+
+/* ------------------------------------------------------------- channels */
+.chan{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,2vw,24px)}
+.chan a{
+  position:relative;display:flex;flex-direction:column;gap:12px;text-decoration:none;overflow:hidden;
+  background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:clamp(22px,2.6vw,32px);
+  transition:transform .35s var(--ease),border-color .35s,background .35s,box-shadow .35s;
+}
+.chan a:hover{transform:translateY(-5px);border-color:var(--amber-pale);background:var(--white);box-shadow:0 30px 54px -40px rgba(7,43,34,.5)}
+.chan a.primary{background:var(--teal-950);border-color:var(--teal-900)}
+.chan a.primary:hover{background:var(--teal-900);border-color:var(--amber-bright)}
+.chan .ic{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:var(--white);border:1px solid var(--line);color:var(--teal)}
+.chan a.primary .ic{background:var(--wa);border-color:var(--wa);color:#fff}
+.chan .ic svg{width:21px;height:21px;fill:currentColor}
+.chan h3{font-size:1.35rem;color:var(--teal-950);margin:0}
+.chan a.primary h3{color:var(--cream)}
+.chan .val{font-family:var(--mono);font-size:.95rem;color:var(--teal);word-break:break-word}
+.chan a.primary .val{color:var(--amber-bright)}
+.chan p{margin:0;font-size:.94rem;color:var(--muted)}
+.chan a.primary p{color:rgba(241,239,232,.7)}
+.chan .when{
+  font-family:var(--mono);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);
+  margin-top:auto;padding-top:10px;display:flex;align-items:center;gap:8px;
+}
+.chan a.primary .when{color:var(--amber-pale)}
+.chan .when i{width:7px;height:7px;border-radius:50%;background:var(--wa);flex:none}
+
+/* ----------------------------------------------------------------- form */
+.capture-grid{display:grid;grid-template-columns:.95fr 1.05fr;gap:clamp(28px,5vw,64px);align-items:start}
+/* five lines of display type in the narrow column read as a wall */
+.capture-grid .h2{font-size:clamp(1.75rem,3.1vw,2.5rem)}
+.form-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.field{display:flex;flex-direction:column;gap:8px}
+.field.full{grid-column:1/-1}
+.field label{font-family:var(--mono);font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(241,239,232,.68)}
+.field input{
+  font-family:var(--sans);font-size:1rem;color:var(--cream);background:rgba(241,239,232,.06);
+  border:1px solid var(--line-dark);border-radius:10px;padding:14px 16px;transition:border-color .2s,background .2s;
+}
+.field input::placeholder{color:rgba(241,239,232,.34)}
+.field input:focus{outline:none;border-color:var(--amber-bright);background:rgba(241,239,232,.1)}
+.formnote{font-size:.88rem;color:rgba(241,239,232,.55);margin:12px 0 0;line-height:1.55}
+.getlist{list-style:none;margin:22px 0 0;padding:0;display:grid;gap:13px}
+.getlist li{position:relative;padding-left:30px;font-size:1rem;color:rgba(241,239,232,.82);line-height:1.5}
+.getlist li::before{
+  content:"";position:absolute;left:3px;top:.5em;width:13px;height:7px;
+  border-left:2px solid var(--amber-bright);border-bottom:2px solid var(--amber-bright);transform:rotate(-45deg);
+}
+
+/* -------------------------------------------------------------- next up */
+.next4{display:grid;grid-template-columns:repeat(4,1fr);gap:0}
+.next4 div{position:relative;padding:clamp(20px,2.4vw,28px) clamp(14px,1.8vw,24px) clamp(20px,2.4vw,28px) 0}
+.next4 div+div{padding-left:clamp(14px,1.8vw,24px);border-left:1px solid var(--line)}
+.next4 b{display:block;font-family:var(--mono);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--amber-text);margin-bottom:11px}
+.next4 h3{font-size:1.15rem;margin:0 0 6px}
+.next4 p{margin:0;font-size:.93rem;color:var(--muted)}
+
+/* ------------------------------------------------------------------ faq */
+.faq{border-top:1px solid var(--line)}
+.faq details{border-bottom:1px solid var(--line)}
+.faq summary{
+  cursor:pointer;list-style:none;padding:22px 44px 22px 0;position:relative;
+  font-family:var(--display);font-size:clamp(1.15rem,2vw,1.45rem);color:var(--teal-950);
+}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{
+  content:"";position:absolute;right:8px;top:50%;width:12px;height:12px;margin-top:-8px;
+  border-right:1.5px solid var(--amber);border-bottom:1.5px solid var(--amber);
+  transform:rotate(45deg);transition:transform .3s var(--ease);
+}
+.faq details[open] summary::after{transform:rotate(-135deg);margin-top:-3px}
+.faq .ans{padding:0 0 24px;color:var(--muted);font-size:1.02rem;max-width:70ch;margin:0}
+.faq summary:hover{color:var(--teal)}
+
+@media (max-width:900px){
+  .chan,.capture-grid{grid-template-columns:1fr}
+  .next4{grid-template-columns:repeat(2,1fr)}
+  .next4 div:nth-child(3){border-left:0;padding-left:0}
+  .next4 div:nth-child(3),.next4 div:nth-child(4){border-top:1px solid var(--line)}
+}
+@media (max-width:560px){ .form-grid{grid-template-columns:1fr} }
+</style>
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"FAQPage",
+  "mainEntity":[
+    {"@type":"Question","name":"How much does it cost?","acceptedAnswer":{"@type":"Answer","text":"The Smart Storefront is OMR 950 one-time at the founding price, OMR 1,450 standard. The dashboard adds OMR 650, the autopilot adds OMR 900, and all three together are OMR 2,200."}},
+    {"@type":"Question","name":"Is there a monthly fee?","acceptedAnswer":{"@type":"Answer","text":"Not to keep anything working. The first year of hosting, security and care is included in the build price. The Growth Desk at OMR 75 a month is optional and never required."}},
+    {"@type":"Question","name":"Do you have clients I can speak to?","acceptedAnswer":{"@type":"Answer","text":"Not yet. That is why there is a named guarantee and why the dashboard and buyer-agent demos are open to click without asking for anything."}},
+    {"@type":"Question","name":"What if it doesn't work?","acceptedAnswer":{"@type":"Answer","text":"The First Inquiry Promise: no real buyer inquiry within 30 days of going live and it gets rebuilt free until you get one. If you still don't, you get your money back."}},
+    {"@type":"Question","name":"Do you work in Arabic?","acceptedAnswer":{"@type":"Answer","text":"Yes. Both English and Arabic are treated as first-class, and Arabic copy is checked by a native reader before it ships."}},
+    {"@type":"Question","name":"Who am I actually contracting with?","acceptedAnswer":{"@type":"Answer","text":"Lotus Gulf International, CR 1570092, South Al Khuwair, Bousher, Muscat. AI Profit Lab is the brand. Not VAT registered, so invoices carry no VAT line."}}
+  ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="top" id="top">
+  <a href="/en/index-v4/" aria-label="AI Profit Lab home">
+    <img class="mark" src="/assets/brand/wordmark-primary.svg" alt="AI Profit Lab" width="160" height="28">
+  </a>
+  <nav class="nav" aria-label="Primary">
+        <a class="lnk" href="/en/services-v4/">What I Build</a>
+    <a class="lnk" href="/en/process-v4/">How It Works</a>
+    <a class="lnk" href="/en/about-v4/">About</a>
+    <a class="lnk" href="/en/contact-v4/" aria-current="page">Contact</a>
+    <a class="lnk" href="/en/blog/">Articles</a>
+    <a class="lnk" href="/" lang="ar">&#1593;&#1585;&#1576;&#1610;</a>
+    <a class="top-wa" href="https://wa.me/96899245250?text=Hello%20Nahid%2C%20I%20have%20a%20question%20about%20my%20business."><svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 1.8a8.2 8.2 0 1 1-4.2 15.3l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8zm-3.1 4c-.2 0-.5 0-.7.3-.2.3-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.8 2.8 4.4 3.8 2.2.9 2.6.7 3.1.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2-.1-.1-.2-.2-.5-.3l-1.7-.8c-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.1-.2 0-.4.1-.5l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5L10 8.2c-.2-.4-.4-.4-.6-.4h-.5z"/></svg><span>WhatsApp</span></a>
+    <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="mmenu"><i></i></button>
+  </nav>
+</header>
+<div class="mmenu" id="mmenu" aria-hidden="true">
+    <a href="/en/index-v4/"><em>01</em>Home</a>
+  <a href="/en/services-v4/"><em>02</em>What I Build</a>
+  <a href="/en/process-v4/"><em>03</em>How It Works</a>
+  <a href="/en/about-v4/"><em>04</em>About</a>
+  <a href="/en/contact-v4/" aria-current="page"><em>05</em>Contact</a>
+  <a href="/en/blog/"><em>06</em>Articles</a>
+  <p class="mfoot">hello@aiprofitlab.io &middot; <span dir="ltr">+968 9924 5250</span><br>Muscat, Oman</p>
+</div>
+<main id="main">
+
+<header class="phero s-cream grain">
+  <div class="wrap">
+    <p class="eyebrow"><span class="star">&#10038;</span> Talk to me</p>
+    <h1 class="h1">You will be talking to<br>the person who builds it.</h1>
+    <p class="lede">There is no sales team, no ticket queue and no account manager. Whichever way you get in
+      touch, it reaches the same phone.</p>
+  </div>
+</header>
+
+<section class="s-cream grain" style="padding-top:0">
+  <div class="wrap">
+    <div class="chan" data-stagger>
+      <a class="primary" href="https://wa.me/96899245250?text=Hello%20Nahid%2C%20I%20have%20a%20question%20about%20my%20business.">
+        <span class="ic"><svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 1.8a8.2 8.2 0 1 1-4.2 15.3l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8zm-3.1 4c-.2 0-.5 0-.7.3-.2.3-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.8 2.8 4.4 3.8 2.2.9 2.6.7 3.1.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2-.1-.1-.2-.2-.5-.3l-1.7-.8c-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.1-.2 0-.4.1-.5l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5L10 8.2c-.2-.4-.4-.4-.6-.4h-.5z"/></svg></span>
+        <h3>WhatsApp</h3>
+        <span class="val" dir="ltr">+968 9924 5250</span>
+        <p>The fastest route, and the one I actually watch. Voice notes are fine.</p>
+        <span class="when"><i></i>Usually same day</span>
+      </a>
+      <a href="mailto:hello@aiprofitlab.io">
+        <span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 5.5A1.5 1.5 0 0 1 3.5 4h17A1.5 1.5 0 0 1 22 5.5v13a1.5 1.5 0 0 1-1.5 1.5h-17A1.5 1.5 0 0 1 2 18.5v-13zm2.2.5 7.8 5.9L19.8 6H4.2zM20 7.9l-7.4 5.6a1 1 0 0 1-1.2 0L4 7.9V18h16V7.9z"/></svg></span>
+        <h3>Email</h3>
+        <span class="val">hello@aiprofitlab.io</span>
+        <p>Best if you want to attach a catalogue, a price list or a brief.</p>
+        <span class="when"><i></i>Within one business day</span>
+      </a>
+      <a href="tel:+96899245250">
+        <span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 2h3.1l1.6 4-2.1 1.5a12.6 12.6 0 0 0 5.9 5.9L16.6 11l4 1.6v3.1a2.3 2.3 0 0 1-2.5 2.3A16.4 16.4 0 0 1 4.3 4.5 2.3 2.3 0 0 1 6.6 2z"/></svg></span>
+        <h3>Phone</h3>
+        <span class="val" dir="ltr">+968 9924 5250</span>
+        <p>If you would rather just say it out loud. Sunday to Thursday.</p>
+        <span class="when"><i></i>9am &ndash; 6pm Muscat</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================== SILENT BUYER TEST -->
+<section class="s-dark" id="test">
+  <div class="wrap">
+    <div class="capture-grid">
+      <div>
+        <p class="eyebrow"><span class="star">&#10038;</span> Free &#183; no obligation &#183; five a week</p>
+        <h2 class="h2">Before you buy anything, let me show you what a buyer sees.</h2>
+        <p class="lede">I contact your business the way a real buyer would &mdash; WhatsApp, your website form,
+          email and phone, at a normal buying hour in the evening.</p>
+        <ul class="getlist">
+          <li>How long each channel took to answer &mdash; measured, not guessed</li>
+          <li>What a buyer actually saw, including in Arabic</li>
+          <li>Where that buyer would have gone instead</li>
+          <li>No pitch attached. If everything answers fast, I will tell you so and you should keep your money.</li>
+        </ul>
+      </div>
+
+      <form id="sbtForm" class="form-grid" novalidate>
+        <div class="field">
+          <label for="f-name">Your name</label>
+          <input id="f-name" name="name" type="text" required placeholder="Your name">
+        </div>
+        <div class="field">
+          <label for="f-biz">Business name</label>
+          <input id="f-biz" name="business" type="text" required placeholder="Gulf Lotus Trading">
+        </div>
+        <div class="field">
+          <label for="f-wa">WhatsApp number</label>
+          <input id="f-wa" name="whatsapp" type="tel" required placeholder="+968 &hellip;" inputmode="tel">
+        </div>
+        <div class="field">
+          <label for="f-sell">What do you sell?</label>
+          <input id="f-sell" name="sells" type="text" required placeholder="Medical consumables, wholesale">
+        </div>
+        <div class="field full">
+          <button class="btn btn-wa" type="submit" style="width:100%"><svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 1.8a8.2 8.2 0 1 1-4.2 15.3l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8zm-3.1 4c-.2 0-.5 0-.7.3-.2.3-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.8 2.8 4.4 3.8 2.2.9 2.6.7 3.1.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2-.1-.1-.2-.2-.5-.3l-1.7-.8c-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.1-.2 0-.4.1-.5l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5L10 8.2c-.2-.4-.4-.4-.6-.4h-.5z"/></svg>Send my details on WhatsApp</button>
+          <p class="formnote">This opens WhatsApp with your message ready &mdash; nothing is sent until you press
+            send there. I run five of these a week, because each one takes me about forty minutes to do properly.</p>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ==================================================== WHAT HAPPENS NEXT -->
+<section class="s-panel">
+  <div class="wrap">
+    <p class="eyebrow"><span class="star">&#10038;</span> What happens next</p>
+    <h2 class="h2">No funnel. Four things, in this order.</h2>
+
+    <div class="next4" style="margin-top:clamp(22px,3vw,38px)" data-stagger>
+      <div><b>Step 1</b><h3>I reply</h3><p>Usually the same day, from the same number you messaged.</p></div>
+      <div><b>Step 2</b><h3>I run the test</h3><p>About forty minutes of my time. You do nothing.</p></div>
+      <div><b>Step 3</b><h3>You get the scorecard</h3><p>One page. Yours to keep whatever you decide next.</p></div>
+      <div><b>Step 4</b><h3>Only if it&#8217;s useful</h3><p>Thirty minutes on what to fix &mdash; or nothing at all, with no chasing.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================ FAQ -->
+<section class="s-cream grain">
+  <div class="wrap-n">
+    <p class="eyebrow"><span class="star">&#10038;</span> The awkward questions</p>
+    <h2 class="h2">Asked and answered.</h2>
+
+    <div class="faq" style="margin-top:clamp(22px,3vw,38px)">
+      <details>
+        <summary>How much does it cost?</summary>
+        <p class="ans">The Smart Storefront is OMR 950 one-time at the founding price, OMR 1,450 standard. The
+          dashboard adds OMR 650, the autopilot adds OMR 900, and all three together are OMR 2,200. Every number
+          is on <a href="/en/services-v4/#price">the price list</a> &mdash; you do not need to call to find out.</p>
+      </details>
+      <details>
+        <summary>Is there a monthly fee?</summary>
+        <p class="ans">Not to keep anything working. The first year of hosting, security and care is included in
+          the build price. The Growth Desk at OMR 75/month is optional, sold after delivery, and never required.</p>
+      </details>
+      <details>
+        <summary>Do you have clients I can speak to?</summary>
+        <p class="ans">Not yet, and I am not going to pretend otherwise. That is exactly why there is a named
+          guarantee and why the demos are open to click without asking me for anything: the
+          <a href="/customized-ceo-dashboard-demo/">dashboard</a> and the
+          <a href="/whatsapp-receptionist-demo/">buyer agent</a> are both running on this site right now.</p>
+      </details>
+      <details>
+        <summary>What if it doesn&#8217;t work?</summary>
+        <p class="ans">The First Inquiry Promise: no real buyer inquiry within 30 days of going live and I rebuild
+          it free until you get one. If you still don&#8217;t, you get your money back.</p>
+      </details>
+      <details>
+        <summary>Do you work in Arabic?</summary>
+        <p class="ans">Yes &mdash; both languages are treated as first-class, because your buyers write in Arabic
+          while your datasheets are in English. Arabic copy is checked by a native reader before it ships.</p>
+      </details>
+      <details>
+        <summary>Who am I actually contracting with?</summary>
+        <p class="ans">Lotus Gulf International, CR <span dir="ltr">1570092</span>, South Al Khuwair, Bousher, Muscat.
+          AI Profit Lab is the brand; the invoice comes from the company. Not VAT registered, so invoices carry no
+          VAT line.</p>
+      </details>
+      <details>
+        <summary>How do I pay?</summary>
+        <p class="ans">Bank transfer, in OMR. There are three structures &mdash; pay on start, three payments, or pay
+          only once it has produced a real inquiry. They are described on
+          <a href="/en/services-v4/#price">the services page</a>. No payment is ever taken on this website.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+</main>
+<nav class="pager" aria-label="Next page">
+  <div class="wrap"><a href="/en/index-v4/">
+    <span><span class="pl">Back to the start</span><span class="pt">Never lose a buyer to silence again</span></span>
+    <span class="parw" aria-hidden="true">&rarr;</span>
+  </a></div>
+</nav>
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <img class="fmark" src="/assets/brand/wordmark-reversed.svg" alt="AI Profit Lab" width="170" height="29">
+        <p class="slogan">Every success starts with insight.</p>
+        <p class="slogan-ar" lang="ar" dir="rtl">&#1603;&#1604; &#1606;&#1580;&#1575;&#1581; &#1610;&#1576;&#1583;&#1571; &#1576;&#1585;&#1572;&#1610;&#1577;</p>
+      </div>
+      <div>
+        <h4>The work</h4>
+        <ul>
+          <li><a href="/en/services-v4/">What I build</a></li>
+          <li><a href="/en/process-v4/">How it works</a></li>
+          <li><a href="/en/services-v4/#price">Prices</a></li>
+          <li><a href="/customized-ceo-dashboard-demo/">Dashboard demo</a></li>
+          <li><a href="/whatsapp-receptionist-demo/">WhatsApp demo</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Talk to me</h4>
+        <ul>
+          <li><a href="https://wa.me/96899245250?text=Hello%20Nahid">WhatsApp <span dir="ltr">+968 9924 5250</span></a></li>
+          <li><a href="mailto:hello@aiprofitlab.io">hello@aiprofitlab.io</a></li>
+          <li><a href="/en/contact-v4/">Contact page</a></li>
+          <li><a href="/en/about-v4/">About Nahid</a></li>
+          <li><a href="/en/blog/">Articles</a></li>
+          <li><a href="/privacy/">Privacy</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="legal">
+      &copy; 2026 AI Profit Lab &mdash; a brand of Lotus Gulf International (CR <span dir="ltr">1570092</span>)<br>
+      South Al Khuwair, Bousher, Muscat, Oman &middot; Not VAT registered (TIN <span dir="ltr">2317725</span>)
+    </p>
+  </div>
+</footer>
+<a class="fab" href="https://wa.me/96899245250?text=Hello%20Nahid%2C%20I%20have%20a%20question%20about%20my%20business." aria-label="Chat on WhatsApp"><svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 1.8a8.2 8.2 0 1 1-4.2 15.3l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8zm-3.1 4c-.2 0-.5 0-.7.3-.2.3-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.8 2.8 4.4 3.8 2.2.9 2.6.7 3.1.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2-.1-.1-.2-.2-.5-.3l-1.7-.8c-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.1-.2 0-.4.1-.5l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5L10 8.2c-.2-.4-.4-.4-.6-.4h-.5z"/></svg><span>WhatsApp</span></a>
+<script>
+/* ---------------------------------------------------------------------------
+   Shared page behaviour: sticky header state, mobile menu, scroll reveals,
+   SVG draw-in, and count-up numbers. Everything degrades to "visible and
+   static" when JS or IntersectionObserver is missing, and is skipped wholesale
+   under prefers-reduced-motion.
+--------------------------------------------------------------------------- */
+(function(){
+  "use strict";
+  var root = document.documentElement;
+  var reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* header ---------------------------------------------------------------- */
+  var top = document.getElementById("top");
+  function onScroll(){ top.classList.toggle("solid", scrollY > 40); }
+  onScroll(); addEventListener("scroll", onScroll, {passive:true});
+
+  /* mobile menu ----------------------------------------------------------- */
+  var burger = document.getElementById("burger"), mm = document.getElementById("mmenu");
+  if (burger && mm){
+    var setMenu = function(open){
+      root.classList.toggle("menu-open", open);
+      burger.setAttribute("aria-expanded", open ? "true" : "false");
+      mm.setAttribute("aria-hidden", open ? "false" : "true");
+      document.body.style.overflow = open ? "hidden" : "";
+    };
+    burger.addEventListener("click", function(){ setMenu(!root.classList.contains("menu-open")); });
+    mm.addEventListener("click", function(e){ if (e.target.tagName === "A") setMenu(false); });
+    addEventListener("keydown", function(e){ if (e.key === "Escape") setMenu(false); });
+  }
+
+  /* auto-tag the standard blocks so pages don't have to repeat class="rv" --- */
+  document.querySelectorAll("section:not(.cine) .eyebrow, section:not(.cine) .lede").forEach(function(el){ el.classList.add("rv"); });
+  /* The wipe needs an inner block to move inside the heading's own overflow,
+     so the script supplies one rather than every page repeating it. */
+  document.querySelectorAll("section:not(.cine) h2, section:not(.cine) .h1").forEach(function(el){
+    var inner = document.createElement("span");
+    inner.className = "wi";
+    while (el.firstChild) inner.appendChild(el.firstChild);
+    el.appendChild(inner);
+    el.classList.add("rvw");
+  });
+  /* [data-stagger] children reveal in sequence, capped so a long grid does not
+     end up waiting a second and a half for its last card. */
+  document.querySelectorAll("[data-stagger]").forEach(function(g){
+    Array.prototype.forEach.call(g.children, function(c,i){
+      c.classList.add("rv"); c.style.setProperty("--d", Math.min(i*0.075, 0.45) + "s");
+    });
+  });
+
+  /* SVG draw-in: measure each stroked path so the dash length is its own
+     length, not a guessed constant that under- or over-shoots. */
+  document.querySelectorAll(".drawn").forEach(function(svg){
+    svg.querySelectorAll("path,line,polyline,circle,rect.dr").forEach(function(p,i){
+      var len = 1000;
+      try { if (p.getTotalLength) len = Math.ceil(p.getTotalLength()) || 1000; } catch(e){}
+      p.style.setProperty("--len", len);
+      p.style.setProperty("--d", Math.min(i*0.09, 0.7) + "s");
+    });
+  });
+
+  var els = document.querySelectorAll(".rv,.rvw,.drawn,[data-count]");
+  function showAll(){ els.forEach(function(e){ e.classList.add("vis"); countUp(e, true); }); }
+  if (reduce || !("IntersectionObserver" in window)){ showAll(); return; }
+
+  /* count-up -------------------------------------------------------------- */
+  function countUp(el, instant){
+    var raw = el.getAttribute("data-count"); if (raw === null || el.dataset.counted) return;
+    el.dataset.counted = "1";
+    var to = parseFloat(raw), pre = el.getAttribute("data-pre") || "", post = el.getAttribute("data-post") || "";
+    var dp = parseInt(el.getAttribute("data-dp") || "0", 10);
+    if (instant){ el.textContent = pre + to.toFixed(dp) + post; return; }
+    var t0 = 0, dur = 1250;
+    (function step(now){
+      if (!t0) t0 = now;
+      var k = Math.min((now - t0)/dur, 1);
+      var e = 1 - Math.pow(1 - k, 3);                       /* easeOutCubic */
+      var v = to * e;
+      el.textContent = pre + (dp ? v.toFixed(dp) : Math.round(v).toLocaleString("en-US")) + post;
+      if (k < 1) requestAnimationFrame(step);
+    })(0);
+  }
+
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){
+      if (!en.isIntersecting) return;
+      en.target.classList.add("vis"); countUp(en.target, false); io.unobserve(en.target);
+    });
+  }, {threshold:0.12, rootMargin:"0px 0px -60px 0px"});
+  els.forEach(function(e){ io.observe(e); });
+})();
+
+/* ---------------------------------------------------------------------------
+   Silent Buyer Test capture.
+
+   Composes a WhatsApp message rather than posting to a backend, so nothing is
+   transmitted until the visitor presses send inside WhatsApp - which is what
+   the note under the button promises. Same pattern as en/index-v3.html.
+--------------------------------------------------------------------------- */
+(function(){
+  "use strict";
+  var form = document.getElementById("sbtForm");
+  if (!form) return;
+
+  form.addEventListener("submit", function(e){
+    e.preventDefault();
+    var get = function(n){ return (form.elements[n].value || "").trim(); };
+    var required = ["name","business","whatsapp","sells"];
+    for (var i = 0; i < required.length; i++){
+      var n = required[i];
+      if (!get(n)){
+        form.elements[n].focus();
+        if (form.elements[n].reportValidity) form.elements[n].reportValidity();
+        return;
+      }
+    }
+    var msg = "Hello Nahid \u2014 I'd like the free Silent Buyer Test.\n\n" +
+      "Name: " + get("name") + "\n" +
+      "Business: " + get("business") + "\n" +
+      "WhatsApp: " + get("whatsapp") + "\n" +
+      "We sell: " + get("sells");
+    if (typeof gtag === "function") gtag("event","generate_lead",{method:"silent_buyer_test"});
+    window.open("https://wa.me/96899245250?text=" + encodeURIComponent(msg), "_blank", "noopener");
+  });
+})();
+</script>
+</body>
+</html>
