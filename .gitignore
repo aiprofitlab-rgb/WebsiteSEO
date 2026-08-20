@@ -1,3 +1,7 @@
 # Site backup archives — keep them locally, never in git.
 # GitHub rejects any single file over 100 MB, and these are 20–120 MB each.
 *.zip
+
+# Python bytecode — build byproducts, regenerated on every run.
+__pycache__/
+*.py[cod]
