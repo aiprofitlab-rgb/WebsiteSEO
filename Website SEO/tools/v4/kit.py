@@ -239,13 +239,22 @@ section{position:relative;padding:clamp(74px,9vw,138px) 0}
 .nav a.lnk:hover{opacity:1;color:var(--teal)}
 .nav a.lnk:hover::after,.nav a.lnk[aria-current=page]::after{transform:scaleX(1)}
 .nav a.lnk[aria-current=page]{opacity:1;color:var(--teal-950)}
+/* The one and only WhatsApp entry point on the page. There used to be two -
+   this pill in white up here plus a green float bottom-right - which meant one
+   action wearing two different looks, and on a phone the float sat on top of
+   the content. The pill is now the green one, the float is gone, and it stays
+   on screen at every width, including where the nav links collapse into the
+   burger. */
 .top-wa{
   display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:.85rem;
-  letter-spacing:.1em;text-transform:uppercase;text-decoration:none;color:var(--teal-900);
-  border:1px solid rgba(35,43,38,.22);background:rgba(250,248,242,.82);
-  padding:10px 16px;border-radius:99px;transition:border-color .2s,background .2s,transform .2s;
+  letter-spacing:.1em;text-transform:uppercase;text-decoration:none;color:#fff;white-space:nowrap;
+  border:1px solid transparent;background:var(--wa);
+  padding:10px 16px;border-radius:99px;
+  box-shadow:0 12px 26px -16px rgba(31,175,94,.9);
+  transition:background .2s,transform .2s,box-shadow .2s;
 }
-.top-wa:hover{border-color:var(--teal);background:var(--white);transform:translateY(-1px)}
+.top-wa:hover{background:#199B51;transform:translateY(-1px);box-shadow:0 16px 30px -16px rgba(31,175,94,1)}
+.top-wa .wa-icon{width:18px;height:18px}
 
 /* Mobile menu. The v3 header simply hid its links below 1100px, which on a
    phone left the site with no way to reach any other page — the exact
@@ -395,16 +404,6 @@ section{position:relative;padding:clamp(74px,9vw,138px) 0}
   font-family:var(--mono);font-size:.79rem;letter-spacing:.05em;line-height:2;color:rgba(241,239,232,.5);
 }
 
-/* WhatsApp float */
-.fab{
-  position:fixed;right:18px;bottom:18px;z-index:70;display:inline-flex;align-items:center;gap:9px;
-  background:var(--wa);color:#fff;text-decoration:none;padding:13px 20px;border-radius:99px;
-  font-family:var(--mono);font-size:.84rem;letter-spacing:.08em;text-transform:uppercase;
-  box-shadow:0 16px 34px -14px rgba(31,175,94,.75);transition:transform .2s var(--ease);
-}
-.fab:hover{transform:translateY(-3px)}
-.fab .wa-icon{width:19px;height:19px}
-
 /* ----------------------------------------------------------- motion kit */
 .js .rv{opacity:0;transform:translateY(24px);transition:opacity .8s var(--ease),transform .8s var(--ease);transition-delay:var(--d,0s)}
 .js .rv.vis{opacity:1;transform:none}
@@ -436,7 +435,14 @@ section{position:relative;padding:clamp(74px,9vw,138px) 0}
   .g3{grid-template-columns:repeat(2,1fr)}
 }
 @media (max-width:900px){
-  .nav a.lnk,.nav .top-wa{display:none}
+  .nav a.lnk{display:none}
+  /* The WhatsApp button survives the collapse as an icon-only circle: it is
+     the primary contact route, and the float that used to carry it here is
+     gone. It sits above the open menu (header z-index 80 > mmenu 75), so it
+     is reachable whether the menu is open or shut. */
+  .top-wa{width:44px;height:44px;padding:0;gap:0;justify-content:center}
+  .top-wa span{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+  .top-wa .wa-icon{width:20px;height:20px}
   .burger{display:inline-flex}
   .foot-grid{grid-template-columns:1fr 1fr}
   /* brand block goes full width so the two link columns still sit side by side */
@@ -446,8 +452,6 @@ section{position:relative;padding:clamp(74px,9vw,138px) 0}
   body{font-size:18px}
   .g2,.g3,.g4{grid-template-columns:1fr}
   .foot-grid{grid-template-columns:1fr}
-  .fab span{display:none}
-  .fab{padding:15px;border-radius:50%}
   .pager .parw{display:none}
   .review .rarw{display:none}
   .review{gap:16px;padding-right:76px}
@@ -549,7 +553,7 @@ def header(active_href):
   </a>
   <nav class="nav" aria-label="Primary">
     {chr(10).join('    ' + l for l in links)}
-    <a class="top-wa" href="{WA}?text=Hello%20Nahid%2C%20I%20have%20a%20question%20about%20my%20business.">{WA_ICON}<span>WhatsApp</span></a>
+    <a class="top-wa" href="{WA}?text=Hello%20Nahid%2C%20I%20have%20a%20question%20about%20my%20business." target="_blank" rel="noopener" aria-label="Chat with Nahid on WhatsApp">{WA_ICON}<span>WhatsApp</span></a>
     <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="mmenu"><i></i></button>
   </nav>
 </header>
@@ -694,7 +698,6 @@ FOOTER = f"""<footer class="foot">
     </p>
   </div>
 </footer>
-<a class="fab" href="{WA}?text=Hello%20Nahid%2C%20I%20have%20a%20question%20about%20my%20business." aria-label="Chat on WhatsApp">{WA_ICON}<span>WhatsApp</span></a>
 """
 
 # --------------------------------------------------------------------------

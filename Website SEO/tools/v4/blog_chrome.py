@@ -245,7 +245,7 @@ RTL_CSS = """
 [dir=rtl] .byline .who span,[dir=rtl] .byline .stamp,[dir=rtl] .steps b,
 [dir=rtl] .related .card .rd,[dir=rtl] .related .card .n,[dir=rtl] .pfig figcaption,
 [dir=rtl] .afig figcaption,[dir=rtl] .brandbox .rolelbl,[dir=rtl] .topics span:first-child,
-[dir=rtl] .fab,[dir=rtl] .lnk,[dir=rtl] .top-wa,[dir=rtl] .btn,[dir=rtl] .chip,
+[dir=rtl] .lnk,[dir=rtl] .top-wa,[dir=rtl] .btn,[dir=rtl] .chip,
 [dir=rtl] .pager .pl,[dir=rtl] .foot h4,[dir=rtl] .soc-h,[dir=rtl] .rk,[dir=rtl] .rt,
 [dir=rtl] .legal,[dir=rtl] .mfoot,[dir=rtl] .mmenu a{
   letter-spacing:0;text-transform:none;
@@ -255,7 +255,6 @@ RTL_CSS = """
 [dir=rtl] .prog{left:auto;right:0}
 [dir=rtl] .skip{left:auto;right:-9999px;border-radius:0 0 0 8px}
 [dir=rtl] .skip:focus{left:auto;right:0}
-[dir=rtl] .fab{right:auto;left:18px}
 
 [dir=rtl] .prose p.open::first-letter{float:right;padding:.06em 0 0 .12em}
 [dir=rtl] .prose li{padding-left:0;padding-right:30px}
@@ -402,7 +401,7 @@ def header(lang):
   <nav class="nav" aria-label="Primary">
     {links}
     <a class="lnk" href="{u["other"]}" lang="{other_lang}">{t["other_lang"]}</a>
-    <a class="top-wa" href="{WA}?text={t["wa_intro"]}">{WA_ICON}<span>{t["whatsapp"]}</span></a>
+    <a class="top-wa" href="{WA}?text={t["wa_intro"]}" target="_blank" rel="noopener" aria-label="{t["whatsapp"]}">{WA_ICON}<span>{t["whatsapp"]}</span></a>
     <button class="burger" id="burger" aria-label="{t["menu"]}" aria-expanded="false" aria-controls="mmenu"><i></i></button>
   </nav>
 </header>
@@ -473,7 +472,6 @@ def footer(lang):
     <p class="legal">{t["legal"]}</p>
   </div>
 </footer>
-<a class="fab" href="{WA}?text={t["wa_intro"]}" aria-label="{t["whatsapp"]}">{WA_ICON}<span>{t["whatsapp"]}</span></a>
 """
 
 
