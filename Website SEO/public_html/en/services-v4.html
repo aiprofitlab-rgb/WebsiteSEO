@@ -303,16 +303,108 @@ section{position:relative;padding:clamp(74px,9vw,138px) 0}
 .pager a:hover .parw{transform:translateX(10px)}
 
 /* -------------------------------------------------------------- footer */
-.foot{background:var(--teal-950);color:rgba(241,239,232,.74);padding:clamp(58px,7vw,92px) 0 40px;font-size:1rem}
-.foot .fmark{width:170px;margin-bottom:20px}
-.foot .slogan{font-family:var(--display);font-size:clamp(1.25rem,2.4vw,1.7rem);color:var(--cream);margin:0 0 8px}
-.foot .slogan-ar{font-size:1.15rem;color:var(--amber-pale);margin:0}
-.foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:clamp(26px,4vw,56px);align-items:start}
+.foot{
+  position:relative;background:var(--teal-950);color:rgba(241,239,232,.74);
+  padding:clamp(58px,7vw,92px) 0 40px;font-size:1rem;
+  /* Two soft lights instead of a flat slab: a teal wash rising from the top
+     left, an amber one from the right, both well under the text contrast. */
+  background-image:
+    radial-gradient(980px 400px at 8% -14%, rgba(15,110,86,.50), transparent 62%),
+    radial-gradient(720px 360px at 96% 6%, rgba(186,117,23,.13), transparent 66%);
+}
+/* hairline that fades in from both sides - reads as a seam, not a border */
+.foot::before{
+  content:"";position:absolute;left:0;right:0;top:0;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(186,117,23,.7) 26%,rgba(232,201,143,.35) 64%,transparent);
+}
+.foot .fmark{width:170px;margin-bottom:22px}
+.foot .slogan{font-family:var(--display);font-size:clamp(1.25rem,2.4vw,1.7rem);color:var(--cream);margin:0 0 2px;line-height:1.25}
+.foot .slogan-ar{
+  /* Marcellus carries no Arabic glyphs, so this line ALWAYS falls back - naming
+     the fallback is what makes its size predictable across platforms. Sized so
+     the Arabic runs a touch shorter than the English line above it, and
+     width:fit-content pulls the RTL box back to the column's left edge instead
+     of letting it drift out to the right of the whole column. */
+  font-family:'Noto Naskh Arabic','Geeza Pro','Segoe UI',Tahoma,serif;
+  font-size:clamp(1.18rem,2.4vw,1.58rem);line-height:1.85;color:var(--amber-pale);
+  width:fit-content;margin:0;
+}
+.foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:clamp(26px,4vw,56px);align-items:stretch}
+/* The brand column is the short one. Making it a flex column and pushing the
+   socials down on auto margin lands the tiles on the same baseline as the
+   longest link column instead of leaving a hole under them. */
+.foot-brand{display:flex;flex-direction:column}
+.soc-wrap{margin-top:auto;padding-top:34px}
 .foot h4{font-family:var(--mono);font-size:.82rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--amber-pale);margin:0 0 16px}
 .foot ul{list-style:none;margin:0;padding:0}
 .foot li{margin-bottom:11px}
 .foot a{color:rgba(241,239,232,.74);text-decoration:none;transition:color .2s}
 .foot a:hover{color:var(--amber-bright)}
+
+/* Column links: underline wipes in from the left. Drawn on a pseudo-element
+   rather than text-decoration so it animates and costs no layout shift. */
+.foot .fcol a{position:relative;display:inline-block}
+.foot .fcol a::after{
+  content:"";position:absolute;left:0;right:0;bottom:-2px;height:1px;background:currentColor;
+  transform:scaleX(0);transform-origin:left;transition:transform .3s var(--ease);
+}
+.foot .fcol a:hover::after{transform:scaleX(1)}
+
+/* The two direct lines are the ones actually worth a click, so they get size,
+   an icon and full-cream contrast while the nav links stay quiet. */
+.foot .direct{margin-bottom:20px}
+.foot .fcol .direct a{display:inline-flex;align-items:center;gap:10px;color:var(--cream);font-size:1.06rem}
+.foot .fcol .direct a:hover{color:var(--amber-bright)}
+.foot .direct svg{width:17px;height:17px;flex:none;fill:currentColor;color:var(--amber-pale);transition:transform .25s var(--ease)}
+.foot .fcol .direct a:hover svg{transform:translateX(2px)}
+
+/* --------------------------------------------------------------- socials */
+.foot .soc-h{margin:0 0 14px}
+.socials{display:flex;flex-wrap:wrap;gap:10px}
+.socials li{margin:0}
+.socials a{
+  --sc:var(--teal);
+  width:46px;height:46px;border-radius:13px;display:inline-flex;align-items:center;justify-content:center;
+  border:1px solid var(--line-dark);background:rgba(241,239,232,.03);color:rgba(241,239,232,.82);
+  transition:transform .28s var(--ease),background .28s,border-color .28s,color .28s,box-shadow .28s;
+}
+.socials svg{width:20px;height:20px;fill:currentColor}
+.socials a:hover{
+  transform:translateY(-4px);background:var(--sc);border-color:transparent;color:#fff;
+  box-shadow:0 14px 26px -12px var(--sc);
+}
+
+/* ---------------------------------------------------- google review card */
+.review{
+  position:relative;overflow:hidden;display:flex;align-items:center;gap:clamp(16px,2.6vw,28px);
+  margin-top:clamp(36px,5vw,58px);padding:clamp(20px,2.8vw,26px) clamp(20px,3vw,30px);
+  border:1px solid rgba(232,201,143,.26);border-radius:20px;text-decoration:none;
+  background:linear-gradient(115deg,rgba(186,117,23,.16),rgba(186,117,23,.05) 52%,rgba(241,239,232,.02));
+  transition:transform .3s var(--ease),border-color .3s,box-shadow .3s;
+}
+/* sheen that sweeps across on hover */
+.review::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(105deg,transparent 32%,rgba(241,239,232,.11) 46%,transparent 60%);
+  transform:translateX(-110%);transition:transform 1s var(--ease);
+}
+.review:hover{transform:translateY(-3px);border-color:rgba(232,201,143,.55);box-shadow:0 26px 48px -28px rgba(0,0,0,.9)}
+.review:hover::after{transform:translateX(110%)}
+.review .gmark{flex:none;width:52px;height:52px;border-radius:50%;background:var(--white);display:flex;align-items:center;justify-content:center}
+.review .gmark svg{width:26px;height:26px}
+.review .rbody{flex:1 1 auto;min-width:0}
+.review .stars{display:flex;gap:3px;margin-bottom:8px}
+.review .stars svg{width:16px;height:16px;fill:var(--amber-pale);transition:fill .3s var(--ease),transform .3s var(--ease)}
+.review:hover .stars svg{fill:var(--amber-bright);transform:scale(1.18)}
+.review:hover .stars svg:nth-child(2){transition-delay:.05s}
+.review:hover .stars svg:nth-child(3){transition-delay:.1s}
+.review:hover .stars svg:nth-child(4){transition-delay:.15s}
+.review:hover .stars svg:nth-child(5){transition-delay:.2s}
+.review .rk{display:block;font-family:var(--mono);font-size:.76rem;letter-spacing:.14em;text-transform:uppercase;color:var(--amber-pale)}
+.review .rt{display:block;font-family:var(--display);font-size:clamp(1.15rem,2.2vw,1.55rem);line-height:1.2;color:var(--cream);margin-top:5px}
+.review .rarw{flex:none;font-size:1.7rem;line-height:1;color:var(--amber-bright);transition:transform .35s var(--ease)}
+.review:hover .rarw{transform:translateX(9px)}
+
 .foot .legal{
   margin-top:clamp(34px,5vw,58px);padding-top:26px;border-top:1px solid var(--line-dark);
   font-family:var(--mono);font-size:.79rem;letter-spacing:.05em;line-height:2;color:rgba(241,239,232,.5);
@@ -362,6 +454,8 @@ section{position:relative;padding:clamp(74px,9vw,138px) 0}
   .nav a.lnk,.nav .top-wa{display:none}
   .burger{display:inline-flex}
   .foot-grid{grid-template-columns:1fr 1fr}
+  /* brand block goes full width so the two link columns still sit side by side */
+  .foot-brand{grid-column:1/-1;margin-bottom:10px}
 }
 @media (max-width:640px){
   body{font-size:18px}
@@ -370,6 +464,11 @@ section{position:relative;padding:clamp(74px,9vw,138px) 0}
   .fab span{display:none}
   .fab{padding:15px;border-radius:50%}
   .pager .parw{display:none}
+  .review .rarw{display:none}
+  .review{gap:16px;padding-right:76px}
+  .review .rt{font-size:1.12rem}
+  .review .gmark{width:44px;height:44px}
+  .review .gmark svg{width:22px;height:22px}
 }
 
 /* ---------------------------------------------------------- stat strip */
@@ -818,34 +917,60 @@ table.t .mini{display:block;font-size:.86rem;color:var(--muted);margin-top:5px;l
 <footer class="foot">
   <div class="wrap">
     <div class="foot-grid">
-      <div>
+
+      <div class="foot-brand">
         <img class="fmark" src="/assets/brand/wordmark-reversed.svg" alt="AI Profit Lab" width="170" height="29">
         <p class="slogan">Every success starts with insight.</p>
         <p class="slogan-ar" lang="ar" dir="rtl">&#1603;&#1604; &#1606;&#1580;&#1575;&#1581; &#1610;&#1576;&#1583;&#1571; &#1576;&#1585;&#1572;&#1610;&#1577;</p>
+        <div class="soc-wrap">
+          <h4 class="soc-h">Follow the work</h4>
+          <ul class="socials">
+    <li><a href="https://wa.me/96899245250?text=Hello%20Nahid" style="--sc:#1FAF5E" target="_blank" rel="noopener" aria-label="AI Profit Lab on WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 1.8a8.2 8.2 0 1 1-4.2 15.3l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8zm-3.1 4c-.2 0-.5 0-.7.3-.2.3-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.8 2.8 4.4 3.8 2.2.9 2.6.7 3.1.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2-.1-.1-.2-.2-.5-.3l-1.7-.8c-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.1-.2 0-.4.1-.5l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5L10 8.2c-.2-.4-.4-.4-.6-.4h-.5z"/></svg></a></li>
+    <li><a href="https://www.linkedin.com/in/nahid-aby" style="--sc:#0A66C2" target="_blank" rel="noopener" aria-label="AI Profit Lab on LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg></a></li>
+    <li><a href="https://www.youtube.com/@AI_for_Managers" style="--sc:#FF0000" target="_blank" rel="noopener" aria-label="AI Profit Lab on YouTube"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg></a></li>
+    <li><a href="https://www.facebook.com/profile.php?id=61584870364473" style="--sc:#1877F2" target="_blank" rel="noopener" aria-label="AI Profit Lab on Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/></svg></a></li>
+          </ul>
+        </div>
       </div>
-      <div>
+
+      <nav class="fcol" aria-label="The work">
         <h4>The work</h4>
         <ul>
           <li><a href="/en/services-v4/">What I build</a></li>
           <li><a href="/en/process-v4/">How it works</a></li>
           <li><a href="/en/services-v4/#price">Prices</a></li>
+          <li><a href="/en/simulator-v4/">Revenue leak simulator</a></li>
           <li><a href="/en/demo-v4/#dash">Dashboard demo</a></li>
           <li><a href="/en/demo-v4/">WhatsApp demo</a></li>
         </ul>
-      </div>
-      <div>
+      </nav>
+
+      <nav class="fcol" aria-label="Talk to me">
         <h4>Talk to me</h4>
+        <ul class="direct">
+          <li><a href="https://wa.me/96899245250?text=Hello%20Nahid"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 1.8a8.2 8.2 0 1 1-4.2 15.3l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8zm-3.1 4c-.2 0-.5 0-.7.3-.2.3-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.8 2.8 4.4 3.8 2.2.9 2.6.7 3.1.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2-.1-.1-.2-.2-.5-.3l-1.7-.8c-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.1-.2 0-.4.1-.5l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5L10 8.2c-.2-.4-.4-.4-.6-.4h-.5z"/></svg><span dir="ltr">+968 9924 5250</span></a></li>
+          <li><a href="mailto:hello@aiprofitlab.io"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>hello@aiprofitlab.io</a></li>
+        </ul>
         <ul>
-          <li><a href="https://wa.me/96899245250?text=Hello%20Nahid">WhatsApp <span dir="ltr">+968 9924 5250</span></a></li>
-          <li><a href="mailto:hello@aiprofitlab.io">hello@aiprofitlab.io</a></li>
           <li><a href="/en/contact-v4/">Contact page</a></li>
           <li><a href="/en/about-v4/">About Nahid</a></li>
           <li><a href="/en/blog-v4/">Articles</a></li>
-          <li><a href="/en/simulator-v4/">Revenue leak simulator</a></li>
           <li><a href="/privacy/">Privacy</a></li>
         </ul>
-      </div>
+      </nav>
+
     </div>
+
+    <a class="review" href="https://g.page/r/CYPlrz58-k0DEAI/review" target="_blank" rel="noopener">
+      <span class="gmark" aria-hidden="true"><svg viewBox="0 0 48 48" aria-hidden="true"><path fill="#4285F4" d="M45.12 24.5c0-1.56-.14-3.06-.4-4.5H24v8.51h11.84c-.51 2.75-2.06 5.08-4.39 6.64v5.52h7.11c4.16-3.83 6.56-9.47 6.56-16.17z"/><path fill="#34A853" d="M24 46c5.94 0 10.92-1.97 14.56-5.33l-7.11-5.52c-1.97 1.32-4.49 2.1-7.45 2.1-5.73 0-10.58-3.87-12.31-9.07H4.34v5.7C7.96 41.07 15.4 46 24 46z"/><path fill="#FBBC05" d="M11.69 28.18C11.25 26.86 11 25.45 11 24s.25-2.86.69-4.18v-5.7H4.34C2.85 17.09 2 20.45 2 24s.85 6.91 2.34 9.88l7.35-5.7z"/><path fill="#EA4335" d="M24 10.75c3.23 0 6.13 1.11 8.41 3.29l6.31-6.31C34.91 4.18 29.93 2 24 2 15.4 2 7.96 6.93 4.34 14.12l7.35 5.7c1.73-5.2 6.58-9.07 12.31-9.07z"/></svg></span>
+      <span class="rbody">
+        <span class="stars" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 17.3l-6.18 3.75 1.64-7.03L2 9.24l7.19-.61L12 2l2.81 6.63 7.19.61-5.46 4.78 1.64 7.03z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 17.3l-6.18 3.75 1.64-7.03L2 9.24l7.19-.61L12 2l2.81 6.63 7.19.61-5.46 4.78 1.64 7.03z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 17.3l-6.18 3.75 1.64-7.03L2 9.24l7.19-.61L12 2l2.81 6.63 7.19.61-5.46 4.78 1.64 7.03z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 17.3l-6.18 3.75 1.64-7.03L2 9.24l7.19-.61L12 2l2.81 6.63 7.19.61-5.46 4.78 1.64 7.03z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 17.3l-6.18 3.75 1.64-7.03L2 9.24l7.19-.61L12 2l2.81 6.63 7.19.61-5.46 4.78 1.64 7.03z"/></svg></span>
+        <span class="rk">Worked with me?</span>
+        <span class="rt">Leave a review on Google Maps</span>
+      </span>
+      <span class="rarw" aria-hidden="true">&rarr;</span>
+    </a>
+
     <p class="legal">
       &copy; 2026 AI Profit Lab &mdash; a brand of Lotus Gulf International (CR <span dir="ltr">1570092</span>)<br>
       South Al Khuwair, Bousher, Muscat, Oman &middot; Not VAT registered (TIN <span dir="ltr">2317725</span>)

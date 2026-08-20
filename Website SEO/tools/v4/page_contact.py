@@ -5,6 +5,8 @@ The form composes a WhatsApp message rather than posting to a backend - the
 same pattern index-v3 and contact-new.html use - so nothing leaves the browser
 until the visitor presses send inside WhatsApp, which is exactly what the note
 under the button promises.
+
+Copy here is deliberately short: this page exists to be acted on, not read.
 """
 from kit import WA, WA_ICON, STAR
 
@@ -26,14 +28,23 @@ CSS = """
 .chan a.primary h3{color:var(--cream)}
 .chan .val{font-family:var(--mono);font-size:.95rem;color:var(--teal);word-break:break-word}
 .chan a.primary .val{color:var(--amber-bright)}
-.chan p{margin:0;font-size:.94rem;color:var(--muted)}
-.chan a.primary p{color:rgba(241,239,232,.7)}
 .chan .when{
   font-family:var(--mono);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);
   margin-top:auto;padding-top:10px;display:flex;align-items:center;gap:8px;
 }
 .chan a.primary .when{color:var(--amber-pale)}
 .chan .when i{width:7px;height:7px;border-radius:50%;background:var(--wa);flex:none}
+
+/* --------------------------------------------------------- section plate
+   Same background image and opacity the live contact page uses, with the
+   section colour faded back in top and bottom so the form stays readable. */
+.plate{position:absolute;inset:0;z-index:0;overflow:hidden;pointer-events:none}
+.plate img{width:100%;height:100%;object-fit:cover;opacity:.2}
+.plate::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,var(--teal-950),rgba(7,43,34,.45) 45%,var(--teal-950));
+}
+#test .wrap{position:relative;z-index:1}
 
 /* ----------------------------------------------------------------- form */
 .capture-grid{display:grid;grid-template-columns:.95fr 1.05fr;gap:clamp(28px,5vw,64px);align-items:start}
@@ -44,11 +55,11 @@ CSS = """
 .field.full{grid-column:1/-1}
 .field label{font-family:var(--mono);font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(241,239,232,.68)}
 .field input{
-  font-family:var(--sans);font-size:1rem;color:var(--cream);background:rgba(241,239,232,.06);
+  font-family:var(--sans);font-size:1rem;color:var(--cream);background:rgba(7,43,34,.55);
   border:1px solid var(--line-dark);border-radius:10px;padding:14px 16px;transition:border-color .2s,background .2s;
 }
 .field input::placeholder{color:rgba(241,239,232,.34)}
-.field input:focus{outline:none;border-color:var(--amber-bright);background:rgba(241,239,232,.1)}
+.field input:focus{outline:none;border-color:var(--amber-bright);background:rgba(7,43,34,.75)}
 .formnote{font-size:.88rem;color:rgba(241,239,232,.55);margin:12px 0 0;line-height:1.55}
 .getlist{list-style:none;margin:22px 0 0;padding:0;display:grid;gap:13px}
 .getlist li{position:relative;padding-left:30px;font-size:1rem;color:rgba(241,239,232,.82);line-height:1.5}
@@ -56,14 +67,6 @@ CSS = """
   content:"";position:absolute;left:3px;top:.5em;width:13px;height:7px;
   border-left:2px solid var(--amber-bright);border-bottom:2px solid var(--amber-bright);transform:rotate(-45deg);
 }
-
-/* -------------------------------------------------------------- next up */
-.next4{display:grid;grid-template-columns:repeat(4,1fr);gap:0}
-.next4 div{position:relative;padding:clamp(20px,2.4vw,28px) clamp(14px,1.8vw,24px) clamp(20px,2.4vw,28px) 0}
-.next4 div+div{padding-left:clamp(14px,1.8vw,24px);border-left:1px solid var(--line)}
-.next4 b{display:block;font-family:var(--mono);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--amber-text);margin-bottom:11px}
-.next4 h3{font-size:1.15rem;margin:0 0 6px}
-.next4 p{margin:0;font-size:.93rem;color:var(--muted)}
 
 /* ------------------------------------------------------------------ faq */
 .faq{border-top:1px solid var(--line)}
@@ -82,12 +85,7 @@ CSS = """
 .faq .ans{padding:0 0 24px;color:var(--muted);font-size:1.02rem;max-width:70ch;margin:0}
 .faq summary:hover{color:var(--teal)}
 
-@media (max-width:900px){
-  .chan,.capture-grid{grid-template-columns:1fr}
-  .next4{grid-template-columns:repeat(2,1fr)}
-  .next4 div:nth-child(3){border-left:0;padding-left:0}
-  .next4 div:nth-child(3),.next4 div:nth-child(4){border-top:1px solid var(--line)}
-}
+@media (max-width:900px){ .chan,.capture-grid{grid-template-columns:1fr} }
 @media (max-width:560px){ .form-grid{grid-template-columns:1fr} }
 """
 
@@ -105,8 +103,7 @@ def body():
   <div class="wrap">
     <p class="eyebrow"><span class="star">{STAR}</span> Talk to me</p>
     <h1 class="h1">You will be talking to<br>the person who builds it.</h1>
-    <p class="lede">There is no sales team, no ticket queue and no account manager. Whichever way you get in
-      touch, it reaches the same phone.</p>
+    <p class="lede">No sales team, no ticket queue. Every route below reaches the same phone.</p>
   </div>
 </header>
 
@@ -117,21 +114,18 @@ def body():
         <span class="ic">{WA_ICON}</span>
         <h3>WhatsApp</h3>
         <span class="val" dir="ltr">+968 9924 5250</span>
-        <p>The fastest route, and the one I actually watch. Voice notes are fine.</p>
         <span class="when"><i></i>Usually same day</span>
       </a>
       <a href="mailto:hello@aiprofitlab.io">
         <span class="ic">{MAIL_ICON}</span>
         <h3>Email</h3>
         <span class="val">hello@aiprofitlab.io</span>
-        <p>Best if you want to attach a catalogue, a price list or a brief.</p>
         <span class="when"><i></i>Within one business day</span>
       </a>
       <a href="tel:+96899245250">
         <span class="ic">{PHONE_ICON}</span>
         <h3>Phone</h3>
         <span class="val" dir="ltr">+968 9924 5250</span>
-        <p>If you would rather just say it out loud. Sunday to Thursday.</p>
         <span class="when"><i></i>9am &ndash; 6pm Muscat</span>
       </a>
     </div>
@@ -140,18 +134,20 @@ def body():
 
 <!-- ================================================== SILENT BUYER TEST -->
 <section class="s-dark" id="test">
+  <span class="plate" aria-hidden="true">
+    <img src="/audit-bg.webp" alt="" width="1000" height="667" loading="lazy" decoding="async">
+  </span>
   <div class="wrap">
     <div class="capture-grid">
       <div>
-        <p class="eyebrow"><span class="star">{STAR}</span> Free &#183; no obligation &#183; five a week</p>
-        <h2 class="h2">Before you buy anything, let me show you what a buyer sees.</h2>
-        <p class="lede">I contact your business the way a real buyer would &mdash; WhatsApp, your website form,
-          email and phone, at a normal buying hour in the evening.</p>
+        <p class="eyebrow"><span class="star">{STAR}</span> Free &#183; five a week</p>
+        <h2 class="h2">Before you buy, see what a buyer sees.</h2>
+        <p class="lede">I contact your business the way a real buyer would &mdash; WhatsApp, form, email, phone.</p>
         <ul class="getlist">
-          <li>How long each channel took to answer &mdash; measured, not guessed</li>
-          <li>What a buyer actually saw, including in Arabic</li>
+          <li>How fast each channel answered &mdash; measured, not guessed</li>
+          <li>What a buyer saw, including in Arabic</li>
           <li>Where that buyer would have gone instead</li>
-          <li>No pitch attached. If everything answers fast, I will tell you so and you should keep your money.</li>
+          <li>No pitch attached</li>
         </ul>
       </div>
 
@@ -174,25 +170,9 @@ def body():
         </div>
         <div class="field full">
           <button class="btn btn-wa" type="submit" style="width:100%">{WA_ICON}Send my details on WhatsApp</button>
-          <p class="formnote">This opens WhatsApp with your message ready &mdash; nothing is sent until you press
-            send there. I run five of these a week, because each one takes me about forty minutes to do properly.</p>
+          <p class="formnote">Nothing is sent until you press send inside WhatsApp.</p>
         </div>
       </form>
-    </div>
-  </div>
-</section>
-
-<!-- ==================================================== WHAT HAPPENS NEXT -->
-<section class="s-panel">
-  <div class="wrap">
-    <p class="eyebrow"><span class="star">{STAR}</span> What happens next</p>
-    <h2 class="h2">No funnel. Four things, in this order.</h2>
-
-    <div class="next4" style="margin-top:clamp(22px,3vw,38px)" data-stagger>
-      <div><b>Step 1</b><h3>I reply</h3><p>Usually the same day, from the same number you messaged.</p></div>
-      <div><b>Step 2</b><h3>I run the test</h3><p>About forty minutes of my time. You do nothing.</p></div>
-      <div><b>Step 3</b><h3>You get the scorecard</h3><p>One page. Yours to keep whatever you decide next.</p></div>
-      <div><b>Step 4</b><h3>Only if it&#8217;s useful</h3><p>Thirty minutes on what to fix &mdash; or nothing at all, with no chasing.</p></div>
     </div>
   </div>
 </section>
@@ -206,43 +186,38 @@ def body():
     <div class="faq" style="margin-top:clamp(22px,3vw,38px)">
       <details>
         <summary>How much does it cost?</summary>
-        <p class="ans">The Smart Storefront is OMR 950 one-time at the founding price, OMR 1,450 standard. The
-          dashboard adds OMR 650, the autopilot adds OMR 900, and all three together are OMR 2,200. Every number
-          is on <a href="/en/services-v4/#price">the price list</a> &mdash; you do not need to call to find out.</p>
+        <p class="ans">Smart Storefront: OMR 950 founding, 1,450 standard. Dashboard +650, autopilot +900, all
+          three 2,200. Every number is on <a href="/en/services-v4/#price">the price list</a>.</p>
       </details>
       <details>
         <summary>Is there a monthly fee?</summary>
-        <p class="ans">Not to keep anything working. The first year of hosting, security and care is included in
-          the build price. The Growth Desk at OMR 75/month is optional, sold after delivery, and never required.</p>
+        <p class="ans">Not to keep anything working. The first year of hosting and care is in the build price.
+          The Growth Desk at OMR 75/month is optional.</p>
       </details>
       <details>
         <summary>Do you have clients I can speak to?</summary>
-        <p class="ans">Not yet, and I am not going to pretend otherwise. That is exactly why there is a named
-          guarantee and why the demos are open to click without asking me for anything: the
-          <a href="/customized-ceo-dashboard-demo/">dashboard</a> and the
-          <a href="/whatsapp-receptionist-demo/">buyer agent</a> are both running on this site right now.</p>
+        <p class="ans">Not yet, and I won&#8217;t pretend otherwise. That is why the guarantee is named and both
+          demos are open to click: the <a href="/customized-ceo-dashboard-demo/">dashboard</a> and the
+          <a href="/whatsapp-receptionist-demo/">buyer agent</a>.</p>
       </details>
       <details>
         <summary>What if it doesn&#8217;t work?</summary>
         <p class="ans">The First Inquiry Promise: no real buyer inquiry within 30 days of going live and I rebuild
-          it free until you get one. If you still don&#8217;t, you get your money back.</p>
+          it free. If you still don&#8217;t get one, you get your money back.</p>
       </details>
       <details>
         <summary>Do you work in Arabic?</summary>
-        <p class="ans">Yes &mdash; both languages are treated as first-class, because your buyers write in Arabic
-          while your datasheets are in English. Arabic copy is checked by a native reader before it ships.</p>
+        <p class="ans">Yes &mdash; both languages first-class, with Arabic checked by a native reader before it ships.</p>
       </details>
       <details>
         <summary>Who am I actually contracting with?</summary>
-        <p class="ans">Lotus Gulf International, CR <span dir="ltr">1570092</span>, South Al Khuwair, Bousher, Muscat.
-          AI Profit Lab is the brand; the invoice comes from the company. Not VAT registered, so invoices carry no
-          VAT line.</p>
+        <p class="ans">Lotus Gulf International, CR <span dir="ltr">1570092</span>, Bousher, Muscat. AI Profit Lab is
+          the brand. Not VAT registered, so invoices carry no VAT line.</p>
       </details>
       <details>
         <summary>How do I pay?</summary>
-        <p class="ans">Bank transfer, in OMR. There are three structures &mdash; pay on start, three payments, or pay
-          only once it has produced a real inquiry. They are described on
-          <a href="/en/services-v4/#price">the services page</a>. No payment is ever taken on this website.</p>
+        <p class="ans">Bank transfer in OMR &mdash; on start, in three payments, or only once it has produced a real
+          inquiry. Set out on <a href="/en/services-v4/#price">the services page</a>. No payment is taken on this site.</p>
       </details>
     </div>
   </div>

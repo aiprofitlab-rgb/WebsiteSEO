@@ -6,10 +6,10 @@ This is the one part of index-v3 Nahid signed off on, so it moves across
 unchanged in behaviour: a scroll-scrubbed WebP frame sequence painted to a
 canvas (150 frames desktop / 75 mobile, coarse-to-fine fetch, cross-dissolved).
 The engine itself is extracted mechanically into _ported_js.py rather than
-retyped. Only the copy and the two lead CTAs are new - they now point into the
-rest of the v4 set instead of at in-page anchors only.
+retyped. Only the copy and the lead CTA are new - the first screen is deliberately
+bare: headline plus one button, with everything else left to the scroll.
 """
-from kit import WA, WA_ICON, STAR
+from kit import WA, WA_ICON
 
 # Layout geometry note (kept from v3, still load-bearing): the copy column has
 # to end before x=25% of the frame, which is where the subject's silhouette
@@ -32,13 +32,11 @@ HERO_CSS = """
   text-align:center;opacity:0;transition:opacity .45s ease;pointer-events:none;
 }
 .lead.on,.endcard.on,.beat.on{opacity:1;pointer-events:auto}
-.lead h1{font-size:clamp(2.6rem,5.6vw,4.5rem);line-height:1.04;color:var(--teal-950);margin:0 0 16px}
-.lead p.sub{margin:0 auto 22px;max-width:46ch;color:var(--ink);font-size:clamp(1.2rem,2.2vw,1.55rem);line-height:1.45}
-/* Two CTAs inside the first viewport. v3 learned this the hard way: with the
+.lead h1{font-size:clamp(2.6rem,5.6vw,4.5rem);line-height:1.04;color:var(--teal-950);margin:0 0 26px}
+/* A CTA inside the first viewport. v3 learned this the hard way: with the
    only button on the endcard at 86% scroll progress, a visitor who did not
    scroll five screens never saw a call to action at all. */
-.lead-cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:18px}
-.trust-strip{font-family:var(--mono);font-size:.85rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:0;line-height:1.9}
+.lead-cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin:0}
 .beat{font-family:var(--mono);font-size:clamp(1rem,3.2vw,1.15rem);line-height:1.55;color:var(--teal-900)}
 .beat span{display:inline-block;border-top:2px solid var(--amber);padding-top:14px}
 .endcard p{font-family:var(--display);font-size:clamp(1.7rem,5vw,2.5rem);color:var(--teal-950);margin:0 0 22px;line-height:1.2}
@@ -64,7 +62,6 @@ HERO_CSS = """
   .wash-r{display:block;background:linear-gradient(270deg,rgba(241,239,232,.72) 0%,rgba(241,239,232,.34) 22%,rgba(241,239,232,0) 44%)}
   .lead,.endcard{left:clamp(32px,4.5vw,76px);right:auto;top:46%;transform:translateY(-50%);width:min(470px,34vw);text-align:left}
   .lead h1{font-size:clamp(2.5rem,3.5vw,3.6rem)}
-  .lead p.sub{margin:0 0 22px;max-width:32ch;font-size:1.2rem}
   .lead-cta{justify-content:flex-start}
   .beat{left:auto;right:clamp(32px,4.5vw,76px);top:50%;transform:translateY(-50%);width:min(330px,25vw);text-align:left;font-size:1.1rem}
   .scroll-hint{left:clamp(32px,4.5vw,76px);transform:none;bottom:38px}
@@ -84,8 +81,6 @@ HERO_CSS = """
 @media (max-width:560px){
   .cine{height:420vh}
   .lead h1{font-size:clamp(2.1rem,8.6vw,2.7rem)}
-  .lead p.sub{font-size:1.05rem;margin-bottom:16px}
-  .trust-strip{font-size:.78rem}
 }
 """
 
@@ -101,16 +96,10 @@ HERO_HTML = f"""<section class="cine" id="cine">
 
     <div class="cine-ui">
       <div class="lead on" id="lead">
-        <p class="eyebrow"><span class="star">{STAR}</span> AI Profit Lab &middot; Muscat, Oman</p>
         <h1>Never lose a buyer to silence again.</h1>
-        <p class="sub">A bilingual storefront that answers your buyers in Arabic and English &mdash; at 9pm,
-          on a Friday, while you sleep. Built in days. Yours to keep.</p>
         <div class="lead-cta">
           <a class="btn btn-teal" href="#leak">What silence costs you &darr;</a>
-          <a class="btn btn-ghost" href="/en/services-v4/">See what I build</a>
         </div>
-        <p class="trust-strip">One-time fee &middot; No monthly lock-in &middot; Priced in OMR<br>
-          Lotus Gulf International &middot; South Al Khuwair, Bousher, Muscat</p>
       </div>
 
       <p class="beat" data-at="0.16"><span>9:47 PM. A buyer asks if you deliver to Sohar.</span></p>
