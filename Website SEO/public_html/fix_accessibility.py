@@ -33,7 +33,7 @@ def process_file(filepath):
                 # Add an aria-label based on context or a generic one
                 if 'class' in tag.attrs and 'hamburger' in tag['class']:
                     tag['aria-label'] = 'Toggle Menu'
-                elif 'href' in tag.attrs and 'wa.me' in tag['href']:
+                elif 'href' in tag.attrs and ('wa.me' in tag['href'] or 'api.whatsapp.com' in tag['href']):
                     tag['aria-label'] = 'WhatsApp Contact'
                 elif 'href' in tag.attrs and 'youtube.com' in tag['href']:
                     tag['aria-label'] = 'YouTube Channel'

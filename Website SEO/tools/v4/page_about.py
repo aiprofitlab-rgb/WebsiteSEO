@@ -82,7 +82,7 @@ def body():
         <p class="lede">Which is the only reason I know what a missed 9pm message actually costs, and why
           nothing on this site is written in software vocabulary.</p>
         <div class="btn-row" style="margin-top:30px">
-          <a class="btn btn-wa" href="{WA}?text=Hello%20Nahid%2C%20I%20read%20your%20about%20page.">{WA_ICON}Message me directly</a>
+          <a class="btn btn-wa" href="{WA}&text=Hello%20Nahid%2C%20I%20read%20your%20about%20page.">{WA_ICON}Message me directly</a>
           <a class="tlink" href="/en/services-v4/">See what I build <span class="arw">&rarr;</span></a>
         </div>
       </div>
@@ -168,7 +168,7 @@ def body():
       <div><dt>Where</dt><dd>South Al Khuwair, Bousher, Muscat, Sultanate of Oman</dd></div>
       <div><dt>Languages</dt><dd>English and Arabic, both delivered as first-class</dd></div>
       <div><dt>Who does the work</dt><dd>Me. You will not be handed to an account manager.</dd></div>
-      <div><dt>Reach me</dt><dd><a href="{WA}?text=Hello%20Nahid">WhatsApp <span dir="ltr">+968 9924 5250</span></a> &#183; <a href="mailto:hello@aiprofitlab.io">hello@aiprofitlab.io</a></dd></div>
+      <div><dt>Reach me</dt><dd><a href="{WA}&text=Hello%20Nahid">WhatsApp <span dir="ltr">+968 9924 5250</span></a> &#183; <a href="mailto:hello@aiprofitlab.io">hello@aiprofitlab.io</a></dd></div>
     </dl>
   </div>
 </section>

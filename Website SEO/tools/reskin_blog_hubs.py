@@ -904,7 +904,7 @@ def render(lang, entries, css_href, js_href):
     <h2 class="h2">{t["cta_h"]}</h2>
     <p class="lede" style="margin-inline:auto">{t["cta_p"]}</p>
     <div class="btn-row" style="justify-content:center;margin-top:26px">
-      <a class="btn btn-wa" href="{WA}?text={t["cta_wa"]}">{WA_ICON}<span>{t["cta_btn"]}</span></a>
+      <a class="btn btn-wa" href="{WA}&text={t["cta_wa"]}">{WA_ICON}<span>{t["cta_btn"]}</span></a>
       <a class="btn btn-ghost" href="{u["sim"]}">{t["cta_alt"]}</a>
     </div>
   </div>

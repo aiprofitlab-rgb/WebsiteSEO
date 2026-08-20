@@ -99,7 +99,7 @@ HERO_HTML = f"""<section class="cine" id="cine">
 
       <div class="endcard" id="endcard">
         <p>Every success starts with insight.</p>
-        <a class="btn btn-wa" href="{WA}?text=Hello%20Nahid%2C%20I%20want%20to%20ask%20about%20a%20Smart%20Website%20for%20my%20business.">{WA_ICON}Message me on WhatsApp</a>
+        <a class="btn btn-wa" href="{WA}&text=Hello%20Nahid%2C%20I%20want%20to%20ask%20about%20a%20Smart%20Website%20for%20my%20business.">{WA_ICON}Message me on WhatsApp</a>
       </div>
 
     </div>

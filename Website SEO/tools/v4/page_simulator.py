@@ -325,7 +325,7 @@ JS = r"""
 
       chart(out.svg, monthly, tool.cost, tool.costLabel, out.legend);
 
-      out.wa.setAttribute("href", "https://wa.me/96899245250?text=" +
+      out.wa.setAttribute("href", "https://api.whatsapp.com/send?phone=96899245250&text=" +
         encodeURIComponent(tool.wa(v, {monthly: monthly, days: days < 400 ? days : 0})));
     }
 

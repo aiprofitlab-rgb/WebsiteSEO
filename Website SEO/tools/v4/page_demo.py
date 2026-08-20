@@ -532,7 +532,7 @@ def body():
         {_static_rail(first)}
         </ul>
         <div class="btn-row" style="margin-top:30px">
-          <a class="btn btn-wa" href="{WA}?text=Hello%20Nahid%2C%20I%20watched%20the%20buyer%20agent%20demo%20-%20can%20it%20answer%20from%20my%20stock%20list%3F">{WA_ICON}<span>Ask it about my stock</span></a>
+          <a class="btn btn-wa" href="{WA}&text=Hello%20Nahid%2C%20I%20watched%20the%20buyer%20agent%20demo%20-%20can%20it%20answer%20from%20my%20stock%20list%3F">{WA_ICON}<span>Ask it about my stock</span></a>
           <a class="btn btn-ghost" href="/en/services-v4/#price">What it costs</a>
         </div>
       </div>
@@ -613,7 +613,7 @@ def body():
           </div>
         </div>
         <div class="btn-row" style="margin-top:28px">
-          <a class="btn btn-wa" href="{WA}?text=Hello%20Nahid%2C%20I%20want%20a%20dashboard%20like%20the%20demo%20-%20built%20on%20my%20own%20numbers.">{WA_ICON}<span>Build this on my numbers</span></a>
+          <a class="btn btn-wa" href="{WA}&text=Hello%20Nahid%2C%20I%20want%20a%20dashboard%20like%20the%20demo%20-%20built%20on%20my%20own%20numbers.">{WA_ICON}<span>Build this on my numbers</span></a>
           <a class="btn btn-ghost" href="/en/simulator-v4/">Run my numbers first</a>
         </div>
       </div>

@@ -265,7 +265,7 @@ def body():
       </div>
       <div class="btn-row">
         <a class="btn btn-amber" href="/en/contact-v4/#test">Get the Silent Buyer Test</a>
-        <a class="btn btn-ghost" href="{WA}?text=Hello%20Nahid%2C%20I%20read%20how%20it%20works%20and%20I%20have%20a%20question.">{WA_ICON}Just ask me something</a>
+        <a class="btn btn-ghost" href="{WA}&text=Hello%20Nahid%2C%20I%20read%20how%20it%20works%20and%20I%20have%20a%20question.">{WA_ICON}Just ask me something</a>
       </div>
     </div>
   </div>

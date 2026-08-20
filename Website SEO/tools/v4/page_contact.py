@@ -110,7 +110,7 @@ def body():
 <section class="s-cream grain" style="padding-top:0">
   <div class="wrap">
     <div class="chan" data-stagger>
-      <a class="primary" href="{WA}?text=Hello%20Nahid%2C%20I%20have%20a%20question%20about%20my%20business.">
+      <a class="primary" href="{WA}&text=Hello%20Nahid%2C%20I%20have%20a%20question%20about%20my%20business.">
         <span class="ic">{WA_ICON}</span>
         <h3>WhatsApp</h3>
         <span class="val" dir="ltr">+968 9924 5250</span>
@@ -258,7 +258,7 @@ JS = """
       "WhatsApp: " + get("whatsapp") + "\\n" +
       "We sell: " + get("sells");
     if (typeof gtag === "function") gtag("event","generate_lead",{method:"silent_buyer_test"});
-    window.open("https://wa.me/96899245250?text=" + encodeURIComponent(msg), "_blank", "noopener");
+    window.open("https://api.whatsapp.com/send?phone=96899245250&text=" + encodeURIComponent(msg), "_blank", "noopener");
   });
 })();
 """

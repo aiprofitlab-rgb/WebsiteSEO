@@ -168,7 +168,7 @@ def _ord(iso):
 def share_row(title, url, t):
     q = quote("%s — %s" % (legacy.text(title), url))
     return f"""<div class="share">
-      <a href="https://wa.me/?text={q}" target="_blank" rel="noopener" aria-label="{t['share_wa']}" title="{t['share_wa']}">{WA_ICON}</a>
+      <a href="https://api.whatsapp.com/send?text={q}" target="_blank" rel="noopener" aria-label="{t['share_wa']}" title="{t['share_wa']}">{WA_ICON}</a>
       <a href="https://www.linkedin.com/sharing/share-offsite/?url={quote(url)}" target="_blank" rel="noopener" aria-label="{t['share_li']}" title="{t['share_li']}">{LI_ICON}</a>
       <button type="button" id="copyLink" aria-label="{t['copy']}" title="{t['copy']}">{LINK_ICON}</button>
     </div>"""
@@ -219,14 +219,14 @@ def render(doc, slug, lang, idx, css_href, js_href):
             href = href[len(SITE):]
         ext = ' target="_blank" rel="noopener"' if href.startswith("http") else ""
         btn = "btn btn-wa" if "wa.me" in href or "whatsapp" in href else "btn btn-amber"
-        icon = WA_ICON if "wa.me" in href else ""
+        icon = WA_ICON if "wa.me" in href or "api.whatsapp.com" in href else ""
         cta_html = (f'<div class="icta"><h3>{cta["head"]}</h3>'
                     + (f'<p>{cta["text"]}</p>' if cta["text"] else "")
                     + f'<div class="btn-row"><a class="{btn}" href="{_html.escape(href, quote=True)}"{ext}>'
                       f'{icon}<span>{cta["label"]}</span></a></div></div>')
     else:
         cta_html = (f'<div class="icta"><h3>{t["cta_head"]}</h3><p>{t["cta_text"]}</p>'
-                    f'<div class="btn-row"><a class="btn btn-wa" href="{WA}?text={t["cta_wa"]}">'
+                    f'<div class="btn-row"><a class="btn btn-wa" href="{WA}&text={t["cta_wa"]}">'
                     f'{WA_ICON}<span>{t["cta_label"]}</span></a></div></div>')
 
     # ------------------------------------------------------------------------- FAQ
@@ -321,7 +321,7 @@ def render(doc, slug, lang, idx, css_href, js_href):
             <h3>{t["aboutname"]}</h3>
             <p>{t["abouttext"]}</p>
             <div class="btn-row">
-              <a class="btn btn-wa" href="{WA}?text={t["cta_wa"]}">{WA_ICON}<span>{t["askme"]}</span></a>
+              <a class="btn btn-wa" href="{WA}&text={t["cta_wa"]}">{WA_ICON}<span>{t["askme"]}</span></a>
               <a class="tlink" href="{u["about"]}">{t["moreabout"]} <span class="arw">{arrow}</span></a>
             </div>
           </div>

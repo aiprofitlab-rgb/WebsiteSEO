@@ -323,7 +323,7 @@ def body():
       probably more specific than that &mdash; send it and you get an answer from the person who builds the
       thing, not a form reply.</p>
     <div class="btn-row" style="justify-content:center;margin-top:26px">
-      <a class="btn btn-wa" href="{WA}?text=Hello%20Nahid%2C%20I%20have%20a%20question%20I%20did%20not%20find%20an%20article%20about.">{WA_ICON}<span>Ask on WhatsApp</span></a>
+      <a class="btn btn-wa" href="{WA}&text=Hello%20Nahid%2C%20I%20have%20a%20question%20I%20did%20not%20find%20an%20article%20about.">{WA_ICON}<span>Ask on WhatsApp</span></a>
       <a class="btn btn-ghost" href="/en/simulator-v4/">Run the numbers instead</a>
     </div>
   </div>

@@ -464,7 +464,7 @@ section{position:relative;padding:clamp(74px,9vw,138px) 0}
 # --------------------------------------------------------------------------
 # Shared markup fragments
 # --------------------------------------------------------------------------
-WA = "https://wa.me/96899245250"
+WA = "https://api.whatsapp.com/send?phone=96899245250"
 WA_ICON = (
     '<svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 '
     '15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 1.8a8.2 8.2 0 1 1-4.2 15.3l-.3-.2-3 .8.8-2.9-.2-.3A8.2 '
@@ -553,7 +553,7 @@ def header(active_href):
   </a>
   <nav class="nav" aria-label="Primary">
     {chr(10).join('    ' + l for l in links)}
-    <a class="top-wa" href="{WA}?text=Hello%20Nahid%2C%20I%20have%20a%20question%20about%20my%20business." target="_blank" rel="noopener" aria-label="Chat with Nahid on WhatsApp">{WA_ICON}<span>WhatsApp</span></a>
+    <a class="top-wa" href="{WA}&text=Hello%20Nahid%2C%20I%20have%20a%20question%20about%20my%20business." target="_blank" rel="noopener" aria-label="Chat with Nahid on WhatsApp">{WA_ICON}<span>WhatsApp</span></a>
     <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="mmenu"><i></i></button>
   </nav>
 </header>
@@ -669,7 +669,7 @@ FOOTER = f"""<footer class="foot">
       <nav class="fcol" aria-label="Talk to me">
         <h4>Talk to me</h4>
         <ul class="direct">
-          <li><a href="{WA}?text=Hello%20Nahid">{WA_SMALL}<span dir="ltr">+968 9924 5250</span></a></li>
+          <li><a href="{WA}&text=Hello%20Nahid">{WA_SMALL}<span dir="ltr">+968 9924 5250</span></a></li>
           <li><a href="mailto:hello@aiprofitlab.io">{MAIL_ICON}hello@aiprofitlab.io</a></li>
         </ul>
         <ul>

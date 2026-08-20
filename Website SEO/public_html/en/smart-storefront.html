@@ -665,7 +665,7 @@ footer a{color:var(--amber-pale)}
 
     <div class="offline" id="ladderOffline">
       <strong>The live count isn't loading right now.</strong>
-      I'd rather show you nothing than a number I made up. <a href="https://wa.me/96899245250" target="_blank" rel="noopener">Ask me on WhatsApp</a>.
+      I'd rather show you nothing than a number I made up. <a href="https://api.whatsapp.com/send?phone=96899245250" target="_blank" rel="noopener">Ask me on WhatsApp</a>.
     </div>
 
     <div class="scard rv" id="ladderList">
@@ -798,7 +798,7 @@ footer a{color:var(--amber-pale)}
   "use strict";
 
   var API = "https://storefront-offer-api-989128855797.me-central1.run.app";
-  var WA  = "https://wa.me/96899245250";
+  var WA  = "https://api.whatsapp.com/send?phone=96899245250";
   var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var track = function(name, params){ if (window.gtag) gtag("event", name, params || {}); };
 

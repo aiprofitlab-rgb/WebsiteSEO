@@ -401,7 +401,7 @@ def header(lang):
   <nav class="nav" aria-label="Primary">
     {links}
     <a class="lnk" href="{u["other"]}" lang="{other_lang}">{t["other_lang"]}</a>
-    <a class="top-wa" href="{WA}?text={t["wa_intro"]}" target="_blank" rel="noopener" aria-label="{t["whatsapp"]}">{WA_ICON}<span>{t["whatsapp"]}</span></a>
+    <a class="top-wa" href="{WA}&text={t["wa_intro"]}" target="_blank" rel="noopener" aria-label="{t["whatsapp"]}">{WA_ICON}<span>{t["whatsapp"]}</span></a>
     <button class="burger" id="burger" aria-label="{t["menu"]}" aria-expanded="false" aria-controls="mmenu"><i></i></button>
   </nav>
 </header>
@@ -449,7 +449,7 @@ def footer(lang):
       <nav class="fcol" aria-label="{t["f_talk"]}">
         <h4>{t["f_talk"]}</h4>
         <ul class="direct">
-          <li><a href="{WA}?text={t["wa_intro"]}">{WA_SMALL}<span dir="ltr">+968 9924 5250</span></a></li>
+          <li><a href="{WA}&text={t["wa_intro"]}">{WA_SMALL}<span dir="ltr">+968 9924 5250</span></a></li>
           <li><a href="mailto:hello@aiprofitlab.io">{MAIL_ICON}hello@aiprofitlab.io</a></li>
         </ul>
         <ul>

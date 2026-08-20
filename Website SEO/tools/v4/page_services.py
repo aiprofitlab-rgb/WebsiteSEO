@@ -174,7 +174,7 @@ def body():
           <li>A year of hosting, security and care included</li>
         </ul>
         <div class="pricetag"><b>OMR 950</b><span>One-time &#183; founding price</span></div>
-        <a class="btn btn-wa" href="{WA}?text=Hello%20Nahid%2C%20I%20want%20to%20ask%20about%20the%20Smart%20Website.">{WA_ICON}Ask about a build slot</a>
+        <a class="btn btn-wa" href="{WA}&text=Hello%20Nahid%2C%20I%20want%20to%20ask%20about%20the%20Smart%20Website.">{WA_ICON}Ask about a build slot</a>
       </div>
       <div class="art rv">
         <div class="phone">
@@ -340,7 +340,7 @@ def body():
         <span class="price">OMR 1,150</span>
         <p>Nothing today. Nothing when it goes live. I invoice you only after your smart website has produced its
           first real, verifiable buyer inquiry. If it never does, you never pay.</p>
-        <a class="btn btn-wa" href="{WA}?text=Hello%20Nahid%2C%20I%20want%20the%20Smart%20Website%20on%20Pay%20on%20Proof%20terms.">{WA_ICON}Ask about a slot</a>
+        <a class="btn btn-wa" href="{WA}&text=Hello%20Nahid%2C%20I%20want%20the%20Smart%20Website%20on%20Pay%20on%20Proof%20terms.">{WA_ICON}Ask about a slot</a>
       </div>
       <div class="pay">
         <span class="badge">Cheapest</span>
@@ -348,7 +348,7 @@ def body():
         <span class="price">OMR 950</span>
         <p>Paid up front by bank transfer. Saves you OMR 200 against Pay on Proof, and includes the Arabic
           content pass, the Google Business Profile fix, and one staff training session at no charge.</p>
-        <a class="btn btn-ghost" href="{WA}?text=Hello%20Nahid%2C%20I%20want%20the%20Smart%20Website%20paid%20up%20front%20at%20OMR%20950.">Ask about a slot</a>
+        <a class="btn btn-ghost" href="{WA}&text=Hello%20Nahid%2C%20I%20want%20the%20Smart%20Website%20paid%20up%20front%20at%20OMR%20950.">Ask about a slot</a>
       </div>
       <div class="pay">
         <span class="badge">Spread it out</span>
@@ -356,7 +356,7 @@ def body():
         <span class="price">3 &times; OMR 340</span>
         <p>On signing, on go-live, and thirty days later. Less than one month of an administrator&#8217;s salary
           in total &mdash; and it keeps working after the three months are done.</p>
-        <a class="btn btn-ghost" href="{WA}?text=Hello%20Nahid%2C%20I%20want%20the%20Smart%20Website%20on%20the%20three-payment%20plan.">Ask about a slot</a>
+        <a class="btn btn-ghost" href="{WA}&text=Hello%20Nahid%2C%20I%20want%20the%20Smart%20Website%20on%20the%20three-payment%20plan.">Ask about a slot</a>
       </div>
     </div>
 

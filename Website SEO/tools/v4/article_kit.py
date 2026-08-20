@@ -491,7 +491,7 @@ def _stats(items):
 
 def _cta(heading, text, label, wa_text):
     return (f'<div class="icta"><h3>{heading}</h3><p>{text}</p><div class="btn-row">'
-            f'<a class="btn btn-wa" href="{WA}?text={wa_text}">{WA_ICON}<span>{label}</span></a>'
+            f'<a class="btn btn-wa" href="{WA}&text={wa_text}">{WA_ICON}<span>{label}</span></a>'
             f'</div></div>')
 
 
@@ -559,7 +559,7 @@ def share_row(title, url):
     from urllib.parse import quote
     q = quote(f"{title} — {url}")
     return f"""<div class="share">
-      <a href="https://wa.me/?text={q}" target="_blank" rel="noopener" aria-label="Share on WhatsApp" title="Share on WhatsApp">{WA_ICON}</a>
+      <a href="https://api.whatsapp.com/send?text={q}" target="_blank" rel="noopener" aria-label="Share on WhatsApp" title="Share on WhatsApp">{WA_ICON}</a>
       <a href="https://www.linkedin.com/sharing/share-offsite/?url={quote(url)}" target="_blank" rel="noopener" aria-label="Share on LinkedIn" title="Share on LinkedIn">{LI_ICON}</a>
       <button type="button" id="copyLink" aria-label="Copy link" title="Copy link">{LINK_ICON}</button>
     </div><!-- {t} -->"""
@@ -663,7 +663,7 @@ def render(art):
               here comes out of work done for trading and distribution owners in Oman. If a number in
               this article does not match your business, send me yours and I will run it with you.</p>
             <div class="btn-row">
-              <a class="btn btn-wa" href="{WA}?text=Hello%20Nahid%2C%20I%20read%20your%20article%20and%20have%20a%20question.">{WA_ICON}<span>Ask me directly</span></a>
+              <a class="btn btn-wa" href="{WA}&text=Hello%20Nahid%2C%20I%20read%20your%20article%20and%20have%20a%20question.">{WA_ICON}<span>Ask me directly</span></a>
               <a class="tlink" href="/en/about-v4/">More about me <span class="arw">&rarr;</span></a>
             </div>
           </div>
