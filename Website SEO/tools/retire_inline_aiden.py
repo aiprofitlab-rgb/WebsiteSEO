@@ -30,6 +30,8 @@ import os
 import re
 import sys
 
+import aiden_version
+
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PUBLIC = os.path.join(ROOT, "public_html")
 
@@ -45,7 +47,7 @@ WIDGET_OPEN = re.compile(r'<!--[^\n]*Chatbot Widget[^\n]*-->\s*\n?\s*'
                          r'(?P<div><div class="fixed bottom-8 (?:left|right)-8 z-\[10005\]">)'
                          r'|(?P<bare><div class="fixed bottom-8 (?:left|right)-8 z-\[10005\]">)')
 
-TAG = '<script defer src="/js/aiden-chat.js"></script>'
+TAG = aiden_version.tag()
 
 SHIMS = """        // Aiden mounts itself from /js/aiden-chat.js, loaded at the end of this
         // page. These shims remain only so any stray caller keeps working.
@@ -184,7 +186,9 @@ def convert(html):
 
     # Look for the tag, not the bare path: the shim comment above mentions the
     # file by name and would otherwise read as "already linked".
-    if 'src="/js/aiden-chat.js"' not in html:
+    # Match the prefix, not the whole tag: the src carries a ?v=<hash> token
+    # that changes whenever the widget does.
+    if 'src="/js/aiden-chat.js' not in html:
         head, sep, tail = html.rpartition("</body>")
         html = head + "    " + TAG + "\n" + sep + tail
         notes.append("script tag")

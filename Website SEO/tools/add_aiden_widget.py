@@ -13,8 +13,12 @@ old widget markup inline. They are given the script tag like everything else;
 aiden-chat.js removes that legacy markup on mount and replaces it with the one
 current widget, so no page edit is needed to retire it.
 
+The tag carries the widget's content hash, so editing aiden-chat.js and running
+this script again re-stamps every page with a URL nothing has cached - without
+it the edit never reaches a returning visitor. See tools/aiden_version.py.
+
     python3 tools/add_aiden_widget.py --dry-run
-    python3 tools/add_aiden_widget.py            # add where missing
+    python3 tools/add_aiden_widget.py            # add where missing, re-stamp stale
     python3 tools/add_aiden_widget.py --prune    # also strip it from articles
 """
 
@@ -23,10 +27,14 @@ import os
 import re
 import sys
 
+import aiden_version
+
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PUBLIC = os.path.join(ROOT, "public_html")
 
-TAG = '<script defer src="/js/aiden-chat.js"></script>'
+TAG = aiden_version.tag()
+# Matches the tag with or without a version token, so a page stamped by an
+# older run is still recognised - and re-stamped rather than duplicated.
 MARKER = "/js/aiden-chat.js"
 
 # Same exclusions as the knowledge index: don't touch scratch or template files.
@@ -47,7 +55,7 @@ ARTICLE_PATTERNS = [
 ]
 
 # The script tag on its own line, however it was indented when it was added.
-TAG_LINE = re.compile(r"[ \t]*<script[^>]+src=\"/js/aiden-chat\.js\"[^>]*></script>[ \t]*\n?")
+TAG_LINE = re.compile(r"[ \t]*<script[^>]+src=\"/js/aiden-chat\.js(?:\?[^\"]*)?\"[^>]*></script>[ \t]*\n?")
 
 
 def is_article(rel):
@@ -65,7 +73,7 @@ def main():
                     help="also remove the script tag from article pages that have it")
     args = ap.parse_args()
 
-    added, already, skipped, failed, articles, pruned = [], [], [], [], [], []
+    added, already, skipped, failed, articles, pruned, restamped = [], [], [], [], [], [], []
 
     for dirpath, dirnames, filenames in os.walk(PUBLIC):
         dirnames[:] = [d for d in dirnames if d not in {"assets", "images", "js", "node_modules"}]
@@ -97,7 +105,19 @@ def main():
                 continue
 
             if MARKER in html:
-                already.append(rel)
+                if TAG in html:
+                    already.append(rel)
+                    continue
+                # Present but pointing at an older build of the widget: replace
+                # the tag in place rather than adding a second one.
+                updated = TAG_LINE.sub("    " + TAG + "\n", html, count=1)
+                if TAG_LINE.search(html) is None:
+                    failed.append(f"{rel}: widget referenced but no tag line matched")
+                    continue
+                if not args.dry_run:
+                    with open(full, "w", encoding="utf-8") as fh:
+                        fh.write(updated)
+                restamped.append(rel)
                 continue
 
             if "</body>" not in html:
@@ -114,7 +134,8 @@ def main():
             added.append(rel)
 
     print(f"{'Would add' if args.dry_run else 'Added'} widget to : {len(added)} pages")
-    print(f"Already had it            : {len(already)} pages")
+    print(f"Already current           : {len(already)} pages")
+    print(f"{'Would re-stamp' if args.dry_run else 'Re-stamped'} to v={aiden_version.token()} : {len(restamped)} pages")
     print(f"Articles (widget excluded): {len(articles)} pages")
     print(f"{'Would strip' if args.dry_run else 'Stripped'} from articles : {len(pruned)} pages")
     print(f"Skipped (template/scratch): {len(skipped)} pages")

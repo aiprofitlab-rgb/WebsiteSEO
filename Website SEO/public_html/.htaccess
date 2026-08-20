@@ -39,6 +39,14 @@
     <FilesMatch "\.(jpeg|jpg|png|webp|svg|ico|css|js|woff|woff2|ttf|otf|eot)$">
         Header set Cache-Control "public, max-age=31536000, immutable"
     </FilesMatch>
+    # The Aiden widget is the one script that ships from a stable filename and
+    # changes often. Pinned for a year it kept serving an old build from the CDN
+    # edge long after the origin was correct, so it revalidates like a page.
+    # Pages also carry a ?v=<hash> token (tools/aiden_version.py) - belt and
+    # braces, because this header cannot evict what an edge already holds.
+    <FilesMatch "^aiden-chat\.js$">
+        Header set Cache-Control "public, max-age=600, must-revalidate"
+    </FilesMatch>
     # HTML pages: short cache with revalidation
     <FilesMatch "\.html$">
         Header set Cache-Control "public, max-age=600, must-revalidate"

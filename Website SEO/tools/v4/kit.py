@@ -609,7 +609,7 @@ WA_SMALL = f'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="{_WA_PATH}"/><
 
 # label, href, brand colour used for the hover fill, glyph path
 SOCIALS = [
-    ("WhatsApp", WA + "?text=Hello%20Nahid", "#1FAF5E", _WA_PATH),
+    ("WhatsApp", WA + "&text=Hello%20Nahid", "#1FAF5E", _WA_PATH),
     ("LinkedIn", "https://www.linkedin.com/in/nahid-aby", "#0A66C2",
      "M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238"
      "-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75"
@@ -804,7 +804,10 @@ TAIL = """<script>{{JS}}</script>
 </html>
 """
 
-AIDEN_TAG = '<script defer src="/js/aiden-chat.js"></script>\n'
+# {{VER}} is the widget's content hash, filled in by build_v4.render() from
+# tools/aiden_version.py. Without it an edited widget never reaches a returning
+# visitor: .htaccess serves .js as immutable for a year on a stable filename.
+AIDEN_TAG = '<script defer src="/js/aiden-chat.js?v={{VER}}"></script>\n'
 
 SKIP_CSS = """
 .skip{position:absolute;left:-9999px;top:0;z-index:200;background:var(--teal-950);color:var(--cream);

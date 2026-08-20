@@ -17,7 +17,9 @@ HERE = pathlib.Path(__file__).resolve().parent
 ROOT = HERE.parent
 OUT = ROOT / "public_html" / "en"
 sys.path.insert(0, str(HERE / "v4"))
+sys.path.insert(0, str(HERE))
 
+import aiden_version  # noqa: E402
 import kit  # noqa: E402
 
 MODULES = ["page_home", "page_services", "page_process", "page_about", "page_contact",
@@ -66,7 +68,8 @@ def render(mod):
         # surface and the launcher competes with it. Default is on, so a new
         # page gets the widget unless it opts out.
         + kit.TAIL.replace("{{JS}}", js + getattr(m, "JS", ""))
-                  .replace("{{AIDEN}}", kit.AIDEN_TAG if meta.get("aiden", True) else "")
+                  .replace("{{AIDEN}}", kit.AIDEN_TAG.replace("{{VER}}", aiden_version.token())
+                           if meta.get("aiden", True) else "")
     )
 
     dest = OUT / (meta["slug"] + ".html")
