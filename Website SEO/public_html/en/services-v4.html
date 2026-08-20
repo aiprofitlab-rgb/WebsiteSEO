@@ -326,18 +326,75 @@ section{position:relative;padding:clamp(74px,9vw,138px) 0}
   content:"";position:absolute;left:0;right:0;top:0;height:1px;
   background:linear-gradient(90deg,transparent,rgba(186,117,23,.7) 26%,rgba(232,201,143,.35) 64%,transparent);
 }
-.foot .fmark{width:170px;margin-bottom:22px}
-.foot .slogan{font-family:var(--display);font-size:clamp(1.25rem,2.4vw,1.7rem);color:var(--cream);margin:0 0 2px;line-height:1.25}
+.foot .fmark{width:170px;margin-bottom:clamp(24px,2.6vw,30px)}
+
+/* -------------------------------------------------------- footer signature
+   The slogan used to be two flat paragraphs stacked under the wordmark, at
+   roughly the weight of a caption - nothing about it said "this is the line
+   the whole brand hangs on". It is set as a signature block instead: an amber
+   rule in the inline-start gutter to anchor it, the payoff word lifted into
+   amber over a brush stroke, and a short beat holding the two languages apart
+   in place of 2px of dead margin. Built on logical properties (inset-inline-*,
+   not left) so the whole frame mirrors on the Arabic pages, where .slogan
+   carries the Arabic and .slogan-ar carries the English echo. */
+.fsig{position:relative;margin:0}
+/* The rule HANGS in the gutter rather than indenting the text, so the slogan,
+   the wordmark above it and the socials below it all share one left edge and
+   the mark reads as an annotation instead of a nested quote. Bright at the
+   first line and gone by the second: a mark in the margin, not a full-height
+   border, which would close the block into a box. */
+.fsig::before{
+  content:"";position:absolute;inset-block:.16em .5em;inset-inline-start:-18px;
+  width:2px;border-radius:2px;
+  background:linear-gradient(180deg,var(--amber-bright),rgba(186,117,23,.5) 48%,transparent);
+}
+.foot .slogan{
+  font-family:var(--display);font-size:clamp(1.42rem,2.9vw,2.05rem);
+  line-height:1.22;letter-spacing:-.01em;color:var(--cream);margin:0;
+  text-wrap:balance;
+}
+/* The payoff word: amber plus a rule under it. inline-block keeps that rule
+   the width of the word rather than of the whole line box, and font-weight
+   stays 400 because Marcellus ships one weight - anything heavier is a
+   synthesised bold that thickens the serifs unevenly. */
+.foot .slogan .ins{
+  display:inline-block;position:relative;font-weight:400;
+  color:var(--amber-pale);white-space:nowrap;
+}
+.foot .slogan .ins::after{
+  /* Thicker than a text-decoration and rounded at both ends, because at 2px
+     square this landed as a link underline in a column full of links that do
+     not carry one. It has to read as a brush mark. */
+  content:"";position:absolute;left:-.04em;right:-.04em;bottom:-.12em;
+  height:4px;border-radius:3px;
+  background:linear-gradient(90deg,rgba(216,146,52,.85),rgba(216,146,52,.22));
+  transition:background .45s var(--ease);
+}
+/* Deliberately NOT hung off the .rv reveal. Every other block on the page can
+   afford to wait for IntersectionObserver; the one line the brand rests on
+   cannot be invisible on any page where the motion script fails to run. The
+   movement is on hover instead, where nothing depends on it firing. */
+.fsig:hover .slogan .ins::after{background:linear-gradient(90deg,var(--amber-bright),var(--amber-bright))}
+/* the beat between the two languages */
+.fsig .sig-beat{
+  display:block;width:44px;height:1px;
+  margin:clamp(13px,1.4vw,17px) 0 clamp(11px,1.2vw,14px);
+  background:linear-gradient(90deg,rgba(232,201,143,.6),rgba(232,201,143,0));
+}
 .foot .slogan-ar{
   /* Marcellus carries no Arabic glyphs, so this line ALWAYS falls back - naming
-     the fallback is what makes its size predictable across platforms. Sized so
-     the Arabic runs a touch shorter than the English line above it, and
-     width:fit-content pulls the RTL box back to the column's left edge instead
-     of letting it drift out to the right of the whole column. */
+     the fallback is what makes its size predictable across platforms. Held a
+     clear step under the English now rather than matching it, so the pair reads
+     as statement and echo instead of two headlines competing; width:fit-content
+     pulls the RTL box back to the column's inline-start edge instead of letting
+     it drift out to the right of the whole column. */
   font-family:'Noto Naskh Arabic','Geeza Pro','Segoe UI',Tahoma,serif;
-  font-size:clamp(1.18rem,2.4vw,1.58rem);line-height:1.85;color:var(--amber-pale);
+  font-size:clamp(1.02rem,2vw,1.3rem);line-height:1.8;color:rgba(232,201,143,.78);
   width:fit-content;margin:0;
 }
+/* The Arabic echo takes the colour but not the stroke: an underline crosses the
+   descenders and the join, which is what makes the word hard to read. */
+.foot .slogan-ar .ins{color:var(--amber-pale)}
 .foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:clamp(26px,4vw,56px);align-items:stretch}
 /* The brand column is the short one. Making it a flex column and pushing the
    socials down on auto margin lands the tiles on the same baseline as the
@@ -414,6 +471,8 @@ section{position:relative;padding:clamp(74px,9vw,138px) 0}
 .review .rarw{flex:none;font-size:1.7rem;line-height:1;color:var(--amber-bright);transition:transform .35s var(--ease)}
 .review:hover .rarw{transform:translateX(9px)}
 
+.foot .legal a{color:rgba(241,239,232,.82);text-decoration:underline;text-underline-offset:3px}
+.foot .legal a:hover{color:var(--amber-bright)}
 .foot .legal{
   margin-top:clamp(34px,5vw,58px);padding-top:26px;border-top:1px solid var(--line-dark);
   font-family:var(--mono);font-size:.79rem;letter-spacing:.05em;line-height:2;color:rgba(241,239,232,.5);
@@ -465,6 +524,17 @@ section{position:relative;padding:clamp(74px,9vw,138px) 0}
 }
 @media (max-width:640px){
   body{font-size:18px}
+  /* .wrap leaves ~4vw of gutter here - too little to hang a rule in - and
+     indenting the block instead would cost the single left edge the column
+     reads on. So the mark turns horizontal and sits above the line. Flat
+     amber rather than a gradient: a horizontal fade would have to be flipped
+     for Arabic, and at 34px there is nothing to fade. */
+  .fsig{padding-inline-start:0;padding-top:15px}
+  .fsig::before{
+    inset-block:0 auto;inset-inline-start:0;width:34px;height:2px;
+    background:var(--amber-bright);
+  }
+  .foot .slogan{font-size:1.36rem}
   .g2,.g3,.g4{grid-template-columns:1fr}
   .foot-grid{grid-template-columns:1fr}
   .pager .parw{display:none}
@@ -839,7 +909,7 @@ table.t .mini{display:block;font-size:.86rem;color:var(--muted);margin-top:5px;l
         <span class="price">OMR 1,150</span>
         <p>Nothing today. Nothing when it goes live. I invoice you only after your smart website has produced its
           first real, verifiable buyer inquiry. If it never does, you never pay.</p>
-        <a class="btn btn-wa" href="https://api.whatsapp.com/send?phone=96899245250&text=Hello%20Nahid%2C%20I%20want%20the%20Smart%20Website%20on%20Pay%20on%20Proof%20terms."><svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 1.8a8.2 8.2 0 1 1-4.2 15.3l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8zm-3.1 4c-.2 0-.5 0-.7.3-.2.3-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.8 2.8 4.4 3.8 2.2.9 2.6.7 3.1.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2-.1-.1-.2-.2-.5-.3l-1.7-.8c-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.1-.2 0-.4.1-.5l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5L10 8.2c-.2-.4-.4-.4-.6-.4h-.5z"/></svg>Ask about a slot</a>
+        <div class="btn-row"><a class="btn btn-amber" href="/en/checkout-v4/?plan=proof">Start this order</a><a class="btn btn-ghost" href="https://api.whatsapp.com/send?phone=96899245250&text=Hello%20Nahid%2C%20I%20want%20the%20Smart%20Website%20on%20Pay%20on%20Proof%20terms."><svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 1.8a8.2 8.2 0 1 1-4.2 15.3l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8zm-3.1 4c-.2 0-.5 0-.7.3-.2.3-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.8 2.8 4.4 3.8 2.2.9 2.6.7 3.1.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2-.1-.1-.2-.2-.5-.3l-1.7-.8c-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.1-.2 0-.4.1-.5l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5L10 8.2c-.2-.4-.4-.4-.6-.4h-.5z"/></svg>Ask first</a></div>
       </div>
       <div class="pay">
         <span class="badge">Cheapest</span>
@@ -847,7 +917,7 @@ table.t .mini{display:block;font-size:.86rem;color:var(--muted);margin-top:5px;l
         <span class="price">OMR 950</span>
         <p>Paid up front by bank transfer. Saves you OMR 200 against Pay on Proof, and includes the Arabic
           content pass, the Google Business Profile fix, and one staff training session at no charge.</p>
-        <a class="btn btn-ghost" href="https://api.whatsapp.com/send?phone=96899245250&text=Hello%20Nahid%2C%20I%20want%20the%20Smart%20Website%20paid%20up%20front%20at%20OMR%20950.">Ask about a slot</a>
+        <div class="btn-row"><a class="btn btn-ghost" href="/en/checkout-v4/?plan=full">Start this order</a><a class="btn btn-ghost" href="https://api.whatsapp.com/send?phone=96899245250&text=Hello%20Nahid%2C%20I%20want%20the%20Smart%20Website%20paid%20up%20front%20at%20OMR%20950."><svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 1.8a8.2 8.2 0 1 1-4.2 15.3l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8zm-3.1 4c-.2 0-.5 0-.7.3-.2.3-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.8 2.8 4.4 3.8 2.2.9 2.6.7 3.1.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2-.1-.1-.2-.2-.5-.3l-1.7-.8c-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.1-.2 0-.4.1-.5l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5L10 8.2c-.2-.4-.4-.4-.6-.4h-.5z"/></svg>Ask first</a></div>
       </div>
       <div class="pay">
         <span class="badge">Spread it out</span>
@@ -855,9 +925,15 @@ table.t .mini{display:block;font-size:.86rem;color:var(--muted);margin-top:5px;l
         <span class="price">3 &times; OMR 340</span>
         <p>On signing, on go-live, and thirty days later. Less than one month of an administrator&#8217;s salary
           in total &mdash; and it keeps working after the three months are done.</p>
-        <a class="btn btn-ghost" href="https://api.whatsapp.com/send?phone=96899245250&text=Hello%20Nahid%2C%20I%20want%20the%20Smart%20Website%20on%20the%20three-payment%20plan.">Ask about a slot</a>
+        <div class="btn-row"><a class="btn btn-ghost" href="/en/checkout-v4/?plan=three">Start this order</a><a class="btn btn-ghost" href="https://api.whatsapp.com/send?phone=96899245250&text=Hello%20Nahid%2C%20I%20want%20the%20Smart%20Website%20on%20the%20three-payment%20plan."><svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 1.8a8.2 8.2 0 1 1-4.2 15.3l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8zm-3.1 4c-.2 0-.5 0-.7.3-.2.3-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.8 2.8 4.4 3.8 2.2.9 2.6.7 3.1.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2-.1-.1-.2-.2-.5-.3l-1.7-.8c-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.1-.2 0-.4.1-.5l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5L10 8.2c-.2-.4-.4-.4-.6-.4h-.5z"/></svg>Ask first</a></div>
       </div>
     </div>
+
+    <p class="lede" style="margin:clamp(20px,2.6vw,30px) auto 0;max-width:66ch">
+      Not ready to commit the whole figure today? <a href="/en/checkout-v4/">Reserve a build slot for
+      OMR 100</a> instead &mdash; it holds your place in the queue, comes off your price in full, and is
+      refundable until the day building starts.
+    </p>
 
     <!-- The exclusions sit immediately beside the price. That placement is the
          point: it is where honesty does the most work. -->
@@ -905,6 +981,7 @@ table.t .mini{display:block;font-size:.86rem;color:var(--muted);margin-top:5px;l
       </div>
       <div class="btn-row">
         <a class="btn btn-amber" href="/en/contact-v4/#test">Get the Silent Buyer Test</a>
+        <a class="btn btn-ghost" href="/en/checkout-v4/">Or start an order</a>
         <a class="btn btn-ghost" href="/en/process-v4/">See how a build runs</a>
       </div>
     </div>
@@ -924,8 +1001,11 @@ table.t .mini{display:block;font-size:.86rem;color:var(--muted);margin-top:5px;l
 
       <div class="foot-brand">
         <img class="fmark" src="/assets/brand/wordmark-reversed.svg" alt="AI Profit Lab" width="170" height="29">
-        <p class="slogan">Every success starts with insight.</p>
-        <p class="slogan-ar" lang="ar" dir="rtl">&#1603;&#1604; &#1606;&#1580;&#1575;&#1581; &#1610;&#1576;&#1583;&#1571; &#1576;&#1585;&#1572;&#1610;&#1577;</p>
+        <div class="fsig">
+          <p class="slogan">Every success starts with <span class="ins">insight</span>.</p>
+          <span class="sig-beat" aria-hidden="true"></span>
+          <p class="slogan-ar" lang="ar" dir="rtl">&#1603;&#1604; &#1606;&#1580;&#1575;&#1581; &#1610;&#1576;&#1583;&#1571; <span class="ins">&#1576;&#1585;&#1572;&#1610;&#1577;</span></p>
+        </div>
         <div class="soc-wrap">
           <h4 class="soc-h">Follow the work</h4>
           <ul class="socials">
@@ -943,6 +1023,7 @@ table.t .mini{display:block;font-size:.86rem;color:var(--muted);margin-top:5px;l
           <li><a href="/en/services-v4/">What I build</a></li>
           <li><a href="/en/process-v4/">How it works</a></li>
           <li><a href="/en/services-v4/#price">Prices</a></li>
+          <li><a href="/en/checkout-v4/">Start an order</a></li>
           <li><a href="/en/simulator-v4/">Revenue leak simulator</a></li>
           <li><a href="/en/demo-v4/#dash">Dashboard demo</a></li>
           <li><a href="/en/demo-v4/">WhatsApp demo</a></li>
@@ -959,7 +1040,6 @@ table.t .mini{display:block;font-size:.86rem;color:var(--muted);margin-top:5px;l
           <li><a href="/en/contact-v4/">Contact page</a></li>
           <li><a href="/en/about-v4/">About Nahid</a></li>
           <li><a href="/en/blog-v4/">Articles</a></li>
-          <li><a href="/privacy/">Privacy</a></li>
         </ul>
       </nav>
 
@@ -977,7 +1057,9 @@ table.t .mini{display:block;font-size:.86rem;color:var(--muted);margin-top:5px;l
 
     <p class="legal">
       &copy; 2026 AI Profit Lab &mdash; a brand of Lotus Gulf International (CR <span dir="ltr">1570092</span>)<br>
-      South Al Khuwair, Bousher, Muscat, Oman &middot; Not VAT registered (TIN <span dir="ltr">2317725</span>)
+      South Al Khuwair, Bousher, Muscat, Oman &middot; Not VAT registered (TIN <span dir="ltr">2317725</span>)<br>
+      <a href="/terms/">Terms of Service</a> &middot; <a href="/refund-policy/">Refunds &amp; cancellation</a>
+      &middot; <a href="/privacy/">Privacy</a>
     </p>
   </div>
 </footer>

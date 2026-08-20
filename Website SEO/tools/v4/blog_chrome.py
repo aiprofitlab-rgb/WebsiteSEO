@@ -80,7 +80,7 @@ T = {
         "f_direct": [("Contact page", "contact"), ("About", "about"), ("Privacy", "privacy")],
         "review_k": "Worked with us?", "review_t": "Leave a review on Google Maps",
         "follow": "Follow the work",
-        "slogan": "Every success starts with insight.",
+        "slogan": 'Every success starts with <span class="ins">insight</span>.',
         "legal": ('&copy; 2026 AI Profit Lab &mdash; a brand of Lotus Gulf International '
                   '(CR <span dir="ltr">1570092</span>)<br>South Al Khuwair, Bousher, Muscat, '
                   'Oman &middot; Not VAT registered (TIN <span dir="ltr">2317725</span>)'),
@@ -121,7 +121,7 @@ T = {
         "f_direct": [("صفحة التواصل", "contact"), ("من نحن", "about"), ("الخصوصية", "privacy")],
         "review_k": "تعاملت معنا؟", "review_t": "اترك تقييماً على خرائط جوجل",
         "follow": "تابع أعمالنا",
-        "slogan": "كل نجاح يبدأ برؤية",
+        "slogan": 'كل نجاح يبدأ <span class="ins">برؤية</span>',
         "legal": ('&copy; 2026 AI Profit Lab &mdash; علامة تجارية تابعة لشركة Lotus Gulf International '
                   '(س.ت <span dir="ltr">1570092</span>)<br>الخوير الجنوبية، بوشر، مسقط، سلطنة عُمان '
                   '&middot; غير مسجّلة لضريبة القيمة المضافة (الرقم الضريبي <span dir="ltr">2317725</span>)'),
@@ -291,6 +291,28 @@ RTL_CSS = """
 [dir=rtl] .num,[dir=rtl] .tbl td.n,[dir=rtl] .formula span,[dir=rtl] .prose code{
   direction:ltr;unicode-bidi:embed;text-align:right;
 }
+
+/* ---------------------------------------------- footer signature, mirrored */
+/* On an Arabic page the two lines swap roles: .slogan carries the Arabic and
+   .slogan-ar carries the English echo. The amber stroke follows the Latin word
+   rather than staying on .slogan, because under Arabic it cuts through the
+   descenders and the join. The frame itself needs no override - .fsig is built
+   on logical properties and mirrors on its own. */
+[dir=rtl] .foot .slogan .ins::after{content:none}
+/* .slogan-ar carries Latin here, so it drops the Arabic fallback stack and
+   takes Marcellus - which these pages already load for the wordmark - instead
+   of rendering the English echo in a Naskh face. */
+[dir=rtl] .foot .slogan-ar{font-family:'Marcellus',Georgia,'Times New Roman',serif}
+[dir=rtl] .foot .slogan-ar .ins{display:inline-block;position:relative;white-space:nowrap}
+[dir=rtl] .foot .slogan-ar .ins::after{
+  content:"";position:absolute;left:-.04em;right:-.04em;bottom:-.12em;
+  height:4px;border-radius:3px;
+  background:linear-gradient(90deg,rgba(216,146,52,.85),rgba(216,146,52,.22));
+  transition:background .45s var(--ease);
+}
+[dir=rtl] .fsig:hover .slogan-ar .ins::after{background:linear-gradient(90deg,var(--amber-bright),var(--amber-bright))}
+/* the beat fades away from the inline-start edge, which is the right one here */
+[dir=rtl] .fsig .sig-beat{background:linear-gradient(270deg,rgba(232,201,143,.6),rgba(232,201,143,0))}
 """
 
 
@@ -420,17 +442,21 @@ def footer(lang):
     direct = "\n          ".join('<li><a href="%s">%s</a></li>' % (u[key], label)
                                  for label, key in t["f_direct"])
     slogan_other = ('<p class="slogan-ar" lang="ar" dir="rtl">&#1603;&#1604; &#1606;&#1580;&#1575;&#1581; '
-                    '&#1610;&#1576;&#1583;&#1571; &#1576;&#1585;&#1572;&#1610;&#1577;</p>'
+                    '&#1610;&#1576;&#1583;&#1571; <span class="ins">&#1576;&#1585;&#1572;&#1610;&#1577;</span></p>'
                     if lang == "en" else
-                    '<p class="slogan-ar" lang="en" dir="ltr">Every success starts with insight.</p>')
+                    '<p class="slogan-ar" lang="en" dir="ltr">Every success starts with '
+                    '<span class="ins">insight</span>.</p>')
     return f"""<footer class="foot">
   <div class="wrap">
     <div class="foot-grid">
 
       <div class="foot-brand">
         <img class="fmark" src="/assets/brand/wordmark-reversed.svg" alt="AI Profit Lab" width="170" height="29">
-        <p class="slogan">{t["slogan"]}</p>
-        {slogan_other}
+        <div class="fsig">
+          <p class="slogan">{t["slogan"]}</p>
+          <span class="sig-beat" aria-hidden="true"></span>
+          {slogan_other}
+        </div>
         <div class="soc-wrap">
           <h4 class="soc-h">{t["follow"]}</h4>
           <ul class="socials">

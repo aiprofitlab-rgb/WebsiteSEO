@@ -1,0 +1,380 @@
+#!/usr/bin/env python3
+"""
+The commerce layer for the v4 set.
+
+This module is the ONLY place that knows what is sold, what it costs, which
+payment structures exist, and whether the card gateway is switched on. The
+checkout page, the order-status page and the honesty of the copy on the
+services and contact pages all read from here, and the same table is shipped
+to the browser as JSON (CONFIG_JSON) rather than retyped in JavaScript - the
+arithmetic exists once, in Python, and is transported.
+
+Two rules this file exists to enforce:
+
+1. MONEY IS INTEGER BAISA, EVERYWHERE. 1 OMR = 1000 baisa. Thawani's
+   `unit_amount` is an integer number of baisa and rejects decimals, and float
+   arithmetic on prices is how a checkout ends up showing OMR 949.9999998.
+   Nothing in this module or the page's script ever holds a price as a float.
+
+2. NOTHING CLAIMS A CARD IS TAKEN UNTIL ONE ACTUALLY CAN BE. `PAY_LIVE` is
+   False until Thawani approves the merchant account, and every piece of user
+   facing copy that mentions how to pay branches on it. Flipping one boolean
+   turns the site from "bank transfer, invoice to follow" to "pay by card now"
+   in the checkout, the services page and the contact FAQ at once.
+
+Prices are the ones published on services-v4 (the Founding Partner column) and
+quoted in the contact FAQ. build_v4.py asserts at build time that every figure
+below still appears in the rendered services page, so the two cannot drift
+apart silently - see check_services().
+"""
+import json
+
+# ---------------------------------------------------------------------------
+# The switch. Everything downstream branches on these four values.
+# ---------------------------------------------------------------------------
+
+# Flip to True on the day the Thawani merchant account is approved AND the
+# checkout API is deployed with live keys. Flipping it alone is not enough:
+# PAY_API must point at a running service, or the page falls back anyway.
+PAY_LIVE = False
+
+# Base URL of the checkout API that creates Thawani sessions - no trailing
+# slash. Empty means "not deployed yet", and the checkout uses its offline
+# path: it collects the order, shows the reference, and hands it to WhatsApp.
+# The contract this URL must satisfy is written down in docs/payments-api.md.
+PAY_API = ""
+
+# "uat" while testing against uatcheckout.thawani.om, "live" against
+# checkout.thawani.om. The front end never talks to Thawani directly - the
+# secret key cannot touch a browser - so this is here for the banner that
+# tells a tester which environment they are looking at.
+THAWANI_ENV = "uat"
+
+# The Founding Partner column is the live price column until the first capped
+# group closes. Set False and every price on the checkout becomes the standard
+# column, with no other edit anywhere.
+FOUNDING_OPEN = True
+
+OMR = 1000          # baisa per rial
+CURRENCY = "OMR"
+
+# ---------------------------------------------------------------------------
+# What is sold.
+#
+# `founding` / `standard` are the two published columns, in baisa. `kind`
+# separates a one-time build item from a monthly service, because a monthly
+# service is NOT charged at checkout: Thawani's e-commerce checkout takes a
+# single payment, and recurring billing needs card-on-file, which the
+# E-commerce + Payment-link application does not cover. The Growth Desk is
+# therefore recorded on the order and invoiced monthly from go-live.
+# ---------------------------------------------------------------------------
+BASE_ID = "website"
+
+CATALOG = [
+    {
+        "id": BASE_ID, "kind": "build", "required": True,
+        "name": "The Smart Website",
+        "blurb": "Bilingual site, AI buyer agent, wholesale quote flow, WhatsApp handoff, "
+                 "AI-search visibility, and the first year of hosting and care.",
+        "founding": 950 * OMR, "standard": 1450 * OMR,
+    },
+    {
+        "id": "dashboard", "kind": "build", "required": False,
+        "name": "The Live Owner Dashboard",
+        "blurb": "Cash position, margin, stock and open leads on one screen, each with the "
+                 "action it is asking for.",
+        "founding": 650 * OMR, "standard": 950 * OMR,
+    },
+    {
+        "id": "autopilot", "kind": "build", "required": False,
+        "name": "The Full Autopilot",
+        "blurb": "Quote and invoice follow-up on a schedule, stopping the moment the buyer "
+                 "replies or pays.",
+        "founding": 900 * OMR, "standard": 1300 * OMR,
+    },
+    {
+        "id": "desk", "kind": "monthly", "required": False,
+        "name": "The Growth Desk",
+        "blurb": "Optional monthly care, new features and a reporting review. Never required "
+                 "to keep anything working, and cancellable any month.",
+        "founding": 75 * OMR, "standard": 95 * OMR,
+    },
+]
+
+# All three build items together are sold as one thing at a lower price than
+# the sum of its parts. `saving` is not stored - it is derived, so it cannot
+# disagree with the numbers above.
+BUNDLE = {
+    "id": "stack",
+    "name": "The Operator Stack",
+    "requires": ["dashboard", "autopilot"],
+    "founding": 2200 * OMR, "standard": 3400 * OMR,
+}
+
+# ---------------------------------------------------------------------------
+# How it can be paid for.
+#
+# `surcharge` and `due` are what turn the published headline figures into
+# arithmetic that generalises past the Smart Website on its own:
+#
+#   full     950            -> the published "Pay on Start" price
+#   three    950 + 70 = 1020 -> the published "3 x OMR 340"
+#   proof    950 + 200 = 1150 -> the published "Pay on Proof" price
+#
+# The two surcharges are flat, not percentages, because a flat figure is the
+# only reading that reproduces all three published numbers exactly. On a
+# larger order a flat surcharge is the generous reading, deliberately.
+# ASSUMPTION, FLAGGED TO NAHID: the services page only ever published these
+# three structures against the Smart Website alone. If he wants the premium
+# to scale with the order instead, it changes here and nowhere else.
+# ---------------------------------------------------------------------------
+PLANS = [
+    {
+        "id": "deposit", "card": True, "recommended": True,
+        "label": "Reserve a build slot",
+        "badge": "Most owners start here",
+        "due": "deposit", "surcharge": 0, "split": 1,
+        "blurb": "OMR 100 today holds your slot in the build queue and comes straight off "
+                 "your price. The balance is invoiced once your brief is confirmed.",
+    },
+    {
+        "id": "full", "card": True, "recommended": False,
+        "label": "Pay in full",
+        "badge": "Three extras included",
+        "due": "total", "surcharge": 0, "split": 1,
+        "blurb": "The whole build paid now. This is the Pay on Start price, and it carries "
+                 "the Arabic content pass, the Google Business Profile fix and one staff "
+                 "training session at no charge.",
+    },
+    {
+        "id": "three", "card": True, "recommended": False,
+        "label": "Three payments",
+        "badge": "Spread it out",
+        "due": "first", "surcharge": 70 * OMR, "split": 3,
+        "blurb": "On signing, on go-live, and thirty days later. Paying in three adds "
+                 "OMR 70 to the total.",
+    },
+    {
+        "id": "proof", "card": False, "recommended": False,
+        "label": "Pay on Proof",
+        "badge": "Nothing until it works",
+        "due": "zero", "surcharge": 200 * OMR, "split": 1,
+        "blurb": "Nothing today, and nothing when it goes live. You are invoiced only after "
+                 "your site has produced its first real, verifiable buyer inquiry. If it "
+                 "never does, you never pay. Pay on Proof adds OMR 200 to the total.",
+    },
+]
+
+DEPOSIT = 100 * OMR
+
+# Thawani truncates a product name at 40 characters. Building the line items
+# server-side does not remove the constraint - the names come from CATALOG, so
+# they are checked here, at build time, where a rename is caught immediately.
+THAWANI_NAME_MAX = 40
+
+
+# ---------------------------------------------------------------------------
+# Helpers
+# ---------------------------------------------------------------------------
+def price(item, founding=None):
+    """The live price of a catalog item or the bundle, in baisa."""
+    f = FOUNDING_OPEN if founding is None else founding
+    return item["founding"] if f else item["standard"]
+
+
+def omr(baisa):
+    """Format baisa as an OMR figure. Whole rials stay whole; a remainder gets
+    three decimals, because baisa are thousandths and 0.5 OMR is 0.500."""
+    whole, rem = divmod(int(baisa), OMR)
+    s = f"{whole:,}"
+    if rem:
+        s += f".{rem:03d}"
+    return s
+
+
+def money(baisa):
+    return f"{CURRENCY} {omr(baisa)}"
+
+
+def bundle_saving(founding=None):
+    """What the Operator Stack saves against buying the three separately."""
+    parts = sum(price(i, founding) for i in CATALOG
+                if i["kind"] == "build" and (i["id"] == BASE_ID or i["id"] in BUNDLE["requires"]))
+    return parts - price(BUNDLE, founding)
+
+
+def item(item_id):
+    for i in CATALOG:
+        if i["id"] == item_id:
+            return i
+    raise KeyError(item_id)
+
+
+def plan(plan_id):
+    for p in PLANS:
+        if p["id"] == plan_id:
+            return p
+    raise KeyError(plan_id)
+
+
+# ---------------------------------------------------------------------------
+# What the browser gets.
+#
+# The page's script recomputes totals live as the buyer toggles things, so it
+# needs the same table. It is serialised rather than restated: a price edited
+# above changes the rendered markup AND the script in the same build.
+# ---------------------------------------------------------------------------
+def config():
+    return {
+        "currency": CURRENCY,
+        "baisa": OMR,
+        "founding": FOUNDING_OPEN,
+        "live": PAY_LIVE,
+        "api": PAY_API,
+        "env": THAWANI_ENV,
+        "deposit": DEPOSIT,
+        "base": BASE_ID,
+        "items": [
+            {"id": i["id"], "kind": i["kind"], "name": i["name"], "required": i["required"],
+             "price": price(i)}
+            for i in CATALOG
+        ],
+        "bundle": {"id": BUNDLE["id"], "name": BUNDLE["name"], "requires": BUNDLE["requires"],
+                   "price": price(BUNDLE), "saving": bundle_saving()},
+        "plans": [
+            {"id": p["id"], "label": p["label"], "card": p["card"], "due": p["due"],
+             "surcharge": p["surcharge"], "split": p["split"]}
+            for p in PLANS
+        ],
+    }
+
+
+def CONFIG_JSON():
+    return json.dumps(config(), separators=(",", ":"))
+
+
+# ---------------------------------------------------------------------------
+# Anti-drift check, run from build_v4.py after services-v4.html is written.
+#
+# The services page holds its price table as hand-written markup. That is fine
+# - it is a page of prose, not a spreadsheet - but it means two copies of every
+# figure exist. Rather than rewrite that page, the build asserts the copies
+# agree: every live price in this module must still appear, formatted, in the
+# rendered services page. Change a price here and forget the table, and the
+# build fails with the figure that no longer matches.
+# ---------------------------------------------------------------------------
+def check_services(html):
+    """Return a list of human-readable problems; empty means consistent."""
+    problems = []
+
+    for i in CATALOG:
+        want = omr(price(i))
+        # The table writes add-ons as "+OMR 650" and the base as "OMR 950";
+        # both contain "OMR 650" / "OMR 950", so one needle covers both.
+        needle = f"{CURRENCY} {want}"
+        if i["kind"] == "monthly":
+            needle += "/mo"
+        if needle not in html:
+            problems.append(f"{i['name']}: services-v4 does not contain {needle!r}")
+
+    if f"{CURRENCY} {omr(price(BUNDLE))}" not in html:
+        problems.append(f"{BUNDLE['name']}: services-v4 does not contain "
+                        f"'{CURRENCY} {omr(price(BUNDLE))}'")
+
+    # The three published payment structures, as the page writes them.
+    base = price(item(BASE_ID))
+    for pid, shown in (("full", money(base)),
+                       ("proof", money(base + plan("proof")["surcharge"]))):
+        if shown not in html:
+            problems.append(f"payment structure {pid!r}: services-v4 does not contain {shown!r}")
+
+    three = base + plan("three")["surcharge"]
+    per = three // 3
+    if per * 3 != three:
+        problems.append(f"three-payment total {omr(three)} does not divide into 3 whole payments")
+    elif f"{CURRENCY} {omr(per)}" not in html:
+        problems.append(f"payment structure 'three': services-v4 does not contain "
+                        f"'{CURRENCY} {omr(per)}' (3 x)")
+
+    for i in CATALOG:
+        if len(i["name"]) > THAWANI_NAME_MAX:
+            problems.append(f"{i['name']!r} is {len(i['name'])} chars; Thawani truncates a "
+                            f"product name at {THAWANI_NAME_MAX}")
+
+    return problems
+
+
+# ---------------------------------------------------------------------------
+# The quote.
+#
+# This is the arithmetic the checkout runs. It lives here so that the page can
+# render a CORRECT static default for a visitor with no JavaScript, and so the
+# published figures can be asserted at build time. The page's script is a
+# direct port of this function - if you change a rule here, change it there
+# too, and `python3 tools/v4/pay.py` will tell you if the published numbers
+# stopped coming out.
+# ---------------------------------------------------------------------------
+def quote(item_ids, plan_id, founding=None):
+    p = plan(plan_id)
+    chosen = [i for i in CATALOG if i["id"] in item_ids or i["required"]]
+    build = [i for i in chosen if i["kind"] == "build"]
+    monthly = [i for i in chosen if i["kind"] == "monthly"]
+
+    parts = sum(price(i, founding) for i in build)
+    bundled = all(r in {i["id"] for i in build} for r in BUNDLE["requires"])
+    subtotal = price(BUNDLE, founding) if bundled else parts
+    saving = parts - subtotal
+
+    total = subtotal + p["surcharge"]
+
+    if p["due"] == "deposit":
+        due = min(DEPOSIT, total)
+    elif p["due"] == "total":
+        due = total
+    elif p["due"] == "first":
+        # Whole-rial instalments, with the rounding remainder carried by the
+        # FIRST payment. Paying the odd baisa up front means the two later
+        # invoices are identical, which is the pair the buyer has to remember.
+        per = (total // p["split"]) // OMR * OMR
+        due = total - per * (p["split"] - 1)
+    else:
+        due = 0
+
+    return {
+        "items": build, "monthly": monthly, "bundled": bundled,
+        "parts": parts, "subtotal": subtotal, "saving": saving,
+        "surcharge": p["surcharge"], "total": total,
+        "due": due, "balance": total - due,
+        "later": (total - due) // (p["split"] - 1) if p["split"] > 1 else 0,
+        "plan": p,
+    }
+
+
+if __name__ == "__main__":
+    # Every figure the services page publishes, recomputed from the table
+    # above. Run this after touching a price.
+    base = [BASE_ID]
+    checks = [
+        ("Smart Website, paid in full", quote(base, "full")["total"], 950 * OMR),
+        ("Smart Website, pay on proof", quote(base, "proof")["total"], 1150 * OMR),
+        ("Smart Website, three payments", quote(base, "three")["total"], 1020 * OMR),
+        ("  ... first payment", quote(base, "three")["due"], 340 * OMR),
+        ("  ... each later payment", quote(base, "three")["later"], 340 * OMR),
+        ("Smart Website, deposit today", quote(base, "deposit")["due"], 100 * OMR),
+        ("  ... balance", quote(base, "deposit")["balance"], 850 * OMR),
+        ("Operator Stack, paid in full", quote([BASE_ID, "dashboard", "autopilot"], "full")["total"],
+         2200 * OMR),
+        ("  ... saving against the parts",
+         quote([BASE_ID, "dashboard", "autopilot"], "full")["saving"], 300 * OMR),
+    ]
+    bad = 0
+    for label, got, want in checks:
+        ok = got == want
+        bad += not ok
+        print(f"  {'ok ' if ok else 'BAD'} {label:38s} {money(got):>12s}"
+              + ("" if ok else f"   expected {money(want)}"))
+    stack3 = quote([BASE_ID, "dashboard", "autopilot"], "three")
+    print(f"\n  Operator Stack in three: {money(stack3['due'])} today, "
+          f"then 2 x {money(stack3['later'])}  (total {money(stack3['total'])})")
+    assert stack3["due"] + stack3["later"] * 2 == stack3["total"], "instalments do not sum to the total"
+    raise SystemExit(bad)

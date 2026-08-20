@@ -8,6 +8,7 @@ under the button promises.
 
 Copy here is deliberately short: this page exists to be acted on, not read.
 """
+import pay
 from kit import WA, WA_ICON, STAR
 
 CSS = """
@@ -96,7 +97,7 @@ PHONE_ICON = ('<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 2h3.1l1
               '5.9L16.6 11l4 1.6v3.1a2.3 2.3 0 0 1-2.5 2.3A16.4 16.4 0 0 1 4.3 4.5 2.3 2.3 0 0 1 6.6 2z"/></svg>')
 
 
-def body():
+def _body():
     return f"""<main id="main">
 
 <header class="phero s-cream grain">
@@ -216,8 +217,7 @@ def body():
       </details>
       <details>
         <summary>How do I pay?</summary>
-        <p class="ans">Bank transfer in OMR &mdash; on start, in three payments, or only once it has produced a real
-          inquiry. Set out on <a href="/en/services-v4/#price">the services page</a>. No payment is taken on this site.</p>
+        <p class="ans">{{PAY_ANSWER}}</p>
       </details>
     </div>
   </div>
@@ -225,6 +225,22 @@ def body():
 
 </main>
 """
+
+
+def body():
+    """The one answer on this page that changes the day the gateway is
+    approved. Gated on tools/v4/pay.py rather than edited by hand, so the FAQ
+    cannot go on saying "no payment is taken on this site" after one is."""
+    if pay.PAY_LIVE:
+        answer = ('By card on <a href="/en/checkout-v4/">the checkout page</a>, or by bank transfer in '
+                  'OMR &mdash; on start, in three payments, or only once it has produced a real inquiry. '
+                  'Every structure is set out on <a href="/en/services-v4/#price">the services page</a>.')
+    else:
+        answer = ('Bank transfer in OMR &mdash; on start, in three payments, or only once it has produced '
+                  'a real inquiry. Set out on <a href="/en/services-v4/#price">the services page</a>. You '
+                  'can put the order together on <a href="/en/checkout-v4/">the checkout page</a> and I '
+                  'send the invoice; card payment on the site is being switched on now.')
+    return _body().replace("{PAY_ANSWER}", answer)
 
 
 JS = """

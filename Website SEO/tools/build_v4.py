@@ -23,7 +23,8 @@ import aiden_version  # noqa: E402
 import kit  # noqa: E402
 
 MODULES = ["page_home", "page_services", "page_process", "page_about", "page_contact",
-           "page_blog", "page_article", "page_simulator", "page_demo"]
+           "page_blog", "page_article", "page_simulator", "page_demo",
+           "page_checkout", "page_order"]
 
 
 def render(mod):
@@ -93,3 +94,23 @@ if __name__ == "__main__":
         print(f"  ok {dest.relative_to(ROOT)}  {n/1024:.0f} KB")
     if not built:
         print("nothing built")
+
+    # ----------------------------------------------------------------------
+    # Anti-drift check: the price table on services-v4 is hand-written markup,
+    # while the checkout computes from tools/v4/pay.py. Two copies of every
+    # figure therefore exist, so the build asserts they still agree. This runs
+    # against the file on disk rather than the freshly rendered string, so it
+    # also catches "I edited pay.py and rebuilt only the checkout".
+    # ----------------------------------------------------------------------
+    import pay  # noqa: E402
+    svc = OUT / "services-v4.html"
+    if svc.exists():
+        problems = pay.check_services(svc.read_text(encoding="utf-8"))
+        if problems:
+            print("\n  PRICE MISMATCH - pay.py and services-v4.html disagree:")
+            for pr in problems:
+                print("    x " + pr)
+            sys.exit(1)
+        print("  ok prices in pay.py match services-v4.html")
+    else:
+        print("  !! services-v4.html not built; price consistency not checked")

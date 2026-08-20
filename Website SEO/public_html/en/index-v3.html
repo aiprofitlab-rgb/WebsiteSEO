@@ -1318,11 +1318,50 @@
       display: block
     }
 
+
+    /* Centred variant of the footer signature. Same two moves as the column
+       footer - a mark above the line and the payoff word in amber over a
+       brush stroke - laid out for a centred block. */
     .foot .slogan {
       font-family: var(--display);
-      font-size: 1.4rem;
+      font-size: clamp(1.5rem,3vw,2.1rem);
+      line-height: 1.25;
       color: var(--cream);
-      margin: 0 0 26px
+      margin: 0 auto 30px;
+      max-width: 15em;   /* em, not ch - Marcellus's figures run ~0.8em wide, which makes ch a misleading measure here */
+      text-wrap: balance;
+      position: relative;
+      padding-top: 22px
+    }
+
+    .foot .slogan::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 38px;
+      height: 2px;
+      border-radius: 2px;
+      background: var(--amber-bright)
+    }
+
+    .foot .slogan .ins {
+      display: inline-block;
+      position: relative;
+      font-weight: 400;
+      color: #E8C98F
+    }
+
+    .foot .slogan .ins::after {
+      content: "";
+      position: absolute;
+      left: -.04em;
+      right: -.04em;
+      bottom: -.12em;
+      height: 4px;
+      border-radius: 3px;
+      background: linear-gradient(90deg, rgba(216, 146, 52, .85), rgba(216, 146, 52, .22))
     }
 
     .foot .fnav {
@@ -2420,7 +2459,7 @@
     <div class="wrap">
       <img class="mark" src="/assets/brand/wordmark-reversed.svg" alt="AI Profit Lab" width="200" height="35"
         loading="lazy" decoding="async">
-      <p class="slogan">Every success starts with insight.</p>
+      <p class="slogan">Every success starts with <span class="ins">insight</span>.</p>
       <ul class="fnav">
         <li><a href="#cost">The cost of silence</a></li>
         <li><a href="#systems">What I build</a></li>
