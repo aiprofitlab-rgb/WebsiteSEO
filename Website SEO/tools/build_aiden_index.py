@@ -37,6 +37,7 @@ EXCLUDE_FILES = {
 EXCLUDE_PATTERNS = [
     re.compile(r"/en/.*-new\.html$"),        # unreleased template skins
     re.compile(r"/en/index-cinematic\.html$"),
+    re.compile(r"/en/index-v3\.html$"),      # superseded homepage draft
     re.compile(r"/en/preview-templates\.html$"),
     re.compile(r"/tmp_"),
 ]
@@ -51,7 +52,7 @@ TYPE_RULES = [
     (re.compile(r"process"), "process"),
     (re.compile(r"about"), "about"),
     (re.compile(r"contact"), "contact"),
-    (re.compile(r"privacy|terms|legal"), "legal"),
+    (re.compile(r"privacy|terms|legal|refund"), "legal"),
     (re.compile(r"offer"), "offer"),
     (re.compile(r"simulator|calculator"), "tool"),
     (re.compile(r"demo"), "demo"),

@@ -214,4 +214,7 @@ META = dict(
     nav="/en/blog-v4/",
     next=("Next", "Run your own numbers", "/en/simulator-v4/"),
     schema=ak.schema(ARTICLE),
+    # No chat launcher on articles: an article is a reading surface, and the
+    # launcher lands in the same corner the WhatsApp float already occupies.
+    aiden=False,
 )

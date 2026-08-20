@@ -62,7 +62,11 @@ def render(mod):
         + m.body()
         + kit.pager(*meta["next"])
         + kit.FOOTER
+        # Aiden runs on every page except the articles; an article is a reading
+        # surface and the launcher competes with it. Default is on, so a new
+        # page gets the widget unless it opts out.
         + kit.TAIL.replace("{{JS}}", js + getattr(m, "JS", ""))
+                  .replace("{{AIDEN}}", kit.AIDEN_TAG if meta.get("aiden", True) else "")
     )
 
     dest = OUT / (meta["slug"] + ".html")

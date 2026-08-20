@@ -560,34 +560,6 @@ nav svg[width="16"][height="16"] { width: 16px !important; height: 16px !importa
 <footer class="py-8 border-t border-gray-900 text-center text-sm text-gray-400">
         &copy; ٢٠٢٥ <span class="text-blue-500">A</span><span class="text-red-500">I</span> Profit Lab &mdash; علامة تجارية لشركة لوتس الخليج العالمية &bull; جميع الحقوق محفوظة &bull; نخدم دول الخليج
     </footer>
-<!-- ======================= Chatbot Widget ======================= -->
-<div class="fixed bottom-8 left-8 z-[10005]">
-<button aria-label="Button Action" class="pulse w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center shadow-2xl" onclick="toggleChat()">
-<svg class="w-8 h-8 text-white" fill="none" height="32" stroke="currentColor" viewbox="0 0 24 24" width="32">
-<path d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-</svg>
-</button>
-<div class="absolute bottom-24 left-0 w-[350px] md:w-[400px] h-[500px] bg-[#0f0f0f] border border-gray-800 rounded-3xl shadow-2xl flex flex-col overflow-hidden" id="aiden-ui">
-<div class="p-4 bg-gradient-to-r from-blue-900 to-black flex justify-between items-center border-b border-gray-800">
-<span class="font-bold text-sm tracking-widest text-white">
-<span class="text-blue-500">A</span><span class="text-red-500">I</span>DEN 
-                    <span class="text-green-400 text-[10px] mr-2">● متصل</span>
-</span>
-<span class="text-xs text-gray-400" id="visitor-country"></span>
-<button class="text-white opacity-50 hover:opacity-100 font-bold text-xl" onclick="toggleChat()">✕</button>
-</div>
-<div class="flex-1 p-6 overflow-y-auto space-y-4 text-sm text-gray-300" id="chat-messages">
-<div class="bg-gray-800 p-4 rounded-2xl rounded-tr-none max-w-[85%]">
-                    مرحباً! كيف يمكننا مساعدتك اليوم؟
-                    <span class="block text-xs text-gray-400 mt-1" id="welcome-message"></span>
-</div>
-</div>
-<div class="p-4 bg-[#050505] border-t border-gray-800 flex items-center">
-<input class="bg-transparent border-none outline-none flex-1 text-sm text-white py-2 text-right" id="user-input" placeholder="اكتب رسالتك..." type="text">
-<button class="bg-blue-600 text-white px-4 py-1 rounded-full text-xs font-bold hover:bg-blue-500 transition mr-2" onclick="handleSend()">إرسال</button>
-</div>
-</div>
-</div>
 <!-- ======================= MULTI-STEP FORM MODAL ======================= -->
 <div class="form-modal-overlay" id="auditModal">
 <div class="form-modal-content">
@@ -714,23 +686,10 @@ nav svg[width="16"][height="16"] { width: 16px !important; height: 16px !importa
                 document.body.appendChild(s);
             });
         }
-        let chatLoading = false;
-        window.toggleChat = function() {
-            if (window.aidenChat) {
-                window.aidenChat.toggle();
-            } else if (!chatLoading) {
-                chatLoading = true;
-                loadScript('/js/aiden-chat.js').then(() => {
-                    window.aidenChat.init();
-                    window.aidenChat.toggle();
-                });
-            }
-        };
-        window.handleSend = function() {
-            if (window.aidenChat) {
-                window.aidenChat.send();
-            }
-        };
+        // Aiden mounts itself from /js/aiden-chat.js, loaded at the end of this
+        // page. These shims remain only so any stray caller keeps working.
+        window.toggleChat = function () { if (window.aidenChat) window.aidenChat.toggle(); };
+        window.handleSend = function () { if (window.aidenChat) window.aidenChat.send(); };
         let formLoading = false;
         window.openAuditForm = function() {
             if (window.auditForm) {
@@ -748,15 +707,6 @@ nav svg[width="16"][height="16"] { width: 16px !important; height: 16px !importa
                 window.auditForm.close();
             }
         };
-        // Lazy-load chatbot after 10s delay to keep initial load completely clean
-        setTimeout(() => {
-            if (!chatLoading && !window.aidenChat) {
-                chatLoading = true;
-                loadScript('/js/aiden-chat.js').then(() => {
-                    window.aidenChat.init();
-                });
-            }
-        }, 10000);
     </script>
 <script>
   (function() {
@@ -780,5 +730,6 @@ nav svg[width="16"][height="16"] { width: 16px !important; height: 16px !importa
     }
   })();
 </script>
+    <script defer src="/js/aiden-chat.js"></script>
 </body>
 </html>

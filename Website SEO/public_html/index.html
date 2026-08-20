@@ -754,26 +754,6 @@ nav svg[width="16"][height="16"] { width: 16px !important; height: 16px !importa
 </p>
 </div>
 </footer>
-<!-- Chatbot Widget (unchanged) -->
-<div class="fixed bottom-8 left-8 z-[10005]">
-<button aria-label="Button Action" class="pulse w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center shadow-2xl" onclick="toggleChat()">
-<svg class="w-8 h-8 text-white" fill="none" height="32" stroke="currentColor" viewbox="0 0 24 24" width="32"><path d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
-</button>
-<div class="absolute bottom-24 left-0 w-[350px] md:w-[400px] h-[500px] bg-[#0f0f0f] border border-gray-800 rounded-3xl shadow-2xl flex flex-col overflow-hidden" id="aiden-ui">
-<div class="p-4 bg-gradient-to-r from-blue-900 to-black flex justify-between items-center border-b border-gray-800">
-<span class="font-bold text-sm tracking-widest text-white"><span class="text-blue-500">A</span><span class="text-red-500">I</span>DEN <span class="text-green-400 text-[10px] mr-2">● متصل</span></span>
-<span class="text-xs text-gray-400" id="visitor-country"></span>
-<button class="text-white opacity-50 hover:opacity-100 font-bold text-xl" onclick="toggleChat()">✕</button>
-</div>
-<div class="flex-1 p-6 overflow-y-auto space-y-4 text-sm text-gray-300" id="chat-messages">
-<div class="bg-gray-800 p-4 rounded-2xl rounded-tr-none max-w-[85%]">مرحباً! أنا أيدن. كيف يمكنني مساعدتك اليوم؟<span class="block text-xs text-gray-400 mt-1" id="welcome-message"></span></div>
-</div>
-<div class="p-4 bg-[#050505] border-t border-gray-800 flex items-center">
-<input class="bg-transparent border-none outline-none flex-1 text-sm text-white py-2 text-right" id="user-input" placeholder="اكتب رسالتك..." type="text"/>
-<button class="bg-blue-600 text-white px-4 py-1 rounded-full text-xs font-bold hover:bg-blue-500 transition mr-2" onclick="handleSend()">إرسال</button>
-</div>
-</div>
-</div>
 <!-- MULTI-STEP AUDIT FORM MODAL (unchanged) -->
 <div class="form-modal-overlay" id="auditModal"><div class="form-modal-content"><button class="close-btn" onclick="closeAuditForm()">×</button><h2>استبيان جلسة استراتيجية الذكاء الاصطناعي</h2><p class="subtitle">أكمل هذا النموذج القصير (٣-٥ دقائق) لمساعدتنا في تخصيص مكالمتك الاستراتيجية.</p><div class="progress-bar"><div class="progress-step active" data-step="1">١</div><div class="progress-step" data-step="2">٢</div><div class="progress-step" data-step="3">٣</div><div class="progress-step" data-step="4">٤</div></div><form id="auditForm"><div class="form-step active" data-step="1"><h3>بيانات التواصل</h3><p class="step-description">لنبدأ بالأساسيات.</p><div class="grid md:grid-cols-2 gap-4"><div><label for="fullName">الاسم الكامل <span class="required">*</span></label><input id="fullName" name="fullName" required="" type="text"/></div><div><label for="email">البريد الإلكتروني <span class="required">*</span></label><input id="email" name="email" required="" type="email"/></div><div><label for="phone">رقم الهاتف</label><input id="phone" name="phone" type="tel"/></div><div><label for="company">الشركة <span class="required">*</span></label><input id="company" name="company" required="" type="text"/></div><div><label for="role">المسمى الوظيفي <span class="required">*</span></label><input id="role" name="role" required="" type="text"/></div><div><label for="website">الموقع الإلكتروني</label><input id="website" name="website" type="url"/></div></div><div class="form-navigation"><button class="nav-btn next" type="button">التالي →</button></div></div><div class="form-step" data-step="2"><h3>لمحة عن عملك</h3><p class="step-description">أخبرنا عن عملك لتقييم ملاءمة الذكاء الاصطناعي.</p><div class="grid md:grid-cols-2 gap-4"><div><label for="industry">المجال/القطاع؟</label><input id="industry" name="industry" type="text"/></div><div><label for="employees">حجم الشركة (عدد الموظفين)</label><input id="employees" name="employees" type="number"/></div></div><label for="revenue">الإيرادات السنوية</label><input id="revenue" name="revenue" type="text"/><label for="revenueStreams">أهم ٣ مصادر دخل أو منتجات/خدمات؟</label><textarea id="revenueStreams" name="revenueStreams"></textarea><div class="form-navigation"><button class="nav-btn prev" type="button">→ السابق</button><button class="nav-btn next" type="button">التالي →</button></div></div><div class="form-step" data-step="3"><h3>التحديات والأهداف</h3><p class="step-description">ما التحديات التي تعيقك؟ كيف يبدو النجاح؟</p><label for="challenges">أهم ٣ تحديات تواجه عملك؟</label><textarea id="challenges" name="challenges"></textarea><label for="goals">أهدافك من الذكاء الاصطناعي؟ <span class="required">*</span></label><textarea id="goals" name="goals" required=""></textarea><label for="pastExperience">تجارب سابقة مع الذكاء الاصطناعي/الأتمتة؟</label><textarea id="pastExperience" name="pastExperience"></textarea><label for="aiComfort">مستوى راحة فريقك مع الذكاء الاصطناعي (١-١٠):</label><div class="slider-container"><div class="slider-output" id="aiComfortOutput">٥</div><input class="w-full" id="aiComfort" max="10" min="1" name="aiComfort" type="range" value="5"/></div><div class="form-navigation"><button class="nav-btn prev" type="button">→ السابق</button><button class="nav-btn next" type="button">التالي →</button></div></div><div class="form-step" data-step="4"><h3>الجاهزية والخطوات التالية</h3><p class="step-description">ساعدنا على فهم جدولك الزمني والتزامك.</p><label>ما العمليات التي تبحث عن أتمتتها؟</label><div class="checkbox-group"><label class="checkbox-item"><input name="process" type="checkbox" value="Marketing"/><span class="checkmark"><svg fill="none" height="24" stroke="currentColor" viewbox="0 0 24 24" width="24"><path d="M5 13l4 4L19 7"></path></svg></span>التسويق</label><label class="checkbox-item"><input name="process" type="checkbox" value="Sales"/><span class="checkmark"><svg fill="none" height="24" stroke="currentColor" viewbox="0 0 24 24" width="24"><path d="M5 13l4 4L19 7"></path></svg></span>المبيعات</label><label class="checkbox-item"><input name="process" type="checkbox" value="Operations"/><span class="checkmark"><svg fill="none" height="24" stroke="currentColor" viewbox="0 0 24 24" width="24"><path d="M5 13l4 4L19 7"></path></svg></span>العمليات</label><label class="checkbox-item"><input name="process" type="checkbox" value="Customer Service"/><span class="checkmark"><svg fill="none" height="24" stroke="currentColor" viewbox="0 0 24 24" width="24"><path d="M5 13l4 4L19 7"></path></svg></span>خدمة العملاء</label></div><label for="budget">نطاق الميزانية؟</label><select id="budget" name="budget"><option value="OMR 5K">٥ آلاف ر.ع</option><option value="OMR 5-20K">٥-٢٠ ألف ر.ع</option><option value="OMR 20-50K">٢٠-٥٠ ألف ر.ع</option><option value="OMR 50K+">أكثر من ٥٠ ألف ر.ع</option></select><label for="timeline">الجدول الزمني المستهدف؟</label><select id="timeline" name="timeline"><option value="1-3 months">١-٣ أشهر</option><option value="3-6 months">٣-٦ أشهر</option><option value="6+ months">أكثر من ٦ أشهر</option></select><label>كيف سمعت عنا؟</label><div class="checkbox-group"><label class="checkbox-item"><input name="source" type="checkbox" value="LinkedIn"/><span class="checkmark"><svg fill="none" height="24" stroke="currentColor" viewbox="0 0 24 24" width="24"><path d="M5 13l4 4L19 7"></path></svg></span>لينكد إن (LinkedIn)</label><label class="checkbox-item"><input name="source" type="checkbox" value="YouTube"/><span class="checkmark"><svg fill="none" height="24" stroke="currentColor" viewbox="0 0 24 24" width="24"><path d="M5 13l4 4L19 7"></path></svg></span>يوتيوب (YouTube)</label><label class="checkbox-item"><input name="source" type="checkbox" value="Google Search"/><span class="checkmark"><svg fill="none" height="24" stroke="currentColor" viewbox="0 0 24 24" width="24"><path d="M5 13l4 4L19 7"></path></svg></span>بحث جوجل</label><label class="checkbox-item"><input name="source" type="checkbox" value="Chat GPT"/><span class="checkmark"><svg fill="none" height="24" stroke="currentColor" viewbox="0 0 24 24" width="24"><path d="M5 13l4 4L19 7"></path></svg></span>شات جي بي تي (Chat GPT)</label><label class="checkbox-item"><input name="source" type="checkbox" value="Gemini"/><span class="checkmark"><svg fill="none" height="24" stroke="currentColor" viewbox="0 0 24 24" width="24"><path d="M5 13l4 4L19 7"></path></svg></span>جيميني (Gemini)</label><label class="checkbox-item"><input name="source" type="checkbox" value="Claude"/><span class="checkmark"><svg fill="none" height="24" stroke="currentColor" viewbox="0 0 24 24" width="24"><path d="M5 13l4 4L19 7"></path></svg></span>كلود (Claude)</label><label class="checkbox-item"><input name="source" type="checkbox" value="Perplexity"/><span class="checkmark"><svg fill="none" height="24" stroke="currentColor" viewbox="0 0 24 24" width="24"><path d="M5 13l4 4L19 7"></path></svg></span>بيربلكسيتي (Perplexity)</label><label class="checkbox-item"><input name="source" type="checkbox" value="Word of mouth"/><span class="checkmark"><svg fill="none" height="24" stroke="currentColor" viewbox="0 0 24 24" width="24"><path d="M5 13l4 4L19 7"></path></svg></span>عن طريق المعارف</label></div><label for="otherSource">أخرى (يرجى التحديد)</label><input id="otherSource" name="otherSource" type="text"/><label for="keyQuestion">السؤال الذي يجب طرحه في مكالمتنا؟ <span class="required">*</span></label><input id="keyQuestion" name="keyQuestion" required="" type="text"/><div class="form-navigation"><button class="nav-btn prev" type="button">→ السابق</button><button class="nav-btn submit" type="submit">احجز مكالمتي ←</button></div></div></form><p class="form-footer">نحترم خصوصيتك—البيانات تُستخدم فقط للتحضير للمكالمة.</p></div></div>
 <!-- Unified Performance Optimized Scripts Loader -->
@@ -792,23 +772,10 @@ nav svg[width="16"][height="16"] { width: 16px !important; height: 16px !importa
                 document.body.appendChild(s);
             });
         }
-        let chatLoading = false;
-        window.toggleChat = function() {
-            if (window.aidenChat) {
-                window.aidenChat.toggle();
-            } else if (!chatLoading) {
-                chatLoading = true;
-                loadScript('/js/aiden-chat.js').then(() => {
-                    window.aidenChat.init();
-                    window.aidenChat.toggle();
-                });
-            }
-        };
-        window.handleSend = function() {
-            if (window.aidenChat) {
-                window.aidenChat.send();
-            }
-        };
+        // Aiden mounts itself from /js/aiden-chat.js, loaded at the end of this
+        // page. These shims remain only so any stray caller keeps working.
+        window.toggleChat = function () { if (window.aidenChat) window.aidenChat.toggle(); };
+        window.handleSend = function () { if (window.aidenChat) window.aidenChat.send(); };
         let formLoading = false;
         window.openAuditForm = function() {
             if (window.auditForm) {
@@ -826,15 +793,6 @@ nav svg[width="16"][height="16"] { width: 16px !important; height: 16px !importa
                 window.auditForm.close();
             }
         };
-        // Lazy-load chatbot after 10s delay to keep initial load completely clean
-        setTimeout(() => {
-            if (!chatLoading && !window.aidenChat) {
-                chatLoading = true;
-                loadScript('/js/aiden-chat.js').then(() => {
-                    window.aidenChat.init();
-                });
-            }
-        }, 10000);
     </script>
 <script>
   (function() {
@@ -858,5 +816,6 @@ nav svg[width="16"][height="16"] { width: 16px !important; height: 16px !importa
     }
   })();
 </script>
+    <script defer src="/js/aiden-chat.js"></script>
 </body>
 </html>

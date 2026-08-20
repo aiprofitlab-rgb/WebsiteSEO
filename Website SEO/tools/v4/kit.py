@@ -793,11 +793,15 @@ MOTION_JS = """
 })();
 """
 
+# {{AIDEN}} is the Aiden chat widget tag, filled in by build_v4.render(). It is
+# a placeholder rather than a fixed line because article pages do not carry the
+# widget - see AIDEN_TAG and META["aiden"].
 TAIL = """<script>{{JS}}</script>
-<script defer src="/js/aiden-chat.js"></script>
-</body>
+{{AIDEN}}</body>
 </html>
 """
+
+AIDEN_TAG = '<script defer src="/js/aiden-chat.js"></script>\n'
 
 SKIP_CSS = """
 .skip{position:absolute;left:-9999px;top:0;z-index:200;background:var(--teal-950);color:var(--cream);
