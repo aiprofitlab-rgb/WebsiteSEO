@@ -27,6 +27,7 @@ EXCLUDE_FILES = {"test.html", "whatsapp_receptionist_demo.html", "Customized_CEO
 EXCLUDE_PATTERNS = [
     re.compile(r"/en/.*-new\.html$"),
     re.compile(r"/en/index-cinematic\.html$"),
+    re.compile(r"/en/index-v3\.html$"),
     re.compile(r"/en/preview-templates\.html$"),
     re.compile(r"/tmp_"),
 ]

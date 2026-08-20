@@ -1,6 +1,6 @@
 ---
 name: article-creator
-description: Automatically writes dual-language (English and Arabic) SEO articles for the AI Profit Lab blog when given a keyword. Supports Compact Keywords and Reddit-focused community curation strategies. Generates an image and applies the website's dark-mode glassmorphism HTML structure. Triggers when the user asks to "write an article about [keyword]" or "generate blog post for [keyword]".
+description: Automatically writes dual-language (English and Arabic) SEO articles for the AI Profit Lab blog when given a keyword. Supports Compact Keywords and Reddit-focused community curation strategies. Generates an image and publishes the article on the v4 brand-book skin (the teal/amber editorial system) via tools/reskin_articles.py. Triggers when the user asks to "write an article about [keyword]" or "generate blog post for [keyword]".
 ---
 
 # AI Profit Lab Article Creator
@@ -9,9 +9,20 @@ This skill automates the end-to-end creation of high-quality, story-driven, full
 
 When the user asks you to write an article for a given keyword/topic, follow these steps exactly:
 
+## Output Skin: the v4 Brand Book (READ THIS BEFORE WRITING ANY HTML)
+
+Every published article ships on the **v4 brand-book skin** — the teal/amber editorial system defined in `brand/docs/02-brand-book.md` and already live across the v4 page set (`public_html/en/*-v4.html`) and all 300 published articles. The old dark-mode glassmorphism look is retired as a *published* skin.
+
+**You do not hand-write the brand skin.** It is ~60KB of CSS served from a content-hashed file (`/assets/css/apl-article.<hash>.css`) whose filename changes whenever the CSS changes; typing it into an article by hand would break on the next rebuild. Instead:
+
+1. **Author** the article in the source template at the bottom of this file. That template is unchanged, and must stay unchanged, because the renderer locates each part of the article by its exact markers.
+2. **Render** it with `tools/reskin_articles.py` (Step 5). The script rewrites the file in place onto the brand skin and carries every meta tag, the canonical, the hreflang pair and **every** JSON-LD block in the head — both the `@graph` and the `ProfessionalService` NAP node — across byte for byte.
+
+Nothing about *how the article is written* changes: the research, outline, word count, FAQ, references, CTA, SEO and GEO rules below all still apply exactly as written. The skin is applied after the writing is finished, not instead of it.
+
 ## Step 0: Title Similarity & Overlap Pre-Check (MANDATORY PRE-CHECK)
 Before starting any research or outlining, perform a strict similarity/overlap check against all existing published articles on the website:
-1. **Scan Existing Articles**: Check all `.html` files in `public_html/blog/en/` and `public_html/blog/ar/` (or inspect `blog_hub_data.json` / hub lists).
+1. **Scan Existing Articles**: Check all `.html` files in `public_html/blog/en/` and `public_html/blog/ar/`. The fastest list of published titles is the hub markup itself (`public_html/blog/index.html`, `public_html/blog-ar/index.html`).
 2. **Calculate Similarity/Overlap**: Compare the proposed article title/topic against existing article titles and target keywords using token overlap / Jaccard similarity / character n-gram overlap.
 3. **Pushback Rule (>65% Similarity)**:
    - If the similarity or overlap with any existing article title/topic is **greater than 65%**, **STOP IMMEDIATELY**.
@@ -47,6 +58,8 @@ To ensure all generated articles achieve a **STRONG** rating under the quality a
 4. **Word Count & Compact Depth**:
    - The main body text (visible text inside the `<article>` tag, excluding navigation, header, footer, references, and schema) must be between **800 to 1200 words** (keeping it "Compact").
    - The text must contain at least **3+ concrete examples, step-by-step guides, or specific data points/numbers** (e.g. specific OMR/USD pricing, % growth, hours/days saved).
+   - **Factual density**: strip evaluative adjectives ("amazing", "incredible", "powerful") and replace each with a hard number ("30% fewer manual touches", "9 hours/week saved"). Any ROI claim in the body must carry the figure that backs it.
+   - **Data table (mandatory)**: include at least one real HTML `<table>` inside the article body — ROI breakdown, time saved before/after, tool or pricing comparison. Tables are what LLMs and AI Overviews quote back; a wall of paragraphs is not.
 
 5. **Table of Contents (TOC)**:
    - **Mandatory TOC Component**: Every article must include a styled glassmorphism Table of Contents (TOC) right after the hero image / header area to give the page a well-thought-out, structured appearance.
@@ -89,17 +102,31 @@ To ensure all generated articles achieve a **STRONG** rating under the quality a
 
 13. **JSON-LD Schema Markup**:
     - Embedded JSON-LD schema in `<head>` must include the article's `Article` data, the `FAQPage` data with all 10 FAQs, and `Organization` details.
-    - Ensure the Organization schema and LocalBusiness/ProfessionalService schema have the correct properties:
+    - Both templates also carry a **second `<script type="application/ld+json">` holding the `ProfessionalService` (local business) node** — the NAP block with the Muscat address, geo coordinates, phone and `sameAs` profiles. Copy it verbatim from the template; do not retype the address, the coordinates or the phone number from memory. The renderer preserves every JSON-LD block it finds, so both scripts survive Step 5.
+    - Organization / ProfessionalService properties must read exactly:
       - `name`: "AI Profit Lab"
-      - `legalName`: "International Gulf Lotus SPC"
+      - `legalName`: "Lotus Gulf International"
       - `url`: "https://aiprofitlab.io"
 
 14. **Legal Footer Copyright**:
-    - English: `© 2025 AI Profit Lab — a brand of International Gulf Lotus SPC • All Rights Reserved`
-    - Arabic: `© ٢٠٢٥ AI Profit Lab — علامة تجارية لشركة International Gulf Lotus SPC • جميع الحقوق محفوظة`
+    - English: `© 2025 AI Profit Lab — a brand of Lotus Gulf International • All Rights Reserved`
+    - Arabic: `© ٢٠٢٥ AI Profit Lab — علامة تجارية تابعة لشركة Lotus Gulf International • جميع الحقوق محفوظة`
+    - Both lines are throwaway in the source file — `tools/v4/blog_chrome.py` rebuilds the footer and stamps the current year at Step 5. Type them correctly anyway so an unrendered draft never shows the wrong entity.
+
+15. **Outbound Authority Links & the References Block**:
+    - Every article MUST cite **outside sources inline in the body text**, linked to high-authority destinations: vendor/tech documentation (OpenAI, Anthropic, Meta WhatsApp Business API, n8n, Make), Omani and GCC government or regulator portals (Oman Vision 2040, MTCIT, CBO, Omani PDPL), or reputable news and research.
+    - Every source linked in the body must reappear in the **References** block at the end, as a real `<a href>` to the source.
+    - **Verify each URL resolves before shipping.** A fabricated or dead reference is worse than no reference. If you cannot confirm a URL, drop the claim rather than inventing a citation.
+    - `--dry-run` at Step 5 prints the reference count it parsed. A count of 0 means the References markup drifted from the marker contract.
+
+16. **Hero Image Concept & Alt Text**:
+    - Designate a hero image concept in the outline that matches the **futuristic, semi-realistic AI aesthetic** already used across the blog, so the new card does not look foreign on the hub.
+    - Alt text on every image must describe its value to the brand, not just its contents:
+      - English: `[image_name] - Empowering AI Solutions by AI Profit Lab to scale your business operations.`
+      - Arabic: `[image_name] - حلول الذكاء الاصطناعي المبتكرة من AI Profit Lab لتطوير أعمالك.`
 
 ## Step 2: Generate the English Version
-Draft the English article content. Wrap it in the exact HTML structure expected for the blog. Ensure it follows the dark-mode glassmorphism style.
+Draft the English article content. Wrap it in the exact source HTML structure given at the bottom of this file. That dark Tailwind markup is an **authoring format, not the published look** — Step 5 converts it to the brand-book skin — so reproduce its markers exactly rather than restyling it.
 Save it to: `public_html/blog/en/YYYY-MM-DD-[slug-title].html` (use the current date).
 
 ## Step 3: Generate the Arabic Version
@@ -108,7 +135,7 @@ Set `lang="ar"` and `dir="rtl"`.
 Save it to: `public_html/blog/ar/YYYY-MM-DD-[slug-title-in-english].html`.
 
 ## Step 4: Generate the Image
-Use your `generate_image` tool to create the hero image based on the designated concept.
+Use your `generate_image` tool to create the hero image from the concept you designated in Step 1 (criterion 16) — futuristic, semi-realistic AI, consistent with the existing blog.
 Save the generated image to: `public_html/blog/images/[image_name].png`. Make sure both HTML files point to this exact absolute path (`/blog/images/[image_name].png`).
 
 ## Step 4.5: Internal Linking & Cornerstoning Workflow
@@ -116,21 +143,79 @@ Save the generated image to: `public_html/blog/images/[image_name].png`. Make su
 - **Bi-Directional Interlinking**:
   1. Add internal contextual links within the new article pointing to existing related blog posts on the site.
   2. Locate an existing high-ranking page on `aiprofitlab.io` and insert a contextual link pointing to the newly published article so search engine crawlers easily discover and index it.
+- **Link naturally, never by quota**: place an internal link only where the sentence genuinely calls for it. A forced link block reads as SEO filler to both readers and reviewers.
+- **Always use the clean URL**: `/blog/en/YYYY-MM-DD-slug/` with the trailing slash — never `.html`, never a relative path. Same rule for Arabic (`/blog/ar/…/`) and for the money pages (`/en/services-en/`, `/en/contact-en/`, `/contact/`).
 
-## Step 5: Update the Blog Hub
-After generating and saving the images and HTML files, use your `run_command` tool to execute the python script that automatically updates the hub pages with the new content:
-`python3 update_blog_hubs.py` (run this from the `Website SEO` directory).
+## Step 5: Apply the v4 Brand-Book Skin (MANDATORY)
+Run the deterministic renderer over the two files you just wrote:
+```bash
+cd "Website SEO" && python3 tools/reskin_articles.py --only YYYY-MM-DD-[slug-title]
+```
+- Run it **only once both the English and the Arabic file exist**. The renderer pairs them to emit `hreflang` en / ar / x-default; run it early and the new article ships without its language pair.
+- `--only` takes a substring of the filename. **Always pass it.** Never run the script bare.
+- Add `--dry-run` first if you want to see the word count, FAQ count and reference count it parsed out of your markup before anything is written. A count of 0 FAQs or 0 references means your markup drifted from the marker contract below — fix the article, do not fix the script.
 
-## Step 6: Regenerate the Sitemap
+**What the renderer does for you** — stop hand-building any of this:
+- Replaces the Tailwind CDN dark skin with the brand stylesheet and script under `/assets/`, and drops the FOUC overlay and the chat widget.
+- Rebuilds the nav, footer and legal line from `tools/v4/blog_chrome.py`, so the copyright year and the legal entity (`Lotus Gulf International`) are always correct without you typing them.
+- Rebuilds the table of contents from your `<h2>` ids and adds a breadcrumb, byline, reading time, share row, related-articles block and topic chips.
+- Adds the Open Graph tags, Twitter card and explicit `robots` directive the old template never had.
+- Keeps every heading `id`, so any anchor link that already points into the article still resolves.
+
+**Never re-run the renderer over an already-skinned article.** It is not idempotent: a second pass replaces the article's own CTA with the generic WhatsApp default and folds the References block back into the body. One pass, per new article, always filtered with `--only`.
+
+**Verify before moving on** (replace the slug):
+```bash
+cd "Website SEO" && for L in en ar; do
+  f="public_html/blog/$L/YYYY-MM-DD-[slug-title].html"
+  echo "$L tailwind=$(grep -c cdn.tailwindcss.com "$f") brandcss=$(grep -c apl-article "$f") hero=$(grep -c 'class="afig"' "$f")"
+done
+```
+Expect `tailwind=0`, `brandcss=1`, `hero=1` on both lines.
+
+## Step 6: Update the Blog Hub
+After the articles are on the brand skin, use your `run_command` tool to execute the python script that rebuilds the hub cards:
+```bash
+cd "Website SEO" && python3 update_blog_hubs.py
+```
+The hub pages themselves are still the older dark skin — that is expected, and the script reads the brand-skin articles correctly. Check that the new card shows a real thumbnail from `/blog/images/` and a real title, not the site wordmark or a filename.
+
+## Step 7: Regenerate the Sitemap
 After the blog hub is updated, **always** regenerate the `sitemap.xml` by running the following inline Python script from the `public_html` directory:
 ```bash
 cd "Website SEO/public_html" && python3 generate_sitemap.py
 ```
 Or use the sitemap command. Confirm that sitemap output shows the updated URL count.
 
+## Step 8: Hand Over the Forum Snippet
+Finish the run by writing a short promotional snippet (roughly 60–90 words) that Nahid can post to a local GCC business forum, LinkedIn group or WhatsApp community to seed the article.
+- Lead with the problem the article solves, not with the article.
+- Include one concrete number lifted from the piece.
+- End with the clean article URL (`https://aiprofitlab.io/blog/en/YYYY-MM-DD-slug/`).
+- Produce it in **both English and Arabic**, and print it in the chat — it is a deliverable, not a file.
+
 ---
 
-## HTML Template Requirements
+## Source Template Requirements (the authoring format, not the published skin)
+
+The two templates below are what you **write**. They are not what the reader sees: Step 5 rewrites them onto the v4 brand-book skin. Their dark colours, Tailwind classes, nav and footer are all discarded by the renderer — reproduce them anyway, because the renderer finds each part of the article by the markers embedded in them.
+
+### Marker contract — do not restyle the source template
+
+`tools/v4/legacy.py` locates each part of the article by these exact signals. Drop one and that part silently disappears from the published page:
+
+| Part of the article | What the renderer looks for |
+|---|---|
+| Hero image | an `<img>` whose `src` sits under `/blog/images/` |
+| Standfirst / hook | the `<p class="text-xl ... text-gray-400 ...">` directly after the `<h1>`, at least 25 characters |
+| Table of contents | `<nav ... id="table-of-contents">` — it is removed and rebuilt from your `<h2>` ids, so those ids are what actually matter |
+| CTA | a `.glass-card` (or `border-blue-500/30`) `<div>` under 2600 characters, containing 1–2 links and **no** `<h2>` |
+| FAQ | `<section ... id="faq">`, plus the `FAQPage` node in the JSON-LD |
+| References | an `<h3>` reading References / Sources / المراجع / المصادر, immediately followed by `<ul><li><a href="…">` |
+| Category chip | `<meta name="category" content="…">` |
+| Section anchors | the `id` on each `<h2>` |
+
+Everything else in the templates — `body` colours, the `.prose` rules, the nav, the footer, the copyright line — is throwaway. Do not spend effort on it, and do not let it drift into the article body.
 
 ### 1. English HTML Template
 ```html
@@ -164,7 +249,7 @@ Or use the sitemap command. Confirm that sitemap output shows the updated URL co
           "@type": "Organization",
           "@id": "https://aiprofitlab.io/#organization",
           "name": "AI Profit Lab",
-          "legalName": "International Gulf Lotus SPC",
+          "legalName": "Lotus Gulf International",
           "url": "https://aiprofitlab.io/",
           "logo": {
             "@type": "ImageObject",
@@ -199,6 +284,44 @@ Or use the sitemap command. Confirm that sitemap output shows the updated URL co
             // Generate for ALL 10 FAQs sequentially
           ]
         }
+      ]
+    }
+    </script>
+
+    <!-- Local Business Schema (NAP) - copy verbatim, do not retype from memory -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "name": "AI Profit Lab",
+      "legalName": "Lotus Gulf International",
+      "url": "https://aiprofitlab.io",
+      "logo": "https://aiprofitlab.io/logo.webp",
+      "image": "https://aiprofitlab.io/og-aiprofitlab-2026.jpg",
+      "description": "Helping non-technical managers leverage AI, automation, and technology to increase ROI and business efficiency.",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "South Al Khuwair, Bousher",
+        "addressLocality": "Muscat",
+        "addressRegion": "Muscat Governorate",
+        "postalCode": "000",
+        "addressCountry": "OM"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 23.5803,
+        "longitude": 58.4310
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+968-99245250",
+        "contactType": "customer service",
+        "areaServed": "GCC",
+        "availableLanguage": ["en", "ar"]
+      },
+      "sameAs": [
+        "https://www.youtube.com/@AI_for_Managers",
+        "https://www.linkedin.com/in/nahid-aby"
       ]
     }
     </script>
@@ -280,7 +403,7 @@ Or use the sitemap command. Confirm that sitemap output shows the updated URL co
     </main>
 
     <footer class="border-t border-white/10 bg-black py-8 text-center text-gray-500 text-sm mt-auto">
-        <p>© 2025 <span class="text-blue-500">A</span><span class="text-red-500">I</span> Profit Lab — a brand of International Gulf Lotus SPC • All Rights Reserved</p>
+        <p>© 2025 <span class="text-blue-500">A</span><span class="text-red-500">I</span> Profit Lab — a brand of Lotus Gulf International • All Rights Reserved</p>
     </footer>
 </body>
 </html>
@@ -318,7 +441,7 @@ Or use the sitemap command. Confirm that sitemap output shows the updated URL co
           "@type": "Organization",
           "@id": "https://aiprofitlab.io/#organization",
           "name": "AI Profit Lab",
-          "legalName": "International Gulf Lotus SPC",
+          "legalName": "Lotus Gulf International",
           "url": "https://aiprofitlab.io/",
           "logo": {
             "@type": "ImageObject",
@@ -352,6 +475,44 @@ Or use the sitemap command. Confirm that sitemap output shows the updated URL co
             }
           ]
         }
+      ]
+    }
+    </script>
+
+    <!-- Local Business Schema (NAP) - copy verbatim, do not retype from memory -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "name": "AI Profit Lab",
+      "legalName": "Lotus Gulf International",
+      "url": "https://aiprofitlab.io",
+      "logo": "https://aiprofitlab.io/logo.webp",
+      "image": "https://aiprofitlab.io/og-aiprofitlab-2026.jpg",
+      "description": "Helping non-technical managers leverage AI, automation, and technology to increase ROI and business efficiency.",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "South Al Khuwair, Bousher",
+        "addressLocality": "Muscat",
+        "addressRegion": "Muscat Governorate",
+        "postalCode": "000",
+        "addressCountry": "OM"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 23.5803,
+        "longitude": 58.4310
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+968-99245250",
+        "contactType": "customer service",
+        "areaServed": "GCC",
+        "availableLanguage": ["en", "ar"]
+      },
+      "sameAs": [
+        "https://www.youtube.com/@AI_for_Managers",
+        "https://www.linkedin.com/in/nahid-aby"
       ]
     }
     </script>
@@ -433,7 +594,7 @@ Or use the sitemap command. Confirm that sitemap output shows the updated URL co
     </main>
 
     <footer class="border-t border-white/10 bg-black py-8 text-center text-gray-500 text-sm mt-auto">
-        <p>© ٢٠٢٥ <span class="text-blue-500">A</span><span class="text-red-500">I</span> Profit Lab — علامة تجارية لشركة International Gulf Lotus SPC • جميع الحقوق محفوظة</p>
+        <p>© ٢٠٢٥ <span class="text-blue-500">A</span><span class="text-red-500">I</span> Profit Lab — علامة تجارية لشركة Lotus Gulf International • جميع الحقوق محفوظة</p>
     </footer>
 </body>
 </html>

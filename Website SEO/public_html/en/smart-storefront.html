@@ -239,15 +239,86 @@ nav{position:sticky;top:0;z-index:60;background:rgba(241,239,232,.93);backdrop-f
 .result.on{display:grid;animation:popIn .5s var(--spring)}
 .mockup{position:relative;width:236px;height:412px;border-radius:30px;background:#0A1613;border:7px solid #16261F;
   overflow:hidden;box-shadow:0 26px 60px -22px rgba(10,61,48,.55);margin:0 auto}
-.mockup[data-vibe="expensive"] .pscreen{background:#11201B}
-.mockup[data-vibe="expensive"] .pbody{color:var(--cream)}
-.mockup[data-vibe="expensive"] .pbody .pht{color:var(--amber-pale)}
-.mockup[data-vibe="expensive"] .pchip{background:rgba(241,239,232,.12);color:rgba(241,239,232,.75)}
-.mockup[data-vibe="expensive"] .bub{background:#16261F;border-color:#24382F;color:var(--cream)}
+/* ── the four vibes are four different builds, not one build in four colours.
+      renderMockup() swaps the whole screen markup; these rules dress each one.
+      Anything below is scoped to .mockup so the hero phone keeps its own look. ── */
+.mockup{--mk-bg:var(--cream)}
+.mockup .pscreen{background:var(--mk-bg)}
+.mockup .pconv{min-height:0;flex:none}
+.mockup .pbody{flex:0 1 auto;min-height:0;overflow:hidden}
+.mockup .pstrip{font-family:var(--mono);font-size:7.5px;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--muted);background:var(--panel-2);padding:4px 12px;border-bottom:1px solid var(--line);flex:none}
+.mockup .psub{font-size:9px;line-height:1.5;color:var(--muted);margin:0 0 7px}
+.mockup .prule{width:32px;height:2px;background:var(--amber);margin:0 0 8px}
+
+/* 1 ── serious: trade chrome, a credential strip, a ticked spec list, squared buttons */
+.mockup[data-vibe="serious"] .ptop{border-bottom:3px solid var(--amber)}
+.mockup[data-vibe="serious"] .pbody{padding:9px 12px 0}
+.mockup[data-vibe="serious"] .pht{font-size:13.5px}
+.mockup[data-vibe="serious"] .pspec{list-style:none;margin:0 0 9px;padding:0;border-top:1px solid var(--line)}
+.mockup[data-vibe="serious"] .pspec li{display:flex;gap:6px;align-items:baseline;font-size:9px;color:var(--ink);
+  padding:3px 0;border-bottom:1px solid var(--line)}
+.mockup[data-vibe="serious"] .pspec li::before{content:"\2713";color:var(--teal);font-size:8px;flex:none}
+.mockup[data-vibe="serious"] .pbtn{border-radius:3px;padding:6px;margin-top:6px}
+.mockup[data-vibe="serious"] .pbtn.wa{background:transparent;color:var(--wa);border:1.5px solid var(--wa)}
+.mockup[data-vibe="serious"] .pbtn.wa::after{display:none}
+.mockup[data-vibe="serious"] .pfoot{margin-top:6px}
+.mockup[data-vibe="serious"] .bub{border-radius:4px}
+.mockup[data-vibe="serious"] .ptoast{top:8px;border-radius:3px}
+
+/* 2 ── modern: light chrome, air, outline chips, pill buttons */
+.mockup[data-vibe="modern"]{--mk-bg:var(--white)}
+.mockup[data-vibe="modern"] .ptop{background:var(--white);color:var(--ink);border-bottom:1px solid var(--line);padding:12px}
+.mockup[data-vibe="modern"] .ptop b{font-family:var(--sans);font-weight:600;font-size:10px;display:flex;align-items:center;gap:6px}
+.mockup[data-vibe="modern"] .ptop b::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--teal);flex:none}
+.mockup[data-vibe="modern"] .ptag{border-color:var(--line);color:var(--muted);border-radius:99px}
+.mockup[data-vibe="modern"] .pbody{padding:15px 15px 0}
+.mockup[data-vibe="modern"] .pht{font-family:var(--sans);font-weight:600;font-size:13.5px;letter-spacing:-.015em;
+  line-height:1.32;color:var(--ink);margin-bottom:8px}
+.mockup[data-vibe="modern"] .pchips{gap:5px;margin:11px 0 2px}
+.mockup[data-vibe="modern"] .pchip{background:transparent;border:1px solid var(--line);font-family:var(--mono);
+  font-size:7.5px;letter-spacing:.1em;text-transform:uppercase;padding:4px 9px}
+.mockup[data-vibe="modern"] .pbtn{border-radius:99px;padding:8px;margin-top:7px}
+.mockup[data-vibe="modern"] .pbtn.wa{background:transparent;color:var(--wa);border:1.5px solid var(--wa)}
+.mockup[data-vibe="modern"] .pbtn.wa::after{border-radius:99px}
+.mockup[data-vibe="modern"] .pfoot{margin-top:6px}
+.mockup[data-vibe="modern"] .bub{background:#F2F3F1;border:0;border-radius:15px;box-shadow:0 8px 20px -12px rgba(10,61,48,.5)}
+.mockup[data-vibe="modern"] .bub.ar{background:#E7F1ED;border-color:#E7F1ED}
+.mockup[data-vibe="modern"] .ptoast{top:8px;border-radius:99px;text-align:center}
+
+/* 3 ── expensive: dark, no chrome, one sentence, one thin outlined button */
+.mockup[data-vibe="expensive"]{--mk-bg:#11201B}
+.mockup[data-vibe="expensive"] .pmark{font-family:var(--mono);font-size:7.5px;letter-spacing:.32em;text-transform:uppercase;
+  color:rgba(232,201,143,.7);text-align:center;padding:22px 12px 0;flex:none}
+.mockup[data-vibe="expensive"] .pbody{padding:30px 18px 0;color:var(--cream)}
+.mockup[data-vibe="expensive"] .pht{font-size:17.5px;line-height:1.28;color:var(--amber-pale);margin-bottom:16px}
+.mockup[data-vibe="expensive"] .pmeta{font-family:var(--mono);font-size:7.5px;letter-spacing:.16em;text-transform:uppercase;
+  color:rgba(241,239,232,.45);margin:0 0 24px}
+.mockup[data-vibe="expensive"] .pbtn{background:transparent;border:1px solid rgba(232,201,143,.5);color:var(--amber-pale);
+  border-radius:0;font-family:var(--mono);font-weight:400;font-size:8px;letter-spacing:.18em;text-transform:uppercase;padding:11px}
+.mockup[data-vibe="expensive"] .pwa{display:block;text-align:center;margin-top:13px;font-size:8.5px;letter-spacing:.05em;
+  color:rgba(241,239,232,.5)}
+.mockup[data-vibe="expensive"] .pconv{min-height:130px}
+.mockup[data-vibe="expensive"] .bub{background:#16261F;border-color:#24382F;color:var(--cream);box-shadow:none}
 .mockup[data-vibe="expensive"] .bub.ar{background:#1C2E27;border-color:#1C2E27;color:var(--amber-pale)}
-.mockup[data-vibe="modern"] .ptop{background:var(--teal)}
-.mockup[data-vibe="plain"] .ptop{background:var(--ink)}
-.mockup[data-vibe="plain"] .pbtn{background:var(--ink)}
+.mockup[data-vibe="expensive"] .d-type i{background:rgba(241,239,232,.5)}
+.mockup[data-vibe="expensive"] .ptoast{top:8px;background:rgba(232,201,143,.94);border-radius:2px}
+
+/* 4 ── plain: no decoration, WhatsApp first and biggest, every corner square */
+.mockup[data-vibe="plain"]{--mk-bg:#F4F3EF}
+.mockup[data-vibe="plain"] .ptop{background:var(--ink);padding:9px 12px}
+.mockup[data-vibe="plain"] .ptop b{font-family:var(--sans);font-weight:700;font-size:10.5px}
+.mockup[data-vibe="plain"] .ptag{border-radius:0}
+.mockup[data-vibe="plain"] .pbody{padding:12px 12px 0}
+.mockup[data-vibe="plain"] .pht{font-family:var(--sans);font-weight:700;font-size:12.5px;line-height:1.35;color:var(--ink)}
+.mockup[data-vibe="plain"] .plist{margin:0 0 11px;padding-left:15px;font-size:9px;line-height:1.6;color:var(--muted)}
+.mockup[data-vibe="plain"] .pbtn{border-radius:4px;font-size:10px;padding:9px;margin-top:7px}
+.mockup[data-vibe="plain"] .pbtn.wa{margin-top:0;padding:11px;font-size:10.5px}
+.mockup[data-vibe="plain"] .pbtn.wa::after{border-radius:4px}
+.mockup[data-vibe="plain"] .pbtn.sec{background:var(--white);color:var(--ink);border:1px solid var(--line)}
+.mockup[data-vibe="plain"] .pfoot{text-align:left;font-size:8px;margin-top:8px}
+.mockup[data-vibe="plain"] .bub{border-radius:3px;box-shadow:none}
+.mockup[data-vibe="plain"] .ptoast{top:8px;border-radius:2px;box-shadow:none}
 
 /* ══ cards ══ */
 .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
@@ -557,24 +628,8 @@ footer a{color:var(--amber-pale)}
       <p class="say" id="say" aria-live="polite"></p>
 
       <div class="result" id="qresult">
-        <div class="mockup" id="mockup" data-vibe="serious">
-          <div class="pscreen">
-            <div class="ptop"><b>YOUR BUSINESS</b><span class="ptag">AR</span><span class="ptag">EN</span></div>
-            <div class="pbody">
-              <div class="pht" id="mkhead">Supplying Oman, since the day you started.</div>
-              <div class="pchips" id="mkchips"></div>
-              <div class="pbtn">Request a bulk quote</div>
-              <div class="pbtn wa">Talk on WhatsApp</div>
-              <div class="pfoot">Answers in Arabic &amp; English · 24/7</div>
-            </div>
-            <div class="pconv">
-              <div class="bub ar d-ar">مرحباً! تحتاج تسعيرة بالجملة؟</div>
-              <div class="bub d-type"><i></i><i></i><i></i></div>
-              <div class="bub en d-en" id="mken">Yes — send me your price list.</div>
-            </div>
-            <div class="ptoast">New inquiry → sent to your phone</div>
-          </div>
-        </div>
+        <!-- built by renderMockup() as soon as the third question is answered -->
+        <div class="mockup" id="mockup" data-vibe="serious"></div>
         <div>
           <h3 style="font-family:var(--display);font-weight:400;font-size:1.5rem;color:var(--teal-900);margin-bottom:12px">A mockup, not a promise.</h3>
           <p style="color:var(--muted);font-size:.97rem">Ten seconds of proof, worth exactly that much. The real one takes about a week and has your actual products in it, in both languages.</p>
@@ -892,13 +947,147 @@ footer a{color:var(--amber-pale)}
     ]}
   ];
 
-  var HEADLINES = {
-    "Building materials": { h: "Cement, steel and blocks — delivered across Oman.", chips: ["Bulk pricing","Site delivery","Stock check"], en: "400 bags, delivered to Sohar." },
-    "Medical supplies":   { h: "Medical supplies, with the paperwork in order.",     chips: ["Spec sheets","Cold chain","Tenders"],     en: "Can you send the spec sheet?" },
-    "Auto parts":         { h: "The part you need, in stock, today.",                chips: ["Part lookup","Trade pricing","Same day"],  en: "Do you have this part number?" },
-    "Food & FMCG":        { h: "Wholesale supply your shelves can rely on.",         chips: ["Price list","Reorders","Delivery days"],   en: "Send me this week's price list." },
-    "Something else":     { h: "Supplying Oman, since the day you started.",         chips: ["Bulk pricing","Delivery","Datasheets"],    en: "Can I get a bulk quote?" }
+  /* ─── what the mockup is built from ───
+     Sector picks the copy and the conversation, the website answer picks the
+     notification, and the vibe picks an entirely different build of the screen
+     (SKINS below). Five sectors x four situations x four vibes, so two people
+     answering differently never see the same phone. */
+  var SECTORS = {
+    "Building materials": {
+      brand: "YOUR BUILDING SUPPLY",
+      h:    "Cement, steel and blocks — delivered across Oman.",
+      sub:  "From one pallet to a whole project, priced the day you ask.",
+      chips:["Bulk pricing","Site delivery","Stock check"],
+      cta:  "Request a bulk quote",
+      ar:   "مرحباً! تحتاج تسعيرة بالجملة؟",
+      en:   "400 bags, delivered to Sohar."
+    },
+    "Medical supplies": {
+      brand:"YOUR MEDICAL SUPPLY",
+      h:    "Medical supplies, with the paperwork in order.",
+      sub:  "Spec sheets, cold-chain handling and tender documents, on request.",
+      chips:["Spec sheets","Cold chain","Tenders"],
+      cta:  "Request specs & pricing",
+      ar:   "مرحباً! تبحث عن مواصفات المنتج؟",
+      en:   "Can you send the spec sheet?"
+    },
+    "Auto parts": {
+      brand:"YOUR PARTS COMPANY",
+      h:    "The part you need, in stock, today.",
+      sub:  "Send a part number or a photo. You will know in minutes.",
+      chips:["Part lookup","Trade pricing","Same day"],
+      cta:  "Check part availability",
+      ar:   "مرحباً! تبحث عن قطعة معينة؟",
+      en:   "Do you have this part number?"
+    },
+    "Food & FMCG": {
+      brand:"YOUR WHOLESALE CO.",
+      h:    "Wholesale supply your shelves can rely on.",
+      sub:  "Standing orders, weekly price lists, delivery days you can plan around.",
+      chips:["Price list","Reorders","Delivery days"],
+      cta:  "Get this week\u2019s price list",
+      ar:   "مرحباً! تريد قائمة الأسعار؟",
+      en:   "Send me this week\u2019s price list."
+    },
+    "Something else": {
+      brand:"YOUR BUSINESS",
+      h:    "Supplying Oman, since the day you started.",
+      sub:  "It answers in your buyer\u2019s language, at your buyer\u2019s hour.",
+      chips:["Bulk pricing","Delivery","Datasheets"],
+      cta:  "Request a bulk quote",
+      ar:   "مرحباً! كيف أقدر أساعدك؟",
+      en:   "Can I get a bulk quote?"
+    }
   };
+
+  // the notification is the part that answers "what was I missing before?"
+  var TOASTS = {
+    "I don't have one":      "New inquiry → sent to your phone",
+    "I have one, from 2019": "Answered at 2:14am → you were asleep",
+    "My nephew built it":    "Quote request → straight to WhatsApp",
+    "We just use WhatsApp":  "Found on Google → now in your WhatsApp",
+    _default:                "New inquiry → sent to your phone"
+  };
+
+  function mkConv(d) {
+    return '<div class="pconv">'
+      + '<div class="bub ar d-ar">' + d.ar + '</div>'
+      + '<div class="bub d-type"><i></i><i></i><i></i></div>'
+      + '<div class="bub en d-en">' + d.en + '</div>'
+      + '</div>';
+  }
+  function mkChips(list) {
+    return list.map(function(c){ return '<span class="pchip">' + c + '</span>'; }).join("");
+  }
+  function mkItems(list) {
+    return list.map(function(c){ return '<li>' + c + '</li>'; }).join("");
+  }
+
+  /* Four builds. Same ingredients, different architecture: the chrome, the type,
+     the way the three selling points are listed and the buttons all change. */
+  var SKINS = {
+    // trade chrome, credentials, a ticked spec list, squared buttons
+    serious: function(d, toast) {
+      return '<div class="pscreen">'
+        + '<div class="ptop"><b>' + d.brand + '</b><span class="ptag">AR</span><span class="ptag">EN</span></div>'
+        + '<div class="pstrip">Trade licence · Bulk supply · Oman</div>'
+        + '<div class="pbody">'
+        +   '<div class="pht">' + d.h + '</div>'
+        +   '<div class="prule"></div>'
+        +   '<ul class="pspec">' + mkItems(d.chips) + '</ul>'
+        +   '<div class="pbtn">' + d.cta + '</div>'
+        +   '<div class="pbtn wa">Talk on WhatsApp</div>'
+        +   '<div class="pfoot">Arabic &amp; English · Answered 24/7</div>'
+        + '</div>' + mkConv(d)
+        + '<div class="ptoast">' + toast + '</div></div>';
+    },
+    // light chrome, white space, outline chips, pill buttons
+    modern: function(d, toast) {
+      return '<div class="pscreen">'
+        + '<div class="ptop"><b>' + d.brand + '</b><span class="ptag">AR</span><span class="ptag">EN</span></div>'
+        + '<div class="pbody">'
+        +   '<div class="pht">' + d.h + '</div>'
+        +   '<p class="psub">' + d.sub + '</p>'
+        +   '<div class="pchips">' + mkChips(d.chips) + '</div>'
+        +   '<div class="pbtn">' + d.cta + '</div>'
+        +   '<div class="pbtn wa">WhatsApp</div>'
+        +   '<div class="pfoot">Bilingual · Always on</div>'
+        + '</div>' + mkConv(d)
+        + '<div class="ptoast">' + toast + '</div></div>';
+    },
+    // dark, no chrome, one sentence, one thin outlined button
+    expensive: function(d, toast) {
+      return '<div class="pscreen">'
+        + '<div class="pmark">' + d.brand.replace(/^YOUR /, "") + '</div>'
+        + '<div class="pbody">'
+        +   '<div class="pht">' + d.h + '</div>'
+        +   '<p class="pmeta">' + d.chips.join(" · ") + '</p>'
+        +   '<div class="pbtn">Enquire</div>'
+        +   '<span class="pwa">or WhatsApp →</span>'
+        + '</div>' + mkConv(d)
+        + '<div class="ptoast">' + toast + '</div></div>';
+    },
+    // no decoration, WhatsApp first and biggest, every corner square
+    plain: function(d, toast) {
+      return '<div class="pscreen">'
+        + '<div class="ptop"><b>' + d.brand + '</b><span class="ptag">AR</span><span class="ptag">EN</span></div>'
+        + '<div class="pbody">'
+        +   '<div class="pht">' + d.h + '</div>'
+        +   '<ul class="plist">' + mkItems(d.chips) + '</ul>'
+        +   '<div class="pbtn wa">Message us on WhatsApp</div>'
+        +   '<div class="pbtn sec">' + d.cta + '</div>'
+        +   '<div class="pfoot">Arabic &amp; English, any hour.</div>'
+        + '</div>' + mkConv(d)
+        + '<div class="ptoast">' + toast + '</div></div>';
+    }
+  };
+
+  function renderMockup(sector, site, vibe) {
+    var d = SECTORS[sector] || SECTORS["Something else"];
+    var mk = document.getElementById("mockup");
+    mk.setAttribute("data-vibe", vibe);
+    mk.innerHTML = (SKINS[vibe] || SKINS.serious)(d, TOASTS[site] || TOASTS._default);
+  }
 
   // `busy` locks input while the commentary is typing. Without it, two quick taps on the
   // same question advance the counter twice, run finish() with unanswered questions, and
@@ -968,13 +1157,9 @@ footer a{color:var(--amber-pale)}
 
   function finish() {
     var sector = answers.sector ? answers.sector.label : "Something else";
+    var site = answers.site ? answers.site.label : "";
     var vibe = answers.vibe ? answers.vibe.vibe : "serious";
-    var data = HEADLINES[sector] || HEADLINES["Something else"];
-    document.getElementById("mkhead").textContent = data.h;
-    document.getElementById("mken").textContent = data.en;
-    document.getElementById("mkchips").innerHTML = data.chips
-      .map(function(c){ return '<span class="pchip">' + c + "</span>"; }).join("");
-    document.getElementById("mockup").setAttribute("data-vibe", vibe);
+    renderMockup(sector, site, vibe);
 
     var sectorField = document.getElementById("f-sector");
     if (!sectorField.value) sectorField.value = sector === "Something else" ? "" : sector;
@@ -983,7 +1168,7 @@ footer a{color:var(--amber-pale)}
     qresult.classList.add("on");
     mascotCheer();
     confetti(document.getElementById("qcard"), 18);
-    track("roast_complete", { sector: sector, vibe: vibe });
+    track("roast_complete", { sector: sector, site: site, vibe: vibe });
   }
 
   document.getElementById("qagain").addEventListener("click", function(){
@@ -1287,5 +1472,6 @@ footer a{color:var(--amber-pale)}
   document.addEventListener("keydown", function(e){ if (e.key === "Escape" && curtain.classList.contains("on")) sleep(); });
 })();
 </script>
+    <script defer src="/js/aiden-chat.js"></script>
 </body>
 </html>

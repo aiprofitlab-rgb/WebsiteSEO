@@ -14,8 +14,8 @@ formatting and the WhatsApp handoff are shared.
 """
 from kit import WA, WA_ICON, STAR
 
-STOREFRONT = 950     # one-time, must match the services page ladder
-AUTOPILOT = 900      # one-time, added to the Storefront
+SMART_SITE = 950     # one-time, must match the services page ladder
+AUTOPILOT = 900      # one-time, added to the Smart Website
 
 CSS = """
 /* ------------------------------------------------------------------ tabs */
@@ -149,7 +149,7 @@ JS = r"""
   var TOOLS = {
     A: {
       cost: 950,
-      costLabel: "Smart Storefront, once",
+      costLabel: "Smart Website, once",
       fields: {
         a1: {fmt: String},
         a2: {fmt: pct},
@@ -423,15 +423,15 @@ def body():
         <div class="figs">
           <div><b id="AAnnual">OMR 12,276</b><span>Over twelve months</span></div>
           <div><b id="ADaily">OMR 34</b><span>Every day it stays open</span></div>
-          <div><b id="APayback">28 days</b><span>To cover OMR {STOREFRONT} once</span></div>
+          <div><b id="APayback">28 days</b><span>To cover OMR {SMART_SITE} once</span></div>
         </div>
         <div class="chartwrap">
           <h4>Cumulative, against the one-time cost of closing it</h4>
           <svg class="chart" id="AChart" viewBox="0 0 620 210" role="img"
-               aria-label="Cumulative revenue at stake over twelve months, compared with the one-time cost of the Smart Storefront"></svg>
+               aria-label="Cumulative revenue at stake over twelve months, compared with the one-time cost of the Smart Website"></svg>
           <p class="legend"><span><i style="background:#D89234"></i>The month it has paid for itself</span>
             <span><i style="background:rgba(241,239,232,.22)"></i>Cumulative at stake</span>
-            <span><i class="dash"></i><span id="ACost">Smart Storefront, once &middot; OMR 950</span></span></p>
+            <span><i class="dash"></i><span id="ACost">Smart Website, once &middot; OMR 950</span></span></p>
         </div>
         <div class="btn-row">
           <a class="btn btn-wa" id="AWa" href="{WA}">{WA_ICON}<span>Send me these numbers</span></a>
@@ -521,8 +521,8 @@ def body():
       <table class="tbl">
         <thead><tr><th>What it is</th><th>One-time</th><th>Required monthly</th></tr></thead>
         <tbody>
-          <tr><td>The Smart Storefront &mdash; a site with a buyer agent that answers in Arabic and English</td>
-              <td class="n">OMR {STOREFRONT}</td><td class="n">OMR 0</td></tr>
+          <tr><td>The Smart Website &mdash; a site with a buyer agent that answers in Arabic and English</td>
+              <td class="n">OMR {SMART_SITE}</td><td class="n">OMR 0</td></tr>
           <tr><td>The Live Owner Dashboard &mdash; cash, margin, stock and open leads on one screen</td>
               <td class="n">+OMR 650</td><td class="n">OMR 0</td></tr>
           <tr><td>The Full Autopilot &mdash; quote and invoice follow-up that stops when the buyer replies</td>

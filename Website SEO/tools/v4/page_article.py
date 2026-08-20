@@ -133,7 +133,7 @@ ARTICLE = {
           ["A buyer agent that answers", "~OMR 950 once",
            "Answers in Arabic or English at any hour, then hands a live buyer to you on WhatsApp",
            "Judgement calls &mdash; those are routed to you deliberately, not guessed at"]],
-         "The Smart Storefront price is the founding one-time figure published on the services page. Care is optional at OMR 75/month and cancellable."),
+         "The Smart Website price is the founding one-time figure published on the services page. Care is optional at OMR 75/month and cancellable."),
         ("p", "The comparison that matters is not between the three rows. It is between your monthly figure and "
               "the one-time one. If the arithmetic says OMR 1,023 a month is walking away, a one-time OMR 950 "
               "stops being an expense and becomes a payback period &mdash; in that case, twenty-eight days."),
@@ -173,7 +173,7 @@ ARTICLE = {
          "needs the answer, not a promise of one. If the real reply still arrives on Monday, the buyer has "
          "already bought elsewhere."),
         ("What does it cost to close the gap?",
-         "The Smart Storefront &mdash; a bilingual site with a buyer agent that answers in Arabic and English and "
+         "The Smart Website &mdash; a bilingual site with a buyer agent that answers in Arabic and English and "
          "hands live buyers to WhatsApp &mdash; is OMR 950 one-time at the founding price, with no required monthly "
          "fee. Optional care is OMR 75 a month and can be cancelled."),
         ("Does answering buyers automatically create a data protection problem in Oman?",
@@ -187,7 +187,7 @@ ARTICLE = {
          "https://www.mtcit.gov.om/"),
         ("WhatsApp Business Platform &mdash; official documentation",
          "https://business.whatsapp.com/"),
-        ("AI Profit Lab &mdash; published prices for the Smart Storefront",
+        ("AI Profit Lab &mdash; published prices for the Smart Website",
          "https://aiprofitlab.io/en/services-v4/#price"),
     ],
 

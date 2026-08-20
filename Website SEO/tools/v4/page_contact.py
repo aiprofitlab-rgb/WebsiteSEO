@@ -186,7 +186,7 @@ def body():
     <div class="faq" style="margin-top:clamp(22px,3vw,38px)">
       <details>
         <summary>How much does it cost?</summary>
-        <p class="ans">Smart Storefront: OMR 950 founding, 1,450 standard. Dashboard +650, autopilot +900, all
+        <p class="ans">Smart Website: OMR 950 founding, 1,450 standard. Dashboard +650, autopilot +900, all
           three 2,200. Every number is on <a href="/en/services-v4/#price">the price list</a>.</p>
       </details>
       <details>
@@ -274,7 +274,7 @@ META = dict(
   "@context":"https://schema.org",
   "@type":"FAQPage",
   "mainEntity":[
-    {"@type":"Question","name":"How much does it cost?","acceptedAnswer":{"@type":"Answer","text":"The Smart Storefront is OMR 950 one-time at the founding price, OMR 1,450 standard. The dashboard adds OMR 650, the autopilot adds OMR 900, and all three together are OMR 2,200."}},
+    {"@type":"Question","name":"How much does it cost?","acceptedAnswer":{"@type":"Answer","text":"The Smart Website is OMR 950 one-time at the founding price, OMR 1,450 standard. The dashboard adds OMR 650, the autopilot adds OMR 900, and all three together are OMR 2,200."}},
     {"@type":"Question","name":"Is there a monthly fee?","acceptedAnswer":{"@type":"Answer","text":"Not to keep anything working. The first year of hosting, security and care is included in the build price. The Growth Desk at OMR 75 a month is optional and never required."}},
     {"@type":"Question","name":"Do you have clients I can speak to?","acceptedAnswer":{"@type":"Answer","text":"Not yet. That is why there is a named guarantee and why the dashboard and buyer-agent demos are open to click without asking for anything."}},
     {"@type":"Question","name":"What if it doesn't work?","acceptedAnswer":{"@type":"Answer","text":"The First Inquiry Promise: no real buyer inquiry within 30 days of going live and it gets rebuilt free until you get one. If you still don't, you get your money back."}},

@@ -42,9 +42,15 @@ def extract_metadata(filepath):
         content = f.read()
 
     # Title
-    title_match = re.search(r'<title>(.*?)</title>', content, re.IGNORECASE)
-    title = title_match.group(1).strip() if title_match else filename
-    title = title.split(' | ')[0]  # Remove brand suffix if present
+    title_match = re.search(r'<title>(.*?)</title>', content, re.IGNORECASE | re.DOTALL)
+    title = title_match.group(1).strip() if title_match else ""
+    title = title.split(' | ')[0].strip()  # Remove brand suffix if present
+    if not title:
+        # 32 Arabic articles carry a malformed <title> tag inherited from an
+        # older pipeline, so the head gives nothing. Their <h1> is intact —
+        # use it rather than putting a blank card on the hub.
+        h1_match = re.search(r'<h1[^>]*>(.*?)</h1>', content, re.IGNORECASE | re.DOTALL)
+        title = re.sub(r'<[^>]+>', '', h1_match.group(1)).strip() if h1_match else filename
 
     # Category
     meta_cat_match = re.search(r'<meta\s+name=["\']category["\']\s+content=["\'](.*?)["\']', content, re.IGNORECASE)
@@ -69,8 +75,16 @@ def extract_metadata(filepath):
     if hero_match:
         img_src = hero_match.group(1)
     else:
-        img_match = re.search(r'<img[^>]+src=["\']([^"\']+)["\']', content, re.IGNORECASE)
-        img_src = img_match.group(1) if img_match else "/blog/images/default.png"
+        # v4 brand-book skin: the hero sits in <figure class="afig"> and its
+        # attributes wrap across lines, so the old single-line patterns above
+        # miss it and the first <img> in the document is the header wordmark.
+        # Anything under /blog/images/ is by definition an article image.
+        art_match = re.search(r'<img[^>]+src=["\'](/blog/images/[^"\']+)["\']', content, re.IGNORECASE | re.DOTALL)
+        if art_match:
+            img_src = art_match.group(1)
+        else:
+            img_match = re.search(r'<img[^>]+src=["\']([^"\']+)["\']', content, re.IGNORECASE)
+            img_src = img_match.group(1) if img_match else "/blog/images/default.png"
 
     return {
         "filename": filename,

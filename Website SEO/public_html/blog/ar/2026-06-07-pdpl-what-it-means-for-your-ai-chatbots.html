@@ -1,25 +1,54 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html dir="rtl" lang="ar">
 <head>
-<style>
-  #fouc-overlay {
-    position: fixed;
-    inset: 0;
-    z-index: 999999;
-    background: #050505;
-    transition: opacity 0.3s ease;
-  }
-</style>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>ماذا يعني قانون حماية البيانات الشخصية (PDPL) فعلياً لروبوتات الدردشة الذكية | AI Profit Lab</title>
+<meta name="description" content="حلول الذكاء الاصطناعي - أتمتة الذكاء الاصطناعي في عمان. اكتشف كيف يمكننا مساعدة عملك في مسقط ودعم رؤية عمان 2040.">
+<meta name="keywords" content="PDPL عمان, قانون حماية البيانات الذكاء الاصطناعي, امتثال روبوت الدردشة عمان, خصوصية البيانات الذكاء الاصطناعي مسقط, PDPL بوت واتساب, تنظيم الذكاء الاصطناعي عمان 2024, AI Profit Lab">
+<meta name="category" content="أمن وحوكمة الذكاء الاصطناعي">
+<!-- Explicit and permissive: large image previews and uncapped snippets are
+     what let this page surface as a rich result and be quoted in full by an
+     answer engine. The old template shipped no robots tag at all. -->
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="canonical" href="https://aiprofitlab.io/blog/ar/2026-06-07-pdpl-what-it-means-for-your-ai-chatbots">
+<link rel="alternate" hreflang="en" href="https://aiprofitlab.io/blog/en/2026-06-07-pdpl-what-it-means-for-your-ai-chatbots/">
+<link rel="alternate" hreflang="ar" href="https://aiprofitlab.io/blog/ar/2026-06-07-pdpl-what-it-means-for-your-ai-chatbots/">
+<link rel="alternate" hreflang="x-default" href="https://aiprofitlab.io/blog/en/2026-06-07-pdpl-what-it-means-for-your-ai-chatbots/">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/favicon.svg">
+
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="AI Profit Lab">
+<meta property="og:title" content="ماذا يعني قانون حماية البيانات الشخصية (PDPL) فعلياً لروبوتات الدردشة الذكية | AI Profit Lab">
+<meta property="og:description" content="حلول الذكاء الاصطناعي - أتمتة الذكاء الاصطناعي في عمان. اكتشف كيف يمكننا مساعدة عملك في مسقط ودعم رؤية عمان 2040.">
+<meta property="og:url" content="https://aiprofitlab.io/blog/ar/2026-06-07-pdpl-what-it-means-for-your-ai-chatbots">
+<meta property="og:image" content="https://aiprofitlab.io/blog/images/pdpl-ai-chatbot-oman.png">
+<meta property="og:locale" content="ar_OM">
+<meta property="article:published_time" content="2026-06-07">
+<meta property="article:publisher" content="https://www.facebook.com/profile.php?id=61584870364473">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="ماذا يعني قانون حماية البيانات الشخصية (PDPL) فعلياً لروبوتات الدردشة الذكية | AI Profit Lab">
+<meta name="twitter:description" content="حلول الذكاء الاصطناعي - أتمتة الذكاء الاصطناعي في عمان. اكتشف كيف يمكننا مساعدة عملك في مسقط ودعم رؤية عمان 2040.">
+<meta name="twitter:image" content="https://aiprofitlab.io/blog/images/pdpl-ai-chatbot-oman.png">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com" rel="preconnect">
-<link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Marcellus&family=Markazi+Text:wght@400;500;600&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" media="print" onload="this.media='all'" href="https://fonts.googleapis.com/css2?family=Marcellus&family=Markazi+Text:wght@400;500;600&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus&family=Markazi+Text:wght@400;500;600&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap"></noscript>
+<!-- One stylesheet, shared by all 300 articles. The filename carries a content
+     hash, which is what makes the host's `immutable, max-age=31536000` rule on
+     /assets/** safe here: an edited stylesheet ships under a new name instead
+     of sitting behind a year-long cache on a stale one. -->
+<link rel="stylesheet" href="/assets/css/apl-article.5d933cf61d.css">
+<script>document.documentElement.className+=" js"</script>
 
-<meta content="PDPL عمان, قانون حماية البيانات الذكاء الاصطناعي, امتثال روبوت الدردشة عمان, خصوصية البيانات الذكاء الاصطناعي مسقط, PDPL بوت واتساب, تنظيم الذكاء الاصطناعي عمان 2024, AI Profit Lab" name="keywords">
-<link href="/favicon.svg" rel="icon" type="image/svg+xml">
-<link href="/favicon.svg" rel="apple-touch-icon">
-<!-- JSON-LD Schema Markup -->
+<!-- Google tag (gtag.js) -->
+<script defer src="/assets/js/apl-article.77b8e120ac.js"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SLR9GD3MJP"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-SLR9GD3MJP');</script>
+
 <script type="application/ld+json">
 {
     "@context": "https://schema.org",
@@ -138,33 +167,6 @@
     ]
 }
 </script>
-<link rel="preconnect" href="https://cdn.tailwindcss.com">
-<link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
-<script src="https://cdn.tailwindcss.com"></script>
-<link as="style" href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&family=Outfit:wght@300;400;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'" rel="preload">
-<noscript><link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet"></noscript>
-<style>
-        body { font-family: 'Cairo', sans-serif; background-color: #050505; color: #ffffff; }
-        .logo-font { font-family: 'Outfit', sans-serif !important; }
-        .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.05); }
-        .glass-card { background: rgba(255, 255, 255, 0.02); backdrop-filter: blur(8px); border: 1px solid rgba(255, 255, 255, 0.05); transition: all 0.3s ease; }
-        .glass-card:hover { border-color: #3B82F6; transform: translateY(-5px); box-shadow: 0 20px 40px rgba(59, 130, 246, 0.1); }
-        .prose h2 { color: #60A5FA; margin-top: 2.5em; margin-bottom: 1em; font-weight: 800; font-size: 1.875rem; }
-        .prose h3 { color: #93C5FD; margin-top: 2em; margin-bottom: 1em; font-weight: 700; font-size: 1.5rem; }
-        .prose p { margin-bottom: 1.5em; line-height: 2; color: #D1D5DB; }
-        .prose strong { color: #F3F4F6; }
-        .prose blockquote { border-right: 4px solid #3B82F6; border-left: none; padding-right: 1rem; padding-left: 0; font-style: normal; color: #9CA3AF; margin-right: 0; }
-        table { width: 100%; border-collapse: collapse; margin-top: 1.5em; margin-bottom: 1.5em; }
-        th, td { border: 1px solid rgba(255, 255, 255, 0.1); padding: 12px; text-align: right; }
-        th { background-color: rgba(59, 130, 246, 0.1); color: #93C5FD; font-weight: 700; }
-        .prose ul { margin-bottom: 1.5em; padding-right: 1.5em; padding-left: 0; }
-        .prose ul li { margin-bottom: 0.75em; line-height: 2; color: #D1D5DB; }
-        .warning-box { background: rgba(239, 68, 68, 0.08); border: 1px solid rgba(239, 68, 68, 0.2); border-radius: 0.75rem; padding: 1.25rem 1.5rem; margin: 1.5em 0; }
-        .warning-box strong { color: #FCA5A5; }
-        .tip-box { background: rgba(34, 197, 94, 0.08); border: 1px solid rgba(34, 197, 94, 0.2); border-radius: 0.75rem; padding: 1.25rem 1.5rem; margin: 1.5em 0; }
-        .tip-box strong { color: #86EFAC; }
-    </style>
-<!-- Local Business Schema -->
 <script type="application/ld+json">
 {
     "@context": "https://schema.org",
@@ -204,155 +206,85 @@
     ]
 }
 </script>
-</meta><style>img, video, iframe { aspect-ratio: attr(width) / attr(height); } .youtube-facade, #aiden-ui, .dynamic-content { min-height: 200px; }</style><style>
-/* === ANTI-BLACK-SCREEN: Critical layout fallback (pre-Tailwind) === */
-.text-white { color: #fff; }
-.text-gray-300 { color: #d1d5db; }
-.text-gray-400 { color: #9ca3af; }
-.text-blue-500 { color: #3b82f6; }
-.text-red-500 { color: #ef4444; }
-.text-red-400 { color: #f87171; }
-.text-green-400 { color: #4ade80; }
-.text-green-500 { color: #22c55e; }
-.text-purple-400 { color: #c084fc; }
-.text-transparent { color: transparent; }
-.bg-clip-text { -webkit-background-clip: text; background-clip: text; }
-.bg-gradient-to-r { background-image: linear-gradient(to right, var(--tw-gradient-stops, #3b82f6, #22c55e)); }
-.from-blue-500 { --tw-gradient-from: #3b82f6; --tw-gradient-stops: #3b82f6, #22c55e; }
-.text-sm { font-size: 0.875rem; }
-.text-lg { font-size: 1.125rem; }
-.text-xl { font-size: 1.25rem; }
-.text-2xl { font-size: 1.5rem; }
-.text-3xl { font-size: 1.875rem; }
-.text-4xl { font-size: 2.25rem; }
-.text-5xl { font-size: 3rem; }
-.font-bold { font-weight: 700; }
-.font-extrabold { font-weight: 800; }
-.flex { display: flex; }
-.hidden { display: none; }
-.block { display: block; }
-.grid { display: grid; }
-.items-center { align-items: center; }
-.justify-center { justify-content: center; }
-.justify-between { justify-content: space-between; }
-.flex-col { flex-direction: column; }
-.flex-wrap { flex-wrap: wrap; }
-.text-center { text-align: center; }
-.text-left { text-align: left; }
-.mx-auto { margin-left: auto; margin-right: auto; }
-.px-4 { padding-left: 1rem; padding-right: 1rem; }
-.px-6 { padding-left: 1.5rem; padding-right: 1.5rem; }
-.py-4 { padding-top: 1rem; padding-bottom: 1rem; }
-.py-8 { padding-top: 2rem; padding-bottom: 2rem; }
-.py-16 { padding-top: 4rem; padding-bottom: 4rem; }
-.py-24 { padding-top: 6rem; padding-bottom: 6rem; }
-.pt-16 { padding-top: 4rem; }
-.pt-24 { padding-top: 6rem; }
-.pb-8 { padding-bottom: 2rem; }
-.mt-2 { margin-top: 0.5rem; }
-.mt-6 { margin-top: 1.5rem; }
-.mt-8 { margin-top: 2rem; }
-.mt-10 { margin-top: 2.5rem; }
-.mb-3 { margin-bottom: 0.75rem; }
-.mb-4 { margin-bottom: 1rem; }
-.mb-6 { margin-bottom: 1.5rem; }
-.gap-4 { gap: 1rem; }
-.gap-8 { gap: 2rem; }
-.gap-12 { gap: 3rem; }
-.max-w-4xl { max-width: 56rem; }
-.max-w-6xl { max-width: 72rem; }
-.min-h-screen { min-height: 100vh; }
-.w-full { width: 100%; }
-.fixed { position: fixed; }
-.relative { position: relative; }
-.absolute { position: absolute; }
-.z-50 { z-index: 50; }
-.rounded-xl { border-radius: 0.75rem; }
-.rounded-2xl { border-radius: 1rem; }
-.rounded-3xl { border-radius: 1.5rem; }
-.overflow-hidden { overflow: hidden; }
-.shadow-lg { box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); }
-.leading-relaxed { line-height: 1.625; }
-.leading-tight { line-height: 1.25; }
-.transition { transition-property: all; transition-duration: 0.15s; }
-.inline-block { display: inline-block; }
-.inline-flex { display: inline-flex; }
-@media (min-width: 768px) {
-  .md\:flex { display: flex; }
-  .md\:hidden { display: none; }
-  .md\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .md\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  .md\:grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-  .md\:px-12 { padding-left: 3rem; padding-right: 3rem; }
-  .md\:text-3xl { font-size: 1.875rem; }
-  .md\:text-4xl { font-size: 2.25rem; }
-  .md\:text-5xl { font-size: 3rem; }
-  .md\:text-7xl { font-size: 4.5rem; }
-  .md\:w-1\/2 { width: 50%; }
-  .md\:flex-row { flex-direction: row; }
-  .md\:col-span-2 { grid-column: span 2; }
-}
-@media (min-width: 640px) {
-  .sm\:text-6xl { font-size: 3.75rem; }
-  .sm\:flex-row { flex-direction: row; }
-}
-/* === CLS FIX: Constrain all chevron/arrow/scroll SVGs === */
-.chevron, [class*="chevron"], [class*="arrow"], [class*="scroll"] svg,
-.swiper-button-next, .swiper-button-prev {
-  width: 40px !important; height: 40px !important;
-  max-width: 40px !important; max-height: 40px !important;
-}
-svg { max-width: 100%; height: auto; overflow: hidden; }
-svg:not([width]) { width: 24px; height: 24px; }
-/* Nav chevron SVGs: lock to exact inline dimensions */
-nav svg[width="16"][height="16"] { width: 16px !important; height: 16px !important; max-width: 16px !important; max-height: 16px !important; }
-</style><!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-SLR9GD3MJP"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-SLR9GD3MJP');
-</script>
-    <link rel="canonical" href="https://aiprofitlab.io/blog/ar/2026-06-07-pdpl-what-it-means-for-your-ai-chatbots" />
-    <link rel="alternate" hreflang="en" href="https://aiprofitlab.io/blog/en/2026-06-07-pdpl-what-it-means-for-your-ai-chatbots" />
-    <link rel="alternate" hreflang="ar" href="https://aiprofitlab.io/blog/ar/2026-06-07-pdpl-what-it-means-for-your-ai-chatbots" />
-    <link rel="alternate" hreflang="x-default" href="https://aiprofitlab.io/blog/en/2026-06-07-pdpl-what-it-means-for-your-ai-chatbots" />
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta content="أمن وحوكمة الذكاء الاصطناعي" name="category">
-<title>ماذا يعني قانون حماية البيان...">
-  <meta name="description" content="حلول الذكاء الاصطناعي - أتمتة الذكاء الاصطناعي في عمان. اكتشف كيف يمكننا مساعدة عملك في مسقط ودعم رؤية عمان 2040.">
 </head>
-<body class="antialiased flex flex-col min-h-screen">
-<div id="fouc-overlay"></div>
-<!-- Navigation -->
-<nav class="flex justify-between items-center px-6 md:px-12 py-8 w-full z-50 glass sticky top-0 bg-black/30" id="header">
-<a class="font-extrabold text-3xl md:text-4xl tracking-tighter hover:opacity-80 transition logo-font" href="/">
-<span class="text-blue-500">A</span><span class="text-red-500">I</span> <span class="text-white text-2xl md:text-3xl">Profit Lab</span>
-</a>
-<a class="text-gray-300 hover:text-white font-semibold transition" href="/blog-ar/">العودة للمقالات</a>
-</nav>
-<!-- Main Content -->
-<main class="max-w-4xl mx-auto px-6 py-16 flex-grow">
-<article>
-<div class="mb-12 text-center">
-<span class="bg-blue-500/10 text-blue-400 text-sm font-bold px-4 py-2 rounded-full border border-blue-500/20 mb-6 inline-block">أمن وحوكمة الذكاء الاصطناعي</span>
-<h1 class="text-4xl md:text-6xl font-extrabold mb-6 leading-tight">ماذا يعني قانون حماية البيانات الشخصية (PDPL) فعلياً لروبوتات الدردشة الذكية</h1>
-<p class="text-xl text-gray-400 max-w-2xl mx-auto">قانون حماية البيانات العُماني ساري المفعول. إليك الشرح الواضح لما يعنيه لكل بوت واتساب ودردشة موقع وموظف استقبال ذكي تُشغّله شركتك الآن.</p>
+<body>
+<a class="skip" href="#main">تخطَّ إلى المحتوى</a>
+<header class="top" id="top">
+  <a href="/" aria-label="AI Profit Lab">
+    <img class="mark" src="/assets/brand/wordmark-primary.svg" alt="AI Profit Lab" width="160" height="28">
+  </a>
+  <nav class="nav" aria-label="Primary">
+    <a class="lnk" href="/services/">باقاتنا</a>
+    <a class="lnk" href="/process/">طريقتنا</a>
+    <a class="lnk" href="/about/">من نحن</a>
+    <a class="lnk" href="/contact/">اتصل بنا</a>
+    <a class="lnk" href="/blog-ar/">المقالات</a>
+    <a class="lnk" href="/en/" lang="en">English</a>
+    <a class="top-wa" href="https://wa.me/96899245250?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%D8%8C%20%D9%84%D8%AF%D9%8A%20%D8%B3%D8%A4%D8%A7%D9%84%20%D8%B9%D9%86%20%D8%B9%D9%85%D9%84%D9%8A."><svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 1.8a8.2 8.2 0 1 1-4.2 15.3l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8zm-3.1 4c-.2 0-.5 0-.7.3-.2.3-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.8 2.8 4.4 3.8 2.2.9 2.6.7 3.1.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2-.1-.1-.2-.2-.5-.3l-1.7-.8c-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.1-.2 0-.4.1-.5l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5L10 8.2c-.2-.4-.4-.4-.6-.4h-.5z"/></svg><span>واتساب</span></a>
+    <button class="burger" id="burger" aria-label="فتح القائمة" aria-expanded="false" aria-controls="mmenu"><i></i></button>
+  </nav>
+</header>
+<div class="mmenu" id="mmenu" aria-hidden="true">
+  <a href="/"><em>٠١</em>الرئيسية</a>
+  <a href="/services/"><em>٠٢</em>باقاتنا</a>
+  <a href="/process/"><em>٠٣</em>طريقتنا</a>
+  <a href="/about/"><em>٠٤</em>من نحن</a>
+  <a href="/contact/"><em>٠٥</em>اتصل بنا</a>
+  <a href="/blog-ar/"><em>٠٦</em>المقالات</a>
+  <a href="/en/" lang="en"><em>07</em>English</a>
+  <p class="mfoot">hello@aiprofitlab.io &middot; <span dir="ltr">+968 9924 5250</span><br>Muscat, Oman</p>
 </div>
-<img alt="درع امتثال PDPL في عُمان مع واجهة روبوت الدردشة الذكي والوثائق القانونية" class="w-full rounded-3xl mb-16 shadow-[0_0_50px_rgba(59,130,246,0.15)] border border-white/5 object-cover h-[500px]" height="1024" src="/blog/images/pdpl-ai-chatbot-oman.png" width="1024">
-<div class="prose max-w-none">
+<div class="prog" id="prog" aria-hidden="true"></div>
+<main id="main">
+
+<section class="ahero grain">
+  <div class="wrap-a">
+    <p class="crumbs">
+      <a href="/">الرئيسية</a><i>&#10038;</i><a href="/blog-ar/">المقالات</a><i>&#10038;</i>
+      <span>أمن وحوكمة الذكاء الاصطناعي</span>
+    </p>
+    <h1 class="h1">ماذا يعني قانون حماية البيانات الشخصية (PDPL) فعلياً لروبوتات الدردشة الذكية</h1>
+    <p class="lede">قانون حماية البيانات العُماني ساري المفعول. إليك الشرح الواضح لما يعنيه لكل بوت واتساب ودردشة موقع وموظف استقبال ذكي تُشغّله شركتك الآن.</p>
+    <div class="byline">
+      <span class="bymark" aria-hidden="true"><img src="/assets/brand/icon-transparent.svg" alt="" width="26" height="26"></span>
+      <div class="who"><b>AI Profit Lab</b><span>يُكتب ويُنشر في مسقط</span></div>
+      <span class="sp"></span>
+      <time class="stamp" datetime="2026-06-07">7 يونيو 2026 &middot; 6 دقائق قراءة</time>
+      <div class="share">
+      <a href="https://wa.me/?text=%D9%85%D8%A7%D8%B0%D8%A7%20%D9%8A%D8%B9%D9%86%D9%8A%20%D9%82%D8%A7%D9%86%D9%88%D9%86%20%D8%AD%D9%85%D8%A7%D9%8A%D8%A9%20%D8%A7%D9%84%D8%A8%D9%8A%D8%A7%D9%86%D8%A7%D8%AA%20%D8%A7%D9%84%D8%B4%D8%AE%D8%B5%D9%8A%D8%A9%20%28PDPL%29%20%D9%81%D8%B9%D9%84%D9%8A%D8%A7%D9%8B%20%D9%84%D8%B1%D9%88%D8%A8%D9%88%D8%AA%D8%A7%D8%AA%20%D8%A7%D9%84%D8%AF%D8%B1%D8%AF%D8%B4%D8%A9%20%D8%A7%D9%84%D8%B0%D9%83%D9%8A%D8%A9%20%E2%80%94%20https%3A//aiprofitlab.io/blog/ar/2026-06-07-pdpl-what-it-means-for-your-ai-chatbots" target="_blank" rel="noopener" aria-label="شارك على واتساب" title="شارك على واتساب"><svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 1.8a8.2 8.2 0 1 1-4.2 15.3l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8zm-3.1 4c-.2 0-.5 0-.7.3-.2.3-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.8 2.8 4.4 3.8 2.2.9 2.6.7 3.1.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2-.1-.1-.2-.2-.5-.3l-1.7-.8c-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.1-.2 0-.4.1-.5l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5L10 8.2c-.2-.4-.4-.4-.6-.4h-.5z"/></svg></a>
+      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aiprofitlab.io/blog/ar/2026-06-07-pdpl-what-it-means-for-your-ai-chatbots" target="_blank" rel="noopener" aria-label="شارك على لينكدإن" title="شارك على لينكدإن"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-.95 1.83-1.95 3.77-1.95 4.03 0 4.78 2.5 4.78 5.76V21h-4v-5.6c0-1.34-.03-3.06-1.9-3.06-1.9 0-2.2 1.45-2.2 2.96V21H9z"/></svg></a>
+      <button type="button" id="copyLink" aria-label="نسخ الرابط" title="نسخ الرابط"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10.6 13.4a1 1 0 0 1 0-1.4l1.4-1.4a1 1 0 0 1 1.4 1.4l-1.4 1.4a1 1 0 0 1-1.4 0zm-3 4.4a3.5 3.5 0 0 1 0-5l2.2-2.1 1.4 1.4-2.2 2.1a1.5 1.5 0 0 0 2.2 2.2l2.1-2.2 1.4 1.4-2.1 2.2a3.5 3.5 0 0 1-5 0zm9-9a3.5 3.5 0 0 0-5 0l-2.1 2.2 1.4 1.4 2.1-2.2a1.5 1.5 0 0 1 2.2 2.2l-2.2 2.1 1.4 1.4 2.2-2.1a3.5 3.5 0 0 0 0-5z"/></svg></button>
+    </div>
+    </div>
+  </div>
+  <div class="artwrap" style="margin-top:clamp(30px,4vw,52px)">
+    <figure class="afig">
+      <img src="/blog/images/pdpl-ai-chatbot-oman.png" alt="درع امتثال PDPL في عُمان مع واجهة روبوت الدردشة الذكي والوثائق القانونية"
+           width="1180" height="516" fetchpriority="high" decoding="async">
+    </figure>
+  </div>
+</section>
+
+<section class="s-cream">
+  <div class="artwrap">
+    <div class="artgrid">
+      <nav class="toc" aria-label="في هذه الصفحة">
+        <h4>في هذه الصفحة</h4>
+        <ol><li><a href="#pdpl">أولاً: ما هو قانون PDPL؟</a></li><li><a href="#4-pdpl">أبرز 4 التزامات لقانون PDPL تؤثر بشدة على روبوتات الدردشة</a></li><li><a href="#section">واقع العقوبات: هذا ليس نظرياً</a></li><li><a href="#pdpl-2">قائمة مراجعة عملية للامتثال لـ PDPL لروبوتات الدردشة الذكية</a></li><li><a href="#pdpl-3">كيف تبدو &quot;الذكاء الاصطناعي المتوافق مع PDPL&quot; فعلياً</a></li><li><a href="#section-4">الفرصة المخفية في الامتثال</a></li><li><a href="#ai-profit-lab">نهج AI Profit Lab في الذكاء الاصطناعي المتوافق</a></li><li><a href="#questions">أسئلة يطرحها القُرّاء</a></li><li><a href="#sources">المصادر</a></li></ol>
+        <p class="back"><a class="tlink" href="/blog-ar/"><span class="arw">&rarr;</span><span>كل المقالات</span></a></p>
+      </nav>
+      <div id="art">
+        <article class="prose">
 <p>معظم أصحاب الأعمال العُمانيين الذين يشغّلون روبوتات دردشة ذكية اليوم يجلسون دون علم فوق قنبلة امتثال قانوني موقوتة. <strong>قانون حماية البيانات الشخصية (PDPL)</strong>، الصادر بموجب المرسوم السلطاني رقم 6/2022، هو أحد أهم التشريعات التي تؤثر على الأعمال الرقمية في السلطنة. ومع ذلك، فإن غالبية بوتات واتساب وأدوات الدردشة على المواقع الإلكترونية وموظفي الاستقبال الآليين العاملين حالياً في مسقط بُنيت دون أخذ امتثال PDPL بعين الاعتبار.</p>
 <p>هذا المقال يقطع عبر المصطلحات القانونية المعقدة. لا لغة محامين. فقط شرح مباشر وعملي لما يقوله القانون، ولماذا يؤثر بشكل خاص على الأدوات المدعومة بالذكاء الاصطناعي، وما الذي يجب عليك فعله لحماية عملك من المخاطر المالية والسمعية الجسيمة.</p>
-<h2>أولاً: ما هو قانون PDPL؟</h2>
+<h2 id="pdpl">أولاً: ما هو قانون PDPL؟</h2>
 <p>قانون حماية البيانات الشخصية هو المعادل العُماني للائحة GDPR الأوروبية أو قانون PDPL السعودي. يحكم هذا القانون طريقة <strong>أي شركة</strong> &mdash; مسجّلة في عُمان أو أجنبية &mdash; في جمع وتخزين ومعالجة ومشاركة البيانات الشخصية للأفراد داخل السلطنة.</p>
 <p>يُعرِّف القانون "البيانات الشخصية" تعريفاً واسعاً للغاية: أي معلومات يمكنها تحديد هوية شخص &mdash; بشكل مباشر أو غير مباشر. يشمل ذلك الأسماء وأرقام الهواتف وعناوين البريد الإلكتروني وعناوين IP وبيانات الموقع وتاريخ الشراء والتسجيلات الصوتية وحتى الأسئلة المحددة التي يطرحها المستخدم على روبوت الدردشة إذا كان بالإمكان ربطها بهوية معينة.</p>
-<div class="warning-box">
+
 <strong>⚠️ التحقق من الواقع الحرج:</strong> إذا كان روبوت الدردشة الخاص بك يطلب اسم العميل أو رقم هاتفه أو أي تفصيل يُعرِّفه &mdash; فأنت تعالج بيانات شخصية بموجب PDPL. لا يوجد "إعفاء للشركات الصغيرة."
-                </div>
-<h2>أبرز 4 التزامات لقانون PDPL تؤثر بشدة على روبوتات الدردشة</h2>
-<h3>1. الموافقة الصريحة المُبلَّغة &mdash; قبل جمع البيانات</h3>
+
+<h2 id="4-pdpl">أبرز 4 التزامات لقانون PDPL تؤثر بشدة على روبوتات الدردشة</h2>
+<h3 id="1">1. الموافقة الصريحة المُبلَّغة &mdash; قبل جمع البيانات</h3>
 <p>قبل أن يجمع روبوت الدردشة قطعة واحدة من البيانات الشخصية، يجب أن يُقدِّم المستخدم <strong>موافقة صريحة ومُبلَّغة</strong>. هذه ليست مربع تحقق مخفياً في شروط الخدمة. وليست "باستمرارك في هذه المحادثة فأنت توافق على..." مدفونةً في رسالة أولى يتخطاها المستخدم.</p>
 <p>يجب أن تكون الموافقة الصحيحة بموجب PDPL:</p>
 <ul>
@@ -361,20 +293,20 @@ nav svg[width="16"][height="16"] { width: 16px !important; height: 16px !importa
 <li><strong>غير غامضة:</strong> إجراء إيجابي واضح &mdash; لا مربع محدد مسبقاً أو قبول سلبي.</li>
 <li><strong>قابلة للسحب:</strong> يجب أن يتمكن المستخدم من سحب موافقته في أي وقت وحذف بياناته.</li>
 </ul>
-<h3>2. الحد الأدنى من البيانات &mdash; اجمع فقط ما تحتاجه</h3>
+<h3 id="2">2. الحد الأدنى من البيانات &mdash; اجمع فقط ما تحتاجه</h3>
 <p>تُبني كثير من روبوتات الدردشة لجمع أكبر قدر ممكن من المعلومات "للاحتياط." يقلب PDPL هذا المنطق رأساً على عقب. يشترط مبدأ <strong>تقليل البيانات</strong> أن تجمع فقط البيانات الشخصية الضرورية بشكل صارم للغرض المُعلَن.</p>
 <p>إذا كان روبوت الدردشة يحجز مواعيد الخدمة، فأنت بحاجة إلى اسم ورقم هاتف والوقت المفضل. لست بحاجة إلى تاريخ ميلاد العميل أو رقم هويته الوطنية أو دخله الأسري &mdash; إلا إذا استطعت تبرير ذلك قانونياً. كل حقل بيانات غير ضروري هو مسؤولية قانونية.</p>
-<h3>3. نقل البيانات إلى أطراف ثالثة &mdash; مشكلة موردي الذكاء الاصطناعي</h3>
+<h3 id="3">3. نقل البيانات إلى أطراف ثالثة &mdash; مشكلة موردي الذكاء الاصطناعي</h3>
 <p>هنا تكمن القضية التي لا يتحدث عنها أحد تقريباً: حين تعالج روبوت الدردشة محادثةً عبر GPT-4 من OpenAI أو Gemini من Google أو أي خدمة ذكاء اصطناعي سحابية، فأنت تنقل بيانات شخصية إلى خوادم خارج عُمان. بموجب PDPL، هذا يستوجب:</p>
 <ul>
 <li>اتفاقية <strong>معالجة بيانات (DPA)</strong> رسمية مع مورد الذكاء الاصطناعي.</li>
 <li>الإفصاح في سياسة الخصوصية بأن البيانات تُعالَج دولياً.</li>
 <li>التحقق من أن الدولة المستلِمة تمتلك معايير حماية بيانات "كافية."</li>
 </ul>
-<div class="warning-box">
+
 <strong>⚠️ فخ الموردين:</strong> مجرد استخدام واجهة API الخاصة بـ OpenAI دون توقيع DPA، ودون الإفصاح لمستخدميك، يُعدّ انتهاكاً مباشراً لـ PDPL. معظم الشركات الصغيرة لم تتحقق أبداً مما إذا كان مورد الذكاء الاصطناعي يوفر DPA لعملاء منطقة الخليج.
-                </div>
-<h3>4. حقوق أصحاب البيانات &mdash; عملاؤك يمكنهم المطالبة بإجراء</h3>
+
+<h3 id="4">4. حقوق أصحاب البيانات &mdash; عملاؤك يمكنهم المطالبة بإجراء</h3>
 <p>بموجب PDPL، لكل شخص تحتفظ ببياناته حقوق قابلة للتنفيذ قانونياً. بالنسبة لروبوت الدردشة الذكي، يعني هذا:</p>
 <ul>
 <li><strong>حق الوصول:</strong> يستطيع العميل طلب جميع البيانات التي جمعها روبوت الدردشة عنه.</li>
@@ -382,13 +314,13 @@ nav svg[width="16"][height="16"] { width: 16px !important; height: 16px !importa
 <li><strong>حق التصحيح:</strong> إذا كانت البيانات غير صحيحة، يستطيع المطالبة بتصحيحها.</li>
 <li><strong>حق الاعتراض:</strong> يستطيع الاعتراض على أنواع معينة من المعالجة، بما في ذلك اتخاذ القرار الآلي.</li>
 </ul>
-<h2>واقع العقوبات: هذا ليس نظرياً</h2>
+<h2 id="section">واقع العقوبات: هذا ليس نظرياً</h2>
 <p>تملك هيئة حماية البيانات في عُمان (OCTA) صلاحية فرض غرامات تصل إلى <strong>500,000 ريال عُماني</strong> (ما يعادل حوالي 1.3 مليون دولار أمريكي) للانتهاكات الجسيمة. المسؤولية الجنائية ممكنة أيضاً في حالات الاختراق المتعمد. وما وراء الغرامات، فإن أي إجراء تنفيذي علني ضد شركة عُمانية &mdash; خاصةً ما يتعلق ببيانات العملاء &mdash; يحمل ضرراً سمعياً لا يستطيع أي قدر من التسويق إصلاحه.</p>
-<blockquote class="bg-gray-900/50 p-4 rounded-r-lg border-r-4 border-l-0 border-blue-500">
+<blockquote>
                     "الامتثال ليس مشكلة الفريق القانوني &mdash; إنه مشكلة تصميم المنتج. الوقت المناسب لبناء PDPL في أنظمة الذكاء الاصطناعي هو قبل الإطلاق، لا بعد تقديم شكوى."
                 </blockquote>
-<h2>قائمة مراجعة عملية للامتثال لـ PDPL لروبوتات الدردشة الذكية</h2>
-<table>
+<h2 id="pdpl-2">قائمة مراجعة عملية للامتثال لـ PDPL لروبوتات الدردشة الذكية</h2>
+<div class="tblwrap"><table class="tbl">
 <thead>
 <tr>
 <th>مجال الامتثال</th>
@@ -400,40 +332,40 @@ nav svg[width="16"][height="16"] { width: 16px !important; height: 16px !importa
 <tr>
 <td>آلية الموافقة</td>
 <td>إضافة موافقة صريحة قبل بدء جمع البيانات</td>
-<td style="color: #FCA5A5;">معظم البوتات: مفقودة</td>
+<td>معظم البوتات: مفقودة</td>
 </tr>
 <tr>
 <td>سياسة الخصوصية</td>
 <td>نشر سياسة خصوصية متوافقة مع PDPL بالعربية والإنجليزية</td>
-<td style="color: #FCA5A5;">غالباً: غير محدّثة</td>
+<td>غالباً: غير محدّثة</td>
 </tr>
 <tr>
 <td>تقليل البيانات</td>
 <td>إزالة جميع حقول جمع البيانات غير الضرورية</td>
-<td style="color: #FCA5A5;">نادراً ما تُراجَع</td>
+<td>نادراً ما تُراجَع</td>
 </tr>
 <tr>
 <td>اتفاقيات DPA مع الموردين</td>
 <td>توقيع DPA مع OpenAI وGoogle وMake.com وغيرها</td>
-<td style="color: #FCA5A5;">مفقودة تقريباً دائماً</td>
+<td>مفقودة تقريباً دائماً</td>
 </tr>
 <tr>
 <td>عملية حذف البيانات</td>
 <td>تفعيل حذف بيانات المستخدم عند الطلب</td>
-<td style="color: #FCA5A5;">نادراً ما تُطبَّق</td>
+<td>نادراً ما تُطبَّق</td>
 </tr>
 <tr>
 <td>بروتوكول اختراق البيانات</td>
 <td>تحديد إجراء الإخطار بالخرق</td>
-<td style="color: #FCA5A5;">معظم الشركات الصغيرة: لا يوجد</td>
+<td>معظم الشركات الصغيرة: لا يوجد</td>
 </tr>
 </tbody>
-</table>
-<h2>كيف تبدو "الذكاء الاصطناعي المتوافق مع PDPL" فعلياً</h2>
-<h3>تدفق بوت واتساب المتوافق</h3>
+</table></div>
+<h2 id="pdpl-3">كيف تبدو "الذكاء الاصطناعي المتوافق مع PDPL" فعلياً</h2>
+<h3 id="section-2">تدفق بوت واتساب المتوافق</h3>
 <p>حين يراسل مستخدم بوت واتساب الخاص بشركتك لأول مرة، يجب ألا تكون الاستجابة الأولى "مرحباً! كيف يمكنني مساعدتك اليوم؟" بل يجب أن تكون رسالة موافقة واضحة وودّية: <em>"مرحباً بك في [اسم الشركة]. قبل البدء، يُرجى العلم بأننا نجمع اسمك وتفاصيل استفسارك لمساعدتك. اطّلع على سياسة الخصوصية على [الرابط]. أرسل 'نعم' للمتابعة."</em></p>
 <p>فقط بعد تلقّي "نعم" يتابع البوت جمع أي معلومات شخصية. هذا التغيير الواحد يحوّل بوتك من مسؤولية PDPL إلى نظام متوافق.</p>
-<h3>بنية الخصوصية بالتصميم</h3>
+<h3 id="section-3">بنية الخصوصية بالتصميم</h3>
 <p>ما وراء الموافقة، تُصمَّم أنظمة الذكاء الاصطناعي المتوافقة مع PDPL من الأساس مع مراعاة الخصوصية:</p>
 <ul>
 <li><strong>تخزين البيانات محلياً أو في خوادم منطقة الخليج</strong> حيثما أمكن، مما يقلل من تعقيدات النقل العابر للحدود.</li>
@@ -441,13 +373,13 @@ nav svg[width="16"][height="16"] { width: 16px !important; height: 16px !importa
 <li><strong>ضوابط الوصول المستندة إلى الأدوار</strong> حتى لا يتمكن من عرض سجلات محادثات المستخدمين إلا الموظفون المُخوَّلون.</li>
 <li><strong>سجلات المراجعة</strong> التي تسجل من وصل إلى أي بيانات ومتى &mdash; ضرورية لإثبات الامتثال أمام الجهات التنظيمية.</li>
 </ul>
-<div class="tip-box">
+
 <strong>✅ مكسب سريع:</strong> قبل أي تغييرات تقنية، ببساطة أضف سياسة خصوصية متوافقة مع PDPL إلى موقعك الإلكتروني وأشِر إليها من كل تفاعل لروبوت الدردشة. هذا وحده يُقلّص بشكل ملحوظ مخاطر مسؤوليتك ويُظهر حسن النية للجهات التنظيمية.
-                </div>
-<h2>الفرصة المخفية في الامتثال</h2>
+
+<h2 id="section-4">الفرصة المخفية في الامتثال</h2>
 <p>إليك الحقيقة المعاكسة للحدس: الشركات التي تبني الامتثال لـ PDPL في أنظمة الذكاء الاصطناعي اليوم ستمتلك <strong>ميزة تنافسية ضخمة</strong> غداً. مع نضوج البيئة التنظيمية في عُمان، ستصبح الفجوة بين أنظمة الذكاء الاصطناعي المتوافقة وغير المتوافقة مرئيةً بشكل متزايد للعملاء والشركاء من المؤسسات الكبيرة التي هي بدورها تحت ضغط الامتثال.</p>
 <p>الجهات الحكومية العُمانية والشركات الكبرى والعملاء الدوليون العاملون في عُمان سيطلبون بشكل متزايد إثبات الامتثال البياني من موردي التقنية ومزودي الخدمات. أن تكون الشركة التي يمكنها القول "أنظمة الذكاء الاصطناعي لدينا متوافقة مع PDPL بحكم التصميم" ليس مجرد خانة امتثال &mdash; بل هو مُميِّز تجاري.</p>
-<h2>نهج AI Profit Lab في الذكاء الاصطناعي المتوافق</h2>
+<h2 id="ai-profit-lab">نهج AI Profit Lab في الذكاء الاصطناعي المتوافق</h2>
 <p>في AI Profit Lab، كل نظام ذكاء اصطناعي نبنيه للشركات العُمانية مُصمَّم مع الامتثال التنظيمي كطبقة أساسية، لا فكرة لاحقة. هذا يعني:</p>
 <ul>
 <li>تدفقات الموافقة مدمجة في كل أداة ذكاء اصطناعي تواجه العملاء.</li>
@@ -457,103 +389,94 @@ nav svg[width="16"][height="16"] { width: 16px !important; height: 16px !importa
 <li>تدريب الموظفين على حقوق أصحاب البيانات وكيفية التعامل مع الطلبات.</li>
 </ul>
 <p>القانون واضح. المخاطر حقيقية. البشرى السارة هي أن بناء ذكاء اصطناعي متوافق قابل للتحقيق تماماً لأي شركة عُمانية &mdash; يتطلب فقط معرفة ما تبنيه.</p>
-</div>
-<!-- FAQ Section -->
-<section class="mt-16 pt-8 border-t border-white/10" id="faq">
-<h2 class="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-cyan-400 mb-8">أسئلة شائعة</h2>
-<div class="space-y-6">
-<div class="glass-card rounded-2xl p-6">
-<h3 class="text-lg font-bold text-white mb-2">ما هو قانون PDPL في عُمان؟</h3>
-<p class="text-gray-400 mb-0">قانون حماية البيانات الشخصية في عُمان (المرسوم السلطاني رقم 6/2022) هو تشريع شامل لخصوصية البيانات يحكم طريقة جمع الشركات وتخزين ومعالجة ومشاركة البيانات الشخصية للمقيمين في السلطنة. يطبَّق على أي مؤسسة &mdash; محلية أو أجنبية &mdash; تتعامل مع بيانات الأشخاص داخل عُمان.</p>
-</div>
-<div class="glass-card rounded-2xl p-6">
-<h3 class="text-lg font-bold text-white mb-2">هل يحتاج روبوت الدردشة الذكي الخاص بي إلى الامتثال لـ PDPL؟</h3>
-<p class="text-gray-400 mb-0">نعم. إذا كان روبوت الدردشة الخاص بك يجمع أي معلومات شخصية &mdash; اسم أو رقم هاتف أو موقع أو تاريخ شراء أو أي معرّف &mdash; من مستخدم في عُمان، فيجب أن يمتثل نظامك لقانون PDPL. يشمل ذلك بوتات واتساب وأدوات الدردشة على المواقع الإلكترونية وموظفي الاستقبال الآليين وأدوات أتمتة خدمة العملاء.</p>
-</div>
-<div class="glass-card rounded-2xl p-6">
-<h3 class="text-lg font-bold text-white mb-2">ماذا تعني 'الموافقة الصريحة' في إطار PDPL للذكاء الاصطناعي؟</h3>
-<p class="text-gray-400 mb-0">قبل أن يجمع روبوت الدردشة أي بيانات شخصية، يجب أن يوافق المستخدم بصورة نشطة وواضحة. القبول السلبي غير كافٍ عموماً. يجب أن تكون الموافقة محددة ومُبلَّغة وغير غامضة وقابلة للسحب في أي وقت.</p>
-</div>
-<div class="glass-card rounded-2xl p-6">
-<h3 class="text-lg font-bold text-white mb-2">هل يمكنني إرسال بيانات محادثات روبوت الدردشة إلى OpenAI أو Google؟</h3>
-<p class="text-gray-400 mb-0">نقل البيانات الشخصية إلى معالجين من أطراف ثالثة خارج عُمان (مثل خوادم OpenAI في الولايات المتحدة) يستوجب أن تمتلك الدولة المستلِمة معايير حماية بيانات كافية أو أن يكون لديك اتفاقية معالجة بيانات (DPA) رسمية سارية. يجب أيضاً الإفصاح عن ذلك في سياسة الخصوصية.</p>
-</div>
-<div class="glass-card rounded-2xl p-6">
-<h3 class="text-lg font-bold text-white mb-2">ما هي عقوبات عدم الامتثال لـ PDPL؟</h3>
-<p class="text-gray-400 mb-0">يمكن أن تصل الغرامات بموجب PDPL إلى 500,000 ريال عُماني (ما يعادل حوالي 1.3 مليون دولار أمريكي) مع إمكانية تطبيق المسؤولية الجنائية في حالات الانتهاكات الجسيمة. والأضرار السمعية وفقدان ثقة العملاء تشكّل أيضاً مخاطر جسيمة.</p>
-</div>
-<div class="glass-card rounded-2xl p-6">
-<h3 class="text-lg font-bold text-white mb-2">ما هي اتفاقية معالجة البيانات (DPA)؟</h3>
-<p class="text-gray-400 mb-0">DPA هي عقد بين مراقب البيانات (شركتك) ومعالج البيانات (مثل مورد الذكاء الاصطناعي) يحدد كيفية التعامل مع البيانات وتأمينها وحذفها. بموجب PDPL، يجب أن يكون لديك DPA مع أي خدمة طرف ثالث تعالج البيانات الشخصية نيابةً عنك.</p>
-</div>
-<div class="glass-card rounded-2xl p-6">
-<h3 class="text-lg font-bold text-white mb-2">هل ينطبق PDPL على بوتات واتساب؟</h3>
-<p class="text-gray-400 mb-0">نعم. بوتات واتساب التي تجمع معلومات المستخدمين (الاسم ونوع الاستفسار ورقم الهاتف والموقع) تخضع بالكامل لنطاق تطبيق PDPL. يجب على الشركات الحصول على الموافقة وتقديم إشعار الخصوصية والتأكد من أن معالجة بيانات واتساب/ميتا تستوفي معايير PDPL.</p>
-</div>
-<div class="glass-card rounded-2xl p-6">
-<h3 class="text-lg font-bold text-white mb-2">كيف أجعل روبوت الدردشة الذكي الخاص بي متوافقاً مع PDPL؟</h3>
-<p class="text-gray-400 mb-0">الخطوات الرئيسية: (1) إضافة آلية موافقة واضحة قبل بدء جمع البيانات، (2) نشر سياسة خصوصية متوافقة مع PDPL، (3) تقليل البيانات &mdash; اجمع فقط ما تحتاجه فعلاً، (4) توقيع اتفاقيات DPA مع جميع موردي الذكاء الاصطناعي، (5) تفعيل طلبات حذف البيانات، (6) مراجعة أنظمة الذكاء الاصطناعي بانتظام.</p>
-</div>
-                    <div class="glass-card rounded-2xl p-6">
-                        <h3 class="text-lg font-bold text-white mb-2">كم من الوقت يستغرق رؤية عائد الاستثمار من الذكاء الاصطناعي؟</h3>
-                        <p class="text-gray-400 mb-0">تبلغ العديد من الشركات في دول مجلس التعاون الخليجي عن رؤية عائد استثمار إيجابي في غضون 3 إلى 6 أشهر من نشر أتمتة سير العمل.</p>
-                    </div>
-                    <div class="glass-card rounded-2xl p-6">
-                        <h3 class="text-lg font-bold text-white mb-2">كيف يتعامل الذكاء الاصطناعي مع دعم العملاء خارج ساعات العمل؟</h3>
-                        <p class="text-gray-400 mb-0">توفر روبوتات الدردشة والوكلاء الصوتيون استجابات فورية على مدار الساعة، مما يجذب العملاء المحتملين ويحل المشكلات الشائعة حتى عندما يكون مكتبك مغلقاً.</p>
-                    </div>
-                    <div class="glass-card rounded-2xl p-6">
-                        <h3 class="text-lg font-bold text-white mb-2">ماذا لو ارتكب الذكاء الاصطناعي خطأ مع عميل؟</h3>
-                        <p class="text-gray-400 mb-0">تستخدم تطبيقات الذكاء الاصطناعي السليمة حواجز حتمية وتقنية RAG لمنع الهلوسة، وغالباً ما تبقي على 'الإشراف البشري' للتفاعلات الحساسة.</p>
-                    </div>
-                    <div class="glass-card rounded-2xl p-6">
-                        <h3 class="text-lg font-bold text-white mb-2">هل يمكن للذكاء الاصطناعي المساعدة في التسويق وتوليد العملاء المحتملين؟</h3>
-                        <p class="text-gray-400 mb-0">نعم، يمكن للذكاء الاصطناعي تحليل اتجاهات السوق، وإنشاء نصوص إعلانية مخصصة، وتسجيل العملاء المحتملين الواردين تلقائياً بناءً على احتمالية تحولهم.</p>
-                    </div>
-                    <div class="glass-card rounded-2xl p-6">
-                        <h3 class="text-lg font-bold text-white mb-2">هل هناك وكالات ذكاء اصطناعي محلية في مسقط؟</h3>
-                        <p class="text-gray-400 mb-0">نعم، تتخصص الوكالات المحلية مثل AI Profit Lab في جلب معايير أتمتة الذكاء الاصطناعي العالمية إلى الشركات العمانية بسياق محلي.</p>
-                    </div>
-                </div>
+        </article>
+        <div class="icta"><h3>تريد تشغيل هذا في شركتك؟</h3><p>أرسل رسالة واحدة تصف فيها ما يقوم به فريقك يدوياً اليوم، وستحصل على إجابة صريحة: هل الأتمتة مجدية لك، وكم تكلفتها.</p><div class="btn-row"><a class="btn btn-wa" href="https://wa.me/96899245250?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%D8%8C%20%D9%82%D8%B1%D8%A3%D8%AA%20%D8%A3%D8%AD%D8%AF%20%D9%85%D9%82%D8%A7%D9%84%D8%A7%D8%AA%D9%83%D9%85%20%D9%88%D9%84%D8%AF%D9%8A%20%D8%B3%D8%A4%D8%A7%D9%84."><svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 1.8a8.2 8.2 0 1 1-4.2 15.3l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8zm-3.1 4c-.2 0-.5 0-.7.3-.2.3-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.8 2.8 4.4 3.8 2.2.9 2.6.7 3.1.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2-.1-.1-.2-.2-.5-.3l-1.7-.8c-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.1-.2 0-.4.1-.5l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5L10 8.2c-.2-.4-.4-.4-.6-.4h-.5z"/></svg><span>راسلنا على واتساب</span></a></div></div>
+        <section class="faq" id="questions" style="margin-top:clamp(48px,6vw,74px)"><h2 style="scroll-margin-top:104px">أسئلة يطرحها القُرّاء</h2><details><summary>ما هو قانون PDPL في عُمان؟</summary><p>قانون حماية البيانات الشخصية في عُمان (المرسوم السلطاني رقم 6/2022) هو تشريع شامل لخصوصية البيانات يحكم طريقة جمع الشركات وتخزين ومعالجة ومشاركة البيانات الشخصية للمقيمين في السلطنة. يطبَّق على أي مؤسسة &mdash; محلية أو أجنبية &mdash; تتعامل مع بيانات الأشخاص داخل عُمان.</p></details><details><summary>هل يحتاج روبوت الدردشة الذكي الخاص بي إلى الامتثال لـ PDPL؟</summary><p>نعم. إذا كان روبوت الدردشة الخاص بك يجمع أي معلومات شخصية &mdash; اسم أو رقم هاتف أو موقع أو تاريخ شراء أو أي معرّف &mdash; من مستخدم في عُمان، فيجب أن يمتثل نظامك لقانون PDPL. يشمل ذلك بوتات واتساب وأدوات الدردشة على المواقع الإلكترونية وموظفي الاستقبال الآليين وأدوات أتمتة خدمة العملاء.</p></details><details><summary>ماذا تعني 'الموافقة الصريحة' في إطار PDPL للذكاء الاصطناعي؟</summary><p>قبل أن يجمع روبوت الدردشة أي بيانات شخصية، يجب أن يوافق المستخدم بصورة نشطة وواضحة. القبول السلبي غير كافٍ عموماً. يجب أن تكون الموافقة محددة ومُبلَّغة وغير غامضة وقابلة للسحب في أي وقت.</p></details><details><summary>هل يمكنني إرسال بيانات محادثات روبوت الدردشة إلى OpenAI أو Google؟</summary><p>نقل البيانات الشخصية إلى معالجين من أطراف ثالثة خارج عُمان (مثل خوادم OpenAI في الولايات المتحدة) يستوجب أن تمتلك الدولة المستلِمة معايير حماية بيانات كافية أو أن يكون لديك اتفاقية معالجة بيانات (DPA) رسمية سارية. يجب أيضاً الإفصاح عن ذلك في سياسة الخصوصية.</p></details><details><summary>ما هي عقوبات عدم الامتثال لـ PDPL؟</summary><p>يمكن أن تصل الغرامات بموجب PDPL إلى 500,000 ريال عُماني (ما يعادل حوالي 1.3 مليون دولار أمريكي) مع إمكانية تطبيق المسؤولية الجنائية في حالات الانتهاكات الجسيمة. والأضرار السمعية وفقدان ثقة العملاء تشكّل أيضاً مخاطر جسيمة.</p></details><details><summary>ما هي اتفاقية معالجة البيانات (DPA)؟</summary><p>DPA هي عقد بين مراقب البيانات (شركتك) ومعالج البيانات (مثل مورد الذكاء الاصطناعي) يحدد كيفية التعامل مع البيانات وتأمينها وحذفها. بموجب PDPL، يجب أن يكون لديك DPA مع أي خدمة طرف ثالث تعالج البيانات الشخصية نيابةً عنك.</p></details><details><summary>هل ينطبق PDPL على بوتات واتساب؟</summary><p>نعم. بوتات واتساب التي تجمع معلومات المستخدمين (الاسم ونوع الاستفسار ورقم الهاتف والموقع) تخضع بالكامل لنطاق تطبيق PDPL. يجب على الشركات الحصول على الموافقة وتقديم إشعار الخصوصية والتأكد من أن معالجة بيانات واتساب/ميتا تستوفي معايير PDPL.</p></details><details><summary>كيف أجعل روبوت الدردشة الذكي الخاص بي متوافقاً مع PDPL؟</summary><p>الخطوات الرئيسية: (1) إضافة آلية موافقة واضحة قبل بدء جمع البيانات، (2) نشر سياسة خصوصية متوافقة مع PDPL، (3) تقليل البيانات &mdash; اجمع فقط ما تحتاجه فعلاً، (4) توقيع اتفاقيات DPA مع جميع موردي الذكاء الاصطناعي، (5) تفعيل طلبات حذف البيانات، (6) مراجعة أنظمة الذكاء الاصطناعي بانتظام.</p></details><details><summary>كم من الوقت يستغرق رؤية عائد الاستثمار من الذكاء الاصطناعي؟</summary><p>تبلغ العديد من الشركات في دول مجلس التعاون الخليجي عن رؤية عائد استثمار إيجابي في غضون 3 إلى 6 أشهر من نشر أتمتة سير العمل.</p></details><details><summary>كيف يتعامل الذكاء الاصطناعي مع دعم العملاء خارج ساعات العمل؟</summary><p>توفر روبوتات الدردشة والوكلاء الصوتيون استجابات فورية على مدار الساعة، مما يجذب العملاء المحتملين ويحل المشكلات الشائعة حتى عندما يكون مكتبك مغلقاً.</p></details><details><summary>ماذا لو ارتكب الذكاء الاصطناعي خطأ مع عميل؟</summary><p>تستخدم تطبيقات الذكاء الاصطناعي السليمة حواجز حتمية وتقنية RAG لمنع الهلوسة، وغالباً ما تبقي على 'الإشراف البشري' للتفاعلات الحساسة.</p></details><details><summary>هل يمكن للذكاء الاصطناعي المساعدة في التسويق وتوليد العملاء المحتملين؟</summary><p>نعم، يمكن للذكاء الاصطناعي تحليل اتجاهات السوق، وإنشاء نصوص إعلانية مخصصة، وتسجيل العملاء المحتملين الواردين تلقائياً بناءً على احتمالية تحولهم.</p></details><details><summary>هل هناك وكالات ذكاء اصطناعي محلية في مسقط؟</summary><p>نعم، تتخصص الوكالات المحلية مثل AI Profit Lab في جلب معايير أتمتة الذكاء الاصطناعي العالمية إلى الشركات العمانية بسياق محلي.</p></details></section>
+        <div class="refs" id="sources"><h4>المصادر</h4><ol><li><a href="https://www.ita.gov.om/" target="_blank" rel="noopener nofollow">هيئة تقنية المعلومات في عُمان (ITA) &mdash; الجهة التنظيمية الرسمية</a></li><li><a href="https://openai.com/enterprise-privacy/" target="_blank" rel="noopener nofollow">وثائق الخصوصية المؤسسية واتفاقية DPA من OpenAI</a></li><li><a href="https://cloud.google.com/terms/data-processing-addendum" target="_blank" rel="noopener nofollow">ملحق معالجة البيانات من Google Cloud</a></li></ol></div>
+        <div class="topics"><span>أمن وحوكمة الذكاء الاصطناعي</span><b>PDPL عمان</b><b>قانون حماية البيانات الذكاء الاصطناعي</b><b>امتثال روبوت الدردشة عمان</b><b>خصوصية البيانات الذكاء الاصطناعي مسقط</b><b>PDPL بوت واتساب</b><b>تنظيم الذكاء الاصطناعي عمان 2024</b><b>AI Profit Lab</b></div>
+        <div class="brandbox">
+          <span class="bmark" aria-hidden="true"><img src="/assets/brand/icon-transparent.svg" alt="" width="42" height="42"></span>
+          <div>
+            <p class="rolelbl">الجهة الناشرة</p>
+            <h3>AI Profit Lab</h3>
+            <p>نبني في AI Profit Lab وكلاء واتساب بالذكاء الاصطناعي، ومواقع ثنائية اللغة، ولوحات متابعة حيّة لشركات التجارة والتوزيع والخدمات في عُمان والخليج. إذا لم تنطبق أرقام هذا المقال على نشاطك، أرسل لنا أرقامك ونحسبها معك.</p>
+            <div class="btn-row">
+              <a class="btn btn-wa" href="https://wa.me/96899245250?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%D8%8C%20%D9%82%D8%B1%D8%A3%D8%AA%20%D8%A3%D8%AD%D8%AF%20%D9%85%D9%82%D8%A7%D9%84%D8%A7%D8%AA%D9%83%D9%85%20%D9%88%D9%84%D8%AF%D9%8A%20%D8%B3%D8%A4%D8%A7%D9%84."><svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 1.8a8.2 8.2 0 1 1-4.2 15.3l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8zm-3.1 4c-.2 0-.5 0-.7.3-.2.3-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.8 2.8 4.4 3.8 2.2.9 2.6.7 3.1.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2-.1-.1-.2-.2-.5-.3l-1.7-.8c-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.1-.2 0-.4.1-.5l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5L10 8.2c-.2-.4-.4-.4-.6-.4h-.5z"/></svg><span>اسألنا مباشرة على واتساب</span></a>
+              <a class="tlink" href="/about/">عن AI Profit Lab <span class="arw">&larr;</span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
-<hr class="border-gray-800 my-10">
-<!-- References -->
-<div class="mt-8">
-<h3 class="text-xl font-bold mb-4 text-white">المراجع</h3>
-<ul class="list-disc list-inside text-gray-400 space-y-2 text-sm max-w-full overflow-hidden" style="padding-right: 1.25rem; padding-left: 0;">
-<li><a class="hover:text-blue-400 break-words" href="https://www.ita.gov.om/" target="_blank">هيئة تقنية المعلومات في عُمان (ITA) &mdash; الجهة التنظيمية الرسمية</a></li>
-<li><a class="hover:text-blue-400 break-words" href="https://openai.com/enterprise-privacy/" target="_blank">وثائق الخصوصية المؤسسية واتفاقية DPA من OpenAI</a></li>
-<li><a class="hover:text-blue-400 break-words" href="https://cloud.google.com/terms/data-processing-addendum" target="_blank">ملحق معالجة البيانات من Google Cloud</a></li>
-</ul>
-</div>
-</article>
+
+<section class="s-panel related grain">
+  <div class="wrap">
+    <p class="eyebrow"><span class="star">&#10038;</span>اقرأ أيضاً</p>
+    <div class="grid g3" data-stagger><a class="card" href="/blog/ar/2026-04-14-ai-ethics-sharia-compliance"><span class="n">أمن وحوكمة الذكاء الاصطناعي</span><h3>أخلاقيات الذكاء الاصطناعي والتوافق م... | AI Profit Lab عمان</h3><span class="rd">اقرأ &larr;</span></a><a class="card" href="/blog/ar/2026-04-14-sovereign-ai-data-borders"><span class="n">أمن وحوكمة الذكاء الاصطناعي</span><h3>صعود الذكاء الاصطناعي السيادي: لماذا... | AI Profit Lab عمان</h3><span class="rd">اقرأ &larr;</span></a><a class="card" href="/blog/ar/2026-06-11-navigating-pdpl-ai-compliant-chatbots-oman"><span class="n">أمن وحوكمة الذكاء الاصطناعي</span><h3>2026-06-11-navigating-pdpl-ai-compliant-chatbots-oman</h3><span class="rd">اقرأ &larr;</span></a></div>
+  </div>
+</section>
 </main>
-<!-- Footer -->
-<footer class="border-t border-white/10 bg-black py-8 text-center text-gray-500 text-sm mt-auto">
-        <p>© ٢٠٢٥ AI Profit Lab — علامة تجارية لشركة لوتس الخليج العالمية • جميع الحقوق محفوظة</p>
-    </footer>
-<script>
-  (function() {
-    var overlay = document.getElementById('fouc-overlay');
-    function removeOverlay() {
-      if (overlay) {
-        overlay.style.opacity = '0';
-        setTimeout(function() {
-          if (overlay && overlay.parentNode) {
-            overlay.parentNode.removeChild(overlay);
-          }
-        }, 320);
-      }
-    }
-    if (document.readyState === 'complete') {
-      setTimeout(removeOverlay, 100);
-    } else {
-      window.addEventListener('load', function() {
-        setTimeout(removeOverlay, 100);
-      });
-    }
-  })();
-</script>
-    <script defer src="/js/aiden-chat.js"></script>
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-grid">
+
+      <div class="foot-brand">
+        <img class="fmark" src="/assets/brand/wordmark-reversed.svg" alt="AI Profit Lab" width="170" height="29">
+        <p class="slogan">كل نجاح يبدأ برؤية</p>
+        <p class="slogan-ar" lang="en" dir="ltr">Every success starts with insight.</p>
+        <div class="soc-wrap">
+          <h4 class="soc-h">تابع أعمالنا</h4>
+          <ul class="socials">
+    <li><a href="https://wa.me/96899245250?text=Hello%20Nahid" style="--sc:#1FAF5E" target="_blank" rel="noopener" aria-label="AI Profit Lab on WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 1.8a8.2 8.2 0 1 1-4.2 15.3l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8zm-3.1 4c-.2 0-.5 0-.7.3-.2.3-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.8 2.8 4.4 3.8 2.2.9 2.6.7 3.1.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2-.1-.1-.2-.2-.5-.3l-1.7-.8c-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.1-.2 0-.4.1-.5l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5L10 8.2c-.2-.4-.4-.4-.6-.4h-.5z"/></svg></a></li>
+    <li><a href="https://www.linkedin.com/in/nahid-aby" style="--sc:#0A66C2" target="_blank" rel="noopener" aria-label="AI Profit Lab on LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg></a></li>
+    <li><a href="https://www.youtube.com/@AI_for_Managers" style="--sc:#FF0000" target="_blank" rel="noopener" aria-label="AI Profit Lab on YouTube"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg></a></li>
+    <li><a href="https://www.facebook.com/profile.php?id=61584870364473" style="--sc:#1877F2" target="_blank" rel="noopener" aria-label="AI Profit Lab on Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/></svg></a></li>
+          </ul>
+        </div>
+      </div>
+
+      <nav class="fcol" aria-label="ما نقدّمه">
+        <h4>ما نقدّمه</h4>
+        <ul>
+          <li><a href="/services/">باقاتنا</a></li>
+          <li><a href="/process/">طريقتنا</a></li>
+          <li><a href="/blog-ar/">المقالات</a></li>
+          <li><a href="/missed-call-simulator-ar/">حاسبة الفرص الضائعة</a></li>
+          <li><a href="/whatsapp-receptionist-demo-ar/">تجربة واتساب</a></li>
+          <li><a href="/customized-ceo-dashboard-demo-ar/">تجربة لوحة المتابعة</a></li>
+        </ul>
+      </nav>
+
+      <nav class="fcol" aria-label="تواصل معنا">
+        <h4>تواصل معنا</h4>
+        <ul class="direct">
+          <li><a href="https://wa.me/96899245250?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%D8%8C%20%D9%84%D8%AF%D9%8A%20%D8%B3%D8%A4%D8%A7%D9%84%20%D8%B9%D9%86%20%D8%B9%D9%85%D9%84%D9%8A."><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 1.8a8.2 8.2 0 1 1-4.2 15.3l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8zm-3.1 4c-.2 0-.5 0-.7.3-.2.3-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.8 2.8 4.4 3.8 2.2.9 2.6.7 3.1.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2-.1-.1-.2-.2-.5-.3l-1.7-.8c-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.1-.2 0-.4.1-.5l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5L10 8.2c-.2-.4-.4-.4-.6-.4h-.5z"/></svg><span dir="ltr">+968 9924 5250</span></a></li>
+          <li><a href="mailto:hello@aiprofitlab.io"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>hello@aiprofitlab.io</a></li>
+        </ul>
+        <ul>
+          <li><a href="/contact/">صفحة التواصل</a></li>
+          <li><a href="/about/">من نحن</a></li>
+          <li><a href="/privacy/">الخصوصية</a></li>
+        </ul>
+      </nav>
+
+    </div>
+
+    <a class="review" href="https://g.page/r/CYPlrz58-k0DEAI/review" target="_blank" rel="noopener">
+      <span class="gmark" aria-hidden="true"><svg viewBox="0 0 48 48" aria-hidden="true"><path fill="#4285F4" d="M45.12 24.5c0-1.56-.14-3.06-.4-4.5H24v8.51h11.84c-.51 2.75-2.06 5.08-4.39 6.64v5.52h7.11c4.16-3.83 6.56-9.47 6.56-16.17z"/><path fill="#34A853" d="M24 46c5.94 0 10.92-1.97 14.56-5.33l-7.11-5.52c-1.97 1.32-4.49 2.1-7.45 2.1-5.73 0-10.58-3.87-12.31-9.07H4.34v5.7C7.96 41.07 15.4 46 24 46z"/><path fill="#FBBC05" d="M11.69 28.18C11.25 26.86 11 25.45 11 24s.25-2.86.69-4.18v-5.7H4.34C2.85 17.09 2 20.45 2 24s.85 6.91 2.34 9.88l7.35-5.7z"/><path fill="#EA4335" d="M24 10.75c3.23 0 6.13 1.11 8.41 3.29l6.31-6.31C34.91 4.18 29.93 2 24 2 15.4 2 7.96 6.93 4.34 14.12l7.35 5.7c1.73-5.2 6.58-9.07 12.31-9.07z"/></svg></span>
+      <span class="rbody">
+        <span class="stars" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 17.3l-6.18 3.75 1.64-7.03L2 9.24l7.19-.61L12 2l2.81 6.63 7.19.61-5.46 4.78 1.64 7.03z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 17.3l-6.18 3.75 1.64-7.03L2 9.24l7.19-.61L12 2l2.81 6.63 7.19.61-5.46 4.78 1.64 7.03z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 17.3l-6.18 3.75 1.64-7.03L2 9.24l7.19-.61L12 2l2.81 6.63 7.19.61-5.46 4.78 1.64 7.03z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 17.3l-6.18 3.75 1.64-7.03L2 9.24l7.19-.61L12 2l2.81 6.63 7.19.61-5.46 4.78 1.64 7.03z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 17.3l-6.18 3.75 1.64-7.03L2 9.24l7.19-.61L12 2l2.81 6.63 7.19.61-5.46 4.78 1.64 7.03z"/></svg></span>
+        <span class="rk">تعاملت معنا؟</span>
+        <span class="rt">اترك تقييماً على خرائط جوجل</span>
+      </span>
+      <span class="rarw" aria-hidden="true">&larr;</span>
+    </a>
+
+    <p class="legal">&copy; 2026 AI Profit Lab &mdash; علامة تجارية تابعة لشركة Lotus Gulf International (س.ت <span dir="ltr">1570092</span>)<br>الخوير الجنوبية، بوشر، مسقط، سلطنة عُمان &middot; غير مسجّلة لضريبة القيمة المضافة (الرقم الضريبي <span dir="ltr">2317725</span>)</p>
+  </div>
+</footer>
+<a class="fab" href="https://wa.me/96899245250?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%D8%8C%20%D9%84%D8%AF%D9%8A%20%D8%B3%D8%A4%D8%A7%D9%84%20%D8%B9%D9%86%20%D8%B9%D9%85%D9%84%D9%8A." aria-label="واتساب"><svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 1.8a8.2 8.2 0 1 1-4.2 15.3l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8zm-3.1 4c-.2 0-.5 0-.7.3-.2.3-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.8 2.8 4.4 3.8 2.2.9 2.6.7 3.1.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2-.1-.1-.2-.2-.5-.3l-1.7-.8c-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.1-.2 0-.4.1-.5l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5L10 8.2c-.2-.4-.4-.4-.6-.4h-.5z"/></svg><span>واتساب</span></a>
 </body>
 </html>

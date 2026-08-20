@@ -99,7 +99,7 @@
         html = html.replace(/\[([^\]\n]+)\]\(([^)\s]+)\)/g, function (match, label, url) {
             var href = safeUrl(url);
             if (!href) return label;
-            return '<a href="' + href + '" class="text-blue-400 underline hover:text-blue-300">' + label + '</a>';
+            return '<a href="' + href + '" class="aiden-link text-blue-400 underline hover:text-blue-300">' + label + '</a>';
         });
 
         html = html.replace(/\*\*([^*\n]+)\*\*/g, '<strong>$1</strong>');
@@ -131,8 +131,8 @@
         return el;
     }
 
-    var BOT_CLS = 'bg-gray-800 p-3 rounded-2xl max-w-[85%] text-gray-300 leading-relaxed';
-    var USER_CLS = 'bg-blue-900/50 p-3 rounded-2xl max-w-[85%] text-white';
+    var BOT_CLS = 'aiden-bubble aiden-bubble-bot bg-gray-800 p-3 rounded-2xl max-w-[85%] text-gray-300 leading-relaxed';
+    var USER_CLS = 'aiden-bubble aiden-bubble-user bg-blue-900/50 p-3 rounded-2xl max-w-[85%] text-white';
 
     function renderSources(sources) {
         if (!sources || !sources.length) return;
@@ -140,15 +140,15 @@
         var links = sources.map(function (s) {
             var href = safeUrl(s.url);
             if (!href) return '';
-            return '<a href="' + href + '" class="inline-block bg-gray-900 border border-gray-700 hover:border-blue-500 ' +
+            return '<a href="' + href + '" class="aiden-chip inline-block bg-gray-900 border border-gray-700 hover:border-blue-500 ' +
                 'rounded-full px-3 py-1 text-[11px] text-gray-300 hover:text-blue-300 transition mr-1 mb-1">' +
                 escapeHtml(s.title.slice(0, 60)) + '</a>';
         }).filter(Boolean).join('');
         if (!links) return;
         appendBubble(
-            '<span class="block text-[10px] uppercase tracking-wider text-gray-500 mb-1">' +
+            '<span class="aiden-sources-label block text-[10px] uppercase tracking-wider text-gray-500 mb-1">' +
             (isEn ? 'Related on our site' : 'ذات صلة على موقعنا') + '</span>' + links,
-            'max-w-[95%]'
+            'aiden-sources max-w-[95%]'
         );
     }
 
@@ -210,6 +210,60 @@
 
     var selfMounted = false;
 
+    // The self-mounted markup above carries Tailwind utility classes, which only
+    // resolve on pages that load the Tailwind CDN. The v4 pages and the storefront
+    // pages ship self-contained CSS and no Tailwind, so the widget would mount
+    // unstyled there. These rules restate the same values scoped under #aiden-root:
+    // an id+class selector outranks a bare utility class, so pages that DO load
+    // Tailwind render exactly as before, and pages that don't now render correctly.
+    var SKIN_CSS =
+        '#aiden-root,#aiden-root *,#aiden-root *::before,#aiden-root *::after{box-sizing:border-box}' +
+        '#aiden-root{font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,' +
+        '"Helvetica Neue",Arial,sans-serif;line-height:1.5;-webkit-font-smoothing:antialiased}' +
+        '#aiden-root #aiden-launcher{background-color:#2563eb;border-radius:9999px;display:flex;' +
+        'align-items:center;justify-content:center;padding:0;' +
+        'box-shadow:0 25px 50px -12px rgba(0,0,0,.25);transition:background-color .15s cubic-bezier(.4,0,.2,1)}' +
+        '#aiden-root #aiden-launcher:hover{background-color:#3b82f6}' +
+        '#aiden-root #aiden-launcher svg{width:1.75rem;height:1.75rem;color:#fff;display:block}' +
+        '#aiden-root #aiden-ui{background-color:#0f0f0f;border:1px solid #1f2937;border-radius:1.5rem;' +
+        'box-shadow:0 25px 50px -12px rgba(0,0,0,.25);display:flex;flex-direction:column;overflow:hidden}' +
+        '#aiden-root .aiden-head{padding:1rem;background-image:linear-gradient(to right,#1e3a8a,#000);' +
+        'display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #1f2937}' +
+        '#aiden-root .aiden-brand{font-weight:700;font-size:.875rem;letter-spacing:.1em;color:#fff}' +
+        '#aiden-root .aiden-a{color:#3b82f6}#aiden-root .aiden-i{color:#ef4444}' +
+        '#aiden-root .aiden-dot{color:#4ade80;font-size:10px;margin-inline-start:.5rem}' +
+        '#aiden-root .aiden-country{font-size:.75rem;color:#9ca3af}' +
+        '#aiden-root #aiden-close{color:#fff;opacity:.5;font-weight:700;font-size:1.25rem;line-height:1;' +
+        'background:transparent;border:0;cursor:pointer;padding:0;font-family:inherit}' +
+        '#aiden-root #aiden-close:hover{opacity:1}' +
+        '#aiden-root .aiden-body{flex:1 1 0%;padding:1.25rem;overflow-y:auto;font-size:.875rem;color:#d1d5db}' +
+        '#aiden-root .aiden-body > * + *{margin-top:1rem}' +
+        '#aiden-root .aiden-bubble{padding:.75rem;border-radius:1rem;max-width:85%;line-height:1.625}' +
+        '#aiden-root .aiden-bubble-bot{background-color:#1f2937;color:#d1d5db}' +
+        '#aiden-root .aiden-bubble-user{background-color:rgba(30,58,138,.5);color:#fff}' +
+        '#aiden-root .aiden-sub{display:block;font-size:.75rem;color:#9ca3af;margin-top:.25rem}' +
+        '#aiden-root .aiden-link{color:#60a5fa;text-decoration:underline}' +
+        '#aiden-root .aiden-link:hover{color:#93c5fd}' +
+        '#aiden-root .aiden-sources{max-width:95%}' +
+        '#aiden-root .aiden-sources-label{display:block;font-size:10px;text-transform:uppercase;' +
+        'letter-spacing:.05em;color:#6b7280;margin-bottom:.25rem}' +
+        '#aiden-root .aiden-chip{display:inline-block;background-color:#111827;border:1px solid #374151;' +
+        'border-radius:9999px;padding:.25rem .75rem;font-size:11px;color:#d1d5db;text-decoration:none;' +
+        'margin-inline-end:.25rem;margin-bottom:.25rem;transition:border-color .15s,color .15s}' +
+        '#aiden-root .aiden-chip:hover{border-color:#3b82f6;color:#93c5fd}' +
+        '#aiden-root .aiden-foot{padding:.75rem;background-color:#050505;border-top:1px solid #1f2937;' +
+        'display:flex;align-items:center}' +
+        '#aiden-root #user-input{flex:1 1 0%;min-width:0;background:transparent;border:0;outline:none;' +
+        'font-size:.875rem;color:#fff;padding:.5rem 0;font-family:inherit}' +
+        '#aiden-root #user-input::placeholder{color:#6b7280}' +
+        '#aiden-root #aiden-send{background-color:#2563eb;color:#fff;padding:.25rem 1rem;border-radius:9999px;' +
+        'font-size:.75rem;font-weight:700;border:0;cursor:pointer;white-space:nowrap;font-family:inherit;' +
+        'margin-inline-start:.5rem;transition:background-color .15s}' +
+        '#aiden-root #aiden-send:hover{background-color:#3b82f6}' +
+        '#aiden-root .aiden-typing{display:inline-block;animation:aiden-pulse 2s cubic-bezier(.4,0,.6,1) infinite}' +
+        '@keyframes aiden-pulse{0%,100%{opacity:1}50%{opacity:.5}}';
+
+
     function widgetStyles() {
         if (document.getElementById('aiden-injected-style')) return;
         var css = document.createElement('style');
@@ -225,7 +279,7 @@
             'html:not([dir="rtl"]) #aiden-ui{right:0;left:auto}' +
             '#aiden-ui.active{transform:translateY(0);visibility:visible;opacity:1}' +
             '@media(max-width:420px){#aiden-ui{width:calc(100vw - 40px)}}' +
-            '#aiden-launcher{width:60px;height:60px;border:0;cursor:pointer}';
+            '#aiden-launcher{width:60px;height:60px;border:0;cursor:pointer}' + SKIN_CSS;
         document.head.appendChild(css);
     }
 
@@ -247,16 +301,16 @@
             'stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg></button>' +
 
             '<div id="aiden-ui" class="bg-[#0f0f0f] border border-gray-800 rounded-3xl shadow-2xl flex flex-col overflow-hidden">' +
-            '<div class="p-4 bg-gradient-to-r from-blue-900 to-black flex justify-between items-center border-b border-gray-800">' +
-            '<span class="font-bold text-sm tracking-widest text-white">' +
-            '<span class="text-blue-500">A</span><span class="text-red-500">I</span>DEN' +
-            '<span class="text-green-400 text-[10px] ml-2">● ONLINE</span></span>' +
-            '<span class="text-xs text-gray-400" id="visitor-country"></span>' +
+            '<div class="aiden-head p-4 bg-gradient-to-r from-blue-900 to-black flex justify-between items-center border-b border-gray-800">' +
+            '<span class="aiden-brand font-bold text-sm tracking-widest text-white">' +
+            '<span class="aiden-a text-blue-500">A</span><span class="aiden-i text-red-500">I</span>DEN' +
+            '<span class="aiden-dot text-green-400 text-[10px] ml-2">● ONLINE</span></span>' +
+            '<span class="aiden-country text-xs text-gray-400" id="visitor-country"></span>' +
             '<button id="aiden-close" aria-label="' + (isEn ? 'Close chat' : 'إغلاق المحادثة') +
             '" class="text-white opacity-50 hover:opacity-100 font-bold text-xl bg-transparent border-0 cursor-pointer">✕</button></div>' +
-            '<div class="flex-1 p-5 overflow-y-auto space-y-4 text-sm text-gray-300" id="chat-messages">' +
-            '<div class="bg-gray-800 p-4 rounded-2xl max-w-[85%]"><span class="block text-xs text-gray-400 mt-1" id="welcome-message"></span></div></div>' +
-            '<div class="p-3 bg-[#050505] border-t border-gray-800 flex items-center">' +
+            '<div class="aiden-body flex-1 p-5 overflow-y-auto space-y-4 text-sm text-gray-300" id="chat-messages">' +
+            '<div class="aiden-bubble aiden-bubble-bot bg-gray-800 p-4 rounded-2xl max-w-[85%]"><span class="aiden-sub block text-xs text-gray-400 mt-1" id="welcome-message"></span></div></div>' +
+            '<div class="aiden-foot p-3 bg-[#050505] border-t border-gray-800 flex items-center">' +
             '<input class="bg-transparent border-none outline-none flex-1 text-sm text-white py-2" id="user-input" ' +
             'placeholder="' + (isEn ? 'Type your message...' : 'اكتب رسالتك...') + '" type="text">' +
             '<button id="aiden-send" class="bg-blue-600 text-white px-4 py-1 rounded-full text-xs font-bold hover:bg-blue-500 transition ml-2 border-0 cursor-pointer">' +
@@ -344,7 +398,7 @@
             if (box && box.children.length <= 1) {
                 box.innerHTML =
                     '<div class="' + BOT_CLS + '">' + escapeHtml(pageGreeting()) +
-                    '<span class="block text-xs text-gray-500 mt-1">' + escapeHtml(welcomeText) + '</span></div>';
+                    '<span class="aiden-sub block text-xs text-gray-500 mt-1">' + escapeHtml(welcomeText) + '</span></div>';
             }
             var input = document.getElementById('user-input');
             if (input) input.focus();
@@ -369,8 +423,8 @@
 
             appendBubble(escapeHtml(msg), USER_CLS, true);
             var typing = appendBubble(
-                '<span class="inline-block animate-pulse">●●●</span>',
-                'bg-gray-800 p-3 rounded-2xl max-w-[85%] text-gray-500'
+                '<span class="aiden-typing inline-block animate-pulse">●●●</span>',
+                'aiden-bubble aiden-bubble-bot bg-gray-800 p-3 rounded-2xl max-w-[85%] text-gray-500'
             );
 
             try {

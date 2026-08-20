@@ -7,14 +7,14 @@
      remove this tag AND add the noindex to the page it replaces in the SAME
      deploy - never separately, or both versions compete in the index. -->
 <meta name="robots" content="noindex, nofollow">
-<title>AI Profit Lab | Never lose a buyer to silence again — Muscat, Oman</title>
-<meta name="description" content="A bilingual storefront with an AI buyer agent that answers your buyers in Arabic and English while you sleep. One-time fee, no monthly lock-in, built by an operator in Muscat.">
+<title>AI Profit Lab | You don't have to learn AI — Muscat, Oman</title>
+<meta name="description" content="You never open it, never log in, never type a prompt. A bilingual smart website answers your buyers in Arabic and English at 2am and reports to your WhatsApp in one sentence. One-time fee, no monthly lock-in, built by an operator in Muscat.">
 <link rel="canonical" href="https://aiprofitlab.io/en/index-v4/">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 
 <meta property="og:type" content="website">
-<meta property="og:title" content="AI Profit Lab | Never lose a buyer to silence again — Muscat, Oman">
-<meta property="og:description" content="A bilingual storefront with an AI buyer agent that answers your buyers in Arabic and English while you sleep. One-time fee, no monthly lock-in, built by an operator in Muscat.">
+<meta property="og:title" content="AI Profit Lab | You don't have to learn AI — Muscat, Oman">
+<meta property="og:description" content="You never open it, never log in, never type a prompt. A bilingual smart website answers your buyers in Arabic and English at 2am and reports to your WhatsApp in one sentence. One-time fee, no monthly lock-in, built by an operator in Muscat.">
 <meta property="og:url" content="https://aiprofitlab.io/en/index-v4/">
 <meta property="og:image" content="https://aiprofitlab.io/og-aiprofitlab-2026.jpg">
 <meta property="og:locale" content="en_OM">
@@ -471,27 +471,110 @@ section{position:relative;padding:clamp(74px,9vw,138px) 0}
   .review .gmark svg{width:22px;height:22px}
 }
 
-/* ------------------------------------------------------- cost calculator */
-.leak-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:clamp(20px,3vw,40px);align-items:start}
+/* The word cloud is decorative markup that carries real meaning, so the meaning
+   is repeated once in text for anyone who cannot see it. */
+.sr-only{
+  position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;
+  clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;border:0;
+}
+
+/* ==================================================== S2 - the noise cloud */
+.buzz{
+  position:relative;overflow:hidden;border-radius:20px;border:1px solid var(--line-dark);
+  height:clamp(360px,44vw,480px);margin:clamp(26px,4vw,44px) 0 0;
+  background:radial-gradient(120% 90% at 50% 50%,rgba(15,110,86,.30),transparent 68%);
+}
+.buzz b{
+  position:absolute;font-family:var(--mono);font-weight:400;white-space:nowrap;color:var(--cream);
+  left:var(--x);top:var(--y);font-size:var(--s);opacity:var(--o);
+  /* the centring translate lives INSIDE the keyframes, or the animation would
+     overwrite it on the first frame and every word would jump down-right */
+  transform:translate(-50%,-50%);
+  animation:drift var(--t) ease-in-out infinite alternate;animation-delay:var(--dl);
+}
+@keyframes drift{from{transform:translate(-50%,-50%)}to{transform:translate(-50%,calc(-50% - 20px))}}
+.buzz-card{
+  position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(580px,84%);
+  text-align:center;border:1px solid rgba(232,201,143,.5);border-radius:18px;
+  padding:clamp(26px,3.6vw,40px);backdrop-filter:blur(10px);
+  /* a shade lighter than the section it sits on, so it reads as a card lying
+     over the noise rather than as a hole cut out of it */
+  background:linear-gradient(180deg,rgba(12,66,52,.97),rgba(7,43,34,.98));
+  box-shadow:0 44px 90px -44px #000;
+}
+.buzz-card .k{
+  font-family:var(--mono);font-size:.8rem;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--amber-pale);margin:0 0 14px;
+}
+.buzz-card p.q{
+  font-family:var(--display);font-size:clamp(1.4rem,3.2vw,2.15rem);line-height:1.25;
+  color:var(--cream);margin:0;
+}
+.buzz-card p.q em{font-style:normal;color:var(--amber-bright)}
+
+/* ============================================== S2 - the five real questions */
+.qa{border-top:1px solid var(--line-dark);margin-top:clamp(30px,4vw,50px)}
+.qa-row{
+  display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.02fr);align-items:center;
+  gap:clamp(14px,3vw,52px);padding:clamp(22px,3vw,32px) 0;border-bottom:1px solid var(--line-dark);
+  transition:background .35s var(--ease);
+}
+.qa-row:hover{background:rgba(241,239,232,.03)}
+.qa-q{display:flex;align-items:baseline;gap:clamp(12px,1.6vw,20px)}
+.qa-n{font-family:var(--mono);font-size:.78rem;letter-spacing:.14em;color:var(--amber-bright);flex:none}
+.qa-q p{
+  font-family:var(--display);font-size:clamp(1.28rem,2.4vw,1.9rem);line-height:1.24;
+  color:var(--cream);margin:0;
+}
+.qa-a{
+  margin:0;padding-left:clamp(15px,2vw,24px);border-left:2px solid var(--amber);
+  color:rgba(241,239,232,.78);font-size:1rem;line-height:1.62;
+}
+.qa-a b{color:var(--cream);font-weight:500}
+
+/* ======================================================= S3 - the reply race */
+.race{margin-top:clamp(28px,4vw,48px);display:grid;gap:clamp(20px,2.6vw,30px)}
+.lane-head{display:flex;align-items:baseline;justify-content:space-between;gap:14px;margin-bottom:9px}
+/* .lane-who is itself a flex row so that on a narrow screen the "got the order"
+   chip wraps under the supplier name instead of pushing the time onto its own
+   line, where space-between would strand it against the left edge. */
+.lane-who{display:flex;flex-wrap:wrap;align-items:center;gap:10px;min-width:0;font-size:1.04rem;color:var(--teal-950)}
+.lane-when{font-family:var(--mono);font-variant-numeric:tabular-nums;font-size:1rem;color:var(--muted);white-space:nowrap}
+.lane-track{height:14px;border-radius:99px;background:var(--panel-2);overflow:hidden}
+.lane-track i{
+  display:block;height:100%;width:var(--w);border-radius:99px;background:var(--tone);
+  transform:scaleX(0);transform-origin:0 50%;transition:transform 1.1s var(--ease);
+  transition-delay:var(--d,0s);
+}
+.rv.vis .lane-track i,html:not(.js) .lane-track i{transform:none}
+.lane-note{margin:9px 0 0;font-size:.95rem;color:var(--muted)}
+.lane.bad{--tone:var(--alert)}
+.lane.mid{--tone:#B9AE93}
+.lane.good{--tone:var(--teal)}
+.lane.best{--tone:var(--wa)}
+.lane.best .lane-who,.lane.best .lane-when{color:var(--teal-950);font-weight:500}
+.lane.best .lane-track{background:rgba(31,175,94,.16)}
+.lane-flag{
+  display:inline-flex;align-items:center;gap:7px;font-family:var(--mono);
+  font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--teal-950);
+  background:var(--amber-pale);border-radius:99px;padding:4px 10px;white-space:nowrap;
+}
+.lane.best .lane-flag{background:var(--wa);color:#fff}
+.race-foot{
+  display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:14px;
+  margin-top:clamp(24px,3vw,36px);padding-top:20px;border-top:1px solid var(--line);
+}
+.race-kick{font-family:var(--display);font-size:clamp(1.2rem,2.4vw,1.7rem);color:var(--teal-950);margin:0}
+.race-note{font-family:var(--mono);font-size:.76rem;letter-spacing:.06em;color:var(--muted);margin:0;max-width:38ch}
+
+/* ================================================== S4 - the four sliders */
+.leak-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(20px,3vw,40px);align-items:stretch}
 .panelcard{
   background:rgba(241,239,232,.05);border:1px solid var(--line-dark);
   border-radius:16px;padding:clamp(24px,3vw,36px);
 }
-.panelcard h3{color:var(--cream);margin:0 0 22px;font-size:1.5rem}
-/* the evening, as a timeline */
-.tl{list-style:none;margin:0;padding:0}
-.tl li{position:relative;padding:0 0 22px 26px;border-left:1px solid var(--line-dark)}
-.tl li:last-child{padding-bottom:0;border-left-color:transparent}
-.tl li::before{
-  content:"";position:absolute;left:-4.5px;top:8px;width:8px;height:8px;border-radius:50%;
-  background:var(--amber-pale);
-}
-.tl li.bad::before{background:var(--alert);box-shadow:0 0 0 4px rgba(166,67,31,.18)}
-.tl .t{display:block;font-family:var(--mono);font-size:.78rem;letter-spacing:.12em;color:var(--amber-pale);margin-bottom:5px}
-.tl .d{display:block;color:rgba(241,239,232,.8);font-size:.98rem;line-height:1.55}
-.tl .d b{color:var(--cream)}
-
-.fieldrow{margin-bottom:20px}
+.panelcard h3{color:var(--cream);margin:0 0 22px;font-size:1.4rem}
+.fieldrow{margin-bottom:22px}
 .fieldrow label{
   display:flex;justify-content:space-between;align-items:baseline;gap:12px;
   font-size:.95rem;color:rgba(241,239,232,.8);margin-bottom:9px;
@@ -512,24 +595,79 @@ input[type=range]::-moz-range-thumb{
 }
 .bignum-cap{
   display:block;font-family:var(--mono);font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;
-  color:rgba(241,239,232,.55);margin:30px 0 4px;
+  color:rgba(241,239,232,.55);margin:0 0 4px;
 }
 .bignum{
-  display:block;font-family:var(--display);font-size:clamp(2.6rem,6vw,4.2rem);line-height:1;
+  display:block;font-family:var(--display);font-size:clamp(2.8rem,6.4vw,4.4rem);line-height:1;
   color:var(--amber-bright);font-variant-numeric:tabular-nums;
 }
-.payback{margin:18px 0 0;color:rgba(241,239,232,.82);font-size:1.02rem}
+.payback{margin:20px 0 0;color:rgba(241,239,232,.82);font-size:1.02rem}
 .payback b{color:var(--cream)}
-.assume{margin:14px 0 0;font-size:.88rem;line-height:1.6;color:rgba(241,239,232,.5)}
+.assume{margin:14px 0 0;font-size:.86rem;line-height:1.6;color:rgba(241,239,232,.5)}
 
-/* ------------------------------------------------------------- staircase */
+/* ============================== S5 - the morning message and the three zeros */
+.touch-grid{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(30px,5vw,68px);align-items:center}
+.phone{
+  width:min(320px,100%);margin-inline:auto;padding:9px;border-radius:36px;
+  background:var(--teal-950);border:1px solid var(--teal-900);
+  box-shadow:0 46px 80px -46px rgba(7,43,34,.75);
+}
+.phone-in{border-radius:28px;overflow:hidden;background:#E9E3D6}
+.phone-bar{display:flex;align-items:center;gap:11px;background:var(--teal-900);padding:13px 15px}
+.phone-av{
+  width:34px;height:34px;border-radius:50%;flex:none;background:var(--amber);color:var(--teal-950);
+  display:grid;place-items:center;font-family:var(--mono);font-size:.76rem;font-weight:500;
+}
+.phone-nm{font-size:.92rem;color:var(--cream);line-height:1.25}
+.phone-nm span{
+  display:block;font-family:var(--mono);font-size:.64rem;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--amber-pale);
+}
+.phone-body{padding:18px 15px 24px}
+.bub{
+  background:#fff;border-radius:3px 15px 15px 15px;padding:15px 16px;
+  box-shadow:0 3px 10px -4px rgba(7,43,34,.35);font-size:.92rem;line-height:1.6;color:var(--ink);
+}
+.bub p{margin:0 0 10px}
+.bub ul{list-style:none;margin:0 0 10px;padding:0}
+.bub li{position:relative;padding-left:18px;margin-bottom:5px}
+.bub li::before{content:"";position:absolute;left:2px;top:.62em;width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.bub li.act::before{background:var(--alert)}
+.bub b{color:var(--teal-950);font-weight:600}
+.bub .act-l{color:var(--alert);font-weight:600}
+.bub .tme{display:block;text-align:right;font-family:var(--mono);font-size:.62rem;color:var(--muted);margin-top:2px}
+.phone-cap{
+  text-align:center;font-family:var(--mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--muted);margin:16px 0 0;
+}
+.zeros{list-style:none;margin:0;padding:0;display:grid;gap:clamp(12px,1.8vw,18px)}
+.zeros li{
+  display:flex;align-items:center;gap:clamp(16px,2.4vw,28px);
+  border-bottom:1px solid var(--line);padding-bottom:clamp(12px,1.8vw,18px);
+}
+.zeros li:last-child{border-bottom:0;padding-bottom:0}
+/* Mono, not the display serif: Marcellus's zero is a wide open oval that at
+   5rem reads as a ring or a bullet, not as the number nought - which is the
+   entire point of the row. Plex Mono's zero is unmistakable. */
+.zeros .z{
+  font-family:var(--mono);font-weight:500;font-size:clamp(2.9rem,6.6vw,4.4rem);
+  line-height:.9;color:var(--amber);flex:none;min-width:1.1em;text-align:center;
+}
+.zeros .zt{margin:0;font-size:clamp(1.05rem,1.8vw,1.28rem);color:var(--teal-950);line-height:1.3}
+.zeros .zt small{display:block;font-size:.88rem;color:var(--muted);margin-top:3px;line-height:1.5}
+.touch-kick{
+  margin:clamp(28px,4vw,46px) 0 0;font-family:var(--display);
+  font-size:clamp(1.35rem,3vw,2.1rem);line-height:1.3;color:var(--teal-950);text-align:center;
+}
+.touch-kick em{font-style:normal;color:var(--amber-text)}
+
+/* ----------------------------------------------------------- S6 staircase */
 .stair{width:100%;height:auto;display:block;margin:clamp(24px,4vw,44px) 0 clamp(28px,4vw,52px);overflow:visible}
 .stair .step{opacity:0;transform:translateY(26px);transition:opacity .7s var(--ease),transform .8s var(--ease);transition-delay:var(--d,0s)}
 .stair.vis .step{opacity:1;transform:none}
 .stair .anno{opacity:0;transition:opacity .6s var(--ease);transition-delay:var(--d,0s)}
 .stair.vis .anno{opacity:1}
 html:not(.js) .stair .step,html:not(.js) .stair .anno{opacity:1;transform:none}
-
 .sys-card{display:flex;flex-direction:column;gap:14px}
 .sys-card .tag{
   font-family:var(--mono);font-size:.85rem;letter-spacing:.06em;color:var(--teal-900);
@@ -538,8 +676,8 @@ html:not(.js) .stair .step,html:not(.js) .stair .anno{opacity:1;transform:none}
 .sys-card .tag b{color:var(--amber-text)}
 .sys-card .tlink{margin-top:auto}
 
-/* ----------------------------------------------------------- proof tiles */
-.tiles{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(16px,2.2vw,26px)}
+/* --------------------------------------------------------- S7 proof tiles */
+.tiles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(16px,2.2vw,26px)}
 .tile{
   position:relative;display:block;text-decoration:none;border-radius:16px;overflow:hidden;
   border:1px solid var(--line-dark);background:rgba(241,239,232,.04);
@@ -560,12 +698,12 @@ html:not(.js) .stair .step,html:not(.js) .stair .anno{opacity:1;transform:none}
 }
 .tile .live i{width:7px;height:7px;border-radius:50%;background:var(--wa);animation:pulse 2.2s ease-in-out infinite}
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.45;transform:scale(.8)}}
-.tile-wide{grid-column:1/-1;display:grid;grid-template-columns:1fr auto;align-items:center;gap:24px;padding:clamp(24px,3vw,36px)}
+.tile-wide{grid-column:1/-1;display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:24px;padding:clamp(24px,3vw,36px)}
 .tile-wide h3{margin:0 0 8px}
 .tile-wide .cap{padding:0}
 
-/* --------------------------------------------------------- hours grid */
-.hours-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(18px,3vw,34px)}
+/* ------------------------------------------------- S8 hours + growth chart */
+.hours-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(18px,3vw,34px)}
 .hcard{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:clamp(22px,3vw,32px)}
 .hcard.win{background:var(--teal-950);border-color:var(--teal-900);color:var(--cream)}
 .hcard h3{margin:0 0 4px;font-size:1.4rem}
@@ -575,7 +713,7 @@ html:not(.js) .stair .step,html:not(.js) .stair .anno{opacity:1;transform:none}
 /* 24 columns x 7 rows: one row per day, one cell per hour. Transposed from
    7x24 because 24 narrow columns keep the cells small enough to read as a
    texture; at 7 columns each cell was ~40px and the block ran a metre tall. */
-.hgrid{display:grid;grid-template-columns:repeat(24,1fr);gap:2px;margin-bottom:20px}
+.hgrid{display:grid;grid-template-columns:repeat(24,minmax(0,1fr));gap:2px;margin-bottom:20px}
 .hgrid i{aspect-ratio:1;border-radius:1px;background:var(--panel-2);display:block}
 .hcard.win .hgrid i{background:rgba(241,239,232,.12)}
 .hgrid i.on{background:var(--alert)}
@@ -586,9 +724,17 @@ html:not(.js) .stair .step,html:not(.js) .stair .anno{opacity:1;transform:none}
 .hcard.win .note{color:rgba(241,239,232,.72)}
 .hlegend{font-family:var(--mono);font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:0 0 8px}
 .hcard.win .hlegend{color:rgba(241,239,232,.55)}
+.growth{
+  margin-top:clamp(18px,3vw,34px);background:var(--white);border:1px solid var(--line);border-radius:16px;
+  padding:clamp(22px,3vw,34px);display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);
+  gap:clamp(20px,3.4vw,46px);align-items:center;
+}
+.growth svg{width:100%;height:auto;display:block}
+.growth h3{margin:0 0 10px;font-size:clamp(1.3rem,2.4vw,1.75rem)}
+.growth p{margin:0;color:var(--muted);font-size:1rem}
 
-/* -------------------------------------------------------------- promise */
-.promise-grid{display:grid;grid-template-columns:auto 1fr;gap:clamp(24px,4vw,52px);align-items:center}
+/* ------------------------------------------------------------- S9 promise */
+.promise-grid{display:grid;grid-template-columns:auto minmax(0,1fr);gap:clamp(24px,4vw,52px);align-items:center}
 .promise-photo{
   width:clamp(150px,17vw,220px);aspect-ratio:1;border-radius:50%;object-fit:cover;
   border:1px solid var(--line-dark);filter:saturate(.92);
@@ -600,8 +746,8 @@ html:not(.js) .stair .step,html:not(.js) .stair .anno{opacity:1;transform:none}
 .promise q::before,.promise q::after{content:""}
 .promise .sig{font-family:var(--mono);font-size:.85rem;letter-spacing:.1em;text-transform:uppercase;color:var(--amber-pale);margin:0}
 
-/* -------------------------------------------------------- explore rail */
-.rail{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(14px,1.8vw,22px)}
+/* ---------------------------------------------------------- S10 explore rail */
+.rail{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(14px,1.8vw,22px)}
 .rcard{
   position:relative;display:flex;flex-direction:column;justify-content:space-between;gap:34px;
   min-height:230px;text-decoration:none;background:var(--panel);border:1px solid var(--line);
@@ -621,14 +767,25 @@ html:not(.js) .stair .step,html:not(.js) .stair .anno{opacity:1;transform:none}
 .rcard .go{position:relative;font-family:var(--mono);font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);display:inline-flex;align-items:center;gap:8px}
 .rcard:hover .go{color:var(--amber-text)}
 
-@media (max-width:760px){ .stair{display:none} }
+/* ------------------------------------------------------------ breakpoints */
 @media (max-width:960px){
-  .leak-grid,.hours-grid,.tiles{grid-template-columns:1fr}
-  .rail{grid-template-columns:repeat(2,1fr)}
-  .promise-grid{grid-template-columns:1fr;text-align:left}
-  .tile-wide{grid-template-columns:1fr}
+  .leak-grid,.hours-grid,.tiles,.touch-grid,.growth{grid-template-columns:minmax(0,1fr)}
+  .rail{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .promise-grid{grid-template-columns:minmax(0,1fr);text-align:left}
+  .tile-wide{grid-template-columns:minmax(0,1fr)}
+  .qa-row{grid-template-columns:minmax(0,1fr);gap:14px}
+  .qa-a{margin-left:calc(2ch + 20px)}
 }
-@media (max-width:560px){ .rail{grid-template-columns:1fr} }
+@media (max-width:760px){
+  .stair{display:none}
+  .buzz{height:clamp(330px,74vw,400px)}
+  .buzz b.o{display:none}
+  .buzz b{left:var(--xs);top:var(--ys);font-size:calc(var(--s) * .78)}
+}
+@media (max-width:560px){
+  .rail{grid-template-columns:minmax(0,1fr)}
+  .qa-a{margin-left:0}
+}
 
 /* Section height IS the playback speed control: travel = height - 100vh
    stage, and the frames are spread across that travel. */
@@ -646,7 +803,11 @@ html:not(.js) .stair .step,html:not(.js) .stair .anno{opacity:1;transform:none}
   text-align:center;opacity:0;transition:opacity .45s ease;pointer-events:none;
 }
 .lead.on,.endcard.on,.beat.on{opacity:1;pointer-events:auto}
-.lead h1{font-size:clamp(2.6rem,5.6vw,4.5rem);line-height:1.04;color:var(--teal-950);margin:0 0 26px}
+.lead h1{font-size:clamp(2.6rem,5.6vw,4.5rem);line-height:1.04;color:var(--teal-950);margin:0 0 18px}
+/* The relief line. The h1 removes the fear ("you don't have to learn it"); this
+   line supplies the reason to keep reading. Kept to one sentence because it is
+   read over moving footage. */
+.lead .sub{font-size:clamp(1.05rem,2.4vw,1.24rem);line-height:1.5;color:var(--teal-900);margin:0 0 26px;max-width:26ch;margin-inline:auto}
 /* A CTA inside the first viewport. v3 learned this the hard way: with the
    only button on the endcard at 86% scroll progress, a visitor who did not
    scroll five screens never saw a call to action at all. */
@@ -654,18 +815,8 @@ html:not(.js) .stair .step,html:not(.js) .stair .anno{opacity:1;transform:none}
 .beat{font-family:var(--mono);font-size:clamp(1rem,3.2vw,1.15rem);line-height:1.55;color:var(--teal-900)}
 .beat span{display:inline-block;border-top:2px solid var(--amber);padding-top:14px}
 .endcard p{font-family:var(--display);font-size:clamp(1.7rem,5vw,2.5rem);color:var(--teal-950);margin:0 0 22px;line-height:1.2}
-.scroll-hint{
-  position:absolute;left:50%;bottom:12px;transform:translateX(-50%);font-family:var(--mono);
-  font-size:.85rem;letter-spacing:.24em;text-transform:uppercase;color:var(--muted);
-  margin:0;opacity:0;transition:opacity .4s ease;
-}
-.scroll-hint.on{opacity:.8}
 .cine-progress{position:absolute;left:0;right:0;bottom:0;height:3px;background:rgba(35,43,38,.1);z-index:5}
 .cine-progress i{display:block;height:100%;width:100%;background:var(--amber);transform:scaleX(0);transform-origin:0 50%}
-.illus-note{
-  position:absolute;left:0;right:0;bottom:12px;z-index:5;font-family:var(--mono);font-size:.95rem;
-  letter-spacing:.05em;color:rgba(35,43,38,.6);margin:0;text-align:center;padding:0 20px;
-}
 .wash-l,.wash-r{display:none;position:absolute;inset:0;z-index:3;pointer-events:none}
 
 @media (min-width:1100px){
@@ -676,21 +827,14 @@ html:not(.js) .stair .step,html:not(.js) .stair .anno{opacity:1;transform:none}
   .wash-r{display:block;background:linear-gradient(270deg,rgba(241,239,232,.72) 0%,rgba(241,239,232,.34) 22%,rgba(241,239,232,0) 44%)}
   .lead,.endcard{left:clamp(32px,4.5vw,76px);right:auto;top:46%;transform:translateY(-50%);width:min(470px,34vw);text-align:left}
   .lead h1{font-size:clamp(2.5rem,3.5vw,3.6rem)}
+  .lead .sub{margin-inline:0}
   .lead-cta{justify-content:flex-start}
   .beat{left:auto;right:clamp(32px,4.5vw,76px);top:50%;transform:translateY(-50%);width:min(330px,25vw);text-align:left;font-size:1.1rem}
-  .scroll-hint{left:clamp(32px,4.5vw,76px);transform:none;bottom:38px}
-  .illus-note{left:auto;right:210px;bottom:14px;text-align:right;font-size:.95rem;padding:0}
 }
 @media (max-width:1099px){
   .cine{height:460vh}
-  /* Bottom padding reserves room for the absolutely-positioned disclaimer at
-     the foot of the stage; without it the centred copy lands on top of it. */
-  .cine-ui{padding:clamp(18px,4vw,32px) 20px 88px}
+  .cine-ui{padding:clamp(18px,4vw,32px) 20px}
   .cine-media{height:clamp(220px,38svh,420px)}
-  /* Opposite corners: stacked, both of these default to bottom-centre and the
-     disclaimer wraps onto the scroll hint. */
-  .illus-note{left:16px;right:auto;max-width:62%;text-align:left;bottom:10px}
-  .scroll-hint{left:auto;right:16px;transform:none;bottom:10px}
 }
 @media (max-width:560px){
   .cine{height:420vh}
@@ -755,28 +899,27 @@ html:not(.js) .stair .step,html:not(.js) .stair .anno{opacity:1;transform:none}
 
     <div class="cine-ui">
       <div class="lead on" id="lead">
-        <h1>Never lose a buyer to silence again.</h1>
+        <h1>You don&#8217;t have to learn AI.</h1>
+        <p class="sub">You only have to stop losing buyers to the supplier who answers first.</p>
         <div class="lead-cta">
-          <a class="btn btn-teal" href="#leak">What silence costs you &darr;</a>
+          <a class="btn btn-teal" href="#noise">Show me, in one minute &darr;</a>
         </div>
       </div>
 
       <p class="beat" data-at="0.16"><span>9:47 PM. A buyer asks if you deliver to Sohar.</span></p>
       <p class="beat" data-at="0.28"><span>Your office closed four hours ago.</span></p>
-      <p class="beat" data-at="0.40"><span>Something answers anyway.</span></p>
-      <p class="beat" data-at="0.52"><span>It knows your stock. It knows your delivery times.</span></p>
-      <p class="beat" data-at="0.64"><span>It books the order and logs the lead.</span></p>
-      <p class="beat" data-at="0.76"><span>You read about it in the morning.</span></p>
+      <p class="beat" data-at="0.40"><span>Something answers him. In Arabic.</span></p>
+      <p class="beat" data-at="0.52"><span>It knows your stock. It knows your delivery days.</span></p>
+      <p class="beat" data-at="0.64"><span>It quotes. It books. It logs the lead.</span></p>
+      <p class="beat" data-at="0.76"><span>You read about it over coffee. You learned nothing new.</span></p>
 
       <div class="endcard" id="endcard">
         <p>Every success starts with insight.</p>
-        <a class="btn btn-wa" href="https://wa.me/96899245250?text=Hello%20Nahid%2C%20I%20want%20to%20ask%20about%20a%20Smart%20Storefront%20for%20my%20business."><svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 1.8a8.2 8.2 0 1 1-4.2 15.3l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8zm-3.1 4c-.2 0-.5 0-.7.3-.2.3-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.8 2.8 4.4 3.8 2.2.9 2.6.7 3.1.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2-.1-.1-.2-.2-.5-.3l-1.7-.8c-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.1-.2 0-.4.1-.5l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5L10 8.2c-.2-.4-.4-.4-.6-.4h-.5z"/></svg>Message me on WhatsApp</a>
+        <a class="btn btn-wa" href="https://wa.me/96899245250?text=Hello%20Nahid%2C%20I%20want%20to%20ask%20about%20a%20Smart%20Website%20for%20my%20business."><svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 1.8a8.2 8.2 0 1 1-4.2 15.3l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8zm-3.1 4c-.2 0-.5 0-.7.3-.2.3-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.8 2.8 4.4 3.8 2.2.9 2.6.7 3.1.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2-.1-.1-.2-.2-.5-.3l-1.7-.8c-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.1-.2 0-.4.1-.5l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5L10 8.2c-.2-.4-.4-.4-.6-.4h-.5z"/></svg>Message me on WhatsApp</a>
       </div>
 
-      <p class="scroll-hint on" id="hint">Scroll</p>
     </div>
 
-    <p class="illus-note">Illustration of the system. Not a photograph of a person.</p>
     <div class="cine-progress"><i id="cineBar"></i></div>
   </div>
 </section>
@@ -784,48 +927,131 @@ html:not(.js) .stair .step,html:not(.js) .stair .anno{opacity:1;transform:none}
 
 <div class="facts" aria-label="Key facts">
   <div class="track">
-    <div class="half">
-      <span><span class="star">&#10038;</span>One-time fee</span>
-      <span><span class="star">&#10038;</span>No monthly lock-in</span>
-      <span><span class="star">&#10038;</span>Priced in OMR</span>
-      <span><span class="star">&#10038;</span>English + &#1575;&#1604;&#1593;&#1585;&#1576;&#1610;&#1577;</span>
-      <span><span class="star">&#10038;</span>Built in Muscat</span>
-      <span><span class="star">&#10038;</span>Live in about a week</span>
-      <span><span class="star">&#10038;</span>You keep what I build</span>
-    </div>
-    <div class="half" aria-hidden="true">
-      <span><span class="star">&#10038;</span>One-time fee</span>
-      <span><span class="star">&#10038;</span>No monthly lock-in</span>
-      <span><span class="star">&#10038;</span>Priced in OMR</span>
-      <span><span class="star">&#10038;</span>English + &#1575;&#1604;&#1593;&#1585;&#1576;&#1610;&#1577;</span>
-      <span><span class="star">&#10038;</span>Built in Muscat</span>
-      <span><span class="star">&#10038;</span>Live in about a week</span>
-      <span><span class="star">&#10038;</span>You keep what I build</span>
-    </div>
+    <div class="half"><span><span class="star">&#10038;</span>Nothing new to learn</span><span><span class="star">&#10038;</span>You keep using WhatsApp</span><span><span class="star">&#10038;</span>One-time fee</span><span><span class="star">&#10038;</span>No monthly lock-in</span><span><span class="star">&#10038;</span>Arabic &#43; English</span><span><span class="star">&#10038;</span>Live in about a week</span><span><span class="star">&#10038;</span>Built in Muscat</span><span><span class="star">&#10038;</span>You own what I build</span></div>
+    <div class="half" aria-hidden="true"><span><span class="star">&#10038;</span>Nothing new to learn</span><span><span class="star">&#10038;</span>You keep using WhatsApp</span><span><span class="star">&#10038;</span>One-time fee</span><span><span class="star">&#10038;</span>No monthly lock-in</span><span><span class="star">&#10038;</span>Arabic &#43; English</span><span><span class="star">&#10038;</span>Live in about a week</span><span><span class="star">&#10038;</span>Built in Muscat</span><span><span class="star">&#10038;</span>You own what I build</span></div>
   </div>
 </div>
 
-<!-- ============================================ S2 - THE LEAK, IN YOUR NUMBERS -->
+<!-- ================================= S2 - THE NOISE, THEN THE REAL QUESTIONS -->
+<section class="s-dark" id="noise">
+  <div class="wrap">
+    <p class="eyebrow"><span class="star">&#10038;</span> Start here</p>
+    <h2 class="h2">Everyone is talking about AI. Almost none of it is your job.</h2>
+
+    <div class="buzz rv" aria-hidden="true">
+    <b style="--x:11%;--y:13%;--xs:18%;--ys:9%;--s:1.55rem;--o:0.34;--t:13s;--dl:-0.0s">LLM</b>
+    <b class="o" style="--x:37%;--y:7%;--s:1.0rem;--o:0.19;--t:17s;--dl:-1.7s">prompt engineering</b>
+    <b style="--x:63%;--y:13%;--xs:68%;--ys:9%;--s:1.7rem;--o:0.3;--t:15s;--dl:-3.4s">RAG</b>
+    <b class="o" style="--x:85%;--y:24%;--s:0.95rem;--o:0.18;--t:19s;--dl:-5.1s">vector database</b>
+    <b class="o" style="--x:9%;--y:35%;--s:1.15rem;--o:0.25;--t:16s;--dl:-6.8s">fine-tuning</b>
+    <b class="o" style="--x:90%;--y:45%;--s:1.2rem;--o:0.22;--t:14s;--dl:-8.5s">transformers</b>
+    <b style="--x:15%;--y:55%;--xs:72%;--ys:91%;--s:1.45rem;--o:0.28;--t:18s;--dl:-10.2s">tokens</b>
+    <b class="o" style="--x:85%;--y:58%;--s:1.05rem;--o:0.2;--t:15s;--dl:-11.9s">hallucination</b>
+    <b style="--x:11%;--y:76%;--xs:24%;--ys:91%;--s:1.6rem;--o:0.32;--t:13s;--dl:-13.6s">agents</b>
+    <b class="o" style="--x:41%;--y:90%;--s:1.0rem;--o:0.19;--t:20s;--dl:-15.3s">embeddings</b>
+    <b style="--x:67%;--y:84%;--xs:46%;--ys:17%;--s:1.3rem;--o:0.24;--t:16s;--dl:-17.0s">inference</b>
+    <b class="o" style="--x:88%;--y:76%;--s:0.95rem;--o:0.17;--t:18s;--dl:-18.7s">neural networks</b>
+    <b class="o" style="--x:27%;--y:24%;--s:0.95rem;--o:0.17;--t:21s;--dl:-20.4s">chain-of-thought</b>
+    <b class="o" style="--x:80%;--y:20%;--s:1.05rem;--o:0.21;--t:17s;--dl:-22.1s">GPU clusters</b>
+    <b class="o" style="--x:20%;--y:88%;--s:1.2rem;--o:0.23;--t:14s;--dl:-23.8s">copilots</b>
+    <b class="o" style="--x:55%;--y:94%;--s:1.0rem;--o:0.18;--t:19s;--dl:-25.5s">multimodal</b>
+      <div class="buzz-card">
+        <p class="k">Your job is one question</p>
+        <p class="q">Did that buyer get an answer, <em>or did he go somewhere else?</em></p>
+      </div>
+    </div>
+    <p class="sr-only">A cloud of AI jargon &mdash; LLM, RAG, fine-tuning, agents, embeddings, inference
+      and the rest &mdash; with one sentence over it: your job is one question. Did that buyer get an
+      answer, or did he go somewhere else?</p>
+
+    <div class="asterism" style="margin-top:clamp(38px,5vw,64px)" aria-hidden="true">&#10038;</div>
+
+    <p class="eyebrow"><span class="star">&#10038;</span> The five you don&#8217;t ask out loud</p>
+    <div class="qa">
+      <div class="qa-row rv">
+        <div class="qa-q"><span class="qa-n">01</span><p>&#8220;Is this real, or is it hype?&#8221;</p></div>
+        <p class="qa-a">For a trading business it is one thing: a machine that answers buyers in Arabic and English at two in the morning. <b>That part works today.</b></p>
+      </div>
+      <div class="qa-row rv">
+        <div class="qa-q"><span class="qa-n">02</span><p>&#8220;Will it actually touch my business?&#8221;</p></div>
+        <p class="qa-a">Only through the supplier who replied to your buyer <b>while you were at dinner</b>. Nothing else about AI needs to concern you this year.</p>
+      </div>
+      <div class="qa-row rv">
+        <div class="qa-q"><span class="qa-n">03</span><p>&#8220;Do I have to learn it?&#8221;</p></div>
+        <p class="qa-a">No. You never open it, never log in, never type a prompt. <b>It reports to your WhatsApp in one sentence.</b></p>
+      </div>
+      <div class="qa-row rv">
+        <div class="qa-q"><span class="qa-n">04</span><p>&#8220;Will it break the way I work now?&#8221;</p></div>
+        <p class="qa-a">Nothing about your day changes. It is built <b>beside</b> your business, not on top of it &mdash; the phone, the prices and the people stay exactly as they are.</p>
+      </div>
+      <div class="qa-row rv">
+        <div class="qa-q"><span class="qa-n">05</span><p>&#8220;Can it really make me spend less?&#8221;</p></div>
+        <p class="qa-a">It is paid <b>once</b>, not every month. It takes no visa, no leave and no sick days, and it costs the same whether one buyer writes tonight or forty do.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================= S3 - THE REPLY RACE -->
+<section class="s-cream grain">
+  <div class="wrap">
+    <p class="eyebrow"><span class="star">&#10038;</span> What has actually changed</p>
+    <h2 class="h2">Your buyer stopped waiting. That is the whole change.</h2>
+    <p class="lede">One evening. One buyer. The same question sent to three suppliers at 9:47 PM.</p>
+
+    <div class="race rv" data-stagger>
+      <div class="lane bad">
+        <div class="lane-head">
+          <span class="lane-who">You, tonight</span>
+          <span class="lane-when">14 h 25 m</span>
+        </div>
+        <div class="lane-track"><i style="--w:100%"></i></div>
+        <p class="lane-note">He read your price at 8:12am. He had ordered at 10:03pm.</p>
+      </div>
+      <div class="lane mid">
+        <div class="lane-head">
+          <span class="lane-who">The second supplier</span>
+          <span class="lane-when">2 h 04 m</span>
+        </div>
+        <div class="lane-track"><i style="--w:31%"></i></div>
+        <p class="lane-note">Also too late. He never even got a reply.</p>
+      </div>
+      <div class="lane good">
+        <div class="lane-head">
+          <span class="lane-who">The supplier who won<span class="lane-flag">Got the order</span></span>
+          <span class="lane-when">4 min</span>
+        </div>
+        <div class="lane-track"><i style="--w:9%"></i></div>
+        <p class="lane-note">Not cheaper. Not better. Awake.</p>
+      </div>
+      <div class="lane best">
+        <div class="lane-head">
+          <span class="lane-who">You, with the system<span class="lane-flag">Answered first</span></span>
+          <span class="lane-when">40 sec</span>
+        </div>
+        <div class="lane-track"><i style="--w:3.5%"></i></div>
+        <p class="lane-note">The quote goes out. The lead lands on your phone.</p>
+      </div>
+    </div>
+
+    <div class="race-foot">
+      <p class="race-kick">Three suppliers got the message. One got the order.</p>
+      <p class="race-note">An evening of the kind you have had, not a statistic.
+        Bar length is ranked, not to scale.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ========================================== S4 - YOUR OWN NUMBER, NOT MINE -->
 <section class="s-dark" id="leak">
   <div class="wrap">
-    <p class="eyebrow"><span class="star">&#10038;</span> The cost of silence</p>
-    <h2 class="h2">Move four sliders. See your own number.</h2>
-    <p class="lede">Nothing here is assumed. Every figure is one you set yourself.</p>
+    <p class="eyebrow"><span class="star">&#10038;</span> Your own numbers</p>
+    <h2 class="h2">Four sliders. Nothing assumed. Your number.</h2>
+    <p class="lede">I have no figures about your business, so every one below is yours to set.</p>
 
     <div class="leak-grid" style="margin-top:clamp(30px,4vw,52px)">
       <div class="panelcard rv">
-        <h3>One buyer. One evening.</h3>
-        <ol class="tl">
-          <li class="bad"><span class="t">21:47 THU</span><span class="d">A buyer asks if you deliver to Sohar, and what the bulk price is.</span></li>
-          <li class="bad"><span class="t">21:47 &rarr; 08:12</span><span class="d">Nothing. Your office closed at 5pm. The message sits <b>14 hours</b>.</span></li>
-          <li class="bad"><span class="t">22:10 THU</span><span class="d">He messages two more suppliers. One replies in four minutes.</span></li>
-          <li><span class="t">08:12 FRI</span><span class="d">You reply, politely, with a good price.</span></li>
-          <li class="bad"><span class="t">08:14 FRI</span><span class="d">Silence. You never got to compete.</span></li>
-        </ol>
-      </div>
-
-      <div class="panelcard rv" style="--d:.12s">
-        <h3>What that costs you every month</h3>
+        <h3>Your business, in four numbers</h3>
 
         <div class="fieldrow">
           <label for="q1">Buyer inquiries you get in a week <output id="o1">25</output></label>
@@ -839,29 +1065,31 @@ html:not(.js) .stair .step,html:not(.js) .stair .anno{opacity:1;transform:none}
           <label for="q3">Your average order value <output id="o3">OMR 180</output></label>
           <input type="range" id="q3" min="20" max="2000" step="20" value="180">
         </div>
-        <div class="fieldrow">
+        <div class="fieldrow" style="margin-bottom:0">
           <label for="q4">Share of answered inquiries you win <output id="o4">20%</output></label>
           <input type="range" id="q4" min="5" max="60" step="5" value="20">
         </div>
+      </div>
 
+      <div class="panelcard rv" style="--d:.12s">
         <span class="bignum-cap">Revenue walking away, per month</span>
         <span class="bignum" id="leakNum">OMR 1,559</span>
 
         <!-- Two bars, one scale: the monthly leak against the one-time cost of
              fixing it. The comparison is the whole argument. -->
-        <svg id="bars" viewBox="0 0 420 132" role="img" style="width:100%;height:auto;margin-top:22px" aria-labelledby="barsTitle">
-          <title id="barsTitle">Monthly revenue lost to silence, compared with the one-time cost of the Smart Storefront</title>
+        <svg id="bars" viewBox="0 0 420 132" role="img" style="width:100%;height:auto;margin-top:26px" aria-labelledby="barsTitle">
+          <title id="barsTitle">Monthly revenue lost to silence, compared with the one-time cost of the Smart Website</title>
           <text x="0" y="14" fill="#A8BCB1" font-family="IBM Plex Mono, monospace" font-size="15">Lost each month</text>
           <rect x="0" y="22" width="420" height="26" rx="5" fill="rgba(241,239,232,.10)"/>
           <rect id="barLeak" x="0" y="22" width="420" height="26" rx="5" fill="#D89234"/>
           <text id="barLeakT" x="410" y="40" fill="#072B22" font-family="IBM Plex Mono, monospace" font-size="15" font-weight="500" text-anchor="end">OMR 1,559</text>
-          <text x="0" y="82" fill="#A8BCB1" font-family="IBM Plex Mono, monospace" font-size="15">Smart Storefront, once</text>
+          <text x="0" y="82" fill="#A8BCB1" font-family="IBM Plex Mono, monospace" font-size="15">Smart Website, once</text>
           <rect x="0" y="90" width="420" height="26" rx="5" fill="rgba(241,239,232,.10)"/>
           <rect id="barCost" x="0" y="90" width="256" height="26" rx="5" fill="#1FAF5E"/>
           <text x="10" y="108" fill="#072B22" font-family="IBM Plex Mono, monospace" font-size="15" font-weight="500">OMR 950</text>
         </svg>
 
-        <p class="payback">At that rate the build pays for itself in <b id="days">19 days</b>.</p>
+        <p class="payback">At that rate it pays for itself in <b id="days">19 days</b>.</p>
         <p class="assume">After-hours inquiries per month &times; your win rate &times; your average order.
           It shows what is <em>at stake</em> in those messages &mdash; not a promise of recovery.</p>
       </div>
@@ -869,22 +1097,78 @@ html:not(.js) .stair .step,html:not(.js) .stair .anno{opacity:1;transform:none}
   </div>
 </section>
 
+<!-- ============================== S5 - THE PART HE IS ACTUALLY AFRAID OF -->
+<section class="s-panel">
+  <div class="wrap">
+    <p class="eyebrow"><span class="star">&#10038;</span> The part that worries you</p>
+    <h2 class="h2">There is nothing here for you to learn.</h2>
+    <p class="lede">No app to install. No screen to check. One message arrives every morning,
+      in the place you already look first.</p>
+
+    <div class="touch-grid" style="margin-top:clamp(30px,4vw,52px)">
+      <div class="rv">
+        <div class="phone">
+          <div class="phone-in">
+            <div class="phone-bar">
+              <span class="phone-av" aria-hidden="true">AI</span>
+              <span class="phone-nm">AI Profit Lab<span>online</span></span>
+            </div>
+            <div class="phone-body">
+              <div class="bub">
+                <p><b>Good morning.</b> Overnight, while you slept:</p>
+                <ul>
+                  <li>6 buyers asked about stock and delivery</li>
+                  <li>4 got prices and dates &mdash; closed</li>
+                  <li class="act"><span class="act-l">Needs you:</span> 200 cartons to Sohar</li>
+                  <li class="act"><span class="act-l">Needs you:</span> a request for 60-day credit</li>
+                </ul>
+                <p style="margin:0">Both numbers are saved in your phone.</p>
+                <span class="tme">07:02 &#10003;&#10003;</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="phone-cap">An example of the daily message</p>
+      </div>
+
+      <ul class="zeros rv" style="--d:.12s">
+        <li>
+          <span class="z" aria-hidden="true">0</span>
+          <p class="zt">apps to install
+            <small>Your phone stays exactly as it is today.</small></p>
+        </li>
+        <li>
+          <span class="z" aria-hidden="true">0</span>
+          <p class="zt">passwords to remember
+            <small>There is no login for you, so there is nothing to forget.</small></p>
+        </li>
+        <li>
+          <span class="z" aria-hidden="true">0</span>
+          <p class="zt">screens you must check
+            <small>It writes to you. You never go looking for it.</small></p>
+        </li>
+      </ul>
+    </div>
+
+    <p class="touch-kick">If you can read a WhatsApp message, <em>you can run this.</em></p>
+  </div>
+</section>
+
 <section class="s-cream grain" id="build">
   <div class="wrap">
     <p class="eyebrow"><span class="star">&#10038;</span> What gets built</p>
-    <h2 class="h2">Three systems. Each one solves the problem the last one creates.</h2>
-    <p class="lede">Start where the pain is. Nothing is a bundle you must buy at once, and nothing
-      needs a monthly fee to keep working.</p>
+    <h2 class="h2">Three systems. Start with the one that hurts.</h2>
+    <p class="lede">Nothing is a bundle you must buy at once. Nothing needs a monthly fee to keep working.</p>
 
     <svg class="stair rv" viewBox="0 0 1000 400" role="img" aria-labelledby="stairT stairD">
       <title id="stairT">The three systems as a staircase</title>
-      <desc id="stairD">Step one, the Smart Storefront at OMR 950, makes buyers arrive. That creates the next
+      <desc id="stairD">Step one, the Smart Website at OMR 950, makes buyers arrive. That creates the next
         question, answered by step two, the Live Owner Dashboard at plus OMR 650. That creates the next question,
         answered by step three, the Full Autopilot at plus OMR 900.</desc>
 
       <g class="step" style="--d:0s">
         <rect x="30" y="270" width="280" height="90" rx="12" fill="#0F6E56"/>
-        <text x="54" y="308" fill="#F1EFE8" font-family="Marcellus, Georgia, serif" font-size="26">The Smart Storefront</text>
+        <text x="54" y="308" fill="#F1EFE8" font-family="Marcellus, Georgia, serif" font-size="26">The Smart Website</text>
         <text x="54" y="336" fill="#BFE3D5" font-family="IBM Plex Mono, monospace" font-size="17">01 &#183; OMR 950</text>
       </g>
 
@@ -919,22 +1203,22 @@ html:not(.js) .stair .step,html:not(.js) .stair .anno{opacity:1;transform:none}
     <div class="grid g3" data-stagger>
       <article class="card sys-card">
         <span class="n">01</span>
-        <h3>The Smart Storefront</h3>
-        <p>A bilingual site that answers buyers in Arabic and English, records who they are, and hands the live ones to your WhatsApp.</p>
+        <h3>The Smart Website</h3>
+        <p>Answers buyers in Arabic and English, records who they are, and hands the live ones to your WhatsApp.</p>
         <span class="tag">One-time &#183; <b>OMR 950</b></span>
-        <a class="tlink" href="/en/services-v4/#storefront">See what&#8217;s inside <span class="arw">&rarr;</span></a>
+        <a class="tlink" href="/en/services-v4/#smart-website">See what&#8217;s inside <span class="arw">&rarr;</span></a>
       </article>
       <article class="card sys-card">
         <span class="n">02</span>
         <h3>The Live Owner Dashboard</h3>
-        <p>Your cash position, stock and open leads on one screen &mdash; without phoning three people to assemble it.</p>
+        <p>Cash, stock and open leads on one screen &mdash; without phoning three people to assemble it.</p>
         <span class="tag">Add-on &#183; <b>+OMR 650</b></span>
         <a class="tlink" href="/customized-ceo-dashboard-demo/">Open the live demo <span class="arw">&rarr;</span></a>
       </article>
       <article class="card sys-card">
         <span class="n">03</span>
         <h3>The Full Autopilot</h3>
-        <p>Something has to chase the quotes and the invoices. This does it, on schedule, without anyone remembering to.</p>
+        <p>Something has to chase the quotes and the invoices. This does, on schedule, without being reminded.</p>
         <span class="tag">Add-on &#183; <b>+OMR 900</b></span>
         <a class="tlink" href="/en/services-v4/#autopilot">See what&#8217;s inside <span class="arw">&rarr;</span></a>
       </article>
@@ -942,20 +1226,20 @@ html:not(.js) .stair .step,html:not(.js) .stair .anno{opacity:1;transform:none}
   </div>
 </section>
 
-<!-- ================================================= S4 - PROOF YOU CAN CLICK -->
+<!-- ================================================= S7 - PROOF YOU CAN CLICK -->
 <section class="s-dark" id="proof">
   <div class="wrap">
     <p class="eyebrow"><span class="star">&#10038;</span> Proof, not testimonials</p>
-    <h2 class="h2">I have no client logos yet. So open the systems instead.</h2>
-    <p class="lede">These are the real builds, running on real demo data. Click into them &mdash; that is
-      a better test than a quote from someone you&#8217;ve never met.</p>
+    <h2 class="h2">Don&#8217;t take my word. Open the machines.</h2>
+    <p class="lede">Real builds, running on demo data. Clicking one is a better test than a quote
+      from someone you have never met.</p>
 
     <div class="tiles" style="margin-top:clamp(28px,4vw,48px)" data-stagger>
       <a class="tile" href="/customized-ceo-dashboard-demo/">
         <span class="live"><i></i>Live demo</span>
         <span class="shot"><img src="/assets/v4/demo-dashboard-960.webp" alt="The CEO dashboard demo: revenue, gross profit and margin cards above a list of ranked actions." width="960" height="600" loading="lazy" decoding="async"></span>
         <span class="cap">
-          <h3>The Live Owner Dashboard</h3>
+          <h3>Your business on one screen</h3>
           <p>Cash, margin, dead stock and what to do about it &mdash; ranked, in plain sentences.</p>
           <span class="tlink">Open it <span class="arw">&rarr;</span></span>
         </span>
@@ -983,13 +1267,13 @@ html:not(.js) .stair .step,html:not(.js) .stair .anno{opacity:1;transform:none}
   </div>
 </section>
 
-<!-- ============================================ S5 - THE HONEST COMPARISON -->
+<!-- ================================== S8 - SPEND LESS, SERVE MORE -->
 <section class="s-panel">
   <div class="wrap">
-    <p class="eyebrow"><span class="star">&#10038;</span> Against the real alternative</p>
-    <h2 class="h2">A week has 168 hours. An administrator covers 40 of them.</h2>
-    <p class="lede">Each square is one hour of your week. This is not a claim about quality &mdash; a good
-      administrator does things no system can. It is only about coverage.</p>
+    <p class="eyebrow"><span class="star">&#10038;</span> Spend less. Serve more.</p>
+    <h2 class="h2">A week has 168 hours. An administrator covers 40.</h2>
+    <p class="lede">Each square is one hour of your week. This is about coverage, not quality &mdash;
+      a good administrator does things no system can.</p>
 
     <div class="hours-grid" style="margin-top:clamp(28px,4vw,48px)" data-stagger>
       <div class="hcard">
@@ -1002,12 +1286,35 @@ html:not(.js) .stair .step,html:not(.js) .stair .anno{opacity:1;transform:none}
       </div>
 
       <div class="hcard win">
-        <h3>The Smart Storefront</h3>
+        <h3>The Smart Website</h3>
         <p class="sub">OMR 950, once</p>
         <p class="hlegend">Rows: Sun &rarr; Sat &#183; columns: 00:00 &rarr; 23:00</p>
         <div class="hgrid" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></div>
         <span class="hcount"><span data-count="168">168</span> of 168 hours</span>
         <p class="note">It does not replace her. It covers the 128 hours she was never there for.</p>
+      </div>
+    </div>
+
+    <div class="growth rv">
+      <svg class="drawn" viewBox="0 0 640 284" role="img" aria-labelledby="grT grD">
+        <title id="grT">Monthly cost as the number of buyers grows</title>
+        <desc id="grD">Staff cost climbs in steps: every increase in inquiry volume eventually needs another
+          salary. The system's line is flat &mdash; it is paid once and does not rise with the number of buyers.</desc>
+        <line x1="48" y1="246" x2="612" y2="246" stroke="#DED8C8" stroke-width="2"/>
+        <line x1="48" y1="22" x2="48" y2="246" stroke="#DED8C8" stroke-width="2"/>
+        <polyline points="48,180 190,180 190,140 332,140 332,98 474,98 474,50 612,50"
+          fill="none" stroke="#A6431F" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+        <polyline points="48,224 612,224" fill="none" stroke="#1FAF5E" stroke-width="3" stroke-linecap="round"/>
+        <text x="58" y="168" fill="#A6431F" font-family="IBM Plex Mono, monospace" font-size="15">More staff</text>
+        <text x="58" y="212" fill="#178A4B" font-family="IBM Plex Mono, monospace" font-size="15">The system</text>
+        <text x="48" y="272" fill="#5A665D" font-family="IBM Plex Mono, monospace" font-size="13">buyers per month &#8594;</text>
+        <text x="20" y="134" fill="#5A665D" font-family="IBM Plex Mono, monospace" font-size="13"
+          text-anchor="middle" transform="rotate(-90 20 134)">monthly cost</text>
+      </svg>
+      <div>
+        <h3>Ten buyers at once cost the same as one.</h3>
+        <p>Every step up in volume eventually costs another salary, every month. The system is paid
+          once and does not notice how many people wrote tonight.</p>
       </div>
     </div>
 
@@ -1018,7 +1325,7 @@ html:not(.js) .stair .step,html:not(.js) .stair .anno{opacity:1;transform:none}
   </div>
 </section>
 
-<!-- ================================================== S6 - THE NAMED PROMISE -->
+<!-- ================================================== S9 - THE NAMED PROMISE -->
 <section class="s-teal promise">
   <div class="wrap">
     <p class="eyebrow"><span class="star">&#10038;</span> The First Inquiry Promise</p>
@@ -1033,7 +1340,7 @@ html:not(.js) .stair .step,html:not(.js) .stair .anno{opacity:1;transform:none}
   </div>
 </section>
 
-<!-- ===================================================== S7 - EXPLORE RAIL -->
+<!-- ===================================================== S10 - EXPLORE RAIL -->
 <section class="s-cream grain">
   <div class="wrap">
     <p class="eyebrow"><span class="star">&#10038;</span> Keep going</p>
@@ -1260,7 +1567,6 @@ html:not(.js) .stair .step,html:not(.js) .stair .anno{opacity:1;transform:none}
   const poster = document.getElementById("cinePoster");
   const bar = document.getElementById("cineBar");
   const lead = document.getElementById("lead");
-  const hint = document.getElementById("hint");
   const endcard = document.getElementById("endcard");
   const beats = [].slice.call(document.querySelectorAll(".beat"));
   const topbar = document.getElementById("top");
@@ -1280,7 +1586,6 @@ html:not(.js) .stair .step,html:not(.js) .stair .anno{opacity:1;transform:none}
     lead.classList.add("on");
     endcard.classList.add("on");
     beats.forEach(b => b.classList.add("on"));
-    hint.classList.remove("on");
     return;
   }
 
@@ -1401,7 +1706,6 @@ html:not(.js) .stair .step,html:not(.js) .stair .anno{opacity:1;transform:none}
   function overlays(p) {
     bar.style.transform = "scaleX(" + p + ")";
     lead.classList.toggle("on", p < 0.12);
-    hint.classList.toggle("on", p < 0.06);
     endcard.classList.toggle("on", p > 0.86);
     for (let i = 0; i < beats.length; i++) {
       const at = parseFloat(beats[i].dataset.at);
@@ -1464,7 +1768,7 @@ html:not(.js) .stair .step,html:not(.js) .stair .anno{opacity:1;transform:none}
   if (!q1) return;
 
   const WEEKS_PER_MONTH = 4.33;
-  const STOREFRONT = 950;          // must match the price ladder above
+  const SMART_SITE = 950;          // must match the price ladder above
   const fmt = n => "OMR " + Math.round(n).toLocaleString("en-US");
 
   function render() {
@@ -1481,10 +1785,10 @@ html:not(.js) .stair .step,html:not(.js) .stair .anno{opacity:1;transform:none}
     /* Both bars share one scale so the comparison is honest. The leak bar is
        full width whenever it exceeds the build cost, and the cost bar shrinks
        against it; below that the roles swap. */
-    const max = Math.max(leak, STOREFRONT) || 1;
+    const max = Math.max(leak, SMART_SITE) || 1;
     const W = 420;
     const leakW = Math.max(4, (leak / max) * W);
-    const costW = Math.max(4, (STOREFRONT / max) * W);
+    const costW = Math.max(4, (SMART_SITE / max) * W);
     $("barLeak").setAttribute("width", leakW.toFixed(1));
     $("barCost").setAttribute("width", costW.toFixed(1));
 
@@ -1503,7 +1807,7 @@ html:not(.js) .stair .step,html:not(.js) .stair .anno{opacity:1;transform:none}
     }
 
     const perDay = leak / 30;
-    const days = perDay > 0 ? Math.ceil(STOREFRONT / perDay) : Infinity;
+    const days = perDay > 0 ? Math.ceil(SMART_SITE / perDay) : Infinity;
     $("days").textContent = !isFinite(days) ? "—"
       : days <= 1 ? "a single day"
         : days < 400 ? days + " days"
@@ -1514,5 +1818,6 @@ html:not(.js) .stair .step,html:not(.js) .stair .anno{opacity:1;transform:none}
   render();
 })();
 </script>
+<script defer src="/js/aiden-chat.js"></script>
 </body>
 </html>

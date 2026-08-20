@@ -1,28 +1,54 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html dir="ltr" lang="en">
 <head>
-<style>
-  #fouc-overlay {
-    position: fixed;
-    inset: 0;
-    z-index: 999999;
-    background: #050505;
-    transition: opacity 0.3s ease;
-  }
-</style>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>AI Profit Lab’s Guide: Integrating Localized LLMs for Arabic Customer Support | AI Profit Lab عمان</title>
+<meta name="description" content="Are English support bots frustrating local customers in Oman and GCC? Integrate localized Arabic LLMs to handle dialect support and satisfy clients. - أ...">
+<meta name="keywords" content="Arabic LLM, Customer Support Automation, AI Oman, GCC Business Automation, AI Profit Lab">
+<meta name="category" content="AI Customer Support">
+<!-- Explicit and permissive: large image previews and uncapped snippets are
+     what let this page surface as a rich result and be quoted in full by an
+     answer engine. The old template shipped no robots tag at all. -->
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="canonical" href="https://aiprofitlab.io/blog/en/2026-06-07-integrating-localized-llms-arabic-customer-support">
+<link rel="alternate" hreflang="en" href="https://aiprofitlab.io/blog/en/2026-06-07-integrating-localized-llms-arabic-customer-support/">
+<link rel="alternate" hreflang="ar" href="https://aiprofitlab.io/blog/ar/2026-06-07-integrating-localized-llms-arabic-customer-support/">
+<link rel="alternate" hreflang="x-default" href="https://aiprofitlab.io/blog/en/2026-06-07-integrating-localized-llms-arabic-customer-support/">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/favicon.svg">
+
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="AI Profit Lab">
+<meta property="og:title" content="AI Profit Lab’s Guide: Integrating Localized LLMs for Arabic Customer Support | AI Profit Lab عمان">
+<meta property="og:description" content="Are English support bots frustrating local customers in Oman and GCC? Integrate localized Arabic LLMs to handle dialect support and satisfy clients. - أ...">
+<meta property="og:url" content="https://aiprofitlab.io/blog/en/2026-06-07-integrating-localized-llms-arabic-customer-support">
+<meta property="og:image" content="https://aiprofitlab.io/blog/images/arabic_llm_customer_support.png">
+<meta property="og:locale" content="en_OM">
+<meta property="article:published_time" content="2026-06-07">
+<meta property="article:publisher" content="https://www.facebook.com/profile.php?id=61584870364473">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="AI Profit Lab’s Guide: Integrating Localized LLMs for Arabic Customer Support | AI Profit Lab عمان">
+<meta name="twitter:description" content="Are English support bots frustrating local customers in Oman and GCC? Integrate localized Arabic LLMs to handle dialect support and satisfy clients. - أ...">
+<meta name="twitter:image" content="https://aiprofitlab.io/blog/images/arabic_llm_customer_support.png">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com" rel="preconnect">
-<link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
-<meta content="width=device-width, initial-scale=1.0" name="viewport">
-<meta content="AI Customer Support" name="category">
-<title>AI Profit Lab&rsquo;s Guide: Integra... | AI Profit Lab عمان</title>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Marcellus&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" media="print" onload="this.media='all'" href="https://fonts.googleapis.com/css2?family=Marcellus&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap"></noscript>
+<!-- One stylesheet, shared by all 300 articles. The filename carries a content
+     hash, which is what makes the host's `immutable, max-age=31536000` rule on
+     /assets/** safe here: an edited stylesheet ships under a new name instead
+     of sitting behind a year-long cache on a stale one. -->
+<link rel="stylesheet" href="/assets/css/apl-article.5d933cf61d.css">
+<script>document.documentElement.className+=" js"</script>
 
-<meta content="Arabic LLM, Customer Support Automation, AI Oman, GCC Business Automation, AI Profit Lab" name="keywords">
-<link href="/favicon.svg" rel="icon" type="image/svg+xml">
-<link href="/favicon.svg" rel="apple-touch-icon">
-<!-- JSON-LD Schema Markup -->
+<!-- Google tag (gtag.js) -->
+<script defer src="/assets/js/apl-article.77b8e120ac.js"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SLR9GD3MJP"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-SLR9GD3MJP');</script>
+
 <script type="application/ld+json">
 {
     "@context": "https://schema.org",
@@ -140,28 +166,6 @@
     ]
 }
 </script>
-<link rel="preconnect" href="https://cdn.tailwindcss.com">
-<link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
-<script src="https://cdn.tailwindcss.com"></script>
-<link as="style" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'" rel="preload">
-<noscript><link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet"></noscript>
-<style>
-        body { font-family: 'Outfit', sans-serif; background-color: #050505; color: #ffffff; }
-        .logo-font { font-family: 'Outfit', sans-serif !important; }
-        .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.05); }
-        .glass-card { background: rgba(255, 255, 255, 0.02); backdrop-filter: blur(8px); border: 1px solid rgba(255, 255, 255, 0.05); transition: all 0.3s ease; }
-        .glass-card:hover { border-color: #3B82F6; transform: translateY(-5px); box-shadow: 0 20px 40px rgba(59, 130, 246, 0.1); }
-        .prose h2 { color: #60A5FA; margin-top: 2.5em; margin-bottom: 1em; font-weight: 800; font-size: 1.875rem; }
-        .prose h3 { color: #93C5FD; margin-top: 2em; margin-bottom: 1em; font-weight: 700; font-size: 1.5rem; }
-        .prose p { margin-bottom: 1.5em; line-height: 1.8; color: #D1D5DB; }
-        .prose strong { color: #F3F4F6; }
-        .prose blockquote { border-left: 4px solid #3B82F6; padding-left: 1rem; font-style: italic; color: #9CA3AF; margin-left: 0; }
-        table { width: 100%; border-collapse: collapse; margin-top: 2em; margin-bottom: 2em; }
-        th, td { border: 1px solid rgba(255, 255, 255, 0.1); padding: 12px; text-align: left; }
-        th { background-color: rgba(59, 130, 246, 0.1); color: #93C5FD; font-weight: 600; }
-        tr:nth-child(even) { background-color: rgba(255, 255, 255, 0.02); }
-    </style>
-<!-- Local Business Schema -->
 <script type="application/ld+json">
 {
     "@context": "https://schema.org",
@@ -201,150 +205,84 @@
     ]
 }
 </script>
-</meta><style>img, video, iframe { aspect-ratio: attr(width) / attr(height); } .youtube-facade, #aiden-ui, .dynamic-content { min-height: 200px; }</style><style>
-/* === ANTI-BLACK-SCREEN: Critical layout fallback (pre-Tailwind) === */
-.text-white { color: #fff; }
-.text-gray-300 { color: #d1d5db; }
-.text-gray-400 { color: #9ca3af; }
-.text-blue-500 { color: #3b82f6; }
-.text-red-500 { color: #ef4444; }
-.text-red-400 { color: #f87171; }
-.text-green-400 { color: #4ade80; }
-.text-green-500 { color: #22c55e; }
-.text-purple-400 { color: #c084fc; }
-.text-transparent { color: transparent; }
-.bg-clip-text { -webkit-background-clip: text; background-clip: text; }
-.bg-gradient-to-r { background-image: linear-gradient(to right, var(--tw-gradient-stops, #3b82f6, #22c55e)); }
-.from-blue-500 { --tw-gradient-from: #3b82f6; --tw-gradient-stops: #3b82f6, #22c55e; }
-.text-sm { font-size: 0.875rem; }
-.text-lg { font-size: 1.125rem; }
-.text-xl { font-size: 1.25rem; }
-.text-2xl { font-size: 1.5rem; }
-.text-3xl { font-size: 1.875rem; }
-.text-4xl { font-size: 2.25rem; }
-.text-5xl { font-size: 3rem; }
-.font-bold { font-weight: 700; }
-.font-extrabold { font-weight: 800; }
-.flex { display: flex; }
-.hidden { display: none; }
-.block { display: block; }
-.grid { display: grid; }
-.items-center { align-items: center; }
-.justify-center { justify-content: center; }
-.justify-between { justify-content: space-between; }
-.flex-col { flex-direction: column; }
-.flex-wrap { flex-wrap: wrap; }
-.text-center { text-align: center; }
-.text-left { text-align: left; }
-.mx-auto { margin-left: auto; margin-right: auto; }
-.px-4 { padding-left: 1rem; padding-right: 1rem; }
-.px-6 { padding-left: 1.5rem; padding-right: 1.5rem; }
-.py-4 { padding-top: 1rem; padding-bottom: 1rem; }
-.py-8 { padding-top: 2rem; padding-bottom: 2rem; }
-.py-16 { padding-top: 4rem; padding-bottom: 4rem; }
-.py-24 { padding-top: 6rem; padding-bottom: 6rem; }
-.pt-16 { padding-top: 4rem; }
-.pt-24 { padding-top: 6rem; }
-.pb-8 { padding-bottom: 2rem; }
-.mt-2 { margin-top: 0.5rem; }
-.mt-6 { margin-top: 1.5rem; }
-.mt-8 { margin-top: 2rem; }
-.mt-10 { margin-top: 2.5rem; }
-.mb-3 { margin-bottom: 0.75rem; }
-.mb-4 { margin-bottom: 1rem; }
-.mb-6 { margin-bottom: 1.5rem; }
-.gap-4 { gap: 1rem; }
-.gap-8 { gap: 2rem; }
-.gap-12 { gap: 3rem; }
-.max-w-4xl { max-width: 56rem; }
-.max-w-6xl { max-width: 72rem; }
-.min-h-screen { min-height: 100vh; }
-.w-full { width: 100%; }
-.fixed { position: fixed; }
-.relative { position: relative; }
-.absolute { position: absolute; }
-.z-50 { z-index: 50; }
-.rounded-xl { border-radius: 0.75rem; }
-.rounded-2xl { border-radius: 1rem; }
-.rounded-3xl { border-radius: 1.5rem; }
-.overflow-hidden { overflow: hidden; }
-.shadow-lg { box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); }
-.leading-relaxed { line-height: 1.625; }
-.leading-tight { line-height: 1.25; }
-.transition { transition-property: all; transition-duration: 0.15s; }
-.inline-block { display: inline-block; }
-.inline-flex { display: inline-flex; }
-@media (min-width: 768px) {
-  .md\:flex { display: flex; }
-  .md\:hidden { display: none; }
-  .md\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .md\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  .md\:grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-  .md\:px-12 { padding-left: 3rem; padding-right: 3rem; }
-  .md\:text-3xl { font-size: 1.875rem; }
-  .md\:text-4xl { font-size: 2.25rem; }
-  .md\:text-5xl { font-size: 3rem; }
-  .md\:text-7xl { font-size: 4.5rem; }
-  .md\:w-1\/2 { width: 50%; }
-  .md\:flex-row { flex-direction: row; }
-  .md\:col-span-2 { grid-column: span 2; }
-}
-@media (min-width: 640px) {
-  .sm\:text-6xl { font-size: 3.75rem; }
-  .sm\:flex-row { flex-direction: row; }
-}
-/* === CLS FIX: Constrain all chevron/arrow/scroll SVGs === */
-.chevron, [class*="chevron"], [class*="arrow"], [class*="scroll"] svg,
-.swiper-button-next, .swiper-button-prev {
-  width: 40px !important; height: 40px !important;
-  max-width: 40px !important; max-height: 40px !important;
-}
-svg { max-width: 100%; height: auto; overflow: hidden; }
-svg:not([width]) { width: 24px; height: 24px; }
-/* Nav chevron SVGs: lock to exact inline dimensions */
-nav svg[width="16"][height="16"] { width: 16px !important; height: 16px !important; max-width: 16px !important; max-height: 16px !important; }
-</style><!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-SLR9GD3MJP"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-SLR9GD3MJP');
-</script>
-    <link rel="canonical" href="https://aiprofitlab.io/blog/en/2026-06-07-integrating-localized-llms-arabic-customer-support" />
-    <link rel="alternate" hreflang="en" href="https://aiprofitlab.io/blog/en/2026-06-07-integrating-localized-llms-arabic-customer-support" />
-    <link rel="alternate" hreflang="ar" href="https://aiprofitlab.io/blog/ar/2026-06-07-integrating-localized-llms-arabic-customer-support" />
-    <link rel="alternate" hreflang="x-default" href="https://aiprofitlab.io/blog/en/2026-06-07-integrating-localized-llms-arabic-customer-support" />
-  <meta name="description" content="Are English support bots frustrating local customers in Oman and GCC? Integrate localized Arabic LLMs to handle dialect support and satisfy clients. - أ...">
 </head>
-<body class="antialiased">
-<div id="fouc-overlay"></div>
-<!-- Navigation -->
-<nav class="flex justify-between items-center px-6 md:px-12 py-8 w-full z-50 glass sticky top-0 bg-black/30" id="header">
-<a class="font-extrabold text-3xl md:text-4xl tracking-tighter hover:opacity-80 transition logo-font" href="/en/">
-<span class="text-blue-500">A</span><span class="text-red-500">I</span> <span class="text-white text-2xl md:text-3xl">Profit Lab</span>
-</a>
-<a class="text-gray-300 hover:text-white font-semibold transition" href="/blog/">Back to Hub</a>
-</nav>
-<!-- Main Content -->
-<main class="max-w-4xl mx-auto px-6 py-16">
-<article>
-<div class="mb-12 text-center">
-<span class="bg-blue-500/10 text-blue-400 text-sm font-bold px-4 py-2 rounded-full border border-blue-500/20 mb-6 inline-block">AI Customer Support</span>
-<h1 class="text-4xl md:text-6xl font-extrabold mb-6 leading-tight">AI Profit Lab&rsquo;s Guide: Integrating Localized LLMs for Arabic Customer Support</h1>
-<p class="text-xl text-gray-400 max-w-2xl mx-auto">Transform your customer service by bridging the gap between cutting-edge AI technology and authentic GCC dialects.</p>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="top" id="top">
+  <a href="/en/" aria-label="AI Profit Lab">
+    <img class="mark" src="/assets/brand/wordmark-primary.svg" alt="AI Profit Lab" width="160" height="28">
+  </a>
+  <nav class="nav" aria-label="Primary">
+    <a class="lnk" href="/en/services-en/">What I Build</a>
+    <a class="lnk" href="/en/process-en/">How It Works</a>
+    <a class="lnk" href="/en/about-en/">About</a>
+    <a class="lnk" href="/en/contact-en/">Contact</a>
+    <a class="lnk" href="/blog/">Articles</a>
+    <a class="lnk" href="/" lang="ar">&#1593;&#1585;&#1576;&#1610;</a>
+    <a class="top-wa" href="https://wa.me/96899245250?text=Hello%20Nahid%2C%20I%20have%20a%20question%20about%20my%20business."><svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 1.8a8.2 8.2 0 1 1-4.2 15.3l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8zm-3.1 4c-.2 0-.5 0-.7.3-.2.3-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.8 2.8 4.4 3.8 2.2.9 2.6.7 3.1.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2-.1-.1-.2-.2-.5-.3l-1.7-.8c-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.1-.2 0-.4.1-.5l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5L10 8.2c-.2-.4-.4-.4-.6-.4h-.5z"/></svg><span>WhatsApp</span></a>
+    <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="mmenu"><i></i></button>
+  </nav>
+</header>
+<div class="mmenu" id="mmenu" aria-hidden="true">
+  <a href="/en/"><em>01</em>Home</a>
+  <a href="/en/services-en/"><em>02</em>What I Build</a>
+  <a href="/en/process-en/"><em>03</em>How It Works</a>
+  <a href="/en/about-en/"><em>04</em>About</a>
+  <a href="/en/contact-en/"><em>05</em>Contact</a>
+  <a href="/blog/"><em>06</em>Articles</a>
+  <a href="/" lang="ar"><em>07</em>&#1593;&#1585;&#1576;&#1610;</a>
+  <p class="mfoot">hello@aiprofitlab.io &middot; <span dir="ltr">+968 9924 5250</span><br>Muscat, Oman</p>
 </div>
-<img alt="arabic_llm_customer_support - Empowering AI Solutions by AI Profit Lab to scale your business operations." class="w-full rounded-3xl mb-16 shadow-[0_0_50px_rgba(59,130,246,0.15)] border border-white/5 object-cover h-[500px]" height="1024" src="/blog/images/arabic_llm_customer_support.png" width="1024">
-<div class="prose max-w-none">
+<div class="prog" id="prog" aria-hidden="true"></div>
+<main id="main">
+
+<section class="ahero grain">
+  <div class="wrap-a">
+    <p class="crumbs">
+      <a href="/en/">Home</a><i>&#10038;</i><a href="/blog/">Articles</a><i>&#10038;</i>
+      <span>AI Customer Support</span>
+    </p>
+    <h1 class="h1">AI Profit Lab&rsquo;s Guide: Integrating Localized LLMs for Arabic Customer Support</h1>
+    <p class="lede">Transform your customer service by bridging the gap between cutting-edge AI technology and authentic GCC dialects.</p>
+    <div class="byline">
+      <span class="bymark" aria-hidden="true"><img src="/assets/brand/icon-transparent.svg" alt="" width="26" height="26"></span>
+      <div class="who"><b>AI Profit Lab</b><span>Written and published in Muscat</span></div>
+      <span class="sp"></span>
+      <time class="stamp" datetime="2026-06-07">7 June 2026 &middot; 3 min read</time>
+      <div class="share">
+      <a href="https://wa.me/?text=AI%20Profit%20Lab%E2%80%99s%20Guide%3A%20Integrating%20Localized%20LLMs%20for%20Arabic%20Customer%20Support%20%E2%80%94%20https%3A//aiprofitlab.io/blog/en/2026-06-07-integrating-localized-llms-arabic-customer-support" target="_blank" rel="noopener" aria-label="Share on WhatsApp" title="Share on WhatsApp"><svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 1.8a8.2 8.2 0 1 1-4.2 15.3l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8zm-3.1 4c-.2 0-.5 0-.7.3-.2.3-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.8 2.8 4.4 3.8 2.2.9 2.6.7 3.1.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2-.1-.1-.2-.2-.5-.3l-1.7-.8c-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.1-.2 0-.4.1-.5l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5L10 8.2c-.2-.4-.4-.4-.6-.4h-.5z"/></svg></a>
+      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aiprofitlab.io/blog/en/2026-06-07-integrating-localized-llms-arabic-customer-support" target="_blank" rel="noopener" aria-label="Share on LinkedIn" title="Share on LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-.95 1.83-1.95 3.77-1.95 4.03 0 4.78 2.5 4.78 5.76V21h-4v-5.6c0-1.34-.03-3.06-1.9-3.06-1.9 0-2.2 1.45-2.2 2.96V21H9z"/></svg></a>
+      <button type="button" id="copyLink" aria-label="Copy link" title="Copy link"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10.6 13.4a1 1 0 0 1 0-1.4l1.4-1.4a1 1 0 0 1 1.4 1.4l-1.4 1.4a1 1 0 0 1-1.4 0zm-3 4.4a3.5 3.5 0 0 1 0-5l2.2-2.1 1.4 1.4-2.2 2.1a1.5 1.5 0 0 0 2.2 2.2l2.1-2.2 1.4 1.4-2.1 2.2a3.5 3.5 0 0 1-5 0zm9-9a3.5 3.5 0 0 0-5 0l-2.1 2.2 1.4 1.4 2.1-2.2a1.5 1.5 0 0 1 2.2 2.2l-2.2 2.1 1.4 1.4 2.2-2.1a3.5 3.5 0 0 0 0-5z"/></svg></button>
+    </div>
+    </div>
+  </div>
+  <div class="artwrap" style="margin-top:clamp(30px,4vw,52px)">
+    <figure class="afig">
+      <img src="/blog/images/arabic_llm_customer_support.png" alt="AI Profit Lab’s Guide: Integrating Localized LLMs for Arabic Customer Support"
+           width="1180" height="516" fetchpriority="high" decoding="async">
+    </figure>
+  </div>
+</section>
+
+<section class="s-cream">
+  <div class="artwrap">
+    <div class="artgrid">
+      <nav class="toc" aria-label="On this page">
+        <h4>On this page</h4>
+        <ol><li><a href="#why-are-standard-ai-models-failing-middle-eastern-customers">Why Are Standard AI Models Failing Middle Eastern Customers?</a></li><li><a href="#how-does-localized-ai-drive-immediate-roi">How Does Localized AI Drive Immediate ROI?</a></li><li><a href="#what-are-the-steps-to-integrate-an-arabic-llm">What Are The Steps To Integrate An Arabic LLM?</a></li><li><a href="#how-does-this-align-with-oman-vision-2040">How Does This Align With Oman Vision 2040?</a></li><li><a href="#questions">Questions people ask</a></li><li><a href="#sources">Sources</a></li></ol>
+        <p class="back"><a class="tlink" href="/blog/"><span class="arw">&larr;</span><span>All articles</span></a></p>
+      </nav>
+      <div id="art">
+        <article class="prose">
 <p>The Middle East is rapidly adopting artificial intelligence, yet many businesses still rely on customer support systems that fail to understand the nuances of local Arabic dialects. Standard translation layers create friction, frustration, and ultimately, lost revenue. For businesses operating in Oman and the wider GCC, the solution lies in integrating localized Large Language Models (LLMs) specifically trained on regional data.</p>
 <p>This guide breaks down exactly why an Arabic-first AI strategy is no longer optional and how integrating these advanced models can systematically reduce operational overhead while drastically improving customer satisfaction.</p>
-<h2>Why Are Standard AI Models Failing Middle Eastern Customers?</h2>
+<h2 id="why-are-standard-ai-models-failing-middle-eastern-customers">Why Are Standard AI Models Failing Middle Eastern Customers?</h2>
 <p>Standard models process Arabic through an English translation layer, destroying cultural nuance and failing to comprehend regional dialects, which results in a 40% drop in user satisfaction compared to native-language interactions.</p>
-<p>When a customer in Muscat messages a business on WhatsApp using local Omani slang, an English-centric AI model often struggles. It either provides a rigidly formal Modern Standard Arabic (MSA) response or completely misinterprets the intent. This disconnect destroys the illusion of seamless support. Localized LLMs, such as Jais or similar regional initiatives, are trained extensively on Arabic datasets. To achieve optimal accuracy, many organizations rely on <a href="/blog/en/2026-08-11-fine-tuning-arabic-llms-omani-business-dialects-technical-jargon.html" class="text-blue-400 hover:underline">fine-tuning Arabic LLMs for Omani business dialects and technical jargon</a>. They understand context, humor, and dialectical variations, allowing businesses to communicate with their audience authentically.</p>
-<h2>How Does Localized AI Drive Immediate ROI?</h2>
+<p>When a customer in Muscat messages a business on WhatsApp using local Omani slang, an English-centric AI model often struggles. It either provides a rigidly formal Modern Standard Arabic (MSA) response or completely misinterprets the intent. This disconnect destroys the illusion of seamless support. Localized LLMs, such as Jais or similar regional initiatives, are trained extensively on Arabic datasets. To achieve optimal accuracy, many organizations rely on <a href="/blog/en/2026-08-11-fine-tuning-arabic-llms-omani-business-dialects-technical-jargon.html">fine-tuning Arabic LLMs for Omani business dialects and technical jargon</a>. They understand context, humor, and dialectical variations, allowing businesses to communicate with their audience authentically.</p>
+<h2 id="how-does-localized-ai-drive-immediate-roi">How Does Localized AI Drive Immediate ROI?</h2>
 <p>Deploying a localized Arabic LLM reduces average resolution times by 65% and deflects up to 80% of routine inquiries, translating directly to a 30% reduction in customer service operational costs.</p>
 <p>The financial impact of AI automation is undeniable when properly implemented. Instead of scaling human teams to manage high-volume, repetitive queries, businesses can leverage AI to handle the bulk of interactions instantly. This 24/7 availability ensures no lead goes cold and no customer is left waiting. The human workforce can then be reallocated to handle complex, high-value problem solving, maximizing efficiency across the board.</p>
-<table>
+<div class="tblwrap"><table class="tbl">
 <thead>
 <tr>
 <th>Metric</th>
@@ -374,108 +312,107 @@ nav svg[width="16"][height="16"] { width: 16px !important; height: 16px !importa
 <td>Extremely Low</td>
 </tr>
 </tbody>
-</table>
-<h2>What Are The Steps To Integrate An Arabic LLM?</h2>
+</table></div>
+<h2 id="what-are-the-steps-to-integrate-an-arabic-llm">What Are The Steps To Integrate An Arabic LLM?</h2>
 <p>Integration requires auditing existing data, selecting a sovereign or compliant cloud provider, mapping APIs to your communication channels (like WhatsApp), and rigorously training the model on your specific company knowledge base.</p>
 <p>The process begins with your data. A model is only as intelligent as the context it is provided. By feeding the AI your historical customer interactions, product manuals, and FAQ documents, you create a highly specialized assistant. Crucially, the deployment architecture must respect regional data sovereignty laws, ensuring that sensitive customer information remains secure within local servers.</p>
 <blockquote>"The future of GCC business efficiency relies not just on adopting AI, but on adopting AI that inherently speaks the language of our culture and our customers."</blockquote>
-<h2>How Does This Align With Oman Vision 2040?</h2>
+<h2 id="how-does-this-align-with-oman-vision-2040">How Does This Align With Oman Vision 2040?</h2>
 <p>Integrating localized AI directly supports Oman Vision 2040 by driving digital transformation, enhancing private sector competitiveness, and building a robust, technology-driven knowledge economy within the Sultanate.</p>
 <p>As the region pushes towards diversification, digital maturity becomes a key competitive differentiator. Businesses that adopt advanced AI solutions position themselves as market leaders. AI Profit Lab is dedicated to guiding enterprises through this transition, ensuring that the implementation of AI is not just a technological upgrade, but a strategic business advantage.</p>
+
+<div class="callout">
+<h3 id="ready-to-upgrade-your-customer-experience">Ready to Upgrade Your Customer Experience?</h3>
+<p>Join industry leaders at the upcoming GCC Tech & AI Forum in Muscat to discuss implementing these exact strategies, or contact AI Profit Lab today for a localized integration roadmap.</p>
 </div>
-<!-- FAQ Section -->
-<section class="mt-16 pt-8 border-t border-white/10" id="faq">
-<h2 class="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-cyan-400 mb-8">Frequently Asked Questions</h2>
-<div class="space-y-6">
-<div class="glass-card rounded-2xl p-6">
-<h3 class="text-lg font-bold text-white mb-2">What is a localized Arabic LLM?</h3>
-<p class="text-gray-400 mb-0">A localized Arabic Large Language Model (LLM) is specifically trained on Arabic datasets, dialects, and cultural nuances, ensuring accurate, context-aware responses rather than awkward translations from English.</p>
-</div>
-<div class="glass-card rounded-2xl p-6">
-<h3 class="text-lg font-bold text-white mb-2">How does Arabic AI support improve customer satisfaction?</h3>
-<p class="text-gray-400 mb-0">It provides instant, 24/7 responses in the customer's native dialect, reducing wait times to zero and eliminating language barriers, which directly increases customer retention and satisfaction.</p>
-</div>
-<div class="glass-card rounded-2xl p-6">
-<h3 class="text-lg font-bold text-white mb-2">Can AI handle complex customer inquiries?</h3>
-<p class="text-gray-400 mb-0">Yes, modern AI can process complex queries, access your company's knowledge base, and resolve 80% of routine issues, only routing highly specialized requests to human agents.</p>
-</div>
-<div class="glass-card rounded-2xl p-6">
-<h3 class="text-lg font-bold text-white mb-2">Is integrating AI customer support expensive?</h3>
-<p class="text-gray-400 mb-0">While there is an initial setup cost, AI customer support reduces operational overhead by up to 40% annually, offering a rapid return on investment by automating repetitive tasks.</p>
-</div>
-<div class="glass-card rounded-2xl p-6">
-<h3 class="text-lg font-bold text-white mb-2">Does AI support understand GCC dialects?</h3>
-<p class="text-gray-400 mb-0">Advanced localized models, such as Jais, are specifically trained to comprehend and generate text in various GCC dialects, including Omani, Saudi, and Emirati.</p>
-</div>
-<div class="glass-card rounded-2xl p-6">
-<h3 class="text-lg font-bold text-white mb-2">Is customer data safe with AI?</h3>
-<p class="text-gray-400 mb-0">Yes. By utilizing localized, sovereign cloud deployments or compliant enterprise APIs, businesses can ensure that all customer data remains secure and adheres to regional data protection laws.</p>
-</div>
-<div class="glass-card rounded-2xl p-6">
-<h3 class="text-lg font-bold text-white mb-2">How long does it take to deploy an AI chatbot?</h3>
-<p class="text-gray-400 mb-0">A custom AI customer support system can typically be integrated and deployed within 2 to 4 weeks, depending on the complexity of the existing infrastructure and knowledge base.</p>
-</div>
-<div class="glass-card rounded-2xl p-6">
-<h3 class="text-lg font-bold text-white mb-2">Will AI replace my human support team?</h3>
-<p class="text-gray-400 mb-0">No. AI acts as a powerful assistant that handles high-volume, routine queries, freeing your human team to focus on high-value, complex problem-solving and relationship building.</p>
-</div>
-<div class="glass-card rounded-2xl p-6">
-<h3 class="text-lg font-bold text-white mb-2">Can AI integrate with WhatsApp?</h3>
-<p class="text-gray-400 mb-0">Absolutely. AI can seamlessly integrate with the WhatsApp Business API, allowing customers to interact with your business directly on their preferred messaging platform.</p>
-</div>
-<div class="glass-card rounded-2xl p-6">
-<h3 class="text-lg font-bold text-white mb-2">How do I measure the ROI of AI support?</h3>
-<p class="text-gray-400 mb-0">ROI is measured by tracking metrics such as reduced resolution times, increased query deflection rates, lower operational costs, and improved customer satisfaction scores.</p>
-</div>
-</div>
+        </article>
+        <div class="icta"><h3>Ready to Automate Your Business Operations?</h3><p>AI Profit Lab helps non-technical managers in Oman and the GCC deploy custom AI solutions, automated customer service systems, and real-time dashboards to slash overhead costs and eliminate manual busywork.</p><div class="btn-row"><a class="btn btn-amber" href="/en/contact-en/"><span>Book a Free 30-Minute AI Consultation</span></a></div></div>
+        <section class="faq" id="questions" style="margin-top:clamp(48px,6vw,74px)"><h2 style="scroll-margin-top:104px">Questions people ask</h2><details><summary>What is a localized Arabic LLM?</summary><p>A localized Arabic Large Language Model (LLM) is specifically trained on Arabic datasets, dialects, and cultural nuances, ensuring accurate, context-aware responses rather than awkward translations from English.</p></details><details><summary>How does Arabic AI support improve customer satisfaction?</summary><p>It provides instant, 24/7 responses in the customer's native dialect, reducing wait times to zero and eliminating language barriers, which directly increases customer retention and satisfaction.</p></details><details><summary>Can AI handle complex customer inquiries?</summary><p>Yes, modern AI can process complex queries, access your company's knowledge base, and resolve 80% of routine issues, only routing highly specialized requests to human agents.</p></details><details><summary>Is integrating AI customer support expensive?</summary><p>While there is an initial setup cost, AI customer support reduces operational overhead by up to 40% annually, offering a rapid return on investment by automating repetitive tasks.</p></details><details><summary>Does AI support understand GCC dialects?</summary><p>Advanced localized models, such as Jais, are specifically trained to comprehend and generate text in various GCC dialects, including Omani, Saudi, and Emirati.</p></details><details><summary>Is customer data safe with AI?</summary><p>Yes. By utilizing localized, sovereign cloud deployments or compliant enterprise APIs, businesses can ensure that all customer data remains secure and adheres to regional data protection laws.</p></details><details><summary>How long does it take to deploy an AI chatbot?</summary><p>A custom AI customer support system can typically be integrated and deployed within 2 to 4 weeks, depending on the complexity of the existing infrastructure and knowledge base.</p></details><details><summary>Will AI replace my human support team?</summary><p>No. AI acts as a powerful assistant that handles high-volume, routine queries, freeing your human team to focus on high-value, complex problem-solving and relationship building.</p></details><details><summary>Can AI integrate with WhatsApp?</summary><p>Absolutely. AI can seamlessly integrate with the WhatsApp Business API, allowing customers to interact with your business directly on their preferred messaging platform.</p></details><details><summary>How do I measure the ROI of AI support?</summary><p>ROI is measured by tracking metrics such as reduced resolution times, increased query deflection rates, lower operational costs, and improved customer satisfaction scores.</p></details></section>
+        <div class="refs" id="sources"><h4>Sources</h4><ol><li><a href="https://platform.openai.com/docs/guides/text-generation" target="_blank" rel="noopener nofollow">OpenAI Text Generation Documentation</a></li><li><a href="https://oman2040.om/en/" target="_blank" rel="noopener nofollow">Oman Vision 2040 Official Portal</a></li></ol></div>
+        <div class="topics"><span>AI Customer Support</span><b>Arabic LLM</b><b>Customer Support Automation</b><b>AI Oman</b><b>GCC Business Automation</b><b>AI Profit Lab</b></div>
+        <div class="brandbox">
+          <span class="bmark" aria-hidden="true"><img src="/assets/brand/icon-transparent.svg" alt="" width="42" height="42"></span>
+          <div>
+            <p class="rolelbl">Who publishes this</p>
+            <h3>AI Profit Lab</h3>
+            <p>AI Profit Lab builds WhatsApp AI agents, bilingual storefronts and live dashboards for trading, distribution and service businesses in Oman and the wider Gulf. If a number in this article does not match your business, send yours and we will run it with you.</p>
+            <div class="btn-row">
+              <a class="btn btn-wa" href="https://wa.me/96899245250?text=Hello%20Nahid%2C%20I%20read%20one%20of%20your%20articles%20and%20have%20a%20question."><svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 1.8a8.2 8.2 0 1 1-4.2 15.3l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8zm-3.1 4c-.2 0-.5 0-.7.3-.2.3-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.8 2.8 4.4 3.8 2.2.9 2.6.7 3.1.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2-.1-.1-.2-.2-.5-.3l-1.7-.8c-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.1-.2 0-.4.1-.5l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5L10 8.2c-.2-.4-.4-.4-.6-.4h-.5z"/></svg><span>Ask a question on WhatsApp</span></a>
+              <a class="tlink" href="/en/about-en/">About AI Profit Lab <span class="arw">&rarr;</span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
-<hr class="border-gray-800 my-10">
-<div class="p-6 bg-gradient-to-r from-blue-900/40 to-cyan-900/40 rounded-2xl border border-blue-500/20 text-center mb-8">
-<h3 class="text-2xl font-bold text-white mb-2">Ready to Upgrade Your Customer Experience?</h3>
-<p class="text-blue-200 mb-4">Join industry leaders at the upcoming GCC Tech & AI Forum in Muscat to discuss implementing these exact strategies, or contact AI Profit Lab today for a localized integration roadmap.</p>
-</div>
-<!-- References -->
-<div class="mt-8">
-<h3 class="text-xl font-bold mb-4 text-white">References</h3>
-<ul class="list-disc list-inside text-gray-400 space-y-2 text-sm max-w-full overflow-hidden">
-<li><a class="hover:text-blue-400 break-words" href="https://platform.openai.com/docs/guides/text-generation" target="_blank">OpenAI Text Generation Documentation</a></li>
-<li><a class="hover:text-blue-400 break-words" href="https://oman2040.om/en/" target="_blank">Oman Vision 2040 Official Portal</a></li>
-</ul>
-</div>
-<!-- CTA Block -->
-<div class="glass-card rounded-2xl p-8 mt-12 mb-8 text-center border-blue-500/30 border">
-    <h3 class="text-2xl font-bold text-white mb-4">Ready to Automate Your Business Operations?</h3>
-    <p class="text-gray-300 mb-6">AI Profit Lab helps non-technical managers in Oman and the GCC deploy custom AI solutions, automated customer service systems, and real-time dashboards to slash overhead costs and eliminate manual busywork.</p>
-    <a class="inline-block bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 px-8 rounded-full transition shadow-[0_0_15px_rgba(37,99,235,0.5)]" href="/en/contact/">Book a Free 30-Minute AI Consultation</a>
-</div>
-</article>
+
+<section class="s-panel related grain">
+  <div class="wrap">
+    <p class="eyebrow"><span class="star">&#10038;</span>Keep reading</p>
+    <div class="grid g3" data-stagger><a class="card" href="/blog/en/2026-08-11-fine-tuning-arabic-llms-omani-business-dialects-technical-jargon/"><span class="n">AI Strategy</span><h3>Fine-Tuning Arabic LLMs for Omani Business Dialects: A 5-Step Guide</h3><span class="rd">Read &rarr;</span></a><a class="card" href="/blog/en/2026-06-07-cut-operational-costs-oman-ai-roadmap"><span class="n">Implementation &amp; Automation</span><h3>How to Cut Operational Costs by 30% in Oman: An AI Automation Roadmap</h3><span class="rd">Read &rarr;</span></a><a class="card" href="/blog/en/2026-06-07-pdpl-what-it-means-for-your-ai-chatbots"><span class="n">AI Security &amp; Governance</span><h3>What the PDPL Actually Means for Your AI Chatbots</h3><span class="rd">Read &rarr;</span></a></div>
+  </div>
+</section>
 </main>
-<!-- Footer -->
-<footer class="border-t border-white/10 bg-black py-8 text-center text-gray-500 text-sm mt-auto">
-    <p>© 2025 <span class="text-blue-500">A</span><span class="text-red-500">I</span> Profit Lab — a brand of Lotus Gulf International • All Rights Reserved</p>
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-grid">
+
+      <div class="foot-brand">
+        <img class="fmark" src="/assets/brand/wordmark-reversed.svg" alt="AI Profit Lab" width="170" height="29">
+        <p class="slogan">Every success starts with insight.</p>
+        <p class="slogan-ar" lang="ar" dir="rtl">&#1603;&#1604; &#1606;&#1580;&#1575;&#1581; &#1610;&#1576;&#1583;&#1571; &#1576;&#1585;&#1572;&#1610;&#1577;</p>
+        <div class="soc-wrap">
+          <h4 class="soc-h">Follow the work</h4>
+          <ul class="socials">
+    <li><a href="https://wa.me/96899245250?text=Hello%20Nahid" style="--sc:#1FAF5E" target="_blank" rel="noopener" aria-label="AI Profit Lab on WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 1.8a8.2 8.2 0 1 1-4.2 15.3l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8zm-3.1 4c-.2 0-.5 0-.7.3-.2.3-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.8 2.8 4.4 3.8 2.2.9 2.6.7 3.1.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2-.1-.1-.2-.2-.5-.3l-1.7-.8c-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.1-.2 0-.4.1-.5l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5L10 8.2c-.2-.4-.4-.4-.6-.4h-.5z"/></svg></a></li>
+    <li><a href="https://www.linkedin.com/in/nahid-aby" style="--sc:#0A66C2" target="_blank" rel="noopener" aria-label="AI Profit Lab on LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg></a></li>
+    <li><a href="https://www.youtube.com/@AI_for_Managers" style="--sc:#FF0000" target="_blank" rel="noopener" aria-label="AI Profit Lab on YouTube"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg></a></li>
+    <li><a href="https://www.facebook.com/profile.php?id=61584870364473" style="--sc:#1877F2" target="_blank" rel="noopener" aria-label="AI Profit Lab on Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/></svg></a></li>
+          </ul>
+        </div>
+      </div>
+
+      <nav class="fcol" aria-label="The work">
+        <h4>The work</h4>
+        <ul>
+          <li><a href="/en/services-en/">What I build</a></li>
+          <li><a href="/en/process-en/">How it works</a></li>
+          <li><a href="/blog/">Articles</a></li>
+          <li><a href="/en/missed-call-simulator-en/">Revenue leak simulator</a></li>
+          <li><a href="/en/whatsapp-receptionist-demo/">WhatsApp demo</a></li>
+          <li><a href="/customized-ceo-dashboard-demo/">Dashboard demo</a></li>
+        </ul>
+      </nav>
+
+      <nav class="fcol" aria-label="Talk to us">
+        <h4>Talk to us</h4>
+        <ul class="direct">
+          <li><a href="https://wa.me/96899245250?text=Hello%20Nahid%2C%20I%20have%20a%20question%20about%20my%20business."><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 1.8a8.2 8.2 0 1 1-4.2 15.3l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8zm-3.1 4c-.2 0-.5 0-.7.3-.2.3-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.8 2.8 4.4 3.8 2.2.9 2.6.7 3.1.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2-.1-.1-.2-.2-.5-.3l-1.7-.8c-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.1-.2 0-.4.1-.5l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5L10 8.2c-.2-.4-.4-.4-.6-.4h-.5z"/></svg><span dir="ltr">+968 9924 5250</span></a></li>
+          <li><a href="mailto:hello@aiprofitlab.io"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>hello@aiprofitlab.io</a></li>
+        </ul>
+        <ul>
+          <li><a href="/en/contact-en/">Contact page</a></li>
+          <li><a href="/en/about-en/">About</a></li>
+          <li><a href="/privacy/">Privacy</a></li>
+        </ul>
+      </nav>
+
+    </div>
+
+    <a class="review" href="https://g.page/r/CYPlrz58-k0DEAI/review" target="_blank" rel="noopener">
+      <span class="gmark" aria-hidden="true"><svg viewBox="0 0 48 48" aria-hidden="true"><path fill="#4285F4" d="M45.12 24.5c0-1.56-.14-3.06-.4-4.5H24v8.51h11.84c-.51 2.75-2.06 5.08-4.39 6.64v5.52h7.11c4.16-3.83 6.56-9.47 6.56-16.17z"/><path fill="#34A853" d="M24 46c5.94 0 10.92-1.97 14.56-5.33l-7.11-5.52c-1.97 1.32-4.49 2.1-7.45 2.1-5.73 0-10.58-3.87-12.31-9.07H4.34v5.7C7.96 41.07 15.4 46 24 46z"/><path fill="#FBBC05" d="M11.69 28.18C11.25 26.86 11 25.45 11 24s.25-2.86.69-4.18v-5.7H4.34C2.85 17.09 2 20.45 2 24s.85 6.91 2.34 9.88l7.35-5.7z"/><path fill="#EA4335" d="M24 10.75c3.23 0 6.13 1.11 8.41 3.29l6.31-6.31C34.91 4.18 29.93 2 24 2 15.4 2 7.96 6.93 4.34 14.12l7.35 5.7c1.73-5.2 6.58-9.07 12.31-9.07z"/></svg></span>
+      <span class="rbody">
+        <span class="stars" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 17.3l-6.18 3.75 1.64-7.03L2 9.24l7.19-.61L12 2l2.81 6.63 7.19.61-5.46 4.78 1.64 7.03z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 17.3l-6.18 3.75 1.64-7.03L2 9.24l7.19-.61L12 2l2.81 6.63 7.19.61-5.46 4.78 1.64 7.03z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 17.3l-6.18 3.75 1.64-7.03L2 9.24l7.19-.61L12 2l2.81 6.63 7.19.61-5.46 4.78 1.64 7.03z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 17.3l-6.18 3.75 1.64-7.03L2 9.24l7.19-.61L12 2l2.81 6.63 7.19.61-5.46 4.78 1.64 7.03z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 17.3l-6.18 3.75 1.64-7.03L2 9.24l7.19-.61L12 2l2.81 6.63 7.19.61-5.46 4.78 1.64 7.03z"/></svg></span>
+        <span class="rk">Worked with us?</span>
+        <span class="rt">Leave a review on Google Maps</span>
+      </span>
+      <span class="rarw" aria-hidden="true">&rarr;</span>
+    </a>
+
+    <p class="legal">&copy; 2026 AI Profit Lab &mdash; a brand of Lotus Gulf International (CR <span dir="ltr">1570092</span>)<br>South Al Khuwair, Bousher, Muscat, Oman &middot; Not VAT registered (TIN <span dir="ltr">2317725</span>)</p>
+  </div>
 </footer>
-<script>
-  (function() {
-    var overlay = document.getElementById('fouc-overlay');
-    function removeOverlay() {
-      if (overlay) {
-        overlay.style.opacity = '0';
-        setTimeout(function() {
-          if (overlay && overlay.parentNode) {
-            overlay.parentNode.removeChild(overlay);
-          }
-        }, 320);
-      }
-    }
-    if (document.readyState === 'complete') {
-      setTimeout(removeOverlay, 100);
-    } else {
-      window.addEventListener('load', function() {
-        setTimeout(removeOverlay, 100);
-      });
-    }
-  })();
-</script>
-    <script defer src="/js/aiden-chat.js"></script>
+<a class="fab" href="https://wa.me/96899245250?text=Hello%20Nahid%2C%20I%20have%20a%20question%20about%20my%20business." aria-label="WhatsApp"><svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 1.8a8.2 8.2 0 1 1-4.2 15.3l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8zm-3.1 4c-.2 0-.5 0-.7.3-.2.3-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.8 2.8 4.4 3.8 2.2.9 2.6.7 3.1.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2-.1-.1-.2-.2-.5-.3l-1.7-.8c-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.1-.2 0-.4.1-.5l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5L10 8.2c-.2-.4-.4-.4-.6-.4h-.5z"/></svg><span>WhatsApp</span></a>
 </body>
 </html>

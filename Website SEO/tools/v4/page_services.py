@@ -156,13 +156,13 @@ def body():
   <div><b>OMR 0</b><span>Required monthly<br>to keep it running</span></div>
 </div>
 
-<!-- ==================================================== 01 - THE STOREFRONT -->
-<section class="s-cream grain" id="storefront">
+<!-- ==================================================== 01 - THE SMART WEBSITE -->
+<section class="s-cream grain" id="smart-website">
   <div class="wrap">
     <div class="sysblock">
       <div>
         <span class="kicker">01 &#183; The flagship</span>
-        <h3>The Smart Storefront</h3>
+        <h3>The Smart Website</h3>
         <p>A bilingual site with a buyer agent inside it. It answers in Arabic or English, knows your
           catalogue and your delivery terms, and hands the serious ones to your WhatsApp.</p>
         <ul class="deliver">
@@ -174,7 +174,7 @@ def body():
           <li>A year of hosting, security and care included</li>
         </ul>
         <div class="pricetag"><b>OMR 950</b><span>One-time &#183; founding price</span></div>
-        <a class="btn btn-wa" href="{WA}?text=Hello%20Nahid%2C%20I%20want%20to%20ask%20about%20the%20Smart%20Storefront.">{WA_ICON}Ask about a build slot</a>
+        <a class="btn btn-wa" href="{WA}?text=Hello%20Nahid%2C%20I%20want%20to%20ask%20about%20the%20Smart%20Website.">{WA_ICON}Ask about a build slot</a>
       </div>
       <div class="art rv">
         <div class="phone">
@@ -211,7 +211,7 @@ def body():
           <li>What to do about each one, in a plain sentence</li>
           <li>Reads the systems you already use</li>
         </ul>
-        <div class="pricetag"><b>+OMR 650</b><span>One-time &#183; added to the Storefront</span></div>
+        <div class="pricetag"><b>+OMR 650</b><span>One-time &#183; added to the Smart Website</span></div>
         <div class="btn-row">
           <a class="btn btn-teal" href="/customized-ceo-dashboard-demo/">Open the live demo</a>
           <a class="tlink" href="#price">See it in the price list <span class="arw">&rarr;</span></a>
@@ -250,7 +250,7 @@ def body():
           <li>Stops the moment the buyer replies or pays</li>
           <li>Every message logged where you can read it</li>
         </ul>
-        <div class="pricetag"><b>+OMR 900</b><span>One-time &#183; added to the Storefront</span></div>
+        <div class="pricetag"><b>+OMR 900</b><span>One-time &#183; added to the Smart Website</span></div>
         <a class="btn btn-ghost" href="#price">See it in the price list</a>
       </div>
       <div class="art rv">
@@ -302,7 +302,7 @@ def body():
             <td class="n">Free</td><td class="n">Free</td><td>&mdash;</td>
           </tr>
           <tr class="hi">
-            <td><b>The Smart Storefront</b><span class="mini">Bilingual site, AI buyer agent, wholesale quote flow, WhatsApp handoff, AI-search visibility, 1 year hosting &amp; care</span></td>
+            <td><b>The Smart Website</b><span class="mini">Bilingual site, AI buyer agent, wholesale quote flow, WhatsApp handoff, AI-search visibility, 1 year hosting &amp; care</span></td>
             <td class="n">OMR 950</td><td class="n">OMR 1,450</td><td>One-time</td>
           </tr>
           <tr>
@@ -338,9 +338,9 @@ def body():
         <span class="badge">Most owners start here</span>
         <h3>Pay on Proof</h3>
         <span class="price">OMR 1,150</span>
-        <p>Nothing today. Nothing when it goes live. I invoice you only after your storefront has produced its
+        <p>Nothing today. Nothing when it goes live. I invoice you only after your smart website has produced its
           first real, verifiable buyer inquiry. If it never does, you never pay.</p>
-        <a class="btn btn-wa" href="{WA}?text=Hello%20Nahid%2C%20I%20want%20the%20Smart%20Storefront%20on%20Pay%20on%20Proof%20terms.">{WA_ICON}Ask about a slot</a>
+        <a class="btn btn-wa" href="{WA}?text=Hello%20Nahid%2C%20I%20want%20the%20Smart%20Website%20on%20Pay%20on%20Proof%20terms.">{WA_ICON}Ask about a slot</a>
       </div>
       <div class="pay">
         <span class="badge">Cheapest</span>
@@ -348,7 +348,7 @@ def body():
         <span class="price">OMR 950</span>
         <p>Paid up front by bank transfer. Saves you OMR 200 against Pay on Proof, and includes the Arabic
           content pass, the Google Business Profile fix, and one staff training session at no charge.</p>
-        <a class="btn btn-ghost" href="{WA}?text=Hello%20Nahid%2C%20I%20want%20the%20Smart%20Storefront%20paid%20up%20front%20at%20OMR%20950.">Ask about a slot</a>
+        <a class="btn btn-ghost" href="{WA}?text=Hello%20Nahid%2C%20I%20want%20the%20Smart%20Website%20paid%20up%20front%20at%20OMR%20950.">Ask about a slot</a>
       </div>
       <div class="pay">
         <span class="badge">Spread it out</span>
@@ -356,7 +356,7 @@ def body():
         <span class="price">3 &times; OMR 340</span>
         <p>On signing, on go-live, and thirty days later. Less than one month of an administrator&#8217;s salary
           in total &mdash; and it keeps working after the three months are done.</p>
-        <a class="btn btn-ghost" href="{WA}?text=Hello%20Nahid%2C%20I%20want%20the%20Smart%20Storefront%20on%20the%20three-payment%20plan.">Ask about a slot</a>
+        <a class="btn btn-ghost" href="{WA}?text=Hello%20Nahid%2C%20I%20want%20the%20Smart%20Website%20on%20the%20three-payment%20plan.">Ask about a slot</a>
       </div>
     </div>
 
@@ -420,7 +420,7 @@ def body():
 META = dict(
     slug="services-v4",
     title="What I build | AI Profit Lab — three systems, every price published",
-    desc=("The Smart Storefront, the Live Owner Dashboard and the Full Autopilot - what each one does, "
+    desc=("The Smart Website, the Live Owner Dashboard and the Full Autopilot - what each one does, "
           "what it costs in OMR, and what is deliberately not included."),
     nav="/en/services-v4/",
     next=("Next", "How it works", "/en/process-v4/"),
@@ -429,7 +429,7 @@ META = dict(
   "@type":"ItemList",
   "name":"Systems built by AI Profit Lab",
   "itemListElement":[
-    {"@type":"Service","position":1,"name":"The Smart Storefront","description":"A bilingual site with an AI buyer agent that answers in Arabic and English and hands live buyers to WhatsApp.","provider":{"@type":"Organization","name":"AI Profit Lab"},"areaServed":"Oman","offers":{"@type":"Offer","price":"950","priceCurrency":"OMR"}},
+    {"@type":"Service","position":1,"name":"The Smart Website","description":"A bilingual site with an AI buyer agent that answers in Arabic and English and hands live buyers to WhatsApp.","provider":{"@type":"Organization","name":"AI Profit Lab"},"areaServed":"Oman","offers":{"@type":"Offer","price":"950","priceCurrency":"OMR"}},
     {"@type":"Service","position":2,"name":"The Live Owner Dashboard","description":"Cash position, margin, stock and open leads on one screen, with a recommended action for each.","provider":{"@type":"Organization","name":"AI Profit Lab"},"areaServed":"Oman","offers":{"@type":"Offer","price":"650","priceCurrency":"OMR"}},
     {"@type":"Service","position":3,"name":"The Full Autopilot","description":"Quote and invoice follow-up on a schedule, stopping as soon as the buyer replies or pays.","provider":{"@type":"Organization","name":"AI Profit Lab"},"areaServed":"Oman","offers":{"@type":"Offer","price":"900","priceCurrency":"OMR"}}
   ]

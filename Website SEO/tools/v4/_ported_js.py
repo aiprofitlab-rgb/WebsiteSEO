@@ -35,7 +35,6 @@ CINE_JS = r'''
   const poster = document.getElementById("cinePoster");
   const bar = document.getElementById("cineBar");
   const lead = document.getElementById("lead");
-  const hint = document.getElementById("hint");
   const endcard = document.getElementById("endcard");
   const beats = [].slice.call(document.querySelectorAll(".beat"));
   const topbar = document.getElementById("top");
@@ -55,7 +54,6 @@ CINE_JS = r'''
     lead.classList.add("on");
     endcard.classList.add("on");
     beats.forEach(b => b.classList.add("on"));
-    hint.classList.remove("on");
     return;
   }
 
@@ -176,7 +174,6 @@ CINE_JS = r'''
   function overlays(p) {
     bar.style.transform = "scaleX(" + p + ")";
     lead.classList.toggle("on", p < 0.12);
-    hint.classList.toggle("on", p < 0.06);
     endcard.classList.toggle("on", p > 0.86);
     for (let i = 0; i < beats.length; i++) {
       const at = parseFloat(beats[i].dataset.at);
@@ -241,7 +238,7 @@ CALC_JS = r'''
   if (!q1) return;
 
   const WEEKS_PER_MONTH = 4.33;
-  const STOREFRONT = 950;          // must match the price ladder above
+  const SMART_SITE = 950;          // must match the price ladder above
   const fmt = n => "OMR " + Math.round(n).toLocaleString("en-US");
 
   function render() {
@@ -258,10 +255,10 @@ CALC_JS = r'''
     /* Both bars share one scale so the comparison is honest. The leak bar is
        full width whenever it exceeds the build cost, and the cost bar shrinks
        against it; below that the roles swap. */
-    const max = Math.max(leak, STOREFRONT) || 1;
+    const max = Math.max(leak, SMART_SITE) || 1;
     const W = 420;
     const leakW = Math.max(4, (leak / max) * W);
-    const costW = Math.max(4, (STOREFRONT / max) * W);
+    const costW = Math.max(4, (SMART_SITE / max) * W);
     $("barLeak").setAttribute("width", leakW.toFixed(1));
     $("barCost").setAttribute("width", costW.toFixed(1));
 
@@ -280,7 +277,7 @@ CALC_JS = r'''
     }
 
     const perDay = leak / 30;
-    const days = perDay > 0 ? Math.ceil(STOREFRONT / perDay) : Infinity;
+    const days = perDay > 0 ? Math.ceil(SMART_SITE / perDay) : Infinity;
     $("days").textContent = !isFinite(days) ? "—"
       : days <= 1 ? "a single day"
         : days < 400 ? days + " days"

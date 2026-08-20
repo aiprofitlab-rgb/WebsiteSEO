@@ -794,6 +794,7 @@ MOTION_JS = """
 """
 
 TAIL = """<script>{{JS}}</script>
+<script defer src="/js/aiden-chat.js"></script>
 </body>
 </html>
 """

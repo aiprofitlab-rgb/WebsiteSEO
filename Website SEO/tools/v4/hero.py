@@ -7,7 +7,7 @@ unchanged in behaviour: a scroll-scrubbed WebP frame sequence painted to a
 canvas (150 frames desktop / 75 mobile, coarse-to-fine fetch, cross-dissolved).
 The engine itself is extracted mechanically into _ported_js.py rather than
 retyped. Only the copy and the lead CTA are new - the first screen is deliberately
-bare: headline plus one button, with everything else left to the scroll.
+bare: headline, one relief line, one button, everything else left to the scroll.
 """
 from kit import WA, WA_ICON
 
@@ -32,7 +32,11 @@ HERO_CSS = """
   text-align:center;opacity:0;transition:opacity .45s ease;pointer-events:none;
 }
 .lead.on,.endcard.on,.beat.on{opacity:1;pointer-events:auto}
-.lead h1{font-size:clamp(2.6rem,5.6vw,4.5rem);line-height:1.04;color:var(--teal-950);margin:0 0 26px}
+.lead h1{font-size:clamp(2.6rem,5.6vw,4.5rem);line-height:1.04;color:var(--teal-950);margin:0 0 18px}
+/* The relief line. The h1 removes the fear ("you don't have to learn it"); this
+   line supplies the reason to keep reading. Kept to one sentence because it is
+   read over moving footage. */
+.lead .sub{font-size:clamp(1.05rem,2.4vw,1.24rem);line-height:1.5;color:var(--teal-900);margin:0 0 26px;max-width:26ch;margin-inline:auto}
 /* A CTA inside the first viewport. v3 learned this the hard way: with the
    only button on the endcard at 86% scroll progress, a visitor who did not
    scroll five screens never saw a call to action at all. */
@@ -40,18 +44,8 @@ HERO_CSS = """
 .beat{font-family:var(--mono);font-size:clamp(1rem,3.2vw,1.15rem);line-height:1.55;color:var(--teal-900)}
 .beat span{display:inline-block;border-top:2px solid var(--amber);padding-top:14px}
 .endcard p{font-family:var(--display);font-size:clamp(1.7rem,5vw,2.5rem);color:var(--teal-950);margin:0 0 22px;line-height:1.2}
-.scroll-hint{
-  position:absolute;left:50%;bottom:12px;transform:translateX(-50%);font-family:var(--mono);
-  font-size:.85rem;letter-spacing:.24em;text-transform:uppercase;color:var(--muted);
-  margin:0;opacity:0;transition:opacity .4s ease;
-}
-.scroll-hint.on{opacity:.8}
 .cine-progress{position:absolute;left:0;right:0;bottom:0;height:3px;background:rgba(35,43,38,.1);z-index:5}
 .cine-progress i{display:block;height:100%;width:100%;background:var(--amber);transform:scaleX(0);transform-origin:0 50%}
-.illus-note{
-  position:absolute;left:0;right:0;bottom:12px;z-index:5;font-family:var(--mono);font-size:.95rem;
-  letter-spacing:.05em;color:rgba(35,43,38,.6);margin:0;text-align:center;padding:0 20px;
-}
 .wash-l,.wash-r{display:none;position:absolute;inset:0;z-index:3;pointer-events:none}
 
 @media (min-width:1100px){
@@ -62,21 +56,14 @@ HERO_CSS = """
   .wash-r{display:block;background:linear-gradient(270deg,rgba(241,239,232,.72) 0%,rgba(241,239,232,.34) 22%,rgba(241,239,232,0) 44%)}
   .lead,.endcard{left:clamp(32px,4.5vw,76px);right:auto;top:46%;transform:translateY(-50%);width:min(470px,34vw);text-align:left}
   .lead h1{font-size:clamp(2.5rem,3.5vw,3.6rem)}
+  .lead .sub{margin-inline:0}
   .lead-cta{justify-content:flex-start}
   .beat{left:auto;right:clamp(32px,4.5vw,76px);top:50%;transform:translateY(-50%);width:min(330px,25vw);text-align:left;font-size:1.1rem}
-  .scroll-hint{left:clamp(32px,4.5vw,76px);transform:none;bottom:38px}
-  .illus-note{left:auto;right:210px;bottom:14px;text-align:right;font-size:.95rem;padding:0}
 }
 @media (max-width:1099px){
   .cine{height:460vh}
-  /* Bottom padding reserves room for the absolutely-positioned disclaimer at
-     the foot of the stage; without it the centred copy lands on top of it. */
-  .cine-ui{padding:clamp(18px,4vw,32px) 20px 88px}
+  .cine-ui{padding:clamp(18px,4vw,32px) 20px}
   .cine-media{height:clamp(220px,38svh,420px)}
-  /* Opposite corners: stacked, both of these default to bottom-centre and the
-     disclaimer wraps onto the scroll hint. */
-  .illus-note{left:16px;right:auto;max-width:62%;text-align:left;bottom:10px}
-  .scroll-hint{left:auto;right:16px;transform:none;bottom:10px}
 }
 @media (max-width:560px){
   .cine{height:420vh}
@@ -96,28 +83,27 @@ HERO_HTML = f"""<section class="cine" id="cine">
 
     <div class="cine-ui">
       <div class="lead on" id="lead">
-        <h1>Never lose a buyer to silence again.</h1>
+        <h1>You don&#8217;t have to learn AI.</h1>
+        <p class="sub">You only have to stop losing buyers to the supplier who answers first.</p>
         <div class="lead-cta">
-          <a class="btn btn-teal" href="#leak">What silence costs you &darr;</a>
+          <a class="btn btn-teal" href="#noise">Show me, in one minute &darr;</a>
         </div>
       </div>
 
       <p class="beat" data-at="0.16"><span>9:47 PM. A buyer asks if you deliver to Sohar.</span></p>
       <p class="beat" data-at="0.28"><span>Your office closed four hours ago.</span></p>
-      <p class="beat" data-at="0.40"><span>Something answers anyway.</span></p>
-      <p class="beat" data-at="0.52"><span>It knows your stock. It knows your delivery times.</span></p>
-      <p class="beat" data-at="0.64"><span>It books the order and logs the lead.</span></p>
-      <p class="beat" data-at="0.76"><span>You read about it in the morning.</span></p>
+      <p class="beat" data-at="0.40"><span>Something answers him. In Arabic.</span></p>
+      <p class="beat" data-at="0.52"><span>It knows your stock. It knows your delivery days.</span></p>
+      <p class="beat" data-at="0.64"><span>It quotes. It books. It logs the lead.</span></p>
+      <p class="beat" data-at="0.76"><span>You read about it over coffee. You learned nothing new.</span></p>
 
       <div class="endcard" id="endcard">
         <p>Every success starts with insight.</p>
-        <a class="btn btn-wa" href="{WA}?text=Hello%20Nahid%2C%20I%20want%20to%20ask%20about%20a%20Smart%20Storefront%20for%20my%20business.">{WA_ICON}Message me on WhatsApp</a>
+        <a class="btn btn-wa" href="{WA}?text=Hello%20Nahid%2C%20I%20want%20to%20ask%20about%20a%20Smart%20Website%20for%20my%20business.">{WA_ICON}Message me on WhatsApp</a>
       </div>
 
-      <p class="scroll-hint on" id="hint">Scroll</p>
     </div>
 
-    <p class="illus-note">Illustration of the system. Not a photograph of a person.</p>
     <div class="cine-progress"><i id="cineBar"></i></div>
   </div>
 </section>
