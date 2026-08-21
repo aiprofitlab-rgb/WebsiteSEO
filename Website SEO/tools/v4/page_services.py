@@ -16,7 +16,11 @@ CSS = """
 .stats div{padding:clamp(22px,3vw,34px) clamp(14px,2vw,26px);border-right:1px solid var(--line)}
 .stats div:last-child{border-right:0}
 .stats b{display:block;font-family:var(--display);font-size:clamp(1.9rem,3.6vw,2.9rem);line-height:1;color:var(--teal-950);margin-bottom:8px;font-weight:400}
-.stats span{font-family:var(--mono);font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);line-height:1.6;display:block}
+/* `> span`, not `span`: the first cell's figure is a <span data-count> nested
+   inside the <b> so the motion kit can count it up, and an unscoped `.stats
+   span` caught it too - which rendered "168" as an 0.78rem mono label beside
+   three 2.9rem display figures. */
+.stats div>span{font-family:var(--mono);font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);line-height:1.6;display:block}
 
 /* ------------------------------------------------------ system blocks */
 .sysblock{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,5vw,72px);align-items:center}

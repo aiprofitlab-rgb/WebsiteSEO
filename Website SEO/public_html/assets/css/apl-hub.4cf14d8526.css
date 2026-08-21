@@ -506,379 +506,221 @@ section{position:relative;padding:clamp(74px,9vw,138px) 0}
   .review .gmark svg{width:22px;height:22px}
 }
 
-/* ---------------------------------------------------------- reading bar */
-/* Sits above the fixed header (z-80) so it reads as chrome of the window,
-   not of the page. Width is set by JS; with no JS it simply stays at 0. */
-.prog{position:fixed;top:0;left:0;height:2px;width:0;z-index:90;background:var(--amber);will-change:width}
+/* ------------------------------------------------------------------ hero */
+.hhero .lede{margin:0 0 clamp(30px,3.6vw,42px)}
+.hhero .h1{margin:0 0 22px}
 
-/* ---------------------------------------------------------------- hero */
-/* Two measures: the headline column is narrow (880) so a long title breaks
-   into readable lines; the figure and the body grid use the site's own 1180. */
-.artwrap{width:min(1180px,92vw);margin-inline:auto}
-.wrap-a{width:min(880px,92vw);margin-inline:auto}
-.ahero{padding:clamp(126px,15vw,178px) 0 clamp(26px,3.5vw,40px);background:var(--panel);position:relative;overflow:hidden}
-.crumbs{
-  font-family:var(--mono);font-size:.76rem;letter-spacing:.12em;text-transform:uppercase;
-  color:var(--muted);margin:0 0 20px;display:flex;gap:9px;flex-wrap:wrap;align-items:center;
-}
-.crumbs a{color:var(--muted);text-decoration:none;transition:color .2s}
-.crumbs a:hover{color:var(--amber-text)}
-.crumbs i{color:var(--amber);font-style:normal}
-.ahero .h1{font-size:clamp(2rem,4.4vw,3.35rem);line-height:1.06;margin:0 0 20px}
-.ahero .lede{font-size:clamp(1.1rem,1.8vw,1.32rem);max-width:62ch}
+/* Visually hidden but read aloud: the search field and the filter group both
+   need a name, and neither has room for a visible one. */
+.vh{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;
+  clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;border:0}
 
-.byline{
-  display:flex;align-items:center;gap:15px;flex-wrap:wrap;
-  margin-top:clamp(26px,3.5vw,38px);padding-top:20px;border-top:1px solid var(--line);
+/* ---------------------------------------------------------------- search */
+.search{position:relative;max-width:620px}
+.search input{
+  width:100%;font-family:var(--sans);font-size:1rem;color:var(--ink);
+  background:var(--white);border:1px solid var(--line);border-radius:99px;
+  padding:15px 52px 15px 52px;transition:border-color .2s,box-shadow .2s;
+  -webkit-appearance:none;appearance:none;
 }
-.byline .face{width:46px;height:46px;border-radius:50%;object-fit:cover;flex:none;filter:saturate(.94)}
-.byline .who{line-height:1.35}
-.byline .who b{display:block;font-weight:500;font-size:1rem;color:var(--teal-950)}
-.byline .who span,.byline .stamp{
-  font-family:var(--mono);font-size:.76rem;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);
+.search input::placeholder{color:var(--taupe)}
+.search input:focus{outline:none;border-color:var(--teal);box-shadow:0 0 0 4px rgba(15,110,86,.12)}
+.search input::-webkit-search-cancel-button{-webkit-appearance:none}
+.search .mag{
+  position:absolute;top:50%;inset-inline-start:19px;transform:translateY(-50%);
+  width:19px;height:19px;color:var(--muted);pointer-events:none;
 }
-.byline .sp{flex:1 1 40px}
+.search .mag svg{width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:2;
+  stroke-linecap:round;stroke-linejoin:round}
+.search .clr{
+  position:absolute;top:50%;inset-inline-end:9px;transform:translateY(-50%);
+  width:34px;height:34px;border:0;border-radius:50%;background:var(--panel-2);
+  color:var(--teal-900);cursor:pointer;font-size:1.15rem;line-height:1;
+  display:none;align-items:center;justify-content:center;
+}
+.search .clr:hover{background:var(--line)}
+.search.has-q .clr{display:flex}
 
-/* share — icon buttons, no third-party script and therefore no third-party
-   cookie. Each is a plain link except copy, which needs one clipboard call. */
-.share{display:flex;gap:9px;align-items:center}
-.share a,.share button{
-  width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:var(--white);
-  display:inline-flex;align-items:center;justify-content:center;color:var(--teal-900);cursor:pointer;
-  padding:0;transition:border-color .2s,color .2s,transform .2s,background .2s;
+/* ---------------------------------------------------------------- filter */
+.filters{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:clamp(20px,2.4vw,26px)}
+.filters button{
+  font-family:var(--mono);font-size:.79rem;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--teal-900);background:var(--white);border:1px solid var(--line);border-radius:99px;
+  padding:9px 17px;cursor:pointer;transition:border-color .2s,background .2s,color .2s,transform .2s;
 }
-.share a:hover,.share button:hover{border-color:var(--teal);color:var(--teal);transform:translateY(-2px)}
-.share svg{width:17px;height:17px;fill:currentColor}
-.share .done{border-color:var(--wa);color:var(--wa)}
-
-/* hero figure */
-.afig{margin:0;position:relative;background:var(--panel-2);border:1px solid var(--line);
-  border-radius:20px;padding:clamp(10px,1.2vw,16px)}
-.afig img{width:100%;aspect-ratio:16/7;object-fit:cover;border-radius:12px}
-.afig figcaption{
-  font-family:var(--mono);font-size:.76rem;letter-spacing:.07em;color:var(--muted);
-  margin:12px 4px 4px;padding-left:14px;border-left:2px solid var(--amber);
+.filters button:hover{border-color:var(--teal);transform:translateY(-1px)}
+.filters button[aria-pressed=true]{background:var(--teal-950);border-color:var(--teal-950);color:var(--cream)}
+.filters button i{font-style:normal;opacity:.55;margin-inline-start:7px}
+.fcount{
+  font-family:var(--mono);font-size:.79rem;letter-spacing:.08em;color:var(--muted);
+  margin-inline-start:auto;white-space:nowrap;
 }
 
-/* ---------------------------------------------------------- body layout */
-.artgrid{display:grid;grid-template-columns:206px minmax(0,1fr);gap:clamp(28px,5vw,68px);align-items:start}
-.toc{position:sticky;top:106px}
-.toc h4{
-  font-family:var(--mono);font-size:.74rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;
-  color:var(--muted);margin:0 0 14px;
+/* -------------------------------------------------------------- featured */
+.feat{
+  display:grid;grid-template-columns:1.05fr .95fr;background:var(--white);
+  border:1px solid var(--line);border-radius:18px;overflow:hidden;text-decoration:none;
+  transition:transform .4s var(--ease),box-shadow .4s var(--ease);
 }
-.toc ol{list-style:none;margin:0;padding:0}
-.toc a{
-  display:block;font-size:.9rem;line-height:1.35;color:var(--muted);text-decoration:none;
-  padding:8px 0 8px 15px;border-left:1px solid var(--line);transition:color .25s,border-color .25s;
+.feat:hover{transform:translateY(-4px);box-shadow:0 30px 60px -40px rgba(7,43,34,.6)}
+/* Every hero in /blog/images/ was drawn for the old navy skin: near-black
+   fields of blue and cyan. Dropped straight onto cream they read as holes in
+   the page. `article_kit`'s .afig already answered this - inset the art in a
+   panel-toned frame so it presents as a mounted plate rather than as the page
+   itself - and the hub matting is deliberately the same frame, so a card and
+   the article it opens look like one system. */
+.feat .shot{background:var(--panel-2);padding:clamp(12px,1.4vw,18px)}
+.feat .shot img{display:block;width:100%;height:100%;aspect-ratio:16/10;
+  object-fit:cover;border-radius:12px}
+.feat .txt{padding:clamp(26px,3.4vw,44px);display:flex;flex-direction:column;justify-content:center}
+.feat .tagline{
+  font-family:var(--mono);font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--amber-text);margin:0 0 14px;display:flex;align-items:center;gap:9px;
 }
-.toc a:hover{color:var(--teal)}
-.toc a.on{color:var(--teal-950);border-left-color:var(--amber)}
-.toc .back{margin-top:20px}
+.feat h2{font-size:clamp(1.4rem,2.6vw,2.05rem);line-height:1.14;color:var(--teal-950);margin:0 0 14px}
+.feat p{color:var(--muted);font-size:1.02rem;margin:0 0 20px}
+.feat .stamp{font-family:var(--mono);font-size:.76rem;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted)}
 
-/* ---------------------------------------------------------------- prose */
-.prose{counter-reset:sec;max-width:68ch}
-.prose p{font-size:clamp(1.04rem,1.4vw,1.13rem);line-height:1.72;margin:0 0 1.25em;color:var(--ink)}
-.prose p.open::first-letter{
-  float:left;font-family:var(--display);font-size:3.5em;line-height:.82;padding:.06em .1em 0 0;color:var(--teal);
+/* ------------------------------------------------------------------ grid */
+.posts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(18px,2.4vw,28px)}
+.post{
+  display:flex;flex-direction:column;background:var(--panel);border:1px solid var(--line);
+  border-radius:16px;overflow:hidden;text-decoration:none;
+  transition:transform .35s var(--ease),box-shadow .35s var(--ease),border-color .35s;
 }
-.prose h2{
-  font-size:clamp(1.55rem,2.9vw,2.2rem);line-height:1.15;color:var(--teal-950);
-  margin:clamp(46px,6vw,74px) 0 18px;scroll-margin-top:104px;
+.post:hover{transform:translateY(-4px);box-shadow:0 26px 50px -34px rgba(7,43,34,.5);border-color:var(--panel-2)}
+/* Same matte as .feat. The zoom-on-hover that a bleeding thumbnail can afford
+   is gone with it: a scaled image inside a padded frame grows over its own
+   mount. The card still answers the pointer by lifting. */
+.post .shot{background:var(--panel-2);padding:clamp(9px,1vw,12px)}
+.post .shot img{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:11px}
+.post .txt{padding:clamp(20px,2.2vw,26px);display:flex;flex-direction:column;flex:1}
+.post .kicker{font-family:var(--mono);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--amber-text);margin:0 0 11px}
+.post h3{font-size:clamp(1.06rem,1.5vw,1.22rem);line-height:1.26;color:var(--teal-950);margin:0 0 10px}
+.post p{color:var(--muted);font-size:.95rem;line-height:1.55;margin:0 0 18px}
+.post .stamp{
+  margin-top:auto;padding-top:14px;border-top:1px solid var(--line);
+  font-family:var(--mono);font-size:.73rem;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--muted);display:flex;justify-content:space-between;gap:10px;
 }
-/* Section numerals come from a counter, not from markup: the TOC reads
-   heading.textContent, and a numeral in the markup would end up in every
-   entry. ::before is not a child node, so the motion script's wipe wrapper
-   leaves it alone and it holds still while the words rise. */
-.prose h2::before{
-  content:counter(sec,decimal-leading-zero);counter-increment:sec;display:block;
-  font-family:var(--mono);font-size:.76rem;letter-spacing:.18em;color:var(--amber-text);margin-bottom:11px;
-}
-.prose h3{font-size:clamp(1.18rem,1.9vw,1.4rem);color:var(--teal-950);margin:clamp(30px,3.5vw,44px) 0 12px;scroll-margin-top:104px}
-.prose a{color:var(--teal);text-decoration:none;background-image:linear-gradient(var(--amber),var(--amber));
-  background-size:100% 1px;background-position:0 100%;background-repeat:no-repeat;padding-bottom:2px;
-  transition:color .2s,background-size .3s var(--ease)}
-.prose a:hover{color:var(--amber-text)}
-/* A button inside the prose is not a prose link. `.prose a` (0,2,0) outranks
-   `.btn-wa` (0,1,0), which repainted the pill's own label teal and drew the
-   link underline straight through it. */
-.prose .btn{background-image:none;padding-bottom:15px}
-.prose .btn-wa,.prose .btn-teal{color:#fff}
-.prose .btn-amber{color:var(--teal-950)}
-.prose .btn-ghost{color:var(--teal-900)}
-.icta .btn-ghost{color:var(--cream);border-color:var(--line-dark)}
-.prose strong{font-weight:600;color:var(--teal-950)}
-.prose em{font-style:italic}
-.prose code{
-  font-family:var(--mono);font-size:.88em;background:var(--panel-2);border:1px solid var(--line);
-  border-radius:5px;padding:1px 6px;color:var(--teal-900);
-}
-.prose ul,.prose ol{margin:0 0 1.35em;padding-left:0;list-style:none}
-.prose li{position:relative;padding-left:30px;margin-bottom:.7em;font-size:clamp(1.02rem,1.35vw,1.1rem);line-height:1.65}
-.prose ul>li::before{
-  content:"";position:absolute;left:6px;top:.62em;width:7px;height:7px;border-radius:50%;background:var(--amber);
-}
-.prose ol{counter-reset:li}
-.prose ol>li::before{
-  counter-increment:li;content:counter(li,decimal-leading-zero);position:absolute;left:0;top:.16em;
-  font-family:var(--mono);font-size:.8rem;color:var(--amber-text);
-}
+/* .post is display:flex, which beats the [hidden] UA rule, so the filter's
+   hidden attribute needs saying again here or nothing ever disappears. */
+.post[hidden]{display:none}
 
-/* ------------------------------------------------------------ takeaways */
-.keybox{
-  background:var(--white);border:1px solid var(--line);border-left:3px solid var(--amber);
-  border-radius:0 14px 14px 0;padding:clamp(22px,3vw,30px) clamp(22px,3vw,32px);margin:0 0 clamp(34px,4vw,48px);
+/* ------------------------------------------------------------ show more */
+.more-row{display:flex;justify-content:center;margin-top:clamp(34px,4vw,52px)}
+.more{
+  font-family:var(--mono);font-size:.82rem;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--teal-950);background:transparent;border:1px solid var(--teal-950);
+  border-radius:99px;padding:15px 34px;cursor:pointer;
+  transition:background .25s,color .25s;
 }
-.keybox h4{
-  font-family:var(--mono);font-size:.76rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;
-  color:var(--amber-text);margin:0 0 16px;display:flex;align-items:center;gap:9px;
-}
-.keybox ul{margin:0;padding:0;list-style:none}
-.keybox li{position:relative;padding-left:26px;margin:0 0 .65em;font-size:1.02rem;line-height:1.6;color:var(--ink)}
-.keybox li:last-child{margin-bottom:0}
-.keybox li::before{content:"\2727";position:absolute;left:0;top:0;color:var(--amber);font-size:.95em}
+.more:hover{background:var(--teal-950);color:var(--cream)}
+.more[hidden]{display:none}
 
-/* -------------------------------------------------------------- quotes */
-.prose blockquote{
-  margin:clamp(34px,4vw,50px) 0;padding:0 0 0 clamp(20px,3vw,30px);border-left:2px solid var(--amber);
-}
-.prose blockquote p{
-  font-family:var(--display);font-size:clamp(1.3rem,2.2vw,1.65rem);line-height:1.35;color:var(--teal-950);margin:0 0 .5em;
-}
-.prose blockquote cite{
-  font-family:var(--mono);font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-style:normal;
-}
-/* A pull quote is a break in the column, not a citation: hairline above and
-   below, no rule on the side, so it reads as a held breath. */
-.pull{
-  margin:clamp(38px,5vw,58px) 0;padding:clamp(24px,3vw,32px) 0;
-  border-top:1px solid var(--line);border-bottom:1px solid var(--line);text-align:center;
-}
-.pull p{font-family:var(--display);font-size:clamp(1.4rem,2.6vw,1.9rem);line-height:1.3;color:var(--teal);margin:0}
+.empty{border:1px dashed var(--line);border-radius:16px;padding:clamp(30px,5vw,60px);
+  text-align:center;color:var(--muted);margin-top:24px}
+.empty[hidden]{display:none}
+.empty b{display:block;font-family:var(--display);font-size:1.3rem;color:var(--teal-950);
+  font-weight:400;margin-bottom:8px}
 
-/* ------------------------------------------------------------ callouts */
-.callout{
-  background:var(--panel);border:1px solid var(--line);border-radius:14px;
-  padding:clamp(20px,2.6vw,26px) clamp(20px,2.6vw,28px);margin:clamp(30px,3.6vw,42px) 0;position:relative;
-}
-.callout b{
-  display:block;font-family:var(--mono);font-size:.75rem;font-weight:500;letter-spacing:.16em;
-  text-transform:uppercase;margin-bottom:10px;color:var(--teal);
-}
-.callout p{margin:0;font-size:1.02rem;line-height:1.65}
-.callout p+p{margin-top:.8em}
-.callout.warn{background:rgba(166,67,31,.05);border-color:rgba(166,67,31,.28)}
-.callout.warn b{color:var(--alert)}
-.callout.tip{background:rgba(186,117,23,.06);border-color:rgba(186,117,23,.3)}
-.callout.tip b{color:var(--amber-text)}
+/* --------------------------------------------------- no-JS / no-behaviour */
+/* Nothing above is load-bearing for reading the archive. Without the script
+   the page is 150 cards, newest first, and the three controls that would do
+   nothing are not shown at all rather than shown broken. */
+html:not(.js) .search,
+html:not(.js) .filters,
+html:not(.js) .more-row{display:none}
+html:not(.js) .post[hidden]{display:flex}
+/* …except the newest article's duplicate card, which only exists so the
+   search can return it. The panel above is already showing that article, and
+   with no script running the panel never goes away. Must follow the rule
+   above: equal specificity, so source order decides. */
+html:not(.js) .post[data-feat]{display:none}
 
-/* the arithmetic itself, set as a plate rather than a sentence */
-.formula{
-  background:var(--teal-950);color:var(--cream);border-radius:14px;
-  padding:clamp(22px,3vw,30px);margin:clamp(30px,3.6vw,42px) 0;text-align:center;
-}
-.formula span{
-  font-family:var(--mono);font-size:clamp(.92rem,1.6vw,1.08rem);line-height:1.9;letter-spacing:.02em;
-  color:var(--cream);display:block;
-}
-.formula em{color:var(--amber-bright);font-style:normal}
-.formula .lbl{
-  font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(241,239,232,.55);margin-bottom:12px;
-}
-
-/* ---------------------------------------------------------------- steps */
-.steps{margin:clamp(26px,3vw,38px) 0;border-top:1px solid var(--line)}
-/* > div, not div: the row holds a second div for its text, and a bare
-   descendant selector turned that inner wrapper into a grid too. */
-.steps>div{display:grid;grid-template-columns:56px 1fr;gap:clamp(14px,2vw,22px);padding:22px 0;border-bottom:1px solid var(--line)}
-.steps b{font-family:var(--mono);font-size:.82rem;letter-spacing:.1em;color:var(--amber-text);padding-top:.32em}
-.steps h4{font-family:var(--display);font-size:clamp(1.12rem,1.8vw,1.3rem);font-weight:400;color:var(--teal-950);margin:0 0 7px}
-.steps p{margin:0;font-size:1rem;color:var(--muted);line-height:1.62}
-
-/* ---------------------------------------------------------------- table */
-/* Wide tables scroll inside their own container - the page body never does. */
-.tblwrap{margin:clamp(30px,3.6vw,44px) 0;overflow-x:auto;border:1px solid var(--line);border-radius:14px;background:var(--white)}
-.tbl{border-collapse:collapse;width:100%;min-width:520px;font-size:.97rem}
-.tbl th{
-  text-align:left;font-family:var(--mono);font-size:.74rem;font-weight:500;letter-spacing:.13em;
-  text-transform:uppercase;color:var(--muted);background:var(--panel);padding:14px 18px;border-bottom:1px solid var(--line);
-}
-.tbl td{padding:14px 18px;border-bottom:1px solid var(--line);color:var(--ink);vertical-align:top}
-.tbl tr:last-child td{border-bottom:0}
-.tbl td.n{font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap;color:var(--teal-900)}
-.tbl tbody tr:hover{background:var(--panel)}
-.tblcap{font-family:var(--mono);font-size:.75rem;letter-spacing:.07em;color:var(--muted);margin:-24px 0 34px;padding-left:16px;border-left:2px solid var(--amber)}
-
-/* --------------------------------------------------------------- figure */
-.pfig{margin:clamp(30px,3.6vw,44px) 0}
-.pfig img{width:100%;border-radius:14px;border:1px solid var(--line)}
-.pfig figcaption{font-family:var(--mono);font-size:.75rem;letter-spacing:.07em;color:var(--muted);margin-top:11px;padding-left:16px;border-left:2px solid var(--amber)}
-
-/* ---------------------------------------------------------------- stats */
-.pstats{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,2vw,20px);margin:clamp(30px,3.6vw,44px) 0}
-.pstats div{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px 20px}
-.pstats b{display:block;font-family:var(--mono);font-size:clamp(1.5rem,3vw,2rem);color:var(--teal);line-height:1;margin-bottom:9px;font-weight:500}
-.pstats span{font-size:.88rem;color:var(--muted);line-height:1.45;display:block}
-
-/* ------------------------------------------------------------ inline CTA */
-.icta{
-  background:var(--teal-900);color:var(--cream);border-radius:16px;
-  padding:clamp(26px,3.4vw,38px);margin:clamp(38px,4.5vw,56px) 0;position:relative;overflow:hidden;
-}
-.icta::after{
-  content:"";position:absolute;right:-40px;bottom:-40px;width:150px;height:150px;border-radius:50%;
-  background:rgba(186,117,23,.16);
-}
-.icta h3{font-size:clamp(1.25rem,2.2vw,1.6rem);color:var(--cream);margin:0 0 10px;position:relative}
-.icta p{color:rgba(241,239,232,.78);font-size:1rem;margin:0 0 20px;max-width:52ch;position:relative}
-.icta .btn-row{position:relative}
-
-/* ------------------------------------------------------------------ FAQ */
-.faq{border-top:1px solid var(--line)}
-.faq details{border-bottom:1px solid var(--line)}
-.faq summary{
-  cursor:pointer;list-style:none;padding:20px 44px 20px 0;position:relative;
-  font-family:var(--display);font-size:clamp(1.05rem,1.7vw,1.24rem);color:var(--teal-950);
-  transition:color .2s;
-}
-.faq summary::-webkit-details-marker{display:none}
-.faq summary:hover{color:var(--teal)}
-.faq summary::after{
-  content:"";position:absolute;right:8px;top:50%;width:13px;height:1.5px;background:var(--amber);
-}
-.faq summary::before{
-  content:"";position:absolute;right:14px;top:50%;width:1.5px;height:13px;margin-top:-6px;background:var(--amber);
-  transition:transform .3s var(--ease),opacity .3s;
-}
-.faq details[open] summary::before{transform:rotate(90deg);opacity:0}
-.faq details p{margin:0 0 20px;color:var(--muted);font-size:1.01rem;line-height:1.68;max-width:66ch;padding-right:44px}
-
-/* ------------------------------------------------------------ references */
-.refs{margin-top:clamp(34px,4vw,50px);padding-top:26px;border-top:1px solid var(--line)}
-.refs h4{font-family:var(--mono);font-size:.75rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin:0 0 14px}
-.refs ol{list-style:none;margin:0;padding:0;counter-reset:r}
-.refs li{position:relative;padding-left:32px;margin-bottom:.6em;font-size:.94rem;line-height:1.5}
-.refs li::before{counter-increment:r;content:counter(r,decimal-leading-zero);position:absolute;left:0;top:.15em;font-family:var(--mono);font-size:.76rem;color:var(--amber-text)}
-.refs a{color:var(--teal);text-decoration:none;border-bottom:1px solid var(--line)}
-.refs a:hover{color:var(--amber-text);border-bottom-color:var(--amber)}
-
-/* --------------------------------------------------------------- author */
-.author{
-  display:grid;grid-template-columns:104px 1fr;gap:clamp(18px,3vw,30px);align-items:start;
-  background:var(--panel-2);border-radius:16px;padding:clamp(24px,3vw,34px);margin-top:clamp(40px,5vw,60px);
-}
-.author img{width:104px;height:104px;border-radius:50%;object-fit:cover;filter:saturate(.94)}
-.author .rolelbl{font-family:var(--mono);font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;color:var(--amber-text);margin:0 0 8px}
-.author h3{font-size:clamp(1.2rem,2vw,1.45rem);margin:0 0 10px}
-.author p{font-size:.99rem;color:var(--muted);margin:0 0 16px;line-height:1.62}
-
-/* -------------------------------------------------------------- related */
-.related .card h3{font-size:clamp(1.08rem,1.6vw,1.25rem);line-height:1.28}
-.related a.card{text-decoration:none;display:block}
-.related .card .n{color:var(--amber-text)}
-.related .card .rd{font-family:var(--mono);font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:16px;display:block}
-
-/* --------------------------------------------------------- breakpoints */
 @media (max-width:1080px){
-  /* minmax(0,1fr), never 1fr: a grid item's automatic minimum is its
-     min-content width, so the 520px min-width on a wide table stretched the
-     whole column past the viewport and every line of prose was clipped with
-     it. The table still scrolls inside .tblwrap. */
-  .artgrid{grid-template-columns:minmax(0,1fr)}
-  /* The rail becomes a plate above the article: still one tap to any
-     section, but no longer competing with the text for width. */
-  .toc{position:static;border:1px solid var(--line);border-radius:14px;padding:22px 24px;background:var(--panel);margin-bottom:34px}
-  .toc ol{columns:2;column-gap:26px}
-  .toc a{padding:6px 0 6px 13px;break-inside:avoid}
-  .toc .back{display:none}
-  .prose{max-width:none}
+  /* minmax(0,…) on every track: a card's <img> carries a width attribute, so
+     the automatic minimum of a plain 1fr track is that image's own width and
+     the grid quietly grows past a phone viewport. */
+  .posts{grid-template-columns:repeat(2,minmax(0,1fr))}
+  /* Stacked, the shot has no row height to inherit, so height:100% goes
+     indefinite and the img's own aspect-ratio takes over sizing it. That is
+     why the ratio lives on the img and there is no min-height anywhere: the
+     pair together would set an automatic minimum in the INLINE axis and push
+     the card past the viewport. */
+  .feat{grid-template-columns:minmax(0,1fr)}
 }
 @media (max-width:640px){
-  .toc ol{columns:1}
-  .pstats{grid-template-columns:1fr}
-  .author{grid-template-columns:1fr;text-align:left}
-  .author img{width:84px;height:84px}
-  .steps>div{grid-template-columns:1fr;gap:4px}
-  .afig img{aspect-ratio:4/3}
-  .byline .sp{display:none}
-  .byline .share{width:100%;margin-top:6px}
+  .posts{grid-template-columns:minmax(0,1fr)}
+  .fcount{width:100%;margin:4px 0 0}
 }
-
-/* Panels lifted from the old skin keep their heading, so a callout has to
-   style one. `article_kit` only ever emitted a mono <b> label. */
-.callout h3,.callout h4{
-  font-family:var(--display);font-weight:400;line-height:1.25;
-  font-size:clamp(1.08rem,1.7vw,1.28rem);color:var(--teal-950);margin:0 0 12px;
-}
-.callout ul,.callout ol{margin:0}
-.callout li{font-size:1rem;line-height:1.6}
-.callout li:last-child{margin-bottom:0}
-.callout p:last-child,.callout ul:last-child,.callout ol:last-child{margin-bottom:0}
-.callout .callout{background:var(--panel-2);margin:18px 0}
-
-/* YouTube embeds: 16:9 box so the iframe cannot set the page's width. */
-.embed{
-  position:relative;padding-top:56.25%;margin:clamp(30px,3.6vw,44px) 0;
-  border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--panel-2);
-}
-.embed iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
-
-/* In-prose figures carry no caption in the migrated set - the old pages put
-   their captions in the surrounding paragraph. */
-.pfig img{background:var(--panel-2)}
-
-/* The article footer: brand block in place of the personal byline, because
-   every one of these pages declares an Organization as its schema author. */
-.brandbox{
-  display:grid;grid-template-columns:64px 1fr;gap:clamp(16px,2.4vw,24px);align-items:start;
-  background:var(--panel-2);border-radius:16px;padding:clamp(22px,3vw,32px);margin-top:clamp(40px,5vw,60px);
-}
-.brandbox .bmark{width:64px;height:64px;border-radius:14px;background:var(--teal-950);
-  display:flex;align-items:center;justify-content:center;padding:11px}
-.brandbox .bmark img{width:100%;height:auto}
-.brandbox .rolelbl{font-family:var(--mono);font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;
-  color:var(--amber-text);margin:0 0 8px}
-.brandbox h3{font-size:clamp(1.2rem,2vw,1.45rem);margin:0 0 10px}
-.brandbox p{font-size:.99rem;color:var(--muted);margin:0 0 18px;line-height:1.62}
-
-/* Byline mark stands in for the portrait in `article_kit`. */
-.byline .bymark{width:42px;height:42px;border-radius:11px;background:var(--teal-950);flex:none;
-  display:flex;align-items:center;justify-content:center;padding:8px}
-.byline .bymark img{width:100%;height:auto}
-
-/* The keyword row: the page's own <meta name="keywords">, shown as topic
-   chips. They are the article's declared subjects, so they double as the
-   entity list an answer engine reads off the page. */
-.topics{display:flex;flex-wrap:wrap;gap:9px;margin:clamp(34px,4vw,48px) 0 0;padding-top:24px;border-top:1px solid var(--line)}
-.topics span:first-child{font-family:var(--mono);font-size:.74rem;letter-spacing:.16em;
-  text-transform:uppercase;color:var(--muted);align-self:center;margin-right:4px}
-.topics b{font-weight:400;font-size:.86rem;color:var(--teal-900);background:var(--panel);
-  border:1px solid var(--line);border-radius:99px;padding:5px 13px}
-
-/* .faq is a <section>, so it inherits the site's section padding - which puts
-   a 138px chasm between its own border-top hairline and its heading. On the
-   marketing pages that padding separates full-bleed bands; here it separates
-   two blocks inside one column. */
-.faq{padding:clamp(26px,3.2vw,38px) 0 0}
-.faq>h2{margin-bottom:clamp(8px,1.4vw,16px)}
-
-/* Long machine-generated headings need a lower ceiling than the v4 hero. */
-.ahero .h1{font-size:clamp(1.85rem,3.9vw,3rem)}
 
 /* --------------------------------------------------------------- Arabic */
-/* Scoped to [dir=rtl] rather than shipped as a second file: one stylesheet
-   serves all 300 articles in both languages, which means one cache entry
-   instead of two and no chance of the pair drifting apart.
-
-   Latin display faces have no Arabic glyphs, so the whole stack is swapped
-   rather than fallen back on. Markazi Text runs small next to IBM Plex Sans
-   Arabic, hence the size bump on display type. Mono keeps IBM Plex Mono for
-   figures and dates and hands Arabic words to Plex Sans Arabic. */
 [dir=rtl]{
   --display:'Markazi Text','Amiri',Georgia,serif;
   --sans:'IBM Plex Sans Arabic','IBM Plex Sans',-apple-system,'Segoe UI',sans-serif;
   --mono:'IBM Plex Mono','IBM Plex Sans Arabic',ui-monospace,SFMono-Regular,Menlo,monospace;
 }
+/* Naskh needs more leading than Latin at the same size: the descenders and the
+   dots below the baseline collide at 1.7. */
+[dir=rtl] body{line-height:1.85}
+[dir=rtl] h1,[dir=rtl] h2,[dir=rtl] h3,[dir=rtl] h4{letter-spacing:0}
+/* Markazi Text runs visibly small against IBM Plex Sans Arabic, so display
+   type is bumped a step and given the leading Arabic ascenders need. */
+[dir=rtl] .h1{font-size:clamp(2.3rem,5.4vw,4.2rem);line-height:1.24}
+[dir=rtl] .h2{font-size:clamp(1.9rem,4.2vw,3.1rem);line-height:1.32}
+[dir=rtl] .h3{line-height:1.4}
+[dir=rtl] .lede{line-height:1.85}
+[dir=rtl] .phero .h1{margin-bottom:26px}
+
+/* Tracking and small-caps are Latin devices. On Arabic, letter-spacing breaks
+   the join between letters and text-transform does nothing at all, so both
+   come off everywhere the kit sets them. */
+[dir=rtl] .eyebrow,[dir=rtl] .chip,[dir=rtl] .btn,[dir=rtl] .tlink,
+[dir=rtl] .lnk,[dir=rtl] .top-wa,[dir=rtl] .facts span,[dir=rtl] .card .n,
+[dir=rtl] .pager .pl,[dir=rtl] .foot h4,[dir=rtl] .soc-h,[dir=rtl] .rk,
+[dir=rtl] .rt,[dir=rtl] .legal,[dir=rtl] .mfoot,[dir=rtl] .mmenu a,
+[dir=rtl] .mmenu a em,[dir=rtl] .skip{
+  letter-spacing:0;text-transform:none;
+}
+
+/* Figures, prices, phone numbers and times stay left-to-right inside Arabic
+   running text. Without this, "OMR 1,023" comes out reversed and "9:47" reads
+   as "47:9".
+
+   isolate, NOT embed. Under `embed` the Latin run still takes part in the
+   surrounding reorder, so a figure at the start of a line gets thrown to the
+   far edge of its box and the Arabic closes up behind it - which is exactly
+   what happened to the four stats cells on the services page. `isolate`
+   treats the run as one neutral object sitting at its logical position. */
+[dir=rtl] .num,[dir=rtl] [dir=ltr]{direction:ltr;unicode-bidi:isolate}
+/* A figure that is the whole of a display value gets its own line box, so the
+   isolation has nothing to fight with; the cell just reads right-to-left. */
+[dir=rtl] .stats div b,[dir=rtl] .bignum,[dir=rtl] .hcount{unicode-bidi:isolate}
+
+/* An Arabic page wraps every figure in `.num` so the bidi algorithm cannot
+   reorder it. That wrapper is a <span>, and it lands INSIDE components whose
+   caption rule is an unscoped descendant selector - `.pricetag span`,
+   `.kpi span`, `.mock .mh span`, `.figs span`. Those are (0,1,1) and beat a
+   bare `.num`, so a 2.3rem price was rendering its digits at 0.85rem in
+   uppercase grey while the currency beside it stayed full size.
+   `[dir=rtl] .num` is (0,2,0) and out-specifies all of them. Everything here
+   is inherit-or-off: the figure takes the size and colour of whatever it sits
+   in, and only keeps the tabular mono face the brand book gives to numerals.
+   The English pages are untouched - they write their figures as plain text. */
+[dir=rtl] .num{
+  display:inline;margin:0;
+  font-size:inherit;line-height:inherit;color:inherit;
+  letter-spacing:0;text-transform:none;font-weight:inherit;
+}
+
+/* ------------------------------------------- article-specific RTL layer */
+/* The tokens, the type scale and the tracking kill-list above come from
+   tools/v4/rtl.py, which the core pages load too - one copy, so the article
+   header and the services header cannot end up on different Arabic faces.
+   What follows is only what an ARTICLE has and a core page does not. */
 [dir=rtl] body{line-height:1.85}
 [dir=rtl] h1,[dir=rtl] h2,[dir=rtl] h3,[dir=rtl] h4{letter-spacing:0}
 [dir=rtl] .h1,[dir=rtl] .ahero .h1{font-size:clamp(2rem,4.3vw,3.2rem);line-height:1.3}
@@ -965,3 +807,24 @@ section{position:relative;padding:clamp(74px,9vw,138px) 0}
 [dir=rtl] .fsig:hover .slogan-ar .ins::after{background:linear-gradient(90deg,var(--amber-bright),var(--amber-bright))}
 /* the beat fades away from the inline-start edge, which is the right one here */
 [dir=rtl] .fsig .sig-beat{background:linear-gradient(270deg,rgba(232,201,143,.6),rgba(232,201,143,0))}
+
+/* --------------------------------------------------- Arabic hub overrides */
+/* The hero heading is display type; Markazi Text sits smaller on the body than
+   Marcellus does, so the Latin clamp leaves it undersized. */
+[dir=rtl] .hhero .h1{font-size:clamp(2.2rem,4.6vw,3.4rem);line-height:1.28}
+[dir=rtl] .feat h2{font-size:clamp(1.5rem,2.8vw,2.2rem);line-height:1.34}
+[dir=rtl] .post h3{font-size:clamp(1.14rem,1.6vw,1.32rem);line-height:1.45}
+/* Tracked, upper-cased small text is a Latin device: on Arabic it separates
+   letters that must join and the label stops being a word. */
+[dir=rtl] .filters button,[dir=rtl] .fcount,[dir=rtl] .more,
+[dir=rtl] .feat .tagline,[dir=rtl] .feat .stamp,
+[dir=rtl] .post .kicker,[dir=rtl] .post .stamp{letter-spacing:0;text-transform:none}
+[dir=rtl] .search input{font-size:1.02rem}
+/* Deliberately NO direction:ltr on the date. blog_chrome forces LTR on .num
+   because a bare figure like "OMR 1,023" comes out reversed in Arabic, and
+   the same rule applied here looks like it should help - the day and year are
+   Western digits. It does the opposite. "18 أغسطس 2026" is not a number, it
+   is an RTL phrase with digits in it, and forcing the run LTR strands the
+   year between the day and the month: 18 2026 أغسطس. Left alone, the bidi
+   algorithm puts the day on the right and the year on the left, which is the
+   order an Arabic reader expects. */

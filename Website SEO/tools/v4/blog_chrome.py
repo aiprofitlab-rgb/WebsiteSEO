@@ -27,6 +27,7 @@ import html as _html
 from kit import (BASE_CSS, GOOGLE_G, GOOGLE_REVIEW, MAIL_ICON, SKIP_CSS, SOCIALS,
                  STAR, STAR_SVG, TOKENS, WA, WA_ICON, WA_SMALL, _socials)
 from article_kit import ARTICLE_CSS
+from rtl import RTL_BASE
 
 # --------------------------------------------------------------------------
 # Where the chrome points. One table, both languages.
@@ -41,8 +42,8 @@ URLS = {
     "ar": {
         "home": "/ar/", "services": "/services/", "process": "/process/",
         "about": "/about/", "contact": "/contact/", "blog": "/blog-ar/",
-        "privacy": "/privacy/", "other": "/", "sim": "/missed-call-simulator-ar/",
-        "demo": "/whatsapp-receptionist-demo-ar/", "dash": "/customized-ceo-dashboard-demo-ar/",
+        "privacy": "/privacy/", "other": "/", "sim": "/simulators-ar/",
+        "demo": "/demos-ar/", "dash": "/demos-ar/#dash",
     },
 }
 
@@ -88,9 +89,12 @@ T = {
                    "August", "September", "October", "November", "December"],
     },
     "ar": {
-        "nav": [("الرئيسية", "home", "٠١"), ("باقاتنا", "services", "٠٢"),
-                ("طريقتنا", "process", "٠٣"), ("من نحن", "about", "٠٤"),
-                ("اتصل بنا", "contact", "٠٥"), ("المقالات", "blog", "٠٦")],
+        # Kept identical to kit.NAV_AR - an article header and a core-page
+        # header are the same component and must name the same pages the same
+        # way. First person singular, for the reason given there.
+        "nav": [("الرئيسية", "home", "٠١"), ("ما أبنيه", "services", "٠٢"),
+                ("طريقة العمل", "process", "٠٣"), ("من أنا", "about", "٠٤"),
+                ("تواصل معي", "contact", "٠٥"), ("المقالات", "blog", "٠٦")],
         "other_lang": "English", "whatsapp": "واتساب",
         "skip": "تخطَّ إلى المحتوى", "menu": "فتح القائمة",
         "crumb_home": "الرئيسية", "crumb_blog": "المقالات", "article": "مقال",
@@ -114,13 +118,13 @@ T = {
                   "%20%D9%88%D9%84%D8%AF%D9%8A%20%D8%B3%D8%A4%D8%A7%D9%84.",
         "wa_intro": "%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%D8%8C%20%D9%84%D8%AF%D9%8A%20"
                     "%D8%B3%D8%A4%D8%A7%D9%84%20%D8%B9%D9%86%20%D8%B9%D9%85%D9%84%D9%8A.",
-        "f_work": "ما نقدّمه", "f_talk": "تواصل معنا",
-        "f_links": [("باقاتنا", "services"), ("طريقتنا", "process"),
-                    ("المقالات", "blog"), ("حاسبة الفرص الضائعة", "sim"),
+        "f_work": "ما أقدّمه", "f_talk": "تواصل معي",
+        "f_links": [("ما أبنيه", "services"), ("طريقة العمل", "process"),
+                    ("المقالات", "blog"), ("حاسبة الإيرادات الضائعة", "sim"),
                     ("تجربة واتساب", "demo"), ("تجربة لوحة المتابعة", "dash")],
-        "f_direct": [("صفحة التواصل", "contact"), ("من نحن", "about"), ("الخصوصية", "privacy")],
-        "review_k": "تعاملت معنا؟", "review_t": "اترك تقييماً على خرائط جوجل",
-        "follow": "تابع أعمالنا",
+        "f_direct": [("صفحة التواصل", "contact"), ("عن ناهد", "about"), ("الخصوصية", "privacy")],
+        "review_k": "تعاملت معي؟", "review_t": "اترك تقييماً على خرائط جوجل",
+        "follow": "تابع العمل",
         "slogan": 'كل نجاح يبدأ <span class="ins">برؤية</span>',
         "legal": ('&copy; 2026 AI Profit Lab &mdash; علامة تجارية تابعة لشركة Lotus Gulf International '
                   '(س.ت <span dir="ltr">1570092</span>)<br>الخوير الجنوبية، بوشر، مسقط، سلطنة عُمان '
@@ -212,21 +216,12 @@ MIGRATED_CSS = """
 .ahero .h1{font-size:clamp(1.85rem,3.9vw,3rem)}
 """
 
-RTL_CSS = """
-/* --------------------------------------------------------------- Arabic */
-/* Scoped to [dir=rtl] rather than shipped as a second file: one stylesheet
-   serves all 300 articles in both languages, which means one cache entry
-   instead of two and no chance of the pair drifting apart.
-
-   Latin display faces have no Arabic glyphs, so the whole stack is swapped
-   rather than fallen back on. Markazi Text runs small next to IBM Plex Sans
-   Arabic, hence the size bump on display type. Mono keeps IBM Plex Mono for
-   figures and dates and hands Arabic words to Plex Sans Arabic. */
-[dir=rtl]{
-  --display:'Markazi Text','Amiri',Georgia,serif;
-  --sans:'IBM Plex Sans Arabic','IBM Plex Sans',-apple-system,'Segoe UI',sans-serif;
-  --mono:'IBM Plex Mono','IBM Plex Sans Arabic',ui-monospace,SFMono-Regular,Menlo,monospace;
-}
+RTL_CSS = RTL_BASE + """
+/* ------------------------------------------- article-specific RTL layer */
+/* The tokens, the type scale and the tracking kill-list above come from
+   tools/v4/rtl.py, which the core pages load too - one copy, so the article
+   header and the services header cannot end up on different Arabic faces.
+   What follows is only what an ARTICLE has and a core page does not. */
 [dir=rtl] body{line-height:1.85}
 [dir=rtl] h1,[dir=rtl] h2,[dir=rtl] h3,[dir=rtl] h4{letter-spacing:0}
 [dir=rtl] .h1,[dir=rtl] .ahero .h1{font-size:clamp(2rem,4.3vw,3.2rem);line-height:1.3}

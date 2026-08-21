@@ -128,7 +128,7 @@ CSS = """
 }
 """
 
-JS = r"""
+JS_TPL = r"""
 /* ---------------------------------------------------------------------------
    Two simulators, one engine.
 
@@ -143,13 +143,14 @@ JS = r"""
 (function(){
   "use strict";
   var WEEKS = 4.33;
-  var omr = function(n){ return "OMR " + Math.round(n).toLocaleString("en-US"); };
+  var T = __WORDS__;
+  var omr = function(n){ return T.cur.replace("#", Math.round(n).toLocaleString("en-US")); };
   var pct = function(n){ return n + "%"; };
 
   var TOOLS = {
     A: {
       cost: 950,
-      costLabel: "Smart Website, once",
+      costLabel: T.costA,
       fields: {
         a1: {fmt: String},
         a2: {fmt: pct},
@@ -160,49 +161,49 @@ JS = r"""
          those you would have won -> the order they were worth */
       calc: function(v){ return v.a1 * WEEKS * (v.a2/100) * (v.a3/100) * v.a4; },
       chain: function(v){ return [
-        [v.a1 + " a week", "inquiries"],
-        [WEEKS.toFixed(2), "weeks/month"],
-        [pct(v.a2), "after hours"],
-        [pct(v.a3), "you win"],
-        [omr(v.a4), "per order"]
+        [v.a1 + T.aWeek, T.inquiries],
+        [WEEKS.toFixed(2), T.weeksMonth],
+        [pct(v.a2), T.afterHours],
+        [pct(v.a3), T.youWin],
+        [omr(v.a4), T.perOrder]
       ]; },
       wa: function(v, out){
-        return "Hello Nahid — I ran the silence simulator.\n\n" +
-          "Inquiries a week: " + v.a1 + "\n" +
-          "Arriving after hours: " + pct(v.a2) + "\n" +
-          "Win rate when answered: " + pct(v.a3) + "\n" +
-          "Average order: " + omr(v.a4) + "\n\n" +
-          "It puts " + omr(out.monthly) + " a month at stake" +
-          (out.days ? ", and payback at " + out.days + " days." : ".") +
-          "\n\nCan we talk about it?";
+        return T.waA1 +
+          T.waQWeek + v.a1 + "\n" +
+          T.waQAfter + pct(v.a2) + "\n" +
+          T.waQWin + pct(v.a3) + "\n" +
+          T.waQOrder + omr(v.a4) + "\n\n" +
+          T.waA2.replace("#", omr(out.monthly)) +
+          (out.days ? T.waPay.replace("#", out.days) : ".") +
+          T.waTalk;
       }
     },
     B: {
       cost: 900,
-      costLabel: "Full Autopilot, once",
+      costLabel: T.costB,
       fields: {
         b1: {fmt: String},
-        b2: {fmt: function(n){ return n + " h"; }},
-        b3: {fmt: function(n){ return "OMR " + n; }},
+        b2: {fmt: function(n){ return n + T.hShort; }},
+        b3: {fmt: function(n){ return T.cur.replace("#", n); }},
         b4: {fmt: pct}
       },
       calc: function(v){ return v.b1 * v.b2 * WEEKS * v.b3 * (v.b4/100); },
       chain: function(v){ return [
-        [v.b1 + (v.b1 === 1 ? " person" : " people"), "re-typing"],
-        [v.b2 + " h a week", "each"],
-        [WEEKS.toFixed(2), "weeks/month"],
-        ["OMR " + v.b3, "an hour"],
-        [pct(v.b4), "automatable"]
+        [v.b1 + (v.b1 === 1 ? T.person : T.people), T.reTyping],
+        [v.b2 + T.hWeek, T.each],
+        [WEEKS.toFixed(2), T.weeksMonth],
+        [T.cur.replace("#", v.b3), T.anHour],
+        [pct(v.b4), T.automatable]
       ]; },
       wa: function(v, out){
-        return "Hello Nahid — I ran the re-typing simulator.\n\n" +
-          "People doing it: " + v.b1 + "\n" +
-          "Hours each a week: " + v.b2 + "\n" +
-          "Loaded cost an hour: OMR " + v.b3 + "\n" +
-          "Share that is mechanical: " + pct(v.b4) + "\n\n" +
-          "It puts " + omr(out.monthly) + " a month into work nobody bills for" +
-          (out.days ? ", with payback at " + out.days + " days." : ".") +
-          "\n\nCan we talk about it?";
+        return T.waB1 +
+          T.waBPeople + v.b1 + "\n" +
+          T.waBHours + v.b2 + "\n" +
+          T.waBRate + T.cur.replace("#", v.b3) + "\n" +
+          T.waBShare + pct(v.b4) + "\n\n" +
+          T.waB2.replace("#", omr(out.monthly)) +
+          (out.days ? T.waPay.replace("#", out.days) : ".") +
+          T.waTalk;
       }
     }
   };
@@ -236,7 +237,9 @@ JS = r"""
       if (crossed < 0 && cum >= cost && cost > 0) crossed = i;
       var hit = (was < 0 && crossed === i);
       var h = Math.max(1, (cum / max) * (H - padB - padT));
-      var x = i * bw, y = H - padB - h;
+      /* On an Arabic page month 1 belongs on the right: the bars accumulate
+         away from the reader's starting edge, same as the page does. */
+      var x = T.rtl ? W - (i + 1) * bw : i * bw, y = H - padB - h;
       svg.appendChild(el("rect", {
         x: x + gap/2, y: y, width: bw - gap, height: h, rx: 4,
         fill: hit ? "#D89234" : (crossed >= 0 ? "rgba(241,239,232,.22)" : "rgba(241,239,232,.13)")
@@ -256,9 +259,10 @@ JS = r"""
     marks.forEach(function(m){
       if (seen[m[0]] && m[1] !== "#D89234") return;
       seen[m[0]] = 1;
-      var t = el("text", {x: m[0] * bw + bw/2, y: H - 9, "text-anchor": "middle",
+      var mx = T.rtl ? W - (m[0] + 1) * bw + bw/2 : m[0] * bw + bw/2;
+      var t = el("text", {x: mx, y: H - 9, "text-anchor": "middle",
         fill: m[1], "font-family": "IBM Plex Mono, monospace", "font-size": "11"});
-      t.textContent = "M" + (m[0] + 1);
+      t.textContent = T.month + (m[0] + 1);
       svg.appendChild(t);
     });
 
@@ -306,7 +310,7 @@ JS = r"""
       out.annual.textContent = omr(monthly * 12);
       out.daily.textContent = omr(perDay);
       out.payback.textContent = !days ? "—"
-        : days <= 1 ? "1 day" : days < 400 ? days + " days" : "over a year";
+        : days <= 1 ? T.day1 : days < 400 ? days + T.days : T.overYear;
 
       out.chain.innerHTML = "";
       tool.chain(v).forEach(function(pair, i){
@@ -362,6 +366,73 @@ JS = r"""
   });
 })();
 """
+
+
+# --------------------------------------------------------------------------
+# The strings the engine above reads. "#" is the slot a figure drops into -
+# a placeholder rather than concatenation, because Arabic puts the currency
+# after the number and the English puts it before, and a sentence like "it
+# puts X a month at stake" does not survive being glued together in order.
+# --------------------------------------------------------------------------
+WORDS = {
+    "en": {
+        "rtl": False,
+        "cur": "OMR #",
+        "costA": "Smart Website, once", "costB": "Full Autopilot, once",
+        "aWeek": " a week", "inquiries": "inquiries", "weeksMonth": "weeks/month",
+        "afterHours": "after hours", "youWin": "you win", "perOrder": "per order",
+        "hShort": " h", "hWeek": " h a week", "each": "each",
+        "person": " person", "people": " people", "reTyping": "re-typing",
+        "anHour": "an hour", "automatable": "automatable",
+        "day1": "1 day", "days": " days", "overYear": "over a year", "month": "M",
+        "waA1": "Hello Nahid \u2014 I ran the silence simulator.\n\n",
+        "waQWeek": "Inquiries a week: ", "waQAfter": "Arriving after hours: ",
+        "waQWin": "Win rate when answered: ", "waQOrder": "Average order: ",
+        "waA2": "It puts # a month at stake",
+        "waB1": "Hello Nahid \u2014 I ran the re-typing simulator.\n\n",
+        "waBPeople": "People doing it: ", "waBHours": "Hours each a week: ",
+        "waBRate": "Loaded cost an hour: ", "waBShare": "Share that is mechanical: ",
+        "waB2": "It puts # a month into work nobody bills for",
+        "waPay": ", and payback at # days.",
+        "waTalk": "\n\nCan we talk about it?",
+    },
+    "ar": {
+        "rtl": True,
+        "cur": "# \u0631.\u0639.",
+        "costA": "\u0627\u0644\u0645\u0648\u0642\u0639 \u0627\u0644\u0630\u0643\u064a\u060c \u0645\u0631\u0629 \u0648\u0627\u062d\u062f\u0629",
+        "costB": "\u0627\u0644\u0637\u064a\u0627\u0631 \u0627\u0644\u0622\u0644\u064a \u0627\u0644\u0643\u0627\u0645\u0644\u060c \u0645\u0631\u0629 \u0648\u0627\u062d\u062f\u0629",
+        "aWeek": " \u0623\u0633\u0628\u0648\u0639\u064a\u0627\u064b", "inquiries": "\u0627\u0633\u062a\u0641\u0633\u0627\u0631\u0627\u062a",
+        "weeksMonth": "\u0623\u0633\u0627\u0628\u064a\u0639/\u0634\u0647\u0631", "afterHours": "\u0628\u0639\u062f \u0627\u0644\u062f\u0648\u0627\u0645",
+        "youWin": "\u062a\u0643\u0633\u0628\u0647\u0627", "perOrder": "\u0644\u0644\u0637\u0644\u0628 \u0627\u0644\u0648\u0627\u062d\u062f",
+        "hShort": " \u0633", "hWeek": " \u0633 \u0623\u0633\u0628\u0648\u0639\u064a\u0627\u064b", "each": "\u0644\u0643\u0644 \u0648\u0627\u062d\u062f",
+        "person": " \u0634\u062e\u0635", "people": " \u0623\u0634\u062e\u0627\u0635", "reTyping": "\u064a\u0639\u064a\u062f\u0648\u0646 \u0627\u0644\u0625\u062f\u062e\u0627\u0644",
+        "anHour": "\u0644\u0644\u0633\u0627\u0639\u0629", "automatable": "\u0642\u0627\u0628\u0644 \u0644\u0644\u0623\u062a\u0645\u062a\u0629",
+        "day1": "\u064a\u0648\u0645 \u0648\u0627\u062d\u062f", "days": " \u064a\u0648\u0645\u0627\u064b",
+        "overYear": "\u0623\u0643\u062b\u0631 \u0645\u0646 \u0633\u0646\u0629", "month": "\u0634",
+        "waA1": "\u0645\u0631\u062d\u0628\u0627\u064b \u0646\u0627\u0647\u062f \u2014 \u062c\u0631\u0651\u0628\u062a \u062d\u0627\u0633\u0628\u0629 \u0627\u0644\u0635\u0645\u062a.\n\n",
+        "waQWeek": "\u0627\u0644\u0627\u0633\u062a\u0641\u0633\u0627\u0631\u0627\u062a \u0623\u0633\u0628\u0648\u0639\u064a\u0627\u064b: ",
+        "waQAfter": "\u0645\u0627 \u064a\u0635\u0644 \u0628\u0639\u062f \u0627\u0644\u062f\u0648\u0627\u0645: ",
+        "waQWin": "\u0646\u0633\u0628\u0629 \u0627\u0644\u0643\u0633\u0628 \u0628\u0639\u062f \u0627\u0644\u0631\u062f: ",
+        "waQOrder": "\u0645\u062a\u0648\u0633\u0637 \u0627\u0644\u0637\u0644\u0628: ",
+        "waA2": "\u064a\u0636\u0639 \u0630\u0644\u0643 # \u0634\u0647\u0631\u064a\u0627\u064b \u0639\u0644\u0649 \u0627\u0644\u0645\u062d\u0643\u0651",
+        "waB1": "\u0645\u0631\u062d\u0628\u0627\u064b \u0646\u0627\u0647\u062f \u2014 \u062c\u0631\u0651\u0628\u062a \u062d\u0627\u0633\u0628\u0629 \u0625\u0639\u0627\u062f\u0629 \u0627\u0644\u0625\u062f\u062e\u0627\u0644.\n\n",
+        "waBPeople": "\u0639\u062f\u062f \u0645\u0646 \u064a\u0642\u0648\u0645 \u0628\u0647: ",
+        "waBHours": "\u0633\u0627\u0639\u0627\u062a \u0643\u0644 \u0648\u0627\u062d\u062f \u0623\u0633\u0628\u0648\u0639\u064a\u0627\u064b: ",
+        "waBRate": "\u0627\u0644\u062a\u0643\u0644\u0641\u0629 \u0627\u0644\u0645\u062d\u0645\u0651\u0644\u0629 \u0644\u0644\u0633\u0627\u0639\u0629: ",
+        "waBShare": "\u0627\u0644\u062c\u0632\u0621 \u0627\u0644\u0645\u064a\u0643\u0627\u0646\u064a\u0643\u064a \u0645\u0646\u0647: ",
+        "waB2": "\u064a\u0636\u0639 \u0630\u0644\u0643 # \u0634\u0647\u0631\u064a\u0627\u064b \u0641\u064a \u0639\u0645\u0644 \u0644\u0627 \u064a\u062d\u0627\u0633\u0628 \u0639\u0644\u064a\u0647 \u0623\u062d\u062f",
+        "waPay": "\u060c \u0648\u062a\u0633\u062f\u064a\u062f \u0627\u0644\u062a\u0643\u0644\u0641\u0629 \u0641\u064a # \u064a\u0648\u0645\u0627\u064b.",
+        "waTalk": "\n\n\u0647\u0644 \u0646\u062a\u062d\u062f\u0651\u062b \u0639\u0646 \u0630\u0644\u0643\u061f",
+    },
+}
+
+
+def js(lang="en"):
+    import json
+    return JS_TPL.replace("__WORDS__", json.dumps(WORDS[lang], ensure_ascii=False))
+
+
+JS = js("en")
 
 
 def _field(fid, label, mn, mx, step, val, out):

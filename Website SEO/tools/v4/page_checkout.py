@@ -612,7 +612,7 @@ def body():
 """
 
 
-JS = r"""
+JS_TPL = r"""
 /* ---------------------------------------------------------------------------
    Checkout engine.
 
@@ -635,6 +635,12 @@ JS = r"""
   var CFG;
   try { CFG = JSON.parse(cfgEl.textContent); } catch(e){ return; }
 
+  /* Every user-visible string, so one engine serves both languages. "#" is
+     the slot a value drops into: Arabic puts the currency after the figure
+     and English before it, and none of these sentences survive being glued
+     together in a fixed order. */
+  var T = __WORDS__;
+
   var $ = function(id){ return document.getElementById(id); };
 
   /* ------------------------------------------------------------- money --- */
@@ -644,7 +650,7 @@ JS = r"""
     if (r) s += "." + ("00" + r).slice(-3);
     return s;
   }
-  function money(b){ return CFG.currency + " " + omr(b); }
+  function money(b){ return T.cur.replace("#", omr(b)); }
 
   function planById(id){
     for (var i = 0; i < CFG.plans.length; i++) if (CFG.plans[i].id === id) return CFG.plans[i];
@@ -748,43 +754,40 @@ JS = r"""
       lines.appendChild(li((i ? "+ " : "") + q.build[i].name, money(q.build[i].price)));
     }
     if (q.saving > 0){
-      lines.appendChild(li(CFG.bundle.name + " — priced as one build", "−" + money(q.saving), "save"));
+      lines.appendChild(li(T.bundleLine.replace("#", CFG.bundle.name), "−" + money(q.saving), "save"));
     }
     if (q.surcharge > 0){
       lines.appendChild(li(
-        q.plan.id === "three" ? "Paying in three" : "Paying only on proof",
+        q.plan.id === "three" ? T.payThree : T.payProof,
         "+" + money(q.surcharge)));
     }
-    lines.appendChild(li("Total", money(q.total), "total"));
+    lines.appendChild(li(T.total, money(q.total), "total"));
     for (i = 0; i < q.monthly.length; i++){
-      lines.appendChild(li(q.monthly[i].name, money(q.monthly[i].price) + "/mo", "later",
-        "From the month after go-live. Not charged today, cancel any month."));
+      lines.appendChild(li(q.monthly[i].name, T.perMonth.replace("#", money(q.monthly[i].price)), "later",
+        T.monthlyNote));
     }
 
     /* ---- the number that matters ---- */
     dueVal.textContent = money(q.due);
     if (barVal) barVal.textContent = money(q.due);
-    var key = q.plan.due === "zero" ? "Due today" : "Due today";
+    var key = T.dueToday;
     dueKey.textContent = key;
     if (barKey) barKey.textContent = key;
 
     /* ---- and what happens to the rest of it ---- */
     var then;
     if (q.plan.due === "zero"){
-      then = "Nothing is charged now. The full " + money(q.total) + " is invoiced only after your site "
-           + "has produced its first real, verifiable buyer inquiry — and if it never does, it is "
-           + "never invoiced.";
+      then = T.thenZero.replace("#", money(q.total));
     } else if (q.plan.split > 1){
-      then = "Then " + money(q.later) + " when it goes live, and " + money(q.later)
-           + " thirty days after that. " + money(q.total) + " in total, and nothing after it.";
+      then = T.thenSplit.replace("#1", money(q.later)).replace("#2", money(q.later))
+                        .replace("#3", money(q.total));
     } else if (q.balance > 0){
-      then = "The remaining " + money(q.balance) + " is invoiced once your brief is confirmed. Your "
-           + money(q.due) + " comes off it — it is a deposit, not a fee.";
+      then = T.thenBalance.replace("#1", money(q.balance)).replace("#2", money(q.due));
     } else {
-      then = "That is the whole build, paid once. No monthly fee is required to keep any of it running.";
+      then = T.thenWhole;
     }
     if (q.monthly.length){
-      then += " " + q.monthly[0].name + " starts separately, the month after go-live.";
+      then += " " + T.monthlyStarts.replace("#", q.monthly[0].name);
     }
     thenP.textContent = then;
 
@@ -793,7 +796,7 @@ JS = r"""
       var p = CFG.plans[i], tag = form.querySelector('[data-planfig="' + p.id + '"]');
       if (!tag) continue;
       var pq = quote(sel, p.id);
-      tag.textContent = p.due === "zero" ? "Nothing today" : money(pq.due) + " today";
+      tag.textContent = p.due === "zero" ? T.nothingToday : T.todayFig.replace("#", money(pq.due));
     }
 
     if (bundleNote) bundleNote.classList.toggle("on", q.bundled);
@@ -801,16 +804,15 @@ JS = r"""
     /* ---- the button says what will actually happen ---- */
     var canCard = CFG.live && CFG.api && q.plan.card;
     if (canCard){
-      payLabel.textContent = "Pay " + money(q.due) + " securely";
-      if (barBtn) barBtn.textContent = "Pay " + money(q.due);
+      payLabel.textContent = T.payNow.replace("#", money(q.due));
+      if (barBtn) barBtn.textContent = T.payNowShort.replace("#", money(q.due));
     } else if (CFG.live && !q.plan.card){
-      payLabel.textContent = "Send my order";
-      if (barBtn) barBtn.textContent = "Send order";
-      payUnder.innerHTML = "Nothing is charged on Pay on Proof terms. I confirm the order and the "
-        + "agreement follows — the invoice only comes after your first real inquiry.";
+      payLabel.textContent = T.sendOrder;
+      if (barBtn) barBtn.textContent = T.sendOrderShort;
+      payUnder.innerHTML = T.proofUnder;
     } else {
-      payLabel.textContent = "Reserve my slot";
-      if (barBtn) barBtn.textContent = "Reserve";
+      payLabel.textContent = T.reserve;
+      if (barBtn) barBtn.textContent = T.reserveShort;
     }
 
     save(sel, q);
@@ -882,12 +884,12 @@ JS = r"""
     var ok = true, first = null, i;
     for (i = 0; i < REQUIRED.length; i++){
       var nm = REQUIRED[i], v = (form.elements[nm].value || "").trim();
-      var msg = v ? "" : "I need this one.";
+      var msg = v ? "" : T.errRequired;
       if (!msg && nm === "email" && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v)){
-        msg = "That address does not look complete.";
+        msg = T.errEmail;
       }
       if (!msg && nm === "whatsapp" && v.replace(/[^\d]/g, "").length < 8){
-        msg = "A number I can actually reach you on, please.";
+        msg = T.errPhone;
       }
       if (msg){ ok = false; first = first || form.elements[nm]; }
       fieldErr(nm, msg);
@@ -895,14 +897,13 @@ JS = r"""
     var box = $("formErr");
     if (!form.elements.agree.checked){
       ok = false;
-      box.textContent = "Please confirm you have read the terms and the refund policy — it is the "
-                      + "one box I cannot tick for you.";
+      box.textContent = T.errAgree;
       box.classList.add("on");
       first = first || form.elements.agree;
     } else if (ok){
       box.classList.remove("on");
     } else {
-      box.textContent = "A few details are missing below.";
+      box.textContent = T.errSome;
       box.classList.add("on");
     }
     if (first){
@@ -943,24 +944,24 @@ JS = r"""
   }
 
   function summaryText(q){
-    var out = ["Hello Nahid — here is my order.", "", "Reference: " + reference(), ""];
+    var out = [T.waHead, "", T.waRef + reference(), ""];
     for (var i = 0; i < q.build.length; i++){
       out.push("• " + q.build[i].name + " — " + money(q.build[i].price));
     }
-    if (q.saving > 0) out.push("• " + CFG.bundle.name + " — " + money(q.saving) + " off the parts");
-    if (q.surcharge > 0) out.push("• " + q.plan.label + " — adds " + money(q.surcharge));
+    if (q.saving > 0) out.push("• " + CFG.bundle.name + " — " + T.waSaving.replace("#", money(q.saving)));
+    if (q.surcharge > 0) out.push("• " + q.plan.label + " — " + T.waAdds.replace("#", money(q.surcharge)));
     for (i = 0; i < q.monthly.length; i++){
-      out.push("• " + q.monthly[i].name + " — " + money(q.monthly[i].price) + "/month from go-live");
+      out.push("• " + q.monthly[i].name + " — " + T.waMonthly.replace("#", money(q.monthly[i].price)));
     }
-    out.push("", "Total: " + money(q.total));
-    out.push(q.plan.due === "zero" ? "Terms: " + q.plan.label + ", nothing due now"
-                                   : "Due now: " + money(q.due) + " (" + q.plan.label + ")");
+    out.push("", T.waTotal + money(q.total));
+    out.push(q.plan.due === "zero" ? T.waTerms + q.plan.label + T.waNothingDue
+                                   : T.waDueNow + money(q.due) + " (" + q.plan.label + ")");
     var g = function(n){ return (form.elements[n].value || "").trim(); };
-    out.push("", "Name: " + g("name"), "Business: " + g("business"), "Email: " + g("email"),
-             "WhatsApp: " + g("whatsapp"));
-    if (g("cr")) out.push("CR: " + g("cr"));
-    if (g("city")) out.push("City: " + g("city"));
-    if (g("notes")) out.push("", "Notes: " + g("notes"));
+    out.push("", T.waName + g("name"), T.waBusiness + g("business"), T.waEmail + g("email"),
+             T.waWhatsapp + g("whatsapp"));
+    if (g("cr")) out.push(T.waCr + g("cr"));
+    if (g("city")) out.push(T.waCity + g("city"));
+    if (g("notes")) out.push("", T.waNotes + g("notes"));
     return out.join("\n");
   }
 
@@ -971,7 +972,7 @@ JS = r"""
     if (why) $("offlineWhy").textContent = why;
     var text = summaryText(q);
     $("offlineWa").href = "https://api.whatsapp.com/send?phone=96899245250&text=" + encodeURIComponent(text);
-    $("offlineMail").href = "mailto:hello@aiprofitlab.io?subject=" + encodeURIComponent("Order " + reference())
+    $("offlineMail").href = "mailto:hello@aiprofitlab.io?subject=" + encodeURIComponent(T.mailSubject + reference())
                           + "&body=" + encodeURIComponent(text);
     panel.classList.add("on");
     panel.scrollIntoView({block: "nearest", behavior: "smooth"});
@@ -992,7 +993,7 @@ JS = r"""
     if (!canCard){ offline(q, null); return; }
 
     btn.setAttribute("aria-busy", "true");
-    $("payLabel").textContent = "Opening secure payment…";
+    $("payLabel").textContent = T.opening;
 
     /* One attempt, settled exactly once - by the response, by a refusal, or by
        the timeout, whichever gets there first.
@@ -1012,13 +1013,12 @@ JS = r"""
     function abandon(why){
       btn.removeAttribute("aria-busy");
       render();
-      offline(q, "The card payment could not be started (" + why + "), so nothing was charged. "
-               + "Send the order across instead and I will follow it up with a payment link.");
+      offline(q, T.abandon.replace("#", why));
     }
 
     var give_up = setTimeout(function(){
       if (!settle()) return;
-      abandon("the gateway did not answer in time");
+      abandon(T.errTimeout);
     }, 15000);
 
     fetch(CFG.api + "/session", {
@@ -1038,10 +1038,10 @@ JS = r"""
         location.href = res.body.redirect_url;
         return;
       }
-      abandon((res.body && res.body.message) || "the gateway refused the order");
+      abandon((res.body && res.body.message) || T.errRefused);
     }).catch(function(err){
       if (!settle()) return;
-      abandon(err && err.message ? err.message : "unknown error");
+      abandon(err && err.message ? err.message : T.errUnknown);
     });
   });
 
@@ -1079,6 +1079,101 @@ JS = r"""
   render();
 })();
 """
+
+
+# --------------------------------------------------------------------------
+# Every user-visible string in the checkout engine, both languages.
+# "#" (or #1/#2/#3) marks where a formatted figure drops in.
+# --------------------------------------------------------------------------
+WORDS = {
+    "en": {
+        "cur": "OMR #",
+        "bundleLine": "# — priced as one build",
+        "payThree": "Paying in three", "payProof": "Paying only on proof",
+        "total": "Total", "perMonth": "#/mo",
+        "monthlyNote": "From the month after go-live. Not charged today, cancel any month.",
+        "dueToday": "Due today",
+        "thenZero": ("Nothing is charged now. The full # is invoiced only after your site has produced "
+                     "its first real, verifiable buyer inquiry — and if it never does, it is never invoiced."),
+        "thenSplit": "Then #1 when it goes live, and #2 thirty days after that. #3 in total, and nothing after it.",
+        "thenBalance": ("The remaining #1 is invoiced once your brief is confirmed. "
+                        "Your #2 comes off it — it is a deposit, not a fee."),
+        "thenWhole": "That is the whole build, paid once. No monthly fee is required to keep any of it running.",
+        "monthlyStarts": "# starts separately, the month after go-live.",
+        "nothingToday": "Nothing today", "todayFig": "# today",
+        "payNow": "Pay # securely", "payNowShort": "Pay #",
+        "sendOrder": "Send my order", "sendOrderShort": "Send order",
+        "proofUnder": ("Nothing is charged on Pay on Proof terms. I confirm the order and the agreement "
+                       "follows — the invoice only comes after your first real inquiry."),
+        "reserve": "Reserve my slot", "reserveShort": "Reserve",
+        "errRequired": "I need this one.",
+        "errEmail": "That address does not look complete.",
+        "errPhone": "A number I can actually reach you on, please.",
+        "errAgree": ("Please confirm you have read the terms and the refund policy — it is the "
+                     "one box I cannot tick for you."),
+        "errSome": "A few details are missing below.",
+        "waHead": "Hello Nahid — here is my order.", "waRef": "Reference: ",
+        "waSaving": "# off the parts", "waAdds": "adds #", "waMonthly": "#/month from go-live",
+        "waTotal": "Total: ", "waTerms": "Terms: ", "waNothingDue": ", nothing due now",
+        "waDueNow": "Due now: ", "waName": "Name: ", "waBusiness": "Business: ",
+        "waEmail": "Email: ", "waWhatsapp": "WhatsApp: ", "waCr": "CR: ",
+        "waCity": "City: ", "waNotes": "Notes: ",
+        "mailSubject": "Order ", "opening": "Opening secure payment…",
+        "abandon": ("The card payment could not be started (#), so nothing was charged. "
+                    "Send the order across instead and I will follow it up with a payment link."),
+        "errTimeout": "the gateway did not answer in time",
+        "errRefused": "the gateway refused the order",
+        "errUnknown": "unknown error",
+    },
+    "ar": {
+        "cur": "# ر.ع.",
+        "bundleLine": "# — بسعر بناء واحد",
+        "payThree": "الدفع على ثلاث دفعات", "payProof": "الدفع عند الإثبات فقط",
+        "total": "الإجمالي", "perMonth": "#/شهرياً",
+        "monthlyNote": "يبدأ من الشهر التالي للإطلاق. غير محتسب اليوم، ويُلغى في أي شهر.",
+        "dueToday": "المستحق اليوم",
+        "thenZero": ("لا يُحتسب شيء الآن. المبلغ كاملاً # يُفوتر فقط بعد أن ينتج موقعك أول استفسار "
+                     "حقيقي وقابل للتحقق من مشترٍ — وإن لم ينتجه أبداً، فلن يُفوتر أبداً."),
+        "thenSplit": "ثم #1 عند الإطلاق، و#2 بعد ثلاثين يوماً من ذلك. #3 إجمالاً، ولا شيء بعدها.",
+        "thenBalance": ("المتبقي #1 يُفوتر بعد تأكيد ملخّص طلبك. "
+                        "و#2 التي دفعتها تُخصم منه — فهي عربون لا رسم."),
+        "thenWhole": "هذا هو البناء كاملاً، مدفوعاً مرة واحدة. ولا رسم شهري مطلوب لإبقاء أي منه يعمل.",
+        "monthlyStarts": "# يبدأ على حدة، في الشهر التالي للإطلاق.",
+        "nothingToday": "لا شيء اليوم", "todayFig": "# اليوم",
+        "payNow": "ادفع # بأمان", "payNowShort": "ادفع #",
+        "sendOrder": "أرسل طلبي", "sendOrderShort": "أرسل الطلب",
+        "proofUnder": ("لا يُحتسب شيء بصيغة الدفع عند الإثبات. أؤكّد الطلب ويتبعه الاتفاق — "
+                       "والفاتورة لا تأتي إلا بعد أول استفسار حقيقي يصلك."),
+        "reserve": "احجز موعدي", "reserveShort": "احجز",
+        "errRequired": "أحتاج هذه الخانة.",
+        "errEmail": "هذا العنوان لا يبدو مكتملاً.",
+        "errPhone": "رقم أستطيع الوصول إليك عليه فعلاً، من فضلك.",
+        "errAgree": ("يرجى تأكيد اطّلاعك على الشروط وسياسة الاسترداد — وهي الخانة الوحيدة "
+                     "التي لا أستطيع تعليمها نيابةً عنك."),
+        "errSome": "بعض البيانات ناقصة في الأسفل.",
+        "waHead": "مرحباً ناهد — هذا طلبي.", "waRef": "الرقم المرجعي: ",
+        "waSaving": "# خصماً عن مجموع الأجزاء", "waAdds": "يضيف #",
+        "waMonthly": "#/شهرياً من تاريخ الإطلاق",
+        "waTotal": "الإجمالي: ", "waTerms": "الصيغة: ", "waNothingDue": "، لا مستحق الآن",
+        "waDueNow": "المستحق الآن: ", "waName": "الاسم: ", "waBusiness": "النشاط: ",
+        "waEmail": "البريد: ", "waWhatsapp": "واتساب: ", "waCr": "س.ت: ",
+        "waCity": "المدينة: ", "waNotes": "ملاحظات: ",
+        "mailSubject": "طلب ", "opening": "جارٍ فتح صفحة الدفع الآمن…",
+        "abandon": ("تعذّر بدء الدفع بالبطاقة (#)، فلم يُحتسب شيء. "
+                    "أرسل الطلب بدلاً من ذلك وسأتابعه معك برابط دفع."),
+        "errTimeout": "لم تستجب بوابة الدفع في الوقت المحدد",
+        "errRefused": "رفضت بوابة الدفع الطلب",
+        "errUnknown": "خطأ غير معروف",
+    },
+}
+
+
+def js(lang="en"):
+    import json
+    return JS_TPL.replace("__WORDS__", json.dumps(WORDS[lang], ensure_ascii=False))
+
+
+JS = js("en")
 
 
 META = dict(

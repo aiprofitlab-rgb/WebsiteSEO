@@ -1,13 +1,21 @@
 #!/usr/bin/env python3
 """
-Build the v4 page set into public_html/en/.
+Build the v4 page set, in both languages.
 
-    python3 tools/build_v4.py            # build every page
-    python3 tools/build_v4.py index-v4   # build one
+    python3 tools/build_v4.py                # every page, English and Arabic
+    python3 tools/build_v4.py services       # that page in both languages
+    python3 tools/build_v4.py --lang ar      # the Arabic set only
 
-Existing pages are never touched: this writes only *-v4.html files, which are
-new names. Each output is self-contained (inlined CSS + JS) - see the note at
-the top of tools/v4/kit.py for why that beats a shared stylesheet here.
+Each output is self-contained (inlined CSS + JS) - see the note at the top of
+tools/v4/kit.py for why that beats a shared stylesheet here.
+
+The Arabic modules live in tools/v4/ar/ and import their CSS from the English
+module of the same page, so the two languages cannot drift apart visually: an
+Arabic page is the same components, the same copy structure and the same
+figures, with translated strings and the RTL layer from tools/v4/rtl.py
+appended last. Where a page carries an SVG diagram whose reading direction
+matters, the Arabic module authors a mirrored one - that is the only markup
+either side duplicates on purpose.
 """
 import importlib
 import pathlib
@@ -17,10 +25,12 @@ HERE = pathlib.Path(__file__).resolve().parent
 ROOT = HERE.parent
 OUT = ROOT / "public_html" / "en"
 sys.path.insert(0, str(HERE / "v4"))
+sys.path.insert(0, str(HERE / "v4" / "ar"))
 sys.path.insert(0, str(HERE))
 
 import aiden_version  # noqa: E402
 import kit  # noqa: E402
+import rtl  # noqa: E402
 
 # page_blog and page_article are deliberately absent. Both were pattern
 # references built before the corpus migration: the real article hub is
@@ -30,11 +40,17 @@ import kit  # noqa: E402
 MODULES = ["page_home", "page_services", "page_process", "page_about", "page_contact",
            "page_simulator", "page_demo", "page_checkout", "page_order"]
 
+# Same nine pages, the Arabic side. Added 2026-08-21, replacing the old dark
+# skin on the five core Arabic URLs and introducing four pages Arabic never
+# had. Names are suffixed rather than shadowed because both sets sit on
+# sys.path and an Arabic module imports its English twin for the CSS.
+MODULES_AR = [m + "_ar" for m in MODULES]
 
-def render(mod):
+
+def render(mod, lang="en"):
     m = importlib.import_module(mod)
     meta = m.META
-    rel, path, ar_alt = kit.PAGES[meta["slug"]]
+    rel, path, other = kit.pages(lang)[meta["slug"]]
 
     css = kit.TOKENS + kit.SKIP_CSS + kit.BASE_CSS + getattr(m, "CSS", "")
     js = kit.MOTION_JS
@@ -51,27 +67,32 @@ def render(mod):
                       'href="/assets/cinematic/poster.webp?v=20260817" fetchpriority="high">')
     if meta.get("calc"):
         import _ported_js
-        js += _ported_js.CALC_JS
+        js += _ported_js.calc_js(lang)
 
     schema = ""
     if meta.get("schema"):
         schema = '<script type="application/ld+json">\n' + meta["schema"] + "\n</script>"
 
+    # The RTL layer is appended AFTER the page's own CSS so it wins on a
+    # specificity tie without any !important - see tools/v4/rtl.py.
+    if lang == "ar":
+        css += rtl.CORE_RTL_CSS
+
     html = (
-        kit.HEAD
+        kit.head_html(lang)
         .replace("{{TITLE}}", meta["title"])
         .replace("{{DESC}}", meta["desc"])
         .replace("{{ROBOTS}}", kit.ROBOTS_NONE if meta.get("noindex")
                  else kit.ROBOTS_INDEX)
         .replace("{{PATH}}", path)
-        .replace("{{ALTERNATES}}", kit.alternates(path, ar_alt))
+        .replace("{{ALTERNATES}}", kit.alternates(path, other, lang))
         .replace("{{HEADEXTRA}}", head_extra)
         .replace("{{SCHEMA}}", schema)
         .replace("{{CSS}}", css)
-        + kit.header(meta["nav"])
+        + kit.header(meta["nav"], lang)
         + m.body()
-        + kit.pager(*meta["next"])
-        + kit.FOOTER
+        + kit.pager(*meta["next"], lang=lang)
+        + kit.footer(lang)
         # Aiden runs on every page except the articles; an article is a reading
         # surface and the launcher competes with it. Default is on, so a new
         # page gets the widget unless it opts out.
@@ -86,38 +107,53 @@ def render(mod):
 
 
 if __name__ == "__main__":
-    want = sys.argv[1:]
+    argv = sys.argv[1:]
+    langs = ["en", "ar"]
+    if "--lang" in argv:
+        i = argv.index("--lang")
+        langs = [argv[i + 1]]
+        del argv[i:i + 2]
+    want = argv
     built = []
-    for mod in MODULES:
-        try:
-            m = importlib.import_module(mod)
-        except ModuleNotFoundError:
-            print(f"  .. {mod} not written yet, skipping")
-            continue
-        if want and m.META["slug"] not in want:
-            continue
-        dest, n = render(mod)
-        built.append(dest)
-        print(f"  ok {dest.relative_to(ROOT)}  {n/1024:.0f} KB")
+
+    for lang in langs:
+        mods = MODULES_AR if lang == "ar" else MODULES
+        print(f"[{lang}]")
+        for mod in mods:
+            try:
+                m = importlib.import_module(mod)
+            except ModuleNotFoundError:
+                print(f"  .. {mod} not written yet, skipping")
+                continue
+            if want and m.META["slug"] not in want:
+                continue
+            dest, n = render(mod, lang)
+            built.append(dest)
+            print(f"  ok {dest.relative_to(ROOT)}  {n/1024:.0f} KB")
     if not built:
         print("nothing built")
 
     # ----------------------------------------------------------------------
-    # Anti-drift check: the price table on services-v4 is hand-written markup,
-    # while the checkout computes from tools/v4/pay.py. Two copies of every
-    # figure therefore exist, so the build asserts they still agree. This runs
-    # against the file on disk rather than the freshly rendered string, so it
-    # also catches "I edited pay.py and rebuilt only the checkout".
+    # Anti-drift check: the price table on the services page is hand-written
+    # markup, while the checkout computes from tools/v4/pay.py. Two copies of
+    # every figure therefore exist, so the build asserts they still agree. This
+    # runs against the file on disk rather than the freshly rendered string, so
+    # it also catches "I edited pay.py and rebuilt only the checkout".
     # ----------------------------------------------------------------------
     import pay  # noqa: E402
-    svc = ROOT / "public_html" / kit.PAGES["services"][0]
-    if svc.exists():
-        problems = pay.check_services(svc.read_text(encoding="utf-8"))
+    failed = False
+    for lang in langs:
+        svc = ROOT / "public_html" / kit.pages(lang)["services"][0]
+        if not svc.exists():
+            print(f"  !! {lang} services page not built; prices not checked")
+            continue
+        problems = pay.check_services(svc.read_text(encoding="utf-8"), lang)
         if problems:
-            print("\n  PRICE MISMATCH - pay.py and the services page disagree:")
+            failed = True
+            print(f"\n  PRICE MISMATCH - pay.py and {svc.relative_to(ROOT)} disagree:")
             for pr in problems:
                 print("    x " + pr)
-            sys.exit(1)
-        print(f"  ok prices in pay.py match {svc.relative_to(ROOT)}")
-    else:
-        print("  !! services page not built; price consistency not checked")
+        else:
+            print(f"  ok prices in pay.py match {svc.relative_to(ROOT)}")
+    if failed:
+        sys.exit(1)

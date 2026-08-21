@@ -562,11 +562,45 @@ PAGES = {
     "process":    ("en/process.html",     "/en/process/",    "/process/"),
     "about":      ("en/about.html",       "/en/about/",      "/about/"),
     "contact":    ("en/contact.html",     "/en/contact/",    "/contact/"),
-    "simulators": ("en/simulators.html",  "/en/simulators/", None),
-    "demos":      ("en/demos.html",       "/en/demos/",      None),
-    "checkout":   ("en/checkout.html",    "/en/checkout/",   None),
-    "order":      ("en/order.html",       "/en/order/",      None),
+    "simulators": ("en/simulators.html",  "/en/simulators/", "/simulators-ar/"),
+    "demos":      ("en/demos.html",       "/en/demos/",      "/demos-ar/"),
+    "checkout":   ("en/checkout.html",    "/en/checkout/",   "/checkout-ar/"),
+    "order":      ("en/order.html",       "/en/order/",      "/order-ar/"),
 }
+
+# --------------------------------------------------------------------------
+# The Arabic twin of the same table, added 2026-08-21 when the Arabic set was
+# rebuilt on this skin. Same shape: (file under public_html/, public URL,
+# the OTHER language's URL).
+#
+# The five core pages keep the root URLs they have been indexed on for months
+# - only the skin under them changes, so nothing 301s and no equity moves. The
+# four pages that are new in Arabic take the site's existing `-ar` suffix
+# convention (/blog-ar/, /refund-policy-ar/), which .htaccess rule 5 already
+# maps to a root file: no new rewrite rule is needed to serve them.
+# --------------------------------------------------------------------------
+PAGES_AR = {
+    "index":      ("ar/index.html",       "/ar/",            "/"),
+    "services":   ("services.html",       "/services/",      "/en/services/"),
+    "process":    ("process.html",        "/process/",       "/en/process/"),
+    "about":      ("about.html",          "/about/",         "/en/about/"),
+    "contact":    ("contact.html",        "/contact/",       "/en/contact/"),
+    "simulators": ("simulators-ar.html",  "/simulators-ar/", "/en/simulators/"),
+    "demos":      ("demos-ar.html",       "/demos-ar/",      "/en/demos/"),
+    "checkout":   ("checkout-ar.html",    "/checkout-ar/",   "/en/checkout/"),
+    "order":      ("order-ar.html",       "/order-ar/",      "/en/order/"),
+}
+
+
+def pages(lang):
+    return PAGES_AR if lang == "ar" else PAGES
+
+
+def url(slug, lang="en"):
+    """The public URL of one v4 page in one language. Every cross-page link in
+    the page modules goes through this, so a URL change is a one-line edit in
+    the table above rather than a grep across nine files in two languages."""
+    return pages(lang)[slug][1]
 
 
 ROBOTS_INDEX = ('<meta name="robots" content="index, follow, '
@@ -574,14 +608,21 @@ ROBOTS_INDEX = ('<meta name="robots" content="index, follow, '
 ROBOTS_NONE = '<meta name="robots" content="noindex, follow">'
 
 
-def alternates(path, ar):
-    """hreflang block for one page. x-default is the English side throughout:
-    the Arabic pages already nominate it, and this is a Muscat business whose
-    English pages are the ones written for a first-time visitor."""
-    out = [f'<link rel="alternate" hreflang="en" href="https://aiprofitlab.io{path}">']
+def alternates(path, other, lang="en"):
+    """hreflang block for one page. `path` is this page, `other` is its twin in
+    the other language (or None where the page exists in one language only).
+
+    x-default is the English side throughout: the Arabic pages already nominate
+    it, and this is a Muscat business whose English pages are the ones written
+    for a first-time visitor. Which of the two URLs is English therefore
+    depends on which language is being rendered, hence the swap below."""
+    en, ar = (other, path) if lang == "ar" else (path, other)
+    out = []
+    if en:
+        out.append(f'<link rel="alternate" hreflang="en" href="https://aiprofitlab.io{en}">')
     if ar:
         out.append(f'<link rel="alternate" hreflang="ar" href="https://aiprofitlab.io{ar}">')
-    out.append(f'<link rel="alternate" hreflang="x-default" href="https://aiprofitlab.io{path}">')
+    out.append(f'<link rel="alternate" hreflang="x-default" href="https://aiprofitlab.io{en or path}">')
     return "\n".join(out)
 
 NAV = [
@@ -592,8 +633,107 @@ NAV = [
     ("Contact",      "/en/contact/",  "05"),
 ]
 
-HEAD = """<!DOCTYPE html>
-<html dir="ltr" lang="en">
+# The Arabic nav, in the same order and carrying the same meanings. The labels
+# are first-person singular ("ما أبنيه", "من أنا") rather than the corporate
+# plural the old Arabic site used, because the whole proposition of the about
+# page is that this is one operator and not an agency - "نحن" would contradict
+# the page it links to. tools/v4/blog_chrome.py carries the same six labels so
+# an article and a core page do not disagree in the header.
+NAV_AR = [
+    ("الرئيسية",     "/ar/",       "٠١"),
+    ("ما أبنيه",      "/services/", "٠٢"),
+    ("طريقة العمل",   "/process/",  "٠٣"),
+    ("من أنا",       "/about/",    "٠٤"),
+    ("تواصل معي",    "/contact/",  "٠٥"),
+]
+
+# Everything in the chrome that is a word rather than a URL. Anything a page
+# module needs in both languages belongs here, not in an `if lang == "ar"`.
+CHROME = {
+    "en": {
+        "nav": NAV, "blog": "/blog/", "blog_label": "Articles",
+        "other_url": "/ar/", "other_label": "&#1593;&#1585;&#1576;&#1610;", "other_lang": "ar",
+        "skip": "Skip to content", "menu": "Open menu", "whatsapp": "WhatsApp",
+        "home_aria": "AI Profit Lab home", "primary": "Primary",
+        "wa_intro": "Hello%20Nahid%2C%20I%20have%20a%20question%20about%20my%20business.",
+        "wa_short": "Hello%20Nahid",
+        "wa_aria": "Chat with Nahid on WhatsApp",
+        "mfoot": "Muscat, Oman",
+        "arrow": "&rarr;",
+        "f_work": "The work", "f_talk": "Talk to me",
+        "f_links": [("What I build", "/en/services/"), ("How it works", "/en/process/"),
+                    ("Prices", "/en/services/#price"), ("Start an order", "/en/checkout/"),
+                    ("Revenue leak simulator", "/en/simulators/"),
+                    ("Dashboard demo", "/en/demos/#dash"), ("WhatsApp demo", "/en/demos/")],
+        "f_direct": [("Contact page", "/en/contact/"), ("About Nahid", "/en/about/"),
+                     ("Articles", "/blog/")],
+        "follow": "Follow the work",
+        "review_k": "Worked with me?", "review_t": "Leave a review on Google Maps",
+        "slogan": 'Every success starts with <span class="ins">insight</span>.',
+        "slogan_other": ('<p class="slogan-ar" lang="ar" dir="rtl">&#1603;&#1604; &#1606;&#1580;&#1575;&#1581; '
+                         '&#1610;&#1576;&#1583;&#1571; <span class="ins">&#1576;&#1585;&#1572;&#1610;&#1577;</span></p>'),
+        "legal": ('&copy; 2026 AI Profit Lab &mdash; a brand of Lotus Gulf International '
+                  '(CR <span dir="ltr">1570092</span>)<br>\n      South Al Khuwair, Bousher, Muscat, '
+                  'Oman &middot; Not VAT registered (TIN <span dir="ltr">2317725</span>)<br>\n      '
+                  '<a href="/terms/">Terms of Service</a> &middot; '
+                  '<a href="/refund-policy/">Refunds &amp; cancellation</a>\n      '
+                  '&middot; <a href="/privacy/">Privacy</a>'),
+        "locale": "en_OM", "dir": "ltr", "htmllang": "en",
+    },
+    "ar": {
+        "nav": NAV_AR, "blog": "/blog-ar/", "blog_label": "المقالات",
+        "other_url": "/", "other_label": "English", "other_lang": "en",
+        "skip": "تخطَّ إلى المحتوى", "menu": "فتح القائمة", "whatsapp": "واتساب",
+        "home_aria": "AI Profit Lab — الصفحة الرئيسية", "primary": "الرئيسية",
+        # "مرحباً، لدي سؤال عن عملي."
+        "wa_intro": "%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%D8%8C%20%D9%84%D8%AF%D9%8A%20"
+                    "%D8%B3%D8%A4%D8%A7%D9%84%20%D8%B9%D9%86%20%D8%B9%D9%85%D9%84%D9%8A.",
+        # "مرحباً ناهد"
+        "wa_short": "%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%20%D9%86%D8%A7%D9%87%D8%AF",
+        "wa_aria": "راسل ناهد على واتساب",
+        "mfoot": "مسقط، سلطنة عُمان",
+        "arrow": "&larr;",
+        "f_work": "ما أقدّمه", "f_talk": "تواصل معي",
+        "f_links": [("ما أبنيه", "/services/"), ("طريقة العمل", "/process/"),
+                    ("الأسعار", "/services/#price"), ("ابدأ طلبك", "/checkout-ar/"),
+                    ("حاسبة الإيرادات الضائعة", "/simulators-ar/"),
+                    ("تجربة لوحة المتابعة", "/demos-ar/#dash"), ("تجربة واتساب", "/demos-ar/")],
+        "f_direct": [("صفحة التواصل", "/contact/"), ("عن ناهد", "/about/"),
+                     ("المقالات", "/blog-ar/")],
+        "follow": "تابع العمل",
+        "review_k": "تعاملت معي؟", "review_t": "اترك تقييماً على خرائط جوجل",
+        "slogan": 'كل نجاح يبدأ <span class="ins">برؤية</span>',
+        "slogan_other": ('<p class="slogan-ar" lang="en" dir="ltr">Every success starts with '
+                         '<span class="ins">insight</span>.</p>'),
+        "legal": ('&copy; 2026 AI Profit Lab &mdash; علامة تجارية تابعة لشركة Lotus Gulf International '
+                  '(س.ت <span dir="ltr">1570092</span>)<br>\n      الخوير الجنوبية، بوشر، مسقط، '
+                  'سلطنة عُمان &middot; غير مسجّلة في ضريبة القيمة المضافة '
+                  '(الرقم الضريبي <span dir="ltr">2317725</span>)<br>\n      '
+                  '<a href="/terms/">شروط الخدمة</a> &middot; '
+                  '<a href="/refund-policy-ar/">الاسترداد والإلغاء</a>\n      '
+                  '&middot; <a href="/privacy/">الخصوصية</a>'),
+        "locale": "ar_OM", "dir": "rtl", "htmllang": "ar",
+    },
+}
+
+FONTS_EN = ("https://fonts.googleapis.com/css2?family=Marcellus&family=IBM+Plex+Sans:wght@400;500;600;700"
+            "&family=IBM+Plex+Mono:wght@400;500&display=swap")
+# Marcellus is kept on the Arabic pages: it has no Arabic glyphs, but it is
+# what the wordmark and every Latin figure caption are set in, and dropping it
+# would leave those falling back to a system serif mid-page.
+FONTS_AR = ("https://fonts.googleapis.com/css2?family=Marcellus&family=Markazi+Text:wght@400;500;600"
+            "&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700"
+            "&family=IBM+Plex+Mono:wght@400;500&display=swap")
+
+def head_html(lang="en"):
+    """The <head> template for one language. Everything language-dependent is
+    a lookup rather than a branch: direction, html lang, og:locale, the font
+    stylesheet and the skip link. The placeholders build_v4.render() fills in
+    are identical in both, so nothing downstream has to know the language."""
+    c = CHROME[lang]
+    fonts = FONTS_AR if lang == "ar" else FONTS_EN
+    return """<!DOCTYPE html>
+<html dir="%(dir)s" lang="%(htmllang)s">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
@@ -609,7 +749,7 @@ HEAD = """<!DOCTYPE html>
 <meta property="og:description" content="{{DESC}}">
 <meta property="og:url" content="https://aiprofitlab.io{{PATH}}">
 <meta property="og:image" content="https://aiprofitlab.io/og-aiprofitlab-2026.jpg">
-<meta property="og:locale" content="en_OM">
+<meta property="og:locale" content="%(locale)s">
 <meta name="twitter:card" content="summary_large_image">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -617,9 +757,9 @@ HEAD = """<!DOCTYPE html>
 <!-- Non-blocking font load: a plain stylesheet link costs a render-blocking
      round trip to fonts.googleapis.com. display=swap paints fallback text
      immediately and swaps when the webfont lands. -->
-<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Marcellus&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" media="print" onload="this.media='all'" href="https://fonts.googleapis.com/css2?family=Marcellus&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
-<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap"></noscript>
+<link rel="preload" as="style" href="%(fonts)s">
+<link rel="stylesheet" media="print" onload="this.media='all'" href="%(fonts)s">
+<noscript><link rel="stylesheet" href="%(fonts)s"></noscript>
 {{HEADEXTRA}}
 <!-- Sets .js before first paint so the reveal styles apply only when there is
      JS to un-apply them. Without it, a no-JS visitor gets a blank page. -->
@@ -633,48 +773,57 @@ HEAD = """<!DOCTYPE html>
 {{SCHEMA}}
 </head>
 <body>
-<a class="skip" href="#main">Skip to content</a>
-"""
+<a class="skip" href="#main">%(skip)s</a>
+""" % dict(c, fonts=fonts)
 
 
-def header(active_href):
+# Kept as a module constant because it is what the English build has always
+# read. It is now one call of the function above rather than a second copy.
+HEAD = head_html("en")
+
+
+def header(active_href, lang="en"):
     """Fixed header + the full-screen mobile menu."""
+    c = CHROME[lang]
+    nav = c["nav"]
     links = []
-    for label, href, _ in NAV[1:]:
+    for label, href, _ in nav[1:]:
         cur = ' aria-current="page"' if href == active_href else ""
         links.append(f'<a class="lnk" href="{href}"{cur}>{label}</a>')
-    cur = ' aria-current="page"' if active_href == "/blog/" else ""
-    links.append(f'<a class="lnk" href="/blog/"{cur}>Articles</a>')
-    links.append('<a class="lnk" href="/ar/" lang="ar">&#1593;&#1585;&#1576;&#1610;</a>')
+    cur = ' aria-current="page"' if active_href == c["blog"] else ""
+    links.append(f'<a class="lnk" href="{c["blog"]}"{cur}>{c["blog_label"]}</a>')
+    links.append(f'<a class="lnk" href="{c["other_url"]}" lang="{c["other_lang"]}">{c["other_label"]}</a>')
 
     m = []
-    for label, href, n in NAV:
-        cur = ' aria-current="page"' if href == active_href else ""
-        m.append(f'<a href="{href}"{cur}><em>{n}</em>{label}</a>')
-    m.append(f'<a href="/blog/"{cur}><em>06</em>Articles</a>')
+    for label, href, n in nav:
+        mcur = ' aria-current="page"' if href == active_href else ""
+        m.append(f'<a href="{href}"{mcur}><em>{n}</em>{label}</a>')
+    m.append(f'<a href="{c["blog"]}"{cur}><em>{"٠٦" if lang == "ar" else "06"}</em>{c["blog_label"]}</a>')
 
     return f"""<header class="top" id="top">
-  <a href="/" aria-label="AI Profit Lab home">
+  <a href="{nav[0][1]}" aria-label="{c["home_aria"]}">
     <img class="mark" src="/assets/brand/wordmark-primary.svg" alt="AI Profit Lab" width="160" height="28">
   </a>
-  <nav class="nav" aria-label="Primary">
+  <nav class="nav" aria-label="{c["primary"]}">
     {chr(10).join('    ' + l for l in links)}
-    <a class="top-wa" href="{WA}&text=Hello%20Nahid%2C%20I%20have%20a%20question%20about%20my%20business." target="_blank" rel="noopener" aria-label="Chat with Nahid on WhatsApp">{WA_ICON}<span>WhatsApp</span></a>
-    <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="mmenu"><i></i></button>
+    <a class="top-wa" href="{WA}&text={c["wa_intro"]}" target="_blank" rel="noopener" aria-label="{c["wa_aria"]}">{WA_ICON}<span>{c["whatsapp"]}</span></a>
+    <button class="burger" id="burger" aria-label="{c["menu"]}" aria-expanded="false" aria-controls="mmenu"><i></i></button>
   </nav>
 </header>
 <div class="mmenu" id="mmenu" aria-hidden="true">
   {chr(10).join('  ' + l for l in m)}
-  <p class="mfoot">hello@aiprofitlab.io &middot; <span dir="ltr">+968 9924 5250</span><br>Muscat, Oman</p>
+  <p class="mfoot">hello@aiprofitlab.io &middot; <span dir="ltr">+968 9924 5250</span><br>{c["mfoot"]}</p>
 </div>
 """
 
 
-def pager(label, title, href):
-    return f"""<nav class="pager" aria-label="Next page">
+def pager(label, title, href, lang="en"):
+    c = CHROME[lang]
+    aria = "الصفحة التالية" if lang == "ar" else "Next page"
+    return f"""<nav class="pager" aria-label="{aria}">
   <div class="wrap"><a href="{href}">
     <span><span class="pl">{label}</span><span class="pt">{title}</span></span>
-    <span class="parw" aria-hidden="true">&rarr;</span>
+    <span class="parw" aria-hidden="true">{c["arrow"]}</span>
   </a></div>
 </nav>
 """
@@ -744,48 +893,49 @@ def _socials():
     return "\n".join(li)
 
 
-FOOTER = f"""<footer class="foot">
+def footer(lang="en"):
+    """Site footer. Same four blocks in both languages; every word and every
+    href comes out of CHROME, so an Arabic footer cannot quietly keep an
+    English link the way a hand-translated copy would."""
+    c = CHROME[lang]
+    work = "\n          ".join('<li><a href="%s">%s</a></li>' % (href, label)
+                               for label, href in c["f_links"])
+    direct = "\n          ".join('<li><a href="%s">%s</a></li>' % (href, label)
+                                 for label, href in c["f_direct"])
+    return f"""<footer class="foot">
   <div class="wrap">
     <div class="foot-grid">
 
       <div class="foot-brand">
         <img class="fmark" src="/assets/brand/wordmark-reversed.svg" alt="AI Profit Lab" width="170" height="29">
         <div class="fsig">
-          <p class="slogan">Every success starts with <span class="ins">insight</span>.</p>
+          <p class="slogan">{c["slogan"]}</p>
           <span class="sig-beat" aria-hidden="true"></span>
-          <p class="slogan-ar" lang="ar" dir="rtl">&#1603;&#1604; &#1606;&#1580;&#1575;&#1581; &#1610;&#1576;&#1583;&#1571; <span class="ins">&#1576;&#1585;&#1572;&#1610;&#1577;</span></p>
+          {c["slogan_other"]}
         </div>
         <div class="soc-wrap">
-          <h4 class="soc-h">Follow the work</h4>
+          <h4 class="soc-h">{c["follow"]}</h4>
           <ul class="socials">
 {_socials()}
           </ul>
         </div>
       </div>
 
-      <nav class="fcol" aria-label="The work">
-        <h4>The work</h4>
+      <nav class="fcol" aria-label="{c["f_work"]}">
+        <h4>{c["f_work"]}</h4>
         <ul>
-          <li><a href="/en/services/">What I build</a></li>
-          <li><a href="/en/process/">How it works</a></li>
-          <li><a href="/en/services/#price">Prices</a></li>
-          <li><a href="/en/checkout/">Start an order</a></li>
-          <li><a href="/en/simulators/">Revenue leak simulator</a></li>
-          <li><a href="/en/demos/#dash">Dashboard demo</a></li>
-          <li><a href="/en/demos/">WhatsApp demo</a></li>
+          {work}
         </ul>
       </nav>
 
-      <nav class="fcol" aria-label="Talk to me">
-        <h4>Talk to me</h4>
+      <nav class="fcol" aria-label="{c["f_talk"]}">
+        <h4>{c["f_talk"]}</h4>
         <ul class="direct">
-          <li><a href="{WA}&text=Hello%20Nahid">{WA_SMALL}<span dir="ltr">+968 9924 5250</span></a></li>
+          <li><a href="{WA}&text={c["wa_short"]}">{WA_SMALL}<span dir="ltr">+968 9924 5250</span></a></li>
           <li><a href="mailto:hello@aiprofitlab.io">{MAIL_ICON}hello@aiprofitlab.io</a></li>
         </ul>
         <ul>
-          <li><a href="/en/contact/">Contact page</a></li>
-          <li><a href="/en/about/">About Nahid</a></li>
-          <li><a href="/blog/">Articles</a></li>
+          {direct}
         </ul>
       </nav>
 
@@ -795,21 +945,21 @@ FOOTER = f"""<footer class="foot">
       <span class="gmark" aria-hidden="true">{GOOGLE_G}</span>
       <span class="rbody">
         <span class="stars" aria-hidden="true">{STAR_SVG * 5}</span>
-        <span class="rk">Worked with me?</span>
-        <span class="rt">Leave a review on Google Maps</span>
+        <span class="rk">{c["review_k"]}</span>
+        <span class="rt">{c["review_t"]}</span>
       </span>
-      <span class="rarw" aria-hidden="true">&rarr;</span>
+      <span class="rarw" aria-hidden="true">{c["arrow"]}</span>
     </a>
 
     <p class="legal">
-      &copy; 2026 AI Profit Lab &mdash; a brand of Lotus Gulf International (CR <span dir="ltr">1570092</span>)<br>
-      South Al Khuwair, Bousher, Muscat, Oman &middot; Not VAT registered (TIN <span dir="ltr">2317725</span>)<br>
-      <a href="/terms/">Terms of Service</a> &middot; <a href="/refund-policy/">Refunds &amp; cancellation</a>
-      &middot; <a href="/privacy/">Privacy</a>
+      {c["legal"]}
     </p>
   </div>
 </footer>
 """
+
+
+FOOTER = footer("en")
 
 # --------------------------------------------------------------------------
 # Motion kit — one IIFE, shared by every page.

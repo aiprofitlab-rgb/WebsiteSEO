@@ -1873,7 +1873,7 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://aiprofitlab.io/campaign-roi-simulator-ar/</loc>
+    <loc>https://aiprofitlab.io/checkout-ar/</loc>
     <lastmod>2026-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -1885,7 +1885,7 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://aiprofitlab.io/customized-ceo-dashboard-demo-ar/</loc>
+    <loc>https://aiprofitlab.io/demos-ar/</loc>
     <lastmod>2026-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -1945,12 +1945,6 @@
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://aiprofitlab.io/missed-call-simulator-ar/</loc>
-    <lastmod>2026-08-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
     <loc>https://aiprofitlab.io/process/</loc>
     <lastmod>2026-08-21</lastmod>
     <changefreq>weekly</changefreq>
@@ -1963,15 +1957,15 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://aiprofitlab.io/simulators-ar/</loc>
+    <lastmod>2026-08-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://aiprofitlab.io/smart-website-offer.html</loc>
     <lastmod>2026-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://aiprofitlab.io/whatsapp-receptionist-demo-ar/</loc>
-    <lastmod>2026-08-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
   </url>
 </urlset>

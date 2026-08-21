@@ -20,6 +20,9 @@ from kit import WA, WA_ICON, STAR
 # --------------------------------------------------------------------------
 # Conversations. who: "in" buyer, "out" agent, "sys" system note, "day" divider.
 # rail: what the system did at that point, shown alongside.
+# dir/lang: stamped on every speech bubble, so a thread in the other language
+# reads correctly whichever page it is embedded in - on the Arabic page it is
+# the English scenario that has to opt out of the page direction.
 # --------------------------------------------------------------------------
 SCENARIOS = [
     {
@@ -28,7 +31,7 @@ SCENARIOS = [
         "title": "A buyer asks for stock and a price after hours",
         "sub": "Nobody is at the office. The agent answers from your own stock and price list, then hands "
                "over the moment the buyer shows intent.",
-        "rtl": False,
+        "dir": "ltr", "lang": "en",
         "msgs": [
             {"who": "day", "text": "Friday 21:41"},
             {"who": "in", "t": "21:41",
@@ -63,7 +66,7 @@ SCENARIOS = [
         "title": "The same agent, answering in Arabic",
         "sub": "The language is detected from the buyer's first message, not chosen from a menu. A buyer "
                "who writes in Arabic is answered in Arabic, with the same stock and the same prices.",
-        "rtl": True,
+        "dir": "rtl", "lang": "ar",
         "msgs": [
             {"who": "day", "text": "السبت 20:12"},
             {"who": "in", "t": "20:12", "text": "السلام عليكم، عندكم فلتر زيت لتويوتا هايلكس ٢٠١٩؟",
@@ -89,7 +92,7 @@ SCENARIOS = [
         "title": "A quote goes out and the buyer goes quiet",
         "sub": "This is the Autopilot, not the receptionist. It chases a quote on a schedule you set, and "
                "stops itself the moment the buyer replies — which is the part most follow-up tools get wrong.",
-        "rtl": False,
+        "dir": "ltr", "lang": "en",
         "msgs": [
             {"who": "sys", "text": "Quote #1184 sent — OMR 2,340",
              "rail": ["Mon 11:02", "Quote issued. Follow-up scheduled: day 2, day 5, day 9."]},
@@ -333,7 +336,7 @@ JS_TAIL = r""";
     }
     var b = document.createElement("div");
     b.className = "bub " + m.who;
-    if (m.rtl){ b.setAttribute("dir", "rtl"); b.setAttribute("lang", "ar"); }
+    if (m.dir){ b.setAttribute("dir", m.dir); b.setAttribute("lang", m.lang); }
     b.appendChild(document.createTextNode(m.text));
     if (m.t){
       var t = document.createElement("span");
@@ -356,7 +359,7 @@ JS_TAIL = r""";
   function paint(sc){
     thread.innerHTML = ""; rail.innerHTML = "";
     sc.msgs.forEach(function(m){
-      m.rtl = sc.rtl && (m.who === "in" || m.who === "out");
+      m.dir = sc.dir; m.lang = sc.lang;
       thread.appendChild(bubble(m));
       if (m.rail) rail.appendChild(railItem(m, false));
     });
@@ -399,7 +402,7 @@ JS_TAIL = r""";
         after(at, function(){
           var tp = document.getElementById("tp");
           if (tp) tp.remove();
-          msg.rtl = sc.rtl && (msg.who === "in" || msg.who === "out");
+          msg.dir = sc.dir; msg.lang = sc.lang;
           thread.appendChild(bubble(msg));
           if (li) li.classList.add("on");
           toBottom();
@@ -480,7 +483,7 @@ def _static_thread(sc):
         elif m["who"] == "sys":
             out.append(f'<div class="sysmsg">{m["text"]}</div>')
         else:
-            rtl = ' dir="rtl" lang="ar"' if sc["rtl"] else ""
+            rtl = f' dir="{sc["dir"]}" lang="{sc["lang"]}"' 
             t = f'<span class="t">{m["t"]}</span>' if m.get("t") else ""
             out.append(f'<div class="bub {m["who"]}"{rtl}>{m["text"]}{t}</div>')
     return "\n        ".join(out)

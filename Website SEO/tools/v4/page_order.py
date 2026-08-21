@@ -188,7 +188,7 @@ def body():
 """
 
 
-JS = r"""
+JS_TPL = r"""
 /* ---------------------------------------------------------------------------
    Order status.
 
@@ -244,7 +244,7 @@ JS = r"""
       if (d.payment_status === "paid"){
         show("paid");
         if (d.reference || ref) fill("[data-ref]", d.reference || ref);
-        fill("[data-paid]", d.amount_display || "Confirmed");
+        fill("[data-paid]", d.amount_display || __CONFIRMED__);
         try { localStorage.removeItem("apl_order"); } catch(e){}
         if (typeof gtag === "function"){
           gtag("event", "purchase", {
@@ -262,6 +262,17 @@ JS = r"""
 })();
 """
 
+
+# The one user-visible string in the script: the fallback shown when the API
+# confirms a payment but sends no formatted amount back with it.
+WORDS = {"en": '"Confirmed"', "ar": '"تم التأكيد"'}
+
+
+def js(lang="en"):
+    return JS_TPL.replace("__CONFIRMED__", WORDS[lang])
+
+
+JS = js("en")
 
 META = dict(
     noindex=True,

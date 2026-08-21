@@ -18,23 +18,26 @@ urls = [
     ("/en/academy/", 0.8),
     ("/en/smart-website-offer.html", 0.9),
 
-    # --- Arabic, still on the previous skin ---------------------------------
+    # --- Arabic, the v4 set (rebuilt 2026-08-21) ----------------------------
+    # The five core URLs are unchanged - only the skin under them moved.
     ("/ar/", 0.9),
     ("/services/", 0.8),
     ("/process/", 0.8),
     ("/about/", 0.8),
     ("/contact/", 0.8),
+    ("/demos-ar/", 0.7),
+    ("/simulators-ar/", 0.7),
+    ("/checkout-ar/", 0.7),
     ("/blog-ar/", 0.8),
     ("/academy-ar/", 0.8),
-    ("/campaign-roi-simulator-ar/", 0.7),
-    ("/customized-ceo-dashboard-demo-ar/", 0.7),
-    ("/missed-call-simulator-ar/", 0.7),
-    ("/whatsapp-receptionist-demo-ar/", 0.7),
     ("/smart-website-offer.html", 0.9),
 
-    # /en/order/ is a payment-return page and /en/checkout/?plan=... are query
-    # variants of one URL - neither belongs in a sitemap. The English demo and
-    # simulator pages that used to be listed here now 301 into the two above.
+    # Neither /en/order/ nor /order-ar/ belongs here: both are payment-return
+    # pages carrying noindex, and /en/checkout/?plan=... are query variants of
+    # one URL. The four stand-alone Arabic demo and simulator pages that used
+    # to be listed are gone too - they now 301 into /demos-ar/ and
+    # /simulators-ar/ (.htaccess section 2c), and a sitemap must not list a URL
+    # that redirects.
 ]
 
 blog_ar_path = os.path.join(public_html, "blog", "ar")

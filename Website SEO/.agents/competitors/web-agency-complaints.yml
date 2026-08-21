@@ -1,0 +1,401 @@
+---
+# Omani service-business complaints — harvested buyer language.
+#
+# READ THIS FIRST — the file was renamed in spirit but not in slug. Round 2 of the
+# miner widened the pool and the pool drifted OFF-CATEGORY. It now contains a
+# courier depot, a Samsung repair counter, a car service centre, two immigration
+# consultancies and five print shops. It contains almost no web agencies.
+#
+# The headline result is unchanged from round 1 and is worth stating flatly:
+# ZERO written complaints were surfaced against any Omani web / creative / digital
+# agency. Every in-category business in the pool returned either no review text or
+# a positive one. What round 2 bought instead is a usable corpus of complaints
+# about Omani SERVICE BUSINESSES generally. That is a different question, it is
+# still useful, and it must never be relabelled as the first one.
+slug: web-agency-complaints
+name: Omani service businesses (non-tracked) — review complaints
+type: complaint-harvest          # not a competitor profile; no pricing/positioning
+verified: 2026-08-21
+verified_round: 2                # round 1 = 2026-08-20, 4 rows. Round 2 = 32 rows.
+verified_source: out/prospecting/oman-negative-reviews.csv (Google Places API,
+  harvested via tools/prospecting/gmaps_review_mining.py)
+confidence: low                  # see confidence_note — no theme here is publishable
+publishable: false
+
+scope_note: >
+  These businesses are a DIFFERENT set of companies from the AI-automation
+  competitors tracked in this directory (QwicLink, Nuqta, 4Ys, WIYA). Nothing in
+  this file may be moved into those files — see cross_contamination_check.
+  They are also, after round 2, largely a different set from "web agencies".
+  See category_drift_warning.
+
+category_drift_warning: >
+  Round 2 expanded the pool from 21 to 22 named businesses but changed WHAT was in
+  it. Any count computed across all 32 rows measures "Omani service businesses"
+  — courier, electronics repair, car servicing, immigration paperwork, printing —
+  not "Omani web agencies". Do not quote a whole-corpus number as though it were
+  about our competitive set. The theme counts below are annotated with how many
+  DISTINCT companies and how many distinct CATEGORIES support each one, because
+  that is the only honest way to read this sample.
+
+sample:
+  round_1:
+    rows: 4
+    with_review_text: 2
+    distinct_companies_with_a_written_complaint: 1
+  round_2_cumulative:
+    rows: 32
+    distinct_companies: 22
+    rows_with_no_review_text: 7
+    rows_with_text_but_no_complaint_content: 5   # "Awesome", "Good", "For toners
+                                                 # only", a shop description, "Very bad"
+    rows_with_substantive_complaint_language: 20
+    distinct_companies_with_a_substantive_complaint: 12
+    arabic_language_rows: 2                      # 1 usable complaint, 1 description
+  in_category_breakdown:
+    web_creative_digital_agencies_in_pool: 6     # Olive Creative Studio, Olive
+                                                 # E-Solutions, OmanAD, Bullseye
+                                                 # Communication, SysX Labs,
+                                                 # Donia Al Tasameem
+    of_those_with_a_written_complaint: 0         # <-- THE RESULT. Still zero.
+    adjacent_it_vendors_with_a_written_complaint: 2  # Ultimate Solutions, abu mazin
+    off_category_companies_with_a_written_complaint: 10
+  method_ceiling: >
+    Google returns at most 5 reviews per place and picks them itself ("most
+    relevant"). Older and lower-rated reviews are usually not among the 5. This
+    sample reliably indicates WHICH businesses generate unhappy customers; it is
+    not a register of complaints and cannot support a market-level claim.
+
+# ---------------------------------------------------------------------------
+# THEMES
+# Every theme below is a HYPOTHESIS, per the harvest brief's own rule (a theme
+# backed by three reviews is a hypothesis, not a finding). None reaches finding
+# status. They are ordered by how many INDEPENDENT companies support them, not by
+# review count — five reviews across two companies is one company's story told
+# twice, and is ranked accordingly.
+# ---------------------------------------------------------------------------
+themes:
+
+  - id: T3
+    label: Cannot get a reply on the channel they used
+    status: hypothesis
+    strength: strongest            # widest independent spread in the corpus
+    reviews: 5
+    distinct_companies: 5
+    distinct_categories: 5         # print, IT retail, HR, electronics repair, immigration
+    why_it_ranks_first: >
+      The only theme where every supporting review comes from a different company
+      AND a different industry. That independence is what makes it a candidate
+      pattern rather than one firm's reputation. It is also the failure our own
+      product exists to remove, which is a reason to be MORE careful about
+      motivated reading, not less.
+    verbatim:
+      - agency: AL IBDA PRINTING PRESS
+        date: 2023-04-03
+        stars: 1
+        quote: >-
+          If you send a Whats App message today, the answer does not come even on
+          the second or third day.
+      - agency: Takatuf Oman تكاتف عمان - القرم
+        date: 2026-05-12
+        stars: 2
+        quote: "Trying to reach the company on the phone without response"
+      - agency: abu mazin computers
+        date: 2026-07-14
+        stars: 1
+        quote: >-
+          I requested, on WhatsApp, a quotation for a camera system and a computer,
+          but the salesperson only listed the item names without any
+          specifications. When I politely asked for the specifications to be
+          included, he replied, "I don't have time to write specifications on
+          paper."
+      - agency: Samsung Customer Service Plaza - Azaiba
+        date: 2026-04-01
+        stars: 1
+        quote: >-
+          The fact that they even forgot to take my number to call them shows their
+          so called dedication to the customers
+
+  - id: T1
+    label: Payment taken, then silence
+    status: hypothesis
+    reviews: 5
+    distinct_companies: 3
+    distinct_categories: 2         # immigration consultancy (x2), print (x1)
+    caveat: >
+      Two of the three companies are immigration consultancies, a category with
+      its own well-known dynamics (long statutory waits, non-refundable government
+      fees, customers who may not distinguish agency delay from embassy delay).
+      Cross-category support for this theme is exactly ONE print shop. Weight
+      accordingly.
+    verbatim:
+      - agency: Stratix Consultants Oman
+        date: 2025-09-14
+        stars: 1
+        quote: >-
+          I paid for their services with the understanding that they would assist
+          me as promised. However, after they received my payment, communication
+          completely stopped.
+      - agency: DM Immigration Consultants in Muscat, Oman
+        date: 2026-06-19
+        stars: 1
+        quote: >-
+          NOT DELIVERING PROMISED SERVICE & Dont even bothered to give back replies
+          after taking our hard earned money
+      - agency: AL IBDA PRINTING PRESS
+        date: 2023-04-03
+        stars: 1
+        quote: >-
+          Even after making advance payment, the work is not done at the right
+          time. Even phone calls are not received after taking advance.
+
+  - id: T4
+    label: Price moves after commitment, or charges nobody explains
+    status: hypothesis
+    reviews: 4
+    distinct_companies: 3
+    distinct_categories: 3         # electronics repair, courier, car servicing
+    caveat: >
+      All three companies are off-category consumer services. Nothing here is
+      evidence about how B2B project pricing is experienced in Oman. Its relevance
+      to us is analogical only.
+    verbatim:
+      - agency: Samsung Customer Service Plaza - Azaiba
+        date: 2025-02-01
+        stars: 3
+        quote: >-
+          When I called them, they told me it would cost 20 OMR, and when I reached
+          them, they told me 25 OMR
+      - agency: DHL Service Point (SOHAR)
+        date: 2025-11-23
+        stars: 2
+        quote: "Can't understand what's the administration fee that they are charging the customer's"
+      - agency: Precision Tune - Car Service & Repair Center Ibra
+        date: 2025-02-28
+        stars: 1
+        quote: >-
+          While leaving the car it was mentioned clearly only normal service is
+          enough. However on call they ll make u scare saying change is must. They
+          charged over 50 omr.
+
+  - id: T6
+    label: Deadline slips, managed with a rolling "tomorrow"
+    status: hypothesis
+    reviews: 3
+    distinct_companies: 3
+    distinct_categories: 2         # print (x2), IT retail (x1)
+    verbatim:
+      - agency: Printing Zone منطقة الطباعة
+        date: 2025-11-17
+        stars: 1
+        language: mixed en+ar
+        quote_original: >-
+          Worst customer service ever had !!!! تجربه سيئه شهر يماطلوا كل يوم بكره
+          وبعد بكره يجهز اخر شي يقول ماعندنا ستوك اكواب
+        quote_translation_en: >-
+          [TRANSLATION — not the reviewer's words] "Worst customer service ever
+          had!!!! A bad experience — for a month they kept stalling, every day
+          'tomorrow', 'the day after tomorrow it'll be ready', and in the end he
+          says we don't have cups in stock."
+        translation_note: >
+          Translated by Claude, 2026-08-21. Not verified by a native speaker. The
+          Arabic verb يماطل (yumāṭil) means to stall or fob someone off with
+          delays — stronger than neutral "was late". Do not quote the English
+          publicly without a human check.
+      - agency: abu mazin computers
+        date: 2026-06-16
+        stars: 1
+        quote: >-
+          I have been chasing them up for 2 months to rectify a defect and the
+          staff keep giving promises that he will come without any success!!
+      - agency: AL IBDA PRINTING PRESS
+        date: 2023-04-03
+        stars: 1
+        quote: "the work is not done at the right time"
+
+  - id: T2
+    label: Attentive before the sale, gone after it
+    status: hypothesis
+    reviews: 3
+    distinct_companies: 2
+    distinct_categories: 1         # IT vendors — the only ADJACENT category in the pool
+    why_it_matters_despite_low_count: >
+      Weakest by company count, but it is the ONLY theme whose supporting reviews
+      land on businesses that sell something like what we sell — an ERP/software
+      vendor and an IT systems installer. Every other theme transfers to us by
+      analogy; this one transfers directly. Two companies is still two companies.
+    verbatim:
+      - agency: Ultimate Solutions Technology LLC ERP - VAT
+        date: 2026-02-09
+        stars: 1
+        quote: >-
+          this company during sales were in best behavior but after sales service &
+          the support team has some of the most rude employees & displayed
+          unsupportive behavior. Especially when you have queries & need support
+          they will act pricy.
+      - agency: abu mazin computers
+        date: 2026-06-16
+        stars: 1
+        quote: >-
+          The staff will be very responsive and helpful till the install the system
+          in your home. Any support you require for defects, they will provide. I
+          have been chasing them up for 2 months to rectify a defect
+      - agency: Ultimate Solutions Technology LLC ERP - VAT
+        date: 2025-10-15
+        stars: 1
+        quote: "Baseless software with worst supporting team"
+
+rejected_as_theme:
+  - id: T5
+    label: Refund promised in the agreement, then refused
+    reviews: 5
+    distinct_companies: 2
+    distinct_categories: 1
+    rejected_because: >
+      Five reviews looks strong until you notice all five are against two
+      immigration consultancies and nothing else. This is a category artifact — a
+      well-documented pattern in visa-processing complaints worldwide — not an
+      Omani-market signal. Recorded so nobody rediscovers it and mistakes the
+      review count for breadth.
+    illustrative_quote:
+      agency: Stratix Consultants Oman
+      date: 2024-10-15
+      stars: 1
+      quote: "It's been almost three years, and they purposely canceled my Refund Policy."
+
+# ---------------------------------------------------------------------------
+# NEGATIVE RESULTS — hypothesised in the harvest brief, absent from the data.
+# These are as valuable as the themes. They stop us building pages against fears
+# nobody in this sample expressed.
+# ---------------------------------------------------------------------------
+hypothesised_but_not_found:
+  - hypothesis: Agencies refuse handover of domain / hosting / source code
+    occurrences: 0
+    note: >
+      Not one review across 32 rows mentions ownership, domain control, hosting
+      access or source code. Do NOT build a differentiator page on this. Our
+      existing services-en.html line ("Products are built once — you own them") is
+      adequate and should not be expanded on the strength of this harvest.
+  - hypothesis: Template work sold as custom
+    occurrences: 0
+  - hypothesis: Charging the client to fix the vendor's own defects
+    occurrences: 0
+    note: >
+      abu mazin (2026-06-16) is the nearest miss — an unrectified defect — but no
+      review anywhere alleges being CHARGED for a vendor's own bug.
+  - hypothesis: No Arabic support / Arabic-language service failure
+    occurrences: 0
+    note: >
+      Two Arabic-containing rows surfaced (up from zero in round 1). One is a
+      complaint about stalling, one is a shop description. Neither is about Arabic
+      language support. The sample still says NOTHING about Arabic-speaking buyers,
+      and 2 rows is not a basis for saying anything.
+  - hypothesis: Complaints about price being too high
+    occurrences: 0
+    note: >
+      Worth stating explicitly because it is the loudest silence in the corpus.
+      Across 20 substantive complaints, ZERO say the vendor was too expensive.
+      They say the money bought nothing, or that the price moved. Consistent with
+      _us.yml's warning not to compete on price — for a different reason than
+      QwicLink's undercut.
+
+single_most_useful_observation: >
+  All 20 substantive complaints are about what happened AFTER money changed hands.
+  Not one is about the quality of the thing bought, the vendor's skills, or the
+  price. The failure Omani buyers write about is relational and post-payment:
+  the vendor stopped answering. That is the fear our sales pages have to answer,
+  and — usefully, given we have no clients to name — it is answerable with
+  commitments about ourselves rather than proof about our past.
+
+complaints_index:
+  note: >
+    Full verbatim rows live in the source CSV. Themes above carry the quotes worth
+    keeping. This index records which companies produced substantive complaint
+    language, for reconciliation.
+  companies_with_substantive_complaints:
+    - {company: Stratix Consultants Oman, category: immigration, reviews: 4, tracked_competitor: false}
+    - {company: DHL Service Point (SOHAR), category: courier, reviews: 4, tracked_competitor: false}
+    - {company: DM Immigration Consultants in Muscat, category: immigration, reviews: 2, tracked_competitor: false}
+    - {company: Samsung Customer Service Plaza - Azaiba, category: electronics repair, reviews: 2, tracked_competitor: false}
+    - {company: Ultimate Solutions Technology LLC ERP - VAT, category: ERP/IT vendor (ADJACENT), reviews: 2, tracked_competitor: false}
+    - {company: abu mazin computers, category: IT retail & install (ADJACENT), reviews: 2, tracked_competitor: false}
+    - {company: AL IBDA PRINTING PRESS, category: print, reviews: 1, tracked_competitor: false}
+    - {company: Printing Zone منطقة الطباعة, category: print, reviews: 1, tracked_competitor: false}
+    - {company: Precision Tune Ibra, category: car servicing, reviews: 1, tracked_competitor: false}
+    - {company: Takatuf Oman, category: HR / talent, reviews: 1, tracked_competitor: false}
+    - {company: Jal Engineering Services LLC, category: engineering, reviews: 1, tracked_competitor: false}
+    - {company: Canary Digital Printing, category: print, reviews: 1, tracked_competitor: false}
+  in_category_companies_that_produced_nothing:
+    # The six businesses closest to our category. All silent. This IS the finding.
+    - {company: Olive Creative Studio, why: 3-star, no text}
+    - {company: Olive E-Solutions LLC, why: 1-star, no text}
+    - {company: Oman Advertising Agency LLC (OmanAD), why: 3-star, no text, 8 years old}
+    - {company: Bullseye Communication, why: 2-star, no text}
+    - {company: SysX Labs Inc., why: 2-star, no text, 10 years old}
+    - {company: Donia Al Tasameem, why: 3-star but the text is "Awesome" — miscaptured as negative}
+
+confidence_note: >
+  Two separate things are being rated, and they are not the same.
+  (a) The EXISTENCE and wording of every quote above is directly verifiable in the
+  source CSV and at each review's Google Maps URL. That part is solid.
+  (b) Any generalisation from them to "Omani agencies behave like X" is low
+  confidence and fails this directory's publish rule — the pool is small, Google
+  caps it at 5 reviews per place and chooses them itself, and after round 2 the
+  pool is mostly not even our industry.
+  Treat (a) as a citation. Never publish (b).
+
+do_not_publish:
+  - Any named-company negative claim from this file. A handful of Google reviews
+    is not a basis for publicly criticising a named Omani business, and the
+    reputational and legal exposure runs one way — against us.
+  - Any statistic implying a market-wide pattern of agency misbehaviour.
+  - Any "unlike other agencies in Oman…" framing. Nothing in this data licenses it.
+  - The English translation of the Printing Zone review, until a native Arabic
+    speaker has checked it.
+  - Any claim about Arabic-speaking buyers' experience. n=1.
+
+cross_contamination_check:
+  performed: 2026-08-21
+  method: >
+    Exact-string grep of .agents/competitors/ for all 22 distinct company names in
+    the CSV, plus a token-level pass. Token pass produced 6 apparent hits, all
+    verified false positives from generic words matching unrelated text
+    ("SOHAR" in a geography list, "Engineering"/"Media"/"Customer"/"Zone" as
+    industry vocabulary, "Sult" inside "consult"/"result", "Tune" inside
+    "opportune"). Exact-name grep returned 0 across all 22.
+  result: >
+    No company named in this harvest appears anywhere in the tracked competitor
+    files. Therefore ZERO entries were added to any competitor's
+    common_complaints. Every common_complaints field in this directory remains an
+    intentionally empty list, unchanged since round 1.
+
+what_this_sample_can_support:
+  - "A directional read on what Omani buyers of local services fear: abandonment
+    after payment, not price and not capability. Usable as an internal steer for
+    which objections our pages should pre-empt. NOT usable as a published claim."
+  - "A hard negative: review-mining does not work for the Omani web-agency market.
+    Six in-category businesses, zero written complaints, across two rounds."
+  - "A correction to an assumption about our credibility gap. Local competitors
+    have very little review-based social proof either — most sit under 30 reviews.
+    Our zero-testimonials problem is real against Nuqta's six named clients, but
+    it is not a review-count problem."
+  - "Evidence that our unsourced performance stats are the wrong weapon. Buyers in
+    this corpus never complain about throughput or error rates. See
+    _us.yml claims_needing_care."
+
+what_this_sample_cannot_support:
+  - Any published theme, count, or ranking of complaint types.
+  - Any website copy, ad copy or comparison-page claim naming or alluding to
+    local competitors.
+  - Any statement about Arabic-speaking buyers.
+  - Any claim about web agencies specifically. The in-category sample is empty.
+
+next_step_if_this_is_wanted: >
+  Do not run a round 3. Two rounds have now established that the in-category pool
+  is small, mostly review-less, and does not produce written complaints; round 2
+  spent its budget drifting into couriers and car workshops. Buyer language for
+  this market has to come from conversations — the README already says so ("no
+  third-party reviews located... buyer conversations are the substitute").
+  Capture verbatim objections from discovery calls into this file instead. The
+  five themes above are a usable question list for those calls: ask which of them
+  the prospect has personally lived through.

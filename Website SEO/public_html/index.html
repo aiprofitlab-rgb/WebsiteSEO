@@ -1847,6 +1847,7 @@ html:not(.js) .stair .step,html:not(.js) .stair .anno{opacity:1;transform:none}
 
   const WEEKS_PER_MONTH = 4.33;
   const SMART_SITE = 950;          // must match the price ladder above
+  const RTL = false;
   const fmt = n => "OMR " + Math.round(n).toLocaleString("en-US");
 
   function render() {
@@ -1869,18 +1870,24 @@ html:not(.js) .stair .step,html:not(.js) .stair .anno{opacity:1;transform:none}
     const costW = Math.max(4, (SMART_SITE / max) * W);
     $("barLeak").setAttribute("width", leakW.toFixed(1));
     $("barCost").setAttribute("width", costW.toFixed(1));
+    /* On an Arabic page both bars are anchored to the right edge of the track
+       and grow leftwards, so a bar still starts where the reader starts. */
+    if (RTL) {
+      $("barLeak").setAttribute("x", (W - leakW).toFixed(1));
+      $("barCost").setAttribute("x", (W - costW).toFixed(1));
+    }
 
     /* Keep the leak label inside its own bar; when the bar is short the label
        would otherwise overhang the track and collide with the background. */
     const lt = $("barLeakT");
     lt.textContent = fmt(leak);
     if (leakW > 120) {
-      lt.setAttribute("x", (leakW - 10).toFixed(1));
-      lt.setAttribute("text-anchor", "end");
+      lt.setAttribute("x", (RTL ? W - leakW + 10 : leakW - 10).toFixed(1));
+      lt.setAttribute("text-anchor", RTL ? "start" : "end");
       lt.setAttribute("fill", "#072B22");
     } else {
-      lt.setAttribute("x", (leakW + 10).toFixed(1));
-      lt.setAttribute("text-anchor", "start");
+      lt.setAttribute("x", (RTL ? W - leakW - 10 : leakW + 10).toFixed(1));
+      lt.setAttribute("text-anchor", RTL ? "end" : "start");
       lt.setAttribute("fill", "#F1EFE8");
     }
 

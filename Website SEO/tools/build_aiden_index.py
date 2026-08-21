@@ -44,6 +44,14 @@ EXCLUDE_FILES = {
     "campaign-roi-simulator.html",
     "whatsapp-receptionist-demo.html",
     "customized-ceo-dashboard-demo.html",
+    # Retired by the Arabic v4 rebuild, same day and for the same reason:
+    # /demos-ar/ and /simulators-ar/ now carry what these four did, and the
+    # originals sit behind 301s (.htaccess section 2c).
+    "missed-call-simulator-ar.html",
+    "campaign-roi-simulator-ar.html",
+    "whatsapp-receptionist-demo-ar.html",
+    "customized-ceo-dashboard-demo-ar.html",
+    "medflow-sales-automation-demo-ar.html",
 }
 EXCLUDE_PATTERNS = [
     re.compile(r"/en/.*-new\.html$"),        # unreleased template skins

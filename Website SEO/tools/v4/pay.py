@@ -74,29 +74,37 @@ CATALOG = [
     {
         "id": BASE_ID, "kind": "build", "required": True,
         "name": "The Smart Website",
+        "name_ar": "الموقع الذكي",
         "blurb": "Bilingual site, AI buyer agent, wholesale quote flow, WhatsApp handoff, "
                  "AI-search visibility, and the first year of hosting and care.",
+        "blurb_ar": "موقع بلغتين، ووكيل مشترٍ بالذكاء الاصطناعي، ومسار عرض سعر بالجملة، وتحويل إلى واتساب، وظهور في بحث الذكاء الاصطناعي، والسنة الأولى من الاستضافة والرعاية.",
         "founding": 950 * OMR, "standard": 1450 * OMR,
     },
     {
         "id": "dashboard", "kind": "build", "required": False,
         "name": "The Live Owner Dashboard",
+        "name_ar": "لوحة متابعة المالك الحيّة",
         "blurb": "Cash position, margin, stock and open leads on one screen, each with the "
                  "action it is asking for.",
+        "blurb_ar": "السيولة والهامش والمخزون والطلبات المفتوحة على شاشة واحدة، ومع كل بند الإجراء الذي يطلبه.",
         "founding": 650 * OMR, "standard": 950 * OMR,
     },
     {
         "id": "autopilot", "kind": "build", "required": False,
         "name": "The Full Autopilot",
+        "name_ar": "الطيار الآلي الكامل",
         "blurb": "Quote and invoice follow-up on a schedule, stopping the moment the buyer "
                  "replies or pays.",
+        "blurb_ar": "متابعة عروض الأسعار والفواتير وفق جدول، وتتوقف فور أن يردّ المشتري أو يدفع.",
         "founding": 900 * OMR, "standard": 1300 * OMR,
     },
     {
         "id": "desk", "kind": "monthly", "required": False,
         "name": "The Growth Desk",
+        "name_ar": "مكتب النمو",
         "blurb": "Optional monthly care, new features and a reporting review. Never required "
                  "to keep anything working, and cancellable any month.",
+        "blurb_ar": "رعاية شهرية اختيارية، وميزات جديدة، ومراجعة للتقارير. غير مطلوبة أبداً لإبقاء أي شيء يعمل، وتُلغى في أي شهر.",
         "founding": 75 * OMR, "standard": 95 * OMR,
     },
 ]
@@ -107,6 +115,7 @@ CATALOG = [
 BUNDLE = {
     "id": "stack",
     "name": "The Operator Stack",
+    "name_ar": "حزمة المشغّل",
     "requires": ["dashboard", "autopilot"],
     "founding": 2200 * OMR, "standard": 3400 * OMR,
 }
@@ -132,36 +141,48 @@ PLANS = [
     {
         "id": "deposit", "card": True, "recommended": True,
         "label": "Reserve a build slot",
+        "label_ar": "احجز موعد بناء",
         "badge": "Most owners start here",
+        "badge_ar": "أكثر ما يبدأ به أصحاب الأعمال",
         "due": "deposit", "surcharge": 0, "split": 1,
         "blurb": "OMR 100 today holds your slot in the build queue and comes straight off "
                  "your price. The balance is invoiced once your brief is confirmed.",
+        "blurb_ar": "‏100 ر.ع. اليوم تحفظ لك مكانك في دور البناء وتُخصم مباشرةً من سعرك. والمتبقي يُفوتر بعد تأكيد ملخّص طلبك.",
     },
     {
         "id": "full", "card": True, "recommended": False,
         "label": "Pay in full",
+        "label_ar": "ادفع المبلغ كاملاً",
         "badge": "Three extras included",
+        "badge_ar": "ثلاث إضافات مشمولة",
         "due": "total", "surcharge": 0, "split": 1,
         "blurb": "The whole build paid now. This is the Pay on Start price, and it carries "
                  "the Arabic content pass, the Google Business Profile fix and one staff "
                  "training session at no charge.",
+        "blurb_ar": "البناء كاملاً مدفوعاً الآن. هذا هو سعر الدفع عند البدء، ويشمل مجاناً تحرير المحتوى العربي، وضبط ملفّك في نشاطي التجاري على جوجل، وجلسة تدريب واحدة للفريق.",
     },
     {
         "id": "three", "card": True, "recommended": False,
         "label": "Three payments",
+        "label_ar": "ثلاث دفعات",
         "badge": "Spread it out",
+        "badge_ar": "وزّعها على مراحل",
         "due": "first", "surcharge": 70 * OMR, "split": 3,
         "blurb": "On signing, on go-live, and thirty days later. Paying in three adds "
                  "OMR 70 to the total.",
+        "blurb_ar": "عند التوقيع، وعند الإطلاق، وبعد ثلاثين يوماً. والدفع على ثلاث دفعات يضيف 70 ر.ع. إلى الإجمالي.",
     },
     {
         "id": "proof", "card": False, "recommended": False,
         "label": "Pay on Proof",
+        "label_ar": "ادفع عند الإثبات",
         "badge": "Nothing until it works",
+        "badge_ar": "لا شيء حتى ينجح",
         "due": "zero", "surcharge": 200 * OMR, "split": 1,
         "blurb": "Nothing today, and nothing when it goes live. You are invoiced only after "
                  "your site has produced its first real, verifiable buyer inquiry. If it "
                  "never does, you never pay. Pay on Proof adds OMR 200 to the total.",
+        "blurb_ar": "لا شيء اليوم، ولا شيء عند الإطلاق. تُفوتر فقط بعد أن ينتج موقعك أول استفسار حقيقي وقابل للتحقق من مشترٍ. وإن لم ينتجه أبداً، فلن تدفع أبداً. والدفع عند الإثبات يضيف 200 ر.ع. إلى الإجمالي.",
     },
 ]
 
@@ -196,6 +217,18 @@ def money(baisa):
     return f"{CURRENCY} {omr(baisa)}"
 
 
+# The Arabic pages never hand-type a figure: they call this, so the price table
+# and the checkout cannot drift the way the English table can. The numeral is
+# wrapped and forced LTR because an Arabic paragraph otherwise renders
+# "1,450" with the comma group reversed.
+CURRENCY_AR = "ر.ع."
+MONTHLY_AR = "شهرياً"
+
+
+def money_ar(baisa):
+    return f'<span class="num" dir="ltr">{omr(baisa)}</span> {CURRENCY_AR}'
+
+
 def bundle_saving(founding=None):
     """What the Operator Stack saves against buying the three separately."""
     parts = sum(price(i, founding) for i in CATALOG
@@ -224,7 +257,16 @@ def plan(plan_id):
 # needs the same table. It is serialised rather than restated: a price edited
 # above changes the rendered markup AND the script in the same build.
 # ---------------------------------------------------------------------------
-def config():
+def t(entry, field, lang="en"):
+    """A catalogue string in one language. Arabic falls back to the English if
+    a translation has not been written yet, which is what keeps a newly added
+    product from rendering as an empty label on the Arabic checkout."""
+    if lang == "ar":
+        return entry.get(field + "_ar") or entry[field]
+    return entry[field]
+
+
+def config(lang="en"):
     return {
         "currency": CURRENCY,
         "baisa": OMR,
@@ -235,22 +277,23 @@ def config():
         "deposit": DEPOSIT,
         "base": BASE_ID,
         "items": [
-            {"id": i["id"], "kind": i["kind"], "name": i["name"], "required": i["required"],
-             "price": price(i)}
+            {"id": i["id"], "kind": i["kind"], "name": t(i, "name", lang),
+             "required": i["required"], "price": price(i)}
             for i in CATALOG
         ],
-        "bundle": {"id": BUNDLE["id"], "name": BUNDLE["name"], "requires": BUNDLE["requires"],
+        "bundle": {"id": BUNDLE["id"], "name": t(BUNDLE, "name", lang),
+                   "requires": BUNDLE["requires"],
                    "price": price(BUNDLE), "saving": bundle_saving()},
         "plans": [
-            {"id": p["id"], "label": p["label"], "card": p["card"], "due": p["due"],
+            {"id": p["id"], "label": t(p, "label", lang), "card": p["card"], "due": p["due"],
              "surcharge": p["surcharge"], "split": p["split"]}
             for p in PLANS
         ],
     }
 
 
-def CONFIG_JSON():
-    return json.dumps(config(), separators=(",", ":"))
+def CONFIG_JSON(lang="en"):
+    return json.dumps(config(lang), separators=(",", ":"))
 
 
 # ---------------------------------------------------------------------------
@@ -263,38 +306,46 @@ def CONFIG_JSON():
 # rendered services page. Change a price here and forget the table, and the
 # build fails with the figure that no longer matches.
 # ---------------------------------------------------------------------------
-def check_services(html):
-    """Return a list of human-readable problems; empty means consistent."""
+def check_services(html, lang="en"):
+    """Return a list of human-readable problems; empty means consistent.
+
+    `lang` picks how a figure is written on the page under test. English writes
+    "OMR 950" as literal text in a hand-authored table; Arabic writes the
+    fragment money_ar() emits. Both are checked the same way, so an Arabic
+    price cannot quietly fall behind a change in this module either."""
+    ar = lang == "ar"
+    fmt = money_ar if ar else money
+    monthly_suffix = f"/{MONTHLY_AR}" if ar else "/mo"
+    page = "services-ar" if ar else "services-v4"
     problems = []
 
     for i in CATALOG:
-        want = omr(price(i))
         # The table writes add-ons as "+OMR 650" and the base as "OMR 950";
         # both contain "OMR 650" / "OMR 950", so one needle covers both.
-        needle = f"{CURRENCY} {want}"
+        needle = fmt(price(i))
         if i["kind"] == "monthly":
-            needle += "/mo"
+            needle += monthly_suffix
         if needle not in html:
-            problems.append(f"{i['name']}: services-v4 does not contain {needle!r}")
+            problems.append(f"{i['name']}: {page} does not contain {needle!r}")
 
-    if f"{CURRENCY} {omr(price(BUNDLE))}" not in html:
-        problems.append(f"{BUNDLE['name']}: services-v4 does not contain "
-                        f"'{CURRENCY} {omr(price(BUNDLE))}'")
+    if fmt(price(BUNDLE)) not in html:
+        problems.append(f"{BUNDLE['name']}: {page} does not contain "
+                        f"{fmt(price(BUNDLE))!r}")
 
     # The three published payment structures, as the page writes them.
     base = price(item(BASE_ID))
-    for pid, shown in (("full", money(base)),
-                       ("proof", money(base + plan("proof")["surcharge"]))):
+    for pid, shown in (("full", fmt(base)),
+                       ("proof", fmt(base + plan("proof")["surcharge"]))):
         if shown not in html:
-            problems.append(f"payment structure {pid!r}: services-v4 does not contain {shown!r}")
+            problems.append(f"payment structure {pid!r}: {page} does not contain {shown!r}")
 
     three = base + plan("three")["surcharge"]
     per = three // 3
     if per * 3 != three:
         problems.append(f"three-payment total {omr(three)} does not divide into 3 whole payments")
-    elif f"{CURRENCY} {omr(per)}" not in html:
-        problems.append(f"payment structure 'three': services-v4 does not contain "
-                        f"'{CURRENCY} {omr(per)}' (3 x)")
+    elif fmt(per) not in html:
+        problems.append(f"payment structure 'three': {page} does not contain "
+                        f"{fmt(per)!r} (3 x)")
 
     for i in CATALOG:
         if len(i["name"]) > THAWANI_NAME_MAX:

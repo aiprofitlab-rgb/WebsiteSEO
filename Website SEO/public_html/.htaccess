@@ -150,6 +150,21 @@ RewriteRule ^en/order-v4/?$      /en/order/      [R=301,L]
 RewriteRule ^en/blog-v4/?$       /blog/          [R=301,L]
 RewriteRule ^en/article-v4/?$    /blog/en/2026-06-25-true-cost-missed-whatsapp-inquiries-oman/ [R=301,L]
 
+# 2c. Arabic v4, 2026-08-21 - the Arabic set moved onto this skin and gained
+# four pages it never had. The five CORE Arabic pages (/ar/, /services/,
+# /process/, /about/, /contact/) keep their URLs and need no rule here: only
+# the skin under them changed, so nothing 301s and no ranking moves.
+#
+# The four new pages take the site's existing `-ar` suffix convention, which
+# rule 5 already maps to a root file - no rewrite is needed to SERVE them.
+# What is needed is retiring the stand-alone Arabic demo and simulator pages
+# that /demos-ar/ and /simulators-ar/ now carry. The old files stay on disk
+# behind these redirects as a fallback, exactly as the English ones did.
+RewriteRule ^missed-call-simulator-ar/?$          /simulators-ar/ [R=301,L]
+RewriteRule ^campaign-roi-simulator-ar/?$         /simulators-ar/ [R=301,L]
+RewriteRule ^whatsapp-receptionist-demo-ar/?$     /demos-ar/      [R=301,L]
+RewriteRule ^customized-ceo-dashboard-demo-ar/?$  /demos-ar/      [R=301,L]
+
 # 3. Serve pages that genuinely live INSIDE public_html/en/
 # Must come before rule 3b. That rule encodes the site's older convention,
 # where English pages sat at the document root as <name>-en.html, so it sends
