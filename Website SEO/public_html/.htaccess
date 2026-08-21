@@ -114,6 +114,42 @@ RewriteRule ^en/smart-website-offer/?$ smart-website-offer-en.html [L]
 RewriteRule ^en/blog/$ blog/index.html [L]
 RewriteRule ^en/academy/$ academy/index.html [L]
 
+# 2b. v4 launch, 2026-08-21 - the English pages moved onto clean URLs.
+# These must sit above rules 3/3b: the old English pages are still on disk as
+# <name>-en.html, so without a redirect here rule 3b would go on serving them.
+# 301, not 302 - the old paths are indexed and the equity has to move.
+RewriteRule ^en/services-en/?$   /en/services/   [R=301,L]
+RewriteRule ^en/process-en/?$    /en/process/    [R=301,L]
+RewriteRule ^en/about-en/?$      /en/about/      [R=301,L]
+RewriteRule ^en/contact-en/?$    /en/contact/    [R=301,L]
+
+# The English homepage moved from /en/ to the site root, and the Arabic
+# homepage took /ar/. Everything else Arabic keeps the root paths it had.
+RewriteRule ^en/?$               /               [R=301,L]
+
+# One demo page and one simulator page now carry what four separate pages
+# used to. The originals stay on disk; only the URLs are retired.
+RewriteRule ^en/whatsapp-receptionist-demo/?$    /en/demos/      [R=301,L]
+RewriteRule ^whatsapp-receptionist-demo/?$       /en/demos/      [R=301,L]
+RewriteRule ^customized-ceo-dashboard-demo/?$    /en/demos/      [R=301,L]
+RewriteRule ^en/missed-call-simulator-en/?$      /en/simulators/ [R=301,L]
+RewriteRule ^en/campaign-roi-simulator/?$        /en/simulators/ [R=301,L]
+RewriteRule ^campaign-roi-simulator/?$           /en/simulators/ [R=301,L]
+
+# The preview paths the set was built and reviewed on. Never indexed, but they
+# were shared as links, so they resolve rather than 404.
+RewriteRule ^en/index-v4/?$      /               [R=301,L]
+RewriteRule ^en/services-v4/?$   /en/services/   [R=301,L]
+RewriteRule ^en/process-v4/?$    /en/process/    [R=301,L]
+RewriteRule ^en/about-v4/?$      /en/about/      [R=301,L]
+RewriteRule ^en/contact-v4/?$    /en/contact/    [R=301,L]
+RewriteRule ^en/simulator-v4/?$  /en/simulators/ [R=301,L]
+RewriteRule ^en/demo-v4/?$       /en/demos/      [R=301,L]
+RewriteRule ^en/checkout-v4/?$   /en/checkout/   [R=301,L]
+RewriteRule ^en/order-v4/?$      /en/order/      [R=301,L]
+RewriteRule ^en/blog-v4/?$       /blog/          [R=301,L]
+RewriteRule ^en/article-v4/?$    /blog/en/2026-06-25-true-cost-missed-whatsapp-inquiries-oman/ [R=301,L]
+
 # 3. Serve pages that genuinely live INSIDE public_html/en/
 # Must come before rule 3b. That rule encodes the site's older convention,
 # where English pages sat at the document root as <name>-en.html, so it sends

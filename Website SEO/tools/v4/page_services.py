@@ -145,7 +145,7 @@ def body():
       them running, and every price is on this page.</p>
     <div class="btn-row" style="margin-top:30px">
       <a class="btn btn-teal" href="#price">Jump to the price list</a>
-      <a class="tlink" href="/en/process-v4/">How a build actually runs <span class="arw">&rarr;</span></a>
+      <a class="tlink" href="/en/process/">How a build actually runs <span class="arw">&rarr;</span></a>
     </div>
   </div>
 </header>
@@ -214,7 +214,7 @@ def body():
         </ul>
         <div class="pricetag"><b>+OMR 650</b><span>One-time &#183; added to the Smart Website</span></div>
         <div class="btn-row">
-          <a class="btn btn-teal" href="/customized-ceo-dashboard-demo/">Open the live demo</a>
+          <a class="btn btn-teal" href="/en/demos/#dash">Open the live demo</a>
           <a class="tlink" href="#price">See it in the price list <span class="arw">&rarr;</span></a>
         </div>
       </div>
@@ -341,7 +341,7 @@ def body():
         <span class="price">OMR 1,150</span>
         <p>Nothing today. Nothing when it goes live. I invoice you only after your smart website has produced its
           first real, verifiable buyer inquiry. If it never does, you never pay.</p>
-        <div class="btn-row"><a class="btn btn-amber" href="/en/checkout-v4/?plan=proof">Start this order</a><a class="btn btn-ghost" href="{WA}&text=Hello%20Nahid%2C%20I%20want%20the%20Smart%20Website%20on%20Pay%20on%20Proof%20terms.">{WA_ICON}Ask first</a></div>
+        <div class="btn-row"><a class="btn btn-amber" href="/en/checkout/?plan=proof">Start this order</a><a class="btn btn-ghost" href="{WA}&text=Hello%20Nahid%2C%20I%20want%20the%20Smart%20Website%20on%20Pay%20on%20Proof%20terms.">{WA_ICON}Ask first</a></div>
       </div>
       <div class="pay">
         <span class="badge">Cheapest</span>
@@ -349,7 +349,7 @@ def body():
         <span class="price">OMR 950</span>
         <p>Paid up front {{PAY_HOW}}. Saves you OMR 200 against Pay on Proof, and includes the Arabic
           content pass, the Google Business Profile fix, and one staff training session at no charge.</p>
-        <div class="btn-row"><a class="btn btn-ghost" href="/en/checkout-v4/?plan=full">Start this order</a><a class="btn btn-ghost" href="{WA}&text=Hello%20Nahid%2C%20I%20want%20the%20Smart%20Website%20paid%20up%20front%20at%20OMR%20950.">{WA_ICON}Ask first</a></div>
+        <div class="btn-row"><a class="btn btn-ghost" href="/en/checkout/?plan=full">Start this order</a><a class="btn btn-ghost" href="{WA}&text=Hello%20Nahid%2C%20I%20want%20the%20Smart%20Website%20paid%20up%20front%20at%20OMR%20950.">{WA_ICON}Ask first</a></div>
       </div>
       <div class="pay">
         <span class="badge">Spread it out</span>
@@ -357,12 +357,12 @@ def body():
         <span class="price">3 &times; OMR 340</span>
         <p>On signing, on go-live, and thirty days later. Less than one month of an administrator&#8217;s salary
           in total &mdash; and it keeps working after the three months are done.</p>
-        <div class="btn-row"><a class="btn btn-ghost" href="/en/checkout-v4/?plan=three">Start this order</a><a class="btn btn-ghost" href="{WA}&text=Hello%20Nahid%2C%20I%20want%20the%20Smart%20Website%20on%20the%20three-payment%20plan.">{WA_ICON}Ask first</a></div>
+        <div class="btn-row"><a class="btn btn-ghost" href="/en/checkout/?plan=three">Start this order</a><a class="btn btn-ghost" href="{WA}&text=Hello%20Nahid%2C%20I%20want%20the%20Smart%20Website%20on%20the%20three-payment%20plan.">{WA_ICON}Ask first</a></div>
       </div>
     </div>
 
     <p class="lede" style="margin:clamp(20px,2.6vw,30px) auto 0;max-width:66ch">
-      Not ready to commit the whole figure today? <a href="/en/checkout-v4/">Reserve a build slot for
+      Not ready to commit the whole figure today? <a href="/en/checkout/">Reserve a build slot for
       {{DEPOSIT}}</a> instead &mdash; it holds your place in the queue, comes off your price in full, and is
       refundable until the day building starts.
     </p>
@@ -412,9 +412,9 @@ def body():
           and send you the scorecard &mdash; no obligation, and you keep it either way.</p>
       </div>
       <div class="btn-row">
-        <a class="btn btn-amber" href="/en/contact-v4/#test">Get the Silent Buyer Test</a>
-        <a class="btn btn-ghost" href="/en/checkout-v4/">Or start an order</a>
-        <a class="btn btn-ghost" href="/en/process-v4/">See how a build runs</a>
+        <a class="btn btn-amber" href="/en/contact/#test">Get the Silent Buyer Test</a>
+        <a class="btn btn-ghost" href="/en/checkout/">Or start an order</a>
+        <a class="btn btn-ghost" href="/en/process/">See how a build runs</a>
       </div>
     </div>
   </div>
@@ -430,12 +430,12 @@ def body():
 
 
 META = dict(
-    slug="services-v4",
+    slug="services",
     title="What I build | AI Profit Lab — three systems, every price published",
     desc=("The Smart Website, the Live Owner Dashboard and the Full Autopilot - what each one does, "
           "what it costs in OMR, and what is deliberately not included."),
-    nav="/en/services-v4/",
-    next=("Next", "How it works", "/en/process-v4/"),
+    nav="/en/services/",
+    next=("Next", "How it works", "/en/process/"),
     schema="""{
   "@context":"https://schema.org",
   "@type":"ItemList",

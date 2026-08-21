@@ -97,11 +97,11 @@ def body():
     # the shared blocks are built first and passed in as plain strings.
     contact = f"""    <div class="btn-row" style="margin-top:clamp(26px,3.4vw,38px)">
       <a class="btn btn-wa" href="{WA}&text=Hello%20Nahid%2C%20about%20my%20order%20">{WA_ICON}Ask me about it</a>
-      <a class="btn btn-ghost" href="/en/index-v4/">Back to the site</a>
+      <a class="btn btn-ghost" href="/">Back to the site</a>
     </div>"""
 
     retry = f"""    <div class="btn-row" style="margin-top:clamp(26px,3.4vw,38px)">
-      <a class="btn btn-amber" href="/en/checkout-v4/?restore=1">Pick up where I left off</a>
+      <a class="btn btn-amber" href="/en/checkout/?restore=1">Pick up where I left off</a>
       <a class="btn btn-ghost" href="{WA}&text=Hello%20Nahid%2C%20I%20had%20trouble%20paying%20on%20the%20site.">Something went wrong &mdash; tell me</a>
     </div>"""
 
@@ -264,9 +264,10 @@ JS = r"""
 
 
 META = dict(
-    slug="order-v4",
+    noindex=True,
+    slug="order",
     title="Your order | AI Profit Lab",
     desc="Where your AI Profit Lab order stands, and what happens next.",
-    nav="/en/services-v4/",
-    next=("Back to the start", "You don't have to learn AI", "/en/index-v4/"),
+    nav="/en/services/",
+    next=("Back to the start", "You don't have to learn AI", "/"),
 )

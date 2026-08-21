@@ -33,6 +33,17 @@ EXCLUDE_FILES = {
     "whatsapp_receptionist_demo.html",   # superseded by the hyphenated version
     "Customized_CEO_Dashboard.html",     # superseded by customized-ceo-dashboard-demo
     "onboarding.html",                   # client-only page, not public marketing
+    # Retired by the v4 launch, 2026-08-21. The files stay on disk as a
+    # fallback behind their 301s, but Aiden must never hand a visitor a URL
+    # that redirects - it quotes these paths verbatim in its answers.
+    "services-en.html",
+    "process-en.html",
+    "about-en.html",
+    "contact-en.html",
+    "missed-call-simulator-en.html",
+    "campaign-roi-simulator.html",
+    "whatsapp-receptionist-demo.html",
+    "customized-ceo-dashboard-demo.html",
 }
 EXCLUDE_PATTERNS = [
     re.compile(r"/en/.*-new\.html$"),        # unreleased template skins
@@ -40,6 +51,8 @@ EXCLUDE_PATTERNS = [
     re.compile(r"/en/index-v3\.html$"),      # superseded homepage draft
     re.compile(r"/en/preview-templates\.html$"),
     re.compile(r"/tmp_"),
+    re.compile(r"^/en/index\.html$"),        # English home moved to /
+    re.compile(r"^/en/claim\.html$"),
 ]
 
 # Ordered: first matching rule wins.
@@ -56,7 +69,7 @@ TYPE_RULES = [
     (re.compile(r"offer"), "offer"),
     (re.compile(r"simulator|calculator"), "tool"),
     (re.compile(r"demo"), "demo"),
-    (re.compile(r"^/index\.html$|^/en/index\.html$"), "home"),
+    (re.compile(r"^/index\.html$|^/ar/index\.html$"), "home"),
 ]
 
 STOPWORDS = set("""

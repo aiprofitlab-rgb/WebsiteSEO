@@ -23,7 +23,7 @@ Three properties it has to keep:
    card number is ever typed into aiprofitlab.io. The front end only ever calls
    our own API, whose contract is written down in docs/payments-api.md.
 
-Deep links: /en/checkout-v4/?plan=full&items=dashboard,autopilot preselects a
+Deep links: /en/checkout/?plan=full&items=dashboard,autopilot preselects a
 configuration, which is what the buttons on the services page use.
 """
 import pay
@@ -595,8 +595,8 @@ def body():
           the way a buyer would and send you the scorecard. You keep it either way, and there is no pitch attached.</p>
       </div>
       <div class="btn-row">
-        <a class="btn btn-amber" href="/en/contact-v4/#test">Get the Silent Buyer Test</a>
-        <a class="btn btn-ghost" href="/en/services-v4/#price">See the full price list</a>
+        <a class="btn btn-amber" href="/en/contact/#test">Get the Silent Buyer Test</a>
+        <a class="btn btn-ghost" href="/en/services/#price">See the full price list</a>
       </div>
     </div>
   </div>
@@ -1082,12 +1082,12 @@ JS = r"""
 
 
 META = dict(
-    slug="checkout-v4",
+    slug="checkout",
     title="Checkout | AI Profit Lab — build it the way you need it",
     desc=("Choose what gets built, choose how you pay for it, and see the total before you commit. "
           "Priced in OMR by Lotus Gulf International, CR 1570092, Muscat."),
-    nav="/en/services-v4/",
-    next=("Any last questions?", "Talk to the person who builds it", "/en/contact-v4/"),
+    nav="/en/services/",
+    next=("Any last questions?", "Talk to the person who builds it", "/en/contact/"),
     schema="""{
   "@context":"https://schema.org",
   "@type":"CheckoutPage",

@@ -3,19 +3,19 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<!-- Stays noindex until Nahid approves this set for launch. When it launches,
-     remove this tag AND add the noindex to the page it replaces in the SAME
-     deploy - never separately, or both versions compete in the index. -->
-<meta name="robots" content="noindex, nofollow">
-<title>Your order | AI Profit Lab</title>
-<meta name="description" content="Where your AI Profit Lab order stands, and what happens next.">
-<link rel="canonical" href="https://aiprofitlab.io/en/order-v4/">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+<link rel="alternate" hreflang="en" href="https://aiprofitlab.io/en/process/">
+<link rel="alternate" hreflang="ar" href="https://aiprofitlab.io/process/">
+<link rel="alternate" hreflang="x-default" href="https://aiprofitlab.io/en/process/">
+<title>How it works | AI Profit Lab — from first message to live in about a week</title>
+<meta name="description" content="Five steps: a free Silent Buyer Test, one honest conversation, the build, go-live, and a 30-day promise. What I need from you, and where it goes wrong.">
+<link rel="canonical" href="https://aiprofitlab.io/en/process/">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 
 <meta property="og:type" content="website">
-<meta property="og:title" content="Your order | AI Profit Lab">
-<meta property="og:description" content="Where your AI Profit Lab order stands, and what happens next.">
-<meta property="og:url" content="https://aiprofitlab.io/en/order-v4/">
+<meta property="og:title" content="How it works | AI Profit Lab — from first message to live in about a week">
+<meta property="og:description" content="Five steps: a free Silent Buyer Test, one honest conversation, the build, go-live, and a 30-day promise. What I need from you, and where it goes wrong.">
+<meta property="og:url" content="https://aiprofitlab.io/en/process/">
 <meta property="og:image" content="https://aiprofitlab.io/og-aiprofitlab-2026.jpg">
 <meta property="og:locale" content="en_OM">
 <meta name="twitter:card" content="summary_large_image">
@@ -545,178 +545,310 @@ section{position:relative;padding:clamp(74px,9vw,138px) 0}
   .review .gmark svg{width:22px;height:22px}
 }
 
-.ost{padding:clamp(140px,16vw,200px) 0 clamp(50px,6vw,80px)}
-.ost .wrap{position:relative}
-
-/* the state mark: a ring that draws itself, then the glyph inside it */
-.mark-o{
-  width:88px;height:88px;border-radius:50%;display:grid;place-items:center;margin:0 0 28px;
-  border:2px solid var(--line-dark);position:relative;
+/* --------------------------------------------------------- the week bar */
+.weekbar{margin-top:clamp(26px,3.5vw,44px)}
+.wb{display:grid;grid-template-columns:1fr 2fr 3fr 1fr 1fr;gap:4px;margin-bottom:12px}
+.wb i{
+  display:block;height:16px;border-radius:4px;background:var(--teal);
+  transform-origin:0 50%;transform:scaleX(0);transition:transform .8s var(--ease);transition-delay:var(--d,0s);
 }
-.mark-o svg{width:40px;height:40px;fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
-.mark-o.good{border-color:rgba(31,175,94,.5)}
-.mark-o.good svg{stroke:var(--wa)}
-.mark-o.wait{border-color:rgba(232,201,143,.5)}
-.mark-o.wait svg{stroke:var(--amber-bright)}
-.mark-o.stop{border-color:rgba(166,67,31,.55)}
-.mark-o.stop svg{stroke:#E08461}
-.mark-o svg path,.mark-o svg circle,.mark-o svg polyline{
-  stroke-dasharray:var(--len,80);stroke-dashoffset:var(--len,80);
-  animation:draw .9s var(--ease) forwards;animation-delay:.15s;
-}
-@keyframes draw{to{stroke-dashoffset:0}}
-@media (prefers-reduced-motion:reduce){ .mark-o svg path,.mark-o svg circle,.mark-o svg polyline{animation:none;stroke-dashoffset:0} }
+.weekbar.vis .wb i{transform:none}
+html:not(.js) .wb i{transform:none}
+.wb i:nth-child(1){background:var(--amber)}
+.wb i:nth-child(2){background:var(--teal-600)}
+.wb i:nth-child(3){background:var(--teal)}
+.wb i:nth-child(4){background:var(--teal-900)}
+.wb i:nth-child(5){background:var(--wa)}
+.wbl{display:grid;grid-template-columns:1fr 2fr 3fr 1fr 1fr;gap:4px}
+.wbl span{font-family:var(--mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);line-height:1.5}
+.wbl b{display:block;color:var(--teal-950);font-weight:500}
+.wb{min-height:16px}
 
-.ost h1{font-size:clamp(2.2rem,5vw,3.6rem);line-height:1.05;margin:0 0 18px}
-.ost .lede{max-width:56ch}
-
-.refcard{
-  display:inline-flex;flex-wrap:wrap;align-items:center;gap:clamp(16px,3vw,34px);
-  background:rgba(241,239,232,.06);border:1px solid var(--line-dark);border-radius:14px;
-  padding:18px clamp(20px,2.6vw,28px);margin:clamp(24px,3vw,34px) 0 0;
+/* ------------------------------------------------------------- the steps */
+.steps{margin-top:clamp(40px,6vw,80px)}
+.step-row{display:grid;grid-template-columns:88px 1fr 1fr;gap:clamp(18px,3vw,46px);align-items:start;position:relative;padding-bottom:clamp(46px,6vw,84px)}
+.step-row:last-child{padding-bottom:0}
+.step-rail{position:relative;display:flex;flex-direction:column;align-items:center;align-self:stretch}
+.step-rail .dotn{
+  width:56px;height:56px;border-radius:50%;border:1px solid var(--line);background:var(--white);
+  display:grid;place-items:center;font-family:var(--mono);font-size:.92rem;color:var(--muted);
+  flex:none;z-index:2;transition:background .5s,color .5s,border-color .5s,transform .5s var(--ease);
 }
-.refcard div{display:flex;flex-direction:column;gap:5px}
-.refcard .k{font-family:var(--mono);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--amber-pale)}
-.refcard .v{font-family:var(--mono);font-size:1.08rem;color:var(--cream);letter-spacing:.05em;font-variant-numeric:tabular-nums}
+.step-row.vis .dotn{background:var(--teal-950);color:var(--amber-bright);border-color:var(--teal-950);transform:scale(1.04)}
+.step-rail .ln{flex:1;width:1px;background:var(--line);margin-top:10px;transform:scaleY(0);transform-origin:50% 0;transition:transform .9s var(--ease) .15s}
+.step-row.vis .ln{transform:none}
+.step-row:last-child .ln{display:none}
+html:not(.js) .step-rail .ln{transform:none}
+.step-body h3{font-size:clamp(1.4rem,2.6vw,2rem);margin:6px 0 12px}
+.step-body p{color:var(--muted);font-size:1.02rem;margin:0 0 14px}
+.step-when{font-family:var(--mono);font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--amber-text);display:block;margin-bottom:2px}
 
-/* next steps */
-.nxt{list-style:none;margin:clamp(28px,4vw,44px) 0 0;padding:0;display:grid;gap:0;counter-reset:n}
-.nxt li{
-  position:relative;padding:20px 0 20px 52px;border-top:1px solid var(--line);
-  color:var(--muted);font-size:1rem;line-height:1.6;
+/* ----------------------------------------------------------- mock cards */
+.mock{background:var(--white);border:1px solid var(--line);border-radius:14px;padding:20px 22px;box-shadow:0 30px 56px -44px rgba(7,43,34,.55)}
+.mock .mh{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid var(--line);padding-bottom:11px;margin-bottom:14px}
+.mock .mh b{font-family:var(--display);font-size:1.1rem;color:var(--teal-950);font-weight:400}
+.mock .mh span{font-family:var(--mono);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.scorerow{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:9px 0;border-bottom:1px dotted var(--line);font-size:.92rem}
+.scorerow:last-child{border-bottom:0}
+.scorerow em{font-style:normal;color:var(--muted)}
+.grade{font-family:var(--mono);font-size:.78rem;letter-spacing:.06em;padding:3px 10px;border-radius:99px;white-space:nowrap}
+.grade.bad{background:rgba(166,67,31,.12);color:var(--alert)}
+.grade.mid{background:rgba(186,117,23,.14);color:var(--amber)}
+.grade.good{background:rgba(31,175,94,.14);color:#127A41}
+.checks{list-style:none;margin:0;padding:0}
+.checks li{position:relative;padding:8px 0 8px 28px;font-size:.94rem;border-bottom:1px dotted var(--line)}
+.checks li:last-child{border-bottom:0}
+.checks li::before{
+  content:"";position:absolute;left:2px;top:1.15em;width:13px;height:7px;border-left:2px solid var(--wa);
+  border-bottom:2px solid var(--wa);transform:rotate(-45deg);
 }
-.nxt li:last-child{border-bottom:1px solid var(--line)}
-.nxt li::before{
-  counter-increment:n;content:"0" counter(n);position:absolute;left:0;top:20px;
-  font-family:var(--mono);font-size:.82rem;letter-spacing:.12em;color:var(--amber-text);
-}
-.nxt b{color:var(--teal-950);font-weight:600;display:block;font-size:1.05rem;margin-bottom:3px;font-family:var(--display)}
+.board{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}
+.board .col{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px}
+.board .col b{display:block;font-family:var(--mono);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.board .t{background:var(--white);border:1px solid var(--line);border-radius:6px;padding:7px 8px;font-size:.74rem;line-height:1.35;margin-bottom:6px;color:var(--ink)}
+.board .t:last-child{margin-bottom:0}
+.board .col.done .t{color:var(--muted);text-decoration:line-through;text-decoration-color:var(--line)}
 
-.state{display:none}
-.state.on{display:block}
+/* ------------------------------------------------------------ you-give */
+.give{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,2vw,22px)}
+.give div{border:1px solid var(--line-dark);border-radius:14px;padding:24px 26px;background:rgba(241,239,232,.045)}
+.give b{display:block;font-family:var(--display);font-size:1.3rem;color:var(--cream);font-weight:400;margin-bottom:7px}
+.give p{margin:0;font-size:.96rem;color:rgba(241,239,232,.7)}
+.give .t{font-family:var(--mono);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--amber-bright);display:block;margin-bottom:12px}
+
+@media (max-width:900px){
+  /* minmax(0,1fr): the automatic minimum of a plain 1fr track is the widest
+     thing inside it, so the 3-column .board held this row at ~430px and the
+     right edge of every step was clipped on a phone. */
+  .step-row{grid-template-columns:56px minmax(0,1fr)}
+  .step-row .art{grid-column:2}
+  .wb,.wbl{grid-template-columns:1fr 1fr}
+  .wbl span:nth-child(n+3){margin-top:6px}
+  .give{grid-template-columns:1fr}
+  .step-rail .dotn{width:44px;height:44px;font-size:.8rem}
+}
 </style>
-
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"HowTo",
+  "name":"How an AI Profit Lab build runs",
+  "totalTime":"P7D",
+  "step":[
+    {"@type":"HowToStep","position":1,"name":"The Silent Buyer Test","text":"I message your business the way a buyer would and send you a scorecard of what happened. Free."},
+    {"@type":"HowToStep","position":2,"name":"One honest conversation","text":"Thirty minutes on which system fixes the leak, what it costs, and whether it is worth doing."},
+    {"@type":"HowToStep","position":3,"name":"The build","text":"Days one to six, with a live link on day three and one round of changes included."},
+    {"@type":"HowToStep","position":4,"name":"Go live","text":"Tested from a real phone, with your team shown how it works in one sitting."},
+    {"@type":"HowToStep","position":5,"name":"The 30-day promise","text":"No real buyer inquiry within 30 days? It gets rebuilt free, or your money back."}
+  ]
+}
+</script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
 <header class="top" id="top">
-  <a href="/en/index-v4/" aria-label="AI Profit Lab home">
+  <a href="/" aria-label="AI Profit Lab home">
     <img class="mark" src="/assets/brand/wordmark-primary.svg" alt="AI Profit Lab" width="160" height="28">
   </a>
   <nav class="nav" aria-label="Primary">
-        <a class="lnk" href="/en/services-v4/" aria-current="page">What I Build</a>
-    <a class="lnk" href="/en/process-v4/">How It Works</a>
-    <a class="lnk" href="/en/about-v4/">About</a>
-    <a class="lnk" href="/en/contact-v4/">Contact</a>
-    <a class="lnk" href="/en/blog-v4/">Articles</a>
-    <a class="lnk" href="/" lang="ar">&#1593;&#1585;&#1576;&#1610;</a>
+        <a class="lnk" href="/en/services/">What I Build</a>
+    <a class="lnk" href="/en/process/" aria-current="page">How It Works</a>
+    <a class="lnk" href="/en/about/">About</a>
+    <a class="lnk" href="/en/contact/">Contact</a>
+    <a class="lnk" href="/blog/">Articles</a>
+    <a class="lnk" href="/ar/" lang="ar">&#1593;&#1585;&#1576;&#1610;</a>
     <a class="top-wa" href="https://api.whatsapp.com/send?phone=96899245250&text=Hello%20Nahid%2C%20I%20have%20a%20question%20about%20my%20business." target="_blank" rel="noopener" aria-label="Chat with Nahid on WhatsApp"><svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 1.8a8.2 8.2 0 1 1-4.2 15.3l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8zm-3.1 4c-.2 0-.5 0-.7.3-.2.3-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.8 2.8 4.4 3.8 2.2.9 2.6.7 3.1.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2-.1-.1-.2-.2-.5-.3l-1.7-.8c-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.1-.2 0-.4.1-.5l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5L10 8.2c-.2-.4-.4-.4-.6-.4h-.5z"/></svg><span>WhatsApp</span></a>
     <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="mmenu"><i></i></button>
   </nav>
 </header>
 <div class="mmenu" id="mmenu" aria-hidden="true">
-    <a href="/en/index-v4/"><em>01</em>Home</a>
-  <a href="/en/services-v4/" aria-current="page"><em>02</em>What I Build</a>
-  <a href="/en/process-v4/"><em>03</em>How It Works</a>
-  <a href="/en/about-v4/"><em>04</em>About</a>
-  <a href="/en/contact-v4/"><em>05</em>Contact</a>
-  <a href="/en/blog-v4/"><em>06</em>Articles</a>
+    <a href="/"><em>01</em>Home</a>
+  <a href="/en/services/"><em>02</em>What I Build</a>
+  <a href="/en/process/" aria-current="page"><em>03</em>How It Works</a>
+  <a href="/en/about/"><em>04</em>About</a>
+  <a href="/en/contact/"><em>05</em>Contact</a>
+  <a href="/blog/"><em>06</em>Articles</a>
   <p class="mfoot">hello@aiprofitlab.io &middot; <span dir="ltr">+968 9924 5250</span><br>Muscat, Oman</p>
 </div>
 <main id="main">
 
-<header class="ost s-dark grain">
+<header class="phero s-cream grain">
   <div class="wrap">
+    <p class="eyebrow"><span class="star">&#10038;</span> How it works</p>
+    <h1 class="h1">First message to live system,<br>in about a week.</h1>
+    <p class="lede">Five steps. The first one is free, the second one is a conversation, and you can stop
+      after either without owing anything.</p>
 
-  <div class="state" id="st-wait">
-    <span class="mark-o wait" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><polyline points="12,6.5 12,12 16,14.5"/></svg></span>
-    <h1 class="h1">Thank you &mdash; I&#8217;m confirming your payment.</h1>
-    <p class="lede">Your order has come through. I check every payment by hand against the provider before I call anything confirmed, so your receipt follows by email shortly &mdash; usually within minutes, and always within one business day.</p>
-    <div class="refcard">
-      <div><span class="k">Your reference</span><span class="v" data-ref>&mdash;</span></div>
-      <div><span class="k">Status</span><span class="v" data-status>Confirming</span></div>
+    <div class="weekbar rv">
+      <div class="wb"><i style="--d:0s"></i><i style="--d:.1s"></i><i style="--d:.2s"></i><i style="--d:.3s"></i><i style="--d:.4s"></i></div>
+      <div class="wbl">
+        <span><b>Day 0</b>Test &amp; call</span>
+        <span><b>Days 1&ndash;2</b>Copy &amp; structure</span>
+        <span><b>Days 3&ndash;5</b>Build</span>
+        <span><b>Day 6</b>Your review</span>
+        <span><b>Day 7</b>Live</span>
+      </div>
     </div>
-    <div class="btn-row" style="margin-top:clamp(26px,3.4vw,38px)">
-      <a class="btn btn-wa" href="https://api.whatsapp.com/send?phone=96899245250&text=Hello%20Nahid%2C%20about%20my%20order%20"><svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 1.8a8.2 8.2 0 1 1-4.2 15.3l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8zm-3.1 4c-.2 0-.5 0-.7.3-.2.3-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.8 2.8 4.4 3.8 2.2.9 2.6.7 3.1.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2-.1-.1-.2-.2-.5-.3l-1.7-.8c-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.1-.2 0-.4.1-.5l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5L10 8.2c-.2-.4-.4-.4-.6-.4h-.5z"/></svg>Ask me about it</a>
-      <a class="btn btn-ghost" href="/en/index-v4/">Back to the site</a>
-    </div>
-  </div>
-
-  <div class="state" id="st-paid">
-    <span class="mark-o good" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="4,13 9.5,18.5 20,6"/></svg></span>
-    <h1 class="h1">Payment received. Your slot is held.</h1>
-    <p class="lede">That is the money side finished. Everything from here is me and you: I will be in touch within one business day to take the brief properly, and nothing gets built off a form alone.</p>
-    <div class="refcard">
-      <div><span class="k">Your reference</span><span class="v" data-ref>&mdash;</span></div>
-      <div><span class="k">Paid</span><span class="v" data-paid>&mdash;</span></div>
-    </div>
-    <div class="btn-row" style="margin-top:clamp(26px,3.4vw,38px)">
-      <a class="btn btn-wa" href="https://api.whatsapp.com/send?phone=96899245250&text=Hello%20Nahid%2C%20about%20my%20order%20"><svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 1.8a8.2 8.2 0 1 1-4.2 15.3l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8zm-3.1 4c-.2 0-.5 0-.7.3-.2.3-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.8 2.8 4.4 3.8 2.2.9 2.6.7 3.1.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2-.1-.1-.2-.2-.5-.3l-1.7-.8c-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.1-.2 0-.4.1-.5l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5L10 8.2c-.2-.4-.4-.4-.6-.4h-.5z"/></svg>Ask me about it</a>
-      <a class="btn btn-ghost" href="/en/index-v4/">Back to the site</a>
-    </div>
-  </div>
-
-  <div class="state" id="st-cancel">
-    <span class="mark-o stop" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12"/><path d="M18 6L6 18"/></svg></span>
-    <h1 class="h1">Nothing was charged.</h1>
-    <p class="lede">You backed out of the payment page, which is entirely your right &mdash; no money moved and no order was created. Your configuration is still saved in this browser, so you can walk straight back into it, or ask me the question that stopped you.</p>
-    <div class="btn-row" style="margin-top:clamp(26px,3.4vw,38px)">
-      <a class="btn btn-amber" href="/en/checkout-v4/?restore=1">Pick up where I left off</a>
-      <a class="btn btn-ghost" href="https://api.whatsapp.com/send?phone=96899245250&text=Hello%20Nahid%2C%20I%20had%20trouble%20paying%20on%20the%20site.">Something went wrong &mdash; tell me</a>
-    </div>
-  </div>
-
-  <div class="state" id="st-fail">
-    <span class="mark-o stop" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12"/><path d="M18 6L6 18"/></svg></span>
-    <h1 class="h1">That payment didn&#8217;t go through.</h1>
-    <p class="lede">The provider tells me the payment was not completed, so nothing has been charged. This is usually a bank declining an online transaction rather than anything wrong with the card &mdash; a call to them, or a different card, normally settles it.</p>
-    <div class="btn-row" style="margin-top:clamp(26px,3.4vw,38px)">
-      <a class="btn btn-amber" href="/en/checkout-v4/?restore=1">Pick up where I left off</a>
-      <a class="btn btn-ghost" href="https://api.whatsapp.com/send?phone=96899245250&text=Hello%20Nahid%2C%20I%20had%20trouble%20paying%20on%20the%20site.">Something went wrong &mdash; tell me</a>
-    </div>
-  </div>
-
-  <div class="state" id="st-none">
-    <span class="mark-o wait" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><polyline points="12,6.5 12,12 16,14.5"/></svg></span>
-    <h1 class="h1">Looking for an order?</h1>
-    <p class="lede">There is nothing to show on this page unless you have just come back from a payment. If you have an order reference and want to know where it stands, send it to me and I will tell you in plain terms.</p>
-    <div class="btn-row" style="margin-top:clamp(26px,3.4vw,38px)">
-      <a class="btn btn-wa" href="https://api.whatsapp.com/send?phone=96899245250&text=Hello%20Nahid%2C%20about%20my%20order%20"><svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 1.8a8.2 8.2 0 1 1-4.2 15.3l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8zm-3.1 4c-.2 0-.5 0-.7.3-.2.3-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.8 2.8 4.4 3.8 2.2.9 2.6.7 3.1.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2-.1-.1-.2-.2-.5-.3l-1.7-.8c-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.1-.2 0-.4.1-.5l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5L10 8.2c-.2-.4-.4-.4-.6-.4h-.5z"/></svg>Ask me about it</a>
-      <a class="btn btn-ghost" href="/en/index-v4/">Back to the site</a>
-    </div>
-  </div>
-
   </div>
 </header>
 
-<section class="s-cream grain pad-s">
-  <div class="wrap-n">
-    <p class="eyebrow"><span class="star">&#10038;</span> What happens now</p>
-    <h2 class="h2">The next four things, in order.</h2>
-    <ol class="nxt">
-      <li><b>Your receipt and invoice</b>Emailed to the address on your order, itemised, from Lotus Gulf
-        International (CR <span dir="ltr">1570092</span>). No VAT line, because the company is below the
-        registration threshold.</li>
-      <li><b>The brief call</b>Within one business day. Half an hour, on the phone or WhatsApp, about your
-        business rather than about websites.</li>
-      <li><b>A link in the first week</b>You watch it get built. You are never handed a finished thing you
-        have not already seen and commented on.</li>
-      <li><b>Go-live, and the promise starts</b>The 30-day First Inquiry Promise counts from the day it goes
-        live, not the day you paid.</li>
-    </ol>
-
-    <p style="margin-top:clamp(26px,3.4vw,38px);color:var(--muted);font-size:.96rem">
-      Changed your mind? The <a href="/refund-policy/">Refund &amp; Cancellation Policy</a> sets out exactly
-      what comes back and when &mdash; in short, everything, until the day building starts.
-    </p>
+<section class="s-panel">
+  <div class="wrap">
+    <div class="steps">
+      <div class="step-row rv">
+  <div class="step-rail"><span class="dotn">01</span><span class="ln"></span></div>
+  <div class="step-body">
+    <span class="step-when">Day 0 &#183; free</span>
+    <h3>The Silent Buyer Test</h3>
+    <p>I message your business the way a buyer would &mdash; in Arabic, after hours &mdash; and send you a scorecard of what happened. You owe me nothing, and most people stop here having learned something.</p>
+  </div>
+  <div class="art"><div class="mock">
+  <div class="mh"><b>Silent Buyer Test</b><span>Your scorecard</span></div>
+  <div class="scorerow"><em>Reply to a WhatsApp message at 9pm</em><span class="grade bad">No reply</span></div>
+  <div class="scorerow"><em>Reply to the same message next morning</em><span class="grade mid">14h 25m</span></div>
+  <div class="scorerow"><em>Answered in Arabic</em><span class="grade bad">No</span></div>
+  <div class="scorerow"><em>Bulk pricing offered</em><span class="grade bad">No</span></div>
+  <div class="scorerow"><em>Website found on Google</em><span class="grade good">Page 1</span></div>
+  <div class="scorerow"><em>Business named by ChatGPT</em><span class="grade bad">Not mentioned</span></div>
+</div>
+<p class="lede" style="font-size:.86rem;margin:14px 0 0">Illustration of the format. Yours is filled in with what actually happened.</p></div>
+</div>
+<div class="step-row rv">
+  <div class="step-rail"><span class="dotn">02</span><span class="ln"></span></div>
+  <div class="step-body">
+    <span class="step-when">Day 0 &#183; 30 minutes</span>
+    <h3>One honest conversation</h3>
+    <p>We look at the scorecard together and I tell you which system fixes it, what it costs, and whether it is worth doing at all.</p>
+  </div>
+  <div class="art"><div class="mock">
+  <div class="mh"><b>The call</b><span>30 minutes</span></div>
+  <ul class="checks">
+    <li>Where the money is leaking, in your words</li>
+    <li>What your buyers actually ask, and in which language</li>
+    <li>Which of the three systems fixes it &mdash; often only one</li>
+    <li>The number, and how you would rather pay it</li>
+    <li>What I will <em>not</em> be doing for you</li>
+  </ul>
+</div>
+<p class="lede" style="font-size:.86rem;margin:14px 0 0">No slides. No proposal to sit through. If it isn&#8217;t a fit I will say so on the call.</p></div>
+</div>
+<div class="step-row rv">
+  <div class="step-rail"><span class="dotn">03</span><span class="ln"></span></div>
+  <div class="step-body">
+    <span class="step-when">Days 1&ndash;6</span>
+    <h3>The build</h3>
+    <p>I build it. You get a link on day three to look at real progress, not a status email. One round of changes is expected, not charged for.</p>
+  </div>
+  <div class="art"><div class="mock">
+  <div class="mh"><b>Your build</b><span>Day 3 of 7</span></div>
+  <div class="board">
+    <div class="col done"><b>Done</b>
+      <div class="t">Catalogue &amp; terms captured</div>
+      <div class="t">EN + AR copy drafted</div>
+      <div class="t">Structure signed off</div>
+    </div>
+    <div class="col"><b>Building</b>
+      <div class="t">Buyer agent trained on your stock</div>
+      <div class="t">WhatsApp handoff wired</div>
+      <div class="t">Quote flow</div>
+    </div>
+    <div class="col"><b>Next</b>
+      <div class="t">Search &amp; AI-answer setup</div>
+      <div class="t">Your review pass</div>
+      <div class="t">Go live</div>
+    </div>
+  </div>
+</div></div>
+</div>
+<div class="step-row rv">
+  <div class="step-rail"><span class="dotn">04</span><span class="ln"></span></div>
+  <div class="step-body">
+    <span class="step-when">Day 7</span>
+    <h3>Go live</h3>
+    <p>Tested from a real phone before anyone else sees it. Your team gets shown how it works, live, in one sitting.</p>
+  </div>
+  <div class="art"><div class="mock">
+  <div class="mh"><b>Go-live checklist</b><span>Before I hand it over</span></div>
+  <ul class="checks">
+    <li>Tested from a real phone, on a real network</li>
+    <li>Arabic and English both answered correctly</li>
+    <li>A test buyer routed to your WhatsApp</li>
+    <li>Google Business Profile pointing at the right place</li>
+    <li>Your team shown how it works, once, live</li>
+    <li>Hosting, security and care running for a year</li>
+  </ul>
+</div></div>
+</div>
+<div class="step-row rv">
+  <div class="step-rail"><span class="dotn">05</span><span class="ln"></span></div>
+  <div class="step-body">
+    <span class="step-when">Days 7&ndash;37</span>
+    <h3>The 30-day promise</h3>
+    <p>The clock starts the day it goes live. If it produces no real buyer inquiry in thirty days, I rebuild it free &mdash; and if that still fails, you get your money back.</p>
+  </div>
+  <div class="art"><div class="mock" style="background:var(--teal-950);border-color:var(--teal-900)">
+  <div class="mh" style="border-bottom-color:rgba(241,239,232,.16)">
+    <b style="color:var(--cream)">The First Inquiry Promise</b><span style="color:var(--amber-pale)">30 days</span>
+  </div>
+  <p style="font-family:var(--display);font-size:1.25rem;line-height:1.35;color:var(--cream);margin:0 0 14px">
+    No real buyer inquiry within 30 days of going live? I rebuild it free until you get one.
+    If you still don&#8217;t, you get your money back.</p>
+  <p style="font-family:var(--mono);font-size:.76rem;letter-spacing:.1em;text-transform:uppercase;color:var(--amber-pale);margin:0">
+    Nahid Abyari &#183; Founder</p>
+</div></div>
+</div>
+    </div>
   </div>
 </section>
 
-<script type="application/json" id="payCfg">{"currency":"OMR","baisa":1000,"founding":true,"live":false,"api":"","env":"uat","deposit":100000,"base":"website","items":[{"id":"website","kind":"build","name":"The Smart Website","required":true,"price":950000},{"id":"dashboard","kind":"build","name":"The Live Owner Dashboard","required":false,"price":650000},{"id":"autopilot","kind":"build","name":"The Full Autopilot","required":false,"price":900000},{"id":"desk","kind":"monthly","name":"The Growth Desk","required":false,"price":75000}],"bundle":{"id":"stack","name":"The Operator Stack","requires":["dashboard","autopilot"],"price":2200000,"saving":300000},"plans":[{"id":"deposit","label":"Reserve a build slot","card":true,"due":"deposit","surcharge":0,"split":1},{"id":"full","label":"Pay in full","card":true,"due":"total","surcharge":0,"split":1},{"id":"three","label":"Three payments","card":true,"due":"first","surcharge":70000,"split":3},{"id":"proof","label":"Pay on Proof","card":false,"due":"zero","surcharge":200000,"split":1}]}</script>
+<!-- ======================================================== WHAT I NEED -->
+<section class="s-dark">
+  <div class="wrap">
+    <p class="eyebrow"><span class="star">&#10038;</span> What I need from you</p>
+    <h2 class="h2">Three things. That is the whole ask.</h2>
+    <p class="lede">You are not going to be managing this build. If you are, I have done it wrong.</p>
+
+    <div class="give" style="margin-top:clamp(26px,3.5vw,44px)" data-stagger>
+      <div><span class="t">About an hour</span><b>Your catalogue and terms</b><p>What you sell, at what tiers, delivered where, in how long.</p></div>
+      <div><span class="t">About 30 minutes</span><b>One review pass</b><p>You read it, mark what is wrong, I fix it. One round is expected.</p></div>
+      <div><span class="t">Five minutes</span><b>Access, not passwords</b><p>The WhatsApp number the leads should land on. Nothing sensitive by message.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================================================== WHAT CAN GO WRONG -->
+<section class="s-cream grain">
+  <div class="wrap-n">
+    <p class="eyebrow"><span class="star">&#10038;</span> Being straight with you</p>
+    <h2 class="h2">Where this goes wrong.</h2>
+    <div class="grid" style="margin-top:26px" data-stagger>
+      <article class="card"><span class="n">01</span><h3>You never send the catalogue</h3><p>The single most common way a build stalls. The agent is only as good as what it knows about your stock and your terms.</p></article>
+      <article class="card"><span class="n">02</span><h3>Nobody watches the WhatsApp</h3><p>It hands you live buyers. If the phone goes unread for two days, you have moved the silence, not removed it.</p></article>
+      <article class="card"><span class="n">03</span><h3>You needed an ERP</h3><p>If the real problem is multi-branch inventory and finance in one system, this is the wrong tool and I will tell you on the call.</p></article>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================ CTA -->
+<section class="s-teal pad-s">
+  <div class="wrap">
+    <div style="display:flex;gap:clamp(20px,4vw,50px);align-items:center;justify-content:space-between;flex-wrap:wrap">
+      <div style="flex:1 1 380px">
+        <h2 class="h2" style="margin-bottom:12px">Step one costs nothing.</h2>
+        <p class="lede" style="margin:0">Let me message your business as a buyer would, and send you the scorecard.</p>
+      </div>
+      <div class="btn-row">
+        <a class="btn btn-amber" href="/en/contact/#test">Get the Silent Buyer Test</a>
+        <a class="btn btn-ghost" href="https://api.whatsapp.com/send?phone=96899245250&text=Hello%20Nahid%2C%20I%20read%20how%20it%20works%20and%20I%20have%20a%20question."><svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 1.8a8.2 8.2 0 1 1-4.2 15.3l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8zm-3.1 4c-.2 0-.5 0-.7.3-.2.3-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.8 2.8 4.4 3.8 2.2.9 2.6.7 3.1.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2-.1-.1-.2-.2-.5-.3l-1.7-.8c-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.1-.2 0-.4.1-.5l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5L10 8.2c-.2-.4-.4-.4-.6-.4h-.5z"/></svg>Just ask me something</a>
+      </div>
+    </div>
+  </div>
+</section>
+
 </main>
 <nav class="pager" aria-label="Next page">
-  <div class="wrap"><a href="/en/index-v4/">
-    <span><span class="pl">Back to the start</span><span class="pt">You don't have to learn AI</span></span>
+  <div class="wrap"><a href="/en/about/">
+    <span><span class="pl">Next</span><span class="pt">Who builds it</span></span>
     <span class="parw" aria-hidden="true">&rarr;</span>
   </a></div>
 </nav>
@@ -745,13 +877,13 @@ section{position:relative;padding:clamp(74px,9vw,138px) 0}
       <nav class="fcol" aria-label="The work">
         <h4>The work</h4>
         <ul>
-          <li><a href="/en/services-v4/">What I build</a></li>
-          <li><a href="/en/process-v4/">How it works</a></li>
-          <li><a href="/en/services-v4/#price">Prices</a></li>
-          <li><a href="/en/checkout-v4/">Start an order</a></li>
-          <li><a href="/en/simulator-v4/">Revenue leak simulator</a></li>
-          <li><a href="/en/demo-v4/#dash">Dashboard demo</a></li>
-          <li><a href="/en/demo-v4/">WhatsApp demo</a></li>
+          <li><a href="/en/services/">What I build</a></li>
+          <li><a href="/en/process/">How it works</a></li>
+          <li><a href="/en/services/#price">Prices</a></li>
+          <li><a href="/en/checkout/">Start an order</a></li>
+          <li><a href="/en/simulators/">Revenue leak simulator</a></li>
+          <li><a href="/en/demos/#dash">Dashboard demo</a></li>
+          <li><a href="/en/demos/">WhatsApp demo</a></li>
         </ul>
       </nav>
 
@@ -762,9 +894,9 @@ section{position:relative;padding:clamp(74px,9vw,138px) 0}
           <li><a href="mailto:hello@aiprofitlab.io"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>hello@aiprofitlab.io</a></li>
         </ul>
         <ul>
-          <li><a href="/en/contact-v4/">Contact page</a></li>
-          <li><a href="/en/about-v4/">About Nahid</a></li>
-          <li><a href="/en/blog-v4/">Articles</a></li>
+          <li><a href="/en/contact/">Contact page</a></li>
+          <li><a href="/en/about/">About Nahid</a></li>
+          <li><a href="/blog/">Articles</a></li>
         </ul>
       </nav>
 
@@ -878,78 +1010,6 @@ section{position:relative;padding:clamp(74px,9vw,138px) 0}
     });
   }, {threshold:0.12, rootMargin:"0px 0px -60px 0px"});
   els.forEach(function(e){ io.observe(e); });
-})();
-
-/* ---------------------------------------------------------------------------
-   Order status.
-
-   ?status=success is a claim made by a URL, not proof of payment. This script
-   therefore starts every successful return in the "confirming" state and only
-   upgrades it - and only then reports a purchase to analytics - after our own
-   API confirms payment_status === "paid" for the session. With no API deployed
-   the page simply stays in the honest state, which is why it is the default.
---------------------------------------------------------------------------- */
-(function(){
-  "use strict";
-  var cfgEl = document.getElementById("payCfg");
-  var CFG = {};
-  try { CFG = JSON.parse(cfgEl.textContent); } catch(e){}
-
-  var qs = new URLSearchParams(location.search);
-  var status = (qs.get("status") || "").toLowerCase();
-  var session = qs.get("session") || qs.get("session_id") || "";
-  var ref = qs.get("ref") || "";
-
-  var saved = null;
-  try { saved = JSON.parse(localStorage.getItem("apl_order") || "null"); } catch(e){}
-  if (!ref && saved) ref = saved.ref || "";
-  if (!session && saved) session = saved.session || "";
-
-  function show(id){
-    document.querySelectorAll(".state").forEach(function(el){ el.classList.remove("on"); });
-    var el = document.getElementById("st-" + id);
-    if (el) el.classList.add("on");
-    /* The heading in a hidden state was wrapped for the reveal animation by the
-       shared motion script and left un-revealed; force the visible one open. */
-    if (el) el.querySelectorAll(".rv,.rvw").forEach(function(n){ n.classList.add("vis"); });
-  }
-  function fill(sel, text){
-    document.querySelectorAll(sel).forEach(function(el){ el.textContent = text; });
-  }
-
-  var first = status === "cancel" ? "cancel"
-            : status === "success" ? "wait"
-            : status === "fail" ? "fail"
-            : status ? "wait" : "none";
-  show(first);
-  if (ref) fill("[data-ref]", ref);
-
-  if (first !== "wait" || !CFG.api || !session) return;
-
-  /* Confirm it properly. A failure here is not an error state for the buyer -
-     it only means the page keeps saying "confirming", which is true. */
-  fetch(CFG.api + "/session/" + encodeURIComponent(session), {headers: {"Accept": "application/json"}})
-    .then(function(r){ return r.json(); })
-    .then(function(d){
-      if (!d) return;
-      if (d.payment_status === "paid"){
-        show("paid");
-        if (d.reference || ref) fill("[data-ref]", d.reference || ref);
-        fill("[data-paid]", d.amount_display || "Confirmed");
-        try { localStorage.removeItem("apl_order"); } catch(e){}
-        if (typeof gtag === "function"){
-          gtag("event", "purchase", {
-            transaction_id: d.reference || ref || session,
-            value: typeof d.amount === "number" ? d.amount / (CFG.baisa || 1000) : undefined,
-            currency: CFG.currency || "OMR"
-          });
-        }
-      } else if (d.payment_status === "cancelled" || d.payment_status === "unpaid"){
-        show("fail");
-        if (ref) fill("[data-ref]", ref);
-      }
-    })
-    .catch(function(){ /* stay in "confirming" - it is the truthful state */ });
 })();
 </script>
 <script defer src="/js/aiden-chat.js?v=371d5470"></script>

@@ -3,19 +3,19 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<!-- Stays noindex until Nahid approves this set for launch. When it launches,
-     remove this tag AND add the noindex to the page it replaces in the SAME
-     deploy - never separately, or both versions compete in the index. -->
-<meta name="robots" content="noindex, nofollow">
-<title>Simulators | What silence and re-typing cost your business — AI Profit Lab</title>
-<meta name="description" content="Two calculators on your own figures: what unanswered buyer inquiries put at stake each month, and what manual data entry costs you. Nothing stored, nothing submitted.">
-<link rel="canonical" href="https://aiprofitlab.io/en/simulator-v4/">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+<link rel="alternate" hreflang="en" href="https://aiprofitlab.io/en/contact/">
+<link rel="alternate" hreflang="ar" href="https://aiprofitlab.io/contact/">
+<link rel="alternate" hreflang="x-default" href="https://aiprofitlab.io/en/contact/">
+<title>Contact | AI Profit Lab — talk to the person who builds it</title>
+<meta name="description" content="WhatsApp, email or phone - all reaching the same person in Muscat. Or start with the free Silent Buyer Test and see what a buyer sees when they message your business.">
+<link rel="canonical" href="https://aiprofitlab.io/en/contact/">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 
 <meta property="og:type" content="website">
-<meta property="og:title" content="Simulators | What silence and re-typing cost your business — AI Profit Lab">
-<meta property="og:description" content="Two calculators on your own figures: what unanswered buyer inquiries put at stake each month, and what manual data entry costs you. Nothing stored, nothing submitted.">
-<meta property="og:url" content="https://aiprofitlab.io/en/simulator-v4/">
+<meta property="og:title" content="Contact | AI Profit Lab — talk to the person who builds it">
+<meta property="og:description" content="WhatsApp, email or phone - all reaching the same person in Muscat. Or start with the free Silent Buyer Test and see what a buyer sees when they message your business.">
+<meta property="og:url" content="https://aiprofitlab.io/en/contact/">
 <meta property="og:image" content="https://aiprofitlab.io/og-aiprofitlab-2026.jpg">
 <meta property="og:locale" content="en_OM">
 <meta name="twitter:card" content="summary_large_image">
@@ -545,340 +545,253 @@ section{position:relative;padding:clamp(74px,9vw,138px) 0}
   .review .gmark svg{width:22px;height:22px}
 }
 
-/* ------------------------------------------------------------------ tabs */
-.tabs{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:clamp(24px,3vw,36px)}
-.tabs button{
-  display:inline-flex;align-items:center;gap:12px;font-family:var(--mono);font-size:.82rem;
-  letter-spacing:.1em;text-transform:uppercase;color:rgba(241,239,232,.72);
-  background:transparent;border:1px solid var(--line-dark);border-radius:99px;padding:12px 22px;
-  cursor:pointer;transition:color .2s,border-color .2s,background .2s,transform .2s;
+/* ------------------------------------------------------------- channels */
+.chan{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,2vw,24px)}
+.chan a{
+  position:relative;display:flex;flex-direction:column;gap:12px;text-decoration:none;overflow:hidden;
+  background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:clamp(22px,2.6vw,32px);
+  transition:transform .35s var(--ease),border-color .35s,background .35s,box-shadow .35s;
 }
-.tabs button em{font-style:normal;color:var(--amber-bright);opacity:.75}
-.tabs button:hover{color:var(--cream);border-color:var(--amber);transform:translateY(-1px)}
-.tabs button[aria-selected=true]{background:var(--cream);color:var(--teal-950);border-color:var(--cream)}
-.tabs button[aria-selected=true] em{color:var(--amber-text);opacity:1}
+.chan a:hover{transform:translateY(-5px);border-color:var(--amber-pale);background:var(--white);box-shadow:0 30px 54px -40px rgba(7,43,34,.5)}
+.chan a.primary{background:var(--teal-950);border-color:var(--teal-900)}
+.chan a.primary:hover{background:var(--teal-900);border-color:var(--amber-bright)}
+.chan .ic{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:var(--white);border:1px solid var(--line);color:var(--teal)}
+.chan a.primary .ic{background:var(--wa);border-color:var(--wa);color:#fff}
+.chan .ic svg{width:21px;height:21px;fill:currentColor}
+.chan h3{font-size:1.35rem;color:var(--teal-950);margin:0}
+.chan a.primary h3{color:var(--cream)}
+.chan .val{font-family:var(--mono);font-size:.95rem;color:var(--teal);word-break:break-word}
+.chan a.primary .val{color:var(--amber-bright)}
+.chan .when{
+  font-family:var(--mono);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);
+  margin-top:auto;padding-top:10px;display:flex;align-items:center;gap:8px;
+}
+.chan a.primary .when{color:var(--amber-pale)}
+.chan .when i{width:7px;height:7px;border-radius:50%;background:var(--wa);flex:none}
 
-/* ------------------------------------------------------------ simulator */
-.simgrid{display:grid;grid-template-columns:.92fr 1.08fr;gap:clamp(22px,3vw,44px);align-items:start}
-.simgrid[hidden]{display:none}
-.simin,.simout{
-  background:rgba(241,239,232,.045);border:1px solid var(--line-dark);border-radius:18px;
-  padding:clamp(24px,2.8vw,34px);
+/* --------------------------------------------------------- section plate
+   Same background image and opacity the live contact page uses, with the
+   section colour faded back in top and bottom so the form stays readable. */
+.plate{position:absolute;inset:0;z-index:0;overflow:hidden;pointer-events:none}
+.plate img{width:100%;height:100%;object-fit:cover;opacity:.2}
+.plate::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,var(--teal-950),rgba(7,43,34,.45) 45%,var(--teal-950));
 }
-.simout{background:rgba(7,43,34,.55)}
-.simlbl{
-  font-family:var(--mono);font-size:.76rem;letter-spacing:.16em;text-transform:uppercase;
-  color:var(--amber-bright);margin:0 0 18px;display:flex;align-items:center;gap:9px;
-}
-.presets{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px}
-.presets button{
-  font-family:var(--mono);font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;
-  color:rgba(241,239,232,.75);background:transparent;border:1px solid var(--line-dark);
-  border-radius:99px;padding:7px 13px;cursor:pointer;transition:color .2s,border-color .2s,background .2s;
-}
-.presets button:hover{color:var(--teal-950);background:var(--amber-pale);border-color:var(--amber-pale)}
+#test .wrap{position:relative;z-index:1}
 
-.fieldrow{margin-bottom:22px}
-.fieldrow label{
-  display:flex;justify-content:space-between;align-items:baseline;gap:12px;
-  font-size:.95rem;color:rgba(241,239,232,.82);margin-bottom:10px;
+/* ----------------------------------------------------------------- form */
+.capture-grid{display:grid;grid-template-columns:.95fr 1.05fr;gap:clamp(28px,5vw,64px);align-items:start}
+/* five lines of display type in the narrow column read as a wall */
+.capture-grid .h2{font-size:clamp(1.75rem,3.1vw,2.5rem)}
+.form-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.field{display:flex;flex-direction:column;gap:8px}
+.field.full{grid-column:1/-1}
+.field label{font-family:var(--mono);font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(241,239,232,.68)}
+.field input{
+  font-family:var(--sans);font-size:1rem;color:var(--cream);background:rgba(7,43,34,.55);
+  border:1px solid var(--line-dark);border-radius:10px;padding:14px 16px;transition:border-color .2s,background .2s;
 }
-.fieldrow output{font-family:var(--mono);color:var(--amber-bright);font-size:1.02rem;white-space:nowrap}
-.simin input[type=range]{
-  -webkit-appearance:none;appearance:none;width:100%;height:4px;border-radius:99px;
-  background:rgba(241,239,232,.16);outline:none;cursor:pointer;
+.field input::placeholder{color:rgba(241,239,232,.34)}
+.field input:focus{outline:none;border-color:var(--amber-bright);background:rgba(7,43,34,.75)}
+.formnote{font-size:.88rem;color:rgba(241,239,232,.55);margin:12px 0 0;line-height:1.55}
+.getlist{list-style:none;margin:22px 0 0;padding:0;display:grid;gap:13px}
+.getlist li{position:relative;padding-left:30px;font-size:1rem;color:rgba(241,239,232,.82);line-height:1.5}
+.getlist li::before{
+  content:"";position:absolute;left:3px;top:.5em;width:13px;height:7px;
+  border-left:2px solid var(--amber-bright);border-bottom:2px solid var(--amber-bright);transform:rotate(-45deg);
 }
-.simin input[type=range]::-webkit-slider-thumb{
-  -webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:var(--amber-bright);
-  border:3px solid var(--teal-950);cursor:grab;transition:transform .15s var(--ease);
-}
-.simin input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.15)}
-.simin input[type=range]::-moz-range-thumb{
-  width:18px;height:18px;border-radius:50%;background:var(--amber-bright);border:3px solid var(--teal-950);cursor:grab;
-}
-.micro{font-size:.84rem;line-height:1.6;color:rgba(241,239,232,.5);margin:22px 0 0}
 
-/* ----------------------------------------------------------------- out */
-.bignum-cap{
-  display:block;font-family:var(--mono);font-size:.78rem;letter-spacing:.15em;text-transform:uppercase;
-  color:rgba(241,239,232,.55);margin:0 0 6px;
+/* ------------------------------------------------------------------ faq */
+.faq{border-top:1px solid var(--line)}
+.faq details{border-bottom:1px solid var(--line)}
+.faq summary{
+  cursor:pointer;list-style:none;padding:22px 44px 22px 0;position:relative;
+  font-family:var(--display);font-size:clamp(1.15rem,2vw,1.45rem);color:var(--teal-950);
 }
-.bignum{
-  display:block;font-family:var(--display);font-size:clamp(2.5rem,5.6vw,4rem);line-height:1;
-  color:var(--amber-bright);font-variant-numeric:tabular-nums;
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{
+  content:"";position:absolute;right:8px;top:50%;width:12px;height:12px;margin-top:-8px;
+  border-right:1.5px solid var(--amber);border-bottom:1.5px solid var(--amber);
+  transform:rotate(45deg);transition:transform .3s var(--ease);
 }
-/* the arithmetic, shown rather than hidden - the whole argument is that the
-   visitor can check every term against their own phone */
-.chain{
-  display:flex;flex-wrap:wrap;align-items:center;gap:7px 10px;margin:22px 0 0;
-  padding:16px 0;border-top:1px solid var(--line-dark);border-bottom:1px solid var(--line-dark);
-}
-.chain span{font-family:var(--mono);font-size:.82rem;color:var(--cream);white-space:nowrap}
-.chain i{font-style:normal;color:var(--amber-bright);opacity:.7}
-.chain b{font-weight:400;color:rgba(241,239,232,.5);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;display:block}
+.faq details[open] summary::after{transform:rotate(-135deg);margin-top:-3px}
+.faq .ans{padding:0 0 24px;color:var(--muted);font-size:1.02rem;max-width:70ch;margin:0}
+.faq summary:hover{color:var(--teal)}
 
-.figs{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:22px 0 0}
-.figs div{border:1px solid var(--line-dark);border-radius:12px;padding:15px 16px}
-.figs b{display:block;font-family:var(--mono);font-size:1.12rem;color:var(--cream);margin-bottom:5px;font-weight:500;font-variant-numeric:tabular-nums}
-.figs span{font-size:.78rem;line-height:1.4;color:rgba(241,239,232,.55);display:block}
-
-.chartwrap{margin:26px 0 0}
-.chartwrap h4{
-  font-family:var(--mono);font-size:.74rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;
-  color:rgba(241,239,232,.55);margin:0 0 14px;
-}
-.chart{width:100%;height:auto;display:block;overflow:visible}
-.legend{display:flex;gap:18px;flex-wrap:wrap;margin-top:14px;font-family:var(--mono);font-size:.74rem;letter-spacing:.06em;color:rgba(241,239,232,.6)}
-.legend i{display:inline-block;width:11px;height:11px;border-radius:3px;margin-right:7px;vertical-align:-1px}
-.legend i.dash{width:16px;height:0;border-radius:0;border-top:1.5px dashed var(--wa);vertical-align:4px}
-.assume{margin:20px 0 0;font-size:.86rem;line-height:1.62;color:rgba(241,239,232,.5)}
-.simout .btn-row{margin-top:24px}
-
-/* --------------------------------------------------------------- method */
-.method{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,2vw,24px)}
-.method .card p{font-size:.97rem}
-.fixes .tblwrap{border:1px solid var(--line);border-radius:14px;overflow-x:auto;background:var(--white)}
-
-@media (max-width:980px){
-  .simgrid{grid-template-columns:minmax(0,1fr)}
-  .figs{grid-template-columns:repeat(3,1fr)}
-  .method{grid-template-columns:1fr}
-}
-@media (max-width:640px){
-  .figs{grid-template-columns:1fr}
-  /* The multiplication signs only read as operators on one line. Once the
-     chain wraps, a two-column list of labelled terms is clearer than an
-     equation broken in the middle. */
-  .chain{display:grid;grid-template-columns:1fr 1fr;gap:14px 16px}
-  .chain i{display:none}
-  .tabs button{flex:1 1 100%;justify-content:center}
-}
+@media (max-width:900px){ .chan,.capture-grid{grid-template-columns:1fr} }
+@media (max-width:560px){ .form-grid{grid-template-columns:1fr} }
 </style>
 <script type="application/ld+json">
 {
   "@context":"https://schema.org",
-  "@type":"WebApplication",
-  "name":"AI Profit Lab Revenue Leak Simulators",
-  "applicationCategory":"BusinessApplication",
-  "operatingSystem":"Any",
-  "url":"https://aiprofitlab.io/en/simulator-v4/",
-  "offers":{"@type":"Offer","price":"0","priceCurrency":"OMR"},
-  "publisher":{"@type":"Organization","name":"AI Profit Lab","legalName":"Lotus Gulf International"}
+  "@type":"FAQPage",
+  "mainEntity":[
+    {"@type":"Question","name":"How much does it cost?","acceptedAnswer":{"@type":"Answer","text":"The Smart Website is OMR 950 one-time at the founding price, OMR 1,450 standard. The dashboard adds OMR 650, the autopilot adds OMR 900, and all three together are OMR 2,200."}},
+    {"@type":"Question","name":"Is there a monthly fee?","acceptedAnswer":{"@type":"Answer","text":"Not to keep anything working. The first year of hosting, security and care is included in the build price. The Growth Desk at OMR 75 a month is optional and never required."}},
+    {"@type":"Question","name":"Do you have clients I can speak to?","acceptedAnswer":{"@type":"Answer","text":"Not yet. That is why there is a named guarantee and why the dashboard and buyer-agent demos are open to click without asking for anything."}},
+    {"@type":"Question","name":"What if it doesn't work?","acceptedAnswer":{"@type":"Answer","text":"The First Inquiry Promise: no real buyer inquiry within 30 days of going live and it gets rebuilt free until you get one. If you still don't, you get your money back."}},
+    {"@type":"Question","name":"Do you work in Arabic?","acceptedAnswer":{"@type":"Answer","text":"Yes. Both English and Arabic are treated as first-class, and Arabic copy is checked by a native reader before it ships."}},
+    {"@type":"Question","name":"Who am I actually contracting with?","acceptedAnswer":{"@type":"Answer","text":"Lotus Gulf International, CR 1570092, South Al Khuwair, Bousher, Muscat. AI Profit Lab is the brand. Not VAT registered, so invoices carry no VAT line."}}
+  ]
 }
 </script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
 <header class="top" id="top">
-  <a href="/en/index-v4/" aria-label="AI Profit Lab home">
+  <a href="/" aria-label="AI Profit Lab home">
     <img class="mark" src="/assets/brand/wordmark-primary.svg" alt="AI Profit Lab" width="160" height="28">
   </a>
   <nav class="nav" aria-label="Primary">
-        <a class="lnk" href="/en/services-v4/">What I Build</a>
-    <a class="lnk" href="/en/process-v4/">How It Works</a>
-    <a class="lnk" href="/en/about-v4/">About</a>
-    <a class="lnk" href="/en/contact-v4/">Contact</a>
-    <a class="lnk" href="/en/blog-v4/">Articles</a>
-    <a class="lnk" href="/" lang="ar">&#1593;&#1585;&#1576;&#1610;</a>
+        <a class="lnk" href="/en/services/">What I Build</a>
+    <a class="lnk" href="/en/process/">How It Works</a>
+    <a class="lnk" href="/en/about/">About</a>
+    <a class="lnk" href="/en/contact/" aria-current="page">Contact</a>
+    <a class="lnk" href="/blog/">Articles</a>
+    <a class="lnk" href="/ar/" lang="ar">&#1593;&#1585;&#1576;&#1610;</a>
     <a class="top-wa" href="https://api.whatsapp.com/send?phone=96899245250&text=Hello%20Nahid%2C%20I%20have%20a%20question%20about%20my%20business." target="_blank" rel="noopener" aria-label="Chat with Nahid on WhatsApp"><svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 1.8a8.2 8.2 0 1 1-4.2 15.3l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8zm-3.1 4c-.2 0-.5 0-.7.3-.2.3-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.8 2.8 4.4 3.8 2.2.9 2.6.7 3.1.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2-.1-.1-.2-.2-.5-.3l-1.7-.8c-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.1-.2 0-.4.1-.5l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5L10 8.2c-.2-.4-.4-.4-.6-.4h-.5z"/></svg><span>WhatsApp</span></a>
     <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="mmenu"><i></i></button>
   </nav>
 </header>
 <div class="mmenu" id="mmenu" aria-hidden="true">
-    <a href="/en/index-v4/"><em>01</em>Home</a>
-  <a href="/en/services-v4/"><em>02</em>What I Build</a>
-  <a href="/en/process-v4/"><em>03</em>How It Works</a>
-  <a href="/en/about-v4/"><em>04</em>About</a>
-  <a href="/en/contact-v4/"><em>05</em>Contact</a>
-  <a href="/en/blog-v4/"><em>06</em>Articles</a>
+    <a href="/"><em>01</em>Home</a>
+  <a href="/en/services/"><em>02</em>What I Build</a>
+  <a href="/en/process/"><em>03</em>How It Works</a>
+  <a href="/en/about/"><em>04</em>About</a>
+  <a href="/en/contact/" aria-current="page"><em>05</em>Contact</a>
+  <a href="/blog/" aria-current="page"><em>06</em>Articles</a>
   <p class="mfoot">hello@aiprofitlab.io &middot; <span dir="ltr">+968 9924 5250</span><br>Muscat, Oman</p>
 </div>
 <main id="main">
 
-<section class="phero s-panel grain">
+<header class="phero s-cream grain">
   <div class="wrap">
-    <p class="eyebrow"><span class="star">&#10038;</span>Simulators</p>
-    <h1 class="h1">Run your own numbers</h1>
-    <p class="lede">Two calculators for the two leaks I am asked about most: the buyers who message
-      when nobody is there, and the hours your staff spend re-typing what a machine already knows.
-      Every term is a figure you set. Nothing is stored, nothing is submitted, and no result is a promise.</p>
-    <div class="btn-row" style="margin-top:26px">
-      <a class="btn btn-teal" href="#tools">Open the simulators</a>
-      <a class="tlink" href="/en/article-v4/">Read the method first <span class="arw">&rarr;</span></a>
+    <p class="eyebrow"><span class="star">&#10038;</span> Talk to me</p>
+    <h1 class="h1">You will be talking to<br>the person who builds it.</h1>
+    <p class="lede">No sales team, no ticket queue. Every route below reaches the same phone.</p>
+  </div>
+</header>
+
+<section class="s-cream grain" style="padding-top:0">
+  <div class="wrap">
+    <div class="chan" data-stagger>
+      <a class="primary" href="https://api.whatsapp.com/send?phone=96899245250&text=Hello%20Nahid%2C%20I%20have%20a%20question%20about%20my%20business.">
+        <span class="ic"><svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 1.8a8.2 8.2 0 1 1-4.2 15.3l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8zm-3.1 4c-.2 0-.5 0-.7.3-.2.3-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.8 2.8 4.4 3.8 2.2.9 2.6.7 3.1.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2-.1-.1-.2-.2-.5-.3l-1.7-.8c-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.1-.2 0-.4.1-.5l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5L10 8.2c-.2-.4-.4-.4-.6-.4h-.5z"/></svg></span>
+        <h3>WhatsApp</h3>
+        <span class="val" dir="ltr">+968 9924 5250</span>
+        <span class="when"><i></i>Usually same day</span>
+      </a>
+      <a href="mailto:hello@aiprofitlab.io">
+        <span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 5.5A1.5 1.5 0 0 1 3.5 4h17A1.5 1.5 0 0 1 22 5.5v13a1.5 1.5 0 0 1-1.5 1.5h-17A1.5 1.5 0 0 1 2 18.5v-13zm2.2.5 7.8 5.9L19.8 6H4.2zM20 7.9l-7.4 5.6a1 1 0 0 1-1.2 0L4 7.9V18h16V7.9z"/></svg></span>
+        <h3>Email</h3>
+        <span class="val">hello@aiprofitlab.io</span>
+        <span class="when"><i></i>Within one business day</span>
+      </a>
+      <a href="tel:+96899245250">
+        <span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 2h3.1l1.6 4-2.1 1.5a12.6 12.6 0 0 0 5.9 5.9L16.6 11l4 1.6v3.1a2.3 2.3 0 0 1-2.5 2.3A16.4 16.4 0 0 1 4.3 4.5 2.3 2.3 0 0 1 6.6 2z"/></svg></span>
+        <h3>Phone</h3>
+        <span class="val" dir="ltr">+968 9924 5250</span>
+        <span class="when"><i></i>9am &ndash; 6pm Muscat</span>
+      </a>
     </div>
   </div>
 </section>
 
-<section class="s-dark grain" id="tools">
+<!-- ================================================== SILENT BUYER TEST -->
+<section class="s-dark" id="test">
+  <span class="plate" aria-hidden="true">
+    <img src="/audit-bg.webp" alt="" width="1000" height="667" loading="lazy" decoding="async">
+  </span>
   <div class="wrap">
-    <div class="tabs" id="simtabs" role="tablist" aria-label="Choose a simulator">
-      <button type="button" role="tab" id="tabA" aria-controls="panelA" aria-selected="true" tabindex="0"><em>01</em>The cost of silence</button>
-      <button type="button" role="tab" id="tabB" aria-controls="panelB" aria-selected="false" tabindex="-1"><em>02</em>The cost of re-typing</button>
-    </div>
+    <div class="capture-grid">
+      <div>
+        <p class="eyebrow"><span class="star">&#10038;</span> Free &#183; five a week</p>
+        <h2 class="h2">Before you buy, see what a buyer sees.</h2>
+        <p class="lede">I contact your business the way a real buyer would &mdash; WhatsApp, form, email, phone.</p>
+        <ul class="getlist">
+          <li>How fast each channel answered &mdash; measured, not guessed</li>
+          <li>What a buyer saw, including in Arabic</li>
+          <li>Where that buyer would have gone instead</li>
+          <li>No pitch attached</li>
+        </ul>
+      </div>
 
-    <!-- ------------------------------------------------ tool A: silence -->
-    <div class="simgrid" id="panelA" role="tabpanel" aria-labelledby="tabA">
-      <div class="simin">
-        <p class="simlbl"><span class="star">&#10038;</span>Your numbers</p>
-        <div class="presets"><button type="button" data-preset="a1:30,a2:35,a3:25,a4:90">Auto workshop</button><button type="button" data-preset="a1:22,a2:45,a3:15,a4:420">Trading &amp; distribution</button><button type="button" data-preset="a1:18,a2:50,a3:10,a4:800">Real estate</button><button type="button" data-preset="a1:45,a2:40,a3:30,a4:35">Clinic</button></div>
-        <div class="fieldrow">
-          <label for="a1">Buyer inquiries in a normal week <output id="a1o" for="a1">30</output></label>
-          <input type="range" id="a1" min="5" max="150" step="1" value="30">
+      <form id="sbtForm" class="form-grid" novalidate>
+        <div class="field">
+          <label for="f-name">Your name</label>
+          <input id="f-name" name="name" type="text" required placeholder="Your name">
         </div>
-        <div class="fieldrow">
-          <label for="a2">Share arriving outside working hours <output id="a2o" for="a2">35%</output></label>
-          <input type="range" id="a2" min="5" max="80" step="5" value="35">
+        <div class="field">
+          <label for="f-biz">Business name</label>
+          <input id="f-biz" name="business" type="text" required placeholder="Gulf Lotus Trading">
         </div>
-        <div class="fieldrow">
-          <label for="a3">Share of answered inquiries you win <output id="a3o" for="a3">25%</output></label>
-          <input type="range" id="a3" min="5" max="60" step="5" value="25">
+        <div class="field">
+          <label for="f-wa">WhatsApp number</label>
+          <input id="f-wa" name="whatsapp" type="tel" required placeholder="+968 &hellip;" inputmode="tel">
         </div>
-        <div class="fieldrow">
-          <label for="a4">Your average order value <output id="a4o" for="a4">OMR 90</output></label>
-          <input type="range" id="a4" min="20" max="2000" step="10" value="90">
+        <div class="field">
+          <label for="f-sell">What do you sell?</label>
+          <input id="f-sell" name="sells" type="text" required placeholder="Medical consumables, wholesale">
         </div>
-        <p class="micro">Count people, not messages, and use a normal week rather than your best one.
-          Round every figure down &mdash; the argument is stronger when it is conservative.</p>
-      </div>
-      <div class="simout">
-        <span class="bignum-cap">Revenue at stake, per month</span>
-        <span class="bignum" id="AMonthly">OMR 1,023</span>
-        <div class="chain" id="AChain"></div>
-        <div class="figs">
-          <div><b id="AAnnual">OMR 12,276</b><span>Over twelve months</span></div>
-          <div><b id="ADaily">OMR 34</b><span>Every day it stays open</span></div>
-          <div><b id="APayback">28 days</b><span>To cover OMR 950 once</span></div>
+        <div class="field full">
+          <button class="btn btn-wa" type="submit" style="width:100%"><svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 1.8a8.2 8.2 0 1 1-4.2 15.3l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8zm-3.1 4c-.2 0-.5 0-.7.3-.2.3-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.8 2.8 4.4 3.8 2.2.9 2.6.7 3.1.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2-.1-.1-.2-.2-.5-.3l-1.7-.8c-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.1-.2 0-.4.1-.5l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5L10 8.2c-.2-.4-.4-.4-.6-.4h-.5z"/></svg>Send my details on WhatsApp</button>
+          <p class="formnote">Nothing is sent until you press send inside WhatsApp.</p>
         </div>
-        <div class="chartwrap">
-          <h4>Cumulative, against the one-time cost of closing it</h4>
-          <svg class="chart" id="AChart" viewBox="0 0 620 210" role="img"
-               aria-label="Cumulative revenue at stake over twelve months, compared with the one-time cost of the Smart Website"></svg>
-          <p class="legend"><span><i style="background:#D89234"></i>The month it has paid for itself</span>
-            <span><i style="background:rgba(241,239,232,.22)"></i>Cumulative at stake</span>
-            <span><i class="dash"></i><span id="ACost">Smart Website, once &middot; OMR 950</span></span></p>
-        </div>
-        <div class="btn-row">
-          <a class="btn btn-wa" id="AWa" href="https://api.whatsapp.com/send?phone=96899245250"><svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 1.8a8.2 8.2 0 1 1-4.2 15.3l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8zm-3.1 4c-.2 0-.5 0-.7.3-.2.3-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.8 2.8 4.4 3.8 2.2.9 2.6.7 3.1.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2-.1-.1-.2-.2-.5-.3l-1.7-.8c-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.1-.2 0-.4.1-.5l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5L10 8.2c-.2-.4-.4-.4-.6-.4h-.5z"/></svg><span>Send me these numbers</span></a>
-          <a class="btn btn-ghost" href="/en/services-v4/#price">See what closes it</a>
-        </div>
-        <p class="assume">This is what is <em>at stake</em> in the messages nobody answered &mdash; not revenue
-          you are guaranteed to recover. I deliberately do not multiply it by a recovery rate, because I
-          would be inventing that rate and you would have no way to check it.</p>
-      </div>
-    </div>
-
-    <!-- ----------------------------------------------- tool B: re-typing -->
-    <div class="simgrid" id="panelB" role="tabpanel" aria-labelledby="tabB" hidden>
-      <div class="simin">
-        <p class="simlbl"><span class="star">&#10038;</span>Your numbers</p>
-        <div class="fieldrow">
-          <label for="b1">People re-keying data between systems <output id="b1o" for="b1">3</output></label>
-          <input type="range" id="b1" min="1" max="20" step="1" value="3">
-        </div>
-        <div class="fieldrow">
-          <label for="b2">Hours each spends on it per week <output id="b2o" for="b2">6 h</output></label>
-          <input type="range" id="b2" min="1" max="30" step="1" value="6">
-        </div>
-        <div class="fieldrow">
-          <label for="b3">Loaded cost of an hour of their time <output id="b3o" for="b3">OMR 4</output></label>
-          <input type="range" id="b3" min="1" max="15" step="1" value="4">
-        </div>
-        <div class="fieldrow">
-          <label for="b4">Share of it that is purely mechanical <output id="b4o" for="b4">70%</output></label>
-          <input type="range" id="b4" min="10" max="90" step="5" value="70">
-        </div>
-        <p class="micro">Loaded cost means salary plus everything that comes with it, divided by the hours
-          actually worked &mdash; not the hourly rate on the contract. The mechanical share is the part with
-          no judgement in it: copying, re-formatting, checking one screen against another.</p>
-      </div>
-      <div class="simout">
-        <span class="bignum-cap">Paid for work nobody bills for, per month</span>
-        <span class="bignum" id="BMonthly">OMR 218</span>
-        <div class="chain" id="BChain"></div>
-        <div class="figs">
-          <div><b id="BAnnual">OMR 2,619</b><span>Over twelve months</span></div>
-          <div><b id="BDaily">OMR 7</b><span>Every day it stays manual</span></div>
-          <div><b id="BPayback">124 days</b><span>To cover OMR 900 once</span></div>
-        </div>
-        <div class="chartwrap">
-          <h4>Cumulative, against the one-time cost of automating it</h4>
-          <svg class="chart" id="BChart" viewBox="0 0 620 210" role="img"
-               aria-label="Cumulative cost of manual re-keying over twelve months, compared with the one-time cost of the Full Autopilot"></svg>
-          <p class="legend"><span><i style="background:#D89234"></i>The month it has paid for itself</span>
-            <span><i style="background:rgba(241,239,232,.22)"></i>Cumulative cost</span>
-            <span><i class="dash"></i><span id="BCost">Full Autopilot, once &middot; OMR 900</span></span></p>
-        </div>
-        <div class="btn-row">
-          <a class="btn btn-wa" id="BWa" href="https://api.whatsapp.com/send?phone=96899245250"><svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 1.8a8.2 8.2 0 1 1-4.2 15.3l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8zm-3.1 4c-.2 0-.5 0-.7.3-.2.3-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.8 2.8 4.4 3.8 2.2.9 2.6.7 3.1.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2-.1-.1-.2-.2-.5-.3l-1.7-.8c-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.1-.2 0-.4.1-.5l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5L10 8.2c-.2-.4-.4-.4-.6-.4h-.5z"/></svg><span>Send me these numbers</span></a>
-          <a class="btn btn-ghost" href="/en/services-v4/#price">See what closes it</a>
-        </div>
-        <p class="assume">This one is a real cost, not an opportunity cost: you are already paying it every
-          month in salary. What it does not include is the error rate &mdash; the wrong figure typed once and
-          then trusted by everyone downstream.</p>
-      </div>
+      </form>
     </div>
   </div>
 </section>
 
+<!-- ================================================================ FAQ -->
 <section class="s-cream grain">
-  <div class="wrap">
-    <div class="asterism"><span>&#10038;</span></div>
-    <p class="eyebrow"><span class="star">&#10038;</span>How to read the result</p>
-    <h2 class="h2">Three rules, so the number stays honest</h2>
-    <div class="method grid" data-stagger style="margin-top:clamp(28px,4vw,44px)">
-      <div class="card">
-        <span class="n">01</span>
-        <h3>Every term is yours</h3>
-        <p>There is not one industry average anywhere in this page. If the output looks wrong, one of your
-          four inputs is wrong &mdash; and you are the only person who can correct it.</p>
-      </div>
-      <div class="card">
-        <span class="n">02</span>
-        <h3>At stake, not recovered</h3>
-        <p>Tool 01 prices what was in the messages, not what any system would win back. Anyone quoting you
-          a fixed recovery percentage has invented it.</p>
-      </div>
-      <div class="card">
-        <span class="n">03</span>
-        <h3>One-time against monthly</h3>
-        <p>The comparison that matters is a recurring leak against a cost you pay once. That is the only
-          reason the payback line is on the chart at all.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="s-panel grain fixes">
   <div class="wrap-n">
-    <p class="eyebrow"><span class="star">&#10038;</span>What the money buys</p>
-    <h2 class="h2">The published prices these charts compare against</h2>
-    <p class="lede">No quote-on-request, no discovery call before you are told a number.</p>
-    <div class="tblwrap" style="margin-top:clamp(24px,3vw,34px)">
-      <table class="tbl">
-        <thead><tr><th>What it is</th><th>One-time</th><th>Required monthly</th></tr></thead>
-        <tbody>
-          <tr><td>The Smart Website &mdash; a site with a buyer agent that answers in Arabic and English</td>
-              <td class="n">OMR 950</td><td class="n">OMR 0</td></tr>
-          <tr><td>The Live Owner Dashboard &mdash; cash, margin, stock and open leads on one screen</td>
-              <td class="n">+OMR 650</td><td class="n">OMR 0</td></tr>
-          <tr><td>The Full Autopilot &mdash; quote and invoice follow-up that stops when the buyer replies</td>
-              <td class="n">+OMR 900</td><td class="n">OMR 0</td></tr>
-          <tr><td>Care &mdash; optional, cancellable, never required to keep the system running</td>
-              <td class="n">&mdash;</td><td class="n">OMR 75/mo</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="btn-row" style="margin-top:26px">
-      <a class="btn btn-teal" href="/en/services-v4/#price">The full price page</a>
-      <a class="btn btn-ghost" href="/en/demo-v4/">Watch it answer a buyer</a>
+    <p class="eyebrow"><span class="star">&#10038;</span> The awkward questions</p>
+    <h2 class="h2">Asked and answered.</h2>
+
+    <div class="faq" style="margin-top:clamp(22px,3vw,38px)">
+      <details>
+        <summary>How much does it cost?</summary>
+        <p class="ans">Smart Website: OMR 950 founding, 1,450 standard. Dashboard +650, autopilot +900, all
+          three 2,200. Every number is on <a href="/en/services/#price">the price list</a>.</p>
+      </details>
+      <details>
+        <summary>Is there a monthly fee?</summary>
+        <p class="ans">Not to keep anything working. The first year of hosting and care is in the build price.
+          The Growth Desk at OMR 75/month is optional.</p>
+      </details>
+      <details>
+        <summary>Do you have clients I can speak to?</summary>
+        <p class="ans">Not yet, and I won&#8217;t pretend otherwise. That is why the guarantee is named and both
+          demos are open to click: the <a href="/en/demos/#dash">dashboard</a> and the
+          <a href="/en/demos/">buyer agent</a>.</p>
+      </details>
+      <details>
+        <summary>What if it doesn&#8217;t work?</summary>
+        <p class="ans">The First Inquiry Promise: no real buyer inquiry within 30 days of going live and I rebuild
+          it free. If you still don&#8217;t get one, you get your money back.</p>
+      </details>
+      <details>
+        <summary>Do you work in Arabic?</summary>
+        <p class="ans">Yes &mdash; both languages first-class, with Arabic checked by a native reader before it ships.</p>
+      </details>
+      <details>
+        <summary>Who am I actually contracting with?</summary>
+        <p class="ans">Lotus Gulf International, CR <span dir="ltr">1570092</span>, Bousher, Muscat. AI Profit Lab is
+          the brand. Not VAT registered, so invoices carry no VAT line.</p>
+      </details>
+      <details>
+        <summary>How do I pay?</summary>
+        <p class="ans">Bank transfer in OMR &mdash; on start, in three payments, or only once it has produced a real inquiry. Set out on <a href="/en/services/#price">the services page</a>. You can put the order together on <a href="/en/checkout/">the checkout page</a> and I send the invoice; card payment on the site is being switched on now.</p>
+      </details>
     </div>
   </div>
 </section>
 
 </main>
 <nav class="pager" aria-label="Next page">
-  <div class="wrap"><a href="/en/demo-v4/">
-    <span><span class="pl">Next</span><span class="pt">Watch it answer a buyer</span></span>
+  <div class="wrap"><a href="/">
+    <span><span class="pl">Back to the start</span><span class="pt">Never lose a buyer to silence again</span></span>
     <span class="parw" aria-hidden="true">&rarr;</span>
   </a></div>
 </nav>
@@ -907,13 +820,13 @@ section{position:relative;padding:clamp(74px,9vw,138px) 0}
       <nav class="fcol" aria-label="The work">
         <h4>The work</h4>
         <ul>
-          <li><a href="/en/services-v4/">What I build</a></li>
-          <li><a href="/en/process-v4/">How it works</a></li>
-          <li><a href="/en/services-v4/#price">Prices</a></li>
-          <li><a href="/en/checkout-v4/">Start an order</a></li>
-          <li><a href="/en/simulator-v4/">Revenue leak simulator</a></li>
-          <li><a href="/en/demo-v4/#dash">Dashboard demo</a></li>
-          <li><a href="/en/demo-v4/">WhatsApp demo</a></li>
+          <li><a href="/en/services/">What I build</a></li>
+          <li><a href="/en/process/">How it works</a></li>
+          <li><a href="/en/services/#price">Prices</a></li>
+          <li><a href="/en/checkout/">Start an order</a></li>
+          <li><a href="/en/simulators/">Revenue leak simulator</a></li>
+          <li><a href="/en/demos/#dash">Dashboard demo</a></li>
+          <li><a href="/en/demos/">WhatsApp demo</a></li>
         </ul>
       </nav>
 
@@ -924,9 +837,9 @@ section{position:relative;padding:clamp(74px,9vw,138px) 0}
           <li><a href="mailto:hello@aiprofitlab.io"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>hello@aiprofitlab.io</a></li>
         </ul>
         <ul>
-          <li><a href="/en/contact-v4/">Contact page</a></li>
-          <li><a href="/en/about-v4/">About Nahid</a></li>
-          <li><a href="/en/blog-v4/">Articles</a></li>
+          <li><a href="/en/contact/">Contact page</a></li>
+          <li><a href="/en/about/">About Nahid</a></li>
+          <li><a href="/blog/">Articles</a></li>
         </ul>
       </nav>
 
@@ -1043,235 +956,36 @@ section{position:relative;padding:clamp(74px,9vw,138px) 0}
 })();
 
 /* ---------------------------------------------------------------------------
-   Two simulators, one engine.
+   Silent Buyer Test capture.
 
-   Each tool declares its fields, how to format them, the arithmetic, and the
-   one-time cost it is being compared against. Everything below - the chart,
-   the payback line, the WhatsApp handoff - is shared, so a third tool is a
-   data entry rather than a new script.
-
-   No input leaves the page. The WhatsApp button composes a message and hands
-   it to WhatsApp; nothing is sent until the visitor presses send there.
+   Composes a WhatsApp message rather than posting to a backend, so nothing is
+   transmitted until the visitor presses send inside WhatsApp - which is what
+   the note under the button promises. Same pattern as en/index-v3.html.
 --------------------------------------------------------------------------- */
 (function(){
   "use strict";
-  var WEEKS = 4.33;
-  var omr = function(n){ return "OMR " + Math.round(n).toLocaleString("en-US"); };
-  var pct = function(n){ return n + "%"; };
+  var form = document.getElementById("sbtForm");
+  if (!form) return;
 
-  var TOOLS = {
-    A: {
-      cost: 950,
-      costLabel: "Smart Website, once",
-      fields: {
-        a1: {fmt: String},
-        a2: {fmt: pct},
-        a3: {fmt: pct},
-        a4: {fmt: omr}
-      },
-      /* inquiries a week -> a month -> the after-hours slice -> the share of
-         those you would have won -> the order they were worth */
-      calc: function(v){ return v.a1 * WEEKS * (v.a2/100) * (v.a3/100) * v.a4; },
-      chain: function(v){ return [
-        [v.a1 + " a week", "inquiries"],
-        [WEEKS.toFixed(2), "weeks/month"],
-        [pct(v.a2), "after hours"],
-        [pct(v.a3), "you win"],
-        [omr(v.a4), "per order"]
-      ]; },
-      wa: function(v, out){
-        return "Hello Nahid — I ran the silence simulator.\n\n" +
-          "Inquiries a week: " + v.a1 + "\n" +
-          "Arriving after hours: " + pct(v.a2) + "\n" +
-          "Win rate when answered: " + pct(v.a3) + "\n" +
-          "Average order: " + omr(v.a4) + "\n\n" +
-          "It puts " + omr(out.monthly) + " a month at stake" +
-          (out.days ? ", and payback at " + out.days + " days." : ".") +
-          "\n\nCan we talk about it?";
-      }
-    },
-    B: {
-      cost: 900,
-      costLabel: "Full Autopilot, once",
-      fields: {
-        b1: {fmt: String},
-        b2: {fmt: function(n){ return n + " h"; }},
-        b3: {fmt: function(n){ return "OMR " + n; }},
-        b4: {fmt: pct}
-      },
-      calc: function(v){ return v.b1 * v.b2 * WEEKS * v.b3 * (v.b4/100); },
-      chain: function(v){ return [
-        [v.b1 + (v.b1 === 1 ? " person" : " people"), "re-typing"],
-        [v.b2 + " h a week", "each"],
-        [WEEKS.toFixed(2), "weeks/month"],
-        ["OMR " + v.b3, "an hour"],
-        [pct(v.b4), "automatable"]
-      ]; },
-      wa: function(v, out){
-        return "Hello Nahid — I ran the re-typing simulator.\n\n" +
-          "People doing it: " + v.b1 + "\n" +
-          "Hours each a week: " + v.b2 + "\n" +
-          "Loaded cost an hour: OMR " + v.b3 + "\n" +
-          "Share that is mechanical: " + pct(v.b4) + "\n\n" +
-          "It puts " + omr(out.monthly) + " a month into work nobody bills for" +
-          (out.days ? ", with payback at " + out.days + " days." : ".") +
-          "\n\nCan we talk about it?";
+  form.addEventListener("submit", function(e){
+    e.preventDefault();
+    var get = function(n){ return (form.elements[n].value || "").trim(); };
+    var required = ["name","business","whatsapp","sells"];
+    for (var i = 0; i < required.length; i++){
+      var n = required[i];
+      if (!get(n)){
+        form.elements[n].focus();
+        if (form.elements[n].reportValidity) form.elements[n].reportValidity();
+        return;
       }
     }
-  };
-
-  var SVGNS = "http://www.w3.org/2000/svg";
-  function el(name, attrs){
-    var n = document.createElementNS(SVGNS, name);
-    for (var k in attrs) n.setAttribute(k, attrs[k]);
-    return n;
-  }
-
-  /* Twelve months of cumulative loss against one one-time cost. The month the
-     bars cross the cost line is the whole point of the picture, so that bar is
-     the only one painted amber and the only extra label drawn.
-
-     The cost line carries no text of its own: at a realistic leak the line
-     sits near the floor, and any label on it landed on top of the first bars.
-     It is named in the legend underneath instead, where nothing can cover it. */
-  function chart(svg, monthly, cost, costLabel, legendEl){
-    while (svg.firstChild) svg.removeChild(svg.firstChild);
-    var W = 620, H = 210, padB = 26, padT = 14;
-    var total = monthly * 12;
-    var max = Math.max(total, cost * 1.15) || 1;
-    var bw = W / 12, gap = 5;
-    var crossed = -1;
-    var marks = [];
-
-    for (var i = 0; i < 12; i++){
-      var cum = monthly * (i + 1);
-      var was = crossed;
-      if (crossed < 0 && cum >= cost && cost > 0) crossed = i;
-      var hit = (was < 0 && crossed === i);
-      var h = Math.max(1, (cum / max) * (H - padB - padT));
-      var x = i * bw, y = H - padB - h;
-      svg.appendChild(el("rect", {
-        x: x + gap/2, y: y, width: bw - gap, height: h, rx: 4,
-        fill: hit ? "#D89234" : (crossed >= 0 ? "rgba(241,239,232,.22)" : "rgba(241,239,232,.13)")
-      }));
-      if (hit) marks.push([i, "#D89234"]);
-      else if (i === 0 || i === 5 || i === 11) marks.push([i, "rgba(241,239,232,.5)"]);
-    }
-
-    if (cost > 0 && cost <= max){
-      var ly = H - padB - (cost / max) * (H - padB - padT);
-      svg.appendChild(el("line", {x1: 0, y1: ly, x2: W, y2: ly,
-        stroke: "#1FAF5E", "stroke-width": 1.5, "stroke-dasharray": "5 4"}));
-    }
-
-    /* month labels last, so nothing paints over them */
-    var seen = {};
-    marks.forEach(function(m){
-      if (seen[m[0]] && m[1] !== "#D89234") return;
-      seen[m[0]] = 1;
-      var t = el("text", {x: m[0] * bw + bw/2, y: H - 9, "text-anchor": "middle",
-        fill: m[1], "font-family": "IBM Plex Mono, monospace", "font-size": "11"});
-      t.textContent = "M" + (m[0] + 1);
-      svg.appendChild(t);
-    });
-
-    if (legendEl) legendEl.textContent = costLabel + " \u00b7 " + omr(cost);
-    return crossed;
-  }
-
-  function wire(key){
-    var tool = TOOLS[key];
-    var panel = document.getElementById("panel" + key);
-    if (!panel) return null;
-    var ids = Object.keys(tool.fields);
-    var inputs = ids.map(function(id){ return document.getElementById(id); });
-    if (inputs.some(function(x){ return !x; })) return null;
-
-    var out = {
-      monthly: document.getElementById(key + "Monthly"),
-      chain:   document.getElementById(key + "Chain"),
-      annual:  document.getElementById(key + "Annual"),
-      daily:   document.getElementById(key + "Daily"),
-      payback: document.getElementById(key + "Payback"),
-      svg:     document.getElementById(key + "Chart"),
-      wa:      document.getElementById(key + "Wa"),
-      legend:  document.getElementById(key + "Cost")
-    };
-
-    function read(){
-      var v = {};
-      ids.forEach(function(id){ v[id] = +document.getElementById(id).value; });
-      return v;
-    }
-
-    function render(){
-      var v = read();
-      ids.forEach(function(id){
-        var o = document.getElementById(id + "o");
-        if (o) o.textContent = tool.fields[id].fmt(v[id]);
-      });
-
-      var monthly = tool.calc(v);
-      var perDay = monthly / 30;
-      var days = perDay > 0 ? Math.ceil(tool.cost / perDay) : 0;
-
-      out.monthly.textContent = omr(monthly);
-      out.annual.textContent = omr(monthly * 12);
-      out.daily.textContent = omr(perDay);
-      out.payback.textContent = !days ? "—"
-        : days <= 1 ? "1 day" : days < 400 ? days + " days" : "over a year";
-
-      out.chain.innerHTML = "";
-      tool.chain(v).forEach(function(pair, i){
-        if (i){
-          var x = document.createElement("i");
-          x.textContent = "×";
-          out.chain.appendChild(x);
-        }
-        var s = document.createElement("span");
-        var b = document.createElement("b");
-        b.textContent = pair[1];
-        s.appendChild(b);
-        s.appendChild(document.createTextNode(pair[0]));
-        out.chain.appendChild(s);
-      });
-
-      chart(out.svg, monthly, tool.cost, tool.costLabel, out.legend);
-
-      out.wa.setAttribute("href", "https://api.whatsapp.com/send?phone=96899245250&text=" +
-        encodeURIComponent(tool.wa(v, {monthly: monthly, days: days < 400 ? days : 0})));
-    }
-
-    inputs.forEach(function(i){ i.addEventListener("input", render); });
-    panel.addEventListener("click", function(e){
-      var b = e.target.closest("[data-preset]"); if (!b) return;
-      b.getAttribute("data-preset").split(",").forEach(function(pair){
-        var kv = pair.split(":"), f = document.getElementById(kv[0]);
-        if (f) f.value = kv[1];
-      });
-      render();
-      if (typeof gtag === "function") gtag("event","simulator_preset",{tool:key});
-    });
-    if (out.wa) out.wa.addEventListener("click", function(){
-      if (typeof gtag === "function") gtag("event","generate_lead",{method:"simulator_" + key});
-    });
-    render();
-    return render;
-  }
-
-  wire("A"); wire("B");
-
-  /* tabs ------------------------------------------------------------------ */
-  var bar = document.getElementById("simtabs");
-  if (bar) bar.addEventListener("click", function(e){
-    var b = e.target.closest("button[role=tab]"); if (!b) return;
-    [].forEach.call(bar.querySelectorAll("button[role=tab]"), function(t){
-      var on = t === b;
-      t.setAttribute("aria-selected", on ? "true" : "false");
-      t.setAttribute("tabindex", on ? "0" : "-1");
-      document.getElementById(t.getAttribute("aria-controls")).hidden = !on;
-    });
-    if (typeof gtag === "function") gtag("event","simulator_tab",{tool:b.id});
+    var msg = "Hello Nahid \u2014 I'd like the free Silent Buyer Test.\n\n" +
+      "Name: " + get("name") + "\n" +
+      "Business: " + get("business") + "\n" +
+      "WhatsApp: " + get("whatsapp") + "\n" +
+      "We sell: " + get("sells");
+    if (typeof gtag === "function") gtag("event","generate_lead",{method:"silent_buyer_test"});
+    window.open("https://api.whatsapp.com/send?phone=96899245250&text=" + encodeURIComponent(msg), "_blank", "noopener");
   });
 })();
 </script>

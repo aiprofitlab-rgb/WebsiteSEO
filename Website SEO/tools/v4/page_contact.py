@@ -188,7 +188,7 @@ def _body():
       <details>
         <summary>How much does it cost?</summary>
         <p class="ans">Smart Website: OMR 950 founding, 1,450 standard. Dashboard +650, autopilot +900, all
-          three 2,200. Every number is on <a href="/en/services-v4/#price">the price list</a>.</p>
+          three 2,200. Every number is on <a href="/en/services/#price">the price list</a>.</p>
       </details>
       <details>
         <summary>Is there a monthly fee?</summary>
@@ -198,8 +198,8 @@ def _body():
       <details>
         <summary>Do you have clients I can speak to?</summary>
         <p class="ans">Not yet, and I won&#8217;t pretend otherwise. That is why the guarantee is named and both
-          demos are open to click: the <a href="/customized-ceo-dashboard-demo/">dashboard</a> and the
-          <a href="/whatsapp-receptionist-demo/">buyer agent</a>.</p>
+          demos are open to click: the <a href="/en/demos/#dash">dashboard</a> and the
+          <a href="/en/demos/">buyer agent</a>.</p>
       </details>
       <details>
         <summary>What if it doesn&#8217;t work?</summary>
@@ -232,13 +232,13 @@ def body():
     approved. Gated on tools/v4/pay.py rather than edited by hand, so the FAQ
     cannot go on saying "no payment is taken on this site" after one is."""
     if pay.PAY_LIVE:
-        answer = ('By card on <a href="/en/checkout-v4/">the checkout page</a>, or by bank transfer in '
+        answer = ('By card on <a href="/en/checkout/">the checkout page</a>, or by bank transfer in '
                   'OMR &mdash; on start, in three payments, or only once it has produced a real inquiry. '
-                  'Every structure is set out on <a href="/en/services-v4/#price">the services page</a>.')
+                  'Every structure is set out on <a href="/en/services/#price">the services page</a>.')
     else:
         answer = ('Bank transfer in OMR &mdash; on start, in three payments, or only once it has produced '
-                  'a real inquiry. Set out on <a href="/en/services-v4/#price">the services page</a>. You '
-                  'can put the order together on <a href="/en/checkout-v4/">the checkout page</a> and I '
+                  'a real inquiry. Set out on <a href="/en/services/#price">the services page</a>. You '
+                  'can put the order together on <a href="/en/checkout/">the checkout page</a> and I '
                   'send the invoice; card payment on the site is being switched on now.')
     return _body().replace("{PAY_ANSWER}", answer)
 
@@ -280,12 +280,12 @@ JS = """
 """
 
 META = dict(
-    slug="contact-v4",
+    slug="contact",
     title="Contact | AI Profit Lab — talk to the person who builds it",
     desc=("WhatsApp, email or phone - all reaching the same person in Muscat. Or start with the free "
           "Silent Buyer Test and see what a buyer sees when they message your business."),
-    nav="/en/contact-v4/",
-    next=("Back to the start", "Never lose a buyer to silence again", "/en/index-v4/"),
+    nav="/en/contact/",
+    next=("Back to the start", "Never lose a buyer to silence again", "/"),
     schema="""{
   "@context":"https://schema.org",
   "@type":"FAQPage",

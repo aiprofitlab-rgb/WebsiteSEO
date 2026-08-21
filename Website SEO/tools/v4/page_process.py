@@ -264,7 +264,7 @@ def body():
         <p class="lede" style="margin:0">Let me message your business as a buyer would, and send you the scorecard.</p>
       </div>
       <div class="btn-row">
-        <a class="btn btn-amber" href="/en/contact-v4/#test">Get the Silent Buyer Test</a>
+        <a class="btn btn-amber" href="/en/contact/#test">Get the Silent Buyer Test</a>
         <a class="btn btn-ghost" href="{WA}&text=Hello%20Nahid%2C%20I%20read%20how%20it%20works%20and%20I%20have%20a%20question.">{WA_ICON}Just ask me something</a>
       </div>
     </div>
@@ -276,12 +276,12 @@ def body():
 
 
 META = dict(
-    slug="process-v4",
+    slug="process",
     title="How it works | AI Profit Lab — from first message to live in about a week",
     desc=("Five steps: a free Silent Buyer Test, one honest conversation, the build, go-live, and a "
           "30-day promise. What I need from you, and where it goes wrong."),
-    nav="/en/process-v4/",
-    next=("Next", "Who builds it", "/en/about-v4/"),
+    nav="/en/process/",
+    next=("Next", "Who builds it", "/en/about/"),
     schema="""{
   "@context":"https://schema.org",
   "@type":"HowTo",

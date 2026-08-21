@@ -618,7 +618,7 @@ def render(art):
 <section class="ahero grain">
   <div class="wrap-a">
     <p class="crumbs">
-      <a href="/en/index-v4/">Home</a><i>{STAR}</i><a href="/en/blog-v4/">Articles</a><i>{STAR}</i>
+      <a href="/">Home</a><i>{STAR}</i><a href="/blog/">Articles</a><i>{STAR}</i>
       <span>{art["cat"]}</span>
     </p>
     <h1 class="h1">{art["title"]}</h1>
@@ -645,7 +645,7 @@ def render(art):
       <nav class="toc" aria-label="On this page">
         <h4>On this page</h4>
         <ol>{toc_html}</ol>
-        <p class="back"><a class="tlink" href="/en/blog-v4/"><span class="arw">&larr;</span><span>All articles</span></a></p>
+        <p class="back"><a class="tlink" href="/blog/"><span class="arw">&larr;</span><span>All articles</span></a></p>
       </nav>
       <div id="art">
         {keybox}
@@ -664,7 +664,7 @@ def render(art):
               this article does not match your business, send me yours and I will run it with you.</p>
             <div class="btn-row">
               <a class="btn btn-wa" href="{WA}&text=Hello%20Nahid%2C%20I%20read%20your%20article%20and%20have%20a%20question.">{WA_ICON}<span>Ask me directly</span></a>
-              <a class="tlink" href="/en/about-v4/">More about me <span class="arw">&rarr;</span></a>
+              <a class="tlink" href="/en/about/">More about me <span class="arw">&rarr;</span></a>
             </div>
           </div>
         </div>
@@ -694,14 +694,14 @@ def schema(art):
      "description":%s,
      "image":"https://aiprofitlab.io%s",
      "datePublished":"%s","dateModified":"%s",
-     "author":{"@type":"Person","name":"Nahid Abyari","url":"https://aiprofitlab.io/en/about-v4/"},
+     "author":{"@type":"Person","name":"Nahid Abyari","url":"https://aiprofitlab.io/en/about/"},
      "publisher":{"@type":"Organization","name":"AI Profit Lab","legalName":"Lotus Gulf International"},
      "mainEntityOfPage":{"@type":"WebPage","@id":"%s"},
      "articleSection":%s,
      "inLanguage":"en"},
     {"@type":"BreadcrumbList","itemListElement":[
-      {"@type":"ListItem","position":1,"name":"Home","item":"https://aiprofitlab.io/en/index-v4/"},
-      {"@type":"ListItem","position":2,"name":"Articles","item":"https://aiprofitlab.io/en/blog-v4/"},
+      {"@type":"ListItem","position":1,"name":"Home","item":"https://aiprofitlab.io/"},
+      {"@type":"ListItem","position":2,"name":"Articles","item":"https://aiprofitlab.io/blog/"},
       {"@type":"ListItem","position":3,"name":%s,"item":"%s"}
     ]}%s
   ]

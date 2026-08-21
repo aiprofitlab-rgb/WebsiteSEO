@@ -435,8 +435,8 @@ JS_TAIL = r""";
 
   /* demo tabs (conversation / dashboard) --------------------------------- */
   var dt = document.getElementById("dtabs");
-  if (dt) dt.addEventListener("click", function(e){
-    var b = e.target.closest("button[role=tab]"); if (!b) return;
+  function selectDemo(b){
+    if (!dt || !b) return;
     [].forEach.call(dt.querySelectorAll("button[role=tab]"), function(t){
       var on = t === b;
       t.setAttribute("aria-selected", on ? "true" : "false");
@@ -444,8 +444,27 @@ JS_TAIL = r""";
       document.getElementById(t.getAttribute("aria-controls")).hidden = !on;
     });
     if (b.id === "dtab1" && !playing) play(current);
+  }
+  if (dt) dt.addEventListener("click", function(e){
+    var b = e.target.closest("button[role=tab]"); if (!b) return;
+    selectDemo(b);
     if (typeof gtag === "function") gtag("event","demo_tab",{demo:b.id});
   });
+
+  /* Deep links. The site nav points every page at /en/demo/#dash, but the
+     dashboard is a tab panel that starts hidden - a bare fragment would land
+     on the conversation demo with nothing to show. Map the friendly names
+     onto their tab buttons and scroll the section into view ourselves. */
+  var HASHTAB = {"#dash":"dtab2","#dashboard":"dtab2","#demo2":"dtab2",
+                 "#agent":"dtab1","#demo1":"dtab1"};
+  function fromHash(smooth){
+    var id = HASHTAB[location.hash]; if (!id) return;
+    selectDemo(document.getElementById(id));
+    var s = document.getElementById("demos");
+    if (s) s.scrollIntoView({block:"start", behavior: smooth ? "smooth" : "auto"});
+  }
+  fromHash(false);
+  addEventListener("hashchange", function(){ fromHash(true); });
 })();
 """
 
@@ -533,7 +552,7 @@ def body():
         </ul>
         <div class="btn-row" style="margin-top:30px">
           <a class="btn btn-wa" href="{WA}&text=Hello%20Nahid%2C%20I%20watched%20the%20buyer%20agent%20demo%20-%20can%20it%20answer%20from%20my%20stock%20list%3F">{WA_ICON}<span>Ask it about my stock</span></a>
-          <a class="btn btn-ghost" href="/en/services-v4/#price">What it costs</a>
+          <a class="btn btn-ghost" href="/en/services/#price">What it costs</a>
         </div>
       </div>
     </div>
@@ -614,7 +633,7 @@ def body():
         </div>
         <div class="btn-row" style="margin-top:28px">
           <a class="btn btn-wa" href="{WA}&text=Hello%20Nahid%2C%20I%20want%20a%20dashboard%20like%20the%20demo%20-%20built%20on%20my%20own%20numbers.">{WA_ICON}<span>Build this on my numbers</span></a>
-          <a class="btn btn-ghost" href="/en/simulator-v4/">Run my numbers first</a>
+          <a class="btn btn-ghost" href="/en/simulators/">Run my numbers first</a>
         </div>
       </div>
     </div>
@@ -654,17 +673,17 @@ def body():
 
 
 META = dict(
-    slug="demo-v4",
+    slug="demos",
     title="Demos | Watch the buyer agent answer — AI Profit Lab",
     desc=("A live demo of the WhatsApp buyer agent answering in English and Arabic after hours, and of "
           "the owner dashboard. Fictional company, real behaviour."),
-    nav="/en/demo-v4/",
-    next=("Next", "Talk to me", "/en/contact-v4/"),
+    nav="/en/demos/",
+    next=("Next", "Talk to me", "/en/contact/"),
     schema="""{
   "@context":"https://schema.org",
   "@type":"WebPage",
   "name":"AI Profit Lab — product demos",
-  "url":"https://aiprofitlab.io/en/demo-v4/",
+  "url":"https://aiprofitlab.io/en/demos/",
   "description":"Interactive demonstrations of the WhatsApp buyer agent and the live owner dashboard.",
   "inLanguage":"en",
   "publisher":{"@type":"Organization","name":"AI Profit Lab","legalName":"Lotus Gulf International"}

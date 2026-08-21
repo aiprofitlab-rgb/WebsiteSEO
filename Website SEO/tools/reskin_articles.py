@@ -106,7 +106,7 @@ def build_index():
             cat = legacy._meta(head, "category")
             m = re.search(r'rel="canonical"\s+href="([^"]+)"', head) or \
                 re.search(r'href="([^"]+)"\s+rel="canonical"', head)
-            url = m.group(1) if m else f"{SITE}/blog/{lang}/{f.stem}/"
+            url = canon_url(m.group(1)) if m else f"{SITE}/blog/{lang}/{f.stem}/"
             idx[lang][f.stem] = {
                 "title": title, "cat": cat, "url": url,
                 "date": (re.match(r"(\d{4}-\d{2}-\d{2})", f.stem) or [None, ""])[1],
@@ -140,6 +140,23 @@ def related(doc, slug, lang, idx):
                 seen.add(e["slug"])
                 pool.append(e)
     return pool[:3]
+
+
+def canon_url(u):
+    """Force the trailing-slash form of an on-site URL.
+
+    Rewrite rule 1 in .htaccess 301s any non-file path without a trailing
+    slash, so 121 of the 150 English articles were declaring a canonical that
+    redirects - while the sitemap listed all 150 with the slash. Two different
+    URLs claimed to be the same page's canonical form. Everything emitted here
+    uses the form that answers 200.
+    """
+    if not u or "?" in u or "#" in u:
+        return u
+    base = u.split("//", 1)[-1]
+    if u.endswith("/") or "." in base.rsplit("/", 1)[-1]:
+        return u
+    return u + "/"
 
 
 def hreflang(slug, existing):
@@ -337,8 +354,10 @@ def render(doc, slug, lang, idx, css_href, js_href):
     og = doc["hero"].get("src", "/og-aiprofitlab-2026.jpg")
     if og.startswith("/"):
         og = SITE + og
-    doc["canonical"] = doc["canonical"] or url
+    doc["canonical"] = canon_url(doc["canonical"] or url)
     doc["hreflang"] = hreflang(slug, doc["hreflang"])
+    bare = doc["canonical"].rstrip("/")
+    doc["jsonld"] = [b.replace(bare + '"', doc["canonical"] + '"') for b in doc["jsonld"]]
 
     return (C.head(doc, og, css_href, js_href)
             + C.header(lang)

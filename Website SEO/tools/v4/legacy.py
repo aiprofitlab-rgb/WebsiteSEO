@@ -313,11 +313,24 @@ def _clean_inline(h):
 # migration that carefully preserved a broken link would be preserving nothing
 # worth having.
 LINK_FIX = {
-    "/en/contact/": "/en/contact-en/",
-    "/en/services/": "/en/services-en/",
-    "/en/about/": "/en/about-en/",
-    "/en/process/": "/en/process-en/",
-    "/ar/": "/",
+    # /en/<name>/ is now the v4 page itself, so those four need no repair; the
+    # old -en paths are what redirect. Kept as identities so the table still
+    # documents the URLs the corpus references.
+    # The English home moved from /en/ to / when the v4 set launched; every
+    # article's inline breadcrumb still pointed at the old path.
+    "/en/": "/",
+    "/en/contact-en/": "/en/contact/",
+    "/en/services-en/": "/en/services/",
+    "/en/about-en/": "/en/about/",
+    # The stand-alone demo and simulator pages were retired into one page each
+    # at the v4 launch; the corpus links to them from ~30 articles.
+    "/en/whatsapp-receptionist-demo/": "/en/demos/",
+    "/whatsapp-receptionist-demo/": "/en/demos/",
+    "/customized-ceo-dashboard-demo/": "/en/demos/",
+    "/en/missed-call-simulator-en/": "/en/simulators/",
+    "/en/campaign-roi-simulator/": "/en/simulators/",
+    "/campaign-roi-simulator/": "/en/simulators/",
+    "/en/process-en/": "/en/process/",
     "/ar/contact/": "/contact/",
     "/ar/services/": "/services/",
     "/ar/about/": "/about/",
@@ -325,16 +338,36 @@ LINK_FIX = {
 }
 
 
+def _slash(href):
+    """Force the trailing-slash form of an on-site path.
+
+    Rewrite rule 1 301s any non-file path that arrives without a trailing
+    slash, and most of the corpus was written without one - so an article
+    linking a sibling sent the reader through a redirect, and the sitemap
+    (all slashes) disagreed with the body links (mostly none). Paths that
+    name a real file keep their extension and are left alone.
+    """
+    base, sep, tail = href.partition("#")
+    if not sep:
+        base, sep, tail = href.partition("?")
+    if not base.startswith(("/", "https://aiprofitlab.io/")) or base.endswith("/"):
+        return href
+    last = base.rstrip("/").rsplit("/", 1)[-1]
+    if "." in last:
+        return href
+    return base + "/" + sep + tail
+
+
 def fix_link(href):
     """Repair a known-bad legacy target; everything else passes through."""
     base = href.split("#")[0].split("?")[0]
     if base in LINK_FIX:
-        return LINK_FIX[base] + href[len(base):]
+        return _slash(LINK_FIX[base] + href[len(base):])
     if base.startswith("https://aiprofitlab.io"):
         tail = base[len("https://aiprofitlab.io"):]
         if tail in LINK_FIX:
-            return "https://aiprofitlab.io" + LINK_FIX[tail] + href[len(base):]
-    return href
+            return _slash("https://aiprofitlab.io" + LINK_FIX[tail] + href[len(base):])
+    return _slash(href)
 
 
 _DROP_SUBTREE = {"script", "style", "noscript", "svg", "form", "button"}

@@ -1,43 +1,4 @@
-<!DOCTYPE html>
-<html dir="ltr" lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<!-- Stays noindex until Nahid approves this set for launch. When it launches,
-     remove this tag AND add the noindex to the page it replaces in the SAME
-     deploy - never separately, or both versions compete in the index. -->
-<meta name="robots" content="noindex, nofollow">
-<title>What silence costs: pricing the WhatsApp messages you never answered | AI Profit Lab</title>
-<meta name="description" content="The four-term formula for what missed WhatsApp inquiries cost an Omani business each month, worked through with real figures - and what it does not prove.">
-<link rel="canonical" href="https://aiprofitlab.io/en/article-v4/">
-<link rel="icon" type="image/svg+xml" href="/favicon.svg">
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="What silence costs: pricing the WhatsApp messages you never answered | AI Profit Lab">
-<meta property="og:description" content="The four-term formula for what missed WhatsApp inquiries cost an Omani business each month, worked through with real figures - and what it does not prove.">
-<meta property="og:url" content="https://aiprofitlab.io/en/article-v4/">
-<meta property="og:image" content="https://aiprofitlab.io/og-aiprofitlab-2026.jpg">
-<meta property="og:locale" content="en_OM">
-<meta name="twitter:card" content="summary_large_image">
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<!-- Non-blocking font load: a plain stylesheet link costs a render-blocking
-     round trip to fonts.googleapis.com. display=swap paints fallback text
-     immediately and swaps when the webfont lands. -->
-<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Marcellus&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" media="print" onload="this.media='all'" href="https://fonts.googleapis.com/css2?family=Marcellus&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
-<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap"></noscript>
-
-<!-- Sets .js before first paint so the reveal styles apply only when there is
-     JS to un-apply them. Without it, a no-JS visitor gets a blank page. -->
-<script>document.documentElement.className+=" js"</script>
-
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-SLR9GD3MJP"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-SLR9GD3MJP');</script>
-
-<style>
 :root{
   --teal-950:#072B22; --teal-900:#0A3D30; --teal:#0F6E56; --teal-600:#158268;
   --amber:#BA7517;    --amber-bright:#D89234; --amber-pale:#E8C98F;
@@ -842,383 +803,165 @@ section{position:relative;padding:clamp(74px,9vw,138px) 0}
   .byline .sp{display:none}
   .byline .share{width:100%;margin-top:6px}
 }
-</style>
-<script type="application/ld+json">
-{
-  "@context":"https://schema.org",
-  "@graph":[
-    {"@type":"Article",
-     "headline":"What silence costs: putting a number on the messages you never answered",
-     "description":"Twelve unread WhatsApp messages on a Sunday morning is not a customer service problem. It is a number. Here is the arithmetic that produces it — using your figures, not mine.",
-     "image":"https://aiprofitlab.io/blog/images/whatsapp_missed_inquiries_cost_oman.png",
-     "datePublished":"2026-06-25","dateModified":"2026-08-19",
-     "author":{"@type":"Person","name":"Nahid Abyari","url":"https://aiprofitlab.io/en/about-v4/"},
-     "publisher":{"@type":"Organization","name":"AI Profit Lab","legalName":"Lotus Gulf International"},
-     "mainEntityOfPage":{"@type":"WebPage","@id":"https://aiprofitlab.io/en/article-v4/"},
-     "articleSection":"The cost of silence",
-     "inLanguage":"en"},
-    {"@type":"BreadcrumbList","itemListElement":[
-      {"@type":"ListItem","position":1,"name":"Home","item":"https://aiprofitlab.io/en/index-v4/"},
-      {"@type":"ListItem","position":2,"name":"Articles","item":"https://aiprofitlab.io/en/blog-v4/"},
-      {"@type":"ListItem","position":3,"name":"What silence costs: putting a number on the messages you never answered","item":"https://aiprofitlab.io/en/article-v4/"}
-    ]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I calculate what missed WhatsApp inquiries cost my business in Oman?","acceptedAnswer":{"@type":"Answer","text":"Count the distinct people who message you in a normal week, multiply by 4.33 for a month, multiply by the share arriving outside working hours, then by the share of answered inquiries you normally win, then by your average order value in OMR. The result is the revenue at stake each month in messages you did not answer."}},{"@type":"Question","name":"Is that figure the revenue I would recover with automation?","acceptedAnswer":{"@type":"Answer","text":"No. It is what is at stake, not what is recoverable. Some of those buyers were never going to order and some return anyway. Treat any vendor who converts it into a guaranteed recovery figure with suspicion — that conversion rate is invented."}},{"@type":"Question","name":"Why is after-hours the part that matters most?","acceptedAnswer":{"@type":"Answer","text":"Because it is the only part a faster human cannot fix. Daytime volume can be answered by hiring. A message at 9:40pm on a Friday can only be answered by something that does not sleep, or by nobody."}},{"@type":"Question","name":"Does a WhatsApp Business auto-reply solve this?","acceptedAnswer":{"@type":"Answer","text":"It reduces the feeling of being ignored and nothing else. A buyer asking whether you carry a part needs the answer, not a promise of one. If the real reply still arrives on Monday, the buyer has already bought elsewhere."}},{"@type":"Question","name":"What does it cost to close the gap?","acceptedAnswer":{"@type":"Answer","text":"The Smart Website — a bilingual site with a buyer agent that answers in Arabic and English and hands live buyers to WhatsApp — is OMR 950 one-time at the founding price, with no required monthly fee. Optional care is OMR 75 a month and can be cancelled."}},{"@type":"Question","name":"Does answering buyers automatically create a data protection problem in Oman?","acceptedAnswer":{"@type":"Answer","text":"It creates a data protection responsibility. Under the Personal Data Protection Law (Royal Decree 6/2022) you need a stated purpose for collecting the data, a consent mechanism, and secure handling. That is designed in from the start rather than added later."}}]}
-  ]
+
+/* Panels lifted from the old skin keep their heading, so a callout has to
+   style one. `article_kit` only ever emitted a mono <b> label. */
+.callout h3,.callout h4{
+  font-family:var(--display);font-weight:400;line-height:1.25;
+  font-size:clamp(1.08rem,1.7vw,1.28rem);color:var(--teal-950);margin:0 0 12px;
 }
-</script>
-</head>
-<body>
-<a class="skip" href="#main">Skip to content</a>
-<header class="top" id="top">
-  <a href="/en/index-v4/" aria-label="AI Profit Lab home">
-    <img class="mark" src="/assets/brand/wordmark-primary.svg" alt="AI Profit Lab" width="160" height="28">
-  </a>
-  <nav class="nav" aria-label="Primary">
-        <a class="lnk" href="/en/services-v4/">What I Build</a>
-    <a class="lnk" href="/en/process-v4/">How It Works</a>
-    <a class="lnk" href="/en/about-v4/">About</a>
-    <a class="lnk" href="/en/contact-v4/">Contact</a>
-    <a class="lnk" href="/en/blog-v4/" aria-current="page">Articles</a>
-    <a class="lnk" href="/" lang="ar">&#1593;&#1585;&#1576;&#1610;</a>
-    <a class="top-wa" href="https://api.whatsapp.com/send?phone=96899245250&text=Hello%20Nahid%2C%20I%20have%20a%20question%20about%20my%20business." target="_blank" rel="noopener" aria-label="Chat with Nahid on WhatsApp"><svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 1.8a8.2 8.2 0 1 1-4.2 15.3l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8zm-3.1 4c-.2 0-.5 0-.7.3-.2.3-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.8 2.8 4.4 3.8 2.2.9 2.6.7 3.1.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2-.1-.1-.2-.2-.5-.3l-1.7-.8c-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.1-.2 0-.4.1-.5l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5L10 8.2c-.2-.4-.4-.4-.6-.4h-.5z"/></svg><span>WhatsApp</span></a>
-    <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="mmenu"><i></i></button>
-  </nav>
-</header>
-<div class="mmenu" id="mmenu" aria-hidden="true">
-    <a href="/en/index-v4/"><em>01</em>Home</a>
-  <a href="/en/services-v4/"><em>02</em>What I Build</a>
-  <a href="/en/process-v4/"><em>03</em>How It Works</a>
-  <a href="/en/about-v4/"><em>04</em>About</a>
-  <a href="/en/contact-v4/"><em>05</em>Contact</a>
-  <a href="/en/blog-v4/"><em>06</em>Articles</a>
-  <p class="mfoot">hello@aiprofitlab.io &middot; <span dir="ltr">+968 9924 5250</span><br>Muscat, Oman</p>
-</div>
-<div class="prog" id="prog" aria-hidden="true"></div>
-<main id="main">
+.callout ul,.callout ol{margin:0}
+.callout li{font-size:1rem;line-height:1.6}
+.callout li:last-child{margin-bottom:0}
+.callout p:last-child,.callout ul:last-child,.callout ol:last-child{margin-bottom:0}
+.callout .callout{background:var(--panel-2);margin:18px 0}
 
-<section class="ahero grain">
-  <div class="wrap-a">
-    <p class="crumbs">
-      <a href="/en/index-v4/">Home</a><i>&#10038;</i><a href="/en/blog-v4/">Articles</a><i>&#10038;</i>
-      <span>The cost of silence</span>
-    </p>
-    <h1 class="h1">What silence costs: putting a number on the messages you never answered</h1>
-    <p class="lede">Twelve unread WhatsApp messages on a Sunday morning is not a customer service problem. It is a number. Here is the arithmetic that produces it &mdash; using your figures, not mine.</p>
-    <div class="byline">
-      <img class="face" src="/nahid-founder-2026.webp" alt="Nahid Abyari" width="46" height="46" loading="lazy">
-      <div class="who"><b>Nahid Abyari</b><span>Founder &middot; writes every word</span></div>
-      <span class="sp"></span>
-      <span class="stamp">25 June 2026 &middot; updated 19 August 2026 &middot; 6 min read</span>
-      <div class="share">
-      <a href="https://api.whatsapp.com/send?text=What%20silence%20costs%3A%20putting%20a%20number%20on%20the%20messages%20you%20never%20answered%20%E2%80%94%20https%3A//aiprofitlab.io/en/article-v4/" target="_blank" rel="noopener" aria-label="Share on WhatsApp" title="Share on WhatsApp"><svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 1.8a8.2 8.2 0 1 1-4.2 15.3l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8zm-3.1 4c-.2 0-.5 0-.7.3-.2.3-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.8 2.8 4.4 3.8 2.2.9 2.6.7 3.1.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2-.1-.1-.2-.2-.5-.3l-1.7-.8c-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.1-.2 0-.4.1-.5l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5L10 8.2c-.2-.4-.4-.4-.6-.4h-.5z"/></svg></a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aiprofitlab.io/en/article-v4/" target="_blank" rel="noopener" aria-label="Share on LinkedIn" title="Share on LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-.95 1.83-1.95 3.77-1.95 4.03 0 4.78 2.5 4.78 5.76V21h-4v-5.6c0-1.34-.03-3.06-1.9-3.06-1.9 0-2.2 1.45-2.2 2.96V21H9z"/></svg></a>
-      <button type="button" id="copyLink" aria-label="Copy link" title="Copy link"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10.6 13.4a1 1 0 0 1 0-1.4l1.4-1.4a1 1 0 0 1 1.4 1.4l-1.4 1.4a1 1 0 0 1-1.4 0zm-3 4.4a3.5 3.5 0 0 1 0-5l2.2-2.1 1.4 1.4-2.2 2.1a1.5 1.5 0 0 0 2.2 2.2l2.1-2.2 1.4 1.4-2.1 2.2a3.5 3.5 0 0 1-5 0zm9-9a3.5 3.5 0 0 0-5 0l-2.1 2.2 1.4 1.4 2.1-2.2a1.5 1.5 0 0 1 2.2 2.2l-2.2 2.1 1.4 1.4 2.2-2.1a3.5 3.5 0 0 0 0-5z"/></svg></button>
-    </div><!-- What silence costs: putting a number on the messages you never answered -->
-    </div>
-  </div>
-  <div class="artwrap" style="margin-top:clamp(32px,4.5vw,58px)">
-    <figure class="afig">
-      <img src="/blog/images/whatsapp_missed_inquiries_cost_oman.png" alt="Unanswered WhatsApp inquiries stacking up overnight for an Omani business" width="1180" height="516" fetchpriority="high">
-      <figcaption>Every unanswered message was a buyer who had already chosen you, right up until the silence.</figcaption>
-    </figure>
-  </div>
-</section>
+/* YouTube embeds: 16:9 box so the iframe cannot set the page's width. */
+.embed{
+  position:relative;padding-top:56.25%;margin:clamp(30px,3.6vw,44px) 0;
+  border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--panel-2);
+}
+.embed iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 
-<section class="s-cream">
-  <div class="artwrap">
-    <div class="artgrid">
-      <nav class="toc" aria-label="On this page">
-        <h4>On this page</h4>
-        <ol><li><a href="#a-missed-message-is-not-a-missed-call">A missed message is not a missed call</a></li><li><a href="#the-four-numbers-you-already-have">The four numbers you already have</a></li><li><a href="#run-the-arithmetic">Run the arithmetic</a></li><li><a href="#the-leak-is-wider-than-the-formula">The leak is wider than the formula</a></li><li><a href="#what-actually-closes-the-gap">What actually closes the gap</a></li><li><a href="#do-the-sum-before-you-buy-anything">Do the sum before you buy anything</a></li><li><a href="#questions">Questions people ask</a></li></ol>
-        <p class="back"><a class="tlink" href="/en/blog-v4/"><span class="arw">&larr;</span><span>All articles</span></a></p>
-      </nav>
-      <div id="art">
-        <div class="keybox"><h4><span class="star">&#10038;</span>The short version</h4><ul><li>A missed inquiry is not a service failure. It is a paid-for lead you already bought and then dropped.</li><li>The formula needs four numbers and every one of them is yours: weekly inquiries, the share that arrive after hours, your win rate on the ones you do answer, and your average order.</li><li>Multiply, and you get one monthly figure. Compare that figure to whatever the fix costs, once.</li><li>The number is what is <em>at stake</em> in those messages &mdash; not a promise of recovery. Treat any vendor who tells you otherwise with suspicion.</li></ul></div>
-        <article class="prose">
-<p class="open">You open WhatsApp on a Sunday morning and there are twelve messages from Friday night. One asking whether you carry a part. One asking for a price on forty cartons. One that is just <em>Hello</em>, sent at 9:40pm, from a number you do not recognise. You reply to all twelve. Two reply back. The other ten already bought somewhere else.</p>
-<p>Every owner I meet in Muscat knows this happens. Almost none of them can tell me what it costs. And a leak you cannot put a number on is a leak nobody ever fixes, because it never has to compete for budget against the things that do have numbers &mdash; the rent, the van, the salary. So let us produce the number.</p>
-<h2 id="a-missed-message-is-not-a-missed-call">A missed message is not a missed call</h2>
-<p>A missed call is a moment. A missed WhatsApp message is a decision that stays on the buyer's screen. They can see, hours later, that you did not reply. They can see the two grey ticks. And sitting directly above your unanswered message in their chat list is the competitor who did answer.</p>
-<p>That is the first thing to be precise about: you did not lose a conversation, you lost a lead you had already paid for. The Instagram spend that put your number in front of them, the sign on the warehouse, the years of being the name people pass on &mdash; all of that was spent to produce that message. The silence is where the money leaves, and it leaves after you have already paid to acquire it.</p>
-<div class="pull"><p>You are not losing customers. You are paying full price for leads and then dropping them after midnight.</p></div>
-<h2 id="the-four-numbers-you-already-have">The four numbers you already have</h2>
-<p>You do not need analytics for this. You need four figures, and you can get all four from your own phone in about twenty minutes.</p>
-<div class="steps"><div><b>01</b><div><h4>Inquiries in a normal week</h4><p>Scroll back seven days in WhatsApp and count the distinct people who asked you something. Not messages &mdash; people. A normal week, not your best one.</p></div></div><div><b>02</b><div><h4>The share that landed outside working hours</h4><p>Of those, how many arrived after you closed, on a Friday, or during a prayer break? This is the portion where speed was never possible, only automation was.</p></div></div><div><b>03</b><div><h4>Your win rate on the ones you did answer</h4><p>Of the inquiries you replied to promptly, how many turned into an order? For a workshop this might be one in four. For project quotes, one in ten. Use your own record and round down.</p></div></div><div><b>04</b><div><h4>Your average order value</h4><p>Not your best invoice. The middle one. If you sell to both walk-ins and trade accounts, run the arithmetic twice rather than averaging two different businesses together.</p></div></div></div>
-<h2 id="run-the-arithmetic">Run the arithmetic</h2>
-<p>With those four numbers the formula is one line, and it contains no assumption of mine:</p>
-<div class="formula"><span class="lbl">Monthly revenue at stake</span><span>weekly inquiries &times; <em>4.33</em> &times; after-hours share &times; win rate &times; average order</span></div>
-<p>The 4.33 is just weeks in a month. Everything else came from your phone. Three worked examples, with the kind of figures owners in Oman actually give me &mdash; substitute your own:</p>
-<div class="tblwrap"><table class="tbl"><thead><tr><th>Business</th><th>Inquiries / week</th><th>After hours</th><th>Win rate</th><th>Avg order</th><th>At stake / month</th></tr></thead><tbody><tr><td>Auto workshop, Ghala</td><td class="n">30</td><td class="n">35%</td><td class="n">25%</td><td class="n">OMR 90</td><td class="n">OMR 1,023</td></tr><tr><td>Building-materials trader, Rusayl</td><td class="n">22</td><td class="n">45%</td><td class="n">15%</td><td class="n">OMR 420</td><td class="n">OMR 2,701</td></tr><tr><td>Villa rentals, Al Khuwair</td><td class="n">18</td><td class="n">50%</td><td class="n">10%</td><td class="n">OMR 800</td><td class="n">OMR 3,118</td></tr></tbody></table></div><p class="tblcap">Illustrations, not benchmarks. The formula is the point; the inputs must be yours.</p>
-<div class="callout"><b>What this number is and is not</b><p>This is the revenue <em>at stake</em> in the messages you did not answer &mdash; not revenue you are guaranteed to recover. Some of those buyers were never going to order. Some will come back on Monday regardless. Recovering even a third of it changes the year.</p><p>I am deliberately not multiplying it by a recovery rate, because I would be inventing that rate and you would have no way to check it. Anyone quoting you a fixed recovery percentage is doing exactly that.</p></div>
-<h2 id="the-leak-is-wider-than-the-formula">The leak is wider than the formula</h2>
-<p>The four-term formula only counts the first order. Three costs sit outside it, and in a relationship market they are often larger than the sum you just calculated:</p>
-<ul><li><strong>The advertising you already spent.</strong> If you spend on ads to make the phone ring, every unanswered message is that spend, delivered and then thrown away. Divide monthly ad spend by inquiries generated and you have the exact cost of each dropped one.</li><li><strong>The lifetime, not the invoice.</strong> A distributor who orders monthly is not worth one order. The formula prices the first transaction only, which is the most conservative reading available.</li><li><strong>What gets said about you.</strong> In a market this small, the buyer who was ignored on a Friday evening tells people. That cost never appears on any statement and never stops.</li></ul>
-<div class="icta"><h3>Rather not do the arithmetic by hand?</h3><p>The simulator runs this exact formula on four sliders you set yourself, and shows the monthly figure against the one-time cost of closing the gap. Nothing is stored and nothing is sent.</p><div class="btn-row"><a class="btn btn-wa" href="https://api.whatsapp.com/send?phone=96899245250&text=Hello%20Nahid%2C%20I%20ran%20the%20numbers%20on%20missed%20inquiries%20and%20want%20to%20talk%20about%20them."><svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 1.8a8.2 8.2 0 1 1-4.2 15.3l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8zm-3.1 4c-.2 0-.5 0-.7.3-.2.3-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.8 2.8 4.4 3.8 2.2.9 2.6.7 3.1.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2-.1-.1-.2-.2-.5-.3l-1.7-.8c-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.1-.2 0-.4.1-.5l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5L10 8.2c-.2-.4-.4-.4-.6-.4h-.5z"/></svg><span>Open the simulator on WhatsApp</span></a></div></div>
-<h2 id="what-actually-closes-the-gap">What actually closes the gap</h2>
-<p>Once you have a monthly figure, the decision stops being a matter of taste. It is one number against another. There are three honest ways to close an after-hours gap, and they are not equivalent:</p>
-<div class="tblwrap"><table class="tbl"><thead><tr><th>Approach</th><th>What it costs</th><th>What it fixes</th><th>What it does not</th></tr></thead><tbody><tr><td>Another person on the phone</td><td class="n">Monthly, forever</td><td>Daytime volume when one person is not enough</td><td>The 9pm message, Fridays, and two buyers at once</td></tr><tr><td>WhatsApp auto-reply template</td><td class="n">Free</td><td>Tells the buyer you exist</td><td>Answers nothing &mdash; a holding message is still silence with better manners</td></tr><tr><td>A buyer agent that answers</td><td class="n">OMR 950 once</td><td>Answers in Arabic or English at any hour, then hands a live buyer to you on WhatsApp</td><td>Judgement calls &mdash; those are routed to you deliberately, not guessed at</td></tr></tbody></table></div><p class="tblcap">The Smart Website price is the founding one-time figure published on the services page. Care is optional at OMR 75/month and cancellable.</p>
-<p>The comparison that matters is not between the three rows. It is between your monthly figure and the one-time one. If the arithmetic says OMR 1,023 a month is walking away, a one-time OMR 950 stops being an expense and becomes a payback period &mdash; in that case, twenty-eight days.</p>
-<div class="callout warn"><b>Before you automate anything, read this</b><p>Anything that answers your buyers is now handling personal data under Oman's Personal Data Protection Law (Royal Decree 6/2022). That means a stated purpose, a way to consent, and somewhere defensible for the data to live. It is not onerous, but it is not optional, and it is the part most vendors skip in the demo.</p></div>
-<h2 id="do-the-sum-before-you-buy-anything">Do the sum before you buy anything</h2>
-<p>I would rather you ran this formula and concluded that your leak is OMR 90 a month than bought anything from me. At OMR 90 a month, do not automate &mdash; answer faster and keep your money.</p>
-<p>But most owners who actually sit down and count are surprised by the size of it, because the messages arrive one at a time and the loss only exists in aggregate. Twelve unanswered messages is not twelve moments of poor service. It is one number, once a month, every month, until somebody puts it on a page.</p>
-<blockquote><p>Every success starts with insight. The number is the insight. What you do about it is a separate decision &mdash; but you cannot make it without the number.</p><cite>AI Profit Lab</cite></blockquote>
-        </article>
-        <section class="faq" id="questions" style="margin-top:clamp(48px,6vw,74px)"><h2 style="scroll-margin-top:104px">Questions people ask</h2><details><summary>How do I calculate what missed WhatsApp inquiries cost my business in Oman?</summary><p>Count the distinct people who message you in a normal week, multiply by 4.33 for a month, multiply by the share arriving outside working hours, then by the share of answered inquiries you normally win, then by your average order value in OMR. The result is the revenue at stake each month in messages you did not answer.</p></details><details><summary>Is that figure the revenue I would recover with automation?</summary><p>No. It is what is at stake, not what is recoverable. Some of those buyers were never going to order and some return anyway. Treat any vendor who converts it into a guaranteed recovery figure with suspicion &mdash; that conversion rate is invented.</p></details><details><summary>Why is after-hours the part that matters most?</summary><p>Because it is the only part a faster human cannot fix. Daytime volume can be answered by hiring. A message at 9:40pm on a Friday can only be answered by something that does not sleep, or by nobody.</p></details><details><summary>Does a WhatsApp Business auto-reply solve this?</summary><p>It reduces the feeling of being ignored and nothing else. A buyer asking whether you carry a part needs the answer, not a promise of one. If the real reply still arrives on Monday, the buyer has already bought elsewhere.</p></details><details><summary>What does it cost to close the gap?</summary><p>The Smart Website &mdash; a bilingual site with a buyer agent that answers in Arabic and English and hands live buyers to WhatsApp &mdash; is OMR 950 one-time at the founding price, with no required monthly fee. Optional care is OMR 75 a month and can be cancelled.</p></details><details><summary>Does answering buyers automatically create a data protection problem in Oman?</summary><p>It creates a data protection responsibility. Under the Personal Data Protection Law (Royal Decree 6/2022) you need a stated purpose for collecting the data, a consent mechanism, and secure handling. That is designed in from the start rather than added later.</p></details></section>
-        <div class="refs"><h4>Sources</h4><ol><li><a href="https://www.mtcit.gov.om/" target="_blank" rel="noopener nofollow">Oman Personal Data Protection Law &mdash; Royal Decree 6/2022 (MTCIT)</a></li><li><a href="https://business.whatsapp.com/" target="_blank" rel="noopener nofollow">WhatsApp Business Platform &mdash; official documentation</a></li><li><a href="https://aiprofitlab.io/en/services-v4/#price" target="_blank" rel="noopener nofollow">AI Profit Lab &mdash; published prices for the Smart Website</a></li></ol></div>
-        <div class="author">
-          <img src="/nahid-founder-2026.webp" alt="Nahid Abyari" width="104" height="104" loading="lazy">
-          <div>
-            <p class="rolelbl">Who wrote this</p>
-            <h3>Nahid Abyari</h3>
-            <p>I build the systems I write about — one operator in Muscat, not an agency. Everything
-              here comes out of work done for trading and distribution owners in Oman. If a number in
-              this article does not match your business, send me yours and I will run it with you.</p>
-            <div class="btn-row">
-              <a class="btn btn-wa" href="https://api.whatsapp.com/send?phone=96899245250&text=Hello%20Nahid%2C%20I%20read%20your%20article%20and%20have%20a%20question."><svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 1.8a8.2 8.2 0 1 1-4.2 15.3l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8zm-3.1 4c-.2 0-.5 0-.7.3-.2.3-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.8 2.8 4.4 3.8 2.2.9 2.6.7 3.1.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2-.1-.1-.2-.2-.5-.3l-1.7-.8c-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.1-.2 0-.4.1-.5l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5L10 8.2c-.2-.4-.4-.4-.6-.4h-.5z"/></svg><span>Ask me directly</span></a>
-              <a class="tlink" href="/en/about-v4/">More about me <span class="arw">&rarr;</span></a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+/* In-prose figures carry no caption in the migrated set - the old pages put
+   their captions in the surrounding paragraph. */
+.pfig img{background:var(--panel-2)}
 
-<section class="s-panel related grain">
-  <div class="wrap">
-    <p class="eyebrow"><span class="star">&#10038;</span>Keep reading</p>
-    <div class="grid g3" data-stagger><a class="card" href="/en/contact-v4/#sbt"><span class="n">Silence</span><h3>The Silent Buyer Test: what a real buyer sees when they message you</h3><span class="rd">Read &rarr;</span></a><a class="card" href="/en/simulator-v4/"><span class="n">Arithmetic</span><h3>Run your own numbers in the revenue leak simulator</h3><span class="rd">Read &rarr;</span></a><a class="card" href="/en/demo-v4/"><span class="n">Demo</span><h3>Watch the buyer agent answer at 9:40pm, in Arabic</h3><span class="rd">Read &rarr;</span></a></div>
-  </div>
-</section>
-</main>
-<nav class="pager" aria-label="Next page">
-  <div class="wrap"><a href="/en/simulator-v4/">
-    <span><span class="pl">Next</span><span class="pt">Run your own numbers</span></span>
-    <span class="parw" aria-hidden="true">&rarr;</span>
-  </a></div>
-</nav>
-<footer class="foot">
-  <div class="wrap">
-    <div class="foot-grid">
+/* The article footer: brand block in place of the personal byline, because
+   every one of these pages declares an Organization as its schema author. */
+.brandbox{
+  display:grid;grid-template-columns:64px 1fr;gap:clamp(16px,2.4vw,24px);align-items:start;
+  background:var(--panel-2);border-radius:16px;padding:clamp(22px,3vw,32px);margin-top:clamp(40px,5vw,60px);
+}
+.brandbox .bmark{width:64px;height:64px;border-radius:14px;background:var(--teal-950);
+  display:flex;align-items:center;justify-content:center;padding:11px}
+.brandbox .bmark img{width:100%;height:auto}
+.brandbox .rolelbl{font-family:var(--mono);font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--amber-text);margin:0 0 8px}
+.brandbox h3{font-size:clamp(1.2rem,2vw,1.45rem);margin:0 0 10px}
+.brandbox p{font-size:.99rem;color:var(--muted);margin:0 0 18px;line-height:1.62}
 
-      <div class="foot-brand">
-        <img class="fmark" src="/assets/brand/wordmark-reversed.svg" alt="AI Profit Lab" width="170" height="29">
-        <div class="fsig">
-          <p class="slogan">Every success starts with <span class="ins">insight</span>.</p>
-          <span class="sig-beat" aria-hidden="true"></span>
-          <p class="slogan-ar" lang="ar" dir="rtl">&#1603;&#1604; &#1606;&#1580;&#1575;&#1581; &#1610;&#1576;&#1583;&#1571; <span class="ins">&#1576;&#1585;&#1572;&#1610;&#1577;</span></p>
-        </div>
-        <div class="soc-wrap">
-          <h4 class="soc-h">Follow the work</h4>
-          <ul class="socials">
-    <li><a href="https://api.whatsapp.com/send?phone=96899245250&text=Hello%20Nahid" style="--sc:#1FAF5E" target="_blank" rel="noopener" aria-label="AI Profit Lab on WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 1.8a8.2 8.2 0 1 1-4.2 15.3l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8zm-3.1 4c-.2 0-.5 0-.7.3-.2.3-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.8 2.8 4.4 3.8 2.2.9 2.6.7 3.1.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2-.1-.1-.2-.2-.5-.3l-1.7-.8c-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.1-.2 0-.4.1-.5l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5L10 8.2c-.2-.4-.4-.4-.6-.4h-.5z"/></svg></a></li>
-    <li><a href="https://www.linkedin.com/in/nahid-aby" style="--sc:#0A66C2" target="_blank" rel="noopener" aria-label="AI Profit Lab on LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg></a></li>
-    <li><a href="https://www.youtube.com/@AI_for_Managers" style="--sc:#FF0000" target="_blank" rel="noopener" aria-label="AI Profit Lab on YouTube"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg></a></li>
-    <li><a href="https://www.facebook.com/profile.php?id=61584870364473" style="--sc:#1877F2" target="_blank" rel="noopener" aria-label="AI Profit Lab on Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/></svg></a></li>
-          </ul>
-        </div>
-      </div>
+/* Byline mark stands in for the portrait in `article_kit`. */
+.byline .bymark{width:42px;height:42px;border-radius:11px;background:var(--teal-950);flex:none;
+  display:flex;align-items:center;justify-content:center;padding:8px}
+.byline .bymark img{width:100%;height:auto}
 
-      <nav class="fcol" aria-label="The work">
-        <h4>The work</h4>
-        <ul>
-          <li><a href="/en/services-v4/">What I build</a></li>
-          <li><a href="/en/process-v4/">How it works</a></li>
-          <li><a href="/en/services-v4/#price">Prices</a></li>
-          <li><a href="/en/checkout-v4/">Start an order</a></li>
-          <li><a href="/en/simulator-v4/">Revenue leak simulator</a></li>
-          <li><a href="/en/demo-v4/#dash">Dashboard demo</a></li>
-          <li><a href="/en/demo-v4/">WhatsApp demo</a></li>
-        </ul>
-      </nav>
+/* The keyword row: the page's own <meta name="keywords">, shown as topic
+   chips. They are the article's declared subjects, so they double as the
+   entity list an answer engine reads off the page. */
+.topics{display:flex;flex-wrap:wrap;gap:9px;margin:clamp(34px,4vw,48px) 0 0;padding-top:24px;border-top:1px solid var(--line)}
+.topics span:first-child{font-family:var(--mono);font-size:.74rem;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--muted);align-self:center;margin-right:4px}
+.topics b{font-weight:400;font-size:.86rem;color:var(--teal-900);background:var(--panel);
+  border:1px solid var(--line);border-radius:99px;padding:5px 13px}
 
-      <nav class="fcol" aria-label="Talk to me">
-        <h4>Talk to me</h4>
-        <ul class="direct">
-          <li><a href="https://api.whatsapp.com/send?phone=96899245250&text=Hello%20Nahid"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 1.8a8.2 8.2 0 1 1-4.2 15.3l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8zm-3.1 4c-.2 0-.5 0-.7.3-.2.3-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.8 2.8 4.4 3.8 2.2.9 2.6.7 3.1.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2-.1-.1-.2-.2-.5-.3l-1.7-.8c-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.1-.2 0-.4.1-.5l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5L10 8.2c-.2-.4-.4-.4-.6-.4h-.5z"/></svg><span dir="ltr">+968 9924 5250</span></a></li>
-          <li><a href="mailto:hello@aiprofitlab.io"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>hello@aiprofitlab.io</a></li>
-        </ul>
-        <ul>
-          <li><a href="/en/contact-v4/">Contact page</a></li>
-          <li><a href="/en/about-v4/">About Nahid</a></li>
-          <li><a href="/en/blog-v4/">Articles</a></li>
-        </ul>
-      </nav>
+/* .faq is a <section>, so it inherits the site's section padding - which puts
+   a 138px chasm between its own border-top hairline and its heading. On the
+   marketing pages that padding separates full-bleed bands; here it separates
+   two blocks inside one column. */
+.faq{padding:clamp(26px,3.2vw,38px) 0 0}
+.faq>h2{margin-bottom:clamp(8px,1.4vw,16px)}
 
-    </div>
+/* Long machine-generated headings need a lower ceiling than the v4 hero. */
+.ahero .h1{font-size:clamp(1.85rem,3.9vw,3rem)}
 
-    <a class="review" href="https://g.page/r/CYPlrz58-k0DEAI/review" target="_blank" rel="noopener">
-      <span class="gmark" aria-hidden="true"><svg viewBox="0 0 48 48" aria-hidden="true"><path fill="#4285F4" d="M45.12 24.5c0-1.56-.14-3.06-.4-4.5H24v8.51h11.84c-.51 2.75-2.06 5.08-4.39 6.64v5.52h7.11c4.16-3.83 6.56-9.47 6.56-16.17z"/><path fill="#34A853" d="M24 46c5.94 0 10.92-1.97 14.56-5.33l-7.11-5.52c-1.97 1.32-4.49 2.1-7.45 2.1-5.73 0-10.58-3.87-12.31-9.07H4.34v5.7C7.96 41.07 15.4 46 24 46z"/><path fill="#FBBC05" d="M11.69 28.18C11.25 26.86 11 25.45 11 24s.25-2.86.69-4.18v-5.7H4.34C2.85 17.09 2 20.45 2 24s.85 6.91 2.34 9.88l7.35-5.7z"/><path fill="#EA4335" d="M24 10.75c3.23 0 6.13 1.11 8.41 3.29l6.31-6.31C34.91 4.18 29.93 2 24 2 15.4 2 7.96 6.93 4.34 14.12l7.35 5.7c1.73-5.2 6.58-9.07 12.31-9.07z"/></svg></span>
-      <span class="rbody">
-        <span class="stars" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 17.3l-6.18 3.75 1.64-7.03L2 9.24l7.19-.61L12 2l2.81 6.63 7.19.61-5.46 4.78 1.64 7.03z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 17.3l-6.18 3.75 1.64-7.03L2 9.24l7.19-.61L12 2l2.81 6.63 7.19.61-5.46 4.78 1.64 7.03z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 17.3l-6.18 3.75 1.64-7.03L2 9.24l7.19-.61L12 2l2.81 6.63 7.19.61-5.46 4.78 1.64 7.03z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 17.3l-6.18 3.75 1.64-7.03L2 9.24l7.19-.61L12 2l2.81 6.63 7.19.61-5.46 4.78 1.64 7.03z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 17.3l-6.18 3.75 1.64-7.03L2 9.24l7.19-.61L12 2l2.81 6.63 7.19.61-5.46 4.78 1.64 7.03z"/></svg></span>
-        <span class="rk">Worked with me?</span>
-        <span class="rt">Leave a review on Google Maps</span>
-      </span>
-      <span class="rarw" aria-hidden="true">&rarr;</span>
-    </a>
+/* --------------------------------------------------------------- Arabic */
+/* Scoped to [dir=rtl] rather than shipped as a second file: one stylesheet
+   serves all 300 articles in both languages, which means one cache entry
+   instead of two and no chance of the pair drifting apart.
 
-    <p class="legal">
-      &copy; 2026 AI Profit Lab &mdash; a brand of Lotus Gulf International (CR <span dir="ltr">1570092</span>)<br>
-      South Al Khuwair, Bousher, Muscat, Oman &middot; Not VAT registered (TIN <span dir="ltr">2317725</span>)<br>
-      <a href="/terms/">Terms of Service</a> &middot; <a href="/refund-policy/">Refunds &amp; cancellation</a>
-      &middot; <a href="/privacy/">Privacy</a>
-    </p>
-  </div>
-</footer>
-<script>
-/* ---------------------------------------------------------------------------
-   Shared page behaviour: sticky header state, mobile menu, scroll reveals,
-   SVG draw-in, and count-up numbers. Everything degrades to "visible and
-   static" when JS or IntersectionObserver is missing, and is skipped wholesale
-   under prefers-reduced-motion.
---------------------------------------------------------------------------- */
-(function(){
-  "use strict";
-  var root = document.documentElement;
-  var reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+   Latin display faces have no Arabic glyphs, so the whole stack is swapped
+   rather than fallen back on. Markazi Text runs small next to IBM Plex Sans
+   Arabic, hence the size bump on display type. Mono keeps IBM Plex Mono for
+   figures and dates and hands Arabic words to Plex Sans Arabic. */
+[dir=rtl]{
+  --display:'Markazi Text','Amiri',Georgia,serif;
+  --sans:'IBM Plex Sans Arabic','IBM Plex Sans',-apple-system,'Segoe UI',sans-serif;
+  --mono:'IBM Plex Mono','IBM Plex Sans Arabic',ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+[dir=rtl] body{line-height:1.85}
+[dir=rtl] h1,[dir=rtl] h2,[dir=rtl] h3,[dir=rtl] h4{letter-spacing:0}
+[dir=rtl] .h1,[dir=rtl] .ahero .h1{font-size:clamp(2rem,4.3vw,3.2rem);line-height:1.3}
+[dir=rtl] .h2,[dir=rtl] .prose h2{line-height:1.35}
+[dir=rtl] .prose h2{font-size:clamp(1.7rem,3.1vw,2.4rem)}
+[dir=rtl] .prose h3{font-size:clamp(1.3rem,2.1vw,1.55rem);line-height:1.4}
+[dir=rtl] .prose p{line-height:1.9}
+[dir=rtl] .prose blockquote p{line-height:1.6}
+[dir=rtl] .faq summary{line-height:1.5}
+[dir=rtl] .callout h3,[dir=rtl] .callout h4{line-height:1.45}
 
-  /* header ---------------------------------------------------------------- */
-  var top = document.getElementById("top");
-  function onScroll(){ top.classList.toggle("solid", scrollY > 40); }
-  onScroll(); addEventListener("scroll", onScroll, {passive:true});
+/* Tracking and small-caps are Latin devices; on Arabic they break the join
+   between letters and leave a label unreadable. */
+[dir=rtl] .eyebrow,[dir=rtl] .crumbs,[dir=rtl] .toc h4,[dir=rtl] .keybox h4,
+[dir=rtl] .callout b,[dir=rtl] .refs h4,[dir=rtl] .tblcap,[dir=rtl] .tbl th,
+[dir=rtl] .byline .who span,[dir=rtl] .byline .stamp,[dir=rtl] .steps b,
+[dir=rtl] .related .card .rd,[dir=rtl] .related .card .n,[dir=rtl] .pfig figcaption,
+[dir=rtl] .afig figcaption,[dir=rtl] .brandbox .rolelbl,[dir=rtl] .topics span:first-child,
+[dir=rtl] .lnk,[dir=rtl] .top-wa,[dir=rtl] .btn,[dir=rtl] .chip,
+[dir=rtl] .pager .pl,[dir=rtl] .foot h4,[dir=rtl] .soc-h,[dir=rtl] .rk,[dir=rtl] .rt,
+[dir=rtl] .legal,[dir=rtl] .mfoot,[dir=rtl] .mmenu a{
+  letter-spacing:0;text-transform:none;
+}
 
-  /* mobile menu ----------------------------------------------------------- */
-  var burger = document.getElementById("burger"), mm = document.getElementById("mmenu");
-  if (burger && mm){
-    var setMenu = function(open){
-      root.classList.toggle("menu-open", open);
-      burger.setAttribute("aria-expanded", open ? "true" : "false");
-      mm.setAttribute("aria-hidden", open ? "false" : "true");
-      document.body.style.overflow = open ? "hidden" : "";
-    };
-    burger.addEventListener("click", function(){ setMenu(!root.classList.contains("menu-open")); });
-    mm.addEventListener("click", function(e){ if (e.target.tagName === "A") setMenu(false); });
-    addEventListener("keydown", function(e){ if (e.key === "Escape") setMenu(false); });
-  }
+/* ------------------------------------------------------------ mirroring */
+[dir=rtl] .prog{left:auto;right:0}
+[dir=rtl] .skip{left:auto;right:-9999px;border-radius:0 0 0 8px}
+[dir=rtl] .skip:focus{left:auto;right:0}
 
-  /* auto-tag the standard blocks so pages don't have to repeat class="rv" --- */
-  document.querySelectorAll("section:not(.cine) .eyebrow, section:not(.cine) .lede").forEach(function(el){ el.classList.add("rv"); });
-  /* The wipe needs an inner block to move inside the heading's own overflow,
-     so the script supplies one rather than every page repeating it. */
-  document.querySelectorAll("section:not(.cine) h2, section:not(.cine) .h1").forEach(function(el){
-    var inner = document.createElement("span");
-    inner.className = "wi";
-    while (el.firstChild) inner.appendChild(el.firstChild);
-    el.appendChild(inner);
-    el.classList.add("rvw");
-  });
-  /* [data-stagger] children reveal in sequence, capped so a long grid does not
-     end up waiting a second and a half for its last card. */
-  document.querySelectorAll("[data-stagger]").forEach(function(g){
-    Array.prototype.forEach.call(g.children, function(c,i){
-      c.classList.add("rv"); c.style.setProperty("--d", Math.min(i*0.075, 0.45) + "s");
-    });
-  });
+[dir=rtl] .prose p.open::first-letter{float:right;padding:.06em 0 0 .12em}
+[dir=rtl] .prose li{padding-left:0;padding-right:30px}
+[dir=rtl] .prose ul>li::before{left:auto;right:6px}
+[dir=rtl] .prose ol>li::before{left:auto;right:0}
+[dir=rtl] .prose blockquote{padding:0 clamp(20px,3vw,30px) 0 0;border-left:0;border-right:2px solid var(--amber)}
 
-  /* SVG draw-in: measure each stroked path so the dash length is its own
-     length, not a guessed constant that under- or over-shoots. */
-  document.querySelectorAll(".drawn").forEach(function(svg){
-    svg.querySelectorAll("path,line,polyline,circle,rect.dr").forEach(function(p,i){
-      var len = 1000;
-      try { if (p.getTotalLength) len = Math.ceil(p.getTotalLength()) || 1000; } catch(e){}
-      p.style.setProperty("--len", len);
-      p.style.setProperty("--d", Math.min(i*0.09, 0.7) + "s");
-    });
-  });
+[dir=rtl] .keybox{border-left:0;border-right:3px solid var(--amber);border-radius:14px 0 0 14px}
+[dir=rtl] .keybox li{padding-left:0;padding-right:26px}
+[dir=rtl] .keybox li::before{left:auto;right:0}
 
-  var els = document.querySelectorAll(".rv,.rvw,.drawn,[data-count]");
-  function showAll(){ els.forEach(function(e){ e.classList.add("vis"); countUp(e, true); }); }
-  if (reduce || !("IntersectionObserver" in window)){ showAll(); return; }
+[dir=rtl] .toc a{padding:8px 15px 8px 0;border-left:0;border-right:1px solid var(--line)}
+[dir=rtl] .toc a.on{border-left-color:transparent;border-right-color:var(--amber)}
 
-  /* count-up -------------------------------------------------------------- */
-  function countUp(el, instant){
-    var raw = el.getAttribute("data-count"); if (raw === null || el.dataset.counted) return;
-    el.dataset.counted = "1";
-    var to = parseFloat(raw), pre = el.getAttribute("data-pre") || "", post = el.getAttribute("data-post") || "";
-    var dp = parseInt(el.getAttribute("data-dp") || "0", 10);
-    if (instant){ el.textContent = pre + to.toFixed(dp) + post; return; }
-    var t0 = 0, dur = 1250;
-    (function step(now){
-      if (!t0) t0 = now;
-      var k = Math.min((now - t0)/dur, 1);
-      var e = 1 - Math.pow(1 - k, 3);                       /* easeOutCubic */
-      var v = to * e;
-      el.textContent = pre + (dp ? v.toFixed(dp) : Math.round(v).toLocaleString("en-US")) + post;
-      if (k < 1) requestAnimationFrame(step);
-    })(0);
-  }
+[dir=rtl] .tbl th{text-align:right}
+[dir=rtl] .tblcap,[dir=rtl] .pfig figcaption,[dir=rtl] .afig figcaption{
+  padding-left:0;padding-right:16px;border-left:0;border-right:2px solid var(--amber);
+}
+[dir=rtl] .afig figcaption{padding-right:14px}
 
-  var io = new IntersectionObserver(function(entries){
-    entries.forEach(function(en){
-      if (!en.isIntersecting) return;
-      en.target.classList.add("vis"); countUp(en.target, false); io.unobserve(en.target);
-    });
-  }, {threshold:0.12, rootMargin:"0px 0px -60px 0px"});
-  els.forEach(function(e){ io.observe(e); });
-})();
+[dir=rtl] .refs li{padding-left:0;padding-right:32px}
+[dir=rtl] .refs li::before{left:auto;right:0}
 
-/* ---------------------------------------------------------------------------
-   Article behaviour. The table of contents is rendered server-side and every
-   link works without this script; what runs here is only the progress bar,
-   the "you are here" highlight, and the copy-link button.
---------------------------------------------------------------------------- */
-(function(){
-  "use strict";
-  var art = document.getElementById("art");
-  if (!art) return;
+[dir=rtl] .faq summary{padding:20px 0 20px 44px}
+[dir=rtl] .faq summary::after{right:auto;left:8px}
+[dir=rtl] .faq summary::before{right:auto;left:14px}
+[dir=rtl] .faq details p{padding-right:0;padding-left:44px}
 
-  /* progress ------------------------------------------------------------- */
-  var bar = document.getElementById("prog");
-  if (bar){
-    var tick = function(){
-      var box = art.getBoundingClientRect();
-      var total = box.height - innerHeight;
-      var done = total > 0 ? (-box.top) / total : 1;
-      bar.style.width = (Math.min(Math.max(done, 0), 1) * 100).toFixed(2) + "%";
-    };
-    tick(); addEventListener("scroll", tick, {passive:true}); addEventListener("resize", tick);
-  }
+[dir=rtl] .icta::after{right:auto;left:-40px}
+[dir=rtl] .topics span:first-child{margin-right:0;margin-left:4px}
 
-  /* scrollspy ------------------------------------------------------------ */
-  var links = [].slice.call(document.querySelectorAll(".toc a[href^='#']"));
-  var heads = links.map(function(a){ return document.getElementById(a.getAttribute("href").slice(1)); })
-                   .filter(Boolean);
-  if (heads.length && "IntersectionObserver" in window){
-    var seen = {};
-    var mark = function(){
-      /* The topmost heading that has already crossed the reading line wins;
-         intersection alone would light up two entries on a long section. */
-      var best = null;
-      heads.forEach(function(h){ if (h.getBoundingClientRect().top < 140) best = h; });
-      links.forEach(function(a){
-        a.classList.toggle("on", !!best && a.getAttribute("href") === "#" + best.id);
-      });
-    };
-    mark(); addEventListener("scroll", mark, {passive:true});
-    void seen;
-  }
+/* Figures, prices, phone numbers and code stay left-to-right inside Arabic
+   running text; without this "OMR 1,023" comes out reversed. */
+[dir=rtl] .num,[dir=rtl] .tbl td.n,[dir=rtl] .formula span,[dir=rtl] .prose code{
+  direction:ltr;unicode-bidi:embed;text-align:right;
+}
 
-  /* copy link ------------------------------------------------------------ */
-  var copy = document.getElementById("copyLink");
-  if (copy){
-    copy.addEventListener("click", function(){
-      var url = location.href.split("#")[0];
-      var ok = function(){
-        copy.classList.add("done");
-        copy.setAttribute("aria-label", "Link copied");
-        setTimeout(function(){ copy.classList.remove("done"); copy.setAttribute("aria-label","Copy link"); }, 1800);
-      };
-      if (navigator.clipboard && navigator.clipboard.writeText){
-        navigator.clipboard.writeText(url).then(ok, function(){});
-      } else {
-        var t = document.createElement("textarea");
-        t.value = url; document.body.appendChild(t); t.select();
-        try { document.execCommand("copy"); ok(); } catch(e){}
-        document.body.removeChild(t);
-      }
-    });
-  }
-})();
-</script>
-</body>
-</html>
+/* ---------------------------------------------- footer signature, mirrored */
+/* On an Arabic page the two lines swap roles: .slogan carries the Arabic and
+   .slogan-ar carries the English echo. The amber stroke follows the Latin word
+   rather than staying on .slogan, because under Arabic it cuts through the
+   descenders and the join. The frame itself needs no override - .fsig is built
+   on logical properties and mirrors on its own. */
+[dir=rtl] .foot .slogan .ins::after{content:none}
+/* .slogan-ar carries Latin here, so it drops the Arabic fallback stack and
+   takes Marcellus - which these pages already load for the wordmark - instead
+   of rendering the English echo in a Naskh face. */
+[dir=rtl] .foot .slogan-ar{font-family:'Marcellus',Georgia,'Times New Roman',serif}
+[dir=rtl] .foot .slogan-ar .ins{display:inline-block;position:relative;white-space:nowrap}
+[dir=rtl] .foot .slogan-ar .ins::after{
+  content:"";position:absolute;left:-.04em;right:-.04em;bottom:-.12em;
+  height:4px;border-radius:3px;
+  background:linear-gradient(90deg,rgba(216,146,52,.85),rgba(216,146,52,.22));
+  transition:background .45s var(--ease);
+}
+[dir=rtl] .fsig:hover .slogan-ar .ins::after{background:linear-gradient(90deg,var(--amber-bright),var(--amber-bright))}
+/* the beat fades away from the inline-start edge, which is the right one here */
+[dir=rtl] .fsig .sig-beat{background:linear-gradient(270deg,rgba(232,201,143,.6),rgba(232,201,143,0))}

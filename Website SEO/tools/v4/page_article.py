@@ -18,7 +18,7 @@ CSS = ak.ARTICLE_CSS
 JS = ak.ARTICLE_JS
 
 ARTICLE = {
-    "path": "/en/article-v4/",
+    "path": "/blog/en/2026-06-25-true-cost-missed-whatsapp-inquiries-oman/",
     "cat": "The cost of silence",
     "title": "What silence costs: putting a number on the messages you never answered",
     "dek": ("Twelve unread WhatsApp messages on a Sunday morning is not a customer service problem. "
@@ -188,16 +188,16 @@ ARTICLE = {
         ("WhatsApp Business Platform &mdash; official documentation",
          "https://business.whatsapp.com/"),
         ("AI Profit Lab &mdash; published prices for the Smart Website",
-         "https://aiprofitlab.io/en/services-v4/#price"),
+         "https://aiprofitlab.io/en/services/#price"),
     ],
 
     "related": [
         ("Silence", "The Silent Buyer Test: what a real buyer sees when they message you",
-         "/en/contact-v4/#sbt"),
+         "/en/contact/#test"),
         ("Arithmetic", "Run your own numbers in the revenue leak simulator",
-         "/en/simulator-v4/"),
+         "/en/simulators/"),
         ("Demo", "Watch the buyer agent answer at 9:40pm, in Arabic",
-         "/en/demo-v4/"),
+         "/en/demos/"),
     ],
 }
 
@@ -207,12 +207,12 @@ def body():
 
 
 META = dict(
-    slug="article-v4",
+    slug="article",
     title="What silence costs: pricing the WhatsApp messages you never answered | AI Profit Lab",
     desc=("The four-term formula for what missed WhatsApp inquiries cost an Omani business each month, "
           "worked through with real figures - and what it does not prove."),
-    nav="/en/blog-v4/",
-    next=("Next", "Run your own numbers", "/en/simulator-v4/"),
+    nav="/blog/",
+    next=("Next", "Run your own numbers", "/en/simulators/"),
     schema=ak.schema(ARTICLE),
     # No chat launcher on articles: an article is a reading surface, and the
     # launcher lands in the same corner the WhatsApp float already occupies.

@@ -5,34 +5,36 @@ public_html = "public_html"
 base_url = "https://aiprofitlab.io"
 
 urls = [
-    # Static pages (Arabic)
+    # --- English, the v4 set (launched 2026-08-21) --------------------------
     ("/", 1.0),
+    ("/en/services/", 0.9),
+    ("/en/process/", 0.8),
+    ("/en/about/", 0.8),
+    ("/en/contact/", 0.8),
+    ("/en/demos/", 0.7),
+    ("/en/simulators/", 0.7),
+    ("/en/checkout/", 0.7),
+    ("/blog/", 0.8),
+    ("/en/academy/", 0.8),
+    ("/en/smart-website-offer.html", 0.9),
+
+    # --- Arabic, still on the previous skin ---------------------------------
+    ("/ar/", 0.9),
+    ("/services/", 0.8),
+    ("/process/", 0.8),
     ("/about/", 0.8),
     ("/contact/", 0.8),
-    ("/process/", 0.8),
-    ("/services/", 0.8),
     ("/blog-ar/", 0.8),
     ("/academy-ar/", 0.8),
     ("/campaign-roi-simulator-ar/", 0.7),
     ("/customized-ceo-dashboard-demo-ar/", 0.7),
     ("/missed-call-simulator-ar/", 0.7),
     ("/whatsapp-receptionist-demo-ar/", 0.7),
-
     ("/smart-website-offer.html", 0.9),
 
-    # Static pages (English)
-    ("/en/", 0.9),
-    ("/en/smart-website-offer.html", 0.9),
-    ("/en/about-en/", 0.8),
-    ("/en/contact-en/", 0.8),
-    ("/en/process-en/", 0.8),
-    ("/en/services-en/", 0.8),
-    ("/en/blog/", 0.8),
-    ("/en/academy/", 0.8),
-    ("/campaign-roi-simulator/", 0.7),
-    ("/customized-ceo-dashboard-demo/", 0.7),
-    ("/en/missed-call-simulator-en/", 0.7),
-    ("/en/whatsapp-receptionist-demo/", 0.7),
+    # /en/order/ is a payment-return page and /en/checkout/?plan=... are query
+    # variants of one URL - neither belongs in a sitemap. The English demo and
+    # simulator pages that used to be listed here now 301 into the two above.
 ]
 
 blog_ar_path = os.path.join(public_html, "blog", "ar")

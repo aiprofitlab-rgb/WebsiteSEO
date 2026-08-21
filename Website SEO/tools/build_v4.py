@@ -22,15 +22,19 @@ sys.path.insert(0, str(HERE))
 import aiden_version  # noqa: E402
 import kit  # noqa: E402
 
+# page_blog and page_article are deliberately absent. Both were pattern
+# references built before the corpus migration: the real article hub is
+# regenerated from all 150 published pieces by tools/reskin_blog_hubs.py, and
+# the reference article is a rewrite of a piece that tools/reskin_articles.py
+# now re-skins in place. Publishing either would duplicate a live URL.
 MODULES = ["page_home", "page_services", "page_process", "page_about", "page_contact",
-           "page_blog", "page_article", "page_simulator", "page_demo",
-           "page_checkout", "page_order"]
+           "page_simulator", "page_demo", "page_checkout", "page_order"]
 
 
 def render(mod):
     m = importlib.import_module(mod)
     meta = m.META
-    path = f"/en/{meta['slug']}/"
+    rel, path, ar_alt = kit.PAGES[meta["slug"]]
 
     css = kit.TOKENS + kit.SKIP_CSS + kit.BASE_CSS + getattr(m, "CSS", "")
     js = kit.MOTION_JS
@@ -57,7 +61,10 @@ def render(mod):
         kit.HEAD
         .replace("{{TITLE}}", meta["title"])
         .replace("{{DESC}}", meta["desc"])
+        .replace("{{ROBOTS}}", kit.ROBOTS_NONE if meta.get("noindex")
+                 else kit.ROBOTS_INDEX)
         .replace("{{PATH}}", path)
+        .replace("{{ALTERNATES}}", kit.alternates(path, ar_alt))
         .replace("{{HEADEXTRA}}", head_extra)
         .replace("{{SCHEMA}}", schema)
         .replace("{{CSS}}", css)
@@ -73,7 +80,7 @@ def render(mod):
                            if meta.get("aiden", True) else "")
     )
 
-    dest = OUT / (meta["slug"] + ".html")
+    dest = ROOT / "public_html" / rel
     dest.write_text(html, encoding="utf-8")
     return dest, len(html)
 
@@ -103,14 +110,14 @@ if __name__ == "__main__":
     # also catches "I edited pay.py and rebuilt only the checkout".
     # ----------------------------------------------------------------------
     import pay  # noqa: E402
-    svc = OUT / "services-v4.html"
+    svc = ROOT / "public_html" / kit.PAGES["services"][0]
     if svc.exists():
         problems = pay.check_services(svc.read_text(encoding="utf-8"))
         if problems:
-            print("\n  PRICE MISMATCH - pay.py and services-v4.html disagree:")
+            print("\n  PRICE MISMATCH - pay.py and the services page disagree:")
             for pr in problems:
                 print("    x " + pr)
             sys.exit(1)
-        print("  ok prices in pay.py match services-v4.html")
+        print(f"  ok prices in pay.py match {svc.relative_to(ROOT)}")
     else:
-        print("  !! services-v4.html not built; price consistency not checked")
+        print("  !! services page not built; price consistency not checked")

@@ -392,7 +392,7 @@ def body():
       Every term is a figure you set. Nothing is stored, nothing is submitted, and no result is a promise.</p>
     <div class="btn-row" style="margin-top:26px">
       <a class="btn btn-teal" href="#tools">Open the simulators</a>
-      <a class="tlink" href="/en/article-v4/">Read the method first <span class="arw">&rarr;</span></a>
+      <a class="tlink" href="/blog/en/2026-06-25-true-cost-missed-whatsapp-inquiries-oman/">Read the method first <span class="arw">&rarr;</span></a>
     </div>
   </div>
 </section>
@@ -435,7 +435,7 @@ def body():
         </div>
         <div class="btn-row">
           <a class="btn btn-wa" id="AWa" href="{WA}">{WA_ICON}<span>Send me these numbers</span></a>
-          <a class="btn btn-ghost" href="/en/services-v4/#price">See what closes it</a>
+          <a class="btn btn-ghost" href="/en/services/#price">See what closes it</a>
         </div>
         <p class="assume">This is what is <em>at stake</em> in the messages nobody answered &mdash; not revenue
           you are guaranteed to recover. I deliberately do not multiply it by a recovery rate, because I
@@ -474,7 +474,7 @@ def body():
         </div>
         <div class="btn-row">
           <a class="btn btn-wa" id="BWa" href="{WA}">{WA_ICON}<span>Send me these numbers</span></a>
-          <a class="btn btn-ghost" href="/en/services-v4/#price">See what closes it</a>
+          <a class="btn btn-ghost" href="/en/services/#price">See what closes it</a>
         </div>
         <p class="assume">This one is a real cost, not an opportunity cost: you are already paying it every
           month in salary. What it does not include is the error rate &mdash; the wrong figure typed once and
@@ -533,8 +533,8 @@ def body():
       </table>
     </div>
     <div class="btn-row" style="margin-top:26px">
-      <a class="btn btn-teal" href="/en/services-v4/#price">The full price page</a>
-      <a class="btn btn-ghost" href="/en/demo-v4/">Watch it answer a buyer</a>
+      <a class="btn btn-teal" href="/en/services/#price">The full price page</a>
+      <a class="btn btn-ghost" href="/en/demos/">Watch it answer a buyer</a>
     </div>
   </div>
 </section>
@@ -544,19 +544,19 @@ def body():
 
 
 META = dict(
-    slug="simulator-v4",
+    slug="simulators",
     title="Simulators | What silence and re-typing cost your business — AI Profit Lab",
     desc=("Two calculators on your own figures: what unanswered buyer inquiries put at stake each month, "
           "and what manual data entry costs you. Nothing stored, nothing submitted."),
-    nav="/en/simulator-v4/",
-    next=("Next", "Watch it answer a buyer", "/en/demo-v4/"),
+    nav="/en/simulators/",
+    next=("Next", "Watch it answer a buyer", "/en/demos/"),
     schema="""{
   "@context":"https://schema.org",
   "@type":"WebApplication",
   "name":"AI Profit Lab Revenue Leak Simulators",
   "applicationCategory":"BusinessApplication",
   "operatingSystem":"Any",
-  "url":"https://aiprofitlab.io/en/simulator-v4/",
+  "url":"https://aiprofitlab.io/en/simulators/",
   "offers":{"@type":"Offer","price":"0","priceCurrency":"OMR"},
   "publisher":{"@type":"Organization","name":"AI Profit Lab","legalName":"Lotus Gulf International"}
 }""",

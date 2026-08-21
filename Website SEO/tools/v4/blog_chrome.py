@@ -6,11 +6,11 @@ articles need on top of the v4 kit.
 Two things separate this from `kit.py`, and both are deliberate:
 
   * URLs point at the pages that are live and indexed today (`/en/`,
-    `/en/services-en/`, `/blog/`, and the Arabic set at the root), NOT at the
-    `-v4` previews. The articles are indexed; the v4 page set still carries
-    `noindex, nofollow`. Linking one to the other would push crawlers and
-    readers from a live page into a page that asks not to be indexed. When the
-    v4 set launches, flip `URLS` below and rebuild - that is the only edit.
+    `/en/services/`, `/blog/`, and the Arabic set at the root). Flipped on
+    2026-08-21 when the v4 set launched onto those URLs; before that they
+    pointed at the old `-en` pages, because linking an indexed article into a
+    `noindex` preview would have pushed crawlers and readers into a page that
+    asks not to be indexed.
 
   * Nothing here emits `<meta name="robots" content="noindex">`. `kit.HEAD`
     does, because the v4 previews must stay out of the index. An article that
@@ -33,15 +33,15 @@ from article_kit import ARTICLE_CSS
 # --------------------------------------------------------------------------
 URLS = {
     "en": {
-        "home": "/en/", "services": "/en/services-en/", "process": "/en/process-en/",
-        "about": "/en/about-en/", "contact": "/en/contact-en/", "blog": "/blog/",
-        "privacy": "/privacy/", "other": "/", "sim": "/en/missed-call-simulator-en/",
-        "demo": "/en/whatsapp-receptionist-demo/", "dash": "/customized-ceo-dashboard-demo/",
+        "home": "/", "services": "/en/services/", "process": "/en/process/",
+        "about": "/en/about/", "contact": "/en/contact/", "blog": "/blog/",
+        "privacy": "/privacy/", "other": "/ar/", "sim": "/en/simulators/",
+        "demo": "/en/demos/", "dash": "/en/demos/#dash",
     },
     "ar": {
-        "home": "/", "services": "/services/", "process": "/process/",
+        "home": "/ar/", "services": "/services/", "process": "/process/",
         "about": "/about/", "contact": "/contact/", "blog": "/blog-ar/",
-        "privacy": "/privacy/", "other": "/en/", "sim": "/missed-call-simulator-ar/",
+        "privacy": "/privacy/", "other": "/", "sim": "/missed-call-simulator-ar/",
         "demo": "/whatsapp-receptionist-demo-ar/", "dash": "/customized-ceo-dashboard-demo-ar/",
     },
 }

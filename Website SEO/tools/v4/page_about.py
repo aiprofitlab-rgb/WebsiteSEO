@@ -83,7 +83,7 @@ def body():
           nothing on this site is written in software vocabulary.</p>
         <div class="btn-row" style="margin-top:30px">
           <a class="btn btn-wa" href="{WA}&text=Hello%20Nahid%2C%20I%20read%20your%20about%20page.">{WA_ICON}Message me directly</a>
-          <a class="tlink" href="/en/services-v4/">See what I build <span class="arw">&rarr;</span></a>
+          <a class="tlink" href="/en/services/">See what I build <span class="arw">&rarr;</span></a>
         </div>
       </div>
       <figure class="portrait rv" style="margin:0">
@@ -182,8 +182,8 @@ def body():
         <p class="lede" style="margin:0">Free, takes me about forty minutes, and you keep the scorecard whatever you decide.</p>
       </div>
       <div class="btn-row">
-        <a class="btn btn-amber" href="/en/contact-v4/#test">Get the Silent Buyer Test</a>
-        <a class="btn btn-ghost" href="/en/services-v4/#price">See the prices</a>
+        <a class="btn btn-amber" href="/en/contact/#test">Get the Silent Buyer Test</a>
+        <a class="btn btn-ghost" href="/en/services/#price">See the prices</a>
       </div>
     </div>
   </div>
@@ -194,12 +194,12 @@ def body():
 
 
 META = dict(
-    slug="about-v4",
+    slug="about",
     title="About | AI Profit Lab — one operator, not an agency",
     desc=("An engineer who has built and run a real distribution business, now building AI systems for "
           "trading and distribution owners in Oman. Including who I turn away."),
-    nav="/en/about-v4/",
-    next=("Next", "Talk to me", "/en/contact-v4/"),
+    nav="/en/about/",
+    next=("Next", "Talk to me", "/en/contact/"),
     schema="""{
   "@context":"https://schema.org",
   "@type":"AboutPage",

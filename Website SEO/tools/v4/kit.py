@@ -546,12 +546,50 @@ WA_ICON = (
 STAR = "&#10038;"
 
 # label, href, mono-index for the mobile menu
+# --------------------------------------------------------------------------
+# Where each page lands once published: slug -> (path under public_html/,
+# public URL). Launched 2026-08-21, taking over the English URLs from the old
+# skin; the -v4 preview paths and the older -en paths 301 here (.htaccess
+# section 2b). The homepage is the one page that answers on "/" rather than
+# under /en/, so its file is written to the document root.
+# --------------------------------------------------------------------------
+# Third field is the Arabic twin, or None where the page is English-only. The
+# Arabic pages already declare the English side of each pair; without this the
+# pairing is one-directional and Google ignores it.
+PAGES = {
+    "index":      ("index.html",          "/",               "/ar/"),
+    "services":   ("en/services.html",    "/en/services/",   "/services/"),
+    "process":    ("en/process.html",     "/en/process/",    "/process/"),
+    "about":      ("en/about.html",       "/en/about/",      "/about/"),
+    "contact":    ("en/contact.html",     "/en/contact/",    "/contact/"),
+    "simulators": ("en/simulators.html",  "/en/simulators/", None),
+    "demos":      ("en/demos.html",       "/en/demos/",      None),
+    "checkout":   ("en/checkout.html",    "/en/checkout/",   None),
+    "order":      ("en/order.html",       "/en/order/",      None),
+}
+
+
+ROBOTS_INDEX = ('<meta name="robots" content="index, follow, '
+                'max-image-preview:large, max-snippet:-1">')
+ROBOTS_NONE = '<meta name="robots" content="noindex, follow">'
+
+
+def alternates(path, ar):
+    """hreflang block for one page. x-default is the English side throughout:
+    the Arabic pages already nominate it, and this is a Muscat business whose
+    English pages are the ones written for a first-time visitor."""
+    out = [f'<link rel="alternate" hreflang="en" href="https://aiprofitlab.io{path}">']
+    if ar:
+        out.append(f'<link rel="alternate" hreflang="ar" href="https://aiprofitlab.io{ar}">')
+    out.append(f'<link rel="alternate" hreflang="x-default" href="https://aiprofitlab.io{path}">')
+    return "\n".join(out)
+
 NAV = [
-    ("Home",         "/en/index-v4/",    "01"),
-    ("What I Build", "/en/services-v4/", "02"),
-    ("How It Works", "/en/process-v4/",  "03"),
-    ("About",        "/en/about-v4/",    "04"),
-    ("Contact",      "/en/contact-v4/",  "05"),
+    ("Home",         "/",    "01"),
+    ("What I Build", "/en/services/", "02"),
+    ("How It Works", "/en/process/",  "03"),
+    ("About",        "/en/about/",    "04"),
+    ("Contact",      "/en/contact/",  "05"),
 ]
 
 HEAD = """<!DOCTYPE html>
@@ -559,10 +597,8 @@ HEAD = """<!DOCTYPE html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<!-- Stays noindex until Nahid approves this set for launch. When it launches,
-     remove this tag AND add the noindex to the page it replaces in the SAME
-     deploy - never separately, or both versions compete in the index. -->
-<meta name="robots" content="noindex, nofollow">
+{{ROBOTS}}
+{{ALTERNATES}}
 <title>{{TITLE}}</title>
 <meta name="description" content="{{DESC}}">
 <link rel="canonical" href="https://aiprofitlab.io{{PATH}}">
@@ -607,18 +643,18 @@ def header(active_href):
     for label, href, _ in NAV[1:]:
         cur = ' aria-current="page"' if href == active_href else ""
         links.append(f'<a class="lnk" href="{href}"{cur}>{label}</a>')
-    cur = ' aria-current="page"' if active_href == "/en/blog-v4/" else ""
-    links.append(f'<a class="lnk" href="/en/blog-v4/"{cur}>Articles</a>')
-    links.append('<a class="lnk" href="/" lang="ar">&#1593;&#1585;&#1576;&#1610;</a>')
+    cur = ' aria-current="page"' if active_href == "/blog/" else ""
+    links.append(f'<a class="lnk" href="/blog/"{cur}>Articles</a>')
+    links.append('<a class="lnk" href="/ar/" lang="ar">&#1593;&#1585;&#1576;&#1610;</a>')
 
     m = []
     for label, href, n in NAV:
         cur = ' aria-current="page"' if href == active_href else ""
         m.append(f'<a href="{href}"{cur}><em>{n}</em>{label}</a>')
-    m.append(f'<a href="/en/blog-v4/"{cur}><em>06</em>Articles</a>')
+    m.append(f'<a href="/blog/"{cur}><em>06</em>Articles</a>')
 
     return f"""<header class="top" id="top">
-  <a href="/en/index-v4/" aria-label="AI Profit Lab home">
+  <a href="/" aria-label="AI Profit Lab home">
     <img class="mark" src="/assets/brand/wordmark-primary.svg" alt="AI Profit Lab" width="160" height="28">
   </a>
   <nav class="nav" aria-label="Primary">
@@ -730,13 +766,13 @@ FOOTER = f"""<footer class="foot">
       <nav class="fcol" aria-label="The work">
         <h4>The work</h4>
         <ul>
-          <li><a href="/en/services-v4/">What I build</a></li>
-          <li><a href="/en/process-v4/">How it works</a></li>
-          <li><a href="/en/services-v4/#price">Prices</a></li>
-          <li><a href="/en/checkout-v4/">Start an order</a></li>
-          <li><a href="/en/simulator-v4/">Revenue leak simulator</a></li>
-          <li><a href="/en/demo-v4/#dash">Dashboard demo</a></li>
-          <li><a href="/en/demo-v4/">WhatsApp demo</a></li>
+          <li><a href="/en/services/">What I build</a></li>
+          <li><a href="/en/process/">How it works</a></li>
+          <li><a href="/en/services/#price">Prices</a></li>
+          <li><a href="/en/checkout/">Start an order</a></li>
+          <li><a href="/en/simulators/">Revenue leak simulator</a></li>
+          <li><a href="/en/demos/#dash">Dashboard demo</a></li>
+          <li><a href="/en/demos/">WhatsApp demo</a></li>
         </ul>
       </nav>
 
@@ -747,9 +783,9 @@ FOOTER = f"""<footer class="foot">
           <li><a href="mailto:hello@aiprofitlab.io">{MAIL_ICON}hello@aiprofitlab.io</a></li>
         </ul>
         <ul>
-          <li><a href="/en/contact-v4/">Contact page</a></li>
-          <li><a href="/en/about-v4/">About Nahid</a></li>
-          <li><a href="/en/blog-v4/">Articles</a></li>
+          <li><a href="/en/contact/">Contact page</a></li>
+          <li><a href="/en/about/">About Nahid</a></li>
+          <li><a href="/blog/">Articles</a></li>
         </ul>
       </nav>
 

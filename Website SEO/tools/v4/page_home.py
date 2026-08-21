@@ -704,21 +704,21 @@ def body():
         <h3>The Smart Website</h3>
         <p>Answers buyers in Arabic and English, records who they are, and hands the live ones to your WhatsApp.</p>
         <span class="tag">One-time &#183; <b>OMR 950</b></span>
-        <a class="tlink" href="/en/services-v4/#smart-website">See what&#8217;s inside <span class="arw">&rarr;</span></a>
+        <a class="tlink" href="/en/services/#smart-website">See what&#8217;s inside <span class="arw">&rarr;</span></a>
       </article>
       <article class="card sys-card">
         <span class="n">02</span>
         <h3>The Live Owner Dashboard</h3>
         <p>Cash, stock and open leads on one screen &mdash; without phoning three people to assemble it.</p>
         <span class="tag">Add-on &#183; <b>+OMR 650</b></span>
-        <a class="tlink" href="/customized-ceo-dashboard-demo/">Open the live demo <span class="arw">&rarr;</span></a>
+        <a class="tlink" href="/en/demos/#dash">Open the live demo <span class="arw">&rarr;</span></a>
       </article>
       <article class="card sys-card">
         <span class="n">03</span>
         <h3>The Full Autopilot</h3>
         <p>Something has to chase the quotes and the invoices. This does, on schedule, without being reminded.</p>
         <span class="tag">Add-on &#183; <b>+OMR 900</b></span>
-        <a class="tlink" href="/en/services-v4/#autopilot">See what&#8217;s inside <span class="arw">&rarr;</span></a>
+        <a class="tlink" href="/en/services/#autopilot">See what&#8217;s inside <span class="arw">&rarr;</span></a>
       </article>
     </div>
   </div>
@@ -733,7 +733,7 @@ def body():
       from someone you have never met.</p>
 
     <div class="tiles" style="margin-top:clamp(28px,4vw,48px)" data-stagger>
-      <a class="tile" href="/customized-ceo-dashboard-demo/">
+      <a class="tile" href="/en/demos/#dash">
         <span class="live"><i></i>Live demo</span>
         <span class="shot"><img src="/assets/v4/demo-dashboard-960.webp" alt="The CEO dashboard demo: revenue, gross profit and margin cards above a list of ranked actions." width="960" height="600" loading="lazy" decoding="async"></span>
         <span class="cap">
@@ -743,7 +743,7 @@ def body():
         </span>
       </a>
 
-      <a class="tile" href="/whatsapp-receptionist-demo/">
+      <a class="tile" href="/en/demos/">
         <span class="live"><i></i>Live demo</span>
         <span class="shot"><img src="/assets/v4/demo-whatsapp-960.webp" alt="The WhatsApp receptionist demo: a lead list beside a full buyer conversation handled by the AI agent." width="960" height="600" loading="lazy" decoding="async"></span>
         <span class="cap">
@@ -753,7 +753,7 @@ def body():
         </span>
       </a>
 
-      <a class="tile tile-wide" href="/en/contact-v4/#test">
+      <a class="tile tile-wide" href="/en/contact/#test">
         <span class="cap">
           <h3>Or point it at your own business: the Silent Buyer Test</h3>
           <p>I message your business the way a buyer would, then send you the scorecard &mdash; how long you took,
@@ -817,8 +817,8 @@ def body():
     </div>
 
     <div class="btn-row" style="margin-top:clamp(26px,3vw,40px)">
-      <a class="btn btn-teal" href="/en/services-v4/#price">See the whole price list</a>
-      <a class="tlink" href="/en/services-v4/">Every system, in detail <span class="arw">&rarr;</span></a>
+      <a class="btn btn-teal" href="/en/services/#price">See the whole price list</a>
+      <a class="tlink" href="/en/services/">Every system, in detail <span class="arw">&rarr;</span></a>
     </div>
   </div>
 </section>
@@ -845,22 +845,22 @@ def body():
     <h2 class="h2">Four places worth your next five minutes.</h2>
 
     <div class="rail" style="margin-top:clamp(26px,3.5vw,44px)" data-stagger>
-      <a class="rcard" href="/en/services-v4/">
+      <a class="rcard" href="/en/services/">
         <span class="rn">01</span>
         <span><h3>What I build</h3><p>Three systems, every price, and what is deliberately not included.</p></span>
         <span class="go">Open <span aria-hidden="true">&rarr;</span></span>
       </a>
-      <a class="rcard" href="/en/process-v4/">
+      <a class="rcard" href="/en/process/">
         <span class="rn">02</span>
         <span><h3>How it works</h3><p>First message to live system, step by step, with the dates.</p></span>
         <span class="go">Open <span aria-hidden="true">&rarr;</span></span>
       </a>
-      <a class="rcard" href="/en/about-v4/">
+      <a class="rcard" href="/en/about/">
         <span class="rn">03</span>
         <span><h3>Who builds it</h3><p>One operator, not an agency. Including who I turn away.</p></span>
         <span class="go">Open <span aria-hidden="true">&rarr;</span></span>
       </a>
-      <a class="rcard" href="/en/blog-v4/">
+      <a class="rcard" href="/blog/">
         <span class="rn">04</span>
         <span><h3>Articles</h3><p>Plain-language writing on AI for Omani and GCC trading businesses.</p></span>
         <span class="go">Open <span aria-hidden="true">&rarr;</span></span>
@@ -875,21 +875,21 @@ def body():
 
 
 META = dict(
-    slug="index-v4",
+    slug="index",
     title="AI Profit Lab | You don't have to learn AI — Muscat, Oman",
     desc=("You never open it, never log in, never type a prompt. A bilingual smart website answers "
           "your buyers in Arabic and English at 2am and reports to your WhatsApp in one sentence. "
           "One-time fee, no monthly lock-in, built by an operator in Muscat."),
-    nav="/en/index-v4/",
+    nav="/",
     hero=True,
     calc=True,
-    next=("Next", "What I build", "/en/services-v4/"),
+    next=("Next", "What I build", "/en/services/"),
     schema="""{
   "@context":"https://schema.org",
   "@type":"ProfessionalService",
   "name":"AI Profit Lab",
   "description":"Done-for-you AI automation for trading and distribution SMEs in Oman and the GCC.",
-  "url":"https://aiprofitlab.io/en/index-v4/",
+  "url":"https://aiprofitlab.io/",
   "email":"hello@aiprofitlab.io",
   "telephone":"+968 9924 5250",
   "slogan":"Every success starts with insight",

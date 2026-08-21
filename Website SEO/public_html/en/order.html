@@ -3,19 +3,18 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<!-- Stays noindex until Nahid approves this set for launch. When it launches,
-     remove this tag AND add the noindex to the page it replaces in the SAME
-     deploy - never separately, or both versions compete in the index. -->
-<meta name="robots" content="noindex, nofollow">
-<title>Contact | AI Profit Lab — talk to the person who builds it</title>
-<meta name="description" content="WhatsApp, email or phone - all reaching the same person in Muscat. Or start with the free Silent Buyer Test and see what a buyer sees when they message your business.">
-<link rel="canonical" href="https://aiprofitlab.io/en/contact-v4/">
+<meta name="robots" content="noindex, follow">
+<link rel="alternate" hreflang="en" href="https://aiprofitlab.io/en/order/">
+<link rel="alternate" hreflang="x-default" href="https://aiprofitlab.io/en/order/">
+<title>Your order | AI Profit Lab</title>
+<meta name="description" content="Where your AI Profit Lab order stands, and what happens next.">
+<link rel="canonical" href="https://aiprofitlab.io/en/order/">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 
 <meta property="og:type" content="website">
-<meta property="og:title" content="Contact | AI Profit Lab — talk to the person who builds it">
-<meta property="og:description" content="WhatsApp, email or phone - all reaching the same person in Muscat. Or start with the free Silent Buyer Test and see what a buyer sees when they message your business.">
-<meta property="og:url" content="https://aiprofitlab.io/en/contact-v4/">
+<meta property="og:title" content="Your order | AI Profit Lab">
+<meta property="og:description" content="Where your AI Profit Lab order stands, and what happens next.">
+<meta property="og:url" content="https://aiprofitlab.io/en/order/">
 <meta property="og:image" content="https://aiprofitlab.io/og-aiprofitlab-2026.jpg">
 <meta property="og:locale" content="en_OM">
 <meta name="twitter:card" content="summary_large_image">
@@ -545,253 +544,178 @@ section{position:relative;padding:clamp(74px,9vw,138px) 0}
   .review .gmark svg{width:22px;height:22px}
 }
 
-/* ------------------------------------------------------------- channels */
-.chan{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,2vw,24px)}
-.chan a{
-  position:relative;display:flex;flex-direction:column;gap:12px;text-decoration:none;overflow:hidden;
-  background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:clamp(22px,2.6vw,32px);
-  transition:transform .35s var(--ease),border-color .35s,background .35s,box-shadow .35s;
-}
-.chan a:hover{transform:translateY(-5px);border-color:var(--amber-pale);background:var(--white);box-shadow:0 30px 54px -40px rgba(7,43,34,.5)}
-.chan a.primary{background:var(--teal-950);border-color:var(--teal-900)}
-.chan a.primary:hover{background:var(--teal-900);border-color:var(--amber-bright)}
-.chan .ic{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:var(--white);border:1px solid var(--line);color:var(--teal)}
-.chan a.primary .ic{background:var(--wa);border-color:var(--wa);color:#fff}
-.chan .ic svg{width:21px;height:21px;fill:currentColor}
-.chan h3{font-size:1.35rem;color:var(--teal-950);margin:0}
-.chan a.primary h3{color:var(--cream)}
-.chan .val{font-family:var(--mono);font-size:.95rem;color:var(--teal);word-break:break-word}
-.chan a.primary .val{color:var(--amber-bright)}
-.chan .when{
-  font-family:var(--mono);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);
-  margin-top:auto;padding-top:10px;display:flex;align-items:center;gap:8px;
-}
-.chan a.primary .when{color:var(--amber-pale)}
-.chan .when i{width:7px;height:7px;border-radius:50%;background:var(--wa);flex:none}
+.ost{padding:clamp(140px,16vw,200px) 0 clamp(50px,6vw,80px)}
+.ost .wrap{position:relative}
 
-/* --------------------------------------------------------- section plate
-   Same background image and opacity the live contact page uses, with the
-   section colour faded back in top and bottom so the form stays readable. */
-.plate{position:absolute;inset:0;z-index:0;overflow:hidden;pointer-events:none}
-.plate img{width:100%;height:100%;object-fit:cover;opacity:.2}
-.plate::after{
-  content:"";position:absolute;inset:0;
-  background:linear-gradient(180deg,var(--teal-950),rgba(7,43,34,.45) 45%,var(--teal-950));
+/* the state mark: a ring that draws itself, then the glyph inside it */
+.mark-o{
+  width:88px;height:88px;border-radius:50%;display:grid;place-items:center;margin:0 0 28px;
+  border:2px solid var(--line-dark);position:relative;
 }
-#test .wrap{position:relative;z-index:1}
+.mark-o svg{width:40px;height:40px;fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.mark-o.good{border-color:rgba(31,175,94,.5)}
+.mark-o.good svg{stroke:var(--wa)}
+.mark-o.wait{border-color:rgba(232,201,143,.5)}
+.mark-o.wait svg{stroke:var(--amber-bright)}
+.mark-o.stop{border-color:rgba(166,67,31,.55)}
+.mark-o.stop svg{stroke:#E08461}
+.mark-o svg path,.mark-o svg circle,.mark-o svg polyline{
+  stroke-dasharray:var(--len,80);stroke-dashoffset:var(--len,80);
+  animation:draw .9s var(--ease) forwards;animation-delay:.15s;
+}
+@keyframes draw{to{stroke-dashoffset:0}}
+@media (prefers-reduced-motion:reduce){ .mark-o svg path,.mark-o svg circle,.mark-o svg polyline{animation:none;stroke-dashoffset:0} }
 
-/* ----------------------------------------------------------------- form */
-.capture-grid{display:grid;grid-template-columns:.95fr 1.05fr;gap:clamp(28px,5vw,64px);align-items:start}
-/* five lines of display type in the narrow column read as a wall */
-.capture-grid .h2{font-size:clamp(1.75rem,3.1vw,2.5rem)}
-.form-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
-.field{display:flex;flex-direction:column;gap:8px}
-.field.full{grid-column:1/-1}
-.field label{font-family:var(--mono);font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(241,239,232,.68)}
-.field input{
-  font-family:var(--sans);font-size:1rem;color:var(--cream);background:rgba(7,43,34,.55);
-  border:1px solid var(--line-dark);border-radius:10px;padding:14px 16px;transition:border-color .2s,background .2s;
-}
-.field input::placeholder{color:rgba(241,239,232,.34)}
-.field input:focus{outline:none;border-color:var(--amber-bright);background:rgba(7,43,34,.75)}
-.formnote{font-size:.88rem;color:rgba(241,239,232,.55);margin:12px 0 0;line-height:1.55}
-.getlist{list-style:none;margin:22px 0 0;padding:0;display:grid;gap:13px}
-.getlist li{position:relative;padding-left:30px;font-size:1rem;color:rgba(241,239,232,.82);line-height:1.5}
-.getlist li::before{
-  content:"";position:absolute;left:3px;top:.5em;width:13px;height:7px;
-  border-left:2px solid var(--amber-bright);border-bottom:2px solid var(--amber-bright);transform:rotate(-45deg);
-}
+.ost h1{font-size:clamp(2.2rem,5vw,3.6rem);line-height:1.05;margin:0 0 18px}
+.ost .lede{max-width:56ch}
 
-/* ------------------------------------------------------------------ faq */
-.faq{border-top:1px solid var(--line)}
-.faq details{border-bottom:1px solid var(--line)}
-.faq summary{
-  cursor:pointer;list-style:none;padding:22px 44px 22px 0;position:relative;
-  font-family:var(--display);font-size:clamp(1.15rem,2vw,1.45rem);color:var(--teal-950);
+.refcard{
+  display:inline-flex;flex-wrap:wrap;align-items:center;gap:clamp(16px,3vw,34px);
+  background:rgba(241,239,232,.06);border:1px solid var(--line-dark);border-radius:14px;
+  padding:18px clamp(20px,2.6vw,28px);margin:clamp(24px,3vw,34px) 0 0;
 }
-.faq summary::-webkit-details-marker{display:none}
-.faq summary::after{
-  content:"";position:absolute;right:8px;top:50%;width:12px;height:12px;margin-top:-8px;
-  border-right:1.5px solid var(--amber);border-bottom:1.5px solid var(--amber);
-  transform:rotate(45deg);transition:transform .3s var(--ease);
-}
-.faq details[open] summary::after{transform:rotate(-135deg);margin-top:-3px}
-.faq .ans{padding:0 0 24px;color:var(--muted);font-size:1.02rem;max-width:70ch;margin:0}
-.faq summary:hover{color:var(--teal)}
+.refcard div{display:flex;flex-direction:column;gap:5px}
+.refcard .k{font-family:var(--mono);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--amber-pale)}
+.refcard .v{font-family:var(--mono);font-size:1.08rem;color:var(--cream);letter-spacing:.05em;font-variant-numeric:tabular-nums}
 
-@media (max-width:900px){ .chan,.capture-grid{grid-template-columns:1fr} }
-@media (max-width:560px){ .form-grid{grid-template-columns:1fr} }
+/* next steps */
+.nxt{list-style:none;margin:clamp(28px,4vw,44px) 0 0;padding:0;display:grid;gap:0;counter-reset:n}
+.nxt li{
+  position:relative;padding:20px 0 20px 52px;border-top:1px solid var(--line);
+  color:var(--muted);font-size:1rem;line-height:1.6;
+}
+.nxt li:last-child{border-bottom:1px solid var(--line)}
+.nxt li::before{
+  counter-increment:n;content:"0" counter(n);position:absolute;left:0;top:20px;
+  font-family:var(--mono);font-size:.82rem;letter-spacing:.12em;color:var(--amber-text);
+}
+.nxt b{color:var(--teal-950);font-weight:600;display:block;font-size:1.05rem;margin-bottom:3px;font-family:var(--display)}
+
+.state{display:none}
+.state.on{display:block}
 </style>
-<script type="application/ld+json">
-{
-  "@context":"https://schema.org",
-  "@type":"FAQPage",
-  "mainEntity":[
-    {"@type":"Question","name":"How much does it cost?","acceptedAnswer":{"@type":"Answer","text":"The Smart Website is OMR 950 one-time at the founding price, OMR 1,450 standard. The dashboard adds OMR 650, the autopilot adds OMR 900, and all three together are OMR 2,200."}},
-    {"@type":"Question","name":"Is there a monthly fee?","acceptedAnswer":{"@type":"Answer","text":"Not to keep anything working. The first year of hosting, security and care is included in the build price. The Growth Desk at OMR 75 a month is optional and never required."}},
-    {"@type":"Question","name":"Do you have clients I can speak to?","acceptedAnswer":{"@type":"Answer","text":"Not yet. That is why there is a named guarantee and why the dashboard and buyer-agent demos are open to click without asking for anything."}},
-    {"@type":"Question","name":"What if it doesn't work?","acceptedAnswer":{"@type":"Answer","text":"The First Inquiry Promise: no real buyer inquiry within 30 days of going live and it gets rebuilt free until you get one. If you still don't, you get your money back."}},
-    {"@type":"Question","name":"Do you work in Arabic?","acceptedAnswer":{"@type":"Answer","text":"Yes. Both English and Arabic are treated as first-class, and Arabic copy is checked by a native reader before it ships."}},
-    {"@type":"Question","name":"Who am I actually contracting with?","acceptedAnswer":{"@type":"Answer","text":"Lotus Gulf International, CR 1570092, South Al Khuwair, Bousher, Muscat. AI Profit Lab is the brand. Not VAT registered, so invoices carry no VAT line."}}
-  ]
-}
-</script>
+
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
 <header class="top" id="top">
-  <a href="/en/index-v4/" aria-label="AI Profit Lab home">
+  <a href="/" aria-label="AI Profit Lab home">
     <img class="mark" src="/assets/brand/wordmark-primary.svg" alt="AI Profit Lab" width="160" height="28">
   </a>
   <nav class="nav" aria-label="Primary">
-        <a class="lnk" href="/en/services-v4/">What I Build</a>
-    <a class="lnk" href="/en/process-v4/">How It Works</a>
-    <a class="lnk" href="/en/about-v4/">About</a>
-    <a class="lnk" href="/en/contact-v4/" aria-current="page">Contact</a>
-    <a class="lnk" href="/en/blog-v4/">Articles</a>
-    <a class="lnk" href="/" lang="ar">&#1593;&#1585;&#1576;&#1610;</a>
+        <a class="lnk" href="/en/services/" aria-current="page">What I Build</a>
+    <a class="lnk" href="/en/process/">How It Works</a>
+    <a class="lnk" href="/en/about/">About</a>
+    <a class="lnk" href="/en/contact/">Contact</a>
+    <a class="lnk" href="/blog/">Articles</a>
+    <a class="lnk" href="/ar/" lang="ar">&#1593;&#1585;&#1576;&#1610;</a>
     <a class="top-wa" href="https://api.whatsapp.com/send?phone=96899245250&text=Hello%20Nahid%2C%20I%20have%20a%20question%20about%20my%20business." target="_blank" rel="noopener" aria-label="Chat with Nahid on WhatsApp"><svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 1.8a8.2 8.2 0 1 1-4.2 15.3l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8zm-3.1 4c-.2 0-.5 0-.7.3-.2.3-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.8 2.8 4.4 3.8 2.2.9 2.6.7 3.1.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2-.1-.1-.2-.2-.5-.3l-1.7-.8c-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.1-.2 0-.4.1-.5l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5L10 8.2c-.2-.4-.4-.4-.6-.4h-.5z"/></svg><span>WhatsApp</span></a>
     <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="mmenu"><i></i></button>
   </nav>
 </header>
 <div class="mmenu" id="mmenu" aria-hidden="true">
-    <a href="/en/index-v4/"><em>01</em>Home</a>
-  <a href="/en/services-v4/"><em>02</em>What I Build</a>
-  <a href="/en/process-v4/"><em>03</em>How It Works</a>
-  <a href="/en/about-v4/"><em>04</em>About</a>
-  <a href="/en/contact-v4/" aria-current="page"><em>05</em>Contact</a>
-  <a href="/en/blog-v4/" aria-current="page"><em>06</em>Articles</a>
+    <a href="/"><em>01</em>Home</a>
+  <a href="/en/services/" aria-current="page"><em>02</em>What I Build</a>
+  <a href="/en/process/"><em>03</em>How It Works</a>
+  <a href="/en/about/"><em>04</em>About</a>
+  <a href="/en/contact/"><em>05</em>Contact</a>
+  <a href="/blog/"><em>06</em>Articles</a>
   <p class="mfoot">hello@aiprofitlab.io &middot; <span dir="ltr">+968 9924 5250</span><br>Muscat, Oman</p>
 </div>
 <main id="main">
 
-<header class="phero s-cream grain">
+<header class="ost s-dark grain">
   <div class="wrap">
-    <p class="eyebrow"><span class="star">&#10038;</span> Talk to me</p>
-    <h1 class="h1">You will be talking to<br>the person who builds it.</h1>
-    <p class="lede">No sales team, no ticket queue. Every route below reaches the same phone.</p>
+
+  <div class="state" id="st-wait">
+    <span class="mark-o wait" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><polyline points="12,6.5 12,12 16,14.5"/></svg></span>
+    <h1 class="h1">Thank you &mdash; I&#8217;m confirming your payment.</h1>
+    <p class="lede">Your order has come through. I check every payment by hand against the provider before I call anything confirmed, so your receipt follows by email shortly &mdash; usually within minutes, and always within one business day.</p>
+    <div class="refcard">
+      <div><span class="k">Your reference</span><span class="v" data-ref>&mdash;</span></div>
+      <div><span class="k">Status</span><span class="v" data-status>Confirming</span></div>
+    </div>
+    <div class="btn-row" style="margin-top:clamp(26px,3.4vw,38px)">
+      <a class="btn btn-wa" href="https://api.whatsapp.com/send?phone=96899245250&text=Hello%20Nahid%2C%20about%20my%20order%20"><svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 1.8a8.2 8.2 0 1 1-4.2 15.3l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8zm-3.1 4c-.2 0-.5 0-.7.3-.2.3-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.8 2.8 4.4 3.8 2.2.9 2.6.7 3.1.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2-.1-.1-.2-.2-.5-.3l-1.7-.8c-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.1-.2 0-.4.1-.5l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5L10 8.2c-.2-.4-.4-.4-.6-.4h-.5z"/></svg>Ask me about it</a>
+      <a class="btn btn-ghost" href="/">Back to the site</a>
+    </div>
+  </div>
+
+  <div class="state" id="st-paid">
+    <span class="mark-o good" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="4,13 9.5,18.5 20,6"/></svg></span>
+    <h1 class="h1">Payment received. Your slot is held.</h1>
+    <p class="lede">That is the money side finished. Everything from here is me and you: I will be in touch within one business day to take the brief properly, and nothing gets built off a form alone.</p>
+    <div class="refcard">
+      <div><span class="k">Your reference</span><span class="v" data-ref>&mdash;</span></div>
+      <div><span class="k">Paid</span><span class="v" data-paid>&mdash;</span></div>
+    </div>
+    <div class="btn-row" style="margin-top:clamp(26px,3.4vw,38px)">
+      <a class="btn btn-wa" href="https://api.whatsapp.com/send?phone=96899245250&text=Hello%20Nahid%2C%20about%20my%20order%20"><svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 1.8a8.2 8.2 0 1 1-4.2 15.3l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8zm-3.1 4c-.2 0-.5 0-.7.3-.2.3-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.8 2.8 4.4 3.8 2.2.9 2.6.7 3.1.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2-.1-.1-.2-.2-.5-.3l-1.7-.8c-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.1-.2 0-.4.1-.5l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5L10 8.2c-.2-.4-.4-.4-.6-.4h-.5z"/></svg>Ask me about it</a>
+      <a class="btn btn-ghost" href="/">Back to the site</a>
+    </div>
+  </div>
+
+  <div class="state" id="st-cancel">
+    <span class="mark-o stop" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12"/><path d="M18 6L6 18"/></svg></span>
+    <h1 class="h1">Nothing was charged.</h1>
+    <p class="lede">You backed out of the payment page, which is entirely your right &mdash; no money moved and no order was created. Your configuration is still saved in this browser, so you can walk straight back into it, or ask me the question that stopped you.</p>
+    <div class="btn-row" style="margin-top:clamp(26px,3.4vw,38px)">
+      <a class="btn btn-amber" href="/en/checkout/?restore=1">Pick up where I left off</a>
+      <a class="btn btn-ghost" href="https://api.whatsapp.com/send?phone=96899245250&text=Hello%20Nahid%2C%20I%20had%20trouble%20paying%20on%20the%20site.">Something went wrong &mdash; tell me</a>
+    </div>
+  </div>
+
+  <div class="state" id="st-fail">
+    <span class="mark-o stop" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12"/><path d="M18 6L6 18"/></svg></span>
+    <h1 class="h1">That payment didn&#8217;t go through.</h1>
+    <p class="lede">The provider tells me the payment was not completed, so nothing has been charged. This is usually a bank declining an online transaction rather than anything wrong with the card &mdash; a call to them, or a different card, normally settles it.</p>
+    <div class="btn-row" style="margin-top:clamp(26px,3.4vw,38px)">
+      <a class="btn btn-amber" href="/en/checkout/?restore=1">Pick up where I left off</a>
+      <a class="btn btn-ghost" href="https://api.whatsapp.com/send?phone=96899245250&text=Hello%20Nahid%2C%20I%20had%20trouble%20paying%20on%20the%20site.">Something went wrong &mdash; tell me</a>
+    </div>
+  </div>
+
+  <div class="state" id="st-none">
+    <span class="mark-o wait" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><polyline points="12,6.5 12,12 16,14.5"/></svg></span>
+    <h1 class="h1">Looking for an order?</h1>
+    <p class="lede">There is nothing to show on this page unless you have just come back from a payment. If you have an order reference and want to know where it stands, send it to me and I will tell you in plain terms.</p>
+    <div class="btn-row" style="margin-top:clamp(26px,3.4vw,38px)">
+      <a class="btn btn-wa" href="https://api.whatsapp.com/send?phone=96899245250&text=Hello%20Nahid%2C%20about%20my%20order%20"><svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 1.8a8.2 8.2 0 1 1-4.2 15.3l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8zm-3.1 4c-.2 0-.5 0-.7.3-.2.3-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.8 2.8 4.4 3.8 2.2.9 2.6.7 3.1.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2-.1-.1-.2-.2-.5-.3l-1.7-.8c-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.1-.2 0-.4.1-.5l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5L10 8.2c-.2-.4-.4-.4-.6-.4h-.5z"/></svg>Ask me about it</a>
+      <a class="btn btn-ghost" href="/">Back to the site</a>
+    </div>
+  </div>
+
   </div>
 </header>
 
-<section class="s-cream grain" style="padding-top:0">
-  <div class="wrap">
-    <div class="chan" data-stagger>
-      <a class="primary" href="https://api.whatsapp.com/send?phone=96899245250&text=Hello%20Nahid%2C%20I%20have%20a%20question%20about%20my%20business.">
-        <span class="ic"><svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 1.8a8.2 8.2 0 1 1-4.2 15.3l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8zm-3.1 4c-.2 0-.5 0-.7.3-.2.3-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.8 2.8 4.4 3.8 2.2.9 2.6.7 3.1.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2-.1-.1-.2-.2-.5-.3l-1.7-.8c-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.1-.2 0-.4.1-.5l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5L10 8.2c-.2-.4-.4-.4-.6-.4h-.5z"/></svg></span>
-        <h3>WhatsApp</h3>
-        <span class="val" dir="ltr">+968 9924 5250</span>
-        <span class="when"><i></i>Usually same day</span>
-      </a>
-      <a href="mailto:hello@aiprofitlab.io">
-        <span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 5.5A1.5 1.5 0 0 1 3.5 4h17A1.5 1.5 0 0 1 22 5.5v13a1.5 1.5 0 0 1-1.5 1.5h-17A1.5 1.5 0 0 1 2 18.5v-13zm2.2.5 7.8 5.9L19.8 6H4.2zM20 7.9l-7.4 5.6a1 1 0 0 1-1.2 0L4 7.9V18h16V7.9z"/></svg></span>
-        <h3>Email</h3>
-        <span class="val">hello@aiprofitlab.io</span>
-        <span class="when"><i></i>Within one business day</span>
-      </a>
-      <a href="tel:+96899245250">
-        <span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 2h3.1l1.6 4-2.1 1.5a12.6 12.6 0 0 0 5.9 5.9L16.6 11l4 1.6v3.1a2.3 2.3 0 0 1-2.5 2.3A16.4 16.4 0 0 1 4.3 4.5 2.3 2.3 0 0 1 6.6 2z"/></svg></span>
-        <h3>Phone</h3>
-        <span class="val" dir="ltr">+968 9924 5250</span>
-        <span class="when"><i></i>9am &ndash; 6pm Muscat</span>
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- ================================================== SILENT BUYER TEST -->
-<section class="s-dark" id="test">
-  <span class="plate" aria-hidden="true">
-    <img src="/audit-bg.webp" alt="" width="1000" height="667" loading="lazy" decoding="async">
-  </span>
-  <div class="wrap">
-    <div class="capture-grid">
-      <div>
-        <p class="eyebrow"><span class="star">&#10038;</span> Free &#183; five a week</p>
-        <h2 class="h2">Before you buy, see what a buyer sees.</h2>
-        <p class="lede">I contact your business the way a real buyer would &mdash; WhatsApp, form, email, phone.</p>
-        <ul class="getlist">
-          <li>How fast each channel answered &mdash; measured, not guessed</li>
-          <li>What a buyer saw, including in Arabic</li>
-          <li>Where that buyer would have gone instead</li>
-          <li>No pitch attached</li>
-        </ul>
-      </div>
-
-      <form id="sbtForm" class="form-grid" novalidate>
-        <div class="field">
-          <label for="f-name">Your name</label>
-          <input id="f-name" name="name" type="text" required placeholder="Your name">
-        </div>
-        <div class="field">
-          <label for="f-biz">Business name</label>
-          <input id="f-biz" name="business" type="text" required placeholder="Gulf Lotus Trading">
-        </div>
-        <div class="field">
-          <label for="f-wa">WhatsApp number</label>
-          <input id="f-wa" name="whatsapp" type="tel" required placeholder="+968 &hellip;" inputmode="tel">
-        </div>
-        <div class="field">
-          <label for="f-sell">What do you sell?</label>
-          <input id="f-sell" name="sells" type="text" required placeholder="Medical consumables, wholesale">
-        </div>
-        <div class="field full">
-          <button class="btn btn-wa" type="submit" style="width:100%"><svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 1.8a8.2 8.2 0 1 1-4.2 15.3l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8zm-3.1 4c-.2 0-.5 0-.7.3-.2.3-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.8 2.8 4.4 3.8 2.2.9 2.6.7 3.1.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2-.1-.1-.2-.2-.5-.3l-1.7-.8c-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.1-.2 0-.4.1-.5l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5L10 8.2c-.2-.4-.4-.4-.6-.4h-.5z"/></svg>Send my details on WhatsApp</button>
-          <p class="formnote">Nothing is sent until you press send inside WhatsApp.</p>
-        </div>
-      </form>
-    </div>
-  </div>
-</section>
-
-<!-- ================================================================ FAQ -->
-<section class="s-cream grain">
+<section class="s-cream grain pad-s">
   <div class="wrap-n">
-    <p class="eyebrow"><span class="star">&#10038;</span> The awkward questions</p>
-    <h2 class="h2">Asked and answered.</h2>
+    <p class="eyebrow"><span class="star">&#10038;</span> What happens now</p>
+    <h2 class="h2">The next four things, in order.</h2>
+    <ol class="nxt">
+      <li><b>Your receipt and invoice</b>Emailed to the address on your order, itemised, from Lotus Gulf
+        International (CR <span dir="ltr">1570092</span>). No VAT line, because the company is below the
+        registration threshold.</li>
+      <li><b>The brief call</b>Within one business day. Half an hour, on the phone or WhatsApp, about your
+        business rather than about websites.</li>
+      <li><b>A link in the first week</b>You watch it get built. You are never handed a finished thing you
+        have not already seen and commented on.</li>
+      <li><b>Go-live, and the promise starts</b>The 30-day First Inquiry Promise counts from the day it goes
+        live, not the day you paid.</li>
+    </ol>
 
-    <div class="faq" style="margin-top:clamp(22px,3vw,38px)">
-      <details>
-        <summary>How much does it cost?</summary>
-        <p class="ans">Smart Website: OMR 950 founding, 1,450 standard. Dashboard +650, autopilot +900, all
-          three 2,200. Every number is on <a href="/en/services-v4/#price">the price list</a>.</p>
-      </details>
-      <details>
-        <summary>Is there a monthly fee?</summary>
-        <p class="ans">Not to keep anything working. The first year of hosting and care is in the build price.
-          The Growth Desk at OMR 75/month is optional.</p>
-      </details>
-      <details>
-        <summary>Do you have clients I can speak to?</summary>
-        <p class="ans">Not yet, and I won&#8217;t pretend otherwise. That is why the guarantee is named and both
-          demos are open to click: the <a href="/customized-ceo-dashboard-demo/">dashboard</a> and the
-          <a href="/whatsapp-receptionist-demo/">buyer agent</a>.</p>
-      </details>
-      <details>
-        <summary>What if it doesn&#8217;t work?</summary>
-        <p class="ans">The First Inquiry Promise: no real buyer inquiry within 30 days of going live and I rebuild
-          it free. If you still don&#8217;t get one, you get your money back.</p>
-      </details>
-      <details>
-        <summary>Do you work in Arabic?</summary>
-        <p class="ans">Yes &mdash; both languages first-class, with Arabic checked by a native reader before it ships.</p>
-      </details>
-      <details>
-        <summary>Who am I actually contracting with?</summary>
-        <p class="ans">Lotus Gulf International, CR <span dir="ltr">1570092</span>, Bousher, Muscat. AI Profit Lab is
-          the brand. Not VAT registered, so invoices carry no VAT line.</p>
-      </details>
-      <details>
-        <summary>How do I pay?</summary>
-        <p class="ans">Bank transfer in OMR &mdash; on start, in three payments, or only once it has produced a real inquiry. Set out on <a href="/en/services-v4/#price">the services page</a>. You can put the order together on <a href="/en/checkout-v4/">the checkout page</a> and I send the invoice; card payment on the site is being switched on now.</p>
-      </details>
-    </div>
+    <p style="margin-top:clamp(26px,3.4vw,38px);color:var(--muted);font-size:.96rem">
+      Changed your mind? The <a href="/refund-policy/">Refund &amp; Cancellation Policy</a> sets out exactly
+      what comes back and when &mdash; in short, everything, until the day building starts.
+    </p>
   </div>
 </section>
 
+<script type="application/json" id="payCfg">{"currency":"OMR","baisa":1000,"founding":true,"live":false,"api":"","env":"uat","deposit":100000,"base":"website","items":[{"id":"website","kind":"build","name":"The Smart Website","required":true,"price":950000},{"id":"dashboard","kind":"build","name":"The Live Owner Dashboard","required":false,"price":650000},{"id":"autopilot","kind":"build","name":"The Full Autopilot","required":false,"price":900000},{"id":"desk","kind":"monthly","name":"The Growth Desk","required":false,"price":75000}],"bundle":{"id":"stack","name":"The Operator Stack","requires":["dashboard","autopilot"],"price":2200000,"saving":300000},"plans":[{"id":"deposit","label":"Reserve a build slot","card":true,"due":"deposit","surcharge":0,"split":1},{"id":"full","label":"Pay in full","card":true,"due":"total","surcharge":0,"split":1},{"id":"three","label":"Three payments","card":true,"due":"first","surcharge":70000,"split":3},{"id":"proof","label":"Pay on Proof","card":false,"due":"zero","surcharge":200000,"split":1}]}</script>
 </main>
 <nav class="pager" aria-label="Next page">
-  <div class="wrap"><a href="/en/index-v4/">
-    <span><span class="pl">Back to the start</span><span class="pt">Never lose a buyer to silence again</span></span>
+  <div class="wrap"><a href="/">
+    <span><span class="pl">Back to the start</span><span class="pt">You don't have to learn AI</span></span>
     <span class="parw" aria-hidden="true">&rarr;</span>
   </a></div>
 </nav>
@@ -820,13 +744,13 @@ section{position:relative;padding:clamp(74px,9vw,138px) 0}
       <nav class="fcol" aria-label="The work">
         <h4>The work</h4>
         <ul>
-          <li><a href="/en/services-v4/">What I build</a></li>
-          <li><a href="/en/process-v4/">How it works</a></li>
-          <li><a href="/en/services-v4/#price">Prices</a></li>
-          <li><a href="/en/checkout-v4/">Start an order</a></li>
-          <li><a href="/en/simulator-v4/">Revenue leak simulator</a></li>
-          <li><a href="/en/demo-v4/#dash">Dashboard demo</a></li>
-          <li><a href="/en/demo-v4/">WhatsApp demo</a></li>
+          <li><a href="/en/services/">What I build</a></li>
+          <li><a href="/en/process/">How it works</a></li>
+          <li><a href="/en/services/#price">Prices</a></li>
+          <li><a href="/en/checkout/">Start an order</a></li>
+          <li><a href="/en/simulators/">Revenue leak simulator</a></li>
+          <li><a href="/en/demos/#dash">Dashboard demo</a></li>
+          <li><a href="/en/demos/">WhatsApp demo</a></li>
         </ul>
       </nav>
 
@@ -837,9 +761,9 @@ section{position:relative;padding:clamp(74px,9vw,138px) 0}
           <li><a href="mailto:hello@aiprofitlab.io"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>hello@aiprofitlab.io</a></li>
         </ul>
         <ul>
-          <li><a href="/en/contact-v4/">Contact page</a></li>
-          <li><a href="/en/about-v4/">About Nahid</a></li>
-          <li><a href="/en/blog-v4/">Articles</a></li>
+          <li><a href="/en/contact/">Contact page</a></li>
+          <li><a href="/en/about/">About Nahid</a></li>
+          <li><a href="/blog/">Articles</a></li>
         </ul>
       </nav>
 
@@ -956,37 +880,75 @@ section{position:relative;padding:clamp(74px,9vw,138px) 0}
 })();
 
 /* ---------------------------------------------------------------------------
-   Silent Buyer Test capture.
+   Order status.
 
-   Composes a WhatsApp message rather than posting to a backend, so nothing is
-   transmitted until the visitor presses send inside WhatsApp - which is what
-   the note under the button promises. Same pattern as en/index-v3.html.
+   ?status=success is a claim made by a URL, not proof of payment. This script
+   therefore starts every successful return in the "confirming" state and only
+   upgrades it - and only then reports a purchase to analytics - after our own
+   API confirms payment_status === "paid" for the session. With no API deployed
+   the page simply stays in the honest state, which is why it is the default.
 --------------------------------------------------------------------------- */
 (function(){
   "use strict";
-  var form = document.getElementById("sbtForm");
-  if (!form) return;
+  var cfgEl = document.getElementById("payCfg");
+  var CFG = {};
+  try { CFG = JSON.parse(cfgEl.textContent); } catch(e){}
 
-  form.addEventListener("submit", function(e){
-    e.preventDefault();
-    var get = function(n){ return (form.elements[n].value || "").trim(); };
-    var required = ["name","business","whatsapp","sells"];
-    for (var i = 0; i < required.length; i++){
-      var n = required[i];
-      if (!get(n)){
-        form.elements[n].focus();
-        if (form.elements[n].reportValidity) form.elements[n].reportValidity();
-        return;
+  var qs = new URLSearchParams(location.search);
+  var status = (qs.get("status") || "").toLowerCase();
+  var session = qs.get("session") || qs.get("session_id") || "";
+  var ref = qs.get("ref") || "";
+
+  var saved = null;
+  try { saved = JSON.parse(localStorage.getItem("apl_order") || "null"); } catch(e){}
+  if (!ref && saved) ref = saved.ref || "";
+  if (!session && saved) session = saved.session || "";
+
+  function show(id){
+    document.querySelectorAll(".state").forEach(function(el){ el.classList.remove("on"); });
+    var el = document.getElementById("st-" + id);
+    if (el) el.classList.add("on");
+    /* The heading in a hidden state was wrapped for the reveal animation by the
+       shared motion script and left un-revealed; force the visible one open. */
+    if (el) el.querySelectorAll(".rv,.rvw").forEach(function(n){ n.classList.add("vis"); });
+  }
+  function fill(sel, text){
+    document.querySelectorAll(sel).forEach(function(el){ el.textContent = text; });
+  }
+
+  var first = status === "cancel" ? "cancel"
+            : status === "success" ? "wait"
+            : status === "fail" ? "fail"
+            : status ? "wait" : "none";
+  show(first);
+  if (ref) fill("[data-ref]", ref);
+
+  if (first !== "wait" || !CFG.api || !session) return;
+
+  /* Confirm it properly. A failure here is not an error state for the buyer -
+     it only means the page keeps saying "confirming", which is true. */
+  fetch(CFG.api + "/session/" + encodeURIComponent(session), {headers: {"Accept": "application/json"}})
+    .then(function(r){ return r.json(); })
+    .then(function(d){
+      if (!d) return;
+      if (d.payment_status === "paid"){
+        show("paid");
+        if (d.reference || ref) fill("[data-ref]", d.reference || ref);
+        fill("[data-paid]", d.amount_display || "Confirmed");
+        try { localStorage.removeItem("apl_order"); } catch(e){}
+        if (typeof gtag === "function"){
+          gtag("event", "purchase", {
+            transaction_id: d.reference || ref || session,
+            value: typeof d.amount === "number" ? d.amount / (CFG.baisa || 1000) : undefined,
+            currency: CFG.currency || "OMR"
+          });
+        }
+      } else if (d.payment_status === "cancelled" || d.payment_status === "unpaid"){
+        show("fail");
+        if (ref) fill("[data-ref]", ref);
       }
-    }
-    var msg = "Hello Nahid \u2014 I'd like the free Silent Buyer Test.\n\n" +
-      "Name: " + get("name") + "\n" +
-      "Business: " + get("business") + "\n" +
-      "WhatsApp: " + get("whatsapp") + "\n" +
-      "We sell: " + get("sells");
-    if (typeof gtag === "function") gtag("event","generate_lead",{method:"silent_buyer_test"});
-    window.open("https://api.whatsapp.com/send?phone=96899245250&text=" + encodeURIComponent(msg), "_blank", "noopener");
-  });
+    })
+    .catch(function(){ /* stay in "confirming" - it is the truthful state */ });
 })();
 </script>
 <script defer src="/js/aiden-chat.js?v=371d5470"></script>

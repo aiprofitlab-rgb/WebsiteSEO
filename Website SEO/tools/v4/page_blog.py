@@ -34,7 +34,7 @@ POSTS = [
      "the arithmetic that produces it.",
      "25 June 2026", "2026-06-25",
      "/blog/images/whatsapp_missed_inquiries_cost_oman.png",
-     "/en/article-v4/", None, 6),
+     "/blog/en/2026-06-25-true-cost-missed-whatsapp-inquiries-oman/", None, 6),
     ("money",
      "How much a WhatsApp AI receptionist costs in Oman",
      "What the setup actually involves, what Meta charges on top, and how to tell a real quote from a "
@@ -324,7 +324,7 @@ def body():
       thing, not a form reply.</p>
     <div class="btn-row" style="justify-content:center;margin-top:26px">
       <a class="btn btn-wa" href="{WA}&text=Hello%20Nahid%2C%20I%20have%20a%20question%20I%20did%20not%20find%20an%20article%20about.">{WA_ICON}<span>Ask on WhatsApp</span></a>
-      <a class="btn btn-ghost" href="/en/simulator-v4/">Run the numbers instead</a>
+      <a class="btn btn-ghost" href="/en/simulators/">Run the numbers instead</a>
     </div>
   </div>
 </section>
@@ -334,17 +334,17 @@ def body():
 
 
 META = dict(
-    slug="blog-v4",
+    slug="blog",
     title="Articles | AI Profit Lab — notes from the work in Oman",
     desc=("Practical writing on WhatsApp response gaps, owner dashboards, automation cost and Oman's PDPL "
           "- from the operator who builds the systems, not a content team."),
-    nav="/en/blog-v4/",
-    next=("Start here", "What silence costs", "/en/article-v4/"),
+    nav="/blog/",
+    next=("Start here", "What silence costs", "/blog/en/2026-06-25-true-cost-missed-whatsapp-inquiries-oman/"),
     schema="""{
   "@context":"https://schema.org",
   "@type":"Blog",
   "name":"AI Profit Lab — Articles",
-  "url":"https://aiprofitlab.io/en/blog-v4/",
+  "url":"https://aiprofitlab.io/blog/",
   "inLanguage":"en",
   "publisher":{"@type":"Organization","name":"AI Profit Lab","legalName":"Lotus Gulf International"}
 }""",
