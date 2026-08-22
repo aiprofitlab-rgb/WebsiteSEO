@@ -232,5 +232,7 @@ META = dict(
     {"@type":"Question","name":"هل تعمل بالعربية؟","acceptedAnswer":{"@type":"Answer","text":"نعم. العربية والإنجليزية كلتاهما بالمستوى نفسه، والنص العربي يراجعه قارئ عربي قبل النشر."}},
     {"@type":"Question","name":"مع من أتعاقد فعلياً؟","acceptedAnswer":{"@type":"Answer","text":"مع شركة Lotus Gulf International، س.ت 1570092، الخوير الجنوبية، بوشر، مسقط. AI Profit Lab هي العلامة التجارية. الشركة غير مسجّلة في ضريبة القيمة المضافة، فالفواتير لا تحمل بند ضريبة."}}
   ]
-}""",
+}
+$$SPLIT$$
+{"@type":"ContactPage","@id":"https://aiprofitlab.io/contact/#contactpage","url":"https://aiprofitlab.io/contact/","inLanguage":"ar","isPartOf":{"@id":"https://aiprofitlab.io/#website"},"about":{"@id":"https://aiprofitlab.io/#organization"}}""",
 )

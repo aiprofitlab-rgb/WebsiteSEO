@@ -72,6 +72,11 @@ window.auditForm = {
             if (e.target === modal) window.auditForm.close();
         });
         
+        /** Bilingual field label for the hand-off message. */
+        function label(en, ar) {
+            return (document.documentElement.lang === 'en' ? en : ar) + ': ';
+        }
+
         // Submissions handler
         form.addEventListener('submit', async (event) => {
             event.preventDefault();
@@ -109,35 +114,50 @@ window.auditForm = {
                 page: window.location.pathname
             };
             
+            // The two POSTs that used to live here went to a Railway host
+            // that no longer exists. Every path on it answers with a JSON 404,
+            // so response.json() resolved, result.success was undefined, and
+            // the handler fell through to alert('An error occurred') - after
+            // the visitor had typed out challenges, goals, budget and
+            // timeline. Nothing was ever stored. There is no server to store
+            // it in, so the lead is handed straight to a channel that works:
+            // WhatsApp carries the answers, Calendly takes the booking.
             try {
-                let response = await fetch("https://aiden-backend-aiden.up.railway.app/audit", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify(formData)
-                });
-                let result = await response.json();
-                
-                if (result.success) {
-                    alert(isEn ? 'Form submitted! Redirecting to booking page.' : 'تم إرسال النموذج! جاري تحويلك إلى صفحة الحجز.');
-                    window.location.href = "https://calendly.com/ai-profit-lab2026";
-                } else {
-                    // Fallback try
-                    let altResponse = await fetch("https://aiden-backend-aiden.up.railway.app/api/audit", {
-                        method: "POST",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify(formData)
-                    });
-                    let altResult = await altResponse.json();
-                    if (altResult.success) {
-                        alert(isEn ? 'Submitted! Redirecting to booking page.' : 'تم الإرسال! تحويلك إلى الحجز.');
-                        window.location.href = "https://calendly.com/ai-profit-lab2026";
-                    } else {
-                        alert(isEn ? 'An error occurred. Please try again.' : 'حدث خطأ. حاول مرة أخرى.');
-                    }
-                }
+                const lines = [
+                    isEn ? 'Free AI Strategy Audit' : 'التدقيق المجاني لاستراتيجية الذكاء الاصطناعي',
+                    '',
+                    label('Name', 'الاسم') + formData.fullName,
+                    label('Email', 'البريد') + formData.email,
+                    label('Phone', 'الهاتف') + formData.phone,
+                    label('Company', 'الشركة') + formData.company,
+                    label('Role', 'الدور') + formData.role,
+                    label('Website', 'الموقع') + formData.website,
+                    label('Industry', 'القطاع') + formData.industry,
+                    label('Employees', 'عدد الموظفين') + formData.employees,
+                    label('Revenue', 'الإيرادات') + formData.revenue,
+                    label('Revenue streams', 'مصادر الإيرادات') + formData.revenueStreams,
+                    label('Challenges', 'التحديات') + formData.challenges,
+                    label('Goals', 'الأهداف') + formData.goals,
+                    label('Past experience', 'تجارب سابقة') + formData.pastExperience,
+                    label('Comfort with AI (1-10)', 'مستوى الإلمام (1-10)') + formData.aiComfort,
+                    label('Processes to automate', 'العمليات المطلوب أتمتتها') + formData.processes,
+                    label('Budget', 'الميزانية') + formData.budget,
+                    label('Timeline', 'الإطار الزمني') + formData.timeline,
+                    label('Key question', 'السؤال الأهم') + formData.keyQuestion,
+                    '',
+                    label('Page', 'الصفحة') + formData.page
+                ].filter(line => !/: $/.test(line));
+
+                const wa = 'https://api.whatsapp.com/send?phone=96899245250&text=' +
+                    encodeURIComponent(lines.join('\n'));
+
+                // Opened before the redirect so the answers survive it. If the
+                // popup is blocked the Calendly booking still goes ahead.
+                window.open(wa, '_blank', 'noopener');
+                window.location.href = 'https://calendly.com/ai-profit-lab2026';
             } catch (e) {
                 console.error(e);
-                alert(isEn ? 'Connection error.' : 'خطأ في الاتصال.');
+                window.location.href = 'https://calendly.com/ai-profit-lab2026';
             } finally {
                 btn.textContent = originalText;
                 btn.disabled = false;

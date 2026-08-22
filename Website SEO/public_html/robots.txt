@@ -1,4 +1,52 @@
+# aiprofitlab.io
+#
+# Everything here is meant to be read, by search crawlers and by the crawlers
+# that feed answer engines alike. The wildcard below already allows all of
+# them; the named groups exist because several of these agents are commonly
+# blocked by default templates, and an explicit Allow removes any ambiguity
+# about intent. Pages that should stay out of an index carry a noindex tag
+# rather than a Disallow here - a Disallow would stop the crawler reading the
+# tag, which is the opposite of what it is for.
+
 User-agent: *
 Allow: /
 
+# Answer engines and AI assistants.
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
 Sitemap: https://aiprofitlab.io/sitemap.xml
+
+# A plain-language summary of the company, its systems and its prices, with
+# the current URL map. Written for agents that would rather read one file
+# than crawl the site: https://aiprofitlab.io/llms.txt

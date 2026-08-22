@@ -87,7 +87,7 @@ ARTICLE_CSS = """
 /* ---------------------------------------------------------- body layout */
 .artgrid{display:grid;grid-template-columns:206px minmax(0,1fr);gap:clamp(28px,5vw,68px);align-items:start}
 .toc{position:sticky;top:106px}
-.toc h4{
+.toc h2{
   font-family:var(--mono);font-size:.74rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;
   color:var(--muted);margin:0 0 14px;
 }
@@ -279,7 +279,7 @@ ARTICLE_CSS = """
 
 /* ------------------------------------------------------------ references */
 .refs{margin-top:clamp(34px,4vw,50px);padding-top:26px;border-top:1px solid var(--line)}
-.refs h4{font-family:var(--mono);font-size:.75rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin:0 0 14px}
+.refs h2{font-family:var(--mono);font-size:.75rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin:0 0 14px}
 .refs ol{list-style:none;margin:0;padding:0;counter-reset:r}
 .refs li{position:relative;padding-left:32px;margin-bottom:.6em;font-size:.94rem;line-height:1.5}
 .refs li::before{counter-increment:r;content:counter(r,decimal-leading-zero);position:absolute;left:0;top:.15em;font-family:var(--mono);font-size:.76rem;color:var(--amber-text)}

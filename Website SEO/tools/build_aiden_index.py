@@ -52,6 +52,10 @@ EXCLUDE_FILES = {
     "whatsapp-receptionist-demo-ar.html",
     "customized-ceo-dashboard-demo-ar.html",
     "medflow-sales-automation-demo-ar.html",
+    # The English twin, which was only ever linked from the retired v3
+    # homepage. Excluded alongside it rather than left as the one orphan
+    # Aiden could still hand a visitor.
+    "medflow-sales-automation-demo.html",
 }
 EXCLUDE_PATTERNS = [
     re.compile(r"/en/.*-new\.html$"),        # unreleased template skins

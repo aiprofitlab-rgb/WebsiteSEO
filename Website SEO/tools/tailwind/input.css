@@ -1,0 +1,24 @@
+/* Static stylesheet for the pages still on the pre-v4 Tailwind skin.
+   They used to pull cdn.tailwindcss.com as a render-blocking <script> in
+   <head> - 124 KB, then the stylesheet generated at runtime, ~770 ms of
+   render-blocking each - and mask the page with #fouc-overlay until `load`
+   to hide the flash that caused. Built ahead of time, none of that happens.
+   The @source list is exactly the pages that still carry the skin, so the
+   output stays small: the 300 articles and the v4 core pages are not
+   Tailwind and must not widen this scan. */
+@import "tailwindcss";
+
+@source "../../public_html/smart-website-offer.html";
+@source "../../public_html/smart-website-offer-en.html";
+@source "../../public_html/en/smart-website-offer.html";
+@source "../../public_html/onboarding.html";
+@source "../../public_html/academy/index.html";
+@source "../../public_html/academy/en/*.html";
+@source "../../public_html/academy-ar/index.html";
+@source "../../public_html/academy/ar/*.html";
+@source "../../public_html/about-en.html";
+@source "../../public_html/contact-en.html";
+@source "../../public_html/process-en.html";
+@source "../../public_html/services-en.html";
+@source "../../public_html/en/index.html";
+@source "../../public_html/js/*.js";

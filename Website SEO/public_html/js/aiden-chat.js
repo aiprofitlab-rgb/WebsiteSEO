@@ -28,6 +28,9 @@
     'use strict';
 
     var API = 'https://aiden-backend-aiden.up.railway.app/chat';
+    // Where the widget sends a visitor when the backend cannot answer.
+    var WHATSAPP_URL = 'https://api.whatsapp.com/send?phone=96899245250' +
+        '&text=' + encodeURIComponent('Hello Nahid, I have a question about my business.');
     var SITE_HOST = 'aiprofitlab.io';
     var REQUEST_TIMEOUT_MS = 30000;
 
@@ -1189,11 +1192,18 @@
                     body: JSON.stringify(body),
                     signal: controller ? controller.signal : undefined
                 });
+                // Load-bearing. A dead backend answers every path with its
+                // own 404 page, and that page is valid JSON - so res.json()
+                // resolves, no field matches, and the widget used to fall
+                // through to the filler line below and answer every message
+                // with it, forever, without ever erroring. Saying we are
+                // unavailable costs far less than answering nothing
+                // convincingly, so anything but a 2xx goes to the catch.
+                if (!res.ok) throw new Error('HTTP ' + res.status);
                 var result = await res.json();
+                var reply = result.reply || result.response;
+                if (!reply) throw new Error('no reply field');
                 typing.remove();
-
-                var reply = result.reply || result.response ||
-                    t('Thanks — got that. What else can I help with?', 'شكراً — وصلتني. كيف أساعدك أكثر؟');
 
                 bubble(renderMarkdown(reply), 'bot');
                 thread.push({ role: 'assistant', text: reply });
@@ -1201,8 +1211,12 @@
                 renderSources(result.sources);
             } catch (e) {
                 typing.remove();
-                bubble(escapeHtml(t('I could not reach the server just then. Try again in a moment — or message us on WhatsApp.',
-                    'تعذّر الوصول إلى الخادم الآن. حاول مرة أخرى بعد قليل — أو راسلنا على واتساب.')), 'bot', 'err');
+                // Hand the visitor somewhere that works, as a real link -
+                // this is the only path left when the backend is down.
+                bubble(escapeHtml(t('I could not reach the server just then. Try again in a moment — or message us on WhatsApp: ',
+                    'تعذّر الوصول إلى الخادم الآن. حاول مرة أخرى بعد قليل — أو راسلنا على واتساب: ')) +
+                    '<a href="' + WHATSAPP_URL + '" target="_blank" rel="noopener">' +
+                    escapeHtml(t('Chat on WhatsApp', 'المحادثة على واتساب')) + '</a>', 'bot', 'err');
             } finally {
                 if (timer) clearTimeout(timer);
                 sending = false;

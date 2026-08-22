@@ -1,4 +1,5 @@
 import os
+import subprocess
 from datetime import datetime
 
 public_html = "public_html"
@@ -15,8 +16,7 @@ urls = [
     ("/en/simulators/", 0.7),
     ("/en/checkout/", 0.7),
     ("/blog/", 0.8),
-    ("/en/academy/", 0.8),
-    ("/en/smart-website-offer.html", 0.9),
+    ("/en/smart-website-offer/", 0.9),
 
     # --- Arabic, the v4 set (rebuilt 2026-08-21) ----------------------------
     # The five core URLs are unchanged - only the skin under them moved.
@@ -29,9 +29,20 @@ urls = [
     ("/simulators-ar/", 0.7),
     ("/checkout-ar/", 0.7),
     ("/blog-ar/", 0.8),
-    ("/academy-ar/", 0.8),
-    ("/smart-website-offer.html", 0.9),
+    ("/smart-website-offer/", 0.9),
 
+    # --- Trust pages -------------------------------------------------------
+    # Linked from the footer of all 320 pages and never submitted. For a
+    # business taking payment online these are trust pages, not boilerplate.
+    ("/privacy/", 0.4),
+    ("/terms/", 0.4),
+    ("/refund-policy/", 0.4),
+    ("/refund-policy-ar/", 0.4),
+
+    # The Academy is not here on purpose. Its eight pages carry noindex: no
+    # live v4 page links to them, they are thin against the articles covering
+    # the same ground, and they were competing with them. A sitemap must not
+    # advertise a page that tells the crawler not to index it.
     # Neither /en/order/ nor /order-ar/ belongs here: both are payment-return
     # pages carrying noindex, and /en/checkout/?plan=... are query variants of
     # one URL. The four stand-alone Arabic demo and simulator pages that used
@@ -54,28 +65,96 @@ if os.path.exists(blog_en_path):
             slug = file.replace(".html", "")
             urls.append((f"/blog/en/{slug}/", 0.6))
 
-academy_ar_path = os.path.join(public_html, "academy", "ar")
-if os.path.exists(academy_ar_path):
-    for file in os.listdir(academy_ar_path):
-        if file.endswith(".html") and file != "index.html":
-            slug = file.replace(".html", "")
-            urls.append((f"/academy/ar/{slug}/", 0.6))
+def source_file(loc):
+    """Map a public URL back to the file .htaccess serves for it.
 
-academy_en_path = os.path.join(public_html, "academy", "en")
-if os.path.exists(academy_en_path):
-    for file in os.listdir(academy_en_path):
-        if file.endswith(".html") and file != "index.html":
-            slug = file.replace(".html", "")
-            urls.append((f"/academy/en/{slug}/", 0.6))
+    Mirrors the rewrite rules: /en/<x>/ prefers public_html/en/<x>.html and
+    falls back to the older root-level <x>-en.html convention; everything
+    else is a root .html file or a directory index.
+    """
+    path = loc.strip("/")
+    if path == "":
+        return os.path.join(public_html, "index.html")
+    if path == "en/smart-website-offer":          # .htaccess section 2, explicit
+        return os.path.join(public_html, "smart-website-offer-en.html")
+    parts = path.split("/")
+    candidates = []
+    if parts[0] == "en" and len(parts) == 2:
+        candidates.append(os.path.join(public_html, "en", parts[1] + ".html"))
+        candidates.append(os.path.join(public_html, parts[1] + "-en.html"))
+    candidates.append(os.path.join(public_html, *parts) + ".html")
+    candidates.append(os.path.join(public_html, *parts, "index.html"))
+    for c in candidates:
+        if os.path.isfile(c):
+            return c
+    return None
 
-lastmod = datetime.now().strftime("%Y-%m-%d")
+
+TODAY = datetime.now().strftime("%Y-%m-%d")
+
+
+def _git_last_modified():
+    """Last commit date per file, one `git log` pass.
+
+    mtime is not usable here: a fresh clone or checkout stamps every file with
+    the checkout time, which is exactly the uniform-lastmod problem this is
+    meant to solve. The commit date is the real one. Files with uncommitted
+    edits fall back to today, since they are about to be deployed.
+    """
+    def git(*args):
+        return subprocess.run(("git",) + args, capture_output=True, text=True,
+                              check=True, timeout=60).stdout
+    try:
+        # git reports paths from the repo root, which sits ABOVE this script -
+        # without stripping that prefix every lookup misses and every URL
+        # silently falls back to today, i.e. the bug this replaces.
+        prefix = git("rev-parse", "--show-prefix").strip()
+        out = git("log", "--name-only", "--pretty=format:C%cs",
+                  "--diff-filter=AMR", "--", public_html)
+        st = git("status", "--porcelain", "--", public_html)
+    except (OSError, subprocess.SubprocessError):
+        return {}, set()
+
+    def strip(path):
+        path = path.strip().strip('"')
+        return path[len(prefix):] if prefix and path.startswith(prefix) else path
+
+    dates, cur = {}, None
+    for line in out.splitlines():
+        if line.startswith("C") and len(line) == 11:
+            cur = line[1:]
+        elif line.strip():
+            dates.setdefault(strip(line), cur)    # log is newest-first
+    dirty = {strip(l[3:]) for l in st.splitlines() if l[3:].strip()}
+    return dates, dirty
+
+
+GIT_DATES, GIT_DIRTY = _git_last_modified()
+
+
+def lastmod_for(loc):
+    """A uniform lastmod is a signal crawlers learn to discount, which costs
+    us the one case where it matters: telling a crawler a page really changed."""
+    f = source_file(loc)
+    if f is None:
+        return TODAY
+    key = f.replace(os.sep, "/")
+    if key in GIT_DIRTY:
+        return TODAY
+    return GIT_DATES.get(key) or datetime.fromtimestamp(
+        os.path.getmtime(f)).strftime("%Y-%m-%d")
+
+
+unresolved = []
 xml_content = '<?xml version="1.0" encoding="UTF-8"?>\n'
 xml_content += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n'
 
 for loc, priority in sorted(urls):
+    if source_file(loc) is None:
+        unresolved.append(loc)
     xml_content += '  <url>\n'
     xml_content += f'    <loc>{base_url}{loc}</loc>\n'
-    xml_content += f'    <lastmod>{lastmod}</lastmod>\n'
+    xml_content += f'    <lastmod>{lastmod_for(loc)}</lastmod>\n'
     xml_content += '    <changefreq>weekly</changefreq>\n'
     xml_content += f'    <priority>{priority}</priority>\n'
     xml_content += '  </url>\n'
@@ -87,3 +166,8 @@ with open(sitemap_file, "w", encoding="utf-8") as f:
     f.write(xml_content)
 
 print(f"SUCCESS: Generated {sitemap_file} with {len(urls)} URLs.")
+if unresolved:
+    print(f"WARNING: {len(unresolved)} URL(s) have no file on disk - a sitemap"
+          " must not list a URL that 404s:")
+    for loc in unresolved:
+        print("  " + loc)

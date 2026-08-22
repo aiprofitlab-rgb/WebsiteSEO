@@ -1,15 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<style>
-  #fouc-overlay {
-    position: fixed;
-    inset: 0;
-    z-index: 999999;
-    background: #050505;
-    transition: opacity 0.3s ease;
-  }
-</style>
 <meta charset="utf-8">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -300,7 +291,6 @@
   <meta name="description" content="WhatsApp Receptionist Demo - أتمتة الذكاء الاصطناعي في عمان. اكتشف كيف يمكننا مساعدة عملك في مسقط ودعم رؤية عمان 2040.">
 </head>
 <body>
-<div id="fouc-overlay"></div>
 <!-- AI Profit Lab Topbar -->
 <div id="wa-topbar">
   <a href="/" class="wa-topbar-logo" title="AI Profit Lab">
@@ -726,28 +716,6 @@ selectLead('sara');
 buildCalendar();
 </script>
 <script defer src="/js/main.js"></script>
-<script>
-  (function() {
-    var overlay = document.getElementById('fouc-overlay');
-    function removeOverlay() {
-      if (overlay) {
-        overlay.style.opacity = '0';
-        setTimeout(function() {
-          if (overlay && overlay.parentNode) {
-            overlay.parentNode.removeChild(overlay);
-          }
-        }, 320);
-      }
-    }
-    if (document.readyState === 'complete') {
-      setTimeout(removeOverlay, 100);
-    } else {
-      window.addEventListener('load', function() {
-        setTimeout(removeOverlay, 100);
-      });
-    }
-  })();
-</script>
 <footer class="wa-footer">
   © 2025 AI Profit Lab — a brand of Lotus Gulf International • All Rights Reserved<br>
   <small>This is an interactive demo. Data shown is illustrative only.</small>
@@ -779,6 +747,6 @@ buildCalendar();
   }
 })();
 </script>
-    <script defer src="/js/aiden-chat.js?v=371d5470"></script>
+    <script defer src="/js/aiden-chat.js?v=b072ce1f"></script>
 </body>
 </html>

@@ -35,6 +35,7 @@ The Tailwind CDN script and the old dark skin, the FOUC overlay, and
 import argparse
 import hashlib
 import html as _html
+import json as _json
 import pathlib
 import re
 import sys
@@ -191,6 +192,51 @@ def share_row(title, url, t):
     </div>"""
 
 
+def hero_src(src, width=1200):
+    """The resized WebP for a hero, when one has been built.
+
+    Falls back to the original so a missing derivative degrades to the old
+    behaviour rather than to a broken image. Build them with
+    `python3 tools/build_image_derivatives.py`.
+    """
+    if not src.startswith("/blog/images/"):
+        return src
+    stem, _, ext = src.rpartition(".")
+    # Only a .webp named "<stem>-<width>" is one of ours. Testing for a
+    # trailing number alone skipped every source whose name simply ends in a
+    # year or a timestamp - oman-10-percent-gdp-target-2040.png and friends.
+    if not ext or (ext.lower() == "webp" and re.fullmatch(r".*-(640|1200)", stem)):
+        return src
+    cand = f"{stem}-{width}.webp"
+    return cand if (ROOT / "public_html" / cand.lstrip("/")).exists() else src
+
+
+def add_breadcrumbs(doc, lang, cat):
+    """Append a BreadcrumbList matching the trail the page already renders.
+
+    Every article draws Home / Articles / Category at the top and not one of
+    the 300 declared it. The trail is the machine-readable form of where the
+    page sits, and it is what puts the path rather than a bare URL under a
+    result - cheap to emit, and the markup to describe it is already here.
+    """
+    if any('"BreadcrumbList"' in b for b in doc["jsonld"]):
+        return doc["jsonld"]
+    t, u = C.T[lang], C.URLS[lang]
+    # Named exactly as the visible trail reads - Home / Articles / Category -
+    # with the current page as the last item. A BreadcrumbList that disagrees
+    # with the crumbs on the page is worse than none.
+    trail = [(t["crumb_home"], SITE + u["home"]),
+             (t["crumb_blog"], SITE + u["blog"]),
+             (legacy.text(cat), doc["canonical"])]
+    items = ",\n    ".join(
+        '{"@type":"ListItem","position":%d,"name":%s,"item":%s}'
+        % (i, _json.dumps(name, ensure_ascii=False), _json.dumps(href, ensure_ascii=False))
+        for i, (name, href) in enumerate(trail, 1))
+    return doc["jsonld"] + ['{\n  "@context": "https://schema.org",\n'
+                            '  "@type": "BreadcrumbList",\n  "itemListElement": [\n    '
+                            + items + "\n  ]\n}"]
+
+
 def render(doc, slug, lang, idx, css_href, js_href):
     t, u = C.T[lang], C.URLS[lang]
     url = doc["canonical"] or f"{SITE}/blog/{lang}/{slug}/"
@@ -209,8 +255,11 @@ def render(doc, slug, lang, idx, css_href, js_href):
         toc += '<li><a href="#sources">%s</a></li>' % t["sources"]
     toc_html = ""
     if toc:
+        # h2, not h4. Sitting directly under the page h1 an <h4> skips two
+        # levels, which is what a screen reader announces and what an outline
+        # crawler reads. The visual size is the .toc rule's job, not the tag's.
         toc_html = f"""<nav class="toc" aria-label="{t["onpage"]}">
-        <h4>{t["onpage"]}</h4>
+        <h2>{t["onpage"]}</h2>
         <ol>{toc}</ol>
         <p class="back"><a class="tlink" href="{u["blog"]}"><span class="arw">{back_arrow}</span><span>{t["allposts"]}</span></a></p>
       </nav>"""
@@ -221,9 +270,12 @@ def render(doc, slug, lang, idx, css_href, js_href):
         alt = doc["hero"].get("alt", "")
         if ALT_BOILERPLATE in alt or not alt.strip():
             alt = legacy.text(doc["h1"])
+        # The 1200px WebP, not the original. This <img> carries
+        # fetchpriority="high" and is the LCP element on every article page;
+        # at 761 KB it was what put a sampled article at 5.7 s mobile LCP.
         hero_html = f"""  <div class="artwrap" style="margin-top:clamp(30px,4vw,52px)">
     <figure class="afig">
-      <img src="{_html.escape(doc["hero"]["src"], quote=True)}" alt="{_html.escape(alt, quote=True)}"
+      <img src="{_html.escape(hero_src(doc["hero"]["src"]), quote=True)}" alt="{_html.escape(alt, quote=True)}"
            width="1180" height="516" fetchpriority="high" decoding="async">
     </figure>
   </div>"""
@@ -264,7 +316,9 @@ def render(doc, slug, lang, idx, css_href, js_href):
             ('<li><a href="%s" target="_blank" rel="noopener nofollow">%s</a></li>' % (
                 _html.escape(uu, quote=True), lbl)) if uu else "<li>%s</li>" % lbl
             for lbl, uu in doc["refs"])
-        refs_html = f'<div class="refs" id="sources"><h4>{t["sources"]}</h4><ol>{li}</ol></div>'
+        # h2 for the same reason: Sources follows the article's <h2> sections,
+        # so an <h4> there skips a level in the middle of the outline.
+        refs_html = f'<div class="refs" id="sources"><h2>{t["sources"]}</h2><ol>{li}</ol></div>'
 
     # ---------------------------------------------------------------------- topics
     topics_html = ""
@@ -358,6 +412,7 @@ def render(doc, slug, lang, idx, css_href, js_href):
     doc["hreflang"] = hreflang(slug, doc["hreflang"])
     bare = doc["canonical"].rstrip("/")
     doc["jsonld"] = [b.replace(bare + '"', doc["canonical"] + '"') for b in doc["jsonld"]]
+    doc["jsonld"] = add_breadcrumbs(doc, lang, cat)
 
     return (C.head(doc, og, css_href, js_href)
             + C.header(lang)

@@ -445,9 +445,9 @@ META = dict(
   "@type":"ItemList",
   "name":"Systems built by AI Profit Lab",
   "itemListElement":[
-    {"@type":"Service","position":1,"name":"The Smart Website","description":"A bilingual site with an AI buyer agent that answers in Arabic and English and hands live buyers to WhatsApp.","provider":{"@type":"Organization","name":"AI Profit Lab"},"areaServed":"Oman","offers":{"@type":"Offer","price":"950","priceCurrency":"OMR"}},
-    {"@type":"Service","position":2,"name":"The Live Owner Dashboard","description":"Cash position, margin, stock and open leads on one screen, with a recommended action for each.","provider":{"@type":"Organization","name":"AI Profit Lab"},"areaServed":"Oman","offers":{"@type":"Offer","price":"650","priceCurrency":"OMR"}},
-    {"@type":"Service","position":3,"name":"The Full Autopilot","description":"Quote and invoice follow-up on a schedule, stopping as soon as the buyer replies or pays.","provider":{"@type":"Organization","name":"AI Profit Lab"},"areaServed":"Oman","offers":{"@type":"Offer","price":"900","priceCurrency":"OMR"}}
+    {"@type":"Service","position":1,"name":"The Smart Website","description":"A bilingual site with an AI buyer agent that answers in Arabic and English and hands live buyers to WhatsApp.","provider":{"@id":"https://aiprofitlab.io/#organization"},"areaServed":"Oman","offers":{"@type":"Offer","price":"950","priceCurrency":"OMR","availability":"https://schema.org/InStock","url":"https://aiprofitlab.io/en/checkout/?plan=website","priceValidUntil":"2026-12-31"}},
+    {"@type":"Service","position":2,"name":"The Live Owner Dashboard","description":"Cash position, margin, stock and open leads on one screen, with a recommended action for each.","provider":{"@id":"https://aiprofitlab.io/#organization"},"areaServed":"Oman","offers":{"@type":"Offer","price":"650","priceCurrency":"OMR","availability":"https://schema.org/InStock","url":"https://aiprofitlab.io/en/checkout/?plan=dashboard","priceValidUntil":"2026-12-31"}},
+    {"@type":"Service","position":3,"name":"The Full Autopilot","description":"Quote and invoice follow-up on a schedule, stopping as soon as the buyer replies or pays.","provider":{"@id":"https://aiprofitlab.io/#organization"},"areaServed":"Oman","offers":{"@type":"Offer","price":"900","priceCurrency":"OMR","availability":"https://schema.org/InStock","url":"https://aiprofitlab.io/en/checkout/?plan=autopilot","priceValidUntil":"2026-12-31"}}
   ]
 }""",
 )

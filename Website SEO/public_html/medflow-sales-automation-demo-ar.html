@@ -1,15 +1,6 @@
 <!DOCTYPE html>
 <html dir="rtl" lang="ar">
 <head>
-<style>
-  #fouc-overlay {
-    position: fixed;
-    inset: 0;
-    z-index: 999999;
-    background: #050505;
-    transition: opacity 0.3s ease;
-  }
-</style>
 <meta charset="utf-8">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,7 +8,6 @@
 
 <meta content="أتمتة المبيعات الطبية, أتمتة الفواتير, الذكاء الاصطناعي, AI Profit Lab, أتمتة الأعمال عمان, الخليج" name="keywords">
 <meta content="AI Profit Lab" name="author">
-<meta content="index, follow" name="robots">
 <!-- Open Graph / Social Media -->
 <meta content="MedFlow Sales & فاتورة Automation Demo | AI Profit Lab" property="og:title">
 <meta content="شاهد كيف تتحول الطلبات إلى فواتير تلقائياً بدون عمل يدوي." property="og:description">
@@ -727,10 +717,11 @@ nav svg[width="16"][height="16"] { width: 16px !important; height: 16px !importa
 </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>العرض التجريبي: أتمتة المبيعات والفو... | AI Profit Lab عمان</title>
+<!-- Orphaned, same as the English twin - see the note there. -->
+<meta name="robots" content="noindex, follow">
   <meta name="description" content="العرض التجريبي: أتمتة المبيعات والفو... - أتمتة الذكاء الاصطناعي في عمان. اكتشف كيف يمكننا مساعدة عملك في مسقط ودعم رؤية عمان 2040.">
 </head>
 <body>
-<div id="fouc-overlay"></div>
 <div class="page">
 <!-- ── NAV ── -->
 <nav>
@@ -1215,28 +1206,6 @@ $('wa-in').addEventListener('keydown', function(e){ if(e.key==='Enter') send(); 
   }
 })();
 </script>
-<script>
-  (function() {
-    var overlay = document.getElementById('fouc-overlay');
-    function removeOverlay() {
-      if (overlay) {
-        overlay.style.opacity = '0';
-        setTimeout(function() {
-          if (overlay && overlay.parentNode) {
-            overlay.parentNode.removeChild(overlay);
-          }
-        }, 320);
-      }
-    }
-    if (document.readyState === 'complete') {
-      setTimeout(removeOverlay, 100);
-    } else {
-      window.addEventListener('load', function() {
-        setTimeout(removeOverlay, 100);
-      });
-    }
-  })();
-</script>
-    <script defer src="/js/aiden-chat.js?v=371d5470"></script>
+    <script defer src="/js/aiden-chat.js?v=b072ce1f"></script>
 </body>
 </html>

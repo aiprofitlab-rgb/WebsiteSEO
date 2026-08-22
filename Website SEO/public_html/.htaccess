@@ -35,8 +35,13 @@
 
 # --- Cache-Control Headers (mod_headers) ---
 <IfModule mod_headers.c>
-    # Immutable static assets (1 year)
-    <FilesMatch "\.(jpeg|jpg|png|webp|svg|ico|css|js|woff|woff2|ttf|otf|eot)$">
+    # Immutable static assets (1 year). Excludes aiden-chat.js by name: the
+    # rule below is what that file is supposed to get, and `Header set` from
+    # the FIRST matching FilesMatch is not overridden by a later one - so with
+    # .js matching here the intended 600s was silently discarded and
+    # production served the widget `max-age=31536000, immutable` regardless of
+    # what the block below said.
+    <FilesMatch "^(?!aiden-chat\.js$).*\.(jpeg|jpg|png|webp|svg|ico|css|js|woff|woff2|ttf|otf|eot)$">
         Header set Cache-Control "public, max-age=31536000, immutable"
     </FilesMatch>
     # The Aiden widget is the one script that ships from a stable filename and
@@ -45,6 +50,14 @@
     # Pages also carry a ?v=<hash> token (tools/aiden_version.py) - belt and
     # braces, because this header cannot evict what an edge already holds.
     <FilesMatch "^aiden-chat\.js$">
+        # mod_expires is the other half of the problem: ExpiresByType above
+        # pins every application/javascript response to a year, and it runs
+        # after mod_headers - so excluding this file from the immutable
+        # FilesMatch alone would not have been enough. Turned off for this
+        # file only, which leaves the header below as the one in effect.
+        <IfModule mod_expires.c>
+            ExpiresActive Off
+        </IfModule>
         Header set Cache-Control "public, max-age=600, must-revalidate"
     </FilesMatch>
     # HTML pages: short cache with revalidation
@@ -126,6 +139,23 @@ RewriteRule ^en/contact-en/?$    /en/contact/    [R=301,L]
 # The English homepage moved from /en/ to the site root, and the Arabic
 # homepage took /ar/. Everything else Arabic keeps the root paths it had.
 RewriteRule ^en/?$               /               [R=301,L]
+RewriteRule ^en/index/?$         /               [R=301,L]
+
+# The same four pages were also reachable WITHOUT the /en/ prefix - that is the
+# older root-level convention, and rule 5 still finds <name>-en.html on disk and
+# serves the retired v3 skin at 200. Thirteen in-article links pointed here.
+RewriteRule ^services-en/?$      /en/services/   [R=301,L]
+RewriteRule ^process-en/?$       /en/process/    [R=301,L]
+RewriteRule ^about-en/?$         /en/about/      [R=301,L]
+RewriteRule ^contact-en/?$       /en/contact/    [R=301,L]
+RewriteRule ^missed-call-simulator-en/?$ /en/simulators/ [R=301,L]
+
+# The English offer page lives at /en/smart-website-offer/ (section 2 maps it
+# to smart-website-offer-en.html on disk). That filename is ALSO reachable
+# through rule 5 as /smart-website-offer-en/, which served the same document
+# at 200 under a second URL. It self-canonicals to the /en/ form, so nothing
+# was ranking on it - but a duplicate that resolves is a duplicate.
+RewriteRule ^smart-website-offer-en/?$ /en/smart-website-offer/ [R=301,L]
 
 # One demo page and one simulator page now carry what four separate pages
 # used to. The originals stay on disk; only the URLs are retired.
@@ -205,13 +235,24 @@ RewriteRule ^blog_ar/?$ /blog-ar/ [R=301,L]
 RewriteRule ^Customized_CEO_Dashboard_demo-ar/?$ /customized-ceo-dashboard-demo-ar/ [R=301,L]
 RewriteRule ^whatsapp_receptionist_demo_ar/?$ /whatsapp-receptionist-demo-ar/ [R=301,L]
 
-# 7. Redirect .html URLs to clean slash versions
-RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /(.+)\.html\ HTTP/
-RewriteRule ^(.+)\.html$ https://aiprofitlab.io/$1/ [R=301,L]
+# 6b. One story, published twice a day apart under the identical title, in
+# both languages. The pair cannibalised each other and gave an engine asked
+# about the same work two documents to choose between. The 13 June pieces are
+# canonical; these two URLs fold into them.
+RewriteRule ^blog/en/2026-06-14-how-we-automated-lead-recovery-muscat-hypermarket-case-study/?$ /blog/en/2026-06-13-automated-lead-recovery-muscat-hypermarket-case-study/ [R=301,L]
+RewriteRule ^blog/ar/2026-06-14-how-we-automated-lead-recovery-muscat-hypermarket-case-study/?$ /blog/ar/2026-06-13-automated-lead-recovery-muscat-hypermarket-case-study/ [R=301,L]
 
-# 8. Special case for index.html files
+# 7. Special case for index.html files. MUST sit above rule 8: rule 8's
+# ^(.+)\.html$ also matches these, and being first it would send
+# /en/index.html to /en/index/ and /index.html to /index/ - one extra hop
+# each, and in the /en/ case a hop that lands ON the retired v3 homepage
+# instead of escaping it. Both go straight to the live English root here.
 RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /en/index\.html\ HTTP/
-RewriteRule ^en/index\.html$ https://aiprofitlab.io/en/ [R=301,L]
+RewriteRule ^en/index\.html$ https://aiprofitlab.io/ [R=301,L]
 
 RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /index\.html\ HTTP/
 RewriteRule ^index\.html$ https://aiprofitlab.io/ [R=301,L]
+
+# 8. Redirect .html URLs to clean slash versions
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /(.+)\.html\ HTTP/
+RewriteRule ^(.+)\.html$ https://aiprofitlab.io/$1/ [R=301,L]

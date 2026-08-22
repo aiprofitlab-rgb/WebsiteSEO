@@ -1,25 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<style>
-  #fouc-overlay {
-    position: fixed;
-    inset: 0;
-    z-index: 999999;
-    background: #050505;
-    transition: opacity 0.3s ease;
-  }
-</style>
 <meta charset="utf-8">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
 <title>MedFlow Sales & Invoice Automation Demo | AI Profit Lab</title>
+<!-- Orphaned: the only page that linked here was the retired v3 English
+     homepage, which now 301s to /. Still live for anyone sent the link,
+     but with no inbound link and no sitemap entry it could only ever
+     compete with the pages that are meant to rank. -->
+<meta name="robots" content="noindex, follow">
 <meta content="وفر وقتك وزد أرباحك مع AI Profit Lab - منصة الذكاء الاصطناعي للتداول الآلي" name="description">
 <meta content="medical sales automation, invoice automation, MedFlow, AI Profit Lab, Oman business automation, GCC" name="keywords">
 <meta content="AI Profit Lab" name="author">
-<meta content="index, follow" name="robots">
 <!-- Open Graph / Social Media -->
 <meta content="MedFlow Sales & Invoice Automation Demo | AI Profit Lab" property="og:title">
 <meta content="Watch how orders turn into invoices automatically without manual work." property="og:description">
@@ -712,7 +707,6 @@ nav svg[width="16"][height="16"] { width: 16px !important; height: 16px !importa
   <meta name="description" content="MedFlow Sales & Invoice Automation Demo - أتمتة الذكاء الاصطناعي في عمان. اكتشف كيف يمكننا مساعدة عملك في مسقط ودعم رؤية عمان 2040.">
 </head>
 <body>
-<div id="fouc-overlay"></div>
 <div class="page">
 <!-- ── NAV ── -->
 <nav>
@@ -1200,28 +1194,6 @@ $('wa-in').addEventListener('keydown', function(e){ if(e.key==='Enter') send(); 
   }
 })();
 </script>
-<script>
-  (function() {
-    var overlay = document.getElementById('fouc-overlay');
-    function removeOverlay() {
-      if (overlay) {
-        overlay.style.opacity = '0';
-        setTimeout(function() {
-          if (overlay && overlay.parentNode) {
-            overlay.parentNode.removeChild(overlay);
-          }
-        }, 320);
-      }
-    }
-    if (document.readyState === 'complete') {
-      setTimeout(removeOverlay, 100);
-    } else {
-      window.addEventListener('load', function() {
-        setTimeout(removeOverlay, 100);
-      });
-    }
-  })();
-</script>
-    <script defer src="/js/aiden-chat.js?v=371d5470"></script>
+    <script defer src="/js/aiden-chat.js?v=b072ce1f"></script>
 </body>
 </html>

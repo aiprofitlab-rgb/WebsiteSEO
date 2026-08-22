@@ -297,5 +297,7 @@ META = dict(
     {"@type":"Question","name":"Do you work in Arabic?","acceptedAnswer":{"@type":"Answer","text":"Yes. Both English and Arabic are treated as first-class, and Arabic copy is checked by a native reader before it ships."}},
     {"@type":"Question","name":"Who am I actually contracting with?","acceptedAnswer":{"@type":"Answer","text":"Lotus Gulf International, CR 1570092, South Al Khuwair, Bousher, Muscat. AI Profit Lab is the brand. Not VAT registered, so invoices carry no VAT line."}}
   ]
-}""",
+}
+$$SPLIT$$
+{"@type":"ContactPage","@id":"https://aiprofitlab.io/en/contact/#contactpage","url":"https://aiprofitlab.io/en/contact/","inLanguage":"en","isPartOf":{"@id":"https://aiprofitlab.io/#website"},"about":{"@id":"https://aiprofitlab.io/#organization"}}""",
 )

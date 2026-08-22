@@ -657,11 +657,43 @@ html:not(.js) .post[data-feat]{display:none}
   .fcount{width:100%;margin:4px 0 0}
 }
 
+/* ---------------------------------------------- Arabic fallback metrics --
+   The Arabic pages shifted on font swap and the byte-identical English ones
+   did not: same template, same images, CLS 0.160 against 0.002. The cause is
+   `display=swap` plus a metric mismatch. Markazi Text has an x-height of
+   36.4% of its em; Geeza Pro on Apple is 49.1% and Tahoma on Windows 54.5% -
+   so every Arabic heading painted around a third too large in the fallback
+   and then snapped down when the webfont arrived, dragging the hero figure
+   and everything under it with it.
+
+   One adjusted face per platform font, listed in stack order: a face whose
+   only src is a local() the machine does not have simply fails to load and
+   the next one is used. Every number below is read out of the actual font
+   files - head.unitsPerEm, hhea ascender/descender, OS/2 sxHeight - not
+   estimated: size-adjust is xHeight(web)/xHeight(fallback), and the
+   ascent/descent overrides are the webfont's own metrics divided by it. */
+@font-face{
+  font-family:'Markazi Fallback';src:local('Geeza Pro');
+  size-adjust:74.2%;ascent-override:113.1%;descent-override:48.7%;line-gap-override:0%;
+}
+@font-face{
+  font-family:'Markazi Fallback 2';src:local('Tahoma'),local('Segoe UI');
+  size-adjust:66.8%;ascent-override:125.6%;descent-override:54.1%;line-gap-override:0%;
+}
+@font-face{
+  font-family:'Plex Arabic Fallback';src:local('Geeza Pro');
+  size-adjust:105.1%;ascent-override:103.2%;descent-override:39.5%;line-gap-override:0%;
+}
+@font-face{
+  font-family:'Plex Arabic Fallback 2';src:local('Tahoma'),local('Segoe UI');
+  size-adjust:94.6%;ascent-override:114.7%;descent-override:43.9%;line-gap-override:0%;
+}
+
 /* --------------------------------------------------------------- Arabic */
 [dir=rtl]{
-  --display:'Markazi Text','Amiri',Georgia,serif;
-  --sans:'IBM Plex Sans Arabic','IBM Plex Sans',-apple-system,'Segoe UI',sans-serif;
-  --mono:'IBM Plex Mono','IBM Plex Sans Arabic',ui-monospace,SFMono-Regular,Menlo,monospace;
+  --display:'Markazi Text','Markazi Fallback','Markazi Fallback 2','Amiri',Georgia,serif;
+  --sans:'IBM Plex Sans Arabic','Plex Arabic Fallback','Plex Arabic Fallback 2','IBM Plex Sans',-apple-system,'Segoe UI',sans-serif;
+  --mono:'IBM Plex Mono','IBM Plex Sans Arabic','Plex Arabic Fallback',ui-monospace,SFMono-Regular,Menlo,monospace;
 }
 /* Naskh needs more leading than Latin at the same size: the descenders and the
    dots below the baseline collide at 1.7. */
@@ -734,8 +766,8 @@ html:not(.js) .post[data-feat]{display:none}
 
 /* Tracking and small-caps are Latin devices; on Arabic they break the join
    between letters and leave a label unreadable. */
-[dir=rtl] .eyebrow,[dir=rtl] .crumbs,[dir=rtl] .toc h4,[dir=rtl] .keybox h4,
-[dir=rtl] .callout b,[dir=rtl] .refs h4,[dir=rtl] .tblcap,[dir=rtl] .tbl th,
+[dir=rtl] .eyebrow,[dir=rtl] .crumbs,[dir=rtl] .toc h2,[dir=rtl] .keybox h4,
+[dir=rtl] .callout b,[dir=rtl] .refs h2,[dir=rtl] .tblcap,[dir=rtl] .tbl th,
 [dir=rtl] .byline .who span,[dir=rtl] .byline .stamp,[dir=rtl] .steps b,
 [dir=rtl] .related .card .rd,[dir=rtl] .related .card .n,[dir=rtl] .pfig figcaption,
 [dir=rtl] .afig figcaption,[dir=rtl] .brandbox .rolelbl,[dir=rtl] .topics span:first-child,

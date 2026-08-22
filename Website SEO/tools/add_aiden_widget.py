@@ -45,6 +45,13 @@ EXCLUDE_PATTERNS = [
     re.compile(r"/en/index-v3\.html$"),
     re.compile(r"/en/preview-templates\.html$"),
     re.compile(r"/tmp_"),
+    # Both blog hubs, for the reason the articles are excluded below:
+    # blog_chrome.footer already pins a WhatsApp action button to the bottom
+    # corner and Aiden's launcher pins to the same one, so the two overlap.
+    # The articles were protected by ARTICLE_PATTERNS; the hubs were not, so
+    # any run of this script silently undid the re-skin's decision on them.
+    re.compile(r"^/blog/index\.html$"),
+    re.compile(r"^/blog-ar/index\.html$"),
 ]
 
 # Articles carry no chat widget. /en/article-v4.html is the article template for

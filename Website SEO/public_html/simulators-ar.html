@@ -25,9 +25,9 @@
 <!-- Non-blocking font load: a plain stylesheet link costs a render-blocking
      round trip to fonts.googleapis.com. display=swap paints fallback text
      immediately and swaps when the webfont lands. -->
-<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Marcellus&family=Markazi+Text:wght@400;500;600&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" media="print" onload="this.media='all'" href="https://fonts.googleapis.com/css2?family=Marcellus&family=Markazi+Text:wght@400;500;600&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
-<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus&family=Markazi+Text:wght@400;500;600&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap"></noscript>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Marcellus&family=Markazi+Text:wght@400;500;600&family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" media="print" onload="this.media='all'" href="https://fonts.googleapis.com/css2?family=Marcellus&family=Markazi+Text:wght@400;500;600&family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus&family=Markazi+Text:wght@400;500;600&family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap"></noscript>
 
 <!-- Sets .js before first paint so the reveal styles apply only when there is
      JS to un-apply them. Without it, a no-JS visitor gets a blank page. -->
@@ -654,11 +654,43 @@ section{position:relative;padding:clamp(74px,9vw,138px) 0}
   .tabs button{flex:1 1 100%;justify-content:center}
 }
 
+/* ---------------------------------------------- Arabic fallback metrics --
+   The Arabic pages shifted on font swap and the byte-identical English ones
+   did not: same template, same images, CLS 0.160 against 0.002. The cause is
+   `display=swap` plus a metric mismatch. Markazi Text has an x-height of
+   36.4% of its em; Geeza Pro on Apple is 49.1% and Tahoma on Windows 54.5% -
+   so every Arabic heading painted around a third too large in the fallback
+   and then snapped down when the webfont arrived, dragging the hero figure
+   and everything under it with it.
+
+   One adjusted face per platform font, listed in stack order: a face whose
+   only src is a local() the machine does not have simply fails to load and
+   the next one is used. Every number below is read out of the actual font
+   files - head.unitsPerEm, hhea ascender/descender, OS/2 sxHeight - not
+   estimated: size-adjust is xHeight(web)/xHeight(fallback), and the
+   ascent/descent overrides are the webfont's own metrics divided by it. */
+@font-face{
+  font-family:'Markazi Fallback';src:local('Geeza Pro');
+  size-adjust:74.2%;ascent-override:113.1%;descent-override:48.7%;line-gap-override:0%;
+}
+@font-face{
+  font-family:'Markazi Fallback 2';src:local('Tahoma'),local('Segoe UI');
+  size-adjust:66.8%;ascent-override:125.6%;descent-override:54.1%;line-gap-override:0%;
+}
+@font-face{
+  font-family:'Plex Arabic Fallback';src:local('Geeza Pro');
+  size-adjust:105.1%;ascent-override:103.2%;descent-override:39.5%;line-gap-override:0%;
+}
+@font-face{
+  font-family:'Plex Arabic Fallback 2';src:local('Tahoma'),local('Segoe UI');
+  size-adjust:94.6%;ascent-override:114.7%;descent-override:43.9%;line-gap-override:0%;
+}
+
 /* --------------------------------------------------------------- Arabic */
 [dir=rtl]{
-  --display:'Markazi Text','Amiri',Georgia,serif;
-  --sans:'IBM Plex Sans Arabic','IBM Plex Sans',-apple-system,'Segoe UI',sans-serif;
-  --mono:'IBM Plex Mono','IBM Plex Sans Arabic',ui-monospace,SFMono-Regular,Menlo,monospace;
+  --display:'Markazi Text','Markazi Fallback','Markazi Fallback 2','Amiri',Georgia,serif;
+  --sans:'IBM Plex Sans Arabic','Plex Arabic Fallback','Plex Arabic Fallback 2','IBM Plex Sans',-apple-system,'Segoe UI',sans-serif;
+  --mono:'IBM Plex Mono','IBM Plex Sans Arabic','Plex Arabic Fallback',ui-monospace,SFMono-Regular,Menlo,monospace;
 }
 /* Naskh needs more leading than Latin at the same size: the descenders and the
    dots below the baseline collide at 1.7. */
@@ -894,6 +926,27 @@ section{position:relative;padding:clamp(74px,9vw,138px) 0}
 <script type="application/ld+json">
 {
   "@context":"https://schema.org",
+  "@graph":[
+  {
+    "@type":"ProfessionalService",
+    "@id":"https://aiprofitlab.io/#organization",
+    "name":"AI Profit Lab",
+    "description":"Done-for-you AI automation for trading and distribution SMEs in Oman and the GCC.",
+    "url":"https://aiprofitlab.io/",
+    "email":"hello@aiprofitlab.io",
+    "telephone":"+968 9924 5250",
+    "slogan":"Every success starts with insight",
+    "logo":{"@type":"ImageObject","url":"https://aiprofitlab.io/assets/brand/wordmark-primary.svg","width":1600,"height":274},
+    "image":"https://aiprofitlab.io/og-aiprofitlab-2026.jpg",
+    "areaServed":[{"@type":"Country","name":"Oman"}],
+    "address":{"@type":"PostalAddress","addressLocality":"Bousher","addressRegion":"Muscat","addressCountry":"OM","streetAddress":"South Al Khuwair"},
+    "geo":{"@type":"GeoCoordinates","latitude":23.5803,"longitude":58.4310},
+    "parentOrganization":{"@type":"Organization","name":"Lotus Gulf International","identifier":"CR 1570092"},
+    "founder":{"@type":"Person","name":"Nahid Abyari"},
+    "priceRange":"OMR 950 - OMR 2200",
+    "sameAs":["https://www.linkedin.com/in/nahid-aby","https://www.youtube.com/@AI_for_Managers","https://www.facebook.com/profile.php?id=61584870364473"]
+  },
+  {
   "@type":"WebApplication",
   "inLanguage":"ar",
   "name":"حاسبات AI Profit Lab",
@@ -901,6 +954,8 @@ section{position:relative;padding:clamp(74px,9vw,138px) 0}
   "operatingSystem":"Web",
   "description":"حاسبتان لأصحاب الأعمال في عُمان: تكلفة الاستفسارات التي لا يردّ عليها أحد، وتكلفة إعادة الإدخال اليدوي للبيانات. كل قيمة يضبطها المستخدم ولا شيء يُخزَّن.",
   "offers":{"@type":"Offer","price":"0","priceCurrency":"OMR"}
+}
+  ]
 }
 </script>
 </head>
@@ -1515,6 +1570,6 @@ section{position:relative;padding:clamp(74px,9vw,138px) 0}
   });
 })();
 </script>
-<script defer src="/js/aiden-chat.js?v=371d5470"></script>
+<script defer src="/js/aiden-chat.js?v=b072ce1f"></script>
 </body>
 </html>

@@ -354,9 +354,9 @@ META = dict(
   "inLanguage":"ar",
   "name":"الأنظمة التي يبنيها AI Profit Lab",
   "itemListElement":[
-    {"@type":"Service","position":1,"name":"الموقع الذكي","description":"موقع بلغتين مع وكيل مشترٍ بالذكاء الاصطناعي يردّ بالعربية والإنجليزية ويحوّل المشترين الأحياء إلى واتساب.","provider":{"@type":"Organization","name":"AI Profit Lab"},"areaServed":"Oman","offers":{"@type":"Offer","price":"950","priceCurrency":"OMR"}},
-    {"@type":"Service","position":2,"name":"لوحة متابعة المالك الحيّة","description":"السيولة وهامش الربح والمخزون والطلبات المفتوحة على شاشة واحدة، ومع كل بند الإجراء الذي يطلبه.","provider":{"@type":"Organization","name":"AI Profit Lab"},"areaServed":"Oman","offers":{"@type":"Offer","price":"650","priceCurrency":"OMR"}},
-    {"@type":"Service","position":3,"name":"الطيار الآلي الكامل","description":"متابعة عروض الأسعار والفواتير وفق جدول، وتتوقف فور أن يردّ المشتري أو يدفع.","provider":{"@type":"Organization","name":"AI Profit Lab"},"areaServed":"Oman","offers":{"@type":"Offer","price":"900","priceCurrency":"OMR"}}
+    {"@type":"Service","position":1,"name":"الموقع الذكي","description":"موقع بلغتين مع وكيل مشترٍ بالذكاء الاصطناعي يردّ بالعربية والإنجليزية ويحوّل المشترين الأحياء إلى واتساب.","provider":{"@id":"https://aiprofitlab.io/#organization"},"areaServed":"Oman","offers":{"@type":"Offer","price":"950","priceCurrency":"OMR","availability":"https://schema.org/InStock","url":"https://aiprofitlab.io/checkout/?plan=website","priceValidUntil":"2026-12-31"}},
+    {"@type":"Service","position":2,"name":"لوحة متابعة المالك الحيّة","description":"السيولة وهامش الربح والمخزون والطلبات المفتوحة على شاشة واحدة، ومع كل بند الإجراء الذي يطلبه.","provider":{"@id":"https://aiprofitlab.io/#organization"},"areaServed":"Oman","offers":{"@type":"Offer","price":"650","priceCurrency":"OMR","availability":"https://schema.org/InStock","url":"https://aiprofitlab.io/checkout/?plan=dashboard","priceValidUntil":"2026-12-31"}},
+    {"@type":"Service","position":3,"name":"الطيار الآلي الكامل","description":"متابعة عروض الأسعار والفواتير وفق جدول، وتتوقف فور أن يردّ المشتري أو يدفع.","provider":{"@id":"https://aiprofitlab.io/#organization"},"areaServed":"Oman","offers":{"@type":"Offer","price":"900","priceCurrency":"OMR","availability":"https://schema.org/InStock","url":"https://aiprofitlab.io/checkout/?plan=autopilot","priceValidUntil":"2026-12-31"}}
   ]
 }""",
 )

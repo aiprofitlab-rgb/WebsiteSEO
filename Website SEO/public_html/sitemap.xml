@@ -13,48 +13,6 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://aiprofitlab.io/academy-ar/</loc>
-    <lastmod>2026-08-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://aiprofitlab.io/academy/ar/ai-for-managers/</loc>
-    <lastmod>2026-08-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://aiprofitlab.io/academy/ar/llm-differences/</loc>
-    <lastmod>2026-08-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://aiprofitlab.io/academy/ar/whatsapp-receptionist/</loc>
-    <lastmod>2026-08-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://aiprofitlab.io/academy/en/ai-for-managers/</loc>
-    <lastmod>2026-08-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://aiprofitlab.io/academy/en/llm-differences/</loc>
-    <lastmod>2026-08-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://aiprofitlab.io/academy/en/whatsapp-receptionist/</loc>
-    <lastmod>2026-08-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>https://aiprofitlab.io/ar/</loc>
     <lastmod>2026-08-21</lastmod>
     <changefreq>weekly</changefreq>
@@ -506,12 +464,6 @@
   </url>
   <url>
     <loc>https://aiprofitlab.io/blog/ar/2026-06-14-automation-workflow-slowing-down/</loc>
-    <lastmod>2026-08-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://aiprofitlab.io/blog/ar/2026-06-14-how-we-automated-lead-recovery-muscat-hypermarket-case-study/</loc>
     <lastmod>2026-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
@@ -1411,12 +1363,6 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://aiprofitlab.io/blog/en/2026-06-14-how-we-automated-lead-recovery-muscat-hypermarket-case-study/</loc>
-    <lastmod>2026-08-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>https://aiprofitlab.io/blog/en/2026-06-14-stop-using-chatgpt-business-strategy/</loc>
     <lastmod>2026-08-21</lastmod>
     <changefreq>weekly</changefreq>
@@ -1897,12 +1843,6 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://aiprofitlab.io/en/academy/</loc>
-    <lastmod>2026-08-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://aiprofitlab.io/en/checkout/</loc>
     <lastmod>2026-08-21</lastmod>
     <changefreq>weekly</changefreq>
@@ -1939,16 +1879,34 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://aiprofitlab.io/en/smart-website-offer.html</loc>
+    <loc>https://aiprofitlab.io/en/smart-website-offer/</loc>
     <lastmod>2026-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://aiprofitlab.io/privacy/</loc>
+    <lastmod>2026-08-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.4</priority>
   </url>
   <url>
     <loc>https://aiprofitlab.io/process/</loc>
     <lastmod>2026-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://aiprofitlab.io/refund-policy-ar/</loc>
+    <lastmod>2026-08-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://aiprofitlab.io/refund-policy/</loc>
+    <lastmod>2026-08-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.4</priority>
   </url>
   <url>
     <loc>https://aiprofitlab.io/services/</loc>
@@ -1963,9 +1921,15 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://aiprofitlab.io/smart-website-offer.html</loc>
+    <loc>https://aiprofitlab.io/smart-website-offer/</loc>
     <lastmod>2026-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://aiprofitlab.io/terms/</loc>
+    <lastmod>2026-08-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.4</priority>
   </url>
 </urlset>

@@ -56,7 +56,13 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<!-- Non-blocking font load, matching the v4 pattern in tools/v4/kit.py: a
+     plain stylesheet link costs a render-blocking round trip to
+     fonts.googleapis.com. display=swap paints fallback text immediately
+     and swaps when the webfont lands. -->
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Marcellus&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" media="print" onload="this.media='all'" href="https://fonts.googleapis.com/css2?family=Marcellus&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap"></noscript>
 
 <style>
 :root{
@@ -1472,6 +1478,6 @@ footer a{color:var(--amber-pale)}
   document.addEventListener("keydown", function(e){ if (e.key === "Escape" && curtain.classList.contains("on")) sleep(); });
 })();
 </script>
-    <script defer src="/js/aiden-chat.js?v=371d5470"></script>
+    <script defer src="/js/aiden-chat.js?v=b072ce1f"></script>
 </body>
 </html>

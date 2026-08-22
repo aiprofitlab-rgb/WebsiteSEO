@@ -722,7 +722,7 @@ FONTS_EN = ("https://fonts.googleapis.com/css2?family=Marcellus&family=IBM+Plex+
 # what the wordmark and every Latin figure caption are set in, and dropping it
 # would leave those falling back to a system serif mid-page.
 FONTS_AR = ("https://fonts.googleapis.com/css2?family=Marcellus&family=Markazi+Text:wght@400;500;600"
-            "&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700"
+            "&family=IBM+Plex+Sans+Arabic:wght@400;500;600"
             "&family=IBM+Plex+Mono:wght@400;500&display=swap")
 
 def head_html(lang="en"):
@@ -880,6 +880,80 @@ SOCIALS = [
 ]
 
 GOOGLE_REVIEW = "https://g.page/r/CYPlrz58-k0DEAI/review"
+
+
+# --------------------------------------------------------------------------
+# Entity graph
+# --------------------------------------------------------------------------
+# One Organization node, given a stable @id and emitted on every page, with
+# every other node on the page referencing it. This is how a search engine
+# consolidates twenty-two URLs into one entity, and it matters more here than
+# it usually would: "AI Profit Lab" collides with an automated-trading brand,
+# and `sameAs` is the only thing on the page that says which one this is.
+#
+# The v4 rebuild had dropped all of it - `grep sameAs tools/v4/` returned
+# nothing, while 187 retired pages still carried the profiles.
+SITE = "https://aiprofitlab.io"
+ORG_ID = SITE + "/#organization"
+SITE_ID = SITE + "/#website"
+
+# openingHours is deliberately absent: there are no published business hours
+# to state, and inventing them would be worse than omitting the property.
+ORG_NODE = """{
+    "@type":"ProfessionalService",
+    "@id":"%(org)s",
+    "name":"AI Profit Lab",
+    "description":"Done-for-you AI automation for trading and distribution SMEs in Oman and the GCC.",
+    "url":"%(site)s/",
+    "email":"hello@aiprofitlab.io",
+    "telephone":"+968 9924 5250",
+    "slogan":"Every success starts with insight",
+    "logo":{"@type":"ImageObject","url":"%(site)s/assets/brand/wordmark-primary.svg","width":1600,"height":274},
+    "image":"%(site)s/og-aiprofitlab-2026.jpg",
+    "areaServed":[{"@type":"Country","name":"Oman"}],
+    "address":{"@type":"PostalAddress","addressLocality":"Bousher","addressRegion":"Muscat","addressCountry":"OM","streetAddress":"South Al Khuwair"},
+    "geo":{"@type":"GeoCoordinates","latitude":23.5803,"longitude":58.4310},
+    "parentOrganization":{"@type":"Organization","name":"Lotus Gulf International","identifier":"CR 1570092"},
+    "founder":{"@type":"Person","name":"Nahid Abyari"},
+    "priceRange":"OMR 950 - OMR 2200",
+    "sameAs":["https://www.linkedin.com/in/nahid-aby","https://www.youtube.com/@AI_for_Managers","https://www.facebook.com/profile.php?id=61584870364473"]
+  }""" % {"org": ORG_ID, "site": SITE}
+
+WEBSITE_NODE = """{
+    "@type":"WebSite",
+    "@id":"%(site_id)s",
+    "url":"%(site)s/",
+    "name":"AI Profit Lab",
+    "inLanguage":["en","ar"],
+    "publisher":{"@id":"%(org)s"}
+  }""" % {"site_id": SITE_ID, "site": SITE, "org": ORG_ID}
+
+
+NODE_SEP = "$$SPLIT$$"
+
+
+def graph(nodes):
+    """One @graph per page: the shared Organization plus the page's own nodes.
+
+    Page modules keep authoring a single self-contained node with its own
+    @context; that context is stripped on the way in, because a graph carries
+    exactly one at the top.
+    """
+    import re as _re
+    flat = []
+    for n in nodes:
+        # A page with more than one node of its own separates them with this
+        # marker rather than hand-assembling a graph it cannot see the rest of.
+        flat.extend((n or "").split(NODE_SEP))
+    out = []
+    for n in flat:
+        n = (n or "").strip()
+        if not n:
+            continue
+        n = _re.sub(r'"@context"\s*:\s*"https://schema\.org"\s*,?\s*', "", n, count=1)
+        out.append(n.strip())
+    return ('{\n  "@context":"https://schema.org",\n  "@graph":[\n  '
+            + ",\n  ".join(out) + "\n  ]\n}")
 
 
 def _socials():

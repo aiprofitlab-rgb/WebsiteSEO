@@ -1,0 +1,114 @@
+#!/usr/bin/env python3
+"""
+Resized WebP derivatives for the article heroes and the blog-hub cards.
+
+    python3 tools/build_image_derivatives.py            # build what is missing
+    python3 tools/build_image_derivatives.py --force    # rebuild everything
+    python3 tools/build_image_derivatives.py --report   # print sizes, write nothing
+
+Why this exists
+---------------
+Both hubs rendered every card as the article's FULL-RESOLUTION hero, scaled
+down in the browser to 420x236. `public_html/blog/images/` holds 145 files
+totalling 83 MB, 101 of them over 500 KB, and exactly one .webp - so a single
+hub view pulled roughly 6 MB over the wire to paint thumbnails. Mobile LCP was
+8.7 s on /blog-ar/ and 6.3 s on /blog/, and the 761 KB article hero carrying
+`fetchpriority="high"` was the largest single element on an article page.
+
+Two sizes, because there are two jobs:
+
+    -640.webp   card thumbnails, displayed at 420x236 (2x on a retina phone)
+    -1200.webp  the article hero, displayed at 1180 wide
+
+Originals are left untouched: they are the source these are derived from, and
+nothing about the pipeline should depend on a lossy file.
+"""
+import argparse
+import pathlib
+import re
+import sys
+
+try:
+    from PIL import Image
+except ImportError:                                          # pragma: no cover
+    sys.exit("Pillow is required: python3 -m pip install Pillow")
+
+ROOT = pathlib.Path(__file__).resolve().parent.parent
+IMAGES = ROOT / "public_html" / "blog" / "images"
+
+# (suffix, target width, quality). Quality 82 is the point where these
+# photographic/illustrative PNGs stop shedding visible detail.
+SIZES = ((640, 82), (1200, 82))
+SOURCE_EXT = {".png", ".jpg", ".jpeg"}
+
+
+def derivative(src: pathlib.Path, width: int) -> pathlib.Path:
+    """Path of the resized WebP for `src` at `width`."""
+    return src.with_name(f"{src.stem}-{width}.webp")
+
+
+def is_derivative(path: pathlib.Path) -> bool:
+    """True only for a file this script wrote.
+
+    The width has to be one of ours: a source whose name merely ends in a
+    number - oman-10-percent-gdp-target-2040.png, ceo-dashboard-story-
+    1774720867978.png - is not a derivative, and treating it as one silently
+    left seven article heroes on the full-resolution original.
+    """
+    widths = "|".join(str(w) for w, _ in SIZES)
+    return path.suffix == ".webp" and re.fullmatch(rf".*-({widths})", path.stem) is not None
+
+
+def build(src: pathlib.Path, width: int, quality: int, force=False):
+    """Write one derivative. Returns (path, bytes) or None when skipped."""
+    dest = derivative(src, width)
+    if dest.exists() and not force and dest.stat().st_mtime >= src.stat().st_mtime:
+        return None
+    with Image.open(src) as im:
+        # Upscaling would cost bytes and add nothing; copy the source size.
+        w = min(width, im.width)
+        h = round(im.height * w / im.width)
+        im = im.convert("RGBA" if "A" in im.getbands() else "RGB")
+        im = im.resize((w, h), Image.LANCZOS)
+        im.save(dest, "WEBP", quality=quality, method=6)
+    return dest, dest.stat().st_size
+
+
+def sources():
+    return sorted(p for p in IMAGES.iterdir()
+                  if p.suffix.lower() in SOURCE_EXT and not is_derivative(p))
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--force", action="store_true", help="rebuild existing derivatives")
+    ap.add_argument("--report", action="store_true", help="print sizes, write nothing")
+    a = ap.parse_args()
+
+    src_bytes = made_bytes = 0
+    made = skipped = 0
+    for src in sources():
+        src_bytes += src.stat().st_size
+        for width, quality in SIZES:
+            if a.report:
+                d = derivative(src, width)
+                if d.exists():
+                    made_bytes += d.stat().st_size
+                continue
+            out = build(src, width, quality, a.force)
+            if out is None:
+                skipped += 1
+                made_bytes += derivative(src, width).stat().st_size
+            else:
+                made += 1
+                made_bytes += out[1]
+
+    print(f"  sources     {len(sources()):>4} files  {src_bytes/1e6:>7.1f} MB")
+    print(f"  derivatives {made + skipped:>4} files  {made_bytes/1e6:>7.1f} MB"
+          f"   ({made} written, {skipped} already current)")
+    if src_bytes:
+        print(f"  card+hero payload is now {made_bytes/src_bytes*100:.0f}% of the originals")
+
+
+if __name__ == "__main__":
+    main()

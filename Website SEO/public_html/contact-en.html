@@ -1,19 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<style>
-  #fouc-overlay {
-    position: fixed;
-    inset: 0;
-    z-index: 999999;
-    background: #050505;
-    transition: opacity 0.3s ease;
-  }
-</style>
 <meta charset="utf-8">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
+<!-- Built by tools/tailwind/input.css, not compiled in the browser. -->
+<link rel="stylesheet" href="/assets/css/apl-tailwind.1717e9e85c.css">
 <!-- SEO Meta Tags -->
 <title>Contact Us | AI Profit Lab - Get in Touch</title>
 <meta content="وفر وقتك وزد أرباحك مع AI Profit Lab - منصة الذكاء الاصطناعي للتداول الآلي" name="description">
@@ -21,9 +14,6 @@
 <link href="/favicon.svg" rel="icon" type="image/svg+xml">
 <link href="/favicon.svg" rel="apple-touch-icon">
 <!-- Fonts & CSS -->
-<link rel="preconnect" href="https://cdn.tailwindcss.com">
-<link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
-<script src="https://cdn.tailwindcss.com"></script>
 <link as="style" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'" rel="preload">
 <noscript><link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet"></noscript>
 <style>
@@ -380,7 +370,6 @@ nav svg[width="16"][height="16"] { width: 16px !important; height: 16px !importa
   <meta name="description" content="Contact Us - أتمتة الذكاء الاصطناعي في عمان. اكتشف كيف يمكننا مساعدة عملك في مسقط ودعم رؤية عمان 2040.">
 </head>
 <body>
-<div id="fouc-overlay"></div>
 <!-- ======================= Navigation ======================= -->
 <!-- ======================= Navigation ======================= -->
 <nav class="flex justify-between items-center px-6 md:px-12 py-8 fixed w-full z-50 glass bg-black/30" id="header">
@@ -717,28 +706,6 @@ nav svg[width="16"][height="16"] { width: 16px !important; height: 16px !importa
             }
         };
     </script>
-<script>
-  (function() {
-    var overlay = document.getElementById('fouc-overlay');
-    function removeOverlay() {
-      if (overlay) {
-        overlay.style.opacity = '0';
-        setTimeout(function() {
-          if (overlay && overlay.parentNode) {
-            overlay.parentNode.removeChild(overlay);
-          }
-        }, 320);
-      }
-    }
-    if (document.readyState === 'complete') {
-      setTimeout(removeOverlay, 100);
-    } else {
-      window.addEventListener('load', function() {
-        setTimeout(removeOverlay, 100);
-      });
-    }
-  })();
-</script>
-    <script defer src="/js/aiden-chat.js?v=371d5470"></script>
+    <script defer src="/js/aiden-chat.js?v=b072ce1f"></script>
 </body>
 </html>

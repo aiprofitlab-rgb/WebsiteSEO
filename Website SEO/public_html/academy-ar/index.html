@@ -1,24 +1,12 @@
 <!DOCTYPE html>
 <html dir="rtl" lang="ar">
 <head>
-<style>
-  #fouc-overlay {
-    position: fixed;
-    inset: 0;
-    z-index: 999999;
-    background: #050505;
-    transition: opacity 0.3s ease;
-  }
-</style>
 <meta charset="utf-8">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
 <link href="/favicon.svg" rel="icon" type="image/svg+xml">
 <link href="/favicon.svg" rel="apple-touch-icon">
-<link rel="preconnect" href="https://cdn.tailwindcss.com">
-<link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
-<script src="https://cdn.tailwindcss.com"></script>
 <link as="style" href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'" rel="preload">
 <noscript><link as="style" href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'" rel="preload">
 <noscript><link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet"></noscript></noscript>
@@ -238,11 +226,18 @@ nav svg[width="16"][height="16"] { width: 16px !important; height: 16px !importa
 }
 </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Built by tools/tailwind/input.css, not compiled in the browser. -->
+<link rel="stylesheet" href="/assets/css/apl-tailwind.1717e9e85c.css">
 <title>أكاديمية الذكاء الاصطناعي للمدراء | AI Profit Lab عمان</title>
-  <meta name="description" content="أكاديمية الذكاء الاصطناعي للمدراء - أتمتة الذكاء الاصطناعي في عمان. اكتشف كيف يمكننا مساعدة عملك في مسقط ودعم رؤية عمان 2040.">
+<!-- The Academy is deliberately out of the index: eight pages nothing on the
+     live site links to, thin against the articles that cover the same ground,
+     and competing with them for the same queries. They stay live and shareable;
+     they are not submitted and not indexed. Paired with their removal from
+     run_sitemap.py - a noindex page in a sitemap is a contradiction. -->
+<meta name="robots" content="noindex, follow">
+<meta name="description" content="دروس قصيرة بلغة واضحة لأصحاب الأعمال والمدراء في عُمان: ماذا تفعل نماذج الذكاء الاصطناعي فعلياً، وأين تُجدي الأتمتة، وكيف يُبنى كل نظام.">
 </head>
 <body class="antialiased">
-<div id="fouc-overlay"></div>
 <nav class="flex justify-between items-center px-6 md:px-12 py-6 fixed w-full z-50 glass bg-black/40 backdrop-blur-md" id="header">
 <!-- Logo -->
 <a class="font-extrabold text-3xl md:text-4xl tracking-tighter" href="/ar/">
@@ -267,8 +262,8 @@ nav svg[width="16"][height="16"] { width: 16px !important; height: 16px !importa
                                 <svg class="w-4 h-4 transform rotate-90" fill="none" height="16" stroke="currentColor" style="will-change: transform" viewbox="0 0 24 24" width="16"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
 </div>
 <div class="submenu-content absolute right-full top-0 w-64 bg-[#0a0a0a] border border-gray-800 rounded-xl shadow-2xl opacity-0 invisible transition-all duration-300 flex flex-col z-50 text-right">
-<a class="px-5 py-4 hover:bg-gray-800 hover:text-blue-400 border-b border-gray-800 transition text-[15px] font-bold tracking-wide" href="/customized-ceo-dashboard-demo-ar/">لوحة تحكم المدير التنفيذي</a>
-<a class="px-5 py-4 hover:bg-gray-800 hover:text-blue-400 transition text-[15px] font-bold tracking-wide" href="/whatsapp-receptionist-demo-ar/">موظف استقبال واتساب</a>
+<a class="px-5 py-4 hover:bg-gray-800 hover:text-blue-400 border-b border-gray-800 transition text-[15px] font-bold tracking-wide" href="/demos-ar/">لوحة تحكم المدير التنفيذي</a>
+<a class="px-5 py-4 hover:bg-gray-800 hover:text-blue-400 transition text-[15px] font-bold tracking-wide" href="/demos-ar/">موظف استقبال واتساب</a>
 </div>
 </div>
 <div class="relative group-submenu">
@@ -277,8 +272,8 @@ nav svg[width="16"][height="16"] { width: 16px !important; height: 16px !importa
                                 <svg class="w-4 h-4 transform rotate-90" fill="none" height="16" stroke="currentColor" style="will-change: transform" viewbox="0 0 24 24" width="16"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
 </div>
 <div class="submenu-content absolute right-full top-0 w-64 bg-[#0a0a0a] border border-gray-800 rounded-xl shadow-2xl opacity-0 invisible transition-all duration-300 flex flex-col z-50 text-right">
-<a class="px-5 py-4 hover:bg-gray-800 hover:text-blue-400 border-b border-gray-800 transition text-[15px] font-bold tracking-wide" href="/missed-call-simulator-ar/">محاكي المكالمات الفائتة</a>
-<a class="px-5 py-4 hover:bg-gray-800 hover:text-blue-400 transition text-[15px] font-bold tracking-wide" href="/campaign-roi-simulator-ar/">محاكي الحملات</a>
+<a class="px-5 py-4 hover:bg-gray-800 hover:text-blue-400 border-b border-gray-800 transition text-[15px] font-bold tracking-wide" href="/simulators-ar/">محاكي المكالمات الفائتة</a>
+<a class="px-5 py-4 hover:bg-gray-800 hover:text-blue-400 transition text-[15px] font-bold tracking-wide" href="/simulators-ar/">محاكي الحملات</a>
 </div>
 </div>
 <a class="px-5 py-4 hover:bg-gray-800 hover:text-blue-400 border-b border-gray-800 transition text-[15px] font-bold tracking-wide" href="/blog-ar/">المقالات</a>
@@ -342,7 +337,7 @@ nav svg[width="16"][height="16"] { width: 16px !important; height: 16px !importa
 </div>
 </a>
 <!-- Video Card 3 -->
-<a class="glass-card rounded-2xl overflow-hidden block relative group" href="/whatsapp-receptionist-demo-ar/">
+<a class="glass-card rounded-2xl overflow-hidden block relative group" href="/demos-ar/">
 <div class="relative aspect-video bg-gray-900 flex items-center justify-center">
 <img alt="Audit Bg - Empowering AI Solutions by AI Profit Lab to scale your business operations." class="w-full h-full object-cover opacity-50" height="667" loading="lazy" src="/audit-bg.webp" width="1000">
 <div class="absolute inset-0 flex items-center justify-center">
@@ -406,10 +401,10 @@ nav svg[width="16"][height="16"] { width: 16px !important; height: 16px !importa
 <div class="col-span-1 text-right">
 <h4 class="text-white font-bold mb-4 uppercase text-sm tracking-wider">العروض التوضيحية</h4>
 <ul class="space-y-2 text-gray-400 text-sm">
-<li><a class="hover:text-blue-400 transition" href="/missed-call-simulator-ar/">محاكي المكالمات الفائتة</a></li>
-<li><a class="hover:text-blue-400 transition" href="/customized-ceo-dashboard-demo-ar/">لوحة تحكم المدير التنفيذي</a></li>
-<li><a class="hover:text-blue-400 transition" href="/whatsapp-receptionist-demo-ar/">موظف استقبال واتساب</a></li>
-<li><a class="hover:text-blue-400 transition" href="/campaign-roi-simulator-ar/">محاكي الحملات</a></li>
+<li><a class="hover:text-blue-400 transition" href="/simulators-ar/">محاكي المكالمات الفائتة</a></li>
+<li><a class="hover:text-blue-400 transition" href="/demos-ar/">لوحة تحكم المدير التنفيذي</a></li>
+<li><a class="hover:text-blue-400 transition" href="/demos-ar/">موظف استقبال واتساب</a></li>
+<li><a class="hover:text-blue-400 transition" href="/simulators-ar/">محاكي الحملات</a></li>
 </ul>
 </div>
 </div>
@@ -418,28 +413,6 @@ nav svg[width="16"][height="16"] { width: 16px !important; height: 16px !importa
 </div>
 </footer>
 <script defer src="/js/main.js"></script>
-<script>
-  (function() {
-    var overlay = document.getElementById('fouc-overlay');
-    function removeOverlay() {
-      if (overlay) {
-        overlay.style.opacity = '0';
-        setTimeout(function() {
-          if (overlay && overlay.parentNode) {
-            overlay.parentNode.removeChild(overlay);
-          }
-        }, 320);
-      }
-    }
-    if (document.readyState === 'complete') {
-      setTimeout(removeOverlay, 100);
-    } else {
-      window.addEventListener('load', function() {
-        setTimeout(removeOverlay, 100);
-      });
-    }
-  })();
-</script>
-    <script defer src="/js/aiden-chat.js?v=371d5470"></script>
+    <script defer src="/js/aiden-chat.js?v=b072ce1f"></script>
 </body>
 </html>

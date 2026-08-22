@@ -23,6 +23,8 @@ to LOOK AT rather than paragraphs to read:
 Prose budget: no block runs longer than four lines, and every section carries a
 diagram, a chart, a control or a screenshot as its centre of gravity.
 """
+import json as _json
+import re
 from kit import WA, WA_ICON, STAR
 
 # --------------------------------------------------------------------------
@@ -431,6 +433,26 @@ def _buzz():
             f'--t:{dur}s;--dl:-{i * 1.7:.1f}s">{word}</b>'
         )
     return "\n".join(out)
+
+
+PAGE_URL = 'https://aiprofitlab.io/'
+LANG = 'en'
+def _faq_schema():
+    """FAQPage built from the five questions the page already shows.
+
+    The block was on the page as visible copy and nowhere in the markup, so
+    the one section written to be quoted was the one an answer engine could
+    not read as an answer. Built from QUESTIONS so the two cannot drift.
+    """
+    import html as _h
+    strip = lambda t: _h.unescape(re.sub(r"<[^>]+>", "", t)).strip()
+    rows = ",".join(
+        '{"@type":"Question","name":%s,"acceptedAnswer":{"@type":"Answer","text":%s}}'
+        % (_json.dumps(strip(q), ensure_ascii=False), _json.dumps(strip(a), ensure_ascii=False))
+        for _, q, a in QUESTIONS)
+    return ('{"@type":"FAQPage","@id":"%s#faq","inLanguage":"%s",'
+            '"isPartOf":{"@id":"https://aiprofitlab.io/#website"},'
+            '"mainEntity":[%s]}' % (PAGE_URL, LANG, rows))
 
 
 def _questions():
@@ -884,19 +906,5 @@ META = dict(
     hero=True,
     calc=True,
     next=("Next", "What I build", "/en/services/"),
-    schema="""{
-  "@context":"https://schema.org",
-  "@type":"ProfessionalService",
-  "name":"AI Profit Lab",
-  "description":"Done-for-you AI automation for trading and distribution SMEs in Oman and the GCC.",
-  "url":"https://aiprofitlab.io/",
-  "email":"hello@aiprofitlab.io",
-  "telephone":"+968 9924 5250",
-  "slogan":"Every success starts with insight",
-  "areaServed":[{"@type":"Country","name":"Oman"}],
-  "address":{"@type":"PostalAddress","addressLocality":"Bousher","addressRegion":"Muscat","addressCountry":"OM","streetAddress":"South Al Khuwair"},
-  "parentOrganization":{"@type":"Organization","name":"Lotus Gulf International","identifier":"CR 1570092"},
-  "founder":{"@type":"Person","name":"Nahid Abyari"},
-  "priceRange":"OMR 950 - OMR 2200"
-}""",
+    schema=_faq_schema(),
 )

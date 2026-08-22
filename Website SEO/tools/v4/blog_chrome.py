@@ -137,7 +137,7 @@ T = {
 FONTS_EN = ("https://fonts.googleapis.com/css2?family=Marcellus&family=IBM+Plex+Sans:wght@400;500;600;700"
             "&family=IBM+Plex+Mono:wght@400;500&display=swap")
 FONTS_AR = ("https://fonts.googleapis.com/css2?family=Marcellus&family=Markazi+Text:wght@400;500;600"
-            "&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap")
+            "&family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap")
 
 
 def fmt_date(iso, lang):
@@ -235,8 +235,8 @@ RTL_CSS = RTL_BASE + """
 
 /* Tracking and small-caps are Latin devices; on Arabic they break the join
    between letters and leave a label unreadable. */
-[dir=rtl] .eyebrow,[dir=rtl] .crumbs,[dir=rtl] .toc h4,[dir=rtl] .keybox h4,
-[dir=rtl] .callout b,[dir=rtl] .refs h4,[dir=rtl] .tblcap,[dir=rtl] .tbl th,
+[dir=rtl] .eyebrow,[dir=rtl] .crumbs,[dir=rtl] .toc h2,[dir=rtl] .keybox h4,
+[dir=rtl] .callout b,[dir=rtl] .refs h2,[dir=rtl] .tblcap,[dir=rtl] .tbl th,
 [dir=rtl] .byline .who span,[dir=rtl] .byline .stamp,[dir=rtl] .steps b,
 [dir=rtl] .related .card .rd,[dir=rtl] .related .card .n,[dir=rtl] .pfig figcaption,
 [dir=rtl] .afig figcaption,[dir=rtl] .brandbox .rolelbl,[dir=rtl] .topics span:first-child,

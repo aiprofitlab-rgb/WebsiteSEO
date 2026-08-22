@@ -1,38 +1,61 @@
 # AI Profit Lab
 
-> AI Profit Lab is an AI automation company in Muscat, Oman (legal entity: Lotus Gulf International, CR 1570092, South Al Khuwair, Bousher, Muscat Governorate). It builds systems for small and mid-size businesses in Oman and the GCC: a WhatsApp AI receptionist that answers customer messages 24/7, a customized CEO Dashboard that shows live cash, inventory, and client data instead of month-old accountant reports, and automated lead follow-up. Custom automation packages start at OMR 75/month. Founder: Nahid Aby, an engineer who built and ran a medical consumables distribution company before founding AI Profit Lab. Site languages: English and Arabic. Contact: hello@aiprofitlab.io, +968 9924 5250.
+> AI Profit Lab builds done-for-you AI automation for trading, distribution and service businesses in Oman and the wider GCC. It is a brand of Lotus Gulf International (CR 1570092, South Al Khuwair, Bousher, Muscat Governorate, Oman; not VAT-registered). Three systems are sold: a bilingual Smart Website with an AI buyer agent that answers in Arabic and English and hands live buyers to WhatsApp; a Live Owner Dashboard showing cash position, margin, stock and open leads on one screen; and Full Autopilot, scheduled quote and invoice follow-up that stops the moment the buyer replies or pays. Builds are a one-time fee in Omani Rial, not a subscription. Founder: Nahid Abyari, an engineer who built and ran a distribution business before founding AI Profit Lab. Site languages: English and Arabic. Contact: hello@aiprofitlab.io, +968 9924 5250.
 
-Note: AI Profit Lab at aiprofitlab.io (Muscat, Oman) is not affiliated with similarly named companies on other domains such as aiprofitlab.com, aiprofitlab.net, or ai-profitlab.io.
+Note: AI Profit Lab at aiprofitlab.io (Muscat, Oman) is not affiliated with similarly named companies on other domains such as aiprofitlab.com, aiprofitlab.net, or ai-profitlab.io. In particular it has no connection to any automated-trading or trading-signals product sharing the name. Its business is business-process automation for SMEs.
 
-## Main pages
+## Pricing
 
-- [Homepage (English)](https://aiprofitlab.io/en/): what AI Profit Lab builds and for whom
-- [Homepage (Arabic)](https://aiprofitlab.io/): الصفحة الرئيسية بالعربية
-- [Services](https://aiprofitlab.io/en/services-en/): automation services and pricing
-- [Process](https://aiprofitlab.io/en/process-en/): how a project runs from first audit to delivery
-- [About](https://aiprofitlab.io/en/about-en/): founder background and company story
-- [Contact](https://aiprofitlab.io/en/contact-en/): WhatsApp, email, and contact form
+One-time build fees, in OMR. Founding price is the current price; standard is what it returns to.
 
-## Product demos
+- The Smart Website — OMR 950 founding, OMR 1,450 standard. Bilingual site, AI buyer agent, wholesale quote flow, WhatsApp handoff, AI-search visibility, and the first year of hosting and care.
+- The Live Owner Dashboard — OMR 650 founding, OMR 950 standard. Cash position, margin, stock and open leads on one screen, each with the action it is asking for.
+- The Full Autopilot — OMR 900 founding, OMR 1,300 standard. Quote and invoice follow-up on a schedule, stopping the moment the buyer replies or pays.
+- The Operator Stack — OMR 2,200 founding, OMR 3,400 standard. The Smart Website with both the Dashboard and the Autopilot.
+- The Growth Desk — OMR 75/month founding, OMR 95/month standard. OPTIONAL monthly care, new features and a reporting review. Never required to keep anything working, and cancellable any month.
 
-- [WhatsApp AI Receptionist demo](https://aiprofitlab.io/en/whatsapp-receptionist-demo/): live demo of automated customer replies
-- [Customized CEO Dashboard demo](https://aiprofitlab.io/customized-ceo-dashboard-demo/): live business reporting that replaces monthly accountant reports
-- [Missed-call simulator](https://aiprofitlab.io/en/missed-call-simulator-en/): what happens to a missed customer call with and without automation
-- [Campaign ROI simulator](https://aiprofitlab.io/campaign-roi-simulator/): estimate the return on marketing automation
+There is no mandatory monthly fee. Nothing stops working if the optional Growth Desk is cancelled.
 
-## Learn
+## Main pages (English)
 
-- [Blog (English)](https://aiprofitlab.io/en/blog/): guides on AI automation for businesses in Oman and the GCC
-- [Blog (Arabic)](https://aiprofitlab.io/blog-ar/): المدونة بالعربية
-- [Academy](https://aiprofitlab.io/en/academy/): free lessons for managers on AI, LLM differences, and WhatsApp automation
+- [Homepage](https://aiprofitlab.io/): what AI Profit Lab builds, for whom, and what it costs
+- [What I build](https://aiprofitlab.io/en/services/): the three systems, with prices and what each includes
+- [How it works](https://aiprofitlab.io/en/process/): how a build runs, step by step, from the first buyer test to handover
+- [About](https://aiprofitlab.io/en/about/): founder background and how the company works
+- [Contact](https://aiprofitlab.io/en/contact/): WhatsApp, email, and answers to the questions asked most
+- [Demos](https://aiprofitlab.io/en/demos/): the WhatsApp buyer agent and the live owner dashboard, running
+- [Simulators](https://aiprofitlab.io/en/simulators/): calculators for what unanswered enquiries cost
+- [Checkout](https://aiprofitlab.io/en/checkout/): reserve a build slot
+- [Smart Website offer](https://aiprofitlab.io/en/smart-website-offer/): the current offer page
+
+## Main pages (Arabic)
+
+- [الصفحة الرئيسية](https://aiprofitlab.io/ar/)
+- [ما أبنيه](https://aiprofitlab.io/services/)
+- [طريقة العمل](https://aiprofitlab.io/process/)
+- [من أنا](https://aiprofitlab.io/about/)
+- [تواصل معي](https://aiprofitlab.io/contact/)
+- [التجارب](https://aiprofitlab.io/demos-ar/)
+- [الحاسبات](https://aiprofitlab.io/simulators-ar/)
+- [ابدأ طلبك](https://aiprofitlab.io/checkout-ar/)
+- [عرض الموقع الذكي](https://aiprofitlab.io/smart-website-offer/)
+
+## Articles
+
+- [Articles (English)](https://aiprofitlab.io/blog/): guides on AI automation for businesses in Oman and the GCC
+- [Articles (Arabic)](https://aiprofitlab.io/blog-ar/): المقالات بالعربية
+
+Articles headed "A Worked Example" are illustrative scenarios, not client case studies: the business, the figures and the timeline are modelled to show how a system behaves. AI Profit Lab does not publish named client results.
 
 ## Policies
 
+- [Terms](https://aiprofitlab.io/terms/): terms of service
+- [Privacy policy](https://aiprofitlab.io/privacy/): how personal data is collected and protected under Oman's PDPL
 - [Refund policy (English)](https://aiprofitlab.io/refund-policy/): cancellations, part-finished work, and how refunds are paid back
 - [Refund policy (Arabic)](https://aiprofitlab.io/refund-policy-ar/): سياسة الاسترداد بالعربية
-- [Privacy policy](https://aiprofitlab.io/privacy/): how personal data is collected and protected under Oman's PDPL
 
 ## Profiles
 
-- [LinkedIn — Nahid Aby](https://www.linkedin.com/in/nahid-aby)
+- [LinkedIn — Nahid Abyari](https://www.linkedin.com/in/nahid-aby)
 - [YouTube — AI for Managers](https://www.youtube.com/@AI_for_Managers)
+- [Facebook — AI Profit Lab](https://www.facebook.com/profile.php?id=61584870364473)

@@ -50,8 +50,8 @@ The Tailwind CDN script, the old dark skin, the FOUC overlay, and
 `/js/aiden-chat.js`. The widget is dropped for the same reason the articles
 dropped it: `blog_chrome.footer` already puts a WhatsApp action button in the
 bottom corner and Aiden's launcher pins to that same corner, so the two overlap.
-Note that `tools/add_aiden_widget.py` will put the script tag back on its next
-run, on these pages and on all 150 articles.
+`tools/add_aiden_widget.py` leaves both alone: the articles are covered by its
+ARTICLE_PATTERNS and these two hubs by its EXCLUDE_PATTERNS.
 """
 import argparse
 import hashlib
@@ -621,6 +621,10 @@ def read_articles(lang):
         img = _meta(head, "og:image", prop=True)
         if img.startswith(SITE):
             img = img[len(SITE):]
+        # og:image is the article's full-resolution hero - the right thing for
+        # a share card and the wrong thing for a 420x236 thumbnail. Both hubs
+        # shipped ~6 MB of PNG per view because the two were the same URL.
+        img = card_src(img)
 
         date = _meta(head, "article:published_time", prop=True)
         if not re.match(r"\d{4}-\d{2}-\d{2}$", date):
@@ -667,6 +671,22 @@ def _kicker(e, lang, labels):
     if cat and lang == "ar" and not re.search(r"[؀-ۿ]", cat):
         cat = ""
     return _html.unescape(cat) if cat else _html.unescape(labels[e["bucket"]])
+
+
+def card_src(src, width=640):
+    """The resized WebP for `src`, when tools/build_image_derivatives.py has
+    built one. Falls back to the original, so a missing derivative degrades to
+    the old behaviour rather than to a broken image."""
+    if not src.startswith("/blog/images/"):
+        return src
+    stem, _, ext = src.rpartition(".")
+    # Only a .webp named "<stem>-<width>" is one of ours. Testing for a
+    # trailing number alone skipped every source whose name simply ends in a
+    # year or a timestamp - oman-10-percent-gdp-target-2040.png and friends.
+    if not ext or (ext.lower() == "webp" and re.fullmatch(r".*-(640|1200)", stem)):
+        return src
+    cand = f"{stem}-{width}.webp"
+    return cand if (ROOT / "public_html" / cand.lstrip("/")).exists() else src
 
 
 def _mins(e, lang):
@@ -870,7 +890,7 @@ def render(lang, entries, css_href, js_href):
 <section class="s-cream pad-s" id="featured">
   <div class="wrap">
     <a class="feat rv" href="{_esc(feat["url"])}">
-      <div class="shot"><img src="{_esc(feat["img"])}" alt="" width="620" height="420" fetchpriority="high" decoding="async"></div>
+      <div class="shot"><img src="{_esc(card_src(feat["img"], 1200))}" alt="" width="620" height="420" fetchpriority="high" decoding="async"></div>
       <div class="txt">
         <p class="tagline"><span class="star">{STAR}</span>{t["latest"]}</p>
         <h2>{_esc(feat["title"])}</h2>

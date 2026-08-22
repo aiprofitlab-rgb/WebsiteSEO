@@ -93,21 +93,26 @@ const initMain = () => {
                 submittedAt: new Date().toISOString()
             };
             
+            // This used to POST to a Railway host that no longer exists,
+            // and no page on the site actually carries #quickContactForm, so
+            // nothing has ever run it. Kept and repointed rather than deleted:
+            // if the form is ever added back, it hands the message to
+            // WhatsApp instead of dropping it into a dead endpoint.
             try {
-                const response = await fetch("https://aiden-backend-aiden.up.railway.app/contact", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify(quickData)
-                });
-                
-                const result = await response.json();
-                
-                if (result.success) {
-                    alert(document.documentElement.lang === 'en' ? 'Message sent! We will reply within 24 hours.' : 'تم إرسال الرسالة! سنرد عليك خلال ٢٤ ساعة.');
-                    quickForm.reset();
-                } else {
-                    alert(document.documentElement.lang === 'en' ? 'An error occurred. Please try again.' : 'حدث خطأ. الرجاء المحاولة مرة أخرى.');
-                }
+                const isEn = document.documentElement.lang === 'en';
+                const text = [
+                    isEn ? 'Website enquiry' : 'استفسار من الموقع',
+                    '',
+                    (isEn ? 'Name: ' : 'الاسم: ') + quickData.fullName,
+                    (isEn ? 'Email: ' : 'البريد: ') + quickData.email,
+                    '',
+                    quickData.message,
+                    '',
+                    (isEn ? 'Page: ' : 'الصفحة: ') + quickData.page
+                ].join('\n');
+                window.location.href = 'https://api.whatsapp.com/send?phone=96899245250&text=' +
+                    encodeURIComponent(text);
+                quickForm.reset();
             } catch (error) {
                 alert(document.documentElement.lang === 'en' ? 'Connection error. Try again.' : 'خطأ في الاتصال. حاول مرة أخرى.');
             } finally {

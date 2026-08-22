@@ -320,6 +320,8 @@ META = dict(
   "url":"https://aiprofitlab.io/demos-ar/",
   "description":"تجارب تفاعلية لوكيل المشتري على واتساب ولوحة متابعة المالك الحيّة.",
   "inLanguage":"ar",
-  "publisher":{"@type":"Organization","name":"AI Profit Lab","legalName":"Lotus Gulf International"}
+  "publisher":{"@type":"Organization","name":"AI Profit Lab","legalName":"Lotus Gulf International"},
+  "mainEntity":[{"@type":"Service","name":"وكيل واتساب للمشترين","description":"يردّ على المشتري بالعربية أو الإنجليزية، ويؤهّل الاستفسار، ويحوّل المشتري الجاد إلى واتساب.","provider":{"@id":"https://aiprofitlab.io/#organization"},"areaServed":"Oman","inLanguage":"ar"},{"@type":"Service","name":"لوحة المتابعة الحيّة للمالك","description":"الوضع النقدي والهامش والمخزون والفرص المفتوحة على شاشة واحدة، مع إجراء مقترح لكل بند.","provider":{"@id":"https://aiprofitlab.io/#organization"},"areaServed":"Oman","inLanguage":"ar"}],
+  "isPartOf":{"@id":"https://aiprofitlab.io/#website"}
 }""",
 )

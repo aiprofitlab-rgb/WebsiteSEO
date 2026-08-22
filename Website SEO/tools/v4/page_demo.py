@@ -689,6 +689,8 @@ META = dict(
   "url":"https://aiprofitlab.io/en/demos/",
   "description":"Interactive demonstrations of the WhatsApp buyer agent and the live owner dashboard.",
   "inLanguage":"en",
-  "publisher":{"@type":"Organization","name":"AI Profit Lab","legalName":"Lotus Gulf International"}
+  "publisher":{"@type":"Organization","name":"AI Profit Lab","legalName":"Lotus Gulf International"},
+  "mainEntity":[{"@type":"Service","name":"The WhatsApp buyer agent","description":"Answers a buyer in Arabic or English, qualifies the enquiry and hands a live buyer to WhatsApp.","provider":{"@id":"https://aiprofitlab.io/#organization"},"areaServed":"Oman","inLanguage":"en"},{"@type":"Service","name":"The live owner dashboard","description":"Cash position, margin, stock and open leads on one screen, with a recommended action for each.","provider":{"@id":"https://aiprofitlab.io/#organization"},"areaServed":"Oman","inLanguage":"en"}],
+  "isPartOf":{"@id":"https://aiprofitlab.io/#website"}
 }""",
 )

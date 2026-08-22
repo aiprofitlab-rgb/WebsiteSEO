@@ -69,9 +69,16 @@ def render(mod, lang="en"):
         import _ported_js
         js += _ported_js.calc_js(lang)
 
-    schema = ""
+    # Every page carries the shared Organization node, so twenty-two URLs
+    # consolidate into one entity instead of twenty-two anonymous ones; the
+    # two homepages also carry the WebSite node. The page's own node, if it
+    # has one, joins them in the same @graph.
+    nodes = [kit.ORG_NODE]
+    if path in ("/", "/ar/"):
+        nodes.append(kit.WEBSITE_NODE)
     if meta.get("schema"):
-        schema = '<script type="application/ld+json">\n' + meta["schema"] + "\n</script>"
+        nodes.append(meta["schema"])
+    schema = '<script type="application/ld+json">\n' + kit.graph(nodes) + "\n</script>"
 
     # The RTL layer is appended AFTER the page's own CSS so it wins on a
     # specificity tie without any !important - see tools/v4/rtl.py.

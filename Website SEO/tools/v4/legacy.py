@@ -19,6 +19,7 @@ Two rules govern every extraction below:
      Google and the answer engines already read.
 """
 import html as _html
+import json as _json
 import re
 
 # --------------------------------------------------------------------------
@@ -33,10 +34,22 @@ _ATTR_RX = re.compile(r"""([a-zA-Z_:][-a-zA-Z0-9_:.]*)\s*(?:=\s*(?:"([^"]*)"|'([
 
 
 def attrs(s):
-    """Attribute string -> dict. Bare attributes map to ''."""
+    """Attribute string -> dict of DECODED values. Bare attributes map to ''.
+
+    The unescape is load-bearing, not tidiness. `_open()` escapes every value
+    on the way out, so reading them raw made one round trip through this
+    module add an escaping level: a WhatsApp href written `?phone=..&amp;text=`
+    came back `&amp;amp;text=`, and the next run `&amp;amp;amp;text=`. Twelve
+    re-skins stacked twelve of them, and since a browser decodes exactly one,
+    WhatsApp received a parameter called `amp;amp;...text` and ignored it -
+    every CTA in the corpus opened an empty compose box while still passing
+    every link checker, because the phone number survived. Decoding here means
+    the escape on the way out is idempotent.
+    """
     out = {}
     for m in _ATTR_RX.finditer(s or ""):
-        out[m.group(1).lower()] = m.group(2) or m.group(3) or m.group(4) or ""
+        out[m.group(1).lower()] = _html.unescape(
+            m.group(2) or m.group(3) or m.group(4) or "")
     return out
 
 
@@ -161,6 +174,31 @@ def _published(d, path):
 _REF_WORDS = ("references", "sources", "المراجع", "المصادر", "مراجع", "مصادر")
 
 
+_AMP_CHAIN_RX = re.compile(r"&amp;(?:amp;)+")
+
+
+def _collapse_amp(src):
+    """Undo stacked entity escaping: `&amp;amp;amp;` -> `&amp;`.
+
+    The escaping bug is fixed in `attrs()`, but one unescape only removes one
+    level and the corpus had up to twelve - so a straight re-run would need
+    twelve passes to work through them, and every intermediate pass would ship
+    a still-broken WhatsApp link. A run of two or more is corruption by
+    definition: nothing on this site displays the literal text "&amp;".
+
+    Idempotent, so it stays as a guard once the corpus is clean.
+    """
+    return _AMP_CHAIN_RX.sub("&amp;", src)
+
+
+def _json_str(raw):
+    """One JSON string body -> text, escapes resolved, encoding intact."""
+    try:
+        return _json.loads('"%s"' % raw)
+    except ValueError:
+        return raw
+
+
 def _faq(main, doc):
     """[(question, answer)] from the #faq section, falling back to the
     FAQPage node in the page's own JSON-LD when the markup is missing."""
@@ -176,8 +214,14 @@ def _faq(main, doc):
     for block in doc["jsonld"]:
         for m in re.finditer(r'"name"\s*:\s*"((?:[^"\\]|\\.)*)"\s*,\s*"acceptedAnswer"\s*:\s*\{[^}]*?"text"\s*:\s*"((?:[^"\\]|\\.)*)"',
                              block, re.S):
-            q = _html.unescape(m.group(1).encode().decode("unicode_escape", "ignore"))
-            a = _html.unescape(m.group(2).encode().decode("unicode_escape", "ignore"))
+            # json.loads, not .encode().decode("unicode_escape"): that decodes
+            # as latin-1, so every non-ASCII character in an answer came back
+            # mojibake - an em dash turned into "\u00e2" plus two invisible
+            # bytes, and the corruption was written back on each run. It had
+            # already reached 42 English files and would have reached every
+            # Arabic one, where the whole answer is non-ASCII.
+            q = _html.unescape(_json_str(m.group(1)))
+            a = _html.unescape(_json_str(m.group(2)))
             out.append((_html.escape(q, quote=False), _html.escape(a, quote=False)))
     return out
 
@@ -253,6 +297,181 @@ def _hero(main):
         if "/blog/images/" in a.get("src", ""):
             return ({"src": a["src"], "alt": a.get("alt", "")}, (m.start(), m.end()))
     return None, None
+
+
+# The FAQ heading text each language renders. Used only to find where a
+# previous run's furniture starts inside an already-damaged body.
+_FAQ_HEADS = ("Questions people ask", "أسئلة يطرحها")
+
+# One stacked copy of the article HEADER, as `rewrite()` flattens it: the
+# breadcrumb line, the standfirst, the byline name, the timestamp, the two
+# share links and the hero figure it has already emptied. The same twelve
+# passes that stacked the FAQ stacked these above the first paragraph.
+_STACKED_HEAD_RX = re.compile(
+    r'\s*<p>\s*<a href="[^"]*">[^<]*</a><i>&\#10038;</i>'
+    r'<a href="[^"]*">[^<]*</a><i>&\#10038;</i>\s*[^<]*</p>'
+    r'(?:\s*<p>.*?</p>)?'
+    r'(?:\s*<b>.*?</b>)?'
+    r'(?:\s*<time[^>]*>.*?</time>)?'
+    r'(?:\s*<a\b[^>]*>\s*</a>)*'
+    r'(?:\s*<figure>\s*</figure>)?', re.S)
+
+_STACKED_RX = re.compile(
+    r"<h2[^>]*>\s*(?:%s)[^<]*</h2>" % "|".join(_FAQ_HEADS))
+
+# The CTA sits directly above the first stacked FAQ copy, in this exact shape,
+# because that is what the re-skin rendered before `rewrite()` flattened it.
+# Each group is confined to its own element - `.*?` alone let `head` swallow
+# the whole article back to the first <h3> on any page whose prose happened to
+# end with a heading and a link, and the body came out 298 words long.
+_STRANDED_CTA_RX = re.compile(
+    r"<h3[^>]*>(?P<head>(?:(?!</h3>).)*)</h3>\s*"
+    r"(?:<p[^>]*>(?P<text>(?:(?!</p>).)*)</p>\s*)?"
+    r"<a\b(?P<attrs>[^>]*)>(?P<label>(?:(?!</a>).)*)</a>\s*$", re.S)
+
+
+def _stranded_refs(tail):
+    """The Sources list out of the furniture `_unstack` removed.
+
+    `_refs()` never matched a re-skinned page - it looks for a heading
+    followed by a <ul>, and the re-skin renders an <ol> - so from the second
+    run onward every article's citations sat in the body as ordinary prose
+    and `doc["refs"]` came back empty. They are worth carrying forward.
+    """
+    m = re.search(r"<h[234][^>]*\bid=\"sources\"[^>]*>.*?</h[234]>", tail, re.S)
+    if not m:
+        for h in re.finditer(r"<h([234])[^>]*>(.*?)</h\1>", tail, re.S):
+            if any(w in text(h.group(2)).lower() for w in _REF_WORDS):
+                m = h
+                break
+    if not m:
+        return []
+    sp = element(tail, "ol", start=m.end()) or element(tail, "ul", start=m.end())
+    if not sp or sp[0] - m.end() > 400:
+        return []
+    out = []
+    for li in re.finditer(r"<li[^>]*>(.*?)</li>", tail[sp[1]:sp[2]], re.S):
+        a = re.search(r"<a\b([^>]*)>(.*?)</a>", li.group(1), re.S)
+        if a:
+            out.append((_clean_inline(a.group(2)), attrs(a.group(1)).get("href", "")))
+        elif text(li.group(1)):
+            out.append((_clean_inline(li.group(1)), ""))
+    return out
+
+
+def _unstack(body):
+    """Strip furniture a previous run left INSIDE the article body.
+
+    The <article class="prose"> boundary in `read()` stops this happening
+    again, but it cannot undo what is already there: the copies accumulated
+    before the boundary existed were written inside that wrapper, so on the
+    first run after the fix they are still part of the body. This finds the
+    first stacked FAQ heading, walks back over the CTA that always precedes
+    it, and returns everything above it - along with that CTA, which is the
+    article's own and worth keeping rather than dropping to the generic one.
+
+    Returns (body, recovered CTA, removed tail) - the tail because the
+    Sources list is in there too, stranded by the same runs, and deleting a
+    page's citations to fix its duplication would be a poor trade.
+
+    A no-op on a body that has never been stacked, which is every body once
+    this has run through the corpus.
+    """
+    # Head first: every pass also stacked a copy of the breadcrumb, standfirst
+    # and byline above the first paragraph.
+    while True:
+        m = _STACKED_HEAD_RX.match(body)
+        if not m or m.end() == 0:
+            break
+        body = body[m.end():]
+
+    m = _STACKED_RX.search(body)
+    if not m:
+        return body.lstrip(), None, ""
+    head, tail = body[:m.start()], body[m.start():]
+    cta = None
+    # Only the tail can hold it, and only a conversion link makes it a CTA
+    # rather than an ordinary heading that happens to end a section.
+    c = _STRANDED_CTA_RX.search(head[-1600:])
+    if c and re.search(r"/contact|wa\.me|api\.whatsapp\.com",
+                       attrs(c.group("attrs")).get("href", "")):
+        c_start = len(head) - 1600 + c.start() if len(head) > 1600 else c.start()
+        cta = {"head": _clean_inline(c.group("head")),
+               "text": _clean_inline(c.group("text") or ""),
+               "label": _clean_inline(c.group("label")),
+               "href": attrs(c.group("attrs")).get("href", "")}
+        head = head[:c_start]
+    return head.strip(), cta, tail
+
+
+def _v4(chrome, doc):
+    """Regions of a page THIS TOOL rendered on a previous run.
+
+    Every one of these sits outside <article class="prose">, and none of them
+    is shaped like the legacy markup the extractors above look for: the FAQ is
+    a <section id="questions"> not <section id="faq">, Sources is an <ol> not a
+    <ul>, and the CTA is .icta not .glass-card. So on a re-run every extractor
+    returned nothing, the whole lot stayed in the body, and a fresh copy was
+    appended below it. Reading them here is what makes the re-skin idempotent.
+    """
+    out = {}
+
+    m = re.search(r'<h1[^>]*\bclass="[^"]*\bh1\b[^"]*"[^>]*>(.*?)</h1>', chrome, re.S)
+    out["h1"] = _clean_inline(m.group(1)) if m else ""
+
+    m = re.search(r'<p[^>]*\bclass="[^"]*\blede\b[^"]*"[^>]*>(.*?)</p>', chrome, re.S)
+    out["dek"] = _clean_inline(m.group(1)) if m else ""
+
+    out["hero"] = {}
+    fig = element(chrome, "figure", where=lambda a: has(a.get("class"), "afig"))
+    if fig:
+        im = re.search(r"<img\b([^>]*)>", chrome[fig[1]:fig[2]], re.I)
+        if im:
+            a = attrs(im.group(1))
+            out["hero"] = {"src": a.get("src", ""), "alt": a.get("alt", "")}
+
+    faq = []
+    sec = inner(chrome, "section", where=lambda a: a.get("id") == "questions")
+    if sec:
+        for m in re.finditer(r"<details[^>]*>\s*<summary[^>]*>(.*?)</summary>\s*"
+                             r"<p[^>]*>(.*?)</p>", sec, re.S):
+            q, a = _clean_inline(m.group(1)), _clean_inline(m.group(2))
+            if q and a:
+                faq.append((q, a))
+    out["faq"] = faq
+
+    refs = []
+    box = inner(chrome, "div", where=lambda a: a.get("id") == "sources"
+                or has(a.get("class"), "refs"))
+    if box:
+        for li in re.finditer(r"<li[^>]*>(.*?)</li>", box, re.S):
+            a = re.search(r"<a\b([^>]*)>(.*?)</a>", li.group(1), re.S)
+            if a:
+                refs.append((_clean_inline(a.group(2)), attrs(a.group(1)).get("href", "")))
+            elif text(li.group(1)):
+                refs.append((_clean_inline(li.group(1)), ""))
+    out["refs"] = refs
+
+    out["cta"] = None
+    box = inner(chrome, "div", where=lambda a: has(a.get("class"), "icta"))
+    if box:
+        h = re.search(r"<h3[^>]*>(.*?)</h3>", box, re.S)
+        a = re.search(r"<a\b([^>]*)>(.*?)</a>", box, re.S)
+        if h and a:
+            lbl = re.search(r"<span[^>]*>(.*?)</span>", a.group(2), re.S)
+            p_ = re.search(r"<p[^>]*>(.*?)</p>", box, re.S)
+            out["cta"] = {"head": _clean_inline(h.group(1)),
+                          "text": _clean_inline(p_.group(1)) if p_ else "",
+                          "label": _clean_inline(lbl.group(1) if lbl else a.group(2)),
+                          "href": attrs(a.group(1)).get("href", "")}
+
+    out["category"] = ""
+    cr = inner(chrome, "p", where=lambda a: has(a.get("class"), "crumbs"))
+    if cr:
+        spans = re.findall(r"<span[^>]*>(.*?)</span>", cr, re.S)
+        if spans:
+            out["category"] = text(spans[-1])
+    return out
 
 
 def _dek(main, h1_end):
@@ -508,6 +727,15 @@ def rewrite(body, headings_out=None, ids_used=None):
             # it is a panel. On the nine oldest pages the whole article is
             # wrapped in one .glass-card, so a block holding an <h1>/<h2> or
             # running past ~2.6KB is a layout shell and gets unwrapped instead.
+            # A callout this module already emitted passes straight through,
+            # variant class and all. Without this the rewriter unwrapped its
+            # own output, so a callout survived exactly one run.
+            if tag == "div" and has(cls, "callout"):
+                keep_cls = " ".join(c for c in cls.split()
+                                    if c in ("callout", "warn", "tip", "note"))
+                out.append('<div class="%s">' % (keep_cls or "callout"))
+                stack.append((tag, "raw", "</div>"))
+                continue
             if tag == "div" and (has(cls, "glass-card", "glass")
                                  or ("border" in cls and "rounded" in cls and "grid" not in cls)):
                 sp = element(body[m.start():], "div")
@@ -556,11 +784,47 @@ def rewrite(body, headings_out=None, ids_used=None):
 def read(path):
     """Parse one legacy article file into the dict `reskin_articles` renders."""
     src = open(path, encoding="utf-8").read()
+    src = _collapse_amp(src)
     doc = _head(src)
     doc["path"] = str(path)
     doc["date_iso"] = _published(doc, path)
 
     main = inner(src, "main") or inner(src, "body") or src
+
+    # A page this tool has already rendered brackets the real article in
+    # <article class="prose">; everything else inside <main> is furniture this
+    # tool appended last time. Taking all of <main> as the body is what made
+    # the re-skin additive instead of idempotent - the CTA, the FAQ, the
+    # sources, the topic chips, the author box and the related-posts grid all
+    # flowed into doc["body"], and the next run appended a fresh set below
+    # them. Twelve runs left 55% of the average English file as twelve stacked
+    # copies of the same three blocks, with "Questions people ask" in the
+    # table of contents thirteen times.
+    prose = element(main, "article", where=lambda a: has(a.get("class"), "prose"))
+    if prose:
+        chrome = main[:prose[0]] + main[prose[3]:]
+        main = main[prose[1]:prose[2]]
+        v4 = _v4(chrome, doc)
+        doc["h1"] = v4["h1"] or doc["title"].split("|")[0].strip()
+        doc["dek"] = v4["dek"]
+        doc["hero"] = v4["hero"]
+        # JSON-LD first, rendered <details> second. The page's own FAQPage node
+        # is carried verbatim from before any of this and is clean; the
+        # <details> markup is last run's OUTPUT, so on a page corrupted by the
+        # old latin-1 decode it carries that corruption forward for ever.
+        doc["faq"] = _faq(main, doc) or v4["faq"]
+        doc["category"] = doc["category"] or v4["category"]
+        main, stranded, tail = _unstack(main)
+        # The stranded one is the article's own CTA, stalled in the body since
+        # the run that stopped recognising it; the one in the chrome is
+        # whatever the last run fell back to. Prefer the specific one.
+        doc["cta"] = stranded or v4["cta"]
+        doc["refs"] = v4["refs"] or _stranded_refs(tail)
+        heads, ids = [], set()
+        doc["body"] = rewrite(main, headings_out=heads, ids_used=ids)
+        doc["headings"] = heads
+        doc["words"] = len(text(doc["body"]).split())
+        return doc
 
     doc["faq"] = _faq(main, doc)
     main, _ = cut(main, "section", where=lambda a: a.get("id") == "faq")

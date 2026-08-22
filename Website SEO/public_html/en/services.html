@@ -673,12 +673,35 @@ table.t .mini{display:block;font-size:.86rem;color:var(--muted);margin-top:5px;l
 <script type="application/ld+json">
 {
   "@context":"https://schema.org",
+  "@graph":[
+  {
+    "@type":"ProfessionalService",
+    "@id":"https://aiprofitlab.io/#organization",
+    "name":"AI Profit Lab",
+    "description":"Done-for-you AI automation for trading and distribution SMEs in Oman and the GCC.",
+    "url":"https://aiprofitlab.io/",
+    "email":"hello@aiprofitlab.io",
+    "telephone":"+968 9924 5250",
+    "slogan":"Every success starts with insight",
+    "logo":{"@type":"ImageObject","url":"https://aiprofitlab.io/assets/brand/wordmark-primary.svg","width":1600,"height":274},
+    "image":"https://aiprofitlab.io/og-aiprofitlab-2026.jpg",
+    "areaServed":[{"@type":"Country","name":"Oman"}],
+    "address":{"@type":"PostalAddress","addressLocality":"Bousher","addressRegion":"Muscat","addressCountry":"OM","streetAddress":"South Al Khuwair"},
+    "geo":{"@type":"GeoCoordinates","latitude":23.5803,"longitude":58.4310},
+    "parentOrganization":{"@type":"Organization","name":"Lotus Gulf International","identifier":"CR 1570092"},
+    "founder":{"@type":"Person","name":"Nahid Abyari"},
+    "priceRange":"OMR 950 - OMR 2200",
+    "sameAs":["https://www.linkedin.com/in/nahid-aby","https://www.youtube.com/@AI_for_Managers","https://www.facebook.com/profile.php?id=61584870364473"]
+  },
+  {
   "@type":"ItemList",
   "name":"Systems built by AI Profit Lab",
   "itemListElement":[
-    {"@type":"Service","position":1,"name":"The Smart Website","description":"A bilingual site with an AI buyer agent that answers in Arabic and English and hands live buyers to WhatsApp.","provider":{"@type":"Organization","name":"AI Profit Lab"},"areaServed":"Oman","offers":{"@type":"Offer","price":"950","priceCurrency":"OMR"}},
-    {"@type":"Service","position":2,"name":"The Live Owner Dashboard","description":"Cash position, margin, stock and open leads on one screen, with a recommended action for each.","provider":{"@type":"Organization","name":"AI Profit Lab"},"areaServed":"Oman","offers":{"@type":"Offer","price":"650","priceCurrency":"OMR"}},
-    {"@type":"Service","position":3,"name":"The Full Autopilot","description":"Quote and invoice follow-up on a schedule, stopping as soon as the buyer replies or pays.","provider":{"@type":"Organization","name":"AI Profit Lab"},"areaServed":"Oman","offers":{"@type":"Offer","price":"900","priceCurrency":"OMR"}}
+    {"@type":"Service","position":1,"name":"The Smart Website","description":"A bilingual site with an AI buyer agent that answers in Arabic and English and hands live buyers to WhatsApp.","provider":{"@id":"https://aiprofitlab.io/#organization"},"areaServed":"Oman","offers":{"@type":"Offer","price":"950","priceCurrency":"OMR","availability":"https://schema.org/InStock","url":"https://aiprofitlab.io/en/checkout/?plan=website","priceValidUntil":"2026-12-31"}},
+    {"@type":"Service","position":2,"name":"The Live Owner Dashboard","description":"Cash position, margin, stock and open leads on one screen, with a recommended action for each.","provider":{"@id":"https://aiprofitlab.io/#organization"},"areaServed":"Oman","offers":{"@type":"Offer","price":"650","priceCurrency":"OMR","availability":"https://schema.org/InStock","url":"https://aiprofitlab.io/en/checkout/?plan=dashboard","priceValidUntil":"2026-12-31"}},
+    {"@type":"Service","position":3,"name":"The Full Autopilot","description":"Quote and invoice follow-up on a schedule, stopping as soon as the buyer replies or pays.","provider":{"@id":"https://aiprofitlab.io/#organization"},"areaServed":"Oman","offers":{"@type":"Offer","price":"900","priceCurrency":"OMR","availability":"https://schema.org/InStock","url":"https://aiprofitlab.io/en/checkout/?plan=autopilot","priceValidUntil":"2026-12-31"}}
+  ]
+}
   ]
 }
 </script>
@@ -1159,6 +1182,6 @@ table.t .mini{display:block;font-size:.86rem;color:var(--muted);margin-top:5px;l
   els.forEach(function(e){ io.observe(e); });
 })();
 </script>
-<script defer src="/js/aiden-chat.js?v=371d5470"></script>
+<script defer src="/js/aiden-chat.js?v=b072ce1f"></script>
 </body>
 </html>

@@ -918,18 +918,36 @@ html:not(.js) .stair .step,html:not(.js) .stair .anno{opacity:1;transform:none}
 <script type="application/ld+json">
 {
   "@context":"https://schema.org",
-  "@type":"ProfessionalService",
-  "name":"AI Profit Lab",
-  "description":"Done-for-you AI automation for trading and distribution SMEs in Oman and the GCC.",
-  "url":"https://aiprofitlab.io/",
-  "email":"hello@aiprofitlab.io",
-  "telephone":"+968 9924 5250",
-  "slogan":"Every success starts with insight",
-  "areaServed":[{"@type":"Country","name":"Oman"}],
-  "address":{"@type":"PostalAddress","addressLocality":"Bousher","addressRegion":"Muscat","addressCountry":"OM","streetAddress":"South Al Khuwair"},
-  "parentOrganization":{"@type":"Organization","name":"Lotus Gulf International","identifier":"CR 1570092"},
-  "founder":{"@type":"Person","name":"Nahid Abyari"},
-  "priceRange":"OMR 950 - OMR 2200"
+  "@graph":[
+  {
+    "@type":"ProfessionalService",
+    "@id":"https://aiprofitlab.io/#organization",
+    "name":"AI Profit Lab",
+    "description":"Done-for-you AI automation for trading and distribution SMEs in Oman and the GCC.",
+    "url":"https://aiprofitlab.io/",
+    "email":"hello@aiprofitlab.io",
+    "telephone":"+968 9924 5250",
+    "slogan":"Every success starts with insight",
+    "logo":{"@type":"ImageObject","url":"https://aiprofitlab.io/assets/brand/wordmark-primary.svg","width":1600,"height":274},
+    "image":"https://aiprofitlab.io/og-aiprofitlab-2026.jpg",
+    "areaServed":[{"@type":"Country","name":"Oman"}],
+    "address":{"@type":"PostalAddress","addressLocality":"Bousher","addressRegion":"Muscat","addressCountry":"OM","streetAddress":"South Al Khuwair"},
+    "geo":{"@type":"GeoCoordinates","latitude":23.5803,"longitude":58.4310},
+    "parentOrganization":{"@type":"Organization","name":"Lotus Gulf International","identifier":"CR 1570092"},
+    "founder":{"@type":"Person","name":"Nahid Abyari"},
+    "priceRange":"OMR 950 - OMR 2200",
+    "sameAs":["https://www.linkedin.com/in/nahid-aby","https://www.youtube.com/@AI_for_Managers","https://www.facebook.com/profile.php?id=61584870364473"]
+  },
+  {
+    "@type":"WebSite",
+    "@id":"https://aiprofitlab.io/#website",
+    "url":"https://aiprofitlab.io/",
+    "name":"AI Profit Lab",
+    "inLanguage":["en","ar"],
+    "publisher":{"@id":"https://aiprofitlab.io/#organization"}
+  },
+  {"@type":"FAQPage","@id":"https://aiprofitlab.io/#faq","inLanguage":"en","isPartOf":{"@id":"https://aiprofitlab.io/#website"},"mainEntity":[{"@type":"Question","name":"Is this real, or is it hype?","acceptedAnswer":{"@type":"Answer","text":"For a trading business it is one thing: a machine that answers buyers in Arabic and English at two in the morning. That part works today."}},{"@type":"Question","name":"Will it actually touch my business?","acceptedAnswer":{"@type":"Answer","text":"Only through the supplier who replied to your buyer while you were at dinner. Nothing else about AI needs to concern you this year."}},{"@type":"Question","name":"Do I have to learn it?","acceptedAnswer":{"@type":"Answer","text":"No. You never open it, never log in, never type a prompt. It reports to your WhatsApp in one sentence."}},{"@type":"Question","name":"Will it break the way I work now?","acceptedAnswer":{"@type":"Answer","text":"Nothing about your day changes. It is built beside your business, not on top of it — the phone, the prices and the people stay exactly as they are."}},{"@type":"Question","name":"Can it really make me spend less?","acceptedAnswer":{"@type":"Answer","text":"It is paid once, not every month. It takes no visa, no leave and no sick days, and it costs the same whether one buyer writes tonight or forty do."}}]}
+  ]
 }
 </script>
 </head>
@@ -1903,6 +1921,6 @@ html:not(.js) .stair .step,html:not(.js) .stair .anno{opacity:1;transform:none}
   render();
 })();
 </script>
-<script defer src="/js/aiden-chat.js?v=371d5470"></script>
+<script defer src="/js/aiden-chat.js?v=b072ce1f"></script>
 </body>
 </html>
