@@ -26,8 +26,10 @@ en_html = """<!DOCTYPE html>
     <meta name="description" content="Struggling with dropped checkout rates in Oman and the GCC? Connect WhatsApp API to Thawani, Benefit, and OmanNet to capture 4.2x more instant payments.">
     <meta name="keywords" content="WhatsApp API payment gateway Oman, Thawani Pay WhatsApp integration, BenefitPay WhatsApp API GCC, OmanNet WhatsApp automated link, payment webhooks Muscat, WhatsApp business API Oman 2026">
     <link rel="canonical" href="https://aiprofitlab.io/blog/en/2026-08-12-how-to-integrate-whatsapp-api-thawani-benefit-omannet-payment-gateways-muscat-oman/">
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-    <link rel="apple-touch-icon" href="/favicon.svg">
+    <link rel="icon" href="/favicon.ico" sizes="32x32">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=20260822">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=20260822">
+    <link rel="manifest" href="/site.webmanifest?v=20260822">
     
     <!-- JSON-LD Schema Markup -->
     <script type="application/ld+json">
@@ -332,8 +334,10 @@ ar_html = """<!DOCTYPE html>
     <meta name="description" content="هل تعاني من إهمال سلات الشراء في مسقط والخليج؟ اربط واتساب API ببوابات ثواني وبنفت وعمان نت لتحصيل Payments فورية ورفع المبيعات بنسبة 4.2x بنجاح.">
     <meta name="keywords" content="ربط واتساب API بوابات الدفع, بوابة دفع ثواني عمان, BenefitPay WhatsApp API, بطاقات عمان نت الدفع الإلكتروني, أتمتة Payments مسقط 2026">
     <link rel="canonical" href="https://aiprofitlab.io/blog/ar/2026-08-12-how-to-integrate-whatsapp-api-thawani-benefit-omannet-payment-gateways-muscat-oman/">
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-    <link rel="apple-touch-icon" href="/favicon.svg">
+    <link rel="icon" href="/favicon.ico" sizes="32x32">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=20260822">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=20260822">
+    <link rel="manifest" href="/site.webmanifest?v=20260822">
     
     <!-- JSON-LD Schema Markup -->
     <script type="application/ld+json">

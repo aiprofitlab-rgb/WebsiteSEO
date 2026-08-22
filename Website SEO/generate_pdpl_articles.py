@@ -32,8 +32,10 @@ en_html = """<!DOCTYPE html>
     <meta name="description" content="Is your Oman business using WhatsApp or AI safely? Understand Omani PDPL compliance, Royal Decree 6/2022 rules, and data privacy to avoid OMR 50,000 fines.">
     <meta name="keywords" content="Oman PDPL, Omani Personal Data Protection Law, Royal Decree 6/2022, WhatsApp AI Compliance Oman, MTCIT Oman Data Privacy, AI Data Protection Muscat, Data Sovereignty Oman">
     <link rel="canonical" href="https://aiprofitlab.io/blog/en/2026-07-27-oman-pdpl-explained-whatsapp-ai-2026/">
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-    <link rel="apple-touch-icon" href="/favicon.svg">
+    <link rel="icon" href="/favicon.ico" sizes="32x32">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=20260822">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=20260822">
+    <link rel="manifest" href="/site.webmanifest?v=20260822">
     
     <!-- JSON-LD Schema Markup -->
     <script type="application/ld+json">
@@ -326,8 +328,10 @@ ar_html = """<!DOCTYPE html>
     <meta name="description" content="هل تعاني من صعوبة تطبيق قانون حماية البيانات الشخصية العماني؟ اكتشف شروط امتثال الواتساب والذكاء الاصطناعي لمرسوم 6/2022 لحماية شركتك من الغرامات.">
     <meta name="keywords" content="قانون حماية البيانات الشخصية العماني, المرسوم السلطاني رقم 6/2022, امتثال الواتساب في عمان, حماية البيانات مسقط, وزارة النقل والاتصالات وتقنية المعلومات, سيادة البيانات عمان">
     <link rel="canonical" href="https://aiprofitlab.io/blog/ar/2026-07-27-oman-pdpl-explained-whatsapp-ai-2026/">
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-    <link rel="apple-touch-icon" href="/favicon.svg">
+    <link rel="icon" href="/favicon.ico" sizes="32x32">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=20260822">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=20260822">
+    <link rel="manifest" href="/site.webmanifest?v=20260822">
     
     <!-- JSON-LD Schema Markup -->
     <script type="application/ld+json">

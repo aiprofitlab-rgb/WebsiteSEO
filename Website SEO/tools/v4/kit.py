@@ -742,7 +742,10 @@ def head_html(lang="en"):
 <title>{{TITLE}}</title>
 <meta name="description" content="{{DESC}}">
 <link rel="canonical" href="https://aiprofitlab.io{{PATH}}">
-<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg?v=20260822">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=20260822">
+<link rel="manifest" href="/site.webmanifest?v=20260822">
 
 <meta property="og:type" content="website">
 <meta property="og:title" content="{{TITLE}}">

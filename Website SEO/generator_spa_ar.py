@@ -23,8 +23,10 @@ ar_html = f"""<!DOCTYPE html>
     <meta name="description" content="ارتقِ بعملك مع الذكاء الاصطناعي عبر واتساب لصالونات التجميل في عُمان. اكتشف كيف تقوم مراكز التجميل المحلية بأتمتة الحجوزات وزيادة العوائد.">
     <meta name="keywords" content="الذكاء الاصطناعي واتساب, صالونات التجميل عمان, أتمتة مراكز التجميل, أتمتة الأعمال في الخليج, تكنولوجيا الصالونات في مسقط, أنظمة الحجز الذكية">
     <link rel="canonical" href="https://aiprofitlab.io/blog/ar/{date_str}-{slug_en}/">
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-    <link rel="apple-touch-icon" href="/favicon.svg">
+    <link rel="icon" href="/favicon.ico" sizes="32x32">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=20260822">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=20260822">
+    <link rel="manifest" href="/site.webmanifest?v=20260822">
     
     <!-- JSON-LD Schema Markup -->
     <script type="application/ld+json">

@@ -147,11 +147,7 @@ def bucket(entry):
 T = {
     "en": {
         "eyebrow": "Articles",
-        "h1": "Notes from the work",
-        "lede": ("Every article here comes out of a system built for someone in Oman or the wider "
-                 "Gulf &mdash; WhatsApp response gaps, owner dashboards, what automation actually "
-                 "costs, and where the PDPL draws the line. All of it published in English and "
-                 "Arabic."),
+        "h1": "Articles",
         "search_label": "Search articles",
         "search_ph": "Search %d articles &mdash; try ROI, WhatsApp, PDPL, Muscat",
         "clear": "Clear search",
@@ -179,10 +175,7 @@ T = {
     },
     "ar": {
         "eyebrow": "المقالات",
-        "h1": "ملاحظات من العمل",
-        "lede": ("كل مقال هنا خرج من نظام بُني فعلياً لعميل في عُمان أو الخليج &mdash; الرسائل التي "
-                 "لا يُرد عليها على واتساب، ولوحات المتابعة للملّاك، والتكلفة الحقيقية للأتمتة، وأين "
-                 "يضع قانون حماية البيانات الشخصية الحد. وكل ذلك منشور بالعربية والإنجليزية."),
+        "h1": "المقالات",
         "search_label": "ابحث في المقالات",
         "search_ph": "ابحث في %d مقال &mdash; جرّب: واتساب، العائد، البيانات، مسقط",
         "clear": "مسح البحث",
@@ -255,8 +248,7 @@ ORG_SCHEMA = """{
 # --------------------------------------------------------------------------
 HUB_CSS = """
 /* ------------------------------------------------------------------ hero */
-.hhero .lede{margin:0 0 clamp(30px,3.6vw,42px)}
-.hhero .h1{margin:0 0 22px}
+.hhero .h1{margin:0 0 clamp(30px,3.6vw,42px)}
 
 /* Visually hidden but read aloud: the search field and the filter group both
    need a name, and neither has room for a visible one. */
@@ -750,8 +742,10 @@ def head(lang, total, css_href, js_href):
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
 <link rel="canonical" href="{u}">
 {alts}
-<link rel="icon" type="image/svg+xml" href="/favicon.svg">
-<link rel="apple-touch-icon" href="/favicon.svg">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg?v=20260822">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=20260822">
+<link rel="manifest" href="/site.webmanifest?v=20260822">
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="AI Profit Lab">
@@ -871,7 +865,6 @@ def render(lang, entries, css_href, js_href):
   <div class="wrap">
     <p class="eyebrow"><span class="star">{STAR}</span>{t["eyebrow"]}</p>
     <h1 class="h1">{t["h1"]}</h1>
-    <p class="lede">{t["lede"]}</p>
 
     <div class="search" id="searchbox">
       <label class="vh" for="q">{t["search_label"]}</label>

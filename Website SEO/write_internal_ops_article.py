@@ -26,8 +26,10 @@ en_html = """<!DOCTYPE html>
     <meta name="description" content="Tired of spreadsheet errors in Muscat? Replacing manual data entry with automated API integrations saves Omani businesses 120+ hours every month.">
     <meta name="keywords" content="Automating Internal Operations Oman, Replace Manual Data Entry Muscat, Omani Enterprises Automation, n8n integration Oman, PDPL compliant automation Muscat, Digital economy Oman Vision 2040, GCC operations automation">
     <link rel="canonical" href="https://aiprofitlab.io/blog/en/2026-08-12-automating-internal-operations-replacing-manual-data-entry-omani-enterprises/">
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-    <link rel="apple-touch-icon" href="/favicon.svg">
+    <link rel="icon" href="/favicon.ico" sizes="32x32">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=20260822">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=20260822">
+    <link rel="manifest" href="/site.webmanifest?v=20260822">
     
     <!-- JSON-LD Schema Markup -->
     <script type="application/ld+json">
@@ -320,8 +322,10 @@ ar_html = """<!DOCTYPE html>
     <meta name="description" content="هل تعاني من أخطاء الجداول في مسقط؟ استبدل إدخال البيانات اليدوي بأتمتة العمليات لتوفر لشركتك في عمان أكثر من 120 ساعة عمل شهرياً بدقة كاملة.">
     <meta name="keywords" content="أتمتة العمليات الداخلية عمان, استبدال إدخال البيانات مسقط, أتمتة المؤسسات العمانية, ربط n8n عمان, أتمتة متوافقة مع قانون حماية البيانات مسقط, الاقتصاد الرقمي رؤية عمان 2040, أتمتة العمليات الخليج">
     <link rel="canonical" href="https://aiprofitlab.io/blog/ar/2026-08-12-automating-internal-operations-replacing-manual-data-entry-omani-enterprises/">
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-    <link rel="apple-touch-icon" href="/favicon.svg">
+    <link rel="icon" href="/favicon.ico" sizes="32x32">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=20260822">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=20260822">
+    <link rel="manifest" href="/site.webmanifest?v=20260822">
     
     <!-- JSON-LD Schema Markup -->
     <script type="application/ld+json">

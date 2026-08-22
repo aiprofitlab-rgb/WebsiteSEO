@@ -277,10 +277,7 @@ def body():
 <section class="phero s-panel grain">
   <div class="wrap">
     <p class="eyebrow"><span class="star">{STAR}</span>Articles</p>
-    <h1 class="h1">Notes from the work</h1>
-    <p class="lede">Everything here comes out of a system I actually built for someone in Oman. No trend
-      pieces, no borrowed statistics &mdash; if a number appears, you can see where it came from or how to
-      produce it yourself.</p>
+    <h1 class="h1">Articles</h1>
     <div class="filters" id="filters">
       {chips}
       <span class="count" id="fcount">{len(rest)} articles</span>

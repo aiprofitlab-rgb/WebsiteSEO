@@ -9,9 +9,16 @@
     AddOutputFilterByType DEFLATE text/javascript application/javascript application/x-javascript
     AddOutputFilterByType DEFLATE application/xml application/xhtml+xml application/rss+xml
     AddOutputFilterByType DEFLATE application/json application/ld+json
-    AddOutputFilterByType DEFLATE image/svg+xml image/x-icon
+    AddOutputFilterByType DEFLATE image/svg+xml image/x-icon application/manifest+json
     AddOutputFilterByType DEFLATE font/opentype font/otf font/ttf
     AddOutputFilterByType DEFLATE application/vnd.ms-fontobject application/x-font-ttf application/x-font-opentype
+</IfModule>
+
+# --- MIME types not in the stock shared-hosting set ---
+<IfModule mod_mime.c>
+    # Without this the manifest goes out as text/plain and Chrome ignores it,
+    # which costs the Android home-screen icon it exists to provide.
+    AddType application/manifest+json .webmanifest
 </IfModule>
 
 # --- Expires Headers (mod_expires) ---
@@ -41,8 +48,21 @@
     # .js matching here the intended 600s was silently discarded and
     # production served the widget `max-age=31536000, immutable` regardless of
     # what the block below said.
-    <FilesMatch "^(?!aiden-chat\.js$).*\.(jpeg|jpg|png|webp|svg|ico|css|js|woff|woff2|ttf|otf|eot)$">
+    <FilesMatch "^(?!aiden-chat\.js$|favicon\.ico$).*\.(jpeg|jpg|png|webp|svg|ico|css|js|woff|woff2|ttf|otf|eot)$">
         Header set Cache-Control "public, max-age=31536000, immutable"
+    </FilesMatch>
+    # favicon.ico is the one icon that cannot carry a ?v= token: browsers and
+    # SERP crawlers fetch /favicon.ico by convention, ignoring the <link>. Give
+    # it a day instead of a year so a future mark change is not stuck behind
+    # `immutable` in every browser that has ever loaded the site. Same
+    # mod_expires problem as aiden-chat.js below - ExpiresByType image/x-icon
+    # is not set, but ico is served as image/vnd.microsoft.icon on some hosts,
+    # so turn expiry off here rather than rely on that.
+    <FilesMatch "^favicon\.ico$">
+        <IfModule mod_expires.c>
+            ExpiresActive Off
+        </IfModule>
+        Header set Cache-Control "public, max-age=86400, must-revalidate"
     </FilesMatch>
     # The Aiden widget is the one script that ships from a stable filename and
     # changes often. Pinned for a year it kept serving an old build from the CDN

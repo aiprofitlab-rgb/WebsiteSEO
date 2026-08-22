@@ -237,8 +237,10 @@ Everything else in the templates — `body` colours, the `.prose` rules, the nav
     <meta name="description" content="[140-155 chars unique description: start with pain point, include GCC/Oman ref, end with outcome, no forbidden start words]">
     <meta name="keywords" content="[SEO Keywords]">
     <link rel="canonical" href="https://aiprofitlab.io/blog/en/YYYY-MM-DD-[slug-title]/">
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-    <link rel="apple-touch-icon" href="/favicon.svg">
+    <link rel="icon" href="/favicon.ico" sizes="32x32">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=20260822">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=20260822">
+    <link rel="manifest" href="/site.webmanifest?v=20260822">
     
     <!-- JSON-LD Schema Markup -->
     <script type="application/ld+json">
@@ -429,8 +431,10 @@ Everything else in the templates — `body` colours, the `.prose` rules, the nav
     <meta name="description" content="[140-155 chars unique description: start with regional pain point 'هل تعاني من...', include GCC/Oman ref, end with outcome, no forbidden start words]">
     <meta name="keywords" content="[SEO Keywords in Arabic and English]">
     <link rel="canonical" href="https://aiprofitlab.io/blog/ar/YYYY-MM-DD-[slug-title-in-english]/">
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-    <link rel="apple-touch-icon" href="/favicon.svg">
+    <link rel="icon" href="/favicon.ico" sizes="32x32">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=20260822">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=20260822">
+    <link rel="manifest" href="/site.webmanifest?v=20260822">
     
     <!-- JSON-LD Schema Markup -->
     <script type="application/ld+json">

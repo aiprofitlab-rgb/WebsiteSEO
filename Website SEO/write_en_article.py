@@ -18,8 +18,10 @@ EN_HTML = r"""<!DOCTYPE html>
     <meta name="description" content="Paying $2,000 for a WhatsApp AI receptionist in Oman? Break down exactly what you get, what ROI to expect in 90 days, and when it genuinely pays for itself.">
     <meta name="keywords" content="WhatsApp AI receptionist cost, is WhatsApp AI worth it, WhatsApp AI ROI Oman, AI receptionist 2000 dollars, WhatsApp automation GCC, AI chatbot pricing Oman, WhatsApp business AI investment">
     <link rel="canonical" href="https://aiprofitlab.io/blog/en/2026-06-25-whatsapp-ai-receptionist-2000-worth-it/">
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-    <link rel="apple-touch-icon" href="/favicon.svg">
+    <link rel="icon" href="/favicon.ico" sizes="32x32">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=20260822">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=20260822">
+    <link rel="manifest" href="/site.webmanifest?v=20260822">
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -229,8 +231,10 @@ AR_HTML = """<!DOCTYPE html>
     <meta name="description" content="\u0647\u0644 \u062a\u0639\u0627\u0646\u064a \u0645\u0646 \u062a\u0641\u0648\u064a\u062a \u0631\u062f\u0648\u062f \u0648\u0627\u062a\u0633\u0627\u0628 \u0628\u0639\u062f \u0633\u0627\u0639\u0627\u062a \u0627\u0644\u0639\u0645\u0644 \u0641\u064a \u0639\u064f\u0645\u0627\u0646\u061f \u0627\u0643\u062a\u0634\u0641 \u0645\u0627 \u062a\u062d\u0635\u0644 \u0639\u0644\u064a\u0647 \u0645\u0642\u0627\u0628\u0644 2\u060c000 \u062f\u0648\u0644\u0627\u0631\u060c \u0648\u0639\u0627\u0626\u062f \u0627\u0644\u0627\u0633\u062a\u062b\u0645\u0627\u0631 \u062e\u0644\u0627\u0644 90 \u064a\u0648\u0645\u0627\u064b \u0648\u0645\u062a\u0649 \u064a\u0633\u062f\u062f \u0646\u0641\u0633\u0647 \u0641\u0639\u0644\u0627\u064b.">
     <meta name="keywords" content="\u062a\u0643\u0644\u0641\u0629 \u0645\u0633\u0627\u0639\u062f \u0648\u0627\u062a\u0633\u0627\u0628 \u0627\u0644\u0630\u0643\u064a, \u0647\u0644 \u064a\u0633\u062a\u062d\u0642 \u0648\u0627\u062a\u0633\u0627\u0628 AI \u0639\u064f\u0645\u0627\u0646, \u0639\u0627\u0626\u062f \u0627\u0633\u062a\u062b\u0645\u0627\u0631 \u0648\u0627\u062a\u0633\u0627\u0628 AI, \u0623\u062a\u0645\u062a\u0629 \u0648\u0627\u062a\u0633\u0627\u0628 \u0627\u0644\u062e\u0644\u064a\u062c">
     <link rel="canonical" href="https://aiprofitlab.io/blog/ar/2026-06-25-whatsapp-ai-receptionist-2000-worth-it/">
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-    <link rel="apple-touch-icon" href="/favicon.svg">
+    <link rel="icon" href="/favicon.ico" sizes="32x32">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=20260822">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=20260822">
+    <link rel="manifest" href="/site.webmanifest?v=20260822">
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
