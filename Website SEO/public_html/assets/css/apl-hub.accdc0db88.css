@@ -507,8 +507,7 @@ section{position:relative;padding:clamp(74px,9vw,138px) 0}
 }
 
 /* ------------------------------------------------------------------ hero */
-.hhero .lede{margin:0 0 clamp(30px,3.6vw,42px)}
-.hhero .h1{margin:0 0 22px}
+.hhero .h1{margin:0 0 clamp(30px,3.6vw,42px)}
 
 /* Visually hidden but read aloud: the search field and the filter group both
    need a name, and neither has room for a visible one. */
