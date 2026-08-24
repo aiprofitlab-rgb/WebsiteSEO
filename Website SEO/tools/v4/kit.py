@@ -785,9 +785,17 @@ def head_html(lang="en"):
 HEAD = head_html("en")
 
 
-def header(active_href, lang="en"):
-    """Fixed header + the full-screen mobile menu."""
+def header(active_href, lang="en", other=None):
+    """Fixed header + the full-screen mobile menu.
+
+    `other` is where the language toggle goes: the SAME page in the other
+    language, which the caller knows and this function cannot derive. It is the
+    third field of the PAGES row build_v4 already reads, i.e. the exact URL the
+    page's own hreflang alternate declares - the toggle and the alternate can
+    therefore never disagree. Falls back to the other language's home page,
+    which is all this used to do, for a page with no twin."""
     c = CHROME[lang]
+    other = other or c["other_url"]
     nav = c["nav"]
     links = []
     for label, href, _ in nav[1:]:
@@ -795,13 +803,18 @@ def header(active_href, lang="en"):
         links.append(f'<a class="lnk" href="{href}"{cur}>{label}</a>')
     cur = ' aria-current="page"' if active_href == c["blog"] else ""
     links.append(f'<a class="lnk" href="{c["blog"]}"{cur}>{c["blog_label"]}</a>')
-    links.append(f'<a class="lnk" href="{c["other_url"]}" lang="{c["other_lang"]}">{c["other_label"]}</a>')
+    links.append(f'<a class="lnk" href="{other}" lang="{c["other_lang"]}">{c["other_label"]}</a>')
 
     m = []
     for label, href, n in nav:
         mcur = ' aria-current="page"' if href == active_href else ""
         m.append(f'<a href="{href}"{mcur}><em>{n}</em>{label}</a>')
     m.append(f'<a href="{c["blog"]}"{cur}><em>{"٠٦" if lang == "ar" else "06"}</em>{c["blog_label"]}</a>')
+    # Below 900px `.nav a.lnk` is display:none, so without this entry the
+    # burger menu - the only nav a phone gets - had no way to switch language
+    # at all. blog_chrome's menu has carried the same 07 row all along.
+    m.append(f'<a href="{other}" lang="{c["other_lang"]}">'
+             f'<em>{"٠٧" if lang == "ar" else "07"}</em>{c["other_label"]}</a>')
 
     return f"""<header class="top" id="top">
   <a href="{nav[0][1]}" aria-label="{c["home_aria"]}">

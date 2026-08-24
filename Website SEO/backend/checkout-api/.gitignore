@@ -1,0 +1,5 @@
+node_modules/
+# Real keys, UAT included — never in git.
+.env
+.env.*
+!.env.example

@@ -406,8 +406,14 @@ def head(doc, og_image, css_href, js_href=None):
 # --------------------------------------------------------------------------
 # Header / footer
 # --------------------------------------------------------------------------
-def header(lang):
+def header(lang, other=None):
+    """`other` is where the language toggle points: the same page in the other
+    language. An article passes its twin under /blog/<lang>/<slug>/, a hub
+    passes the other hub. Left out, it falls back to the other language's home
+    page - which is what every caller used to get, and the reason the toggle
+    dropped a reader on the wrong page from all 308 articles."""
     t, u = T[lang], URLS[lang]
+    other = other or u["other"]
     links = "\n    ".join('<a class="lnk" href="%s">%s</a>' % (u[key], label)
                           for label, key, _ in t["nav"][1:])
     other_lang = 'ar' if lang == 'en' else 'en'
@@ -419,14 +425,14 @@ def header(lang):
   </a>
   <nav class="nav" aria-label="Primary">
     {links}
-    <a class="lnk" href="{u["other"]}" lang="{other_lang}">{t["other_lang"]}</a>
+    <a class="lnk" href="{other}" lang="{other_lang}">{t["other_lang"]}</a>
     <a class="top-wa" href="{WA}&text={t["wa_intro"]}" target="_blank" rel="noopener" aria-label="{t["whatsapp"]}">{WA_ICON}<span>{t["whatsapp"]}</span></a>
     <button class="burger" id="burger" aria-label="{t["menu"]}" aria-expanded="false" aria-controls="mmenu"><i></i></button>
   </nav>
 </header>
 <div class="mmenu" id="mmenu" aria-hidden="true">
   {menu}
-  <a href="{u["other"]}" lang="{other_lang}"><em>07</em>{t["other_lang"]}</a>
+  <a href="{other}" lang="{other_lang}"><em>07</em>{t["other_lang"]}</a>
   <p class="mfoot">hello@aiprofitlab.io &middot; <span dir="ltr">+968 9924 5250</span><br>Muscat, Oman</p>
 </div>
 """

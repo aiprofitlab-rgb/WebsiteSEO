@@ -1,13 +1,16 @@
 # The checkout API — contract, and how to switch it on
 
-The v4 checkout is built and shipping; the server that takes the money is not,
-because the Thawani merchant account is still in application. This is the
-contract the front end already calls, plus everything needed to write the
-server once the keys arrive.
+The v4 checkout is built and shipping, and **the server that takes the money is
+now written** — `backend/checkout-api/`, running against Thawani's UAT
+environment. What is still missing is merchant approval and live keys.
 
-Nothing here is guesswork about Thawani: the request shapes below were read off
-a production WooCommerce integration and cross-checked against Thawani's own
-Create Session documentation. What is *not* verified is called out as such.
+This is the contract the front end calls and the server satisfies.
+
+Nothing here is guesswork about Thawani. The request shapes were read off a
+production integration, cross-checked against Thawani's own Create Session
+documentation, and since 2026-08-24 **exercised against `uatcheckout.thawani.om`
+with the UAT credentials from the Thawani Mini Document**. Findings from that
+run are marked *verified UAT*. What is still not verified is called out as such.
 
 ---
 
@@ -20,7 +23,11 @@ Create Session documentation. What is *not* verified is called out as such.
 | `public_html/terms.html` | live and indexable at `/terms/` |
 | Pricing table | `tools/v4/pay.py` — one source of truth |
 | Card gateway | **off** (`pay.PAY_LIVE = False`, `pay.PAY_API = ""`) |
-| Checkout API | not written |
+| Checkout API | **written**, `backend/checkout-api/`, not deployed |
+| Price table shipped to it | `backend/checkout-api/catalog.json`, exported by the build |
+| UAT round trip | session created, metadata round-tripped, status read back |
+| Card-on-file | customer + `save_card_on_success` verified; charge step unproven |
+| Billing runner | `POST /billing/run`, `CRON_KEY`-locked, needs a sheet |
 
 With the gateway off, the checkout is fully functional: it prices the order,
 stamps it with a reference, and hands the whole thing to WhatsApp or email. No
@@ -137,15 +144,45 @@ Thawani-Api-Key: {SECRET_KEY}
   "success_url": "https://aiprofitlab.io/en/order-v4/?status=success&ref=APL-260820-KX7M&session={session_id}",
   "cancel_url":  "https://aiprofitlab.io/en/order-v4/?status=cancel&ref=APL-260820-KX7M",
   "metadata": {
+    "order_id": "APL-260820-KX7M",
     "customer_name": "Khalid Al Balushi",
     "customer_email": "khalid@gulflotus.om",
     "customer_phone": "96891234567",
-    "order_id": "APL-260820-KX7M"
+    "customer_business": "Gulf Lotus Trading LLC",
+    "customer_cr": "1234567",
+    "customer_city": "Muscat",
+    "plan": "deposit",
+    "items": "website,dashboard,autopilot",
+    "order_amount": "100000 of 2200000 baisa (founding)"
   }
 }
 ```
 
 Constraints that bite:
+
+- **`metadata` takes at most 10 items** — *verified UAT*, the hard way. An
+  eleventh key does not get dropped; it fails the whole session:
+
+  ```json
+  {"success": false, "code": 4000, "description": "Invalid information",
+   "data": {"error": [{"field": "metadata",
+                       "message": "Metadata cant have more than 10 items"}]}}
+  ```
+
+  A session that fails is an order that falls back to WhatsApp, so the ten keys
+  are a budget to spend deliberately, not a limit to discover in production.
+  That is why the three money figures share one `order_amount` key instead of
+  taking three slots — it buys back room for the buyer's CR number and city.
+  No value-length limit is published; `lib/thawani.js` caps values at 100
+  characters on its own judgement.
+
+- **The metadata round-trips intact** — *verified UAT*. `GET
+  /checkout/session/{id}` returns the full object, which is what lets the
+  payment-landed alert name the buyer without consulting the ledger at all.
+
+- The buyer's free-text `notes` is **not** sent. It is unbounded prose typed
+  into a form, and Thawani is a payment processor, not our CRM. It goes to the
+  ledger.
 
 - **`unit_amount` is an integer number of baisa.** 20 OMR is `20000`. Decimals
   are rejected. This is why `pay.py` holds every price as baisa and never
@@ -155,7 +192,14 @@ Constraints that bite:
   `pay.CATALOG` are safe to send as-is.
 - `success_url` / `cancel_url` must be absolute `https://` URLs. Put the
   reference in them — the redirect back carries no body.
-- A session is **single-use and expires after 24 hours** by default.
+- A session is **single-use and expires after 24 hours** — *verified UAT*: the
+  response carries `expire_at` exactly 24h out, and `mode: "payment"`.
+
+- **The products array is what gets charged**, not any total we declare. So the
+  lines must sum to exactly the amount due. An order paid in full is itemised;
+  a deposit or an instalment is one honest line, because a slice of a total has
+  no itemisation. `lib/thawani.js` throws rather than send a list that does not
+  add up.
 
 Success response carries `code: 2004`:
 
@@ -183,47 +227,92 @@ GET {base}/api/v1/checkout/session/{session_id}
 Thawani-Api-Key: {SECRET_KEY}
 ```
 
-`data.payment_status` is `paid` / `unpaid` / `cancelled`.
+`data.payment_status` is `paid` / `unpaid` / `cancelled`. Success here is
+`code: 2000`, not 2004 — *verified UAT*. The response also carries
+`client_reference_id`, `total_amount`, `invoice` and the full `metadata`, which
+between them are enough to identify an order with no local state at all.
 
 **Do not treat the return redirect as proof of payment** — always ask this
 endpoint. `/en/order-v4/` is built on that assumption and will not claim a
 payment succeeded without it.
 
+### Recurring payments
+
+The Growth Desk's monthly fee needs card-on-file, which is Thawani's 2nd
+scenario. Create a customer, pass `customer_id` and `save_card_on_success: true`
+on the session, then charge later through a payment intent against the saved
+card. The infrastructure for this is built —
+`backend/checkout-api/SUBSCRIPTIONS.md` has the verified call-by-call detail
+and the one open question, which is whether a saved-card charge needs the
+cardholder to complete an OTP every time. If it does, Thawani offers one-click
+repeat payment rather than unattended subscriptions.
+
+**A trap that applies to every call on this page: Thawani silently ignores
+unknown fields.** A session posted with `totally_made_up_field_xyz` still
+returns `2004 Session generated successfully` — *verified UAT*. A misspelled
+field name does not error, it quietly does nothing. The only proof a field
+landed is reading it back off the retrieved session.
+
 ### Not verified
 
-- **Webhooks.** Thawani's docs list them, but the integration read for this
-  document polls the session endpoint instead. Until a webhook is confirmed
-  working, treat the `GET /session/{id}` check as the source of truth, and
-  reconcile against the Thawani merchant portal daily.
-- **Per-transaction ceilings.** No published limit was found. Ask Thawani
-  directly before relying on a single OMR 2,200 or OMR 3,400 card payment —
-  if there is a ceiling, the slot deposit and the three-payment plan are
-  already the way around it.
+- **Webhooks.** Thawani's docs list them, but the signature scheme is
+  unconfirmed and the service does not implement them — trusting an
+  unauthenticated callback about money is not worth the convenience. `GET
+  /session/{id}` polling is the source of truth; reconcile against the Thawani
+  merchant portal daily.
+- ~~**Per-transaction ceilings.**~~ **Settled** — *verified UAT* by asking the
+  API to refuse. Checkout session: `unit_amount` between **1 and 5,000,000
+  baisa** (OMR 5,000) per product line, with a floor of 100 baisa on the
+  session. Payment intent: `amount` between **100 and 9,999,000 baisa**
+  (OMR 0.100–9,999). Both sit far above the dearest thing we sell (the
+  standard-column Operator Stack, OMR 3,400), so a single card payment for a
+  whole order is within limits. What is still unproven is whether an *acquirer*
+  approves a charge that size — creation accepting the amount is not the bank
+  accepting the payment, and only a paid test shows that.
 - **Refunds via API.** Not checked. Assume refunds are done in the portal.
 
 ---
 
-## 4. What the server has to do
+## 4. What the server does
 
-1. Validate the body. Reject anything without a name, business, email and
-   phone, and anything whose `items` are not in the catalog.
-2. **Re-price the order from its own table.** Port `pay.quote()` — the same
-   function the page runs — and compare against `quoted_due` / `quoted_total`.
-   Refuse on mismatch.
-3. Write the order to a ledger *before* calling Thawani, so an order exists even
-   if the gateway call fails. The Smart Storefront's Google Sheet ledger
-   (`storefront-offer-api/lib/sheet.js`) is the working precedent.
-4. Create the Thawani session, store `session_id` and `invoice` against the
-   order, return the redirect.
-5. On `GET /session/{id}`, ask Thawani, update the ledger, and return the four
-   public fields.
-6. Notify — an email and a WhatsApp to Nahid the moment a payment lands. An
-   order nobody sees is worse than no order.
+All six of these are implemented in `backend/checkout-api/` — see its README.
+
+1. Validates the body. Rejects anything without a name, business, email and
+   phone, anything whose `items` are not in the catalog, and Pay on Proof,
+   which is invoiced rather than charged.
+2. **Re-prices the order from its own table** and compares against
+   `quoted_due` / `quoted_total`. Refuses on mismatch, with a 409 and a
+   buyer-readable message. `lib/pricing.js` is the port of `pay.quote()`, and
+   `test/parity.test.js` runs `pay.py` itself over all 32 basket × plan
+   combinations to prove the two have not drifted.
+3. Writes the order to the ledger *before* calling Thawani, so an order exists
+   even if the gateway call fails. A Google Sheet when `CHECKOUT_SHEET_ID` is
+   set — same pattern as `storefront-offer-api/lib/sheet.js` — and one line of
+   JSON on stdout either way, so the guarantee holds with no sheet at all.
+4. Creates the Thawani session with the ten metadata keys, stores `session_id`
+   and `invoice` against the order, returns the redirect. Idempotent on
+   `reference`, so a double-click reuses the session it already made.
+5. On `GET /session/{id}`, asks Thawani, updates the ledger, and returns the
+   four public fields and nothing else.
+6. Notifies — an email to Nahid the first time a session reads back `paid`,
+   naming the buyer from the metadata Thawani hands back. An order nobody sees
+   is worse than no order.
 
 **Only a `paid` status is money.** Mirror the Smart Storefront's rule: nothing
 counts until it is confirmed, and Nahid stays in the loop by hand.
 
+### The price table gets there by export, not by hand
+
+`tools/v4/export_catalog.py` writes `backend/checkout-api/catalog.json` straight
+out of `pay.py`, and `tools/build_v4.py` runs it on every build. The arithmetic
+is ported; the numbers are transported. Change a price and the exporter says out
+loud that the file moved — which is the moment the service needs redeploying.
+
 ### Environment
+
+See `backend/checkout-api/.env.example`. The UAT keys from the Thawani Mini
+Document are in `.env.uat`, which is gitignored — `npm run smoke` uses it to put
+a real session through UAT from this machine.
 
 ```
 THAWANI_SECRET_KEY=…       # server only, never sent to a browser
@@ -231,6 +320,8 @@ THAWANI_PUBLISHABLE_KEY=…  # appears in the redirect URL
 THAWANI_BASE=https://uatcheckout.thawani.om
 SITE_ORIGIN=https://aiprofitlab.io
 ALLOWED_ORIGINS=https://aiprofitlab.io
+CHECKOUT_SHEET_ID=…        # optional; without it, orders go to the logs
+RESEND_API_KEY=…           # optional; without it, alerts are logged and skipped
 ```
 
 CORS must be an allowlist of exactly that origin — this endpoint creates
@@ -272,6 +363,8 @@ Because it is one switch, none of those four can be left saying the old thing.
 ### Before flipping it
 
 - [ ] Thawani merchant account approved, live keys issued
+- [ ] `npm test` green in `backend/checkout-api/` (the parity check is the one
+      that matters — it proves the service prices an order the way the page did)
 - [ ] `checkout-api` deployed, `GET /health` answering
       (**not** `/healthz` — Cloud Run's frontend intercepts that path)
 - [ ] A full UAT run: pay, land on `/en/order-v4/?status=success`, see it turn

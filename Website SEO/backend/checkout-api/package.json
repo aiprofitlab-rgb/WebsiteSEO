@@ -1,0 +1,22 @@
+{
+  "name": "checkout-api",
+  "version": "1.0.0",
+  "description": "Creates Thawani payment sessions for the AI Profit Lab v4 checkout and reports what happened to them",
+  "main": "server.js",
+  "type": "commonjs",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test test/*.test.js",
+    "smoke": "node --env-file=.env.uat scripts/smoke.js",
+    "dev": "node --env-file=.env.uat server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "googleapis": "^171.4.0",
+    "resend": "^6.9.1"
+  }
+}

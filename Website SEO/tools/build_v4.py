@@ -96,7 +96,10 @@ def render(mod, lang="en"):
         .replace("{{HEADEXTRA}}", head_extra)
         .replace("{{SCHEMA}}", schema)
         .replace("{{CSS}}", css)
-        + kit.header(meta["nav"], lang)
+        # `other` is the third field of the PAGES row - the twin URL that also
+        # feeds {{ALTERNATES}} above, so the visible toggle and the hreflang
+        # alternate are the same string by construction.
+        + kit.header(meta["nav"], lang, other)
         + m.body()
         + kit.pager(*meta["next"], lang=lang)
         + kit.footer(lang)
@@ -164,3 +167,18 @@ if __name__ == "__main__":
             print(f"  ok prices in pay.py match {svc.relative_to(ROOT)}")
     if failed:
         sys.exit(1)
+
+    # ----------------------------------------------------------------------
+    # Ship the same table to the checkout server.
+    #
+    # backend/checkout-api/ re-prices every order from its own copy - it must
+    # never charge the number the browser sent - so it needs the price table
+    # too. Exporting it here means a price cannot be changed in pay.py and
+    # rebuilt into the pages while the service keeps quoting the old one; the
+    # only remaining step is redeploying the service, which the exporter says
+    # out loud when the file actually changed.
+    # ----------------------------------------------------------------------
+    import export_catalog  # noqa: E402
+    dest, changed = export_catalog.write()
+    print(f"  {'NEW' if changed else 'ok '} {dest.relative_to(ROOT)}"
+          + ("  <- prices moved: redeploy checkout-api" if changed else ""))

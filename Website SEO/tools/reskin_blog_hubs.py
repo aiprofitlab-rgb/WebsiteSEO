@@ -814,26 +814,12 @@ def schema(lang, entries):
 
 
 def header(lang):
-    """`blog_chrome.header` sends the language toggle to the other language's
-    HOME page. From an article hub the useful destination is the other hub, so
-    the two anchors that carry it are swapped by exact string - a blind replace
-    of the href would also hit the logo, which points at the same "/" on the
-    English pages."""
-    out = C.header(lang)
-    u, t = C.URLS[lang], C.T[lang]
-    other_lang = "ar" if lang == "en" else "en"
-    other_hub = HUBS[other_lang]["url"].replace(SITE, "")
-    for old, new in (
-        ('<a class="lnk" href="%s" lang="%s">%s</a>' % (u["other"], other_lang, t["other_lang"]),
-         '<a class="lnk" href="%s" lang="%s">%s</a>' % (other_hub, other_lang, t["other_lang"])),
-        ('<a href="%s" lang="%s"><em>07</em>%s</a>' % (u["other"], other_lang, t["other_lang"]),
-         '<a href="%s" lang="%s"><em>07</em>%s</a>' % (other_hub, other_lang, t["other_lang"])),
-    ):
-        if old not in out:
-            raise SystemExit("header(): language toggle markup changed in blog_chrome; "
-                             "update reskin_blog_hubs.header()")
-        out = out.replace(old, new)
-    return out
+    """From an article hub the useful destination for the language toggle is
+    the other hub, not the other language's home page. `blog_chrome.header`
+    takes that URL as an argument now, so this no longer has to swap two
+    anchors out of the rendered string by exact match."""
+    other_hub = HUBS["ar" if lang == "en" else "en"]["url"].replace(SITE, "")
+    return C.header(lang, other_hub)
 
 
 def render(lang, entries, css_href, js_href):

@@ -172,6 +172,19 @@ def hreflang(slug, existing):
     return [("en", en), ("ar", ar), ("x-default", en)]
 
 
+def twin_url(slug, lang):
+    """Where the language toggle in the header should go from this article: the
+    same article in the other language. Every article is filed under the same
+    filename in both trees, so the pair is derivable from the slug - the same
+    fact hreflang() above relies on. An article with no twin falls back to the
+    other language's ARTICLE HUB rather than its home page: a reader who was
+    reading gets handed a reading surface."""
+    other = "ar" if lang == "en" else "en"
+    if (BLOG / other / f"{slug}.html").exists():
+        return f"/blog/{other}/{slug}/"
+    return "/blog-ar/" if other == "ar" else "/blog/"
+
+
 def _ord(iso):
     try:
         y, m, d = (int(x) for x in iso.split("-"))
@@ -415,7 +428,7 @@ def render(doc, slug, lang, idx, css_href, js_href):
     doc["jsonld"] = add_breadcrumbs(doc, lang, cat)
 
     return (C.head(doc, og, css_href, js_href)
-            + C.header(lang)
+            + C.header(lang, twin_url(slug, lang))
             + body
             + C.footer(lang)
             + "</body>\n</html>\n")

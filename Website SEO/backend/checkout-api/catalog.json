@@ -1,0 +1,82 @@
+{
+  "currency": "OMR",
+  "baisa": 1000,
+  "founding": true,
+  "deposit": 100000,
+  "base": "website",
+  "items": [
+    {
+      "id": "website",
+      "kind": "build",
+      "name": "The Smart Website",
+      "required": true,
+      "price": 950000
+    },
+    {
+      "id": "dashboard",
+      "kind": "build",
+      "name": "The Live Owner Dashboard",
+      "required": false,
+      "price": 650000
+    },
+    {
+      "id": "autopilot",
+      "kind": "build",
+      "name": "The Full Autopilot",
+      "required": false,
+      "price": 900000
+    },
+    {
+      "id": "desk",
+      "kind": "monthly",
+      "name": "The Growth Desk",
+      "required": false,
+      "price": 75000
+    }
+  ],
+  "bundle": {
+    "id": "stack",
+    "name": "The Operator Stack",
+    "requires": [
+      "dashboard",
+      "autopilot"
+    ],
+    "price": 2200000,
+    "saving": 300000
+  },
+  "plans": [
+    {
+      "id": "deposit",
+      "label": "Reserve a build slot",
+      "card": true,
+      "due": "deposit",
+      "surcharge": 0,
+      "split": 1
+    },
+    {
+      "id": "full",
+      "label": "Pay in full",
+      "card": true,
+      "due": "total",
+      "surcharge": 0,
+      "split": 1
+    },
+    {
+      "id": "three",
+      "label": "Three payments",
+      "card": true,
+      "due": "first",
+      "surcharge": 70000,
+      "split": 3
+    },
+    {
+      "id": "proof",
+      "label": "Pay on Proof",
+      "card": false,
+      "due": "zero",
+      "surcharge": 200000,
+      "split": 1
+    }
+  ],
+  "name_max": 40
+}

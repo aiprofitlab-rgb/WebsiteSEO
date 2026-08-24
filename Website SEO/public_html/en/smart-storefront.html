@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
-<title>The Smart Storefront — AI Profit Lab</title>
+<title>The Smart Website — AI Profit Lab</title>
 <meta name="description" content="A bilingual website that answers your buyers at 4am, sends the serious ones to your WhatsApp, and tells you who is about to buy. One-time price, one year of hosting and care included."/>
 <!-- Runs alongside the existing offer page. Flip to index,follow at handover. -->
 <meta name="robots" content="noindex, follow"/>
 <meta name="author" content="AI Profit Lab"/>
 <meta name="theme-color" content="#0A3D30"/>
 
-<meta property="og:title" content="The Smart Storefront — AI Profit Lab"/>
+<meta property="og:title" content="The Smart Website — AI Profit Lab"/>
 <meta property="og:description" content="You scanned the paper one. Here is what the paper becomes."/>
 <meta property="og:url" content="https://aiprofitlab.io/en/smart-storefront/"/>
 <meta property="og:type" content="website"/>
@@ -394,9 +394,16 @@ nav{position:sticky;top:0;z-index:60;background:rgba(241,239,232,.93);backdrop-f
 
 /* ══ pledges — off unless the gate script above opened them ══ */
 #pledges,.pledge-only,.pledge-only-b{display:none}
-html.pledges-on #pledges{display:block}
+html.pledges-on #pledges{display:block;padding-bottom:0}
 html.pledges-on .pledge-only{display:inline}
 html.pledges-on .pledge-only-b{display:block}
+/* The chase section is never gated — only its intro line changes. With the board
+   open it tucks straight under the maths panel, exactly as it used to. */
+.nopledge{display:block}
+html.pledges-on .nopledge{display:none}
+#chase .chase{margin-top:0}
+html.pledges-on #chase{padding-top:0}
+html.pledges-on #chase .chase{margin-top:34px}
 
 /* ══ pledges — the percentage stays hidden until a tap earns it ══ */
 .pledges{display:grid;gap:11px;max-width:640px}
@@ -550,7 +557,7 @@ footer a{color:var(--amber-pale)}
     <div>
       <p class="eyebrow"><span class="star">✼</span> You scanned the paper one</p>
       <h1>It sells while you sleep.</h1>
-      <p class="sub">A bilingual storefront that answers your buyers in Arabic or English &mdash; any hour &mdash; and hands the serious ones to your WhatsApp.</p>
+      <p class="sub">A bilingual smart website that answers your buyers in Arabic or English &mdash; any hour &mdash; and hands the serious ones to your WhatsApp.</p>
 
       <div class="hero-ctas">
         <a class="btn btn-cream" href="#roast">Show me mine</a>
@@ -567,7 +574,7 @@ footer a{color:var(--amber-pale)}
 
     <div class="stage" id="stage">
       <div class="flyer" id="flyer" aria-hidden="true"></div>
-      <div class="phone" id="phone" role="img" aria-label="A phone showing the bilingual storefront the flyer becomes: an Arabic and English site with a bulk quote button, a WhatsApp button, a live buyer conversation, and a new-inquiry notification.">
+      <div class="phone" id="phone" role="img" aria-label="A phone showing the bilingual smart website the flyer becomes: an Arabic and English site with a bulk quote button, a WhatsApp button, a live buyer conversation, and a new-inquiry notification.">
         <div class="pscreen">
           <div class="ptop"><b>YOUR BUSINESS</b><span class="ptag">AR</span><span class="ptag">EN</span></div>
           <div class="pbody">
@@ -601,7 +608,7 @@ footer a{color:var(--amber-pale)}
       <div>
         <q>No real buyer inquiry within 30 days of going live? I rebuild it free until you get one. If you still don't, you get your money back.</q>
         <p class="sig">— Nahid Abyari</p>
-        <p class="sigsub">I build every Storefront myself · Lotus Gulf International, Muscat</p>
+        <p class="sigsub">AI Profit Lab CEO</p>
       </div>
     </div>
   </div>
@@ -705,8 +712,18 @@ footer a{color:var(--amber-pale)}
       </div>
     </div>
 
+  </div>
+</section>
+
+<!-- ═══ 6b. THE BUTTON THAT RUNS AWAY ═══
+     Sits outside #pledges on purpose. The pledge board is gated (see the top of
+     this file) and a child of a display:none section can never be shown again,
+     so the chase lives in its own section and survives the gate. -->
+<section id="chase">
+  <div class="wrap">
     <div class="chase rv">
-      <p class="chase-note">Some people will now look for the button that gives them even more.</p>
+      <p class="chase-note pledge-only-b">Some people will now look for the button that gives them even more.</p>
+      <p class="chase-note nopledge">Some people will now go looking for the button that knocks a bit more off.</p>
       <button type="button" id="runaway-btn">I want more discount</button>
       <div class="trophy" id="trophy">
         <span class="badge">✼ Certified Button Catcher</span>
@@ -1201,6 +1218,7 @@ footer a{color:var(--amber-pale)}
         '<p style="margin:0;color:rgba(241,239,232,.7)">Message me and I\'ll tell you honestly when the next one opens.</p>';
       document.getElementById("pledgeList").innerHTML = "";
       document.getElementById("maths").style.display = "none";
+      document.getElementById("chase").style.display = "none";
       document.getElementById("claimForm").style.display = "none";
       document.getElementById("sPrice").textContent = "sold out";
       if (stickySeats) stickySeats.textContent = "sold out";
@@ -1326,6 +1344,8 @@ footer a{color:var(--amber-pale)}
       '<p style="color:var(--muted)">The pledge board needs the live price to show you real numbers, and it isn\'t reachable right now. ' +
       '<a href="' + WA + '" target="_blank" rel="noopener">Ask me on WhatsApp</a> and I\'ll walk you through it.</p>';
     document.getElementById("maths").style.display = "none";
+    // No live price on screen means "I want more discount" has nothing to be less than.
+    document.getElementById("chase").style.display = "none";
     document.getElementById("sPrice").textContent = "ask me";
     var stickySeats = document.getElementById("sSeats");
     if (stickySeats) stickySeats.textContent = "";
