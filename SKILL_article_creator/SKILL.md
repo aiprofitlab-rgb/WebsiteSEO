@@ -120,7 +120,7 @@ To ensure all generated articles achieve a **STRONG** rating under the quality a
     - `--dry-run` at Step 5 prints the reference count it parsed. A count of 0 means the References markup drifted from the marker contract.
 
 16. **Hero Image Concept & Alt Text**:
-    - Designate a hero image concept in the outline that matches the **futuristic, semi-realistic AI aesthetic** already used across the blog, so the new card does not look foreign on the hub.
+    - Designate a hero image concept in the outline that matches a **bright, light-mode, semi-realistic AI editorial aesthetic**, ensuring the visual is set against a clean, light background (never dark mode) to align with the v4 brand hub.
     - Alt text on every image must describe its value to the brand, not just its contents:
       - English: `[image_name] - Empowering AI Solutions by AI Profit Lab to scale your business operations.`
       - Arabic: `[image_name] - حلول الذكاء الاصطناعي المبتكرة من AI Profit Lab لتطوير أعمالك.`
@@ -135,7 +135,13 @@ Set `lang="ar"` and `dir="rtl"`.
 Save it to: `public_html/blog/ar/YYYY-MM-DD-[slug-title-in-english].html`.
 
 ## Step 4: Generate the Image
-Use your `generate_image` tool to create the hero image from the concept you designated in Step 1 (criterion 16) — futuristic, semi-realistic AI, consistent with the existing blog.
+Use your `generate_image` tool to create the hero image from the concept you designated in Step 1 (criterion 16).
+**Strict Style Requirements for Image Generation:**
+- **Lighting & Tone**: Bright light-mode editorial photography, soft directional daylight, clean and expensive feel.
+- **Background**: A clean, light cream/off-white background (`#F1EFE8` or `#FAF8F2`) filling the frame.
+- **Color Palette**: Restrained palette of cream, off-white, deep teal (`#0F6E56`) accents, and subtle amber (`#BA7517`) highlights.
+- **Avoid List**: **STRICTLY NO DARK MODE, NO DARK OR BLACK BACKGROUNDS**, no neon, no glowing eyes, no sci-fi/cyberpunk clutter, no generic stock-photo look.
+
 Save the generated image to: `public_html/blog/images/[image_name].png`. Make sure both HTML files point to this exact absolute path (`/blog/images/[image_name].png`).
 
 ## Step 4.5: Internal Linking & Cornerstoning Workflow
