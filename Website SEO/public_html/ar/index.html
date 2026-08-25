@@ -31,7 +31,7 @@
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Marcellus&family=Markazi+Text:wght@400;500;600&family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" media="print" onload="this.media='all'" href="https://fonts.googleapis.com/css2?family=Marcellus&family=Markazi+Text:wght@400;500;600&family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus&family=Markazi+Text:wght@400;500;600&family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap"></noscript>
-<link rel="preload" as="image" href="/assets/cinematic/poster.webp?v=20260817" fetchpriority="high">
+<link rel="preload" as="image" href="/assets/cinematic/poster.webp?v=20260825" media="(min-width:768px)" fetchpriority="high"><link rel="preload" as="image" href="/assets/cinematic/poster-portrait.webp?v=20260825" media="(max-width:767px)" fetchpriority="high">
 <!-- Sets .js before first paint so the reveal styles apply only when there is
      JS to un-apply them. Without it, a no-JS visitor gets a blank page. -->
 <script>document.documentElement.className+=" js"</script>
@@ -908,14 +908,50 @@ html:not(.js) .stair .step,html:not(.js) .stair .anno{opacity:1;transform:none}
   .lead-cta{justify-content:flex-start}
   .beat{left:auto;right:clamp(32px,4.5vw,76px);top:50%;transform:translateY(-50%);width:min(330px,25vw);text-align:left;font-size:1.1rem}
 }
+/* Three tiers, because there are three shapes of screen and only two cuts of
+   the footage:
+
+     >= 1100px   16:9 set, full-bleed behind the copy          (unchanged)
+     768-1099px  16:9 set in a band, copy stacked underneath   (unchanged)
+     <= 767px    9:16 set, full-bleed behind the copy          (2026-08-24)
+
+   The phone tier is the new one. It replaced a band identical to the tablet
+   one, into which the 16:9 frames were covered and lost ~31% of their width -
+   tight framing inside a small window. Tablets keep the band because they
+   would otherwise upscale the 720px-wide portrait set across ~1200 device px,
+   and because a 16:9 frame covered into a full-height portrait stage crops far
+   worse than it does into a band. The breakpoint here MUST match isMobile in
+   _ported_js.py, which decides which set is fetched. */
 @media (max-width:1099px){
   .cine{height:460vh}
   .cine-ui{padding:clamp(18px,4vw,32px) 20px}
   .cine-media{height:clamp(220px,38svh,420px)}
 }
-@media (max-width:560px){
+@media (max-width:767px){
   .cine{height:420vh}
+  .cine-media{position:absolute;inset:0;height:100%;width:100%}
+  .cine-ui{position:absolute;inset:0;z-index:4;flex:none}
+  /* One vertical scrim doing two jobs: keeping the wordmark legible against
+     the top of the frame, and carrying the copy at the bottom. It rides on
+     .wash-l rather than a third element so neither language's markup moves.
+     The first 8% is near-solid on purpose: .top.solid is cream .93 with a
+     border-bottom, and against a bare frame that border read as a torn edge
+     where the header stopped and the footage began. Cream-on-cream there
+     turns it back into a header rule. */
+  .wash-l{display:block;background:linear-gradient(180deg,
+    rgba(241,239,232,.97) 0%,rgba(241,239,232,.95) 8%,rgba(241,239,232,.26) 19%,
+    rgba(241,239,232,0) 34%,rgba(241,239,232,.30) 52%,rgba(241,239,232,.80) 67%,
+    rgba(241,239,232,.93) 80%,rgba(241,239,232,.95) 100%)}
+  /* Copy in the lower third, clear of the subject the 9:16 cut frames above
+     it. Anchored by `bottom` so the CTA and the beats sit on the same line
+     whatever their height - a top/centre anchor makes a one-line beat and the
+     three-element lead land in visibly different places. */
+  .lead,.endcard,.beat{top:auto;bottom:clamp(46px,10svh,92px);transform:translateX(-50%);width:min(680px,92vw)}
+}
+@media (max-width:560px){
+  .cine{height:380vh}
   .lead h1{font-size:clamp(2.1rem,8.6vw,2.7rem)}
+  .lead .sub{margin-bottom:20px}
 }
 
 /* ---------------------------------------------- Arabic fallback metrics --
@@ -1255,9 +1291,14 @@ html:not(.js) .stair .step,html:not(.js) .stair .anno{opacity:1;transform:none}
 <section class="cine" id="cine">
   <div class="cine-stage" id="cineStage">
     <div class="cine-media" id="cineMedia">
-      <img class="cine-poster" id="cinePoster" src="/assets/cinematic/poster.webp?v=20260817"
-        alt="رسم توضيحي للمساعد الذكي: هيئة آلة تتحوّل إلى شخص ويبدأ العمل."
-        width="1440" height="810" fetchpriority="high" decoding="async">
+      <picture>
+        <!-- Portrait poster below 1100px - see the note in hero.py. -->
+        <source id="cinePosterPortrait" media="(max-width:767px)"
+          srcset="/assets/cinematic/poster-portrait.webp?v=20260825" width="1080" height="1920">
+        <img class="cine-poster" id="cinePoster" src="/assets/cinematic/poster.webp?v=20260825"
+          alt="رسم توضيحي للمساعد الذكي: هيئة آلة تتحوّل إلى شخص ويبدأ العمل."
+          width="1440" height="810" fetchpriority="high" decoding="async">
+      </picture>
       <canvas class="cine-canvas" id="cineCanvas" aria-hidden="true"></canvas>
       <div class="wash-l"></div><div class="wash-r"></div>
     </div>
@@ -1926,13 +1967,13 @@ html:not(.js) .stair .step,html:not(.js) .stair .anno{opacity:1;transform:none}
   /* Must match tools/build_cinematic_frames.py. That script prints replacement
      values if you rebuild with a different --frames. */
   const FRAMES_DESKTOP = 150;
-  const FRAMES_MOBILE = 75;
+  const FRAMES_MOBILE = 50;
 
   /* Cache-busting token for the frame set. MUST be bumped whenever the
      frames are rebuilt — build_cinematic_frames.py stamps it automatically.
      The host serves these immutable with positional filenames, so without a
      version token edge nodes can mix two builds of the same sequence. */
-  const ASSET_V = "20260817";
+  const ASSET_V = "20260825";
 
   const sect = document.getElementById("cine");
   const stage = document.getElementById("cineStage");
@@ -1957,13 +1998,19 @@ html:not(.js) .stair .step,html:not(.js) .stair .anno{opacity:1;transform:none}
      one image has to carry the whole story, and reveal all copy statically. */
   if (matchMedia("(prefers-reduced-motion: reduce)").matches) {
     poster.src = "/assets/cinematic/still.webp?v=" + ASSET_V;
+    const psrc = document.getElementById("cinePosterPortrait");
+    if (psrc) psrc.srcset = "/assets/cinematic/still-portrait.webp?v=" + ASSET_V;
     lead.classList.add("on");
     endcard.classList.add("on");
     beats.forEach(b => b.classList.add("on"));
     return;
   }
 
-  const isMobile = matchMedia("(max-width: 768px)").matches;
+  /* MUST match the full-bleed breakpoint in hero.py HERO_CSS. The stage
+     goes full-bleed portrait at 767px and keeps the 16:9 band above it,
+     so a width that gets the portrait stage must also get the portrait set -
+     otherwise the stage is 9:16 and the frames painted into it are 16:9. */
+  const isMobile = matchMedia("(max-width: 767px)").matches;
   const DIR = isMobile ? "mobile" : "desktop";
   const N = isMobile ? FRAMES_MOBILE : FRAMES_DESKTOP;
 
@@ -1975,7 +2022,7 @@ html:not(.js) .stair .step,html:not(.js) .stair .anno{opacity:1;transform:none}
   let started = false;
 
   function resize() {
-    const dpr = Math.min(devicePixelRatio || 1, 2);   // capping at 2 matters
+    const dpr = Math.min(devicePixelRatio || 1, isMobile ? 1.5 : 2);
     const w = media.clientWidth;
     const h = media.clientHeight;
     if (!w || !h) return;
@@ -2199,6 +2246,6 @@ html:not(.js) .stair .step,html:not(.js) .stair .anno{opacity:1;transform:none}
   render();
 })();
 </script>
-    <script defer src="/js/aiden-chat.js?v=6ed58fdc"></script>
+<script defer src="/js/aiden-chat.js?v=6ed58fdc"></script>
 </body>
 </html>

@@ -63,8 +63,16 @@ def render(mod, lang="en"):
         js += _ported_js.CINE_JS
         # Frame 0 is the LCP image on the homepage. ?v= must match ASSET_V in
         # the scrub script, which is why both are bumped by the frame builder.
+        # Two preloads, each gated by the media query the <picture> uses: the
+        # stage is 16:9 above 1100px and full-bleed 9:16 below it, and an
+        # ungated preload would fetch the landscape poster on phones as well
+        # as the portrait one they actually paint.
         head_extra = ('<link rel="preload" as="image" '
-                      'href="/assets/cinematic/poster.webp?v=20260817" fetchpriority="high">')
+                      'href="/assets/cinematic/poster.webp?v=20260825" '
+                      'media="(min-width:768px)" fetchpriority="high">'
+                      '<link rel="preload" as="image" '
+                      'href="/assets/cinematic/poster-portrait.webp?v=20260825" '
+                      'media="(max-width:767px)" fetchpriority="high">')
     if meta.get("calc"):
         import _ported_js
         js += _ported_js.calc_js(lang)

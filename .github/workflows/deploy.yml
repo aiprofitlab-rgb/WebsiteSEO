@@ -3,6 +3,14 @@ on:
   push:
     branches:
       - main
+  # Manual trigger. Without this the only way to force a deploy from the
+  # GitHub UI is "Re-run jobs" on an old run -- and that is destructive:
+  # the FTP action syncs the CHECKED-OUT COMMIT against the server's
+  # .ftp-deploy-sync-state.json, so re-running a stale run rolls the live
+  # site BACKWARDS (deletes files added since that commit). Run #268 did
+  # exactly this on 2026-08-25 and died on "550 /assets/email".
+  # Always deploy the tip of main from here instead.
+  workflow_dispatch:
 
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true

@@ -1,6 +1,11 @@
 #!/usr/bin/env python3
 """
-Build the scroll-scrub frame sequence for public_html/en/index-cinematic.html.
+Build the scroll-scrub frame sequence for the homepage hero.
+
+Two sets: 16:9 for the stage above 1100px, 9:16 for the full-bleed phone
+stage below it. The pages that consume them are generated, so this script
+also stamps the frame counts and the ?v= token into tools/v4/ and
+tools/build_v4.py - see stamp_asset_version().
 
 Lives outside public_html/ on purpose: the FTP deploy mirrors that directory,
 so anything left in it is publicly readable at the site root.
@@ -11,14 +16,20 @@ the already-installed imageio-ffmpeg package, plus Pillow for WebP encoding.
     # before any Kling asset exists — testable placeholder sequence
     python3 tools/build_cinematic_frames.py --placeholder
 
-    # once the assembled video exists
+    # once the assembled video exists (16:9 drives desktop, 9:16 drives mobile)
+    python3 tools/build_cinematic_frames.py \
+        --from-video ~/Desktop/assembled.mp4 \
+        --from-video-mobile ~/Desktop/assembled-9x16.mp4
+
+    # no portrait cut to hand: mobile falls back to a centre crop of the
+    # landscape one, which is a stopgap and says so
     python3 tools/build_cinematic_frames.py --from-video ~/Desktop/assembled.mp4
 
     # how heavy is it?
     python3 tools/build_cinematic_frames.py --report
 
-If you change --frames, the page constants must change too; the script prints
-the exact lines to paste.
+Changing --frames is safe: the frame counts in tools/v4/_ported_js.py are
+rewritten to match whatever ends up on disk.
 """
 
 import argparse
@@ -34,20 +45,41 @@ from PIL import Image, ImageDraw
 
 REPO = Path(__file__).resolve().parent.parent
 OUT = REPO / "public_html" / "assets" / "cinematic"
-PAGE = REPO / "public_html" / "en" / "index-cinematic.html"
 
-# Frame counts. Mobile is every 2nd desktop frame.
-# 150 samples the 14.5s source at ~10 fps. 90 (~6 fps) was visibly steppy under
-# the scrub even with cross-fade blending on the page side.
+# The homepage is generated, so the constants these frames must agree with live
+# in the generator, not in a page. (en/index-cinematic.html was the v3
+# prototype; it is not what ships, and stamping it left the live pages
+# pointing at ?v= values from an older build.)
+GEN_JS = REPO / "tools" / "v4" / "_ported_js.py"          # ASSET_V + FRAMES_*
+GEN_FILES = [
+    GEN_JS,
+    REPO / "tools" / "v4" / "hero.py",                    # poster ?v=
+    REPO / "tools" / "v4" / "ar" / "page_home_ar.py",     # poster ?v=, Arabic
+    REPO / "tools" / "build_v4.py",                       # preload ?v=
+]
+
+# Frame counts. 150 samples the 14.5s source at ~10 fps. 90 (~6 fps) was
+# visibly steppy under the scrub even with cross-fade blending on the page side.
 FRAMES = 150
-DESKTOP_W, DESKTOP_H = 1440, 810
-MOBILE_W, MOBILE_H = 900, 506
-QUALITY_DESKTOP = 72
-QUALITY_MOBILE = 68
+MOBILE_STRIDE = 3           # -> 50 mobile frames; see the note below
 
-# Budget the page is designed around.
+DESKTOP_W, DESKTOP_H = 1440, 810      # 16:9, the stage above 1100px
+
+# 9:16 from 2026-08-24. Below 1100px the stage is full-bleed portrait, so the
+# mobile set is its own vertical cut rather than a scaled copy of the
+# landscape one. 720x1280 with the canvas capped at 1.5x DPR covers a 390pt
+# phone (585 device px) with room to spare; going to 1080 wide tripled the
+# decoded-in-memory cost of the sequence for pixels no phone paints.
+MOBILE_W, MOBILE_H = 720, 1280
+QUALITY_DESKTOP = 72
+QUALITY_MOBILE = 66
+
+# Budget the page is designed around. Mobile is higher than the 1.5 MB of the
+# 16:9 era on purpose: a full-screen portrait frame is ~2x the pixels of the
+# old 900x506 band. MOBILE_STRIDE pays most of that back by shipping 50 frames
+# where the band shipped 75 - the cross-dissolve carries the difference.
 BUDGET_DESKTOP_MB = 4.0
-BUDGET_MOBILE_MB = 1.5
+BUDGET_MOBILE_MB = 2.2
 
 # Brand Playbook v2
 CREAM = (241, 239, 232)
@@ -278,40 +310,71 @@ def build_placeholder(frames: int, recolor: bool = True) -> None:
 # ---------------------------------------------------------- video extraction
 
 
-def build_from_video(video: Path, frames: int, recolor: bool = True) -> None:
-    if not video.exists():
-        sys.exit(f"No such video: {video}")
+def extract(video: Path, frames: int, W: int, H: int, dest: Path) -> float:
+    """Sample `frames` evenly across `video`, covered into W x H. Returns dur."""
     dur = video_duration(video)
     fps = frames / dur
-    print(f"{video.name}: {dur:.2f}s -> sampling {frames} frames at {fps:.3f} fps")
+    print(f"{video.name}: {dur:.2f}s {W}x{H} -> {frames} frames at {fps:.3f} fps")
+    subprocess.run(
+        [
+            ffmpeg_exe(), "-y", "-i", str(video),
+            "-vf", f"fps={fps:.6f},scale={W}:{H}:force_original_"
+                   f"aspect_ratio=increase,crop={W}:{H}",
+            "-frames:v", str(frames),
+            str(dest / "src-%03d.png"),
+        ],
+        check=True,
+        capture_output=True,
+    )
+    got = sorted(dest.glob("src-*.png"))
+    if not got:
+        sys.exit(f"ffmpeg produced no frames from {video.name}.")
+    # ffmpeg is 1-indexed and can come up one short on rounding; normalise.
+    for idx, f in enumerate(got):
+        f.rename(dest / f"norm-{idx:03d}.png")
+    norm = sorted(dest.glob("norm-*.png"))
+    while len(norm) < frames:
+        shutil.copy(norm[-1], dest / f"norm-{len(norm):03d}.png")
+        norm = sorted(dest.glob("norm-*.png"))
+    for idx, f in enumerate(norm[:frames]):
+        f.rename(dest / f"src-{idx:03d}.png")
+    print(f"  extracted {frames} frames.")
+    return dur
+
+
+def build_from_video(video: Path, frames: int, recolor: bool = True,
+                     video_mobile: Path | None = None) -> None:
+    if not video.exists():
+        sys.exit(f"No such video: {video}")
+    if video_mobile is not None and not video_mobile.exists():
+        sys.exit(f"No such video: {video_mobile}")
+
+    mobile_frames = math.ceil(frames / MOBILE_STRIDE)
 
     with tempfile.TemporaryDirectory() as tmp:
         tmpd = Path(tmp)
-        subprocess.run(
-            [
-                ffmpeg_exe(), "-y", "-i", str(video),
-                "-vf", f"fps={fps:.6f},scale={DESKTOP_W}:{DESKTOP_H}:force_original_"
-                       f"aspect_ratio=increase,crop={DESKTOP_W}:{DESKTOP_H}",
-                "-frames:v", str(frames),
-                str(tmpd / "src-%03d.png"),
-            ],
-            check=True,
-            capture_output=True,
-        )
-        got = sorted(tmpd.glob("src-*.png"))
-        if not got:
-            sys.exit("ffmpeg produced no frames.")
-        # ffmpeg is 1-indexed and can come up one short on rounding; normalise.
-        for idx, p in enumerate(got):
-            p.rename(tmpd / f"norm-{idx:03d}.png")
-        norm = sorted(tmpd.glob("norm-*.png"))
-        while len(norm) < frames:
-            shutil.copy(norm[-1], tmpd / f"norm-{len(norm):03d}.png")
-            norm = sorted(tmpd.glob("norm-*.png"))
-        for idx, p in enumerate(norm[:frames]):
-            p.rename(tmpd / f"src-{idx:03d}.png")
-        print(f"Extracted {frames} frames.")
-        encode_sets(tmpd, frames, recolor)
+        dur = extract(video, frames, DESKTOP_W, DESKTOP_H, tmpd)
+
+        msrc = None
+        if video_mobile is not None:
+            msrc = tmpd / "portrait"
+            msrc.mkdir()
+            mdur = extract(video_mobile, mobile_frames, MOBILE_W, MOBILE_H, msrc)
+            # Both sets are sampled evenly across their own duration, so the
+            # scrub maps position -> frame identically only while the two cuts
+            # run the same length. If they drift, the beat markers on the page
+            # (data-at="0.16" ...) land on the wrong moment on phones only,
+            # which is a bug nobody finds by looking at a desktop browser.
+            if abs(mdur - dur) > 0.25:
+                print(f"\n  ! The portrait cut is {mdur:.2f}s and the landscape "
+                      f"cut is {dur:.2f}s.\n"
+                      "    They must be the same length beat for beat, or the "
+                      "copy on the page\n    will fire against the wrong "
+                      "moment on phones. Re-export, or re-time\n    the "
+                      "data-at values in tools/v4/hero.py for mobile.\n")
+
+        encode_sets(tmpd, frames, recolor,
+                    mobile_src=msrc, mobile_frames=mobile_frames)
 
 
 # --------------------------------------------------------------- hud recolor
@@ -377,7 +440,34 @@ def recolor_hud(im: Image.Image) -> tuple[Image.Image, bool]:
 # ------------------------------------------------------------ webp encoding
 
 
-def encode_sets(src_dir: Path, frames: int, recolor: bool = True) -> None:
+def centre_crop(im: Image.Image, aw: int, ah: int) -> Image.Image:
+    """Crop to the aw:ah aspect around the centre, without scaling."""
+    W, H = im.size
+    target = aw / ah
+    if W / H > target:                      # too wide: trim the sides
+        w = int(round(H * target))
+        x = (W - w) // 2
+        return im.crop((x, 0, x + w, H))
+    h = int(round(W / target))              # too tall: trim top and bottom
+    y = (H - h) // 2
+    return im.crop((0, y, W, y + h))
+
+
+def encode_sets(src_dir: Path, frames: int, recolor: bool = True,
+                mobile_src: Path | None = None, mobile_frames: int = 0) -> None:
+    """
+    Encode both frame sets.
+
+    src_dir holds the landscape frames, which drive the desktop set and the
+    landscape stills.
+
+    mobile_src, when given, holds an independently framed 9:16 cut of the same
+    story, and that is the point of the portrait build: below 1100px the stage
+    is full-bleed vertical, and a centre crop of a 16:9 shot keeps only 32% of
+    its width - the subject survives, the composition does not. The crop path
+    below stays as a stopgap so the phone hero is never left letterboxed while
+    a portrait cut is being rendered; it prints as a stopgap when it runs.
+    """
     desktop = OUT / "desktop"
     mobile = OUT / "mobile"
     for dirp in (desktop, mobile):
@@ -385,8 +475,9 @@ def encode_sets(src_dir: Path, frames: int, recolor: bool = True) -> None:
             shutil.rmtree(dirp)
         dirp.mkdir(parents=True)
 
-    mobile_n = 0
     recoloured = 0
+
+    # ---- desktop, 16:9
     for i in range(frames):
         src = src_dir / f"src-{i:03d}.png"
         im = Image.open(src).convert("RGB")
@@ -395,52 +486,94 @@ def encode_sets(src_dir: Path, frames: int, recolor: bool = True) -> None:
             im, changed = recolor_hud(im)
             if changed:
                 recoloured += 1
-                im.save(src)          # keep stills in step with the sequence
+                im.save(src)          # keep stills and the crop path in step
 
         im.resize((DESKTOP_W, DESKTOP_H), Image.LANCZOS).save(
             desktop / f"f-{i:03d}.webp", "WEBP", quality=QUALITY_DESKTOP, method=6
         )
-        if i % 2 == 0:
+
+    # ---- mobile, 9:16
+    mobile_n = 0
+    if mobile_src is not None:
+        for i in range(mobile_frames):
+            src = mobile_src / f"src-{i:03d}.png"
+            im = Image.open(src).convert("RGB")
+            if recolor:
+                im, changed = recolor_hud(im)
+                if changed:
+                    recoloured += 1
+                    im.save(src)
             im.resize((MOBILE_W, MOBILE_H), Image.LANCZOS).save(
                 mobile / f"f-{mobile_n:03d}.webp", "WEBP",
                 quality=QUALITY_MOBILE, method=6,
             )
             mobile_n += 1
+    else:
+        print("  ! No portrait cut given: cropping the landscape frames 9:16.\n"
+              "    Stopgap only - it throws away two thirds of every frame.\n"
+              "    Re-run with --from-video-mobile once the vertical cut exists.")
+        for i in range(0, frames, MOBILE_STRIDE):
+            im = Image.open(src_dir / f"src-{i:03d}.png").convert("RGB")
+            centre_crop(im, 9, 16).resize((MOBILE_W, MOBILE_H), Image.LANCZOS).save(
+                mobile / f"f-{mobile_n:03d}.webp", "WEBP",
+                quality=QUALITY_MOBILE, method=6,
+            )
+            mobile_n += 1
 
-    # Two stills, and the distinction matters:
-    #   poster.webp — frame 0. Painted under the canvas so the very first thing
-    #                 on screen is the same image the scrub starts from. Using
-    #                 the last frame here would flash "at work" and then jump
-    #                 back to "standby" once the canvas took over.
-    #   still.webp  — last frame. Swapped in only on prefers-reduced-motion and
-    #                 in <noscript>, where one image has to tell the whole story.
+    # Two stills per orientation, and the distinction matters:
+    #   poster* — frame 0. Painted under the canvas so the very first thing on
+    #             screen is the same image the scrub starts from. Using the
+    #             last frame here would flash "at work" and then jump back to
+    #             "standby" once the canvas took over. It is also the LCP
+    #             element, which is why each viewport preloads only its own.
+    #   still*  — last frame. Swapped in only on prefers-reduced-motion, where
+    #             one image has to tell the whole story.
     for name, idx, q in (("poster", 0, 82), ("still", frames - 1, 82)):
         Image.open(src_dir / f"src-{idx:03d}.png").convert("RGB").resize(
             (DESKTOP_W, DESKTOP_H), Image.LANCZOS
         ).save(OUT / f"{name}.webp", "WEBP", quality=q, method=6)
 
-    print(f"Wrote {frames} desktop + {mobile_n} mobile frames + poster + still.")
+    for name, idx, q in (("poster-portrait", 0, 80),
+                         ("still-portrait", mobile_n - 1, 80)):
+        if mobile_src is not None:
+            im = Image.open(mobile_src / f"src-{idx:03d}.png").convert("RGB")
+        else:
+            src_idx = min(idx * MOBILE_STRIDE, frames - 1)
+            im = centre_crop(
+                Image.open(src_dir / f"src-{src_idx:03d}.png").convert("RGB"), 9, 16)
+        im.resize((MOBILE_W, MOBILE_H), Image.LANCZOS).save(
+            OUT / f"{name}.webp", "WEBP", quality=q, method=6)
+
+    print(f"Wrote {frames} desktop + {mobile_n} mobile frames + 4 stills.")
     if recolor:
         print(f"HUD recolour: {recoloured} frame(s) remapped cyan -> teal/amber.")
-    check_page_constants(frames, mobile_n)
+    sync_frame_constants(frames, mobile_n)
     stamp_asset_version()
     report()
+    print("  Next: python3 tools/build_v4.py index      "
+          "(the stamped ?v= only reaches visitors through a page rebuild)\n")
 
 
-def check_page_constants(desktop_n: int, mobile_n: int) -> None:
-    if not PAGE.exists():
+def sync_frame_constants(desktop_n: int, mobile_n: int) -> None:
+    """
+    Keep the scrub script's frame counts equal to what is on disk.
+
+    The script fetches f-000 .. f-(N-1). If N is larger than the set, the tail
+    404s (survivable - loadNext skips a gap); if it is smaller, the end of the
+    story is simply never painted, which is not survivable and looks like a
+    truncated video rather than a bug.
+    """
+    if not GEN_JS.exists():
+        print(f"\n  ! {GEN_JS} is missing; frame counts not synced.")
         return
-    html = PAGE.read_text(encoding="utf8")
-    # tolerate any spacing around "=" so aligned declarations don't false-alarm
-    ok_d = re.search(rf"FRAMES_DESKTOP\s*=\s*{desktop_n}\b", html)
-    ok_m = re.search(rf"FRAMES_MOBILE\s*=\s*{mobile_n}\b", html)
-    if ok_d and ok_m:
-        return
-    print(
-        "\n  ! Frame counts differ from the page. Update index-cinematic.html:\n"
-        f"      const FRAMES_DESKTOP = {desktop_n};\n"
-        f"      const FRAMES_MOBILE  = {mobile_n};"
-    )
+    src = GEN_JS.read_text(encoding="utf8")
+    before = src
+    for name, n in (("FRAMES_DESKTOP", desktop_n), ("FRAMES_MOBILE", mobile_n)):
+        src = re.sub(rf"(const {name}\s*=\s*)\d+", rf"\g<1>{n}", src)
+    if src != before:
+        GEN_JS.write_text(src, encoding="utf8")
+        print(f"Frame counts: FRAMES_DESKTOP = {desktop_n}, "
+              f"FRAMES_MOBILE = {mobile_n} (synced into _ported_js.py).")
 
 
 def stamp_asset_version() -> None:
@@ -456,14 +589,20 @@ def stamp_asset_version() -> None:
     frames on disk were correct, the bytes on the edge were half a build old.
 
     Bumping ?v= on every rebuild gives the new frames URLs nothing has cached.
+
+    Every ?v= lives in a generator now, not in a page: the homepage HTML is
+    written by tools/build_v4.py, so stamping alone changes nothing a visitor
+    can see until the pages are rebuilt. That is the last line this script
+    prints.
     """
-    if not PAGE.exists():
+    if not GEN_JS.exists():
+        print(f"\n  ! {GEN_JS} is missing - frame URLs are not cache-busted.")
         return
-    html = PAGE.read_text(encoding="utf8")
-    old = re.search(r'const ASSET_V\s*=\s*"([^"]+)"', html)
+    js = GEN_JS.read_text(encoding="utf8")
+    old = re.search(r'const ASSET_V\s*=\s*"([^"]+)"', js)
     if not old:
-        print("\n  ! No ASSET_V constant in the page — frame URLs are not "
-              "cache-busted. Rebuilt frames may not reach visitors.")
+        print("\n  ! No ASSET_V constant in the scrub script - frame URLs are "
+              "not cache-busted. Rebuilt frames may not reach visitors.")
         return
 
     # Date, plus a letter when rebuilding more than once in a day.
@@ -476,11 +615,20 @@ def stamp_asset_version() -> None:
     else:
         new = stem
 
-    html = re.sub(r'(const ASSET_V\s*=\s*")[^"]+(")', rf"\g<1>{new}\g<2>", html)
-    html = re.sub(r"(/assets/cinematic/[^\"'\s]*\.webp\?v=)[^\"'\s]+",
-                  rf"\g<1>{new}", html)
-    PAGE.write_text(html, encoding="utf8")
-    print(f"Asset version: {prev} -> {new} (frame URLs cache-busted).")
+    touched = []
+    for f in GEN_FILES:
+        if not f.exists():
+            print(f"\n  ! {f} is missing; its ?v= was not stamped.")
+            continue
+        txt = f.read_text(encoding="utf8")
+        out = re.sub(r'(const ASSET_V\s*=\s*")[^"]+(")', rf"\g<1>{new}\g<2>", txt)
+        out = re.sub(r"(/assets/cinematic/[^\"'\s]*\.webp\?v=)[^\"'\s]+",
+                     rf"\g<1>{new}", out)
+        if out != txt:
+            f.write_text(out, encoding="utf8")
+            touched.append(f.name)
+    print(f"Asset version: {prev} -> {new} "
+          f"(stamped in {', '.join(touched) if touched else 'nothing'}).")
 
 
 # ------------------------------------------------------------------- report
@@ -497,7 +645,7 @@ def report() -> None:
     m_bytes = size_of(OUT / "mobile")
     p_bytes = sum(
         (OUT / f"{n}.webp").stat().st_size
-        for n in ("poster", "still")
+        for n in ("poster", "still", "poster-portrait", "still-portrait")
         if (OUT / f"{n}.webp").exists()
     )
 
@@ -536,11 +684,16 @@ def main() -> None:
     g.add_argument("--placeholder", action="store_true",
                    help="render a testable procedural sequence (no assets needed)")
     g.add_argument("--from-video", metavar="MP4",
-                   help="extract frames from the assembled Kling video")
+                   help="extract frames from the assembled 16:9 video")
     g.add_argument("--report", action="store_true",
                    help="print byte sizes of the current frame sets")
+    ap.add_argument("--from-video-mobile", metavar="MP4",
+                    help="9:16 cut of the same footage, same length, for the "
+                         "full-bleed phone stage. Without it the mobile set is "
+                         "a centre crop of --from-video, which is a stopgap.")
     ap.add_argument("--frames", type=int, default=FRAMES,
-                    help=f"desktop frame count (default {FRAMES})")
+                    help=f"desktop frame count (default {FRAMES}; mobile gets "
+                         f"every {MOBILE_STRIDE}rd of them)")
     ap.add_argument("--no-recolor", action="store_true",
                     help="keep the closing HUD its original cyan (off-brand)")
     a = ap.parse_args()
@@ -550,7 +703,10 @@ def main() -> None:
     elif a.placeholder:
         build_placeholder(a.frames, not a.no_recolor)
     else:
-        build_from_video(Path(a.from_video).expanduser(), a.frames, not a.no_recolor)
+        mob = a.from_video_mobile
+        build_from_video(Path(a.from_video).expanduser(), a.frames,
+                         not a.no_recolor,
+                         Path(mob).expanduser() if mob else None)
 
 
 if __name__ == "__main__":

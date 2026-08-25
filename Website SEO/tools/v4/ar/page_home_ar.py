@@ -140,9 +140,14 @@ def _race():
 HERO_HTML_AR = f"""<section class="cine" id="cine">
   <div class="cine-stage" id="cineStage">
     <div class="cine-media" id="cineMedia">
-      <img class="cine-poster" id="cinePoster" src="/assets/cinematic/poster.webp?v=20260817"
-        alt="رسم توضيحي للمساعد الذكي: هيئة آلة تتحوّل إلى شخص ويبدأ العمل."
-        width="1440" height="810" fetchpriority="high" decoding="async">
+      <picture>
+        <!-- Portrait poster below 1100px - see the note in hero.py. -->
+        <source id="cinePosterPortrait" media="(max-width:767px)"
+          srcset="/assets/cinematic/poster-portrait.webp?v=20260825" width="1080" height="1920">
+        <img class="cine-poster" id="cinePoster" src="/assets/cinematic/poster.webp?v=20260825"
+          alt="رسم توضيحي للمساعد الذكي: هيئة آلة تتحوّل إلى شخص ويبدأ العمل."
+          width="1440" height="810" fetchpriority="high" decoding="async">
+      </picture>
       <canvas class="cine-canvas" id="cineCanvas" aria-hidden="true"></canvas>
       <div class="wash-l"></div><div class="wash-r"></div>
     </div>

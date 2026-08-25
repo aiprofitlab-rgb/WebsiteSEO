@@ -20,13 +20,13 @@ CINE_JS = r'''
   /* Must match tools/build_cinematic_frames.py. That script prints replacement
      values if you rebuild with a different --frames. */
   const FRAMES_DESKTOP = 150;
-  const FRAMES_MOBILE = 75;
+  const FRAMES_MOBILE = 50;
 
   /* Cache-busting token for the frame set. MUST be bumped whenever the
      frames are rebuilt — build_cinematic_frames.py stamps it automatically.
      The host serves these immutable with positional filenames, so without a
      version token edge nodes can mix two builds of the same sequence. */
-  const ASSET_V = "20260817";
+  const ASSET_V = "20260825";
 
   const sect = document.getElementById("cine");
   const stage = document.getElementById("cineStage");
@@ -51,13 +51,19 @@ CINE_JS = r'''
      one image has to carry the whole story, and reveal all copy statically. */
   if (matchMedia("(prefers-reduced-motion: reduce)").matches) {
     poster.src = "/assets/cinematic/still.webp?v=" + ASSET_V;
+    const psrc = document.getElementById("cinePosterPortrait");
+    if (psrc) psrc.srcset = "/assets/cinematic/still-portrait.webp?v=" + ASSET_V;
     lead.classList.add("on");
     endcard.classList.add("on");
     beats.forEach(b => b.classList.add("on"));
     return;
   }
 
-  const isMobile = matchMedia("(max-width: 768px)").matches;
+  /* MUST match the full-bleed breakpoint in hero.py HERO_CSS. The stage
+     goes full-bleed portrait at 767px and keeps the 16:9 band above it,
+     so a width that gets the portrait stage must also get the portrait set -
+     otherwise the stage is 9:16 and the frames painted into it are 16:9. */
+  const isMobile = matchMedia("(max-width: 767px)").matches;
   const DIR = isMobile ? "mobile" : "desktop";
   const N = isMobile ? FRAMES_MOBILE : FRAMES_DESKTOP;
 
@@ -69,7 +75,7 @@ CINE_JS = r'''
   let started = false;
 
   function resize() {
-    const dpr = Math.min(devicePixelRatio || 1, 2);   // capping at 2 matters
+    const dpr = Math.min(devicePixelRatio || 1, isMobile ? 1.5 : 2);
     const w = media.clientWidth;
     const h = media.clientHeight;
     if (!w || !h) return;

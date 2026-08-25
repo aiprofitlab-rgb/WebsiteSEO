@@ -60,23 +60,67 @@ HERO_CSS = """
   .lead-cta{justify-content:flex-start}
   .beat{left:auto;right:clamp(32px,4.5vw,76px);top:50%;transform:translateY(-50%);width:min(330px,25vw);text-align:left;font-size:1.1rem}
 }
+/* Three tiers, because there are three shapes of screen and only two cuts of
+   the footage:
+
+     >= 1100px   16:9 set, full-bleed behind the copy          (unchanged)
+     768-1099px  16:9 set in a band, copy stacked underneath   (unchanged)
+     <= 767px    9:16 set, full-bleed behind the copy          (2026-08-24)
+
+   The phone tier is the new one. It replaced a band identical to the tablet
+   one, into which the 16:9 frames were covered and lost ~31% of their width -
+   tight framing inside a small window. Tablets keep the band because they
+   would otherwise upscale the 720px-wide portrait set across ~1200 device px,
+   and because a 16:9 frame covered into a full-height portrait stage crops far
+   worse than it does into a band. The breakpoint here MUST match isMobile in
+   _ported_js.py, which decides which set is fetched. */
 @media (max-width:1099px){
   .cine{height:460vh}
   .cine-ui{padding:clamp(18px,4vw,32px) 20px}
   .cine-media{height:clamp(220px,38svh,420px)}
 }
-@media (max-width:560px){
+@media (max-width:767px){
   .cine{height:420vh}
+  .cine-media{position:absolute;inset:0;height:100%;width:100%}
+  .cine-ui{position:absolute;inset:0;z-index:4;flex:none}
+  /* One vertical scrim doing two jobs: keeping the wordmark legible against
+     the top of the frame, and carrying the copy at the bottom. It rides on
+     .wash-l rather than a third element so neither language's markup moves.
+     The first 8% is near-solid on purpose: .top.solid is cream .93 with a
+     border-bottom, and against a bare frame that border read as a torn edge
+     where the header stopped and the footage began. Cream-on-cream there
+     turns it back into a header rule. */
+  .wash-l{display:block;background:linear-gradient(180deg,
+    rgba(241,239,232,.97) 0%,rgba(241,239,232,.95) 8%,rgba(241,239,232,.26) 19%,
+    rgba(241,239,232,0) 34%,rgba(241,239,232,.30) 52%,rgba(241,239,232,.80) 67%,
+    rgba(241,239,232,.93) 80%,rgba(241,239,232,.95) 100%)}
+  /* Copy in the lower third, clear of the subject the 9:16 cut frames above
+     it. Anchored by `bottom` so the CTA and the beats sit on the same line
+     whatever their height - a top/centre anchor makes a one-line beat and the
+     three-element lead land in visibly different places. */
+  .lead,.endcard,.beat{top:auto;bottom:clamp(46px,10svh,92px);transform:translateX(-50%);width:min(680px,92vw)}
+}
+@media (max-width:560px){
+  .cine{height:380vh}
   .lead h1{font-size:clamp(2.1rem,8.6vw,2.7rem)}
+  .lead .sub{margin-bottom:20px}
 }
 """
 
 HERO_HTML = f"""<section class="cine" id="cine">
   <div class="cine-stage" id="cineStage">
     <div class="cine-media" id="cineMedia">
-      <img class="cine-poster" id="cinePoster" src="/assets/cinematic/poster.webp?v=20260817"
-        alt="An illustration of the AI assistant: a machine form that becomes a person and begins working."
-        width="1440" height="810" fetchpriority="high" decoding="async">
+      <picture>
+        <!-- Portrait poster below 1100px, where the stage is full-bleed 9:16.
+             This <source> is what the browser picks there, so the
+             reduced-motion swap in the scrub script rewrites both it and the
+             <img> - setting img.src alone would leave phones on the poster. -->
+        <source id="cinePosterPortrait" media="(max-width:767px)"
+          srcset="/assets/cinematic/poster-portrait.webp?v=20260825" width="1080" height="1920">
+        <img class="cine-poster" id="cinePoster" src="/assets/cinematic/poster.webp?v=20260825"
+          alt="An illustration of the AI assistant: a machine form that becomes a person and begins working."
+          width="1440" height="810" fetchpriority="high" decoding="async">
+      </picture>
       <canvas class="cine-canvas" id="cineCanvas" aria-hidden="true"></canvas>
       <div class="wash-l"></div><div class="wash-r"></div>
     </div>
