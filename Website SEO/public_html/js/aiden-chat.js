@@ -43,6 +43,12 @@
     var K_TRANSCRIPT = 'aidenTranscript';
     var K_PAGES = 'aidenPagesSeen';
     var K_EMAIL = 'aidenVisitorEmail';
+    var K_PHONE = 'aidenVisitorPhone';
+    // Messages sent in THIS tab session. Deliberately sessionStorage, for the
+    // same reason openVisit() uses it: a "first message" counted in
+    // localStorage would fire once in a visitor's life, and never again for
+    // someone who comes back next week.
+    var K_SENT = 'aidenMessagesSent';
 
     var TRANSCRIPT_TTL_DAYS = 30;   // older than this and we greet as new
     var TRANSCRIPT_MAX = 40;        // messages kept locally
@@ -1058,6 +1064,7 @@
             message: message,
             sessionId: visitorId(),
             email: lsGet(K_EMAIL, ''),
+            phone: lsGet(K_PHONE, ''),
             language: isAr ? 'ar' : 'en',
             country: lsGet('visitorCountry', ''),
             countryCode: lsGet('visitorCountryCode', ''),
@@ -1084,7 +1091,13 @@
 
             // the conversation they can see in front of them
             history: history,
-            hasPriorConversation: priorMessages.length > 0
+            hasPriorConversation: priorMessages.length > 0,
+
+            // GA4's own ids for this browser and session, so this row and the
+            // GA4 session that produced it can be joined. Empty until gtag
+            // answers - see readGaIds().
+            gaClientId: gaIds.clientId,
+            gaSessionId: gaIds.sessionId
         };
     }
 
@@ -1114,8 +1127,132 @@
             .catch(function () { /* location is optional context, never a blocker */ });
     }
 
+    // ---------- GA4 identity ----------
+    //
+    // Aiden's CRM rows and GA4's sessions describe the same people and, until
+    // now, could not be joined: the sheet knew aidenVisitorId, GA4 knew its
+    // own client_id, and nothing linked them. Sending GA4's ids with every
+    // message makes the two one dataset - a conversation in the sheet can be
+    // traced back to the campaign, landing page and session that produced it.
+    //
+    // gtag('get') is asynchronous and answers only once gtag.js has loaded, so
+    // the ids are read in the background and whatever has arrived by the time
+    // a message is sent travels with it. Nothing here can delay or break a
+    // chat: a blocked, absent or slow gtag just leaves the fields empty.
+
+    var gaIds = { clientId: '', sessionId: '' };
+
+    // The measurement id has one home, GA_ID in tools/v4/kit.py, which writes
+    // it into each page's own gtag config - so read it back out of dataLayer
+    // rather than keeping a second copy here to go stale. The literal is a
+    // last-resort fallback for a page that configures GA4 some other way.
+    function measurementId() {
+        try {
+            var dl = window.dataLayer || [];
+            for (var i = 0; i < dl.length; i++) {
+                var args = dl[i];
+                if (args && args[0] === 'config' && typeof args[1] === 'string' &&
+                    args[1].indexOf('G-') === 0) return args[1];
+            }
+        } catch (e) { /* fall through to the fallback */ }
+        return 'G-SLR9GD3MJP';
+    }
+
+    /**
+     * Refresh the cached GA4 ids. Cheap and safe to call repeatedly: client_id
+     * is stable for the life of the browser, but session_id rolls over after
+     * 30 minutes idle, so it is re-read at the moments that matter instead of
+     * once at boot.
+     */
+    function readGaIds() {
+        if (typeof window.gtag !== 'function') return;
+        var id = measurementId();
+        try {
+            window.gtag('get', id, 'client_id', function (v) {
+                if (v) gaIds.clientId = String(v).slice(0, 64);
+            });
+            window.gtag('get', id, 'session_id', function (v) {
+                if (v) gaIds.sessionId = String(v).slice(0, 64);
+            });
+        } catch (e) { /* the join is a nice-to-have, never a blocker */ }
+    }
+
+    // ---------- lead capture ----------
+    //
+    // Aiden has no form: an email or a phone number arrives inside a sentence
+    // ("send the packages to me at ..."). The backend already mines the
+    // message for an email so the CRM row has one; the widget needs to see it
+    // too - to remember it for the next visit, to send it with the request
+    // that carries it, and to report the capture to GA4 as the conversion it
+    // is.
+
+    var EMAIL_RE = /[\w.+-]+@[\w-]+\.[\w.]{2,}/;
+    // Narrow on purpose. An international prefix, or a bare run of 8-15 digits
+    // broken only by spaces: dashes are excluded because they make "2026-04-19"
+    // look exactly like a Gulf mobile number. It will still miss the odd
+    // creatively formatted number, which is the right way to be wrong - a
+    // missed capture costs a GA4 event, a false one poisons the CRM column.
+    var PHONE_RE = /(?:\+|00)\s?\d[\d\s-]{6,16}\d|\b\d[\d\s]{6,14}\d\b/;
+
+    /**
+     * Pull contact details out of an outgoing message, remember them, and
+     * report anything new to GA4. Runs before payload() is built, so a detail
+     * given in this message travels with this request rather than the next.
+     */
+    function captureLead(message, messageCount) {
+        var captured = [];
+
+        var email = String(message).match(EMAIL_RE);
+        if (email) {
+            var address = email[0].slice(0, 120);
+            if (address !== lsGet(K_EMAIL, '')) {
+                lsSet(K_EMAIL, address);
+                captured.push('email');
+            }
+        }
+
+        var phone = String(message).match(PHONE_RE);
+        if (phone) {
+            var digits = phone[0].replace(/\D/g, '');
+            if (digits.length >= 8 && digits.length <= 15) {
+                var number = phone[0].replace(/\s+/g, ' ').trim().slice(0, 32);
+                if (number !== lsGet(K_PHONE, '')) {
+                    lsSet(K_PHONE, number);
+                    captured.push('phone');
+                }
+            }
+        }
+
+        // Only a detail we did not already hold counts as a capture, so
+        // repeating an address across a conversation reports one lead, not
+        // one per message.
+        if (captured.length) {
+            track('aiden_lead_captured', {
+                page_path: location.pathname,
+                lead_type: captured.join('_'),
+                message_count: messageCount,
+                returning: priorVisit.count > 1
+            });
+        }
+    }
+
+    /** Messages sent in this tab session, counting the one being sent now. */
+    function bumpMessageCount() {
+        var n = 0;
+        try { n = parseInt(sessionStorage.getItem(K_SENT) || '0', 10) || 0; } catch (e) { n = 0; }
+        n += 1;
+        try { sessionStorage.setItem(K_SENT, String(n)); } catch (e) { /* ok */ }
+        return n;
+    }
+
     function track(event, params) {
-        try { if (typeof window.gtag === 'function') window.gtag('event', event, params || {}); } catch (e) { /* ok */ }
+        var p = params || {};
+        // page_type on every Aiden event. apl-analytics.js sets it as an
+        // event-scoped default, but only on pages that ship that file, and
+        // these are the events we most want to slice by page type - so it is
+        // re-stated here for the same reason apl-analytics.js re-states it.
+        if (!p.page_type) p.page_type = pageType(location.pathname);
+        try { if (typeof window.gtag === 'function') window.gtag('event', event, p); } catch (e) { /* ok */ }
     }
 
     // ---------- public API ----------
@@ -1130,6 +1267,7 @@
             trackJourney();
             trackPagesSeen();
             mount();
+            readGaIds();
 
             window.addEventListener('scroll', trackScroll, { passive: true });
         },
@@ -1141,6 +1279,9 @@
             els.launch.setAttribute('aria-expanded', 'true');
             detectCountry();
             greet();
+            // gtag may not have been loaded when init() first asked, and the
+            // GA4 session may have rolled over since.
+            readGaIds();
             track('aiden_open', { page_path: location.pathname, returning: priorVisit.count > 1 });
             setTimeout(function () { if (window.innerWidth > 520) els.input.focus(); }, 260);
         },
@@ -1173,12 +1314,31 @@
             sending = true;
 
             bubble(escapeHtml(msg), 'user');
+
+            var messageCount = bumpMessageCount();
+            // Before payload(): a contact detail given in this message is
+            // stored first, so it rides along with this request instead of
+            // waiting for the next one.
+            captureLead(msg, messageCount);
+
             // Built before the message joins the thread, so it carries the
             // conversation up to this point and not the message itself.
             var body = payload(msg);
             thread.push({ role: 'user', text: msg });
             saveTranscript(priorMessages.concat(thread));
-            track('aiden_message', { page_path: location.pathname });
+
+            if (messageCount === 1) {
+                track('aiden_first_message', {
+                    page_path: location.pathname,
+                    returning: priorVisit.count > 1
+                });
+            }
+            track('aiden_message', {
+                page_path: location.pathname,
+                message_count: messageCount
+            });
+            // Keep the ids fresh for the next message in this conversation.
+            readGaIds();
 
             var typing = bubble('<span class="typing"><i></i><i></i><i></i></span>', 'bot');
 
