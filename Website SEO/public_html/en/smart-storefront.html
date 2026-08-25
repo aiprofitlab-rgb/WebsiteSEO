@@ -738,7 +738,7 @@ footer a{color:var(--amber-pale)}
 <section class="roast" id="claim">
   <div class="wrap">
     <p class="eyebrow rv"><span class="star">✼</span> Claim a seat</p>
-    <h2 class="rv">Six fields. Then I email you the agreement.</h2>
+    <h2 class="rv">Six fields. Then your invoice is in your inbox.</h2>
     <p class="lede rv" style="margin-bottom:28px">This holds your place at today's price. The full brief comes later, once the deposit has cleared.</p>
 
     <form class="form rv" id="claimForm" novalidate>
@@ -765,7 +765,7 @@ footer a{color:var(--amber-pale)}
       <div class="formerr" id="formErr"></div>
 
       <p style="margin:20px 0 0"><button type="submit" class="btn btn-primary" id="fSubmit" style="width:100%">Hold my seat at this price</button></p>
-      <p style="font-size:.84rem;color:var(--muted);margin:12px 0 0">No payment on this page. You'll get an agreement and an invoice by email within one business day, and you pay after you've read them.</p>
+      <p id="fPayNote" style="font-size:.84rem;color:var(--muted);margin:12px 0 0">No payment on this page. Your invoice is emailed to you the moment you send this, and the next page is where you pay the deposit.</p>
     </form>
   </div>
 </section>
@@ -1358,6 +1358,13 @@ footer a{color:var(--amber-pale)}
       if (!data.ok) throw new Error("not ok");
       state = data;
       renderLadder();
+      // Whether a card can be taken is the service's answer, never this page's guess —
+      // same rule as the prices. Promising a card the gateway can't process would send
+      // someone to a pay page with no pay button on it.
+      if (data.pay && data.pay.card) {
+        var note = document.getElementById("fPayNote");
+        if (note) note.textContent = "No payment on this page. Your invoice is emailed to you the moment you send this, and the next page takes the deposit by card \u2014 on Thawani's own secure page, so I never see your card number.";
+      }
       // A sold-out ledger has already stripped the pledge board and the form; running
       // the maths afterwards would put a live price back into the sticky bar.
       if (!state.soldOut) { if (PLEDGES_ON) renderPledges(); renderMaths(); }
@@ -1470,7 +1477,7 @@ footer a{color:var(--amber-pale)}
           return fail("Something went wrong saving your claim. Rather than lose it, message me on WhatsApp and I'll take the details myself.");
         }
         track("claim_submitted", { pledges: chosen.length, caught_button: caught });
-        window.location.href = "/en/claim/?ref=" + encodeURIComponent(res.body.ref) + "&new=1";
+        window.location.href = "/en/pay/?ref=" + encodeURIComponent(res.body.ref) + "&new=1";
       })
       .catch(function(){
         fail("I couldn't reach the server. Your connection or my server — either way, message me on WhatsApp and nothing is lost.");

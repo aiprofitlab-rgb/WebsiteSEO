@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+<title>Your seat — AI Profit Lab</title>
+<meta name="robots" content="noindex, nofollow"/>
+<meta name="theme-color" content="#0A3D30"/>
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg?v=20260822">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=20260822">
+<link rel="manifest" href="/site.webmanifest?v=20260822">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --teal-900:#0A3D30;--teal:#0F6E56;--amber:#BA7517;--amber-bright:#D89234;--amber-pale:#E8C98F;
+  --cream:#F1EFE8;--panel:#FAF8F2;--panel-2:#EAE4D5;--white:#FFF;--ink:#232B26;--muted:#5A665D;--line:#DED8C8;--wa:#1FAF5E;
+  --display:'Marcellus',Georgia,serif;--sans:'IBM Plex Sans',-apple-system,sans-serif;--mono:'IBM Plex Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+[hidden]{display:none !important}
+body{margin:0;background:var(--cream);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased}
+a{color:var(--teal)}
+a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--amber-bright);outline-offset:3px}
+h1{font-family:var(--display);font-weight:400;font-size:clamp(1.8rem,4.6vw,2.6rem);line-height:1.15;margin:0 0 .4em;color:var(--white)}
+h2{font-family:var(--display);font-weight:400;font-size:1.4rem;color:var(--teal-900);margin:0 0 .5em}
+p{margin:0 0 1em}
+.wrap{max-width:680px;margin:0 auto;padding:0 22px}
+.top{background:linear-gradient(168deg,var(--teal),var(--teal-900));color:var(--cream);padding:26px 0 46px}
+.brand{display:inline-block;margin-bottom:30px;line-height:0}
+.brand img{height:24px;width:auto}
+.eyebrow{font-family:var(--mono);font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--amber-pale);margin:0 0 12px}
+.top p.sub{color:rgba(241,239,232,.85);margin:0}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:26px 24px;margin:-28px 0 20px;position:relative;box-shadow:0 22px 50px -38px rgba(10,61,48,.7)}
+.refbox{display:flex;align-items:center;gap:14px;flex-wrap:wrap;border-bottom:1px solid var(--line);padding-bottom:18px;margin-bottom:18px}
+.ref{font-family:var(--mono);font-size:1.5rem;color:var(--teal-900);letter-spacing:.06em}
+.pill{font-family:var(--mono);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;padding:5px 11px;border-radius:20px;background:var(--panel-2);color:var(--muted)}
+.pill.wait{background:#FBF3E4;color:#8A6215}
+.pill.sent{background:#E7F0EC;color:var(--teal-900)}
+.pill.done{background:var(--teal);color:#fff}
+.row{display:flex;justify-content:space-between;gap:14px;padding:8px 0;font-size:.98rem}
+.row+.row{border-top:1px solid var(--line)}
+.row b{font-family:var(--display);font-weight:400;font-size:1.2rem;color:var(--teal-900)}
+.row.due b{font-size:1.5rem}
+.steps{list-style:none;padding:0;margin:22px 0 0;counter-reset:s}
+.steps li{counter-increment:s;position:relative;padding:0 0 20px 42px;font-size:.97rem;color:var(--muted)}
+.steps li::before{content:counter(s);position:absolute;left:0;top:-1px;width:27px;height:27px;border-radius:50%;
+  background:var(--panel-2);color:var(--teal-900);font-family:var(--mono);font-size:.8rem;display:flex;align-items:center;justify-content:center}
+.steps li.now::before{background:var(--teal);color:#fff}
+.steps li.was::before{content:"✓";background:#DCE9E3;color:var(--teal)}
+.steps li strong{color:var(--ink);display:block;font-weight:600}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;font-family:var(--sans);font-weight:600;font-size:1rem;
+  border:0;border-radius:8px;padding:14px 24px;cursor:pointer;text-decoration:none;transition:transform .15s,background .15s}
+.btn:hover{transform:translateY(-1px)}
+.btn:disabled{opacity:.65;cursor:default;transform:none}
+.btn-primary{background:var(--teal);color:#fff}
+.btn-wa{background:var(--wa);color:#fff}
+.btn-quiet{background:var(--panel-2);color:var(--teal-900)}
+.btn-block{width:100%}
+/* the pay panel */
+.pay{background:var(--white);border:1px solid var(--line);border-radius:12px;padding:22px 20px;margin-top:20px}
+.pay h3{font-family:var(--display);font-weight:400;font-size:1.15rem;color:var(--teal-900);margin:0 0 6px}
+.secure{display:flex;align-items:center;gap:8px;justify-content:center;font-size:.8rem;color:var(--muted);margin:12px 0 0}
+.secure svg{width:14px;height:14px;fill:var(--teal)}
+.alt{border-top:1px solid var(--line);margin-top:20px;padding-top:18px}
+.alt summary{cursor:pointer;font-weight:600;color:var(--teal-900);font-size:.95rem;list-style:none}
+.alt summary::-webkit-details-marker{display:none}
+.alt summary::before{content:"＋ ";color:var(--amber);font-family:var(--mono)}
+.alt[open] summary::before{content:"− "}
+.up{background:var(--panel);border:1px dashed var(--line);border-radius:12px;padding:20px 18px;margin-top:14px;text-align:center}
+input[type=file]{display:none}
+.note{font-size:.86rem;color:var(--muted)}
+.msg{display:none;border-radius:9px;padding:13px 15px;font-size:.93rem;margin-top:14px}
+.msg.on{display:block}
+.msg.err{background:#FBEDE9;border:1px solid #E5B4A6;color:#8A3B22}
+.msg.ok{background:#E7F0EC;border:1px solid #A9CFC0;color:#0A3D30}
+.msg.info{background:#FBF3E4;border:1px solid #E8CE9C;color:#7A5510}
+/* confirmed */
+.done-box{background:linear-gradient(168deg,#127A5F,var(--teal-900));color:#fff;border-radius:12px;padding:24px 22px;margin-top:20px}
+.done-box h3{font-family:var(--display);font-weight:400;font-size:1.3rem;margin:0 0 8px;color:#fff}
+.done-box p{color:rgba(241,239,232,.9);margin:0 0 8px;font-size:.95rem}
+.done-box .invno{font-family:var(--mono);font-size:.85rem;color:var(--amber-pale)}
+.spin{display:inline-block;width:15px;height:15px;border:2px solid rgba(255,255,255,.35);border-top-color:#fff;border-radius:50%;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.wa-icon{width:19px;height:19px;fill:currentColor}
+footer{padding:36px 0 50px;text-align:center;font-size:.82rem;color:var(--muted)}
+@media (prefers-reduced-motion:reduce){*{transition:none !important;animation:none !important}}
+</style>
+</head>
+<body>
+
+<div class="top">
+  <div class="wrap">
+    <a class="brand" href="/en/smart-storefront/"><img src="/en/logo/wordmark-dark.svg" alt="AI Profit Lab" width="150" height="24"/></a>
+    <p class="eyebrow" id="eyebrow">Your claim</p>
+    <h1 id="headline">Looking up your seat…</h1>
+    <p class="sub" id="subline">One moment.</p>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="card" id="card" hidden>
+    <div class="refbox">
+      <span class="ref" id="ref">—</span>
+      <span class="pill" id="statusPill">—</span>
+    </div>
+    <div class="row"><span>Business</span><span id="business">—</span></div>
+    <div class="row"><span>Price held for you</span><b id="price">—</b></div>
+    <div class="row due"><span id="depositLabel">Deposit to lock the seat (50%)</span><b id="deposit">—</b></div>
+    <div class="row" id="rebateRow" hidden><span>Pledged back to you, after delivery</span><b id="rebate">—</b></div>
+
+    <!-- confirmed -->
+    <div class="done-box" id="doneBox" hidden>
+      <h3 id="doneTitle">Your seat is confirmed.</h3>
+      <p id="doneBody">Your invoice is in your inbox — that one is the receipt, so it's the one to keep.</p>
+      <p class="invno" id="doneInv" hidden></p>
+    </div>
+
+    <!-- returning from the payment page -->
+    <div class="msg info" id="confirming"><span class="spin" style="border-color:rgba(122,85,16,.3);border-top-color:#7A5510"></span> &nbsp;Confirming your payment with the bank. This takes a few seconds — don't close the page.</div>
+
+    <!-- pay -->
+    <div class="pay" id="payBox" hidden>
+      <h3 id="payTitle">Pay the deposit</h3>
+      <p class="note" id="payNote" style="margin:0 0 14px">Card payment, on Thawani's own secure page. We never see or store your card number.</p>
+      <button class="btn btn-primary btn-block" id="payBtn">Pay the deposit</button>
+      <p class="secure">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1L3 5v6c0 5.5 3.8 10.7 9 12 5.2-1.3 9-6.5 9-12V5l-9-4zm0 6a2.5 2.5 0 012.5 2.5V11h1v6h-7v-6h1V9.5A2.5 2.5 0 0112 7zm0 1.5a1 1 0 00-1 1V11h2V9.5a1 1 0 00-1-1z"/></svg>
+        Payments processed by Thawani · Licensed by the Central Bank of Oman
+      </p>
+      <div class="msg err" id="payErr"></div>
+
+      <details class="alt" id="altBox">
+        <summary id="altSummary">Rather pay by bank transfer?</summary>
+        <p class="note" style="margin:12px 0 0">Reply to the email your invoice came with, or message me below, and I'll send you the transfer details directly. I don't publish bank details on a page — that's how people get impersonated.</p>
+
+        <div class="up" id="up">
+          <p style="margin:0 0 6px"><strong>Already transferred it? Upload the receipt.</strong></p>
+          <p class="note" style="margin:0 0 16px">A photo or PDF of the transfer confirmation. Up to 5&nbsp;MB. It's stored privately and only I can open it.</p>
+          <input type="file" id="file" accept="image/jpeg,image/png,image/heic,application/pdf"/>
+          <button class="btn btn-quiet" id="pick">Choose the receipt</button>
+          <p class="note" id="fname" style="margin:12px 0 0"></p>
+          <div class="msg err" id="upErr"></div>
+          <div class="msg ok" id="upOk"></div>
+        </div>
+      </details>
+    </div>
+
+    <ol class="steps" id="steps">
+      <li id="s1"><strong>You claimed a seat</strong>Done — your details are with me.</li>
+      <li id="s2"><strong>Your invoice is in your inbox</strong>Sent the moment you claimed, with everything you need to pay.</li>
+      <li id="s3"><strong>You pay the 50% deposit</strong>By card here, or by transfer if you'd rather.</li>
+      <li id="s4"><strong>Your seat is confirmed</strong>A card payment confirms itself instantly. A transfer confirms once I've seen it land.</li>
+    </ol>
+
+    <p style="margin:22px 0 0;text-align:center">
+      <a class="btn btn-wa" id="wa" href="https://api.whatsapp.com/send?phone=96899245250" target="_blank" rel="noopener">
+        <svg class="wa-icon" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
+        Ask me anything about this
+      </a>
+    </p>
+  </div>
+
+  <div class="card" id="missing" hidden>
+    <h2>I can't find that reference.</h2>
+    <p>Either the link got cut in half somewhere between the email and here, or the reference has a typo in it. Both are easily fixed.</p>
+    <p style="margin-bottom:0"><a class="btn btn-wa" href="https://api.whatsapp.com/send?phone=96899245250" target="_blank" rel="noopener">Send me the reference on WhatsApp</a></p>
+  </div>
+</div>
+
+<footer>
+  <p>AI Profit Lab — a brand of Lotus Gulf International (CR 1570092) · South Al Khuwair, Bousher, Muscat<br>
+  <a href="/en/smart-storefront/">Back to the offer</a> · <a href="/terms/">Terms</a> · <a href="/refund-policy/">Refund policy</a> · <a href="/privacy/">Privacy</a></p>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  var API = "https://storefront-offer-api-989128855797.me-central1.run.app";
+  var WA  = "https://api.whatsapp.com/send?phone=96899245250";
+
+  var params = new URLSearchParams(location.search);
+  var ref     = (params.get("ref") || "").trim();
+  var isNew   = params.get("new") === "1";
+  var arrival = params.get("status") || "";   // success | cancel, set by the gateway redirect
+
+  var $ = function(id){ return document.getElementById(id); };
+  var money = function(n){ return n == null ? "—" : "OMR " + Number(n).toFixed(2); };
+  var track = function(name, props){ if (window.gtag) gtag("event", name, props || {}); };
+
+  var LABELS = {
+    Awaiting_Deposit:  { pill: "Awaiting deposit",  cls: "wait", step: 3 },
+    Payment_Started:   { pill: "Payment started",   cls: "wait", step: 3 },
+    Deposit_Submitted: { pill: "Receipt received",  cls: "sent", step: 4 },
+    Confirmed:         { pill: "Seat confirmed",    cls: "done", step: 5 },
+    Void:              { pill: "Closed",            cls: "",     step: 1 }
+  };
+
+  if (!ref) {
+    $("headline").textContent = "No reference in this link.";
+    $("subline").textContent  = "Check the link in your email, or message me and I'll find you.";
+    $("missing").hidden = false;
+    return;
+  }
+
+  /* ─────────── render ─────────── */
+
+  var claim = null;
+
+  function render(data){
+    claim = data;
+    var meta = LABELS[data.status] || { pill: data.status, cls: "", step: 2 };
+    var paid = Boolean(data.paid) || data.status === "Confirmed";
+
+    $("ref").textContent      = data.ref;
+    $("business").textContent = data.business || "—";
+    $("price").textContent    = money(data.price);
+    $("deposit").textContent  = money(paid && data.paidAmount ? data.paidAmount : data.deposit);
+    $("depositLabel").textContent = paid ? "Deposit paid (50%)" : "Deposit to lock the seat (50%)";
+    $("statusPill").textContent = meta.pill;
+    $("statusPill").className   = "pill " + meta.cls;
+
+    if (data.pledgePct > 0) {
+      $("rebateRow").hidden = false;
+      $("rebate").textContent = money(data.rebate) + " (" + data.pledgePct + "%)";
+    }
+
+    for (var i = 1; i <= 4; i++) {
+      var li = $("s" + i);
+      li.classList.remove("now", "was");
+      if (i < meta.step) li.classList.add("was");
+      else if (i === meta.step) li.classList.add("now");
+    }
+
+    $("wa").href = WA + "&text=" + encodeURIComponent("Hello — about my Smart Website seat, reference " + data.ref + ".");
+
+    if (paid) return showConfirmed(data);
+
+    /* not paid: offer whichever routes are actually available */
+    $("headline").textContent = isNew ? "Your seat is held." : "Your seat.";
+    $("eyebrow").textContent  = isNew ? "That's done" : "Your claim";
+    $("subline").textContent  = data.canPayByCard
+      ? "One payment away from confirmed. Your invoice is already in your inbox."
+      : "Your invoice is in your inbox. This page is where you upload the transfer receipt.";
+
+    $("payBox").hidden = false;
+
+    if (data.canPayByCard) {
+      $("payBtn").textContent = "Pay " + money(data.deposit) + " by card";
+    } else {
+      // No gateway: the transfer route is the offer, not a fallback hidden behind a
+      // disclosure triangle. Say what is true and put it in front of them.
+      $("payTitle").textContent   = "Paying the deposit";
+      $("s3").querySelector("strong").nextSibling.textContent = "By bank transfer. Reply to your invoice email and the details come straight back.";
+      $("s4").querySelector("strong").nextSibling.textContent = "The moment I've seen the transfer land.";
+      $("payNote").textContent    = "Reply to the email your invoice came with and I'll send you the transfer details straight away. I don't publish bank details on a page — that's how people get impersonated.";
+      $("payBtn").style.display   = "none";
+      $("payBox").querySelector(".secure").style.display = "none";
+      $("altBox").open            = true;
+      $("altSummary").style.display = "none";
+      $("altBox").querySelector("p").style.display = "none";
+    }
+
+    if (data.hasReceipt) {
+      $("altBox").open = true;
+      $("upOk").textContent = "A receipt is already on file. I'm checking the transfer — you don't need to do anything else. Upload again only if you sent the wrong file.";
+      $("upOk").classList.add("on");
+    }
+  }
+
+  function showConfirmed(data){
+    $("headline").textContent = "That's your seat. Confirmed.";
+    $("eyebrow").textContent  = "Paid";
+    $("subline").textContent  = "I'll be in touch about the brief. Nothing else is needed from you today.";
+    $("payBox").hidden  = true;
+    $("confirming").classList.remove("on");
+    $("doneBox").hidden = false;
+    if (data.invoiceNo) {
+      $("doneInv").textContent = "Invoice " + data.invoiceNo;
+      $("doneInv").hidden = false;
+    }
+    if (data.method !== "card") {
+      $("doneBody").textContent = "Your deposit has cleared and the seat is yours at the price above.";
+    }
+  }
+
+  function load(){
+    return fetch(API + "/claim/" + encodeURIComponent(ref))
+      .then(function(r){ if (r.status === 404) return null; if (!r.ok) throw new Error("http " + r.status); return r.json(); })
+      .then(function(data){
+        if (!data || !data.ok) {
+          $("headline").textContent = "I can't find that seat.";
+          $("subline").textContent  = "The reference didn't match anything in the ledger.";
+          $("missing").hidden = false;
+          return null;
+        }
+        render(data);
+        $("card").hidden = false;
+        return data;
+      });
+  }
+
+  load()
+    .then(function(data){ if (data) afterLoad(data); })
+    .catch(function(){
+      $("headline").textContent = "I can't reach the ledger right now.";
+      $("subline").textContent  = "Your claim is safe — this page just can't read it at the moment.";
+      $("missing").hidden = false;
+    });
+
+  /* ─────────── coming back from the payment page ─────────── */
+
+  function afterLoad(data){
+    if (data.paid || data.status === "Confirmed") return;
+
+    if (arrival === "cancel") {
+      $("payErr").textContent = "You came back without paying, and nothing was charged. Your seat is still held at this price — pay whenever you're ready.";
+      $("payErr").classList.add("on");
+      track("seat_payment_cancelled", { ref: ref });
+      return;
+    }
+    if (arrival !== "success") return;
+
+    /* A URL parameter is not a receipt — a buyer can type this address. Nothing on this
+       page says "paid" until the gateway itself says so, which is what the poll is for. */
+    $("confirming").classList.add("on");
+    $("payBox").hidden = true;
+
+    var tries = 0;
+    (function poll(){
+      tries++;
+      fetch(API + "/pay/status/" + encodeURIComponent(ref))
+        .then(function(r){ return r.json(); })
+        .then(function(res){
+          if (res.ok && res.payment_status === "paid") {
+            track("seat_paid", { ref: ref, value: res.amount, currency: "OMR" });
+            return load();
+          }
+          if (tries < 10) return setTimeout(poll, 2000);
+          giveUp();
+        })
+        .catch(function(){ if (tries < 10) setTimeout(poll, 2500); else giveUp(); });
+    })();
+
+    function giveUp(){
+      /* Deliberately does NOT say the payment failed — we don't know that. It says what
+         is true: we can't confirm it from here yet. */
+      $("confirming").classList.remove("on");
+      $("payBox").hidden = false;
+      $("payErr").innerHTML = "Your payment hasn't shown up on my side yet. If your bank has confirmed it, don't pay again — " +
+        '<a href="' + WA + '&text=' + encodeURIComponent("Hello — I paid for seat " + ref + " but the page hasn't confirmed it.") + '" target="_blank" rel="noopener">message me</a> and I\'ll sort it in minutes.';
+      $("payErr").classList.add("on");
+      track("seat_payment_unconfirmed", { ref: ref });
+    }
+  }
+
+  /* ─────────── pay by card ─────────── */
+
+  $("payBtn").addEventListener("click", function(){
+    var btn = $("payBtn");
+    btn.disabled = true;
+    btn.textContent = "Opening the secure page…";
+    $("payErr").classList.remove("on");
+
+    fetch(API + "/pay/session", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ ref: ref })
+    })
+      .then(function(r){ return r.json().then(function(b){ return { ok: r.ok, body: b }; }); })
+      .then(function(res){
+        if (res.body && res.body.already_paid) return load();
+        if (!res.ok || !res.body.ok || !res.body.redirect_url) return payFailed(res.body && res.body.error);
+        track("seat_payment_started", { ref: ref, value: claim && claim.deposit, currency: "OMR" });
+        window.location.href = res.body.redirect_url;
+      })
+      .catch(function(){ payFailed("offline"); });
+  });
+
+  function payFailed(why){
+    var btn = $("payBtn");
+    btn.disabled = false;
+    btn.textContent = "Try the card payment again";
+
+    /* Every one of these ends somewhere the buyer can still pay. A card that won't open
+       is an inconvenience; a dead end is a lost seat. */
+    var msg = {
+      card_unavailable: "Card payment isn't available at the moment. Open “Rather pay by bank transfer?” below and I'll send you the details straight away.",
+      claim_void:       "This claim has been closed. Message me and I'll tell you where things stand.",
+      not_found:        "I can't find this claim any more. Message me with your reference and I'll find it.",
+      no_amount:        "There's no amount on this claim yet. Message me and I'll fix it in a minute."
+    }[why] || "I couldn't open the secure payment page just now, and nothing has been charged. Try again, or use the bank transfer option below.";
+
+    $("payErr").textContent = msg;
+    $("payErr").classList.add("on");
+    $("altBox").open = true;
+    track("seat_payment_failed", { ref: ref, reason: why || "unknown" });
+  }
+
+  /* ─────────── the transfer receipt ─────────── */
+
+  var file = $("file");
+  $("pick").addEventListener("click", function(){ file.click(); });
+
+  file.addEventListener("change", function(){
+    var f = file.files && file.files[0];
+    if (!f) return;
+
+    $("upErr").classList.remove("on"); $("upOk").classList.remove("on");
+    $("fname").textContent = f.name;
+
+    if (f.size > 5 * 1024 * 1024) {
+      $("upErr").textContent = "That file is over 5 MB. A photo of the screen is usually plenty — no need for the full-resolution one.";
+      $("upErr").classList.add("on");
+      return;
+    }
+
+    $("pick").disabled = true;
+    $("pick").textContent = "Uploading…";
+
+    var fd = new FormData();
+    fd.append("receipt", f);
+
+    fetch(API + "/claim/" + encodeURIComponent(ref) + "/receipt", { method: "POST", body: fd })
+      .then(function(r){ return r.json(); })
+      .then(function(res){
+        $("pick").disabled = false;
+        if (!res.ok) {
+          $("pick").textContent = "Try another file";
+          $("upErr").textContent = res.error === "bad_file_type"
+            ? "That file type won't open for me. A JPG, PNG or PDF works."
+            : "The upload didn't go through. Send it to me on WhatsApp instead and I'll attach it myself.";
+          $("upErr").classList.add("on");
+          return;
+        }
+        $("pick").textContent = "Upload another";
+        $("statusPill").textContent = "Receipt received";
+        $("statusPill").className = "pill sent";
+        $("s3").classList.remove("now"); $("s3").classList.add("was"); $("s4").classList.add("now");
+        $("upOk").textContent = "Got it. I'll check the transfer has landed and confirm your seat — you'll get an email when I do. Nothing else needed from you.";
+        $("upOk").classList.add("on");
+        track("receipt_uploaded", { ref: ref });
+      })
+      .catch(function(){
+        $("pick").disabled = false;
+        $("pick").textContent = "Try again";
+        $("upErr").textContent = "The upload couldn't reach the server. Send the receipt on WhatsApp and I'll take it from there.";
+        $("upErr").classList.add("on");
+      });
+  });
+})();
+</script>
+    <script defer src="/js/aiden-chat.js?v=6ed58fdc"></script>
+</body>
+</html>

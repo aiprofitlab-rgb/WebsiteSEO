@@ -200,6 +200,14 @@ RewriteRule ^en/order-v4/?$      /en/order/      [R=301,L]
 RewriteRule ^en/blog-v4/?$       /blog/          [R=301,L]
 RewriteRule ^en/article-v4/?$    /blog/en/2026-06-25-true-cost-missed-whatsapp-inquiries-oman/ [R=301,L]
 
+# 2b-ii. The Smart Storefront claim page became a page that can also take the
+# money: /en/pay/. Claim references already went out by email pointing at
+# /en/claim/?ref=..., and en/claim.html is still on disk, so rule 3 would go on
+# serving the upload-only page to them forever. mod_rewrite carries the query
+# string through a substitution that has none of its own, so the reference
+# survives the hop.
+RewriteRule ^en/claim/?$          /en/pay/        [R=301,L]
+
 # 2c. Arabic v4, 2026-08-21 - the Arabic set moved onto this skin and gained
 # four pages it never had. The five CORE Arabic pages (/ar/, /services/,
 # /process/, /about/, /contact/) keep their URLs and need no rule here: only
