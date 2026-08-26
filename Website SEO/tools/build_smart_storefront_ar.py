@@ -1293,6 +1293,12 @@ JS = r"""<script>
   /* ─────────── 4. the button that runs away ─────────── */
   var btn = document.getElementById("runaway-btn");
   var dodges = 0, caught = false, lastDodge = 0, DODGE_LIMIT = 7;
+  // Nothing runs anywhere until the visitor has actually gone for the button.
+  var armed = false;
+  // Real cursor movement, as opposed to the page scrolling under a parked cursor.
+  // Both raise mouseover on this button; only one of them is somebody chasing it.
+  var moved = 0;
+  document.addEventListener("mousemove", function(){ moved = Date.now(); }, { passive: true });
   var TAUNTS = ["لا.","ليس اليوم.","حاول ثانية.","تقترب.","بارد.","كدت!","الأخيرة…"];
 
   function flee(e) {
@@ -1334,12 +1340,45 @@ JS = r"""<script>
     track("button_caught", { dodges: dodges });
   }
 
-  btn.addEventListener("mouseover", flee);
-  // Touch is the whole audience here — a mouseover-only version would be inert on a phone.
-  btn.addEventListener("touchstart", flee, { passive: false });
+  // The opening move has to be a genuine attempt at the button. Fleeing on the first
+  // hover also fires when the page merely scrolls under a parked cursor, or when the
+  // .rv reveal slides the button up into one — and a button that bolts before anyone
+  // has touched it reads as a broken layout, not as a joke.
+  btn.addEventListener("mousedown", function(e){ armed = true; flee(e); });
+  btn.addEventListener("mouseover", function(e){
+    if (!armed) return;
+    // A mouseover with no cursor movement behind it is the page moving, not the visitor:
+    // that is the button landing under a still cursor, and it would burn a free dodge.
+    if (Date.now() - moved > 150) return;
+    flee(e);
+  });
+
+  // Touch is the whole audience here — a mouseover-only version would be inert on a
+  // phone. But fleeing on touchstart fires when a swipe merely BEGINS on the button,
+  // and the preventDefault() that goes with it kills that scroll too. So the finger has
+  // to actually tap: short, and going nowhere.
+  var tapAt = 0, tapX = 0, tapY = 0;
+  btn.addEventListener("touchstart", function(e){
+    var t = e.changedTouches[0];
+    tapAt = Date.now(); tapX = t.clientX; tapY = t.clientY;
+  }, { passive: true });
+  btn.addEventListener("touchend", function(e){
+    var t = e.changedTouches[0];
+    if (Date.now() - tapAt > 500) return;                                           // a long press
+    if (Math.abs(t.clientX - tapX) > 12 || Math.abs(t.clientY - tapY) > 12) return; // a swipe
+    armed = true;
+    flee(e);   // the preventDefault() inside flee() also cancels the click this tap synthesises
+  }, { passive: false });
+
   // Keyboard users get the joke without the chase: focus doesn't trigger flight, and
   // activating it simply surrenders. An unreachable control is not a joke, it's a trap.
-  btn.addEventListener("click", function(){ if (!caught) surrender(); });
+  // A mouse click only counts as a catch once the chase is on and the button has come to
+  // rest — the click that ends the very press which sent it running is not a catch.
+  btn.addEventListener("click", function(e){
+    if (caught) return;
+    if (e.detail === 0) { surrender(); return; }
+    if (dodges > 0 && Date.now() - lastDodge > 600) surrender();
+  });
 
   /* ─────────── 5. the claim ─────────── */
   var form = document.getElementById("claimForm");
