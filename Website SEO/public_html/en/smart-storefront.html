@@ -376,6 +376,84 @@ nav{position:sticky;top:0;z-index:60;background:rgba(241,239,232,.93);backdrop-f
 .sig{font-family:var(--display);font-size:1.02rem;color:var(--teal-900);margin:16px 0 2px}
 .sigsub{font-family:var(--mono);font-size:.74rem;color:var(--muted);margin:0}
 
+/* ══ the receipt: what the money actually buys ══
+   Ten rows and one of them is the invoice. Everything is a flex row that wraps
+   its value column underneath the label on a phone, because a phone is where
+   this page is read - the flyer's QR is the only way in. */
+.vs-sec{background:var(--panel)}
+.vs{max-width:660px;margin:30px 0 0;background:var(--white);border:1px solid var(--line);
+  border-radius:16px;overflow:hidden;box-shadow:0 26px 64px -42px rgba(10,61,48,.75)}
+.vs-hd{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:13px 20px;
+  background:var(--panel-2);font-family:var(--mono);font-size:.62rem;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--muted)}
+.vs-row{display:flex;align-items:baseline;gap:8px 14px;flex-wrap:wrap;padding:13px 20px;border-top:1px solid var(--line)}
+.vs-lbl{flex:1 1 56%;min-width:0;font-size:.97rem;line-height:1.38}
+.vs-val{margin-left:auto;display:flex;align-items:center;gap:10px;white-space:nowrap}
+/* The strike is amber, not the text colour: this figure has to survive being
+   glanced at on a phone, and a grey line through grey type does not. */
+.vs-was{font-family:var(--mono);font-size:.88rem;color:var(--muted);text-decoration:line-through;
+  text-decoration-color:var(--amber-bright);text-decoration-thickness:2px}
+.vs-free{font-family:var(--mono);font-size:.65rem;letter-spacing:.13em;text-transform:uppercase;font-weight:600;
+  color:#0A6B41;background:rgba(31,175,94,.14);border:1px solid rgba(31,175,94,.32);border-radius:99px;padding:5px 11px}
+
+/* the one row that is actually on the invoice */
+.vs-row.core{border-top:0;border-bottom:2px solid var(--teal);padding:18px 20px;
+  background:linear-gradient(100deg,rgba(15,110,86,.10),rgba(15,110,86,.02))}
+.vs-core-lbl{flex:1 1 56%;min-width:0}
+.vs-core-lbl b{display:block;font-family:var(--display);font-weight:400;font-size:1.2rem;color:var(--teal-900);margin-bottom:3px}
+.vs-core-lbl span{display:block;font-size:.87rem;line-height:1.42;color:var(--muted)}
+.vs-core-val{font-family:var(--display);font-size:1.4rem;color:var(--teal-900)}
+.vs-pay-tag{font-family:var(--mono);font-size:.65rem;letter-spacing:.13em;text-transform:uppercase;font-weight:600;
+  color:#7A4405;background:rgba(216,146,52,.18);border:1px solid rgba(216,146,52,.44);border-radius:99px;padding:5px 11px}
+
+/* the totals, welded to the bottom of the same card so the eye cannot leave
+   the list before it reaches the number */
+.vs-tot{background:var(--teal-900);color:var(--cream);padding:18px 20px 20px}
+.vs-tot a{color:var(--amber-pale)}
+.vs-trow{display:flex;justify-content:space-between;align-items:baseline;gap:14px;padding:8px 0;font-size:.95rem}
+.vs-trow+.vs-trow{border-top:1px solid rgba(241,239,232,.14)}
+.vs-trow .lbl{color:rgba(241,239,232,.78)}
+.vs-trow b{font-family:var(--display);font-weight:400;font-size:1.3rem;color:var(--white);white-space:nowrap}
+.vs-trow.gift b{color:#7FE0A8}
+.vs-trow.pay{align-items:center;padding-top:14px;margin-top:4px;border-top:1px solid rgba(232,201,143,.45)}
+.vs-trow.pay .lbl{font-family:var(--mono);font-size:.65rem;letter-spacing:.16em;text-transform:uppercase;color:var(--amber-pale)}
+.vs-trow.pay b{font-size:clamp(2.2rem,10vw,3rem);line-height:1;color:var(--amber-bright)}
+.vs-foot{font-size:.88rem;color:var(--muted);max-width:44em;margin:20px 0 0}
+.vs-foot b{color:var(--teal-900);font-weight:600}
+
+/* Each FREE chip lands on its own beat once the card is in view. Kept out of
+   the reduced-motion path entirely rather than shortened: `backwards` fill plus
+   a 700ms delay would hold the last chip invisible long after the .001ms
+   override had "finished" it. */
+@media (prefers-reduced-motion:no-preference){
+  .js .vs.vis .vs-free{animation:stamp .45s var(--spring) backwards;animation-delay:calc(var(--i,0)*70ms + 140ms)}
+  @keyframes stamp{0%{opacity:0;transform:scale(1.5) rotate(-9deg)}60%{opacity:1;transform:scale(.94) rotate(2deg)}100%{transform:none}}
+}
+
+@media (max-width:560px){
+  .vs{margin-top:24px;border-radius:14px}
+  .vs-hd{padding:11px 15px;font-size:.57rem;letter-spacing:.11em}
+  /* nowrap, NOT a value column wrapped underneath: nine rows each spending a
+     whole extra line on their price turned the card into a thousand pixels of
+     scroll, on the one device this page is actually read on. The label wraps
+     inside its own column instead, and baseline alignment keeps every figure
+     on the row's first line - which is what makes it read as a receipt. */
+  .vs-row{padding:12px 15px;flex-wrap:nowrap;gap:10px}
+  .vs-lbl{flex:1 1 auto;font-size:.92rem}
+  .vs-val{flex:none;gap:7px}
+  .vs-was{font-size:.8rem}
+  .vs-free{font-size:.6rem;letter-spacing:.1em;padding:4px 8px}
+  /* The invoice row keeps the wrap. Its figure is the loudest thing in the
+     card and it has earned a line of its own. */
+  .vs-row.core{padding:16px 15px;flex-wrap:wrap}
+  .vs-core-lbl{flex:1 1 100%}
+  .vs-core-lbl b{font-size:1.12rem}
+  .vs-row.core .vs-val{width:100%;margin:8px 0 0;justify-content:flex-end}
+  .vs-tot{padding:16px 15px 18px}
+  .vs-trow{font-size:.9rem;gap:10px}
+  .vs-trow b{font-size:1.2rem}
+}
+
 /* ══ scarcity: deliberately the loudest block on the page ══ */
 .scarcity{background:var(--teal-900);color:var(--cream);position:relative;overflow:hidden}
 .scarcity::before{content:"";position:absolute;inset:0;pointer-events:none;
@@ -590,7 +668,7 @@ footer a{color:var(--amber-pale)}
 
       <div class="hero-ctas">
         <a class="btn btn-cream" href="#roast">Show me mine</a>
-        <a class="btn btn-outline" href="#ladder">See the price</a>
+        <a class="btn btn-outline" href="#value">See the price</a>
       </div>
 
       <ul class="hero-trust">
@@ -685,7 +763,7 @@ footer a{color:var(--amber-pale)}
         <div>
           <h3 style="font-family:var(--display);font-weight:400;font-size:1.5rem;color:var(--teal-900);margin-bottom:12px">A mockup, not a promise.</h3>
           <p style="color:var(--muted);font-size:.97rem">Ten seconds of proof, worth exactly that much. The real one takes about a week and has your actual products in it, in both languages.</p>
-          <p style="margin-top:16px"><a class="btn btn-primary" href="#ladder">What does it cost?</a></p>
+          <p style="margin-top:16px"><a class="btn btn-primary" href="#value">What does it cost?</a></p>
           <p><button type="button" class="opt" id="qagain" style="margin-top:10px;width:auto">Start again</button></p>
         </div>
       </div>
@@ -706,6 +784,62 @@ footer a{color:var(--amber-pale)}
       <div class="card rv"><span class="ic">🔎</span><h3>Found on Google and ChatGPT</h3><p>Built for traditional search and AI answers alike.</p></div>
       <div class="card rv"><span class="ic">🛠️</span><h3>Nothing to maintain</h3><p>A full year of hosting, security and care included.</p></div>
     </div>
+  </div>
+</section>
+
+<!-- ═══ 4b. THE RECEIPT ═══
+     The value stack, and the only place on the page where the money comes
+     apart. Section 4 above says what each piece DOES; this says what each piece
+     is WORTH, and that exactly one line of it reaches the invoice.
+
+     The ten rows sum to OMR 949 and split as 249 + 700 at the launch rung, so
+     the gift reads as a round 700 off. /en/services/ publishes the Smart
+     Website at OMR 950 - one riyal above this stack - so the totals row prints
+     949 and the footnote names no figure. If the services price is ever recut
+     to match, recut VS_TOTAL and the totals row with it. The nine gift values
+     are the LAUNCH set; if the rungs are recut, recut these too.
+
+     Three numbers are live and the rest are not, on purpose. "All of it" is
+     hard-coded at 949 because that is the sum of the printed rows and it does
+     not move with the ladder; the invoice line and the gift are written by
+     renderMaths() from whatever rung the ledger returns. So when the price
+     climbs to 279 the gift visibly shrinks to 670 - which is the actual story -
+     instead of the arithmetic quietly going wrong. -->
+<section class="vs-sec" id="value">
+  <div class="wrap">
+    <p class="eyebrow rv"><span class="star">✼</span> What the money actually buys</p>
+    <h2 class="rv">You are paying for the website. The rest is a launch gift.</h2>
+    <p class="lede rv">Ask any agency in Muscat what a bilingual site costs to build. Then read the nine lines underneath it &mdash; the ones nobody is charging you for.</p>
+
+    <div class="vs rv">
+      <div class="vs-hd"><span>What arrives</span><span>Normally</span></div>
+
+      <div class="vs-row core">
+        <span class="vs-core-lbl">
+          <b>A bilingual website, fully designed and built</b>
+          <span>Your pages, your catalogue, your terms. Live in about a week.</span>
+        </span>
+        <span class="vs-val"><span class="vs-core-val" id="vsCore">&mdash;</span><span class="vs-pay-tag">You pay this</span></span>
+      </div>
+
+      <div class="vs-row" style="--i:0"><span class="vs-lbl">Optimized to be discovered by Google <em>and</em> ChatGPT</span><span class="vs-val"><span class="vs-was">OMR 50</span><span class="vs-free">Free</span></span></div>
+      <div class="vs-row" style="--i:1"><span class="vs-lbl">A small built-in CRM that books appointments and hands over tasks, driven by what happens on your site</span><span class="vs-val"><span class="vs-was">OMR 100</span><span class="vs-free">Free</span></span></div>
+      <div class="vs-row" style="--i:2"><span class="vs-lbl">A virtual sales agent who talks to your visitors and introduces your business</span><span class="vs-val"><span class="vs-was">OMR 100</span><span class="vs-free">Free</span></span></div>
+      <div class="vs-row" style="--i:3"><span class="vs-lbl">Serious buyers pushed straight to your WhatsApp</span><span class="vs-val"><span class="vs-was">OMR 50</span><span class="vs-free">Free</span></span></div>
+      <div class="vs-row" style="--i:4"><span class="vs-lbl">A smart chatbot that answers any question about your business, in any language</span><span class="vs-val"><span class="vs-was">OMR 200</span><span class="vs-free">Free</span></span></div>
+      <div class="vs-row" style="--i:5"><span class="vs-lbl">Google Business Profile fixed and verified</span><span class="vs-val"><span class="vs-was">OMR 50</span><span class="vs-free">Free</span></span></div>
+      <div class="vs-row" style="--i:6"><span class="vs-lbl">Handover and staff training, recorded</span><span class="vs-val"><span class="vs-was">OMR 50</span><span class="vs-free">Free</span></span></div>
+      <div class="vs-row" style="--i:7"><span class="vs-lbl">Hosting &mdash; 12 months</span><span class="vs-val"><span class="vs-was">OMR 50</span><span class="vs-free">Free</span></span></div>
+      <div class="vs-row" style="--i:8"><span class="vs-lbl">A note on who visited, from which countries, and what they asked</span><span class="vs-val"><span class="vs-was">OMR 50</span><span class="vs-free">Free</span></span></div>
+
+      <div class="vs-tot">
+        <div class="vs-trow"><span class="lbl">Everything above, <a href="/en/services/">normally</a></span><b>OMR 949</b></div>
+        <div class="vs-trow gift"><span class="lbl">Your launch gift</span><b id="vsGift">&mdash;</b></div>
+        <div class="vs-trow pay"><span class="lbl">You pay today</span><b id="vsPay">&mdash;</b></div>
+      </div>
+    </div>
+
+    <p class="vs-foot rv"><b>None of this is an upsell later.</b> Every line is in the build, at today&rsquo;s seat price. When the seats at this price are gone the price climbs &mdash; and the gift shrinks by exactly the same amount. The published price on the services page never moves.</p>
   </div>
 </section>
 
@@ -1250,6 +1384,21 @@ footer a{color:var(--amber-pale)}
   var state = null, chosen = [];
   var PLEDGES_ON = document.documentElement.className.indexOf("pledges-on") > -1;
   var money = function(n){ return "OMR " + Number(n).toFixed(2); };
+  /* The receipt prints round riyals. "OMR 249.00" set in 3rem reads as a bill
+     someone is about to dispute; the .00 stays everywhere a deposit can land on
+     a half riyal. */
+  var money0 = function(n){ n = Number(n); return "OMR " + (n % 1 ? n.toFixed(2) : n.toFixed(0)); };
+
+  /* The value stack's three live figures. VS_TOTAL is the sum of the ten
+     printed rows and is deliberately NOT read from the ledger - it is the thing
+     the ladder is discounting against, so it has to hold still while the rung
+     moves. Change a row's figure and change this with it, or the gift stops
+     being the arithmetic the reader just did. */
+  var VS_TOTAL = 949;
+  function paintReceipt(core, gift, pay) {
+    var set = function(id, txt){ var el = document.getElementById(id); if (el) el.textContent = txt; };
+    set("vsCore", core); set("vsGift", gift); set("vsPay", pay);
+  }
 
   function renderLadder() {
     var list = document.getElementById("ladderList");
@@ -1263,6 +1412,7 @@ footer a{color:var(--amber-pale)}
       document.getElementById("chase").style.display = "none";
       document.getElementById("claimForm").style.display = "none";
       document.getElementById("sPrice").textContent = "sold out";
+      paintReceipt("sold out", "\u2014", "sold out");
       if (stickySeats) stickySeats.textContent = "sold out";
       return;
     }
@@ -1377,6 +1527,7 @@ footer a{color:var(--amber-pale)}
     document.getElementById("fDeposit").textContent = money(state.activeTier.deposit);
     document.getElementById("fRebate").textContent  = money(rebate);
     document.getElementById("sPrice").textContent   = money(price);
+    paintReceipt(money0(price), "\u2212 " + money0(VS_TOTAL - price), money0(price));
   }
 
   function ledgerOffline() {
@@ -1389,6 +1540,7 @@ footer a{color:var(--amber-pale)}
     // No live price on screen means "I want more discount" has nothing to be less than.
     document.getElementById("chase").style.display = "none";
     document.getElementById("sPrice").textContent = "ask me";
+    paintReceipt("ask me", "\u2014", "ask me");
     var stickySeats = document.getElementById("sSeats");
     if (stickySeats) stickySeats.textContent = "";
     document.getElementById("claimForm").style.display = "none";

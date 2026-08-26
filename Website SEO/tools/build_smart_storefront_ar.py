@@ -188,6 +188,13 @@ RTL_CSS = r"""
 [dir=rtl] .pledge:hover{transform:translateX(-4px)}
 [dir=rtl] .mockup[data-vibe="plain"] .plist{padding-left:0;padding-right:15px}
 [dir=rtl] .mockup[data-vibe="plain"] .pfoot{text-align:right}
+/* The receipt. Its value column has to sit on the reader's FAR edge, which is
+   the left one here: `margin-left:auto` absorbs the slack on the wrong side in
+   RTL and shunts every price back against its own label. The mobile rule below
+   it is the wrapped invoice row, where `justify-content` is already
+   direction-aware and needs nothing said about it. */
+[dir=rtl] .vs-val{margin-left:0;margin-right:auto}
+[dir=rtl] .vs-row.core{background:linear-gradient(260deg,rgba(15,110,86,.10),rgba(15,110,86,.02))}
 [dir=rtl] .trophy{text-align:right}
 [dir=rtl] .hp{left:auto;right:-9999px}
 [dir=rtl] .sticky .info{margin-right:0;margin-left:auto}
@@ -321,7 +328,7 @@ BODY = r"""<body>
 
       <div class="hero-ctas">
         <a class="btn btn-cream" href="#roast">أرِني موقعي</a>
-        <a class="btn btn-outline" href="#ladder">أرِني السعر</a>
+        <a class="btn btn-outline" href="#value">أرِني السعر</a>
       </div>
 
       <ul class="hero-trust">
@@ -416,7 +423,7 @@ BODY = r"""<body>
         <div>
           <h3 style="font-family:var(--display);font-weight:400;font-size:1.7rem;color:var(--teal-900);margin-bottom:12px">نموذج، لا وعد.</h3>
           <p style="color:var(--muted);font-size:.97rem">عشر ثوانٍ من الإثبات، بقيمتها تماماً. الموقع الحقيقي يستغرق نحو أسبوع، وفيه منتجاتك أنت، باللغتين.</p>
-          <p style="margin-top:16px"><a class="btn btn-primary" href="#ladder">كم يكلّف؟</a></p>
+          <p style="margin-top:16px"><a class="btn btn-primary" href="#value">كم يكلّف؟</a></p>
           <p><button type="button" class="opt" id="qagain" style="margin-top:10px;width:auto">ابدأ من جديد</button></p>
         </div>
       </div>
@@ -437,6 +444,59 @@ BODY = r"""<body>
       <div class="card rv"><span class="ic">🔎</span><h3>يظهر في جوجل وفي ChatGPT</h3><p>مبنيّ للبحث التقليدي ولإجابات الذكاء الاصطناعي معاً.</p></div>
       <div class="card rv"><span class="ic">🛠️</span><h3>لا شيء تصونه</h3><p>سنة كاملة من الاستضافة والحماية والرعاية، مشمولة.</p></div>
     </div>
+  </div>
+</section>
+
+<!-- ═══ 4b. THE RECEIPT ═══
+     The value stack. Same structure and the same figures as the English page -
+     the ten rows sum to OMR 949 and split as 249 + 700 at the launch rung -
+     because the ledger it reads from is the same ledger, and a buyer switching
+     languages mid-scroll has to land on the same offer.
+
+     ARABIC: the values are written the way money() writes it below, figure
+     first and currency after, so the static rows and the three live ones read
+     as one column. The minus on the gift row needs no wrapper. U+2212 only
+     folds into a number run when it sits BETWEEN two of them (bidi W4), and
+     here it leads, so it resolves as a neutral and takes the paragraph's RTL
+     level - which parks it at the right-hand end of the cell, the first thing
+     an Arabic reader meets. Measured, not assumed: right to left the cell
+     reads minus, 700, ر.ع. It is set tight against the digits only so the two
+     scan as one figure. -->
+<section class="vs-sec" id="value">
+  <div class="wrap">
+    <p class="eyebrow rv"><span class="star">✼</span> ما الذي يشتريه المبلغ فعلاً</p>
+    <h2 class="rv">أنت تدفع ثمن الموقع. والباقي هديّة إطلاق.</h2>
+    <p class="lede rv">اسأل أي وكالة في مسقط كم يكلّف بناء موقع ثنائي اللغة. ثم اقرأ الأسطر التسعة تحته — تلك التي لا يحاسبك عليها أحد.</p>
+
+    <div class="vs rv">
+      <div class="vs-hd"><span>ما الذي يصلك</span><span>سعره المعتاد</span></div>
+
+      <div class="vs-row core">
+        <span class="vs-core-lbl">
+          <b>موقع ثنائي اللغة، مُصمَّم ومبنيّ بالكامل</b>
+          <span>صفحاتك، وكتالوجك، وشروطك. جاهز خلال أسبوع تقريباً.</span>
+        </span>
+        <span class="vs-val"><span class="vs-core-val" id="vsCore">—</span><span class="vs-pay-tag">هذا ما تدفعه</span></span>
+      </div>
+
+      <div class="vs-row" style="--i:0"><span class="vs-lbl">مُهيّأ ليُكتشَف في جوجل <em>وفي</em> ChatGPT</span><span class="vs-val"><span class="vs-was">50 ر.ع.</span><span class="vs-free">مجاناً</span></span></div>
+      <div class="vs-row" style="--i:1"><span class="vs-lbl">نظام إدارة عملاء صغير مدمج، يحجز المواعيد ويوزّع المهام بحسب ما يجري في الموقع</span><span class="vs-val"><span class="vs-was">100 ر.ع.</span><span class="vs-free">مجاناً</span></span></div>
+      <div class="vs-row" style="--i:2"><span class="vs-lbl">وكيل مبيعات افتراضي يتحدّث إلى زوار موقعك ويعرّفهم بنشاطك</span><span class="vs-val"><span class="vs-was">100 ر.ع.</span><span class="vs-free">مجاناً</span></span></div>
+      <div class="vs-row" style="--i:3"><span class="vs-lbl">المشترون الجادّون يصلون مباشرة إلى واتساب</span><span class="vs-val"><span class="vs-was">50 ر.ع.</span><span class="vs-free">مجاناً</span></span></div>
+      <div class="vs-row" style="--i:4"><span class="vs-lbl">شات بوت ذكي يجيب عن أي سؤال عن نشاطك، بأي لغة</span><span class="vs-val"><span class="vs-was">200 ر.ع.</span><span class="vs-free">مجاناً</span></span></div>
+      <div class="vs-row" style="--i:5"><span class="vs-lbl">ملف نشاطك على جوجل مُصحَّح ومُوثَّق</span><span class="vs-val"><span class="vs-was">50 ر.ع.</span><span class="vs-free">مجاناً</span></span></div>
+      <div class="vs-row" style="--i:6"><span class="vs-lbl">تسليم وتدريب لفريقك، مُسجَّل</span><span class="vs-val"><span class="vs-was">50 ر.ع.</span><span class="vs-free">مجاناً</span></span></div>
+      <div class="vs-row" style="--i:7"><span class="vs-lbl">استضافة اثني عشر شهراً</span><span class="vs-val"><span class="vs-was">50 ر.ع.</span><span class="vs-free">مجاناً</span></span></div>
+      <div class="vs-row" style="--i:8"><span class="vs-lbl">ملاحظة عمّن زار موقعك، ومن أي البلدان، وماذا سأل</span><span class="vs-val"><span class="vs-was">50 ر.ع.</span><span class="vs-free">مجاناً</span></span></div>
+
+      <div class="vs-tot">
+        <div class="vs-trow"><span class="lbl">كل ما سبق، <a href="/services/">بسعره المعتاد</a></span><b>949 ر.ع.</b></div>
+        <div class="vs-trow gift"><span class="lbl">هديّة الإطلاق</span><b id="vsGift">—</b></div>
+        <div class="vs-trow pay"><span class="lbl">تدفع اليوم</span><b id="vsPay">—</b></div>
+      </div>
+    </div>
+
+    <p class="vs-foot rv"><b>لا شيء هنا يُباع لك لاحقاً كإضافة.</b> كل سطر داخل البناء، بسعر مقعد اليوم. وحين تنتهي المقاعد بهذا السعر يرتفع السعر — وتنقص الهديّة بالمقدار نفسه. أمّا السعر المنشور في صفحة الخدمات فلا يتحرك.</p>
   </div>
 </section>
 
@@ -1028,6 +1088,20 @@ JS = r"""<script>
      digits on the right and the currency to their left - which is the order an
      Arabic reader reads it in. No wrapper needed on the figure itself. */
   var money = function(n){ return Number(n).toFixed(2) + " ر.ع."; };
+  /* The receipt prints round riyals. A figure set in 3rem with ".00" hanging
+     off it reads as a bill someone is about to argue with; the decimals stay
+     everywhere a deposit can land on a half riyal. */
+  var money0 = function(n){ n = Number(n); return (n % 1 ? n.toFixed(2) : n.toFixed(0)) + " ر.ع."; };
+
+  /* The value stack's three live figures. VS_TOTAL is the sum of the ten
+     printed rows and is deliberately NOT read from the ledger - it is the thing
+     the ladder discounts against, so it has to hold still while the rung moves.
+     Change a row's figure and change this with it. */
+  var VS_TOTAL = 949;
+  function paintReceipt(core, gift, pay) {
+    var set = function(id, txt){ var el = document.getElementById(id); if (el) el.textContent = txt; };
+    set("vsCore", core); set("vsGift", gift); set("vsPay", pay);
+  }
 
   /* ARABIC: the ledger serves its pledge labels in English. Only the display
      strings are localised here - the id and the percentage stay the service's,
@@ -1061,6 +1135,7 @@ JS = r"""<script>
       document.getElementById("chase").style.display = "none";
       document.getElementById("claimForm").style.display = "none";
       document.getElementById("sPrice").textContent = "نفدت المقاعد";
+      paintReceipt("نفدت المقاعد", "\u2014", "نفدت المقاعد");
       if (stickySeats) stickySeats.textContent = "نفدت المقاعد";
       return;
     }
@@ -1177,6 +1252,7 @@ JS = r"""<script>
     document.getElementById("fDeposit").textContent = money(state.activeTier.deposit);
     document.getElementById("fRebate").textContent  = money(rebate);
     document.getElementById("sPrice").textContent   = money(price);
+    paintReceipt(money0(price), "\u2212" + money0(VS_TOTAL - price), money0(price));
   }
 
   function ledgerOffline() {
@@ -1189,6 +1265,7 @@ JS = r"""<script>
     // No live price on screen means "I want more discount" has nothing to be less than.
     document.getElementById("chase").style.display = "none";
     document.getElementById("sPrice").textContent = "اسألني";
+    paintReceipt("اسألني", "\u2014", "اسألني");
     var stickySeats = document.getElementById("sSeats");
     if (stickySeats) stickySeats.textContent = "";
     document.getElementById("claimForm").style.display = "none";
@@ -1368,6 +1445,7 @@ HOOKS = [
     ".opt::after{", ".qdot::after{", ".card::before{", ".mrow b{", ".vow{",
     ".seatbar i{", ".sc-pips i.open{", ".pledge:hover{", ".trophy{", ".hp{",
     ".sticky .info{", ".nav-lang{", ".sc-count span{", ".pledge .txt span{", ".pbody{",
+    ".vs-val{", ".vs-row.core{",
     '.mockup[data-vibe="plain"] .plist{',
 ]
 
