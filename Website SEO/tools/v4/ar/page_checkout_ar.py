@@ -212,7 +212,7 @@ def body():
 
           <label class="consent">
             <input type="checkbox" name="agree" id="f-agree" required>
-            <span>قرأت <a href="/terms/" target="_blank" rel="noopener">شروط الخدمة</a> و<a href="/refund-policy-ar/" target="_blank" rel="noopener">سياسة
+            <span>قرأت <a href="/terms-ar/" target="_blank" rel="noopener">شروط الخدمة</a> و<a href="/refund-policy-ar/" target="_blank" rel="noopener">سياسة
               الاسترداد والإلغاء</a>، وأفهم ما هو مشمول في هذا البناء وما هو غير مشمول.</span>
           </label>
 

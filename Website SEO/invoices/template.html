@@ -1,0 +1,360 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Invoice — Lotus Gulf International</title>
+<!--
+  The manual invoice template.
+
+  Two ways to use it:
+
+    1. Filled by script (normal)   python3 tools/invoice.py invoices/customers/<file>.json
+       The script substitutes every placeholder, repeats the ROWS block once per
+       line item, drops the IF blocks that do not apply, inlines the logo and the
+       fonts, allocates the next invoice number, and prints a PDF.
+
+    2. Edited by hand (rare)       duplicate this file, type over the placeholders,
+       open it in Chrome and Cmd-P -> Save as PDF. Delete the IF blocks you do not
+       want, comment markers and all. Assign the number yourself and write it into
+       invoices/register.json so the script never reissues it.
+
+  The design deliberately matches the automatic storefront invoice
+  (SmartChatBot/storefront-offer-api/lib/invoice.js). Two invoice series from one
+  company should look like one company. Change one, look at the other.
+
+  Three rules that are not style choices:
+    - The issuer is the LEGAL ENTITY, Lotus Gulf International. "AI Profit Lab" is
+      the trading name on top of it. Every financial document asks for the former.
+    - There is NO VAT line, because there is no VAT registration. The document says
+      so in words; a 0% line would imply a registration that does not exist.
+    - NO BANK DETAILS. Not here, not in the covering email. An IBAN on a document
+      that can be forwarded is how impersonation starts. Nahid sends them by hand.
+-->
+<link rel="stylesheet" href="assets/fonts.css">
+<style>
+  :root {
+    --teal-900: #0A3D30;
+    --teal: #0F6E56;
+    --amber: #BA7517;
+    --ink: #232B26;
+    --muted: #5A665D;
+    --line: #DED8C8;
+    --panel: #FAF8F2;
+    --display: 'Marcellus', Georgia, 'Times New Roman', serif;
+    --sans: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+
+  @page { size: A4; margin: 14mm 14mm 12mm; }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    font-family: var(--sans);
+    font-size: 9.6pt;
+    line-height: 1.5;
+    color: var(--ink);
+    background: #fff;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* On screen only: show the sheet as a page on a desk. Print ignores all of this. */
+  @media screen {
+    body { background: #EFEBE1; padding: 28px 0; }
+    .sheet {
+      width: 210mm;
+      padding: 14mm 14mm 12mm;
+      margin: 0 auto;
+      background: #fff;
+      box-shadow: 0 2px 24px rgba(10, 61, 48, .16);
+    }
+  }
+
+  .sheet {
+    display: flex;
+    flex-direction: column;
+    min-height: 271mm; /* A4 height less the top and bottom @page margins */
+  }
+
+  /* ---------------------------------------------------------------- header -- */
+
+  .head { display: flex; justify-content: space-between; align-items: flex-start; gap: 18mm; }
+  .wordmark { width: 46mm; height: auto; display: block; }
+  .doc { text-align: right; white-space: nowrap; }
+  .doctype {
+    font-family: var(--display);
+    font-size: 15pt;
+    letter-spacing: .04em;
+    color: var(--teal-900);
+    line-height: 1.1;
+  }
+  .doctype.is-proforma { color: var(--amber); }
+  .docnum { font-family: var(--mono); font-size: 10.5pt; margin-top: 5px; }
+  .docdate { font-size: 8.8pt; color: var(--muted); margin-top: 3px; }
+
+  .rule { border: 0; border-top: 1px solid var(--line); margin: 5mm 0 5mm; }
+
+  /* --------------------------------------------------------------- parties -- */
+
+  .label {
+    font-size: 6.9pt;
+    font-weight: 600;
+    letter-spacing: .13em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 2.5mm;
+  }
+
+  .parties { display: flex; gap: 10mm; }
+  .parties > div { flex: 1 1 0; min-width: 0; }
+  .party-name {
+    font-family: var(--display);
+    font-size: 12pt;
+    color: var(--teal-900);
+    line-height: 1.25;
+  }
+  .party-sub { color: var(--muted); font-size: 8.8pt; }
+  .party-line { font-size: 8.8pt; }
+  .party a, .party-line a { color: var(--teal); text-decoration: none; }
+
+  /* ------------------------------------------------------------ ref strip -- */
+
+  .refstrip {
+    display: flex;
+    justify-content: space-between;
+    gap: 8mm;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    padding: 2.6mm 4mm;
+    margin-top: 6mm;
+    font-size: 8.8pt;
+  }
+  .refstrip .k {
+    font-size: 6.9pt;
+    font-weight: 600;
+    letter-spacing: .13em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-right: 3mm;
+  }
+  .refstrip .v { font-family: var(--mono); color: var(--teal-900); }
+
+  /* --------------------------------------------------------------- items -- */
+
+  table.items { width: 100%; border-collapse: collapse; margin-top: 7mm; }
+  table.items th {
+    font-size: 6.9pt;
+    font-weight: 600;
+    letter-spacing: .13em;
+    text-transform: uppercase;
+    color: var(--amber);
+    text-align: left;
+    padding: 0 0 1.6mm;
+    border-bottom: 1px solid var(--line);
+  }
+  table.items th.num, table.items td.num { text-align: right; white-space: nowrap; }
+  table.items td {
+    padding: 3.2mm 0;
+    vertical-align: top;
+    border-bottom: 1px solid var(--line);
+  }
+  table.items td.num { font-variant-numeric: tabular-nums; }
+  .item-title { font-size: 10.2pt; }
+  .item-note { font-size: 8.2pt; color: var(--muted); line-height: 1.45; margin-top: 1mm; max-width: 105mm; }
+  tr.item { break-inside: avoid; }
+
+  /* --------------------------------------------------------------- totals -- */
+
+  .sums { margin-top: 4mm; margin-left: auto; width: 74mm; font-size: 9.4pt; }
+  .sums .row { display: flex; justify-content: space-between; padding: 1.1mm 0; }
+  .sums .row span:last-child { font-variant-numeric: tabular-nums; }
+  .sums .row.muted { color: var(--muted); }
+
+  .total {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    background: var(--teal-900);
+    color: #fff;
+    padding: 3.4mm 4mm;
+    margin-top: 3mm;
+    break-inside: avoid;
+  }
+  .total .t-label { font-size: 10.5pt; font-weight: 600; }
+  /* Sans, not the display face. Marcellus draws a wide circular zero that reads as a
+     capital O at this size — fine in a heading, wrong on the one number the customer
+     checks against their bank. */
+  .total .t-amount {
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 15.5pt;
+    letter-spacing: .01em;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* ------------------------------------------------------- pay / paid box -- */
+
+  .paidbox {
+    background: var(--panel);
+    border: 1px solid var(--teal);
+    padding: 3.4mm 4mm;
+    margin-top: 6mm;
+    break-inside: avoid;
+  }
+  .paidbox h3 {
+    margin: 0 0 1.8mm;
+    font-size: 10.5pt;
+    font-weight: 600;
+    letter-spacing: .04em;
+    color: var(--teal);
+  }
+  .paidbox p { margin: 0 0 1mm; font-size: 9pt; }
+
+  .howtopay { margin-top: 6mm; break-inside: avoid; }
+  .howtopay p { margin: 0 0 1.4mm; font-size: 9pt; }
+  .howtopay .link { font-family: var(--mono); font-size: 8.4pt; color: var(--teal); word-break: break-all; }
+
+  .notes { margin-top: 5mm; font-size: 8.8pt; }
+  .notes .body { color: var(--ink); white-space: pre-line; }
+
+  .smallprint { margin-top: 6mm; font-size: 7.8pt; line-height: 1.5; color: var(--muted); }
+  .smallprint p { margin: 0 0 1.6mm; }
+
+  /* --------------------------------------------------------------- footer -- */
+
+  .foot {
+    margin-top: auto;
+    padding-top: 3mm;
+    border-top: 1px solid var(--line);
+    font-size: 7.8pt;
+    color: var(--muted);
+  }
+  .foot .slogan { color: var(--amber); }
+</style>
+
+<div class="sheet">
+
+  <header class="head">
+    <img class="wordmark" src="../brand/logo/wordmark-primary.png" alt="AI Profit Lab">
+    <div class="doc">
+      <div class="doctype{{DOCTYPE_CLASS}}">{{DOCTYPE}}</div>
+      <div class="docnum">{{NUMBER}}</div>
+      <div class="docdate">{{DATE}}</div>
+    </div>
+  </header>
+
+  <hr class="rule">
+
+  <section class="parties">
+    <div class="party">
+      <div class="label">From</div>
+      <div class="party-name">AI Profit Lab</div>
+      <div class="party-sub">a brand of Lotus Gulf International</div>
+      <div class="party-line">CR 1570092 &nbsp;·&nbsp; TIN 2317725</div>
+      <div class="party-sub">South Al Khuwair, Bousher</div>
+      <div class="party-sub">Muscat Governorate</div>
+      <div class="party-sub">P.O. Box 1, P.C. 411, Sultanate of Oman</div>
+      <div class="party-line"><a href="mailto:hello@aiprofitlab.io">hello@aiprofitlab.io</a></div>
+    </div>
+    <div class="party">
+      <div class="label">Billed to</div>
+      <div class="party-name">{{BUYER_NAME}}</div>
+      <!--IF:BUYER_ATTN--><div class="party-line">Attn: {{BUYER_ATTN}}</div><!--ENDIF:BUYER_ATTN-->
+      <!--IF:BUYER_CR--><div class="party-line">CR {{BUYER_CR}}</div><!--ENDIF:BUYER_CR-->
+      <!--IF:BUYER_ADDRESS--><div class="party-sub">{{BUYER_ADDRESS}}</div><!--ENDIF:BUYER_ADDRESS-->
+      <!--IF:BUYER_EMAIL--><div class="party-sub">{{BUYER_EMAIL}}</div><!--ENDIF:BUYER_EMAIL-->
+      <!--IF:BUYER_PHONE--><div class="party-sub">{{BUYER_PHONE}}</div><!--ENDIF:BUYER_PHONE-->
+    </div>
+  </section>
+
+  <!--IF:STRIP-->
+  <div class="refstrip">
+    <div><!--IF:REFERENCE--><span class="k">Reference</span><span class="v">{{REFERENCE}}</span><!--ENDIF:REFERENCE--></div>
+    <div><!--IF:TERMS--><span class="k">{{TERMS_LABEL}}</span><span class="v">{{TERMS}}</span><!--ENDIF:TERMS--></div>
+  </div>
+  <!--ENDIF:STRIP-->
+
+  <table class="items">
+    <thead>
+      <tr>
+        <th>Description</th>
+        <!--IF:HASQTY--><th class="num">Qty</th><th class="num">Unit price</th><!--ENDIF:HASQTY-->
+        <th class="num">Amount</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!--ROWS-->
+      <tr class="item">
+        <td>
+          <div class="item-title">{{ROW_TITLE}}</div>
+          <!--IF:ROW_NOTE--><div class="item-note">{{ROW_NOTE}}</div><!--ENDIF:ROW_NOTE-->
+        </td>
+        <!--IF:HASQTY--><td class="num">{{ROW_QTY}}</td><td class="num">{{ROW_UNIT}}</td><!--ENDIF:HASQTY-->
+        <td class="num">{{ROW_AMOUNT}}</td>
+      </tr>
+      <!--ENDROWS-->
+    </tbody>
+  </table>
+
+  <div class="sums">
+    <!--IF:SHOWSUBTOTAL-->
+    <div class="row"><span>Subtotal</span><span>{{SUBTOTAL}}</span></div>
+    <!--ENDIF:SHOWSUBTOTAL-->
+    <!--IF:DISCOUNT-->
+    <div class="row muted"><span>{{DISCOUNT_LABEL}}</span><span>−{{DISCOUNT}}</span></div>
+    <!--ENDIF:DISCOUNT-->
+    <!--IF:ALREADYPAID-->
+    <div class="row muted"><span>{{ALREADYPAID_LABEL}}</span><span>−{{ALREADYPAID}}</span></div>
+    <!--ENDIF:ALREADYPAID-->
+  </div>
+
+  <div class="total">
+    <span class="t-label">{{TOTAL_LABEL}}</span>
+    <span class="t-amount">{{TOTAL}}</span>
+  </div>
+
+  <!--IF:PAID-->
+  <div class="paidbox">
+    <h3>Payment received</h3>
+    <p>{{PAID_AMOUNT}} received on {{PAID_DATE}}{{PAID_METHOD_PHRASE}}.</p>
+    <!--IF:PAID_REF--><p>Payment reference {{PAID_REF}}.</p><!--ENDIF:PAID_REF-->
+    <p>{{PAID_CLOSING}}</p>
+  </div>
+  <!--ENDIF:PAID-->
+
+  <!--IF:UNPAID-->
+  <div class="howtopay">
+    <div class="label">How to pay</div>
+    <!--IF:PAY_URL-->
+    <p>Pay by card on the secure page for this invoice:</p>
+    <p class="link">{{PAY_URL}}</p>
+    <p>The card is entered on Thawani&rsquo;s own payment page. We never see or store a card number.</p>
+    <p>Prefer a bank transfer? Reply to the email this invoice came with and the transfer details are sent to you directly &mdash; they are never printed on a document like this one.</p>
+    <!--ENDIF:PAY_URL-->
+    <!--IF:NO_PAY_URL-->
+    <p>Reply to the email this invoice came with and the payment details are sent to you directly.</p>
+    <p>They are deliberately not printed on a document that can be forwarded &mdash; it is how impersonation starts.</p>
+    <!--ENDIF:NO_PAY_URL-->
+  </div>
+  <!--ENDIF:UNPAID-->
+
+  <!--IF:NOTES-->
+  <div class="notes">
+    <div class="label">Notes</div>
+    <div class="body">{{NOTES}}</div>
+  </div>
+  <!--ENDIF:NOTES-->
+
+  <div class="smallprint">
+    <p>Not registered for VAT &mdash; the company is below Oman&rsquo;s OMR 38,500 registration threshold. No VAT has been charged on this invoice.</p>
+    <!--IF:PROFORMA-->
+    <p>This is a proforma invoice &mdash; a request for payment, not a tax document and not a receipt. A final invoice is issued once payment clears.</p>
+    <!--ENDIF:PROFORMA-->
+  </div>
+
+  <footer class="foot">
+    <div>AI Profit Lab &mdash; a brand of Lotus Gulf International &nbsp;·&nbsp; CR 1570092 &nbsp;·&nbsp; aiprofitlab.io</div>
+    <div class="slogan">Every success starts with insight.</div>
+  </footer>
+
+</div>

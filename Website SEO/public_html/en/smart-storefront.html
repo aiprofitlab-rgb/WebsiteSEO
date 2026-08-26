@@ -343,6 +343,16 @@ nav{position:sticky;top:0;z-index:60;background:rgba(241,239,232,.93);backdrop-f
 .card p{margin:0;font-size:.94rem;color:var(--muted)}
 .card h3{color:var(--teal-900)}
 
+/* ══ the credo: the positioning line, between the hero and the vow ══ */
+.credo{padding:clamp(40px,5.5vw,60px) 0;border-bottom:1px solid var(--line)}
+.credo p{font-family:var(--display);font-weight:400;
+  font-size:clamp(1.3rem,3.2vw,2.1rem);line-height:1.3;
+  color:var(--muted);margin:0 auto;max-width:900px;text-align:center;text-wrap:balance}
+.credo b{font-weight:400;color:var(--teal-950)}
+/* Not <em>: Marcellus has no true italic at this size, and the meaning is
+   carried by the rule under the verb rather than by a slant. */
+.credo i{font-style:normal;color:var(--teal);box-shadow:inset 0 -.13em 0 var(--amber-pale)}
+
 /* ══ the vow: the guarantee and the face behind it, in one block ══ */
 .vow{display:grid;grid-template-columns:200px 1fr;gap:30px;align-items:center;max-width:900px;
   background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--amber);border-radius:0 16px 16px 0;padding:28px 30px}
@@ -538,6 +548,9 @@ footer a{color:var(--amber-pale)}
   .seatbar i{width:auto !important}
 }
 </style>
+<!-- Microsoft Clarity -->
+<script>(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","y7wcjlyamc");</script>
+<script defer src="/js/apl-analytics.js?v=c85e0eed"></script>
 </head>
 <body>
 
@@ -595,6 +608,14 @@ footer a{color:var(--amber-pale)}
     </div>
   </div>
 </header>
+
+<!-- ═══ 1b. THE CREDO ═══ -->
+<section class="credo">
+  <div class="wrap">
+    <p class="rv">We don&rsquo;t just build websites &mdash; <b>we build intelligent digital
+      systems that <i>think</i>, <i>adapt</i>, and <i>convert</i>.</b></p>
+  </div>
+</section>
 
 <!-- ═══ 2. THE GUARANTEE, AND THE FACE BEHIND IT ═══ -->
 <section>
@@ -1507,6 +1528,6 @@ footer a{color:var(--amber-pale)}
   document.addEventListener("keydown", function(e){ if (e.key === "Escape" && curtain.classList.contains("on")) sleep(); });
 })();
 </script>
-    <script defer src="/js/aiden-chat.js?v=e2d0538f"></script>
+    <script defer src="/js/aiden-chat.js?v=3762fcc3"></script>
 </body>
 </html>

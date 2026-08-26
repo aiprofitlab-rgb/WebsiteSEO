@@ -21,6 +21,9 @@ Two rules govern every extraction below:
 import html as _html
 import json as _json
 import re
+import sys as _sys
+
+import kit
 
 # --------------------------------------------------------------------------
 # Small HTML utilities. A real parser would be nicer, but bs4 is not installed
@@ -148,8 +151,21 @@ def _head(s):
     d["jsonld"] = [m.group(1).strip() for m in re.finditer(
         r'<script[^>]*type=["\']application/ld\+json["\'][^>]*>(.*?)</script>', head, re.S | re.I)]
 
+    # The one field that is deliberately NOT preserved. Rule 2 above keeps
+    # every addressable thing the source page had, but a measurement id is not
+    # an addressable thing - it is configuration, and the site has exactly one
+    # correct value. Copying it across meant a stray old property survived
+    # every re-skin: 94 articles carried G-2GPVY4Z5KR, a manual cleanup
+    # repointed them, and the next run of reskin_articles.py read the stray
+    # back out of the pre-cleanup markup and restored it. So: read what is
+    # there, report anything that is not ours, and always hand back the
+    # canonical id.
     m = re.search(r"gtag/js\?id=([A-Za-z0-9-]+)", head)
-    d["ga"] = m.group(1) if m else ""
+    found = m.group(1) if m else ""
+    if found and found != kit.GA_ID:
+        print(f"  !! stray GA property {found} in source; emitting {kit.GA_ID}",
+              file=_sys.stderr)
+    d["ga"] = kit.GA_ID
 
     m = re.search(r'<html\b([^>]*)>', s, re.I)
     a = attrs(m.group(1)) if m else {}

@@ -1,0 +1,36 @@
+{
+  "_comment": "A worked example: copy this file, rename it after the customer, edit. Delete the _comment and the number line in your copy — the script fills the number in.",
+  "kind": "invoice",
+  "buyer": {
+    "name": "Example Trading LLC",
+    "attn": "Mr. Example Al Example",
+    "cr": "1234567",
+    "address": "Al Khuwair, Muscat",
+    "email": "owner@example.om",
+    "phone": "+968 9000 0000"
+  },
+  "items": [
+    {
+      "title": "The Smart Website — Founding Partner",
+      "note": "Bilingual site, AI buyer agent, wholesale quote flow, WhatsApp handoff, AI-search visibility, and the first year of hosting and care.",
+      "amount": 950
+    },
+    {
+      "title": "The Growth Desk",
+      "note": "Optional monthly care, new features and a reporting review. Cancellable any month.",
+      "qty": 3,
+      "unit": 75
+    }
+  ],
+  "already_paid": {
+    "label": "Deposit paid 12 Aug 2026",
+    "amount": 100
+  },
+  "paid": {
+    "amount": 1075,
+    "date": "2026-08-25",
+    "method": "card",
+    "reference": "checkout_EXAMPLE123"
+  },
+  "notes": "Build starts on confirmation of your brief. The Growth Desk runs from go-live and is invoiced monthly thereafter."
+}

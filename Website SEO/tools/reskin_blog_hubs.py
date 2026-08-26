@@ -65,7 +65,7 @@ ROOT = HERE.parent
 sys.path.insert(0, str(HERE / "v4"))
 
 import blog_chrome as C                                   # noqa: E402
-from kit import (BASE_CSS, MOTION_JS, SKIP_CSS, STAR, TOKENS,   # noqa: E402
+from kit import (ANALYTICS, APL_ANALYTICS_TAG, BASE_CSS, MOTION_JS, SKIP_CSS, STAR, TOKENS,   # noqa: E402
                  WA, WA_ICON)
 
 BLOG = ROOT / "public_html" / "blog"
@@ -770,10 +770,15 @@ def head(lang, total, css_href, js_href):
 <link rel="stylesheet" href="{css_href}">
 <script>document.documentElement.className+=" js"</script>
 
-<!-- Google tag (gtag.js) -->
+<!-- The hub's own behaviour: the category filter and the reveal motion. It is
+     content-hashed like the stylesheet above. Dropped from this template when
+     the hardcoded gtag block was replaced by the shared ANALYTICS constant,
+     which left both hubs shipping the filter UI markup with nothing to drive
+     it - and stopped filter_articles firing. Restored 2026-08-25. -->
 <script defer src="{js_href}"></script>
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-SLR9GD3MJP"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){{dataLayer.push(arguments)}}gtag('js',new Date());gtag('config','G-SLR9GD3MJP');</script>
+
+{ANALYTICS}
+{APL_ANALYTICS_TAG}
 
 <script type="application/ld+json">
 {ORG_SCHEMA}

@@ -157,21 +157,22 @@
         return out;
     }
 
+    // The page classifier used to live here, and /js/apl-analytics.js needed
+    // the same one to label every GA4 event. Two copies of a rule table like
+    // this drift the first time a page type is added to one of them, so the
+    // definition now has a single home in apl-analytics.js and this reads it.
+    //
+    // Ordering is safe by construction: apl-analytics.js is a `defer` script
+    // in <head>, so it has run before DOMContentLoaded, and this widget boots
+    // on window load + 900ms. The fallback is for a page that carries the
+    // widget but not the analytics script - it should not exist, and if it
+    // does the honest answer is the generic type rather than a stale copy of
+    // the table.
     function pageType(path) {
-        if (/\/blog\/(en|ar)\//.test(path)) return 'article';
-        if (/\/academy\/(en|ar)\//.test(path)) return 'guide';
-        if (/^\/(blog|blog-ar)\/?(index\.html)?$/.test(path)) return 'blog-hub';
-        if (/^\/(academy|academy-ar)\/?(index\.html)?$/.test(path)) return 'academy-hub';
-        if (/privacy|terms|legal|refund/.test(path)) return 'legal';
-        if (/service|package/.test(path)) return 'services';
-        if (/process/.test(path)) return 'process';
-        if (/about/.test(path)) return 'about';
-        if (/contact/.test(path)) return 'contact';
-        if (/simulator|calculator/.test(path)) return 'tool';
-        if (/demo/.test(path)) return 'demo';
-        if (/offer|storefront|claim/.test(path)) return 'offer';
-        if (/^\/(en\/)?(index[\w-]*\.html)?$/.test(path)) return 'home';
-        return 'page';
+        var shared = window.APLPage;
+        return (shared && typeof shared.pageType === 'function')
+            ? shared.pageType(path)
+            : 'page';
     }
 
     // Trail of pages in this tab session (what Aiden calls "the journey").

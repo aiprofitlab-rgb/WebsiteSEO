@@ -1,0 +1,20 @@
+{
+  "kind": "invoice",
+  "buyer": {
+    "name": "",
+    "attn": "",
+    "cr": "",
+    "address": "",
+    "email": "",
+    "phone": ""
+  },
+  "items": [
+    { "title": "", "note": "", "amount": 0 }
+  ],
+  "paid": {
+    "amount": 0,
+    "date": "",
+    "method": "bank transfer",
+    "reference": ""
+  }
+}

@@ -6,3 +6,21 @@ media/
 *.mp4
 *.mov
 .tmp/
+
+# Customer invoices. THIS REPO IS PUBLIC — a committed invoice publishes a real
+# customer's name, CR number, e-mail, phone and what they paid. Only the template,
+# the script and the two placeholder specs are tracked.
+invoices/customers/*.json
+!invoices/customers/_blank.json
+!invoices/customers/_example-paid.json
+invoices/out/
+invoices/register.json
+invoices/.env
+
+# Visitor journey reports. THIS REPO IS PUBLIC — these contain GA4 visitor
+# identifiers, full page-by-page journeys and, where the Aiden CSV was joined,
+# verbatim things visitors typed into the chat. The cache holds the same rows
+# straight from BigQuery. Only tools/build_journey_report.py is tracked.
+out/journey-*.html
+out/.journey-cache/
+Aiden_Chat*.csv

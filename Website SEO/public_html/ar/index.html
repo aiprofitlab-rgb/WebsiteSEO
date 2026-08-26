@@ -40,6 +40,10 @@
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-SLR9GD3MJP"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-SLR9GD3MJP');</script>
 
+<!-- Microsoft Clarity -->
+<script>(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","y7wcjlyamc");</script>
+<script defer src="/js/apl-analytics.js?v=c85e0eed"></script>
+
 <style>
 :root{
   --teal-950:#072B22; --teal-900:#0A3D30; --teal:#0F6E56; --teal-600:#158268;
@@ -737,6 +741,26 @@ input[type=range]::-moz-range-thumb{
   font-size:clamp(1.35rem,3vw,2.1rem);line-height:1.3;color:var(--teal-950);text-align:center;
 }
 .touch-kick em{font-style:normal;color:var(--amber-text)}
+
+/* ------------------------------------------------------------- S6 the credo
+   The positioning line, set in display type between the section head and the
+   lede so it reads as a statement rather than as body copy. Two clauses: the
+   first is the thing everyone else sells (muted), the second is what is
+   actually being sold (ink), with the three verbs carrying the amber rule.
+   text-wrap:balance keeps the break off a lone verb on a narrow column. */
+.credo{
+  font-family:var(--display);font-weight:400;
+  font-size:clamp(1.28rem,2.5vw,1.95rem);line-height:1.3;
+  color:var(--muted);max-width:24ch;max-width:min(940px,100%);
+  margin:0 0 clamp(18px,2.2vw,26px);text-wrap:balance;
+}
+.credo b{font-weight:400;color:var(--teal-950)}
+/* Not <em>: the slant is wrong at this size in Marcellus, and the meaning is
+   carried by the rule under the word, not by italics. */
+.credo i{font-style:normal;color:var(--teal);box-shadow:inset 0 -.13em 0 var(--amber-pale)}
+.s-dark .credo,.s-teal .credo{color:rgba(241,239,232,.62)}
+.s-dark .credo b,.s-teal .credo b{color:var(--cream)}
+.s-dark .credo i,.s-teal .credo i{color:var(--amber-pale);box-shadow:inset 0 -.13em 0 rgba(216,146,52,.5)}
 
 /* ----------------------------------------------------------- S6 staircase */
 .stair{width:100%;height:auto;display:block;margin:clamp(24px,4vw,44px) 0 clamp(28px,4vw,52px);overflow:visible}
@@ -1565,6 +1589,8 @@ html:not(.js) .stair .step,html:not(.js) .stair .anno{opacity:1;transform:none}
   <div class="wrap">
     <p class="eyebrow"><span class="star">&#10038;</span> ما الذي يُبنى</p>
     <h2 class="h2">ثلاثة أنظمة. ابدأ بالذي يؤلمك.</h2>
+    <p class="credo rv">نحن لا نبني مواقع إلكترونية فحسب &mdash; <b>بل أنظمة رقمية ذكية
+      <i>تفكّر</i>، و<i>تتكيّف</i>، و<i>تحوّل</i> الزائر إلى عميل.</b></p>
     <p class="lede">لا شيء منها باقة مفروضة تشتريها دفعة واحدة. ولا شيء منها يحتاج رسماً شهرياً كي يستمر.</p>
 
     <svg class="stair rv" viewBox="0 0 1000 400" role="img" aria-labelledby="stairT stairD">
@@ -1852,8 +1878,8 @@ html:not(.js) .stair .step,html:not(.js) .stair .anno{opacity:1;transform:none}
     <p class="legal">
       &copy; 2026 AI Profit Lab &mdash; علامة تجارية تابعة لشركة Lotus Gulf International (س.ت <span dir="ltr">1570092</span>)<br>
       الخوير الجنوبية، بوشر، مسقط، سلطنة عُمان &middot; غير مسجّلة في ضريبة القيمة المضافة (الرقم الضريبي <span dir="ltr">2317725</span>)<br>
-      <a href="/terms/">شروط الخدمة</a> &middot; <a href="/refund-policy-ar/">الاسترداد والإلغاء</a>
-      &middot; <a href="/privacy/">الخصوصية</a>
+      <a href="/terms-ar/">شروط الخدمة</a> &middot; <a href="/refund-policy-ar/">الاسترداد والإلغاء</a>
+      &middot; <a href="/privacy-ar/">الخصوصية</a>
     </p>
   </div>
 </footer>
@@ -2246,6 +2272,6 @@ html:not(.js) .stair .step,html:not(.js) .stair .anno{opacity:1;transform:none}
   render();
 })();
 </script>
-<script defer src="/js/aiden-chat.js?v=e2d0538f"></script>
+    <script defer src="/js/aiden-chat.js?v=3762fcc3"></script>
 </body>
 </html>

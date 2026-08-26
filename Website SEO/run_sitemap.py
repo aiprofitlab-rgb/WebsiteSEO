@@ -35,7 +35,9 @@ urls = [
     # Linked from the footer of all 320 pages and never submitted. For a
     # business taking payment online these are trust pages, not boilerplate.
     ("/privacy/", 0.4),
+    ("/privacy-ar/", 0.4),
     ("/terms/", 0.4),
+    ("/terms-ar/", 0.4),
     ("/refund-policy/", 0.4),
     ("/refund-policy-ar/", 0.4),
 

@@ -274,6 +274,26 @@ input[type=range]::-moz-range-thumb{
 }
 .touch-kick em{font-style:normal;color:var(--amber-text)}
 
+/* ------------------------------------------------------------- S6 the credo
+   The positioning line, set in display type between the section head and the
+   lede so it reads as a statement rather than as body copy. Two clauses: the
+   first is the thing everyone else sells (muted), the second is what is
+   actually being sold (ink), with the three verbs carrying the amber rule.
+   text-wrap:balance keeps the break off a lone verb on a narrow column. */
+.credo{
+  font-family:var(--display);font-weight:400;
+  font-size:clamp(1.28rem,2.5vw,1.95rem);line-height:1.3;
+  color:var(--muted);max-width:24ch;max-width:min(940px,100%);
+  margin:0 0 clamp(18px,2.2vw,26px);text-wrap:balance;
+}
+.credo b{font-weight:400;color:var(--teal-950)}
+/* Not <em>: the slant is wrong at this size in Marcellus, and the meaning is
+   carried by the rule under the word, not by italics. */
+.credo i{font-style:normal;color:var(--teal);box-shadow:inset 0 -.13em 0 var(--amber-pale)}
+.s-dark .credo,.s-teal .credo{color:rgba(241,239,232,.62)}
+.s-dark .credo b,.s-teal .credo b{color:var(--cream)}
+.s-dark .credo i,.s-teal .credo i{color:var(--amber-pale);box-shadow:inset 0 -.13em 0 rgba(216,146,52,.5)}
+
 /* ----------------------------------------------------------- S6 staircase */
 .stair{width:100%;height:auto;display:block;margin:clamp(24px,4vw,44px) 0 clamp(28px,4vw,52px);overflow:visible}
 .stair .step{opacity:0;transform:translateY(26px);transition:opacity .7s var(--ease),transform .8s var(--ease);transition-delay:var(--d,0s)}
@@ -678,6 +698,8 @@ def body():
   <div class="wrap">
     <p class="eyebrow"><span class="star">{STAR}</span> What gets built</p>
     <h2 class="h2">Three systems. Start with the one that hurts.</h2>
+    <p class="credo rv">We don&#8217;t just build websites &mdash; <b>we build intelligent digital
+      systems that <i>think</i>, <i>adapt</i>, and <i>convert</i>.</b></p>
     <p class="lede">Nothing is a bundle you must buy at once. Nothing needs a monthly fee to keep working.</p>
 
     <svg class="stair rv" viewBox="0 0 1000 400" role="img" aria-labelledby="stairT stairD">

@@ -15,9 +15,12 @@ What is preserved, byte for byte
 --------------------------------
 title, meta description, meta keywords, meta category, canonical, every
 hreflang alternate, the complete JSON-LD @graph (Organization / Article /
-FAQPage / BreadcrumbList as each page had it), the page's own GA measurement
-id, every heading `id` (old table-of-contents anchors keep working), and every
-link in the body.
+FAQPage / BreadcrumbList as each page had it), every heading `id` (old
+table-of-contents anchors keep working), and every link in the body.
+
+The GA measurement id is the one thing deliberately NOT preserved - it is
+configuration, not content, and copying it forward is how a retired property
+survived a cleanup once already. See the note in tools/v4/legacy.py.
 
 What is added
 -------------

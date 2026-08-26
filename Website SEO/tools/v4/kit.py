@@ -16,6 +16,15 @@ on its own. During a design review that difference is the whole game.
 Palette, type and voice come from brand/docs/02-brand-book.md. Prices come from
 en/index-v3.html, which is the page that currently publishes them.
 """
+import pathlib as _pathlib
+import sys as _sys
+
+# tools/ holds analytics_version.py. Every entry point that imports this module
+# runs from tools/, so it is normally on the path already; the insert is what
+# keeps `import kit` working from anywhere else.
+_sys.path.insert(0, str(_pathlib.Path(__file__).resolve().parent.parent))
+
+import analytics_version  # noqa: E402
 
 # --------------------------------------------------------------------------
 # Design tokens — verbatim from the brand book, plus three working values.
@@ -608,6 +617,69 @@ ROBOTS_INDEX = ('<meta name="robots" content="index, follow, '
 ROBOTS_NONE = '<meta name="robots" content="noindex, follow">'
 
 
+# --------------------------------------------------------------------------
+# The one GA4 property for aiprofitlab.io. Every template that emits a gtag
+# snippet reads this name rather than repeating the string, and every reader
+# that finds a measurement id in an existing page normalises to it.
+#
+# The literal used to be repeated per template, and `legacy._head()` copied
+# whatever id it found in the page it was re-skinning. An old property,
+# G-2GPVY4Z5KR, had been left on 94 blog articles; a manual cleanup fixed
+# them, and the next re-skin faithfully restored the stray from the file it
+# was reading. Hence one constant, and no code path that preserves an id.
+# --------------------------------------------------------------------------
+GA_ID = "G-SLR9GD3MJP"
+
+# --------------------------------------------------------------------------
+# Microsoft Clarity - session recordings and heatmaps, added 2026-08-25.
+# Same one-constant rule as GA_ID: the tag id lives here, every template reads
+# the snippets below rather than carrying its own copy of either.
+#
+# The id is the project id in the Clarity dashboard URL. Clarity masks input
+# values and anything marked sensitive by default, which matters on /en/pay/
+# and the contact form - see Settings > Masking before relaxing it.
+# --------------------------------------------------------------------------
+CLARITY_ID = "y7wcjlyamc"
+
+# The two snippets, and the pair. Kept separate because the generated pages
+# take ANALYTICS whole, while tools/apply_clarity_tag.py has to add just the
+# Clarity half to the hand-maintained pages that already carry gtag.
+#
+# Neither contains a %% or a literal {} that a template has to survive: this
+# module's head is %-formatted and blog_chrome.py's is an f-string, and a
+# brace would need escaping differently in each. Building them with .replace()
+# rather than interpolation is what keeps that true of the Clarity IIFE.
+GTAG_SNIPPET = """<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=GA_ID_"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','GA_ID_');</script>""".replace("GA_ID_", GA_ID)
+
+CLARITY_SNIPPET = """<!-- Microsoft Clarity -->
+<script>(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","CLARITY_ID_");</script>""".replace("CLARITY_ID_", CLARITY_ID)
+
+# One block, so a generated page gets the pair and cannot end up with one.
+ANALYTICS = GTAG_SNIPPET + "\n\n" + CLARITY_SNIPPET
+
+# --------------------------------------------------------------------------
+# The shared measurement script - /js/apl-analytics.js.
+#
+# Everything we measure that is the same on every page (scroll depth, real
+# time on page, the exit event, outbound and CTA clicks, and the page_type /
+# content_language / article_slug dimensions every other event inherits) lives
+# in that one file rather than in these templates. Changing what is tracked is
+# then an edit to the script plus one re-run of the builders to re-stamp the
+# hash, instead of a change to a template and a 375-page rebuild.
+#
+# Kept OUT of ANALYTICS on purpose: ANALYTICS is the gtag + Clarity pair that
+# tools/apply_clarity_tag.py reasons about, and the templates place this tag
+# after it - the script calls the global gtag() that the pair defines, so it
+# must not be able to end up above it.
+#
+# `defer`, like AIDEN_TAG: it must not block the render, and it needs the DOM
+# for its click delegation. See tools/analytics_version.py for the ?v= token.
+# --------------------------------------------------------------------------
+APL_ANALYTICS_TAG = analytics_version.tag()
+
+
 def alternates(path, other, lang="en"):
     """hreflang block for one page. `path` is this page, `other` is its twin in
     the other language (or None where the page exists in one language only).
@@ -709,9 +781,9 @@ CHROME = {
                   '(س.ت <span dir="ltr">1570092</span>)<br>\n      الخوير الجنوبية، بوشر، مسقط، '
                   'سلطنة عُمان &middot; غير مسجّلة في ضريبة القيمة المضافة '
                   '(الرقم الضريبي <span dir="ltr">2317725</span>)<br>\n      '
-                  '<a href="/terms/">شروط الخدمة</a> &middot; '
+                  '<a href="/terms-ar/">شروط الخدمة</a> &middot; '
                   '<a href="/refund-policy-ar/">الاسترداد والإلغاء</a>\n      '
-                  '&middot; <a href="/privacy/">الخصوصية</a>'),
+                  '&middot; <a href="/privacy-ar/">الخصوصية</a>'),
         "locale": "ar_OM", "dir": "rtl", "htmllang": "ar",
     },
 }
@@ -768,16 +840,15 @@ def head_html(lang="en"):
      JS to un-apply them. Without it, a no-JS visitor gets a blank page. -->
 <script>document.documentElement.className+=" js"</script>
 
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-SLR9GD3MJP"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-SLR9GD3MJP');</script>
+%(analytics)s
+%(apl_analytics)s
 
 <style>{{CSS}}</style>
 {{SCHEMA}}
 </head>
 <body>
 <a class="skip" href="#main">%(skip)s</a>
-""" % dict(c, fonts=fonts)
+""" % dict(c, fonts=fonts, analytics=ANALYTICS, apl_analytics=APL_ANALYTICS_TAG)
 
 
 # Kept as a module constant because it is what the English build has always

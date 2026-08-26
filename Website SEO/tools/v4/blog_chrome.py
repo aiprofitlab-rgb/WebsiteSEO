@@ -24,8 +24,8 @@ cards and an explicit robots directive with large image previews.
 """
 import html as _html
 
-from kit import (BASE_CSS, GOOGLE_G, GOOGLE_REVIEW, MAIL_ICON, SKIP_CSS, SOCIALS,
-                 STAR, STAR_SVG, TOKENS, WA, WA_ICON, WA_SMALL, _socials)
+from kit import (ANALYTICS, APL_ANALYTICS_TAG, BASE_CSS, GOOGLE_G, GOOGLE_REVIEW, MAIL_ICON, SKIP_CSS,
+                 SOCIALS, STAR, STAR_SVG, TOKENS, WA, WA_ICON, WA_SMALL, _socials)
 from article_kit import ARTICLE_CSS
 from rtl import RTL_BASE
 
@@ -42,7 +42,7 @@ URLS = {
     "ar": {
         "home": "/ar/", "services": "/services/", "process": "/process/",
         "about": "/about/", "contact": "/contact/", "blog": "/blog-ar/",
-        "privacy": "/privacy/", "other": "/", "sim": "/simulators-ar/",
+        "privacy": "/privacy-ar/", "other": "/", "sim": "/simulators-ar/",
         "demo": "/demos-ar/", "dash": "/demos-ar/#dash",
     },
 }
@@ -342,7 +342,9 @@ def head(doc, og_image, css_href, js_href=None):
         '<link rel="alternate" hreflang="%s" href="%s">' % (_esc(h), _esc(u))
         for h, u in doc["hreflang"])
 
-    ga = doc["ga"] or "G-SLR9GD3MJP"
+    # legacy._head() already normalises this to the canonical property;
+    # falling back to the same constant means no path through this file
+    # can emit a measurement id that is not ours.
     keywords = ('\n<meta name="keywords" content="%s">' % _esc(doc["keywords"])) if doc["keywords"] else ""
     cat = ('\n<meta name="category" content="%s">' % _esc(doc["category"])) if doc["category"] else ""
     schema = "\n".join('<script type="application/ld+json">\n%s\n</script>' % b for b in doc["jsonld"])
@@ -391,10 +393,10 @@ def head(doc, og_image, css_href, js_href=None):
 <link rel="stylesheet" href="{css_href}">
 <script>document.documentElement.className+=" js"</script>
 
-<!-- Google tag (gtag.js) -->
 <script defer src="{js_href}"></script>
-<script async src="https://www.googletagmanager.com/gtag/js?id={ga}"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){{dataLayer.push(arguments)}}gtag('js',new Date());gtag('config','{ga}');</script>
+
+{ANALYTICS}
+{APL_ANALYTICS_TAG}
 
 {schema}
 </head>

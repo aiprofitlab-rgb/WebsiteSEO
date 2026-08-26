@@ -51,6 +51,7 @@ Articles headed "A Worked Example" are illustrative scenarios, not client case s
 
 - [Terms](https://aiprofitlab.io/terms/): terms of service
 - [Privacy policy](https://aiprofitlab.io/privacy/): how personal data is collected and protected under Oman's PDPL
+- [Privacy policy (Arabic)](https://aiprofitlab.io/privacy-ar/): سياسة الخصوصية بالعربية
 - [Refund policy (English)](https://aiprofitlab.io/refund-policy/): cancellations, part-finished work, and how refunds are paid back
 - [Refund policy (Arabic)](https://aiprofitlab.io/refund-policy-ar/): سياسة الاسترداد بالعربية
 
