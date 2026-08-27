@@ -16,6 +16,15 @@ One-time build fees, in OMR. Founding price is the current price; standard is wh
 
 There is no mandatory monthly fee. Nothing stops working if the optional Growth Desk is cancelled.
 
+### Current launch offer (capped)
+
+A capped launch group buys the Smart Website build at a seat price that climbs as seats are confirmed. The published prices above do not move; the launch seat is a discount against them, and every capability listed in the build is included at the seat price rather than sold as an upgrade later.
+
+- Seat price on 26 August 2026: OMR 249, with 3 seats open at that price. It then steps to OMR 279 (7 seats), then OMR 299 (10 seats), and continues climbing after that.
+- The seat price is live data, not a fixed figure: the offer pages below show the current rung and the seats left at it. Quote them from the page rather than from this file.
+- A 50% deposit holds a seat. The build is one-time and includes the first year of hosting and care, as above.
+- The offer runs on the Smart Website only. The Dashboard, the Autopilot, the Operator Stack and the Growth Desk are sold at the prices listed above.
+
 ## Main pages (English)
 
 - [Homepage](https://aiprofitlab.io/): what AI Profit Lab builds, for whom, and what it costs
@@ -26,7 +35,7 @@ There is no mandatory monthly fee. Nothing stops working if the optional Growth 
 - [Demos](https://aiprofitlab.io/en/demos/): the WhatsApp buyer agent and the live owner dashboard, running
 - [Simulators](https://aiprofitlab.io/en/simulators/): calculators for what unanswered enquiries cost
 - [Checkout](https://aiprofitlab.io/en/checkout/): reserve a build slot
-- [Smart Website offer](https://aiprofitlab.io/en/smart-website-offer/): the current offer page
+- [Launch offer](https://aiprofitlab.io/en/smart-storefront/): the capped launch offer, with the live seat price and the seats left at it
 
 ## Main pages (Arabic)
 
@@ -38,7 +47,7 @@ There is no mandatory monthly fee. Nothing stops working if the optional Growth 
 - [التجارب](https://aiprofitlab.io/demos-ar/)
 - [الحاسبات](https://aiprofitlab.io/simulators-ar/)
 - [ابدأ طلبك](https://aiprofitlab.io/checkout-ar/)
-- [عرض الموقع الذكي](https://aiprofitlab.io/smart-website-offer/)
+- [عرض الإطلاق](https://aiprofitlab.io/smart-storefront-ar/)
 
 ## Articles
 

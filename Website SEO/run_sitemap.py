@@ -16,7 +16,6 @@ urls = [
     ("/en/simulators/", 0.7),
     ("/en/checkout/", 0.7),
     ("/blog/", 0.8),
-    ("/en/smart-website-offer/", 0.9),
 
     # --- Arabic, the v4 set (rebuilt 2026-08-21) ----------------------------
     # The five core URLs are unchanged - only the skin under them moved.
@@ -29,7 +28,6 @@ urls = [
     ("/simulators-ar/", 0.7),
     ("/checkout-ar/", 0.7),
     ("/blog-ar/", 0.8),
-    ("/smart-website-offer/", 0.9),
 
     # --- Trust pages -------------------------------------------------------
     # Linked from the footer of all 320 pages and never submitted. For a
@@ -45,6 +43,10 @@ urls = [
     # live v4 page links to them, they are thin against the articles covering
     # the same ground, and they were competing with them. A sitemap must not
     # advertise a page that tells the crawler not to index it.
+    # The two Smart Website offer pages were retired 2026-08-26: their URLs
+    # now 301 to the Smart Storefront campaign (.htaccess section 2), the
+    # files carry noindex, and the campaign page they land on is noindex
+    # too. Nothing here to list.
     # Neither /en/order/ nor /order-ar/ belongs here: both are payment-return
     # pages carrying noindex, and /en/checkout/?plan=... are query variants of
     # one URL. The four stand-alone Arabic demo and simulator pages that used
@@ -77,8 +79,6 @@ def source_file(loc):
     path = loc.strip("/")
     if path == "":
         return os.path.join(public_html, "index.html")
-    if path == "en/smart-website-offer":          # .htaccess section 2, explicit
-        return os.path.join(public_html, "smart-website-offer-en.html")
     parts = path.split("/")
     candidates = []
     if parts[0] == "en" and len(parts) == 2:

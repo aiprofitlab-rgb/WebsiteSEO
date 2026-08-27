@@ -143,7 +143,28 @@ RewriteCond %{REQUEST_URI} !(.*)/$
 RewriteRule ^(.*)$ https://aiprofitlab.io/$1/ [L,R=301]
 
 # 2. Specific Hub Redirects (PRIORITY)
-RewriteRule ^en/smart-website-offer/?$ smart-website-offer-en.html [L]
+# The Early Bird offer page was retired 2026-08-26. It published OMR 249
+# against a struck-through OMR 850, while /en/services/ publishes OMR 950 /
+# OMR 1,450 for the same build - two indexed pages disagreeing on the price of
+# one product, one of them in Product schema. The live campaign is the Smart
+# Storefront, which carries the same OMR 249 seat price from the ledger, so
+# these 301s land an old link on the offer it was promising. The files stay on
+# disk and are noindex; only the URLs are retired.
+RewriteRule ^en/smart-website-offer/?$ /en/smart-storefront/ [R=301,L]
+RewriteRule ^smart-website-offer/?$    /smart-storefront-ar/ [R=301,L]
+# The stale sitemap advertised these two pages by their RAW .html paths for
+# months, so those are the URLs Google actually holds. They resolve as files,
+# which means the pretty-URL redirects above never see them - they need their
+# own. Nothing rewrites to these filenames any more, so there is no loop.
+# THE_REQUEST guard, same reason as section 6: it matches what the browser
+# actually asked for, so an internal rewrite that ever lands on one of these
+# filenames cannot be turned into an external redirect by these rules.
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /en/smart-website-offer\.html\ HTTP/
+RewriteRule ^en/smart-website-offer\.html$  /en/smart-storefront/ [R=301,L]
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /smart-website-offer\.html\ HTTP/
+RewriteRule ^smart-website-offer\.html$     /smart-storefront-ar/ [R=301,L]
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /smart-website-offer-en\.html\ HTTP/
+RewriteRule ^smart-website-offer-en\.html$  /en/smart-storefront/ [R=301,L]
 RewriteRule ^en/blog/$ blog/index.html [L]
 RewriteRule ^en/academy/$ academy/index.html [L]
 
@@ -175,7 +196,7 @@ RewriteRule ^missed-call-simulator-en/?$ /en/simulators/ [R=301,L]
 # through rule 5 as /smart-website-offer-en/, which served the same document
 # at 200 under a second URL. It self-canonicals to the /en/ form, so nothing
 # was ranking on it - but a duplicate that resolves is a duplicate.
-RewriteRule ^smart-website-offer-en/?$ /en/smart-website-offer/ [R=301,L]
+RewriteRule ^smart-website-offer-en/?$ /en/smart-storefront/ [R=301,L]
 
 # One demo page and one simulator page now carry what four separate pages
 # used to. The originals stay on disk; only the URLs are retired.
