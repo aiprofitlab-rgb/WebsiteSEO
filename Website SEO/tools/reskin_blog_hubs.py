@@ -46,12 +46,17 @@ What is fixed
 
 What is removed
 ---------------
-The Tailwind CDN script, the old dark skin, the FOUC overlay, and
-`/js/aiden-chat.js`. The widget is dropped for the same reason the articles
-dropped it: `blog_chrome.footer` already puts a WhatsApp action button in the
-bottom corner and Aiden's launcher pins to that same corner, so the two overlap.
-`tools/add_aiden_widget.py` leaves both alone: the articles are covered by its
-ARTICLE_PATTERNS and these two hubs by its EXCLUDE_PATTERNS.
+The Tailwind CDN script, the old dark skin, and the FOUC overlay.
+
+The Aiden widget
+----------------
+Emitted here as of 2026-08-27, along with the articles. It was dropped on the
+grounds that `blog_chrome.footer`'s WhatsApp button sat in the launcher's corner;
+in this skin that button is inline in the footer, nothing is `position:fixed` to
+the bottom, and the launcher measures the corner before placing itself anyway.
+A visitor scanning an index is looking for something, which is when Aiden earns
+its place. The tag carries the widget's content hash (tools/aiden_version.py),
+identical to the one tools/add_aiden_widget.py stamps site-wide.
 """
 import argparse
 import hashlib
@@ -63,7 +68,9 @@ import sys
 HERE = pathlib.Path(__file__).resolve().parent
 ROOT = HERE.parent
 sys.path.insert(0, str(HERE / "v4"))
+sys.path.insert(0, str(HERE))
 
+import aiden_version                                      # noqa: E402
 import blog_chrome as C                                   # noqa: E402
 from kit import (ANALYTICS, APL_ANALYTICS_TAG, BASE_CSS, MOTION_JS, SKIP_CSS, STAR, TOKENS,   # noqa: E402
                  WA, WA_ICON)
@@ -930,6 +937,7 @@ def render(lang, entries, css_href, js_href):
             + body
             + C.footer(lang)
             + schema(lang, entries)
+            + aiden_version.tag() + "\n"
             + "</body>\n</html>\n")
 
 

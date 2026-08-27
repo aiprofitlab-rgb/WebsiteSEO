@@ -214,7 +214,9 @@ META = dict(
     nav="/blog/",
     next=("Next", "Run your own numbers", "/en/simulators/"),
     schema=ak.schema(ARTICLE),
-    # No chat launcher on articles: an article is a reading surface, and the
-    # launcher lands in the same corner the WhatsApp float already occupies.
-    aiden=False,
+    # Aiden runs here like everywhere else (2026-08-27). Nothing in this skin
+    # is pinned to the bottom corner any more, and the widget sends the article
+    # text with each message, so a reader can ask about the piece in front of
+    # them - see tools/reskin_articles.py, which owns the live articles.
+    aiden=True,
 )

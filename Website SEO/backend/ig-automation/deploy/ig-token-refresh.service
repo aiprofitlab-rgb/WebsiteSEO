@@ -1,0 +1,24 @@
+# /etc/systemd/system/ig-token-refresh.service
+#
+# One-shot, fired by ig-token-refresh.timer. A systemd timer rather than a cron
+# line so the run, its exit code and its output all land in the journal:
+#   sudo journalctl -u ig-token-refresh --since "7 days ago"
+
+[Unit]
+Description=Refresh the Instagram long-lived access token
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=igbot
+Group=igbot
+WorkingDirectory=/opt/ig-automation
+EnvironmentFile=/etc/ig-automation/.env
+ExecStart=/usr/bin/node scripts/refresh-token.js
+
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/ig-automation

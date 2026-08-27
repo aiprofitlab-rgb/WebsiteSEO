@@ -22,6 +22,10 @@
 // * Pages that still ship the old inline widget markup have it removed on
 //   mount, so there is exactly one Aiden on the page and it is this one.
 //
+// * Every message carries the page's own prose, not just its title and
+//   headings - see pageContent(). That is what lets Aiden answer a question
+//   about the article the visitor is halfway through.
+//
 // Public API is unchanged: window.aidenChat.init / toggle / send.
 
 (function () {
@@ -155,6 +159,140 @@
             if (text.length >= 3 && text.length <= 120) out.push(text);
         }
         return out;
+    }
+
+    // ---------- the page's own words ----------
+    //
+    // Title, description and headings say what a page is *about*. They do not
+    // let Aiden answer "what does this say about X", which is the entire point
+    // of putting a launcher on a 2,000-word article. So the widget reads the
+    // page the way a reader does and sends the prose along with the question.
+    //
+    // Structure survives the trip - headings marked with #, list items with -
+    // because the model is asked to answer *from* this text, and a wall of
+    // concatenated sentences loses which paragraph belonged to which section.
+
+    // How much of the page travels with each message. An article runs past
+    // 15,000 characters; nobody's question needs all of it in front of the
+    // model on every turn, and the heading list carries the shape of the rest.
+    var MAX_PAGE_CONTENT = 6000;
+
+    // Chrome, not content. These subtrees are identical on every page, so
+    // sending them would spend the budget describing the nav bar. NAV also
+    // takes out an article's table of contents, which is its own headings a
+    // second time.
+    //
+    // HEADER is not on the list, and neither are ASIDE and FORM. On this site
+    // <header> is the page hero as often as it is the site banner - dropping
+    // every one of them cost /en/checkout/ its headline and /en/smart-storefront/
+    // its entire opening - so a header is judged by isBanner() instead. The
+    // checkout's order summary, price included, is an <aside> inside a <form>:
+    // skipping either left Aiden unable to say what the visitor was about to pay.
+    var CONTENT_SKIP = /^(SCRIPT|STYLE|NOSCRIPT|TEMPLATE|SVG|NAV|FOOTER|IFRAME|BUTTON|SELECT|LABEL|OPTION)$/;
+    // The same idea for blocks that are markup-wise ordinary but read as
+    // furniture: the breadcrumb trail, the "keep reading" rail of other
+    // articles, the share row. What the visitor could read next is the
+    // backend's job - it retrieves that from the index - so paying for three
+    // more headlines here would buy a worse answer about this page.
+    var CONTENT_SKIP_CLASS = /(^|\s)(crumbs|breadcrumb|toc|related|share|pagination|skip)(\s|$)/;
+    var CONTENT_BLOCKS = 'h1,h2,h3,h4,summary,p,li,blockquote,figcaption,dt,dd,td,th';
+
+    /**
+     * Read fresh on every message rather than once per page load. The checkout
+     * total and the simulator outputs change as the visitor works the controls,
+     * and a memoised extract would have Aiden quoting the figure they saw
+     * before they changed their mind. One pass over a few hundred nodes per
+     * message is not a cost worth being wrong for.
+     */
+    function pageContent() {
+        try { return extractContent(); } catch (e) { return ''; }
+    }
+
+    /**
+     * The site banner, as opposed to a page hero that happens to be a <header>.
+     * The banner is the one carrying the primary navigation.
+     */
+    function isBanner(el) {
+        if (el.tagName !== 'HEADER') return false;
+        if (el.getAttribute && el.getAttribute('role') === 'banner') return true;
+        return !!el.querySelector('nav');
+    }
+
+    /**
+     * Skip page furniture, the widget's own host, and anything whose text was
+     * already taken from an ancestor - a <li> wrapping a <p> would otherwise
+     * be sent twice.
+     */
+    function skipNode(node, taken) {
+        for (var el = node; el && el !== document.body; el = el.parentElement) {
+            if (el === host) return true;
+            if (CONTENT_SKIP.test(el.tagName) || isBanner(el)) return true;
+            if (el.className && typeof el.className === 'string' &&
+                CONTENT_SKIP_CLASS.test(el.className)) return true;
+            if (el.getAttribute && el.getAttribute('aria-hidden') === 'true') return true;
+            if (el !== node && taken.has(el)) return true;
+        }
+        return false;
+    }
+
+    function extractContent() {
+        // <main> rather than <article>: on a blog page the piece's own headline
+        // and standfirst sit in the hero above <article>, and the questions
+        // readers ask sit in a section below it. Both are part of what the
+        // visitor is reading, and skipping them left Aiden unable to name the
+        // article it was standing on. Furniture inside main is handled by
+        // skipNode, which is the more honest place for that decision.
+        var root = document.querySelector('main') ||
+            document.querySelector('[role="main"]') ||
+            document.querySelector('article') ||
+            document.body;
+        if (!root || typeof root.querySelectorAll !== 'function') return '';
+
+        var nodes;
+        try { nodes = root.querySelectorAll(CONTENT_BLOCKS); } catch (e) { return ''; }
+
+        var taken = new Set();
+        var seen = new Set();
+        var out = [];
+        var chars = 0;
+        var truncated = false;
+
+        for (var i = 0; i < nodes.length; i++) {
+            var node = nodes[i];
+            if (skipNode(node, taken)) continue;
+
+            // innerText, not textContent: it respects <br> and returns nothing
+            // for a collapsed mobile menu, which is exactly what we want.
+            var text = (node.innerText || node.textContent || '').replace(/\s+/g, ' ').trim();
+            if (text.length < 2) continue;
+
+            // A server-rendered table of contents repeats every heading
+            // verbatim, and so does the topic chip row. One copy is enough.
+            var key = text.slice(0, 80).toLowerCase();
+            if (seen.has(key)) continue;
+            seen.add(key);
+
+            var tag = node.tagName;
+            var line;
+            if (/^H[1-4]$/.test(tag)) {
+                line = new Array(Number(tag.charAt(1)) + 1).join('#') + ' ' + text;
+            } else if (tag === 'SUMMARY') {
+                // The <summary> of a <details> is the question in an article's
+                // FAQ block. Marked as a heading so it pairs with the answer
+                // that follows instead of reading as one more paragraph.
+                line = '#### ' + text;
+            } else {
+                line = tag === 'LI' ? '- ' + text : text;
+            }
+
+            if (chars + line.length > MAX_PAGE_CONTENT) { truncated = true; break; }
+            out.push(line);
+            taken.add(node);
+            chars += line.length + 1;
+        }
+
+        if (truncated) out.push('[…]');
+        return out.join('\n');
     }
 
     // The page classifier used to live here, and /js/apl-analytics.js needed
@@ -1076,6 +1214,9 @@
             pageType: pageType(location.pathname),
             pageDescription: pageDescription(),
             pageHeadings: pageHeadings(),
+            // The readable text of the page itself, so an answer can quote what
+            // the visitor is looking at rather than paraphrase its description.
+            pageContent: pageContent(),
             journey: trackJourney(),
 
             // how engaged they are with it

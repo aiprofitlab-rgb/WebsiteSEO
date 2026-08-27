@@ -1,0 +1,21 @@
+# /etc/systemd/system/ig-token-refresh.timer
+#
+#   sudo systemctl enable --now ig-token-refresh.timer
+#   systemctl list-timers ig-token-refresh
+#
+# Daily, against a 60-day token. That is 59 chances to notice a problem before
+# anything breaks — the entire point of running it far more often than needed.
+
+[Unit]
+Description=Daily Instagram token refresh
+
+[Timer]
+OnCalendar=daily
+# The VPS may be off or rebooting at the scheduled moment; run it on the way back
+# up rather than skipping the day entirely.
+Persistent=true
+# Do not have every timer on the box fire at exactly 00:00.
+RandomizedDelaySec=30m
+
+[Install]
+WantedBy=timers.target

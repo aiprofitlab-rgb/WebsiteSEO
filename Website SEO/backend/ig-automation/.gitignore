@@ -1,0 +1,9 @@
+node_modules/
+# Real keys and tokens — never in git. This repo is public.
+.env
+.env.*
+!.env.example
+*.sqlite
+*.sqlite-journal
+token.json
+sa.json

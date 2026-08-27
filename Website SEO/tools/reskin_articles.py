@@ -32,8 +32,20 @@ internal linking, and a topic chip row built from the page's own keywords.
 
 What is removed
 ---------------
-The Tailwind CDN script and the old dark skin, the FOUC overlay, and
-`/js/aiden-chat.js` - articles carry no chat widget.
+The Tailwind CDN script and the old dark skin, and the FOUC overlay.
+
+The Aiden widget
+----------------
+Articles used to be re-skinned without `/js/aiden-chat.js`, on the grounds that
+an article is a reading surface and the launcher landed on the footer's WhatsApp
+button. As of 2026-08-27 it is emitted here like any other tag: nothing in this
+skin is pinned to the bottom corner any more, and a reader halfway through a
+piece is precisely the visitor with a question. The widget reads the article's
+own prose and sends it with each message, so Aiden answers from the page.
+
+The tag carries the widget's content hash (tools/aiden_version.py), the same one
+tools/add_aiden_widget.py stamps everywhere else, so a re-skin and a re-stamp
+produce the identical line.
 """
 import argparse
 import hashlib
@@ -47,7 +59,9 @@ from urllib.parse import quote
 HERE = pathlib.Path(__file__).resolve().parent
 ROOT = HERE.parent
 sys.path.insert(0, str(HERE / "v4"))
+sys.path.insert(0, str(HERE))
 
+import aiden_version             # noqa: E402
 import blog_chrome as C          # noqa: E402
 import legacy                    # noqa: E402
 from article_kit import ARTICLE_JS, LINK_ICON, LI_ICON  # noqa: E402
@@ -459,6 +473,7 @@ def render(doc, slug, lang, idx, css_href, js_href):
             + C.header(lang, twin_url(slug, lang))
             + body
             + C.footer(lang)
+            + aiden_version.tag() + "\n"
             + "</body>\n</html>\n")
 
 

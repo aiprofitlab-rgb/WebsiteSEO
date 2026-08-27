@@ -1,0 +1,51 @@
+# /etc/systemd/system/ig-automation.service
+#
+#   sudo systemctl daemon-reload
+#   sudo systemctl enable --now ig-automation
+#   sudo journalctl -u ig-automation -f
+
+[Unit]
+Description=Instagram comment automation (AI Profit Lab)
+Documentation=https://github.com/aiprofitlab-rgb/WebsiteSEO/tree/main/backend/ig-automation
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=igbot
+Group=igbot
+WorkingDirectory=/opt/ig-automation
+
+# Secrets live here, chmod 600, owned by root. NOT in the repo — this repo is public.
+EnvironmentFile=/etc/ig-automation/.env
+
+ExecStart=/usr/bin/node server.js
+
+Restart=always
+RestartSec=5
+# Do not give up on a service that has been flapping — an unreachable Meta or a
+# rebooting database should not leave it permanently stopped.
+StartLimitIntervalSec=0
+
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=ig-automation
+
+# The service handles a public webhook. It needs to read its code, write two
+# files, and talk to the network — nothing else.
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/ig-automation
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX
+RestrictNamespaces=true
+LockPersonality=true
+MemoryDenyWriteExecute=true
+RestrictSUIDSGID=true
+
+[Install]
+WantedBy=multi-user.target

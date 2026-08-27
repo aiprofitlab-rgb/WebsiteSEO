@@ -1,0 +1,48 @@
+# /etc/caddy/Caddyfile
+#
+# Caddy rather than nginx + certbot for one reason: it obtains and renews the
+# certificate itself. Meta rejects a self-signed or expired certificate on a
+# webhook callback, and a silently-failed certbot renewal cron is one of the
+# more common ways these integrations die 90 days after they are set up.
+#
+# Subdomain, never the apex — aiprofitlab.io serves the static site from
+# Hostinger's web root and must not be touched by this.
+
+hooks.aiprofitlab.io {
+	encode zstd gzip
+
+	# Meta only ever calls /ig. Everything else on this host is not for the public.
+	handle /ig* {
+		reverse_proxy 127.0.0.1:8090 {
+			# Meta gives a webhook a couple of seconds. Failing fast here is
+			# better than holding a connection Meta has already given up on.
+			transport http {
+				dial_timeout 5s
+				response_header_timeout 10s
+			}
+		}
+	}
+
+	# Reachable, but not something to leave open to the internet unauthenticated
+	# — it reports account id, rule ids and token days-left. Restrict to your own
+	# IP, or comment the block out and check it over SSH with
+	#   curl -s localhost:8090/health
+	handle /health {
+		@allowed remote_ip 127.0.0.1/32
+		handle @allowed {
+			reverse_proxy 127.0.0.1:8090
+		}
+		respond 403
+	}
+
+	handle {
+		respond "Not found" 404
+	}
+
+	log {
+		output file /var/log/caddy/ig-automation.log {
+			roll_size 10mb
+			roll_keep 5
+		}
+	}
+}

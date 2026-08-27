@@ -1,0 +1,63 @@
+{
+  "_comment": [
+    "Keyword -> action config. Edit and restart the service; no deploy needed.",
+    "Rules are ordered and the FIRST match wins, so put specific keywords above generic ones.",
+    "match: 'word' (default, whole word), 'contains' (substring), or 'exact' (whole comment).",
+    "Meta allows exactly ONE private reply per comment, ever — dm.text and dm.link are",
+    "concatenated into that single message, so it has to carry the whole payload."
+  ],
+  "rules": [
+    {
+      "id": "storefront",
+      "enabled": true,
+      "keywords": ["storefront", "store", "متجر"],
+      "match": "word",
+      "dm": {
+        "text": "Here's the Smart Storefront breakdown — what it includes, what it costs, and how fast it goes live 👇",
+        "link": "https://aiprofitlab.io/en/smart-storefront/"
+      },
+      "publicReply": "Sent! Check your DMs 📩",
+      "askEmail": false,
+      "tag": "smart-storefront"
+    },
+    {
+      "id": "price",
+      "enabled": true,
+      "keywords": ["price", "pricing", "cost", "سعر", "اسعار"],
+      "match": "word",
+      "dm": {
+        "text": "Full pricing, no call required — every package and what's in it 👇",
+        "link": "https://aiprofitlab.io/en/services/"
+      },
+      "publicReply": "Just sent you the pricing 📩",
+      "askEmail": false,
+      "tag": "pricing"
+    },
+    {
+      "id": "demo",
+      "enabled": true,
+      "keywords": ["demo", "demos", "example", "تجربة"],
+      "match": "word",
+      "dm": {
+        "text": "Here are the live demos — click through them, they're real, not screenshots 👇",
+        "link": "https://aiprofitlab.io/en/demos/"
+      },
+      "publicReply": "Demos sent 📩",
+      "askEmail": false,
+      "tag": "demos"
+    },
+    {
+      "id": "guide",
+      "enabled": true,
+      "keywords": ["guide", "checklist", "دليل"],
+      "match": "word",
+      "dm": {
+        "text": "Sending the guide over. Reply here with your email and I'll also send the PDF version you can keep 👇",
+        "link": "https://aiprofitlab.io/en/smart-storefront/"
+      },
+      "publicReply": "Sent! Check your DMs 📩",
+      "askEmail": true,
+      "tag": "lead-magnet"
+    }
+  ]
+}

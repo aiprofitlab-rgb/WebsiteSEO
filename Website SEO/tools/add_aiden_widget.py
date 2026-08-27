@@ -1,12 +1,18 @@
 #!/usr/bin/env python3
 """
-Add the Aiden widget to every published page that should carry it.
+Add the Aiden widget to every published page.
 
-Aiden runs on every page EXCEPT the articles under /blog/en/ and /blog/ar/. An
-article page is a reading surface: the chat launcher competes with the reading
-flow, and the article's own WhatsApp float already occupies that corner. The
-blog and academy hubs DO get the widget - a visitor browsing an index is looking
-for something, which is exactly when Aiden is useful.
+Every page, including the 312 articles under /blog/en/ and /blog/ar/ and both
+blog hubs. Articles used to be excluded on two grounds, and as of 2026-08-27
+neither holds: the reading-surface argument lost to the fact that a reader
+halfway through a 2,000-word piece is exactly the visitor with a question, and
+the corner clash disappeared with the old skin - nothing on an article or a hub
+is `position:fixed` to the bottom any more, and the launcher measures the corner
+before it places itself anyway (avoidCorner in js/aiden-chat.js).
+
+The widget also now sends the page's own prose with every message (pageContent
+in js/aiden-chat.js), so on an article Aiden answers from the article rather
+than from its meta description.
 
 Ten pages (home / services / process / about / contact, EN+AR) still ship the
 old widget markup inline. They are given the script tag like everything else;
@@ -17,9 +23,12 @@ The tag carries the widget's content hash, so editing aiden-chat.js and running
 this script again re-stamps every page with a URL nothing has cached - without
 it the edit never reaches a returning visitor. See tools/aiden_version.py.
 
+Articles and hubs are rebuilt from source by tools/reskin_articles.py and
+tools/reskin_blog_hubs.py, which emit the same tag themselves - so a re-skin no
+longer strips the widget and this script is not needed to put it back.
+
     python3 tools/add_aiden_widget.py --dry-run
     python3 tools/add_aiden_widget.py            # add where missing, re-stamp stale
-    python3 tools/add_aiden_widget.py --prune    # also strip it from articles
 """
 
 import argparse
@@ -45,28 +54,10 @@ EXCLUDE_PATTERNS = [
     re.compile(r"/en/index-v3\.html$"),
     re.compile(r"/en/preview-templates\.html$"),
     re.compile(r"/tmp_"),
-    # Both blog hubs, for the reason the articles are excluded below:
-    # blog_chrome.footer already pins a WhatsApp action button to the bottom
-    # corner and Aiden's launcher pins to the same one, so the two overlap.
-    # The articles were protected by ARTICLE_PATTERNS; the hubs were not, so
-    # any run of this script silently undid the re-skin's decision on them.
-    re.compile(r"^/blog/index\.html$"),
-    re.compile(r"^/blog-ar/index\.html$"),
-]
-
-# Articles carry no chat widget. /en/article-v4.html is the article template for
-# the v4 skin, so it follows the same rule as the articles it stands in for.
-ARTICLE_PATTERNS = [
-    re.compile(r"^/blog/(en|ar)/"),
-    re.compile(r"^/en/article-v4\.html$"),
 ]
 
 # The script tag on its own line, however it was indented when it was added.
 TAG_LINE = re.compile(r"[ \t]*<script[^>]+src=\"/js/aiden-chat\.js(?:\?[^\"]*)?\"[^>]*></script>[ \t]*\n?")
-
-
-def is_article(rel):
-    return any(p.search(rel) for p in ARTICLE_PATTERNS)
 
 
 def excluded(rel, filename):
@@ -76,11 +67,9 @@ def excluded(rel, filename):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--dry-run", action="store_true", help="report without writing")
-    ap.add_argument("--prune", action="store_true",
-                    help="also remove the script tag from article pages that have it")
     args = ap.parse_args()
 
-    added, already, skipped, failed, articles, pruned, restamped = [], [], [], [], [], [], []
+    added, already, skipped, failed, restamped = [], [], [], [], []
 
     for dirpath, dirnames, filenames in os.walk(PUBLIC):
         dirnames[:] = [d for d in dirnames if d not in {"assets", "images", "js", "node_modules"}]
@@ -98,17 +87,6 @@ def main():
                 html = open(full, encoding="utf-8").read()
             except OSError as exc:
                 failed.append(f"{rel}: {exc}")
-                continue
-
-            if is_article(rel):
-                articles.append(rel)
-                if args.prune and MARKER in html:
-                    stripped = TAG_LINE.sub("", html)
-                    if stripped != html:
-                        if not args.dry_run:
-                            with open(full, "w", encoding="utf-8") as fh:
-                                fh.write(stripped)
-                        pruned.append(rel)
                 continue
 
             if MARKER in html:
@@ -143,16 +121,10 @@ def main():
     print(f"{'Would add' if args.dry_run else 'Added'} widget to : {len(added)} pages")
     print(f"Already current           : {len(already)} pages")
     print(f"{'Would re-stamp' if args.dry_run else 'Re-stamped'} to v={aiden_version.token()} : {len(restamped)} pages")
-    print(f"Articles (widget excluded): {len(articles)} pages")
-    print(f"{'Would strip' if args.dry_run else 'Stripped'} from articles : {len(pruned)} pages")
     print(f"Skipped (template/scratch): {len(skipped)} pages")
     if added:
         print("\nPages the widget was added to:")
         for r in added:
-            print(f"  {r}")
-    if pruned:
-        print("\nArticle pages the widget was removed from:")
-        for r in pruned:
             print(f"  {r}")
     if failed:
         print(f"\nFAILED ({len(failed)}):", file=sys.stderr)
