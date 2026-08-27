@@ -84,10 +84,12 @@
     <FilesMatch "\.html$">
         Header set Cache-Control "public, max-age=600, must-revalidate"
     </FilesMatch>
-    # Smart Website offer pages: bypass cache to reflect instant updates
-    <FilesMatch "smart-website-offer.*\.html$">
-        Header set Cache-Control "no-cache, no-store, must-revalidate, max-age=0"
-    </FilesMatch>
+    # The smart-website-offer.*.html no-cache rule was removed 2026-08-27 with
+    # the files it named. Its successor, smart-storefront{,-ar}.html, does NOT
+    # need one: the seat price and seats-left are fetched live by JS from the
+    # ledger on every load, so the cached HTML never carries a stale figure.
+    # It keeps the standard 600s must-revalidate above, which an indexed page
+    # wants anyway.
     # Remove ETag to avoid conditional-GET overhead on shared hosting
     Header unset ETag
 </IfModule>
@@ -148,8 +150,9 @@ RewriteRule ^(.*)$ https://aiprofitlab.io/$1/ [L,R=301]
 # OMR 1,450 for the same build - two indexed pages disagreeing on the price of
 # one product, one of them in Product schema. The live campaign is the Smart
 # Storefront, which carries the same OMR 249 seat price from the ledger, so
-# these 301s land an old link on the offer it was promising. The files stay on
-# disk and are noindex; only the URLs are retired.
+# these 301s land an old link on the offer it was promising. The three files
+# were deleted on 2026-08-27; these rules are file-independent, so the URLs go
+# on resolving to the campaign page rather than 404ing.
 RewriteRule ^en/smart-website-offer/?$ /en/smart-storefront/ [R=301,L]
 RewriteRule ^smart-website-offer/?$    /smart-storefront-ar/ [R=301,L]
 # The stale sitemap advertised these two pages by their RAW .html paths for
@@ -169,9 +172,10 @@ RewriteRule ^en/blog/$ blog/index.html [L]
 RewriteRule ^en/academy/$ academy/index.html [L]
 
 # 2b. v4 launch, 2026-08-21 - the English pages moved onto clean URLs.
-# These must sit above rules 3/3b: the old English pages are still on disk as
-# <name>-en.html, so without a redirect here rule 3b would go on serving them.
-# 301, not 302 - the old paths are indexed and the equity has to move.
+# These must sit above rules 3/3b: the old English pages USED to sit on disk as
+# <name>-en.html, and without a redirect here rule 3b would have gone on serving
+# them. The files were deleted 2026-08-27 once these 301s were verified live;
+# the rules stay, because the old paths are indexed and the equity has to move.
 RewriteRule ^en/services-en/?$   /en/services/   [R=301,L]
 RewriteRule ^en/process-en/?$    /en/process/    [R=301,L]
 RewriteRule ^en/about-en/?$      /en/about/      [R=301,L]
@@ -199,7 +203,8 @@ RewriteRule ^missed-call-simulator-en/?$ /en/simulators/ [R=301,L]
 RewriteRule ^smart-website-offer-en/?$ /en/smart-storefront/ [R=301,L]
 
 # One demo page and one simulator page now carry what four separate pages
-# used to. The originals stay on disk; only the URLs are retired.
+# used to. The originals were deleted 2026-08-27; these 301s are what keeps
+# their indexed URLs resolving.
 RewriteRule ^en/whatsapp-receptionist-demo/?$    /en/demos/      [R=301,L]
 RewriteRule ^whatsapp-receptionist-demo/?$       /en/demos/      [R=301,L]
 RewriteRule ^customized-ceo-dashboard-demo/?$    /en/demos/      [R=301,L]
@@ -221,6 +226,14 @@ RewriteRule ^en/order-v4/?$      /en/order/      [R=301,L]
 RewriteRule ^en/blog-v4/?$       /blog/          [R=301,L]
 RewriteRule ^en/article-v4/?$    /blog/en/2026-06-25-true-cost-missed-whatsapp-inquiries-oman/ [R=301,L]
 
+# 2b-i. Retired internal drafts, deleted 2026-08-27. None was ever linked from
+# the live site or listed in a sitemap, and all carried noindex - but they were
+# served at 200 and a few were shared as preview links. One rule lands any such
+# link on the live homepage instead of a 404. `index-v3` is the old v3 homepage
+# and the `-new` set is the never-shipped skin; `en/index.html` is handled by
+# rule 7 and `^en/?$` above.
+RewriteRule ^en/(index-new|about-new|services-new|process-new|contact-new|blog-new|article-new|academy-new|preview-templates|index-cinematic|index-v3)/?$ / [R=301,L]
+
 # 2b-ii. The Smart Storefront claim page became a page that can also take the
 # money: /en/pay/. Claim references already went out by email pointing at
 # /en/claim/?ref=..., and en/claim.html is still on disk, so rule 3 would go on
@@ -237,8 +250,8 @@ RewriteRule ^en/claim/?$          /en/pay/        [R=301,L]
 # The four new pages take the site's existing `-ar` suffix convention, which
 # rule 5 already maps to a root file - no rewrite is needed to SERVE them.
 # What is needed is retiring the stand-alone Arabic demo and simulator pages
-# that /demos-ar/ and /simulators-ar/ now carry. The old files stay on disk
-# behind these redirects as a fallback, exactly as the English ones did.
+# that /demos-ar/ and /simulators-ar/ now carry. The old files were deleted
+# 2026-08-27 alongside the English ones; these 301s are file-independent.
 RewriteRule ^missed-call-simulator-ar/?$          /simulators-ar/ [R=301,L]
 RewriteRule ^campaign-roi-simulator-ar/?$         /simulators-ar/ [R=301,L]
 RewriteRule ^whatsapp-receptionist-demo-ar/?$     /demos-ar/      [R=301,L]
@@ -252,7 +265,9 @@ RewriteRule ^customized-ceo-dashboard-demo-ar/?$  /demos-ar/      [R=301,L]
 # form (rule 7), and the clean form looks for a root file that isn't there and
 # 404s. That is what broke /en/index-cinematic/ and every /en/*-new/ template.
 # The -f test means this fires only when the file really exists, so nothing
-# that resolves today can change behaviour.
+# that resolves today can change behaviour. The `/en/*-new/` templates it was
+# written for are gone (rule 2b-i now 301s them); the rule still matters for
+# every real page that lives in public_html/en/, e.g. /en/smart-storefront/.
 RewriteCond %{REQUEST_URI} ^/en/([^/]+)/$
 RewriteCond %{DOCUMENT_ROOT}/en/%1.html -f
 RewriteRule ^en/([^/]+)/$ en/$1.html [L]
@@ -273,16 +288,25 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^([^/]+)/$ $1.html [L]
 
 # 6. Legacy Redirects (Cleanup)
-RewriteRule ^Missed-Call-Simulator-en/?$ /en/missed-call-simulator-en/ [R=301,L]
-RewriteRule ^Campaign_ROI_Simulator-ar/?$ /campaign-roi-simulator-ar/ [R=301,L]
+# These are the original mixed-case / underscore URLs. Until 2026-08-27 each
+# pointed at the hyphenated page that replaced it, which by then ALSO 301'd -
+# so every one of them was a two-hop chain, and the second hop's target file
+# has now been deleted. Repointed at the final destination: one hop each.
+RewriteRule ^Missed-Call-Simulator-en/?$ /en/simulators/ [R=301,L]
+RewriteRule ^Missed-Call-Simulator-ar/?$ /simulators-ar/ [R=301,L]
+RewriteRule ^Campaign_ROI_Simulator-ar/?$ /simulators-ar/ [R=301,L]
+RewriteRule ^Campaign_ROI_Simulator/?$ /en/simulators/ [R=301,L]
+RewriteRule ^whatsapp_receptionist_demo_ar/?$ /demos-ar/ [R=301,L]
+RewriteRule ^whatsapp_receptionist_demo/?$ /en/demos/ [R=301,L]
+RewriteRule ^Customized_CEO_Dashboard_demo-ar/?$ /demos-ar/ [R=301,L]
+RewriteRule ^Customized_CEO_Dashboard_demo/?$ /en/demos/ [R=301,L]
+# The dashboard demo was ALSO reachable without the _demo suffix, because
+# Customized_CEO_Dashboard.html sat at the root and rule 5 served it. That file
+# is deleted, so this path needs a rule of its own or it 404s. Anchored, so it
+# cannot swallow the _demo forms above.
+RewriteRule ^Customized_CEO_Dashboard/?$ /en/demos/ [R=301,L]
 RewriteRule ^academy_ar/?$ /academy-ar/ [R=301,L]
-RewriteRule ^Campaign_ROI_Simulator/?$ /campaign-roi-simulator/ [R=301,L]
-RewriteRule ^whatsapp_receptionist_demo/?$ /whatsapp-receptionist-demo/ [R=301,L]
-RewriteRule ^Missed-Call-Simulator-ar/?$ /missed-call-simulator-ar/ [R=301,L]
-RewriteRule ^Customized_CEO_Dashboard_demo/?$ /customized-ceo-dashboard-demo/ [R=301,L]
 RewriteRule ^blog_ar/?$ /blog-ar/ [R=301,L]
-RewriteRule ^Customized_CEO_Dashboard_demo-ar/?$ /customized-ceo-dashboard-demo-ar/ [R=301,L]
-RewriteRule ^whatsapp_receptionist_demo_ar/?$ /whatsapp-receptionist-demo-ar/ [R=301,L]
 
 # 6b. One story, published twice a day apart under the identical title, in
 # both languages. The pair cannibalised each other and gave an engine asked

@@ -227,6 +227,31 @@ def hero_src(src, width=1200):
     return cand if (ROOT / "public_html" / cand.lstrip("/")).exists() else src
 
 
+def share_src(src, width=1200):
+    """The JPEG twin of a hero, for og:image and twitter:image.
+
+    LinkedIn does not decode WebP and WhatsApp is unreliable with it, so a
+    card pointed at the -1200.webp hero previewed as a bare link on the two
+    channels these actually get shared on. The WebP stays on the page; only
+    the share card changes format.
+
+    Takes either an original (/blog/images/foo.png) or a derivative already
+    stamped into the markup by an earlier run (foo-1200.webp), because the
+    reskin re-reads its own output. Falls back to whatever it was given when
+    no JPEG has been built, so a missing derivative degrades to the old
+    behaviour rather than to a broken card. Build them with
+    `python3 tools/build_image_derivatives.py`.
+    """
+    if not src.startswith("/blog/images/"):
+        return src
+    stem, _, ext = src.rpartition(".")
+    if not ext:
+        return src
+    base = re.sub(r"-(?:640|1200)$", "", stem)
+    cand = f"{base}-{width}.jpg"
+    return cand if (ROOT / "public_html" / cand.lstrip("/")).exists() else src
+
+
 def add_breadcrumbs(doc, lang, cat):
     """Append a BreadcrumbList matching the trail the page already renders.
 
@@ -421,7 +446,7 @@ def render(doc, slug, lang, idx, css_href, js_href):
 </main>
 """
 
-    og = doc["hero"].get("src", "/og-aiprofitlab-2026.jpg")
+    og = share_src(doc["hero"].get("src") or "/og-aiprofitlab-2026-v2.jpg")
     if og.startswith("/"):
         og = SITE + og
     doc["canonical"] = canon_url(doc["canonical"] or url)

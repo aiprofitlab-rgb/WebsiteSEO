@@ -823,9 +823,13 @@ def head_html(lang="en"):
 <meta property="og:title" content="{{TITLE}}">
 <meta property="og:description" content="{{DESC}}">
 <meta property="og:url" content="https://aiprofitlab.io{{PATH}}">
-<meta property="og:image" content="https://aiprofitlab.io/og-aiprofitlab-2026.jpg">
+<meta property="og:image" content="https://aiprofitlab.io/og-aiprofitlab-2026-v2.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/jpeg">
 <meta property="og:locale" content="%(locale)s">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://aiprofitlab.io/og-aiprofitlab-2026-v2.jpg">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -996,7 +1000,7 @@ ORG_NODE = """{
     "telephone":"+968 9924 5250",
     "slogan":"Every success starts with insight",
     "logo":{"@type":"ImageObject","url":"%(site)s/assets/brand/wordmark-primary.svg","width":1600,"height":274},
-    "image":"%(site)s/og-aiprofitlab-2026.jpg",
+    "image":"%(site)s/og-aiprofitlab-2026-v2.jpg",
     "areaServed":[{"@type":"Country","name":"Oman"}],
     "address":{"@type":"PostalAddress","addressLocality":"Bousher","addressRegion":"Muscat","addressCountry":"OM","streetAddress":"South Al Khuwair"},
     "geo":{"@type":"GeoCoordinates","latitude":23.5803,"longitude":58.4310},

@@ -20,7 +20,7 @@ There is no mandatory monthly fee. Nothing stops working if the optional Growth 
 
 A capped launch group buys the Smart Website build at a seat price that climbs as seats are confirmed. The published prices above do not move; the launch seat is a discount against them, and every capability listed in the build is included at the seat price rather than sold as an upgrade later.
 
-- Seat price on 26 August 2026: OMR 249, with 3 seats open at that price. It then steps to OMR 279 (7 seats), then OMR 299 (10 seats), and continues climbing after that.
+- Seat price on 27 August 2026: OMR 249, with 3 seats open at that price. It then steps to OMR 279 (7 seats), then OMR 299 (10 seats), and continues climbing after that.
 - The seat price is live data, not a fixed figure: the offer pages below show the current rung and the seats left at it. Quote them from the page rather than from this file.
 - A 50% deposit holds a seat. The build is one-time and includes the first year of hosting and care, as above.
 - The offer runs on the Smart Website only. The Dashboard, the Autopilot, the Operator Stack and the Growth Desk are sold at the prices listed above.
@@ -59,6 +59,7 @@ Articles headed "A Worked Example" are illustrative scenarios, not client case s
 ## Policies
 
 - [Terms](https://aiprofitlab.io/terms/): terms of service
+- [Terms (Arabic)](https://aiprofitlab.io/terms-ar/): شروط الخدمة بالعربية
 - [Privacy policy](https://aiprofitlab.io/privacy/): how personal data is collected and protected under Oman's PDPL
 - [Privacy policy (Arabic)](https://aiprofitlab.io/privacy-ar/): سياسة الخصوصية بالعربية
 - [Refund policy (English)](https://aiprofitlab.io/refund-policy/): cancellations, part-finished work, and how refunds are paid back

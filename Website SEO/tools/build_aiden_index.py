@@ -27,44 +27,26 @@ OUT = os.path.join(PUBLIC, "aiden-index.json")
 SITE = "https://aiprofitlab.io"
 
 # Pages that exist on disk but are not part of the live site Aiden should cite:
-# scratch/test files, unreleased template skins, and the preview hub.
+# scratch/test files and pages kept live but deliberately uncited.
 EXCLUDE_FILES = {
     "test.html",
-    "whatsapp_receptionist_demo.html",   # superseded by the hyphenated version
-    "Customized_CEO_Dashboard.html",     # superseded by customized-ceo-dashboard-demo
     "onboarding.html",                   # client-only page, not public marketing
-    # Retired by the v4 launch, 2026-08-21. The files stay on disk as a
-    # fallback behind their 301s, but Aiden must never hand a visitor a URL
-    # that redirects - it quotes these paths verbatim in its answers.
-    "services-en.html",
-    "process-en.html",
-    "about-en.html",
-    "contact-en.html",
-    "missed-call-simulator-en.html",
-    "campaign-roi-simulator.html",
-    "whatsapp-receptionist-demo.html",
-    "customized-ceo-dashboard-demo.html",
-    # Retired by the Arabic v4 rebuild, same day and for the same reason:
-    # /demos-ar/ and /simulators-ar/ now carry what these four did, and the
-    # originals sit behind 301s (.htaccess section 2c).
-    "missed-call-simulator-ar.html",
-    "campaign-roi-simulator-ar.html",
-    "whatsapp-receptionist-demo-ar.html",
-    "customized-ceo-dashboard-demo-ar.html",
-    "medflow-sales-automation-demo-ar.html",
-    # The English twin, which was only ever linked from the retired v3
-    # homepage. Excluded alongside it rather than left as the one orphan
-    # Aiden could still hand a visitor.
+    # Live but deliberately unlinked and noindex - see the indexing decisions
+    # note. The noindex check below would catch these anyway; they are named
+    # here so the intent survives a future edit to that check.
     "medflow-sales-automation-demo.html",
+    "medflow-sales-automation-demo-ar.html",
 }
+# The long list of retired v3/v4 filenames that used to live above was removed
+# on 2026-08-27, when those 29 files were DELETED from the tree rather than
+# left on disk behind their 301s. A file that does not exist cannot be walked,
+# so excluding it by name is dead configuration. The redirects that keep their
+# indexed URLs alive are .htaccess sections 2, 2b, 2b-i and 2c; git history has
+# the files. Anything retired in future should be deleted the same way - only
+# add a name here if the file has to STAY on disk and stay out of Aiden.
 EXCLUDE_PATTERNS = [
-    re.compile(r"/en/.*-new\.html$"),        # unreleased template skins
-    re.compile(r"/en/index-cinematic\.html$"),
-    re.compile(r"/en/index-v3\.html$"),      # superseded homepage draft
-    re.compile(r"/en/preview-templates\.html$"),
     re.compile(r"/tmp_"),
-    re.compile(r"^/en/index\.html$"),        # English home moved to /
-    re.compile(r"^/en/claim\.html$"),
+    re.compile(r"^/en/claim\.html$"),    # 301s to /en/pay/; Aiden must not quote it
 ]
 
 # Ordered: first matching rule wins.
@@ -78,7 +60,7 @@ TYPE_RULES = [
     (re.compile(r"about"), "about"),
     (re.compile(r"contact"), "contact"),
     (re.compile(r"privacy|terms|legal|refund"), "legal"),
-    (re.compile(r"offer"), "offer"),
+    (re.compile(r"offer|smart-storefront"), "offer"),  # the live campaign page
     (re.compile(r"simulator|calculator"), "tool"),
     (re.compile(r"demo"), "demo"),
     (re.compile(r"^/index\.html$|^/ar/index\.html$"), "home"),

@@ -15,6 +15,7 @@ urls = [
     ("/en/demos/", 0.7),
     ("/en/simulators/", 0.7),
     ("/en/checkout/", 0.7),
+    ("/en/smart-storefront/", 0.9),
     ("/blog/", 0.8),
 
     # --- Arabic, the v4 set (rebuilt 2026-08-21) ----------------------------
@@ -27,6 +28,7 @@ urls = [
     ("/demos-ar/", 0.7),
     ("/simulators-ar/", 0.7),
     ("/checkout-ar/", 0.7),
+    ("/smart-storefront-ar/", 0.9),
     ("/blog-ar/", 0.8),
 
     # --- Trust pages -------------------------------------------------------
@@ -43,10 +45,12 @@ urls = [
     # live v4 page links to them, they are thin against the articles covering
     # the same ground, and they were competing with them. A sitemap must not
     # advertise a page that tells the crawler not to index it.
-    # The two Smart Website offer pages were retired 2026-08-26: their URLs
-    # now 301 to the Smart Storefront campaign (.htaccess section 2), the
-    # files carry noindex, and the campaign page they land on is noindex
-    # too. Nothing here to list.
+    # The two Smart Website offer pages were retired 2026-08-26 and their files
+    # deleted 2026-08-27; their URLs 301 to the Smart Storefront campaign
+    # (.htaccess section 2). The campaign pages themselves went indexable on
+    # 2026-08-27 and ARE listed above, at 0.9: they are the live offer, the
+    # only reason they carried noindex was the retired page publishing a rival
+    # price for the same build, and that page is gone.
     # Neither /en/order/ nor /order-ar/ belongs here: both are payment-return
     # pages carrying noindex, and /en/checkout/?plan=... are query variants of
     # one URL. The four stand-alone Arabic demo and simulator pages that used

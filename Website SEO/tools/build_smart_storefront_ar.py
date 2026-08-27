@@ -234,9 +234,10 @@ HEAD = r"""<!DOCTYPE html>
 <meta property="og:type" content="website"/>
 <meta property="og:locale" content="ar_OM"/>
 <meta property="og:locale:alternate" content="en_US"/>
-<meta property="og:image" content="https://aiprofitlab.io/og-aiprofitlab-2026.jpg"/>
+<meta property="og:image" content="https://aiprofitlab.io/og-aiprofitlab-2026-v2.jpg"/>
 <meta property="og:image:width" content="1200"/>
 <meta property="og:image:height" content="630"/>
+<meta property="og:image:type" content="image/jpeg"/>
 <meta property="og:image:alt" content="ناهد أبياري، مؤسس AI Profit Lab — أتمتة بالذكاء الاصطناعي لشركات الخليج"/>
 <meta name="twitter:card" content="summary_large_image"/>
 

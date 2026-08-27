@@ -214,7 +214,7 @@ ORG_SCHEMA = """{
   "legalName": "Lotus Gulf International",
   "url": "https://aiprofitlab.io",
   "logo": "https://aiprofitlab.io/logo.webp",
-  "image": "https://aiprofitlab.io/og-aiprofitlab-2026.jpg",
+  "image": "https://aiprofitlab.io/og-aiprofitlab-2026-v2.jpg",
   "description": "Helping non-technical managers leverage AI, automation, and technology to increase ROI and business efficiency.",
   "address": {
     "@type": "PostalAddress",
@@ -672,12 +672,18 @@ def card_src(src, width=640):
     if not src.startswith("/blog/images/"):
         return src
     stem, _, ext = src.rpartition(".")
-    # Only a .webp named "<stem>-<width>" is one of ours. Testing for a
-    # trailing number alone skipped every source whose name simply ends in a
-    # year or a timestamp - oman-10-percent-gdp-target-2040.png and friends.
-    if not ext or (ext.lower() == "webp" and re.fullmatch(r".*-(640|1200)", stem)):
+    if not ext:
         return src
-    cand = f"{stem}-{width}.webp"
+    # Strip a derivative suffix before looking up the card size. This arrives
+    # as whatever og:image holds, which is now the -1200.jpg share card, and
+    # previously was the -1200.webp hero: both were returned untouched, so
+    # 154 of 157 cards shipped a full-width file to fill a 420x236 box. Only
+    # the three articles still carrying an original in og:image ever got the
+    # small WebP. Matching a bare trailing number instead would catch every
+    # source whose name merely ends in a year or a timestamp -
+    # oman-10-percent-gdp-target-2040.png and friends.
+    base = re.sub(r"-(?:640|1200)$", "", stem)
+    cand = f"{base}-{width}.webp"
     return cand if (ROOT / "public_html" / cand.lstrip("/")).exists() else src
 
 
@@ -752,12 +758,15 @@ def head(lang, total, css_href, js_href):
 <meta property="og:title" content="{_esc(title)}">
 <meta property="og:description" content="{_esc(desc)}">
 <meta property="og:url" content="{u}">
-<meta property="og:image" content="{SITE}/og-aiprofitlab-2026.jpg">
+<meta property="og:image" content="{SITE}/og-aiprofitlab-2026-v2.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/jpeg">
 <meta property="og:locale" content="{'ar_OM' if lang == 'ar' else 'en_OM'}">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="{_esc(title)}">
 <meta name="twitter:description" content="{_esc(desc)}">
-<meta name="twitter:image" content="{SITE}/og-aiprofitlab-2026.jpg">
+<meta name="twitter:image" content="{SITE}/og-aiprofitlab-2026-v2.jpg">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
