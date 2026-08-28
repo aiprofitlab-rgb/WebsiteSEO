@@ -49,12 +49,24 @@ Everything except the live trigger can be tested before then — see
       against real data while review is pending.
 
 ### 5. App Review assets
-- [x] Privacy policy — live at `https://aiprofitlab.io/privacy.html`
-- [x] Terms — live at `https://aiprofitlab.io/terms.html`
+- [x] Privacy policy — live at `https://aiprofitlab.io/privacy/`
+- [x] Terms — live at `https://aiprofitlab.io/terms/`
 - [x] **Data deletion** — Meta requires either a callback URL or documented
-      instructions. Added as a section in `privacy.html`, reachable at
-      `https://aiprofitlab.io/privacy.html#data-deletion`. Paste that URL into
-      the "Data Deletion Instructions URL" field.
+      instructions. Added as a section in `privacy/`, reachable at
+      `https://aiprofitlab.io/privacy/#data-deletion`.
+- [x] **Business login settings** — both callbacks are served by the webhook
+      service (`webhook.js`), so they are real endpoints rather than a page that
+      happens to load. Meta blocks submission until both are filled in:
+      - Deauthorize callback URL: `https://hooks.aiprofitlab.io/ig/deauthorize`
+      - Data deletion request URL: `https://hooks.aiprofitlab.io/ig/data-deletion`
+
+      Both verify Meta's `signed_request` and refuse a forged one. Neither
+      deletes anything by itself — they record the request in the journal, and
+      the 30-day promise on the privacy page is kept by hand:
+
+      ```bash
+      sudo journalctl -u ig-automation | grep -E '"deauthorize"|data_deletion_request'
+      ```
 - [ ] **Screencast of the full flow.** Reviewers reject submissions that skip the
       consent screen, so record, in one take:
       1. the Instagram OAuth consent screen, with the permissions visible

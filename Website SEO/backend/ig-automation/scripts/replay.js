@@ -29,7 +29,23 @@ const text = isEmail ? args[emailFlag + 1] : args[0] || "storefront";
 // quietly rounds a value on the way into the sheet. Do not shorten it — 16
 // digits round-trips fine and the test stops proving anything.
 const stamp = Date.now();
-const commentId = ("179" + String(stamp) + String(Math.floor(Math.random() * 1e6)).padStart(6, "0")).slice(0, 17);
+
+// Synthetic ids are fine against scripts/graph-stub.js, which accepts anything.
+// They are NOT fine against the real graph.instagram.com: the private reply and
+// the public reply both address the comment BY ID, so a made-up one is a 400.
+// To drive the real API — which is how the App Review screencast is recorded
+// before the comments webhook is switched on — pass the ids of a comment that
+// actually exists:
+//
+//   REPLAY_COMMENT_ID=17... REPLAY_MEDIA_ID=17... REPLAY_IGSID=78... \
+//   IG_USER_ID=<your ig id> TARGET=https://hooks.aiprofitlab.io/ig \
+//   node scripts/replay.js "price"
+//
+// scripts/find-comment.js prints all four.
+const commentId =
+  process.env.REPLAY_COMMENT_ID ||
+  ("179" + String(stamp) + String(Math.floor(Math.random() * 1e6)).padStart(6, "0")).slice(0, 17);
+const mediaId = process.env.REPLAY_MEDIA_ID || "17900000000000001";
 const commenterId = process.env.REPLAY_IGSID || "78412345678901234";
 
 const commentEvent = {
@@ -45,7 +61,7 @@ const commentEvent = {
             id: commentId,
             text,
             from: { id: commenterId, username: "replay_tester" },
-            media: { id: "17900000000000001", media_product_type: "REELS" },
+            media: { id: mediaId, media_product_type: "REELS" },
           },
         },
       ],
@@ -88,7 +104,10 @@ async function main() {
 
   const ms = Date.now() - started;
   console.log(`${isEmail ? "message" : "comment"} "${text}" -> ${res.status} in ${ms}ms`);
-  if (!isEmail) console.log(`comment_id ${commentId}   commenter ${commenterId}`);
+  if (!isEmail) console.log(`comment_id ${commentId}   media ${mediaId}   commenter ${commenterId}`);
+  if (!isEmail && !process.env.REPLAY_COMMENT_ID) {
+    console.log("(synthetic comment id — against the real Graph API this will fail; set REPLAY_COMMENT_ID)");
+  }
 
   // Meta's budget. Over this and it starts retrying, then disables the callback.
   if (ms > 2000) console.error(`!! ${ms}ms is too slow — Meta expects an ack in about two seconds`);

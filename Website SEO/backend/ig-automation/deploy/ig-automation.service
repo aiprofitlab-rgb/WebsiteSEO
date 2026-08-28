@@ -44,7 +44,10 @@ ProtectControlGroups=true
 RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX
 RestrictNamespaces=true
 LockPersonality=true
-MemoryDenyWriteExecute=true
+# MemoryDenyWriteExecute is deliberately ABSENT. V8 maps its JIT output as
+# executable, so the directive kills node the moment the baseline compiler
+# first fires — a SIGTRAP core dump minutes after a clean start, not at boot,
+# which makes it look like a runtime bug rather than a unit-file one.
 RestrictSUIDSGID=true
 
 [Install]

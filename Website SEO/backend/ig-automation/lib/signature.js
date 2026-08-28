@@ -52,6 +52,51 @@ function appsecretProof(accessToken, appSecret) {
   return crypto.createHmac("sha256", appSecret).update(accessToken).digest("hex");
 }
 
+/**
+ * Meta's `signed_request` — the format used by the deauthorize and data-deletion
+ * callbacks. It is NOT the X-Hub-Signature-256 shape above: the signature travels
+ * inside a form field rather than a header, and it covers the base64url payload
+ * STRING, not the decoded JSON. Signing the decoded object would never match.
+ *
+ * @returns {object|null} the payload, or null if absent, malformed or unsigned
+ */
+function parseSignedRequest(signedRequest, appSecret) {
+  if (!appSecret) return null; // fail closed, exactly as verify() does
+  const parts = String(signedRequest || "").split(".");
+  if (parts.length !== 2) return null;
+
+  const [encodedSig, encodedPayload] = parts;
+  if (!encodedSig || !encodedPayload) return null;
+
+  let got;
+  try {
+    got = Buffer.from(encodedSig, "base64url");
+  } catch {
+    return null;
+  }
+
+  const expected = crypto.createHmac("sha256", appSecret).update(encodedPayload).digest();
+  if (got.length !== expected.length) return null;
+  if (!crypto.timingSafeEqual(got, expected)) return null;
+
+  try {
+    const payload = JSON.parse(Buffer.from(encodedPayload, "base64url").toString("utf8"));
+    // Meta has only ever sent HMAC-SHA256 here. Anything else is either a new
+    // algorithm we have not reviewed or someone probing; both mean "refuse".
+    if (payload && payload.algorithm && String(payload.algorithm).toUpperCase() !== "HMAC-SHA256") return null;
+    return payload;
+  } catch {
+    return null;
+  }
+}
+
+/** The inverse, for tests and for anyone reproducing a callback by hand. */
+function makeSignedRequest(payload, appSecret) {
+  const encodedPayload = Buffer.from(JSON.stringify(payload), "utf8").toString("base64url");
+  const sig = crypto.createHmac("sha256", appSecret).update(encodedPayload).digest().toString("base64url");
+  return `${sig}.${encodedPayload}`;
+}
+
 /** Constant-time compare for the GET handshake's verify token. */
 function safeEqual(a, b) {
   const x = Buffer.from(String(a || ""), "utf8");
@@ -60,4 +105,4 @@ function safeEqual(a, b) {
   return crypto.timingSafeEqual(x, y);
 }
 
-module.exports = { sign, verify, appsecretProof, safeEqual };
+module.exports = { sign, verify, appsecretProof, safeEqual, parseSignedRequest, makeSignedRequest };

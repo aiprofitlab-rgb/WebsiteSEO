@@ -159,3 +159,72 @@ test("with no verify token configured, the handshake fails loudly instead of usi
   process.env.IG_VERIFY_TOKEN = saved;
   await s.close();
 });
+
+/* ---- the deauthorize and data-deletion callbacks -------------------------- */
+
+const postForm = (url, fields) =>
+  fetch(url, {
+    method: "POST",
+    headers: { "content-type": "application/x-www-form-urlencoded" },
+    body: new URLSearchParams(fields),
+  });
+
+test("a correctly signed deauthorize callback is accepted", async () => {
+  const s = await serve({ handleEvent: async () => [] });
+  const signed = signature.makeSignedRequest({ user_id: "17841400000000000", algorithm: "HMAC-SHA256" }, SECRET);
+  const res = await postForm(`${s.base}/deauthorize`, { signed_request: signed });
+  assert.equal(res.status, 200);
+  await s.close();
+});
+
+test("a data deletion request returns Meta's url + confirmation_code shape", async () => {
+  const s = await serve({ handleEvent: async () => [] });
+  const signed = signature.makeSignedRequest({ user_id: "17841400000000000", algorithm: "HMAC-SHA256" }, SECRET);
+  const res = await postForm(`${s.base}/data-deletion`, { signed_request: signed });
+  assert.equal(res.status, 200);
+  const body = await res.json();
+  assert.match(body.url, /^https:\/\/aiprofitlab\.io\/privacy\/#data-deletion$/);
+  assert.ok(body.confirmation_code && body.confirmation_code.length > 4);
+  await s.close();
+});
+
+test("a callback signed with the wrong secret is refused, not silently accepted", async () => {
+  const s = await serve({ handleEvent: async () => [] });
+  const forged = signature.makeSignedRequest({ user_id: "1" }, "not-the-app-secret");
+  for (const path of ["/deauthorize", "/data-deletion"]) {
+    const res = await postForm(`${s.base}${path}`, { signed_request: forged });
+    assert.equal(res.status, 400, `${path} accepted a forged signed_request`);
+  }
+  await s.close();
+});
+
+test("a callback with no signed_request at all is refused", async () => {
+  const s = await serve({ handleEvent: async () => [] });
+  const res = await postForm(`${s.base}/deauthorize`, {});
+  assert.equal(res.status, 400);
+  await s.close();
+});
+
+test("a human opening the callback URLs in a browser gets an explanation, not a 404", async () => {
+  const s = await serve({ handleEvent: async () => [] });
+  for (const path of ["/deauthorize", "/data-deletion"]) {
+    const res = await fetch(`${s.base}${path}`);
+    assert.equal(res.status, 200);
+    assert.match(await res.text(), /aiprofitlab\.io\/privacy/);
+  }
+  await s.close();
+});
+
+test("the signed_request signature covers the encoded payload, not the decoded object", async () => {
+  // The classic implementation bug: HMAC the JSON instead of the base64url string.
+  // It passes a naive round-trip test and fails against every real Meta callback.
+  const payload = { user_id: "17841400000000000", algorithm: "HMAC-SHA256" };
+  const wrong = require("node:crypto")
+    .createHmac("sha256", SECRET)
+    .update(JSON.stringify(payload))
+    .digest()
+    .toString("base64url");
+  const encoded = Buffer.from(JSON.stringify(payload), "utf8").toString("base64url");
+  assert.equal(signature.parseSignedRequest(`${wrong}.${encoded}`, SECRET), null);
+  assert.deepEqual(signature.parseSignedRequest(signature.makeSignedRequest(payload, SECRET), SECRET), payload);
+});

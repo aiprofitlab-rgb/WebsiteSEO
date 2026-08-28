@@ -188,11 +188,12 @@ def bq_path():
     return path
 
 
-def bq_run(args, timeout=600):
+def bq_run(args, timeout=600, stdin=None):
     """One bq invocation. Returns stdout; raises BQError with bq's own message."""
     cmd = [bq_path(), "--project_id=" + PROJECT, "--headless", "--format=json"] + args
     try:
-        proc = subprocess.run(cmd, capture_output=True, text=True, timeout=timeout)
+        proc = subprocess.run(cmd, capture_output=True, text=True, timeout=timeout,
+                              input=stdin)
     except subprocess.TimeoutExpired:
         raise BQError("bq timed out after %ds: %s" % (timeout, " ".join(args[:2])))
     if proc.returncode != 0:
@@ -205,8 +206,14 @@ def query(sql, dry_run=False, timeout=600):
     args = ["query", "--use_legacy_sql=false", "--max_rows=1000000"]
     if dry_run:
         args.append("--dry_run")
-    args.append(sql)
-    out = bq_run(args, timeout=timeout)
+    # The SQL goes in on stdin, not as a positional argument. bq parses its
+    # argv with absl, and this SQL opens with a `-- AI Profit Lab ...` comment
+    # line: passed as an argument it is read as a flag name and every real query
+    # dies with "Unknown command line flag", leaving --sample as the only path
+    # that ever worked. A bare `--` separator does not help - absl still claims
+    # the token. stdin sidesteps the parser completely and has no ARG_MAX
+    # ceiling, which the positional form would eventually hit as the pull grows.
+    out = bq_run(args, timeout=timeout, stdin=sql)
     if dry_run:
         return out
     out = out.strip()
@@ -2053,6 +2060,13 @@ CANNOT = [
 # the server. Verified 404 on 2026-08-25.
 ANALYTICS_JS_EVENTS = ("page_exit", "scroll_depth", "cta_click", "outbound_click")
 
+# The two that fire on every page view. If neither arrived, the file itself never
+# loaded. cta_click and outbound_click need a visitor to click something, so
+# their absence in a quiet window says nothing about the deployment - conflating
+# the two cases is how this report spent its first run declaring a live script
+# missing.
+ALWAYS_ON_EVENTS = ("page_exit", "scroll_depth")
+
 
 def coverage(rows, sessions):
     """What actually arrived, so an empty section can be told from a missing tag."""
@@ -2062,6 +2076,7 @@ def coverage(rows, sessions):
     return {
         "names": names.most_common(),
         "missing": [e for e in ANALYTICS_JS_EVENTS if not names.get(e)],
+        "js_live": any(names.get(e) for e in ALWAYS_ON_EVENTS),
         "page_type_param_pct": pct(typed, steps),
     }
 
@@ -2072,22 +2087,37 @@ def render_coverage(cov, sample=False):
             '<h2>What arrived</h2><p class="sub">Every event in the pull, counted. '
             'Read this first when a section looks emptier than it should.</p></header>']
     if cov["missing"] and not sample:
-        html.append(
-            '<div class="note warn"><b>%s never arrived in this window.</b> '
-            'Those events come from <code>/js/apl-analytics.js</code>, and as of '
-            '2026-08-25 that file returns <b>404 on the live site</b> — it is part of '
-            'an un-deployed rollout, so no page loads it and nothing fires it. Until it '
-            'ships: <b>dwell is inferred on every page</b> (never measured), '
-            '<b>scroll depth does not exist at all</b>, the read-fully / bounced split in '
-            'section 3 cannot be computed, and the CTA half of "onward" in section 4 is '
-            'blind. Sections 2 and 5 are unaffected — Aiden and the conversion events are '
-            'fired by the widget and the page builders, and those are live.</div>'
-            % ", ".join("<code>%s</code>" % esc(e) for e in cov["missing"]))
+        names = ", ".join("<code>%s</code>" % esc(e) for e in cov["missing"])
+        if cov["js_live"]:
+            # The file is loading - page_exit or scroll_depth proves it. What is
+            # absent is a click nobody made.
+            html.append(
+                '<div class="note"><b>%s never arrived in this window.</b> '
+                '<code>/js/apl-analytics.js</code> <b>is live and firing</b> — the '
+                'dwell and scroll numbers below came from it — so this is an absence '
+                'of the click, not of the tag. Those two events need a visitor to hit '
+                'the WhatsApp button, a <code>tel:</code>/<code>mailto:</code> link, or a '
+                'link off the domain. In a window this small, nobody did. Everything '
+                'else in the report is unaffected.</div>' % names)
+        else:
+            html.append(
+                '<div class="note warn"><b>%s never arrived in this window.</b> '
+                'Those events come from <code>/js/apl-analytics.js</code>, and neither '
+                '<code>page_exit</code> nor <code>scroll_depth</code> arrived either — '
+                'which means no page loaded the file at all. While that holds: '
+                '<b>dwell is inferred on every page</b> (never measured), '
+                '<b>scroll depth does not exist at all</b>, the read-fully / bounced split in '
+                'section 3 cannot be computed, and the CTA half of "onward" in section 4 is '
+                'blind. Sections 2 and 5 are unaffected — Aiden and the conversion events are '
+                'fired by the widget and the page builders, and those are live.</div>'
+                % names)
     if cov["page_type_param_pct"] is not None and cov["page_type_param_pct"] < 99:
         html.append(
             '<div class="note"><b>page_type arrived on only %s%% of page views.</b> '
-            'It is one of the four event-scoped custom dimensions set by the same '
-            'un-deployed file. For the rest, the report classifies the page '
+            'It is one of the four event-scoped custom dimensions set by '
+            '<code>/js/apl-analytics.js</code>; a page view recorded before that '
+            'file shipped, or served from a browser cache older than it, carries no '
+            'page_type. For the rest, the report classifies the page '
             '<b>from its URL</b> using a port of that file\'s own rules — so section 4 '
             'still finds the articles, but the page type is <span class="badge i">'
             'inferred</span>, not reported by the browser.</div>'
@@ -2402,9 +2432,14 @@ def main(argv=None):
     analysis = analyse(sessions, transcripts, opts)
     cov = coverage(rows, sessions)
     if cov["missing"] and not opts.sample:
-        print("  ! missing: %s - /js/apl-analytics.js is not deployed, so dwell is "
-              "inferred everywhere and scroll depth does not exist"
-              % ", ".join(cov["missing"]))
+        if cov["js_live"]:
+            print("  ! not seen: %s - /js/apl-analytics.js is live and firing, so this "
+                  "means no visitor clicked one in this window, not a broken tag"
+                  % ", ".join(cov["missing"]))
+        else:
+            print("  ! missing: %s - /js/apl-analytics.js is not deployed, so dwell is "
+                  "inferred everywhere and scroll depth does not exist"
+                  % ", ".join(cov["missing"]))
     html = render_html(analysis, meta, aiden_diag, opts, cov)
 
     os.makedirs(OUT_DIR, exist_ok=True)

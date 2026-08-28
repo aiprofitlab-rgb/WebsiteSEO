@@ -70,6 +70,68 @@ function create(deps) {
     });
   });
 
+  /**
+   * Meta's deauthorize and data-deletion callbacks.
+   *
+   * Both are REQUIRED fields on the Business Login settings page before an app
+   * can be submitted for review, and neither is a webhook: they arrive as
+   * form-encoded POSTs carrying a `signed_request`, not as JSON with an
+   * X-Hub-Signature-256 header. So they cannot reuse the gate above, and they
+   * get their own body parser.
+   *
+   * Neither one deletes anything on its own. A person removing the app is not
+   * an emergency, and an automatic irreversible delete triggered by an unsigned
+   * POST would be a worse bug than the one it prevents. Both record the request
+   * loudly in the journal; the 30-day promise on /privacy/#data-deletion is kept
+   * by hand.
+   */
+  const form = express.urlencoded({ extended: false, limit: "16kb" });
+
+  // A reviewer may well click these in a browser. A JSON 404 looks broken.
+  const explain = (what) => (req, res) =>
+    res
+      .type("text/plain")
+      .send(`${what} endpoint for the AI Profit Lab Instagram app.\nMeta POSTs here. See https://aiprofitlab.io/privacy/#data-deletion`);
+
+  router.get("/deauthorize", explain("Deauthorize callback"));
+  router.get("/data-deletion", explain("Data deletion request"));
+
+  router.post("/deauthorize", form, (req, res) => {
+    const payload = signature.parseSignedRequest(req.body && req.body.signed_request, process.env.META_APP_SECRET);
+    if (!payload) {
+      console.warn("DEAUTHORIZE REJECTED (bad or unsigned signed_request) from", req.ip);
+      return res.sendStatus(400);
+    }
+    console.log(JSON.stringify({ event: "deauthorize", user_id: payload.user_id || null, at: new Date().toISOString() }));
+    return res.sendStatus(200);
+  });
+
+  router.post("/data-deletion", form, (req, res) => {
+    const payload = signature.parseSignedRequest(req.body && req.body.signed_request, process.env.META_APP_SECRET);
+    if (!payload) {
+      console.warn("DATA DELETION REJECTED (bad or unsigned signed_request) from", req.ip);
+      return res.sendStatus(400);
+    }
+
+    // Meta shows this code to the user and expects it to be quotable back to us,
+    // so it has to appear in the journal too, next to the id it belongs to.
+    const confirmationCode = `del-${Date.now().toString(36)}-${String(payload.user_id || "unknown").slice(-6)}`;
+    console.log(
+      JSON.stringify({
+        event: "data_deletion_request",
+        user_id: payload.user_id || null,
+        confirmation_code: confirmationCode,
+        at: new Date().toISOString(),
+      })
+    );
+
+    // The shape Meta requires: where the user can check, and a code to quote.
+    return res.json({
+      url: "https://aiprofitlab.io/privacy/#data-deletion",
+      confirmation_code: confirmationCode,
+    });
+  });
+
   return router;
 }
 
