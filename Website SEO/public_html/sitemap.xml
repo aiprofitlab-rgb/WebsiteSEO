@@ -20,13 +20,13 @@
   </url>
   <url>
     <loc>https://aiprofitlab.io/blog-ar/</loc>
-    <lastmod>2026-08-28</lastmod>
+    <lastmod>2026-08-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://aiprofitlab.io/blog/</loc>
-    <lastmod>2026-08-28</lastmod>
+    <lastmod>2026-08-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -938,7 +938,7 @@
   </url>
   <url>
     <loc>https://aiprofitlab.io/blog/ar/2026-08-24-how-omani-law-firms-use-ai-document-summarization-to-save-15-hours-weekly/</loc>
-    <lastmod>2026-08-27</lastmod>
+    <lastmod>2026-08-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -969,6 +969,12 @@
   <url>
     <loc>https://aiprofitlab.io/blog/ar/2026-08-28-hiring-ai-talent-vs-partnering-with-agency-muscat/</loc>
     <lastmod>2026-08-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://aiprofitlab.io/blog/ar/2026-08-30-automating-document-extraction-scanned-arabic-pdfs-civil-ids/</loc>
+    <lastmod>2026-08-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -1880,7 +1886,7 @@
   </url>
   <url>
     <loc>https://aiprofitlab.io/blog/en/2026-08-24-how-omani-law-firms-use-ai-document-summarization-to-save-15-hours-weekly/</loc>
-    <lastmod>2026-08-27</lastmod>
+    <lastmod>2026-08-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -1911,6 +1917,12 @@
   <url>
     <loc>https://aiprofitlab.io/blog/en/2026-08-28-hiring-ai-talent-vs-partnering-with-agency-muscat/</loc>
     <lastmod>2026-08-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://aiprofitlab.io/blog/en/2026-08-30-automating-document-extraction-scanned-arabic-pdfs-civil-ids/</loc>
+    <lastmod>2026-08-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
