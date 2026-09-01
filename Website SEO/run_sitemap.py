@@ -53,10 +53,13 @@ urls = [
     # price for the same build, and that page is gone.
     # Neither /en/order/ nor /order-ar/ belongs here: both are payment-return
     # pages carrying noindex, and /en/checkout/?plan=... are query variants of
-    # one URL. The four stand-alone Arabic demo and simulator pages that used
-    # to be listed are gone too - they now 301 into /demos-ar/ and
-    # /simulators-ar/ (.htaccess section 2c), and a sitemap must not list a URL
-    # that redirects.
+    # one URL. The two stand-alone Arabic simulator pages that used to be
+    # listed are gone too - they now 301 into /simulators-ar/ (.htaccess
+    # section 2c), and a sitemap must not list a URL that redirects.
+    # The four stand-alone demo pages came BACK on 2026-08-30, because the
+    # homepage proof tiles had never stopped showing their screenshots. They
+    # still do not belong here: they carry noindex, follow, and /en/demos/ and
+    # /demos-ar/ above are the indexed hubs for the same two demos.
 ]
 
 blog_ar_path = os.path.join(public_html, "blog", "ar")

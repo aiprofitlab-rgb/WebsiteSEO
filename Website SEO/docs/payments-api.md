@@ -51,7 +51,6 @@ Body — exactly what `order()` in `page_checkout.py` builds:
   "reference": "APL-260820-KX7M",
   "items": ["dashboard", "autopilot", "desk"],
   "plan": "deposit",
-  "founding": true,
   "currency": "OMR",
   "quoted_due": 100000,
   "quoted_total": 2200000,
@@ -153,7 +152,7 @@ Thawani-Api-Key: {SECRET_KEY}
     "customer_city": "Muscat",
     "plan": "deposit",
     "items": "website,dashboard,autopilot",
-    "order_amount": "100000 of 2200000 baisa (founding)"
+    "order_amount": "100000 of 2200000 baisa"
   }
 }
 ```
@@ -265,7 +264,7 @@ landed is reading it back off the retrieved session.
   baisa** (OMR 5,000) per product line, with a floor of 100 baisa on the
   session. Payment intent: `amount` between **100 and 9,999,000 baisa**
   (OMR 0.100–9,999). Both sit far above the dearest thing we sell (the
-  standard-column Operator Stack, OMR 3,400), so a single card payment for a
+  Operator Stack, OMR 2,200), so a single card payment for a
   whole order is within limits. What is still unproven is whether an *acquirer*
   approves a charge that size — creation accepting the amount is not the bank
   accepting the payment, and only a paid test shows that.

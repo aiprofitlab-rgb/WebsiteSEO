@@ -14,7 +14,7 @@ import pay
 from kit import MAIL_ICON, STAR, WA_ICON, url
 from page_contact import CSS, PHONE_ICON  # noqa: F401 - design is shared
 
-from ar_common import (AUTO, DASH, DESK, FOUNDING, PROMISE, SITE, bundle_ar,
+from ar_common import (AUTO, DASH, DESK, PROMISE, SITE, bundle_ar,
                        num, price_ar, wa)
 
 __all__ = ["CSS", "body", "JS", "META"]
@@ -114,8 +114,7 @@ def _body():
     <div class="faq" style="margin-top:clamp(22px,3vw,38px)">
       <details>
         <summary>كم التكلفة؟</summary>
-        <p class="ans">{SITE}: {price_ar('website')} بسعر {FOUNDING}، و{price_ar('website', standard=True)} بالسعر
-          القياسي. {DASH} بزيادة {price_ar('dashboard')}، و{AUTO} بزيادة {price_ar('autopilot')}،
+        <p class="ans">{SITE}: {price_ar('website')} دفعة واحدة. {DASH} بزيادة {price_ar('dashboard')}، و{AUTO} بزيادة {price_ar('autopilot')}،
           والثلاثة معاً {bundle_ar()}. كل رقم موجود في
           <a href="{SVC}#price">قائمة الأسعار</a>.</p>
       </details>
@@ -225,7 +224,7 @@ META = dict(
   "@type":"FAQPage",
   "inLanguage":"ar",
   "mainEntity":[
-    {"@type":"Question","name":"كم التكلفة؟","acceptedAnswer":{"@type":"Answer","text":"الموقع الذكي بـ950 ريالاً عُمانياً دفعة واحدة بسعر الشريك المؤسِّس، و1,450 بالسعر القياسي. لوحة المتابعة تضيف 650، والطيار الآلي يضيف 900، والثلاثة معاً 2,200."}},
+    {"@type":"Question","name":"كم التكلفة؟","acceptedAnswer":{"@type":"Answer","text":"الموقع الذكي بـ950 ريالاً عُمانياً دفعة واحدة. لوحة المتابعة تضيف 650، والطيار الآلي يضيف 900، والثلاثة معاً 2,200."}},
     {"@type":"Question","name":"هل هناك رسوم شهرية؟","acceptedAnswer":{"@type":"Answer","text":"لا شيء مطلوب لإبقاء النظام يعمل. السنة الأولى من الاستضافة والحماية والرعاية مشمولة في سعر البناء. مكتب النمو بـ75 ريالاً شهرياً اختياري وغير مطلوب أبداً."}},
     {"@type":"Question","name":"هل لديك عملاء يمكنني التحدث إليهم؟","acceptedAnswer":{"@type":"Answer","text":"ليس بعد. ولهذا يوجد ضمان بالاسم، ولهذا تجربتا لوحة المتابعة ووكيل المشتري مفتوحتان للنقر دون طلب أي بيانات."}},
     {"@type":"Question","name":"وماذا لو لم ينجح؟","acceptedAnswer":{"@type":"Answer","text":"وعد أول استفسار: إن لم يصلك استفسار حقيقي من مشترٍ خلال 30 يوماً من الإطلاق، يُعاد بناؤه مجاناً حتى يصلك. وإن لم يصلك بعدها، تسترد مالك."}},

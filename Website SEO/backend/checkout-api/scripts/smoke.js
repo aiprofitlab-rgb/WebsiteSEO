@@ -50,7 +50,6 @@ async function main() {
       reference: null, // let the server mint one, like a first-time buyer
       items,
       plan,
-      founding: pricing.CATALOG.founding,
       currency: pricing.CATALOG.currency,
       quoted_due: q.due,
       quoted_total: q.total,
@@ -96,7 +95,6 @@ async function main() {
       customer: body.customer,
       quote: q,
       items: q.items.map((i) => i.id),
-      priceColumn: pricing.CATALOG.founding ? "founding" : "standard",
     });
     for (const [k, v] of Object.entries(meta)) console.log(`    ${k.padEnd(20)} ${v}`);
 

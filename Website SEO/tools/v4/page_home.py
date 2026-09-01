@@ -28,6 +28,20 @@ import re
 from kit import WA, WA_ICON, STAR
 
 # --------------------------------------------------------------------------
+# S7's two proof tiles show screenshots of the stand-alone demo builds, not of
+# the /en/demos/ tab panel - the picture is FitFlow's dashboard and the RealtyAI
+# lead list. Those pages were deleted in the 2026-08-27 v3 sweep and 301'd to
+# /en/demos/, which left every tile advertising one build and opening another.
+# Restored 2026-08-30 at their original URLs; the tiles point at them again, so
+# the screenshot and the destination are the same screen.
+#
+# The prose links elsewhere on the page still go to /en/demos/ on purpose: that
+# is the indexed hub, and the stand-alone pages are noindex.
+# --------------------------------------------------------------------------
+DASH_DEMO = "/customized-ceo-dashboard-demo/"
+WA_DEMO   = "/whatsapp-receptionist-demo/"
+
+# --------------------------------------------------------------------------
 # S2 - the buzzword cloud. word, left%, top%, rem, opacity, drift seconds.
 # Positions deliberately avoid the middle band (roughly 26-74% across, 34-66%
 # down) where the answer card sits, so nothing important is ever occluded.
@@ -187,6 +201,10 @@ CSS = """
   border-radius:16px;padding:clamp(24px,3vw,36px);
 }
 .panelcard h3{color:var(--cream);margin:0 0 22px;font-size:1.4rem}
+/* The result card lost the bar chart that used to fill it, and the grid still
+   stretches it to the height of the sliders beside it. Centring keeps the
+   number optically level with them instead of stranded at the top. */
+.panelcard.result{display:flex;flex-direction:column;justify-content:center}
 .fieldrow{margin-bottom:22px}
 .fieldrow label{
   display:flex;justify-content:space-between;align-items:baseline;gap:12px;
@@ -214,9 +232,7 @@ input[type=range]::-moz-range-thumb{
   display:block;font-family:var(--display);font-size:clamp(2.8rem,6.4vw,4.4rem);line-height:1;
   color:var(--amber-bright);font-variant-numeric:tabular-nums;
 }
-.payback{margin:20px 0 0;color:rgba(241,239,232,.82);font-size:1.02rem}
-.payback b{color:var(--cream)}
-.assume{margin:14px 0 0;font-size:.86rem;line-height:1.6;color:rgba(241,239,232,.5)}
+.assume{margin:26px 0 0;font-size:.86rem;line-height:1.6;color:rgba(241,239,232,.5)}
 
 /* ============================== S5 - the morning message and the three zeros */
 .touch-grid{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(30px,5vw,68px);align-items:center}
@@ -604,25 +620,10 @@ def body():
         </div>
       </div>
 
-      <div class="panelcard rv" style="--d:.12s">
+      <div class="panelcard result rv" style="--d:.12s">
         <span class="bignum-cap">Revenue walking away, per month</span>
         <span class="bignum" id="leakNum">OMR 1,559</span>
 
-        <!-- Two bars, one scale: the monthly leak against the one-time cost of
-             fixing it. The comparison is the whole argument. -->
-        <svg id="bars" viewBox="0 0 420 132" role="img" style="width:100%;height:auto;margin-top:26px" aria-labelledby="barsTitle">
-          <title id="barsTitle">Monthly revenue lost to silence, compared with the one-time cost of the Smart Website</title>
-          <text x="0" y="14" fill="#A8BCB1" font-family="IBM Plex Mono, monospace" font-size="15">Lost each month</text>
-          <rect x="0" y="22" width="420" height="26" rx="5" fill="rgba(241,239,232,.10)"/>
-          <rect id="barLeak" x="0" y="22" width="420" height="26" rx="5" fill="#D89234"/>
-          <text id="barLeakT" x="410" y="40" fill="#072B22" font-family="IBM Plex Mono, monospace" font-size="15" font-weight="500" text-anchor="end">OMR 1,559</text>
-          <text x="0" y="82" fill="#A8BCB1" font-family="IBM Plex Mono, monospace" font-size="15">Smart Website, once</text>
-          <rect x="0" y="90" width="420" height="26" rx="5" fill="rgba(241,239,232,.10)"/>
-          <rect id="barCost" x="0" y="90" width="256" height="26" rx="5" fill="#1FAF5E"/>
-          <text x="10" y="108" fill="#072B22" font-family="IBM Plex Mono, monospace" font-size="15" font-weight="500">OMR 950</text>
-        </svg>
-
-        <p class="payback">At that rate it pays for itself in <b id="days">19 days</b>.</p>
         <p class="assume">After-hours inquiries per month &times; your win rate &times; your average order.
           It shows what is <em>at stake</em> in those messages &mdash; not a promise of recovery.</p>
       </div>
@@ -704,14 +705,14 @@ def body():
 
     <svg class="stair rv" viewBox="0 0 1000 400" role="img" aria-labelledby="stairT stairD">
       <title id="stairT">The three systems as a staircase</title>
-      <desc id="stairD">Step one, the Smart Website at OMR 950, makes buyers arrive. That creates the next
-        question, answered by step two, the Live Owner Dashboard at plus OMR 650. That creates the next question,
-        answered by step three, the Full Autopilot at plus OMR 900.</desc>
+      <desc id="stairD">Step one, the Smart Website, makes buyers arrive. That creates the next
+        question, answered by step two, the Live Owner Dashboard. That creates the next question,
+        answered by step three, the Full Autopilot.</desc>
 
       <g class="step" style="--d:0s">
         <rect x="30" y="270" width="280" height="90" rx="12" fill="#0F6E56"/>
         <text x="54" y="308" fill="#F1EFE8" font-family="Marcellus, Georgia, serif" font-size="26">The Smart Website</text>
-        <text x="54" y="336" fill="#BFE3D5" font-family="IBM Plex Mono, monospace" font-size="17">01 &#183; OMR 950</text>
+        <text x="54" y="336" fill="#BFE3D5" font-family="IBM Plex Mono, monospace" font-size="17">01</text>
       </g>
 
       <g class="anno" style="--d:.55s">
@@ -724,7 +725,7 @@ def body():
         <rect x="350" y="190" width="280" height="170" rx="12" fill="#0A3D30"/>
         <text x="374" y="228" fill="#F1EFE8" font-family="Marcellus, Georgia, serif" font-size="26">The Live Owner</text>
         <text x="374" y="256" fill="#F1EFE8" font-family="Marcellus, Georgia, serif" font-size="26">Dashboard</text>
-        <text x="374" y="284" fill="#BFE3D5" font-family="IBM Plex Mono, monospace" font-size="17">02 &#183; +OMR 650</text>
+        <text x="374" y="284" fill="#BFE3D5" font-family="IBM Plex Mono, monospace" font-size="17">02</text>
       </g>
 
       <g class="anno" style="--d:.75s">
@@ -736,7 +737,7 @@ def body():
       <g class="step" style="--d:.36s">
         <rect x="670" y="110" width="300" height="250" rx="12" fill="#072B22"/>
         <text x="694" y="148" fill="#F1EFE8" font-family="Marcellus, Georgia, serif" font-size="26">The Full Autopilot</text>
-        <text x="694" y="176" fill="#BFE3D5" font-family="IBM Plex Mono, monospace" font-size="17">03 &#183; +OMR 900</text>
+        <text x="694" y="176" fill="#BFE3D5" font-family="IBM Plex Mono, monospace" font-size="17">03</text>
       </g>
 
       <line x1="30" y1="372" x2="970" y2="372" stroke="#DED8C8" stroke-width="2"/>
@@ -747,21 +748,21 @@ def body():
         <span class="n">01</span>
         <h3>The Smart Website</h3>
         <p>Answers buyers in Arabic and English, records who they are, and hands the live ones to your WhatsApp.</p>
-        <span class="tag">One-time &#183; <b>OMR 950</b></span>
+        <span class="tag">One-time</span>
         <a class="tlink" href="/en/services/#smart-website">See what&#8217;s inside <span class="arw">&rarr;</span></a>
       </article>
       <article class="card sys-card">
         <span class="n">02</span>
         <h3>The Live Owner Dashboard</h3>
         <p>Cash, stock and open leads on one screen &mdash; without phoning three people to assemble it.</p>
-        <span class="tag">Add-on &#183; <b>+OMR 650</b></span>
+        <span class="tag">Add-on</span>
         <a class="tlink" href="/en/demos/#dash">Open the live demo <span class="arw">&rarr;</span></a>
       </article>
       <article class="card sys-card">
         <span class="n">03</span>
         <h3>The Full Autopilot</h3>
         <p>Something has to chase the quotes and the invoices. This does, on schedule, without being reminded.</p>
-        <span class="tag">Add-on &#183; <b>+OMR 900</b></span>
+        <span class="tag">Add-on</span>
         <a class="tlink" href="/en/services/#autopilot">See what&#8217;s inside <span class="arw">&rarr;</span></a>
       </article>
     </div>
@@ -777,7 +778,7 @@ def body():
       from someone you have never met.</p>
 
     <div class="tiles" style="margin-top:clamp(28px,4vw,48px)" data-stagger>
-      <a class="tile" href="/en/demos/#dash">
+      <a class="tile" href="{DASH_DEMO}">
         <span class="live"><i></i>Live demo</span>
         <span class="shot"><img src="/assets/v4/demo-dashboard-960.webp" alt="The CEO dashboard demo: revenue, gross profit and margin cards above a list of ranked actions." width="960" height="600" loading="lazy" decoding="async"></span>
         <span class="cap">
@@ -787,7 +788,7 @@ def body():
         </span>
       </a>
 
-      <a class="tile" href="/en/demos/">
+      <a class="tile" href="{WA_DEMO}">
         <span class="live"><i></i>Live demo</span>
         <span class="shot"><img src="/assets/v4/demo-whatsapp-960.webp" alt="The WhatsApp receptionist demo: a lead list beside a full buyer conversation handled by the AI agent." width="960" height="600" loading="lazy" decoding="async"></span>
         <span class="cap">
@@ -829,7 +830,7 @@ def body():
 
       <div class="hcard win">
         <h3>The Smart Website</h3>
-        <p class="sub">OMR 950, once</p>
+        <p class="sub">Paid once, not every month</p>
         <p class="hlegend">Rows: Sun &rarr; Sat &#183; columns: 00:00 &rarr; 23:00</p>
         {always}
         <span class="hcount"><span data-count="168">168</span> of 168 hours</span>

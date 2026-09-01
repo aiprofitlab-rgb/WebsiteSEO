@@ -64,7 +64,7 @@ recognisable order. Ten keys, sent on every session:
 | `customer_city` | `Muscat` |
 | `plan` | `deposit` |
 | `items` | `website,dashboard,autopilot` |
-| `order_amount` | `100000 of 2200000 baisa (founding)` |
+| `order_amount` | `100000 of 2200000 baisa` |
 
 **Ten is a hard ceiling**, verified against UAT on 2026-08-24 — an eleventh key
 fails the entire session with `Metadata cant have more than 10 items`, which

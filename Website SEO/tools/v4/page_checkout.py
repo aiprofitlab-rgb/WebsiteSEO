@@ -366,14 +366,11 @@ def body():
         envbar = ('<div class="envbar">TEST MODE &mdash; payments run against Thawani UAT. '
                   'No real money moves.</div>')
 
-    founding_note = ("Founding Partner pricing, held for the first capped group."
-                     if pay.FOUNDING_OPEN else "Standard pricing.")
-
     return f"""<main id="main">
 {envbar}
 <header class="phero s-cream grain">
   <div class="wrap">
-    <p class="eyebrow"><span class="star">{STAR}</span> Checkout &#183; {founding_note}</p>
+    <p class="eyebrow"><span class="star">{STAR}</span> Checkout &#183; the published price, nothing added at the end</p>
     <h1 class="h1">Build it exactly<br>the way you need it.</h1>
     <p class="lede">Pick what you want built, choose how you want to pay for it, and the total on the
       right updates as you go. No hidden line appears at the end &mdash; what you see is the invoice.</p>
@@ -928,7 +925,6 @@ JS_TPL = r"""
       reference: reference(),
       items: selected(),
       plan: currentPlan(),
-      founding: CFG.founding,
       currency: CFG.currency,
       /* quoted_* is what the buyer was shown. The server recomputes and, if it
          disagrees, refuses the session rather than quietly charging its own

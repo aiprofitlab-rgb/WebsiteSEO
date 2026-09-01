@@ -665,20 +665,13 @@ table.t .mini{display:block;font-size:.86rem;color:var(--muted);margin-top:5px;l
 }
 .nolog li::after{content:"";position:absolute;left:4px;top:1.06em;width:8px;height:1.5px;background:var(--alert)}
 
-/* --------------------------------------------------------- order grid */
-.ord{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,1.8vw,22px)}
-.ord div{background:var(--white);border:1px solid var(--line);border-radius:14px;padding:22px 24px;transition:border-color .3s,transform .3s var(--ease)}
-.ord div:hover{border-color:var(--amber-pale);transform:translateY(-3px)}
-.ord h4{font-family:var(--display);font-size:1.2rem;color:var(--teal-950);margin:0 0 7px;font-weight:400}
-.ord p{margin:0;font-size:.94rem;color:var(--muted)}
-
 @media (max-width:900px){
   .stats{grid-template-columns:repeat(2,1fr)}
   .stats div:nth-child(2){border-right:0}
   .stats div:nth-child(1),.stats div:nth-child(2){border-bottom:1px solid var(--line)}
   .sysblock{grid-template-columns:1fr}
   .sysblock.flip .art{order:0}
-  .pay-grid,.ord{grid-template-columns:1fr}
+  .pay-grid{grid-template-columns:1fr}
 }
 
 /* ---------------------------------------------- Arabic fallback metrics --
@@ -1053,7 +1046,7 @@ table.t .mini{display:block;font-size:.86rem;color:var(--muted);margin-top:5px;l
           <li>يجده جوجل <em>و</em>يجده ChatGPT</li>
           <li>سنة كاملة من الاستضافة والحماية والرعاية مشمولة</li>
         </ul>
-        <div class="pricetag"><b><span class="num" dir="ltr">950</span> ر.ع.</b><span>دفعة واحدة &#183; سعر الشريك المؤسِّس</span></div>
+        <div class="pricetag"><b><span class="num" dir="ltr">950</span> ر.ع.</b><span>دفعة واحدة</span></div>
         <a class="btn btn-wa" href="https://api.whatsapp.com/send?phone=96899245250&text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%20%D9%86%D8%A7%D9%87%D8%AF%D8%8C%20%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%A7%D9%84%D8%B3%D8%A4%D8%A7%D9%84%20%D8%B9%D9%86%20%D8%A7%D9%84%D9%85%D9%88%D9%82%D8%B9%20%D8%A7%D9%84%D8%B0%D9%83%D9%8A."><svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 1.8a8.2 8.2 0 1 1-4.2 15.3l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8zm-3.1 4c-.2 0-.5 0-.7.3-.2.3-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.8 2.8 4.4 3.8 2.2.9 2.6.7 3.1.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2-.1-.1-.2-.2-.5-.3l-1.7-.8c-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.1-.2 0-.4.1-.5l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5L10 8.2c-.2-.4-.4-.4-.6-.4h-.5z"/></svg>اسأل عن موعد بناء متاح</a>
       </div>
       <div class="art rv">
@@ -1166,39 +1159,39 @@ table.t .mini{display:block;font-size:.86rem;color:var(--muted);margin-top:5px;l
   <div class="wrap">
     <p class="eyebrow"><span class="star">&#10038;</span> قائمة الأسعار كاملة</p>
     <h2 class="h2">كل رقم، على الصفحة، قبل أن تتحدث إليّ.</h2>
-    <p class="lede">سعر الشريك المؤسِّس يسري على المجموعة الأولى المحدودة فقط. والعمود القياسي هو ما يُنشَر
-      بعد إغلاق تلك المجموعة.</p>
+    <p class="lede">سعر واحد لكل درجة، وكلها أدناه. لا فئات تحتاج فكّ رموزها، ولا شيء يظهر
+      بعد أن تبدأ المكالمة فقط.</p>
 
     <div class="tablewrap rv" style="margin-top:clamp(26px,3.5vw,44px)">
       <table class="t">
         <caption>كل درجة، وما الذي تضيفه</caption>
         <thead>
-          <tr><th scope="col">ما الذي تحصل عليه</th><th scope="col" class="n">الشريك المؤسِّس</th><th scope="col" class="n">السعر القياسي</th><th scope="col">طريقة الاحتساب</th></tr>
+          <tr><th scope="col">ما الذي تحصل عليه</th><th scope="col" class="n">السعر</th><th scope="col">طريقة الاحتساب</th></tr>
         </thead>
         <tbody>
           <tr>
             <td><b>اختبار المشتري الصامت</b><span class="mini">أراسل نشاطك كما يفعل مشترٍ، وأرسل لك التقرير</span></td>
-            <td class="n">مجاناً</td><td class="n">مجاناً</td><td>&mdash;</td>
+            <td class="n">مجاناً</td><td>&mdash;</td>
           </tr>
           <tr class="hi">
             <td><b>الموقع الذكي</b><span class="mini">موقع بلغتين، ووكيل مشترٍ بالذكاء الاصطناعي، ومسار عرض سعر بالجملة، وتحويل إلى واتساب، وظهور في بحث الذكاء الاصطناعي، وسنة استضافة ورعاية</span></td>
-            <td class="n"><span class="num" dir="ltr">950</span> ر.ع.</td><td class="n"><span class="num" dir="ltr">1,450</span> ر.ع.</td><td>دفعة واحدة</td>
+            <td class="n"><span class="num" dir="ltr">950</span> ر.ع.</td><td>دفعة واحدة</td>
           </tr>
           <tr>
             <td>+ لوحة متابعة المالك الحيّة<span class="mini">لوحة للسيولة والمخزون والطلبات المفتوحة</span></td>
-            <td class="n">+<span class="num" dir="ltr">650</span> ر.ع.</td><td class="n">+<span class="num" dir="ltr">950</span> ر.ع.</td><td>دفعة واحدة</td>
+            <td class="n">+<span class="num" dir="ltr">650</span> ر.ع.</td><td>دفعة واحدة</td>
           </tr>
           <tr>
             <td>+ الطيار الآلي الكامل<span class="mini">متابعة عروض الأسعار والفواتير، وفق جدول</span></td>
-            <td class="n">+<span class="num" dir="ltr">900</span> ر.ع.</td><td class="n">+<span class="num" dir="ltr">1,300</span> ر.ع.</td><td>دفعة واحدة</td>
+            <td class="n">+<span class="num" dir="ltr">900</span> ر.ع.</td><td>دفعة واحدة</td>
           </tr>
           <tr>
             <td><b>حزمة المشغّل</b><span class="mini">الأنظمة الثلاثة معاً</span></td>
-            <td class="n"><span class="num" dir="ltr">2,200</span> ر.ع.</td><td class="n"><span class="num" dir="ltr">3,400</span> ر.ع.</td><td>دفعة واحدة</td>
+            <td class="n"><span class="num" dir="ltr">2,200</span> ر.ع.</td><td>دفعة واحدة</td>
           </tr>
           <tr>
             <td>مكتب النمو<span class="mini">رعاية شهرية اختيارية، وميزات جديدة، ومراجعة للتقارير. غير مطلوب أبداً لإبقاء أي شيء يعمل.</span></td>
-            <td class="n"><span class="num" dir="ltr">75</span> ر.ع./شهرياً</td><td class="n"><span class="num" dir="ltr">95</span> ر.ع./شهرياً</td><td>اشتراك اختياري، يُلغى في أي وقت</td>
+            <td class="n"><span class="num" dir="ltr">75</span> ر.ع./شهرياً</td><td>اشتراك اختياري، يُلغى في أي وقت</td>
           </tr>
         </tbody>
       </table>
@@ -1259,24 +1252,6 @@ table.t .mini{display:block;font-size:.86rem;color:var(--muted);margin-top:5px;l
         <li>الأسعار أعلاه مبنية على كتالوج منتجات واحد وزوج لغات واحد. وأي شيء أكبر من ذلك فعلاً
           يُسعَّر على حدة، لا يُحشَر في باقة.</li>
       </ul>
-    </div>
-  </div>
-</section>
-
-<!-- ======================================================= BUILT TO ORDER -->
-<section class="s-panel">
-  <div class="wrap">
-    <p class="eyebrow"><span class="star">&#10038;</span> يُبنى حسب الطلب</p>
-    <h2 class="h2">والأشياء التي يحتاجها عملك أنت وحده.</h2>
-    <p class="lede">تُدرَس وتُسعَّر واحدة تلو الأخرى، وغالباً فوق نظام قائم بالفعل.</p>
-
-    <div class="ord" style="margin-top:clamp(26px,3.5vw,42px)" data-stagger>
-      <div><h4>تحرير المحتوى العربي</h4><p>إعادة صياغة صفحاتك الحالية بحيث يأخذك المشتري العربي على محمل الجدّ.</p></div>
-      <div><h4>ملف نشاطي التجاري على جوجل</h4><p>مُصحَّح، وموثَّق، ومثبَّت على الموقع الصحيح في الخريطة.</p></div>
-      <div><h4>أتمتة عروض الأسعار</h4><p>تجميع أسعار الجملة وإرسالها دون إعادة بنائها في كل مرة.</p></div>
-      <div><h4>تنبيهات المورّدين والمخزون</h4><p>تُخبَر قبل أن ينفد المخزون، لا بعد أن يسأل مشترٍ.</p></div>
-      <div><h4>تدريب الفريق</h4><p>ساعتان في مكتبك، حتى يستخدم الفريق فعلاً ما تم بناؤه.</p></div>
-      <div><h4>شيء آخر تماماً</h4><p>صِف نقطة الاختناق. وإن كنت لا أستطيع بناءها، سأقول ذلك.</p></div>
     </div>
   </div>
 </section>
@@ -1466,6 +1441,6 @@ table.t .mini{display:block;font-size:.86rem;color:var(--muted);margin-top:5px;l
   els.forEach(function(e){ io.observe(e); });
 })();
 </script>
-    <script defer src="/js/aiden-chat.js?v=5312f568"></script>
+<script defer src="/js/aiden-chat.js?v=c8fb76b5"></script>
 </body>
 </html>

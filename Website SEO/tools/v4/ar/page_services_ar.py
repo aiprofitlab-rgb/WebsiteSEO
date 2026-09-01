@@ -21,7 +21,7 @@ import pay
 from kit import STAR, WA_ICON, url
 from page_services import CSS  # noqa: F401 - design is shared
 
-from ar_common import (AUTO, DASH, DESK, FOUNDING, ONE_TIME, PLAN_FULL,
+from ar_common import (AUTO, DASH, DESK, ONE_TIME, PLAN_FULL,
                        PLAN_PROOF, PLAN_THREE, SITE, STACK, TEST, bundle_ar,
                        num, plan_instalment_ar, plan_total_ar, price_ar, wa)
 
@@ -101,7 +101,7 @@ def _p1():
           <li>يجده جوجل <em>و</em>يجده ChatGPT</li>
           <li>سنة كاملة من الاستضافة والحماية والرعاية مشمولة</li>
         </ul>
-        <div class="pricetag"><b>{price_ar('website')}</b><span>{ONE_TIME} &#183; سعر {FOUNDING}</span></div>
+        <div class="pricetag"><b>{price_ar('website')}</b><span>{ONE_TIME}</span></div>
         <a class="btn btn-wa" href="{wa('مرحباً ناهد، أريد السؤال عن الموقع الذكي.')}">{WA_ICON}اسأل عن موعد بناء متاح</a>
       </div>
       <div class="art rv">
@@ -200,39 +200,39 @@ def _p2():
   <div class="wrap">
     <p class="eyebrow"><span class="star">{STAR}</span> قائمة الأسعار كاملة</p>
     <h2 class="h2">كل رقم، على الصفحة، قبل أن تتحدث إليّ.</h2>
-    <p class="lede">سعر {FOUNDING} يسري على المجموعة الأولى المحدودة فقط. والعمود القياسي هو ما يُنشَر
-      بعد إغلاق تلك المجموعة.</p>
+    <p class="lede">سعر واحد لكل درجة، وكلها أدناه. لا فئات تحتاج فكّ رموزها، ولا شيء يظهر
+      بعد أن تبدأ المكالمة فقط.</p>
 
     <div class="tablewrap rv" style="margin-top:clamp(26px,3.5vw,44px)">
       <table class="t">
         <caption>كل درجة، وما الذي تضيفه</caption>
         <thead>
-          <tr><th scope="col">ما الذي تحصل عليه</th><th scope="col" class="n">{FOUNDING}</th><th scope="col" class="n">السعر القياسي</th><th scope="col">طريقة الاحتساب</th></tr>
+          <tr><th scope="col">ما الذي تحصل عليه</th><th scope="col" class="n">السعر</th><th scope="col">طريقة الاحتساب</th></tr>
         </thead>
         <tbody>
           <tr>
             <td><b>{TEST}</b><span class="mini">أراسل نشاطك كما يفعل مشترٍ، وأرسل لك التقرير</span></td>
-            <td class="n">مجاناً</td><td class="n">مجاناً</td><td>&mdash;</td>
+            <td class="n">مجاناً</td><td>&mdash;</td>
           </tr>
           <tr class="hi">
             <td><b>{SITE}</b><span class="mini">موقع بلغتين، ووكيل مشترٍ بالذكاء الاصطناعي، ومسار عرض سعر بالجملة، وتحويل إلى واتساب، وظهور في بحث الذكاء الاصطناعي، وسنة استضافة ورعاية</span></td>
-            <td class="n">{price_ar('website')}</td><td class="n">{price_ar('website', standard=True)}</td><td>{ONE_TIME}</td>
+            <td class="n">{price_ar('website')}</td><td>{ONE_TIME}</td>
           </tr>
           <tr>
             <td>+ {DASH}<span class="mini">لوحة للسيولة والمخزون والطلبات المفتوحة</span></td>
-            <td class="n">+{price_ar('dashboard')}</td><td class="n">+{price_ar('dashboard', standard=True)}</td><td>{ONE_TIME}</td>
+            <td class="n">+{price_ar('dashboard')}</td><td>{ONE_TIME}</td>
           </tr>
           <tr>
             <td>+ {AUTO}<span class="mini">متابعة عروض الأسعار والفواتير، وفق جدول</span></td>
-            <td class="n">+{price_ar('autopilot')}</td><td class="n">+{price_ar('autopilot', standard=True)}</td><td>{ONE_TIME}</td>
+            <td class="n">+{price_ar('autopilot')}</td><td>{ONE_TIME}</td>
           </tr>
           <tr>
             <td><b>{STACK}</b><span class="mini">الأنظمة الثلاثة معاً</span></td>
-            <td class="n">{bundle_ar()}</td><td class="n">{bundle_ar(standard=True)}</td><td>{ONE_TIME}</td>
+            <td class="n">{bundle_ar()}</td><td>{ONE_TIME}</td>
           </tr>
           <tr>
             <td>{DESK}<span class="mini">رعاية شهرية اختيارية، وميزات جديدة، ومراجعة للتقارير. غير مطلوب أبداً لإبقاء أي شيء يعمل.</span></td>
-            <td class="n">{price_ar('desk')}/شهرياً</td><td class="n">{price_ar('desk', standard=True)}/شهرياً</td><td>اشتراك اختياري، يُلغى في أي وقت</td>
+            <td class="n">{price_ar('desk')}/شهرياً</td><td>اشتراك اختياري، يُلغى في أي وقت</td>
           </tr>
         </tbody>
       </table>
@@ -293,24 +293,6 @@ def _p2():
         <li>الأسعار أعلاه مبنية على كتالوج منتجات واحد وزوج لغات واحد. وأي شيء أكبر من ذلك فعلاً
           يُسعَّر على حدة، لا يُحشَر في باقة.</li>
       </ul>
-    </div>
-  </div>
-</section>
-
-<!-- ======================================================= BUILT TO ORDER -->
-<section class="s-panel">
-  <div class="wrap">
-    <p class="eyebrow"><span class="star">{STAR}</span> يُبنى حسب الطلب</p>
-    <h2 class="h2">والأشياء التي يحتاجها عملك أنت وحده.</h2>
-    <p class="lede">تُدرَس وتُسعَّر واحدة تلو الأخرى، وغالباً فوق نظام قائم بالفعل.</p>
-
-    <div class="ord" style="margin-top:clamp(26px,3.5vw,42px)" data-stagger>
-      <div><h4>تحرير المحتوى العربي</h4><p>إعادة صياغة صفحاتك الحالية بحيث يأخذك المشتري العربي على محمل الجدّ.</p></div>
-      <div><h4>ملف نشاطي التجاري على جوجل</h4><p>مُصحَّح، وموثَّق، ومثبَّت على الموقع الصحيح في الخريطة.</p></div>
-      <div><h4>أتمتة عروض الأسعار</h4><p>تجميع أسعار الجملة وإرسالها دون إعادة بنائها في كل مرة.</p></div>
-      <div><h4>تنبيهات المورّدين والمخزون</h4><p>تُخبَر قبل أن ينفد المخزون، لا بعد أن يسأل مشترٍ.</p></div>
-      <div><h4>تدريب الفريق</h4><p>ساعتان في مكتبك، حتى يستخدم الفريق فعلاً ما تم بناؤه.</p></div>
-      <div><h4>شيء آخر تماماً</h4><p>صِف نقطة الاختناق. وإن كنت لا أستطيع بناءها، سأقول ذلك.</p></div>
     </div>
   </div>
 </section>

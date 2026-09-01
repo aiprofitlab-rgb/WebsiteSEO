@@ -867,7 +867,7 @@ html:has(.paybar.up) #aiden-root{--bottom:96px!important}
 
 <header class="phero s-cream grain">
   <div class="wrap">
-    <p class="eyebrow"><span class="star">&#10038;</span> Checkout &#183; Founding Partner pricing, held for the first capped group.</p>
+    <p class="eyebrow"><span class="star">&#10038;</span> Checkout &#183; the published price, nothing added at the end</p>
     <h1 class="h1">Build it exactly<br>the way you need it.</h1>
     <p class="lede">Pick what you want built, choose how you want to pay for it, and the total on the
       right updates as you go. No hidden line appears at the end &mdash; what you see is the invoice.</p>
@@ -1156,7 +1156,7 @@ html:has(.paybar.up) #aiden-root{--bottom:96px!important}
   <button class="btn btn-teal" type="submit" form="coForm" id="barBtn">Reserve</button>
 </div>
 
-<script type="application/json" id="payCfg">{"currency":"OMR","baisa":1000,"founding":true,"live":false,"api":"","env":"uat","deposit":100000,"base":"website","items":[{"id":"website","kind":"build","name":"The Smart Website","required":true,"price":950000},{"id":"dashboard","kind":"build","name":"The Live Owner Dashboard","required":false,"price":650000},{"id":"autopilot","kind":"build","name":"The Full Autopilot","required":false,"price":900000},{"id":"desk","kind":"monthly","name":"The Growth Desk","required":false,"price":75000}],"bundle":{"id":"stack","name":"The Operator Stack","requires":["dashboard","autopilot"],"price":2200000,"saving":300000},"plans":[{"id":"deposit","label":"Reserve a build slot","card":true,"due":"deposit","surcharge":0,"split":1},{"id":"full","label":"Pay in full","card":true,"due":"total","surcharge":0,"split":1},{"id":"three","label":"Three payments","card":true,"due":"first","surcharge":70000,"split":3},{"id":"proof","label":"Pay on Proof","card":false,"due":"zero","surcharge":200000,"split":1}]}</script>
+<script type="application/json" id="payCfg">{"currency":"OMR","baisa":1000,"live":false,"api":"","env":"uat","deposit":100000,"base":"website","items":[{"id":"website","kind":"build","name":"The Smart Website","required":true,"price":950000},{"id":"dashboard","kind":"build","name":"The Live Owner Dashboard","required":false,"price":650000},{"id":"autopilot","kind":"build","name":"The Full Autopilot","required":false,"price":900000},{"id":"desk","kind":"monthly","name":"The Growth Desk","required":false,"price":75000}],"bundle":{"id":"stack","name":"The Operator Stack","requires":["dashboard","autopilot"],"price":2200000,"saving":300000},"plans":[{"id":"deposit","label":"Reserve a build slot","card":true,"due":"deposit","surcharge":0,"split":1},{"id":"full","label":"Pay in full","card":true,"due":"total","surcharge":0,"split":1},{"id":"three","label":"Three payments","card":true,"due":"first","surcharge":70000,"split":3},{"id":"proof","label":"Pay on Proof","card":false,"due":"zero","surcharge":200000,"split":1}]}</script>
 </main>
 <nav class="pager" aria-label="Next page">
   <div class="wrap"><a href="/en/contact/">
@@ -1639,7 +1639,6 @@ html:has(.paybar.up) #aiden-root{--bottom:96px!important}
       reference: reference(),
       items: selected(),
       plan: currentPlan(),
-      founding: CFG.founding,
       currency: CFG.currency,
       /* quoted_* is what the buyer was shown. The server recomputes and, if it
          disagrees, refuses the session rather than quietly charging its own
@@ -1790,6 +1789,6 @@ html:has(.paybar.up) #aiden-root{--bottom:96px!important}
   render();
 })();
 </script>
-    <script defer src="/js/aiden-chat.js?v=5312f568"></script>
+<script defer src="/js/aiden-chat.js?v=c8fb76b5"></script>
 </body>
 </html>

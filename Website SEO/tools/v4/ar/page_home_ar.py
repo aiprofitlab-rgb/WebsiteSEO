@@ -30,8 +30,7 @@ import re
 from kit import STAR, WA_ICON, url
 from page_home import CSS, _buzz, _hours_grid  # noqa: F401 - design is shared
 
-from ar_common import (AUTO, DASH, FOUNDER, PROMISE, ROLE, SITE, TEST, num,
-                       price_ar, wa)
+from ar_common import (AUTO, DASH, FOUNDER, PROMISE, ROLE, SITE, TEST, num, wa)
 
 __all__ = ["CSS", "body", "META"]
 
@@ -40,6 +39,18 @@ PROCESS = url("process", "ar")
 ABOUT = url("about", "ar")
 CONTACT = url("contact", "ar")
 DEMOS = url("demos", "ar")
+
+# The two proof tiles in S7 show screenshots of the stand-alone demo builds,
+# not of the /demos-ar/ tab panel. Both Arabic pages were deleted in the
+# 2026-08-27 v3 sweep and 301'd to /demos-ar/, which left each tile
+# advertising one build and opening another. Restored 2026-08-30 at their
+# original URLs. They are RTL pages in their own right, so the Arabic tiles
+# get the Arabic demos - not the English ones.
+#
+# The prose links elsewhere still point at {DEMOS}: that is the indexed hub,
+# and these two are noindex.
+DASH_DEMO = "/customized-ceo-dashboard-demo-ar/"
+WA_DEMO   = "/whatsapp-receptionist-demo-ar/"
 BLOG = "/blog-ar/"
 
 # --------------------------------------------------------------------------
@@ -186,15 +197,15 @@ def _stair_svg():
     the first step is where an Arabic reader starts."""
     return f"""<svg class="stair rv" viewBox="0 0 1000 400" role="img" aria-labelledby="stairT stairD">
       <title id="stairT">الأنظمة الثلاثة على هيئة درج</title>
-      <desc id="stairD">الدرجة الأولى، {SITE} بـ950 ريالاً عُمانياً، تجعل المشترين يصلون. وهذا يخلق
-        السؤال التالي الذي تجيب عنه الدرجة الثانية، {DASH} بزيادة 650 ريالاً. وهذا يخلق السؤال التالي
-        الذي تجيب عنه الدرجة الثالثة، {AUTO} بزيادة 900 ريال.</desc>
+      <desc id="stairD">الدرجة الأولى، {SITE}، تجعل المشترين يصلون. وهذا يخلق
+        السؤال التالي الذي تجيب عنه الدرجة الثانية، {DASH}. وهذا يخلق السؤال التالي
+        الذي تجيب عنه الدرجة الثالثة، {AUTO}.</desc>
 
       <g style="direction:ltr;text-anchor:end">
         <g class="step" style="--d:0s">
           <rect x="690" y="270" width="280" height="90" rx="12" fill="#0F6E56"/>
           <text x="946" y="310" fill="#F1EFE8" font-family="Markazi Text, serif" font-size="30">{SITE}</text>
-          <text x="946" y="340" fill="#BFE3D5" font-family="IBM Plex Mono, monospace" font-size="17">٠١ &#183; 950 ر.ع.</text>
+          <text x="946" y="340" fill="#BFE3D5" font-family="IBM Plex Mono, monospace" font-size="17">٠١</text>
         </g>
 
         <g class="anno" style="--d:.55s">
@@ -207,7 +218,7 @@ def _stair_svg():
           <rect x="370" y="190" width="280" height="170" rx="12" fill="#0A3D30"/>
           <text x="626" y="230" fill="#F1EFE8" font-family="Markazi Text, serif" font-size="30">لوحة متابعة</text>
           <text x="626" y="262" fill="#F1EFE8" font-family="Markazi Text, serif" font-size="30">المالك الحيّة</text>
-          <text x="626" y="290" fill="#BFE3D5" font-family="IBM Plex Mono, monospace" font-size="17">٠٢ &#183; +650 ر.ع.</text>
+          <text x="626" y="290" fill="#BFE3D5" font-family="IBM Plex Mono, monospace" font-size="17">٠٢</text>
         </g>
 
         <g class="anno" style="--d:.75s">
@@ -219,7 +230,7 @@ def _stair_svg():
         <g class="step" style="--d:.36s">
           <rect x="30" y="110" width="300" height="250" rx="12" fill="#072B22"/>
           <text x="306" y="150" fill="#F1EFE8" font-family="Markazi Text, serif" font-size="30">{AUTO}</text>
-          <text x="306" y="180" fill="#BFE3D5" font-family="IBM Plex Mono, monospace" font-size="17">٠٣ &#183; +900 ر.ع.</text>
+          <text x="306" y="180" fill="#BFE3D5" font-family="IBM Plex Mono, monospace" font-size="17">٠٣</text>
         </g>
       </g>
 
@@ -335,26 +346,10 @@ def body():
         </div>
       </div>
 
-      <div class="panelcard rv" style="--d:.12s">
+      <div class="panelcard result rv" style="--d:.12s">
         <span class="bignum-cap">إيراد يمشي بعيداً، شهرياً</span>
         <span class="bignum" id="leakNum" dir="ltr">1,559 ر.ع.</span>
 
-        <!-- Two bars, one scale: the monthly leak against the one-time cost of
-             fixing it. The comparison is the whole argument. Mirrored for RTL -
-             both bars are anchored to the right edge and grow leftwards. -->
-        <svg id="bars" viewBox="0 0 420 132" role="img" style="width:100%;height:auto;margin-top:26px;direction:ltr" aria-labelledby="barsTitle">
-          <title id="barsTitle">الإيراد المفقود شهرياً بسبب الصمت، مقارنةً بالتكلفة المرة الواحدة للموقع الذكي</title>
-          <text x="420" y="14" fill="#A8BCB1" font-family="IBM Plex Sans Arabic, sans-serif" font-size="15" text-anchor="end">يُفقَد كل شهر</text>
-          <rect x="0" y="22" width="420" height="26" rx="5" fill="rgba(241,239,232,.10)"/>
-          <rect id="barLeak" x="0" y="22" width="420" height="26" rx="5" fill="#D89234"/>
-          <text id="barLeakT" x="10" y="40" fill="#072B22" font-family="IBM Plex Mono, monospace" font-size="15" font-weight="500" text-anchor="start">1,559 ر.ع.</text>
-          <text x="420" y="82" fill="#A8BCB1" font-family="IBM Plex Sans Arabic, sans-serif" font-size="15" text-anchor="end">الموقع الذكي، مرة واحدة</text>
-          <rect x="0" y="90" width="420" height="26" rx="5" fill="rgba(241,239,232,.10)"/>
-          <rect id="barCost" x="164" y="90" width="256" height="26" rx="5" fill="#1FAF5E"/>
-          <text x="410" y="108" fill="#072B22" font-family="IBM Plex Mono, monospace" font-size="15" font-weight="500" text-anchor="end">950 ر.ع.</text>
-        </svg>
-
-        <p class="payback">بهذا المعدل يسدّد تكلفته خلال <b id="days" dir="ltr">19 يوماً</b>.</p>
         <p class="assume">استفسارات ما بعد الدوام شهرياً &times; نسبة كسبك &times; متوسط طلبك.
           يُظهر ما هو <em>على المحكّ</em> في تلك الرسائل &mdash; لا وعداً باستعادته.</p>
       </div>
@@ -436,21 +431,21 @@ def body():
         <span class="n">٠١</span>
         <h3>{SITE}</h3>
         <p>يردّ على المشترين بالعربية والإنجليزية، ويسجّل من هم، ويحوّل الأحياء منهم إلى واتساب الخاص بك.</p>
-        <span class="tag">دفعة واحدة &#183; <b>{price_ar('website')}</b></span>
+        <span class="tag">دفعة واحدة</span>
         <a class="tlink" href="{SVC}#smart-website">شاهد ما بداخله <span class="arw">&larr;</span></a>
       </article>
       <article class="card sys-card">
         <span class="n">٠٢</span>
         <h3>{DASH}</h3>
         <p>السيولة والمخزون والطلبات المفتوحة على شاشة واحدة &mdash; دون الاتصال بثلاثة أشخاص لتجميعها.</p>
-        <span class="tag">إضافة &#183; <b>+{price_ar('dashboard')}</b></span>
+        <span class="tag">إضافة</span>
         <a class="tlink" href="{DEMOS}#dash">افتح التجربة الحيّة <span class="arw">&larr;</span></a>
       </article>
       <article class="card sys-card">
         <span class="n">٠٣</span>
         <h3>{AUTO}</h3>
         <p>لا بدّ لشيء أن يطارد عروض الأسعار والفواتير. هذا يفعلها، وفق جدول، دون أن يُذكَّر.</p>
-        <span class="tag">إضافة &#183; <b>+{price_ar('autopilot')}</b></span>
+        <span class="tag">إضافة</span>
         <a class="tlink" href="{SVC}#autopilot">شاهد ما بداخله <span class="arw">&larr;</span></a>
       </article>
     </div>
@@ -466,7 +461,7 @@ def body():
       مدح من شخص لم تقابله قط.</p>
 
     <div class="tiles" style="margin-top:clamp(28px,4vw,48px)" data-stagger>
-      <a class="tile" href="{DEMOS}#dash">
+      <a class="tile" href="{DASH_DEMO}">
         <span class="live"><i></i>تجربة حيّة</span>
         <span class="shot"><img src="/assets/v4/demo-dashboard-960.webp" alt="تجربة لوحة متابعة المدير: بطاقات الإيراد والربح الإجمالي والهامش فوق قائمة إجراءات مرتّبة." width="960" height="600" loading="lazy" decoding="async"></span>
         <span class="cap">
@@ -476,7 +471,7 @@ def body():
         </span>
       </a>
 
-      <a class="tile" href="{DEMOS}">
+      <a class="tile" href="{WA_DEMO}">
         <span class="live"><i></i>تجربة حيّة</span>
         <span class="shot"><img src="/assets/v4/demo-whatsapp-960.webp" alt="تجربة موظف استقبال واتساب: قائمة الطلبات بجانب محادثة كاملة مع مشترٍ يديرها الوكيل الذكي." width="960" height="600" loading="lazy" decoding="async"></span>
         <span class="cap">
@@ -518,7 +513,7 @@ def body():
 
       <div class="hcard win">
         <h3>{SITE}</h3>
-        <p class="sub">{price_ar('website')}، مرة واحدة</p>
+        <p class="sub">تُدفع مرة واحدة، لا كل شهر</p>
         <p class="hlegend">الصفوف: الأحد &#8592; السبت &#183; الأعمدة: {num('00:00')} &#8592; {num('23:00')}</p>
         {always}
         <span class="hcount"><span data-count="168">168</span> من {num('168')} ساعة</span>

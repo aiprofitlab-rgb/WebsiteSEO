@@ -110,12 +110,80 @@ CSS = """
 /* --------------------------------------------------------------- method */
 .method{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,2vw,24px)}
 .method .card p{font-size:.97rem}
-.fixes .tblwrap{border:1px solid var(--line);border-radius:14px;overflow-x:auto;background:var(--white)}
+/* ----------------------------------------------------------- price table
+   This table shipped with no rules of its own until now. `.tbl` is styled in
+   article_kit.py, which only loads on an article page, so what rendered here
+   was the browser default: centred bold headings, no cell padding, and a
+   service name three-quarters the width of a 780px column wrapping against
+   its own figure. It is rebuilt below as a component of this page.
+
+   Two decisions do most of the work. The name and its explanation are
+   separate elements rather than one "Name - what it does" sentence, so the
+   four products scan down the left edge in one pass. And the figure columns
+   are a fixed width in tabular mono, so OMR 950, +OMR 650 and OMR 0 line up
+   on their digits instead of drifting with the text beside them. */
+.fixes .tblwrap{border:1px solid var(--line);border-radius:16px;overflow:hidden;background:var(--white)}
+.fixes .tbl{width:100%;border-collapse:collapse;table-layout:fixed}
+.fixes .tbl thead th{
+  font-family:var(--mono);font-size:.64rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--muted);white-space:nowrap;text-align:start;
+  padding:14px 20px;background:var(--panel);border-bottom:1px solid var(--line);
+}
+/* Widths are set from the headings, not the figures: "REQUIRED MONTHLY" in
+   tracked mono is the widest thing either figure column ever holds, and a
+   heading that outgrows its column escapes the rounded corner. */
+.fixes .tbl thead th+th{width:142px;text-align:end}
+.fixes .tbl thead th+th+th{width:172px}
+.fixes .tbl tbody th{font-weight:400;text-align:start}
+.fixes .tbl tbody th,.fixes .tbl td{padding:17px 20px;border-top:1px solid var(--line);vertical-align:top}
+.fixes .tbl tbody tr:first-child th,.fixes .tbl tbody tr:first-child td{border-top:0}
+.fixes .tbl tbody th b{display:block;font-weight:600;font-size:1rem;line-height:1.35;color:var(--ink)}
+.fixes .tbl tbody th span{
+  display:block;margin-top:4px;font-size:.85rem;line-height:1.55;color:var(--muted);text-wrap:pretty;
+}
+.fixes .tbl td.n{
+  font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap;
+  font-size:.92rem;line-height:1.35;font-weight:500;color:var(--teal-900);text-align:end;
+}
+/* OMR 0 and the em-dash are the answer "nothing", not a price. They stay in
+   the table because three zeroes in a column IS the claim, but they are set
+   back so the eye lands on the figures that are real. */
+.fixes .tbl td.nil{color:var(--muted);font-weight:400}
+.fixes .plus{color:var(--amber-text);font-style:normal}
+/* On the row, not the cells: it has to paint behind the padding once the
+   row is a block card on a phone. */
+.fixes .tbl tbody tr:hover{background:var(--panel)}
+.fixes .tblnote{
+  margin:14px 0 0;font-size:.83rem;line-height:1.6;color:var(--muted);
+  padding-inline-start:14px;border-inline-start:2px solid var(--amber);
+}
 
 @media (max-width:980px){
   .simgrid{grid-template-columns:minmax(0,1fr)}
   .figs{grid-template-columns:repeat(3,1fr)}
   .method{grid-template-columns:1fr}
+}
+/* Three columns stop fitting well before the phone breakpoint: at 720px the
+   two 150px figure columns leave the name under 300px. Below that each row
+   becomes its own card, and the figures carry the column heading they lost as
+   generated content - the <thead> stays in the accessibility tree. */
+@media (max-width:720px){
+  .fixes .tbl,.fixes .tbl tbody,.fixes .tbl tr,.fixes .tbl tbody th,.fixes .tbl td{display:block}
+  .fixes .tbl thead{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+  .fixes .tbl tr{padding:16px 18px;border-top:1px solid var(--line)}
+  .fixes .tbl tbody tr:first-child{border-top:0}
+  .fixes .tbl tbody th,.fixes .tbl td{padding:0;border-top:0}
+  /* The heading and the figure are the two flex items, which is why the
+     figure carries a wrapper of its own: without it the `+` sign is a third
+     item and space-between strands it in the middle of the row. */
+  .fixes .tbl td.n{
+    display:flex;justify-content:space-between;align-items:baseline;gap:16px;
+    margin-top:9px;text-align:end;font-size:.88rem;
+  }
+  .fixes .tbl td.n::before{
+    content:attr(data-l);font-family:var(--mono);font-size:.64rem;font-weight:400;
+    letter-spacing:.11em;text-transform:uppercase;color:var(--muted);
+  }
 }
 @media (max-width:640px){
   .figs{grid-template-columns:1fr}
@@ -590,19 +658,39 @@ def body():
     <p class="lede">No quote-on-request, no discovery call before you are told a number.</p>
     <div class="tblwrap" style="margin-top:clamp(24px,3vw,34px)">
       <table class="tbl">
-        <thead><tr><th>What it is</th><th>One-time</th><th>Required monthly</th></tr></thead>
+        <thead><tr>
+          <th scope="col">What it is</th><th scope="col">One-time</th><th scope="col">Required monthly</th>
+        </tr></thead>
         <tbody>
-          <tr><td>The Smart Website &mdash; a site with a buyer agent that answers in Arabic and English</td>
-              <td class="n">OMR {SMART_SITE}</td><td class="n">OMR 0</td></tr>
-          <tr><td>The Live Owner Dashboard &mdash; cash, margin, stock and open leads on one screen</td>
-              <td class="n">+OMR 650</td><td class="n">OMR 0</td></tr>
-          <tr><td>The Full Autopilot &mdash; quote and invoice follow-up that stops when the buyer replies</td>
-              <td class="n">+OMR {AUTOPILOT}</td><td class="n">OMR 0</td></tr>
-          <tr><td>Care &mdash; optional, cancellable, never required to keep the system running</td>
-              <td class="n">&mdash;</td><td class="n">OMR 75/mo</td></tr>
+          <tr>
+            <th scope="row"><b>The Smart Website</b>
+              <span>A site with a buyer agent that answers in Arabic and English</span></th>
+            <td class="n" data-l="One-time"><span class="v">OMR {SMART_SITE}</span></td>
+            <td class="n nil" data-l="Required monthly"><span class="v">OMR 0</span></td>
+          </tr>
+          <tr>
+            <th scope="row"><b>The Live Owner Dashboard</b>
+              <span>Cash, margin, stock and open leads on one screen</span></th>
+            <td class="n" data-l="One-time"><span class="v"><i class="plus">+</i>OMR 650</span></td>
+            <td class="n nil" data-l="Required monthly"><span class="v">OMR 0</span></td>
+          </tr>
+          <tr>
+            <th scope="row"><b>The Full Autopilot</b>
+              <span>Quote and invoice follow-up that stops when the buyer replies</span></th>
+            <td class="n" data-l="One-time"><span class="v"><i class="plus">+</i>OMR {AUTOPILOT}</span></td>
+            <td class="n nil" data-l="Required monthly"><span class="v">OMR 0</span></td>
+          </tr>
+          <tr>
+            <th scope="row"><b>Care</b>
+              <span>Optional, cancellable, never required to keep the system running</span></th>
+            <td class="n nil" data-l="One-time"><span class="v">&mdash;</span></td>
+            <td class="n" data-l="Required monthly"><span class="v">OMR 75/mo</span></td>
+          </tr>
         </tbody>
       </table>
     </div>
+    <p class="tblnote">A price marked <i class="plus">+</i> is added to the Smart Website, not charged
+      instead of it. Care is the only monthly line here, and cancelling it switches nothing off.</p>
     <div class="btn-row" style="margin-top:26px">
       <a class="btn btn-teal" href="/en/services/#price">The full price page</a>
       <a class="btn btn-ghost" href="/en/demos/">Watch it answer a buyer</a>

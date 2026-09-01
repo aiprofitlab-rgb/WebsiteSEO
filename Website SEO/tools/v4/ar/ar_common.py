@@ -33,7 +33,6 @@ STACK = "حزمة المشغّل"
 DESK = "مكتب النمو"
 TEST = "اختبار المشتري الصامت"
 PROMISE = "وعد أول استفسار"
-FOUNDING = "الشريك المؤسِّس"
 
 PLAN_PROOF = "ادفع عند الإثبات"
 PLAN_FULL = "ادفع عند البدء"
@@ -75,15 +74,13 @@ def num(s):
 import pay  # noqa: E402
 
 
-def price_ar(item_id, standard=False):
-    """The formatted founding (default) or standard price of a catalog item."""
-    it = pay.item(item_id)
-    return pay.money_ar(it["standard"] if standard else pay.price(it))
+def price_ar(item_id):
+    """The formatted published price of a catalog item."""
+    return pay.money_ar(pay.price(pay.item(item_id)))
 
 
-def bundle_ar(standard=False):
-    b = pay.BUNDLE
-    return pay.money_ar(b["standard"] if standard else pay.price(b))
+def bundle_ar():
+    return pay.money_ar(pay.price(pay.BUNDLE))
 
 
 def plan_total_ar(plan_id):

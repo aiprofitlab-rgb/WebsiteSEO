@@ -38,8 +38,8 @@ const META_MAX_KEYS = 10;
 const META_MAX_VALUE = 100;
 
 // Amount ceilings, VERIFIED against UAT 2026-08-24 by asking the API to refuse.
-// Both sit far above anything we sell (the dearest order is the standard-column
-// Operator Stack at OMR 3,400), which is what finally answers the open question
+// Both sit far above anything we sell (the dearest order is the Operator Stack
+// at OMR 2,200), which is what finally answers the open question
 // in docs/payments-api.md about per-transaction limits.
 //
 //   checkout session : "The field UnitAmount must be between 1 and 5000000"
@@ -109,7 +109,7 @@ function phone(raw) {
  * typed into a form, it can carry anything, and Thawani is a payment processor,
  * not our CRM — it goes to the ledger, which is where we read it.
  */
-function metadata({ reference, customer, quote, items, priceColumn }) {
+function metadata({ reference, customer, quote, items }) {
   const pairs = [
     ["order_id", reference],
     ["customer_name", customer.name],
@@ -120,7 +120,7 @@ function metadata({ reference, customer, quote, items, priceColumn }) {
     ["customer_city", customer.city],
     ["plan", quote.plan.id],
     ["items", items.join(",")],
-    ["order_amount", `${quote.due} of ${quote.total} baisa (${priceColumn})`],
+    ["order_amount", `${quote.due} of ${quote.total} baisa`],
   ];
 
   const out = {};

@@ -18,7 +18,7 @@ import page_checkout
 from kit import STAR, WA, WA_ICON, url
 from page_checkout import BACK, CSS, DOC, LOCK, SHIELD  # noqa: F401 - design is shared
 
-from ar_common import FOUNDING, PROMISE, TEST, num, wa
+from ar_common import PROMISE, TEST, num, wa
 
 __all__ = ["CSS", "JS", "body", "META"]
 
@@ -105,14 +105,11 @@ def body():
         envbar = ('<div class="envbar">وضع اختباري &mdash; المدفوعات تعمل على بيئة ثواني التجريبية. '
                   'لا تتحرك أموال حقيقية.</div>')
 
-    founding_note = (f"سعر {FOUNDING}، محجوز للمجموعة الأولى المحدودة."
-                     if pay.FOUNDING_OPEN else "السعر القياسي.")
-
     return f"""<main id="main">
 {envbar}
 <header class="phero s-cream grain">
   <div class="wrap">
-    <p class="eyebrow"><span class="star">{STAR}</span> الطلب &#183; {founding_note}</p>
+    <p class="eyebrow"><span class="star">{STAR}</span> الطلب &#183; السعر المنشور، ولا شيء يُضاف في النهاية</p>
     <h1 class="h1">ابنِه تماماً<br>بالشكل الذي تحتاجه.</h1>
     <p class="lede">اختر ما تريد بناءه، وحدّد كيف تريد الدفع، والإجمالي على اليسار يتحدّث معك خطوة بخطوة.
       ولن يظهر بند مخفي في النهاية &mdash; ما تراه هو الفاتورة.</p>

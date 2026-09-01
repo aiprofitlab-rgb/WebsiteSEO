@@ -55,6 +55,23 @@ function rateLimit({ windowMs, max, bucket }) {
 const db = store.open();
 const rules = rulesLib.load();
 
+/**
+ * The loop breaker's ceiling. Not a rate limit on followers — a bound on us.
+ * Whatever starts a loop, this is what makes it stop at a dozen replies under one
+ * post rather than a hundred, and it is what wakes someone up when it does.
+ */
+const cap = (raw, fallback) => {
+  const n = Number(raw);
+  // A typo must not silently disable the guard, and 0 must survive as 0 — it is
+  // the mute switch: every keyword comment is dropped and reported.
+  return Number.isFinite(n) && n >= 0 ? n : fallback;
+};
+const limits = {
+  perMediaPerHour: cap(process.env.IG_MAX_REPLIES_PER_MEDIA_PER_HOUR, handler.DEFAULT_LIMITS.perMediaPerHour),
+  perAccountPerHour: cap(process.env.IG_MAX_REPLIES_PER_HOUR, handler.DEFAULT_LIMITS.perAccountPerHour),
+  windowMs: handler.DEFAULT_LIMITS.windowMs,
+};
+
 // Learned from the token on boot, so we can recognise and ignore our own
 // comments. IG_USER_ID short-circuits the lookup when it is already known.
 let selfId = process.env.IG_USER_ID || "";
@@ -73,8 +90,12 @@ const deps = {
   rules,
   alert,
   handleEvent: handler.handleEvent,
+  limits,
   get selfId() {
     return selfId;
+  },
+  get selfUsername() {
+    return selfUsername;
   },
 };
 
@@ -89,6 +110,10 @@ app.get("/health", (req, res) => {
     // Fails loudly in the health check rather than at the first real comment.
     webhook: { verifyToken: Boolean(process.env.IG_VERIFY_TOKEN), appSecret: Boolean(process.env.META_APP_SECRET) },
     rules: { count: (rules.rules || []).length, ids: (rules.rules || []).map((r) => r.id) },
+    // The loop guards, visible without reading the source. `selfLoop: "config"`
+    // means we are recognising our own replies by their text, which works even
+    // when the id checks do not.
+    loopGuard: { selfId: Boolean(selfId), selfUsername: Boolean(selfUsername), selfLoop: "config", limits },
     ledger: ledger.enabled() ? "sheet" : "logs",
     store: db.stats(),
   });
@@ -114,10 +139,13 @@ async function resolveSelf() {
     selfUsername = me.username || "";
     console.log(`account resolved: @${selfUsername} (${selfId})`);
   } catch (err) {
-    // Not fatal. Without it we cannot recognise our own comments, so the public
-    // reply is suppressed rather than risk an answer-itself loop.
+    // Not fatal, and no longer dangerous. Recognising our own comments does not
+    // depend on this lookup: entry.id in the payload is the account the webhook
+    // was raised for, and any comment whose text is one of our own publicReply
+    // strings is dropped on sight. Set IG_USER_ID anyway — it is one more way to
+    // be sure, and it saves this call on every boot.
     console.error("!! COULD NOT RESOLVE OWN IG ID:", err && err.message);
-    console.error("!! public replies will still post, but set IG_USER_ID to be safe");
+    console.error("!! the loop guards still hold (entry.id + reply-text match); set IG_USER_ID to remove the doubt");
   }
 }
 
@@ -127,6 +155,9 @@ if (require.main === module) {
 
     if (!process.env.META_APP_SECRET) console.error("!! META_APP_SECRET is not set — every webhook POST will be rejected");
     if (!process.env.IG_VERIFY_TOKEN) console.error("!! IG_VERIFY_TOKEN is not set — the Meta handshake will fail");
+
+    const ruleProblems = rulesLib.validate(rules);
+    if (ruleProblems.length) console.error(`!! ${ruleProblems.length} RULES PROBLEM(S) — see above. A "reply loop" line means the account will answer itself.`);
 
     tokens.seed();
     const left = tokens.daysLeft();

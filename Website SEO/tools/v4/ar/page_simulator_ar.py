@@ -174,19 +174,39 @@ def body():
     <p class="lede">لا &laquo;السعر عند الطلب&raquo;، ولا مكالمة استكشاف قبل أن تُخبَر برقم.</p>
     <div class="tblwrap" style="margin-top:clamp(24px,3vw,34px)">
       <table class="tbl">
-        <thead><tr><th>ما هو</th><th>دفعة واحدة</th><th>المطلوب شهرياً</th></tr></thead>
+        <thead><tr>
+          <th scope="col">ما هو</th><th scope="col">دفعة واحدة</th><th scope="col">المطلوب شهرياً</th>
+        </tr></thead>
         <tbody>
-          <tr><td>{SITE} &mdash; موقع بداخله وكيل يردّ على المشترين بالعربية والإنجليزية</td>
-              <td class="n">{price_ar('website')}</td><td class="n">{num('0')} ر.ع.</td></tr>
-          <tr><td>{DASH} &mdash; السيولة والهامش والمخزون والطلبات المفتوحة على شاشة واحدة</td>
-              <td class="n">+{price_ar('dashboard')}</td><td class="n">{num('0')} ر.ع.</td></tr>
-          <tr><td>{AUTO} &mdash; متابعة عروض الأسعار والفواتير تتوقف فور أن يردّ المشتري</td>
-              <td class="n">+{price_ar('autopilot')}</td><td class="n">{num('0')} ر.ع.</td></tr>
-          <tr><td>{DESK} &mdash; اختياري، يُلغى في أي وقت، وغير مطلوب أبداً لإبقاء النظام يعمل</td>
-              <td class="n">&mdash;</td><td class="n">{price_ar('desk')}/شهرياً</td></tr>
+          <tr>
+            <th scope="row"><b>{SITE}</b>
+              <span>موقع بداخله وكيل يردّ على المشترين بالعربية والإنجليزية</span></th>
+            <td class="n" data-l="دفعة واحدة"><span class="v">{price_ar('website')}</span></td>
+            <td class="n nil" data-l="المطلوب شهرياً"><span class="v">{num('0')} ر.ع.</span></td>
+          </tr>
+          <tr>
+            <th scope="row"><b>{DASH}</b>
+              <span>السيولة والهامش والمخزون والطلبات المفتوحة على شاشة واحدة</span></th>
+            <td class="n" data-l="دفعة واحدة"><span class="v"><i class="plus">+</i>{price_ar('dashboard')}</span></td>
+            <td class="n nil" data-l="المطلوب شهرياً"><span class="v">{num('0')} ر.ع.</span></td>
+          </tr>
+          <tr>
+            <th scope="row"><b>{AUTO}</b>
+              <span>متابعة عروض الأسعار والفواتير تتوقف فور أن يردّ المشتري</span></th>
+            <td class="n" data-l="دفعة واحدة"><span class="v"><i class="plus">+</i>{price_ar('autopilot')}</span></td>
+            <td class="n nil" data-l="المطلوب شهرياً"><span class="v">{num('0')} ر.ع.</span></td>
+          </tr>
+          <tr>
+            <th scope="row"><b>{DESK}</b>
+              <span>اختياري، يُلغى في أي وقت، وغير مطلوب أبداً لإبقاء النظام يعمل</span></th>
+            <td class="n nil" data-l="دفعة واحدة"><span class="v">&mdash;</span></td>
+            <td class="n" data-l="المطلوب شهرياً"><span class="v">{price_ar('desk')}/شهرياً</span></td>
+          </tr>
         </tbody>
       </table>
     </div>
+    <p class="tblnote">السعر المسبوق بعلامة <i class="plus">+</i> يُضاف إلى {SITE} ولا يحلّ محلّه. و{DESK}
+      هو البند الشهري الوحيد هنا، وإلغاؤه لا يوقف شيئاً.</p>
     <div class="btn-row" style="margin-top:26px">
       <a class="btn btn-teal" href="{SVC}#price">صفحة الأسعار كاملة</a>
       <a class="btn btn-ghost" href="{DEMOS}">شاهده يردّ على مشترٍ</a>

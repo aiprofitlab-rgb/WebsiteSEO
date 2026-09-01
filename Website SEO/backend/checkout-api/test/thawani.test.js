@@ -24,7 +24,6 @@ function meta(items = ["website", "dashboard", "autopilot"], plan = "deposit") {
     customer,
     quote: q,
     items: q.items.map((i) => i.id),
-    priceColumn: "founding",
   });
 }
 
@@ -38,7 +37,7 @@ test("customer metadata carries what a human needs to recognise the order", () =
   assert.equal(m.customer_city, "Muscat");
   assert.equal(m.plan, "deposit");
   assert.equal(m.items, "website,dashboard,autopilot");
-  assert.equal(m.order_amount, "100000 of 2200000 baisa (founding)");
+  assert.equal(m.order_amount, "100000 of 2200000 baisa");
 });
 
 test("the phone number is sent in the shape Thawani's own example uses", () => {
@@ -86,7 +85,6 @@ test("absent optional details are dropped, not sent as empty strings", () => {
     customer: { name: "A", business: "B", email: "a@b.om", whatsapp: "91234567", cr: "", city: "", notes: "" },
     quote: q,
     items: ["website"],
-    priceColumn: "founding",
   });
   assert.ok(!("customer_cr" in m));
   assert.ok(!("customer_city" in m));

@@ -84,7 +84,7 @@ is silently left off the page if you do not.
   "terms":     "Due within 7 days", // defaults to "Due on receipt" when unpaid
 
   "items": [
-    { "title": "The Smart Website — Founding Partner",
+    { "title": "The Smart Website",
       "note":  "Optional line of small print under the title.",
       "amount": 950 },
 
@@ -92,7 +92,7 @@ is silently left off the page if you do not.
       "qty": 3, "unit": 75 }        // columns appear only if some line uses them
   ],
 
-  "discount":    { "label": "Founding Partner — group 1", "amount": 150 },
+  "discount":    { "label": "Agreed discount",            "amount": 150 },
   "already_paid":{ "label": "Deposit paid 12 Aug 2026",   "amount": 100 },
 
   "paid": {                        // present = this document is a receipt

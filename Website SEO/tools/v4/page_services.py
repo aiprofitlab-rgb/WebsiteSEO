@@ -3,8 +3,8 @@
 
 Every system gets a *picture of itself* rather than a paragraph describing
 itself: a phone thread, a dashboard, a follow-up schedule. Prices are published
-in full - the whole ladder, founding and standard side by side - because the
-page's argument is that you should not need a sales call to learn a number.
+in full - the whole ladder, one price per rung - because the page's argument
+is that you should not need a sales call to learn a number.
 Figures are the ones already published on en/index-v3.html.
 """
 import pay
@@ -120,20 +120,13 @@ table.t .mini{display:block;font-size:.86rem;color:var(--muted);margin-top:5px;l
 }
 .nolog li::after{content:"";position:absolute;left:4px;top:1.06em;width:8px;height:1.5px;background:var(--alert)}
 
-/* --------------------------------------------------------- order grid */
-.ord{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,1.8vw,22px)}
-.ord div{background:var(--white);border:1px solid var(--line);border-radius:14px;padding:22px 24px;transition:border-color .3s,transform .3s var(--ease)}
-.ord div:hover{border-color:var(--amber-pale);transform:translateY(-3px)}
-.ord h4{font-family:var(--display);font-size:1.2rem;color:var(--teal-950);margin:0 0 7px;font-weight:400}
-.ord p{margin:0;font-size:.94rem;color:var(--muted)}
-
 @media (max-width:900px){
   .stats{grid-template-columns:repeat(2,1fr)}
   .stats div:nth-child(2){border-right:0}
   .stats div:nth-child(1),.stats div:nth-child(2){border-bottom:1px solid var(--line)}
   .sysblock{grid-template-columns:1fr}
   .sysblock.flip .art{order:0}
-  .pay-grid,.ord{grid-template-columns:1fr}
+  .pay-grid{grid-template-columns:1fr}
 }
 """
 
@@ -178,7 +171,7 @@ def body():
           <li>Found by Google <em>and</em> by ChatGPT</li>
           <li>A year of hosting, security and care included</li>
         </ul>
-        <div class="pricetag"><b>OMR 950</b><span>One-time &#183; founding price</span></div>
+        <div class="pricetag"><b>OMR 950</b><span>One-time</span></div>
         <a class="btn btn-wa" href="{WA}&text=Hello%20Nahid%2C%20I%20want%20to%20ask%20about%20the%20Smart%20Website.">{WA_ICON}Ask about a build slot</a>
       </div>
       <div class="art rv">
@@ -292,39 +285,39 @@ def body():
   <div class="wrap">
     <p class="eyebrow"><span class="star">{STAR}</span> The whole price list</p>
     <h2 class="h2">Every number, on the page, before you talk to me.</h2>
-    <p class="lede">Founding Partner pricing applies to the first capped group only. The standard column is
-      what gets published once that group closes.</p>
+    <p class="lede">One price per rung, all of it below. No tiers to decode, and nothing that only
+      appears once you are on a call.</p>
 
     <div class="tablewrap rv" style="margin-top:clamp(26px,3.5vw,44px)">
       <table class="t">
         <caption>Every rung, and what each one adds</caption>
         <thead>
-          <tr><th scope="col">What you get</th><th scope="col" class="n">Founding Partner</th><th scope="col" class="n">Standard</th><th scope="col">Billing</th></tr>
+          <tr><th scope="col">What you get</th><th scope="col" class="n">Price</th><th scope="col">Billing</th></tr>
         </thead>
         <tbody>
           <tr>
             <td><b>Silent Buyer Test</b><span class="mini">I message your business as a buyer would, and send you the scorecard</span></td>
-            <td class="n">Free</td><td class="n">Free</td><td>&mdash;</td>
+            <td class="n">Free</td><td>&mdash;</td>
           </tr>
           <tr class="hi">
             <td><b>The Smart Website</b><span class="mini">Bilingual site, AI buyer agent, wholesale quote flow, WhatsApp handoff, AI-search visibility, 1 year hosting &amp; care</span></td>
-            <td class="n">OMR 950</td><td class="n">OMR 1,450</td><td>One-time</td>
+            <td class="n">OMR 950</td><td>One-time</td>
           </tr>
           <tr>
             <td>+ The Live Owner Dashboard<span class="mini">Cash, stock and open-lead dashboard</span></td>
-            <td class="n">+OMR 650</td><td class="n">+OMR 950</td><td>One-time</td>
+            <td class="n">+OMR 650</td><td>One-time</td>
           </tr>
           <tr>
             <td>+ The Full Autopilot<span class="mini">Quote and invoice follow-up, on schedule</span></td>
-            <td class="n">+OMR 900</td><td class="n">+OMR 1,300</td><td>One-time</td>
+            <td class="n">+OMR 900</td><td>One-time</td>
           </tr>
           <tr>
             <td><b>The Operator Stack</b><span class="mini">All three together</span></td>
-            <td class="n">OMR 2,200</td><td class="n">OMR 3,400</td><td>One-time</td>
+            <td class="n">OMR 2,200</td><td>One-time</td>
           </tr>
           <tr>
             <td>The Growth Desk<span class="mini">Optional monthly care, new features, reporting review. Never required to keep anything working.</span></td>
-            <td class="n">OMR 75/mo</td><td class="n">OMR 95/mo</td><td>Opt-in, cancel anytime</td>
+            <td class="n">OMR 75/mo</td><td>Opt-in, cancel anytime</td>
           </tr>
         </tbody>
       </table>
@@ -384,24 +377,6 @@ def body():
         <li>Prices above assume one product catalogue and one language pair. Something genuinely bigger gets
           quoted, not squeezed into a package.</li>
       </ul>
-    </div>
-  </div>
-</section>
-
-<!-- ======================================================= BUILT TO ORDER -->
-<section class="s-panel">
-  <div class="wrap">
-    <p class="eyebrow"><span class="star">{STAR}</span> Built to order</p>
-    <h2 class="h2">And the things that only your business needs.</h2>
-    <p class="lede">Scoped and quoted one at a time, usually on top of a system that already exists.</p>
-
-    <div class="ord" style="margin-top:clamp(26px,3.5vw,42px)" data-stagger>
-      <div><h4>Arabic content pass</h4><p>Your existing pages rewritten so an Arabic-first buyer takes you seriously.</p></div>
-      <div><h4>Google Business Profile</h4><p>Fixed, verified, and pinned to the right place on the map.</p></div>
-      <div><h4>Quote-sheet automation</h4><p>Bulk pricing assembled and sent without rebuilding it each time.</p></div>
-      <div><h4>Supplier &amp; stock alerts</h4><p>Told before you run out, not after a buyer asks.</p></div>
-      <div><h4>Staff training</h4><p>Two hours, in your office, so the team actually uses what was built.</p></div>
-      <div><h4>Something else entirely</h4><p>Describe the bottleneck. If I can&#8217;t build it, I will say so.</p></div>
     </div>
   </div>
 </section>

@@ -28,7 +28,7 @@ Amount limits, found by asking the API to refuse:
 - **Payment intent**: `amount` between **100 and 9,999,000 baisa** (OMR 0.100–9,999).
 
 Both sit far above anything we sell. The dearest thing in the catalog is the
-standard-column Operator Stack at OMR 3,400. **This closes the open
+Operator Stack at OMR 2,200. **This closes the open
 "per-transaction ceiling" question in `docs/payments-api.md`.**
 
 A payment intent **expires 30 minutes** after creation, so it must be created

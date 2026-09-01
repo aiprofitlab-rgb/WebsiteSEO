@@ -143,13 +143,10 @@ router.post("/", async (req, res) => {
 
   const quotedDue = Number(body.quoted_due);
   const quotedTotal = Number(body.quoted_total);
-  const columnAgrees = body.founding === undefined || Boolean(body.founding) === Boolean(pricing.CATALOG.founding);
-
-  if (quotedDue !== q.due || quotedTotal !== q.total || !columnAgrees) {
+  if (quotedDue !== q.due || quotedTotal !== q.total) {
     console.error(
-      `PRICE MISMATCH ${reference}: page quoted due=${quotedDue} total=${quotedTotal} ` +
-        `founding=${body.founding}; server says due=${q.due} total=${q.total} ` +
-        `founding=${pricing.CATALOG.founding}; items=${itemIds.join(",")} plan=${p.id}`
+      `PRICE MISMATCH ${reference}: page quoted due=${quotedDue} total=${quotedTotal}; ` +
+        `server says due=${q.due} total=${q.total}; items=${itemIds.join(",")} plan=${p.id}`
     );
     return res.status(409).json({ message: BUYER.mismatch });
   }
@@ -228,7 +225,6 @@ router.post("/", async (req, res) => {
       customer,
       quote: q,
       items: q.items.map((i) => i.id),
-      priceColumn: pricing.CATALOG.founding ? "founding" : "standard",
     });
 
     const session = await thawani.createSession({

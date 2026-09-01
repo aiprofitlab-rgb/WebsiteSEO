@@ -35,7 +35,7 @@ const RULES = {
   ],
 };
 
-function harness({ igOverrides = {} } = {}) {
+function harness({ igOverrides = {}, depsOverrides = {} } = {}) {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), "ig-handler-"));
   const db = store.open(path.join(dir, "state.sqlite"));
 
@@ -57,9 +57,22 @@ function harness({ igOverrides = {} } = {}) {
   };
 
   const alerts = [];
-  const alert = { tokenRejected: async (a) => alerts.push(a), tokenRefreshFailed: async (a) => alerts.push(a) };
+  const alert = {
+    tokenRejected: async (a) => alerts.push(a),
+    tokenRefreshFailed: async (a) => alerts.push(a),
+    loopSuspected: async (a) => alerts.push({ loop: true, ...a }),
+  };
 
-  return { db, ig, ledger, calls, appended, updated, alerts, deps: { ig, store: db, ledger, rules: RULES, alert, selfId: SELF } };
+  return {
+    db,
+    ig,
+    ledger,
+    calls,
+    appended,
+    updated,
+    alerts,
+    deps: { ig, store: db, ledger, rules: RULES, alert, selfId: SELF, selfUsername: "aiprofitlab", ...depsOverrides },
+  };
 }
 
 const comment = (over = {}) => ({
@@ -299,5 +312,96 @@ test("a very long comment is clipped before it reaches the sheet", async () => {
   const h = harness();
   await handler.handleComment(comment({ text: "storefront " + "x".repeat(5000) }), entry, h.deps);
   assert.ok(h.appended[0]["Comment text"].length <= 500);
+  h.db.close();
+});
+
+/**
+ * The loop. Every test below is about ONE failure: our own public reply comes
+ * back as a new comment, with a new id, and gets answered. It is not the dedupe
+ * table's job — that table has never seen the new id and never will.
+ */
+
+test("our own comment is recognised from entry.id even when selfId is wrong", async () => {
+  // The real shape of the bug: IG_USER_ID is set, and it is simply not the id
+  // Meta puts in from.id. Guard 1 used to be the only guard, and it failed open.
+  const h = harness({ depsOverrides: { selfId: "some-other-scoped-id", selfUsername: "" } });
+  const out = await handler.handleComment(comment({ from: { id: SELF, username: "aiprofitlab" } }), entry, h.deps);
+
+  assert.equal(out.action, "drop");
+  assert.equal(out.why, "our own comment");
+  assert.equal(h.calls.publicReply.length, 0);
+  h.db.close();
+});
+
+test("our own comment is recognised by username when no id matches", async () => {
+  const h = harness({ depsOverrides: { selfId: "", selfUsername: "AiProfitLab" } });
+  const out = await handler.handleComment(
+    comment({ from: { id: "an-unfamiliar-scoped-id", username: "aiprofitlab" } }),
+    { id: "yet-another-id" },
+    h.deps
+  );
+
+  assert.equal(out.action, "drop");
+  assert.equal(out.why, "our own comment");
+  h.db.close();
+});
+
+test("our own reply text is dropped even when every id check has failed", async () => {
+  // The guard of last resort. Nothing identifies the commenter as us, but the
+  // words are ours — they came out of rules.json — so this can only be the loop.
+  const h = harness({ depsOverrides: { selfId: "", selfUsername: "" } });
+  const out = await handler.handleComment(
+    comment({ id: "17000000000000009", text: "Sent! Check your DMs 📩", from: { id: "stranger", username: "someone" } }),
+    { id: "nothing-matches" },
+    h.deps
+  );
+
+  assert.equal(out.action, "drop");
+  assert.equal(out.why, "our own reply text");
+  assert.equal(h.calls.privateReply.length, 0);
+  h.db.close();
+});
+
+test("the breaker stops a loop that got past every other guard", async () => {
+  // Same post, all different comment ids — exactly what a loop looks like, and
+  // exactly what dedupe cannot see. It must not run away.
+  const h = harness({ depsOverrides: { selfId: "", selfUsername: "", limits: { perMediaPerHour: 5, perAccountPerHour: 40, windowMs: 3600_000 } } });
+
+  const outcomes = [];
+  for (let i = 0; i < 12; i++) {
+    outcomes.push((await handler.handleComment(comment({ id: `1790000000000000${i}` }), entry, h.deps)).action);
+  }
+
+  assert.equal(outcomes.filter((a) => a === "sent").length, 5, "stops at the cap");
+  assert.equal(outcomes.filter((a) => a === "throttled").length, 7);
+  assert.equal(h.calls.publicReply.length, 5, "and posts nothing further under the post");
+  assert.equal(h.alerts.filter((a) => a.loop).length, 1, "reported once, not once per dropped comment");
+  h.db.close();
+});
+
+test("the breaker is per post, so one runaway post does not silence the account", async () => {
+  const h = harness({ depsOverrides: { limits: { perMediaPerHour: 2, perAccountPerHour: 40, windowMs: 3600_000 } } });
+
+  for (let i = 0; i < 4; i++) await handler.handleComment(comment({ id: `17911111111111${i}` }), entry, h.deps);
+  const other = await handler.handleComment(
+    comment({ id: "17922222222222", media: { id: "17900000000000002" } }),
+    entry,
+    h.deps
+  );
+
+  assert.equal(other.action, "sent", "a different post is unaffected");
+  h.db.close();
+});
+
+test("the breaker's window rolls forward — a throttled post recovers by itself", async () => {
+  const h = harness({ depsOverrides: { limits: { perMediaPerHour: 2, perAccountPerHour: 40, windowMs: 3600_000 } } });
+  const t0 = Date.now();
+
+  for (let i = 0; i < 3; i++) {
+    await handler.handleComment(comment({ id: `17933333333333${i}` }), entry, { ...h.deps, now: t0 });
+  }
+  const later = await handler.handleComment(comment({ id: "17944444444444" }), entry, { ...h.deps, now: t0 + 3600_001 });
+
+  assert.equal(later.action, "sent");
   h.db.close();
 });

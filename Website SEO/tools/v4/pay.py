@@ -22,15 +22,15 @@ Two rules this file exists to enforce:
    turns the site from "bank transfer, invoice to follow" to "pay by card now"
    in the checkout, the services page and the contact FAQ at once.
 
-Prices are the ones published on services-v4 (the Founding Partner column) and
-quoted in the contact FAQ. build_v4.py asserts at build time that every figure
-below still appears in the rendered services page, so the two cannot drift
-apart silently - see check_services().
+Prices are the ones published on services-v4 and quoted in the contact FAQ.
+build_v4.py asserts at build time that every figure below still appears in the
+rendered services page, so the two cannot drift apart silently - see
+check_services().
 """
 import json
 
 # ---------------------------------------------------------------------------
-# The switch. Everything downstream branches on these four values.
+# The switch. Everything downstream branches on these three values.
 # ---------------------------------------------------------------------------
 
 # Flip to True on the day the Thawani merchant account is approved AND the
@@ -50,18 +50,13 @@ PAY_API = ""
 # tells a tester which environment they are looking at.
 THAWANI_ENV = "uat"
 
-# The Founding Partner column is the live price column until the first capped
-# group closes. Set False and every price on the checkout becomes the standard
-# column, with no other edit anywhere.
-FOUNDING_OPEN = True
-
 OMR = 1000          # baisa per rial
 CURRENCY = "OMR"
 
 # ---------------------------------------------------------------------------
 # What is sold.
 #
-# `founding` / `standard` are the two published columns, in baisa. `kind`
+# `price` is the published figure, in baisa - one column, no comparison. `kind`
 # separates a one-time build item from a monthly service, because a monthly
 # service is NOT charged at checkout: Thawani's e-commerce checkout takes a
 # single payment, and recurring billing needs card-on-file, which the
@@ -78,7 +73,7 @@ CATALOG = [
         "blurb": "Bilingual site, AI buyer agent, wholesale quote flow, WhatsApp handoff, "
                  "AI-search visibility, and the first year of hosting and care.",
         "blurb_ar": "موقع بلغتين، ووكيل مشترٍ بالذكاء الاصطناعي، ومسار عرض سعر بالجملة، وتحويل إلى واتساب، وظهور في بحث الذكاء الاصطناعي، والسنة الأولى من الاستضافة والرعاية.",
-        "founding": 950 * OMR, "standard": 1450 * OMR,
+        "price": 950 * OMR,
     },
     {
         "id": "dashboard", "kind": "build", "required": False,
@@ -87,7 +82,7 @@ CATALOG = [
         "blurb": "Cash position, margin, stock and open leads on one screen, each with the "
                  "action it is asking for.",
         "blurb_ar": "السيولة والهامش والمخزون والطلبات المفتوحة على شاشة واحدة، ومع كل بند الإجراء الذي يطلبه.",
-        "founding": 650 * OMR, "standard": 950 * OMR,
+        "price": 650 * OMR,
     },
     {
         "id": "autopilot", "kind": "build", "required": False,
@@ -96,7 +91,7 @@ CATALOG = [
         "blurb": "Quote and invoice follow-up on a schedule, stopping the moment the buyer "
                  "replies or pays.",
         "blurb_ar": "متابعة عروض الأسعار والفواتير وفق جدول، وتتوقف فور أن يردّ المشتري أو يدفع.",
-        "founding": 900 * OMR, "standard": 1300 * OMR,
+        "price": 900 * OMR,
     },
     {
         "id": "desk", "kind": "monthly", "required": False,
@@ -105,7 +100,7 @@ CATALOG = [
         "blurb": "Optional monthly care, new features and a reporting review. Never required "
                  "to keep anything working, and cancellable any month.",
         "blurb_ar": "رعاية شهرية اختيارية، وميزات جديدة، ومراجعة للتقارير. غير مطلوبة أبداً لإبقاء أي شيء يعمل، وتُلغى في أي شهر.",
-        "founding": 75 * OMR, "standard": 95 * OMR,
+        "price": 75 * OMR,
     },
 ]
 
@@ -117,7 +112,7 @@ BUNDLE = {
     "name": "The Operator Stack",
     "name_ar": "حزمة المشغّل",
     "requires": ["dashboard", "autopilot"],
-    "founding": 2200 * OMR, "standard": 3400 * OMR,
+    "price": 2200 * OMR,
 }
 
 # ---------------------------------------------------------------------------
@@ -197,10 +192,9 @@ THAWANI_NAME_MAX = 40
 # ---------------------------------------------------------------------------
 # Helpers
 # ---------------------------------------------------------------------------
-def price(item, founding=None):
-    """The live price of a catalog item or the bundle, in baisa."""
-    f = FOUNDING_OPEN if founding is None else founding
-    return item["founding"] if f else item["standard"]
+def price(item):
+    """The published price of a catalog item or the bundle, in baisa."""
+    return item["price"]
 
 
 def omr(baisa):
@@ -229,11 +223,11 @@ def money_ar(baisa):
     return f'<span class="num" dir="ltr">{omr(baisa)}</span> {CURRENCY_AR}'
 
 
-def bundle_saving(founding=None):
+def bundle_saving():
     """What the Operator Stack saves against buying the three separately."""
-    parts = sum(price(i, founding) for i in CATALOG
+    parts = sum(price(i) for i in CATALOG
                 if i["kind"] == "build" and (i["id"] == BASE_ID or i["id"] in BUNDLE["requires"]))
-    return parts - price(BUNDLE, founding)
+    return parts - price(BUNDLE)
 
 
 def item(item_id):
@@ -270,7 +264,6 @@ def config(lang="en"):
     return {
         "currency": CURRENCY,
         "baisa": OMR,
-        "founding": FOUNDING_OPEN,
         "live": PAY_LIVE,
         "api": PAY_API,
         "env": THAWANI_ENV,
@@ -365,15 +358,15 @@ def check_services(html, lang="en"):
 # too, and `python3 tools/v4/pay.py` will tell you if the published numbers
 # stopped coming out.
 # ---------------------------------------------------------------------------
-def quote(item_ids, plan_id, founding=None):
+def quote(item_ids, plan_id):
     p = plan(plan_id)
     chosen = [i for i in CATALOG if i["id"] in item_ids or i["required"]]
     build = [i for i in chosen if i["kind"] == "build"]
     monthly = [i for i in chosen if i["kind"] == "monthly"]
 
-    parts = sum(price(i, founding) for i in build)
+    parts = sum(price(i) for i in build)
     bundled = all(r in {i["id"] for i in build} for r in BUNDLE["requires"])
-    subtotal = price(BUNDLE, founding) if bundled else parts
+    subtotal = price(BUNDLE) if bundled else parts
     saving = parts - subtotal
 
     total = subtotal + p["surcharge"]

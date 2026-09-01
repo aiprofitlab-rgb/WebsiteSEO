@@ -53,6 +53,9 @@ function open(file) {
       finished_at  INTEGER
     );
     CREATE INDEX IF NOT EXISTS handled_claimed ON handled (claimed_at);
+    -- The circuit breaker asks "how many did we answer under this post lately",
+    -- on every keyword comment. Without this it is a table scan each time.
+    CREATE INDEX IF NOT EXISTS handled_media ON handled (media_id, claimed_at);
 
     CREATE TABLE IF NOT EXISTS conversations (
       igsid      TEXT PRIMARY KEY,
@@ -94,6 +97,9 @@ function open(file) {
     getState: db.prepare(`SELECT * FROM conversations WHERE igsid = ?`),
     clearState: db.prepare(`DELETE FROM conversations WHERE igsid = ?`),
     countStates: db.prepare(`SELECT COUNT(*) AS n FROM conversations WHERE expires_at > ?`),
+
+    recentByMedia: db.prepare(`SELECT COUNT(*) AS n FROM handled WHERE media_id = ? AND claimed_at >= ?`),
+    recentAll: db.prepare(`SELECT COUNT(*) AS n FROM handled WHERE claimed_at >= ?`),
 
     sweepStates: db.prepare(`DELETE FROM conversations WHERE expires_at <= ?`),
     sweepHandled: db.prepare(`DELETE FROM handled WHERE claimed_at < ?`),
@@ -137,6 +143,19 @@ function open(file) {
     },
 
     handled: (commentId) => stmts.getHandled.get(String(commentId)) || null,
+
+    /**
+     * How many comments we have taken on recently — under one post, or across the
+     * whole account. This is what the loop breaker in handler.js reads.
+     *
+     * It counts claims, not successes, deliberately: a loop that is failing every
+     * DM is still a loop, and it is still hammering Graph.
+     */
+    recentReplies({ mediaId, since } = {}) {
+      const from = Number(since) || 0;
+      const row = mediaId ? stmts.recentByMedia.get(String(mediaId), from) : stmts.recentAll.get(from);
+      return (row && row.n) || 0;
+    },
 
     /** Claims that never reported an outcome — a crash mid-flight. For /health and ops. */
     stuck(olderThanMs = 10 * 60_000, now = Date.now()) {

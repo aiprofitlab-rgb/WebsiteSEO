@@ -67,7 +67,7 @@ app.get("/health", (req, res) => {
     thawani: { base: cfg.base, env: cfg.live ? "live" : "uat", keys: Boolean(cfg.secret && cfg.publishable) },
     ledger: ledger.enabled() ? "sheet" : "logs",
     billing: process.env.CRON_KEY ? "armed" : "disabled (no CRON_KEY)",
-    catalog: { founding: pricing.CATALOG.founding, items: pricing.CATALOG.items.length },
+    catalog: { items: pricing.CATALOG.items.length },
   });
 });
 

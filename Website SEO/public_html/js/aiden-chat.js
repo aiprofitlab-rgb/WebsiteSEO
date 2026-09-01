@@ -59,6 +59,17 @@
     var HISTORY_TO_SEND = 8;        // messages replayed to the backend
     var MAX_MSG_CHARS = 2000;
 
+    // ---------- the ten-second nudge ----------
+    var AUTO_OPEN_MS = 10000;        // attention, not wall clock - see armAutoOpen()
+    var AUTO_OPEN_MIN_WIDTH = 520;   // the width at which the panel stops being a full-screen sheet
+    // Session-scoped on purpose, like openVisit(): a localStorage "no" would
+    // fire once in a visitor's life and silence Aiden on every future visit.
+    var K_AUTO_DISMISSED = 'aidenAutoOpenDismissed';
+    // Pages where an opening chat panel costs money rather than earning it.
+    // The leading slash matters: without it an article slug ending "-pay.html"
+    // would match.
+    var NO_AUTO_OPEN = /\/(checkout|order|pay|onboarding)(-ar)?(\.html)?\/?$/;
+
     var isAr = document.documentElement.lang === 'ar' ||
         (document.documentElement.getAttribute('dir') || '').toLowerCase() === 'rtl';
     var isRtl = (document.documentElement.getAttribute('dir') || '').toLowerCase() === 'rtl' || isAr;
@@ -1378,11 +1389,14 @@
         }
     }
 
+    /** Messages sent in this tab session so far. */
+    function messagesSent() {
+        try { return parseInt(sessionStorage.getItem(K_SENT) || '0', 10) || 0; } catch (e) { return 0; }
+    }
+
     /** Messages sent in this tab session, counting the one being sent now. */
     function bumpMessageCount() {
-        var n = 0;
-        try { n = parseInt(sessionStorage.getItem(K_SENT) || '0', 10) || 0; } catch (e) { n = 0; }
-        n += 1;
+        var n = messagesSent() + 1;
         try { sessionStorage.setItem(K_SENT, String(n)); } catch (e) { /* ok */ }
         return n;
     }
@@ -1395,6 +1409,89 @@
         // re-stated here for the same reason apl-analytics.js re-states it.
         if (!p.page_type) p.page_type = pageType(location.pathname);
         try { if (typeof window.gtag === 'function') window.gtag('event', event, p); } catch (e) { /* ok */ }
+    }
+
+    // ---------- the ten-second nudge ----------
+    //
+    // A launcher in the corner is invisible to most visitors, so Aiden opens
+    // itself once, ten seconds in. Closing it is the visitor saying no, and
+    // the no is remembered for the rest of the browser session - it never
+    // opens itself at them twice, on this page or any page they go to next.
+    //
+    // Four rules hold this together:
+    //
+    // * Ten seconds of *attention*, not of wall clock. A tab opened in the
+    //   background and read twenty minutes later would otherwise have its one
+    //   nudge spent while nobody was looking, and be counted as dismissed by
+    //   the visitor's first click.
+    // * The clock starts when the widget boots (load + 900ms), which is the
+    //   first moment the launcher exists to be ignored.
+    // * Phones are out. Under 520px the panel is a full-screen sheet, so an
+    //   auto-open covers the article the visitor came to read.
+    // * Checkout, order, pay and onboarding are out. A chat panel opening
+    //   over a payment form costs a sale.
+
+    var autoOpenTimer = null;
+    var autoOpened = false;    // this page's panel was opened by us, not by the visitor
+    var attentionMs = 0;       // visible milliseconds accumulated on this page
+    var attentionSince = 0;    // when the current visible stretch began
+
+    function autoOpenDismissed() {
+        try { return sessionStorage.getItem(K_AUTO_DISMISSED) === '1'; } catch (e) { return false; }
+    }
+
+    function eligibleForAutoOpen() {
+        return !autoOpenDismissed() &&
+            window.innerWidth > AUTO_OPEN_MIN_WIDTH &&
+            !NO_AUTO_OPEN.test(location.pathname);
+    }
+
+    function cancelAutoOpen() {
+        if (autoOpenTimer) { clearTimeout(autoOpenTimer); autoOpenTimer = null; }
+        attentionSince = 0;
+    }
+
+    /** The visitor closed the panel: no more nudges anywhere this session. */
+    function dismissAutoOpen() {
+        cancelAutoOpen();
+        try { sessionStorage.setItem(K_AUTO_DISMISSED, '1'); } catch (e) { /* ok */ }
+    }
+
+    function armAutoOpen() {
+        if (autoOpenTimer || !eligibleForAutoOpen()) return;
+        attentionSince = Date.now();
+        autoOpenTimer = setTimeout(fireAutoOpen, Math.max(0, AUTO_OPEN_MS - attentionMs));
+    }
+
+    function pauseAutoOpen() {
+        if (!autoOpenTimer) return;
+        attentionMs += Date.now() - attentionSince;
+        clearTimeout(autoOpenTimer);
+        autoOpenTimer = null;
+        attentionSince = 0;
+    }
+
+    function fireAutoOpen() {
+        autoOpenTimer = null;
+        // Re-checked at firing time, not only when armed: the window may have
+        // been narrowed to phone width since, or another tab in this session
+        // may have been told no while this one counted.
+        if (!eligibleForAutoOpen()) return;
+        if (!host || host.classList.contains('open')) return;
+        autoOpened = true;
+        api.open({ focus: false });
+        track('aiden_auto_open', {
+            page_path: location.pathname,
+            returning: priorVisit.count > 1
+        });
+    }
+
+    function startAutoOpen() {
+        if (!eligibleForAutoOpen()) return;
+        document.addEventListener('visibilitychange', function () {
+            if (document.hidden) pauseAutoOpen(); else armAutoOpen();
+        });
+        if (!document.hidden) armAutoOpen();
     }
 
     // ---------- public API ----------
@@ -1412,11 +1509,14 @@
             readGaIds();
 
             window.addEventListener('scroll', trackScroll, { passive: true });
+            // mount() bails on a browser without shadow DOM; nothing to open.
+            if (mounted) startAutoOpen();
         },
 
-        open: function () {
+        open: function (opts) {
             if (!mounted) api.init();
             if (!host || host.classList.contains('open')) return;
+            cancelAutoOpen();
             host.classList.add('open');
             els.launch.setAttribute('aria-expanded', 'true');
             detectCountry();
@@ -1425,11 +1525,23 @@
             // GA4 session may have rolled over since.
             readGaIds();
             track('aiden_open', { page_path: location.pathname, returning: priorVisit.count > 1 });
-            setTimeout(function () { if (window.innerWidth > 520) els.input.focus(); }, 260);
+            // A panel the visitor did not ask for does not take the caret:
+            // they were reading, or halfway through a form on the page.
+            if (!opts || opts.focus !== false) {
+                setTimeout(function () { if (window.innerWidth > 520) els.input.focus(); }, 260);
+            }
         },
 
         close: function () {
             if (!host) return;
+            if (autoOpened) {
+                track('aiden_auto_dismissed', {
+                    page_path: location.pathname,
+                    message_count: messagesSent()
+                });
+                autoOpened = false;
+            }
+            dismissAutoOpen();
             host.classList.remove('open');
             els.launch.setAttribute('aria-expanded', 'false');
             els.launch.focus();

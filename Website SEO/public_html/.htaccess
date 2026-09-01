@@ -202,12 +202,18 @@ RewriteRule ^missed-call-simulator-en/?$ /en/simulators/ [R=301,L]
 # was ranking on it - but a duplicate that resolves is a duplicate.
 RewriteRule ^smart-website-offer-en/?$ /en/smart-storefront/ [R=301,L]
 
-# One demo page and one simulator page now carry what four separate pages
-# used to. The originals were deleted 2026-08-27; these 301s are what keeps
-# their indexed URLs resolving.
-RewriteRule ^en/whatsapp-receptionist-demo/?$    /en/demos/      [R=301,L]
-RewriteRule ^whatsapp-receptionist-demo/?$       /en/demos/      [R=301,L]
-RewriteRule ^customized-ceo-dashboard-demo/?$    /en/demos/      [R=301,L]
+# One simulator page now carries what two separate pages used to. The
+# originals were deleted 2026-08-27; these 301s keep their URLs resolving.
+#
+# The two stand-alone demo pages were swept up in that same deletion, but the
+# homepage proof tiles never stopped showing THEIR screenshots - the tile
+# pictured FitFlow and the click landed on the /en/demos/ tab panel, which is
+# a different build entirely. Restored 2026-08-30 at the URLs they were
+# indexed on, so their root 301s are gone and rule 5 serves the files again.
+# Only the /en/-prefixed form still redirects: the files sit at the root, and
+# rule 3b would otherwise serve each of them at a second URL as well.
+RewriteRule ^en/whatsapp-receptionist-demo/?$    /whatsapp-receptionist-demo/    [R=301,L]
+RewriteRule ^en/customized-ceo-dashboard-demo/?$ /customized-ceo-dashboard-demo/ [R=301,L]
 RewriteRule ^en/missed-call-simulator-en/?$      /en/simulators/ [R=301,L]
 RewriteRule ^en/campaign-roi-simulator/?$        /en/simulators/ [R=301,L]
 RewriteRule ^campaign-roi-simulator/?$           /en/simulators/ [R=301,L]
@@ -249,13 +255,14 @@ RewriteRule ^en/claim/?$          /en/pay/        [R=301,L]
 #
 # The four new pages take the site's existing `-ar` suffix convention, which
 # rule 5 already maps to a root file - no rewrite is needed to SERVE them.
-# What is needed is retiring the stand-alone Arabic demo and simulator pages
-# that /demos-ar/ and /simulators-ar/ now carry. The old files were deleted
-# 2026-08-27 alongside the English ones; these 301s are file-independent.
+# What is needed is retiring the stand-alone Arabic simulator pages that
+# /simulators-ar/ now carries. The old files were deleted 2026-08-27 alongside
+# the English ones; these 301s are file-independent.
+#
+# The two Arabic demo pages were restored 2026-08-30 with their English twins,
+# so their 301s are gone and rule 5 serves the files.
 RewriteRule ^missed-call-simulator-ar/?$          /simulators-ar/ [R=301,L]
 RewriteRule ^campaign-roi-simulator-ar/?$         /simulators-ar/ [R=301,L]
-RewriteRule ^whatsapp-receptionist-demo-ar/?$     /demos-ar/      [R=301,L]
-RewriteRule ^customized-ceo-dashboard-demo-ar/?$  /demos-ar/      [R=301,L]
 
 # 3. Serve pages that genuinely live INSIDE public_html/en/
 # Must come before rule 3b. That rule encodes the site's older convention,
@@ -296,15 +303,15 @@ RewriteRule ^Missed-Call-Simulator-en/?$ /en/simulators/ [R=301,L]
 RewriteRule ^Missed-Call-Simulator-ar/?$ /simulators-ar/ [R=301,L]
 RewriteRule ^Campaign_ROI_Simulator-ar/?$ /simulators-ar/ [R=301,L]
 RewriteRule ^Campaign_ROI_Simulator/?$ /en/simulators/ [R=301,L]
-RewriteRule ^whatsapp_receptionist_demo_ar/?$ /demos-ar/ [R=301,L]
-RewriteRule ^whatsapp_receptionist_demo/?$ /en/demos/ [R=301,L]
-RewriteRule ^Customized_CEO_Dashboard_demo-ar/?$ /demos-ar/ [R=301,L]
-RewriteRule ^Customized_CEO_Dashboard_demo/?$ /en/demos/ [R=301,L]
+RewriteRule ^whatsapp_receptionist_demo_ar/?$ /whatsapp-receptionist-demo-ar/ [R=301,L]
+RewriteRule ^whatsapp_receptionist_demo/?$ /whatsapp-receptionist-demo/ [R=301,L]
+RewriteRule ^Customized_CEO_Dashboard_demo-ar/?$ /customized-ceo-dashboard-demo-ar/ [R=301,L]
+RewriteRule ^Customized_CEO_Dashboard_demo/?$ /customized-ceo-dashboard-demo/ [R=301,L]
 # The dashboard demo was ALSO reachable without the _demo suffix, because
 # Customized_CEO_Dashboard.html sat at the root and rule 5 served it. That file
 # is deleted, so this path needs a rule of its own or it 404s. Anchored, so it
 # cannot swallow the _demo forms above.
-RewriteRule ^Customized_CEO_Dashboard/?$ /en/demos/ [R=301,L]
+RewriteRule ^Customized_CEO_Dashboard/?$ /customized-ceo-dashboard-demo/ [R=301,L]
 RewriteRule ^academy_ar/?$ /academy-ar/ [R=301,L]
 RewriteRule ^blog_ar/?$ /blog-ar/ [R=301,L]
 

@@ -30,12 +30,9 @@ function plan(id) {
 /**
  * Port of pay.quote(). Same inputs, same integer arithmetic, same field names.
  *
- * `founding` is not a parameter here the way it is in Python: catalog.json
- * carries one live price column, chosen by pay.FOUNDING_OPEN at build time.
- * The request's `founding` flag is checked against CATALOG.founding by the
- * route and refused on mismatch, which is the only thing it is good for — a
- * disagreement means the deployed page and this service were built from
- * different columns, and that is worth stopping for, not reconciling.
+ * There is one price per item in catalog.json and no column to choose between,
+ * so a quote is fully determined by the items and the plan. The route still
+ * refuses any order whose quoted figures disagree with what this recomputes.
  */
 function quote(itemIds, planId) {
   const p = plan(planId);

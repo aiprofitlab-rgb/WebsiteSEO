@@ -96,6 +96,25 @@ function match(text, config) {
   return null;
 }
 
+/**
+ * Is this text one of our own public replies, handed back to us?
+ *
+ * Meta does not label a comment as ours in any way we can rely on — `from.id` is
+ * scoped per app and is not always the id in IG_USER_ID — so identity alone is
+ * not enough to recognise ourselves. The text is. Every public reply is a fixed
+ * string out of this config; seeing one arrive as a new comment can only mean
+ * the loop has already started, whoever Meta says wrote it.
+ *
+ * Equality on the normalised form, not a substring: a follower quoting us back
+ * word for word is not a lead, and anything looser would start swallowing real
+ * comments.
+ */
+function isOwnReplyText(text, config) {
+  const norm = normalise(text);
+  if (!norm) return false;
+  return ((config && config.rules) || []).some((rule) => rule.publicReply && normalise(rule.publicReply) === norm);
+}
+
 /** The DM body: the payload text with the link appended, since we only get one shot. */
 function dmText(rule) {
   const dm = (rule && rule.dm) || {};
@@ -132,6 +151,23 @@ function validate(config) {
       }
     }
   }
+  // A public reply that trips one of our own keywords is an infinite loop, and it
+  // is invisible on the page: "Demos sent" contains "demos", "Just sent you the
+  // pricing" contains "pricing". We post it, Meta hands it back as a new comment
+  // with a NEW id — so the dedupe table, which is keyed on comment id, cannot see
+  // anything wrong — and we answer ourselves until Instagram rate limits the
+  // account. This check is the reason that can never ship again.
+  rules.forEach((rule, i) => {
+    if (!rule.publicReply) return;
+    const trips = match(rule.publicReply, config);
+    if (trips) {
+      problems.push(
+        `rules[${i}]${rule.id ? ` (${rule.id})` : ""}: publicReply "${rule.publicReply}" contains the keyword "${trips.keyword}" ` +
+          `and would retrigger rule "${trips.rule.id}" — that is a reply loop, change the wording`
+      );
+    }
+  });
+
   return problems;
 }
 
@@ -145,4 +181,4 @@ function load(file) {
   return config;
 }
 
-module.exports = { normalise, match, dmText, validate, load };
+module.exports = { normalise, match, dmText, isOwnReplyText, validate, load };

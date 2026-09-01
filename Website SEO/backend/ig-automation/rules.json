@@ -3,6 +3,10 @@
     "Keyword -> action config. Edit and restart the service; no deploy needed.",
     "Rules are ordered and the FIRST match wins, so put specific keywords above generic ones.",
     "match: 'word' (default, whole word), 'contains' (substring), or 'exact' (whole comment).",
+    "NEVER put a rule's own keyword inside its publicReply. We post that reply, Meta hands it",
+    "back to us as a NEW comment with a NEW id, it matches again, and the account answers",
+    "itself until Instagram throttles it. The dedupe table cannot catch it — every loop step",
+    "has an id it has never seen. The service refuses to start quietly on this: check the log.",
     "Meta allows exactly ONE private reply per comment, ever — dm.text and dm.link are",
     "concatenated into that single message, so it has to carry the whole payload."
   ],
@@ -29,7 +33,7 @@
         "text": "Full pricing, no call required — every package and what's in it 👇",
         "link": "https://aiprofitlab.io/en/services/"
       },
-      "publicReply": "Just sent you the pricing 📩",
+      "publicReply": "Sent it over — check your DMs 📩",
       "askEmail": false,
       "tag": "pricing"
     },
@@ -42,7 +46,7 @@
         "text": "Here are the live demos — click through them, they're real, not screenshots 👇",
         "link": "https://aiprofitlab.io/en/demos/"
       },
-      "publicReply": "Demos sent 📩",
+      "publicReply": "On its way — check your DMs 📩",
       "askEmail": false,
       "tag": "demos"
     },

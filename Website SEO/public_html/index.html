@@ -659,6 +659,10 @@ section{position:relative;padding:clamp(74px,9vw,138px) 0}
   border-radius:16px;padding:clamp(24px,3vw,36px);
 }
 .panelcard h3{color:var(--cream);margin:0 0 22px;font-size:1.4rem}
+/* The result card lost the bar chart that used to fill it, and the grid still
+   stretches it to the height of the sliders beside it. Centring keeps the
+   number optically level with them instead of stranded at the top. */
+.panelcard.result{display:flex;flex-direction:column;justify-content:center}
 .fieldrow{margin-bottom:22px}
 .fieldrow label{
   display:flex;justify-content:space-between;align-items:baseline;gap:12px;
@@ -686,9 +690,7 @@ input[type=range]::-moz-range-thumb{
   display:block;font-family:var(--display);font-size:clamp(2.8rem,6.4vw,4.4rem);line-height:1;
   color:var(--amber-bright);font-variant-numeric:tabular-nums;
 }
-.payback{margin:20px 0 0;color:rgba(241,239,232,.82);font-size:1.02rem}
-.payback b{color:var(--cream)}
-.assume{margin:14px 0 0;font-size:.86rem;line-height:1.6;color:rgba(241,239,232,.5)}
+.assume{margin:26px 0 0;font-size:.86rem;line-height:1.6;color:rgba(241,239,232,.5)}
 
 /* ============================== S5 - the morning message and the three zeros */
 .touch-grid{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(30px,5vw,68px);align-items:center}
@@ -1239,25 +1241,10 @@ html:not(.js) .stair .step,html:not(.js) .stair .anno{opacity:1;transform:none}
         </div>
       </div>
 
-      <div class="panelcard rv" style="--d:.12s">
+      <div class="panelcard result rv" style="--d:.12s">
         <span class="bignum-cap">Revenue walking away, per month</span>
         <span class="bignum" id="leakNum">OMR 1,559</span>
 
-        <!-- Two bars, one scale: the monthly leak against the one-time cost of
-             fixing it. The comparison is the whole argument. -->
-        <svg id="bars" viewBox="0 0 420 132" role="img" style="width:100%;height:auto;margin-top:26px" aria-labelledby="barsTitle">
-          <title id="barsTitle">Monthly revenue lost to silence, compared with the one-time cost of the Smart Website</title>
-          <text x="0" y="14" fill="#A8BCB1" font-family="IBM Plex Mono, monospace" font-size="15">Lost each month</text>
-          <rect x="0" y="22" width="420" height="26" rx="5" fill="rgba(241,239,232,.10)"/>
-          <rect id="barLeak" x="0" y="22" width="420" height="26" rx="5" fill="#D89234"/>
-          <text id="barLeakT" x="410" y="40" fill="#072B22" font-family="IBM Plex Mono, monospace" font-size="15" font-weight="500" text-anchor="end">OMR 1,559</text>
-          <text x="0" y="82" fill="#A8BCB1" font-family="IBM Plex Mono, monospace" font-size="15">Smart Website, once</text>
-          <rect x="0" y="90" width="420" height="26" rx="5" fill="rgba(241,239,232,.10)"/>
-          <rect id="barCost" x="0" y="90" width="256" height="26" rx="5" fill="#1FAF5E"/>
-          <text x="10" y="108" fill="#072B22" font-family="IBM Plex Mono, monospace" font-size="15" font-weight="500">OMR 950</text>
-        </svg>
-
-        <p class="payback">At that rate it pays for itself in <b id="days">19 days</b>.</p>
         <p class="assume">After-hours inquiries per month &times; your win rate &times; your average order.
           It shows what is <em>at stake</em> in those messages &mdash; not a promise of recovery.</p>
       </div>
@@ -1332,14 +1319,14 @@ html:not(.js) .stair .step,html:not(.js) .stair .anno{opacity:1;transform:none}
 
     <svg class="stair rv" viewBox="0 0 1000 400" role="img" aria-labelledby="stairT stairD">
       <title id="stairT">The three systems as a staircase</title>
-      <desc id="stairD">Step one, the Smart Website at OMR 950, makes buyers arrive. That creates the next
-        question, answered by step two, the Live Owner Dashboard at plus OMR 650. That creates the next question,
-        answered by step three, the Full Autopilot at plus OMR 900.</desc>
+      <desc id="stairD">Step one, the Smart Website, makes buyers arrive. That creates the next
+        question, answered by step two, the Live Owner Dashboard. That creates the next question,
+        answered by step three, the Full Autopilot.</desc>
 
       <g class="step" style="--d:0s">
         <rect x="30" y="270" width="280" height="90" rx="12" fill="#0F6E56"/>
         <text x="54" y="308" fill="#F1EFE8" font-family="Marcellus, Georgia, serif" font-size="26">The Smart Website</text>
-        <text x="54" y="336" fill="#BFE3D5" font-family="IBM Plex Mono, monospace" font-size="17">01 &#183; OMR 950</text>
+        <text x="54" y="336" fill="#BFE3D5" font-family="IBM Plex Mono, monospace" font-size="17">01</text>
       </g>
 
       <g class="anno" style="--d:.55s">
@@ -1352,7 +1339,7 @@ html:not(.js) .stair .step,html:not(.js) .stair .anno{opacity:1;transform:none}
         <rect x="350" y="190" width="280" height="170" rx="12" fill="#0A3D30"/>
         <text x="374" y="228" fill="#F1EFE8" font-family="Marcellus, Georgia, serif" font-size="26">The Live Owner</text>
         <text x="374" y="256" fill="#F1EFE8" font-family="Marcellus, Georgia, serif" font-size="26">Dashboard</text>
-        <text x="374" y="284" fill="#BFE3D5" font-family="IBM Plex Mono, monospace" font-size="17">02 &#183; +OMR 650</text>
+        <text x="374" y="284" fill="#BFE3D5" font-family="IBM Plex Mono, monospace" font-size="17">02</text>
       </g>
 
       <g class="anno" style="--d:.75s">
@@ -1364,7 +1351,7 @@ html:not(.js) .stair .step,html:not(.js) .stair .anno{opacity:1;transform:none}
       <g class="step" style="--d:.36s">
         <rect x="670" y="110" width="300" height="250" rx="12" fill="#072B22"/>
         <text x="694" y="148" fill="#F1EFE8" font-family="Marcellus, Georgia, serif" font-size="26">The Full Autopilot</text>
-        <text x="694" y="176" fill="#BFE3D5" font-family="IBM Plex Mono, monospace" font-size="17">03 &#183; +OMR 900</text>
+        <text x="694" y="176" fill="#BFE3D5" font-family="IBM Plex Mono, monospace" font-size="17">03</text>
       </g>
 
       <line x1="30" y1="372" x2="970" y2="372" stroke="#DED8C8" stroke-width="2"/>
@@ -1375,21 +1362,21 @@ html:not(.js) .stair .step,html:not(.js) .stair .anno{opacity:1;transform:none}
         <span class="n">01</span>
         <h3>The Smart Website</h3>
         <p>Answers buyers in Arabic and English, records who they are, and hands the live ones to your WhatsApp.</p>
-        <span class="tag">One-time &#183; <b>OMR 950</b></span>
+        <span class="tag">One-time</span>
         <a class="tlink" href="/en/services/#smart-website">See what&#8217;s inside <span class="arw">&rarr;</span></a>
       </article>
       <article class="card sys-card">
         <span class="n">02</span>
         <h3>The Live Owner Dashboard</h3>
         <p>Cash, stock and open leads on one screen &mdash; without phoning three people to assemble it.</p>
-        <span class="tag">Add-on &#183; <b>+OMR 650</b></span>
+        <span class="tag">Add-on</span>
         <a class="tlink" href="/en/demos/#dash">Open the live demo <span class="arw">&rarr;</span></a>
       </article>
       <article class="card sys-card">
         <span class="n">03</span>
         <h3>The Full Autopilot</h3>
         <p>Something has to chase the quotes and the invoices. This does, on schedule, without being reminded.</p>
-        <span class="tag">Add-on &#183; <b>+OMR 900</b></span>
+        <span class="tag">Add-on</span>
         <a class="tlink" href="/en/services/#autopilot">See what&#8217;s inside <span class="arw">&rarr;</span></a>
       </article>
     </div>
@@ -1405,7 +1392,7 @@ html:not(.js) .stair .step,html:not(.js) .stair .anno{opacity:1;transform:none}
       from someone you have never met.</p>
 
     <div class="tiles" style="margin-top:clamp(28px,4vw,48px)" data-stagger>
-      <a class="tile" href="/en/demos/#dash">
+      <a class="tile" href="/customized-ceo-dashboard-demo/">
         <span class="live"><i></i>Live demo</span>
         <span class="shot"><img src="/assets/v4/demo-dashboard-960.webp" alt="The CEO dashboard demo: revenue, gross profit and margin cards above a list of ranked actions." width="960" height="600" loading="lazy" decoding="async"></span>
         <span class="cap">
@@ -1415,7 +1402,7 @@ html:not(.js) .stair .step,html:not(.js) .stair .anno{opacity:1;transform:none}
         </span>
       </a>
 
-      <a class="tile" href="/en/demos/">
+      <a class="tile" href="/whatsapp-receptionist-demo/">
         <span class="live"><i></i>Live demo</span>
         <span class="shot"><img src="/assets/v4/demo-whatsapp-960.webp" alt="The WhatsApp receptionist demo: a lead list beside a full buyer conversation handled by the AI agent." width="960" height="600" loading="lazy" decoding="async"></span>
         <span class="cap">
@@ -1457,7 +1444,7 @@ html:not(.js) .stair .step,html:not(.js) .stair .anno{opacity:1;transform:none}
 
       <div class="hcard win">
         <h3>The Smart Website</h3>
-        <p class="sub">OMR 950, once</p>
+        <p class="sub">Paid once, not every month</p>
         <p class="hlegend">Rows: Sun &rarr; Sat &#183; columns: 00:00 &rarr; 23:00</p>
         <div class="hgrid" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></div>
         <span class="hcount"><span data-count="168">168</span> of 168 hours</span>
@@ -1948,8 +1935,6 @@ html:not(.js) .stair .step,html:not(.js) .stair .anno{opacity:1;transform:none}
   if (!q1) return;
 
   const WEEKS_PER_MONTH = 4.33;
-  const SMART_SITE = 950;          // must match the price ladder above
-  const RTL = false;
   const fmt = n => "OMR " + Math.round(n).toLocaleString("en-US");
 
   function render() {
@@ -1962,49 +1947,12 @@ html:not(.js) .stair .step,html:not(.js) .stair .anno{opacity:1;transform:none}
 
     const leak = perWeek * WEEKS_PER_MONTH * (pct / 100) * (win / 100) * order;
     $("leakNum").textContent = fmt(leak);
-
-    /* Both bars share one scale so the comparison is honest. The leak bar is
-       full width whenever it exceeds the build cost, and the cost bar shrinks
-       against it; below that the roles swap. */
-    const max = Math.max(leak, SMART_SITE) || 1;
-    const W = 420;
-    const leakW = Math.max(4, (leak / max) * W);
-    const costW = Math.max(4, (SMART_SITE / max) * W);
-    $("barLeak").setAttribute("width", leakW.toFixed(1));
-    $("barCost").setAttribute("width", costW.toFixed(1));
-    /* On an Arabic page both bars are anchored to the right edge of the track
-       and grow leftwards, so a bar still starts where the reader starts. */
-    if (RTL) {
-      $("barLeak").setAttribute("x", (W - leakW).toFixed(1));
-      $("barCost").setAttribute("x", (W - costW).toFixed(1));
-    }
-
-    /* Keep the leak label inside its own bar; when the bar is short the label
-       would otherwise overhang the track and collide with the background. */
-    const lt = $("barLeakT");
-    lt.textContent = fmt(leak);
-    if (leakW > 120) {
-      lt.setAttribute("x", (RTL ? W - leakW + 10 : leakW - 10).toFixed(1));
-      lt.setAttribute("text-anchor", RTL ? "start" : "end");
-      lt.setAttribute("fill", "#072B22");
-    } else {
-      lt.setAttribute("x", (RTL ? W - leakW - 10 : leakW + 10).toFixed(1));
-      lt.setAttribute("text-anchor", RTL ? "end" : "start");
-      lt.setAttribute("fill", "#F1EFE8");
-    }
-
-    const perDay = leak / 30;
-    const days = perDay > 0 ? Math.ceil(SMART_SITE / perDay) : Infinity;
-    $("days").textContent = !isFinite(days) ? "—"
-      : days <= 1 ? "a single day"
-        : days < 400 ? days + " days"
-          : "over a year";
   }
 
   [q1, q2, q3, q4].forEach(el => el.addEventListener("input", render));
   render();
 })();
 </script>
-    <script defer src="/js/aiden-chat.js?v=5312f568"></script>
+<script defer src="/js/aiden-chat.js?v=c8fb76b5"></script>
 </body>
 </html>

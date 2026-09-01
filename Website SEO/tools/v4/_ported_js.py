@@ -232,10 +232,9 @@ CINE_JS = r'''
 # --------------------------------------------------------------------------
 # Cost-of-silence calculator. One template, two languages.
 #
-# The arithmetic, the ids and the bar geometry are shared; what varies is the
-# currency format, the payback wording, and whether the two bars grow from the
-# left or the right. Mirroring is done in the script rather than with a CSS
-# transform because a flipped <g> would mirror the label text with it.
+# The arithmetic and the ids are shared; the only thing that varies is the
+# currency format. The bar chart this used to draw compared the visitor's leak
+# against our own build price, so it went with the prices.
 # --------------------------------------------------------------------------
 _CALC_TPL = r"""
 /* --------------------------------------------------------------------------
@@ -252,8 +251,6 @@ _CALC_TPL = r"""
   if (!q1) return;
 
   const WEEKS_PER_MONTH = 4.33;
-  const SMART_SITE = 950;          // must match the price ladder above
-  const RTL = __RTL__;
   const fmt = n => __FMT__;
 
   function render() {
@@ -266,43 +263,6 @@ _CALC_TPL = r"""
 
     const leak = perWeek * WEEKS_PER_MONTH * (pct / 100) * (win / 100) * order;
     $("leakNum").textContent = fmt(leak);
-
-    /* Both bars share one scale so the comparison is honest. The leak bar is
-       full width whenever it exceeds the build cost, and the cost bar shrinks
-       against it; below that the roles swap. */
-    const max = Math.max(leak, SMART_SITE) || 1;
-    const W = 420;
-    const leakW = Math.max(4, (leak / max) * W);
-    const costW = Math.max(4, (SMART_SITE / max) * W);
-    $("barLeak").setAttribute("width", leakW.toFixed(1));
-    $("barCost").setAttribute("width", costW.toFixed(1));
-    /* On an Arabic page both bars are anchored to the right edge of the track
-       and grow leftwards, so a bar still starts where the reader starts. */
-    if (RTL) {
-      $("barLeak").setAttribute("x", (W - leakW).toFixed(1));
-      $("barCost").setAttribute("x", (W - costW).toFixed(1));
-    }
-
-    /* Keep the leak label inside its own bar; when the bar is short the label
-       would otherwise overhang the track and collide with the background. */
-    const lt = $("barLeakT");
-    lt.textContent = fmt(leak);
-    if (leakW > 120) {
-      lt.setAttribute("x", (RTL ? W - leakW + 10 : leakW - 10).toFixed(1));
-      lt.setAttribute("text-anchor", RTL ? "start" : "end");
-      lt.setAttribute("fill", "#072B22");
-    } else {
-      lt.setAttribute("x", (RTL ? W - leakW - 10 : leakW + 10).toFixed(1));
-      lt.setAttribute("text-anchor", RTL ? "end" : "start");
-      lt.setAttribute("fill", "#F1EFE8");
-    }
-
-    const perDay = leak / 30;
-    const days = perDay > 0 ? Math.ceil(SMART_SITE / perDay) : Infinity;
-    $("days").textContent = !isFinite(days) ? "—"
-      : days <= 1 ? __DAY1__
-        : days < 400 ? __DAYS__
-          : __YEAR__;
   }
 
   [q1, q2, q3, q4].forEach(el => el.addEventListener("input", render));
@@ -312,21 +272,13 @@ _CALC_TPL = r"""
 
 _CALC_WORDS = {
     "en": {
-        "__RTL__": "false",
         "__FMT__": '"OMR " + Math.round(n).toLocaleString("en-US")',
-        "__DAY1__": '"a single day"',
-        "__DAYS__": 'days + " days"',
-        "__YEAR__": '"over a year"',
     },
     "ar": {
-        "__RTL__": "true",
         # Latin figures with an Arabic currency word: Omani prices are written
         # in Latin numerals everywhere, including on invoices. The element that
         # receives this carries dir="ltr" so the group separators survive.
         "__FMT__": 'Math.round(n).toLocaleString("en-US") + " ر.ع."',
-        "__DAY1__": '"يوم واحد"',
-        "__DAYS__": 'days + " يوماً"',
-        "__YEAR__": '"أكثر من سنة"',
     },
 }
 

@@ -1,7 +1,6 @@
 {
   "currency": "OMR",
   "baisa": 1000,
-  "founding": true,
   "deposit": 100000,
   "base": "website",
   "items": [

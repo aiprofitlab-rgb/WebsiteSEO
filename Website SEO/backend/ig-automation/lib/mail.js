@@ -77,4 +77,27 @@ function tokenRejected({ where, message, code }) {
   });
 }
 
-module.exports = { tokenRefreshFailed, tokenRejected, send };
+/**
+ * The loop breaker tripped. Worth an email because the failure is loud in public
+ * and silent in the logs you actually read: it happens under someone's post, on
+ * your account, at whatever hour Meta delivered the comment.
+ */
+function loopSuspected({ mediaId, commentId, perMedia, perAccount, caps, text }) {
+  return send({
+    to: OWNER,
+    subject: "URGENT — Instagram reply loop stopped (automation is throttling itself)",
+    html: shell(`
+<h2 style="margin:0 0 12px;font-size:19px">The comment automation started answering too fast</h2>
+<p style="margin:0 0 16px">The circuit breaker has stopped it. No further replies will be posted under this post until the hour rolls over — but something is wrong, and it will resume on its own unless you look.</p>
+<table style="border-collapse:collapse;font-size:14px">
+<tr><td style="padding:2px 12px 2px 0;color:#5C6259">On this post</td><td style="padding:2px 0"><b>${esc(perMedia)}</b> in the last hour (cap ${esc(caps && caps.perMediaPerHour)})</td></tr>
+<tr><td style="padding:2px 12px 2px 0;color:#5C6259">Account-wide</td><td style="padding:2px 0"><b>${esc(perAccount)}</b> in the last hour (cap ${esc(caps && caps.perAccountPerHour)})</td></tr>
+<tr><td style="padding:2px 12px 2px 0;color:#5C6259">Media</td><td style="padding:2px 0"><b>${esc(mediaId)}</b></td></tr>
+<tr><td style="padding:2px 12px 2px 0;color:#5C6259">Comment</td><td style="padding:2px 0"><b>${esc(commentId)}</b></td></tr>
+<tr><td style="padding:2px 12px 2px 0;color:#5C6259">Text</td><td style="padding:2px 0"><b>${esc(String(text || "").slice(0, 200))}</b></td></tr>
+</table>
+<p style="margin:20px 0 0;font-size:13px;color:#5C6259">First thing to check: does any <code>publicReply</code> in rules.json contain one of its own keywords? That is a loop — we post it, Meta hands it back as a new comment, and it matches again.</p>`),
+  });
+}
+
+module.exports = { tokenRefreshFailed, tokenRejected, loopSuspected, send };

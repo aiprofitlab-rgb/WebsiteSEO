@@ -282,6 +282,14 @@ RTL_PAGES = """
 
 /* ============================================================ simulators */
 [dir=rtl] .legend i{margin-right:0;margin-left:7px}
+/* The price table's headings and its stacked-card labels are set in tracked
+   uppercase mono, which is a Latin device - see the note above. The mono
+   face itself stays: the Arabic --mono stack falls through to Plex Sans
+   Arabic, so "ر.ع." keeps its own letterforms and only the digits beside it
+   are monospaced - which is the whole reason the figures line up. */
+[dir=rtl] .fixes .tbl thead th,[dir=rtl] .fixes .tbl td.n::before{
+  letter-spacing:0;text-transform:none;
+}
 
 /* ================================================================= demos */
 [dir=rtl] .steps2::before{left:auto;right:6px}

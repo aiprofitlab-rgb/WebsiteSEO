@@ -111,6 +111,34 @@ tatweel, diacritics, alef/yeh variants and a leading `ال` — so `سعر` matc
 `السعر`. It will not match a keyword inside a longer word: `store` does not fire
 on `restore`.
 
+### The one rule about `publicReply`
+
+**A public reply must never contain any rule's keyword.** We post it, Meta hands
+it straight back as a new comment with a *new id*, it matches the rule again, and
+the account answers itself until Instagram throttles it. The dedupe table cannot
+help: every step of the loop is an id it has never seen.
+
+`"Demos sent 📩"` under a rule keyed on `demos` is a loop. So is
+`"Just sent you the pricing 📩"` under `pricing`. Both shipped, and both are why
+`validate()` now refuses to stay quiet about it:
+
+```
+rules[2] (demo): publicReply "Demos sent 📩" contains the keyword "demos"
+and would retrigger rule "demo" — that is a reply loop, change the wording
+```
+
+Three further guards stand behind that check, because config is only one of the
+ways a loop starts:
+
+| Guard | Catches |
+| --- | --- |
+| `from.id` vs `selfId`, `entry.id`, and `selfUsername` | our own comment, however Meta scoped the id |
+| comment text equals any configured `publicReply` | our own words, whoever Meta says wrote them |
+| `IG_MAX_REPLIES_PER_MEDIA_PER_HOUR` (12), `IG_MAX_REPLIES_PER_HOUR` (40) | anything else — bounds the damage and sends mail |
+
+The breaker counts claims, not successes, and the window rolls forward on its
+own, so a throttled post recovers an hour later without a restart.
+
 ## Verification
 
 ### Before Advanced Access — everything except the live trigger
@@ -149,6 +177,19 @@ touched, so a spreadsheet outage degrades to the journal instead of losing a lea
 ```bash
 sudo journalctl -u ig-automation | grep '"ledger":"lead"'
 ```
+
+If the account ever starts repeating itself under a post, that is a reply loop.
+Stop it first, diagnose second:
+
+```bash
+sudo systemctl stop ig-automation          # the replies stop immediately
+sudo journalctl -u ig-automation | grep -E 'LOOP BREAKER|"webhook":"sent"' | tail -40
+```
+
+Then delete the runaway comments in the Instagram app, fix the `publicReply` the
+breaker names, and start the service again. `IG_MAX_REPLIES_PER_MEDIA_PER_HOUR=0`
+is the mute switch if you want the service up — answering Meta, keeping the
+handshake and the callbacks alive — while it replies to nobody.
 
 The failure that matters most is the quiet one: the token stops refreshing, every
 Graph call starts returning 190, and the automation is off for eight weeks before

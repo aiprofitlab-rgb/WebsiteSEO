@@ -11,7 +11,7 @@ const pricing = require("../lib/pricing");
 
 const day = (iso) => new Date(iso + "T12:00:00Z");
 
-test("the Growth Desk is the monthly item, at the founding price", () => {
+test("the Growth Desk is the monthly item, at the published price", () => {
   const monthly = subs.monthlyItems();
   assert.equal(monthly.length, 1);
   assert.equal(monthly[0].id, "desk");

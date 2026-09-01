@@ -659,6 +659,10 @@ section{position:relative;padding:clamp(74px,9vw,138px) 0}
   border-radius:16px;padding:clamp(24px,3vw,36px);
 }
 .panelcard h3{color:var(--cream);margin:0 0 22px;font-size:1.4rem}
+/* The result card lost the bar chart that used to fill it, and the grid still
+   stretches it to the height of the sliders beside it. Centring keeps the
+   number optically level with them instead of stranded at the top. */
+.panelcard.result{display:flex;flex-direction:column;justify-content:center}
 .fieldrow{margin-bottom:22px}
 .fieldrow label{
   display:flex;justify-content:space-between;align-items:baseline;gap:12px;
@@ -686,9 +690,7 @@ input[type=range]::-moz-range-thumb{
   display:block;font-family:var(--display);font-size:clamp(2.8rem,6.4vw,4.4rem);line-height:1;
   color:var(--amber-bright);font-variant-numeric:tabular-nums;
 }
-.payback{margin:20px 0 0;color:rgba(241,239,232,.82);font-size:1.02rem}
-.payback b{color:var(--cream)}
-.assume{margin:14px 0 0;font-size:.86rem;line-height:1.6;color:rgba(241,239,232,.5)}
+.assume{margin:26px 0 0;font-size:.86rem;line-height:1.6;color:rgba(241,239,232,.5)}
 
 /* ============================== S5 - the morning message and the three zeros */
 .touch-grid{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(30px,5vw,68px);align-items:center}
@@ -1505,26 +1507,10 @@ html:not(.js) .stair .step,html:not(.js) .stair .anno{opacity:1;transform:none}
         </div>
       </div>
 
-      <div class="panelcard rv" style="--d:.12s">
+      <div class="panelcard result rv" style="--d:.12s">
         <span class="bignum-cap">إيراد يمشي بعيداً، شهرياً</span>
         <span class="bignum" id="leakNum" dir="ltr">1,559 ر.ع.</span>
 
-        <!-- Two bars, one scale: the monthly leak against the one-time cost of
-             fixing it. The comparison is the whole argument. Mirrored for RTL -
-             both bars are anchored to the right edge and grow leftwards. -->
-        <svg id="bars" viewBox="0 0 420 132" role="img" style="width:100%;height:auto;margin-top:26px;direction:ltr" aria-labelledby="barsTitle">
-          <title id="barsTitle">الإيراد المفقود شهرياً بسبب الصمت، مقارنةً بالتكلفة المرة الواحدة للموقع الذكي</title>
-          <text x="420" y="14" fill="#A8BCB1" font-family="IBM Plex Sans Arabic, sans-serif" font-size="15" text-anchor="end">يُفقَد كل شهر</text>
-          <rect x="0" y="22" width="420" height="26" rx="5" fill="rgba(241,239,232,.10)"/>
-          <rect id="barLeak" x="0" y="22" width="420" height="26" rx="5" fill="#D89234"/>
-          <text id="barLeakT" x="10" y="40" fill="#072B22" font-family="IBM Plex Mono, monospace" font-size="15" font-weight="500" text-anchor="start">1,559 ر.ع.</text>
-          <text x="420" y="82" fill="#A8BCB1" font-family="IBM Plex Sans Arabic, sans-serif" font-size="15" text-anchor="end">الموقع الذكي، مرة واحدة</text>
-          <rect x="0" y="90" width="420" height="26" rx="5" fill="rgba(241,239,232,.10)"/>
-          <rect id="barCost" x="164" y="90" width="256" height="26" rx="5" fill="#1FAF5E"/>
-          <text x="410" y="108" fill="#072B22" font-family="IBM Plex Mono, monospace" font-size="15" font-weight="500" text-anchor="end">950 ر.ع.</text>
-        </svg>
-
-        <p class="payback">بهذا المعدل يسدّد تكلفته خلال <b id="days" dir="ltr">19 يوماً</b>.</p>
         <p class="assume">استفسارات ما بعد الدوام شهرياً &times; نسبة كسبك &times; متوسط طلبك.
           يُظهر ما هو <em>على المحكّ</em> في تلك الرسائل &mdash; لا وعداً باستعادته.</p>
       </div>
@@ -1599,15 +1585,15 @@ html:not(.js) .stair .step,html:not(.js) .stair .anno{opacity:1;transform:none}
 
     <svg class="stair rv" viewBox="0 0 1000 400" role="img" aria-labelledby="stairT stairD">
       <title id="stairT">الأنظمة الثلاثة على هيئة درج</title>
-      <desc id="stairD">الدرجة الأولى، الموقع الذكي بـ950 ريالاً عُمانياً، تجعل المشترين يصلون. وهذا يخلق
-        السؤال التالي الذي تجيب عنه الدرجة الثانية، لوحة متابعة المالك الحيّة بزيادة 650 ريالاً. وهذا يخلق السؤال التالي
-        الذي تجيب عنه الدرجة الثالثة، الطيار الآلي الكامل بزيادة 900 ريال.</desc>
+      <desc id="stairD">الدرجة الأولى، الموقع الذكي، تجعل المشترين يصلون. وهذا يخلق
+        السؤال التالي الذي تجيب عنه الدرجة الثانية، لوحة متابعة المالك الحيّة. وهذا يخلق السؤال التالي
+        الذي تجيب عنه الدرجة الثالثة، الطيار الآلي الكامل.</desc>
 
       <g style="direction:ltr;text-anchor:end">
         <g class="step" style="--d:0s">
           <rect x="690" y="270" width="280" height="90" rx="12" fill="#0F6E56"/>
           <text x="946" y="310" fill="#F1EFE8" font-family="Markazi Text, serif" font-size="30">الموقع الذكي</text>
-          <text x="946" y="340" fill="#BFE3D5" font-family="IBM Plex Mono, monospace" font-size="17">٠١ &#183; 950 ر.ع.</text>
+          <text x="946" y="340" fill="#BFE3D5" font-family="IBM Plex Mono, monospace" font-size="17">٠١</text>
         </g>
 
         <g class="anno" style="--d:.55s">
@@ -1620,7 +1606,7 @@ html:not(.js) .stair .step,html:not(.js) .stair .anno{opacity:1;transform:none}
           <rect x="370" y="190" width="280" height="170" rx="12" fill="#0A3D30"/>
           <text x="626" y="230" fill="#F1EFE8" font-family="Markazi Text, serif" font-size="30">لوحة متابعة</text>
           <text x="626" y="262" fill="#F1EFE8" font-family="Markazi Text, serif" font-size="30">المالك الحيّة</text>
-          <text x="626" y="290" fill="#BFE3D5" font-family="IBM Plex Mono, monospace" font-size="17">٠٢ &#183; +650 ر.ع.</text>
+          <text x="626" y="290" fill="#BFE3D5" font-family="IBM Plex Mono, monospace" font-size="17">٠٢</text>
         </g>
 
         <g class="anno" style="--d:.75s">
@@ -1632,7 +1618,7 @@ html:not(.js) .stair .step,html:not(.js) .stair .anno{opacity:1;transform:none}
         <g class="step" style="--d:.36s">
           <rect x="30" y="110" width="300" height="250" rx="12" fill="#072B22"/>
           <text x="306" y="150" fill="#F1EFE8" font-family="Markazi Text, serif" font-size="30">الطيار الآلي الكامل</text>
-          <text x="306" y="180" fill="#BFE3D5" font-family="IBM Plex Mono, monospace" font-size="17">٠٣ &#183; +900 ر.ع.</text>
+          <text x="306" y="180" fill="#BFE3D5" font-family="IBM Plex Mono, monospace" font-size="17">٠٣</text>
         </g>
       </g>
 
@@ -1644,21 +1630,21 @@ html:not(.js) .stair .step,html:not(.js) .stair .anno{opacity:1;transform:none}
         <span class="n">٠١</span>
         <h3>الموقع الذكي</h3>
         <p>يردّ على المشترين بالعربية والإنجليزية، ويسجّل من هم، ويحوّل الأحياء منهم إلى واتساب الخاص بك.</p>
-        <span class="tag">دفعة واحدة &#183; <b><span class="num" dir="ltr">950</span> ر.ع.</b></span>
+        <span class="tag">دفعة واحدة</span>
         <a class="tlink" href="/services/#smart-website">شاهد ما بداخله <span class="arw">&larr;</span></a>
       </article>
       <article class="card sys-card">
         <span class="n">٠٢</span>
         <h3>لوحة متابعة المالك الحيّة</h3>
         <p>السيولة والمخزون والطلبات المفتوحة على شاشة واحدة &mdash; دون الاتصال بثلاثة أشخاص لتجميعها.</p>
-        <span class="tag">إضافة &#183; <b>+<span class="num" dir="ltr">650</span> ر.ع.</b></span>
+        <span class="tag">إضافة</span>
         <a class="tlink" href="/demos-ar/#dash">افتح التجربة الحيّة <span class="arw">&larr;</span></a>
       </article>
       <article class="card sys-card">
         <span class="n">٠٣</span>
         <h3>الطيار الآلي الكامل</h3>
         <p>لا بدّ لشيء أن يطارد عروض الأسعار والفواتير. هذا يفعلها، وفق جدول، دون أن يُذكَّر.</p>
-        <span class="tag">إضافة &#183; <b>+<span class="num" dir="ltr">900</span> ر.ع.</b></span>
+        <span class="tag">إضافة</span>
         <a class="tlink" href="/services/#autopilot">شاهد ما بداخله <span class="arw">&larr;</span></a>
       </article>
     </div>
@@ -1674,7 +1660,7 @@ html:not(.js) .stair .step,html:not(.js) .stair .anno{opacity:1;transform:none}
       مدح من شخص لم تقابله قط.</p>
 
     <div class="tiles" style="margin-top:clamp(28px,4vw,48px)" data-stagger>
-      <a class="tile" href="/demos-ar/#dash">
+      <a class="tile" href="/customized-ceo-dashboard-demo-ar/">
         <span class="live"><i></i>تجربة حيّة</span>
         <span class="shot"><img src="/assets/v4/demo-dashboard-960.webp" alt="تجربة لوحة متابعة المدير: بطاقات الإيراد والربح الإجمالي والهامش فوق قائمة إجراءات مرتّبة." width="960" height="600" loading="lazy" decoding="async"></span>
         <span class="cap">
@@ -1684,7 +1670,7 @@ html:not(.js) .stair .step,html:not(.js) .stair .anno{opacity:1;transform:none}
         </span>
       </a>
 
-      <a class="tile" href="/demos-ar/">
+      <a class="tile" href="/whatsapp-receptionist-demo-ar/">
         <span class="live"><i></i>تجربة حيّة</span>
         <span class="shot"><img src="/assets/v4/demo-whatsapp-960.webp" alt="تجربة موظف استقبال واتساب: قائمة الطلبات بجانب محادثة كاملة مع مشترٍ يديرها الوكيل الذكي." width="960" height="600" loading="lazy" decoding="async"></span>
         <span class="cap">
@@ -1726,7 +1712,7 @@ html:not(.js) .stair .step,html:not(.js) .stair .anno{opacity:1;transform:none}
 
       <div class="hcard win">
         <h3>الموقع الذكي</h3>
-        <p class="sub"><span class="num" dir="ltr">950</span> ر.ع.، مرة واحدة</p>
+        <p class="sub">تُدفع مرة واحدة، لا كل شهر</p>
         <p class="hlegend">الصفوف: الأحد &#8592; السبت &#183; الأعمدة: <span class="num" dir="ltr">00:00</span> &#8592; <span class="num" dir="ltr">23:00</span></p>
         <div class="hgrid" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></div>
         <span class="hcount"><span data-count="168">168</span> من <span class="num" dir="ltr">168</span> ساعة</span>
@@ -2219,8 +2205,6 @@ html:not(.js) .stair .step,html:not(.js) .stair .anno{opacity:1;transform:none}
   if (!q1) return;
 
   const WEEKS_PER_MONTH = 4.33;
-  const SMART_SITE = 950;          // must match the price ladder above
-  const RTL = true;
   const fmt = n => Math.round(n).toLocaleString("en-US") + " ر.ع.";
 
   function render() {
@@ -2233,49 +2217,12 @@ html:not(.js) .stair .step,html:not(.js) .stair .anno{opacity:1;transform:none}
 
     const leak = perWeek * WEEKS_PER_MONTH * (pct / 100) * (win / 100) * order;
     $("leakNum").textContent = fmt(leak);
-
-    /* Both bars share one scale so the comparison is honest. The leak bar is
-       full width whenever it exceeds the build cost, and the cost bar shrinks
-       against it; below that the roles swap. */
-    const max = Math.max(leak, SMART_SITE) || 1;
-    const W = 420;
-    const leakW = Math.max(4, (leak / max) * W);
-    const costW = Math.max(4, (SMART_SITE / max) * W);
-    $("barLeak").setAttribute("width", leakW.toFixed(1));
-    $("barCost").setAttribute("width", costW.toFixed(1));
-    /* On an Arabic page both bars are anchored to the right edge of the track
-       and grow leftwards, so a bar still starts where the reader starts. */
-    if (RTL) {
-      $("barLeak").setAttribute("x", (W - leakW).toFixed(1));
-      $("barCost").setAttribute("x", (W - costW).toFixed(1));
-    }
-
-    /* Keep the leak label inside its own bar; when the bar is short the label
-       would otherwise overhang the track and collide with the background. */
-    const lt = $("barLeakT");
-    lt.textContent = fmt(leak);
-    if (leakW > 120) {
-      lt.setAttribute("x", (RTL ? W - leakW + 10 : leakW - 10).toFixed(1));
-      lt.setAttribute("text-anchor", RTL ? "start" : "end");
-      lt.setAttribute("fill", "#072B22");
-    } else {
-      lt.setAttribute("x", (RTL ? W - leakW - 10 : leakW + 10).toFixed(1));
-      lt.setAttribute("text-anchor", RTL ? "end" : "start");
-      lt.setAttribute("fill", "#F1EFE8");
-    }
-
-    const perDay = leak / 30;
-    const days = perDay > 0 ? Math.ceil(SMART_SITE / perDay) : Infinity;
-    $("days").textContent = !isFinite(days) ? "—"
-      : days <= 1 ? "يوم واحد"
-        : days < 400 ? days + " يوماً"
-          : "أكثر من سنة";
   }
 
   [q1, q2, q3, q4].forEach(el => el.addEventListener("input", render));
   render();
 })();
 </script>
-    <script defer src="/js/aiden-chat.js?v=5312f568"></script>
+<script defer src="/js/aiden-chat.js?v=c8fb76b5"></script>
 </body>
 </html>
