@@ -110,6 +110,19 @@ function create({ token, appSecret, igUserId, fetchImpl = fetch } = {}) {
     /** Post metadata, for the CRM row's permalink. Best-effort; never blocks a DM. */
     media: (mediaId) => call("GET", String(mediaId), { params: { fields: "permalink,media_type" } }),
 
+    /**
+     * The account's posts and reels, for the admin panel's post picker.
+     *
+     * Read-only and never on the webhook path — a Graph outage must not be able
+     * to stop a DM. `thumbnail_url` is only present on videos, so the panel
+     * falls back to `media_url` for images; both are short-lived CDN links,
+     * which is fine for a page that is open for minutes.
+     */
+    mediaList: ({ limit = 50 } = {}) =>
+      call("GET", `${me()}/media`, {
+        params: { fields: "id,caption,media_type,media_url,thumbnail_url,permalink,timestamp", limit },
+      }),
+
     config: () => ({ base: BASE, version: VERSION, igUserId: igUserId || null, hasToken: Boolean(accessToken()), hasProof: Boolean(appSecret) }),
   };
 }

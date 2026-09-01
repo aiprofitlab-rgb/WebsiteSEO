@@ -1,20 +1,37 @@
 {
   "_comment": [
-    "Keyword -> action config. Edit and restart the service; no deploy needed.",
-    "Rules are ordered and the FIRST match wins, so put specific keywords above generic ones.",
-    "match: 'word' (default, whole word), 'contains' (substring), or 'exact' (whole comment).",
-    "NEVER put a rule's own keyword inside its publicReply. We post that reply, Meta hands it",
-    "back to us as a NEW comment with a NEW id, it matches again, and the account answers",
-    "itself until Instagram throttles it. The dedupe table cannot catch it — every loop step",
-    "has an id it has never seen. The service refuses to start quietly on this: check the log.",
-    "Meta allows exactly ONE private reply per comment, ever — dm.text and dm.link are",
-    "concatenated into that single message, so it has to carry the whole payload."
+    "THE SEED, not the live config. On a deployed box IG_RULES_FILE points at",
+    "/var/lib/ig-automation/rules.json, which is written by the admin panel at",
+    "/admin/ and copied from this file only the first time, when nothing is there.",
+    "Editing this file changes nothing on a running install.",
+    "",
+    "Rules are ordered and the FIRST match wins, so put specific keywords above",
+    "generic ones. match: 'word' (default, whole word), 'contains' (substring),",
+    "or 'exact' (whole comment).",
+    "",
+    "media: { mode: 'all' } fires on every post. { mode: 'only', ids: [...] }",
+    "narrows a rule to particular posts, which is how one keyword can mean",
+    "different things on different reels.",
+    "",
+    "NEVER put a rule's own keyword inside its publicReply. We post that reply,",
+    "Meta hands it back as a NEW comment with a NEW id, it matches again, and the",
+    "account answers itself until Instagram throttles it. The dedupe table cannot",
+    "catch it — every loop step has an id it has never seen. The panel refuses to",
+    "save it and the service refuses to start quietly on it.",
+    "",
+    "Meta allows exactly ONE private reply per comment, ever — dm.text, dm.link",
+    "and any uploaded dm.fileId are concatenated into that single message, so it",
+    "has to carry the whole payload."
   ],
   "rules": [
     {
       "id": "storefront",
       "enabled": true,
-      "keywords": ["storefront", "store", "متجر"],
+      "keywords": [
+        "storefront",
+        "store",
+        "متجر"
+      ],
       "match": "word",
       "dm": {
         "text": "Here's the Smart Storefront breakdown — what it includes, what it costs, and how fast it goes live 👇",
@@ -27,7 +44,13 @@
     {
       "id": "price",
       "enabled": true,
-      "keywords": ["price", "pricing", "cost", "سعر", "اسعار"],
+      "keywords": [
+        "price",
+        "pricing",
+        "cost",
+        "سعر",
+        "اسعار"
+      ],
       "match": "word",
       "dm": {
         "text": "Full pricing, no call required — every package and what's in it 👇",
@@ -40,7 +63,12 @@
     {
       "id": "demo",
       "enabled": true,
-      "keywords": ["demo", "demos", "example", "تجربة"],
+      "keywords": [
+        "demo",
+        "demos",
+        "example",
+        "تجربة"
+      ],
       "match": "word",
       "dm": {
         "text": "Here are the live demos — click through them, they're real, not screenshots 👇",
@@ -53,7 +81,11 @@
     {
       "id": "guide",
       "enabled": true,
-      "keywords": ["guide", "checklist", "دليل"],
+      "keywords": [
+        "guide",
+        "checklist",
+        "دليل"
+      ],
       "match": "word",
       "dm": {
         "text": "Sending the guide over. Reply here with your email and I'll also send the PDF version you can keep 👇",

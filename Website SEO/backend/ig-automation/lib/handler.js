@@ -87,7 +87,13 @@ async function handleComment(value, entry, deps) {
 
   // Guard 3. Most comments are not keywords. Costs nothing, so it runs before
   // the write to the dedupe table.
-  const matched = rulesLib.match(text, cfg);
+  //
+  // The media id is part of the question, not a filter applied to the answer: a
+  // rule can be scoped to particular posts, and "first match wins" has to mean
+  // the first rule that could actually fire under THIS post. Passing the key at
+  // all is what turns targeting on, so an event that somehow arrives without a
+  // media id still matches every untargeted rule and none of the targeted ones.
+  const matched = rulesLib.match(text, cfg, { mediaId: media.id || "" });
   if (!matched) return { action: "drop", why: "no keyword" };
   const { rule, keyword } = matched;
 
@@ -139,9 +145,20 @@ async function handleComment(value, entry, deps) {
   };
 
   // The DM. This is the deliverable; everything after it is bookkeeping.
+  //
+  // An attached file travels as a URL inside this one message, because there is
+  // no second message: Meta allows exactly one private reply per comment, ever.
+  // A file that has been deleted since the rule was written resolves to "" and
+  // the DM goes out with its text and link — a lead with a slightly thinner
+  // message beats a lead with a 404 in it.
+  const fileUrl = deps.files && rule.dm && rule.dm.fileId ? deps.files.urlFor(rule.dm.fileId) : "";
+  if (rule.dm && rule.dm.fileId && !fileUrl) {
+    console.error("ATTACHED FILE IS MISSING:", rule.dm.fileId, "for rule", rule.id, "— sending the DM without it");
+  }
+
   let dmOk = false;
   try {
-    await ig.privateReply({ commentId, text: rulesLib.dmText(rule) });
+    await ig.privateReply({ commentId, text: rulesLib.dmText(rule, { fileUrl }) });
     dmOk = true;
     record.DM = "sent";
   } catch (err) {

@@ -13,7 +13,7 @@ comment webhook
   → verify X-Hub-Signature-256   (fails closed; an unsigned POST is refused)
   → ack 200                      (before any work — Meta's budget is ~2s)
   → our own comment?             drop, or the public reply answers itself forever
-  → keyword match?               drop if not; most comments are not keywords
+  → keyword match on THIS post?  a rule can be scoped to particular posts
   → claim comment_id             atomic; a Meta retry loses this race
   → private reply  POST /<IG_ID>/messages  { recipient: { comment_id }, ... }
   → public reply   POST /<COMMENT_ID>/replies
@@ -42,15 +42,50 @@ campaign copy:
 - **24 hours** to keep replying after they message you. Email capture lives inside
   that window.
 
+## The admin panel
+
+Everything a campaign needs changed — keywords, DM copy, which post a rule fires
+on, the file it sends — is a browser form at `/admin/`, not an SSH session:
+
+```
+Rules     one card per rule: keywords, match mode, the posts it fires on,
+          the DM, the link, the attached file, the public reply, email capture
+Files     drag a PDF in; it gets an unguessable public link a rule can attach
+Activity  the last comments the service acted on, and what happened to each
+```
+
+Three properties, each of which is the reason something in `lib/` looks the way
+it does:
+
+- **A save is live on the next comment.** No restart. `lib/rulesStore.js` writes
+  atomically and the service reads the config through a getter.
+- **A reply loop cannot be saved.** The panel runs the same validator the service
+  boots with, and an `error` finding blocks the write. This is the guard for the
+  failure that produced ninety identical replies on 2026-08-30.
+- **The panel does not exist without a password.** `IG_ADMIN_PASSWORD_HASH` unset
+  means the routes are never mounted.
+
+A file is delivered as a link inside the DM rather than as an attachment, and
+that is forced by the first constraint above: with one message to work with,
+an attachment would arrive *instead of* the message.
+
+```bash
+node scripts/set-admin-password.js     # prints the line for .env
+```
+
 ## Layout
 
 | File | What it is |
 |---|---|
 | `server.js` | Wiring, `/health`, rate limit, boot checks |
 | `webhook.js` | The GET handshake and the POST that acks before it works |
-| `rules.json` | Keyword → action config. Edit and restart; no deploy |
+| `rules.json` | Keyword → action config. The SEED; the live copy is writable and lives outside the tree |
+| `admin/` | The panel: the API in `router.js`, the page in `public/` |
 | `lib/signature.js` | `X-Hub-Signature-256` and `appsecret_proof` |
-| `lib/rules.js` | Matching, including Arabic normalisation |
+| `lib/rules.js` | Matching, post targeting, Arabic normalisation, and the validator |
+| `lib/rulesStore.js` | The writable rules file: validate, back up, write, hot-reload |
+| `lib/auth.js` | The panel's password, session cookie and lockout |
+| `lib/files.js` | Uploads, and the public URL a DM links to |
 | `lib/ig.js` | Graph client |
 | `lib/tokens.js` | The token file and its 60-day refresh |
 | `lib/store.js` | SQLite: the dedupe set and conversation state |
@@ -61,6 +96,7 @@ campaign copy:
 | `scripts/replay.js` | Send a correctly signed webhook at a running instance |
 | `scripts/refresh-token.js` | The daily cron |
 | `scripts/verify-sheet.js` | Proves a 17-digit id survives the real spreadsheet |
+| `scripts/set-admin-password.js` | Prints the `IG_ADMIN_PASSWORD_HASH` line for `.env` |
 | `deploy/` | Caddyfile, systemd units, and [DEPLOY.md](deploy/DEPLOY.md) |
 
 Requires **Node 22.5+** — state uses the built-in `node:sqlite`, deliberately
@@ -71,7 +107,7 @@ instead of `better-sqlite3`, so the VPS never needs a C++ toolchain.
 ```bash
 npm ci
 cp .env.example .env          # invent a verify token and an app secret
-npm test                      # 78 tests, no network needed
+npm test                      # 139 tests, no network needed
 
 # Terminal 1 — a fake Instagram
 node scripts/graph-stub.js
@@ -83,6 +119,19 @@ IG_GRAPH_BASE=http://127.0.0.1:9099 npm run dev
 node scripts/replay.js "storefront"
 node scripts/replay.js --email "sure, it's me@example.com"
 ```
+
+The panel needs a password and, over plain http, a cookie it is allowed to set:
+
+```bash
+IG_GRAPH_BASE=http://127.0.0.1:9099 \
+IG_ADMIN_PASSWORD=local-dev-password IG_ADMIN_INSECURE_COOKIES=1 \
+IG_PUBLIC_BASE=http://127.0.0.1:8090 npm run dev
+# then http://127.0.0.1:8090/admin/
+```
+
+The stub serves three fake posts, so the post picker, the targeting and the
+"not in recent list" tile are all exercisable before Meta approves anything.
+
 
 The stub prints every call the service would have made to Meta, and enforces the
 one-private-reply-per-comment rule, so the dedupe is proven rather than assumed.
@@ -143,9 +192,11 @@ own, so a throttled post recovers an hour later without a restart.
 
 ### Before Advanced Access — everything except the live trigger
 
-1. `npm test` — 78 tests: signature (valid, tampered, wrong secret, missing,
-   unconfigured), rules matching, the self-comment guard, dedupe across a
-   restart, token rotation, and the ledger's ID-precision guard.
+1. `npm test` — 139 tests: signature (valid, tampered, wrong secret, missing,
+   unconfigured), rules matching and post targeting, the self-comment guard,
+   dedupe across a restart, token rotation, the ledger's ID-precision guard,
+   and the panel end to end (sign-in, the loop the save gate refuses, an upload
+   that reaches a DM, a stale tab that loses the race).
 2. `node scripts/replay.js "storefront"` against a running instance. Expect a
    **200 in well under two seconds** and the DM, reply and ledger lines in the
    log. Replay the same payload three times and confirm exactly one DM.

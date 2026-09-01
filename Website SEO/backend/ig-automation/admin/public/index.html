@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Nothing here should ever be indexed or previewed anywhere. -->
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<title>Instagram automation · AI Profit Lab</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%230F6E56'/><text x='16' y='23' font-size='19' text-anchor='middle' fill='%23fff' font-family='sans-serif' font-weight='bold'>IG</text></svg>">
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+
+<!-- ── login ─────────────────────────────────────────────────────────────── -->
+<div id="login" class="login hidden">
+  <form class="card" id="login-form">
+    <h1 style="font-size:20px">Instagram automation</h1>
+    <p class="muted" style="font-size:13.5px">Comment keywords, DMs and files for <strong>@aiprofitlab</strong>.</p>
+    <label class="field" style="margin-top:18px">
+      <span class="lbl">Password</span>
+      <input type="password" id="login-password" autocomplete="current-password" autofocus required>
+    </label>
+    <div id="login-error" class="note error hidden"></div>
+    <button class="primary" type="submit" style="width:100%">Sign in</button>
+  </form>
+</div>
+
+<!-- ── app ───────────────────────────────────────────────────────────────── -->
+<div id="app" class="hidden">
+  <header class="top">
+    <div class="brand">AI Profit Lab <span>· Instagram automation</span></div>
+    <div class="facts" id="facts"></div>
+    <div class="spacer"></div>
+    <button class="ghost" id="btn-signout" style="color:#cfe0d8">Sign out</button>
+  </header>
+
+  <nav class="tabs" role="tablist">
+    <button role="tab" data-tab="rules" aria-selected="true">Rules</button>
+    <button role="tab" data-tab="files" aria-selected="false">Files</button>
+    <button role="tab" data-tab="activity" aria-selected="false">Activity</button>
+  </nav>
+
+  <main>
+    <!-- rules -->
+    <section class="tabbed" id="tab-rules">
+      <div id="problems"></div>
+
+      <div class="toolbar">
+        <button class="primary" id="btn-add">+ New rule</button>
+        <button id="btn-test">Test a comment</button>
+        <div class="spacer"></div>
+        <span class="muted" style="font-size:12.5px" id="rule-count"></span>
+      </div>
+
+      <div id="tester" class="hidden" style="margin-bottom:16px">
+        <div class="note ok" style="margin:0">
+          <strong>Dry run.</strong> Nothing is sent — this answers what <em>would</em> happen, using the rules on screen
+          including unsaved edits.
+          <div class="two-col" style="margin-top:10px">
+            <label class="field" style="margin-bottom:8px">
+              <span class="lbl">Someone comments</span>
+              <input type="text" id="test-text" placeholder="how much is the storefront?">
+            </label>
+            <label class="field" style="margin-bottom:8px">
+              <span class="lbl">On this post</span>
+              <select id="test-media"></select>
+            </label>
+          </div>
+          <button class="primary tiny" id="btn-run-test">Run</button>
+          <div id="test-result" style="margin-top:10px"></div>
+        </div>
+      </div>
+
+      <div id="rules"></div>
+
+      <div class="savebar">
+        <span id="dirty" class="muted" style="font-size:13px"></span>
+        <div class="spacer"></div>
+        <button id="btn-revert" disabled>Discard changes</button>
+        <button class="primary" id="btn-save" disabled>Save &amp; go live</button>
+      </div>
+    </section>
+
+    <!-- files -->
+    <section class="tabbed hidden" id="tab-files">
+      <p class="muted" style="font-size:13.5px;max-width:64ch">
+        Anything uploaded here gets a private, unguessable link you can attach to a rule. The link travels
+        <em>inside</em> the DM: Instagram allows exactly one private reply per comment, so a real attachment would
+        mean sending the file <em>instead of</em> your message, never as well as it.
+      </p>
+      <div class="drop" id="drop">
+        <strong>Drop a file here</strong> or <button class="tiny" id="btn-browse">choose one</button>
+        <div class="muted" style="font-size:12.5px;margin-top:6px" id="upload-limits"></div>
+        <input type="file" id="file-input" class="hidden">
+      </div>
+      <div id="upload-error"></div>
+      <div style="margin-top:18px" id="file-list"></div>
+    </section>
+
+    <!-- activity -->
+    <section class="tabbed hidden" id="tab-activity">
+      <div class="toolbar">
+        <h2 style="font-size:16px">Recent comments the automation took on</h2>
+        <div class="spacer"></div>
+        <button class="tiny" id="btn-refresh-activity">Refresh</button>
+      </div>
+      <div id="activity"></div>
+    </section>
+  </main>
+</div>
+
+<div id="toast"></div>
+<script src="app.js"></script>
+</body>
+</html>

@@ -81,6 +81,7 @@ function open(file) {
     dropHandled: db.prepare(`DELETE FROM handled WHERE comment_id = ?`),
     stuck: db.prepare(`SELECT * FROM handled WHERE status = 'processing' AND claimed_at < ? ORDER BY claimed_at`),
     countHandled: db.prepare(`SELECT COUNT(*) AS n FROM handled`),
+    recentHandled: db.prepare(`SELECT * FROM handled ORDER BY claimed_at DESC LIMIT ?`),
 
     setState: db.prepare(
       `INSERT INTO conversations (igsid, account_id, state, rule_id, comment_id, username, updated_at, expires_at)
@@ -155,6 +156,16 @@ function open(file) {
       const from = Number(since) || 0;
       const row = mediaId ? stmts.recentByMedia.get(String(mediaId), from) : stmts.recentAll.get(from);
       return (row && row.n) || 0;
+    },
+
+    /**
+     * The last N comments taken on, newest first. Read-only, and the only thing
+     * the admin panel needs from this table: "did my new rule actually fire?"
+     * is otherwise a journalctl session over SSH.
+     */
+    recent(limit = 40) {
+      const n = Math.min(Math.max(Number(limit) || 40, 1), 500);
+      return stmts.recentHandled.all(n);
     },
 
     /** Claims that never reported an outcome — a crash mid-flight. For /health and ops. */

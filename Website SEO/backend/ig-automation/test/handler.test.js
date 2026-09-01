@@ -405,3 +405,62 @@ test("the breaker's window rolls forward — a throttled post recovers by itself
   assert.equal(later.action, "sent");
   h.db.close();
 });
+
+/* ---------------------------------------------------------------------------
+ * Post targeting and attached files, at the point where a real DM goes out
+ * ------------------------------------------------------------------------- */
+
+const TARGETED = {
+  rules: [
+    {
+      id: "reel-only",
+      keywords: ["guide"],
+      media: { mode: "only", ids: ["MEDIA_A"] },
+      dm: { text: "The reel guide" },
+      publicReply: "On its way 📩",
+    },
+    { id: "everywhere", keywords: ["guide"], dm: { text: "The usual guide" }, publicReply: "Sent 📩" },
+  ],
+};
+
+test("a rule narrowed to one post answers there and stays out of the way elsewhere", async () => {
+  const h = harness({ depsOverrides: { rules: TARGETED } });
+
+  await handler.handleComment(comment({ id: "c1", text: "guide please", media: { id: "MEDIA_A" } }), entry, h.deps);
+  await handler.handleComment(comment({ id: "c2", text: "guide please", media: { id: "MEDIA_B" } }), entry, h.deps);
+
+  assert.deepEqual(
+    h.calls.privateReply.map((c) => c.text),
+    ["The reel guide", "The usual guide"]
+  );
+  assert.deepEqual(
+    h.appended.map((r) => r.Rule),
+    ["reel-only", "everywhere"]
+  );
+});
+
+test("an attached file becomes part of the one private reply, not a second message", async () => {
+  const withFile = {
+    rules: [{ id: "guide", keywords: ["guide"], dm: { text: "Here you go", fileId: "abc123" }, publicReply: "Sent 📩" }],
+  };
+  const h = harness({
+    depsOverrides: { rules: withFile, files: { urlFor: () => "https://hooks.aiprofitlab.io/f/abc123/guide.pdf" } },
+  });
+
+  await handler.handleComment(comment({ text: "guide" }), entry, h.deps);
+
+  assert.equal(h.calls.privateReply.length, 1, "Meta allows exactly one, so there must only ever be one");
+  assert.equal(h.calls.privateReply[0].text, "Here you go\n\nhttps://hooks.aiprofitlab.io/f/abc123/guide.pdf");
+});
+
+test("a file deleted after the rule was written still sends the message, minus the link", async () => {
+  const withFile = {
+    rules: [{ id: "guide", keywords: ["guide"], dm: { text: "Here you go" , fileId: "gone" }, publicReply: "Sent 📩" }],
+  };
+  const h = harness({ depsOverrides: { rules: withFile, files: { urlFor: () => "" } } });
+
+  const result = await handler.handleComment(comment({ text: "guide" }), entry, h.deps);
+
+  assert.equal(result.action, "sent");
+  assert.equal(h.calls.privateReply[0].text, "Here you go");
+});

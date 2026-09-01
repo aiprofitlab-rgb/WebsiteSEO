@@ -23,6 +23,37 @@ hooks.aiprofitlab.io {
 		}
 	}
 
+	# The file a DM links to. PUBLIC on purpose — this is the URL a follower's
+	# phone opens, and it has no cookie. What makes that safe is upstream: the
+	# id is 16 random bytes, the directory is never listed, and only passive
+	# file types can be uploaded, because an .html here would be a same-origin
+	# script wearing aiprofitlab.io.
+	handle /f/* {
+		reverse_proxy 127.0.0.1:8090
+	}
+
+	# The admin panel: keywords, DM copy, post targeting, file uploads.
+	#
+	# Password-protected in the app (scrypt, signed session cookie, per-IP
+	# lockout) and not mounted at all when no password is configured. If you
+	# want a second lock, uncomment the remote_ip matcher below and put your
+	# own address in it — but be sure it is stable first, or you will lock
+	# yourself out of the thing that fixes campaigns.
+	handle /admin* {
+		# @me remote_ip 1.2.3.4
+		# handle @me {
+		reverse_proxy 127.0.0.1:8090 {
+			transport http {
+				# Uploads are up to 25 MB; the webhook's 10s budget is far too
+				# tight for one over a phone connection.
+				dial_timeout 5s
+				response_header_timeout 120s
+			}
+		}
+		# }
+		# respond 403
+	}
+
 	# Reachable, but not something to leave open to the internet unauthenticated
 	# — it reports account id, rule ids and token days-left. Restrict to your own
 	# IP, or comment the block out and check it over SSH with

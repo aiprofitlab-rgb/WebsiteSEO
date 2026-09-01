@@ -450,11 +450,24 @@
             .replace(/'/g, '&#39;');
     }
 
-    // Only same-site links are ever rendered as anchors. Anything else stays as
-    // plain text, so a malformed or injected URL can never become javascript:.
+    // Only same-site links are ever rendered as anchors, plus one exception:
+    // a WhatsApp handover to Nahid's own number, which is where Aiden sends
+    // anyone asking about bespoke work that has no published price. The number
+    // is pinned inside the pattern on purpose - a page that manages to inject
+    // instructions into Aiden still cannot get a link to someone else's
+    // WhatsApp in front of a visitor. Anything else stays as plain text, so a
+    // malformed or injected URL can never become javascript:.
+    var HANDOFF_NUMBER = '96899245250';
+    var HANDOFF_URL_RE = new RegExp(
+        '^https://(api\\.whatsapp\\.com/send\\?phone=' + HANDOFF_NUMBER + '(&|$)' +
+        '|wa\\.me/' + HANDOFF_NUMBER + '(\\?|$))',
+        'i'
+    );
+
     function safeUrl(url) {
         if (/^\/(?!\/)/.test(url)) return url;
         if (/^https?:\/\/([\w-]+\.)?aiprofitlab\.io(\/|$)/i.test(url)) return url;
+        if (HANDOFF_URL_RE.test(url)) return url;
         return null;
     }
 
@@ -466,7 +479,12 @@
         html = html.replace(/\[([^\]\n]+)\]\(([^)\s]+)\)/g, function (match, label, url) {
             var href = safeUrl(url);
             if (!href) return label;
-            return '<a class="lnk" href="' + href + '">' + label + '</a>';
+            // The WhatsApp handover is the only off-site href safeUrl lets
+            // through; open it in a new tab so the visitor keeps the page they
+            // were reading, exactly as the error-path link below does.
+            var offsite = /^https?:/i.test(href) && !/aiprofitlab\.io/i.test(href)
+                ? ' target="_blank" rel="noopener"' : '';
+            return '<a class="lnk" href="' + href + '"' + offsite + '>' + label + '</a>';
         });
 
         html = html.replace(/\*\*([^*\n]+)\*\*/g, '<strong>$1</strong>');

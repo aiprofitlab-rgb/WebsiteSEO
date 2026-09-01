@@ -83,6 +83,24 @@ const refresh = (req, res) => {
 app.get("/refresh_access_token", refresh);
 app.get("/:version/refresh_access_token", refresh);
 
+/**
+ * The account's posts, for the admin panel's post picker. Three fake ones is
+ * enough to prove the picker, the "not in recent list" tile and the id that
+ * ends up in rules.json are all wired to each other.
+ */
+app.get("/:version/:id/media", (req, res) => {
+  log("media list", { limit: req.query.limit });
+  const at = (days) => new Date(Date.now() - days * 86400000).toISOString();
+  res.json({
+    data: [
+      { id: "17900000000000001", caption: "Smart Storefront in 10 days. Comment STOREFRONT.", media_type: "VIDEO", thumbnail_url: "", permalink: "https://www.instagram.com/reel/STUB001/", timestamp: at(2) },
+      { id: "17900000000000002", caption: "What an AI receptionist costs. Comment PRICE.", media_type: "IMAGE", media_url: "", permalink: "https://www.instagram.com/p/STUB002/", timestamp: at(9) },
+      { id: "17900000000000003", caption: "Three live demos. Comment DEMO.", media_type: "CAROUSEL_ALBUM", media_url: "", permalink: "https://www.instagram.com/p/STUB003/", timestamp: at(21) },
+    ],
+    paging: {},
+  });
+});
+
 app.get("/:version/:mediaId", (req, res) => {
   log("media lookup", { media_id: req.params.mediaId });
   res.json({ id: req.params.mediaId, permalink: `https://www.instagram.com/p/STUB${req.params.mediaId.slice(-4)}/`, media_type: "VIDEO" });

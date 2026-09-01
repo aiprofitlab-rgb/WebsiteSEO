@@ -17,25 +17,34 @@ const express = require("express");
 const ledger = require("./lib/ledger");
 const tokens = require("./lib/tokens");
 const rulesLib = require("./lib/rules");
+const rulesStore = require("./lib/rulesStore");
 const igClient = require("./lib/ig");
 const store = require("./lib/store");
+const files = require("./lib/files");
+const auth = require("./lib/auth");
 const alert = require("./lib/mail");
 const handler = require("./lib/handler");
 const webhook = require("./webhook");
+const admin = require("./admin/router");
 
 const app = express();
 app.set("trust proxy", true);
 
 // The raw bytes, kept for the HMAC. A re-serialised object would not produce the
 // digest Meta signed — key order and unicode escaping both differ.
-app.use(
-  express.json({
-    limit: "256kb", // Meta batches events; 64kb is tight for a busy post
-    verify: (req, _res, buf) => {
-      req.rawBody = buf;
-    },
-  })
-);
+const parseWebhookJson = express.json({
+  limit: "256kb", // Meta batches events; 64kb is tight for a busy post
+  verify: (req, _res, buf) => {
+    req.rawBody = buf;
+  },
+});
+
+// Everything except the panel. A body parser is not reusable across these two:
+// the first one to run claims the body, so a global parser here would silently
+// impose Meta's 256kb limit on a 25MB file upload and hand /admin's routes a
+// pre-parsed body whose own limits could never apply. The panel's routes each
+// declare their own parser instead.
+app.use((req, res, next) => (req.path.startsWith("/admin") ? next() : parseWebhookJson(req, res, next)));
 
 /** Same in-memory throttle as checkout-api. */
 const hits = new Map();
@@ -53,7 +62,11 @@ function rateLimit({ windowMs, max, bucket }) {
 }
 
 const db = store.open();
-const rules = rulesLib.load();
+
+// Copy the repo's rules.json into the writable location the first time only.
+// After that the panel owns it, and a deploy must never roll a live campaign
+// back to whatever is in git. See lib/rulesStore.js.
+rulesStore.seed();
 
 /**
  * The loop breaker's ceiling. Not a rate limit on followers — a bound on us.
@@ -87,10 +100,20 @@ const deps = {
   ig,
   store: db,
   ledger,
-  rules,
+  files,
+  tokens,
   alert,
   handleEvent: handler.handleEvent,
   limits,
+  /**
+   * Read through the store, never captured once at boot. This is what makes a
+   * save in the admin panel take effect on the very next comment instead of on
+   * the next `systemctl restart` — and it picks up a rules file edited by hand
+   * over SSH the same way, since the store re-stats before it re-parses.
+   */
+  get rules() {
+    return rulesStore.current();
+  },
   get selfId() {
     return selfId;
   },
@@ -109,7 +132,12 @@ app.get("/health", (req, res) => {
     token: { daysLeft: tokens.daysLeft(), file: tokens.file() },
     // Fails loudly in the health check rather than at the first real comment.
     webhook: { verifyToken: Boolean(process.env.IG_VERIFY_TOKEN), appSecret: Boolean(process.env.META_APP_SECRET) },
-    rules: { count: (rules.rules || []).length, ids: (rules.rules || []).map((r) => r.id) },
+    rules: {
+      count: (deps.rules.rules || []).length,
+      ids: (deps.rules.rules || []).map((r) => r.id),
+      file: rulesStore.file(),
+    },
+    admin: { configured: auth.configured(), files: files.list().length },
     // The loop guards, visible without reading the source. `selfLoop: "config"`
     // means we are recognising our own replies by their text, which works even
     // when the id checks do not.
@@ -120,6 +148,50 @@ app.get("/health", (req, res) => {
 });
 
 app.use("/ig", rateLimit({ windowMs: 60_000, max: 600, bucket: "webhook" }), webhook.create(deps));
+
+/**
+ * The public download for an uploaded file.
+ *
+ * This URL is the one thing in the service a stranger is MEANT to reach: it is
+ * what the DM links to. So it is unauthenticated, and everything that makes
+ * that safe is upstream — the id is 16 random bytes, the directory is never
+ * listed, and lib/files.js only ever accepts passive file types, because this
+ * is a subdomain of the brand and an uploaded .html would be a same-origin
+ * script wearing it.
+ *
+ * The filename in the path is cosmetic; only the id is looked up. That way a
+ * renamed file keeps working and a crafted path cannot escape the directory.
+ */
+app.get("/f/:id/:name?", rateLimit({ windowMs: 60_000, max: 240, bucket: "files" }), (req, res) => {
+  const hit = files.find(req.params.id);
+  if (!hit) return res.status(404).type("text/plain").send("Not found.");
+  res.setHeader("Content-Type", hit.mime);
+  res.setHeader("X-Content-Type-Options", "nosniff");
+  const type = files.TYPES[hit.ext];
+  res.setHeader(
+    "Content-Disposition",
+    `${type && type.inline ? "inline" : "attachment"}; filename="${hit.name.replace(/"/g, "")}"`
+  );
+  // The id is content-addressed by construction — a new upload is a new id — so
+  // this can be cached hard. A file that changes gets a new URL and the rule
+  // that points at it is re-saved.
+  res.setHeader("Cache-Control", "public, max-age=86400");
+  res.sendFile(hit.path);
+});
+
+/**
+ * The admin panel.
+ *
+ * Not mounted at all when no password is configured. An unconfigured admin
+ * surface on a public hostname is worse than a missing feature, so the failure
+ * mode is 404 rather than "open".
+ */
+if (auth.configured()) {
+  app.use("/admin", rateLimit({ windowMs: 60_000, max: 300, bucket: "admin" }), admin.create(deps));
+  app.use("/admin", express.static(require("node:path").join(__dirname, "admin", "public"), { index: "index.html" }));
+} else {
+  console.warn("!! admin panel DISABLED — set IG_ADMIN_PASSWORD_HASH (scripts/set-admin-password.js) to enable it");
+}
 
 app.use((req, res) => res.status(404).json({ message: "Not found." }));
 
@@ -153,11 +225,18 @@ if (require.main === module) {
   app.listen(PORT, async () => {
     console.log(`ig-automation listening on ${PORT}`);
 
+    if (process.env.IG_ADMIN_PASSWORD && !process.env.IG_ADMIN_PASSWORD_HASH) {
+      console.warn("!! IG_ADMIN_PASSWORD is a plaintext password in the environment — fine locally, wrong on the VPS.");
+      console.warn("!! Run scripts/set-admin-password.js and use IG_ADMIN_PASSWORD_HASH instead.");
+    }
     if (!process.env.META_APP_SECRET) console.error("!! META_APP_SECRET is not set — every webhook POST will be rejected");
     if (!process.env.IG_VERIFY_TOKEN) console.error("!! IG_VERIFY_TOKEN is not set — the Meta handshake will fail");
 
-    const ruleProblems = rulesLib.validate(rules);
+    const ruleProblems = rulesLib.validate(deps.rules);
     if (ruleProblems.length) console.error(`!! ${ruleProblems.length} RULES PROBLEM(S) — see above. A "reply loop" line means the account will answer itself.`);
+
+    console.log(`rules: ${rulesStore.file()}`);
+    console.log(`uploads: ${files.dir()} (public base ${files.publicBase()})`);
 
     tokens.seed();
     const left = tokens.daysLeft();

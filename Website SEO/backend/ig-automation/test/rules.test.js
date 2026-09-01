@@ -114,3 +114,86 @@ test("validate names the specific problem rather than just failing", () => {
   assert.ok(problems.some((p) => p.includes("unknown match mode")));
   assert.ok(problems.some((p) => p.includes("shadowed")), "rule c can never fire");
 });
+
+/* ---------------------------------------------------------------------------
+ * Post targeting
+ * ------------------------------------------------------------------------- */
+
+const scoped = {
+  rules: [
+    { id: "reel", keywords: ["guide"], media: { mode: "only", ids: ["111", "222"] }, dm: { text: "reel guide" }, publicReply: "On its way 📩" },
+    { id: "any", keywords: ["guide"], dm: { text: "generic guide" }, publicReply: "Sent 📩" },
+  ],
+};
+
+test("post targeting picks the rule, and first-match-wins means first match that can fire HERE", () => {
+  assert.equal(rules.match("guide", scoped, { mediaId: "111" }).rule.id, "reel");
+  assert.equal(rules.match("guide", scoped, { mediaId: "999" }).rule.id, "any", "the targeted rule is invisible off its posts");
+  assert.equal(rules.match("guide", scoped).rule.id, "reel", "with no post context, every rule is still considered");
+});
+
+test("a comment with no media id cannot trigger a rule that was narrowed to specific posts", () => {
+  const onlyScoped = { rules: [scoped.rules[0]] };
+  assert.equal(rules.match("guide", onlyScoped, { mediaId: "" }), null);
+  assert.equal(rules.match("guide", onlyScoped, { mediaId: null }), null);
+  assert.equal(rules.match("guide", onlyScoped, { mediaId: "222" }).rule.id, "reel");
+});
+
+test("rules on different posts do not shadow each other — that is the point of targeting", () => {
+  const apart = {
+    rules: [
+      { id: "a", keywords: ["guide"], media: { mode: "only", ids: ["111"] }, dm: { text: "a" } },
+      { id: "b", keywords: ["guide"], media: { mode: "only", ids: ["222"] }, dm: { text: "b" } },
+    ],
+  };
+  assert.deepEqual(rules.validate(apart), []);
+
+  const overlapping = JSON.parse(JSON.stringify(apart));
+  overlapping.rules[1].media.ids = ["111", "222"];
+  assert.ok(rules.validate(overlapping).some((p) => p.includes("shadowed")), "sharing one post is enough to shadow");
+});
+
+test("a public reply is only checked against the rules that run where it will appear", () => {
+  const safe = {
+    rules: [
+      { id: "a", keywords: ["guide"], media: { mode: "only", ids: ["111"] }, dm: { text: "a" }, publicReply: "Sent 📩" },
+      { id: "b", keywords: ["sent"], media: { mode: "only", ids: ["222"] }, dm: { text: "b" }, publicReply: "Done 📩" },
+    ],
+  };
+  assert.deepEqual(rules.validate(safe), [], "rule a's reply lands on post 111, where rule b does not run");
+
+  const unsafe = JSON.parse(JSON.stringify(safe));
+  unsafe.rules[1].media.ids = ["111"];
+  assert.ok(rules.validate(unsafe).some((p) => p.includes("reply loop")));
+});
+
+test("targeting turned on with nothing selected is an error, not a rule that quietly never fires", () => {
+  const empty = { rules: [{ id: "a", keywords: ["guide"], media: { mode: "only", ids: [] }, dm: { text: "a" } }] };
+  const problems = rules.inspect(empty);
+  assert.ok(problems.some((p) => p.severity === "error" && /no posts are selected/.test(p.message)));
+});
+
+test("inspect separates what blocks a save from what is merely worth knowing", () => {
+  const config = {
+    rules: [
+      { id: "a", keywords: ["guide"], dm: { text: "hi" } },
+      { id: "b", keywords: ["guide"], dm: { text: "hi" } },
+      { id: "c", keywords: ["price"], dm: { link: "aiprofitlab.io/pricing" } },
+    ],
+  };
+  const problems = rules.inspect(config);
+  assert.equal(problems.find((p) => /shadowed/.test(p.message)).severity, "warn");
+  assert.equal(problems.find((p) => /not an http/.test(p.message)).severity, "error");
+  assert.equal(rules.isSafeToSave(config), false);
+});
+
+test("an attached file rides inside the one message Meta allows", () => {
+  const rule = { dm: { text: "Here it is", link: "https://aiprofitlab.io/x/" } };
+  assert.equal(
+    rules.dmText(rule, { fileUrl: "https://hooks.aiprofitlab.io/f/abc/guide.pdf" }),
+    "Here it is\n\nhttps://aiprofitlab.io/x/\n\nhttps://hooks.aiprofitlab.io/f/abc/guide.pdf"
+  );
+  assert.equal(rules.dmText(rule, {}), "Here it is\n\nhttps://aiprofitlab.io/x/", "a missing file just drops out");
+  assert.equal(rules.hasPayload({ dm: { fileId: "abc" } }), true, "a file alone is a payload");
+  assert.equal(rules.hasPayload({ dm: { text: "  " } }), false);
+});

@@ -70,9 +70,9 @@ Two things get written at runtime, and neither may live in the deployed tree —
 a redeploy would wipe the token and the dedupe table with it.
 
 ```bash
-# Rotating token + SQLite state. Written by the service.
-sudo mkdir -p /var/lib/ig-automation
-sudo chown igbot:igbot /var/lib/ig-automation
+# Rotating token, SQLite state, the rules the admin panel writes, and uploads.
+sudo mkdir -p /var/lib/ig-automation/uploads
+sudo chown -R igbot:igbot /var/lib/ig-automation
 sudo chmod 750 /var/lib/ig-automation
 
 # Secrets. Read by systemd as root, before dropping to igbot.
@@ -96,8 +96,32 @@ META_APP_SECRET=<App Dashboard -> Settings -> Basic -> App Secret>
 IG_USER_ID=<your Instagram professional account id>
 IG_TOKEN_FILE=/var/lib/ig-automation/token.json
 IG_DB_FILE=/var/lib/ig-automation/state.sqlite
-IG_RULES_FILE=/opt/ig-automation/rules.json
+
+# NOT /opt. The admin panel writes this file, and systemd's ProtectSystem=strict
+# only allows writes under /var/lib/ig-automation — a rules file in the deployed
+# tree could not be saved to, and the next rsync would revert it anyway. The
+# repo's rules.json is a seed, copied here once if nothing exists.
+IG_RULES_FILE=/var/lib/ig-automation/rules.json
+IG_UPLOAD_DIR=/var/lib/ig-automation/uploads
+
+# The origin written into every DM that carries a file. Must be the public name.
+IG_PUBLIC_BASE=https://hooks.aiprofitlab.io
+
+# The admin panel. Omit it and the panel is not mounted at all.
+#   node scripts/set-admin-password.js
+IG_ADMIN_PASSWORD_HASH=<paste the scrypt$... line>
+
 PORT=8090
+```
+
+**Upgrading an install that predates the panel.** The rules file moves; nothing
+else does:
+
+```bash
+sudo -u igbot cp /opt/ig-automation/rules.json /var/lib/ig-automation/rules.json
+sudo nano /etc/ig-automation/.env      # point IG_RULES_FILE at the new path
+sudo systemctl restart ig-automation
+curl -s localhost:8090/health | python3 -c 'import sys,json;print(json.load(sys.stdin)["rules"])'
 ```
 
 `IG_VERIFY_TOKEN` is a nonce you invent and paste into the Meta dashboard. It is
@@ -135,6 +159,38 @@ curl -s localhost:8090/health | python3 -m json.tool
 `/health` is the fastest way to catch a configuration mistake — it reports
 whether the verify token and app secret are set, how many days the token has
 left, and whether the ledger is writing to a sheet or to the logs.
+
+## 6b. The admin panel
+
+Keywords, DM copy, which posts a rule fires on, and file uploads — from a
+browser, without SSH.
+
+```bash
+cd /opt/ig-automation
+sudo -u igbot node scripts/set-admin-password.js     # prints the env line
+sudo nano /etc/ig-automation/.env                    # paste IG_ADMIN_PASSWORD_HASH
+sudo systemctl restart ig-automation
+```
+
+Then `https://hooks.aiprofitlab.io/admin/`.
+
+Three things worth knowing before you use it:
+
+- **No password, no panel.** The routes are not mounted when
+  `IG_ADMIN_PASSWORD_HASH` is unset, so a half-finished install is a 404 rather
+  than an open door. `/health` reports `admin.configured`.
+- **Saves are live immediately.** No restart. The running service re-reads the
+  rules file when its mtime changes, so an edit made over SSH takes effect the
+  same way.
+- **It refuses to save a reply loop.** A public reply containing one of your own
+  keywords is what made the account answer itself ninety times on 2026-08-30.
+  The panel runs the same validator the service boots with and blocks the save,
+  naming the rule and the keyword.
+
+Uploaded files are served from `https://hooks.aiprofitlab.io/f/<id>/<name>` —
+public, unguessable, and linked from inside the DM. That is not a shortcut:
+Meta allows exactly one private reply per comment, so an attachment would have
+to be sent *instead of* your message.
 
 ## 7. TLS
 
@@ -193,12 +249,16 @@ are what stop a redeploy from overwriting the live token with a stale one, or
 wiping the dedupe table — which would let Meta's retries re-send DMs for comments
 that were already answered.
 
-Changing keyword rules is not a redeploy:
+Changing keyword rules is not a redeploy, and no longer needs SSH at all —
+use `https://hooks.aiprofitlab.io/admin/`. Over SSH it is still just the file,
+and still needs no restart:
 
 ```bash
-sudo -u igbot nano /opt/ig-automation/rules.json
-sudo systemctl restart ig-automation
+sudo -u igbot nano /var/lib/ig-automation/rules.json
 ```
+
+Note the path: `/var/lib`, not `/opt`. The copy in the deployed tree is only the
+seed used on a fresh box; editing it changes nothing on a running install.
 
 ## When something is wrong
 
@@ -211,6 +271,11 @@ sudo systemctl restart ig-automation
 | A comment got two DMs | dedupe table was wiped by a redeploy | confirm `IG_DB_FILE` is under `/var/lib`, not `/opt` |
 | Leads missing from the sheet | service account lacks access | `grep '"ledger":"lead"' <(journalctl -u ig-automation)` — they are still in the journal |
 | Service answers its own comments | own IG id unknown | `/health` → `account.id`; set `IG_USER_ID` |
+| `/admin/` is a 404 | no password configured | `/health` → `admin.configured`; run `scripts/set-admin-password.js` |
+| Panel loads, saving 500s | `IG_RULES_FILE` is under `/opt` | systemd's `ProtectSystem=strict` blocks it; move it to `/var/lib/ig-automation/rules.json` |
+| A rule's file link 404s in the DM | uploads dir was wiped by a redeploy | confirm `IG_UPLOAD_DIR` is under `/var/lib`, re-upload, re-attach |
+| Panel shows no posts to pick | the Graph call failed | ids already in rules still work; check `/health` → `token.daysLeft` |
+| Signed out constantly | the password hash changed | the cookie key is derived from it; sign in again |
 
 Every lead is printed to the journal as one line of JSON before the sheet is
 touched, so nothing is ever lost to a spreadsheet problem:
