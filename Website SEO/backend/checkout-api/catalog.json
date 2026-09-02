@@ -31,6 +31,13 @@
       "name": "The Growth Desk",
       "required": false,
       "price": 75000
+    },
+    {
+      "id": "visibility",
+      "kind": "monthly",
+      "name": "The Visibility Desk",
+      "required": false,
+      "price": 97000
     }
   ],
   "bundle": {
@@ -42,6 +49,14 @@
     ],
     "price": 2200000,
     "saving": 300000
+  },
+  "upsell": {
+    "id": "visibility",
+    "name": "The Visibility Desk",
+    "price": 97000,
+    "rack": 300000,
+    "months": 6,
+    "skip_if": "desk"
   },
   "plans": [
     {

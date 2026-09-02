@@ -11,12 +11,32 @@ const pricing = require("../lib/pricing");
 
 const day = (iso) => new Date(iso + "T12:00:00Z");
 
-test("the Growth Desk is the monthly item, at the published price", () => {
+test("the monthly items are the Growth Desk and the Visibility Desk", () => {
+  // Two monthly items now. The Visibility Desk is the checkout's upsell: it is
+  // deliberately absent from the public price list (pay.py marks it
+  // listed: False) but it is an ordinary monthly row HERE, because the server
+  // must price and bill it like any other. If a third appears, the site is
+  // asking buyers for three separate monthly fees — worth a second look.
   const monthly = subs.monthlyItems();
-  assert.equal(monthly.length, 1);
-  assert.equal(monthly[0].id, "desk");
+  assert.deepEqual(monthly.map((i) => i.id).sort(), ["desk", "visibility"]);
+
   assert.equal(subs.monthlyTotal(["website", "desk"]), 75 * pricing.OMR);
+  assert.equal(subs.monthlyTotal(["website", "visibility"]), 97 * pricing.OMR);
   assert.equal(subs.monthlyTotal(["website"]), 0, "an order with no monthly item owes nothing monthly");
+});
+
+test("a monthly item never changes what is charged at the card page", () => {
+  // The whole upsell rests on this: Thawani takes ONE payment, recurring needs
+  // card-on-file (see SUBSCRIPTIONS.md), so a monthly line is recorded and
+  // invoiced from go-live and must not move today's figure by a single baisa.
+  // If this ever fails, the interstitial's "nothing is charged today" is a lie.
+  for (const plan of ["deposit", "full", "three", "proof"]) {
+    const without = pricing.quote(["website"], plan);
+    const with_ = pricing.quote(["website", "visibility"], plan);
+    assert.equal(with_.due, without.due, `due changed on plan ${plan}`);
+    assert.equal(with_.total, without.total, `total changed on plan ${plan}`);
+    assert.equal(with_.monthly.length, 1, `plan ${plan} lost the monthly line`);
+  }
 });
 
 test("a cycle anchored on the 31st does not walk forward through short months", () => {

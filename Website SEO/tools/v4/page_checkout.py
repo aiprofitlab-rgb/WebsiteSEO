@@ -269,6 +269,137 @@ html:has(.paybar.up) #aiden-root{--bottom:96px!important}
   .after{grid-template-columns:minmax(0,1fr)}
   .paybar .pb-v{font-size:1.25rem}
 }
+
+/* ==================================================== the upsell interstitial
+   Shown once, between "pay" and the card page. A real <dialog> so the browser
+   supplies the modal semantics, the focus trap and Escape for free - none of
+   which are worth reimplementing badly on the one page that handles money.
+
+   Escape and backdrop-dismiss are NOT blocked. A modal you cannot get out of
+   in front of a card page is how a paying buyer becomes an abandoned cart;
+   every exit from this thing lands on "continue without it".                */
+.up-dlg{
+  border:0;padding:0;background:transparent;max-width:min(760px,calc(100vw - 28px));width:100%;
+  max-height:calc(100dvh - 28px);overflow:visible;color:var(--ink);
+}
+.up-dlg::backdrop{background:rgba(7,43,34,.62);backdrop-filter:blur(3px)}
+.up-card{
+  background:var(--cream);border-radius:18px;overflow:hidden;
+  max-height:calc(100dvh - 28px);display:flex;flex-direction:column;
+  box-shadow:0 50px 100px -40px rgba(7,43,34,.75);
+}
+.up-scroll{overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+
+/* --- the head ---------------------------------------------------------- */
+/* position:relative is load-bearing. .up-x is absolute, and with no positioned
+   ancestor it anchors to the <dialog> itself - which does not scroll - so the
+   close cross hangs in the top corner over whatever text is passing beneath
+   it. Anchored here it scrolls away with the header, as it should; the
+   sticky footer keeps a way out on screen at all times anyway. */
+.up-head{
+  position:relative;background:var(--teal-950);color:var(--cream);
+  padding:clamp(22px,3.4vw,32px) clamp(20px,3.4vw,36px);
+}
+/* the eyebrow is the only line long enough to reach the close cross */
+.up-head .eyebrow{color:var(--amber-bright);margin:0 0 12px;font-size:.74rem;padding-inline-end:44px}
+.up-head h2{
+  font-family:var(--display);font-weight:400;color:var(--cream);margin:0;
+  font-size:clamp(1.36rem,3.1vw,1.95rem);line-height:1.2;
+}
+.up-head p{margin:12px 0 0;color:rgba(241,239,232,.82);font-size:1rem;line-height:1.6}
+
+/* --- the body ---------------------------------------------------------- */
+.up-body{padding:clamp(20px,3.4vw,34px) clamp(20px,3.4vw,36px) 4px}
+.up-body h3{
+  font-family:var(--display);font-weight:400;color:var(--teal-950);
+  font-size:1.16rem;margin:0 0 6px;line-height:1.3;
+}
+.up-body p{margin:0 0 15px;font-size:1rem;line-height:1.68;color:var(--ink)}
+.up-body p.sub{color:var(--muted);font-size:.95rem}
+.up-def{
+  border-inline-start:3px solid var(--amber-pale);padding-inline-start:16px;margin:0 0 22px;
+}
+.up-def:last-of-type{margin-bottom:6px}
+.up-rule{height:1px;background:var(--line);margin:22px 0}
+
+/* the "already built in" list */
+.up-have{background:var(--panel-2);border-radius:14px;padding:18px 20px;margin:0 0 18px}
+.up-have p{margin:0 0 10px;font-size:.95rem}
+.up-have ul{margin:0;padding:0;list-style:none;display:grid;gap:7px}
+.up-have li{
+  position:relative;padding-inline-start:26px;font-size:.93rem;color:var(--muted);line-height:1.5;
+}
+.up-have li::before{
+  content:"";position:absolute;inset-inline-start:2px;top:.52em;
+  width:10px;height:6px;border-inline-start:2px solid var(--teal);border-bottom:2px solid var(--teal);
+  transform:rotate(-45deg);
+}
+
+/* --- the price block --------------------------------------------------- */
+.up-offer{
+  background:var(--teal-950);color:var(--cream);border-radius:16px;
+  padding:clamp(20px,3vw,26px);margin:4px 0 18px;
+}
+.up-offer .nm{
+  font-family:var(--mono);font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--amber-bright);margin:0 0 10px;display:block;
+}
+.up-figs{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin:0 0 10px}
+.up-now{
+  font-family:var(--display);font-size:clamp(1.9rem,5vw,2.5rem);line-height:1;color:var(--cream);
+}
+.up-now .per{font-family:var(--sans);font-size:.94rem;color:rgba(241,239,232,.72)}
+.up-was{
+  font-family:var(--mono);font-size:1rem;color:rgba(241,239,232,.6);text-decoration:line-through;
+  text-decoration-thickness:1.5px;
+}
+.up-offer .note{margin:0;font-size:.9rem;color:rgba(241,239,232,.75);line-height:1.55}
+
+/* --- the guarantee ----------------------------------------------------- */
+.up-gtee{
+  border:1.5px solid var(--teal);border-radius:14px;padding:20px;margin:0 0 18px;background:var(--white);
+  display:flex;gap:15px;align-items:flex-start;
+}
+.up-gtee svg{flex:none;width:30px;height:30px;fill:var(--teal);margin-top:1px}
+.up-gtee h3{margin:0 0 5px}
+.up-gtee p{margin:0;font-size:.95rem;line-height:1.6}
+.up-gtee .fine{margin-top:9px;font-size:.85rem;color:var(--muted);line-height:1.55}
+
+/* --- the scarcity line ------------------------------------------------- */
+.up-only{
+  background:#FBF3E4;border:1px solid #E8CE9C;border-radius:12px;
+  padding:15px 18px;margin:0 0 20px;font-size:.96rem;line-height:1.6;color:#6E4E0E;
+}
+.up-only b{color:#5A3F09}
+
+/* --- the actions ------------------------------------------------------- */
+.up-act{
+  padding:18px clamp(20px,3.4vw,36px) clamp(20px,3.4vw,26px);
+  background:var(--cream);border-top:1px solid var(--line);
+  position:sticky;bottom:0;display:grid;gap:11px;
+}
+.up-act .btn{width:100%}
+.up-no{
+  background:none;border:0;font-family:var(--sans);font-size:.95rem;color:var(--muted);
+  text-decoration:underline;text-underline-offset:3px;cursor:pointer;padding:6px;line-height:1.5;
+}
+.up-no:hover{color:var(--ink)}
+.up-x{
+  position:absolute;inset-inline-end:12px;top:12px;width:36px;height:36px;border:0;border-radius:50%;
+  background:rgba(241,239,232,.14);color:var(--cream);font-size:1.1rem;line-height:1;cursor:pointer;
+  display:grid;place-items:center;
+}
+.up-x:hover{background:rgba(241,239,232,.26)}
+
+@media (max-width:560px){
+  .up-dlg{max-width:100vw;max-height:100dvh;margin:0;height:100dvh}
+  .up-card{border-radius:0;max-height:100dvh;height:100dvh}
+  .up-gtee{flex-direction:column;gap:10px}
+}
+@media (prefers-reduced-motion:no-preference){
+  .up-dlg[open]{animation:upIn .34s var(--ease)}
+  @keyframes upIn{from{opacity:0;transform:translateY(14px) scale(.985)}to{opacity:1;transform:none}}
+}
 """
 
 LOCK = ('<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a5 5 0 0 0-5 5v3H6a2 2 0 0 0-2 2v8a2 '
@@ -279,6 +410,289 @@ DOC = ('<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2h8l6 6v14a0 0 0
 SHIELD = ('<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l8 3v6c0 5-3.4 9.4-8 11-4.6-1.6-8-6-8-11V5l8-3zm'
           '-1.2 13.4 5.7-5.7-1.4-1.4-4.3 4.3-2-2-1.4 1.4 3.4 3.4z"/></svg>')
 BACK = ('<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5V1L7 6l5 5V7a6 6 0 1 1-6 6H4a8 8 0 1 0 8-8z"/></svg>')
+
+
+# ===========================================================================
+# The upsell interstitial.
+#
+# One function, both languages, both checkouts' wording - because this is the
+# single most consequential piece of copy on the site and two drifting copies
+# of it is how a guarantee ends up meaning two different things in two places.
+#
+# Every figure is interpolated from pay.py. Nothing here types a price.
+#
+# WHAT IT PROMISES, EXACTLY - read this before editing a word of it:
+#
+#   * It is NOT charged today. Thawani's e-commerce checkout takes a single
+#     payment and recurring billing needs card-on-file (see SUBSCRIPTIONS.md),
+#     so this is recorded on the order and invoiced monthly from go-live -
+#     identical treatment to the Growth Desk. The copy says so plainly.
+#   * The refund is of THIS SERVICE'S fees only, never the build. Refunding a
+#     OMR 950 website because a visibility retainer underperformed is not what
+#     is being offered and the wording must never be allowed to imply it.
+#   * "Visible" is defined, in writing, in month one. An undefined guarantee
+#     is unenforceable for Nahid and untrustworthy for the buyer; the same
+#     sentence protects both of them.
+# ===========================================================================
+UPSELL = {
+    "en": {
+        "eyebrow": "One page only &#183; you will not see this offer again",
+        "h": "Your website will be ready to be found.<br>Being found is a different job.",
+        "sub": "Ninety seconds, then you can pay. This is the one thing people come back "
+               "and ask me for six months late, so I would rather you heard it now.",
+        "seo_h": "SEO &mdash; how Google decides who to show",
+        "seo_p": "Picture a library with ten million books and one librarian. Somebody walks in "
+                 "and asks for &#8220;the best water pump supplier in Muscat.&#8221; She does not "
+                 "read ten million books. She reaches for the few she already knows, already "
+                 "trusts, and has watched people come back to happy. <b>SEO is the work of "
+                 "becoming a book she reaches for.</b>",
+        "geo_h": "GEO &mdash; the same thing, for AI",
+        "geo_p": "When your buyer asks ChatGPT &#8220;who should I buy from in Oman?&#8221;, "
+                 "ChatGPT does not go and read the internet on the spot. It answers out of what "
+                 "it has already read and already trusts. <b>GEO is the work of being inside what "
+                 "it read</b> &mdash; so your name is in the answer itself, not on page four of "
+                 "something nobody opens.",
+        "why_h": "And here is the part nobody tells you: it never finishes",
+        "why_p": "Your competitors do not stop. Google changes its mind about who to trust almost "
+                 "daily. And the AI models are retrained and re-read the web on their own "
+                 "schedule &mdash; every time they do, the answer is written again from nothing.",
+        "why_p2": "So visibility is not a wall you build once. <b>It is a garden.</b> Stop watering "
+                  "it and it does not stay the way you left it. It goes back to weeds, because the "
+                  "person next door kept watering theirs.",
+        "have_h": "What you are already paying for &mdash; and where it stops",
+        "have_p": "Everything I build for you already carries the full visibility skeleton:",
+        "have": [
+            "A structure Google can read cleanly, on a site that loads fast",
+            "Schema markup that tells an AI what your business is and what it sells",
+            "Arabic and English done properly, not run through a translator",
+            "An <code>llms.txt</code> and a content structure built to be quoted by an answer engine",
+        ],
+        "have_after": "That part is real, it is done, and it is yours for ever. <b>But "
+                      "infrastructure is a road, not a car driving down it.</b> The road will be "
+                      "finished on the day I hand it over. Somebody still has to drive it &mdash; "
+                      "and not once. Every day.",
+        "do_h": "What driving it actually looks like",
+        "do_p": "Watching what your buyers really type and ask. Writing the answers they are "
+                "searching for. Getting your name onto the pages, directories and sources the "
+                "models actually read. Keeping your Google Business Profile alive. Fixing what "
+                "breaks. And testing every month whether ChatGPT, Gemini, Google&#8217;s AI "
+                "answers and ordinary Google search name you &mdash; and showing you the "
+                "screenshots either way.",
+        "do_p2": "That is daily work. It is a job, and it is the job I do.",
+        "offer_nm": "Book it now",
+        "per": "/month",
+        "was": "#/month",
+        "offer_note": "<b>Nothing is charged today.</b> It starts the month after your site goes "
+                      "live and is invoiced monthly. Cancel any month &mdash; though the "
+                      "guarantee below needs #MO months to run.",
+        "g_h": "The #MO-month guarantee",
+        "g_p": "#MO months after your site goes live, if you are not visible &mdash; not named "
+               "by Google, not named by ChatGPT &mdash; <b>I refund every rial you have paid "
+               "for #NM, and I carry on working, free, until you are.</b>",
+        "g_fine": "In plain terms: the refund covers this service&#8217;s fees, not your build. "
+                  "And &#8220;visible&#8221; is not left vague &mdash; in your first month we "
+                  "write down the actual buying questions your customers ask, and those are what "
+                  "we test against, every month, in front of you.",
+        "only_h": "This price lives on this page and nowhere else.",
+        "only_p": "The published rate for the same work is <b>#RACK a month</b>. #NOW is what it "
+                  "costs if you book it in this window, before you pay for your build &mdash; "
+                  "because doing this from day one is far cheaper for me than rescuing it a year "
+                  "in. <b>Leave this page and the price is #RACK.</b> I do not re-open it later, "
+                  "and asking me nicely in March will not work.",
+        "yes": "Add it &mdash; #NOW a month",
+        "no": "No thanks &mdash; continue to payment at #RACK later",
+        "close": "Close and continue without it",
+    },
+    "ar": {
+        "eyebrow": "هذه الصفحة فقط &#183; لن يظهر هذا العرض مرة أخرى",
+        "h": "موقعك سيكون جاهزاً لأن يُعثر عليه.<br>أما أن يُعثر عليه فعلاً، فتلك مهمة أخرى.",
+        "sub": "تسعون ثانية، ثم تستطيع الدفع. هذا هو الشيء الذي يعود الناس ليطلبوه مني بعد ستة "
+               "أشهر، ولذلك أفضّل أن تسمعه الآن.",
+        "seo_h": "‏SEO — كيف يقرّر جوجل من يعرض",
+        "seo_p": "تخيّل مكتبة فيها عشرة ملايين كتاب وأمين مكتبة واحد. يدخل شخص ويسأل عن "
+                 "«أفضل مورّد مضخات مياه في مسقط». هو لا يقرأ عشرة ملايين كتاب، بل يمدّ يده إلى "
+                 "الكتب القليلة التي يعرفها ويثق بها ورأى الناس يعودون إليها راضين. "
+                 "<b>‏SEO هو العمل الذي يجعلك أحد الكتب التي تمتدّ إليها يده.</b>",
+        "geo_h": "‏GEO — الشيء نفسه، لكن للذكاء الاصطناعي",
+        "geo_p": "حين يسأل مشتريك ChatGPT: «ممن أشتري في عُمان؟»، فهو لا يذهب ليقرأ الإنترنت في "
+                 "تلك اللحظة، بل يجيب مما قرأه سابقاً ووثق به. <b>‏GEO هو العمل الذي يجعلك داخل "
+                 "ما قرأه</b> — ليكون اسمك في الإجابة نفسها، لا في صفحة رابعة لا يفتحها أحد.",
+        "why_h": "وهنا الجزء الذي لا يخبرك به أحد: هذا العمل لا ينتهي",
+        "why_p": "منافسوك لا يتوقفون. وجوجل يغيّر رأيه فيمن يثق به كل يوم تقريباً. ونماذج الذكاء "
+                 "الاصطناعي يُعاد تدريبها وتقرأ الويب من جديد وفق جدولها الخاص — وفي كل مرة "
+                 "تُكتب الإجابة من الصفر.",
+        "why_p2": "فالظهور ليس جداراً تبنيه مرة واحدة. <b>إنه حديقة.</b> توقّف عن سقايتها فلن تبقى "
+                  "كما تركتها، بل تعود إلى العشب البري — لأن جارك واصل سقاية حديقته.",
+        "have_h": "ما تدفع مقابله بالفعل — وأين يتوقف",
+        "have_p": "كل ما أبنيه لك يحمل أصلاً هيكل الظهور كاملاً:",
+        "have": [
+            "بنية يقرأها جوجل بوضوح، على موقع سريع التحميل",
+            "ترميز Schema يخبر الذكاء الاصطناعي ما هو نشاطك وما الذي تبيعه",
+            "عربية وإنجليزية مكتوبتان كما ينبغي، لا مارّتان عبر مترجم آلي",
+            "ملف <code>llms.txt</code> وبنية محتوى مصمّمة ليقتبسها محرك الإجابات",
+        ],
+        "have_after": "هذا الجزء حقيقي، ومنجز، وهو ملكك إلى الأبد. <b>لكن البنية التحتية طريق، لا "
+                      "سيارة تسير عليه.</b> الطريق سيكتمل يوم أسلّمه لك، ويبقى على أحدهم أن "
+                      "يقودها — لا مرة واحدة، بل كل يوم.",
+        "do_h": "وكيف تبدو القيادة عملياً",
+        "do_p": "متابعة ما يكتبه ويسأله مشتروك فعلاً. وكتابة الإجابات التي يبحثون عنها. وإيصال "
+                "اسمك إلى الصفحات والأدلة والمصادر التي تقرأها النماذج فعلاً. وإبقاء ملفّك في "
+                "«نشاطي التجاري على جوجل» حيّاً. وإصلاح ما يتعطّل. واختبار شهري لما إذا كان "
+                "ChatGPT وGemini وإجابات جوجل الذكية وبحث جوجل العادي يذكرون اسمك — مع عرض "
+                "لقطات الشاشة عليك في الحالتين.",
+        "do_p2": "هذا عمل يومي. إنه وظيفة، وهي الوظيفة التي أؤدّيها.",
+        "offer_nm": "احجزه الآن",
+        "per": "شهرياً",
+        "was": "# شهرياً",
+        "offer_note": "<b>لا يُحتسب شيء اليوم.</b> يبدأ في الشهر التالي لإطلاق موقعك ويُفوتر شهرياً. "
+                      "وتستطيع الإلغاء في أي شهر — مع أن الضمان أدناه يحتاج #MO أشهر ليكتمل.",
+        "g_h": "ضمان الـ#MO أشهر",
+        "g_p": "بعد #MO أشهر من إطلاق موقعك، إن لم تكن ظاهراً — لا جوجل يذكرك ولا ChatGPT — "
+               "<b>أعيد لك كل ريال دفعته مقابل #NM، وأواصل العمل مجاناً حتى تظهر.</b>",
+        "g_fine": "بعبارة صريحة: الاسترداد يشمل رسوم هذه الخدمة، لا تكلفة بناء موقعك. و«الظهور» "
+                  "ليس مصطلحاً غامضاً — ففي شهرك الأول نكتب معاً أسئلة الشراء الحقيقية التي "
+                  "يسألها عملاؤك، وهي ما نختبر عليه، كل شهر، أمامك.",
+        "only_h": "هذا السعر موجود في هذه الصفحة، ولا مكان غيرها.",
+        "only_p": "السعر المعلن للعمل نفسه هو <b>#RACK شهرياً</b>. و#NOW هو ما يكلّفه إن حجزته في "
+                  "هذه اللحظة، قبل أن تدفع مقابل البناء — لأن القيام بهذا من اليوم الأول أرخص "
+                  "عليّ بكثير من إنقاذه بعد عام. <b>غادر هذه الصفحة وسيعود السعر إلى #RACK</b> "
+                  "أنا لا أعيد فتحه لاحقاً، ولن ينفع الطلب اللطيف في مارس.",
+        "yes": "أضِفه — #NOW شهرياً",
+        "no": "لا، شكراً — أكمل الدفع وسعره لاحقاً #RACK",
+        "close": "إغلاق والمتابعة بدونه",
+    },
+}
+
+
+def upsell_dialog(lang="en"):
+    """The interstitial, rendered server-side into both checkouts.
+
+    Deliberately markup and not a JavaScript template. It is long-form
+    persuasion with two languages of hand-written prose in it, and prose
+    belongs in prose files - building it by string-concatenation in the page
+    script would make it unreadable and unreviewable, which is the last thing
+    a guarantee should be.
+
+    The <dialog> ships closed. Nothing shows it but the submit handler."""
+    w = UPSELL[lang]
+    u = pay.item(pay.UPSELL_ID)
+    fmt = pay.money_ar if lang == "ar" else pay.money
+    now, rack = fmt(pay.price(u)), fmt(u["rack"])
+    months = str(u["guarantee_months"])
+    nm = pay.t(u, "name", lang)
+
+    def s(key):
+        """One string with every token filled.
+
+        Every token is NAMED - #NOW, #RACK, #NM, #MO - and that is not a
+        style choice. WORDS elsewhere in this file uses a bare "#" as its
+        placeholder, but these strings are HTML and HTML is full of numeric
+        entities: a bare "#" replacement rewrites &#8217; into &68217; and
+        prints a literal "&68217;s" on the one page that has to look
+        trustworthy. Named tokens only, here."""
+        return (w[key].replace("#NOW", now).replace("#RACK", rack)
+                .replace("#NM", nm).replace("#MO", months))
+
+    haves = "\n".join(f"            <li>{h}</li>" for h in w["have"])
+
+    return f"""
+<dialog class="up-dlg" id="upDlg" aria-labelledby="upTitle">
+  <div class="up-card">
+    <div class="up-scroll">
+
+      <div class="up-head">
+        <button type="button" class="up-x" id="upX" aria-label="{w['close']}">&#10005;</button>
+        <p class="eyebrow">{w['eyebrow']}</p>
+        <h2 id="upTitle">{w['h']}</h2>
+        <p>{w['sub']}</p>
+      </div>
+
+      <div class="up-body">
+
+        <div class="up-def">
+          <h3>{w['seo_h']}</h3>
+          <p>{w['seo_p']}</p>
+        </div>
+
+        <div class="up-def">
+          <h3>{w['geo_h']}</h3>
+          <p>{w['geo_p']}</p>
+        </div>
+
+        <div class="up-rule"></div>
+
+        <h3>{w['why_h']}</h3>
+        <p>{w['why_p']}</p>
+        <p>{w['why_p2']}</p>
+
+        <div class="up-rule"></div>
+
+        <h3>{w['have_h']}</h3>
+        <div class="up-have">
+          <p>{w['have_p']}</p>
+          <ul>
+{haves}
+          </ul>
+        </div>
+        <p>{w['have_after']}</p>
+
+        <h3>{w['do_h']}</h3>
+        <p>{w['do_p']}</p>
+        <p class="sub">{w['do_p2']}</p>
+
+        <div class="up-rule"></div>
+
+        <div class="up-offer">
+          <span class="nm">{w['offer_nm']} &#183; {nm}</span>
+          <p class="up-figs">
+            <span class="up-now">{now}<span class="per">{w['per']}</span></span>
+            <span class="up-was">{w['was'].replace('#', rack)}</span>
+          </p>
+          <p class="note">{s('offer_note')}</p>
+        </div>
+
+        <div class="up-gtee">
+          {SHIELD}
+          <div>
+            <h3>{s('g_h')}</h3>
+            <p>{s('g_p')}</p>
+            <p class="fine">{s('g_fine')}</p>
+          </div>
+        </div>
+
+        <div class="up-only">
+          <b>{w['only_h']}</b><br>{s('only_p')}
+        </div>
+
+      </div>
+    </div>
+
+    <div class="up-act">
+      <button type="button" class="btn btn-teal" id="upYes">{s('yes')}</button>
+      <button type="button" class="up-no" id="upNo">{s('no')}</button>
+    </div>
+  </div>
+</dialog>
+
+"""
+
+
+def upsell_field():
+    """The upsell's only state, and it has to sit INSIDE #coForm.
+
+    A real checkbox named "item", so the existing selected() finds it,
+    render() re-totals from it, the summary lists it and order() ships it:
+    the interstitial adds a line item through the machinery that was already
+    there rather than around it, and the server prices it like any other
+    monthly row.
+
+    It cannot be attached with a `form="coForm"` attribute from outside,
+    because selected() reads `form.querySelectorAll(...)` - a DOM-descendant
+    query that a form-associated control living elsewhere would silently fail.
+    That failure would be invisible: the buyer accepts, the dialog closes,
+    payment proceeds, and the item is simply not on the order."""
+    return (f'          <input type="checkbox" name="item" value="{pay.UPSELL_ID}" '
+            f'id="upItem" hidden>\n')
 
 
 # ---------------------------------------------------------------------------
@@ -346,7 +760,11 @@ def body():
     cfg = pay.CONFIG_JSON()
     base = pay.item(pay.BASE_ID)
     addons = [i for i in pay.CATALOG if i["kind"] == "build" and not i["required"]]
-    monthlies = [i for i in pay.CATALOG if i["kind"] == "monthly"]
+    # pay.listed() is what keeps the upsell OFF this list. It is a monthly
+    # item like the Growth Desk, but it is sold only by the interstitial - if
+    # it rendered as an ordinary checkbox here, "only on this page" would be
+    # false the moment the page loaded.
+    monthlies = [i for i in pay.CATALOG if i["kind"] == "monthly" and pay.listed(i)]
     q0 = pay.quote([pay.BASE_ID], "deposit")
 
     # The wording of the action changes entirely with the gateway switch, and
@@ -550,7 +968,7 @@ def body():
         </ul>
       </div>
 
-    </form>
+{upsell_field()}    </form>
   </div>
 </section>
 
@@ -604,6 +1022,7 @@ def body():
   <button class="btn btn-teal" type="submit" form="coForm" id="barBtn">Reserve</button>
 </div>
 
+{upsell_dialog("en")}
 <script type="application/json" id="payCfg">{cfg}</script>
 </main>
 """
@@ -980,9 +1399,73 @@ JS_TPL = r"""
 
   /* -------------------------------------------------------- submission --- */
   var btn = $("payBtn");
+
+  /* ------------------------------------------------ the upsell gate ---
+     Runs once, between "pay" and the card page, and only ever DELAYS the
+     submission - never cancels it. Every exit from the dialog calls pay()
+     with the buyer's answer already recorded on #upItem.
+
+     Three reasons it stands down, all of them deliberate:
+       * decided        - it has already been answered this page-load. A
+                          buyer whose card was refused and who presses pay
+                          again is not asked to re-decide an upsell.
+       * skip_if        - they already bought the monthly plan it overlaps
+                          with (the Growth Desk). Nobody is asked to take
+                          two monthly retainers in the same breath.
+       * already ticked - deep link or a browser restoring form state.
+     If the markup is missing for any reason, it stands down too: the
+     absence of an upsell must never be able to block a payment.            */
+  var upDlg = $("upDlg"), upItem = $("upItem"), upDecided = false;
+
+  function upsellDue(){
+    if (upDecided || !upDlg || !upItem || !upDlg.showModal) return false;
+    if (upItem.checked) return false;
+    var cfg = CFG.upsell;
+    if (!cfg) return false;
+    if (cfg.skip_if && selected().indexOf(cfg.skip_if) >= 0) return false;
+    return true;
+  }
+
+  function upsellClose(taken){
+    upDecided = true;
+    upItem.checked = Boolean(taken);
+    render();                       /* re-total, so the summary shows the line */
+    try { upDlg.close(); } catch(err){}
+    if (typeof gtag === "function"){
+      gtag("event", taken ? "add_to_cart" : "upsell_declined", {
+        item_id: CFG.upsell.id, item_name: CFG.upsell.name,
+        value: CFG.upsell.price / CFG.baisa, currency: CFG.currency
+      });
+    }
+    pay();
+  }
+
+  if (upDlg && upItem){
+    $("upYes").addEventListener("click", function(){ upsellClose(true); });
+    $("upNo").addEventListener("click", function(){ upsellClose(false); });
+    $("upX").addEventListener("click", function(){ upsellClose(false); });
+    /* Escape and backdrop both fire `cancel`/`close`. Whichever way the buyer
+       leaves, they leave INTO the payment they asked for - a dialog that
+       swallowed the click on the one page that takes money would be the
+       worst bug on the site. */
+    upDlg.addEventListener("cancel", function(e){ e.preventDefault(); upsellClose(false); });
+  }
+
   form.addEventListener("submit", function(e){
     e.preventDefault();
     if (!validate()) return;
+    if (upsellDue()){
+      upDlg.showModal();
+      if (typeof gtag === "function"){
+        gtag("event", "view_promotion", {promotion_id: CFG.upsell.id,
+                                         promotion_name: CFG.upsell.name});
+      }
+      return;
+    }
+    pay();
+  });
+
+  function pay(){
     var q = render();
     var canCard = CFG.live && CFG.api && q.plan.card;
 
@@ -1039,7 +1522,7 @@ JS_TPL = r"""
       if (!settle()) return;
       abandon(err && err.message ? err.message : T.errUnknown);
     });
-  });
+  }
 
   /* ---------------------------------------------------- mobile pay bar ---
      On a phone the summary is not a sidebar - the single-column stack puts it

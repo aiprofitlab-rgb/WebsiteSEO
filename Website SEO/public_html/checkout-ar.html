@@ -796,6 +796,137 @@ html:has(.paybar.up) #aiden-root{--bottom:96px!important}
   .paybar .pb-v{font-size:1.25rem}
 }
 
+/* ==================================================== the upsell interstitial
+   Shown once, between "pay" and the card page. A real <dialog> so the browser
+   supplies the modal semantics, the focus trap and Escape for free - none of
+   which are worth reimplementing badly on the one page that handles money.
+
+   Escape and backdrop-dismiss are NOT blocked. A modal you cannot get out of
+   in front of a card page is how a paying buyer becomes an abandoned cart;
+   every exit from this thing lands on "continue without it".                */
+.up-dlg{
+  border:0;padding:0;background:transparent;max-width:min(760px,calc(100vw - 28px));width:100%;
+  max-height:calc(100dvh - 28px);overflow:visible;color:var(--ink);
+}
+.up-dlg::backdrop{background:rgba(7,43,34,.62);backdrop-filter:blur(3px)}
+.up-card{
+  background:var(--cream);border-radius:18px;overflow:hidden;
+  max-height:calc(100dvh - 28px);display:flex;flex-direction:column;
+  box-shadow:0 50px 100px -40px rgba(7,43,34,.75);
+}
+.up-scroll{overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+
+/* --- the head ---------------------------------------------------------- */
+/* position:relative is load-bearing. .up-x is absolute, and with no positioned
+   ancestor it anchors to the <dialog> itself - which does not scroll - so the
+   close cross hangs in the top corner over whatever text is passing beneath
+   it. Anchored here it scrolls away with the header, as it should; the
+   sticky footer keeps a way out on screen at all times anyway. */
+.up-head{
+  position:relative;background:var(--teal-950);color:var(--cream);
+  padding:clamp(22px,3.4vw,32px) clamp(20px,3.4vw,36px);
+}
+/* the eyebrow is the only line long enough to reach the close cross */
+.up-head .eyebrow{color:var(--amber-bright);margin:0 0 12px;font-size:.74rem;padding-inline-end:44px}
+.up-head h2{
+  font-family:var(--display);font-weight:400;color:var(--cream);margin:0;
+  font-size:clamp(1.36rem,3.1vw,1.95rem);line-height:1.2;
+}
+.up-head p{margin:12px 0 0;color:rgba(241,239,232,.82);font-size:1rem;line-height:1.6}
+
+/* --- the body ---------------------------------------------------------- */
+.up-body{padding:clamp(20px,3.4vw,34px) clamp(20px,3.4vw,36px) 4px}
+.up-body h3{
+  font-family:var(--display);font-weight:400;color:var(--teal-950);
+  font-size:1.16rem;margin:0 0 6px;line-height:1.3;
+}
+.up-body p{margin:0 0 15px;font-size:1rem;line-height:1.68;color:var(--ink)}
+.up-body p.sub{color:var(--muted);font-size:.95rem}
+.up-def{
+  border-inline-start:3px solid var(--amber-pale);padding-inline-start:16px;margin:0 0 22px;
+}
+.up-def:last-of-type{margin-bottom:6px}
+.up-rule{height:1px;background:var(--line);margin:22px 0}
+
+/* the "already built in" list */
+.up-have{background:var(--panel-2);border-radius:14px;padding:18px 20px;margin:0 0 18px}
+.up-have p{margin:0 0 10px;font-size:.95rem}
+.up-have ul{margin:0;padding:0;list-style:none;display:grid;gap:7px}
+.up-have li{
+  position:relative;padding-inline-start:26px;font-size:.93rem;color:var(--muted);line-height:1.5;
+}
+.up-have li::before{
+  content:"";position:absolute;inset-inline-start:2px;top:.52em;
+  width:10px;height:6px;border-inline-start:2px solid var(--teal);border-bottom:2px solid var(--teal);
+  transform:rotate(-45deg);
+}
+
+/* --- the price block --------------------------------------------------- */
+.up-offer{
+  background:var(--teal-950);color:var(--cream);border-radius:16px;
+  padding:clamp(20px,3vw,26px);margin:4px 0 18px;
+}
+.up-offer .nm{
+  font-family:var(--mono);font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--amber-bright);margin:0 0 10px;display:block;
+}
+.up-figs{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin:0 0 10px}
+.up-now{
+  font-family:var(--display);font-size:clamp(1.9rem,5vw,2.5rem);line-height:1;color:var(--cream);
+}
+.up-now .per{font-family:var(--sans);font-size:.94rem;color:rgba(241,239,232,.72)}
+.up-was{
+  font-family:var(--mono);font-size:1rem;color:rgba(241,239,232,.6);text-decoration:line-through;
+  text-decoration-thickness:1.5px;
+}
+.up-offer .note{margin:0;font-size:.9rem;color:rgba(241,239,232,.75);line-height:1.55}
+
+/* --- the guarantee ----------------------------------------------------- */
+.up-gtee{
+  border:1.5px solid var(--teal);border-radius:14px;padding:20px;margin:0 0 18px;background:var(--white);
+  display:flex;gap:15px;align-items:flex-start;
+}
+.up-gtee svg{flex:none;width:30px;height:30px;fill:var(--teal);margin-top:1px}
+.up-gtee h3{margin:0 0 5px}
+.up-gtee p{margin:0;font-size:.95rem;line-height:1.6}
+.up-gtee .fine{margin-top:9px;font-size:.85rem;color:var(--muted);line-height:1.55}
+
+/* --- the scarcity line ------------------------------------------------- */
+.up-only{
+  background:#FBF3E4;border:1px solid #E8CE9C;border-radius:12px;
+  padding:15px 18px;margin:0 0 20px;font-size:.96rem;line-height:1.6;color:#6E4E0E;
+}
+.up-only b{color:#5A3F09}
+
+/* --- the actions ------------------------------------------------------- */
+.up-act{
+  padding:18px clamp(20px,3.4vw,36px) clamp(20px,3.4vw,26px);
+  background:var(--cream);border-top:1px solid var(--line);
+  position:sticky;bottom:0;display:grid;gap:11px;
+}
+.up-act .btn{width:100%}
+.up-no{
+  background:none;border:0;font-family:var(--sans);font-size:.95rem;color:var(--muted);
+  text-decoration:underline;text-underline-offset:3px;cursor:pointer;padding:6px;line-height:1.5;
+}
+.up-no:hover{color:var(--ink)}
+.up-x{
+  position:absolute;inset-inline-end:12px;top:12px;width:36px;height:36px;border:0;border-radius:50%;
+  background:rgba(241,239,232,.14);color:var(--cream);font-size:1.1rem;line-height:1;cursor:pointer;
+  display:grid;place-items:center;
+}
+.up-x:hover{background:rgba(241,239,232,.26)}
+
+@media (max-width:560px){
+  .up-dlg{max-width:100vw;max-height:100dvh;margin:0;height:100dvh}
+  .up-card{border-radius:0;max-height:100dvh;height:100dvh}
+  .up-gtee{flex-direction:column;gap:10px}
+}
+@media (prefers-reduced-motion:no-preference){
+  .up-dlg[open]{animation:upIn .34s var(--ease)}
+  @keyframes upIn{from{opacity:0;transform:translateY(14px) scale(.985)}to{opacity:1;transform:none}}
+}
+
 /* ---------------------------------------------- Arabic fallback metrics --
    The Arabic pages shifted on font swap and the byte-identical English ones
    did not: same template, same images, CLS 0.160 against 0.002. The cause is
@@ -1038,6 +1169,14 @@ html:has(.paybar.up) #aiden-root{--bottom:96px!important}
 
 /* ============================================================ simulators */
 [dir=rtl] .legend i{margin-right:0;margin-left:7px}
+/* The price table's headings and its stacked-card labels are set in tracked
+   uppercase mono, which is a Latin device - see the note above. The mono
+   face itself stays: the Arabic --mono stack falls through to Plex Sans
+   Arabic, so "ر.ع." keeps its own letterforms and only the digits beside it
+   are monospaced - which is the whole reason the figures line up. */
+[dir=rtl] .fixes .tbl thead th,[dir=rtl] .fixes .tbl td.n::before{
+  letter-spacing:0;text-transform:none;
+}
 
 /* ================================================================= demos */
 [dir=rtl] .steps2::before{left:auto;right:6px}
@@ -1360,6 +1499,7 @@ html:has(.paybar.up) #aiden-root{--bottom:96px!important}
         </ul>
       </div>
 
+          <input type="checkbox" name="item" value="visibility" id="upItem" hidden>
     </form>
   </div>
 </section>
@@ -1413,7 +1553,90 @@ html:has(.paybar.up) #aiden-root{--bottom:96px!important}
   <button class="btn btn-teal" type="submit" form="coForm" id="barBtn">احجز</button>
 </div>
 
-<script type="application/json" id="payCfg">{"currency":"OMR","baisa":1000,"live":false,"api":"","env":"uat","deposit":100000,"base":"website","items":[{"id":"website","kind":"build","name":"\u0627\u0644\u0645\u0648\u0642\u0639 \u0627\u0644\u0630\u0643\u064a","required":true,"price":950000},{"id":"dashboard","kind":"build","name":"\u0644\u0648\u062d\u0629 \u0645\u062a\u0627\u0628\u0639\u0629 \u0627\u0644\u0645\u0627\u0644\u0643 \u0627\u0644\u062d\u064a\u0651\u0629","required":false,"price":650000},{"id":"autopilot","kind":"build","name":"\u0627\u0644\u0637\u064a\u0627\u0631 \u0627\u0644\u0622\u0644\u064a \u0627\u0644\u0643\u0627\u0645\u0644","required":false,"price":900000},{"id":"desk","kind":"monthly","name":"\u0645\u0643\u062a\u0628 \u0627\u0644\u0646\u0645\u0648","required":false,"price":75000}],"bundle":{"id":"stack","name":"\u062d\u0632\u0645\u0629 \u0627\u0644\u0645\u0634\u063a\u0651\u0644","requires":["dashboard","autopilot"],"price":2200000,"saving":300000},"plans":[{"id":"deposit","label":"\u0627\u062d\u062c\u0632 \u0645\u0648\u0639\u062f \u0628\u0646\u0627\u0621","card":true,"due":"deposit","surcharge":0,"split":1},{"id":"full","label":"\u0627\u062f\u0641\u0639 \u0627\u0644\u0645\u0628\u0644\u063a \u0643\u0627\u0645\u0644\u0627\u064b","card":true,"due":"total","surcharge":0,"split":1},{"id":"three","label":"\u062b\u0644\u0627\u062b \u062f\u0641\u0639\u0627\u062a","card":true,"due":"first","surcharge":70000,"split":3},{"id":"proof","label":"\u0627\u062f\u0641\u0639 \u0639\u0646\u062f \u0627\u0644\u0625\u062b\u0628\u0627\u062a","card":false,"due":"zero","surcharge":200000,"split":1}]}</script>
+
+<dialog class="up-dlg" id="upDlg" aria-labelledby="upTitle">
+  <div class="up-card">
+    <div class="up-scroll">
+
+      <div class="up-head">
+        <button type="button" class="up-x" id="upX" aria-label="إغلاق والمتابعة بدونه">&#10005;</button>
+        <p class="eyebrow">هذه الصفحة فقط &#183; لن يظهر هذا العرض مرة أخرى</p>
+        <h2 id="upTitle">موقعك سيكون جاهزاً لأن يُعثر عليه.<br>أما أن يُعثر عليه فعلاً، فتلك مهمة أخرى.</h2>
+        <p>تسعون ثانية، ثم تستطيع الدفع. هذا هو الشيء الذي يعود الناس ليطلبوه مني بعد ستة أشهر، ولذلك أفضّل أن تسمعه الآن.</p>
+      </div>
+
+      <div class="up-body">
+
+        <div class="up-def">
+          <h3>‏SEO — كيف يقرّر جوجل من يعرض</h3>
+          <p>تخيّل مكتبة فيها عشرة ملايين كتاب وأمين مكتبة واحد. يدخل شخص ويسأل عن «أفضل مورّد مضخات مياه في مسقط». هو لا يقرأ عشرة ملايين كتاب، بل يمدّ يده إلى الكتب القليلة التي يعرفها ويثق بها ورأى الناس يعودون إليها راضين. <b>‏SEO هو العمل الذي يجعلك أحد الكتب التي تمتدّ إليها يده.</b></p>
+        </div>
+
+        <div class="up-def">
+          <h3>‏GEO — الشيء نفسه، لكن للذكاء الاصطناعي</h3>
+          <p>حين يسأل مشتريك ChatGPT: «ممن أشتري في عُمان؟»، فهو لا يذهب ليقرأ الإنترنت في تلك اللحظة، بل يجيب مما قرأه سابقاً ووثق به. <b>‏GEO هو العمل الذي يجعلك داخل ما قرأه</b> — ليكون اسمك في الإجابة نفسها، لا في صفحة رابعة لا يفتحها أحد.</p>
+        </div>
+
+        <div class="up-rule"></div>
+
+        <h3>وهنا الجزء الذي لا يخبرك به أحد: هذا العمل لا ينتهي</h3>
+        <p>منافسوك لا يتوقفون. وجوجل يغيّر رأيه فيمن يثق به كل يوم تقريباً. ونماذج الذكاء الاصطناعي يُعاد تدريبها وتقرأ الويب من جديد وفق جدولها الخاص — وفي كل مرة تُكتب الإجابة من الصفر.</p>
+        <p>فالظهور ليس جداراً تبنيه مرة واحدة. <b>إنه حديقة.</b> توقّف عن سقايتها فلن تبقى كما تركتها، بل تعود إلى العشب البري — لأن جارك واصل سقاية حديقته.</p>
+
+        <div class="up-rule"></div>
+
+        <h3>ما تدفع مقابله بالفعل — وأين يتوقف</h3>
+        <div class="up-have">
+          <p>كل ما أبنيه لك يحمل أصلاً هيكل الظهور كاملاً:</p>
+          <ul>
+            <li>بنية يقرأها جوجل بوضوح، على موقع سريع التحميل</li>
+            <li>ترميز Schema يخبر الذكاء الاصطناعي ما هو نشاطك وما الذي تبيعه</li>
+            <li>عربية وإنجليزية مكتوبتان كما ينبغي، لا مارّتان عبر مترجم آلي</li>
+            <li>ملف <code>llms.txt</code> وبنية محتوى مصمّمة ليقتبسها محرك الإجابات</li>
+          </ul>
+        </div>
+        <p>هذا الجزء حقيقي، ومنجز، وهو ملكك إلى الأبد. <b>لكن البنية التحتية طريق، لا سيارة تسير عليه.</b> الطريق سيكتمل يوم أسلّمه لك، ويبقى على أحدهم أن يقودها — لا مرة واحدة، بل كل يوم.</p>
+
+        <h3>وكيف تبدو القيادة عملياً</h3>
+        <p>متابعة ما يكتبه ويسأله مشتروك فعلاً. وكتابة الإجابات التي يبحثون عنها. وإيصال اسمك إلى الصفحات والأدلة والمصادر التي تقرأها النماذج فعلاً. وإبقاء ملفّك في «نشاطي التجاري على جوجل» حيّاً. وإصلاح ما يتعطّل. واختبار شهري لما إذا كان ChatGPT وGemini وإجابات جوجل الذكية وبحث جوجل العادي يذكرون اسمك — مع عرض لقطات الشاشة عليك في الحالتين.</p>
+        <p class="sub">هذا عمل يومي. إنه وظيفة، وهي الوظيفة التي أؤدّيها.</p>
+
+        <div class="up-rule"></div>
+
+        <div class="up-offer">
+          <span class="nm">احجزه الآن &#183; مكتب الظهور</span>
+          <p class="up-figs">
+            <span class="up-now"><span class="num" dir="ltr">97</span> ر.ع.<span class="per">شهرياً</span></span>
+            <span class="up-was"><span class="num" dir="ltr">300</span> ر.ع. شهرياً</span>
+          </p>
+          <p class="note"><b>لا يُحتسب شيء اليوم.</b> يبدأ في الشهر التالي لإطلاق موقعك ويُفوتر شهرياً. وتستطيع الإلغاء في أي شهر — مع أن الضمان أدناه يحتاج 6 أشهر ليكتمل.</p>
+        </div>
+
+        <div class="up-gtee">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l8 3v6c0 5-3.4 9.4-8 11-4.6-1.6-8-6-8-11V5l8-3zm-1.2 13.4 5.7-5.7-1.4-1.4-4.3 4.3-2-2-1.4 1.4 3.4 3.4z"/></svg>
+          <div>
+            <h3>ضمان الـ6 أشهر</h3>
+            <p>بعد 6 أشهر من إطلاق موقعك، إن لم تكن ظاهراً — لا جوجل يذكرك ولا ChatGPT — <b>أعيد لك كل ريال دفعته مقابل مكتب الظهور، وأواصل العمل مجاناً حتى تظهر.</b></p>
+            <p class="fine">بعبارة صريحة: الاسترداد يشمل رسوم هذه الخدمة، لا تكلفة بناء موقعك. و«الظهور» ليس مصطلحاً غامضاً — ففي شهرك الأول نكتب معاً أسئلة الشراء الحقيقية التي يسألها عملاؤك، وهي ما نختبر عليه، كل شهر، أمامك.</p>
+          </div>
+        </div>
+
+        <div class="up-only">
+          <b>هذا السعر موجود في هذه الصفحة، ولا مكان غيرها.</b><br>السعر المعلن للعمل نفسه هو <b><span class="num" dir="ltr">300</span> ر.ع. شهرياً</b>. و<span class="num" dir="ltr">97</span> ر.ع. هو ما يكلّفه إن حجزته في هذه اللحظة، قبل أن تدفع مقابل البناء — لأن القيام بهذا من اليوم الأول أرخص عليّ بكثير من إنقاذه بعد عام. <b>غادر هذه الصفحة وسيعود السعر إلى <span class="num" dir="ltr">300</span> ر.ع.</b> أنا لا أعيد فتحه لاحقاً، ولن ينفع الطلب اللطيف في مارس.
+        </div>
+
+      </div>
+    </div>
+
+    <div class="up-act">
+      <button type="button" class="btn btn-teal" id="upYes">أضِفه — <span class="num" dir="ltr">97</span> ر.ع. شهرياً</button>
+      <button type="button" class="up-no" id="upNo">لا، شكراً — أكمل الدفع وسعره لاحقاً <span class="num" dir="ltr">300</span> ر.ع.</button>
+    </div>
+  </div>
+</dialog>
+
+
+<script type="application/json" id="payCfg">{"currency":"OMR","baisa":1000,"live":false,"api":"","env":"uat","deposit":100000,"base":"website","items":[{"id":"website","kind":"build","name":"\u0627\u0644\u0645\u0648\u0642\u0639 \u0627\u0644\u0630\u0643\u064a","required":true,"price":950000},{"id":"dashboard","kind":"build","name":"\u0644\u0648\u062d\u0629 \u0645\u062a\u0627\u0628\u0639\u0629 \u0627\u0644\u0645\u0627\u0644\u0643 \u0627\u0644\u062d\u064a\u0651\u0629","required":false,"price":650000},{"id":"autopilot","kind":"build","name":"\u0627\u0644\u0637\u064a\u0627\u0631 \u0627\u0644\u0622\u0644\u064a \u0627\u0644\u0643\u0627\u0645\u0644","required":false,"price":900000},{"id":"desk","kind":"monthly","name":"\u0645\u0643\u062a\u0628 \u0627\u0644\u0646\u0645\u0648","required":false,"price":75000},{"id":"visibility","kind":"monthly","name":"\u0645\u0643\u062a\u0628 \u0627\u0644\u0638\u0647\u0648\u0631","required":false,"price":97000}],"bundle":{"id":"stack","name":"\u062d\u0632\u0645\u0629 \u0627\u0644\u0645\u0634\u063a\u0651\u0644","requires":["dashboard","autopilot"],"price":2200000,"saving":300000},"upsell":{"id":"visibility","name":"\u0645\u0643\u062a\u0628 \u0627\u0644\u0638\u0647\u0648\u0631","price":97000,"rack":300000,"months":6,"skip_if":"desk"},"plans":[{"id":"deposit","label":"\u0627\u062d\u062c\u0632 \u0645\u0648\u0639\u062f \u0628\u0646\u0627\u0621","card":true,"due":"deposit","surcharge":0,"split":1},{"id":"full","label":"\u0627\u062f\u0641\u0639 \u0627\u0644\u0645\u0628\u0644\u063a \u0643\u0627\u0645\u0644\u0627\u064b","card":true,"due":"total","surcharge":0,"split":1},{"id":"three","label":"\u062b\u0644\u0627\u062b \u062f\u0641\u0639\u0627\u062a","card":true,"due":"first","surcharge":70000,"split":3},{"id":"proof","label":"\u0627\u062f\u0641\u0639 \u0639\u0646\u062f \u0627\u0644\u0625\u062b\u0628\u0627\u062a","card":false,"due":"zero","surcharge":200000,"split":1}]}</script>
 </main>
 <nav class="pager" aria-label="الصفحة التالية">
   <div class="wrap"><a href="/process/">
@@ -1951,9 +2174,73 @@ html:has(.paybar.up) #aiden-root{--bottom:96px!important}
 
   /* -------------------------------------------------------- submission --- */
   var btn = $("payBtn");
+
+  /* ------------------------------------------------ the upsell gate ---
+     Runs once, between "pay" and the card page, and only ever DELAYS the
+     submission - never cancels it. Every exit from the dialog calls pay()
+     with the buyer's answer already recorded on #upItem.
+
+     Three reasons it stands down, all of them deliberate:
+       * decided        - it has already been answered this page-load. A
+                          buyer whose card was refused and who presses pay
+                          again is not asked to re-decide an upsell.
+       * skip_if        - they already bought the monthly plan it overlaps
+                          with (the Growth Desk). Nobody is asked to take
+                          two monthly retainers in the same breath.
+       * already ticked - deep link or a browser restoring form state.
+     If the markup is missing for any reason, it stands down too: the
+     absence of an upsell must never be able to block a payment.            */
+  var upDlg = $("upDlg"), upItem = $("upItem"), upDecided = false;
+
+  function upsellDue(){
+    if (upDecided || !upDlg || !upItem || !upDlg.showModal) return false;
+    if (upItem.checked) return false;
+    var cfg = CFG.upsell;
+    if (!cfg) return false;
+    if (cfg.skip_if && selected().indexOf(cfg.skip_if) >= 0) return false;
+    return true;
+  }
+
+  function upsellClose(taken){
+    upDecided = true;
+    upItem.checked = Boolean(taken);
+    render();                       /* re-total, so the summary shows the line */
+    try { upDlg.close(); } catch(err){}
+    if (typeof gtag === "function"){
+      gtag("event", taken ? "add_to_cart" : "upsell_declined", {
+        item_id: CFG.upsell.id, item_name: CFG.upsell.name,
+        value: CFG.upsell.price / CFG.baisa, currency: CFG.currency
+      });
+    }
+    pay();
+  }
+
+  if (upDlg && upItem){
+    $("upYes").addEventListener("click", function(){ upsellClose(true); });
+    $("upNo").addEventListener("click", function(){ upsellClose(false); });
+    $("upX").addEventListener("click", function(){ upsellClose(false); });
+    /* Escape and backdrop both fire `cancel`/`close`. Whichever way the buyer
+       leaves, they leave INTO the payment they asked for - a dialog that
+       swallowed the click on the one page that takes money would be the
+       worst bug on the site. */
+    upDlg.addEventListener("cancel", function(e){ e.preventDefault(); upsellClose(false); });
+  }
+
   form.addEventListener("submit", function(e){
     e.preventDefault();
     if (!validate()) return;
+    if (upsellDue()){
+      upDlg.showModal();
+      if (typeof gtag === "function"){
+        gtag("event", "view_promotion", {promotion_id: CFG.upsell.id,
+                                         promotion_name: CFG.upsell.name});
+      }
+      return;
+    }
+    pay();
+  });
+
+  function pay(){
     var q = render();
     var canCard = CFG.live && CFG.api && q.plan.card;
 
@@ -2010,7 +2297,7 @@ html:has(.paybar.up) #aiden-root{--bottom:96px!important}
       if (!settle()) return;
       abandon(err && err.message ? err.message : T.errUnknown);
     });
-  });
+  }
 
   /* ---------------------------------------------------- mobile pay bar ---
      On a phone the summary is not a sidebar - the single-column stack puts it
@@ -2046,6 +2333,6 @@ html:has(.paybar.up) #aiden-root{--bottom:96px!important}
   render();
 })();
 </script>
-    <script defer src="/js/aiden-chat.js?v=61237181"></script>
+<script defer src="/js/aiden-chat.js?v=61237181"></script>
 </body>
 </html>

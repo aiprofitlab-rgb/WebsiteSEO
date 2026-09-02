@@ -85,7 +85,11 @@ def body():
     cfg = pay.CONFIG_JSON("ar")
     base = pay.item(pay.BASE_ID)
     addons = [i for i in pay.CATALOG if i["kind"] == "build" and not i["required"]]
-    monthlies = [i for i in pay.CATALOG if i["kind"] == "monthly"]
+    # pay.listed() is what keeps the upsell OFF this list. It is a monthly
+    # item like the Growth Desk, but it is sold only by the interstitial - if
+    # it rendered as an ordinary checkbox here, "only on this page" would be
+    # false the moment the page loaded.
+    monthlies = [i for i in pay.CATALOG if i["kind"] == "monthly" and pay.listed(i)]
     q0 = pay.quote([pay.BASE_ID], "deposit")
 
     # The wording of the action changes entirely with the gateway switch, and
@@ -285,7 +289,7 @@ def body():
         </ul>
       </div>
 
-    </form>
+{page_checkout.upsell_field()}    </form>
   </div>
 </section>
 
@@ -338,6 +342,7 @@ def body():
   <button class="btn btn-teal" type="submit" form="coForm" id="barBtn">احجز</button>
 </div>
 
+{page_checkout.upsell_dialog("ar")}
 <script type="application/json" id="payCfg">{cfg}</script>
 </main>
 """

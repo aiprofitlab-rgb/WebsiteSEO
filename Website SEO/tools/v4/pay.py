@@ -102,7 +102,47 @@ CATALOG = [
         "blurb_ar": "رعاية شهرية اختيارية، وميزات جديدة، ومراجعة للتقارير. غير مطلوبة أبداً لإبقاء أي شيء يعمل، وتُلغى في أي شهر.",
         "price": 75 * OMR,
     },
+    # -----------------------------------------------------------------------
+    # The one thing in this table that is NOT published.
+    #
+    # `listed: False` is what makes the offer an offer. It keeps this row out
+    # of the services page, out of the checkout's monthly checkboxes, and out
+    # of check_services() below - the ONLY place it is ever shown is the
+    # interstitial that runs between "pay" and the card page. If it ever
+    # appears on a public price list, `rack` stops being true and the whole
+    # claim on that interstitial becomes a lie. Do not list it.
+    #
+    # `rack` is the published rate for the same work bought any other way. It
+    # is the number the interstitial strikes through, and it is the number
+    # quoted to anyone who declines and asks for it later. It is not a
+    # decoration: if Nahid would in fact sell this at 97 to a walk-in, then
+    # 300 is not the regular price and the line has to come off the page.
+    #
+    # `guarantee_months` drives the guarantee wording in both languages and on
+    # both checkouts. Change it here and every surface follows.
+    # -----------------------------------------------------------------------
+    {
+        "id": "visibility", "kind": "monthly", "required": False, "listed": False,
+        "name": "The Visibility Desk",
+        "name_ar": "مكتب الظهور",
+        "blurb": "The daily work of staying named by Google and by the AI assistants "
+                 "buyers now ask first.",
+        "blurb_ar": "العمل اليومي لإبقاء اسمك حاضراً في جوجل وفي مساعدي الذكاء الاصطناعي الذين صار المشترون يسألونهم أولاً.",
+        "price": 97 * OMR,
+        "rack": 300 * OMR,
+        "guarantee_months": 6,
+    },
 ]
+
+# The id of the row above. Everything that renders the interstitial asks for it
+# by this name rather than by the string, so it can be renamed in one place.
+UPSELL_ID = "visibility"
+
+
+def listed(i):
+    """Is this item published on the public price list? Absent means yes - the
+    exception is the thing that has to be declared, not the rule."""
+    return i.get("listed", True)
 
 # All three build items together are sold as one thing at a lower price than
 # the sum of its parts. `saving` is not stored - it is derived, so it cannot
@@ -277,6 +317,22 @@ def config(lang="en"):
         "bundle": {"id": BUNDLE["id"], "name": t(BUNDLE, "name", lang),
                    "requires": BUNDLE["requires"],
                    "price": price(BUNDLE), "saving": bundle_saving()},
+        # The upsell is already in `items` above - the server prices it from
+        # there like any other monthly line. This block is the extra it needs
+        # to be SOLD: the struck-through rate and the length of the guarantee,
+        # which no other item has. Shipped separately so `items` keeps one
+        # shape for every row.
+        "upsell": {
+            "id": UPSELL_ID,
+            "name": t(item(UPSELL_ID), "name", lang),
+            "price": price(item(UPSELL_ID)),
+            "rack": item(UPSELL_ID)["rack"],
+            "months": item(UPSELL_ID)["guarantee_months"],
+            # The row the interstitial stands down for. A buyer who already
+            # took monthly care is not asked to buy a second monthly plan in
+            # the same breath.
+            "skip_if": "desk",
+        },
         "plans": [
             {"id": p["id"], "label": t(p, "label", lang), "card": p["card"], "due": p["due"],
              "surcharge": p["surcharge"], "split": p["split"]}
@@ -313,6 +369,11 @@ def check_services(html, lang="en"):
     problems = []
 
     for i in CATALOG:
+        # An unlisted item is deliberately absent from the price table - see
+        # the note on `listed` in CATALOG. Asserting it were present would
+        # force the exclusive offer onto the public page and destroy it.
+        if not listed(i):
+            continue
         # The table writes add-ons as "+OMR 650" and the base as "OMR 950";
         # both contain "OMR 650" / "OMR 950", so one needle covers both.
         needle = fmt(price(i))
@@ -339,6 +400,24 @@ def check_services(html, lang="en"):
     elif fmt(per) not in html:
         problems.append(f"payment structure 'three': {page} does not contain "
                         f"{fmt(per)!r} (3 x)")
+
+    # ...and the inverse. An unlisted price appearing on the public page is a
+    # worse failure than a listed one going missing: it does not break a build
+    # or look wrong, it just quietly turns "only on this page" into a false
+    # statement while every test still passes.
+    #
+    # Only the offer price is checked, never `rack`: the bundle saving is also
+    # OMR 300 and legitimately appears in that table, so asserting the rack
+    # were absent would fail on a page that is perfectly correct.
+    for i in CATALOG:
+        if listed(i):
+            continue
+        leaked = fmt(price(i))
+        if leaked in html:
+            problems.append(
+                f"{i['name']}: {leaked!r} is an UNLISTED price and it appears on {page}. "
+                f"It is sold only on the checkout interstitial - publishing it there "
+                f"contradicts the 'only on this page' claim.")
 
     for i in CATALOG:
         if len(i["name"]) > THAWANI_NAME_MAX:

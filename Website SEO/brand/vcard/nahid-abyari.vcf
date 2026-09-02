@@ -1,0 +1,18 @@
+BEGIN:VCARD
+VERSION:3.0
+N:Abyari;Nahid;;;
+FN:Nahid Abyari
+ORG:AI Profit Lab
+TITLE:Founder
+TEL;TYPE=CELL:+96899245250
+EMAIL;TYPE=INTERNET:nahid@aiprofitlab.io
+ADR;TYPE=WORK:;;;Muscat;;;Oman
+URL:https://aiprofitlab.io
+PHOTO;VALUE=URI:https://aiprofitlab.io/assets/email/nahid-avatar.png
+item1.URL:https://linkedin.com/in/nahid-aby
+item1.X-ABLabel:LinkedIn
+item2.URL:https://instagram.com/nahid_aby
+item2.X-ABLabel:Instagram
+item3.URL:https://wa.me/96899245250
+item3.X-ABLabel:WhatsApp
+END:VCARD
