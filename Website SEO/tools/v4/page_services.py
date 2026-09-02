@@ -8,7 +8,7 @@ is that you should not need a sales call to learn a number.
 Figures are the ones already published on en/index-v3.html.
 """
 import pay
-from kit import WA, WA_ICON, STAR
+from kit import WA, WA_ICON, STAR, SHIELD
 
 CSS = """
 /* ---------------------------------------------------------- stat strip */
@@ -120,12 +120,47 @@ table.t .mini{display:block;font-size:.86rem;color:var(--muted);margin-top:5px;l
 }
 .nolog li::after{content:"";position:absolute;left:4px;top:1.06em;width:8px;height:1.5px;background:var(--alert)}
 
+/* ------------------------------------------------ the visibility desk
+   The one monthly service on the page, so it gets its own furniture rather
+   than a fourth .sysblock: the argument it has to make is "why does this
+   repeat", which is prose, not a product shot.
+
+   Direction-sensitive rules here use LOGICAL properties (border-inline-start)
+   rather than border-left plus a [dir=rtl] override in rtl.py. The block is
+   pure prose with no mirrored artwork, so the automatic flip is correct in
+   both languages and there is nothing for the Arabic layer to remember. */
+.vis-defs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(16px,2vw,24px);margin:clamp(26px,3.4vw,42px) 0}
+.vis-def{background:var(--white);border:1px solid var(--line);border-radius:16px;padding:clamp(20px,2.4vw,30px)}
+.vis-def h3{font-size:clamp(1.08rem,1.9vw,1.3rem);line-height:1.28;color:var(--teal-950);margin:0 0 12px}
+.vis-def p{margin:0;font-size:1rem;line-height:1.62;color:var(--muted)}
+.vis-def b,.vis-why b,.vis-split b{color:var(--teal-950);font-weight:600}
+.vis-why{background:var(--white);border:1px solid var(--line);border-inline-start:3px solid var(--amber);border-radius:16px;padding:clamp(22px,2.8vw,34px)}
+.vis-why h3{margin:0 0 14px}
+.vis-why p{color:var(--muted);font-size:1.04rem;line-height:1.66;margin:0 0 14px}
+.vis-why p:last-child{margin-bottom:0}
+.vis-split{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(26px,4vw,60px);margin-top:clamp(30px,4vw,52px)}
+.vis-split h3{margin:0}
+.vis-split p{color:var(--muted);font-size:1rem;line-height:1.62;margin:0}
+.vis-gtee{background:var(--white);border:1.5px solid var(--teal);border-radius:16px;
+  padding:clamp(20px,2.6vw,30px);margin-top:clamp(30px,4vw,50px);
+  display:flex;gap:clamp(14px,2vw,20px);align-items:flex-start}
+.vis-gtee svg{flex:none;width:34px;height:34px;fill:var(--teal);margin-top:2px}
+.vis-gtee h3{margin:0 0 8px}
+.vis-gtee p{margin:0;font-size:1.02rem;line-height:1.62;color:var(--ink)}
+.vis-gtee .fine{margin-top:12px;font-size:.9rem;color:var(--muted);line-height:1.58}
+.vis-gtee b{color:var(--teal-950);font-weight:600}
+.vis-foot{display:flex;align-items:center;justify-content:space-between;gap:clamp(16px,3vw,40px);flex-wrap:wrap;
+  margin-top:clamp(30px,4vw,50px);padding-top:clamp(24px,3vw,36px);border-top:1px solid var(--line)}
+.vis-foot .pricetag{margin:0}
+
 @media (max-width:900px){
   .stats{grid-template-columns:repeat(2,1fr)}
   .stats div:nth-child(2){border-right:0}
   .stats div:nth-child(1),.stats div:nth-child(2){border-bottom:1px solid var(--line)}
   .sysblock{grid-template-columns:1fr}
   .sysblock.flip .art{order:0}
+  .vis-defs,.vis-split{grid-template-columns:minmax(0,1fr)}
+  .vis-gtee{flex-direction:column;gap:12px}
   .pay-grid{grid-template-columns:1fr}
 }
 """
@@ -138,8 +173,9 @@ def body():
   <div class="wrap">
     <p class="eyebrow"><span class="star">{STAR}</span> What I build</p>
     <h1 class="h1">You describe the problem.<br>I build the system that removes it.</h1>
-    <p class="lede">Three systems, each one a fixed, one-time build. No retainer is required to keep any of
-      them running, and every price is on this page.</p>
+    <p class="lede">Three systems, each one a fixed, one-time build &mdash; plus one monthly desk, for the
+      single job that genuinely never finishes. No retainer is required to keep anything running, and
+      every price is on this page.</p>
     <div class="btn-row" style="margin-top:30px">
       <a class="btn btn-teal" href="#price">Jump to the price list</a>
       <a class="tlink" href="/en/process/">How a build actually runs <span class="arw">&rarr;</span></a>
@@ -277,6 +313,101 @@ def body():
     </div>
   </div>
 </section>
+
+<!-- =============================================== 04 - THE VISIBILITY DESK -->
+<section class="s-panel2 grain" id="visibility">
+  <div class="wrap">
+    <p class="eyebrow"><span class="star">{STAR}</span> 04 &#183; The monthly one</p>
+    <h2 class="h2">A website makes you findable.<br>Being <em>found</em> is a different job.</h2>
+    <p class="lede">Everything above is built once and then it is yours. This one is not, and I would
+      rather explain why in plain words now than have you feel surprised by an invoice later.</p>
+
+    <div class="vis-defs rv">
+      <div class="vis-def">
+        <h3>SEO &mdash; how Google decides who to show</h3>
+        <p>Picture a library with ten million books and one librarian. Somebody walks in and asks for
+          &#8220;the best water pump supplier in Muscat.&#8221; She does not read ten million books. She
+          reaches for the few she already knows, already trusts, and has watched people come back to
+          happy. <b>SEO is the work of becoming a book she reaches for.</b></p>
+      </div>
+      <div class="vis-def">
+        <h3>GEO &mdash; the same thing, for the AI</h3>
+        <p>Your buyer now asks ChatGPT &#8220;who should I buy from in Oman?&#8221; ChatGPT does not go
+          and read the internet on the spot &mdash; it answers out of what it has already read and
+          already trusts. <b>GEO is the work of being inside what it read</b>, so your name is in the
+          answer itself, not on page four of something nobody opens.</p>
+      </div>
+    </div>
+
+    <div class="vis-why rv">
+      <h3 class="h3">Why this one repeats every month</h3>
+      <p>Your competitors do not stop. Google changes its mind about who it trusts almost daily. And the
+        AI models are retrained and re-read the web on their own schedule &mdash; every time they do, the
+        answer to &#8220;who should I buy from in Oman?&#8221; is written again from nothing. What it said
+        about you last year counts for nothing this year.</p>
+      <p><b>So being found is not a wall you build once. It is a garden.</b> Stop watering it and it does
+        not stay the way you left it. It goes back to weeds &mdash; because the man next door kept
+        watering his.</p>
+      <p>That is the entire reason this is a monthly fee and not a one-time one. You are not buying an
+        object that gets delivered and then sits there working. <b>You are paying for somebody to keep
+        showing up.</b> The month the work stops is the month you start slipping back down the list, and
+        climbing back is slower and dearer than staying put. If that is not worth OMR 300 a month to you,
+        do not buy it &mdash; nothing else on this page needs it to work.</p>
+    </div>
+
+    <div class="vis-split">
+      <div>
+        <h3 class="h3">What your build already gives you, free, for ever</h3>
+        <ul class="deliver">
+          <li>A structure Google can read cleanly, on a site that loads fast</li>
+          <li>Markup that tells an AI what your business is and what it sells</li>
+          <li>Arabic and English done properly, not run through a translator</li>
+          <li>A content structure built to be quoted by an answer engine</li>
+        </ul>
+        <p>That part is real, it is done, and you keep it whether you ever pay me another rial or not.
+          <b>But infrastructure is a road, not a car driving down it.</b> The road is finished the day I
+          hand it over. Somebody still has to drive it &mdash; and not once. Every week.</p>
+      </div>
+      <div>
+        <h3 class="h3">What the Visibility Desk does, every month</h3>
+        <ul class="deliver">
+          <li>Watches what your buyers actually type and ask</li>
+          <li>Writes the answers they are searching for</li>
+          <li>Gets your name onto the pages, directories and sources the models read</li>
+          <li>Keeps your Google Business Profile alive and correct</li>
+          <li>Fixes what breaks before it costs you a position</li>
+          <li>Tests whether ChatGPT, Gemini, Google&#8217;s AI answers and ordinary Google search name
+            you &mdash; and sends you the screenshots either way, good month or bad</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="vis-gtee rv">
+      {SHIELD}
+      <div>
+        <h3 class="h3">The {{GMONTHS}}-month guarantee</h3>
+        <p>{{GMONTHS}} months after the work starts &mdash; that is the day your site goes live if I am
+          building it, or the day we begin if your site is already up &mdash; if you are not visible,
+          not named by Google and not named by ChatGPT, <b>I refund every rial you have paid for the
+          Visibility Desk, and I carry on working, free, until you are.</b></p>
+        <p class="fine">In plain terms: the refund covers this service&#8217;s fees, <b>not your
+          build</b> &mdash; if you bought a website from me, that stays bought and is not touched by
+          this. And &#8220;visible&#8221; is not left vague: in your first month we write down the
+          actual buying questions your customers ask, and those are what we test against, every
+          month, in front of you. You can still cancel any month &mdash; the guarantee simply needs
+          its {{GMONTHS}} months to run.</p>
+      </div>
+    </div>
+
+    <div class="vis-foot">
+      <div class="pricetag"><b>OMR 300</b><span>Per month &#183; cancel any month &#183; {{GMONTHS}}-month guarantee</span></div>
+      <div class="btn-row">
+        <a class="btn btn-wa" href="{WA}&amp;text=Hello%20Nahid%2C%20I%20want%20to%20ask%20about%20the%20Visibility%20Desk%20at%20OMR%20300%20a%20month.">{WA_ICON}Ask about the Visibility Desk</a>
+        <a class="tlink" href="#price">See it in the price list <span class="arw">&rarr;</span></a>
+      </div>
+    </div>
+  </div>
+</section>
 """
 
     p2 = f"""
@@ -318,6 +449,10 @@ def body():
           <tr>
             <td>The Growth Desk<span class="mini">Optional monthly care, new features, reporting review. Never required to keep anything working.</span></td>
             <td class="n">OMR 75/mo</td><td>Opt-in, cancel anytime</td>
+          </tr>
+          <tr>
+            <td>The Visibility Desk<span class="mini">The ongoing SEO and GEO work &mdash; staying named by Google and by the AI assistants buyers ask first. Carries a {{GMONTHS}}-month refund guarantee. <a href="#visibility">What that means, in plain words</a>.</span></td>
+            <td class="n">OMR 300/mo</td><td>Opt-in, cancel any month</td>
           </tr>
         </tbody>
       </table>
@@ -372,7 +507,9 @@ def body():
         <li>This is <b>not an ERP</b>. If you need multi-branch inventory and finance in one system, that is a
           different weight class and I will say so on the call.</li>
         <li>It <b>does not replace your accountant</b>. It shows you what is happening now; they still close your books.</li>
-        <li>No paid ad management, no ongoing social media, no ongoing content writing beyond your initial site copy.</li>
+        <li>No paid ad management and no ongoing social media. A build also carries no ongoing content
+          writing beyond your initial site copy &mdash; that is <a href="#visibility">the Visibility
+          Desk</a>, priced separately above, and nothing here needs it to work.</li>
         <li>No online payment processing or e-commerce checkout. If you need it, it gets scoped and quoted separately.</li>
         <li>Prices above assume one product catalogue and one language pair. Something genuinely bigger gets
           quoted, not squeezed into a package.</li>
@@ -405,14 +542,22 @@ def body():
     # one can actually be taken. DEPOSIT comes from the same table as the
     # checkout, so the two can never quote different deposits.
     pay_how = "by card or bank transfer" if pay.PAY_LIVE else "by bank transfer"
-    return (p1 + p2).replace("{PAY_HOW}", pay_how).replace("{DEPOSIT}", pay.money(pay.DEPOSIT))
+    # The guarantee length is read from the catalog rather than typed, because
+    # the same promise is made on the checkout interstitial from the same
+    # field. Two hand-written copies of "6 months" is how a guarantee ends up
+    # meaning two different lengths on two pages.
+    gmonths = str(pay.item(pay.UPSELL_ID)["guarantee_months"])
+    return ((p1 + p2).replace("{PAY_HOW}", pay_how)
+            .replace("{DEPOSIT}", pay.money(pay.DEPOSIT))
+            .replace("{GMONTHS}", gmonths))
 
 
 META = dict(
     slug="services",
-    title="What I build | AI Profit Lab — three systems, every price published",
-    desc=("The Smart Website, the Live Owner Dashboard and the Full Autopilot - what each one does, "
-          "what it costs in OMR, and what is deliberately not included."),
+    title="What I build | AI Profit Lab — three systems, SEO/GEO, prices published",
+    desc=("The Smart Website, the Live Owner Dashboard, the Full Autopilot and the monthly "
+          "Visibility Desk (SEO and GEO) - what each one does, what it costs in OMR, and what is "
+          "deliberately not included."),
     nav="/en/services/",
     next=("Next", "How it works", "/en/process/"),
     schema="""{
@@ -422,7 +567,8 @@ META = dict(
   "itemListElement":[
     {"@type":"Service","position":1,"name":"The Smart Website","description":"A bilingual site with an AI buyer agent that answers in Arabic and English and hands live buyers to WhatsApp.","provider":{"@id":"https://aiprofitlab.io/#organization"},"areaServed":"Oman","offers":{"@type":"Offer","price":"950","priceCurrency":"OMR","availability":"https://schema.org/InStock","url":"https://aiprofitlab.io/en/checkout/?plan=website","priceValidUntil":"2026-12-31"}},
     {"@type":"Service","position":2,"name":"The Live Owner Dashboard","description":"Cash position, margin, stock and open leads on one screen, with a recommended action for each.","provider":{"@id":"https://aiprofitlab.io/#organization"},"areaServed":"Oman","offers":{"@type":"Offer","price":"650","priceCurrency":"OMR","availability":"https://schema.org/InStock","url":"https://aiprofitlab.io/en/checkout/?plan=dashboard","priceValidUntil":"2026-12-31"}},
-    {"@type":"Service","position":3,"name":"The Full Autopilot","description":"Quote and invoice follow-up on a schedule, stopping as soon as the buyer replies or pays.","provider":{"@id":"https://aiprofitlab.io/#organization"},"areaServed":"Oman","offers":{"@type":"Offer","price":"900","priceCurrency":"OMR","availability":"https://schema.org/InStock","url":"https://aiprofitlab.io/en/checkout/?plan=autopilot","priceValidUntil":"2026-12-31"}}
+    {"@type":"Service","position":3,"name":"The Full Autopilot","description":"Quote and invoice follow-up on a schedule, stopping as soon as the buyer replies or pays.","provider":{"@id":"https://aiprofitlab.io/#organization"},"areaServed":"Oman","offers":{"@type":"Offer","price":"900","priceCurrency":"OMR","availability":"https://schema.org/InStock","url":"https://aiprofitlab.io/en/checkout/?plan=autopilot","priceValidUntil":"2026-12-31"}},
+    {"@type":"Service","position":4,"name":"The Visibility Desk","serviceType":"Search engine and AI answer-engine visibility (SEO and GEO)","description":"Ongoing monthly SEO and GEO work: staying named by Google and by the AI assistants buyers ask first, with a monthly test showing whether ChatGPT, Gemini, Google AI answers and Google search name the business.","provider":{"@id":"https://aiprofitlab.io/#organization"},"areaServed":"Oman","offers":{"@type":"Offer","priceCurrency":"OMR","availability":"https://schema.org/InStock","url":"https://aiprofitlab.io/en/services/#visibility","priceValidUntil":"2026-12-31","priceSpecification":{"@type":"UnitPriceSpecification","price":"300","priceCurrency":"OMR","unitCode":"MON","unitText":"month"}}}
   ]
 }""",
 )

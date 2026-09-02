@@ -103,26 +103,50 @@ CATALOG = [
         "price": 75 * OMR,
     },
     # -----------------------------------------------------------------------
-    # The one thing in this table that is NOT published.
+    # The one thing in this table sold at TWO figures, and the only row where
+    # the price a page prints is not the price this dict calls `price`.
     #
-    # `listed: False` is what makes the offer an offer. It keeps this row out
-    # of the services page, out of the checkout's monthly checkboxes, and out
-    # of check_services() below - the ONLY place it is ever shown is the
-    # interstitial that runs between "pay" and the card page. If it ever
-    # appears on a public price list, `rack` stops being true and the whole
-    # claim on that interstitial becomes a lie. Do not list it.
+    #   rack  = 300  the published rate. This is what the services page shows,
+    #                what a walk-in pays, and what anyone who declines the
+    #                interstitial and asks for it in March pays.
+    #   price =  97  the interstitial's offer, available in one window only:
+    #                after "pay" is pressed and before the card page, on the
+    #                first order. It is what the checkout actually charges.
     #
-    # `rack` is the published rate for the same work bought any other way. It
-    # is the number the interstitial strikes through, and it is the number
-    # quoted to anyone who declines and asks for it later. It is not a
-    # decoration: if Nahid would in fact sell this at 97 to a walk-in, then
-    # 300 is not the regular price and the line has to come off the page.
+    # Two flags keep those apart, and they mean different things:
     #
-    # `guarantee_months` drives the guarantee wording in both languages and on
-    # both checkouts. Change it here and every surface follows.
+    #   `listed: False`   -> not a checkbox on the checkout. The interstitial
+    #                        is the only way to buy it there, at the offer
+    #                        price; a checkbox beside it would sell the same
+    #                        service twice in one page at two figures.
+    #   `published: True` -> IS on the public price list - at `rack`, never at
+    #                        `price`. Added 2026-09-01: the interstitial says
+    #                        "the published rate for the same work is OMR 300
+    #                        a month", and a rate published nowhere is not a
+    #                        published rate. Listing it at 300 is what makes
+    #                        that sentence true.
+    #
+    # The line that must never appear on a public page is 97, not 300 -
+    # check_services() asserts exactly that, in both directions. If Nahid ever
+    # does sell this at 97 to a walk-in, then 300 stops being the real rate
+    # and BOTH the services page and the interstitial have to change together.
+    #
+    # `guarantee_months` drives the guarantee wording on four surfaces now, in
+    # both languages: the two checkout interstitials AND the two services
+    # pages. Nahid confirmed 2026-09-01 that the guarantee travels with the
+    # rack rate - it is not exclusive to the interstitial offer - so the public
+    # page states it in full. Every one of those surfaces reads this field
+    # rather than typing a number, because a guarantee that says six months in
+    # one place and three in another is worse than no guarantee at all.
+    #
+    # What the promise is, exactly, and what it must never be allowed to imply,
+    # is written above UPSELL in page_checkout.py. Read it before editing the
+    # wording anywhere: the refund is of THIS SERVICE'S fees, never the build,
+    # and "visible" is defined in writing in month one.
     # -----------------------------------------------------------------------
     {
-        "id": "visibility", "kind": "monthly", "required": False, "listed": False,
+        "id": "visibility", "kind": "monthly", "required": False,
+        "listed": False, "published": True,
         "name": "The Visibility Desk",
         "name_ar": "مكتب الظهور",
         "blurb": "The daily work of staying named by Google and by the AI assistants "
@@ -140,9 +164,25 @@ UPSELL_ID = "visibility"
 
 
 def listed(i):
-    """Is this item published on the public price list? Absent means yes - the
-    exception is the thing that has to be declared, not the rule."""
+    """Is this item a line the buyer can tick for himself on the checkout?
+    Absent means yes - the exception is the thing that has to be declared, not
+    the rule."""
     return i.get("listed", True)
+
+
+def list_price(i):
+    """What the public price list shows for this item, in baisa, or None if it
+    is not on the list at all.
+
+    For every row but one this is simply `price`. The Visibility Desk is
+    published at its rack rate and sold on the checkout interstitial at a
+    lower one, so `rack` wins wherever it exists - the page prints the rate
+    anyone can buy at, never the rate that is only reachable through the
+    interstitial. `published` defaults to `listed`, because for everything
+    else the two questions have the same answer."""
+    if not i.get("published", listed(i)):
+        return None
+    return i.get("rack") or price(i)
 
 # All three build items together are sold as one thing at a lower price than
 # the sum of its parts. `saving` is not stored - it is derived, so it cannot
@@ -369,14 +409,19 @@ def check_services(html, lang="en"):
     problems = []
 
     for i in CATALOG:
-        # An unlisted item is deliberately absent from the price table - see
-        # the note on `listed` in CATALOG. Asserting it were present would
-        # force the exclusive offer onto the public page and destroy it.
-        if not listed(i):
+        # An unpublished item is deliberately absent from the price table -
+        # see the note on `published` in CATALOG. Asserting it were present
+        # would force a private figure onto the public page.
+        shown = list_price(i)
+        if shown is None:
             continue
+        # `list_price`, not `price`: the Visibility Desk publishes its rack
+        # rate. Checking `price` here would demand the offer figure appear on
+        # the page, which is the exact thing the loop below forbids.
+        #
         # The table writes add-ons as "+OMR 650" and the base as "OMR 950";
         # both contain "OMR 650" / "OMR 950", so one needle covers both.
-        needle = fmt(price(i))
+        needle = fmt(shown)
         if i["kind"] == "monthly":
             needle += monthly_suffix
         if needle not in html:
@@ -401,23 +446,28 @@ def check_services(html, lang="en"):
         problems.append(f"payment structure 'three': {page} does not contain "
                         f"{fmt(per)!r} (3 x)")
 
-    # ...and the inverse. An unlisted price appearing on the public page is a
-    # worse failure than a listed one going missing: it does not break a build
-    # or look wrong, it just quietly turns "only on this page" into a false
-    # statement while every test still passes.
+    # ...and the inverse. A private price appearing on the public page is a
+    # worse failure than a published one going missing: it does not break a
+    # build or look wrong, it just quietly turns "only on this page" into a
+    # false statement while every test still passes.
     #
-    # Only the offer price is checked, never `rack`: the bundle saving is also
-    # OMR 300 and legitimately appears in that table, so asserting the rack
-    # were absent would fail on a page that is perfectly correct.
+    # The needle is the OFFER figure - the price a page is not allowed to
+    # print - and it is checked for every row whose published figure differs
+    # from it, which today means the Visibility Desk (97 forbidden, 300
+    # required above) and would also catch any future unpublished row.
+    #
+    # `rack` itself is never asserted absent: the bundle saving is also
+    # OMR 300 and legitimately appears in that table, so that check would fail
+    # on a page that is perfectly correct.
     for i in CATALOG:
-        if listed(i):
+        if list_price(i) == price(i):
             continue
         leaked = fmt(price(i))
         if leaked in html:
             problems.append(
-                f"{i['name']}: {leaked!r} is an UNLISTED price and it appears on {page}. "
-                f"It is sold only on the checkout interstitial - publishing it there "
-                f"contradicts the 'only on this page' claim.")
+                f"{i['name']}: {leaked!r} is the checkout-interstitial price and it "
+                f"appears on {page}, which publishes {fmt(list_price(i))!r} if anything. "
+                f"Printing it there contradicts the 'only on this page' claim.")
 
     for i in CATALOG:
         if len(i["name"]) > THAWANI_NAME_MAX:

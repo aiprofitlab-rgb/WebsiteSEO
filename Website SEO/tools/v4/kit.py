@@ -941,6 +941,13 @@ GOOGLE_G = (
 STAR_SVG = ('<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 17.3l-6.18 3.75 1.64-7.03L2 '
             '9.24l7.19-.61L12 2l2.81 6.63 7.19.61-5.46 4.78 1.64 7.03z"/></svg>')
 
+# The guarantee glyph. Lives here, not in page_checkout.py, because two
+# surfaces now make the same promise - the checkout interstitial and the
+# Visibility Desk block on the services page - and a guarantee drawn with two
+# different shields reads as two different guarantees.
+SHIELD = ('<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l8 3v6c0 5-3.4 9.4-8 11-4.6-1.6-8-6-8-11V5l8-3zm'
+          '-1.2 13.4 5.7-5.7-1.4-1.4-4.3 4.3-2-2-1.4 1.4 3.4 3.4z"/></svg>')
+
 MAIL_ICON = ('<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 '
              '18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>')
 

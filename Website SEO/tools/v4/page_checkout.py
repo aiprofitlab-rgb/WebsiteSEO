@@ -27,7 +27,7 @@ Deep links: /en/checkout/?plan=full&items=dashboard,autopilot preselects a
 configuration, which is what the buttons on the services page use.
 """
 import pay
-from kit import WA, WA_ICON, STAR
+from kit import WA, WA_ICON, STAR, SHIELD
 
 CSS = """
 /* ------------------------------------------------------------ the frame */
@@ -407,8 +407,6 @@ LOCK = ('<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a5 5 0 0 0-5 
         '0 1 3-3zm0 10a1.8 1.8 0 0 1 1 3.3V19a1 1 0 0 1-2 0v-1.7a1.8 1.8 0 0 1 1-3.3z"/></svg>')
 DOC = ('<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2h8l6 6v14a0 0 0 0 1 0 0H6a2 2 0 0 '
        '1-2-2V4a2 2 0 0 1 2-2zm7 2v5h5l-5-5zM8 13h8v2H8v-2zm0 4h8v2H8v-2z"/></svg>')
-SHIELD = ('<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l8 3v6c0 5-3.4 9.4-8 11-4.6-1.6-8-6-8-11V5l8-3zm'
-          '-1.2 13.4 5.7-5.7-1.4-1.4-4.3 4.3-2-2-1.4 1.4 3.4 3.4z"/></svg>')
 BACK = ('<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5V1L7 6l5 5V7a6 6 0 1 1-6 6H4a8 8 0 1 0 8-8z"/></svg>')
 
 

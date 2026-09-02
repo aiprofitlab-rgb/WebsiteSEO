@@ -31,6 +31,7 @@ DASH = "لوحة متابعة المالك الحيّة"
 AUTO = "الطيار الآلي الكامل"
 STACK = "حزمة المشغّل"
 DESK = "مكتب النمو"
+VIS = "مكتب الظهور"
 TEST = "اختبار المشتري الصامت"
 PROMISE = "وعد أول استفسار"
 
@@ -75,8 +76,20 @@ import pay  # noqa: E402
 
 
 def price_ar(item_id):
-    """The formatted published price of a catalog item."""
-    return pay.money_ar(pay.price(pay.item(item_id)))
+    """The formatted figure this item is PUBLISHED at.
+
+    pay.list_price(), never pay.price(): the Visibility Desk is published at
+    its rack rate and sold on the checkout interstitial at a lower one, so the
+    two are genuinely different numbers and an Arabic page must print the
+    published one. An item with no published figure raises instead of falling
+    back - a page asking for a price it is not allowed to show is a bug, and
+    silently printing the private figure is the exact failure the build's
+    leak check exists to catch."""
+    shown = pay.list_price(pay.item(item_id))
+    if shown is None:
+        raise ValueError(f"{item_id!r} has no published price and must not be "
+                         f"printed on a page")
+    return pay.money_ar(shown)
 
 
 def bundle_ar():

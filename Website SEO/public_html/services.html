@@ -7,8 +7,8 @@
 <link rel="alternate" hreflang="en" href="https://aiprofitlab.io/en/services/">
 <link rel="alternate" hreflang="ar" href="https://aiprofitlab.io/services/">
 <link rel="alternate" hreflang="x-default" href="https://aiprofitlab.io/en/services/">
-<title>ما أبنيه | AI Profit Lab — ثلاثة أنظمة، وكل سعر معلن</title>
-<meta name="description" content="الموقع الذكي، ولوحة متابعة المالك الحيّة، والطيار الآلي الكامل — ماذا يفعل كل واحد منها، وكم يكلّف بالريال العُماني، وما هو غير مشمول عن قصد.">
+<title>ما أبنيه | AI Profit Lab — ثلاثة أنظمة ومكتب ظهور، وكل سعر معلن</title>
+<meta name="description" content="الموقع الذكي، ولوحة متابعة المالك الحيّة، والطيار الآلي الكامل، ومكتب الظهور الشهري (‏SEO و‏GEO) — ماذا يفعل كل واحد منها، وكم يكلّف بالريال العُماني، وما هو غير مشمول عن قصد.">
 <link rel="canonical" href="https://aiprofitlab.io/services/">
 <link rel="icon" href="/favicon.ico" sizes="32x32">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=20260822">
@@ -16,8 +16,8 @@
 <link rel="manifest" href="/site.webmanifest?v=20260822">
 
 <meta property="og:type" content="website">
-<meta property="og:title" content="ما أبنيه | AI Profit Lab — ثلاثة أنظمة، وكل سعر معلن">
-<meta property="og:description" content="الموقع الذكي، ولوحة متابعة المالك الحيّة، والطيار الآلي الكامل — ماذا يفعل كل واحد منها، وكم يكلّف بالريال العُماني، وما هو غير مشمول عن قصد.">
+<meta property="og:title" content="ما أبنيه | AI Profit Lab — ثلاثة أنظمة ومكتب ظهور، وكل سعر معلن">
+<meta property="og:description" content="الموقع الذكي، ولوحة متابعة المالك الحيّة، والطيار الآلي الكامل، ومكتب الظهور الشهري (‏SEO و‏GEO) — ماذا يفعل كل واحد منها، وكم يكلّف بالريال العُماني، وما هو غير مشمول عن قصد.">
 <meta property="og:url" content="https://aiprofitlab.io/services/">
 <meta property="og:image" content="https://aiprofitlab.io/og-aiprofitlab-2026-v2.jpg">
 <meta property="og:image:width" content="1200">
@@ -665,12 +665,47 @@ table.t .mini{display:block;font-size:.86rem;color:var(--muted);margin-top:5px;l
 }
 .nolog li::after{content:"";position:absolute;left:4px;top:1.06em;width:8px;height:1.5px;background:var(--alert)}
 
+/* ------------------------------------------------ the visibility desk
+   The one monthly service on the page, so it gets its own furniture rather
+   than a fourth .sysblock: the argument it has to make is "why does this
+   repeat", which is prose, not a product shot.
+
+   Direction-sensitive rules here use LOGICAL properties (border-inline-start)
+   rather than border-left plus a [dir=rtl] override in rtl.py. The block is
+   pure prose with no mirrored artwork, so the automatic flip is correct in
+   both languages and there is nothing for the Arabic layer to remember. */
+.vis-defs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(16px,2vw,24px);margin:clamp(26px,3.4vw,42px) 0}
+.vis-def{background:var(--white);border:1px solid var(--line);border-radius:16px;padding:clamp(20px,2.4vw,30px)}
+.vis-def h3{font-size:clamp(1.08rem,1.9vw,1.3rem);line-height:1.28;color:var(--teal-950);margin:0 0 12px}
+.vis-def p{margin:0;font-size:1rem;line-height:1.62;color:var(--muted)}
+.vis-def b,.vis-why b,.vis-split b{color:var(--teal-950);font-weight:600}
+.vis-why{background:var(--white);border:1px solid var(--line);border-inline-start:3px solid var(--amber);border-radius:16px;padding:clamp(22px,2.8vw,34px)}
+.vis-why h3{margin:0 0 14px}
+.vis-why p{color:var(--muted);font-size:1.04rem;line-height:1.66;margin:0 0 14px}
+.vis-why p:last-child{margin-bottom:0}
+.vis-split{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(26px,4vw,60px);margin-top:clamp(30px,4vw,52px)}
+.vis-split h3{margin:0}
+.vis-split p{color:var(--muted);font-size:1rem;line-height:1.62;margin:0}
+.vis-gtee{background:var(--white);border:1.5px solid var(--teal);border-radius:16px;
+  padding:clamp(20px,2.6vw,30px);margin-top:clamp(30px,4vw,50px);
+  display:flex;gap:clamp(14px,2vw,20px);align-items:flex-start}
+.vis-gtee svg{flex:none;width:34px;height:34px;fill:var(--teal);margin-top:2px}
+.vis-gtee h3{margin:0 0 8px}
+.vis-gtee p{margin:0;font-size:1.02rem;line-height:1.62;color:var(--ink)}
+.vis-gtee .fine{margin-top:12px;font-size:.9rem;color:var(--muted);line-height:1.58}
+.vis-gtee b{color:var(--teal-950);font-weight:600}
+.vis-foot{display:flex;align-items:center;justify-content:space-between;gap:clamp(16px,3vw,40px);flex-wrap:wrap;
+  margin-top:clamp(30px,4vw,50px);padding-top:clamp(24px,3vw,36px);border-top:1px solid var(--line)}
+.vis-foot .pricetag{margin:0}
+
 @media (max-width:900px){
   .stats{grid-template-columns:repeat(2,1fr)}
   .stats div:nth-child(2){border-right:0}
   .stats div:nth-child(1),.stats div:nth-child(2){border-bottom:1px solid var(--line)}
   .sysblock{grid-template-columns:1fr}
   .sysblock.flip .art{order:0}
+  .vis-defs,.vis-split{grid-template-columns:minmax(0,1fr)}
+  .vis-gtee{flex-direction:column;gap:12px}
   .pay-grid{grid-template-columns:1fr}
 }
 
@@ -981,7 +1016,8 @@ table.t .mini{display:block;font-size:.86rem;color:var(--muted);margin-top:5px;l
   "itemListElement":[
     {"@type":"Service","position":1,"name":"الموقع الذكي","description":"موقع بلغتين مع وكيل مشترٍ بالذكاء الاصطناعي يردّ بالعربية والإنجليزية ويحوّل المشترين الأحياء إلى واتساب.","provider":{"@id":"https://aiprofitlab.io/#organization"},"areaServed":"Oman","offers":{"@type":"Offer","price":"950","priceCurrency":"OMR","availability":"https://schema.org/InStock","url":"https://aiprofitlab.io/checkout/?plan=website","priceValidUntil":"2026-12-31"}},
     {"@type":"Service","position":2,"name":"لوحة متابعة المالك الحيّة","description":"السيولة وهامش الربح والمخزون والطلبات المفتوحة على شاشة واحدة، ومع كل بند الإجراء الذي يطلبه.","provider":{"@id":"https://aiprofitlab.io/#organization"},"areaServed":"Oman","offers":{"@type":"Offer","price":"650","priceCurrency":"OMR","availability":"https://schema.org/InStock","url":"https://aiprofitlab.io/checkout/?plan=dashboard","priceValidUntil":"2026-12-31"}},
-    {"@type":"Service","position":3,"name":"الطيار الآلي الكامل","description":"متابعة عروض الأسعار والفواتير وفق جدول، وتتوقف فور أن يردّ المشتري أو يدفع.","provider":{"@id":"https://aiprofitlab.io/#organization"},"areaServed":"Oman","offers":{"@type":"Offer","price":"900","priceCurrency":"OMR","availability":"https://schema.org/InStock","url":"https://aiprofitlab.io/checkout/?plan=autopilot","priceValidUntil":"2026-12-31"}}
+    {"@type":"Service","position":3,"name":"الطيار الآلي الكامل","description":"متابعة عروض الأسعار والفواتير وفق جدول، وتتوقف فور أن يردّ المشتري أو يدفع.","provider":{"@id":"https://aiprofitlab.io/#organization"},"areaServed":"Oman","offers":{"@type":"Offer","price":"900","priceCurrency":"OMR","availability":"https://schema.org/InStock","url":"https://aiprofitlab.io/checkout/?plan=autopilot","priceValidUntil":"2026-12-31"}},
+    {"@type":"Service","position":4,"name":"مكتب الظهور","serviceType":"الظهور في محركات البحث ومحركات إجابات الذكاء الاصطناعي (SEO و GEO)","description":"عمل شهري مستمر لإبقاء اسمك حاضراً في جوجل وفي مساعدي الذكاء الاصطناعي الذين يسألهم المشترون أولاً، مع اختبار شهري يبيّن ما إذا كان ChatGPT وGemini وإجابات جوجل الذكية وبحث جوجل يذكرون نشاطك.","provider":{"@id":"https://aiprofitlab.io/#organization"},"areaServed":"Oman","offers":{"@type":"Offer","priceCurrency":"OMR","availability":"https://schema.org/InStock","url":"https://aiprofitlab.io/services/#visibility","priceValidUntil":"2026-12-31","priceSpecification":{"@type":"UnitPriceSpecification","price":"300","priceCurrency":"OMR","unitCode":"MON","unitText":"month"}}}
   ]
 }
   ]
@@ -1021,8 +1057,9 @@ table.t .mini{display:block;font-size:.86rem;color:var(--muted);margin-top:5px;l
   <div class="wrap">
     <p class="eyebrow"><span class="star">&#10038;</span> ما أبنيه</p>
     <h1 class="h1">أنت تصف المشكلة.<br>وأنا أبني النظام الذي يزيلها.</h1>
-    <p class="lede">ثلاثة أنظمة، كل واحد منها بناء واحد بسعر ثابت. لا يحتاج أيٌّ منها اشتراكاً شهرياً
-      كي يستمر في العمل، وكل سعر مذكور على هذه الصفحة.</p>
+    <p class="lede">ثلاثة أنظمة، كل واحد منها بناء واحد بسعر ثابت &mdash; ومعها مكتب شهري واحد، للعمل
+      الوحيد الذي لا ينتهي فعلاً. لا يحتاج أيٌّ منها اشتراكاً شهرياً كي يستمر في العمل، وكل سعر مذكور
+      على هذه الصفحة.</p>
     <div class="btn-row" style="margin-top:30px">
       <a class="btn btn-teal" href="#price">انتقل إلى قائمة الأسعار</a>
       <a class="tlink" href="/process/">كيف يسير البناء فعلاً <span class="arw">&larr;</span></a>
@@ -1162,6 +1199,94 @@ table.t .mini{display:block;font-size:.86rem;color:var(--muted);margin-top:5px;l
   </div>
 </section>
 
+<!-- =============================================== 04 - THE VISIBILITY DESK -->
+<section class="s-panel2 grain" id="visibility">
+  <div class="wrap">
+    <p class="eyebrow"><span class="star">&#10038;</span> ٠٤ &#183; الوحيد الشهري</p>
+    <h2 class="h2">الموقع يجعلك قابلاً لأن يُعثر عليك.<br>أما أن <em>يُعثر</em> عليك فعلاً، فتلك مهمة أخرى.</h2>
+    <p class="lede">كل ما سبق يُبنى مرة واحدة ثم يصير لك. وهذا ليس كذلك، وأفضّل أن أشرح لك السبب بكلام
+      واضح الآن، على أن تتفاجأ بفاتورة لاحقاً.</p>
+
+    <div class="vis-defs rv">
+      <div class="vis-def">
+        <h3>‏SEO &mdash; كيف يقرّر جوجل من يعرض</h3>
+        <p>تخيّل مكتبة فيها عشرة ملايين كتاب وأمين مكتبة واحد. يدخل شخص ويسأل عن «أفضل مورّد مضخات مياه
+          في مسقط». هو لا يقرأ عشرة ملايين كتاب، بل يمدّ يده إلى الكتب القليلة التي يعرفها ويثق بها ورأى
+          الناس يعودون إليها راضين. <b>‏SEO هو العمل الذي يجعلك أحد الكتب التي تمتدّ إليها يده.</b></p>
+      </div>
+      <div class="vis-def">
+        <h3>‏GEO &mdash; الشيء نفسه، لكن للذكاء الاصطناعي</h3>
+        <p>مشتريك صار يسأل ChatGPT: «ممن أشتري في عُمان؟». وهو لا يذهب ليقرأ الإنترنت في تلك اللحظة، بل
+          يجيب مما قرأه سابقاً ووثق به. <b>‏GEO هو العمل الذي يجعلك داخل ما قرأه</b>، ليكون اسمك في
+          الإجابة نفسها، لا في صفحة رابعة لا يفتحها أحد.</p>
+      </div>
+    </div>
+
+    <div class="vis-why rv">
+      <h3 class="h3">لماذا يتكرّر هذا كل شهر</h3>
+      <p>منافسوك لا يتوقفون. وجوجل يغيّر رأيه فيمن يثق به كل يوم تقريباً. ونماذج الذكاء الاصطناعي
+        يُعاد تدريبها وتقرأ الويب من جديد وفق جدولها الخاص &mdash; وفي كل مرة تُكتب إجابة سؤال «ممن أشتري
+        في عُمان؟» من الصفر. وما قالته عنك العام الماضي لا يساوي شيئاً هذا العام.</p>
+      <p><b>فالظهور ليس جداراً تبنيه مرة واحدة. إنه حديقة.</b> توقّف عن سقايتها فلن تبقى كما تركتها، بل
+        تعود إلى العشب البري &mdash; لأن جارك واصل سقاية حديقته.</p>
+      <p>وهذا هو السبب كاملاً في أن هذا اشتراك شهري لا دفعة واحدة. أنت لا تشتري شيئاً يُسلَّم مرة ثم
+        يبقى يعمل وحده. <b>أنت تدفع مقابل أن يواصل أحدهم الحضور.</b> والشهر الذي يتوقف فيه العمل هو
+        الشهر الذي تبدأ فيه بالتراجع في القائمة، والعودة إلى الأعلى أبطأ وأغلى من البقاء فيها. وإن لم
+        يكن ذلك يستحق <span class="num" dir="ltr">300</span> ر.ع. شهرياً عندك، فلا تشترِه &mdash; فلا شيء آخر على هذه الصفحة يحتاجه كي يعمل.</p>
+    </div>
+
+    <div class="vis-split">
+      <div>
+        <h3 class="h3">ما يمنحك إياه بناؤك أصلاً، مجاناً، وإلى الأبد</h3>
+        <ul class="deliver">
+          <li>بنية يقرأها جوجل بوضوح، على موقع سريع التحميل</li>
+          <li>ترميز يخبر الذكاء الاصطناعي ما هو نشاطك وما الذي تبيعه</li>
+          <li>عربية وإنجليزية مكتوبتان كما ينبغي، لا مارّتان على مترجم آلي</li>
+          <li>بنية محتوى مصمّمة لأن تُقتبس في إجابات محرّكات الذكاء الاصطناعي</li>
+        </ul>
+        <p>هذا الجزء حقيقي، ومُنجَز، ويبقى لك سواء دفعت لي ريالاً آخر أم لا. <b>لكن البنية طريق، لا
+          سيارة تسير عليه.</b> الطريق يكتمل يوم أسلّمه لك. ويبقى على أحدهم أن يقودها &mdash; لا مرة
+          واحدة، بل كل أسبوع.</p>
+      </div>
+      <div>
+        <h3 class="h3">ما الذي يفعله مكتب الظهور كل شهر</h3>
+        <ul class="deliver">
+          <li>يراقب ما يكتبه مشتروك ويسألون عنه فعلاً</li>
+          <li>يكتب الإجابات التي يبحثون عنها</li>
+          <li>يضع اسمك في الصفحات والأدلة والمصادر التي تقرأها النماذج</li>
+          <li>يُبقي ملفّك في «نشاطي التجاري على جوجل» حيّاً وصحيحاً</li>
+          <li>يصلح ما يتعطّل قبل أن يكلّفك مركزاً</li>
+          <li>يختبر كل شهر ما إذا كان ChatGPT وGemini وإجابات جوجل الذكية وبحث جوجل العادي يذكرون اسمك
+            &mdash; ويرسل لك لقطات الشاشة في الحالتين، في الشهر الجيد وفي السيّئ</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="vis-gtee rv">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l8 3v6c0 5-3.4 9.4-8 11-4.6-1.6-8-6-8-11V5l8-3zm-1.2 13.4 5.7-5.7-1.4-1.4-4.3 4.3-2-2-1.4 1.4 3.4 3.4z"/></svg>
+      <div>
+        <h3 class="h3">ضمان الـ<span class="num" dir="ltr">6</span> أشهر</h3>
+        <p>بعد <span class="num" dir="ltr">6</span> أشهر من بدء العمل &mdash; وهو يوم إطلاق موقعك إن كنت أنا من يبنيه، أو يوم نبدأ إن
+          كان موقعك قائماً أصلاً &mdash; إن لم تكن ظاهراً، لا جوجل يذكرك ولا ChatGPT،
+          <b>أعيد لك كل ريال دفعته مقابل مكتب الظهور، وأواصل العمل مجاناً حتى تظهر.</b></p>
+        <p class="fine">بعبارة صريحة: الاسترداد يشمل رسوم هذه الخدمة، <b>لا تكلفة بناء موقعك</b>
+          &mdash; فإن كنت قد اشتريت مني موقعاً، فهو يبقى لك ولا يمسّه هذا الضمان. و«الظهور» ليس
+          مصطلحاً غامضاً: ففي شهرك الأول نكتب معاً أسئلة الشراء الحقيقية التي يسألها عملاؤك، وهي ما
+          نختبر عليه، كل شهر، أمامك. ويبقى بإمكانك الإلغاء في أي شهر &mdash; غير أن الضمان يحتاج
+          أشهره الـ<span class="num" dir="ltr">6</span> كي يكتمل.</p>
+      </div>
+    </div>
+
+    <div class="vis-foot">
+      <div class="pricetag"><b><span class="num" dir="ltr">300</span> ر.ع.</b><span>شهرياً &#183; يُلغى في أي شهر &#183; ضمان <span class="num" dir="ltr">6</span> أشهر</span></div>
+      <div class="btn-row">
+        <a class="btn btn-wa" href="https://api.whatsapp.com/send?phone=96899245250&text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%20%D9%86%D8%A7%D9%87%D8%AF%D8%8C%20%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%A3%D9%86%20%D8%A3%D8%B3%D8%A3%D9%84%20%D8%B9%D9%86%20%D9%85%D9%83%D8%AA%D8%A8%20%D8%A7%D9%84%D8%B8%D9%87%D9%88%D8%B1%20%D8%A8%D9%80%20300%20%D8%B1.%D8%B9.%20%D8%B4%D9%87%D8%B1%D9%8A%D8%A7%D9%8B."><svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 1.8a8.2 8.2 0 1 1-4.2 15.3l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8zm-3.1 4c-.2 0-.5 0-.7.3-.2.3-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.8 2.8 4.4 3.8 2.2.9 2.6.7 3.1.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2-.1-.1-.2-.2-.5-.3l-1.7-.8c-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.1-.2 0-.4.1-.5l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5L10 8.2c-.2-.4-.4-.4-.6-.4h-.5z"/></svg>اسألني عن مكتب الظهور</a>
+        <a class="tlink" href="#price">شاهده في قائمة الأسعار <span class="arw">&larr;</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ================================================== THE WHOLE PRICE LIST -->
 <section class="s-white" id="price">
   <div class="wrap">
@@ -1200,6 +1325,10 @@ table.t .mini{display:block;font-size:.86rem;color:var(--muted);margin-top:5px;l
           <tr>
             <td>مكتب النمو<span class="mini">رعاية شهرية اختيارية، وميزات جديدة، ومراجعة للتقارير. غير مطلوب أبداً لإبقاء أي شيء يعمل.</span></td>
             <td class="n"><span class="num" dir="ltr">75</span> ر.ع./شهرياً</td><td>اشتراك اختياري، يُلغى في أي وقت</td>
+          </tr>
+          <tr>
+            <td>مكتب الظهور<span class="mini">عمل الـ SEO والـ GEO المستمر &mdash; إبقاء اسمك حاضراً في جوجل وفي مساعدي الذكاء الاصطناعي الذين يسألهم المشترون أولاً. ويحمل ضمان استرداد لمدة <span class="num" dir="ltr">6</span> أشهر. <a href="#visibility">ما معنى ذلك بكلام واضح</a>.</span></td>
+            <td class="n"><span class="num" dir="ltr">300</span> ر.ع./شهرياً</td><td>اشتراك اختياري، يُلغى في أي شهر</td>
           </tr>
         </tbody>
       </table>
@@ -1254,8 +1383,9 @@ table.t .mini{display:block;font-size:.86rem;color:var(--muted);margin-top:5px;l
         <li>هذا <b>ليس نظام ERP</b>. إن كنت تحتاج مخزون عدة فروع والحسابات في نظام واحد، فذلك وزن مختلف
           تماماً وسأقول لك ذلك في المكالمة.</li>
         <li>وهو <b>لا يغني عن محاسبك</b>. يريك ما يحدث الآن، ويبقى إقفال الدفاتر عملهم هم.</li>
-        <li>لا إدارة إعلانات مدفوعة، ولا إدارة مستمرة لمواقع التواصل، ولا كتابة محتوى مستمرة بعد
-          النص الأول لموقعك.</li>
+        <li>لا إدارة إعلانات مدفوعة، ولا إدارة مستمرة لمواقع التواصل. والبناء لا يشمل كذلك كتابة محتوى
+          مستمرة بعد النص الأول لموقعك &mdash; فذلك هو <a href="#visibility">مكتب الظهور</a>، ويُسعَّر على حدة
+          أعلاه، ولا شيء هنا يحتاجه كي يعمل.</li>
         <li>لا معالجة مدفوعات إلكترونية ولا سلة شراء. وإن احتجتها، تُدرَس وتُسعَّر على حدة.</li>
         <li>الأسعار أعلاه مبنية على كتالوج منتجات واحد وزوج لغات واحد. وأي شيء أكبر من ذلك فعلاً
           يُسعَّر على حدة، لا يُحشَر في باقة.</li>

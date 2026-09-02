@@ -18,12 +18,13 @@ than translated in place:
     same assertion over this page as a second net.
 """
 import pay
-from kit import STAR, WA_ICON, url
+from kit import SHIELD, STAR, WA_ICON, url
 from page_services import CSS  # noqa: F401 - design is shared
 
 from ar_common import (AUTO, DASH, DESK, ONE_TIME, PLAN_FULL,
-                       PLAN_PROOF, PLAN_THREE, SITE, STACK, TEST, bundle_ar,
-                       num, plan_instalment_ar, plan_total_ar, price_ar, wa)
+                       PLAN_PROOF, PLAN_THREE, SITE, STACK, TEST, VIS,
+                       bundle_ar, num, plan_instalment_ar, plan_total_ar,
+                       price_ar, wa)
 
 __all__ = ["CSS", "body", "META"]
 
@@ -62,14 +63,23 @@ def _rail_svg():
 
 
 def _p1():
+    # The Visibility Desk's figure comes from pay.list_price() through
+    # price_ar(), not pay.price() - it is published at the rack rate and sold
+    # on the checkout interstitial at a lower one. See the note in ar_common.
+    vis = price_ar("visibility")
+    # Same field the checkout interstitial reads, so the Arabic guarantee
+    # cannot end up a different length from the Arabic interstitial's.
+    gm = num(str(pay.item(pay.UPSELL_ID)["guarantee_months"]))
+    vis_wa = wa(f"مرحباً ناهد، أريد أن أسأل عن {VIS} بـ 300 ر.ع. شهرياً.")
     return f"""<main id="main">
 
 <header class="phero s-cream grain">
   <div class="wrap">
     <p class="eyebrow"><span class="star">{STAR}</span> ما أبنيه</p>
     <h1 class="h1">أنت تصف المشكلة.<br>وأنا أبني النظام الذي يزيلها.</h1>
-    <p class="lede">ثلاثة أنظمة، كل واحد منها بناء واحد بسعر ثابت. لا يحتاج أيٌّ منها اشتراكاً شهرياً
-      كي يستمر في العمل، وكل سعر مذكور على هذه الصفحة.</p>
+    <p class="lede">ثلاثة أنظمة، كل واحد منها بناء واحد بسعر ثابت &mdash; ومعها مكتب شهري واحد، للعمل
+      الوحيد الذي لا ينتهي فعلاً. لا يحتاج أيٌّ منها اشتراكاً شهرياً كي يستمر في العمل، وكل سعر مذكور
+      على هذه الصفحة.</p>
     <div class="btn-row" style="margin-top:30px">
       <a class="btn btn-teal" href="#price">انتقل إلى قائمة الأسعار</a>
       <a class="tlink" href="{PROCESS}">كيف يسير البناء فعلاً <span class="arw">&larr;</span></a>
@@ -188,11 +198,100 @@ def _p1():
     </div>
   </div>
 </section>
+
+<!-- =============================================== 04 - THE VISIBILITY DESK -->
+<section class="s-panel2 grain" id="visibility">
+  <div class="wrap">
+    <p class="eyebrow"><span class="star">{STAR}</span> ٠٤ &#183; الوحيد الشهري</p>
+    <h2 class="h2">الموقع يجعلك قابلاً لأن يُعثر عليك.<br>أما أن <em>يُعثر</em> عليك فعلاً، فتلك مهمة أخرى.</h2>
+    <p class="lede">كل ما سبق يُبنى مرة واحدة ثم يصير لك. وهذا ليس كذلك، وأفضّل أن أشرح لك السبب بكلام
+      واضح الآن، على أن تتفاجأ بفاتورة لاحقاً.</p>
+
+    <div class="vis-defs rv">
+      <div class="vis-def">
+        <h3>‏SEO &mdash; كيف يقرّر جوجل من يعرض</h3>
+        <p>تخيّل مكتبة فيها عشرة ملايين كتاب وأمين مكتبة واحد. يدخل شخص ويسأل عن «أفضل مورّد مضخات مياه
+          في مسقط». هو لا يقرأ عشرة ملايين كتاب، بل يمدّ يده إلى الكتب القليلة التي يعرفها ويثق بها ورأى
+          الناس يعودون إليها راضين. <b>‏SEO هو العمل الذي يجعلك أحد الكتب التي تمتدّ إليها يده.</b></p>
+      </div>
+      <div class="vis-def">
+        <h3>‏GEO &mdash; الشيء نفسه، لكن للذكاء الاصطناعي</h3>
+        <p>مشتريك صار يسأل ChatGPT: «ممن أشتري في عُمان؟». وهو لا يذهب ليقرأ الإنترنت في تلك اللحظة، بل
+          يجيب مما قرأه سابقاً ووثق به. <b>‏GEO هو العمل الذي يجعلك داخل ما قرأه</b>، ليكون اسمك في
+          الإجابة نفسها، لا في صفحة رابعة لا يفتحها أحد.</p>
+      </div>
+    </div>
+
+    <div class="vis-why rv">
+      <h3 class="h3">لماذا يتكرّر هذا كل شهر</h3>
+      <p>منافسوك لا يتوقفون. وجوجل يغيّر رأيه فيمن يثق به كل يوم تقريباً. ونماذج الذكاء الاصطناعي
+        يُعاد تدريبها وتقرأ الويب من جديد وفق جدولها الخاص &mdash; وفي كل مرة تُكتب إجابة سؤال «ممن أشتري
+        في عُمان؟» من الصفر. وما قالته عنك العام الماضي لا يساوي شيئاً هذا العام.</p>
+      <p><b>فالظهور ليس جداراً تبنيه مرة واحدة. إنه حديقة.</b> توقّف عن سقايتها فلن تبقى كما تركتها، بل
+        تعود إلى العشب البري &mdash; لأن جارك واصل سقاية حديقته.</p>
+      <p>وهذا هو السبب كاملاً في أن هذا اشتراك شهري لا دفعة واحدة. أنت لا تشتري شيئاً يُسلَّم مرة ثم
+        يبقى يعمل وحده. <b>أنت تدفع مقابل أن يواصل أحدهم الحضور.</b> والشهر الذي يتوقف فيه العمل هو
+        الشهر الذي تبدأ فيه بالتراجع في القائمة، والعودة إلى الأعلى أبطأ وأغلى من البقاء فيها. وإن لم
+        يكن ذلك يستحق {vis} شهرياً عندك، فلا تشترِه &mdash; فلا شيء آخر على هذه الصفحة يحتاجه كي يعمل.</p>
+    </div>
+
+    <div class="vis-split">
+      <div>
+        <h3 class="h3">ما يمنحك إياه بناؤك أصلاً، مجاناً، وإلى الأبد</h3>
+        <ul class="deliver">
+          <li>بنية يقرأها جوجل بوضوح، على موقع سريع التحميل</li>
+          <li>ترميز يخبر الذكاء الاصطناعي ما هو نشاطك وما الذي تبيعه</li>
+          <li>عربية وإنجليزية مكتوبتان كما ينبغي، لا مارّتان على مترجم آلي</li>
+          <li>بنية محتوى مصمّمة لأن تُقتبس في إجابات محرّكات الذكاء الاصطناعي</li>
+        </ul>
+        <p>هذا الجزء حقيقي، ومُنجَز، ويبقى لك سواء دفعت لي ريالاً آخر أم لا. <b>لكن البنية طريق، لا
+          سيارة تسير عليه.</b> الطريق يكتمل يوم أسلّمه لك. ويبقى على أحدهم أن يقودها &mdash; لا مرة
+          واحدة، بل كل أسبوع.</p>
+      </div>
+      <div>
+        <h3 class="h3">ما الذي يفعله {VIS} كل شهر</h3>
+        <ul class="deliver">
+          <li>يراقب ما يكتبه مشتروك ويسألون عنه فعلاً</li>
+          <li>يكتب الإجابات التي يبحثون عنها</li>
+          <li>يضع اسمك في الصفحات والأدلة والمصادر التي تقرأها النماذج</li>
+          <li>يُبقي ملفّك في «نشاطي التجاري على جوجل» حيّاً وصحيحاً</li>
+          <li>يصلح ما يتعطّل قبل أن يكلّفك مركزاً</li>
+          <li>يختبر كل شهر ما إذا كان ChatGPT وGemini وإجابات جوجل الذكية وبحث جوجل العادي يذكرون اسمك
+            &mdash; ويرسل لك لقطات الشاشة في الحالتين، في الشهر الجيد وفي السيّئ</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="vis-gtee rv">
+      {SHIELD}
+      <div>
+        <h3 class="h3">ضمان الـ{gm} أشهر</h3>
+        <p>بعد {gm} أشهر من بدء العمل &mdash; وهو يوم إطلاق موقعك إن كنت أنا من يبنيه، أو يوم نبدأ إن
+          كان موقعك قائماً أصلاً &mdash; إن لم تكن ظاهراً، لا جوجل يذكرك ولا ChatGPT،
+          <b>أعيد لك كل ريال دفعته مقابل {VIS}، وأواصل العمل مجاناً حتى تظهر.</b></p>
+        <p class="fine">بعبارة صريحة: الاسترداد يشمل رسوم هذه الخدمة، <b>لا تكلفة بناء موقعك</b>
+          &mdash; فإن كنت قد اشتريت مني موقعاً، فهو يبقى لك ولا يمسّه هذا الضمان. و«الظهور» ليس
+          مصطلحاً غامضاً: ففي شهرك الأول نكتب معاً أسئلة الشراء الحقيقية التي يسألها عملاؤك، وهي ما
+          نختبر عليه، كل شهر، أمامك. ويبقى بإمكانك الإلغاء في أي شهر &mdash; غير أن الضمان يحتاج
+          أشهره الـ{gm} كي يكتمل.</p>
+      </div>
+    </div>
+
+    <div class="vis-foot">
+      <div class="pricetag"><b>{vis}</b><span>شهرياً &#183; يُلغى في أي شهر &#183; ضمان {gm} أشهر</span></div>
+      <div class="btn-row">
+        <a class="btn btn-wa" href="{vis_wa}">{WA_ICON}اسألني عن {VIS}</a>
+        <a class="tlink" href="#price">شاهده في قائمة الأسعار <span class="arw">&larr;</span></a>
+      </div>
+    </div>
+  </div>
+</section>
 """
 
 
 def _p2():
     deposit = pay.money_ar(pay.DEPOSIT)
+    gm2 = num(str(pay.item(pay.UPSELL_ID)["guarantee_months"]))
     pay_how = "بالبطاقة أو بحوالة بنكية" if pay.PAY_LIVE else "بحوالة بنكية"
     return f"""
 <!-- ================================================== THE WHOLE PRICE LIST -->
@@ -233,6 +332,10 @@ def _p2():
           <tr>
             <td>{DESK}<span class="mini">رعاية شهرية اختيارية، وميزات جديدة، ومراجعة للتقارير. غير مطلوب أبداً لإبقاء أي شيء يعمل.</span></td>
             <td class="n">{price_ar('desk')}/شهرياً</td><td>اشتراك اختياري، يُلغى في أي وقت</td>
+          </tr>
+          <tr>
+            <td>{VIS}<span class="mini">عمل الـ SEO والـ GEO المستمر &mdash; إبقاء اسمك حاضراً في جوجل وفي مساعدي الذكاء الاصطناعي الذين يسألهم المشترون أولاً. ويحمل ضمان استرداد لمدة {gm2} أشهر. <a href="#visibility">ما معنى ذلك بكلام واضح</a>.</span></td>
+            <td class="n">{price_ar('visibility')}/شهرياً</td><td>اشتراك اختياري، يُلغى في أي شهر</td>
           </tr>
         </tbody>
       </table>
@@ -287,8 +390,9 @@ def _p2():
         <li>هذا <b>ليس نظام ERP</b>. إن كنت تحتاج مخزون عدة فروع والحسابات في نظام واحد، فذلك وزن مختلف
           تماماً وسأقول لك ذلك في المكالمة.</li>
         <li>وهو <b>لا يغني عن محاسبك</b>. يريك ما يحدث الآن، ويبقى إقفال الدفاتر عملهم هم.</li>
-        <li>لا إدارة إعلانات مدفوعة، ولا إدارة مستمرة لمواقع التواصل، ولا كتابة محتوى مستمرة بعد
-          النص الأول لموقعك.</li>
+        <li>لا إدارة إعلانات مدفوعة، ولا إدارة مستمرة لمواقع التواصل. والبناء لا يشمل كذلك كتابة محتوى
+          مستمرة بعد النص الأول لموقعك &mdash; فذلك هو <a href="#visibility">{VIS}</a>، ويُسعَّر على حدة
+          أعلاه، ولا شيء هنا يحتاجه كي يعمل.</li>
         <li>لا معالجة مدفوعات إلكترونية ولا سلة شراء. وإن احتجتها، تُدرَس وتُسعَّر على حدة.</li>
         <li>الأسعار أعلاه مبنية على كتالوج منتجات واحد وزوج لغات واحد. وأي شيء أكبر من ذلك فعلاً
           يُسعَّر على حدة، لا يُحشَر في باقة.</li>
@@ -325,9 +429,9 @@ def body():
 
 META = dict(
     slug="services",
-    title="ما أبنيه | AI Profit Lab — ثلاثة أنظمة، وكل سعر معلن",
-    desc=("الموقع الذكي، ولوحة متابعة المالك الحيّة، والطيار الآلي الكامل — ماذا يفعل كل واحد منها، "
-          "وكم يكلّف بالريال العُماني، وما هو غير مشمول عن قصد."),
+    title="ما أبنيه | AI Profit Lab — ثلاثة أنظمة ومكتب ظهور، وكل سعر معلن",
+    desc=("الموقع الذكي، ولوحة متابعة المالك الحيّة، والطيار الآلي الكامل، ومكتب الظهور الشهري "
+          "(‏SEO و‏GEO) — ماذا يفعل كل واحد منها، وكم يكلّف بالريال العُماني، وما هو غير مشمول عن قصد."),
     nav="/services/",
     next=("التالي", "طريقة العمل", "/process/"),
     schema="""{
@@ -338,7 +442,8 @@ META = dict(
   "itemListElement":[
     {"@type":"Service","position":1,"name":"الموقع الذكي","description":"موقع بلغتين مع وكيل مشترٍ بالذكاء الاصطناعي يردّ بالعربية والإنجليزية ويحوّل المشترين الأحياء إلى واتساب.","provider":{"@id":"https://aiprofitlab.io/#organization"},"areaServed":"Oman","offers":{"@type":"Offer","price":"950","priceCurrency":"OMR","availability":"https://schema.org/InStock","url":"https://aiprofitlab.io/checkout/?plan=website","priceValidUntil":"2026-12-31"}},
     {"@type":"Service","position":2,"name":"لوحة متابعة المالك الحيّة","description":"السيولة وهامش الربح والمخزون والطلبات المفتوحة على شاشة واحدة، ومع كل بند الإجراء الذي يطلبه.","provider":{"@id":"https://aiprofitlab.io/#organization"},"areaServed":"Oman","offers":{"@type":"Offer","price":"650","priceCurrency":"OMR","availability":"https://schema.org/InStock","url":"https://aiprofitlab.io/checkout/?plan=dashboard","priceValidUntil":"2026-12-31"}},
-    {"@type":"Service","position":3,"name":"الطيار الآلي الكامل","description":"متابعة عروض الأسعار والفواتير وفق جدول، وتتوقف فور أن يردّ المشتري أو يدفع.","provider":{"@id":"https://aiprofitlab.io/#organization"},"areaServed":"Oman","offers":{"@type":"Offer","price":"900","priceCurrency":"OMR","availability":"https://schema.org/InStock","url":"https://aiprofitlab.io/checkout/?plan=autopilot","priceValidUntil":"2026-12-31"}}
+    {"@type":"Service","position":3,"name":"الطيار الآلي الكامل","description":"متابعة عروض الأسعار والفواتير وفق جدول، وتتوقف فور أن يردّ المشتري أو يدفع.","provider":{"@id":"https://aiprofitlab.io/#organization"},"areaServed":"Oman","offers":{"@type":"Offer","price":"900","priceCurrency":"OMR","availability":"https://schema.org/InStock","url":"https://aiprofitlab.io/checkout/?plan=autopilot","priceValidUntil":"2026-12-31"}},
+    {"@type":"Service","position":4,"name":"مكتب الظهور","serviceType":"الظهور في محركات البحث ومحركات إجابات الذكاء الاصطناعي (SEO و GEO)","description":"عمل شهري مستمر لإبقاء اسمك حاضراً في جوجل وفي مساعدي الذكاء الاصطناعي الذين يسألهم المشترون أولاً، مع اختبار شهري يبيّن ما إذا كان ChatGPT وGemini وإجابات جوجل الذكية وبحث جوجل يذكرون نشاطك.","provider":{"@id":"https://aiprofitlab.io/#organization"},"areaServed":"Oman","offers":{"@type":"Offer","priceCurrency":"OMR","availability":"https://schema.org/InStock","url":"https://aiprofitlab.io/services/#visibility","priceValidUntil":"2026-12-31","priceSpecification":{"@type":"UnitPriceSpecification","price":"300","priceCurrency":"OMR","unitCode":"MON","unitText":"month"}}}
   ]
 }""",
 )
