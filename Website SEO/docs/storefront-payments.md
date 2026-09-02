@@ -26,11 +26,17 @@ ledger and separate prices. See "Two payment paths" at the bottom.
 | Paid invoice on payment (PDF, emailed) | built, fires only when the gateway reads back `paid` |
 | Card payment | **off** — no Thawani keys on the service yet |
 | Bank transfer + receipt upload | live, unchanged |
-| Tests | `npm test` in the API — 43 pass |
+| Tests | `npm test` in the API — 58 pass |
 
-Service: `storefront-offer-api`, project `aiprofitlab-offer`, region
-`me-central1`. Source: `AI Profit Lab/SmartChatBot/storefront-offer-api/`
-(a sibling of `aiden-backend`, **not** in the website repo).
+Service: `storefront-offer-api`, a **systemd service on the Hostinger VPS**
+(port 8092, behind Traefik at `https://offer.aiprofitlab.io`) since 2026-09-02.
+Source: `AI Profit Lab/SmartChatBot/storefront-offer-api/` (a sibling of
+`aiden-backend`, **not** in the website repo, and **not a git repo** — the
+working tree is the only copy). The runbook is `deploy/DEPLOY.md` there.
+
+It ran on Cloud Run (project `aiprofitlab-offer`, region `me-central1`) until
+that date; the Cloud Run service was kept running in parallel for the cutover.
+The tree still deploys to Cloud Run unchanged, which is what made that possible.
 
 ---
 
@@ -93,11 +99,11 @@ One thing is missing: Thawani keys on the service. Everything else is deployed
 and waiting for them.
 
 ```sh
-cd "AI Profit Lab/SmartChatBot/storefront-offer-api"
-
-gcloud run services update storefront-offer-api \
-  --project aiprofitlab-offer --region me-central1 \
-  --update-env-vars "THAWANI_SECRET_KEY=<secret>,THAWANI_PUBLISHABLE_KEY=<publishable>,THAWANI_BASE=https://checkout.thawani.om"
+sudo nano /etc/storefront-offer-api/.env
+#   THAWANI_SECRET_KEY=<secret>
+#   THAWANI_PUBLISHABLE_KEY=<publishable>
+#   THAWANI_BASE=https://checkout.thawani.om
+sudo systemctl restart storefront-offer-api
 ```
 
 `THAWANI_BASE` is `https://uatcheckout.thawani.om` for testing and
@@ -115,21 +121,56 @@ none of them holds an opinion of its own:
 **Kill switch:** `PAY_ENABLED=0` hides the card route everywhere without
 deleting credentials. `PAY_ENABLED=1` (or unset) restores it.
 
+## 4b. Receipts
+
+A deposit receipt is a photograph of somebody's bank transfer, carrying their
+name and account number. On Cloud Run it went to a private GCS bucket and the
+ledger stored a Cloud Console link, so Google's own login was the gate. Off GCP
+neither half exists, so both were replaced on 2026-09-02:
+
+- the file goes to `RECEIPTS_DIR` on the VPS, written `0600` in a `0700`
+  directory under `/var/lib` — **never** under `/opt`, which a redeploy
+  overwrites;
+- the ledger stores `https://offer.aiprofitlab.io/receipts/<ref>/<file>`, which
+  requires a password (`lib/auth.js` — scrypt, an HMAC session cookie, per-IP
+  lockout; ported from the IG automation's admin panel).
+
+**This is deliberately not the IG automation's `/f/<random>/` pattern.** That
+one is public by design because Meta allows exactly one private reply per
+comment, so a link is the only way to attach anything. Nothing about that
+reasoning transfers to bank details.
+
+Two consequences worth keeping in mind:
+
+- **No password ⇒ no viewing routes at all.** Not "mounted without a password".
+  Uploads still work and still land on disk, so setting it late loses nothing.
+- **The VPS disk is the only copy.** There is no bucket behind it any more and
+  the box has no backup, so losing the disk loses the receipts. Known and
+  accepted (Nahid, 2026-09-02); the smallest fix is a nightly `rsync` of that
+  directory off the box.
+
 Redeploying the service:
 
 ```sh
-gcloud run deploy storefront-offer-api --source . \
-  --project aiprofitlab-offer --region me-central1 --allow-unauthenticated
+cd "AI Profit Lab/SmartChatBot/storefront-offer-api"
+rsync -av --delete --exclude node_modules --exclude .env --exclude sa.json \
+  --exclude '.receipts' --exclude '.DS_Store' ./ root@187.127.116.171:/opt/storefront-offer-api/
+ssh root@187.127.116.171 \
+  'cd /opt/storefront-offer-api && sudo -u offerbot npm ci --omit=dev && systemctl restart storefront-offer-api'
 ```
 
-There is no local Docker on this Mac — `--source` builds in Cloud Build.
+Full detail, including the traps, in that service's `deploy/DEPLOY.md`.
 
 ### Environment
 
 | Var | Set? | Note |
 |---|---|---|
 | `SHEET_ID` | yes | the `Seat_Claims` ledger |
-| `RECEIPTS_BUCKET` | yes | private GCS bucket for transfer receipts |
+| `GOOGLE_APPLICATION_CREDENTIALS` | yes | key file for `offer-api@aiprofitlab-offer…`, **that account specifically** — it is the one shared as a writer on the sheet. Empty on Cloud Run, which used the attached identity |
+| `RECEIPTS_DIR` | yes | `/var/lib/storefront-offer-api/receipts`. Was a private GCS bucket; see below |
+| `PUBLIC_BASE` | yes | `https://offer.aiprofitlab.io` — the origin in the receipt link stored in the ledger |
+| `OFFER_ADMIN_PASSWORD_HASH` | yes | unlocks receipt viewing. **Unset ⇒ the viewing routes are not mounted at all** |
+| `ALLOWED_ORIGINS` | yes | browser origins, not this API's own host — unchanged by the move |
 | `SITE_ORIGIN`, `OWNER_EMAIL` | yes | |
 | `PAY_PATH` | `/en/pay/` | where the buyer is sent back to; defaults to this |
 | `RESEND_API_KEY` | **needed** | without it every email is logged and skipped — a claim is never lost because email is down, but no invoice arrives either |

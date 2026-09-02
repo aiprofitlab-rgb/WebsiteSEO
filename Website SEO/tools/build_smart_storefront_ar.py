@@ -31,6 +31,9 @@ import pathlib
 import re
 import sys
 
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+import aiden_version  # noqa: E402
+
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 SRC = ROOT / "public_html" / "en" / "smart-storefront.html"
 OUT = ROOT / "public_html" / "smart-storefront-ar.html"
@@ -217,9 +220,9 @@ HEAD = r"""<!DOCTYPE html>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
 <title>موقع ذكي يبيع وأنت نائم — AI Profit Lab</title>
-<meta name="description" content="موقع ثنائي اللغة يرد على مشتريك في الرابعة فجراً، ويسلّم الجادّين منهم إلى واتساب، ويخبرك من هو على وشك الشراء. سعر لمرة واحدة، وسنة استضافة ورعاية مشمولة."/>
-<!-- Mirrors the English page's robots value. Flip both together at handover. -->
-<meta name="robots" content="noindex, follow"/>
+<meta name="description" content="موقع ثنائي اللغة يرد على زبون في الرابعة فجراً، وياخذهم الجادّين منهم إلى برنامج الواتساب، ويخبرك من هو على وشك الشراء. السعر لمرة واحدة، وسنة استضافة ورعاية مشمولة."/>
+<!-- Mirrors the English page's robots value; indexable since 2026-08-27. -->
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1"/>
 <meta name="author" content="AI Profit Lab"/>
 <meta name="theme-color" content="#0A3D30"/>
 
@@ -238,8 +241,9 @@ HEAD = r"""<!DOCTYPE html>
 <meta property="og:image:width" content="1200"/>
 <meta property="og:image:height" content="630"/>
 <meta property="og:image:type" content="image/jpeg"/>
-<meta property="og:image:alt" content="ناهد أبياري، مؤسس AI Profit Lab — أتمتة بالذكاء الاصطناعي لشركات الخليج"/>
+<meta property="og:image:alt" content="ناهيد آبياري، مؤسس AI Profit Lab — أتمتة بالذكاء الاصطناعي لشركات الخليج"/>
 <meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://aiprofitlab.io/og-aiprofitlab-2026-v2.jpg"/>
 
 <link rel="icon" href="/favicon.ico" sizes="32x32">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=20260822">
@@ -325,7 +329,7 @@ BODY = r"""<body>
     <div>
       <p class="eyebrow"><span class="star">✼</span> لقد مسحتَ الورقة</p>
       <h1>يبيع وأنت نائم.</h1>
-      <p class="sub">موقع ذكي ثنائي اللغة يرد على مشتريك بالعربية أو الإنجليزية &mdash; في أي ساعة &mdash; ويسلّم الجادّين منهم إلى واتساب.</p>
+      <p class="sub">موقع ذكي ثنائي اللغة يرد على مشترك بالعربية أو الإنجليزية &mdash; في أي ساعة &mdash; وياخذهم الجادّين منهم إلى برنامج الواتساب.</p>
 
       <div class="hero-ctas">
         <a class="btn btn-cream" href="#roast">أرِني موقعي</a>
@@ -333,10 +337,10 @@ BODY = r"""<body>
       </div>
 
       <ul class="hero-trust">
-        <li>سعر لمرة واحدة</li>
+        <li>السعر لمرة واحدة</li>
         <li>سنة استضافة ورعاية مشمولة</li>
         <li>عربي وإنجليزي</li>
-        <li>بلا اشتراك شهري</li>
+        <li>بِلا اشتراك شهري</li>
       </ul>
     </div>
 
@@ -367,7 +371,7 @@ BODY = r"""<body>
 <!-- ═══ 1b. THE CREDO ═══ -->
 <section class="credo">
   <div class="wrap">
-    <p class="rv">أنا لا أبني مواقع وحسب &mdash; <b>أبني أنظمة رقمية ذكية
+    <p class="rv">أنا لا أبني المواقع الالكترونية وحسب &mdash; <b>أبني أنظمة رقمية ذكية
       <i>تفكّر</i> و<i>تتكيّف</i> و<i>تُحوِّل</i>.</b></p>
   </div>
 </section>
@@ -375,15 +379,15 @@ BODY = r"""<body>
 <!-- ═══ 2. THE GUARANTEE, AND THE FACE BEHIND IT ═══ -->
 <section>
   <div class="wrap">
-    <p class="eyebrow rv"><span class="star">✼</span> وعد الاستفسار الأول</p>
+    <p class="eyebrow rv"><span class="star">✼</span> ضمان الاستفسار الأولي</p>
     <div class="vow rv">
       <picture>
         <source srcset="/nahid-founder-seated-2026.webp" type="image/webp"/>
-        <img src="/nahid-founder-seated-2026.jpg" alt="ناهد أبياري، مؤسس AI Profit Lab" width="200" height="235" decoding="async"/>
+        <img src="/nahid-founder-seated-2026.jpg" alt="ناهيد آبياري، مؤسس AI Profit Lab" width="200" height="235" decoding="async"/>
       </picture>
       <div>
-        <q>لم يصلك استفسار حقيقي من مشترٍ خلال 30 يوماً من إطلاق الموقع؟ أُعيد بناءه مجاناً حتى يصلك واحد. وإن لم يصلك بعدها، تسترد مالك.</q>
-        <p class="sig">— ناهد أبياري</p>
+        <q>إن لم يصلك استفسار حقيقي من مشتري خلال 30 يوماً من إطلاق الموقع؟ أُعيد بناءه مجاناً حتى يصلك واحد. وإن لم يصلك بعدها، تسترد مبلغك المالي</q>
+        <p class="sig">— ناهيد أبياري</p>
         <p class="sigsub">الرئيس التنفيذي، AI Profit Lab</p>
       </div>
     </div>
@@ -394,7 +398,7 @@ BODY = r"""<body>
 <section class="roast" id="roast">
   <div class="wrap narrow">
     <p class="eyebrow rv"><span class="star">✼</span> عشر ثوانٍ</p>
-    <h2 class="rv">شاهد كيف سيبدو موقعك أنت.</h2>
+    <h2 class="rv">شاهد كيف سيبدو موقعك.</h2>
     <p class="lede rv" style="margin-bottom:30px">ثلاث نقرات. بلا بريد، وبلا تسجيل.</p>
 
     <div class="qcard rv" id="qcard">
@@ -435,15 +439,15 @@ BODY = r"""<body>
 <!-- ═══ 4. WHAT YOU GET ═══ -->
 <section>
   <div class="wrap">
-    <p class="eyebrow rv"><span class="star">✼</span> ما الذي تحصل عليه</p>
+    <p class="eyebrow rv"><span class="star">✼</span> ما الذي سوف تحصل عليه</p>
     <h2 class="rv">ستة أشياء. لكلٍّ منها وظيفة.</h2>
     <div class="grid3" style="margin-top:34px">
       <div class="card rv"><span class="ic">🕐</span><h3>موظّف لا ينام</h3><p>وكيل ذكاء اصطناعي ثنائي اللغة يرد على المشترين في الرابعة فجراً، ويوم الجمعة، وفي العيد.</p></div>
       <div class="card rv"><span class="ic">📲</span><h3>عملاء ساخنون في جيبك</h3><p>المشترون الجادّون يُسلَّمون مباشرة إلى واتساب.</p></div>
       <div class="card rv"><span class="ic">📋</span><h3>مبنيّ لتسعيرات الجملة</h3><p>مسار طلب تسعيرة بالجملة، لا صندوق «اتصل بنا» للتجزئة.</p></div>
       <div class="card rv"><span class="ic">👀</span><h3>اعرف من هو على وشك الشراء</h3><p>ملخّص قصير عمّن زار وماذا سأل، يصل إلى هاتفك.</p></div>
-      <div class="card rv"><span class="ic">🔎</span><h3>يظهر في جوجل وفي ChatGPT</h3><p>مبنيّ للبحث التقليدي ولإجابات الذكاء الاصطناعي معاً.</p></div>
-      <div class="card rv"><span class="ic">🛠️</span><h3>لا شيء تصونه</h3><p>سنة كاملة من الاستضافة والحماية والرعاية، مشمولة.</p></div>
+      <div class="card rv"><span class="ic">🔎</span><h3>يظهر في جوجل وفي ChatGPT</h3> <p>يظهر للبحث التقليدي ولإجابات الذكاء الاصطناعي معاً.</p></div>
+      <div class="card rv"><span class="ic">🛠️</span> <h3>لا يطلب صيانة</h3> <p>سنة كاملة من الاستضافة والحماية والرعاية، مشمولة.</p></div>
     </div>
   </div>
 </section>
@@ -466,7 +470,7 @@ BODY = r"""<body>
 <section class="vs-sec" id="value">
   <div class="wrap">
     <p class="eyebrow rv"><span class="star">✼</span> ما الذي يشتريه المبلغ فعلاً</p>
-    <h2 class="rv">أنت تدفع ثمن الموقع. والباقي هديّة إطلاق.</h2>
+    <h2 class="rv">أنت تدفع ثمن الموقع. والباقي هديّة إطلاق الموقع حالياً.</h2>
     <p class="lede rv">اسأل أي وكالة في مسقط كم يكلّف بناء موقع ثنائي اللغة. ثم اقرأ الأسطر التسعة تحته — تلك التي لا يحاسبك عليها أحد.</p>
 
     <div class="vs rv">
@@ -486,7 +490,7 @@ BODY = r"""<body>
       <div class="vs-row" style="--i:3"><span class="vs-lbl">المشترون الجادّون يصلون مباشرة إلى واتساب</span><span class="vs-val"><span class="vs-was">50 ر.ع.</span><span class="vs-free">مجاناً</span></span></div>
       <div class="vs-row" style="--i:4"><span class="vs-lbl">شات بوت ذكي يجيب عن أي سؤال عن نشاطك، بأي لغة</span><span class="vs-val"><span class="vs-was">200 ر.ع.</span><span class="vs-free">مجاناً</span></span></div>
       <div class="vs-row" style="--i:5"><span class="vs-lbl">ملف نشاطك على جوجل مُصحَّح ومُوثَّق</span><span class="vs-val"><span class="vs-was">50 ر.ع.</span><span class="vs-free">مجاناً</span></span></div>
-      <div class="vs-row" style="--i:6"><span class="vs-lbl">تسليم وتدريب لفريقك، مُسجَّل</span><span class="vs-val"><span class="vs-was">50 ر.ع.</span><span class="vs-free">مجاناً</span></span></div>
+      <div class="vs-row" style="--i:6"><span class="vs-lbl">فيديو مسجّل لتدريب موظّفينك</span><span class="vs-val"><span class="vs-was">50 ر.ع.</span><span class="vs-free">مجاناً</span></span></div>
       <div class="vs-row" style="--i:7"><span class="vs-lbl">استضافة اثني عشر شهراً</span><span class="vs-val"><span class="vs-was">50 ر.ع.</span><span class="vs-free">مجاناً</span></span></div>
       <div class="vs-row" style="--i:8"><span class="vs-lbl">ملاحظة عمّن زار موقعك، ومن أي البلدان، وماذا سأل</span><span class="vs-val"><span class="vs-was">50 ر.ع.</span><span class="vs-free">مجاناً</span></span></div>
 
@@ -497,7 +501,7 @@ BODY = r"""<body>
       </div>
     </div>
 
-    <p class="vs-foot rv"><b>لا شيء هنا يُباع لك لاحقاً كإضافة.</b> كل سطر داخل البناء، بسعر مقعد اليوم. وحين تنتهي المقاعد بهذا السعر يرتفع السعر — وتنقص الهديّة بالمقدار نفسه. أمّا السعر المنشور في صفحة الخدمات فلا يتحرك.</p>
+    <p class="vs-foot rv"><b> </b>هذالسعر لن يكون متاح دايما، المقاعد محدودة لهذاالعرض. إغتنم الفرصة قبل إنتهاء المعرض </p>
   </div>
 </section>
 
@@ -518,7 +522,7 @@ BODY = r"""<body>
       <div class="sc-pips"><i></i><i></i><i></i></div>
     </div>
 
-    <p class="sc-note rv">مقعد واحد = عربون 50% وصل فعلاً. ليس مؤقّتاً يعود إلى الصفر كلما أعدت تحميل الصفحة. إرسال النموذج لا يحجز مقعداً — العربون هو الذي يحجزه.</p>
+    <p class="sc-note rv"> المقاعد محدودة لسعر المعروض عليك دفع عربون ٥٠٪ حالياً لحجز المقعد</p>
   </div>
 </section>
 
@@ -551,8 +555,8 @@ BODY = r"""<body>
 <section id="chase">
   <div class="wrap">
     <div class="chase rv">
-      <p class="chase-note pledge-only-b">بعضهم سيبحث الآن عن الزر الذي يعطيه أكثر.</p>
-      <p class="chase-note nopledge">بعضهم سيذهب الآن يبحث عن الزر الذي يخصم قليلاً أكثر.</p>
+      <p class="chase-note pledge-only-b"> هل تريد خصماً اكثر؟</p>
+      <p class="chase-note nopledge"></p>هل تريد خصماً أكثر؟</p>
       <button type="button" id="runaway-btn">أريد خصماً أكبر</button>
       <div class="trophy" id="trophy">
         <span class="badge">✼ صائد أزرار معتمد</span>
@@ -585,7 +589,7 @@ BODY = r"""<body>
              but renders as "968+", and an email reads back reordered. -->
         <div class="field"><label for="f-whatsapp">رقم واتساب</label><input id="f-whatsapp" name="whatsapp" type="tel" inputmode="tel" autocomplete="tel" dir="ltr" placeholder="+968 …" required/></div>
         <div class="field"><label for="f-email">البريد الإلكتروني</label><input id="f-email" name="email" type="email" inputmode="email" autocomplete="email" dir="ltr" required/></div>
-        <div class="field full"><label for="f-site">موقعك الحالي <span class="opt-tag">— اختياري، و«لا يوجد» إجابة سليمة تماماً</span></label><input id="f-site" name="currentSite" dir="ltr" placeholder="لا يوجد"/></div>
+        <div class="field full"><label for="f-site">موقعك الالكتروني الحالي <span class="opt-tag">— اختياري </span></label><input id="f-site" name="currentSite" dir="ltr" placeholder="لا يوجد"/></div>
       </div>
 
       <div class="hp" aria-hidden="true"><label for="f-companyurl">Company URL</label><input id="f-companyurl" name="companyUrl" tabindex="-1" autocomplete="off"/></div>
@@ -597,7 +601,7 @@ BODY = r"""<body>
       <div class="formerr" id="formErr"></div>
 
       <p style="margin:20px 0 0"><button type="submit" class="btn btn-primary" id="fSubmit" style="width:100%">احجز لي مقعداً بهذا السعر</button></p>
-      <p id="fPayNote" style="font-size:.84rem;color:var(--muted);margin:12px 0 0">لا دفع في هذه الصفحة. تصلك فاتورتك بالبريد لحظة الإرسال، والصفحة التالية هي مكان دفع العربون.</p>
+      <p id="fPayNote" style="font-size:.84rem;color:var(--muted);margin:12px 0 0"></p>
     </form>
   </div>
 </section>
@@ -662,7 +666,7 @@ BODY = r"""<body>
 JS = r"""<script>
 (function(){
   "use strict";
-  var API = "https://storefront-offer-api-989128855797.me-central1.run.app";
+  var API = "https://offer.aiprofitlab.io";
   var WA  = "https://api.whatsapp.com/send?phone=96899245250";
   var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   // Both languages report into one GA4 property, so every event carries the
@@ -1470,7 +1474,7 @@ JS = r"""<script>
   document.addEventListener("keydown", function(e){ if (e.key === "Escape" && curtain.classList.contains("on")) sleep(); });
 })();
 </script>
-    <script defer src="/js/aiden-chat.js?v=3762fcc3"></script>
+    __AIDEN_TAG__
 </body>
 </html>
 """
@@ -1493,12 +1497,21 @@ HOOKS = [
 def build():
     src = SRC.read_text(encoding="utf-8")
 
-    m = re.search(r"<style>\n(.*?)\n</style>", src, re.S)
+    # The closing tag may be indented: the English page was run through a
+    # formatter between 2026-08-27 and 2026-08-29, which turned `</style>` into
+    # `  </style>` and every `.sel{` into `.sel {`. The old patterns matched
+    # neither, so this script hard-failed for six days and the Arabic page could
+    # not be rebuilt at all. Both patterns are now whitespace-tolerant, because a
+    # reformat is not a restructure and must not read as one.
+    m = re.search(r"<style>\n(.*?)\n\s*</style>", src, re.S)
     if not m:
         sys.exit(f"no <style> block found in {SRC} - has the page been restructured?")
     css = m.group(1)
 
-    missing = [h for h in HOOKS if h not in css]
+    # A hook is a selector, so compare selectors — not the exact bytes around the
+    # brace. The guard still catches what it is for (a selector the mirror layer
+    # overrides having genuinely disappeared) without firing on a whitespace change.
+    missing = [h for h in HOOKS if not re.search(re.escape(h[:-1].rstrip()) + r"\s*\{", css)]
     if missing:
         sys.exit("the English stylesheet no longer carries: " + ", ".join(missing) +
                  "\nUpdate the MIRROR section of RTL_CSS before rebuilding.")
@@ -1513,7 +1526,7 @@ def build():
                .replace("__AR_URL__", AR_URL)
                .replace("__EN_URL__", EN_URL)
            + BODY.replace("__EN_PATH__", "/en/smart-storefront/")
-           + JS)
+           + JS).replace("__AIDEN_TAG__", aiden_version.tag())
 
     OUT.write_text(out, encoding="utf-8")
     print(f"wrote {OUT.relative_to(ROOT)}  ({len(out):,} bytes, "
