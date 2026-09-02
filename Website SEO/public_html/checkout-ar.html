@@ -620,6 +620,19 @@ section{position:relative;padding:clamp(74px,9vw,138px) 0}
   color:var(--amber-text);background:var(--panel-2);border-radius:99px;padding:3px 9px;margin-left:9px;
   vertical-align:.14em;
 }
+/* --------------------------------------------------- the pledge row
+   One row on this page is accepted in the buyer's own words rather than
+   picked off a shelf, so the sentence is the label and the product name sits
+   above it as the header. The statement panel is deliberately symmetric - no
+   left border, no directional padding - so it needs nothing from rtl.py and
+   cannot mirror wrongly on the Arabic checkout. */
+.opt-say .say{
+  display:block;margin-top:10px;padding:13px 15px;border-radius:10px;
+  background:var(--panel-2);color:var(--teal-950);font-size:1.02rem;line-height:1.6;
+}
+.opt-say:has(input:checked) .say{background:rgba(15,110,86,.09)}
+.opt-say .opt-d{margin-top:10px}
+
 .opt.locked{cursor:default;background:var(--panel-2);border-style:dashed}
 .opt.locked:hover{border-color:var(--line);background:var(--panel-2)}
 .opt.locked .tick{background:var(--teal);border-color:var(--teal)}
@@ -1321,7 +1334,8 @@ html:has(.paybar.up) #aiden-root{--bottom:96px!important}
               الإجمالي على اليسار.</span>
           </div>
 
-          <p class="hint" style="margin:26px 0 12px">وشيء اختياري واحد <b>غير</b> محتسب اليوم:</p>
+          <p class="hint" style="margin:26px 0 12px">والعمل الشهري الاختياري &mdash; <b>لا شيء</b> منه
+            محتسب اليوم، ولا شيء منه مطلوب لإبقاء موقعك يعمل:</p>
           <div class="opts">
       <label class="opt" data-kind="item">
         <input type="checkbox" name="item" value="desk">
@@ -1330,6 +1344,15 @@ html:has(.paybar.up) #aiden-root{--bottom:96px!important}
           <span class="opt-h"><b>مكتب النمو</b><span class="opt-p"><span class="num" dir="ltr">75</span> ر.ع./شهرياً</span></span>
           <span class="opt-d">رعاية شهرية اختيارية، وميزات جديدة، ومراجعة للتقارير. غير مطلوبة أبداً لإبقاء أي شيء يعمل، وتُلغى في أي شهر. <b>غير محتسب اليوم</b> &mdash; يبدأ في الشهر
             التالي لإطلاق موقعك، ويُفوتر شهرياً.</span>
+        </span>
+      </label>
+      <label class="opt opt-say" data-kind="item">
+        <input type="checkbox" name="item" value="admin">
+        <span class="tick" aria-hidden="true"></span>
+        <span class="opt-b">
+          <span class="opt-h"><b>المشرف المخصّص</b><span class="opt-p"><span class="num" dir="ltr">37</span> ر.ع./شهرياً</span></span>
+          <span class="say">أريد من AI Profit Lab أن يخصّص مشرفاً لموقعنا يحدّث منتجاتنا وخدماتنا ويكون على تواصل يومي مع فريقنا. وأوافق على دفع <span class="num" dir="ltr">37</span> ر.ع. شهرياً مقابل ذلك.</span>
+          <span class="opt-d"><b>غير محتسب اليوم.</b> يبدأ في الشهر التالي لإطلاق موقعك ويُفوتر شهرياً مع بقية البنود &mdash; ويمكن إلغاؤه في أي شهر.</span>
         </span>
       </label>
           </div>
@@ -1636,7 +1659,7 @@ html:has(.paybar.up) #aiden-root{--bottom:96px!important}
 </dialog>
 
 
-<script type="application/json" id="payCfg">{"currency":"OMR","baisa":1000,"live":false,"api":"","env":"uat","deposit":100000,"base":"website","items":[{"id":"website","kind":"build","name":"\u0627\u0644\u0645\u0648\u0642\u0639 \u0627\u0644\u0630\u0643\u064a","required":true,"price":950000},{"id":"dashboard","kind":"build","name":"\u0644\u0648\u062d\u0629 \u0645\u062a\u0627\u0628\u0639\u0629 \u0627\u0644\u0645\u0627\u0644\u0643 \u0627\u0644\u062d\u064a\u0651\u0629","required":false,"price":650000},{"id":"autopilot","kind":"build","name":"\u0627\u0644\u0637\u064a\u0627\u0631 \u0627\u0644\u0622\u0644\u064a \u0627\u0644\u0643\u0627\u0645\u0644","required":false,"price":900000},{"id":"desk","kind":"monthly","name":"\u0645\u0643\u062a\u0628 \u0627\u0644\u0646\u0645\u0648","required":false,"price":75000},{"id":"visibility","kind":"monthly","name":"\u0645\u0643\u062a\u0628 \u0627\u0644\u0638\u0647\u0648\u0631","required":false,"price":97000}],"bundle":{"id":"stack","name":"\u062d\u0632\u0645\u0629 \u0627\u0644\u0645\u0634\u063a\u0651\u0644","requires":["dashboard","autopilot"],"price":2200000,"saving":300000},"upsell":{"id":"visibility","name":"\u0645\u0643\u062a\u0628 \u0627\u0644\u0638\u0647\u0648\u0631","price":97000,"rack":300000,"months":6,"skip_if":"desk"},"plans":[{"id":"deposit","label":"\u0627\u062d\u062c\u0632 \u0645\u0648\u0639\u062f \u0628\u0646\u0627\u0621","card":true,"due":"deposit","surcharge":0,"split":1},{"id":"full","label":"\u0627\u062f\u0641\u0639 \u0627\u0644\u0645\u0628\u0644\u063a \u0643\u0627\u0645\u0644\u0627\u064b","card":true,"due":"total","surcharge":0,"split":1},{"id":"three","label":"\u062b\u0644\u0627\u062b \u062f\u0641\u0639\u0627\u062a","card":true,"due":"first","surcharge":70000,"split":3},{"id":"proof","label":"\u0627\u062f\u0641\u0639 \u0639\u0646\u062f \u0627\u0644\u0625\u062b\u0628\u0627\u062a","card":false,"due":"zero","surcharge":200000,"split":1}]}</script>
+<script type="application/json" id="payCfg">{"currency":"OMR","baisa":1000,"live":false,"api":"","env":"uat","deposit":100000,"base":"website","items":[{"id":"website","kind":"build","name":"\u0627\u0644\u0645\u0648\u0642\u0639 \u0627\u0644\u0630\u0643\u064a","required":true,"price":950000},{"id":"dashboard","kind":"build","name":"\u0644\u0648\u062d\u0629 \u0645\u062a\u0627\u0628\u0639\u0629 \u0627\u0644\u0645\u0627\u0644\u0643 \u0627\u0644\u062d\u064a\u0651\u0629","required":false,"price":650000},{"id":"autopilot","kind":"build","name":"\u0627\u0644\u0637\u064a\u0627\u0631 \u0627\u0644\u0622\u0644\u064a \u0627\u0644\u0643\u0627\u0645\u0644","required":false,"price":900000},{"id":"desk","kind":"monthly","name":"\u0645\u0643\u062a\u0628 \u0627\u0644\u0646\u0645\u0648","required":false,"price":75000},{"id":"admin","kind":"monthly","name":"\u0627\u0644\u0645\u0634\u0631\u0641 \u0627\u0644\u0645\u062e\u0635\u0651\u0635","required":false,"price":37000},{"id":"visibility","kind":"monthly","name":"\u0645\u0643\u062a\u0628 \u0627\u0644\u0638\u0647\u0648\u0631","required":false,"price":97000}],"bundle":{"id":"stack","name":"\u062d\u0632\u0645\u0629 \u0627\u0644\u0645\u0634\u063a\u0651\u0644","requires":["dashboard","autopilot"],"price":2200000,"saving":300000},"upsell":{"id":"visibility","name":"\u0645\u0643\u062a\u0628 \u0627\u0644\u0638\u0647\u0648\u0631","price":97000,"rack":300000,"months":6,"skip_if":"desk"},"plans":[{"id":"deposit","label":"\u0627\u062d\u062c\u0632 \u0645\u0648\u0639\u062f \u0628\u0646\u0627\u0621","card":true,"due":"deposit","surcharge":0,"split":1},{"id":"full","label":"\u0627\u062f\u0641\u0639 \u0627\u0644\u0645\u0628\u0644\u063a \u0643\u0627\u0645\u0644\u0627\u064b","card":true,"due":"total","surcharge":0,"split":1},{"id":"three","label":"\u062b\u0644\u0627\u062b \u062f\u0641\u0639\u0627\u062a","card":true,"due":"first","surcharge":70000,"split":3},{"id":"proof","label":"\u0627\u062f\u0641\u0639 \u0639\u0646\u062f \u0627\u0644\u0625\u062b\u0628\u0627\u062a","card":false,"due":"zero","surcharge":200000,"split":1}]}</script>
 </main>
 <nav class="pager" aria-label="الصفحة التالية">
   <div class="wrap"><a href="/process/">
@@ -1830,7 +1853,7 @@ html:has(.paybar.up) #aiden-root{--bottom:96px!important}
      the slot a value drops into: Arabic puts the currency after the figure
      and English before it, and none of these sentences survive being glued
      together in a fixed order. */
-  var T = {"cur": "# ر.ع.", "bundleLine": "# — بسعر بناء واحد", "payThree": "الدفع على ثلاث دفعات", "payProof": "الدفع عند الإثبات فقط", "total": "الإجمالي", "perMonth": "#/شهرياً", "monthlyNote": "يبدأ من الشهر التالي للإطلاق. غير محتسب اليوم، ويُلغى في أي شهر.", "dueToday": "المستحق اليوم", "thenZero": "لا يُحتسب شيء الآن. المبلغ كاملاً # يُفوتر فقط بعد أن ينتج موقعك أول استفسار حقيقي وقابل للتحقق من مشترٍ — وإن لم ينتجه أبداً، فلن يُفوتر أبداً.", "thenSplit": "ثم #1 عند الإطلاق، و#2 بعد ثلاثين يوماً من ذلك. #3 إجمالاً، ولا شيء بعدها.", "thenBalance": "المتبقي #1 يُفوتر بعد تأكيد ملخّص طلبك. و#2 التي دفعتها تُخصم منه — فهي عربون لا رسم.", "thenWhole": "هذا هو البناء كاملاً، مدفوعاً مرة واحدة. ولا رسم شهري مطلوب لإبقاء أي منه يعمل.", "monthlyStarts": "# يبدأ على حدة، في الشهر التالي للإطلاق.", "nothingToday": "لا شيء اليوم", "todayFig": "# اليوم", "payNow": "ادفع # بأمان", "payNowShort": "ادفع #", "sendOrder": "أرسل طلبي", "sendOrderShort": "أرسل الطلب", "proofUnder": "لا يُحتسب شيء بصيغة الدفع عند الإثبات. أؤكّد الطلب ويتبعه الاتفاق — والفاتورة لا تأتي إلا بعد أول استفسار حقيقي يصلك.", "reserve": "احجز موعدي", "reserveShort": "احجز", "errRequired": "أحتاج هذه الخانة.", "errEmail": "هذا العنوان لا يبدو مكتملاً.", "errPhone": "رقم أستطيع الوصول إليك عليه فعلاً، من فضلك.", "errAgree": "يرجى تأكيد اطّلاعك على الشروط وسياسة الاسترداد — وهي الخانة الوحيدة التي لا أستطيع تعليمها نيابةً عنك.", "errSome": "بعض البيانات ناقصة في الأسفل.", "waHead": "مرحباً ناهد — هذا طلبي.", "waRef": "الرقم المرجعي: ", "waSaving": "# خصماً عن مجموع الأجزاء", "waAdds": "يضيف #", "waMonthly": "#/شهرياً من تاريخ الإطلاق", "waTotal": "الإجمالي: ", "waTerms": "الصيغة: ", "waNothingDue": "، لا مستحق الآن", "waDueNow": "المستحق الآن: ", "waName": "الاسم: ", "waBusiness": "النشاط: ", "waEmail": "البريد: ", "waWhatsapp": "واتساب: ", "waCr": "س.ت: ", "waCity": "المدينة: ", "waNotes": "ملاحظات: ", "mailSubject": "طلب ", "opening": "جارٍ فتح صفحة الدفع الآمن…", "abandon": "تعذّر بدء الدفع بالبطاقة (#)، فلم يُحتسب شيء. أرسل الطلب بدلاً من ذلك وسأتابعه معك برابط دفع.", "errTimeout": "لم تستجب بوابة الدفع في الوقت المحدد", "errRefused": "رفضت بوابة الدفع الطلب", "errUnknown": "خطأ غير معروف"};
+  var T = {"cur": "# ر.ع.", "bundleLine": "# — بسعر بناء واحد", "payThree": "الدفع على ثلاث دفعات", "payProof": "الدفع عند الإثبات فقط", "total": "الإجمالي", "perMonth": "#/شهرياً", "monthlyNote": "يبدأ من الشهر التالي للإطلاق. غير محتسب اليوم، ويُلغى في أي شهر.", "dueToday": "المستحق اليوم", "thenZero": "لا يُحتسب شيء الآن. المبلغ كاملاً # يُفوتر فقط بعد أن ينتج موقعك أول استفسار حقيقي وقابل للتحقق من مشترٍ — وإن لم ينتجه أبداً، فلن يُفوتر أبداً.", "thenSplit": "ثم #1 عند الإطلاق، و#2 بعد ثلاثين يوماً من ذلك. #3 إجمالاً، ولا شيء بعدها.", "thenBalance": "المتبقي #1 يُفوتر بعد تأكيد ملخّص طلبك. و#2 التي دفعتها تُخصم منه — فهي عربون لا رسم.", "thenWhole": "هذا هو البناء كاملاً، مدفوعاً مرة واحدة. ولا رسم شهري مطلوب لإبقاء أي منه يعمل.", "monthlyStarts": "# يبدأ على حدة، في الشهر التالي للإطلاق.", "monthlyStartsMany": "# تبدأ على حدة، في الشهر التالي للإطلاق.", "and": " و", "nothingToday": "لا شيء اليوم", "todayFig": "# اليوم", "payNow": "ادفع # بأمان", "payNowShort": "ادفع #", "sendOrder": "أرسل طلبي", "sendOrderShort": "أرسل الطلب", "proofUnder": "لا يُحتسب شيء بصيغة الدفع عند الإثبات. أؤكّد الطلب ويتبعه الاتفاق — والفاتورة لا تأتي إلا بعد أول استفسار حقيقي يصلك.", "reserve": "احجز موعدي", "reserveShort": "احجز", "errRequired": "أحتاج هذه الخانة.", "errEmail": "هذا العنوان لا يبدو مكتملاً.", "errPhone": "رقم أستطيع الوصول إليك عليه فعلاً، من فضلك.", "errAgree": "يرجى تأكيد اطّلاعك على الشروط وسياسة الاسترداد — وهي الخانة الوحيدة التي لا أستطيع تعليمها نيابةً عنك.", "errSome": "بعض البيانات ناقصة في الأسفل.", "waHead": "مرحباً ناهد — هذا طلبي.", "waRef": "الرقم المرجعي: ", "waSaving": "# خصماً عن مجموع الأجزاء", "waAdds": "يضيف #", "waMonthly": "#/شهرياً من تاريخ الإطلاق", "waTotal": "الإجمالي: ", "waTerms": "الصيغة: ", "waNothingDue": "، لا مستحق الآن", "waDueNow": "المستحق الآن: ", "waName": "الاسم: ", "waBusiness": "النشاط: ", "waEmail": "البريد: ", "waWhatsapp": "واتساب: ", "waCr": "س.ت: ", "waCity": "المدينة: ", "waNotes": "ملاحظات: ", "mailSubject": "طلب ", "opening": "جارٍ فتح صفحة الدفع الآمن…", "abandon": "تعذّر بدء الدفع بالبطاقة (#)، فلم يُحتسب شيء. أرسل الطلب بدلاً من ذلك وسأتابعه معك برابط دفع.", "errTimeout": "لم تستجب بوابة الدفع في الوقت المحدد", "errRefused": "رفضت بوابة الدفع الطلب", "errUnknown": "خطأ غير معروف"};
 
   var $ = function(id){ return document.getElementById(id); };
 
@@ -1977,8 +2000,15 @@ html:has(.paybar.up) #aiden-root{--bottom:96px!important}
     } else {
       then = T.thenWhole;
     }
+    /* Every monthly line, not just the first. Two of them can now be on one
+       order (the Growth Desk and the Assigned Admin), and naming one while
+       silently invoicing two is the kind of small dishonesty this page is
+       built to avoid. */
     if (q.monthly.length){
-      then += " " + T.monthlyStarts.replace("#", q.monthly[0].name);
+      var mnames = [];
+      for (i = 0; i < q.monthly.length; i++) mnames.push(q.monthly[i].name);
+      then += " " + (q.monthly.length > 1 ? T.monthlyStartsMany : T.monthlyStarts)
+                      .replace("#", mnames.join(T.and));
     }
     thenP.textContent = then;
 

@@ -1,5 +1,6 @@
 /**
- * The Growth Desk's monthly fee — the recurring half of the business.
+ * The monthly fees — the recurring half of the business. More than one can sit
+ * on a single order (see monthlyItems below); a subscription bills their sum.
  *
  * WHAT IS AND ISN'T SETTLED
  *
@@ -27,8 +28,8 @@
  *
  * That is the difference between infrastructure that is ready and a billing
  * system that quietly believes it charged people. Until Thawani answers, the
- * honest description of what we have is "the Growth Desk is invoiced monthly",
- * which is what pay.py already says.
+ * honest description of what we have is "the monthly items are invoiced
+ * monthly", which is what pay.py and the checkout already say.
  */
 
 const thawani = require("./thawani");
@@ -46,7 +47,11 @@ const STATUS = {
 // them. Dunning by machine has a short honest limit.
 const MAX_FAILURES = 3;
 
-/** The monthly items in the catalog — today, just the Growth Desk. */
+/**
+ * The monthly items in the catalog — the Growth Desk, the Assigned Admin and
+ * the Visibility Desk. Read from the catalog rather than listed here, because
+ * an order can carry more than one of them and the sum is what is owed.
+ */
 function monthlyItems() {
   return pricing.CATALOG.items.filter((i) => i.kind === "monthly");
 }
@@ -133,7 +138,14 @@ async function chargeOnce(sub, { now = new Date(), returnUrl } = {}) {
         order_id: sub.ref,
         customer_name: sub.name || "",
         customer_email: sub.email || "",
-        plan: "growth_desk_monthly",
+        // What this charge IS, in the buyer's own statement. Not a fixed
+        // string: an order can carry any combination of the monthly rows
+        // (the Growth Desk, the Assigned Admin, the Visibility Desk), and a
+        // receipt that names the wrong one is the sort of thing a customer
+        // disputes. sub.monthly is the ledger's "Monthly" column, carried
+        // through by routes/billing.js; the slug is the fallback for a
+        // subscription reconstructed without it.
+        plan: sub.monthly || "apl_monthly",
         cycle: String((sub.cycles || 0) + 1),
       },
     });
@@ -208,6 +220,13 @@ function fromOrder({ reference, customerId, itemIds, customer, startAt = new Dat
     customerId: customerId || "",
     amount,
     amountDisplay: pricing.money(amount),
+    // The same string routes/session.js writes to the ledger's "Monthly"
+    // column, so a subscription built here and one reconstructed from the
+    // sheet next month describe themselves identically.
+    monthly: monthlyItems()
+      .filter((i) => new Set(itemIds).has(i.id))
+      .map((i) => `${i.name} @ ${pricing.money(i.price)}/mo`)
+      .join(" | "),
     status: customerId ? STATUS.PENDING_CARD : STATUS.PENDING_CARD,
     name: (customer && customer.name) || "",
     email: (customer && customer.email) || "",
@@ -215,7 +234,7 @@ function fromOrder({ reference, customerId, itemIds, customer, startAt = new Dat
     anchorDay,
     startedAt: startAt.toISOString(),
     // The first monthly charge falls a month after go-live, not at checkout.
-    // pay.py is explicit that the Growth Desk is "invoiced monthly from
+    // pay.py is explicit that a monthly item is "invoiced monthly from
     // go-live", and the build is not live on the day the deposit is paid.
     nextChargeAt: null,
     cycles: 0,

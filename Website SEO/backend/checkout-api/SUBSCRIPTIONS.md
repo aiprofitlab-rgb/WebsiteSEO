@@ -1,8 +1,12 @@
 # Recurring billing — what exists, and the one question that decides it
 
-The Growth Desk is OMR 75/month. Everything else we sell is a one-off build.
-This is the infrastructure for charging that fee, and an honest account of what
-is proven and what is not.
+Three things we sell recur: the Growth Desk (OMR 75/month), the Assigned Admin
+(OMR 37/month, taken on the checkout by ticking a sentence) and the Visibility
+Desk (OMR 97/month, sold only by the checkout's upsell). A buyer can take more
+than one, and the subscription bills their **sum** under a label naming all of
+them. Everything else we sell is a one-off build. This is the infrastructure
+for charging those fees, and an honest account of what is proven and what
+is not.
 
 ## The short version
 
@@ -10,7 +14,7 @@ is proven and what is not.
 unconfirmed, and that single answer decides whether we have subscriptions or
 one-click repeat payments.**
 
-Ask Thawani. Until they answer, `pay.py` correctly says the Growth Desk is
+Ask Thawani. Until they answer, `pay.py` correctly says a monthly item is
 invoiced monthly, and nothing on the site claims otherwise.
 
 ## What is verified (UAT, 2026-08-24)
@@ -97,12 +101,12 @@ An order containing a monthly item now:
    on the saved card, and losing it means asking the buyer to sign up again,
 3. sends the checkout session with `customer_id` and `save_card_on_success: true`,
    so the card is kept when they pay,
-4. records the subscription as `Pending_Card` with **no** `nextChargeAt` — the
-   Growth Desk bills from go-live, not from the day a deposit is paid.
+4. records the subscription as `Pending_Card` with **no** `nextChargeAt` — a
+   monthly item bills from go-live, not from the day a deposit is paid.
 
 If customer creation fails, the order **carries on** as a plain session. Taking
-the build payment and invoicing the Desk by hand is a worse month for Nahid;
-losing the whole order is worse for everyone.
+the build payment and invoicing the monthly items by hand is a worse month for
+Nahid; losing the whole order is worse for everyone.
 
 ## A trap worth knowing
 

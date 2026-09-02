@@ -103,6 +103,34 @@ CATALOG = [
         "price": 75 * OMR,
     },
     # -----------------------------------------------------------------------
+    # The assigned admin. Added 2026-09-02 at Nahid's request.
+    #
+    # Not a product card on the checkout but a PLEDGE: the buyer accepts it by
+    # ticking a sentence written in his own voice ("I want AI Profit Lab to
+    # assign an admin..."), which is why page_checkout.py renders this row
+    # itself instead of through _monthly(). The sentence, in both languages,
+    # is PLEDGE in that module; the figure in it is interpolated from `price`
+    # below, so the sentence a buyer accepts can never quote a stale rate.
+    #
+    # `published: False` because it is sold on the checkout only - it is not
+    # on the services price list, and check_services() therefore asserts that
+    # OMR 37 never appears there. Nothing about it is secret: put it on the
+    # price table and flip this to True and the two checks swap over.
+    #
+    # It is charged like every other monthly row: recorded on the order,
+    # invoiced monthly from go-live, never taken at the card page.
+    # -----------------------------------------------------------------------
+    {
+        "id": "admin", "kind": "monthly", "required": False,
+        "published": False,
+        "name": "The Assigned Admin",
+        "name_ar": "المشرف المخصّص",
+        "blurb": "A named admin on your side of the site: product and service updates as they "
+                 "change, and daily contact with your team.",
+        "blurb_ar": "مشرف مخصّص لموقعك: يحدّث المنتجات والخدمات كلما تغيّرت، ويكون على تواصل يومي مع فريقك.",
+        "price": 37 * OMR,
+    },
+    # -----------------------------------------------------------------------
     # The one thing in this table sold at TWO figures, and the only row where
     # the price a page prints is not the price this dict calls `price`.
     #
@@ -161,6 +189,11 @@ CATALOG = [
 # The id of the row above. Everything that renders the interstitial asks for it
 # by this name rather than by the string, so it can be renamed in one place.
 UPSELL_ID = "visibility"
+
+# The row the checkout sells as a sentence rather than as a product card. Named
+# here for the same reason as UPSELL_ID: the page asks for it by constant, so
+# renaming the row is a one-line change.
+ADMIN_ID = "admin"
 
 
 def listed(i):
@@ -464,9 +497,17 @@ def check_services(html, lang="en"):
             continue
         leaked = fmt(price(i))
         if leaked in html:
+            # Two ways to be unpublished, and the sentence has to say which:
+            # a row with a `rack` publishes a DIFFERENT figure (the Visibility
+            # Desk), a row with none publishes nothing at all (the Assigned
+            # Admin). fmt(None) would raise here, and a build that crashes
+            # instead of naming the problem is not a check.
+            shown_as = (f"which publishes {fmt(list_price(i))!r} if anything"
+                        if list_price(i) is not None
+                        else "which does not publish this item at all")
             problems.append(
-                f"{i['name']}: {leaked!r} is the checkout-interstitial price and it "
-                f"appears on {page}, which publishes {fmt(list_price(i))!r} if anything. "
+                f"{i['name']}: {leaked!r} is a checkout-only price and it "
+                f"appears on {page}, {shown_as}. "
                 f"Printing it there contradicts the 'only on this page' claim.")
 
     for i in CATALOG:

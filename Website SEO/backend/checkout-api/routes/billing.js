@@ -99,6 +99,10 @@ async function loadDue(now) {
       ref: r.get("Ref"),
       customerId: r.get("Customer ID"),
       amount: Number(r.get("Monthly baisa")) || 0,
+      // What the buyer actually took, verbatim from the order. It is what the
+      // charge calls itself on their statement, so an order carrying two
+      // monthly rows is not billed under the name of one of them.
+      monthly: r.get("Monthly") || "",
       status: r.get("Subscription"),
       name: r.get("Name"),
       email: r.get("Email"),

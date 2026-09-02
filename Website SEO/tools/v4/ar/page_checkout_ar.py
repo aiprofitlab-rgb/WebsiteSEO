@@ -89,7 +89,11 @@ def body():
     # item like the Growth Desk, but it is sold only by the interstitial - if
     # it rendered as an ordinary checkbox here, "only on this page" would be
     # false the moment the page loaded.
-    monthlies = [i for i in pay.CATALOG if i["kind"] == "monthly" and pay.listed(i)]
+    # ...and pay.ADMIN_ID is off it for a different reason: it IS listed, but
+    # it is asked as a sentence, so page_checkout.pledge_card("ar") renders it
+    # below - the same sentence table as the English page, translated there.
+    monthlies = [i for i in pay.CATALOG if i["kind"] == "monthly"
+                 and pay.listed(i) and i["id"] != pay.ADMIN_ID]
     q0 = pay.quote([pay.BASE_ID], "deposit")
 
     # The wording of the action changes entirely with the gateway switch, and
@@ -151,9 +155,11 @@ def body():
               الإجمالي على اليسار.</span>
           </div>
 
-          <p class="hint" style="margin:26px 0 12px">وشيء اختياري واحد <b>غير</b> محتسب اليوم:</p>
+          <p class="hint" style="margin:26px 0 12px">والعمل الشهري الاختياري &mdash; <b>لا شيء</b> منه
+            محتسب اليوم، ولا شيء منه مطلوب لإبقاء موقعك يعمل:</p>
           <div class="opts">
 {chr(10).join(_monthly(i) for i in monthlies)}
+{page_checkout.pledge_card("ar")}
           </div>
         </div>
 

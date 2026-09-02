@@ -94,6 +94,19 @@ CSS = """
   color:var(--amber-text);background:var(--panel-2);border-radius:99px;padding:3px 9px;margin-left:9px;
   vertical-align:.14em;
 }
+/* --------------------------------------------------- the pledge row
+   One row on this page is accepted in the buyer's own words rather than
+   picked off a shelf, so the sentence is the label and the product name sits
+   above it as the header. The statement panel is deliberately symmetric - no
+   left border, no directional padding - so it needs nothing from rtl.py and
+   cannot mirror wrongly on the Arabic checkout. */
+.opt-say .say{
+  display:block;margin-top:10px;padding:13px 15px;border-radius:10px;
+  background:var(--panel-2);color:var(--teal-950);font-size:1.02rem;line-height:1.6;
+}
+.opt-say:has(input:checked) .say{background:rgba(15,110,86,.09)}
+.opt-say .opt-d{margin-top:10px}
+
 .opt.locked{cursor:default;background:var(--panel-2);border-style:dashed}
 .opt.locked:hover{border-color:var(--line);background:var(--panel-2)}
 .opt.locked .tick{background:var(--teal);border-color:var(--teal)}
@@ -675,6 +688,69 @@ def upsell_dialog(lang="en"):
 """
 
 
+# ===========================================================================
+# The pledge row.
+#
+# The Assigned Admin is not offered the way the other options are. It is a
+# commitment about how the two teams will work every day, so the buyer accepts
+# it by ticking a sentence written in his own voice - the wording Nahid asked
+# for, verbatim but for the brand name and the figure.
+#
+# Both languages live here for the same reason the upsell's do: one sentence
+# that says what somebody is agreeing to must not exist in two drifting copies.
+# The rate is interpolated from pay.py (#FEE), never typed, so a price change
+# rewrites the sentence a buyer signs. Named token, not a bare "#", because
+# these strings are HTML and a bare "#" replacement would rewrite &#8217;.
+#
+# What it must keep saying, whatever else is edited:
+#   * it is NOT charged today - it starts the month after go-live and is
+#     invoiced monthly, exactly like the Growth Desk (see SUBSCRIPTIONS.md);
+#   * the figure in the sentence is the figure on the invoice;
+#   * it is cancellable any month, and nothing else on the order depends on it.
+# ===========================================================================
+PLEDGE = {
+    "en": {
+        "price": "#FEE/month",
+        "say": "I want AI Profit Lab to assign an admin for our website to update our "
+               "products/services and be in daily touch with our team. I accept a monthly "
+               "payment of #FEE for it.",
+        "note": "<b>Not charged today.</b> It starts the month after your site goes live and is "
+                "invoiced monthly with everything else &mdash; cancel any month.",
+    },
+    "ar": {
+        "price": "#FEE/شهرياً",
+        "say": "أريد من AI Profit Lab أن يخصّص مشرفاً لموقعنا يحدّث منتجاتنا وخدماتنا ويكون على "
+               "تواصل يومي مع فريقنا. وأوافق على دفع #FEE شهرياً مقابل ذلك.",
+        "note": "<b>غير محتسب اليوم.</b> يبدأ في الشهر التالي لإطلاق موقعك ويُفوتر شهرياً مع بقية "
+                "البنود &mdash; ويمكن إلغاؤه في أي شهر.",
+    },
+}
+
+
+def pledge_card(lang="en"):
+    """The Assigned Admin, as a checkbox whose label is the sentence.
+
+    An ordinary `name="item"` checkbox, so it travels the machinery that was
+    already there: selected() finds it, render() re-totals from it, the summary
+    prints it as a monthly line, summaryText() puts it in the WhatsApp order,
+    order() ships its id, and the server prices it from its own copy of the
+    table. Nothing about the pledge is special once it is ticked - only the way
+    it is asked."""
+    i = pay.item(pay.ADMIN_ID)
+    w = PLEDGE[lang]
+    fee = (pay.money_ar if lang == "ar" else pay.money)(pay.price(i))
+    f = lambda key: w[key].replace("#FEE", fee)  # noqa: E731
+    return f"""      <label class="opt opt-say" data-kind="item">
+        <input type="checkbox" name="item" value="{i['id']}">
+        <span class="tick" aria-hidden="true"></span>
+        <span class="opt-b">
+          <span class="opt-h"><b>{pay.t(i, 'name', lang)}</b><span class="opt-p">{f('price')}</span></span>
+          <span class="say">{f('say')}</span>
+          <span class="opt-d">{f('note')}</span>
+        </span>
+      </label>"""
+
+
 def upsell_field():
     """The upsell's only state, and it has to sit INSIDE #coForm.
 
@@ -762,7 +838,11 @@ def body():
     # item like the Growth Desk, but it is sold only by the interstitial - if
     # it rendered as an ordinary checkbox here, "only on this page" would be
     # false the moment the page loaded.
-    monthlies = [i for i in pay.CATALOG if i["kind"] == "monthly" and pay.listed(i)]
+    # ...and pay.ADMIN_ID is off it for a different reason: it IS listed, but
+    # it is asked as a sentence, so pledge_card() renders it below rather than
+    # _monthly() rendering it as a card like the others.
+    monthlies = [i for i in pay.CATALOG if i["kind"] == "monthly"
+                 and pay.listed(i) and i["id"] != pay.ADMIN_ID]
     q0 = pay.quote([pay.BASE_ID], "deposit")
 
     # The wording of the action changes entirely with the gateway switch, and
@@ -824,9 +904,11 @@ def body():
               already in the total on the right.</span>
           </div>
 
-          <p class="hint" style="margin:26px 0 12px">And one optional thing that is <b>not</b> charged today:</p>
+          <p class="hint" style="margin:26px 0 12px">And the optional monthly work &mdash; <b>none</b> of it
+            charged today, and none of it needed to keep your site running:</p>
           <div class="opts">
 {chr(10).join(_monthly(i) for i in monthlies)}
+{pledge_card("en")}
           </div>
         </div>
 
@@ -1200,8 +1282,15 @@ JS_TPL = r"""
     } else {
       then = T.thenWhole;
     }
+    /* Every monthly line, not just the first. Two of them can now be on one
+       order (the Growth Desk and the Assigned Admin), and naming one while
+       silently invoicing two is the kind of small dishonesty this page is
+       built to avoid. */
     if (q.monthly.length){
-      then += " " + T.monthlyStarts.replace("#", q.monthly[0].name);
+      var mnames = [];
+      for (i = 0; i < q.monthly.length; i++) mnames.push(q.monthly[i].name);
+      then += " " + (q.monthly.length > 1 ? T.monthlyStartsMany : T.monthlyStarts)
+                      .replace("#", mnames.join(T.and));
     }
     thenP.textContent = then;
 
@@ -1577,6 +1666,8 @@ WORDS = {
                         "Your #2 comes off it — it is a deposit, not a fee."),
         "thenWhole": "That is the whole build, paid once. No monthly fee is required to keep any of it running.",
         "monthlyStarts": "# starts separately, the month after go-live.",
+        "monthlyStartsMany": "# start separately, the month after go-live.",
+        "and": " and ",
         "nothingToday": "Nothing today", "todayFig": "# today",
         "payNow": "Pay # securely", "payNowShort": "Pay #",
         "sendOrder": "Send my order", "sendOrderShort": "Send order",
@@ -1616,6 +1707,10 @@ WORDS = {
                         "و#2 التي دفعتها تُخصم منه — فهي عربون لا رسم."),
         "thenWhole": "هذا هو البناء كاملاً، مدفوعاً مرة واحدة. ولا رسم شهري مطلوب لإبقاء أي منه يعمل.",
         "monthlyStarts": "# يبدأ على حدة، في الشهر التالي للإطلاق.",
+        "monthlyStartsMany": "# تبدأ على حدة، في الشهر التالي للإطلاق.",
+        # No space after the waw: Arabic joins it to the following word, so
+        # " و" + "المشرف" reads "والمشرف" and " و " would not.
+        "and": " و",
         "nothingToday": "لا شيء اليوم", "todayFig": "# اليوم",
         "payNow": "ادفع # بأمان", "payNowShort": "ادفع #",
         "sendOrder": "أرسل طلبي", "sendOrderShort": "أرسل الطلب",

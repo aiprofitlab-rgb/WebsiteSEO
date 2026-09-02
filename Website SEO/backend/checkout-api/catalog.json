@@ -33,6 +33,13 @@
       "price": 75000
     },
     {
+      "id": "admin",
+      "kind": "monthly",
+      "name": "The Assigned Admin",
+      "required": false,
+      "price": 37000
+    },
+    {
       "id": "visibility",
       "kind": "monthly",
       "name": "The Visibility Desk",

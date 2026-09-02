@@ -11,17 +11,23 @@ const pricing = require("../lib/pricing");
 
 const day = (iso) => new Date(iso + "T12:00:00Z");
 
-test("the monthly items are the Growth Desk and the Visibility Desk", () => {
-  // Two monthly items now. The Visibility Desk is the checkout's upsell: it is
-  // deliberately absent from the public price list (pay.py marks it
-  // listed: False) but it is an ordinary monthly row HERE, because the server
-  // must price and bill it like any other. If a third appears, the site is
-  // asking buyers for three separate monthly fees — worth a second look.
+test("the monthly items are the Growth Desk, the Assigned Admin and the Visibility Desk", () => {
+  // Three monthly rows, sold three different ways, all ordinary monthly rows
+  // HERE because the server must price and bill them alike:
+  //   desk       — a card on the checkout, anyone can tick it
+  //   admin      — the pledge sentence on the checkout (pay.py: ADMIN_ID),
+  //                off the public price list (published: False)
+  //   visibility — the checkout's upsell interstitial (pay.py: listed: False)
+  // Three separate monthly fees can now land on ONE order, which is why
+  // monthlyTotal() is asserted on a combination and not only on singles: a
+  // buyer who takes two owes the sum, and the summary must name both.
   const monthly = subs.monthlyItems();
-  assert.deepEqual(monthly.map((i) => i.id).sort(), ["desk", "visibility"]);
+  assert.deepEqual(monthly.map((i) => i.id).sort(), ["admin", "desk", "visibility"]);
 
   assert.equal(subs.monthlyTotal(["website", "desk"]), 75 * pricing.OMR);
+  assert.equal(subs.monthlyTotal(["website", "admin"]), 37 * pricing.OMR);
   assert.equal(subs.monthlyTotal(["website", "visibility"]), 97 * pricing.OMR);
+  assert.equal(subs.monthlyTotal(["website", "desk", "admin"]), 112 * pricing.OMR);
   assert.equal(subs.monthlyTotal(["website"]), 0, "an order with no monthly item owes nothing monthly");
 });
 
@@ -32,10 +38,12 @@ test("a monthly item never changes what is charged at the card page", () => {
   // If this ever fails, the interstitial's "nothing is charged today" is a lie.
   for (const plan of ["deposit", "full", "three", "proof"]) {
     const without = pricing.quote(["website"], plan);
-    const with_ = pricing.quote(["website", "visibility"], plan);
-    assert.equal(with_.due, without.due, `due changed on plan ${plan}`);
-    assert.equal(with_.total, without.total, `total changed on plan ${plan}`);
-    assert.equal(with_.monthly.length, 1, `plan ${plan} lost the monthly line`);
+    for (const monthly of [["visibility"], ["admin"], ["desk", "admin"]]) {
+      const with_ = pricing.quote(["website", ...monthly], plan);
+      assert.equal(with_.due, without.due, `due changed on plan ${plan} with ${monthly}`);
+      assert.equal(with_.total, without.total, `total changed on plan ${plan} with ${monthly}`);
+      assert.equal(with_.monthly.length, monthly.length, `plan ${plan} lost a monthly line`);
+    }
   }
 });
 
@@ -120,8 +128,24 @@ test("a subscription from an order starts unbilled, awaiting a saved card", () =
   assert.equal(sub.amount, 75 * pricing.OMR);
   assert.equal(sub.status, subs.STATUS.PENDING_CARD);
   assert.equal(sub.anchorDay, 24);
-  assert.equal(sub.nextChargeAt, null, "the Growth Desk bills from go-live, not from checkout");
+  assert.equal(sub.nextChargeAt, null, "a monthly item bills from go-live, not from checkout");
   assert.equal(sub.cycles, 0);
+  assert.equal(sub.monthly, "The Growth Desk @ OMR 75/mo",
+    "the subscription names what it bills for — it is the label on the buyer's statement");
+});
+
+test("a subscription for two monthly rows names both, and bills their sum", () => {
+  // The failure this guards is silent and expensive: a buyer takes the Growth
+  // Desk AND the Assigned Admin, and the charge that leaves their card every
+  // month is labelled as one of them. They dispute it, and they are right to.
+  const sub = subs.fromOrder({
+    reference: "APL-260902-AD37", customerId: "cus_abc",
+    itemIds: ["website", "desk", "admin"],
+    startAt: day("2026-09-02"),
+  });
+  assert.equal(sub.amount, 112 * pricing.OMR);
+  assert.equal(sub.monthly,
+    "The Growth Desk @ OMR 75/mo | The Assigned Admin @ OMR 37/mo");
 });
 
 test("an order with no monthly item creates no subscription", () => {

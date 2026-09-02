@@ -620,6 +620,19 @@ section{position:relative;padding:clamp(74px,9vw,138px) 0}
   color:var(--amber-text);background:var(--panel-2);border-radius:99px;padding:3px 9px;margin-left:9px;
   vertical-align:.14em;
 }
+/* --------------------------------------------------- the pledge row
+   One row on this page is accepted in the buyer's own words rather than
+   picked off a shelf, so the sentence is the label and the product name sits
+   above it as the header. The statement panel is deliberately symmetric - no
+   left border, no directional padding - so it needs nothing from rtl.py and
+   cannot mirror wrongly on the Arabic checkout. */
+.opt-say .say{
+  display:block;margin-top:10px;padding:13px 15px;border-radius:10px;
+  background:var(--panel-2);color:var(--teal-950);font-size:1.02rem;line-height:1.6;
+}
+.opt-say:has(input:checked) .say{background:rgba(15,110,86,.09)}
+.opt-say .opt-d{margin-top:10px}
+
 .opt.locked{cursor:default;background:var(--panel-2);border-style:dashed}
 .opt.locked:hover{border-color:var(--line);background:var(--panel-2)}
 .opt.locked .tick{background:var(--teal);border-color:var(--teal)}
@@ -1051,7 +1064,8 @@ html:has(.paybar.up) #aiden-root{--bottom:96px!important}
               already in the total on the right.</span>
           </div>
 
-          <p class="hint" style="margin:26px 0 12px">And one optional thing that is <b>not</b> charged today:</p>
+          <p class="hint" style="margin:26px 0 12px">And the optional monthly work &mdash; <b>none</b> of it
+            charged today, and none of it needed to keep your site running:</p>
           <div class="opts">
       <label class="opt" data-kind="item">
         <input type="checkbox" name="item" value="desk">
@@ -1060,6 +1074,15 @@ html:has(.paybar.up) #aiden-root{--bottom:96px!important}
           <span class="opt-h"><b>The Growth Desk</b><span class="opt-p">OMR 75/month</span></span>
           <span class="opt-d">Optional monthly care, new features and a reporting review. Never required to keep anything working, and cancellable any month. <b>Not charged today</b> &mdash; it starts the month after
             your site goes live, and is invoiced monthly.</span>
+        </span>
+      </label>
+      <label class="opt opt-say" data-kind="item">
+        <input type="checkbox" name="item" value="admin">
+        <span class="tick" aria-hidden="true"></span>
+        <span class="opt-b">
+          <span class="opt-h"><b>The Assigned Admin</b><span class="opt-p">OMR 37/month</span></span>
+          <span class="say">I want AI Profit Lab to assign an admin for our website to update our products/services and be in daily touch with our team. I accept a monthly payment of OMR 37 for it.</span>
+          <span class="opt-d"><b>Not charged today.</b> It starts the month after your site goes live and is invoiced monthly with everything else &mdash; cancel any month.</span>
         </span>
       </label>
           </div>
@@ -1371,7 +1394,7 @@ html:has(.paybar.up) #aiden-root{--bottom:96px!important}
 </dialog>
 
 
-<script type="application/json" id="payCfg">{"currency":"OMR","baisa":1000,"live":false,"api":"","env":"uat","deposit":100000,"base":"website","items":[{"id":"website","kind":"build","name":"The Smart Website","required":true,"price":950000},{"id":"dashboard","kind":"build","name":"The Live Owner Dashboard","required":false,"price":650000},{"id":"autopilot","kind":"build","name":"The Full Autopilot","required":false,"price":900000},{"id":"desk","kind":"monthly","name":"The Growth Desk","required":false,"price":75000},{"id":"visibility","kind":"monthly","name":"The Visibility Desk","required":false,"price":97000}],"bundle":{"id":"stack","name":"The Operator Stack","requires":["dashboard","autopilot"],"price":2200000,"saving":300000},"upsell":{"id":"visibility","name":"The Visibility Desk","price":97000,"rack":300000,"months":6,"skip_if":"desk"},"plans":[{"id":"deposit","label":"Reserve a build slot","card":true,"due":"deposit","surcharge":0,"split":1},{"id":"full","label":"Pay in full","card":true,"due":"total","surcharge":0,"split":1},{"id":"three","label":"Three payments","card":true,"due":"first","surcharge":70000,"split":3},{"id":"proof","label":"Pay on Proof","card":false,"due":"zero","surcharge":200000,"split":1}]}</script>
+<script type="application/json" id="payCfg">{"currency":"OMR","baisa":1000,"live":false,"api":"","env":"uat","deposit":100000,"base":"website","items":[{"id":"website","kind":"build","name":"The Smart Website","required":true,"price":950000},{"id":"dashboard","kind":"build","name":"The Live Owner Dashboard","required":false,"price":650000},{"id":"autopilot","kind":"build","name":"The Full Autopilot","required":false,"price":900000},{"id":"desk","kind":"monthly","name":"The Growth Desk","required":false,"price":75000},{"id":"admin","kind":"monthly","name":"The Assigned Admin","required":false,"price":37000},{"id":"visibility","kind":"monthly","name":"The Visibility Desk","required":false,"price":97000}],"bundle":{"id":"stack","name":"The Operator Stack","requires":["dashboard","autopilot"],"price":2200000,"saving":300000},"upsell":{"id":"visibility","name":"The Visibility Desk","price":97000,"rack":300000,"months":6,"skip_if":"desk"},"plans":[{"id":"deposit","label":"Reserve a build slot","card":true,"due":"deposit","surcharge":0,"split":1},{"id":"full","label":"Pay in full","card":true,"due":"total","surcharge":0,"split":1},{"id":"three","label":"Three payments","card":true,"due":"first","surcharge":70000,"split":3},{"id":"proof","label":"Pay on Proof","card":false,"due":"zero","surcharge":200000,"split":1}]}</script>
 </main>
 <nav class="pager" aria-label="Next page">
   <div class="wrap"><a href="/en/contact/">
@@ -1565,7 +1588,7 @@ html:has(.paybar.up) #aiden-root{--bottom:96px!important}
      the slot a value drops into: Arabic puts the currency after the figure
      and English before it, and none of these sentences survive being glued
      together in a fixed order. */
-  var T = {"cur": "OMR #", "bundleLine": "# — priced as one build", "payThree": "Paying in three", "payProof": "Paying only on proof", "total": "Total", "perMonth": "#/mo", "monthlyNote": "From the month after go-live. Not charged today, cancel any month.", "dueToday": "Due today", "thenZero": "Nothing is charged now. The full # is invoiced only after your site has produced its first real, verifiable buyer inquiry — and if it never does, it is never invoiced.", "thenSplit": "Then #1 when it goes live, and #2 thirty days after that. #3 in total, and nothing after it.", "thenBalance": "The remaining #1 is invoiced once your brief is confirmed. Your #2 comes off it — it is a deposit, not a fee.", "thenWhole": "That is the whole build, paid once. No monthly fee is required to keep any of it running.", "monthlyStarts": "# starts separately, the month after go-live.", "nothingToday": "Nothing today", "todayFig": "# today", "payNow": "Pay # securely", "payNowShort": "Pay #", "sendOrder": "Send my order", "sendOrderShort": "Send order", "proofUnder": "Nothing is charged on Pay on Proof terms. I confirm the order and the agreement follows — the invoice only comes after your first real inquiry.", "reserve": "Reserve my slot", "reserveShort": "Reserve", "errRequired": "I need this one.", "errEmail": "That address does not look complete.", "errPhone": "A number I can actually reach you on, please.", "errAgree": "Please confirm you have read the terms and the refund policy — it is the one box I cannot tick for you.", "errSome": "A few details are missing below.", "waHead": "Hello Nahid — here is my order.", "waRef": "Reference: ", "waSaving": "# off the parts", "waAdds": "adds #", "waMonthly": "#/month from go-live", "waTotal": "Total: ", "waTerms": "Terms: ", "waNothingDue": ", nothing due now", "waDueNow": "Due now: ", "waName": "Name: ", "waBusiness": "Business: ", "waEmail": "Email: ", "waWhatsapp": "WhatsApp: ", "waCr": "CR: ", "waCity": "City: ", "waNotes": "Notes: ", "mailSubject": "Order ", "opening": "Opening secure payment…", "abandon": "The card payment could not be started (#), so nothing was charged. Send the order across instead and I will follow it up with a payment link.", "errTimeout": "the gateway did not answer in time", "errRefused": "the gateway refused the order", "errUnknown": "unknown error"};
+  var T = {"cur": "OMR #", "bundleLine": "# — priced as one build", "payThree": "Paying in three", "payProof": "Paying only on proof", "total": "Total", "perMonth": "#/mo", "monthlyNote": "From the month after go-live. Not charged today, cancel any month.", "dueToday": "Due today", "thenZero": "Nothing is charged now. The full # is invoiced only after your site has produced its first real, verifiable buyer inquiry — and if it never does, it is never invoiced.", "thenSplit": "Then #1 when it goes live, and #2 thirty days after that. #3 in total, and nothing after it.", "thenBalance": "The remaining #1 is invoiced once your brief is confirmed. Your #2 comes off it — it is a deposit, not a fee.", "thenWhole": "That is the whole build, paid once. No monthly fee is required to keep any of it running.", "monthlyStarts": "# starts separately, the month after go-live.", "monthlyStartsMany": "# start separately, the month after go-live.", "and": " and ", "nothingToday": "Nothing today", "todayFig": "# today", "payNow": "Pay # securely", "payNowShort": "Pay #", "sendOrder": "Send my order", "sendOrderShort": "Send order", "proofUnder": "Nothing is charged on Pay on Proof terms. I confirm the order and the agreement follows — the invoice only comes after your first real inquiry.", "reserve": "Reserve my slot", "reserveShort": "Reserve", "errRequired": "I need this one.", "errEmail": "That address does not look complete.", "errPhone": "A number I can actually reach you on, please.", "errAgree": "Please confirm you have read the terms and the refund policy — it is the one box I cannot tick for you.", "errSome": "A few details are missing below.", "waHead": "Hello Nahid — here is my order.", "waRef": "Reference: ", "waSaving": "# off the parts", "waAdds": "adds #", "waMonthly": "#/month from go-live", "waTotal": "Total: ", "waTerms": "Terms: ", "waNothingDue": ", nothing due now", "waDueNow": "Due now: ", "waName": "Name: ", "waBusiness": "Business: ", "waEmail": "Email: ", "waWhatsapp": "WhatsApp: ", "waCr": "CR: ", "waCity": "City: ", "waNotes": "Notes: ", "mailSubject": "Order ", "opening": "Opening secure payment…", "abandon": "The card payment could not be started (#), so nothing was charged. Send the order across instead and I will follow it up with a payment link.", "errTimeout": "the gateway did not answer in time", "errRefused": "the gateway refused the order", "errUnknown": "unknown error"};
 
   var $ = function(id){ return document.getElementById(id); };
 
@@ -1712,8 +1735,15 @@ html:has(.paybar.up) #aiden-root{--bottom:96px!important}
     } else {
       then = T.thenWhole;
     }
+    /* Every monthly line, not just the first. Two of them can now be on one
+       order (the Growth Desk and the Assigned Admin), and naming one while
+       silently invoicing two is the kind of small dishonesty this page is
+       built to avoid. */
     if (q.monthly.length){
-      then += " " + T.monthlyStarts.replace("#", q.monthly[0].name);
+      var mnames = [];
+      for (i = 0; i < q.monthly.length; i++) mnames.push(q.monthly[i].name);
+      then += " " + (q.monthly.length > 1 ? T.monthlyStartsMany : T.monthlyStarts)
+                      .replace("#", mnames.join(T.and));
     }
     thenP.textContent = then;
 
