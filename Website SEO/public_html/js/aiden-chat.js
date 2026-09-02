@@ -31,7 +31,7 @@
 (function () {
     'use strict';
 
-    var API = 'https://aiden-backend-196956249400.us-central1.run.app/chat';
+    var API = 'https://aiden.aiprofitlab.io/chat';
     // Where the widget sends a visitor when the backend cannot answer.
     var WHATSAPP_URL = 'https://api.whatsapp.com/send?phone=96899245250' +
         '&text=' + encodeURIComponent('Hello Nahid, I have a question about my business.');
