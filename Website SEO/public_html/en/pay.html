@@ -230,6 +230,18 @@ footer{padding:36px 0 50px;text-align:center;font-size:.82rem;color:var(--muted)
 .up-booked p{font-size:.93rem;color:var(--muted);margin:0 0 14px}
 .up-booked b{color:var(--ink)}
 
+.up-band{
+  background:linear-gradient(168deg,#FCF8F0,#F5EFE1);
+  border:1.5px solid var(--amber-bright);border-radius:12px;
+  padding:20px 18px;margin:18px 0 0;
+}
+.up-band .eyebrow{color:var(--amber);margin:0 0 8px}
+.up-band h3{font-family:var(--display);font-weight:400;font-size:1.12rem;line-height:1.35;
+  color:var(--teal-900);margin:0 0 8px}
+.up-band p{font-size:.92rem;color:var(--muted);margin:0 0 16px}
+.up-band b{color:var(--ink)}
+.up-band .btn{background:var(--teal);color:#fff}
+
 /* <<< APL upsell css <<< */
 </style>
 
@@ -291,6 +303,16 @@ footer{padding:36px 0 50px;text-align:center;font-size:.82rem;color:var(--muted)
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1L3 5v6c0 5.5 3.8 10.7 9 12 5.2-1.3 9-6.5 9-12V5l-9-4zm0 6a2.5 2.5 0 012.5 2.5V11h1v6h-7v-6h1V9.5A2.5 2.5 0 0112 7zm0 1.5a1 1 0 00-1 1V11h2V9.5a1 1 0 00-1-1z"/></svg>
         Payments processed by Thawani · Licensed by the Central Bank of Oman
       </p>
+<!-- >>> APL upsell band >>> -->
+      <div class="up-band" id="upBand" hidden>
+        <p class="eyebrow">Before you transfer &#183; ninety seconds</p>
+        <h3>Your website will be ready to be found.<br>Being found is a different job.</h3>
+        <p>The Visibility Desk is the monthly work that puts your name inside Google's answers
+          and ChatGPT's. Booked from this page it is <b>OMR 97 a month</b> instead of OMR 300
+          &mdash; and <b>nothing is charged today</b>.</p>
+        <button type="button" class="btn btn-block" id="upBandBtn">Read it &mdash; OMR 97 a month</button>
+      </div>
+<!-- <<< APL upsell band <<< -->
       <div class="msg err" id="payErr"></div>
 
       <details class="alt" id="altBox">
@@ -504,6 +526,10 @@ footer{padding:36px 0 50px;text-align:center;font-size:.82rem;color:var(--muted)
       $("altBox").open            = true;
       $("altSummary").style.display = "none";
       $("altBox").querySelector("p").style.display = "none";
+      /* Added by tools/apply_upsell.py. This branch hides #payBtn, which is
+         what the upsell gate binds to - so the gate is handed its own way in
+         rather than being silently disabled for every transfer buyer. */
+      upsellOffline();
     }
 
     if (data.hasReceipt) {
@@ -646,17 +672,39 @@ footer{padding:36px 0 50px;text-align:center;font-size:.82rem;color:var(--muted)
 /* >>> APL upsell js >>> */
 
   /* ---------------------------------------------------- the upsell gate ---
-     Shown once, between "pay the deposit" and Thawani's card page. It only
-     ever DELAYS the payment - every exit from it calls startPayment(). */
+     Shown once, before the buyer pays. There are two ways to pay here and so
+     there are two ways in:
+
+       CARD      the gate sits between the pay button and Thawani's page. It
+                 only ever DELAYS the payment - every exit calls startPayment().
+       TRANSFER  there is no pay button at all (render() hides it), so the gate
+                 is hung on the page instead: a standing band in the pay box,
+                 plus one auto-open on the first visit. Nothing here can touch
+                 the payment, because in this mode the page does not take it.
+
+     Both are safe because the offer is BOOKED, not charged. */
   var UP_ID = 'visibility', UP_PRICE = 97,
-      UP_KEY = "apl.upsell." + ref;
-  var upDlg = document.getElementById("upDlg"), upDecided = false;
+      UP_KEY = "apl.upsell." + ref, UP_SEEN = "apl.upsell.seen." + ref;
+  var upDlg  = document.getElementById("upDlg"),
+      upBand = document.getElementById("upBand"),
+      upDecided = false, upOffline = false;
+
+  /* Taken on a previous visit. Read through a helper because three different
+     callers need it and localStorage is allowed to throw in every one. */
+  function upsellTaken(){
+    try { return localStorage.getItem(UP_KEY) === "1"; } catch(e){ return false; }
+  }
 
   function upsellDue(){
     if (upDecided || !upDlg || !upDlg.showModal) return false;
     /* Never interrupt a buyer who has already taken it on a previous visit. */
-    try { if (localStorage.getItem(UP_KEY) === "1") return false; } catch(e){}
-    return true;
+    return !upsellTaken();
+  }
+
+  function upsellShow(){
+    upDecided = false;          /* re-opening it by hand is not a decision */
+    try { upDlg.showModal(); } catch(e){ return; }
+    track("view_promotion", { promotion_id: UP_ID, ref: ref });
   }
 
   function upsellRecord(){
@@ -679,7 +727,40 @@ footer{padding:36px 0 50px;text-align:center;font-size:.82rem;color:var(--muted)
     track(taken ? "add_to_cart" : "upsell_declined",
           { item_id: UP_ID, value: UP_PRICE, currency: "OMR", ref: ref });
     if (taken) { upsellRecord(); upsellBanner(); }
+    if (upOffline) return upsellSettled(taken);
     startPayment();
+  }
+
+  /* Where a transfer buyer lands after deciding. There is no payment to start,
+     so the page just resolves: taken swaps the band for the booked block and
+     puts it in front of them; declined leaves the band as the way back in. */
+  function upsellSettled(taken){
+    if (upBand) upBand.hidden = taken;
+    if (!taken) return;
+    var box = document.getElementById("upBooked");
+    if (box && box.scrollIntoView) box.scrollIntoView({ behavior: "smooth", block: "center" });
+  }
+
+  /* Called by render() on the no-gateway branch - see rewire() in
+     tools/apply_upsell.py. Without it the gate has nothing to hang on: the
+     button it binds to is display:none in that mode, and the offer is never
+     made to a single transfer buyer. */
+  function upsellOffline(){
+    upOffline = true;
+    if (!upBand || !upsellDue()) return;
+    upBand.hidden = false;
+
+    /* The auto-open happens once ever, per seat. The band is permanent, so a
+       buyer who closes it still has a way back and is not asked again on every
+       reload. If localStorage cannot be read we assume it HAS been seen -
+       failing towards the quieter page rather than towards nagging. */
+    var seen = true;
+    try { seen = localStorage.getItem(UP_SEEN) === "1"; } catch(e){}
+    if (seen) return;
+    try { localStorage.setItem(UP_SEEN, "1"); } catch(e){}
+    /* Let the seat card paint first: a dialog that arrives with the page reads
+       as an ad and gets dismissed before it is read. */
+    setTimeout(function(){ if (upsellDue()) upsellShow(); }, 900);
   }
 
   /* The confirmation the buyer sees on the paid screen, and the thing that
@@ -705,10 +786,18 @@ footer{padding:36px 0 50px;text-align:center;font-size:.82rem;color:var(--muted)
     upDlg.addEventListener("cancel", function(e){ e.preventDefault(); upsellClose(false); });
   }
 
+  /* The band's own button ignores upDecided: a buyer who declined and then
+     went looking for the offer again is asking for it, not being interrupted
+     by it. Only actually owning it takes the button away. */
+  if (upBand){
+    document.getElementById("upBandBtn").addEventListener("click", function(){
+      if (upDlg && upDlg.showModal && !upsellTaken()) upsellShow();
+    });
+  }
+
   document.getElementById("payBtn").addEventListener("click", function(){
     if (upsellDue()){
-      upDlg.showModal();
-      track("view_promotion", { promotion_id: UP_ID, ref: ref });
+      upsellShow();
       return;
     }
     startPayment();

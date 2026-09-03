@@ -14,6 +14,17 @@ So the markup, the CSS and the numbers are all rendered from
 tools/v4/page_checkout.py, which renders them from tools/v4/pay.py. Edit the
 copy or the price there, re-run this, and both checkouts say the same sentence.
 
+TWO ROUTES, TWO TRIGGERS
+------------------------
+The seat page takes money two ways and only one of them has a button. When the
+card gateway is off, render() sets #payBtn to display:none - and #payBtn is
+what the gate binds to, so hanging the offer there alone means a bank-transfer
+buyer is never shown it at all. Nothing looks broken; the offer simply never
+happens. So the transfer route gets its own trigger: a standing band inside the
+pay box, plus one auto-open on the first visit to that seat. The offer is
+BOOKED and not charged, which is what makes it safe to make away from the
+payment button.
+
 IDEMPOTENT. Every injected region is fenced by a matched pair of marker
 comments; a re-run replaces what is between the fences rather than adding a
 second copy. Running it twice leaves the file byte-identical - which is the
@@ -40,6 +51,7 @@ TARGET = ROOT / "public_html" / "en" / "pay.html"
 # Every region this tool owns, as (name, opening fence, closing fence).
 CSS_A, CSS_Z = "/* >>> APL upsell css >>> */", "/* <<< APL upsell css <<< */"
 DLG_A, DLG_Z = "<!-- >>> APL upsell dialog >>> -->", "<!-- <<< APL upsell dialog <<< -->"
+BAND_A, BAND_Z = "<!-- >>> APL upsell band >>> -->", "<!-- <<< APL upsell band <<< -->"
 JS_A, JS_Z = "/* >>> APL upsell js >>> */", "/* <<< APL upsell js <<< */"
 
 
@@ -89,17 +101,39 @@ def js():
     u = pay.item(pay.UPSELL_ID)
     return f"""
   /* ---------------------------------------------------- the upsell gate ---
-     Shown once, between "pay the deposit" and Thawani's card page. It only
-     ever DELAYS the payment - every exit from it calls startPayment(). */
+     Shown once, before the buyer pays. There are two ways to pay here and so
+     there are two ways in:
+
+       CARD      the gate sits between the pay button and Thawani's page. It
+                 only ever DELAYS the payment - every exit calls startPayment().
+       TRANSFER  there is no pay button at all (render() hides it), so the gate
+                 is hung on the page instead: a standing band in the pay box,
+                 plus one auto-open on the first visit. Nothing here can touch
+                 the payment, because in this mode the page does not take it.
+
+     Both are safe because the offer is BOOKED, not charged. */
   var UP_ID = {pay.UPSELL_ID!r}, UP_PRICE = {pay.price(u) // pay.OMR},
-      UP_KEY = "apl.upsell." + ref;
-  var upDlg = document.getElementById("upDlg"), upDecided = false;
+      UP_KEY = "apl.upsell." + ref, UP_SEEN = "apl.upsell.seen." + ref;
+  var upDlg  = document.getElementById("upDlg"),
+      upBand = document.getElementById("upBand"),
+      upDecided = false, upOffline = false;
+
+  /* Taken on a previous visit. Read through a helper because three different
+     callers need it and localStorage is allowed to throw in every one. */
+  function upsellTaken(){{
+    try {{ return localStorage.getItem(UP_KEY) === "1"; }} catch(e){{ return false; }}
+  }}
 
   function upsellDue(){{
     if (upDecided || !upDlg || !upDlg.showModal) return false;
     /* Never interrupt a buyer who has already taken it on a previous visit. */
-    try {{ if (localStorage.getItem(UP_KEY) === "1") return false; }} catch(e){{}}
-    return true;
+    return !upsellTaken();
+  }}
+
+  function upsellShow(){{
+    upDecided = false;          /* re-opening it by hand is not a decision */
+    try {{ upDlg.showModal(); }} catch(e){{ return; }}
+    track("view_promotion", {{ promotion_id: UP_ID, ref: ref }});
   }}
 
   function upsellRecord(){{
@@ -122,7 +156,40 @@ def js():
     track(taken ? "add_to_cart" : "upsell_declined",
           {{ item_id: UP_ID, value: UP_PRICE, currency: "OMR", ref: ref }});
     if (taken) {{ upsellRecord(); upsellBanner(); }}
+    if (upOffline) return upsellSettled(taken);
     startPayment();
+  }}
+
+  /* Where a transfer buyer lands after deciding. There is no payment to start,
+     so the page just resolves: taken swaps the band for the booked block and
+     puts it in front of them; declined leaves the band as the way back in. */
+  function upsellSettled(taken){{
+    if (upBand) upBand.hidden = taken;
+    if (!taken) return;
+    var box = document.getElementById("upBooked");
+    if (box && box.scrollIntoView) box.scrollIntoView({{ behavior: "smooth", block: "center" }});
+  }}
+
+  /* Called by render() on the no-gateway branch - see rewire() in
+     tools/apply_upsell.py. Without it the gate has nothing to hang on: the
+     button it binds to is display:none in that mode, and the offer is never
+     made to a single transfer buyer. */
+  function upsellOffline(){{
+    upOffline = true;
+    if (!upBand || !upsellDue()) return;
+    upBand.hidden = false;
+
+    /* The auto-open happens once ever, per seat. The band is permanent, so a
+       buyer who closes it still has a way back and is not asked again on every
+       reload. If localStorage cannot be read we assume it HAS been seen -
+       failing towards the quieter page rather than towards nagging. */
+    var seen = true;
+    try {{ seen = localStorage.getItem(UP_SEEN) === "1"; }} catch(e){{}}
+    if (seen) return;
+    try {{ localStorage.setItem(UP_SEEN, "1"); }} catch(e){{}}
+    /* Let the seat card paint first: a dialog that arrives with the page reads
+       as an ad and gets dismissed before it is read. */
+    setTimeout(function(){{ if (upsellDue()) upsellShow(); }}, 900);
   }}
 
   /* The confirmation the buyer sees on the paid screen, and the thing that
@@ -148,10 +215,18 @@ def js():
     upDlg.addEventListener("cancel", function(e){{ e.preventDefault(); upsellClose(false); }});
   }}
 
+  /* The band's own button ignores upDecided: a buyer who declined and then
+     went looking for the offer again is asking for it, not being interrupted
+     by it. Only actually owning it takes the button away. */
+  if (upBand){{
+    document.getElementById("upBandBtn").addEventListener("click", function(){{
+      if (upDlg && upDlg.showModal && !upsellTaken()) upsellShow();
+    }});
+  }}
+
   document.getElementById("payBtn").addEventListener("click", function(){{
     if (upsellDue()){{
-      upDlg.showModal();
-      track("view_promotion", {{ promotion_id: UP_ID, ref: ref }});
+      upsellShow();
       return;
     }}
     startPayment();
@@ -174,6 +249,44 @@ def booked_box():
     {u['guarantee_months']}-month guarantee.</p>
   <a class="btn btn-wa" id="upBookedWa" href="#" target="_blank" rel="noopener">Confirm it on WhatsApp</a>
 </div>"""
+
+
+def band():
+    """The standing offer, for the route that has no pay button.
+
+    Short on purpose, and carrying NO guarantee wording: a guarantee is a
+    promise and it lives in exactly one place, the dialog. The headline and
+    both figures are the dialog's own values, read from the same tables, so
+    the band cannot drift away from what the buyer reads when they open it."""
+    u = pay.item(pay.UPSELL_ID)
+    w = page_checkout.UPSELL["en"]
+    now, rack = pay.money(pay.price(u)), pay.money(u["rack"])
+    return f"""      <div class="up-band" id="upBand" hidden>
+        <p class="eyebrow">Before you transfer &#183; ninety seconds</p>
+        <h3>{w['h']}</h3>
+        <p>{pay.t(u, 'name')} is the monthly work that puts your name inside Google's answers
+          and ChatGPT's. Booked from this page it is <b>{now} a month</b> instead of {rack}
+          &mdash; and <b>nothing is charged today</b>.</p>
+        <button type="button" class="btn btn-block" id="upBandBtn">Read it &mdash; {now} a month</button>
+      </div>"""
+
+
+# The band's stylesheet. It sits inside .pay, which already styles h3, so these
+# rules have to come after that one - they do, because the whole injected block
+# is written in at the end of <style> where equal specificity resolves by order.
+BAND_CSS = """
+.up-band{
+  background:linear-gradient(168deg,#FCF8F0,#F5EFE1);
+  border:1.5px solid var(--amber-bright);border-radius:12px;
+  padding:20px 18px;margin:18px 0 0;
+}
+.up-band .eyebrow{color:var(--amber);margin:0 0 8px}
+.up-band h3{font-family:var(--display);font-weight:400;font-size:1.12rem;line-height:1.35;
+  color:var(--teal-900);margin:0 0 8px}
+.up-band p{font-size:.92rem;color:var(--muted);margin:0 0 16px}
+.up-band b{color:var(--ink)}
+.up-band .btn{background:var(--teal);color:#fff}
+"""
 
 
 BOOKED_CSS = """
@@ -210,6 +323,38 @@ def fence(name, a, z, payload, html, anchor):
 
 
 def rewire(html):
+    """The two edits this tool makes to hand-written code it does not own.
+
+    Both are surgical line rewrites rather than re-emitted blocks, and both
+    carry their own independent guard: the file in the repo has already had
+    the first one applied, so a shared early return would silently skip the
+    second one for ever."""
+    return rewire_offline(rewire_paybtn(html))
+
+
+# The end of render()'s no-gateway branch. The band reveal goes AFTER it, not
+# before: those lines restyle the pay box for the transfer route, and the band
+# belongs to the box they leave behind.
+OFFLINE_ANCHOR = '      $("altBox").querySelector("p").style.display = "none";\n'
+OFFLINE_ADD = (
+    '      /* Added by tools/apply_upsell.py. This branch hides #payBtn, which is\n'
+    '         what the upsell gate binds to - so the gate is handed its own way in\n'
+    '         rather than being silently disabled for every transfer buyer. */\n'
+    '      upsellOffline();\n')
+
+
+def rewire_offline(html):
+    """Give the gate a trigger on the branch that has no pay button."""
+    if OFFLINE_ADD in html or "upsellOffline();" in html:
+        return html                       # already rewired
+    if html.count(OFFLINE_ANCHOR) != 1:
+        raise SystemExit(f"rewire: the last line of render()'s no-gateway branch appears "
+                         f"{html.count(OFFLINE_ANCHOR)}x, need exactly 1 - pay.html has "
+                         f"changed shape")
+    return html.replace(OFFLINE_ANCHOR, OFFLINE_ANCHOR + OFFLINE_ADD, 1)
+
+
+def rewire_paybtn(html):
     """Turn the existing click handler into startPayment().
 
     The upsell has to run BEFORE the body of that handler, and the handler is
@@ -233,7 +378,7 @@ def rewire(html):
 
 def apply(html):
     html = rewire(html)
-    html = fence("css", CSS_A, CSS_Z, css() + BOOKED_CSS, html, "</style>")
+    html = fence("css", CSS_A, CSS_Z, css() + BOOKED_CSS + BAND_CSS, html, "</style>")
     # BEFORE <footer>, and that is not cosmetic. The page's script is a plain
     # IIFE at the end of <body>, not deferred, so it runs the instant it is
     # parsed. A dialog injected after it does not exist yet when the gate looks
@@ -245,6 +390,12 @@ def apply(html):
     html = fence("booked", "<!-- >>> APL upsell booked >>> -->",
                  "<!-- <<< APL upsell booked <<< -->", booked_box(), html,
                  '    <!-- returning from the payment page -->')
+    # The band lives INSIDE the pay box, above the error line, so that on the
+    # transfer route it reads as part of paying rather than as an ad bolted to
+    # the page. Same parse-order requirement as the dialog: it is bound by id
+    # at script-parse time and must already exist.
+    html = fence("band", BAND_A, BAND_Z, band(), html,
+                 '      <div class="msg err" id="payErr"></div>')
     html = fence("js", JS_A, JS_Z, js(), html, "  /* ─────────── the transfer receipt ─────────── */")
 
     # The one invariant that cannot be left to a comment: the markup must be
@@ -252,10 +403,11 @@ def apply(html):
     # shipped a silently disabled upsell the first time round, and it is
     # invisible from the outside - the page works perfectly, it just never
     # makes the offer. Assert the order rather than trusting the anchors.
-    if html.index(DLG_A) > html.index(JS_A):
-        raise SystemExit(
-            "dialog is injected AFTER the page script that binds to it - the gate "
-            "would find no #upDlg and every buyer would skip the offer silently")
+    for name, marker, node in (("dialog", DLG_A, "#upDlg"), ("band", BAND_A, "#upBand")):
+        if html.index(marker) > html.index(JS_A):
+            raise SystemExit(
+                f"{name} is injected AFTER the page script that binds to it - the gate "
+                f"would find no {node} and every buyer would skip the offer silently")
     return html
 
 

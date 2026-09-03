@@ -181,8 +181,8 @@ const CLAIM = {
 };
 
 async function mount(b, opts = {}) {
-  const { status = "", claim = CLAIM } = opts;
-  const page = await b.newPage();
+  const { status = "", claim = CLAIM, ctx = null } = opts;
+  const page = ctx ? await ctx.newPage() : await b.newPage();
   const seen = [];
   page.on('pageerror', e => seen.push('ERR:' + e.message));
   await page.route('**/claim/**', r => r.fulfill({ json: claim }));
@@ -200,6 +200,10 @@ async function mount(b, opts = {}) {
   await page.waitForSelector('#card:not([hidden])');
   return { page, seen };
 }
+
+// The same seat, on the route the campaign is actually running on: no card
+// gateway, so render() hides #payBtn entirely.
+const TRANSFER = { ...CLAIM, canPayByCard: false };
 
 async function storefrontSuite(b) {
   console.log('\n[storefront] en/pay.html');
@@ -282,6 +286,116 @@ async function storefrontSuite(b) {
 
 }
 
+// ------------------------------------------- storefront, bank transfer ---
+// The route with NO PAY BUTTON. The gate used to hang off #payBtn alone, and
+// render() sets that button to display:none here - so every one of these
+// assertions failed silently by simply never happening. The page looked
+// perfect and the offer was never made. That is what this suite exists for.
+async function transferSuite(b) {
+  console.log('\n[storefront] en/pay.html - bank transfer (no card gateway)');
+
+  // 0. the precondition: there is genuinely no button to click
+  {
+    const ctx = await b.newContext();
+    const { page } = await mount(b, { claim: TRANSFER, ctx });
+    await page.waitForTimeout(300);
+    ok(await page.locator('#payBtn').evaluate(e => getComputedStyle(e).display === 'none'),
+       'pay button really is hidden on this route');
+
+    // 1. the band is there, and it carries both figures
+    ok(!(await page.locator('#upBand').evaluate(e => e.hidden)), 'the offer band is shown');
+    const band = await page.textContent('#upBand');
+    ok(/97/.test(band) && /300/.test(band), 'band shows 97 against the 300 rack rate');
+    ok(/nothing is charged today/i.test(band), 'band says nothing is charged today');
+
+    // 2. and the dialog opens by itself, once
+    await page.waitForTimeout(1200);
+    ok(await page.locator('#upDlg').evaluate(d => d.open), 'interstitial auto-opens on first visit');
+    await ctx.close();
+  }
+
+  // 3. declining leaves the band as the way back in, and does NOT start a payment
+  {
+    const ctx = await b.newContext();
+    const { page, seen } = await mount(b, { claim: TRANSFER, ctx });
+    await page.waitForTimeout(1300);
+    await page.click('#upNo');
+    await page.waitForTimeout(400);
+    ok(!(await page.locator('#upDlg').evaluate(d => d.open)), 'decline closes it');
+    ok(!seen.includes('SESSION'), 'decline does NOT try to open a card page');
+    ok(!(await page.locator('#upBand').evaluate(e => e.hidden)), 'band survives a decline');
+
+    // the band re-opens it on demand, even after a decline
+    await page.click('#upBandBtn');
+    await page.waitForTimeout(300);
+    ok(await page.locator('#upDlg').evaluate(d => d.open), 'the band re-opens it on demand');
+    await ctx.close();
+  }
+
+  // 4. accepting books it: recorded, confirmed on screen, still no payment attempt
+  {
+    const ctx = await b.newContext();
+    const { page, seen } = await mount(b, { claim: TRANSFER, ctx });
+    await page.waitForTimeout(1300);
+    await page.click('#upYes');
+    await page.waitForTimeout(600);
+    ok(seen.includes('UPSELL-POST'), 'accept posts the booking');
+    ok(!seen.includes('SESSION'), 'accept does NOT try to open a card page');
+    ok(!(await page.locator('#upBooked').evaluate(e => e.hidden)), 'the booked block is shown');
+    ok(await page.locator('#upBand').evaluate(e => e.hidden), 'the band stands down once taken');
+    const msg = decodeURIComponent(await page.getAttribute('#upBookedWa', 'href') || '');
+    ok(/APL-TEST-01/.test(msg) && /97/.test(msg), 'WhatsApp record carries ref + price');
+    const stored = await page.evaluate(() => { try { return localStorage.getItem('apl.upsell.APL-TEST-01'); } catch(e){ return 'THREW'; } });
+    ok(stored === '1', 'the booking is remembered');
+    ok(!seen.some(s => s.startsWith('ERR:')), 'no page errors' + seen.filter(s => s.startsWith('ERR:')).join(' | '));
+    await ctx.close();
+  }
+
+  // 5. it does not nag: a second visit shows the band but never auto-opens again
+  {
+    const ctx = await b.newContext();
+    const first = await mount(b, { claim: TRANSFER, ctx });
+    await first.page.waitForTimeout(1300);
+    await first.page.click('#upNo');
+    await first.page.waitForTimeout(300);
+    await first.page.close();
+
+    const { page } = await mount(b, { claim: TRANSFER, ctx });
+    await page.waitForTimeout(1500);
+    ok(!(await page.locator('#upDlg').evaluate(d => d.open)), 'does NOT auto-open on the next visit');
+    ok(!(await page.locator('#upBand').evaluate(e => e.hidden)), 'but the band is still offered');
+    await ctx.close();
+  }
+
+  // 6. a buyer who already took it is not asked again, and sees the confirmation
+  {
+    const ctx = await b.newContext();
+    await ctx.addInitScript(() => { try { localStorage.setItem('apl.upsell.APL-TEST-01', '1'); } catch(e){} });
+    const { page } = await mount(b, { claim: TRANSFER, ctx });
+    await page.waitForTimeout(1500);
+    ok(!(await page.locator('#upDlg').evaluate(d => d.open)), 'never re-asks a buyer who took it');
+    ok(await page.locator('#upBand').evaluate(e => e.hidden), 'and is not shown the band');
+    ok(!(await page.locator('#upBooked').evaluate(e => e.hidden)), 'is shown the booked block instead');
+    await ctx.close();
+  }
+
+  // 7. the receipt upload - the thing this page exists for - still works
+  {
+    const ctx = await b.newContext();
+    const { page } = await mount(b, { claim: TRANSFER, ctx });
+    await page.route('**/receipt', r => r.fulfill({ json: { ok: true } }));
+    await page.waitForTimeout(1300);
+    await page.keyboard.press('Escape');
+    await page.waitForTimeout(300);
+    await page.setInputFiles('#file', { name: 'transfer.png', mimeType: 'image/png',
+                                        buffer: Buffer.from('89504e470d0a1a0a', 'hex') });
+    await page.waitForTimeout(600);
+    ok(await page.locator('#upOk').evaluate(e => e.classList.contains('on')),
+       'the receipt still uploads with the offer on the page');
+    await ctx.close();
+  }
+}
+
 // ---------------------------------------------------------------- runner ---
 (async () => {
   const srv = await serve();
@@ -289,6 +403,7 @@ async function storefrontSuite(b) {
   try {
     await checkoutSuite(b);
     await storefrontSuite(b);
+    await transferSuite(b);
   } finally {
     await b.close();
     srv.close();
