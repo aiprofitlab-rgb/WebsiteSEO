@@ -42,8 +42,18 @@ Other baskets: `npm run smoke -- full stack`, `npm run smoke -- three base`.
    failure leaves an order behind instead of a silence.
 4. **Creates the Thawani session** with the customer metadata below, and returns
    the redirect.
-5. On `GET /session/:id`, asks Thawani, updates the ledger, emails Nahid the
-   first time a session reads back `paid`, and returns four public fields.
+5. On `GET /session/:id`, asks Thawani, updates the ledger, and — the first time
+   a session reads back `paid` — **emails the buyer their receipt** and emails
+   Nahid the alert. Returns four public fields.
+
+The buyer's receipt is not an invoice and carries no number: the LGI- series is
+issued by hand from `tools/invoice.py`, and a document that numbered itself here
+would collide with it. It says what was paid, what is still owed, that monthly
+services are not charged today, and that the formal invoice follows. Building it
+prefers the ledger row, because the Thawani metadata carries **build items
+only** — a receipt built from metadata alone silently omits the Growth Desk or
+Visibility Desk the buyer just signed up for, so with no sheet it says nothing
+about monthly rather than guessing.
 
 Only `paid` is money. The return redirect is not proof of anything — a buyer can
 type the success URL.
@@ -133,6 +143,14 @@ unreachable never fails a checkout.
 
 ## Deploy
 
+**The Hostinger VPS, port 8093, behind Traefik** — the full runbook is
+[`deploy/DEPLOY.md`](deploy/DEPLOY.md), and `storefront-offer-api` is the
+worked example of the same pattern on the same box.
+
+Nothing in this tree is VPS-specific: the port comes from `PORT` and every path
+from an env var, so it still deploys to Cloud Run unchanged if that is ever
+wanted —
+
 ```bash
 gcloud run deploy checkout-api --source . --region me-central1 \
   --project aiprofitlab-offer --allow-unauthenticated
@@ -141,7 +159,12 @@ gcloud run deploy checkout-api --source . --region me-central1 \
 `--source` because there is no local Docker on this Mac. Quote the whole value
 on `--set-env-vars` — zsh eats the commas. Health check is **`/health`**, not
 `/healthz`: Cloud Run's frontend intercepts that path and answers it with its
-own 404 before the request reaches the container.
+own 404 before the request reaches the container. (The name is kept on the VPS
+too, where it is deliberately not routed publicly.)
+
+`/health` reports **`accepting_cards`**. That is the one field to read after any
+deploy: false means the checkout is handing every buyer to WhatsApp, whatever
+the keys say. `PAY_ENABLED=0` is the kill switch that produces it.
 
 Environment: see `.env.example`. `THAWANI_SECRET_KEY` is server-only and must
 never reach a browser; `THAWANI_PUBLISHABLE_KEY` appears in the redirect URL and

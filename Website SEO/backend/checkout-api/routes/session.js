@@ -76,6 +76,84 @@ function recall(reference) {
 const announced = new Set();
 
 /**
+ * What the buyer is told happens next, per payment plan.
+ *
+ * Written per plan rather than as one generic line because the three plans owe
+ * the buyer genuinely different things, and "we'll be in touch" after someone
+ * has just paid OMR 2,200 is not an answer. Keyed by plan id; an unknown plan
+ * falls back to the honest generic, which is better than throwing inside a
+ * receipt for money we have already taken.
+ */
+const NEXT_STEP = {
+  deposit:
+    "Your build slot is held and this comes straight off your price. I'll confirm your brief with you, " +
+    "and the balance is invoiced once that brief is agreed — never before.",
+  full:
+    "Nothing further is owed. I'll be in touch to confirm your brief, and the build starts from there. " +
+    "Your three Pay-in-full extras — the Arabic content pass, the Google Business Profile fix and a staff " +
+    "training session — are included at no charge.",
+  three:
+    "That's the first of three payments. The second falls due at go-live and the third thirty days after " +
+    "that. Both are invoiced when they arrive — nothing is taken from your card automatically.",
+};
+
+/**
+ * Rebuild what the buyer's receipt needs to say.
+ *
+ * Prefers the ledger row, because it is the only place the MONTHLY commitment
+ * survives: the Thawani metadata carries build items only (`q.items` is the
+ * build list), so a receipt built from metadata alone would silently omit the
+ * Growth Desk or the Visibility Desk the buyer just signed up for. With no
+ * sheet configured, falls back to recomputing from the metadata — which is
+ * complete for everything except that one field, and says nothing rather than
+ * guessing about it.
+ *
+ * Never throws. This runs inside a paid branch; money has already moved, and a
+ * receipt that fails to build must not take the owner alert down with it.
+ */
+async function buyerReceipt(reference, meta, amountDisplay) {
+  const planId = meta.plan || "";
+  const p = pricing.plan(planId);
+
+  let itemNames = [];
+  let monthly = [];
+  let balanceDisplay = "";
+
+  const row = await ledger.findByRef(reference);
+  if (row) {
+    itemNames = (row.get("Items") || "").split(" | ").filter(Boolean);
+    monthly = (row.get("Monthly") || "").split(" | ").filter(Boolean);
+    const due = Number(row.get("Due baisa"));
+    const total = Number(row.get("Total baisa"));
+    if (Number.isFinite(due) && Number.isFinite(total) && total > due) {
+      balanceDisplay = pricing.money(total - due);
+    }
+  } else {
+    // Metadata-only path. `items` is build items by id; monthly is unrecoverable
+    // from here, so it stays empty rather than being invented.
+    const ids = String(meta.items || "").split(",").map((s) => s.trim()).filter(Boolean);
+    itemNames = ids.map((id) => (pricing.item(id) || {}).name).filter(Boolean);
+    try {
+      const q = pricing.quote(ids, planId);
+      if (q.balance > 0) balanceDisplay = pricing.money(q.balance);
+    } catch {
+      // An unknown plan or item id. The figures above are already right; the
+      // balance line is simply left off.
+    }
+  }
+
+  return {
+    reference,
+    amountDisplay,
+    planLabel: p ? p.label : "",
+    itemNames,
+    monthly,
+    balanceDisplay,
+    nextStep: NEXT_STEP[planId] || "I'll be in touch to confirm your brief and what happens from here.",
+  };
+}
+
+/**
  * A message written for the BUYER. It is rendered on the checkout under the
  * offline handover, so it says what happened to them, never what broke.
  */
@@ -114,6 +192,13 @@ router.post("/", async (req, res) => {
   if (unknown.length) {
     console.error("SESSION: unknown items", unknown);
     return res.status(400).json({ message: BUYER.invalid });
+  }
+
+  // The kill switch, checked before anything is written or priced. Nothing the
+  // buyer did caused this, so they get the offline handover and the truth.
+  if (!cfg.enabled) {
+    console.error("SESSION: refused — payments are switched off (PAY_ENABLED / missing keys)");
+    return res.status(503).json({ message: BUYER.gateway });
   }
 
   const p = pricing.plan(str(body.plan, 40));
@@ -300,6 +385,19 @@ router.get("/:id", async (req, res) => {
       // transaction — this is exactly what the metadata was attached for, and
       // it means the alert is complete even if the ledger is not configured.
       const m = s.metadata || {};
+
+      // The buyer's own receipt. Fired before the owner alert because this is
+      // the one somebody is actually waiting for, and wrapped end to end: a
+      // receipt that cannot be built must never stop Nahid being told that
+      // money landed.
+      if (m.customer_email) {
+        buyerReceipt(reference || m.order_id || sessionId, m, amount === null ? "" : pricing.money(amount))
+          .then((r) => mail.orderConfirmed({ ...r, customer: { email: m.customer_email } }))
+          .catch((err) => console.error("BUYER RECEIPT FAILED:", reference, err && err.message));
+      } else {
+        console.error("BUYER RECEIPT SKIPPED: no customer_email in metadata", reference);
+      }
+
       mail
         .paymentLanded({
           reference: reference || m.order_id || sessionId,
@@ -337,3 +435,8 @@ router.get("/:id", async (req, res) => {
 });
 
 module.exports = router;
+// Exported for the tests. The receipt is assembled from two different sources
+// depending on whether a sheet is configured, and the metadata-only path is the
+// one that silently loses the monthly commitment — worth pinning down.
+module.exports.buyerReceipt = buyerReceipt;
+module.exports.NEXT_STEP = NEXT_STEP;

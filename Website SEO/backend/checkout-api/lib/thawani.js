@@ -8,8 +8,21 @@
  *
  * This is Thawani's "1st Scenario (only payment without tokenization)" from the
  * mini document: create session -> redirect -> retrieve session. No customer
- * object, no saved cards, no payment intents. We are not storing cards, and the
- * E-commerce + Payment-link application does not cover card-on-file anyway.
+ * object, no saved cards, no payment intents — for an order with nothing
+ * monthly in it.
+ *
+ * CORRECTED 2026-09-03. An earlier version of this comment said card-on-file
+ * was outside our merchant application. That has not been true since the
+ * application was revised on 2026-08-25: the monthly subscription is now
+ * declared in BOTH the E-commerce KYC and the Merchant Application Form, which
+ * clause 5.1 requires (Thawani only permits recurring charges it has
+ * specifically allowed) and 23.3(l)(ii) names the Application Form for
+ * specifically. Thawani's own written answer, 2026-08-24: saved-card recurring
+ * works after ONE OTP at save time, and later charges need no customer present.
+ *
+ * So the card-on-file path below is contractually covered and is meant to be
+ * used. What is still unproven is our code against the LIVE gateway — see the
+ * comment above createPaymentIntent.
  *
  * Shapes verified against Thawani's Create Session documentation and a working
  * production integration. See docs/payments-api.md §3.
@@ -62,11 +75,23 @@ function env(name, fallback) {
 
 function config() {
   const base = env("THAWANI_BASE", "https://uatcheckout.thawani.om").replace(/\/+$/, "");
+  const secret = env("THAWANI_SECRET_KEY", "");
+  const publishable = env("THAWANI_PUBLISHABLE_KEY", "");
   return {
     base,
-    secret: env("THAWANI_SECRET_KEY", ""),
-    publishable: env("THAWANI_PUBLISHABLE_KEY", ""),
+    secret,
+    publishable,
     live: base.includes("//checkout.thawani.om"),
+    // The kill switch, mirroring storefront-offer-api's. Card payment is
+    // attempted only when this service can actually take one: both keys
+    // present, and PAY_ENABLED not explicitly off.
+    //
+    // It exists so that switching payments off in a hurry is one env var and a
+    // restart, rather than deleting a Traefik route or rebuilding the whole
+    // site. A refused session is not a dead end — the checkout page turns any
+    // non-200 into its offline handover and tells the buyer, truthfully, that
+    // nothing was charged.
+    enabled: Boolean(secret && publishable) && env("PAY_ENABLED", "1") !== "0",
   };
 }
 

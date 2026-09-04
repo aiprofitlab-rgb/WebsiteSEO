@@ -85,6 +85,8 @@ node scripts/set-admin-password.js     # prints the line for .env
 | `lib/rules.js` | Matching, post targeting, Arabic normalisation, and the validator |
 | `lib/rulesStore.js` | The writable rules file: validate, back up, write, hot-reload |
 | `lib/auth.js` | The panel's password, session cookie and lockout |
+| `lib/oauth.js` | Instagram Business Login — the consent screen App Review asks to see |
+| `lib/oauthPage.js` | The "Connected as @… ✓" page, sized to be filmed |
 | `lib/files.js` | Uploads, and the public URL a DM links to |
 | `lib/ig.js` | Graph client |
 | `lib/tokens.js` | The token file and its 60-day refresh |
@@ -101,6 +103,29 @@ node scripts/set-admin-password.js     # prints the line for .env
 
 Requires **Node 22.5+** — state uses the built-in `node:sqlite`, deliberately
 instead of `better-sqlite3`, so the VPS never needs a C++ toolchain.
+
+## The login flow
+
+`/ig/oauth/start` → Instagram's consent screen → `/ig/oauth/callback` → a page
+saying **Connected as @you ✓** with the three granted permissions listed.
+
+Nothing in the running service needs it. The token comes from the dashboard and
+is kept alive by `ig-token-refresh.timer`, which beats an interactive login for a
+one-account automation. It exists for App Review, which rejects a screencast that
+does not show the consent screen, and which asks whether the app can be loaded
+and tested externally — this is one URL that answers both.
+
+**It stores nothing.** The callback is public and a reviewer will complete it
+with *their* Instagram account. If that wrote `token.json`, the automation would
+start answering comments as them, mid-review. So the flow exchanges the code,
+upgrades it to the 60-day token, asks Meta whose account it is, renders the
+answer, and throws the token away. `lib/oauth.js` opens with the long version.
+
+Set `IG_APP_ID` (and `IG_APP_SECRET` if the dashboard shows one distinct from
+`META_APP_SECRET`); blank means the routes are not mounted. Register
+`https://hooks.aiprofitlab.io/ig/oauth/callback` under **OAuth redirect URIs** —
+byte for byte, or the last step of the flow 400s. `/health` reports back the URI
+actually in use.
 
 ## Local development
 
@@ -192,11 +217,13 @@ own, so a throttled post recovers an hour later without a restart.
 
 ### Before Advanced Access — everything except the live trigger
 
-1. `npm test` — 139 tests: signature (valid, tampered, wrong secret, missing,
+1. `npm test` — 158 tests: signature (valid, tampered, wrong secret, missing,
    unconfigured), rules matching and post targeting, the self-comment guard,
    dedupe across a restart, token rotation, the ledger's ID-precision guard,
-   and the panel end to end (sign-in, the loop the save gate refuses, an upload
-   that reaches a DM, a stale tab that loses the race).
+   the panel end to end (sign-in, the loop the save gate refuses, an upload
+   that reaches a DM, a stale tab that loses the race), and the login flow
+   (scopes, the long-lived upgrade, a cancelled consent, and the assertion that
+   completing it writes no token file).
 2. `node scripts/replay.js "storefront"` against a running instance. Expect a
    **200 in well under two seconds** and the DM, reply and ledger lines in the
    log. Replay the same payload three times and confirm exactly one DM.

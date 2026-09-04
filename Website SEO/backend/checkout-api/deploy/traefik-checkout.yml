@@ -1,0 +1,45 @@
+# Deployed to: /docker/n8n/traefik-dynamic/checkout.yml
+#
+# Routes checkout.aiprofitlab.io to the v4 checkout API, which runs on the HOST
+# under systemd, not in a container — so Traefik cannot discover it through the
+# docker provider the way n8n is discovered. 172.16.1.1 is the n8n_default
+# bridge gateway: how a container reaches a port on the host.
+#
+# This box has no Caddy. Caddy is installed but `disabled` and `failed`, and
+# /etc/caddy is empty — Traefik (from the n8n compose stack in /docker/n8n)
+# owns :80 and :443.
+#
+# Traefik runs with --providers.file.watch=true, so saving this file is the
+# whole deployment: nothing restarts, and n8n, ig-automation, aiden and the
+# storefront API are untouched. A malformed file is logged and ignored rather
+# than breaking live routes. The certificate is issued on first request via the
+# TLS-ALPN challenge, which is why the DNS A record has to exist first.
+#
+# Two prefixes, and no more:
+#   /session   create a payment session, and read what happened to one.
+#              Called by /en/checkout/ and /checkout-ar/.
+#   /billing   the monthly subscription runner. CRON_KEY-locked in the app and
+#              never called by a browser — it is here only so a scheduler
+#              outside the box can reach it. If billing is driven by a local
+#              systemd timer instead, DELETE THIS PREFIX: an endpoint that
+#              moves money should not be on the public internet without a
+#              reason.
+#
+# /health stays off the public internet. Read it over SSH with:
+#   curl -s localhost:8093/health
+http:
+  routers:
+    checkout-api:
+      rule: "Host(`checkout.aiprofitlab.io`) && (PathPrefix(`/session`) || PathPrefix(`/billing`))"
+      entryPoints:
+        - websecure
+      service: checkout-api
+      tls:
+        certResolver: mytlschallenge
+
+  services:
+    checkout-api:
+      loadBalancer:
+        servers:
+          # 8090 ig-automation · 8091 aiden-backend · 8092 storefront-offer-api
+          - url: "http://172.16.1.1:8093"

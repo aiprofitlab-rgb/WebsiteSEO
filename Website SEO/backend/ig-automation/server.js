@@ -22,6 +22,7 @@ const igClient = require("./lib/ig");
 const store = require("./lib/store");
 const files = require("./lib/files");
 const auth = require("./lib/auth");
+const oauth = require("./lib/oauth");
 const alert = require("./lib/mail");
 const handler = require("./lib/handler");
 const webhook = require("./webhook");
@@ -138,6 +139,12 @@ app.get("/health", (req, res) => {
       file: rulesStore.file(),
     },
     admin: { configured: auth.configured(), files: files.list().length },
+    // The redirect URI is here because it must match the dashboard byte for
+    // byte, and reading it back off the running service is the only way to be
+    // sure IG_PUBLIC_BASE did not quietly make it something else.
+    oauth: oauth.configured()
+      ? { configured: true, redirectUri: oauth.redirectUri(), scopes: oauth.SCOPES }
+      : { configured: false },
     // The loop guards, visible without reading the source. `selfLoop: "config"`
     // means we are recognising our own replies by their text, which works even
     // when the id checks do not.
@@ -146,6 +153,15 @@ app.get("/health", (req, res) => {
     store: db.stats(),
   });
 });
+
+/**
+ * The OAuth routes live under /ig but must not share the webhook's allowance.
+ * 600/min is sized for Meta batching comment events at us; a login endpoint that
+ * makes three upstream calls per request is a different shape of thing, and one
+ * person signing in needs two. Registered before the webhook router so it runs
+ * first, and scoped to the path so it cannot throttle a real event.
+ */
+app.use("/ig/oauth", rateLimit({ windowMs: 60_000, max: 30, bucket: "oauth" }));
 
 app.use("/ig", rateLimit({ windowMs: 60_000, max: 600, bucket: "webhook" }), webhook.create(deps));
 
@@ -237,6 +253,12 @@ if (require.main === module) {
 
     console.log(`rules: ${rulesStore.file()}`);
     console.log(`uploads: ${files.dir()} (public base ${files.publicBase()})`);
+
+    // Printed rather than left to be looked up: this exact string has to be in
+    // the dashboard's OAuth redirect list, and a mismatch is a 400 at the last
+    // step of the flow with nothing in our own logs to explain it.
+    if (oauth.configured()) console.log(`oauth: redirect_uri ${oauth.redirectUri()}`);
+    else console.warn("!! Instagram Business Login DISABLED — set IG_APP_ID (and IG_APP_SECRET) to enable /ig/oauth/start");
 
     tokens.seed();
     const left = tokens.daysLeft();

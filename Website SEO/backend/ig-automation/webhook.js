@@ -18,6 +18,8 @@
 
 const express = require("express");
 const signature = require("./lib/signature");
+const oauth = require("./lib/oauth");
+const oauthPage = require("./lib/oauthPage");
 
 function create(deps) {
   const router = express.Router();
@@ -131,6 +133,77 @@ function create(deps) {
       confirmation_code: confirmationCode,
     });
   });
+
+  /**
+   * Instagram Business Login.
+   *
+   * `/ig/oauth/start` is the single URL that goes in the App Review submission
+   * under "can your app be loaded and tested externally" — a reviewer opens it,
+   * sees the consent screen, and lands on a page naming their own account. It is
+   * also the first shot of the screencast, which is why it is a redirect rather
+   * than a form: one click, no typing, nothing on screen to redact.
+   *
+   * Both routes are read-only. See the header of lib/oauth.js for why storing
+   * the token here would be a bug rather than a feature.
+   *
+   * Not mounted without an app id and secret, the same way the admin panel is
+   * not mounted without a password: a half-configured OAuth endpoint answers
+   * every reviewer with a 500, and a 404 is the more honest "not set up".
+   */
+  if (oauth.configured()) {
+    router.get("/oauth/start", (req, res) => {
+      // No cookie. The state is a signed, timestamped nonce, so it verifies on
+      // the way back with nothing kept in between — which also means the flow
+      // survives the reviewer finishing it in a different browser tab, window
+      // or app than the one they started in. On a phone, Instagram's in-app
+      // browser makes that the normal case rather than the edge one.
+      res.redirect(302, oauth.authorizeUrl());
+    });
+
+    router.get("/oauth/callback", async (req, res) => {
+      const { code, state, error, error_description: description, error_reason: reason } = req.query;
+
+      // Tapping Cancel on the consent screen. Not a fault, and not a 500.
+      if (error) {
+        console.log(JSON.stringify({ event: "oauth_declined", error, reason: reason || null }));
+        return res
+          .status(400)
+          .type("html")
+          .send(oauthPage.failure({ title: "Sign-in cancelled", detail: description || String(error) }));
+      }
+
+      if (!code) {
+        return res.status(400).type("html").send(oauthPage.failure({ title: "Missing authorization code" }));
+      }
+
+      // Warn, do not refuse. A callback opened by hand, or replayed from an
+      // address bar an hour later, has no valid state and still has nothing to
+      // abuse — the request stores nothing either way. Refusing here would turn
+      // a reviewer's harmless retry into a failed test.
+      if (!oauth.checkState(state)) console.warn("OAUTH STATE MISSING OR STALE from", req.ip);
+
+      try {
+        const result = await oauth.connect(code);
+        console.log(
+          JSON.stringify({
+            event: "oauth_connected",
+            username: result.account.username || null,
+            user_id: result.account.id || null,
+            permissions: result.permissions,
+            configured_account: result.isConfiguredAccount,
+            at: new Date().toISOString(),
+          })
+        );
+        return res.type("html").send(oauthPage.success(result));
+      } catch (err) {
+        console.error("OAUTH FAILED:", err && err.step, err && err.message);
+        return res
+          .status(502)
+          .type("html")
+          .send(oauthPage.failure({ title: "Could not complete sign-in", detail: err && err.message }));
+      }
+    });
+  }
 
   return router;
 }

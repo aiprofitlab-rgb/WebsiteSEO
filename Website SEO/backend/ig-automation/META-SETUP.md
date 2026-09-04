@@ -67,13 +67,46 @@ Everything except the live trigger can be tested before then — see
       ```bash
       sudo journalctl -u ig-automation | grep -E '"deauthorize"|data_deletion_request'
       ```
-- [ ] **Screencast of the full flow.** Reviewers reject submissions that skip the
-      consent screen, so record, in one take:
-      1. the Instagram OAuth consent screen, with the permissions visible
-      2. a comment being posted with the keyword
-      3. the DM arriving
+- [ ] **The consent screen.** Set `IG_APP_ID` (Instagram → API setup with
+      Instagram business login → *Instagram app ID*, not the Facebook one), and
+      add this to **OAuth redirect URIs** on the same page:
+
+      ```
+      https://hooks.aiprofitlab.io/ig/oauth/callback
+      ```
+
+      It must match byte for byte. Confirm what the service actually computed:
+
+      ```bash
+      # /health is NOT one of the three prefixes Traefik publishes (/ig, /admin,
+      # /f/), so it is only reachable on the box.
+      ssh root@VPS 'curl -s localhost:8090/health' | grep -o '"oauth":{[^}]*}'
+      ```
+
+      Then `https://hooks.aiprofitlab.io/ig/oauth/start` is the whole flow in one
+      URL — consent screen, then a page naming the account that just connected.
+      That URL is the answer to **"confirm that your app can be loaded and tested
+      externally"**, and it is shot 1 of the screencast.
+
+      It stores nothing. A reviewer completing it with their own account cannot
+      replace the live token — see the header of `lib/oauth.js`, and the test
+      named "completing the flow writes NO token file".
+- [ ] **Screencast of the full flow.** Uploaded, not live — App Review has no
+      live-demo option. MP4 or MOV, English audio or captions, one continuous
+      take, 3–5 minutes. Reviewers reject submissions that skip the consent
+      screen, so record:
+      1. `https://hooks.aiprofitlab.io/ig/oauth/start` → the Instagram consent
+         screen with the three permissions visible → "Connected as @… ✓"
+      2. the rules in `/admin/`, and the post picker listing real posts
+      3. a comment being posted with the keyword, from a second account
       4. the public reply appearing
-      5. the lead landing in the sheet
+      5. the DM arriving
+      6. the lead landing in the sheet
+
+      Upload the same file to all three permission fields and give each one the
+      timestamp where that permission is exercised: `instagram_business_basic` at
+      the post picker, `instagram_business_manage_comments` at the comment and
+      public reply, `instagram_business_manage_messages` at the DM.
 
 ### 6. Request Advanced Access
 - [ ] `instagram_business_basic`

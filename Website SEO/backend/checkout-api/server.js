@@ -64,7 +64,14 @@ app.get("/health", (req, res) => {
   res.json({
     ok: true,
     service: "checkout-api",
-    thawani: { base: cfg.base, env: cfg.live ? "live" : "uat", keys: Boolean(cfg.secret && cfg.publishable) },
+    thawani: {
+      base: cfg.base,
+      env: cfg.live ? "live" : "uat",
+      keys: Boolean(cfg.secret && cfg.publishable),
+      // The single field to check after a deploy: false here means the checkout
+      // is handing every buyer to WhatsApp, whatever the keys say.
+      accepting_cards: cfg.enabled,
+    },
     ledger: ledger.enabled() ? "sheet" : "logs",
     billing: process.env.CRON_KEY ? "armed" : "disabled (no CRON_KEY)",
     catalog: { items: pricing.CATALOG.items.length },

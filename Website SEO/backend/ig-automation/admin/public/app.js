@@ -74,6 +74,8 @@ const json = (body) => ({ headers: { "content-type": "application/json" }, body:
 
 async function boot() {
   const session = await fetch("/admin/api/session", { credentials: "same-origin" }).then((r) => r.json());
+  // The markup carries the handle too, so an unresolved account still reads right.
+  if (session.username) $("#login-handle").textContent = `@${session.username}`;
   if (!session.authed) return showLogin();
   await loadEverything();
   showApp();

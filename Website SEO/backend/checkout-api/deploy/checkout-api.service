@@ -1,0 +1,71 @@
+# /etc/systemd/system/checkout-api.service
+#
+#   sudo systemctl daemon-reload
+#   sudo systemctl enable --now checkout-api
+#   sudo journalctl -u checkout-api -f
+#
+# Twin of storefront-offer-api.service. Every deviation from that file is
+# deliberate and commented; anything not commented is intentionally identical,
+# because two services on one box that differ for no reason are two services
+# nobody can reason about.
+
+[Unit]
+Description=v4 checkout API — Thawani payment sessions (AI Profit Lab)
+Documentation=https://github.com/aiprofitlab-rgb/WebsiteSEO/blob/main/Website%%20SEO/docs/payments-api.md
+After=network-online.target
+Wants=network-online.target
+
+# Do not give up on a service that has been flapping. An unreachable Google
+# Sheets must not leave the checkout permanently down — the ledger is optional
+# by design and the service answers without it.
+#
+# This belongs in [Unit]: systemd parses it here and IGNORES it under [Service]
+# with a warning that is easy to miss. The ig-automation unit has it in the
+# wrong section; do not copy that one.
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+User=checkoutbot
+Group=checkoutbot
+WorkingDirectory=/opt/checkout-api
+
+# Secrets live here, chmod 600, owned by root and read by systemd before it
+# drops to checkoutbot. THIS FILE HOLDS THE LIVE THAWANI SECRET KEY.
+EnvironmentFile=/etc/checkout-api/.env
+
+ExecStart=/usr/bin/node server.js
+
+Restart=always
+RestartSec=5
+
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=checkout-api
+
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+
+# NO ReadWritePaths. Unlike the storefront, this service writes no files at all
+# — orders go to a Google Sheet or to the journal, and there are no uploaded
+# receipts. ProtectSystem=strict with nothing carved out is the correct, and
+# tighter, setting. If a future feature needs to write, add the path here
+# rather than loosening ProtectSystem.
+
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX
+RestrictNamespaces=true
+LockPersonality=true
+# MemoryDenyWriteExecute is deliberately ABSENT. V8 maps its JIT output as
+# executable, so the directive kills node the moment the baseline compiler
+# first fires — a SIGTRAP core dump minutes after a clean start, not at boot,
+# which makes it look like a runtime bug rather than a unit-file one. This cost
+# real time on ig-automation; do not "tidy it up" by adding it here.
+RestrictSUIDSGID=true
+
+[Install]
+WantedBy=multi-user.target

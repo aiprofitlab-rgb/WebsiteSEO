@@ -58,8 +58,18 @@ function create(deps) {
     res.json({ ok: true });
   });
 
+  /**
+   * Pre-auth, so it carries only what the login card needs to name itself:
+   * the handle the service actually resolved at boot. Public already —
+   * /health reports it, and an Instagram username is not a secret — but it
+   * keeps the sign-in page from claiming an account we do not drive.
+   */
   router.get("/api/session", (req, res) => {
-    res.json({ authed: Boolean(auth.readToken(auth.fromRequest(req))), configured: auth.configured() });
+    res.json({
+      authed: Boolean(auth.readToken(auth.fromRequest(req))),
+      configured: auth.configured(),
+      username: deps.selfUsername || null,
+    });
   });
 
   // Everything past this point needs a session.

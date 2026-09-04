@@ -41,7 +41,7 @@ app.use((req, res, next) => {
 
 app.get("/:version/me", (req, res) => {
   log("whoami");
-  res.json({ id: process.env.IG_USER_ID || "17841400000000000", username: "aiprofitlab" });
+  res.json({ id: process.env.IG_USER_ID || "17841400000000000", username: "nahid_aby" });
 });
 
 app.post("/:version/:id/messages", (req, res) => {

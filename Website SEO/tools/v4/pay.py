@@ -59,9 +59,16 @@ CURRENCY = "OMR"
 # `price` is the published figure, in baisa - one column, no comparison. `kind`
 # separates a one-time build item from a monthly service, because a monthly
 # service is NOT charged at checkout: Thawani's e-commerce checkout takes a
-# single payment, and recurring billing needs card-on-file, which the
-# E-commerce + Payment-link application does not cover. The Growth Desk is
-# therefore recorded on the order and invoiced monthly from go-live.
+# single payment. A monthly row is recorded on the order and invoiced from
+# go-live.
+#
+# CORRECTED 2026-09-03: this used to say card-on-file was outside our merchant
+# application. It has not been since the 2026-08-25 revision, which declares
+# the monthly subscription in both the E-commerce KYC and the Merchant
+# Application Form. Thawani confirmed in writing (2026-08-24) that saved-card
+# recurring works after one OTP at save time. The checkout still takes a single
+# payment - that part is unchanged, and is a property of the checkout product,
+# not of what we are licensed for.
 # ---------------------------------------------------------------------------
 BASE_ID = "website"
 
