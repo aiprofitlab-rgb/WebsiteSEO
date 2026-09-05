@@ -5,6 +5,12 @@
  * a public "check your DMs" reply appears under their comment, and the lead is
  * appended to a Google Sheet. The ManyChat behaviour, self-hosted.
  *
+ * Anything the keywords do NOT want — a comment matching nothing, a DM that is
+ * not the email address the capture flow asked for — falls through to the AI
+ * fallback, which answers comments in public and DMs in private. Keywords always
+ * win; the fallback is strictly the second half. It turns itself off completely
+ * without an OPENAI_API_KEY, and ai.json is where its persona and caps live.
+ *
  * Shape follows backend/checkout-api/server.js — same rate limiter, same /health
  * that reports live config, same 404 and unhandled-error handlers. CORS is
  * deliberately absent: no browser ever calls this, only Meta.
@@ -18,6 +24,8 @@ const ledger = require("./lib/ledger");
 const tokens = require("./lib/tokens");
 const rulesLib = require("./lib/rules");
 const rulesStore = require("./lib/rulesStore");
+const aiConfig = require("./lib/aiConfig");
+const aiClient = require("./lib/ai");
 const igClient = require("./lib/ig");
 const store = require("./lib/store");
 const files = require("./lib/files");
@@ -68,6 +76,7 @@ const db = store.open();
 // After that the panel owns it, and a deploy must never roll a live campaign
 // back to whatever is in git. See lib/rulesStore.js.
 rulesStore.seed();
+aiConfig.seed();
 
 /**
  * The loop breaker's ceiling. Not a rate limit on followers — a bound on us.
@@ -97,8 +106,16 @@ const ig = igClient.create({
   igUserId: process.env.IG_USER_ID || "",
 });
 
+/**
+ * The fallback brain. Constructed unconditionally — it reports itself as not
+ * configured when there is no key, and handler.js checks that before every use.
+ * Building it anyway keeps the wiring in one shape instead of two.
+ */
+const ai = aiClient.create({ apiKey: () => process.env.OPENAI_API_KEY });
+
 const deps = {
   ig,
+  ai,
   store: db,
   ledger,
   files,
@@ -114,6 +131,14 @@ const deps = {
    */
   get rules() {
     return rulesStore.current();
+  },
+  /**
+   * Read through on every event, for the same reason `rules` is: editing
+   * /var/lib/ig-automation/ai.json over SSH should change the next reply, not
+   * wait for a restart. aiConfig re-stats before it re-parses.
+   */
+  get aiConfig() {
+    return aiConfig.current();
   },
   get selfId() {
     return selfId;
@@ -139,6 +164,20 @@ app.get("/health", (req, res) => {
       file: rulesStore.file(),
     },
     admin: { configured: auth.configured(), files: files.list().length },
+    // The fallback, at a glance. `key` false is the single most likely reason
+    // for "the AI stopped answering", and it is invisible everywhere else.
+    ai: (() => {
+      const c = deps.aiConfig;
+      return {
+        key: ai.configured(),
+        enabled: Boolean(c.enabled),
+        comments: Boolean(c.enabled && c.comments.enabled),
+        dms: Boolean(c.enabled && c.dms.enabled),
+        model: c.model,
+        caps: { comments: c.comments, dms: c.dms },
+        file: aiConfig.file(),
+      };
+    })(),
     // The redirect URI is here because it must match the dashboard byte for
     // byte, and reading it back off the running service is the only way to be
     // sure IG_PUBLIC_BASE did not quietly make it something else.
@@ -252,6 +291,20 @@ if (require.main === module) {
     if (ruleProblems.length) console.error(`!! ${ruleProblems.length} RULES PROBLEM(S) — see above. A "reply loop" line means the account will answer itself.`);
 
     console.log(`rules: ${rulesStore.file()}`);
+
+    // Said out loud on every boot, because the two ways this silently does
+    // nothing — no key, or `enabled: false` in the config — look identical from
+    // the outside and are both one line to fix.
+    const aic = deps.aiConfig;
+    if (!ai.configured()) {
+      console.warn("!! AI fallback OFF — no OPENAI_API_KEY. Keyword rules are unaffected.");
+    } else if (!aic.enabled) {
+      console.warn(`!! AI fallback OFF — "enabled": false in ${aiConfig.file()}`);
+    } else {
+      console.log(
+        `ai fallback: ${aic.model} · comments ${aic.comments.enabled ? `on (max ${aic.comments.maxPerMediaPerHour}/post/h, ${aic.comments.maxPerHour}/h)` : "off"} · dms ${aic.dms.enabled ? `on (max ${aic.dms.maxPerHour}/h)` : "off"} · ${aiConfig.file()}`
+      );
+    }
     console.log(`uploads: ${files.dir()} (public base ${files.publicBase()})`);
 
     // Printed rather than left to be looked up: this exact string has to be in

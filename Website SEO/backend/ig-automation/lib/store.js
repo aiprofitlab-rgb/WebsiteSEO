@@ -1,7 +1,8 @@
 /**
- * Durable state: the dedupe set, and the email-capture conversation.
+ * Durable state: the dedupe set, the email-capture conversation, the AI's
+ * short-term memory, and the record of what the AI has already said.
  *
- * Both have to survive a restart, so neither can live in a Map.
+ * None of it can live in a Map, because all of it has to survive a restart.
  *
  *   Dedupe — Meta retries a webhook it thinks failed, and a private reply is
  *   one-shot per comment FOREVER. A retry that got through twice would burn the
@@ -10,6 +11,18 @@
  *
  *   Conversation — "reply with your email" only works if the service still
  *   remembers, minutes or hours later, which rule that person was answering.
+ *
+ *   Transcript — the AI fallback answers a DM in context, so it has to be able
+ *   to read back the last few turns. Trimmed hard: this is a lead-capture bot,
+ *   not a therapist, and an unbounded transcript is an unbounded prompt bill.
+ *
+ *   Said — every sentence the AI has posted publicly, recently, as a hash.
+ *   rules.isOwnReplyText() recognises our own words by comparing them against
+ *   the fixed publicReply strings in the config. The AI has no fixed strings,
+ *   so that guard cannot see its output at all — and an AI that answers every
+ *   comment, then meets its own answer coming back as a new comment, is the
+ *   2026-08-30 reply loop with a language model attached. This table is how the
+ *   same guard is made to work on text nobody wrote in advance.
  *
  * Storage is node:sqlite, built into Node 22.5+. Deliberately NOT better-sqlite3:
  * that is a native module, and needing a C++ toolchain on the VPS just to install
@@ -27,6 +40,16 @@ const DEFAULT_FILE = path.join(__dirname, "..", "ig-automation.sqlite");
 const STATE_TTL_MS = 24 * 60 * 60 * 1000;
 // Long enough that no plausible Meta retry lands after it. Keeps the table small.
 const HANDLED_TTL_MS = 60 * 24 * 60 * 60 * 1000;
+// How long the AI remembers a DM thread. Matches the 24h window it can reply in:
+// past that, the next message starts a conversation we could not have continued.
+const TRANSCRIPT_TTL_MS = 24 * 60 * 60 * 1000;
+// How long our own public sentences stay recognisable. A loop closes in seconds,
+// not days, and keeping these forever would eventually start silencing followers
+// who happen to phrase something the way we once did.
+const SAID_TTL_MS = 6 * 60 * 60 * 1000;
+// Turns of DM history handed to the model. Six is three exchanges — enough to
+// not re-ask a question already answered, small enough to stay cheap.
+const TRANSCRIPT_TURNS = 6;
 
 function open(file) {
   const target = file || process.env.IG_DB_FILE || DEFAULT_FILE;
@@ -68,6 +91,27 @@ function open(file) {
       expires_at INTEGER NOT NULL
     );
     CREATE INDEX IF NOT EXISTS conversations_expiry ON conversations (expires_at);
+
+    -- The AI's short-term memory of one DM thread. role is 'user' or 'assistant',
+    -- named to match what the model expects so nothing has to be translated on
+    -- the way out.
+    CREATE TABLE IF NOT EXISTS transcript (
+      id      INTEGER PRIMARY KEY AUTOINCREMENT,
+      igsid   TEXT NOT NULL,
+      role    TEXT NOT NULL,
+      text    TEXT NOT NULL,
+      at      INTEGER NOT NULL
+    );
+    CREATE INDEX IF NOT EXISTS transcript_thread ON transcript (igsid, id);
+    CREATE INDEX IF NOT EXISTS transcript_age ON transcript (at);
+
+    -- What we have said out loud, by hash. Read on every incoming comment, so it
+    -- is a primary-key lookup and never a scan.
+    CREATE TABLE IF NOT EXISTS said (
+      hash TEXT PRIMARY KEY,
+      at   INTEGER NOT NULL
+    );
+    CREATE INDEX IF NOT EXISTS said_age ON said (at);
   `);
 
   const stmts = {
@@ -102,6 +146,28 @@ function open(file) {
     recentByMedia: db.prepare(`SELECT COUNT(*) AS n FROM handled WHERE media_id = ? AND claimed_at >= ?`),
     recentAll: db.prepare(`SELECT COUNT(*) AS n FROM handled WHERE claimed_at >= ?`),
 
+    // Same question as above, narrowed to one rule and to claims that actually
+    // ended in something being posted. The AI needs this shape and the keyword
+    // path must not: a keyword comment we claimed and then failed to DM is still
+    // evidence of a loop, whereas an AI comment we claimed and then declined to
+    // answer is evidence of the guards working. Counting declines against the
+    // AI's own cap would let a wave of spam silence it for the rest of the hour.
+    sentByMediaRule: db.prepare(
+      `SELECT COUNT(*) AS n FROM handled WHERE media_id = ? AND rule_id = ? AND status = 'sent' AND claimed_at >= ?`
+    ),
+    sentByRule: db.prepare(`SELECT COUNT(*) AS n FROM handled WHERE rule_id = ? AND status = 'sent' AND claimed_at >= ?`),
+
+    addTurn: db.prepare(`INSERT INTO transcript (igsid, role, text, at) VALUES (?, ?, ?, ?)`),
+    // Newest first here, reversed by the caller. Taking the tail in SQL means the
+    // index does the work; ordering it back to oldest-first is free in JS.
+    lastTurns: db.prepare(`SELECT role, text FROM transcript WHERE igsid = ? AND at > ? ORDER BY id DESC LIMIT ?`),
+    dropTurns: db.prepare(`DELETE FROM transcript WHERE igsid = ?`),
+
+    remember: db.prepare(`INSERT OR REPLACE INTO said (hash, at) VALUES (?, ?)`),
+    recall: db.prepare(`SELECT at FROM said WHERE hash = ?`),
+
+    sweepTurns: db.prepare(`DELETE FROM transcript WHERE at <= ?`),
+    sweepSaid: db.prepare(`DELETE FROM said WHERE at <= ?`),
     sweepStates: db.prepare(`DELETE FROM conversations WHERE expires_at <= ?`),
     sweepHandled: db.prepare(`DELETE FROM handled WHERE claimed_at < ?`),
   };
@@ -159,6 +225,17 @@ function open(file) {
     },
 
     /**
+     * How many replies under one rule actually went out recently. The AI's own
+     * cap; see the statement above for why it is not just recentReplies().
+     */
+    recentSent({ mediaId, ruleId, since } = {}) {
+      const from = Number(since) || 0;
+      const rule = String(ruleId || "");
+      const row = mediaId ? stmts.sentByMediaRule.get(String(mediaId), rule, from) : stmts.sentByRule.get(rule, from);
+      return (row && row.n) || 0;
+    },
+
+    /**
      * The last N comments taken on, newest first. Read-only, and the only thing
      * the admin panel needs from this table: "did my new rule actually fire?"
      * is otherwise a journalctl session over SSH.
@@ -196,11 +273,57 @@ function open(file) {
 
     clearState: (igsid) => stmts.clearState.run(String(igsid)),
 
+    /**
+     * Append one turn of a DM thread.
+     *
+     * Called for the follower's message AND for our own answer, because a model
+     * that cannot see what it already said will greet the same person four times
+     * in a row. Text is clipped: a pasted wall of text is not worth the tokens,
+     * and the interesting part of a long message is at the front.
+     */
+    addTurn(igsid, role, text, now = Date.now()) {
+      if (!igsid || !text) return;
+      stmts.addTurn.run(String(igsid), role === "assistant" ? "assistant" : "user", String(text).slice(0, 1000), now);
+    },
+
+    /**
+     * The last few turns, oldest first — the order a chat model wants them in.
+     * Anything older than the 24h window is excluded rather than deleted; the
+     * sweep does the deleting, and a read must never depend on it having run.
+     */
+    transcript(igsid, { turns = TRANSCRIPT_TURNS, now = Date.now() } = {}) {
+      if (!igsid) return [];
+      const n = Math.min(Math.max(Number(turns) || TRANSCRIPT_TURNS, 1), 40);
+      return stmts.lastTurns.all(String(igsid), now - TRANSCRIPT_TTL_MS, n).reverse();
+    },
+
+    forget: (igsid) => stmts.dropTurns.run(String(igsid)),
+
+    /**
+     * Record that we said this, and ask whether we recently did.
+     *
+     * The hash is of the caller's normalised form (lib/rules.normalise), so
+     * casing, diacritics and a leading @mention do not defeat it — a follower
+     * quoting us back with an @ in front is exactly the shape a loop takes.
+     */
+    remember(hash, now = Date.now()) {
+      if (!hash) return;
+      stmts.remember.run(String(hash), now);
+    },
+
+    saidRecently(hash, now = Date.now()) {
+      if (!hash) return false;
+      const row = stmts.recall.get(String(hash));
+      return Boolean(row && row.at > now - SAID_TTL_MS);
+    },
+
     /** Housekeeping. Cheap enough to run on an interval from server.js. */
     sweep(now = Date.now()) {
       const states = stmts.sweepStates.run(now).changes;
       const old = stmts.sweepHandled.run(now - HANDLED_TTL_MS).changes;
-      return { states, handled: old };
+      const turns = stmts.sweepTurns.run(now - TRANSCRIPT_TTL_MS).changes;
+      const said = stmts.sweepSaid.run(now - SAID_TTL_MS).changes;
+      return { states, handled: old, turns, said };
     },
 
     stats(now = Date.now()) {
@@ -215,4 +338,4 @@ function open(file) {
   };
 }
 
-module.exports = { open, STATE_TTL_MS, HANDLED_TTL_MS };
+module.exports = { open, STATE_TTL_MS, HANDLED_TTL_MS, TRANSCRIPT_TTL_MS, SAID_TTL_MS, TRANSCRIPT_TURNS };
