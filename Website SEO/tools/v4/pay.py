@@ -36,19 +36,19 @@ import json
 # Flip to True on the day the Thawani merchant account is approved AND the
 # checkout API is deployed with live keys. Flipping it alone is not enough:
 # PAY_API must point at a running service, or the page falls back anyway.
-PAY_LIVE = False
+PAY_LIVE = True
 
 # Base URL of the checkout API that creates Thawani sessions - no trailing
 # slash. Empty means "not deployed yet", and the checkout uses its offline
 # path: it collects the order, shows the reference, and hands it to WhatsApp.
 # The contract this URL must satisfy is written down in docs/payments-api.md.
-PAY_API = ""
+PAY_API = "https://checkout.aiprofitlab.io"
 
 # "uat" while testing against uatcheckout.thawani.om, "live" against
 # checkout.thawani.om. The front end never talks to Thawani directly - the
 # secret key cannot touch a browser - so this is here for the banner that
 # tells a tester which environment they are looking at.
-THAWANI_ENV = "uat"
+THAWANI_ENV = "live"
 
 OMR = 1000          # baisa per rial
 CURRENCY = "OMR"
