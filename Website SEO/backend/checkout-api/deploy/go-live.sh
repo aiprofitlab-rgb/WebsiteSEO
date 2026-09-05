@@ -41,6 +41,7 @@ ENV_LIVE="$SRC/.env.live"
 
 STAMP="$(date +%Y%m%d-%H%M%S)"
 CHECK_ONLY=0
+REDEPLOY=0
 [[ "${1:-}" == "--check" ]] && CHECK_ONLY=1
 
 # ------------------------------------------------------------------ output --
@@ -109,10 +110,21 @@ ok "$DOMAIN -> $BOX_IP"
 
 step "3. Is port $PORT free, and are the neighbours healthy?"
 if sshx "ss -ltn | grep -q ':$PORT '"; then
-  die "Something is already listening on port $PORT." \
-"Find out what with:  ssh $HOST 'ss -ltnp | grep :$PORT'"
+  # Something is listening, which is only a problem if it is not US. After a
+  # first successful install our own service holds this port BY DESIGN, and
+  # dying here would make the script single-use — every later change would have
+  # to be done by hand, which is the thing it exists to avoid.
+  if sshx "systemctl is-active --quiet $SVC"; then
+    REDEPLOY=1
+    ok "port $PORT is $SVC's own — this is a RE-DEPLOY, not a first install"
+  else
+    die "Something ELSE is already listening on port $PORT." \
+"$SVC is not running, so this is not ours.
+Find out what with:  ssh $HOST 'ss -ltnp | grep :$PORT'"
+  fi
+else
+  ok "port $PORT is free"
 fi
-ok "port $PORT is free"
 
 for s in ig-automation aiden-backend "$STOREFRONT_SVC"; do
   if sshx "systemctl is-active --quiet $s"; then
@@ -181,14 +193,26 @@ printf '\n'
 [[ "$RESEND_KEY" == re_* ]] || die "That does not look like a Resend key (they start with 're_')."
 
 info "testing it against Resend..."
+# Probe POST /emails with a deliberately incomplete body. It SENDS NOTHING, and
+# it separates the two failures cleanly:
+#
+#   422 "Missing `to` field"  -> authenticated. The key works for sending.
+#   401 / 403                 -> the key is dead or revoked.
+#
+# Do NOT test with GET /domains. That needs a FULL-ACCESS key, so a correct
+# key made with 'Sending access' — which is what we tell you to create three
+# lines above, and all this service needs — comes back 401 and gets rejected
+# as dead. Verified 2026-09-05 against a real sending-only key: /domains says
+# 401 while /emails says 422.
 RCODE="$(curl -s -o /dev/null -w '%{http_code}' -m 20 \
-  -H "Authorization: Bearer $RESEND_KEY" https://api.resend.com/domains || true)"
-[[ "$RCODE" == "200" ]] \
+  -X POST -H "Authorization: Bearer $RESEND_KEY" -H 'Content-Type: application/json' \
+  -d '{}' https://api.resend.com/emails || true)"
+[[ "$RCODE" == "422" ]] \
   || die "Resend rejected that key (HTTP $RCODE)." \
 "This is exactly the failure that has bitten this setup before, so it is worth
 getting right. Make a fresh key at resend.com -> API Keys -> Create API Key,
 with 'Sending access', and run this again."
-ok "Resend accepted the key"
+ok "Resend accepted the key (sending access confirmed)"
 
 step "8. Arming the storefront service — email ON, cards still OFF"
 backup_remote "$STOREFRONT_ETC"
@@ -274,9 +298,20 @@ if sshx "test -f /etc/storefront-offer-api/sa.json"; then
 fi
 
 backup_remote "$ETC_DIR/.env"
-printf '%s\n%s\n%s\n' "$T_SECRET" "$T_PUBLIC" "$RESEND_KEY" | sshx "
+
+# Carry forward anything a human set by hand after an earlier run. This file is
+# REWRITTEN whole, so a value not read back here is a value silently destroyed:
+# blanking CHECKOUT_SHEET_ID moves every future order out of the Google Sheet
+# and into a log file nobody reads, and /health still cheerfully says "ok":true.
+# Found the hard way on 2026-09-05, when a re-run would have done exactly that.
+KEEP_SHEET="$(sshx "grep -m1 '^CHECKOUT_SHEET_ID=' $ETC_DIR/.env 2>/dev/null | cut -d= -f2-" 2>/dev/null || true)"
+KEEP_CRON="$(sshx "grep -m1 '^CRON_KEY=' $ETC_DIR/.env 2>/dev/null | cut -d= -f2-" 2>/dev/null || true)"
+[[ -n "$KEEP_SHEET" ]] && ok "keeping the CHECKOUT_SHEET_ID already on the box" || warn "no CHECKOUT_SHEET_ID set — orders will go to the log, not the sheet"
+[[ -n "$KEEP_CRON" ]] && ok "keeping the CRON_KEY already on the box" || true
+
+printf '%s\n%s\n%s\n%s\n%s\n' "$T_SECRET" "$T_PUBLIC" "$RESEND_KEY" "$KEEP_SHEET" "$KEEP_CRON" | sshx "
   set -e
-  read -r secret; read -r public; read -r resend
+  read -r secret; read -r public; read -r resend; read -r sheet; read -r cron
   cat > $ETC_DIR/.env <<EOF
 THAWANI_SECRET_KEY=\$secret
 THAWANI_PUBLISHABLE_KEY=\$public
@@ -290,14 +325,14 @@ SITE_ORIGIN=https://aiprofitlab.io
 ORDER_PATH=/en/order-v4/
 ALLOWED_ORIGINS=https://aiprofitlab.io,https://www.aiprofitlab.io
 
-CHECKOUT_SHEET_ID=
+CHECKOUT_SHEET_ID=\$sheet
 CHECKOUT_SHEET_TAB=Checkout_Orders
 GOOGLE_APPLICATION_CREDENTIALS=$ETC_DIR/sa.json
 
 RESEND_API_KEY=\$resend
 OWNER_EMAIL=hello@aiprofitlab.io
 
-CRON_KEY=
+CRON_KEY=\$cron
 PORT=$PORT
 EOF
   chown root:$SVC_USER $ETC_DIR/.env && chmod 640 $ETC_DIR/.env

@@ -73,6 +73,12 @@ app.get("/health", (req, res) => {
       accepting_cards: cfg.enabled,
     },
     ledger: ledger.enabled() ? "sheet" : "logs",
+    // Reported because this is the failure that hides. lib/mail.js logs and
+    // moves on with no key, and both sends are inside a Promise.allSettled, so
+    // a buyer can pay OMR 950 and get silence while every other signal here
+    // still says the service is healthy. If this says DISABLED, cards should
+    // not be on.
+    email: process.env.RESEND_API_KEY ? "armed" : "DISABLED (no RESEND_API_KEY)",
     billing: process.env.CRON_KEY ? "armed" : "disabled (no CRON_KEY)",
     catalog: { items: pricing.CATALOG.items.length },
   });
