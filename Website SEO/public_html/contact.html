@@ -46,7 +46,7 @@
 
 <!-- Microsoft Clarity -->
 <script>(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","y7wcjlyamc");</script>
-<script defer src="/js/apl-analytics.js?v=c85e0eed"></script>
+<script defer src="/js/apl-analytics.js?v=d5c11394"></script>
 
 <style>
 :root{
@@ -900,6 +900,11 @@ section{position:relative;padding:clamp(74px,9vw,138px) 0}
 
 /* ============================================================== checkout */
 [dir=rtl] .opt .flag{margin-left:0;margin-right:9px}
+/* The select's chevron is a background image, and `background-position:right`
+   is not direction-aware the way padding and margin are - left alone it sits
+   on top of the last letter of the Arabic label. The padding that reserved
+   room for it moves with it. */
+[dir=rtl] .fld select{background-position:left 15px center;padding-right:15px;padding-left:40px}
 [dir=rtl] .sum::before{background:linear-gradient(270deg,var(--amber),var(--amber-pale),transparent)}
 [dir=rtl] .offline{border-left:1px solid var(--line);border-right:3px solid var(--amber)}
 [dir=rtl] .after div{padding-left:0;padding-right:0}
@@ -1315,6 +1320,6 @@ section{position:relative;padding:clamp(74px,9vw,138px) 0}
   });
 })();
 </script>
-    <script defer src="/js/aiden-chat.js?v=8002bc67"></script>
+<script defer src="/js/aiden-chat.js?v=8002bc67"></script>
 </body>
 </html>

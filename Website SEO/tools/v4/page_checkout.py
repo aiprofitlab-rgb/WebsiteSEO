@@ -127,16 +127,35 @@ CSS = """
 .fld.full{grid-column:1/-1}
 .fld label{font-family:var(--mono);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
 .fld label .opt-tag{text-transform:none;letter-spacing:0;font-family:var(--sans);opacity:.75}
-.fld input,.fld textarea{
+.fld input,.fld textarea,.fld select{
   font-family:var(--sans);font-size:1rem;color:var(--ink);background:var(--white);
   border:1px solid var(--line);border-radius:10px;padding:13px 15px;width:100%;
   transition:border-color .2s,box-shadow .2s;
 }
 .fld textarea{resize:vertical;min-height:88px;line-height:1.55}
 .fld input::placeholder,.fld textarea::placeholder{color:rgba(90,102,93,.5)}
-.fld input:focus,.fld textarea:focus{outline:none;border-color:var(--teal);box-shadow:0 0 0 3px rgba(15,110,86,.13)}
-.fld input[aria-invalid=true]{border-color:var(--alert);box-shadow:0 0 0 3px rgba(166,67,31,.13)}
+.fld input:focus,.fld textarea:focus,.fld select:focus{outline:none;border-color:var(--teal);box-shadow:0 0 0 3px rgba(15,110,86,.13)}
+.fld input[aria-invalid=true],.fld select[aria-invalid=true]{border-color:var(--alert);box-shadow:0 0 0 3px rgba(166,67,31,.13)}
 .fld .err{font-size:.84rem;color:var(--alert);min-height:0}
+/* The one <select> on the page. The native control is drawn by the OS - grey
+   chrome on one platform, a blue accent chevron on another - beside inputs that
+   are cream and teal, so it reads as something the page did not build. Removing
+   the appearance takes the arrow with it, which is why it comes back as an
+   inline data URI: no request, and it is the ink colour rather than the OS's. */
+.fld select{
+  appearance:none;-webkit-appearance:none;cursor:pointer;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath fill='none' stroke='%235A665D' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round' d='M1 1.5 6 6.5l5-5'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 15px center;background-size:12px 8px;
+  padding-right:40px;
+}
+/* Until something is picked, the only selectable option is the disabled
+   placeholder, so `required` keeps the control :invalid - which is exactly the
+   state in which it should read like placeholder text rather than an answer. */
+.fld select:invalid{color:rgba(90,102,93,.5)}
+/* .fld is a flex column, and display beats the hidden attribute every time.
+   Same trap as the storefront's #rebateRow, which shipped showing "Pledged back
+   to you - -" to every buyer who pledged nothing. */
+.fld[hidden]{display:none}
 
 /* consent row */
 .consent{display:flex;gap:13px;align-items:flex-start;margin:4px 0 0;font-size:.97rem;color:var(--muted);line-height:1.55}
@@ -770,6 +789,73 @@ def upsell_field():
 
 
 # ---------------------------------------------------------------------------
+# "How did you hear about us?"
+#
+# The automatic attribution layer - the utm tags, the click ids, the first and
+# last touch apl-analytics.js keeps in localStorage - can only ever see what
+# arrived through a link. It is blind to a flyer somebody was handed, a name
+# passed on in a meeting, a WhatsApp forward that stripped the query string, and
+# to anyone who searched the brand after hearing it out loud. This question is
+# what catches those, so every buyer is asked it and it is required.
+#
+# The VALUE is a stable id and never the label. English and Arabic answers have
+# to fall in the same bucket in the ledger, and a label has to be rewordable
+# without splitting last month's count in two - so the server maps the id back
+# to one English label before it writes the cell. Add a row here and the option
+# appears in both languages at once; changing an id retires a bucket, so don't.
+# ---------------------------------------------------------------------------
+HEARD = [
+    # id            English                             Arabic
+    ("flyer",     "A printed flyer",                  "منشور مطبوع"),
+    ("google",    "Google search",                    "بحث في جوجل"),
+    ("ai",        "ChatGPT or another AI assistant",  "ChatGPT أو مساعد ذكاء اصطناعي آخر"),
+    ("instagram", "Instagram",                        "إنستغرام"),
+    ("linkedin",  "LinkedIn",                         "لينكدإن"),
+    ("whatsapp",  "A WhatsApp message from Nahid",    "رسالة واتساب من ناهد"),
+    ("referral",  "Someone recommended you",          "أحدهم رشّحكم لي"),
+    ("inperson",  "I met you in person",              "التقيت بكم شخصياً"),
+    ("other",     "Somewhere else",                   "مكان آخر"),
+]
+
+# The two answers worth one more question. A recommendation is the single most
+# valuable thing this field can catch - it names a person who is already selling
+# for us - and "somewhere else" is worthless without the else. The list lives
+# here rather than in the script so the markup and the JS cannot disagree about
+# which options open the box.
+HEARD_ASKS = ("referral", "other")
+
+
+def heard_field(lang="en"):
+    """The select, and the optional box two of its answers open.
+
+    Two `.fld.full` rows rather than one control: the follow-up is a field in
+    its own right, with its own label, and it has to be able to disappear
+    without taking the select's grid cell down with it.
+
+    Wording comes from WORDS[lang], the same table the script reads, because the
+    script rewrites this label as the answer changes - and a label that starts
+    life saying something the script would never write is a label that is wrong
+    for exactly as long as nobody touches the control.
+    """
+    i = 1 if lang == "en" else 2
+    w = WORDS[lang]
+    opts = "\n".join(f'                <option value="{h[0]}">{h[i]}</option>' for h in HEARD)
+    return f"""            <div class="fld full">
+              <label for="f-heard">{w['heardLabel']}</label>
+              <select id="f-heard" name="heard" required>
+                <option value="" selected disabled>{w['heardChoose']}</option>
+{opts}
+              </select>
+              <span class="err" data-for="heard"></span>
+            </div>
+            <div class="fld full" id="heardMore" hidden>
+              <label for="f-heard-detail" id="heardMoreLabel">{w['heardWho']}</label>
+              <input id="f-heard-detail" name="heardDetail" type="text" maxlength="200"
+                     placeholder="{w['heardPh']}">
+            </div>"""
+
+
+# ---------------------------------------------------------------------------
 # Markup helpers. Every card is generated from pay.CATALOG / pay.PLANS, so a
 # new item or a new payment structure appears here without touching markup.
 # ---------------------------------------------------------------------------
@@ -955,6 +1041,7 @@ def body():
               <label for="f-city">City</label>
               <input id="f-city" name="city" type="text" autocomplete="address-level2" placeholder="Muscat">
             </div>
+{heard_field("en")}
             <div class="fld full">
               <label for="f-notes">Anything I should know before the brief call <span class="opt-tag">&mdash; optional</span></label>
               <textarea id="f-notes" name="notes" placeholder="What you sell, how buyers reach you today, and the one thing that is costing you money."></textarea>
@@ -1374,8 +1461,26 @@ JS_TPL = r"""
     }
   });
 
+  /* ------------------------------------------------ how they heard of us ---
+     Two answers earn a follow-up question; every other one closes it. The box
+     is emptied on the way out, so a name typed under "someone recommended you"
+     cannot survive a change of mind and get filed under "Google search".      */
+  var HEARD_ASKS = __HEARD_ASKS__;
+  var heardSel = form.elements.heard, heardMore = $("heardMore");
+  if (heardSel && heardMore){
+    heardSel.addEventListener("change", function(){
+      var asks = HEARD_ASKS.indexOf(heardSel.value) >= 0;
+      if (asks){
+        $("heardMoreLabel").textContent = heardSel.value === "referral" ? T.heardWho : T.heardWhere;
+      } else {
+        form.elements.heardDetail.value = "";
+      }
+      heardMore.hidden = !asks;
+    });
+  }
+
   /* ------------------------------------------------------- validation --- */
-  var REQUIRED = ["name", "business", "email", "whatsapp"];
+  var REQUIRED = ["name", "business", "email", "whatsapp", "heard"];
   function fieldErr(nm, msg){
     var el = form.elements[nm];
     var slot = form.querySelector('.err[data-for="' + nm + '"]');
@@ -1439,7 +1544,11 @@ JS_TPL = r"""
       quoted_total: q.total,
       customer: {
         name: g("name"), business: g("business"), email: g("email"),
-        whatsapp: g("whatsapp"), cr: g("cr"), city: g("city"), notes: g("notes")
+        whatsapp: g("whatsapp"), cr: g("cr"), city: g("city"), notes: g("notes"),
+        /* The id, never the label - see HEARD in page_checkout.py. The server
+           maps it back to one English label before writing the ledger's Notes
+           column, so an Arabic answer and an English one count as one channel. */
+        heardAbout: g("heard"), heardDetail: g("heardDetail")
       },
       page: location.pathname + location.search
     };
@@ -1463,6 +1572,14 @@ JS_TPL = r"""
              T.waWhatsapp + g("whatsapp"));
     if (g("cr")) out.push(T.waCr + g("cr"));
     if (g("city")) out.push(T.waCity + g("city"));
+    /* The label the buyer actually read, not the id: this message is for a
+       human, and on the offline route it is the only copy of the answer that
+       ever reaches Nahid - nothing has been posted to the server. */
+    if (heardSel && heardSel.value){
+      var heard = heardSel.options[heardSel.selectedIndex].text;
+      if (g("heardDetail")) heard += " \u2014 " + g("heardDetail");
+      out.push(T.waHeard + heard);
+    }
     if (g("notes")) out.push("", T.waNotes + g("notes"));
     return out.join("\n");
   }
@@ -1686,6 +1803,12 @@ WORDS = {
         "waDueNow": "Due now: ", "waName": "Name: ", "waBusiness": "Business: ",
         "waEmail": "Email: ", "waWhatsapp": "WhatsApp: ", "waCr": "CR: ",
         "waCity": "City: ", "waNotes": "Notes: ",
+        "heardLabel": "How did you hear about us?",
+        "heardChoose": "Choose one&hellip;",
+        "heardWho": "Who recommended us?",
+        "heardWhere": "Where did you come across us?",
+        "heardPh": "Optional, but it helps me a lot.",
+        "waHeard": "Heard about us: ",
         "mailSubject": "Order ", "opening": "Opening secure payment…",
         "abandon": ("The card payment could not be started (#), so nothing was charged. "
                     "Send the order across instead and I will follow it up with a payment link."),
@@ -1730,6 +1853,12 @@ WORDS = {
         "waDueNow": "المستحق الآن: ", "waName": "الاسم: ", "waBusiness": "النشاط: ",
         "waEmail": "البريد: ", "waWhatsapp": "واتساب: ", "waCr": "س.ت: ",
         "waCity": "المدينة: ", "waNotes": "ملاحظات: ",
+        "heardLabel": "كيف سمعت عنّا؟",
+        "heardChoose": "اختر واحداً&hellip;",
+        "heardWho": "من رشّحنا لك؟",
+        "heardWhere": "أين صادفتنا؟",
+        "heardPh": "اختياري، لكنه يساعدني كثيراً.",
+        "waHeard": "سمعت عنّا عبر: ",
         "mailSubject": "طلب ", "opening": "جارٍ فتح صفحة الدفع الآمن…",
         "abandon": ("تعذّر بدء الدفع بالبطاقة (#)، فلم يُحتسب شيء. "
                     "أرسل الطلب بدلاً من ذلك وسأتابعه معك برابط دفع."),
@@ -1742,7 +1871,8 @@ WORDS = {
 
 def js(lang="en"):
     import json
-    return JS_TPL.replace("__WORDS__", json.dumps(WORDS[lang], ensure_ascii=False))
+    return (JS_TPL.replace("__WORDS__", json.dumps(WORDS[lang], ensure_ascii=False))
+                  .replace("__HEARD_ASKS__", json.dumps(list(HEARD_ASKS))))
 
 
 JS = js("en")

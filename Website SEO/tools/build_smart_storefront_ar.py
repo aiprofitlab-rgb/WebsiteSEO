@@ -33,6 +33,7 @@ import sys
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 import aiden_version  # noqa: E402
+import analytics_version  # noqa: E402
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 SRC = ROOT / "public_html" / "en" / "smart-storefront.html"
@@ -200,6 +201,11 @@ RTL_CSS = r"""
 [dir=rtl] .vs-row.core{background:linear-gradient(260deg,rgba(15,110,86,.10),rgba(15,110,86,.02))}
 [dir=rtl] .trophy{text-align:right}
 [dir=rtl] .hp{left:auto;right:-9999px}
+/* The select's chevron is a background image, and `background-position:right`
+   is not direction-aware the way padding and margin are - left alone it lands
+   on top of the last letter of the Arabic option. The padding that reserved
+   room for it travels with it. */
+[dir=rtl] .field select{background-position:left 13px center;padding-right:13px;padding-left:36px}
 [dir=rtl] .sticky .info{margin-right:0;margin-left:auto}
 
 /* The .nav-lang switch is NOT restated here. It is defined once in the English
@@ -275,6 +281,30 @@ HEAD = r"""<!DOCTYPE html>
 })();
 </script>
 
+<!-- Campaign normaliser - must stay above the gtag snippet, which reads
+     location.search when it fires the page_view. The printed flyer's QR
+     carries ?utm_source=flyer and no medium, and GA4 files a session with no
+     medium under "Unassigned". Only ADDS missing keys. Mirrors the block in
+     the English page; keep the two tables identical. -->
+<script>
+  (function () {
+    try {
+      var q = new URLSearchParams(location.search);
+      var src = (q.get("utm_source") || "").trim().toLowerCase();
+      if (!src) return;
+      var DEFAULTS = { flyer: ["print", "smart_storefront_launch"] };
+      var d = DEFAULTS[src];
+      if (!d) return;
+      var changed = false;
+      if (!q.get("utm_medium")) { q.set("utm_medium", d[0]); changed = true; }
+      if (!q.get("utm_campaign")) { q.set("utm_campaign", d[1]); changed = true; }
+      if (changed && window.history && history.replaceState) {
+        history.replaceState(null, "", location.pathname + "?" + q.toString() + location.hash);
+      }
+    } catch (e) { }
+  })();
+</script>
+
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-SLR9GD3MJP"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -298,7 +328,7 @@ __CSS__
 </style>
 <!-- Microsoft Clarity -->
 <script>(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","y7wcjlyamc");</script>
-<script defer src="/js/apl-analytics.js?v=c85e0eed"></script>
+__ANALYTICS_TAG__
 </head>
 """
 
@@ -571,7 +601,7 @@ BODY = r"""<body>
 <section class="roast" id="claim">
   <div class="wrap">
     <p class="eyebrow rv"><span class="star">✼</span> احجز مقعداً</p>
-    <h2 class="rv">ستة حقول. ثم تصلك فاتورتك في بريدك.</h2>
+    <h2 class="rv">سبعة حقول. ثم تصلك فاتورتك في بريدك.</h2>
     <p class="lede rv" style="margin-bottom:28px">هذا يحفظ مكانك بسعر اليوم. أما التفاصيل الكاملة فتأتي لاحقاً، بعد أن يصل العربون.</p>
 
     <form class="form rv" id="claimForm" novalidate>
@@ -590,6 +620,29 @@ BODY = r"""<body>
         <div class="field"><label for="f-whatsapp">رقم واتساب</label><input id="f-whatsapp" name="whatsapp" type="tel" inputmode="tel" autocomplete="tel" dir="ltr" placeholder="+968 …" required/></div>
         <div class="field"><label for="f-email">البريد الإلكتروني</label><input id="f-email" name="email" type="email" inputmode="email" autocomplete="email" dir="ltr" required/></div>
         <div class="field full"><label for="f-site">موقعك الالكتروني الحالي <span class="opt-tag">— اختياري </span></label><input id="f-site" name="currentSite" dir="ltr" placeholder="لا يوجد"/></div>
+        <!-- The self-reported half of attribution. The VALUES here are the same
+             stable ids the English page posts, so an Arabic claim and an English
+             one are one channel in the ledger rather than two. Keep this list
+             identical to public_html/en/smart-storefront.html and to LABELS in
+             the API's lib/heard.js - only the labels are translated.
+             No dir=ltr on the ChatGPT row: it is Latin at the START of an
+             otherwise Arabic string, which base RTL already places on the
+             reader's first edge. -->
+        <div class="field full"><label for="f-heard">كيف سمعت عنّا؟</label>
+          <select id="f-heard" name="heard" required>
+            <option value="" selected disabled>اختر واحداً…</option>
+            <option value="flyer">منشور مطبوع</option>
+            <option value="google">بحث في جوجل</option>
+            <option value="ai">ChatGPT أو مساعد ذكاء اصطناعي آخر</option>
+            <option value="instagram">إنستغرام</option>
+            <option value="linkedin">لينكدإن</option>
+            <option value="whatsapp">رسالة واتساب من ناهد</option>
+            <option value="referral">أحدهم رشّحكم لي</option>
+            <option value="inperson">التقيت بكم شخصياً</option>
+            <option value="other">مكان آخر</option>
+          </select>
+        </div>
+        <div class="field full" id="heardMore" hidden><label for="f-heard-detail" id="heardMoreLabel">من رشّحنا لك؟</label><input id="f-heard-detail" name="heardDetail" maxlength="200" placeholder="اختياري، لكنه يساعدني كثيراً."/></div>
       </div>
 
       <div class="hp" aria-hidden="true"><label for="f-companyurl">Company URL</label><input id="f-companyurl" name="companyUrl" tabindex="-1" autocomplete="off"/></div>
@@ -1390,6 +1443,24 @@ JS = r"""<script>
   var submitBtn = document.getElementById("fSubmit");
   var formErr = document.getElementById("formErr");
 
+  /* "كيف سمعت عنّا؟" - two answers earn one more question, every other one
+     closes it, and the box is emptied on the way out so a name typed under
+     "أحدهم رشّحكم لي" cannot survive a change of mind and get filed under
+     "بحث في جوجل". Identical behaviour to the English page. */
+  var heardSel = document.getElementById("f-heard");
+  var heardMore = document.getElementById("heardMore");
+  var heardDetail = document.getElementById("f-heard-detail");
+  heardSel.addEventListener("change", function(){
+    var asks = heardSel.value === "referral" || heardSel.value === "other";
+    if (asks) {
+      document.getElementById("heardMoreLabel").textContent =
+        heardSel.value === "referral" ? "من رشّحنا لك؟" : "أين صادفتنا؟";
+    } else {
+      heardDetail.value = "";
+    }
+    heardMore.hidden = !asks;
+  });
+
   function fail(msg) {
     formErr.textContent = msg;
     formErr.classList.remove("on");
@@ -1410,6 +1481,10 @@ JS = r"""<script>
       whatsapp:    document.getElementById("f-whatsapp").value.trim(),
       email:       document.getElementById("f-email").value.trim(),
       currentSite: document.getElementById("f-site").value.trim(),
+      // The id, never the label - the same ids the English page posts, so both
+      // languages count as one channel in the ledger.
+      heardAbout:  heardSel.value,
+      heardDetail: heardDetail.value.trim(),
       companyUrl:  document.getElementById("f-companyurl").value.trim(),
       consent:     document.getElementById("f-consent").checked,
       pledges:     chosen,
@@ -1423,6 +1498,10 @@ JS = r"""<script>
     if (!payload.name || !payload.business || !payload.sector || !payload.whatsapp || !payload.email) {
       return fail("بقيت حقول فارغة — الاسم، واسم النشاط، وما تبيعه، ورقم واتساب، والبريد، كلها لازمة لكتابة اتفاقك.");
     }
+    if (!payload.heardAbout) {
+      heardSel.focus();
+      return fail("بقي سؤال واحد: كيف سمعت عنّا؟ هذه هي الطريقة الوحيدة لأعرف أيّاً مما أفعله يعمل فعلاً.");
+    }
     if (!payload.consent) {
       return fail("أحتاج إذنك لحفظ هذه البيانات والتواصل معك، وإلا لا أستطيع إرسال اتفاق لك.");
     }
@@ -1430,6 +1509,15 @@ JS = r"""<script>
     submitBtn.disabled = true;
     submitBtn.textContent = "أحجز مقعدك…";
 
+    /* Attribution, identical in shape to the English page - the Arabic funnel
+       has to be measurable as its own channel or there is no way to tell
+       whether the translation is earning its keep. */
+    if (window.APLPage && window.APLPage.attributionFields) {
+      var attr = window.APLPage.attributionFields();
+      for (var k in attr) { if (attr.hasOwnProperty(k)) payload[k] = attr[k]; }
+    }
+
+    function sendClaim() {
     fetch(API + "/claim", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -1453,6 +1541,19 @@ JS = r"""<script>
       .catch(function(){
         fail("لم أستطع الوصول إلى الخادم. اتصالك أو خادمي — في الحالتين، راسلني على واتساب ولن يضيع شيء.");
       });
+    }
+
+    /* See the English page: gtag('get') is async and silent when blocked, so
+       this resolves on a timer and the claim is never held up by it. */
+    if (window.APLPage && window.APLPage.gaIds) {
+      window.APLPage.gaIds(function (ids) {
+        payload.gaClientId = ids.client_id;
+        payload.gaSessionId = ids.session_id;
+        sendClaim();
+      }, 900);
+    } else {
+      sendClaim();
+    }
   });
 
   /* ─────────── 6. the cat ─────────── */
@@ -1493,6 +1594,7 @@ HOOKS = [
     ".opt::after{", ".qdot::after{", ".card::before{", ".mrow b{", ".vow{",
     ".seatbar i{", ".sc-pips i.open{", ".pledge:hover{", ".trophy{", ".hp{",
     ".sticky .info{", ".nav-lang{", ".sc-count span{", ".pledge .txt span{", ".pbody{",
+    ".field select{",
     ".vs-val{", ".vs-row.core{",
     '.mockup[data-vibe="plain"] .plist{',
 ]
@@ -1530,7 +1632,8 @@ def build():
                .replace("__AR_URL__", AR_URL)
                .replace("__EN_URL__", EN_URL)
            + BODY.replace("__EN_PATH__", "/en/smart-storefront/")
-           + JS).replace("__AIDEN_TAG__", aiden_version.tag())
+           + JS).replace("__AIDEN_TAG__", aiden_version.tag()) \
+                 .replace("__ANALYTICS_TAG__", analytics_version.tag())
 
     OUT.write_text(out, encoding="utf-8")
     print(f"wrote {OUT.relative_to(ROOT)}  ({len(out):,} bytes, "

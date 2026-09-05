@@ -206,6 +206,7 @@ def body():
               <label for="f-city">المدينة</label>
               <input id="f-city" name="city" type="text" autocomplete="address-level2" placeholder="مسقط">
             </div>
+{page_checkout.heard_field("ar")}
             <div class="fld full">
               <label for="f-notes">أي شيء ينبغي أن أعرفه قبل مكالمة الملخّص <span class="opt-tag">&mdash; اختياري</span></label>
               <textarea id="f-notes" name="notes" placeholder="ماذا تبيع، وكيف يصل إليك المشترون اليوم، والشيء الواحد الذي يكلّفك مالاً."></textarea>

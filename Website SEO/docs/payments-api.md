@@ -61,13 +61,28 @@ Body — exactly what `order()` in `page_checkout.py` builds:
     "whatsapp": "+968 9123 4567",
     "cr": "1234567",
     "city": "Muscat",
-    "notes": "…"
+    "notes": "…",
+    "heardAbout": "referral",
+    "heardDetail": "Ahmed at Gulf Lotus"
   },
   "page": "/en/checkout-v4/?plan=deposit"
 }
 ```
 
 All money is **integer baisa** (1 OMR = 1000 baisa).
+
+`heardAbout` is "how did you hear about us?" — **an id, never a label**, drawn from
+`HEARD` in `tools/v4/page_checkout.py`. The Arabic checkout posts the same ids as the
+English one, and `lib/heard.js` maps them back to a single English label before the
+answer is written to the ledger, so one channel is one row in Nahid's count rather than
+two. `heardDetail` is the free text that two of those answers (`referral`, `other`)
+open a box for; it is empty for every other answer.
+
+Both are folded into the **Notes** column, behind the fixed prefix `Heard about us: `,
+above whatever the buyer wrote themselves. The page requires an answer; **the server
+deliberately does not** — a page cached before this field existed must still be able to
+pay, and a lost order costs more than a blank cell. Nothing here reaches Thawani:
+`metadata()` is an explicit whitelist and neither field is on it.
 
 `quoted_due` and `quoted_total` are what the buyer was *shown*. The server
 **must recompute both from its own copy of the price table and refuse the

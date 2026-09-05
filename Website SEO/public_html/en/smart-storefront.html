@@ -61,6 +61,39 @@
     })();
   </script>
 
+  <!-- Campaign normaliser. MUST stay above the gtag snippet below: gtag reads
+     location.search when it fires the page_view, so a correction made after
+     that call is a correction GA4 never sees.
+
+     The printed flyer's QR encodes ?utm_source=flyer and nothing else - the
+     artwork is at Core4/ColdOutreach and the code is baked into a 4252x1890
+     master, so it cannot be changed for a batch already printed. GA4 needs
+     utm_MEDIUM to place a session in a channel; with the source alone the
+     visit is filed under "Unassigned", which is where traffic goes to be
+     ignored. Filling the gap here costs nothing and makes flyer scans report
+     as a real channel.
+
+     Only ever ADDS missing keys, never rewrites one the URL supplied, so a
+     future flyer or ad that carries its own medium wins over this table. -->
+  <script>
+    (function () {
+      try {
+        var q = new URLSearchParams(location.search);
+        var src = (q.get("utm_source") || "").trim().toLowerCase();
+        if (!src) return;
+        var DEFAULTS = { flyer: ["print", "smart_storefront_launch"] };
+        var d = DEFAULTS[src];
+        if (!d) return;
+        var changed = false;
+        if (!q.get("utm_medium")) { q.set("utm_medium", d[0]); changed = true; }
+        if (!q.get("utm_campaign")) { q.set("utm_campaign", d[1]); changed = true; }
+        if (changed && window.history && history.replaceState) {
+          history.replaceState(null, "", location.pathname + "?" + q.toString() + location.hash);
+        }
+      } catch (e) { /* an old browser keeps the un-normalised URL, which still tracks */ }
+    })();
+  </script>
+
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-SLR9GD3MJP"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -2588,7 +2621,8 @@
       color: var(--muted)
     }
 
-    .field input {
+    .field input,
+    .field select {
       font-family: var(--sans);
       font-size: 1rem;
       padding: 12px 13px;
@@ -2599,9 +2633,41 @@
       transition: border-color .18s, box-shadow .18s
     }
 
-    .field input:focus {
+    .field input:focus,
+    .field select:focus {
       border-color: var(--teal);
       box-shadow: 0 0 0 3px rgba(15, 110, 86, .12)
+    }
+
+    /* The one <select> on the page. Left native it is drawn by the OS — grey
+       chrome on one platform, a blue accent chevron on another — next to six
+       inputs that are cream and teal, and it reads as something this page did
+       not build. Removing the appearance takes the arrow with it, so it comes
+       back as an inline data URI: no request, and it is our ink rather than
+       the system's. */
+    .field select {
+      appearance: none;
+      -webkit-appearance: none;
+      cursor: pointer;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath fill='none' stroke='%235A665D' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round' d='M1 1.5 6 6.5l5-5'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 13px center;
+      background-size: 12px 8px;
+      padding-right: 36px
+    }
+
+    /* Until something is picked the only selectable option is the disabled
+       placeholder, so `required` holds the control :invalid — which is exactly
+       when it should read as placeholder text rather than as an answer. */
+    .field select:invalid {
+      color: rgba(92, 98, 89, .55)
+    }
+
+    /* .field is a flex column, and display beats the hidden attribute every
+       time. Same trap as #rebateRow, which shipped showing "Pledged back to
+       you — —" to every buyer who had pledged nothing. */
+    .field[hidden] {
+      display: none
     }
 
     .hp {
@@ -3011,7 +3077,7 @@
   </style>
   <!-- Microsoft Clarity -->
   <script>(function (c, l, a, r, i, t, y) { c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments) }; t = l.createElement(r); t.async = 1; t.src = "https://www.clarity.ms/tag/" + i; y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y); })(window, document, "clarity", "script", "y7wcjlyamc");</script>
-  <script defer src="/js/apl-analytics.js?v=c85e0eed"></script>
+  <script defer src="/js/apl-analytics.js?v=d5c11394"></script>
 </head>
 
 <body>
@@ -3329,7 +3395,7 @@
   <section class="roast" id="claim">
     <div class="wrap">
       <p class="eyebrow rv"><span class="star">✼</span> Claim a seat</p>
-      <h2 class="rv">Six fields. Then your invoice is in your inbox.</h2>
+      <h2 class="rv">Seven fields. Then your invoice is in your inbox.</h2>
       <p class="lede rv" style="margin-bottom:28px">This holds your place at today's price. The full brief comes later,
         once the deposit has cleared.</p>
 
@@ -3355,6 +3421,32 @@
               inputmode="email" autocomplete="email" required /></div>
           <div class="field full"><label for="f-site">Current website <span class="opt-tag">— optional, and "none" is a
                 perfectly good answer</span></label><input id="f-site" name="currentSite" placeholder="none" /></div>
+          <!-- The self-reported half of attribution. The utm tags and click ids
+               apl-analytics.js collects can only see what arrived through a
+               link; they are blind to a flyer handed over in person, a name
+               passed on at a meeting, and to anyone who heard the brand out
+               loud and then searched it — which GA4 files, correctly and
+               uselessly, as organic search. The VALUE is a stable id, never the
+               label, so the Arabic page's answers land in the same bucket. Keep
+               this list identical to the one in tools/build_smart_storefront_ar.py
+               and to LABELS in the API's lib/heard.js. -->
+          <div class="field full"><label for="f-heard">How did you hear about us?</label>
+            <select id="f-heard" name="heard" required>
+              <option value="" selected disabled>Choose one…</option>
+              <option value="flyer">A printed flyer</option>
+              <option value="google">Google search</option>
+              <option value="ai">ChatGPT or another AI assistant</option>
+              <option value="instagram">Instagram</option>
+              <option value="linkedin">LinkedIn</option>
+              <option value="whatsapp">A WhatsApp message from Nahid</option>
+              <option value="referral">Someone recommended you</option>
+              <option value="inperson">I met you in person</option>
+              <option value="other">Somewhere else</option>
+            </select>
+          </div>
+          <div class="field full" id="heardMore" hidden><label for="f-heard-detail"
+              id="heardMoreLabel">Who recommended us?</label><input id="f-heard-detail" name="heardDetail"
+              maxlength="200" placeholder="Optional, but it helps me a lot." /></div>
         </div>
 
         <div class="hp" aria-hidden="true"><label for="f-companyurl">Company URL</label><input id="f-companyurl"
@@ -4109,6 +4201,24 @@
       var submitBtn = document.getElementById("fSubmit");
       var formErr = document.getElementById("formErr");
 
+      /* "How did you hear about us?" — two answers earn one more question, and
+         every other one closes it. The box is emptied on the way out, so a name
+         typed under "someone recommended you" cannot survive a change of mind
+         and end up filed under "Google search". */
+      var heardSel = document.getElementById("f-heard");
+      var heardMore = document.getElementById("heardMore");
+      var heardDetail = document.getElementById("f-heard-detail");
+      heardSel.addEventListener("change", function () {
+        var asks = heardSel.value === "referral" || heardSel.value === "other";
+        if (asks) {
+          document.getElementById("heardMoreLabel").textContent =
+            heardSel.value === "referral" ? "Who recommended us?" : "Where did you come across us?";
+        } else {
+          heardDetail.value = "";
+        }
+        heardMore.hidden = !asks;
+      });
+
       function fail(msg) {
         formErr.textContent = msg;
         formErr.classList.remove("on");
@@ -4129,6 +4239,11 @@
           whatsapp: document.getElementById("f-whatsapp").value.trim(),
           email: document.getElementById("f-email").value.trim(),
           currentSite: document.getElementById("f-site").value.trim(),
+          /* The id, never the label. The service maps it back to one English
+             label before writing the ledger, so an Arabic claim and an English
+             one count as the same channel. */
+          heardAbout: heardSel.value,
+          heardDetail: heardDetail.value.trim(),
           companyUrl: document.getElementById("f-companyurl").value.trim(),
           consent: document.getElementById("f-consent").checked,
           pledges: chosen,
@@ -4138,6 +4253,10 @@
         if (!payload.name || !payload.business || !payload.sector || !payload.whatsapp || !payload.email) {
           return fail("A few fields are still empty — name, business, what you sell, WhatsApp and email are all needed to write your agreement.");
         }
+        if (!payload.heardAbout) {
+          heardSel.focus();
+          return fail("One more: how did you hear about us? It is the only way I can tell which of the things I do is actually working.");
+        }
         if (!payload.consent) {
           return fail("I need your permission to store these details and contact you, or I can't send you an agreement.");
         }
@@ -4145,11 +4264,23 @@
         submitBtn.disabled = true;
         submitBtn.textContent = "Holding your seat…";
 
-        fetch(API + "/claim", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload)
-        })
+        /* Where this buyer came from. apl-analytics.js keeps a first touch that
+           is never overwritten and a last non-direct touch, so a seat claimed
+           three days after a flyer scan still credits the flyer instead of the
+           Google search that happened to be the last click. Every value is
+           already a string, so a missing one lands as "" rather than the text
+           "undefined" in a spreadsheet column. */
+        if (window.APLPage && window.APLPage.attributionFields) {
+          var attr = window.APLPage.attributionFields();
+          for (var k in attr) { if (attr.hasOwnProperty(k)) payload[k] = attr[k]; }
+        }
+
+        function sendClaim() {
+          fetch(API + "/claim", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload)
+          })
           .then(function (r) { return r.json().then(function (body) { return { ok: r.ok, body: body }; }); })
           .then(function (res) {
             if (!res.ok || !res.body.ok) {
@@ -4164,6 +4295,23 @@
           .catch(function () {
             fail("I couldn't reach the server. Your connection or my server — either way, message me on WhatsApp and nothing is lost.");
           });
+        }
+
+        /* GA4's client id is the key every row in the BigQuery export is
+           filed under, so carrying it into the ledger is what lets a claim be
+           joined to everything that person read before they filled this in.
+           gtag('get') is asynchronous and never answers at all when the tag is
+           blocked, so gaIds resolves on a timer instead - the claim is sent
+           either way, at most 900ms later, and never held hostage to it. */
+        if (window.APLPage && window.APLPage.gaIds) {
+          window.APLPage.gaIds(function (ids) {
+            payload.gaClientId = ids.client_id;
+            payload.gaSessionId = ids.session_id;
+            sendClaim();
+          }, 900);
+        } else {
+          sendClaim();
+        }
       });
 
       /* ─────────── 6. the cat ─────────── */

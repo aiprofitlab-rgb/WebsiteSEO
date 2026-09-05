@@ -307,6 +307,11 @@ RTL_PAGES = """
 
 /* ============================================================== checkout */
 [dir=rtl] .opt .flag{margin-left:0;margin-right:9px}
+/* The select's chevron is a background image, and `background-position:right`
+   is not direction-aware the way padding and margin are - left alone it sits
+   on top of the last letter of the Arabic label. The padding that reserved
+   room for it moves with it. */
+[dir=rtl] .fld select{background-position:left 15px center;padding-right:15px;padding-left:40px}
 [dir=rtl] .sum::before{background:linear-gradient(270deg,var(--amber),var(--amber-pale),transparent)}
 [dir=rtl] .offline{border-left:1px solid var(--line);border-right:3px solid var(--amber)}
 [dir=rtl] .after div{padding-left:0;padding-right:0}

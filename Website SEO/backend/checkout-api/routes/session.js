@@ -18,6 +18,7 @@ const thawani = require("../lib/thawani");
 const ledger = require("../lib/ledger");
 const mail = require("../lib/mail");
 const subs = require("../lib/subscriptions");
+const heard = require("../lib/heard");
 
 const SITE_ORIGIN = (process.env.SITE_ORIGIN || "https://aiprofitlab.io").replace(/\/+$/, "");
 const ORDER_PATH = process.env.ORDER_PATH || "/en/order-v4/";
@@ -180,7 +181,18 @@ router.post("/", async (req, res) => {
     cr: str(body.customer && body.customer.cr, 40),
     city: str(body.customer && body.customer.city, 80),
     notes: str(body.customer && body.customer.notes, 2000),
+    // Self-reported attribution: an id from the page's own list, plus the free
+    // text two of those answers open. Both untrusted, both length-capped, and
+    // neither is in the `missing` check below — a buyer on a page cached before
+    // this field existed must still be able to pay. See lib/heard.js.
+    heardAbout: str(body.customer && body.customer.heardAbout, 40),
+    heardDetail: str(body.customer && body.customer.heardDetail, 200),
   };
+
+  // Folded into the note the buyer wrote, because that is the column Nahid
+  // reads. Done once, here, so every later writer of Notes — the gateway-failure
+  // path below included — carries it without having to know about it.
+  customer.notes = heard.prepend(customer.notes, customer.heardAbout, customer.heardDetail);
 
   const missing = ["name", "business", "email", "whatsapp"].filter((k) => !customer[k]);
   if (missing.length || !isEmail(customer.email)) {
