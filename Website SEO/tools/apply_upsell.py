@@ -45,8 +45,16 @@ sys.path.insert(0, str(HERE / "v4"))
 
 import pay              # noqa: E402
 import page_checkout    # noqa: E402
+import pay_ar_strings as S   # noqa: E402
 
-TARGET = ROOT / "public_html" / "en" / "pay.html"
+# Both seat pages, and the language each one speaks. The Arabic file is BUILT
+# by tools/build_pay_ar.py, which calls apply() itself - so a fresh Arabic page
+# is complete in one command. It is listed here as well so that a price change
+# reaches it without a full rebuild, exactly the way it reaches the English one.
+TARGETS = [
+    (ROOT / "public_html" / "en" / "pay.html", "en"),
+    (ROOT / "public_html" / "pay-ar.html",     "ar"),
+]
 
 # Every region this tool owns, as (name, opening fence, closing fence).
 CSS_A, CSS_Z = "/* >>> APL upsell css >>> */", "/* <<< APL upsell css <<< */"
@@ -76,12 +84,17 @@ def css():
     return shim + whole[start:]
 
 
-def dialog():
-    """The markup, English only - the seat page has no Arabic twin."""
-    return page_checkout.upsell_dialog("en").strip()
+def dialog(lang="en"):
+    """The interstitial, whole, in either language.
+
+    Rendered by page_checkout, not here: it is the same dialog the checkout
+    shows, and its Arabic is copy a native reader has already passed on the
+    live Arabic checkout. A second Arabic translation of a refund guarantee is
+    the exact thing this file exists to prevent."""
+    return page_checkout.upsell_dialog(lang).strip()
 
 
-def js():
+def js(lang="en"):
     """The gate.
 
     Mirrors the checkout's, with one difference that matters: the storefront
@@ -202,8 +215,7 @@ def js():
     if (!box) return;
     box.hidden = !taken;
     if (!taken) return;
-    var msg = "Hello Nahid - seat " + ref + ". I added the {pay.t(u, 'name')} at "
-            + "OMR " + UP_PRICE + "/month on the payment page. Please confirm it.";
+    var msg = {booking_msg(lang)};
     var a = document.getElementById("upBookedWa");
     if (a) a.href = WA + "&text=" + encodeURIComponent(msg);
   }}
@@ -238,9 +250,47 @@ def js():
 """
 
 
-# The block that shows on the confirmed screen. Injected next to the dialog.
-def booked_box():
+def booking_msg(lang):
+    """The WhatsApp message the buyer sends once they have booked it.
+
+    Written as a JavaScript expression rather than a string, because the price
+    is read from UP_PRICE - the same constant the dialog, the band and the
+    recorded event all use. Typed here instead, it would be a fourth place a
+    price could go stale.
+
+    The Arabic wraps the figure in U+2066/U+2069. They are invisible control
+    characters, they cost nothing in a message body, and without them a Latin
+    number sitting between two Arabic words can arrive reordered."""
     u = pay.item(pay.UPSELL_ID)
+    if lang != "ar":
+        return ('"Hello Nahid - seat " + ref + ". I added the '
+                + pay.t(u, "name") + ' at "\n            + "OMR " + UP_PRICE '
+                + '+ "/month on the payment page. Please confirm it."')
+
+    text = S.ALL_BY_KEY["wa_upsell_booked"].replace("{name}", pay.t(u, "name", "ar"))
+    head, mid, tail = re.split(r"\{ref\}|\{price\}", text)
+    if '"' in text:
+        raise SystemExit("wa_upsell_booked: a double quote would close the JS string")
+    return f'"{head}" + ref + "{mid}\\u2066" + UP_PRICE + "\\u2069{tail}"'
+
+
+# The block that shows on the confirmed screen. Injected next to the dialog.
+def booked_box(lang="en"):
+    u = pay.item(pay.UPSELL_ID)
+    if lang == "ar":
+        d = S.ALL_BY_KEY
+        h = (d["up_booked_h"].replace("{name}", pay.t(u, "name", "ar"))
+                             .replace("{now}", pay.money_ar(pay.price(u))))
+        body = d["up_booked_p"].replace("{months}", str(u["guarantee_months"]))
+        # The two clauses the English sets in <b> are the two facts a buyer
+        # misremembers: that the price is the one they were shown, and that
+        # nothing is taken today. Marked in the Arabic for the same reason.
+        body = body.replace("ولا يُحتسب عليك اليوم", "<b>ولا يُحتسب عليك اليوم</b>")
+        return f"""<div class="up-booked" id="upBooked" hidden>
+  <h3>{h}</h3>
+  <p>{body}</p>
+  <a class="btn btn-wa" id="upBookedWa" href="#" target="_blank" rel="noopener">{d["up_booked_wa"]}</a>
+</div>"""
     return f"""<div class="up-booked" id="upBooked" hidden>
   <h3>{pay.t(u, 'name')} &mdash; booked at OMR {pay.price(u) // pay.OMR}/month</h3>
   <p>Locked at the price you were shown, and <b>not charged today</b>. It begins the month
@@ -251,7 +301,7 @@ def booked_box():
 </div>"""
 
 
-def band():
+def band(lang="en"):
     """The standing offer, for the route that has no pay button.
 
     Short on purpose, and carrying NO guarantee wording: a guarantee is a
@@ -259,7 +309,21 @@ def band():
     both figures are the dialog's own values, read from the same tables, so
     the band cannot drift away from what the buyer reads when they open it."""
     u = pay.item(pay.UPSELL_ID)
-    w = page_checkout.UPSELL["en"]
+    w = page_checkout.UPSELL[lang]
+    if lang == "ar":
+        d = S.ALL_BY_KEY
+        now, rack = pay.money_ar(pay.price(u)), pay.money_ar(u["rack"])
+        body = (d["up_band_p"].replace("{name}", pay.t(u, "name", "ar"))
+                              .replace("{now}", f"<b>{now}</b>")
+                              .replace("{rack}", rack)
+                              .replace("ولا يُحتسب عليك شيء اليوم",
+                                       "<b>ولا يُحتسب عليك شيء اليوم</b>"))
+        return f"""      <div class="up-band" id="upBand" hidden>
+        <p class="eyebrow">{d["up_band_eyebrow"]}</p>
+        <h3>{w['h']}</h3>
+        <p>{body}</p>
+        <button type="button" class="btn btn-block" id="upBandBtn">{d["up_band_btn"].replace("{now}", now)}</button>
+      </div>"""
     now, rack = pay.money(pay.price(u)), pay.money(u["rack"])
     return f"""      <div class="up-band" id="upBand" hidden>
         <p class="eyebrow">Before you transfer &#183; ninety seconds</p>
@@ -314,7 +378,7 @@ def fence(name, a, z, payload, html, anchor):
     if a in html:
         if z not in html:
             raise SystemExit(f"{name}: opening fence present but closing fence missing - "
-                             f"{TARGET.name} has been hand-edited inside a generated region")
+                             f"the page has been hand-edited inside a generated region")
         pattern = re.compile(re.escape(a) + r".*?" + re.escape(z) + r"\n?", re.S)
         return pattern.sub(lambda _: block, html, count=1)
     if html.count(anchor) != 1:
@@ -376,7 +440,7 @@ def rewire_paybtn(html):
     return html.replace(OPEN_WAS, OPEN_NOW, 1).replace(CLOSE_WAS, CLOSE_NOW, 1)
 
 
-def apply(html):
+def apply(html, lang="en"):
     html = rewire(html)
     html = fence("css", CSS_A, CSS_Z, css() + BOOKED_CSS + BAND_CSS, html, "</style>")
     # BEFORE <footer>, and that is not cosmetic. The page's script is a plain
@@ -385,18 +449,18 @@ def apply(html):
     # it up - getElementById returns null, `if (upDlg)` quietly skips, and the
     # buyer goes straight to the card page having never seen the offer. No
     # error, no clue. The ordering assertion below is what keeps it that way.
-    html = fence("dialog", DLG_A, DLG_Z, dialog(), html, "<footer>")
+    html = fence("dialog", DLG_A, DLG_Z, dialog(lang), html, "<footer>")
     # The confirmed-screen block belongs inside the card, under the done box.
     html = fence("booked", "<!-- >>> APL upsell booked >>> -->",
-                 "<!-- <<< APL upsell booked <<< -->", booked_box(), html,
+                 "<!-- <<< APL upsell booked <<< -->", booked_box(lang), html,
                  '    <!-- returning from the payment page -->')
     # The band lives INSIDE the pay box, above the error line, so that on the
     # transfer route it reads as part of paying rather than as an ad bolted to
     # the page. Same parse-order requirement as the dialog: it is bound by id
     # at script-parse time and must already exist.
-    html = fence("band", BAND_A, BAND_Z, band(), html,
+    html = fence("band", BAND_A, BAND_Z, band(lang), html,
                  '      <div class="msg err" id="payErr"></div>')
-    html = fence("js", JS_A, JS_Z, js(), html, "  /* ─────────── the transfer receipt ─────────── */")
+    html = fence("js", JS_A, JS_Z, js(lang), html, "  /* ─────────── the transfer receipt ─────────── */")
 
     # The one invariant that cannot be left to a comment: the markup must be
     # parsed before the script that binds to it. This is the exact bug that
@@ -411,25 +475,39 @@ def apply(html):
     return html
 
 
-def main():
-    check = "--check" in sys.argv
-    before = TARGET.read_text(encoding="utf-8")
-    after = apply(before)
+def one(target, lang, check):
+    before = target.read_text(encoding="utf-8")
+    after = apply(before, lang)
 
     # Prove idempotency rather than asserting it: apply twice, compare.
-    twice = apply(after)
+    twice = apply(after, lang)
     if hashlib.sha256(after.encode()).hexdigest() != hashlib.sha256(twice.encode()).hexdigest():
-        raise SystemExit("NOT IDEMPOTENT - a second run changes the file again")
+        raise SystemExit(f"NOT IDEMPOTENT on {target.name} - a second run changes the file again")
 
-    rel = TARGET.relative_to(ROOT)
+    rel = target.relative_to(ROOT)
     if check:
         state = "current" if after == before else "STALE - run without --check"
         print(f"  {'ok ' if after == before else 'BAD'} {rel}  ({state})")
         return 0 if after == before else 1
-    TARGET.write_text(after, encoding="utf-8")
+    target.write_text(after, encoding="utf-8")
     print(f"  {'ok ' if after == before else 'NEW'} {rel}"
           + ("  (already current)" if after == before else "  (upsell applied, idempotency verified)"))
     return 0
+
+
+def main():
+    check = "--check" in sys.argv
+    rc = 0
+    for target, lang in TARGETS:
+        if not target.exists():
+            # Not an error. The Arabic page is generated, and a checkout that
+            # has never been built yet is a state this tool should describe
+            # rather than fail on.
+            print(f"  --  {target.relative_to(ROOT)}  (not built yet - "
+                  f"run python3 tools/build_pay_ar.py)")
+            continue
+        rc |= one(target, lang, check)
+    return rc
 
 
 if __name__ == "__main__":

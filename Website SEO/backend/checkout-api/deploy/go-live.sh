@@ -50,15 +50,15 @@ else
   R=""; G=""; Y=""; B=""; D=""; X=""
 fi
 
-step()  { printf '\n%s>> %s%s\n' "$B" "$1" "$X"; }
-ok()    { printf '   %s✓%s %s\n' "$G" "$X" "$1"; }
-warn()  { printf '   %s!%s %s\n' "$Y" "$X" "$1"; }
-info()  { printf '   %s%s%s\n' "$D" "$1" "$X"; }
+step()  { printf '\n%s>> %s%s\n' "${B}" "$1" "${X}"; }
+ok()    { printf '   %s✓%s %s\n' "${G}" "${X}" "$1"; }
+warn()  { printf '   %s!%s %s\n' "${Y}" "${X}" "$1"; }
+info()  { printf '   %s%s%s\n' "${D}" "$1" "${X}"; }
 
 die() {
-  printf '\n%sSTOPPED.%s %s\n' "$R" "$X" "$1" >&2
+  printf '\n%sSTOPPED.%s %s\n' "${R}" "${X}" "$1" >&2
   [[ $# -gt 1 ]] && printf '\n%s\n' "$2" >&2
-  printf '\n%sNothing further was changed. Paste this output back to Claude.%s\n' "$D" "$X" >&2
+  printf '\n%sNothing further was changed. Paste this output back to Claude.%s\n' "${D}" "${X}" >&2
   exit 1
 }
 
@@ -74,15 +74,15 @@ backup_remote() {
 # PHASE A — look at everything, change nothing
 # ============================================================================
 
-printf '%s\n' "$B"
+printf '%s\n' "${B}"
 cat <<'BANNER'
   ┌──────────────────────────────────────────────────────────┐
   │  AI Profit Lab — payment go-live                         │
   │  checkout-api  ->  the Hostinger VPS, port 8093          │
   └──────────────────────────────────────────────────────────┘
 BANNER
-printf '%s' "$X"
-[[ $CHECK_ONLY -eq 1 ]] && printf '  %sCHECK MODE — nothing will be changed.%s\n' "$Y" "$X"
+printf '%s' "${X}"
+[[ $CHECK_ONLY -eq 1 ]] && printf '  %sCHECK MODE — nothing will be changed.%s\n' "${Y}" "${X}"
 
 step "1. Can I reach the server?"
 sshx "echo ok" >/dev/null 2>&1 \
@@ -156,8 +156,8 @@ case "$CODE" in
 esac
 
 if [[ $CHECK_ONLY -eq 1 ]]; then
-  printf '\n%sAll checks passed.%s Nothing was changed.\n' "$G" "$X"
-  printf 'When you are ready, run it for real:  %s./go-live.sh%s\n\n' "$B" "$X"
+  printf '\n%sAll checks passed.%s Nothing was changed.\n' "${G}" "${X}"
+  printf 'When you are ready, run it for real:  %s./go-live.sh%s\n\n' "${B}" "${X}"
   exit 0
 fi
 
@@ -243,7 +243,7 @@ sshx "
   set -e
   id -u $SVC_USER >/dev/null 2>&1 || useradd --system --shell /usr/sbin/nologin --home $APP_DIR $SVC_USER
   install -d -o $SVC_USER -g $SVC_USER $APP_DIR
-  install -d -m 700 $ETC_DIR
+  install -d -m 750 -o root -g $SVC_USER $ETC_DIR
 "
 ok "$SVC_USER exists, $APP_DIR ready"
 
@@ -268,7 +268,8 @@ step "12. Writing the environment file — WITH CARDS SWITCHED OFF"
 # ledger sheets. Optional — without it orders go to the journal instead.
 SA_NOTE="no ledger sheet (orders go to the log)"
 if sshx "test -f /etc/storefront-offer-api/sa.json"; then
-  sshx "cp -n /etc/storefront-offer-api/sa.json $ETC_DIR/sa.json && chmod 600 $ETC_DIR/sa.json" || true
+  sshx "cp -n /etc/storefront-offer-api/sa.json $ETC_DIR/sa.json \
+        && chown root:$SVC_USER $ETC_DIR/sa.json && chmod 640 $ETC_DIR/sa.json" || true
   SA_NOTE="Google key in place (add CHECKOUT_SHEET_ID later to use a sheet)"
 fi
 
@@ -299,7 +300,7 @@ OWNER_EMAIL=hello@aiprofitlab.io
 CRON_KEY=
 PORT=$PORT
 EOF
-  chmod 600 $ETC_DIR/.env
+  chown root:$SVC_USER $ETC_DIR/.env && chmod 640 $ETC_DIR/.env
 "
 ok "environment written, PAY_ENABLED=0"
 info "$SA_NOTE"
@@ -365,18 +366,19 @@ STRANGER="$(curl -si -m 10 -X POST "https://$DOMAIN/session" \
 
 cat <<EOF
 
-$G┌────────────────────────────────────────────────────────────┐
+${G}┌────────────────────────────────────────────────────────────┐
 │  Deployed. Nothing is taking cards yet — by design.        │
-└────────────────────────────────────────────────────────────┘$X
+└────────────────────────────────────────────────────────────┘${X}
 
   Everything is installed, verified, and switched OFF. Email is fixed on
   both services. The two commands below are the only irreversible steps,
   and they are yours.
 
-$B  A. Turn on the v4 checkout$X
+${B}  A. Turn on the v4 checkout${X}
 
      ssh $HOST "sed -i 's/^PAY_ENABLED=0/PAY_ENABLED=1/' $ETC_DIR/.env && systemctl restart $SVC"
-     curl -s https://$DOMAIN/health          # want: "accepting_cards":true
+     ssh $HOST "curl -s localhost:$PORT/health"   # want: "accepting_cards":true
+     #   /health is deliberately NOT routed publicly — ask the box, not the internet.
 
      Then, on this Mac, in tools/v4/pay.py:
          PAY_LIVE    = True
@@ -384,7 +386,7 @@ $B  A. Turn on the v4 checkout$X
          THAWANI_ENV = "live"
      ...rebuild, and push to deploy the site.
 
-$B  B. Turn on the campaign page$X
+${B}  B. Turn on the campaign page${X}
 
      ssh $HOST "sed -i 's/^PAY_ENABLED=0/PAY_ENABLED=1/' $STOREFRONT_ETC && systemctl restart $STOREFRONT_SVC"
      curl -s https://offer.aiprofitlab.io/status | grep -o '"pay":{[^}]*}'
@@ -392,7 +394,7 @@ $B  B. Turn on the campaign page$X
      Want: {"card":true}. No site rebuild needed — the campaign pages read
      that flag from the service, so the card button appears on its own.
 
-$B  If anything goes wrong, at any time$X
+${B}  If anything goes wrong, at any time${X}
 
      ssh $HOST "sed -i 's/^PAY_ENABLED=1/PAY_ENABLED=0/' $ETC_DIR/.env && systemctl restart $SVC"
      ssh $HOST "sed -i 's/^PAY_ENABLED=1/PAY_ENABLED=0/' $STOREFRONT_ETC && systemctl restart $STOREFRONT_SVC"

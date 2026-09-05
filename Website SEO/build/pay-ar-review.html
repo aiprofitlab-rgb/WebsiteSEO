@@ -1,0 +1,306 @@
+<title>Seat Page Arabic Review</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Markazi+Text:wght@500;600&family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ground:#F6F4EE; --panel:#FFFFFF; --panel-2:#EFEBE0;
+  --ink:#1F2A25; --muted:#5E6B62; --faint:#8A9389;
+  --line:#DFD9C9; --teal:#0F6E56; --teal-deep:#0A3D30; --amber:#BA7517;
+  --shadow:0 1px 2px rgba(10,61,48,.05), 0 8px 24px -16px rgba(10,61,48,.25);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ground:#0C1512; --panel:#121E1A; --panel-2:#182721;
+    --ink:#E8EDE8; --muted:#9AA79E; --faint:#6E7C73;
+    --line:#22322B; --teal:#4FBF9B; --teal-deep:#8FD9C0; --amber:#E0A445;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -16px rgba(0,0,0,.8);
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#0C1512; --panel:#121E1A; --panel-2:#182721;
+  --ink:#E8EDE8; --muted:#9AA79E; --faint:#6E7C73;
+  --line:#22322B; --teal:#4FBF9B; --teal-deep:#8FD9C0; --amber:#E0A445;
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -16px rgba(0,0,0,.8);
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--ground); color:var(--ink);
+  font-family:'IBM Plex Sans','IBM Plex Sans Arabic',-apple-system,BlinkMacSystemFont,sans-serif;
+  font-size:16px; line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:60rem; margin:0 auto; padding:2.5rem 1.25rem 6rem}
+
+/* ---- header ---- */
+header{border-bottom:2px solid var(--line); padding-bottom:1.75rem; margin-bottom:2.5rem}
+.eyebrow{
+  font-family:'IBM Plex Mono',ui-monospace,monospace;
+  font-size:.7rem; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--teal); margin:0 0 .75rem;
+}
+h1{
+  font-family:'Markazi Text','IBM Plex Sans Arabic',Georgia,serif;
+  font-size:clamp(2.2rem,6vw,3.4rem); line-height:1.1; font-weight:600;
+  margin:0 0 .5rem; text-wrap:balance; color:var(--teal-deep);
+}
+.lede{font-size:1.06rem; color:var(--muted); max-width:34rem; margin:0}
+
+/* ---- counters ---- */
+.tally{display:flex; flex-wrap:wrap; gap:.5rem; margin:1.5rem 0 0; padding:0; list-style:none}
+.tally li{
+  background:var(--panel); border:1px solid var(--line); border-radius:2px;
+  padding:.5rem .75rem; font-size:.8rem; color:var(--muted);
+  display:flex; gap:.5rem; align-items:baseline;
+}
+.tally b{
+  font-family:'IBM Plex Mono',ui-monospace,monospace; font-size:1rem;
+  color:var(--ink); font-variant-numeric:tabular-nums; font-weight:600;
+}
+
+/* ---- how-to ---- */
+.howto{
+  background:var(--panel); border:1px solid var(--line); border-inline-start:3px solid var(--teal);
+  padding:1.25rem 1.4rem; margin:2rem 0 0; border-radius:2px; box-shadow:var(--shadow);
+}
+.howto h2{font-size:.95rem; margin:0 0 .6rem; letter-spacing:.01em}
+.howto p{margin:0 0 .5rem; color:var(--muted); font-size:.94rem}
+.howto p:last-child{margin-bottom:0}
+
+/* ---- decisions ---- */
+.decisions{margin:2.5rem 0 0}
+.decisions h2{
+  font-family:'Markazi Text',Georgia,serif; font-size:1.7rem; font-weight:600;
+  color:var(--teal-deep); margin:0 0 .25rem;
+}
+.decisions > p{color:var(--muted); font-size:.94rem; margin:0 0 1rem}
+.decision{
+  background:var(--panel); border:1px solid var(--line);
+  border-inline-start:3px solid var(--amber);
+  padding:1.1rem 1.3rem; border-radius:2px; margin-bottom:.75rem; box-shadow:var(--shadow);
+}
+.decision p{margin:0; font-size:.94rem}
+.decision .q{
+  font-family:'IBM Plex Mono',ui-monospace,monospace; font-size:.68rem;
+  letter-spacing:.12em; text-transform:uppercase; color:var(--amber);
+  display:block; margin-bottom:.4rem;
+}
+
+/* ---- tone reference ---- */
+.tone{margin:3rem 0 0}
+.tone h2{
+  font-family:'Markazi Text',Georgia,serif; font-size:1.7rem; font-weight:600;
+  color:var(--teal-deep); margin:0 0 .25rem;
+}
+.tone > p{color:var(--muted); font-size:.94rem; margin:0 0 1rem; max-width:38rem}
+.ref{
+  display:grid; gap:.4rem 1.5rem; padding:.85rem 0;
+  border-bottom:1px dashed var(--line);
+}
+.ref:last-child{border-bottom:0}
+.ref .ar{
+  font-family:'IBM Plex Sans Arabic','Noto Naskh Arabic',sans-serif;
+  direction:rtl; text-align:right; unicode-bidi:isolate;
+  font-size:1.06rem; color:var(--ink);
+}
+.ref .en{font-size:.82rem; color:var(--faint); direction:ltr; text-align:left; unicode-bidi:isolate}
+
+/* ---- the pairs ---- */
+section.group{margin:3.5rem 0 0}
+section.group > h2{
+  font-family:'Markazi Text','IBM Plex Sans Arabic',Georgia,serif;
+  direction:rtl; text-align:right; unicode-bidi:isolate;
+  font-size:2rem; font-weight:600; color:var(--teal-deep);
+  margin:0 0 .2rem; padding-bottom:.5rem; border-bottom:2px solid var(--line);
+}
+section.group > p.sub{
+  font-size:.85rem; color:var(--faint); margin:.5rem 0 1.5rem;
+  direction:ltr; text-align:left;
+}
+
+.item{
+  display:grid; grid-template-columns:2.5rem 1fr; gap:.15rem 1rem;
+  background:var(--panel); border:1px solid var(--line); border-radius:2px;
+  padding:1.1rem 1.25rem; margin-bottom:.6rem; box-shadow:var(--shadow);
+}
+.item .n{
+  grid-row:1 / span 3;
+  font-family:'IBM Plex Mono',ui-monospace,monospace;
+  font-size:.95rem; font-variant-numeric:tabular-nums;
+  color:var(--amber); font-weight:600; padding-top:.15rem;
+}
+.item .key{
+  font-family:'IBM Plex Mono',ui-monospace,monospace; font-size:.66rem;
+  letter-spacing:.06em; color:var(--faint); direction:ltr; text-align:left;
+  unicode-bidi:isolate;
+}
+.item .en{
+  font-size:.88rem; color:var(--muted); direction:ltr; text-align:left;
+  unicode-bidi:isolate; margin:.15rem 0 .5rem;
+}
+.item .ar{
+  font-family:'IBM Plex Sans Arabic','Noto Naskh Arabic',sans-serif;
+  direction:rtl; text-align:right; unicode-bidi:isolate;
+  font-size:1.22rem; line-height:1.85; color:var(--ink);
+  padding-top:.5rem; border-top:1px solid var(--line);
+}
+
+footer{
+  margin-top:4rem; padding-top:1.5rem; border-top:2px solid var(--line);
+  font-size:.82rem; color:var(--faint);
+}
+footer .ltr{direction:ltr; unicode-bidi:isolate; display:inline-block}
+
+@media (max-width:34rem){
+  .wrap{padding:1.75rem 1rem 4rem}
+  .item{grid-template-columns:2rem 1fr; padding:1rem}
+  .item .ar{font-size:1.14rem}
+}
+@media (prefers-reduced-motion:no-preference){
+  .item{transition:border-color .15s ease}
+}
+.item:hover{border-color:var(--teal)}
+</style>
+
+<div class="wrap">
+<header>
+  <p class="eyebrow">AI Profit Lab · صفحة حجز المقعد</p>
+  <h1>مراجعة النصوص العربية</h1>
+  <p class="lede">These 82 sentences are new. Nobody has read them but the machine that wrote them.</p>
+  <ul class="tally">
+    <li><b>82</b> new, need you</li>
+    <li><b>12</b> already yours</li>
+    <li><b>94</b> strings on the page in total</li>
+  </ul>
+</header>
+
+<div class="howto">
+  <h2>What to do</h2>
+  <p>Read the Arabic. Where it is wrong, stiff, or not how a person would say it, write the better version and quote the number beside it — “item 14 should be …”. That is all that is needed; nothing has to be edited in place.</p>
+  <p>The English above each line is what the sentence has to mean, not a text to translate literally. If natural Arabic says it differently, natural Arabic wins.</p>
+</div>
+
+<div class="decisions">
+  <h2>ثلاثة قرارات</h2>
+  <p>Three things deliberately left open, because they are judgement calls rather than mistakes.</p>
+    <div class="decision"><span class="q">Decision 1</span><p>smart-storefront-ar.html writes the deposit two ways on one page: 'عربون 50%' and 'عربون ٥٠٪'. This table uses Western digits throughout, matching checkout-ar. The reviewer should settle which is intended and the storefront page should be made to match.</p></div>
+    <div class="decision"><span class="q">Decision 2</span><p>'Pledged back to you, after delivery' uses تعهّد for pledge, which is the reviewed term on the storefront. The full sentence is new.</p></div>
+    <div class="decision"><span class="q">Decision 3</span><p>Figures are printed the way pay.money_ar() prints them everywhere else: the number in Western digits, then ر.ع. after it - '97 ر.ع.' - with the number bidi-isolated so Arabic running text cannot reorder it. The seat page shows its figures from JavaScript, where there is no span to hang that on, so it uses the Unicode isolate characters instead. Same result, same reading order.</p></div>
+    <div class="decision"><span class="q">Decision 4</span><p>The Thawani licence line names the Central Bank of Oman. Confirm the reviewer is happy with 'البنك المركزي العُماني' as the rendering, and that leaving 'Thawani' in Latin script is intended (checkout-ar does).</p></div>
+</div>
+
+<div class="tone">
+  <h2>النبرة المعتمدة</h2>
+  <p>Your own reviewed lines, already live on the site. The new sentences were written to sit beside these — if any of them reads in a different voice, that is the bug.</p>
+    <div class="ref"><div class="ar">النشاط</div><div class="en">Business</div></div>
+    <div class="ref"><div class="ar">عربون 50% لحجز المقعد</div><div class="en">Deposit to lock the seat (50%)</div></div>
+    <div class="ref"><div class="ar">بيانات بطاقتك تُدخَل على صفحة مزوّد الدفع نفسه. ولا تُكتب في هذا الموقع ولا تُرسَل إليه ولا تُخزَّن فيه إطلاقاً.</div><div class="en">Card payment, on Thawani's own secure page. We never see or store your card number.</div></div>
+    <div class="ref"><div class="ar">ادفع العربون</div><div class="en">Pay the deposit</div></div>
+    <div class="ref"><div class="ar">حجزت مقعداً</div><div class="en">You claimed a seat</div></div>
+    <div class="ref"><div class="ar">تدفع عربون 50%</div><div class="en">You pay the 50% deposit</div></div>
+</div>
+
+<section class="group">
+  <h2>ما يقرأه الزائر على الصفحة</h2>
+  <p class="sub">What the visitor reads on the page</p>
+  <div class="item"><div class="n">01</div><div class="key">page_title</div><div class="en">Your seat — AI Profit Lab</div><div class="ar">مقعدك — AI Profit Lab</div></div>
+  <div class="item"><div class="n">02</div><div class="key">claim_title</div><div class="en">Your claim</div><div class="ar">حجزك</div></div>
+  <div class="item"><div class="n">03</div><div class="key">looking_up</div><div class="en">Looking up your seat…</div><div class="ar">جارٍ البحث عن مقعدك…</div></div>
+  <div class="item"><div class="n">04</div><div class="key">one_moment</div><div class="en">One moment.</div><div class="ar">لحظة واحدة.</div></div>
+  <div class="item"><div class="n">05</div><div class="key">price_held</div><div class="en">Price held for you</div><div class="ar">السعر المحجوز لك</div></div>
+  <div class="item"><div class="n">06</div><div class="key">pledged_back</div><div class="en">Pledged back to you, after delivery</div><div class="ar">يُرَدّ إليك مقابل تعهّداتك، بعد التسليم</div></div>
+  <div class="item"><div class="n">07</div><div class="key">seat_confirmed_h</div><div class="en">Your seat is confirmed.</div><div class="ar">تم تأكيد مقعدك.</div></div>
+  <div class="item"><div class="n">08</div><div class="key">invoice_is_receipt</div><div class="en">Your invoice is in your inbox — that one is the receipt, so it's the one to keep.</div><div class="ar">فاتورتك في بريدك — وهي الإيصال، فهي التي تحتفظ بها.</div></div>
+  <div class="item"><div class="n">09</div><div class="key">confirming_bank</div><div class="en">Confirming your payment with the bank. This takes a few seconds — don't close the page.</div><div class="ar">جارٍ تأكيد دفعتك مع البنك. يستغرق هذا ثوانٍ قليلة — لا تغلق الصفحة.</div></div>
+  <div class="item"><div class="n">10</div><div class="key">thawani_licence</div><div class="en">Payments processed by Thawani · Licensed by the Central Bank of Oman</div><div class="ar">المدفوعات تُعالَج عبر Thawani · مرخّصة من البنك المركزي العُماني</div></div>
+  <div class="item"><div class="n">11</div><div class="key">transfer_q</div><div class="en">Rather pay by bank transfer?</div><div class="ar">تفضّل الدفع بتحويل بنكي؟</div></div>
+  <div class="item"><div class="n">12</div><div class="key">transfer_body</div><div class="en">Reply to the email your invoice came with, or message me below, and I'll send you the transfer details directly. I don't publish bank details on a page — that's how people get impersonated.</div><div class="ar">ردّ على البريد الذي وصلتك به الفاتورة، أو راسلني بالأسفل، وأرسل لك تفاصيل التحويل مباشرة. أنا لا أنشر بيانات بنكية على صفحة — فهكذا تحديداً يُنتحل اسم الناس.</div></div>
+  <div class="item"><div class="n">13</div><div class="key">upload_q</div><div class="en">Already transferred it? Upload the receipt.</div><div class="ar">حوّلته بالفعل؟ ارفع الإيصال.</div></div>
+  <div class="item"><div class="n">14</div><div class="key">upload_body</div><div class="en">A photo or PDF of the transfer confirmation. Up to 5 MB. It's stored privately and only I can open it.</div><div class="ar">صورة أو ملف PDF لتأكيد التحويل. حتى 5 ميغابايت. يُحفَظ بشكل خاص ولا يفتحه أحد غيري.</div></div>
+  <div class="item"><div class="n">15</div><div class="key">choose_receipt</div><div class="en">Choose the receipt</div><div class="ar">اختر الإيصال</div></div>
+  <div class="item"><div class="n">16</div><div class="key">step1_b</div><div class="en">Done — your details are with me.</div><div class="ar">تم — بياناتك وصلتني.</div></div>
+  <div class="item"><div class="n">17</div><div class="key">step2_h</div><div class="en">Your invoice is in your inbox</div><div class="ar">فاتورتك في بريدك</div></div>
+  <div class="item"><div class="n">18</div><div class="key">step2_b</div><div class="en">Sent the moment you claimed, with everything you need to pay.</div><div class="ar">أُرسلت لحظة حجزك، وفيها كل ما تحتاجه للدفع.</div></div>
+  <div class="item"><div class="n">19</div><div class="key">step3_b</div><div class="en">By card here, or by transfer if you'd rather.</div><div class="ar">بالبطاقة هنا، أو بتحويل إن كنت تفضّل.</div></div>
+  <div class="item"><div class="n">20</div><div class="key">step4_h</div><div class="en">Your seat is confirmed</div><div class="ar">يتأكّد مقعدك</div></div>
+  <div class="item"><div class="n">21</div><div class="key">step4_b</div><div class="en">A card payment confirms itself instantly. A transfer confirms once I've seen it land.</div><div class="ar">الدفع بالبطاقة يتأكّد فوراً. والتحويل يتأكّد حين أراه وقد وصل.</div></div>
+  <div class="item"><div class="n">22</div><div class="key">ask_anything</div><div class="en">Ask me anything about this</div><div class="ar">اسألني عن أي شيء في هذا</div></div>
+  <div class="item"><div class="n">23</div><div class="key">noref_h</div><div class="en">I can't find that reference.</div><div class="ar">لا أجد هذا الرقم المرجعي.</div></div>
+  <div class="item"><div class="n">24</div><div class="key">noref_b</div><div class="en">Either the link got cut in half somewhere between the email and here, or the reference has a typo in it. Both are easily fixed.</div><div class="ar">إمّا أن الرابط انقطع في منتصفه بين البريد وهنا، أو أن في الرقم المرجعي خطأ مطبعي. وكلاهما يُصلَح بسهولة.</div></div>
+  <div class="item"><div class="n">25</div><div class="key">noref_wa</div><div class="en">Send me the reference on WhatsApp</div><div class="ar">أرسل لي الرقم المرجعي على واتساب</div></div>
+  <div class="item"><div class="n">26</div><div class="key">back_to_offer</div><div class="en">Back to the offer</div><div class="ar">العودة إلى العرض</div></div>
+</section>
+<section class="group">
+  <h2>رسائل الخطأ</h2>
+  <p class="sub">Error messages — nobody is blamed, and money is always accounted for</p>
+  <div class="item"><div class="n">27</div><div class="key">err_noref</div><div class="en">No reference in this link.</div><div class="ar">لا يوجد رقم مرجعي في هذا الرابط.</div></div>
+  <div class="item"><div class="n">28</div><div class="key">err_noseat</div><div class="en">I can't find that seat.</div><div class="ar">لا أجد هذا المقعد.</div></div>
+  <div class="item"><div class="n">29</div><div class="key">err_gone</div><div class="en">I can't find this claim any more. Message me with your reference and I'll find it.</div><div class="ar">لم أعد أجد هذا الحجز. راسلني برقمك المرجعي وسأجده لك.</div></div>
+  <div class="item"><div class="n">30</div><div class="key">err_ledger</div><div class="en">I can't reach the ledger right now.</div><div class="ar">لا أستطيع الوصول إلى السجل الآن.</div></div>
+  <div class="item"><div class="n">31</div><div class="key">err_noamount</div><div class="en">There's no amount on this claim yet. Message me and I'll fix it in a minute.</div><div class="ar">لا يوجد مبلغ على هذا الحجز بعد. راسلني وأصلحه خلال دقيقة.</div></div>
+  <div class="item"><div class="n">32</div><div class="key">err_closed</div><div class="en">This claim has been closed. Message me and I'll tell you where things stand.</div><div class="ar">هذا الحجز أُغلق. راسلني وأخبرك أين وصلت الأمور.</div></div>
+  <div class="item"><div class="n">33</div><div class="key">err_card_off</div><div class="en">Card payment isn't available at the moment. Open “Rather pay by bank transfer?” below and I'll send you the details straight away.</div><div class="ar">الدفع بالبطاقة غير متاح حالياً. افتح «تفضّل الدفع بتحويل بنكي؟» بالأسفل وأرسل لك التفاصيل فوراً.</div></div>
+  <div class="item"><div class="n">34</div><div class="key">err_session</div><div class="en">I couldn't open the secure payment page just now, and nothing has been charged. Try again, or use the bank transfer option below.</div><div class="ar">تعذّر عليّ فتح صفحة الدفع الآمن الآن، ولم يُحتسب شيء. حاول مرة أخرى، أو استخدم خيار التحويل البنكي بالأسفل.</div></div>
+  <div class="item"><div class="n">35</div><div class="key">err_retry</div><div class="en">Try the card payment again</div><div class="ar">أعد المحاولة بالبطاقة</div></div>
+  <div class="item"><div class="n">36</div><div class="key">err_filetype</div><div class="en">That file type won't open for me. A JPG, PNG or PDF works.</div><div class="ar">هذا النوع من الملفات لا يفتح عندي. صيغة JPG أو PNG أو PDF تعمل.</div></div>
+  <div class="item"><div class="n">37</div><div class="key">err_upload</div><div class="en">The upload didn't go through. Send it to me on WhatsApp instead and I'll attach it myself.</div><div class="ar">لم يكتمل الرفع. أرسله لي على واتساب بدلاً من ذلك وأرفقه بنفسي.</div></div>
+  <div class="item"><div class="n">38</div><div class="key">err_toobig</div><div class="en">That file is over 5 MB. A photo of the screen is usually plenty — no need for the full-resolution one.</div><div class="ar">هذا الملف أكبر من 5 ميغابايت. صورة للشاشة تكفي عادةً — لا داعي للدقة الكاملة.</div></div>
+  <div class="item"><div class="n">39</div><div class="key">err_upload_offline</div><div class="en">The upload couldn't reach the server. Send the receipt on WhatsApp and I'll take it from there.</div><div class="ar">لم يصل الرفع إلى الخادم. أرسل الإيصال على واتساب وأتولّى الأمر من هناك.</div></div>
+</section>
+<section class="group">
+  <h2>ما تقوله الصفحة أثناء عملها</h2>
+  <p class="sub">What the page says as it works — status, progress, and the sentences only the script ever shows</p>
+  <div class="item"><div class="n">40</div><div class="key">pill_awaiting</div><div class="en">Awaiting deposit</div><div class="ar">بانتظار العربون</div></div>
+  <div class="item"><div class="n">41</div><div class="key">pill_paid</div><div class="en">Deposit paid (50%)</div><div class="ar">العربون مدفوع (50%)</div></div>
+  <div class="item"><div class="n">42</div><div class="key">pill_started</div><div class="en">Payment started</div><div class="ar">بدأ الدفع</div></div>
+  <div class="item"><div class="n">43</div><div class="key">pill_receipt</div><div class="en">Receipt received</div><div class="ar">وصل الإيصال</div></div>
+  <div class="item"><div class="n">44</div><div class="key">pill_confirmed</div><div class="en">Seat confirmed</div><div class="ar">تأكّد المقعد</div></div>
+  <div class="item"><div class="n">45</div><div class="key">held_h</div><div class="en">Your seat is held.</div><div class="ar">مقعدك محجوز.</div></div>
+  <div class="item"><div class="n">46</div><div class="key">held_b</div><div class="en">One payment away from confirmed. Your invoice is already in your inbox.</div><div class="ar">دفعة واحدة ويُصبح مؤكّداً. وفاتورتك في بريدك بالفعل.</div></div>
+  <div class="item"><div class="n">47</div><div class="key">done_h</div><div class="en">That's your seat. Confirmed.</div><div class="ar">هذا مقعدك. مؤكّد.</div></div>
+  <div class="item"><div class="n">48</div><div class="key">done_b</div><div class="en">Your deposit has cleared and the seat is yours at the price above.</div><div class="ar">عربونك وصل، والمقعد لك بالسعر أعلاه.</div></div>
+  <div class="item"><div class="n">49</div><div class="key">transfer_b</div><div class="en">Your invoice is in your inbox. This page is where you upload the transfer receipt.</div><div class="ar">فاتورتك في بريدك. وهذه الصفحة هي المكان الذي ترفع فيه إيصال التحويل.</div></div>
+  <div class="item"><div class="n">50</div><div class="key">pay_title_transfer</div><div class="en">Paying the deposit</div><div class="ar">دفع العربون</div></div>
+  <div class="item"><div class="n">51</div><div class="key">noref_sub</div><div class="en">Check the link in your email, or message me and I'll find you.</div><div class="ar">تحقّق من الرابط في بريدك، أو راسلني وسأجدك.</div></div>
+  <div class="item"><div class="n">52</div><div class="key">noseat_sub</div><div class="en">The reference didn't match anything in the ledger.</div><div class="ar">الرقم المرجعي لم يطابق شيئاً في السجل.</div></div>
+  <div class="item"><div class="n">53</div><div class="key">ledger_sub</div><div class="en">Your claim is safe — this page just can't read it at the moment.</div><div class="ar">حجزك بأمان — هذه الصفحة وحدها هي التي لا تستطيع قراءته الآن.</div></div>
+  <div class="item"><div class="n">54</div><div class="key">done_sub</div><div class="en">I'll be in touch about the brief. Nothing else is needed from you today.</div><div class="ar">سأتواصل معك بخصوص الموجز. لا شيء آخر مطلوب منك اليوم.</div></div>
+  <div class="item"><div class="n">55</div><div class="key">eyebrow_thatsdone</div><div class="en">That's done</div><div class="ar">تمّ ذلك</div></div>
+  <div class="item"><div class="n">56</div><div class="key">eyebrow_paid</div><div class="en">Paid</div><div class="ar">مدفوع</div></div>
+  <div class="item"><div class="n">57</div><div class="key">head_seat</div><div class="en">Your seat.</div><div class="ar">مقعدك.</div></div>
+  <div class="item"><div class="n">58</div><div class="key">pill_closed</div><div class="en">Closed</div><div class="ar">مُغلق</div></div>
+  <div class="item"><div class="n">59</div><div class="key">s3_transfer</div><div class="en">By bank transfer. Reply to your invoice email and the details come straight back.</div><div class="ar">بتحويل بنكي. ردّ على بريد فاتورتك وتصلك التفاصيل فوراً.</div></div>
+  <div class="item"><div class="n">60</div><div class="key">s4_transfer</div><div class="en">The moment I've seen the transfer land.</div><div class="ar">لحظة أن أرى التحويل وقد وصل.</div></div>
+  <div class="item"><div class="n">61</div><div class="key">paynote_transfer</div><div class="en">Reply to the email your invoice came with and I'll send you the transfer details straight away. I don't publish bank details on a page — that's how people get impersonated.</div><div class="ar">ردّ على البريد الذي وصلتك به الفاتورة وأرسل لك تفاصيل التحويل فوراً. أنا لا أنشر بيانات بنكية على صفحة — فهكذا تحديداً يُنتحل اسم الناس.</div></div>
+  <div class="item"><div class="n">62</div><div class="key">receipt_on_file</div><div class="en">A receipt is already on file. I'm checking the transfer — you don't need to do anything else. Upload again only if you sent the wrong file.</div><div class="ar">هناك إيصال محفوظ بالفعل. أنا أتحقّق من التحويل، ولا يلزمك شيء آخر. لا ترفع مرة أخرى إلا إن كنت قد أرسلت الملف الخطأ.</div></div>
+  <div class="item"><div class="n">63</div><div class="key">pay_by_card</div><div class="en">Pay {amount} by card</div><div class="ar">ادفع {amount} بالبطاقة</div></div>
+  <div class="item"><div class="n">64</div><div class="key">invoice_no</div><div class="en">Invoice {no}</div><div class="ar">فاتورة {no}</div></div>
+  <div class="item"><div class="n">65</div><div class="key">came_back</div><div class="en">You came back without paying, and nothing was charged. Your seat is still held at this price — pay whenever you're ready.</div><div class="ar">عدت دون أن تدفع، ولم يُحتسب عليك شيء. مقعدك ما زال محجوزاً بهذا السعر — ادفع متى كنت مستعداً.</div></div>
+  <div class="item"><div class="n">66</div><div class="key">unconfirmed</div><div class="en">Your payment hasn't shown up on my side yet. If your bank has confirmed it, don't pay again — </div><div class="ar">دفعتك لم تظهر عندي بعد. إن كان بنكك قد أكّدها فلا تدفع مرة أخرى — </div></div>
+  <div class="item"><div class="n">67</div><div class="key">unconfirmed_link</div><div class="en">message me</div><div class="ar">راسلني</div></div>
+  <div class="item"><div class="n">68</div><div class="key">unconfirmed_tail</div><div class="en"> and I'll sort it in minutes.</div><div class="ar"> وسأحلّها خلال دقائق.</div></div>
+  <div class="item"><div class="n">69</div><div class="key">uploading</div><div class="en">Uploading…</div><div class="ar">جارٍ الرفع…</div></div>
+  <div class="item"><div class="n">70</div><div class="key">try_another_file</div><div class="en">Try another file</div><div class="ar">جرّب ملفاً آخر</div></div>
+  <div class="item"><div class="n">71</div><div class="key">upload_another</div><div class="en">Upload another</div><div class="ar">ارفع ملفاً آخر</div></div>
+  <div class="item"><div class="n">72</div><div class="key">try_again</div><div class="en">Try again</div><div class="ar">أعد المحاولة</div></div>
+  <div class="item"><div class="n">73</div><div class="key">upload_ok</div><div class="en">Got it. I'll check the transfer has landed and confirm your seat — you'll get an email when I do. Nothing else needed from you.</div><div class="ar">وصلني. سأتأكّد من وصول التحويل ثم أؤكّد مقعدك، وسيصلك بريد حين أفعل. لا شيء آخر مطلوب منك.</div></div>
+  <div class="item"><div class="n">74</div><div class="key">wa_about_seat</div><div class="en">Hello — about my Smart Website seat, reference {ref}.</div><div class="ar">مرحباً — بخصوص مقعدي في الموقع الذكي، الرقم المرجعي {ref}.</div></div>
+  <div class="item"><div class="n">75</div><div class="key">wa_paid_unconfirmed</div><div class="en">Hello — I paid for seat {ref} but the page hasn't confirmed it.</div><div class="ar">مرحباً — دفعت مقابل المقعد {ref} لكن الصفحة لم تؤكّد ذلك.</div></div>
+  <div class="item"><div class="n">76</div><div class="key">wa_upsell_booked</div><div class="en">Hello Nahid - seat {ref}. I added the {name} at OMR {price}/month on the payment page. Please confirm it.</div><div class="ar">مرحباً ناهد — المقعد {ref}. أضفت {name} بـ {price} ر.ع. شهرياً في صفحة الدفع. أرجو تأكيده.</div></div>
+</section>
+<section class="group">
+  <h2>عرض مكتب الظهور</h2>
+  <p class="sub">The Visibility Desk offer, where it touches this page. The interstitial itself is already-reviewed Arabic and is not repeated here.</p>
+  <div class="item"><div class="n">77</div><div class="key">up_band_eyebrow</div><div class="en">Before you transfer · ninety seconds</div><div class="ar">قبل أن تحوّل · تسعون ثانية</div></div>
+  <div class="item"><div class="n">78</div><div class="key">up_band_p</div><div class="en">{name} is the monthly work that puts your name inside Google's answers and ChatGPT's. Booked from this page it is {now} a month instead of {rack} — and nothing is charged today.</div><div class="ar">{name} هو العمل الشهري الذي يضع اسمك داخل إجابات جوجل وإجابات ChatGPT. وحجزه من هذه الصفحة بـ {now} شهرياً بدلاً من {rack} — ولا يُحتسب عليك شيء اليوم.</div></div>
+  <div class="item"><div class="n">79</div><div class="key">up_band_btn</div><div class="en">Read it — {now} a month</div><div class="ar">اقرأه — {now} شهرياً</div></div>
+  <div class="item"><div class="n">80</div><div class="key">up_booked_h</div><div class="en">{name} — booked at {now}/month</div><div class="ar">{name} — محجوز بـ {now} شهرياً</div></div>
+  <div class="item"><div class="n">81</div><div class="key">up_booked_p</div><div class="en">Locked at the price you were shown, and not charged today. It begins the month after your site goes live. Send me one message so it is on your file in writing — that message is your record of the price and the {months}-month guarantee.</div><div class="ar">مثبّت على السعر الذي عُرض عليك، ولا يُحتسب عليك اليوم. يبدأ في الشهر التالي لإطلاق موقعك. أرسل لي رسالة واحدة ليكون في ملفك كتابةً — تلك الرسالة هي سندك على السعر وعلى ضمان الـ {months} أشهر.</div></div>
+  <div class="item"><div class="n">82</div><div class="key">up_booked_wa</div><div class="en">Confirm it on WhatsApp</div><div class="ar">أكّده على واتساب</div></div>
+</section>
+
+<footer>
+  <p>Generated from <span class="ltr">tools/pay_ar_strings.py</span> · the seat-claim page at <span class="ltr">/pay-ar/</span> · first person singular throughout, never the corporate plural.</p>
+</footer>
+</div>

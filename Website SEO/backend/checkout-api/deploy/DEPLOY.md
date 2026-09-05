@@ -189,18 +189,31 @@ taking real money — check it.
 
 In order of speed:
 
-1. **Kill the route.** `sudo rm /docker/n8n/traefik-dynamic/checkout.yml` —
-   takes effect immediately, no restart. The checkout page's own timeout then
-   hands every buyer to the WhatsApp fallback and tells them nothing was
-   charged, which is true.
+1. **Flip the kill switch.** One env var and a restart:
+
+   ```bash
+   ssh root@187.127.116.171 \
+     "sed -i 's/^PAY_ENABLED=1/PAY_ENABLED=0/' /etc/checkout-api/.env \
+      && systemctl restart checkout-api"
+   ```
+
+   `lib/thawani.js` reads `PAY_ENABLED` into `config().enabled`, mirroring
+   `storefront-offer-api`. `routes/session.js` then refuses every session, and
+   the checkout page turns that refusal into its offline handover — the buyer
+   is told, truthfully, that nothing was charged. Reverse it by changing the
+   `0` back to a `1`.
 2. **Stop the service.** `sudo systemctl stop checkout-api`. Same buyer-facing
-   result.
-3. **Rebuild with `PAY_LIVE = False`.** The honest, permanent one — the copy
+   result, but `/health` stops answering too, so monitoring reads it as an
+   outage rather than a deliberate pause.
+3. **Kill the route.** `sudo rm /docker/n8n/traefik-dynamic/checkout.yml` —
+   also immediate, no restart, but it throws away the Traefik file and the
+   certificate is re-challenged when you put it back.
+4. **Rebuild with `PAY_LIVE = False`.** The honest, permanent one — the copy
    stops promising a card at all. Slowest, because it needs a site deploy.
 
-Unlike the storefront, this service has **no `PAY_ENABLED` kill switch**. If
-that matters, it is a small addition to `lib/thawani.js` mirroring
-`storefront-offer-api`'s `config().enabled`.
+The same switch exists on the storefront, at `/etc/storefront-offer-api/.env`
+with `systemctl restart storefront-offer-api`. The two services are independent:
+switching one off leaves the other taking cards.
 
 ## 10. Retiring nothing
 

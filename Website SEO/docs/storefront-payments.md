@@ -21,6 +21,7 @@ ledger and separate prices. See "Two payment paths" at the bottom.
 | Piece | State |
 |---|---|
 | `public_html/en/pay.html` → `/en/pay/` | built, `noindex` |
+| `public_html/pay-ar.html` → `/pay-ar/` | built 2026-09-05 by `tools/build_pay_ar.py`, `noindex`. **Arabic copy is awaiting a native pass** — see §2b |
 | `/en/claim/` | 301 → `/en/pay/` (`.htaccess` §2b-ii); `en/claim.html` stays on disk |
 | Proforma invoice on claim (PDF, emailed) | built, **needs `RESEND_API_KEY` on the service** |
 | Paid invoice on payment (PDF, emailed) | built, fires only when the gateway reads back `paid` |
@@ -65,6 +66,47 @@ form on /en/smart-storefront/
   │  Nahid sets Confirmed by hand once the transfer lands              │
   └────────────────────────────────────────────────────────────────────┘
 ```
+
+### 2b. The Arabic route
+
+The Arabic storefront now ends on an Arabic seat page:
+
+```
+form on /smart-storefront-ar/  ──►  /pay-ar/?ref=SS-XXXXXX&new=1
+```
+
+`public_html/pay-ar.html` is **generated from `public_html/en/pay.html`**, not
+written beside it. `tools/build_pay_ar.py` carries the English page's markup and
+its entire script over byte for byte and swaps only the strings, so there is one
+copy of the code that opens Thawani sessions, polls for confirmation and decides
+whether to say "paid". Edit `en/pay.html`, re-run the builder, and the Arabic
+page follows. Reword an English sentence without updating
+`tools/pay_ar_strings.py` and the builder stops rather than shipping the old
+Arabic.
+
+```
+python3 tools/build_pay_ar.py            # write it
+python3 tools/build_pay_ar.py --check    # fail if it is stale
+python3 tools/build_pay_ar_review.py     # the reviewer's page, build/pay-ar-review.html
+```
+
+**Two links still send an Arabic buyer to the English page**, and both live in
+`storefront-offer-api`, not in this repo:
+
+1. **The invoice email.** It links to `PAY_PATH`, which is one fixed value for
+   every buyer.
+2. **The gateway return URL.** Built from the same `PAY_PATH`, so a buyer who
+   pays by card comes back to `/en/pay/?ref=…&status=success` — the English
+   page, at the one moment the page is telling them their money arrived.
+
+The claim row already carries what is needed to fix both: the Arabic form posts
+`lang: "ar"` with the claim, and has since the page was built. `routes/claim.js`
+reads a fixed key list and drops it. Storing that field and choosing the path
+per claim — `/pay-ar/` when `lang === "ar"`, `PAY_PATH` otherwise — is the whole
+change, on the service side.
+
+Until then the Arabic page is reached on the redirect straight after the claim,
+which is the visit that matters most and the only one most buyers make.
 
 **Only a gateway reading back `paid` confirms a seat automatically.** A
 `?status=success` in the URL is not a receipt — a buyer can type it — so the page

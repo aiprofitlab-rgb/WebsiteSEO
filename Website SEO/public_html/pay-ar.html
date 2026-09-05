@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+<title>مقعدك — AI Profit Lab</title>
+<meta name="robots" content="noindex, nofollow"/>
+<meta name="theme-color" content="#0A3D30"/>
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg?v=20260822">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=20260822">
+<link rel="manifest" href="/site.webmanifest?v=20260822">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Markazi+Text:wght@400;500;600&family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --teal-900:#0A3D30;--teal:#0F6E56;--amber:#BA7517;--amber-bright:#D89234;--amber-pale:#E8C98F;
+  --cream:#F1EFE8;--panel:#FAF8F2;--panel-2:#EAE4D5;--white:#FFF;--ink:#232B26;--muted:#5A665D;--line:#DED8C8;--wa:#1FAF5E;
+  --display:'Marcellus',Georgia,serif;--sans:'IBM Plex Sans',-apple-system,sans-serif;--mono:'IBM Plex Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+[hidden]{display:none !important}
+body{margin:0;background:var(--cream);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased}
+a{color:var(--teal)}
+a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--amber-bright);outline-offset:3px}
+h1{font-family:var(--display);font-weight:400;font-size:clamp(1.8rem,4.6vw,2.6rem);line-height:1.15;margin:0 0 .4em;color:var(--white)}
+h2{font-family:var(--display);font-weight:400;font-size:1.4rem;color:var(--teal-900);margin:0 0 .5em}
+p{margin:0 0 1em}
+.wrap{max-width:680px;margin:0 auto;padding:0 22px}
+.top{background:linear-gradient(168deg,var(--teal),var(--teal-900));color:var(--cream);padding:26px 0 46px}
+.brand{display:inline-block;margin-bottom:30px;line-height:0}
+.brand img{height:24px;width:auto}
+.eyebrow{font-family:var(--mono);font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--amber-pale);margin:0 0 12px}
+.top p.sub{color:rgba(241,239,232,.85);margin:0}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:26px 24px;margin:-28px 0 20px;position:relative;box-shadow:0 22px 50px -38px rgba(10,61,48,.7)}
+.refbox{display:flex;align-items:center;gap:14px;flex-wrap:wrap;border-bottom:1px solid var(--line);padding-bottom:18px;margin-bottom:18px}
+.ref{font-family:var(--mono);font-size:1.5rem;color:var(--teal-900);letter-spacing:.06em}
+.pill{font-family:var(--mono);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;padding:5px 11px;border-radius:20px;background:var(--panel-2);color:var(--muted)}
+.pill.wait{background:#FBF3E4;color:#8A6215}
+.pill.sent{background:#E7F0EC;color:var(--teal-900)}
+.pill.done{background:var(--teal);color:#fff}
+.row{display:flex;justify-content:space-between;gap:14px;padding:8px 0;font-size:.98rem}
+.row+.row{border-top:1px solid var(--line)}
+.row b{font-family:var(--display);font-weight:400;font-size:1.2rem;color:var(--teal-900)}
+.row.due b{font-size:1.5rem}
+.steps{list-style:none;padding:0;margin:22px 0 0;counter-reset:s}
+.steps li{counter-increment:s;position:relative;padding:0 0 20px 42px;font-size:.97rem;color:var(--muted)}
+.steps li::before{content:counter(s);position:absolute;left:0;top:-1px;width:27px;height:27px;border-radius:50%;
+  background:var(--panel-2);color:var(--teal-900);font-family:var(--mono);font-size:.8rem;display:flex;align-items:center;justify-content:center}
+.steps li.now::before{background:var(--teal);color:#fff}
+.steps li.was::before{content:"✓";background:#DCE9E3;color:var(--teal)}
+.steps li strong{color:var(--ink);display:block;font-weight:600}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;font-family:var(--sans);font-weight:600;font-size:1rem;
+  border:0;border-radius:8px;padding:14px 24px;cursor:pointer;text-decoration:none;transition:transform .15s,background .15s}
+.btn:hover{transform:translateY(-1px)}
+.btn:disabled{opacity:.65;cursor:default;transform:none}
+.btn-primary{background:var(--teal);color:#fff}
+.btn-wa{background:var(--wa);color:#fff}
+.btn-quiet{background:var(--panel-2);color:var(--teal-900)}
+.btn-block{width:100%}
+/* the pay panel */
+.pay{background:var(--white);border:1px solid var(--line);border-radius:12px;padding:22px 20px;margin-top:20px}
+.pay h3{font-family:var(--display);font-weight:400;font-size:1.15rem;color:var(--teal-900);margin:0 0 6px}
+.secure{display:flex;align-items:center;gap:8px;justify-content:center;font-size:.8rem;color:var(--muted);margin:12px 0 0}
+.secure svg{width:14px;height:14px;fill:var(--teal)}
+.alt{border-top:1px solid var(--line);margin-top:20px;padding-top:18px}
+.alt summary{cursor:pointer;font-weight:600;color:var(--teal-900);font-size:.95rem;list-style:none}
+.alt summary::-webkit-details-marker{display:none}
+.alt summary::before{content:"＋ ";color:var(--amber);font-family:var(--mono)}
+.alt[open] summary::before{content:"− "}
+.up{background:var(--panel);border:1px dashed var(--line);border-radius:12px;padding:20px 18px;margin-top:14px;text-align:center}
+input[type=file]{display:none}
+.note{font-size:.86rem;color:var(--muted)}
+.msg{display:none;border-radius:9px;padding:13px 15px;font-size:.93rem;margin-top:14px}
+.msg.on{display:block}
+.msg.err{background:#FBEDE9;border:1px solid #E5B4A6;color:#8A3B22}
+.msg.ok{background:#E7F0EC;border:1px solid #A9CFC0;color:#0A3D30}
+.msg.info{background:#FBF3E4;border:1px solid #E8CE9C;color:#7A5510}
+/* confirmed */
+.done-box{background:linear-gradient(168deg,#127A5F,var(--teal-900));color:#fff;border-radius:12px;padding:24px 22px;margin-top:20px}
+.done-box h3{font-family:var(--display);font-weight:400;font-size:1.3rem;margin:0 0 8px;color:#fff}
+.done-box p{color:rgba(241,239,232,.9);margin:0 0 8px;font-size:.95rem}
+.done-box .invno{font-family:var(--mono);font-size:.85rem;color:var(--amber-pale)}
+.spin{display:inline-block;width:15px;height:15px;border:2px solid rgba(255,255,255,.35);border-top-color:#fff;border-radius:50%;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.wa-icon{width:19px;height:19px;fill:currentColor}
+footer{padding:36px 0 50px;text-align:center;font-size:.82rem;color:var(--muted)}
+@media (prefers-reduced-motion:reduce){*{transition:none !important;animation:none !important}}
+/* >>> APL upsell css >>> */
+/* tokens this page does not define, scoped to the dialog that needs them */
+.up-dlg{--teal-950:#072B22;--ease:cubic-bezier(.22,.7,.25,1)}
+.up-dlg .btn-teal{background:var(--teal);color:#fff}
+/* ==================================================== the upsell interstitial
+   Shown once, between "pay" and the card page. A real <dialog> so the browser
+   supplies the modal semantics, the focus trap and Escape for free - none of
+   which are worth reimplementing badly on the one page that handles money.
+
+   Escape and backdrop-dismiss are NOT blocked. A modal you cannot get out of
+   in front of a card page is how a paying buyer becomes an abandoned cart;
+   every exit from this thing lands on "continue without it".                */
+.up-dlg{
+  border:0;padding:0;background:transparent;max-width:min(760px,calc(100vw - 28px));width:100%;
+  max-height:calc(100dvh - 28px);overflow:visible;color:var(--ink);
+}
+.up-dlg::backdrop{background:rgba(7,43,34,.62);backdrop-filter:blur(3px)}
+.up-card{
+  background:var(--cream);border-radius:18px;overflow:hidden;
+  max-height:calc(100dvh - 28px);display:flex;flex-direction:column;
+  box-shadow:0 50px 100px -40px rgba(7,43,34,.75);
+}
+.up-scroll{overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+
+/* --- the head ---------------------------------------------------------- */
+/* position:relative is load-bearing. .up-x is absolute, and with no positioned
+   ancestor it anchors to the <dialog> itself - which does not scroll - so the
+   close cross hangs in the top corner over whatever text is passing beneath
+   it. Anchored here it scrolls away with the header, as it should; the
+   sticky footer keeps a way out on screen at all times anyway. */
+.up-head{
+  position:relative;background:var(--teal-950);color:var(--cream);
+  padding:clamp(22px,3.4vw,32px) clamp(20px,3.4vw,36px);
+}
+/* the eyebrow is the only line long enough to reach the close cross */
+.up-head .eyebrow{color:var(--amber-bright);margin:0 0 12px;font-size:.74rem;padding-inline-end:44px}
+.up-head h2{
+  font-family:var(--display);font-weight:400;color:var(--cream);margin:0;
+  font-size:clamp(1.36rem,3.1vw,1.95rem);line-height:1.2;
+}
+.up-head p{margin:12px 0 0;color:rgba(241,239,232,.82);font-size:1rem;line-height:1.6}
+
+/* --- the body ---------------------------------------------------------- */
+.up-body{padding:clamp(20px,3.4vw,34px) clamp(20px,3.4vw,36px) 4px}
+.up-body h3{
+  font-family:var(--display);font-weight:400;color:var(--teal-950);
+  font-size:1.16rem;margin:0 0 6px;line-height:1.3;
+}
+.up-body p{margin:0 0 15px;font-size:1rem;line-height:1.68;color:var(--ink)}
+.up-body p.sub{color:var(--muted);font-size:.95rem}
+.up-def{
+  border-inline-start:3px solid var(--amber-pale);padding-inline-start:16px;margin:0 0 22px;
+}
+.up-def:last-of-type{margin-bottom:6px}
+.up-rule{height:1px;background:var(--line);margin:22px 0}
+
+/* the "already built in" list */
+.up-have{background:var(--panel-2);border-radius:14px;padding:18px 20px;margin:0 0 18px}
+.up-have p{margin:0 0 10px;font-size:.95rem}
+.up-have ul{margin:0;padding:0;list-style:none;display:grid;gap:7px}
+.up-have li{
+  position:relative;padding-inline-start:26px;font-size:.93rem;color:var(--muted);line-height:1.5;
+}
+.up-have li::before{
+  content:"";position:absolute;inset-inline-start:2px;top:.52em;
+  width:10px;height:6px;border-inline-start:2px solid var(--teal);border-bottom:2px solid var(--teal);
+  transform:rotate(-45deg);
+}
+
+/* --- the price block --------------------------------------------------- */
+.up-offer{
+  background:var(--teal-950);color:var(--cream);border-radius:16px;
+  padding:clamp(20px,3vw,26px);margin:4px 0 18px;
+}
+.up-offer .nm{
+  font-family:var(--mono);font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--amber-bright);margin:0 0 10px;display:block;
+}
+.up-figs{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin:0 0 10px}
+.up-now{
+  font-family:var(--display);font-size:clamp(1.9rem,5vw,2.5rem);line-height:1;color:var(--cream);
+}
+.up-now .per{font-family:var(--sans);font-size:.94rem;color:rgba(241,239,232,.72)}
+.up-was{
+  font-family:var(--mono);font-size:1rem;color:rgba(241,239,232,.6);text-decoration:line-through;
+  text-decoration-thickness:1.5px;
+}
+.up-offer .note{margin:0;font-size:.9rem;color:rgba(241,239,232,.75);line-height:1.55}
+
+/* --- the guarantee ----------------------------------------------------- */
+.up-gtee{
+  border:1.5px solid var(--teal);border-radius:14px;padding:20px;margin:0 0 18px;background:var(--white);
+  display:flex;gap:15px;align-items:flex-start;
+}
+.up-gtee svg{flex:none;width:30px;height:30px;fill:var(--teal);margin-top:1px}
+.up-gtee h3{margin:0 0 5px}
+.up-gtee p{margin:0;font-size:.95rem;line-height:1.6}
+.up-gtee .fine{margin-top:9px;font-size:.85rem;color:var(--muted);line-height:1.55}
+
+/* --- the scarcity line ------------------------------------------------- */
+.up-only{
+  background:#FBF3E4;border:1px solid #E8CE9C;border-radius:12px;
+  padding:15px 18px;margin:0 0 20px;font-size:.96rem;line-height:1.6;color:#6E4E0E;
+}
+.up-only b{color:#5A3F09}
+
+/* --- the actions ------------------------------------------------------- */
+.up-act{
+  padding:18px clamp(20px,3.4vw,36px) clamp(20px,3.4vw,26px);
+  background:var(--cream);border-top:1px solid var(--line);
+  position:sticky;bottom:0;display:grid;gap:11px;
+}
+.up-act .btn{width:100%}
+.up-no{
+  background:none;border:0;font-family:var(--sans);font-size:.95rem;color:var(--muted);
+  text-decoration:underline;text-underline-offset:3px;cursor:pointer;padding:6px;line-height:1.5;
+}
+.up-no:hover{color:var(--ink)}
+.up-x{
+  position:absolute;inset-inline-end:12px;top:12px;width:36px;height:36px;border:0;border-radius:50%;
+  background:rgba(241,239,232,.14);color:var(--cream);font-size:1.1rem;line-height:1;cursor:pointer;
+  display:grid;place-items:center;
+}
+.up-x:hover{background:rgba(241,239,232,.26)}
+
+@media (max-width:560px){
+  .up-dlg{max-width:100vw;max-height:100dvh;margin:0;height:100dvh}
+  .up-card{border-radius:0;max-height:100dvh;height:100dvh}
+  .up-gtee{flex-direction:column;gap:10px}
+}
+@media (prefers-reduced-motion:no-preference){
+  .up-dlg[open]{animation:upIn .34s var(--ease)}
+  @keyframes upIn{from{opacity:0;transform:translateY(14px) scale(.985)}to{opacity:1;transform:none}}
+}
+
+.up-booked{
+  background:var(--white);border:1.5px solid var(--teal);border-radius:12px;
+  padding:20px 18px;margin-top:18px;
+}
+.up-booked h3{font-family:var(--display);font-weight:400;font-size:1.1rem;color:var(--teal-900);margin:0 0 6px}
+.up-booked p{font-size:.93rem;color:var(--muted);margin:0 0 14px}
+.up-booked b{color:var(--ink)}
+
+.up-band{
+  background:linear-gradient(168deg,#FCF8F0,#F5EFE1);
+  border:1.5px solid var(--amber-bright);border-radius:12px;
+  padding:20px 18px;margin:18px 0 0;
+}
+.up-band .eyebrow{color:var(--amber);margin:0 0 8px}
+.up-band h3{font-family:var(--display);font-weight:400;font-size:1.12rem;line-height:1.35;
+  color:var(--teal-900);margin:0 0 8px}
+.up-band p{font-size:.92rem;color:var(--muted);margin:0 0 16px}
+.up-band b{color:var(--ink)}
+.up-band .btn{background:var(--teal);color:#fff}
+
+/* <<< APL upsell css <<< */
+
+/* ══════════════════════ Arabic ══════════════════════ */
+/* Appended by tools/build_pay_ar.py. Everything above this line is the English
+   page's stylesheet, carried over unchanged - so a design change lands on both
+   languages and only the declarations that name a physical side are restated.
+
+   1. TYPE  2. BIDI  3. MIRROR, in that order. */
+
+/* ─────────── 1. TYPE ─────────── */
+/* Fallback metrics measured out of the font files in tools/v4/rtl.py. Without
+   them the page reflows on font swap: Markazi Text's x-height is 36.4% of its
+   em against Geeza Pro's 49.1%, so every Arabic heading paints a third too
+   large in the fallback and snaps down when the webfont lands. */
+@font-face{
+  font-family:'Markazi Fallback';src:local('Geeza Pro');
+  size-adjust:74.2%;ascent-override:113.1%;descent-override:48.7%;line-gap-override:0%;
+}
+@font-face{
+  font-family:'Markazi Fallback 2';src:local('Tahoma'),local('Segoe UI');
+  size-adjust:66.8%;ascent-override:125.6%;descent-override:54.1%;line-gap-override:0%;
+}
+@font-face{
+  font-family:'Plex Arabic Fallback';src:local('Geeza Pro');
+  size-adjust:105.1%;ascent-override:103.2%;descent-override:39.5%;line-gap-override:0%;
+}
+@font-face{
+  font-family:'Plex Arabic Fallback 2';src:local('Tahoma'),local('Segoe UI');
+  size-adjust:94.6%;ascent-override:114.7%;descent-override:43.9%;line-gap-override:0%;
+}
+
+[dir=rtl]{
+  --display:'Markazi Text','Markazi Fallback','Markazi Fallback 2','Amiri',Georgia,serif;
+  --sans:'IBM Plex Sans Arabic','Plex Arabic Fallback','Plex Arabic Fallback 2',-apple-system,'Segoe UI',sans-serif;
+  /* The mono face keeps its Latin stack. Everything this page sets in mono is
+     Latin: the reference code, the figures, and the eyebrow. */
+}
+/* Naskh needs more leading than Latin at the same size - the dots below the
+   baseline collide at 1.65. */
+[dir=rtl] body{line-height:1.85}
+[dir=rtl] h1,[dir=rtl] h2,[dir=rtl] h3{letter-spacing:0;line-height:1.32}
+[dir=rtl] h1{font-size:clamp(2rem,5.2vw,2.9rem)}
+[dir=rtl] h2{font-size:1.6rem}
+/* Markazi sets visibly smaller than Marcellus at the same px, and the price is
+   the one figure on this page a buyer checks twice. */
+[dir=rtl] .row b{font-size:1.3rem}
+[dir=rtl] .row.due b{font-size:1.6rem}
+[dir=rtl] .done-box h3{font-size:1.45rem}
+
+/* Tracking and small-caps are Latin devices: letter-spacing breaks the join
+   between Arabic letters, and text-transform does nothing at all. Both come
+   off wherever the English sheet sets them on a string that is now Arabic.
+   .ref is deliberately absent - a reference code is still Latin. */
+[dir=rtl] .eyebrow,[dir=rtl] .pill{letter-spacing:0;text-transform:none}
+
+/* ─────────── 2. BIDI ─────────── */
+/* A Latin run inside Arabic is reordered unless it is isolated. Prices go
+   through money(), which carries its own U+2066/U+2069 pair; these are the
+   runs that arrive as bare text from the ledger or from the markup.
+
+   isolate, NOT embed: under `embed` the Latin run still takes part in the
+   surrounding reorder and a code at the start of a line gets thrown to the far
+   edge of its box. */
+[dir=rtl] .ref{direction:ltr;unicode-bidi:isolate;text-align:right}
+/* The business name is whatever the buyer typed - Arabic, Latin, or both.
+   plaintext lets each one set its own direction from its first strong
+   character instead of being forced either way. */
+[dir=rtl] #business{unicode-bidi:plaintext}
+[dir=rtl] .invno{direction:rtl;unicode-bidi:isolate}
+
+/* ─────────── 3. MIRROR ─────────── */
+/* The whole of it. Four declarations name a physical side on this page. */
+[dir=rtl] .steps li{padding:0 42px 20px 0}
+[dir=rtl] .steps li::before{left:auto;right:0}
+</style>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SLR9GD3MJP"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-SLR9GD3MJP');</script>
+<!-- Microsoft Clarity -->
+<script>(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","y7wcjlyamc");</script>
+<script defer src="/js/apl-analytics.js?v=c85e0eed"></script>
+</head>
+<body>
+
+<div class="top">
+  <div class="wrap">
+    <a class="brand" href="/smart-storefront-ar/"><img src="/en/logo/wordmark-dark.svg" alt="AI Profit Lab" width="150" height="24"/></a>
+    <p class="eyebrow" id="eyebrow">حجزك</p>
+    <h1 id="headline">جارٍ البحث عن مقعدك…</h1>
+    <p class="sub" id="subline">لحظة واحدة.</p>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="card" id="card" hidden>
+    <div class="refbox">
+      <span class="ref" id="ref">—</span>
+      <span class="pill" id="statusPill">—</span>
+    </div>
+    <div class="row"><span>النشاط</span><span id="business">—</span></div>
+    <div class="row"><span>السعر المحجوز لك</span><b id="price">—</b></div>
+    <div class="row due"><span id="depositLabel">عربون 50% لحجز المقعد</span><b id="deposit">—</b></div>
+    <div class="row" id="rebateRow" hidden><span>يُرَدّ إليك مقابل تعهّداتك، بعد التسليم</span><b id="rebate">—</b></div>
+
+    <!-- confirmed -->
+    <div class="done-box" id="doneBox" hidden>
+      <h3 id="doneTitle">تم تأكيد مقعدك.</h3>
+      <p id="doneBody">فاتورتك في بريدك — وهي الإيصال، فهي التي تحتفظ بها.</p>
+      <p class="invno" id="doneInv" hidden></p>
+    </div>
+
+<!-- >>> APL upsell booked >>> -->
+<div class="up-booked" id="upBooked" hidden>
+  <h3>مكتب الظهور — محجوز بـ <span class="num" dir="ltr">97</span> ر.ع. شهرياً</h3>
+  <p>مثبّت على السعر الذي عُرض عليك، <b>ولا يُحتسب عليك اليوم</b>. يبدأ في الشهر التالي لإطلاق موقعك. أرسل لي رسالة واحدة ليكون في ملفك كتابةً — تلك الرسالة هي سندك على السعر وعلى ضمان الـ 6 أشهر.</p>
+  <a class="btn btn-wa" id="upBookedWa" href="#" target="_blank" rel="noopener">أكّده على واتساب</a>
+</div>
+<!-- <<< APL upsell booked <<< -->
+    <!-- returning from the payment page -->
+    <div class="msg info" id="confirming"><span class="spin" style="border-color:rgba(122,85,16,.3);border-top-color:#7A5510"></span> &nbsp;جارٍ تأكيد دفعتك مع البنك. يستغرق هذا ثوانٍ قليلة — لا تغلق الصفحة.</div>
+
+    <!-- pay -->
+    <div class="pay" id="payBox" hidden>
+      <h3 id="payTitle">ادفع العربون</h3>
+      <p class="note" id="payNote" style="margin:0 0 14px">بيانات بطاقتك تُدخَل على صفحة مزوّد الدفع نفسه. ولا تُكتب في هذا الموقع ولا تُرسَل إليه ولا تُخزَّن فيه إطلاقاً.</p>
+      <button class="btn btn-primary btn-block" id="payBtn">ادفع العربون</button>
+      <p class="secure">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1L3 5v6c0 5.5 3.8 10.7 9 12 5.2-1.3 9-6.5 9-12V5l-9-4zm0 6a2.5 2.5 0 012.5 2.5V11h1v6h-7v-6h1V9.5A2.5 2.5 0 0112 7zm0 1.5a1 1 0 00-1 1V11h2V9.5a1 1 0 00-1-1z"/></svg>
+        المدفوعات تُعالَج عبر Thawani · مرخّصة من البنك المركزي العُماني
+      </p>
+<!-- >>> APL upsell band >>> -->
+      <div class="up-band" id="upBand" hidden>
+        <p class="eyebrow">قبل أن تحوّل · تسعون ثانية</p>
+        <h3>موقعك سيكون جاهزاً لأن يُعثر عليه.<br>أما أن يُعثر عليه فعلاً، فتلك مهمة أخرى.</h3>
+        <p>مكتب الظهور هو العمل الشهري الذي يضع اسمك داخل إجابات جوجل وإجابات ChatGPT. وحجزه من هذه الصفحة بـ <b><span class="num" dir="ltr">97</span> ر.ع.</b> شهرياً بدلاً من <span class="num" dir="ltr">300</span> ر.ع. — <b>ولا يُحتسب عليك شيء اليوم</b>.</p>
+        <button type="button" class="btn btn-block" id="upBandBtn">اقرأه — <span class="num" dir="ltr">97</span> ر.ع. شهرياً</button>
+      </div>
+<!-- <<< APL upsell band <<< -->
+      <div class="msg err" id="payErr"></div>
+
+      <details class="alt" id="altBox">
+        <summary id="altSummary">تفضّل الدفع بتحويل بنكي؟</summary>
+        <p class="note" style="margin:12px 0 0">ردّ على البريد الذي وصلتك به الفاتورة، أو راسلني بالأسفل، وأرسل لك تفاصيل التحويل مباشرة. أنا لا أنشر بيانات بنكية على صفحة — فهكذا تحديداً يُنتحل اسم الناس.</p>
+
+        <div class="up" id="up">
+          <p style="margin:0 0 6px"><strong>حوّلته بالفعل؟ ارفع الإيصال.</strong></p>
+          <p class="note" style="margin:0 0 16px">صورة أو ملف PDF لتأكيد التحويل. حتى 5 ميغابايت. يُحفَظ بشكل خاص ولا يفتحه أحد غيري.</p>
+          <input type="file" id="file" accept="image/jpeg,image/png,image/heic,application/pdf"/>
+          <button class="btn btn-quiet" id="pick">اختر الإيصال</button>
+          <p class="note" id="fname" style="margin:12px 0 0"></p>
+          <div class="msg err" id="upErr"></div>
+          <div class="msg ok" id="upOk"></div>
+        </div>
+      </details>
+    </div>
+
+    <ol class="steps" id="steps">
+      <li id="s1"><strong>حجزت مقعداً</strong>تم — بياناتك وصلتني.</li>
+      <li id="s2"><strong>فاتورتك في بريدك</strong>أُرسلت لحظة حجزك، وفيها كل ما تحتاجه للدفع.</li>
+      <li id="s3"><strong>تدفع عربون 50%</strong>بالبطاقة هنا، أو بتحويل إن كنت تفضّل.</li>
+      <li id="s4"><strong>يتأكّد مقعدك</strong>الدفع بالبطاقة يتأكّد فوراً. والتحويل يتأكّد حين أراه وقد وصل.</li>
+    </ol>
+
+    <p style="margin:22px 0 0;text-align:center">
+      <a class="btn btn-wa" id="wa" href="https://api.whatsapp.com/send?phone=96899245250" target="_blank" rel="noopener">
+        <svg class="wa-icon" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
+        اسألني عن أي شيء في هذا
+      </a>
+    </p>
+  </div>
+
+  <div class="card" id="missing" hidden>
+    <h2>لا أجد هذا الرقم المرجعي.</h2>
+    <p>إمّا أن الرابط انقطع في منتصفه بين البريد وهنا، أو أن في الرقم المرجعي خطأ مطبعي. وكلاهما يُصلَح بسهولة.</p>
+    <p style="margin-bottom:0"><a class="btn btn-wa" href="https://api.whatsapp.com/send?phone=96899245250" target="_blank" rel="noopener">أرسل لي الرقم المرجعي على واتساب</a></p>
+  </div>
+</div>
+
+<!-- >>> APL upsell dialog >>> -->
+<dialog class="up-dlg" id="upDlg" aria-labelledby="upTitle">
+  <div class="up-card">
+    <div class="up-scroll">
+
+      <div class="up-head">
+        <button type="button" class="up-x" id="upX" aria-label="إغلاق والمتابعة بدونه">&#10005;</button>
+        <p class="eyebrow">هذه الصفحة فقط &#183; لن يظهر هذا العرض مرة أخرى</p>
+        <h2 id="upTitle">موقعك سيكون جاهزاً لأن يُعثر عليه.<br>أما أن يُعثر عليه فعلاً، فتلك مهمة أخرى.</h2>
+        <p>تسعون ثانية، ثم تستطيع الدفع. هذا هو الشيء الذي يعود الناس ليطلبوه مني بعد ستة أشهر، ولذلك أفضّل أن تسمعه الآن.</p>
+      </div>
+
+      <div class="up-body">
+
+        <div class="up-def">
+          <h3>‏SEO — كيف يقرّر جوجل من يعرض</h3>
+          <p>تخيّل مكتبة فيها عشرة ملايين كتاب وأمين مكتبة واحد. يدخل شخص ويسأل عن «أفضل مورّد مضخات مياه في مسقط». هو لا يقرأ عشرة ملايين كتاب، بل يمدّ يده إلى الكتب القليلة التي يعرفها ويثق بها ورأى الناس يعودون إليها راضين. <b>‏SEO هو العمل الذي يجعلك أحد الكتب التي تمتدّ إليها يده.</b></p>
+        </div>
+
+        <div class="up-def">
+          <h3>‏GEO — الشيء نفسه، لكن للذكاء الاصطناعي</h3>
+          <p>حين يسأل مشتريك ChatGPT: «ممن أشتري في عُمان؟»، فهو لا يذهب ليقرأ الإنترنت في تلك اللحظة، بل يجيب مما قرأه سابقاً ووثق به. <b>‏GEO هو العمل الذي يجعلك داخل ما قرأه</b> — ليكون اسمك في الإجابة نفسها، لا في صفحة رابعة لا يفتحها أحد.</p>
+        </div>
+
+        <div class="up-rule"></div>
+
+        <h3>وهنا الجزء الذي لا يخبرك به أحد: هذا العمل لا ينتهي</h3>
+        <p>منافسوك لا يتوقفون. وجوجل يغيّر رأيه فيمن يثق به كل يوم تقريباً. ونماذج الذكاء الاصطناعي يُعاد تدريبها وتقرأ الويب من جديد وفق جدولها الخاص — وفي كل مرة تُكتب الإجابة من الصفر.</p>
+        <p>فالظهور ليس جداراً تبنيه مرة واحدة. <b>إنه حديقة.</b> توقّف عن سقايتها فلن تبقى كما تركتها، بل تعود إلى العشب البري — لأن جارك واصل سقاية حديقته.</p>
+
+        <div class="up-rule"></div>
+
+        <h3>ما تدفع مقابله بالفعل — وأين يتوقف</h3>
+        <div class="up-have">
+          <p>كل ما أبنيه لك يحمل أصلاً هيكل الظهور كاملاً:</p>
+          <ul>
+            <li>بنية يقرأها جوجل بوضوح، على موقع سريع التحميل</li>
+            <li>ترميز Schema يخبر الذكاء الاصطناعي ما هو نشاطك وما الذي تبيعه</li>
+            <li>عربية وإنجليزية مكتوبتان كما ينبغي، لا مارّتان عبر مترجم آلي</li>
+            <li>ملف <code>llms.txt</code> وبنية محتوى مصمّمة ليقتبسها محرك الإجابات</li>
+          </ul>
+        </div>
+        <p>هذا الجزء حقيقي، ومنجز، وهو ملكك إلى الأبد. <b>لكن البنية التحتية طريق، لا سيارة تسير عليه.</b> الطريق سيكتمل يوم أسلّمه لك، ويبقى على أحدهم أن يقودها — لا مرة واحدة، بل كل يوم.</p>
+
+        <h3>وكيف تبدو القيادة عملياً</h3>
+        <p>متابعة ما يكتبه ويسأله مشتروك فعلاً. وكتابة الإجابات التي يبحثون عنها. وإيصال اسمك إلى الصفحات والأدلة والمصادر التي تقرأها النماذج فعلاً. وإبقاء ملفّك في «نشاطي التجاري على جوجل» حيّاً. وإصلاح ما يتعطّل. واختبار شهري لما إذا كان ChatGPT وGemini وإجابات جوجل الذكية وبحث جوجل العادي يذكرون اسمك — مع عرض لقطات الشاشة عليك في الحالتين.</p>
+        <p class="sub">هذا عمل يومي. إنه وظيفة، وهي الوظيفة التي أؤدّيها.</p>
+
+        <div class="up-rule"></div>
+
+        <div class="up-offer">
+          <span class="nm">احجزه الآن &#183; مكتب الظهور</span>
+          <p class="up-figs">
+            <span class="up-now"><span class="num" dir="ltr">97</span> ر.ع.<span class="per">شهرياً</span></span>
+            <span class="up-was"><span class="num" dir="ltr">300</span> ر.ع. شهرياً</span>
+          </p>
+          <p class="note"><b>لا يُحتسب شيء اليوم.</b> يبدأ في الشهر التالي لإطلاق موقعك ويُفوتر شهرياً. وتستطيع الإلغاء في أي شهر — مع أن الضمان أدناه يحتاج 6 أشهر ليكتمل.</p>
+        </div>
+
+        <div class="up-gtee">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l8 3v6c0 5-3.4 9.4-8 11-4.6-1.6-8-6-8-11V5l8-3zm-1.2 13.4 5.7-5.7-1.4-1.4-4.3 4.3-2-2-1.4 1.4 3.4 3.4z"/></svg>
+          <div>
+            <h3>ضمان الـ6 أشهر</h3>
+            <p>بعد 6 أشهر من إطلاق موقعك، إن لم تكن ظاهراً — لا جوجل يذكرك ولا ChatGPT — <b>أعيد لك كل ريال دفعته مقابل مكتب الظهور، وأواصل العمل مجاناً حتى تظهر.</b></p>
+            <p class="fine">بعبارة صريحة: الاسترداد يشمل رسوم هذه الخدمة، لا تكلفة بناء موقعك. و«الظهور» ليس مصطلحاً غامضاً — ففي شهرك الأول نكتب معاً أسئلة الشراء الحقيقية التي يسألها عملاؤك، وهي ما نختبر عليه، كل شهر، أمامك.</p>
+          </div>
+        </div>
+
+        <div class="up-only">
+          <b>هذا السعر موجود في هذه الصفحة، ولا مكان غيرها.</b><br>السعر المعلن للعمل نفسه هو <b><span class="num" dir="ltr">300</span> ر.ع. شهرياً</b>. و<span class="num" dir="ltr">97</span> ر.ع. هو ما يكلّفه إن حجزته في هذه اللحظة، قبل أن تدفع مقابل البناء — لأن القيام بهذا من اليوم الأول أرخص عليّ بكثير من إنقاذه بعد عام. <b>غادر هذه الصفحة وسيعود السعر إلى <span class="num" dir="ltr">300</span> ر.ع.</b> أنا لا أعيد فتحه لاحقاً، ولن ينفع الطلب اللطيف في مارس.
+        </div>
+
+      </div>
+    </div>
+
+    <div class="up-act">
+      <button type="button" class="btn btn-teal" id="upYes">أضِفه — <span class="num" dir="ltr">97</span> ر.ع. شهرياً</button>
+      <button type="button" class="up-no" id="upNo">لا، شكراً — أكمل الدفع وسعره لاحقاً <span class="num" dir="ltr">300</span> ر.ع.</button>
+    </div>
+  </div>
+</dialog>
+<!-- <<< APL upsell dialog <<< -->
+<footer>
+  <p>AI Profit Lab — علامة تجارية تابعة لشركة Lotus Gulf International (س.ت 1570092) · الخوير الجنوبية، بوشر، مسقط<br>
+  <a href="/smart-storefront-ar/">العودة إلى العرض</a> · <a href="/terms-ar/">شروط الخدمة</a> · <a href="/refund-policy-ar/">سياسة الاسترداد</a> · <a href="/privacy-ar/">الخصوصية</a></p>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  var API = "https://offer.aiprofitlab.io";
+  var WA  = "https://api.whatsapp.com/send?phone=96899245250";
+
+  var params = new URLSearchParams(location.search);
+  var ref     = (params.get("ref") || "").trim();
+  var isNew   = params.get("new") === "1";
+  var arrival = params.get("status") || "";   // success | cancel, set by the gateway redirect
+
+  var $ = function(id){ return document.getElementById(id); };
+  /* U+2066/U+2069 isolate the figure so Arabic running text cannot
+     reorder it. Same reading order as pay.money_ar() renders in
+     markup: the number first, then the currency after it. */
+  var money = function(n){ return n == null ? "—" : "\u2066" + Number(n).toFixed(2) + "\u2069 ر.ع."; };
+  var track = function(name, props){ if (window.gtag) gtag("event", name, props || {}); };
+
+  var LABELS = {
+    Awaiting_Deposit:  { pill: "بانتظار العربون",  cls: "wait", step: 3 },
+    Payment_Started:   { pill: "بدأ الدفع",   cls: "wait", step: 3 },
+    Deposit_Submitted: { pill: "وصل الإيصال",  cls: "sent", step: 4 },
+    Confirmed:         { pill: "تأكّد المقعد",    cls: "done", step: 5 },
+    Void:              { pill: "مُغلق",            cls: "",     step: 1 }
+  };
+
+  if (!ref) {
+    $("headline").textContent = "لا يوجد رقم مرجعي في هذا الرابط.";
+    $("subline").textContent  = "تحقّق من الرابط في بريدك، أو راسلني وسأجدك.";
+    $("missing").hidden = false;
+    return;
+  }
+
+  /* ─────────── render ─────────── */
+
+  var claim = null;
+
+  function render(data){
+    claim = data;
+    var meta = LABELS[data.status] || { pill: data.status, cls: "", step: 2 };
+    var paid = Boolean(data.paid) || data.status === "Confirmed";
+
+    $("ref").textContent      = data.ref;
+    $("business").textContent = data.business || "—";
+    $("price").textContent    = money(data.price);
+    $("deposit").textContent  = money(paid && data.paidAmount ? data.paidAmount : data.deposit);
+    $("depositLabel").textContent = paid ? "العربون مدفوع (50%)" : "عربون 50% لحجز المقعد";
+    $("statusPill").textContent = meta.pill;
+    $("statusPill").className   = "pill " + meta.cls;
+
+    if (data.pledgePct > 0) {
+      $("rebateRow").hidden = false;
+      $("rebate").textContent = money(data.rebate) + " (\u2066" + data.pledgePct + "%\u2069)";
+    }
+
+    for (var i = 1; i <= 4; i++) {
+      var li = $("s" + i);
+      li.classList.remove("now", "was");
+      if (i < meta.step) li.classList.add("was");
+      else if (i === meta.step) li.classList.add("now");
+    }
+
+    $("wa").href = WA + "&text=" + encodeURIComponent("مرحباً — بخصوص مقعدي في الموقع الذكي، الرقم المرجعي " + data.ref + ".");
+
+    if (paid) return showConfirmed(data);
+
+    /* not paid: offer whichever routes are actually available */
+    $("headline").textContent = isNew ? "مقعدك محجوز." : "مقعدك.";
+    $("eyebrow").textContent  = isNew ? "تمّ ذلك" : "حجزك";
+    $("subline").textContent  = data.canPayByCard
+      ? "دفعة واحدة ويُصبح مؤكّداً. وفاتورتك في بريدك بالفعل."
+      : "فاتورتك في بريدك. وهذه الصفحة هي المكان الذي ترفع فيه إيصال التحويل.";
+
+    $("payBox").hidden = false;
+
+    if (data.canPayByCard) {
+      $("payBtn").textContent = "ادفع " + money(data.deposit) + " بالبطاقة";
+    } else {
+      // No gateway: the transfer route is the offer, not a fallback hidden behind a
+      // disclosure triangle. Say what is true and put it in front of them.
+      $("payTitle").textContent   = "دفع العربون";
+      $("s3").querySelector("strong").nextSibling.textContent = "بتحويل بنكي. ردّ على بريد فاتورتك وتصلك التفاصيل فوراً.";
+      $("s4").querySelector("strong").nextSibling.textContent = "لحظة أن أرى التحويل وقد وصل.";
+      $("payNote").textContent    = "ردّ على البريد الذي وصلتك به الفاتورة وأرسل لك تفاصيل التحويل فوراً. أنا لا أنشر بيانات بنكية على صفحة — فهكذا تحديداً يُنتحل اسم الناس.";
+      $("payBtn").style.display   = "none";
+      $("payBox").querySelector(".secure").style.display = "none";
+      $("altBox").open            = true;
+      $("altSummary").style.display = "none";
+      $("altBox").querySelector("p").style.display = "none";
+      /* Added by tools/apply_upsell.py. This branch hides #payBtn, which is
+         what the upsell gate binds to - so the gate is handed its own way in
+         rather than being silently disabled for every transfer buyer. */
+      upsellOffline();
+    }
+
+    if (data.hasReceipt) {
+      $("altBox").open = true;
+      $("upOk").textContent = "هناك إيصال محفوظ بالفعل. أنا أتحقّق من التحويل، ولا يلزمك شيء آخر. لا ترفع مرة أخرى إلا إن كنت قد أرسلت الملف الخطأ.";
+      $("upOk").classList.add("on");
+    }
+  }
+
+  function showConfirmed(data){
+    $("headline").textContent = "هذا مقعدك. مؤكّد.";
+    $("eyebrow").textContent  = "مدفوع";
+    $("subline").textContent  = "سأتواصل معك بخصوص الموجز. لا شيء آخر مطلوب منك اليوم.";
+    $("payBox").hidden  = true;
+    $("confirming").classList.remove("on");
+    $("doneBox").hidden = false;
+    if (data.invoiceNo) {
+      $("doneInv").textContent = "فاتورة \u2066" + data.invoiceNo + "\u2069";
+      $("doneInv").hidden = false;
+    }
+    if (data.method !== "card") {
+      $("doneBody").textContent = "عربونك وصل، والمقعد لك بالسعر أعلاه.";
+    }
+  }
+
+  function load(){
+    return fetch(API + "/claim/" + encodeURIComponent(ref))
+      .then(function(r){ if (r.status === 404) return null; if (!r.ok) throw new Error("http " + r.status); return r.json(); })
+      .then(function(data){
+        if (!data || !data.ok) {
+          $("headline").textContent = "لا أجد هذا المقعد.";
+          $("subline").textContent  = "الرقم المرجعي لم يطابق شيئاً في السجل.";
+          $("missing").hidden = false;
+          return null;
+        }
+        render(data);
+        $("card").hidden = false;
+        return data;
+      });
+  }
+
+  load()
+    .then(function(data){ if (data) afterLoad(data); })
+    .catch(function(){
+      $("headline").textContent = "لا أستطيع الوصول إلى السجل الآن.";
+      $("subline").textContent  = "حجزك بأمان — هذه الصفحة وحدها هي التي لا تستطيع قراءته الآن.";
+      $("missing").hidden = false;
+    });
+
+  /* ─────────── coming back from the payment page ─────────── */
+
+  function afterLoad(data){
+    if (data.paid || data.status === "Confirmed") return;
+
+    if (arrival === "cancel") {
+      $("payErr").textContent = "عدت دون أن تدفع، ولم يُحتسب عليك شيء. مقعدك ما زال محجوزاً بهذا السعر — ادفع متى كنت مستعداً.";
+      $("payErr").classList.add("on");
+      track("seat_payment_cancelled", { ref: ref });
+      return;
+    }
+    if (arrival !== "success") return;
+
+    /* A URL parameter is not a receipt — a buyer can type this address. Nothing on this
+       page says "paid" until the gateway itself says so, which is what the poll is for. */
+    $("confirming").classList.add("on");
+    $("payBox").hidden = true;
+
+    var tries = 0;
+    (function poll(){
+      tries++;
+      fetch(API + "/pay/status/" + encodeURIComponent(ref))
+        .then(function(r){ return r.json(); })
+        .then(function(res){
+          if (res.ok && res.payment_status === "paid") {
+            track("seat_paid", { ref: ref, value: res.amount, currency: "OMR" });
+            return load();
+          }
+          if (tries < 10) return setTimeout(poll, 2000);
+          giveUp();
+        })
+        .catch(function(){ if (tries < 10) setTimeout(poll, 2500); else giveUp(); });
+    })();
+
+    function giveUp(){
+      /* Deliberately does NOT say the payment failed — we don't know that. It says what
+         is true: we can't confirm it from here yet. */
+      $("confirming").classList.remove("on");
+      $("payBox").hidden = false;
+      $("payErr").innerHTML = "دفعتك لم تظهر عندي بعد. إن كان بنكك قد أكّدها فلا تدفع مرة أخرى — " +
+        '<a href="' + WA + '&text=' + encodeURIComponent("مرحباً — دفعت مقابل المقعد " + ref + " لكن الصفحة لم تؤكّد ذلك.") + '" target="_blank" rel="noopener">راسلني</a> وسأحلّها خلال دقائق.';
+      $("payErr").classList.add("on");
+      track("seat_payment_unconfirmed", { ref: ref });
+    }
+  }
+
+  /* ─────────── pay by card ─────────── */
+
+  /* Wrapped by tools/apply_upsell.py: the upsell gate below calls this. */
+  function startPayment(){
+    var btn = $("payBtn");
+    btn.disabled = true;
+    btn.textContent = "جارٍ فتح صفحة الدفع الآمن…";
+    $("payErr").classList.remove("on");
+
+    fetch(API + "/pay/session", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ ref: ref })
+    })
+      .then(function(r){ return r.json().then(function(b){ return { ok: r.ok, body: b }; }); })
+      .then(function(res){
+        if (res.body && res.body.already_paid) return load();
+        if (!res.ok || !res.body.ok || !res.body.redirect_url) return payFailed(res.body && res.body.error);
+        track("seat_payment_started", { ref: ref, value: claim && claim.deposit, currency: "OMR" });
+        window.location.href = res.body.redirect_url;
+      })
+      .catch(function(){ payFailed("offline"); });
+  }
+
+  function payFailed(why){
+    var btn = $("payBtn");
+    btn.disabled = false;
+    btn.textContent = "أعد المحاولة بالبطاقة";
+
+    /* Every one of these ends somewhere the buyer can still pay. A card that won't open
+       is an inconvenience; a dead end is a lost seat. */
+    var msg = {
+      card_unavailable: "الدفع بالبطاقة غير متاح حالياً. افتح «تفضّل الدفع بتحويل بنكي؟» بالأسفل وأرسل لك التفاصيل فوراً.",
+      claim_void:       "هذا الحجز أُغلق. راسلني وأخبرك أين وصلت الأمور.",
+      not_found:        "لم أعد أجد هذا الحجز. راسلني برقمك المرجعي وسأجده لك.",
+      no_amount:        "لا يوجد مبلغ على هذا الحجز بعد. راسلني وأصلحه خلال دقيقة."
+    }[why] || "تعذّر عليّ فتح صفحة الدفع الآمن الآن، ولم يُحتسب شيء. حاول مرة أخرى، أو استخدم خيار التحويل البنكي بالأسفل.";
+
+    $("payErr").textContent = msg;
+    $("payErr").classList.add("on");
+    $("altBox").open = true;
+    track("seat_payment_failed", { ref: ref, reason: why || "unknown" });
+  }
+
+/* >>> APL upsell js >>> */
+
+  /* ---------------------------------------------------- the upsell gate ---
+     Shown once, before the buyer pays. There are two ways to pay here and so
+     there are two ways in:
+
+       CARD      the gate sits between the pay button and Thawani's page. It
+                 only ever DELAYS the payment - every exit calls startPayment().
+       TRANSFER  there is no pay button at all (render() hides it), so the gate
+                 is hung on the page instead: a standing band in the pay box,
+                 plus one auto-open on the first visit. Nothing here can touch
+                 the payment, because in this mode the page does not take it.
+
+     Both are safe because the offer is BOOKED, not charged. */
+  var UP_ID = 'visibility', UP_PRICE = 97,
+      UP_KEY = "apl.upsell." + ref, UP_SEEN = "apl.upsell.seen." + ref;
+  var upDlg  = document.getElementById("upDlg"),
+      upBand = document.getElementById("upBand"),
+      upDecided = false, upOffline = false;
+
+  /* Taken on a previous visit. Read through a helper because three different
+     callers need it and localStorage is allowed to throw in every one. */
+  function upsellTaken(){
+    try { return localStorage.getItem(UP_KEY) === "1"; } catch(e){ return false; }
+  }
+
+  function upsellDue(){
+    if (upDecided || !upDlg || !upDlg.showModal) return false;
+    /* Never interrupt a buyer who has already taken it on a previous visit. */
+    return !upsellTaken();
+  }
+
+  function upsellShow(){
+    upDecided = false;          /* re-opening it by hand is not a decision */
+    try { upDlg.showModal(); } catch(e){ return; }
+    track("view_promotion", { promotion_id: UP_ID, ref: ref });
+  }
+
+  function upsellRecord(){
+    try { localStorage.setItem(UP_KEY, "1"); } catch(e){}
+    /* Best effort, never awaited, and wrapped so that a service worker or a
+       blocked request cannot throw into the payment path. keepalive lets it
+       survive the redirect that is about to happen. */
+    try {
+      fetch(API + "/pay/upsell", {
+        method: "POST", keepalive: true,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ref: ref, offer: UP_ID, price: UP_PRICE, currency: "OMR" })
+      }).catch(function(){});
+    } catch(e){}
+  }
+
+  function upsellClose(taken){
+    upDecided = true;
+    try { upDlg.close(); } catch(e){}
+    track(taken ? "add_to_cart" : "upsell_declined",
+          { item_id: UP_ID, value: UP_PRICE, currency: "OMR", ref: ref });
+    if (taken) { upsellRecord(); upsellBanner(); }
+    if (upOffline) return upsellSettled(taken);
+    startPayment();
+  }
+
+  /* Where a transfer buyer lands after deciding. There is no payment to start,
+     so the page just resolves: taken swaps the band for the booked block and
+     puts it in front of them; declined leaves the band as the way back in. */
+  function upsellSettled(taken){
+    if (upBand) upBand.hidden = taken;
+    if (!taken) return;
+    var box = document.getElementById("upBooked");
+    if (box && box.scrollIntoView) box.scrollIntoView({ behavior: "smooth", block: "center" });
+  }
+
+  /* Called by render() on the no-gateway branch - see rewire() in
+     tools/apply_upsell.py. Without it the gate has nothing to hang on: the
+     button it binds to is display:none in that mode, and the offer is never
+     made to a single transfer buyer. */
+  function upsellOffline(){
+    upOffline = true;
+    if (!upBand || !upsellDue()) return;
+    upBand.hidden = false;
+
+    /* The auto-open happens once ever, per seat. The band is permanent, so a
+       buyer who closes it still has a way back and is not asked again on every
+       reload. If localStorage cannot be read we assume it HAS been seen -
+       failing towards the quieter page rather than towards nagging. */
+    var seen = true;
+    try { seen = localStorage.getItem(UP_SEEN) === "1"; } catch(e){}
+    if (seen) return;
+    try { localStorage.setItem(UP_SEEN, "1"); } catch(e){}
+    /* Let the seat card paint first: a dialog that arrives with the page reads
+       as an ad and gets dismissed before it is read. */
+    setTimeout(function(){ if (upsellDue()) upsellShow(); }, 900);
+  }
+
+  /* The confirmation the buyer sees on the paid screen, and the thing that
+     actually tells Nahid a booking happened. Drawn from localStorage, so it
+     survives the round trip through the gateway. */
+  function upsellBanner(){
+    var taken = false;
+    try { taken = localStorage.getItem(UP_KEY) === "1"; } catch(e){}
+    var box = document.getElementById("upBooked");
+    if (!box) return;
+    box.hidden = !taken;
+    if (!taken) return;
+    var msg = "مرحباً ناهد — المقعد " + ref + ". أضفت مكتب الظهور بـ \u2066" + UP_PRICE + "\u2069 ر.ع. شهرياً في صفحة الدفع. أرجو تأكيده.";
+    var a = document.getElementById("upBookedWa");
+    if (a) a.href = WA + "&text=" + encodeURIComponent(msg);
+  }
+
+  if (upDlg){
+    document.getElementById("upYes").addEventListener("click", function(){ upsellClose(true); });
+    document.getElementById("upNo").addEventListener("click", function(){ upsellClose(false); });
+    document.getElementById("upX").addEventListener("click", function(){ upsellClose(false); });
+    upDlg.addEventListener("cancel", function(e){ e.preventDefault(); upsellClose(false); });
+  }
+
+  /* The band's own button ignores upDecided: a buyer who declined and then
+     went looking for the offer again is asking for it, not being interrupted
+     by it. Only actually owning it takes the button away. */
+  if (upBand){
+    document.getElementById("upBandBtn").addEventListener("click", function(){
+      if (upDlg && upDlg.showModal && !upsellTaken()) upsellShow();
+    });
+  }
+
+  document.getElementById("payBtn").addEventListener("click", function(){
+    if (upsellDue()){
+      upsellShow();
+      return;
+    }
+    startPayment();
+  });
+
+  /* A buyer returning from a successful payment never passes through the
+     dialog, so the banner is drawn on load too. */
+  upsellBanner();
+
+/* <<< APL upsell js <<< */
+  /* ─────────── the transfer receipt ─────────── */
+
+  var file = $("file");
+  $("pick").addEventListener("click", function(){ file.click(); });
+
+  file.addEventListener("change", function(){
+    var f = file.files && file.files[0];
+    if (!f) return;
+
+    $("upErr").classList.remove("on"); $("upOk").classList.remove("on");
+    $("fname").textContent = f.name;
+
+    if (f.size > 5 * 1024 * 1024) {
+      $("upErr").textContent = "هذا الملف أكبر من 5 ميغابايت. صورة للشاشة تكفي عادةً — لا داعي للدقة الكاملة.";
+      $("upErr").classList.add("on");
+      return;
+    }
+
+    $("pick").disabled = true;
+    $("pick").textContent = "جارٍ الرفع…";
+
+    var fd = new FormData();
+    fd.append("receipt", f);
+
+    fetch(API + "/claim/" + encodeURIComponent(ref) + "/receipt", { method: "POST", body: fd })
+      .then(function(r){ return r.json(); })
+      .then(function(res){
+        $("pick").disabled = false;
+        if (!res.ok) {
+          $("pick").textContent = "جرّب ملفاً آخر";
+          $("upErr").textContent = res.error === "bad_file_type"
+            ? "هذا النوع من الملفات لا يفتح عندي. صيغة JPG أو PNG أو PDF تعمل."
+            : "لم يكتمل الرفع. أرسله لي على واتساب بدلاً من ذلك وأرفقه بنفسي.";
+          $("upErr").classList.add("on");
+          return;
+        }
+        $("pick").textContent = "ارفع ملفاً آخر";
+        $("statusPill").textContent = "وصل الإيصال";
+        $("statusPill").className = "pill sent";
+        $("s3").classList.remove("now"); $("s3").classList.add("was"); $("s4").classList.add("now");
+        $("upOk").textContent = "وصلني. سأتأكّد من وصول التحويل ثم أؤكّد مقعدك، وسيصلك بريد حين أفعل. لا شيء آخر مطلوب منك.";
+        $("upOk").classList.add("on");
+        track("receipt_uploaded", { ref: ref });
+      })
+      .catch(function(){
+        $("pick").disabled = false;
+        $("pick").textContent = "أعد المحاولة";
+        $("upErr").textContent = "لم يصل الرفع إلى الخادم. أرسل الإيصال على واتساب وأتولّى الأمر من هناك.";
+        $("upErr").classList.add("on");
+      });
+  });
+})();
+</script>
+    <script defer src="/js/aiden-chat.js?v=8002bc67"></script>
+</body>
+</html>

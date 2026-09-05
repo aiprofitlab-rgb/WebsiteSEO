@@ -4283,7 +4283,11 @@
           return fail("حدث خطأ أثناء حفظ حجزك. وبدلاً من أن يضيع، راسلني على واتساب وسآخذ التفاصيل بنفسي.");
         }
         track("claim_submitted", { pledges: chosen.length, caught_button: caught });
-        window.location.href = "/en/pay/?ref=" + encodeURIComponent(res.body.ref) + "&new=1";
+        /* The Arabic seat page, built by tools/build_pay_ar.py. Until 2026-09-05
+           this sent an Arabic buyer to /en/pay/ - the last screen before they
+           pay, and the one that has to explain a 50% deposit, switched to a
+           language they had not been reading for the previous ten minutes. */
+        window.location.href = "/pay-ar/?ref=" + encodeURIComponent(res.body.ref) + "&new=1";
       })
       .catch(function(){
         fail("لم أستطع الوصول إلى الخادم. اتصالك أو خادمي — في الحالتين، راسلني على واتساب ولن يضيع شيء.");
