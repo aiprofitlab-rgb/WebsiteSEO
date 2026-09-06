@@ -33,6 +33,26 @@ const DEFAULTS = {
   persona: "",
   facts: [],
   rules: [],
+  /**
+   * Plan B — retrieval from the live site index. See lib/siteIndex.js.
+   *
+   * OFF here on purpose, and it is the same reason `enabled` above is off: an
+   * install that has not been configured for this must behave exactly like the
+   * install before the feature existed. That includes the live
+   * /var/lib/ig-automation/ai.json, which has no `index` block at all until
+   * somebody adds one — until then these defaults apply and nothing changes.
+   */
+  index: {
+    enabled: false,
+    url: "https://aiprofitlab.io/aiden-index.json",
+    refreshMinutes: 30,
+    maxPages: 3,
+    maxChars: 1000,
+    // Articles only. The core pages are hand-written in `facts` because they
+    // have to be right, and they change rarely.
+    types: ["article"],
+    minScore: 2,
+  },
 };
 
 let cache = null; // { config, mtimeMs }
@@ -67,6 +87,13 @@ function withDefaults(raw) {
     dms: { ...DEFAULTS.dms, ...(c.dms || {}) },
     facts: Array.isArray(c.facts) ? c.facts : DEFAULTS.facts,
     rules: Array.isArray(c.rules) ? c.rules : DEFAULTS.rules,
+    index: {
+      ...DEFAULTS.index,
+      ...(c.index || {}),
+      // A `types` that is not a list is a typo, and honouring it would silently
+      // retrieve either nothing or everything. Fall back to the default instead.
+      types: Array.isArray(c.index && c.index.types) ? c.index.types : DEFAULTS.index.types,
+    },
   };
 }
 

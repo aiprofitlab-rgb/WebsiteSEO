@@ -26,6 +26,7 @@ const rulesLib = require("./lib/rules");
 const rulesStore = require("./lib/rulesStore");
 const aiConfig = require("./lib/aiConfig");
 const aiClient = require("./lib/ai");
+const siteIndex = require("./lib/siteIndex");
 const igClient = require("./lib/ig");
 const store = require("./lib/store");
 const files = require("./lib/files");
@@ -176,6 +177,10 @@ app.get("/health", (req, res) => {
         model: c.model,
         caps: { comments: c.comments, dms: c.dms },
         file: aiConfig.file(),
+        // Plan B at a glance. `loaded: false` with `enabled: true` means the
+        // fetch has never succeeded — the replies are fine, they are just
+        // running on `facts` alone, and nothing else would ever say so.
+        index: { enabled: Boolean((c.index || {}).enabled), ...siteIndex.stats() },
       };
     })(),
     // The redirect URI is here because it must match the dashboard byte for
@@ -305,6 +310,22 @@ if (require.main === module) {
         `ai fallback: ${aic.model} · comments ${aic.comments.enabled ? `on (max ${aic.comments.maxPerMediaPerHour}/post/h, ${aic.comments.maxPerHour}/h)` : "off"} · dms ${aic.dms.enabled ? `on (max ${aic.dms.maxPerHour}/h)` : "off"} · ${aiConfig.file()}`
       );
     }
+    /**
+     * Plan B's clock. Fetched once now and every `refreshMinutes` after, never on
+     * the reply path — see lib/siteIndex.js. Not awaited: a slow website must not
+     * hold up the boot of a service whose whole job is answering webhooks, and
+     * until the first fetch lands lookup() simply returns nothing.
+     */
+    siteIndex
+      .schedule(() => deps.aiConfig)
+      .then((r) => {
+        const ic = deps.aiConfig.index || {};
+        if (!ic.enabled) console.log("site index: off (`index.enabled` is false) — the fallback answers from `facts` alone");
+        else if (r && r.ok) console.log(`site index: ${r.pages} pages of ${r.seen} from ${ic.url} (${r.dropped.figure} dropped for a figure, ${r.dropped.money} for being about money)`);
+        // A failure has already printed its own line inside refresh().
+      })
+      .catch(() => {});
+
     console.log(`uploads: ${files.dir()} (public base ${files.publicBase()})`);
 
     // Printed rather than left to be looked up: this exact string has to be in

@@ -181,3 +181,168 @@ test("the language line is the LAST instruction, where a model is least likely t
   const forbidden = lines.findIndex((l) => l.includes("NEVER use any of these words"));
   assert.ok(lang > forbidden, "it must come after the Arabic keyword list that misleads it");
 });
+
+/* ---------------------------------------------------------------------------
+ * Post targeting and the forbidden list
+ * ------------------------------------------------------------------------- */
+
+/** The live shape: each rule scoped to the one post its campaign runs on. */
+const SCOPED_RULES = {
+  rules: [
+    { id: "demo", keywords: ["demo", "demos"], media: { mode: "only", ids: ["post_A"] }, dm: { text: "here" }, publicReply: "Sent 📩" },
+    { id: "price", keywords: ["price"], media: { mode: "only", ids: ["post_B"] }, dm: { text: "here" }, publicReply: "On its way 📩" },
+  ],
+};
+
+test("a keyword scoped to another post is not forbidden here — the ban follows the rule's scope", async () => {
+  // With every live rule scoped to a single post, an unscoped ban left the model
+  // unable to name its own product anywhere. The matcher was always scope-aware;
+  // only the prompt was not, so the two disagreed and the prompt was the stricter.
+  const { ai, seen } = fakeAi("The Smart Storefront demo is on the site.");
+  const out = await ai.replyToComment({ text: "what do you do?", config: CFG, rulesConfig: SCOPED_RULES, mediaId: "post_C" });
+
+  assert.equal(out, "The Smart Storefront demo is on the site.", "no rule can fire on post_C, so nothing needed suppressing");
+  assert.ok(!seen[0].messages[0].content.includes("NEVER use any of these words"), "and nothing needed forbidding either");
+});
+
+test("on the post the rule IS scoped to, both the ban and the suppression come back", async () => {
+  const { ai, seen } = fakeAi("Sure — the demo is on the site.");
+  const out = await ai.replyToComment({ text: "can I see it?", config: CFG, rulesConfig: SCOPED_RULES, mediaId: "post_A" });
+
+  assert.equal(out, null, "under post_A a reply saying 'demo' would answer itself");
+  const prompt = seen[0].messages[0].content;
+  assert.match(prompt, /NEVER use any of these words.*demo/);
+  assert.ok(!prompt.includes("price"), "post_B's keyword is still irrelevant here");
+});
+
+test("a DM only has to avoid unscoped keywords, because only those could collide", async () => {
+  const { ai, seen } = fakeAi("Happy to help — the demo is on the site.");
+  const out = await ai.replyToDm({ text: "hey", history: [], config: CFG, rulesConfig: SCOPED_RULES });
+
+  assert.equal(out, "Happy to help — the demo is on the site.", "a DM is under no post");
+  assert.ok(!seen[0].messages[0].content.includes("NEVER use any of these words"));
+});
+
+test("with no post context at all, every keyword is still named — the cautious default", async () => {
+  assert.deepEqual(aiLib.liveKeywords(SCOPED_RULES), ["demo", "demos", "price"]);
+  assert.deepEqual(aiLib.liveKeywords(SCOPED_RULES, "post_A"), ["demo", "demos"]);
+  assert.deepEqual(aiLib.liveKeywords(SCOPED_RULES, ""), []);
+});
+
+/* ---------------------------------------------------------------------------
+ * Plan B: the site index in the prompt
+ *
+ * lib/siteIndex.js is tested on its own in test/siteIndex.test.js. What matters
+ * here is only the join: that a block appears where it should, that it carries
+ * the framing, and above all that every way retrieval can fail leaves this file
+ * assembling exactly the prompt it assembled before retrieval existed.
+ * ------------------------------------------------------------------------- */
+
+const siteIndex = require("../lib/siteIndex");
+
+const INDEXED = aiConfig.withDefaults({
+  enabled: true,
+  persona: "You are a test.",
+  facts: ["A fact."],
+  rules: ["A rule."],
+  index: { enabled: true, url: "https://aiprofitlab.io/aiden-index.json" },
+});
+
+const INDEX_PAYLOAD = {
+  generated: "2026-09-05T08:00:11Z",
+  site: "https://aiprofitlab.io",
+  pages: [
+    { url: "/blog/en/receptionist/", lang: "en", type: "article", title: "The AI receptionist explained", desc: "What one is.", keywords: [] },
+    { url: "/blog/ar/receptionist/", lang: "ar", type: "article", title: "موظف الاستقبال الذكي", desc: "ما هو ولماذا.", keywords: [] },
+  ],
+};
+
+test.afterEach(() => siteIndex.reset());
+
+test("a matching article turns up under the facts and above the rules, where it can be overruled", async () => {
+  siteIndex.load(INDEX_PAYLOAD, { url: "https://aiprofitlab.io/aiden-index.json" });
+  const { ai, seen } = fakeAi("fine");
+  await ai.replyToComment({ text: "what is an ai receptionist?", config: INDEXED, rulesConfig: RULES });
+
+  const lines = seen[0].messages[0].content.split("\n");
+  const facts = lines.findIndex((l) => l.startsWith("What you know:"));
+  const block = lines.findIndex((l) => l.startsWith("Reference material"));
+  const rules = lines.findIndex((l) => l.startsWith("How to answer:"));
+
+  assert.ok(block > facts && block < rules, `facts ${facts}, reference ${block}, rules ${rules}`);
+  assert.match(seen[0].messages[0].content, /https:\/\/aiprofitlab\.io\/blog\/en\/receptionist\//);
+  // It is machine-selected off our own site rather than typed by a stranger, but
+  // it is still text arriving from outside the prompt.
+  assert.match(seen[0].messages[0].content, /every rule below overrides them/);
+});
+
+test("nothing retrieved is the prompt this file built before retrieval existed", async () => {
+  siteIndex.load(INDEX_PAYLOAD, { url: "https://aiprofitlab.io/aiden-index.json" });
+  const { ai, seen } = fakeAi("fine");
+  await ai.replyToComment({ text: "nice 👏", config: INDEXED, rulesConfig: RULES });
+
+  const withIndex = seen[0].messages[0].content;
+  const without = aiLib.systemPrompt(INDEXED, {
+    surface: "comment",
+    maxChars: Number(INDEXED.comments.maxChars),
+    forbidden: aiLib.liveKeywords(RULES, ""),
+    language: aiLib.languageInstruction("nice 👏"),
+  });
+  assert.equal(withIndex, without, "byte for byte, or this feature is not additive");
+});
+
+test("a fetch that never succeeded costs the model some reading and nothing else", async () => {
+  await siteIndex.refresh(INDEXED, {
+    fetchImpl: async () => {
+      throw new Error("ENOTFOUND");
+    },
+  });
+  const { ai, seen } = fakeAi("Happy to help — it is all on the site.");
+  const out = await ai.replyToComment({ text: "what is an ai receptionist?", config: INDEXED, rulesConfig: RULES });
+
+  assert.equal(out, "Happy to help — it is all on the site.", "the reply still happens; that is the whole point");
+  assert.ok(!seen[0].messages[0].content.includes("Reference material"));
+});
+
+test("the script of the message picks the language of the reference, not the model", async () => {
+  siteIndex.load(INDEX_PAYLOAD, { url: "https://aiprofitlab.io/aiden-index.json" });
+
+  const ar = fakeAi("تمام");
+  await ar.ai.replyToComment({ text: "ما هو موظف الاستقبال؟", config: INDEXED, rulesConfig: RULES });
+  assert.match(ar.seen[0].messages[0].content, /\/blog\/ar\/receptionist\//);
+  assert.ok(!ar.seen[0].messages[0].content.includes("/blog/en/receptionist/"));
+
+  const en = fakeAi("fine");
+  await en.ai.replyToComment({ text: "what is an ai receptionist?", config: INDEXED, rulesConfig: RULES });
+  assert.match(en.seen[0].messages[0].content, /\/blog\/en\/receptionist\//);
+  assert.ok(!en.seen[0].messages[0].content.includes("/blog/ar/receptionist/"));
+});
+
+test("a DM gets the same treatment, with the empty media id vet() will use", async () => {
+  siteIndex.load(INDEX_PAYLOAD, { url: "https://aiprofitlab.io/aiden-index.json" });
+  const { ai, seen } = fakeAi("ok");
+  await ai.replyToDm({ text: "what is an ai receptionist?", history: [], config: INDEXED, rulesConfig: RULES });
+  assert.match(seen[0].messages[0].content, /\/blog\/en\/receptionist\//);
+});
+
+test("the block can never hand the model a word its own answer would be suppressed for", async () => {
+  // "demo" is a live keyword in RULES. A title carrying it is the trap: the model
+  // repeats what it is shown, vet() then bins the reply, and the follower sees
+  // nothing at all.
+  siteIndex.load(
+    {
+      site: "https://aiprofitlab.io",
+      pages: [
+        { url: "/blog/en/demo/", lang: "en", type: "article", title: "Book a demo of the receptionist", desc: "", keywords: [] },
+        { url: "/blog/en/receptionist/", lang: "en", type: "article", title: "The AI receptionist explained", desc: "", keywords: [] },
+      ],
+    },
+    { url: "https://aiprofitlab.io/aiden-index.json" }
+  );
+  const { ai, seen } = fakeAi("fine");
+  await ai.replyToComment({ text: "what is an ai receptionist?", config: INDEXED, rulesConfig: RULES, mediaId: "" });
+
+  const prompt = seen[0].messages[0].content;
+  assert.match(prompt, /\/blog\/en\/receptionist\//);
+  assert.ok(!prompt.includes("/blog/en/demo/"), "the one with a forbidden word in its title never got offered");
+});
