@@ -1,0 +1,2185 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Your project brief — AI Profit Lab</title>
+  <meta name="description"
+    content="The questions we need answered before we build your Smart Website. Mostly taps, not typing. Saves as you go." />
+
+  <!-- A page for people who have already bought a seat. It is reached by a link
+     sent to them, and has no business in a search result. The older
+     /onboarding/ at the document ROOT is a DIFFERENT page, for the CEO
+     dashboard product - do not merge the two, they ask for different things. -->
+  <meta name="robots" content="noindex, follow" />
+  <meta name="theme-color" content="#0A3D30" />
+
+  <link rel="icon" href="/favicon.ico" sizes="32x32">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=20260822">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=20260822">
+  <link rel="manifest" href="/site.webmanifest?v=20260822">
+
+  <script>document.documentElement.className += " js";</script>
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-SLR9GD3MJP"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-SLR9GD3MJP');
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style"
+    href="https://fonts.googleapis.com/css2?family=Marcellus&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" media="print" onload="this.media='all'"
+    href="https://fonts.googleapis.com/css2?family=Marcellus&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+  <noscript>
+    <link rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Marcellus&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+  </noscript>
+
+  <style>
+    /* Tokens are copied from /en/smart-storefront/ on purpose: a buyer lands here
+       straight off that page and the two must feel like one thing. If the
+       storefront palette is ever recut, recut this block with it. */
+    :root {
+      --teal-950: #072B22;
+      --teal-900: #0A3D30;
+      --teal: #0F6E56;
+      --teal-soft: #E4EFE9;
+      --amber: #BA7517;
+      --amber-bright: #D89234;
+      --amber-pale: #E8C98F;
+      --amber-soft: #FBF3E3;
+      --cream: #F1EFE8;
+      --panel: #FAF8F2;
+      --panel-2: #EAE4D5;
+      --white: #FFFFFF;
+      --ink: #232B26;
+      --muted: #5A665D;
+      --line: #DED8C8;
+      --wa: #1FAF5E;
+      --err: #9B2C1E;
+      --display: 'Marcellus', Georgia, serif;
+      --sans: 'IBM Plex Sans', -apple-system, 'Segoe UI', sans-serif;
+      --mono: 'IBM Plex Mono', ui-monospace, monospace;
+      /* Kept in sync with the real nav height by JS at the bottom of the page:
+         the bar is taller once the webfont lands, and a hard-coded value here
+         let the progress bar slide underneath it. */
+      --navh: 61px;
+    }
+
+    * { box-sizing: border-box }
+
+    html { scroll-behavior: smooth }
+
+    body {
+      margin: 0;
+      background: var(--cream);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: 17px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    img { max-width: 100%; display: block }
+
+    a { color: var(--teal) }
+
+    /* pay.html learnt this the hard way: `hidden` loses to any display rule set
+       on a class, and the result is a panel that silently stays on screen. */
+    [hidden] { display: none !important }
+
+    a:focus-visible,
+    button:focus-visible,
+    input:focus-visible,
+    select:focus-visible,
+    textarea:focus-visible,
+    label:focus-within {
+      outline: 2px solid var(--amber-bright);
+      outline-offset: 2px;
+    }
+
+    h1, h2, h3 { font-family: var(--display); font-weight: 400; line-height: 1.2 }
+
+    .wrap { width: min(760px, 92vw); margin: 0 auto }
+
+    /* ─────────── nav ─────────── */
+    nav {
+      background: var(--teal-950);
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      border-bottom: 1px solid rgba(255, 255, 255, .07);
+    }
+
+    .nav-in {
+      width: min(760px, 92vw);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 12px 0;
+    }
+
+    .nav-help {
+      color: var(--amber-pale);
+      text-decoration: none;
+      font-size: .85rem;
+      border: 1px solid rgba(232, 201, 143, .35);
+      border-radius: 100px;
+      padding: 6px 14px;
+      white-space: nowrap;
+    }
+
+    .nav-help:hover { background: rgba(232, 201, 143, .12) }
+
+    /* ─────────── header ─────────── */
+    header {
+      background: var(--teal-950);
+      color: var(--cream);
+      padding: 40px 0 34px;
+    }
+
+    .eyebrow {
+      font-family: var(--mono);
+      font-size: .74rem;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--amber-pale);
+      margin: 0 0 12px;
+    }
+
+    header h1 { font-size: clamp(1.9rem, 5.4vw, 2.8rem); margin: 0 0 14px }
+
+    header p { color: rgba(241, 239, 232, .78); margin: 0 0 8px; max-width: 56ch }
+
+    .facts {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 20px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .facts li {
+      font-size: .78rem;
+      font-family: var(--mono);
+      background: rgba(255, 255, 255, .06);
+      border: 1px solid rgba(255, 255, 255, .1);
+      border-radius: 100px;
+      padding: 5px 12px;
+      color: rgba(241, 239, 232, .8);
+    }
+
+    /* ─────────── progress ─────────── */
+    .prog-bar {
+      position: sticky;
+      top: var(--navh);
+      z-index: 35;
+      background: var(--cream);
+      border-bottom: 1px solid var(--line);
+      padding: 10px 0;
+    }
+
+    .prog-in {
+      width: min(760px, 92vw);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .prog-track {
+      flex: 1;
+      height: 6px;
+      background: var(--line);
+      border-radius: 100px;
+      overflow: hidden;
+    }
+
+    .prog-fill {
+      height: 100%;
+      width: 0;
+      background: linear-gradient(90deg, var(--teal), var(--amber-bright));
+      border-radius: 100px;
+      transition: width .35s ease;
+    }
+
+    .prog-txt {
+      font-family: var(--mono);
+      font-size: .74rem;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    /* ─────────── the form ─────────── */
+    main { padding: 28px 0 80px }
+
+    .step { display: none }
+    .step.on { display: block; animation: rise .3s ease both }
+
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(8px) }
+      to { opacity: 1; transform: none }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .step.on { animation: none }
+      .prog-fill { transition: none }
+    }
+
+    .step-head { margin: 0 0 22px }
+    .step-head h2 { font-size: clamp(1.5rem, 4.4vw, 2rem); margin: 0 0 8px }
+    .step-head p { color: var(--muted); margin: 0; font-size: .95rem }
+
+    /* Two sticky bars sit above the content, so anything scrolled to needs
+       headroom or it lands underneath them. */
+    .field, .addon { scroll-margin-top: calc(var(--navh) + 70px) }
+
+    .field { margin: 0 0 22px }
+
+    .field > label,
+    .field .q {
+      display: block;
+      font-weight: 600;
+      font-size: 1rem;
+      margin: 0 0 6px;
+    }
+
+    .req { color: var(--amber); font-weight: 400 }
+
+    .opt { font-weight: 400; color: var(--muted); font-size: .82rem }
+
+    .help { color: var(--muted); font-size: .86rem; margin: 0 0 10px; line-height: 1.5 }
+
+    input[type=text],
+    input[type=tel],
+    input[type=email],
+    input[type=url],
+    select,
+    textarea {
+      width: 100%;
+      font: inherit;
+      font-size: 1rem;
+      color: var(--ink);
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 12px 14px;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+
+    textarea { min-height: 88px; resize: vertical; line-height: 1.55 }
+
+    select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%235A665D' stroke-width='1.6'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      background-size: 12px;
+      padding-right: 38px;
+    }
+
+    input::placeholder, textarea::placeholder { color: #A7ADA6 }
+
+    input:focus, select:focus, textarea:focus { border-color: var(--teal) }
+
+    input.bad, select.bad, textarea.bad { border-color: var(--err); background: #FDF4F2 }
+
+    .two {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 0 16px;
+    }
+
+    @media (max-width:640px) { .two { grid-template-columns: minmax(0, 1fr) } }
+
+    /* Choice cards. Big tap targets on purpose - most of these briefs get
+       filled in on a phone, standing in a warehouse. */
+    .opts { display: grid; gap: 8px }
+    .opts.cols2 { grid-template-columns: repeat(auto-fill, minmax(min(230px, 100%), 1fr)) }
+
+    .opt-card {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 11px 13px;
+      cursor: pointer;
+      font-size: .95rem;
+      line-height: 1.4;
+      transition: border-color .15s, background .15s;
+    }
+
+    .opt-card:hover { border-color: var(--teal) }
+
+    .opt-card input { margin: 3px 0 0; accent-color: var(--teal); flex: none }
+
+    .opt-card.sel {
+      border-color: var(--teal);
+      background: var(--teal-soft);
+      box-shadow: inset 0 0 0 1px var(--teal);
+    }
+
+    .other-in { margin-top: 8px }
+
+    .errmsg { color: var(--err); font-size: .84rem; margin: 6px 0 0; font-weight: 500 }
+
+    /* ─────────── the paid add-on ─────────── */
+    .addon {
+      background: var(--amber-soft);
+      border: 1px solid var(--amber-pale);
+      border-radius: 12px;
+      padding: 16px 18px;
+      margin: 0 0 22px;
+    }
+
+    .addon h3 { font-size: 1.25rem; margin: 0 0 6px }
+    .addon p { margin: 0 0 10px; font-size: .92rem; color: #6B5227 }
+
+    .addon .price {
+      font-family: var(--mono);
+      font-size: .78rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--amber);
+      display: block;
+      margin: 0 0 6px;
+    }
+
+    .addon ul { margin: 0 0 12px; padding-left: 20px; font-size: .9rem; color: #6B5227 }
+    .addon li { margin: 0 0 3px }
+    .addon .opt-card { background: rgba(255, 255, 255, .75) }
+    .addon .opt-card.sel { background: var(--white); border-color: var(--amber); box-shadow: inset 0 0 0 1px var(--amber) }
+    .addon .opt-card input { accent-color: var(--amber) }
+
+    /* ─────────── file uploads ─────────── */
+    /* `.field > label` is (0,1,1) and `.drop` is only (0,1,0), so a bare
+       `.drop{font-weight:400}` loses to it and the whole drop zone renders bold.
+       Matching the element too is what actually wins. */
+    .field > label.drop { font-weight: 400 }
+
+    .drop {
+      border: 1.5px dashed var(--line);
+      background: var(--panel);
+      border-radius: 12px;
+      padding: 18px 16px;
+      text-align: center;
+      cursor: pointer;
+      transition: border-color .15s, background .15s;
+    }
+
+    .drop:hover, .drop.over { border-color: var(--teal); background: var(--teal-soft) }
+
+    .drop b { display: block; font-size: .95rem; margin: 0 0 2px }
+    .drop span { font-size: .82rem; color: var(--muted) }
+    .drop input[type=file] { display: none }
+
+    .filelist { list-style: none; margin: 10px 0 0; padding: 0; display: grid; gap: 6px }
+
+    .filelist li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 8px 12px;
+      font-size: .88rem;
+    }
+
+    .filelist .nm { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap }
+    .filelist .sz { color: var(--muted); font-family: var(--mono); font-size: .78rem; flex: none }
+
+    .filelist .rm {
+      background: none;
+      border: 0;
+      color: var(--err);
+      cursor: pointer;
+      font-size: 1.1rem;
+      line-height: 1;
+      padding: 2px 4px;
+      flex: none;
+    }
+
+    .quota { font-size: .8rem; color: var(--muted); margin: 10px 0 0; font-family: var(--mono) }
+    .quota.hot { color: var(--err) }
+
+    /* ─────────── buttons ─────────── */
+    .nav-btns {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      margin: 30px 0 0;
+      padding: 22px 0 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .btn {
+      font: inherit;
+      font-weight: 600;
+      border-radius: 100px;
+      padding: 13px 26px;
+      border: 1px solid transparent;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      line-height: 1.2;
+    }
+
+    .btn-primary { background: var(--teal); color: var(--cream) }
+    .btn-primary:hover { background: var(--teal-900) }
+
+    .btn-ghost { background: transparent; color: var(--teal); border-color: var(--line) }
+    .btn-ghost:hover { border-color: var(--teal) }
+
+    .btn-wa { background: var(--wa); color: #fff }
+    .btn-wa:hover { filter: brightness(.94) }
+
+    .btn-amber { background: var(--amber); color: #fff }
+    .btn-amber:hover { background: var(--amber-bright) }
+
+    .btn-big { width: 100%; padding: 16px 26px; font-size: 1.05rem }
+
+    .btn[disabled] { opacity: .55; cursor: not-allowed }
+
+    .grow { flex: 1 }
+
+    .spin {
+      width: 16px;
+      height: 16px;
+      border: 2px solid rgba(255, 255, 255, .35);
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: sp .7s linear infinite;
+    }
+
+    @keyframes sp { to { transform: rotate(360deg) } }
+
+    /* ─────────── notes, panels ─────────── */
+    .note {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-left: 3px solid var(--amber);
+      border-radius: 8px;
+      padding: 14px 16px;
+      margin: 0 0 22px;
+      font-size: .92rem;
+      color: var(--muted);
+    }
+
+    .note b { color: var(--ink) }
+
+    .resume {
+      background: var(--teal-soft);
+      border: 1px solid #BBD6CA;
+      border-radius: 10px;
+      padding: 12px 16px;
+      margin: 0 0 22px;
+      font-size: .9rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .linky {
+      background: none;
+      border: 0;
+      padding: 0;
+      font: inherit;
+      font-size: .88rem;
+      color: var(--teal);
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    /* ─────────── review ─────────── */
+    .review {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 6px 18px 18px;
+      margin: 0 0 14px;
+      max-height: 420px;
+      overflow-y: auto;
+    }
+
+    .review h4 {
+      font-family: var(--mono);
+      font-size: .72rem;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin: 20px 0 8px;
+      font-weight: 500;
+    }
+
+    .review dl { margin: 0 }
+    .review dt { font-weight: 600; font-size: .88rem; margin: 10px 0 1px }
+    .review dd { margin: 0; color: var(--muted); font-size: .92rem; white-space: pre-wrap }
+    .review .blank { color: #A7ADA6; font-style: italic }
+
+    .send-opts { display: grid; gap: 10px; margin: 14px 0 0 }
+
+    .done {
+      background: var(--teal-950);
+      color: var(--cream);
+      border-radius: 14px;
+      padding: 30px 26px;
+      text-align: center;
+      margin: 0 0 18px;
+    }
+
+    .done h2 { color: var(--cream); font-size: 1.9rem; margin: 0 0 10px }
+    .done p { color: rgba(241, 239, 232, .8); margin: 0 0 8px }
+
+    .tick {
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      background: var(--wa);
+      display: grid;
+      place-items: center;
+      margin: 0 auto 16px;
+      font-size: 1.6rem;
+      color: #fff;
+    }
+
+    /* ─────────── footer ─────────── */
+    footer {
+      background: var(--teal-950);
+      color: rgba(241, 239, 232, .6);
+      padding: 26px 0;
+      font-size: .82rem;
+    }
+
+    footer a { color: var(--amber-pale) }
+    .foot-logo { margin: 0 0 12px }
+
+    .nojs {
+      background: #FDF4F2;
+      border: 1px solid #E7BDB4;
+      border-radius: 10px;
+      padding: 16px;
+      margin: 24px 0;
+      color: var(--err);
+    }
+
+    .js .nojs { display: none }
+  </style>
+</head>
+
+<body>
+
+  <nav>
+    <div class="nav-in">
+      <!-- wordmark-DARK is the cream-ink cut, for dark surfaces. The storefront
+         page uses wordmark-cream.svg because its nav bar is cream; this one is
+         teal, so that file would print teal ink on teal. -->
+      <a class="brand" href="/" aria-label="AI Profit Lab home">
+        <img src="/en/logo/wordmark-dark.svg" alt="AI Profit Lab" width="146" height="25" />
+      </a>
+      <a class="nav-help" id="navHelp" href="https://api.whatsapp.com/send?phone=96899245250">Stuck? Message us</a>
+    </div>
+  </nav>
+
+  <header>
+    <div class="wrap">
+      <p class="eyebrow"><span aria-hidden="true">&#10044;</span> Step two of two</p>
+      <h1 id="hello">Now tell us what to build.</h1>
+      <p id="sub">You have your seat. This is the only long form in the whole project &mdash; and it is mostly
+        tapping, not typing. Answer what you know, skip what you don't, and we'll fill the gaps in one
+        conversation.</p>
+      <ul class="facts">
+        <li>11 sections</li>
+        <li>~12 minutes</li>
+        <li>Mostly tap to answer</li>
+        <li>Saves as you go</li>
+      </ul>
+    </div>
+  </header>
+
+  <div class="prog-bar">
+    <div class="prog-in">
+      <div class="prog-track" role="progressbar" aria-label="Brief completed" aria-valuemin="0" aria-valuemax="100"
+        aria-valuenow="0" id="progBar">
+        <div class="prog-fill" id="progFill"></div>
+      </div>
+      <span class="prog-txt" id="progTxt">Section 1 of 11</span>
+    </div>
+  </div>
+
+  <main>
+    <div class="wrap">
+      <noscript>
+        <div class="nojs">
+          <b>This form needs JavaScript.</b> If you can't turn it on, that's fine &mdash; send us a WhatsApp on
+          <a href="https://api.whatsapp.com/send?phone=96899245250">+968 9924 5250</a> and we'll go through the
+          questions with you on a call instead.
+        </div>
+      </noscript>
+
+      <div class="resume" id="resume" hidden>
+        <span id="resumeTxt">We found an unfinished brief on this device.</span>
+        <span>
+          <button class="btn btn-ghost" type="button" id="resumeYes"
+            style="padding:8px 18px;font-size:.9rem">Continue</button>
+          <button class="linky" type="button" id="resumeNo" style="margin-left:10px">Start fresh</button>
+        </span>
+      </div>
+
+      <form id="brief" novalidate autocomplete="on">
+        <div id="steps"></div>
+      </form>
+    </div>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <img class="foot-logo" src="/en/logo/wordmark-dark.svg" alt="AI Profit Lab" width="140" height="24"
+        loading="lazy" />
+      <p style="margin:0">Every success starts with insight.</p>
+      <p style="margin:8px 0 0">&copy; 2026 AI Profit Lab &mdash; a brand of Lotus Gulf International (CR 1570092)
+        &middot; <a href="/privacy/">Privacy</a> &middot; <a href="/refund-policy/">Refund policy</a></p>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      "use strict";
+
+      /* ══════════════════════════════════════════════════════════════════════
+         WHERE A FINISHED BRIEF GOES
+
+         A Google Apps Script web app, deployed from the spreadsheet that holds
+         the briefs. It writes one row per brief, saves every uploaded file to a
+         Drive folder, and emails Nahid. The script and its setup steps live at
+         tools/onboarding/brief-apps-script.gs in this repo.
+
+         Paste the /exec URL from "Deploy > New deployment > Web app" below.
+         Leave it empty and the page still works - the review screen falls back
+         to WhatsApp, email, clipboard and a downloaded file, and says so. It
+         never claims to have sent something it could not send.
+         ══════════════════════════════════════════════════════════════════════ */
+      var BRIEF_ENDPOINT = "";
+
+      var API = "https://offer.aiprofitlab.io";
+      var WA = "https://api.whatsapp.com/send?phone=96899245250";
+      var MAILTO = "hello@aiprofitlab.io";
+      var STORE = "apl_brief_v2";
+
+      /* Apps Script accepts a large POST, but a phone on mobile data does not
+         enjoy sending one. Past these, we ask for the file on WhatsApp instead. */
+      var MAX_FILE = 12 * 1024 * 1024;
+      var MAX_TOTAL = 25 * 1024 * 1024;
+
+      function track(name, params) {
+        if (!window.gtag) return;
+        params = params || {};
+        params.lang = "en";
+        gtag("event", name, params);
+      }
+
+      /* Reused option lists. Oman's regions as a buyer would name them, not as
+         a map would. */
+      var REGIONS = ["Muscat", "Seeb & Mabela", "Sohar & Batinah", "Nizwa & Dakhiliyah", "Sur & Sharqiyah",
+        "Salalah & Dhofar", "Buraimi", "Ibri & Dhahirah", "Musandam", "All of Oman", "UAE", "Saudi Arabia",
+        "Qatar / Kuwait / Bahrain", "Outside the GCC"];
+
+      /* ══════════════════════════════════════════════════════════════════════
+         THE QUESTIONS
+
+         One array. Add, cut or reword a question here and the form, the progress
+         bar, the review screen, the sheet's columns and the email all follow -
+         nothing else in this file, and nothing in the Apps Script, names a field.
+
+         t:  text | tel | email | url | textarea | select | radio | checks |
+             files | note | addon | consent
+         req:   blocks Next until answered
+         half:  sits two-per-row on a wide screen
+         only:  {k:"otherField", is:[...]} - shown only when that answer was given
+         other: adds a free-text "Something else" box to a radio/checks list
+         ══════════════════════════════════════════════════════════════════════ */
+      var STEPS = [
+
+        /* ─────────────── 1 ─────────────── */
+        {
+          id: "you",
+          title: "Who you are",
+          blurb: "The details that end up printed on the site and on your invoices. Spell them the way you want them to appear.",
+          fields: [
+            { k: "contactName", q: "Your name", t: "text", req: true, half: true, ph: "Ahmed Al Balushi" },
+            {
+              k: "role", q: "Your role", t: "select", half: true, other: true,
+              opts: ["Owner or partner", "General manager", "Sales manager", "Operations manager",
+                "Marketing", "Purchasing", "Helping out in the family business"]
+            },
+            {
+              k: "businessEn", q: "Business name in English", t: "text", req: true,
+              help: "Exactly as you want it printed — including LLC, Trading, & Sons, all of it."
+            },
+            {
+              k: "businessAr", q: "Business name in Arabic", t: "text", rtl: true,
+              help: "Leave it blank if you'd rather we transliterate it — we'll send you the spelling to approve before anything goes live."
+            },
+            { k: "tradingName", q: "Trading or brand name, if it's different", t: "text", half: true },
+            { k: "cr", q: "Commercial Registration (CR) number", t: "text", half: true, help: "It goes in the footer. It's how a new buyer checks you're real." },
+            { k: "vat", q: "VAT registered?", t: "radio", half: true, cols: true, opts: ["Yes", "No", "Not sure"] },
+            { k: "vatNo", q: "VAT number", t: "text", half: true, only: { k: "vat", is: ["Yes"] } },
+            {
+              k: "whatsapp", q: "WhatsApp number that should receive your leads", t: "tel", req: true, half: true,
+              ph: "+968 …", help: "This is where the website sends serious buyers."
+            },
+            {
+              k: "whoAnswers", q: "Who watches that number?", t: "select", half: true, other: true,
+              opts: ["Me", "My sales team", "One salesperson", "The office", "Nobody yet — that's the problem"]
+            },
+            { k: "email", q: "Email", t: "email", req: true, half: true, ph: "you@company.com" },
+            { k: "phone", q: "Office or landline number", t: "tel", half: true, ph: "+968 24 …" },
+            {
+              k: "showAddress", q: "Should your address be on the site?", t: "radio", cols: true,
+              opts: ["Yes — show it", "No — phone and WhatsApp only", "Show the area, not the exact address"]
+            },
+            {
+              k: "address", q: "The address, as you want it shown", t: "textarea",
+              ph: "Building, street, area, city",
+              only: { k: "showAddress", is: ["Yes — show it", "Show the area, not the exact address"] }
+            },
+            { k: "mapLink", q: "Google Maps link", t: "text", ph: "Paste the share link", only: { k: "showAddress", is: ["Yes — show it", "Show the area, not the exact address"] } }
+          ]
+        },
+
+        /* ─────────────── 2 ─────────────── */
+        {
+          id: "business",
+          title: "What the business does",
+          blurb: "Almost everything on the finished site is built out of this section. Two boxes to type in, the rest is tapping.",
+          fields: [
+            {
+              k: "industry", q: "Which line of business are you in?", t: "select", req: true, other: true,
+              opts: ["Building materials & construction", "Steel & metals", "Electrical & lighting",
+                "Plumbing & sanitary ware", "HVAC, cooling & refrigeration", "Paint, chemicals & adhesives",
+                "Auto parts & workshop supplies", "Tyres, batteries & lubricants", "Heavy equipment & spares",
+                "Medical, dental & lab supplies", "Pharmacy & healthcare", "Food & beverage wholesale",
+                "Catering & restaurant supplies", "Agriculture & irrigation", "Fisheries & marine",
+                "Oil & gas services", "Safety, PPE & fire equipment", "Cleaning & hygiene supplies",
+                "Furniture & interiors", "Stationery & office supplies", "IT, electronics & mobiles",
+                "Packaging & plastics", "Textiles, uniforms & tailoring", "Logistics & transport",
+                "General trading — mixed", "Services rather than products"]
+            },
+            {
+              k: "sells", q: "In one or two sentences, what do you sell?", t: "textarea", req: true,
+              ph: "e.g. We supply building materials to contractors across Oman — cement, steel, blocks — and we deliver.",
+              help: "Say it the way you'd say it on the phone. We'll do the polishing."
+            },
+            {
+              k: "customers", q: "Who buys from you?", t: "checks", cols: true, other: true,
+              opts: ["Wholesalers & traders", "Retail shops", "Contractors & builders", "Factories & industry",
+                "Hospitals & clinics", "Hotels & restaurants", "Government & tenders", "Schools & universities",
+                "Oil & gas companies", "Walk-in consumers"]
+            },
+            {
+              k: "mix", q: "Roughly what's the split?", t: "radio", cols: true,
+              opts: ["Almost all business-to-business", "Mostly business, some retail", "About half and half",
+                "Mostly retail customers"]
+            },
+            {
+              k: "orderSize", q: "A typical order is worth about…", t: "radio", cols: true,
+              opts: ["Under OMR 100", "OMR 100 – 500", "OMR 500 – 2,000", "OMR 2,000 – 10,000",
+                "Over OMR 10,000", "It varies enormously"],
+              help: "This decides how hard the site pushes for a phone call versus a form."
+            },
+            { k: "coverage", q: "Where do you sell or deliver?", t: "checks", cols: true, opts: REGIONS },
+            {
+              k: "years", q: "How long have you been trading?", t: "select", half: true,
+              opts: ["Less than a year", "1 – 3 years", "3 – 10 years", "10 – 25 years", "More than 25 years"]
+            },
+            {
+              k: "staff", q: "How many people work with you?", t: "select", half: true,
+              opts: ["Just me", "2 – 5", "6 – 20", "21 – 50", "More than 50"]
+            },
+            {
+              k: "langs", q: "Which languages do your customers use with you?", t: "checks", cols: true, other: true,
+              opts: ["Arabic", "English", "Hindi", "Urdu", "Bengali", "Malayalam", "Farsi", "Swahili"],
+              help: "Not the same question as what languages the pages are in — this decides what your AI agent can hold a conversation in."
+            },
+            {
+              k: "different", q: "Why do people buy from you and not the shop next door?", t: "checks", req: true,
+              cols: true, other: true,
+              opts: ["We hold stock others don't", "We're cheaper", "We deliver faster",
+                "We're the authorised agent for a brand", "We give credit terms", "We handle big bulk quantities",
+                "Our quality is better", "We've been here a long time", "We give real technical advice",
+                "We speak the customer's language", "We're open when others are closed",
+                "We install or fit it too", "We take small orders others refuse"],
+              help: "Tick everything that is genuinely true. This is what your headline gets written from."
+            },
+            {
+              k: "competitors", q: "Name two or three competitors", t: "textarea",
+              ph: "Company name — and their website, if they have one",
+              help: "We look at what they publish so your site says something they don't."
+            }
+          ]
+        },
+
+        /* ─────────────── 3 ─────────────── */
+        {
+          id: "catalogue",
+          title: "Your catalogue",
+          blurb: "The biggest single decision in the whole build is in here: whether prices are public. Take a minute over that one.",
+          fields: [
+            {
+              k: "skuCount", q: "How many products should the website show?", t: "radio", req: true, cols: true,
+              opts: ["Under 10", "10 – 30", "30 – 100", "100 – 500", "More than 500", "Not sure yet"],
+              help: "Not how many you carry — how many are worth showing. Most distributors sell 80% from a short list."
+            },
+            {
+              k: "categories", q: "Your main product categories", t: "textarea",
+              ph: "One per line:\nCement\nSteel bars\nBlocks & aggregate\nSanitary ware",
+              help: "One per line. If it's easier, skip this and just upload your catalogue in section 8 — we'll read them off it."
+            },
+            {
+              k: "pricePolicy", q: "Do you want prices shown on the website?", t: "radio", req: true,
+              opts: ["Show every price", "Show no prices — quote only", "Show prices on some items only",
+                "Show an indication, e.g. “from OMR 12”", "Not sure — advise me"],
+              help: "Most wholesalers hide prices from competitors and quote instead. There is no wrong answer, but this one changes how the entire site is built."
+            },
+            {
+              k: "tiers", q: "Do your prices change with quantity?", t: "radio", cols: true,
+              opts: ["Yes — fixed tiers by quantity", "Yes — but negotiated case by case", "No — one price",
+                "Doesn't apply to us"]
+            },
+            {
+              k: "moqType", q: "Minimum order?", t: "radio", cols: true,
+              opts: ["No minimum", "Yes — a minimum value", "Yes — a minimum quantity", "Depends on the product"]
+            },
+            {
+              k: "moq", q: "What is it?", t: "text", half: true, ph: "e.g. OMR 50, or 1 pallet",
+              only: { k: "moqType", is: ["Yes — a minimum value", "Yes — a minimum quantity", "Depends on the product"] }
+            },
+            {
+              k: "units", q: "How do you sell?", t: "checks", cols: true, other: true,
+              opts: ["Piece", "Box or carton", "Pallet", "Kilogram", "Tonne", "Metre", "Square metre", "Litre",
+                "Roll", "Bag", "Set", "Container load"]
+            },
+            {
+              k: "stock", q: "Should the site say whether something is in stock?", t: "radio", cols: true,
+              opts: ["Yes — live, if we can connect it", "Yes — a simple in/out label we update",
+                "No — don't mention stock", "Not sure"]
+            },
+            {
+              k: "agency", q: "Are you an authorised agent or distributor?", t: "radio", cols: true,
+              opts: ["Yes — sole agent for Oman", "Yes — one of several", "No", "Not sure"],
+              help: "If you have the letter, we'll show it. Nothing builds trust faster in this market."
+            },
+            {
+              k: "brands", q: "Brands you carry or represent", t: "text",
+              ph: "e.g. Bosch, Grundfos, Jotun"
+            },
+            {
+              k: "specs", q: "Do buyers need datasheets, specs or certificates per product?", t: "radio", cols: true,
+              opts: ["Yes — essential", "Sometimes, for the technical items", "No"]
+            }
+          ]
+        },
+
+        /* ─────────────── 4 ─────────────── */
+        {
+          id: "leads",
+          title: "How buyers reach you",
+          blurb: "Your quote form is not a “contact us” box. It decides whether the enquiry landing on your phone is worth answering.",
+          fields: [
+            {
+              k: "quoteFields", q: "What do you need to know before you can quote?", t: "checks", cols: true,
+              other: true,
+              opts: ["Product & quantity", "Delivery city or site", "Company name", "CR number", "Needed-by date",
+                "Target price or budget", "Payment terms wanted", "Contact person & phone", "Technical spec",
+                "Whether it's for a tender"],
+              help: "These become the fields on your quote form. Ask for less and you get more enquiries; ask for more and you get better ones."
+            },
+            {
+              k: "uploads", q: "Should buyers be able to attach a file?", t: "radio", cols: true,
+              opts: ["Yes — BOQs, tender documents, drawings", "Yes — photos only", "No"]
+            },
+            {
+              k: "hours", q: "Working hours", t: "select", other: true,
+              opts: ["Sat – Thu, 8:00 – 18:00", "Sat – Thu, 8:00 – 13:00 and 16:00 – 20:00",
+                "Sun – Thu, 8:00 – 17:00", "Sat – Thu, 7:00 – 15:00", "Every day, 8:00 – 20:00",
+                "We're reachable any time"]
+            },
+            {
+              k: "weekend", q: "Closed days", t: "select", other: true,
+              opts: ["Friday", "Friday & Saturday", "Saturday", "We never close"]
+            },
+            {
+              k: "responseTime", q: "How fast can you realistically reply to a quote request?", t: "radio", cols: true,
+              opts: ["Within the hour", "Same day", "Within 24 hours", "Two to three days"],
+              help: "We print whatever you pick, so promise what you can keep. A kept 24-hour promise beats a broken one-hour promise."
+            },
+            {
+              k: "waType", q: "Is that lead number a WhatsApp Business account?", t: "radio", cols: true,
+              opts: ["Yes", "No, it's a personal WhatsApp", "Not sure — help me set one up"]
+            },
+            {
+              k: "routing", q: "When a lead comes in, who should get it?", t: "radio", cols: true,
+              opts: ["Just me", "Me and one other person", "A team group chat",
+                "Different people for different products", "Not sure yet"]
+            },
+            { k: "routingWho", q: "Names and numbers, so we can set it up", t: "textarea", only: { k: "routing", is: ["Me and one other person", "A team group chat", "Different people for different products"] } },
+            {
+              k: "delivery", q: "Do you deliver?", t: "radio", cols: true,
+              opts: ["Yes — anywhere we serve", "Yes — Muscat only", "Yes — free above a certain order",
+                "Through a third-party courier", "No — pickup only"]
+            },
+            { k: "deliveryNote", q: "Anything to say about delivery terms or charges", t: "text" },
+            {
+              k: "payment", q: "How do customers pay you today?", t: "checks", cols: true, other: true,
+              opts: ["Bank transfer", "Cash", "Cheque", "Card in person", "Credit account (30 / 60 days)",
+                "Online payment", "LC or export terms"]
+            },
+            {
+              k: "payOnline", q: "Do you want to take card payments on the website?", t: "radio", cols: true,
+              opts: ["Yes", "No — quote and invoice only", "Later, not at launch", "Not sure"],
+              help: "Cards need a payment gateway account in your company's name, and that takes paperwork. Saying yes doesn't hold up the launch."
+            },
+            {
+              k: "booking", q: "Do you need appointment booking on the site?", t: "radio", cols: true,
+              opts: ["Yes — showroom visits", "Yes — site visits or surveys", "Yes — consultations", "No"]
+            }
+          ]
+        },
+
+        /* ─────────────── 5 ─────────────── */
+        {
+          id: "agent",
+          title: "Your AI agent",
+          blurb: "The part of the site that answers a buyer at 4am on a Friday. It can only be as good as what you tell it here.",
+          fields: [
+            {
+              t: "note",
+              html: "<b>What this is:</b> a bilingual assistant that sits on your site, answers questions about what you sell, and pushes serious buyers to your WhatsApp. It knows only what you give it &mdash; so the ticks below are worth more than anything else on this page."
+            },
+            { k: "agentName", q: "What should it be called?", t: "text", half: true, ph: "Salim, Noor, or just “Assistant”" },
+            {
+              k: "agentTone", q: "How should it talk?", t: "select", half: true,
+              opts: ["Formal and professional", "Friendly and simple", "Short and to the point",
+                "Warm and local", "Like me — I'll send a voice note"]
+            },
+            {
+              k: "agentLangs", q: "Which languages should it answer in?", t: "checks", cols: true, other: true,
+              opts: ["Arabic", "English", "Hindi", "Urdu"]
+            },
+            {
+              k: "faqPicks", q: "Which of these do customers ask you every week?", t: "checks", req: true, cols: true,
+              opts: ["Do you have this in stock?", "What's your best price for this quantity?",
+                "Do you deliver to my city?", "How long will delivery take?", "Can I pay after 30 days?",
+                "Do you have a catalogue or price list?", "Are you the authorised agent for this brand?",
+                "Do you have it in another size, colour or grade?", "Do you give a warranty?",
+                "Can I visit your warehouse or showroom?", "Do you supply for tenders and projects?",
+                "What's your minimum order?", "Is there a discount for bulk?",
+                "Can you send a quotation on letterhead?"],
+              help: "Tick every one you hear. Each tick is a question your agent will be able to answer on its own, at 4am."
+            },
+            {
+              k: "faqs", q: "Any others, in your customers' own words", t: "textarea",
+              ph: "One per line — broken English, Arabic, spelling mistakes and all. That's what the agent has to understand.",
+            },
+            {
+              k: "answersMode", q: "How do you want to give us the answers?", t: "radio", cols: true,
+              opts: ["I'll type them below", "I'll send a voice note on WhatsApp",
+                "Take them from my catalogue or old site", "Call me and I'll explain"],
+              help: "A voice note is genuinely fine. We'll transcribe it."
+            },
+            { k: "answers", q: "The answers", t: "textarea", only: { k: "answersMode", is: ["I'll type them below"] } },
+            {
+              k: "agentPrices", q: "Can the agent talk about price?", t: "radio", req: true, cols: true,
+              opts: ["Yes — it may give list prices", "Only ranges or “from” prices",
+                "Never — it takes the request and hands over", "Not sure — advise me"],
+              help: "Say never if you're at all unsure. It's a one-line change later; an agent that quoted a price you can't honour is not."
+            },
+            {
+              k: "neverSay", q: "What must it never do?", t: "checks", cols: true, other: true,
+              opts: ["Never promise a delivery date", "Never quote a price", "Never discuss credit or payment terms",
+                "Never mention a competitor", "Never promise stock availability", "Never offer a discount",
+                "Never give technical or engineering advice", "Never handle a complaint"],
+              help: "Think of it as briefing a new salesperson on their first day."
+            },
+            {
+              k: "handover", q: "When should it stop and get a human?", t: "checks", cols: true, other: true,
+              opts: ["Any order above a certain value", "Any complaint", "Any government tender",
+                "Any request for credit", "Any technical question", "Any price negotiation",
+                "Whenever the customer asks for a person", "Always — I want to see every conversation"]
+            },
+            { k: "handoverValue", q: "Above what value?", t: "text", half: true, ph: "e.g. OMR 500", only: { k: "handover", is: ["Any order above a certain value"] } },
+            { k: "agentNotes", q: "Anything it must know that isn't obvious", t: "textarea", ph: "Products you no longer carry, a competitor with a similar name, a name customers always get wrong…" }
+          ]
+        },
+
+        /* ─────────────── 6 ─────────────── */
+        {
+          id: "look",
+          title: "How it should look",
+          blurb: "No design vocabulary needed. Pointing at things works better than describing them anyway.",
+          fields: [
+            {
+              k: "logo", q: "Do you have a logo?", t: "radio", req: true, cols: true,
+              opts: ["Yes — the original vector file (AI, SVG, EPS)", "Yes — an image only (PNG or JPG)",
+                "Only on a printed sign or business card", "No logo at all"],
+              help: "Whichever it is, you can upload it in section 8 — or we can make you a new one, below."
+            },
+            {
+              t: "addon",
+              k: "brandingAddon",
+              title: "Want us to design your logo and visual identity?",
+              price: "Optional add-on — OMR 50",
+              blurb: "Most of the businesses we build for have a logo someone made in Word in 2011, or none at all. If you'd like, we'll design a proper one and the identity around it, and build the site on top of that instead.",
+              includes: ["Three logo concepts, then refinements on the one you pick",
+                "Final files in every format you'll ever need — print, sign-writing, social, web",
+                "Your colour palette and typefaces, written down",
+                "Arabic and English lock-ups of the name",
+                "A one-page brand sheet so your printer and your sign-maker stop guessing"],
+              opts: ["Yes — design a new logo and identity (OMR 50)",
+                "Yes — but just tidy up the logo I already have (OMR 50)",
+                "No thanks — use my existing logo",
+                "Tell me more before I decide"],
+              foot: "It is added to your invoice as a separate line, and we confirm it with you before anything is charged. Saying yes here is not a payment."
+            },
+            {
+              k: "colors", q: "Brand colours, if you have them", t: "text", half: true,
+              ph: "dark blue and gold — or exact codes"
+            },
+            {
+              k: "colorFeel", q: "And if you don't, what feeling do you want?", t: "select", half: true,
+              opts: ["Serious and corporate", "Clean and modern", "Warm and traditional", "Bold and loud",
+                "Premium and quiet", "Industrial and technical", "You decide — that's what I'm paying for"]
+            },
+            {
+              k: "styleRef", q: "Which of these sounds like your website?", t: "checks", cols: true,
+              opts: ["Clean and minimal", "Bold and colourful", "Dark and premium", "Industrial and technical",
+                "Traditional Omani or Gulf feel", "Corporate and formal", "Warm and friendly",
+                "Big product photos, few words", "Show me options"]
+            },
+            {
+              k: "likeSites", q: "Any websites you like?", t: "textarea",
+              ph: "site.com — I like how the products are laid out",
+              help: "They don't have to be in your industry, or even in Oman. Competitors count too."
+            },
+            {
+              k: "hateSites", q: "Anything you definitely don't want?", t: "checks", cols: true, other: true,
+              opts: ["Sliders and moving banners", "Stock photos of handshakes", "Too much text", "Loud colours",
+                "Pop-ups", "Anything that looks like a template", "Video or music that plays by itself"]
+            },
+            {
+              k: "sitePhotos", q: "What real photographs can you give us?", t: "checks", cols: true,
+              opts: ["Warehouse and stock", "Shop or showroom", "The team at work", "Delivery vehicles",
+                "Products in use on site", "Owner or founder portrait", "Nothing yet — use stock images"],
+              help: "A phone photo of your own warehouse beats a perfect stock image. Buyers here are checking whether you're real."
+            },
+            {
+              k: "founderFace", q: "Do you want yourself or your team shown on the site?", t: "radio", cols: true,
+              opts: ["Yes — me", "Just the team", "No — products only", "Not sure"]
+            }
+          ]
+        },
+
+        /* ─────────────── 7 ─────────────── */
+        {
+          id: "words",
+          title: "Words and proof",
+          blurb: "The difference between a site that looks fine and a site that gets an order is usually proof.",
+          fields: [
+            {
+              k: "storyMode", q: "Your company story", t: "radio", cols: true,
+              opts: ["I'll type it below", "I'll send a voice note on WhatsApp", "Take it from my company profile",
+                "Write something for me and I'll correct it"]
+            },
+            {
+              k: "story", q: "How did the business start?", t: "textarea", only: { k: "storyMode", is: ["I'll type it below"] },
+              help: "Two or three sentences. Real beats polished — “my father opened a shop in Ruwi in 1994” is worth more than anything we could invent."
+            },
+            { k: "founded", q: "Year founded", t: "text", half: true, ph: "1994" },
+            {
+              k: "clients", q: "Customers you can name", t: "textarea",
+              help: "Only ones you actually have permission to name. Logos are better than names, and names are much better than nothing."
+            },
+            {
+              k: "testimonials", q: "Could you get two or three customers to say one sentence about you?", t: "radio",
+              cols: true, opts: ["Yes", "Maybe — I'll try", "No, not right now"],
+              help: "One real sentence from a real buyer outperforms a page of anything we could write. A WhatsApp voice note is enough."
+            },
+            {
+              k: "certs", q: "What proof do you have?", t: "checks", cols: true, other: true,
+              opts: ["ISO certification", "Sole agency or distributor letter", "Chamber of Commerce membership",
+                "Municipality or ministry approvals", "Manufacturer authorisations", "Industry awards",
+                "Safety certifications", "Years of trading and nothing on paper"]
+            },
+            {
+              k: "arabicCopy", q: "Who writes the Arabic?", t: "radio", req: true, cols: true,
+              opts: ["You write it, I approve it", "I'll write my own Arabic", "Translate my English exactly",
+                "Not sure"],
+              help: "Most clients pick the first. Either way nothing goes live in Arabic until you've read it — machine-translated Arabic is obvious to an Omani buyer in about four words."
+            },
+            {
+              k: "legalPages", q: "Which policy pages do you need?", t: "checks", cols: true,
+              opts: ["Privacy", "Terms of use", "Return or refund", "Delivery & shipping", "Warranty",
+                "Just use standard ones"]
+            }
+          ]
+        },
+
+        /* ─────────────── 8 ─────────────── */
+        {
+          id: "files",
+          title: "Your files",
+          blurb: "Drop in whatever you already have. Nothing here is required — anything you skip you can send us on WhatsApp later.",
+          fields: [
+            {
+              t: "note",
+              html: "<b>Files go straight to our Drive, not into this page.</b> Up to 12&nbsp;MB each and 25&nbsp;MB in total. Anything bigger &mdash; a full photo library, a video &mdash; send on WhatsApp instead and we'll pick it up there. One thing worth knowing: if you close this page, your answers come back but your file choices don't, so pick them last."
+            },
+            {
+              k: "fLogo", q: "Your logo", t: "files",
+              accept: ".svg,.ai,.eps,.pdf,.png,.jpg,.jpeg,.webp",
+              hint: "Vector (AI, SVG, EPS, PDF) is best. A photo of a business card is better than nothing."
+            },
+            {
+              k: "fProfile", q: "Company profile or brochure", t: "files",
+              accept: ".pdf,.doc,.docx,.ppt,.pptx",
+              hint: "The PDF you already send to customers. We'll take the story, the certificates and the client list off it."
+            },
+            {
+              k: "fCatalogue", q: "Product list, catalogue or price list", t: "files",
+              accept: ".pdf,.xls,.xlsx,.csv,.doc,.docx,.txt",
+              hint: "Excel is ideal. A PDF catalogue works. A photo of a printed one works too."
+            },
+            {
+              k: "fPhotos", q: "Photos — products, warehouse, shop, team", t: "files", accept: "image/*",
+              hint: "Pick as many as you like within the size limit. Phone photos are fine."
+            },
+            {
+              k: "fOther", q: "Anything else", t: "files",
+              hint: "Agency letters, certificates, old website exports, a scan of your letterhead."
+            },
+            {
+              k: "fileLinks", q: "Or paste links instead", t: "textarea",
+              ph: "Google Drive, Dropbox, WeTransfer…",
+              help: "If your files are too big or already live in the cloud, a link is just as good. Make sure it's set so anyone with the link can open it."
+            }
+          ]
+        },
+
+        /* ─────────────── 9 ─────────────── */
+        {
+          id: "tech",
+          title: "Domain, email and what already exists",
+          blurb: "Nothing here is technical for you — it's a list of what you already have, so we don't build a second one by accident.",
+          fields: [
+            {
+              k: "domain", q: "Do you own a domain name?", t: "radio", req: true, cols: true,
+              opts: ["Yes — and I have the login", "Yes — but someone else controls it", "No — I need one",
+                "Not sure"],
+              help: "The domain is your address, e.g. yourcompany.com. It's the one thing that must be in your name, not ours."
+            },
+            { k: "domainName", q: "Which domain?", t: "text", half: true, ph: "yourcompany.com", only: { k: "domain", is: ["Yes — and I have the login", "Yes — but someone else controls it"] } },
+            {
+              k: "domainWishes", q: "Three names you'd like, best first", t: "text",
+              only: { k: "domain", is: ["No — I need one", "Not sure"] },
+              help: "We'll check what's free and register it in your company's name."
+            },
+            {
+              k: "oldSite", q: "Do you have a website now?", t: "radio", cols: true,
+              opts: ["No", "Yes — replace it completely", "Yes — keep it, this is separate",
+                "Yes — but I've lost access to it"]
+            },
+            { k: "oldSiteUrl", q: "Its address", t: "text", half: true, only: { k: "oldSite", is: ["Yes — replace it completely", "Yes — keep it, this is separate", "Yes — but I've lost access to it"] } },
+            {
+              k: "bizEmail", q: "Business email", t: "radio", cols: true,
+              opts: ["We already use name@ourdomain", "We use Gmail or Hotmail and want to upgrade",
+                "No email — set one up", "Not sure"]
+            },
+            {
+              k: "gbp", q: "Google Business Profile", t: "radio", req: true, cols: true,
+              opts: ["Yes — verified, and I have access", "Yes — but I can't get into it",
+                "Someone else created it", "No, we don't have one", "I don't know what that is"],
+              help: "The box on the right of Google, and the pin on Maps. For a local supplier it often brings more calls than the website does — we set it up as part of the build."
+            },
+            {
+              k: "socials", q: "Social accounts to link", t: "textarea",
+              ph: "Instagram, LinkedIn, Facebook, TikTok, YouTube — paste the links"
+            },
+            {
+              k: "analytics", q: "Existing Google Analytics or Search Console?", t: "radio", cols: true,
+              opts: ["Yes — and I have access", "Yes — no access", "No", "Not sure"]
+            },
+            {
+              k: "systems", q: "Software the website might need to talk to", t: "checks", cols: true, other: true,
+              opts: ["Excel or Google Sheets", "Zoho", "Odoo", "QuickBooks", "Tally", "SAP", "A POS system",
+                "Nothing — it's all on paper"]
+            }
+          ]
+        },
+
+        /* ─────────────── 10 ─────────────── */
+        {
+          id: "found",
+          title: "Getting found",
+          blurb: "On Google, and increasingly inside ChatGPT. Neither can find you for words nobody told us about.",
+          fields: [
+            {
+              k: "searchTerms", q: "What would a customer type into Google to find a business like yours?",
+              t: "textarea", req: true,
+              ph: "One per line, English and Arabic:\ncement supplier muscat\nمورد أسمنت مسقط\nsteel bar price oman",
+              help: "Real phrases, including the clumsy ones people actually type. Three or four is enough to start."
+            },
+            { k: "searchCities", q: "Which places should you be found in?", t: "checks", cols: true, opts: REGIONS },
+            {
+              k: "competitorsRank", q: "Who comes up first today when you search those words?", t: "textarea",
+              help: "Go and try it now if you never have. It takes a minute and it tells us exactly what we're up against."
+            },
+            {
+              k: "brandArabic", q: "How should your brand name be spelled in Arabic?", t: "text", rtl: true,
+              help: "If your name is English there's more than one way to write it. We agree the spelling once, here, and use it everywhere — site, Maps, invoices."
+            },
+            {
+              k: "adsPlan", q: "Do you plan to run paid ads?", t: "radio", cols: true,
+              opts: ["Yes, soon", "Maybe later", "No", "Already running some"],
+              help: "It changes nothing about the price. It changes how we build the pages ads would point at."
+            }
+          ]
+        },
+
+        /* ─────────────── 11 ─────────────── */
+        {
+          id: "practical",
+          title: "Practical things",
+          blurb: "The boring section that decides whether this takes one week or six.",
+          fields: [
+            {
+              k: "decider", q: "Who has the final yes on the design?", t: "text", req: true, half: true,
+              ph: "One name", help: "Two people approving is the most common reason a website is late."
+            },
+            { k: "deciderContact", q: "Their WhatsApp, if it isn't you", t: "tel", half: true },
+            {
+              k: "contentBy", q: "When can you get us the logo, photos and product list?", t: "radio", cols: true,
+              opts: ["Already uploaded above", "Within two days", "This week", "Within two weeks",
+                "I need help gathering them"]
+            },
+            {
+              k: "launchWhen", q: "When do you want to be live?", t: "radio", cols: true,
+              opts: ["As fast as possible", "Within two weeks", "Within a month", "No particular rush",
+                "I have a fixed date"]
+            },
+            {
+              k: "deadline", q: "What's the date, and why?", t: "text", ph: "e.g. Oman Build exhibition, 12 October",
+              only: { k: "launchWhen", is: ["I have a fixed date"] }
+            },
+            {
+              k: "reviewHow", q: "How do you want to review the drafts?", t: "radio", cols: true,
+              opts: ["WhatsApp messages", "A phone call", "A video call", "In person", "Email"]
+            },
+            {
+              k: "bestTime", q: "Best time of day to reach you", t: "select", half: true, other: true,
+              opts: ["Early morning", "Mid-morning", "Afternoon", "After 4pm", "Evening", "Any time"]
+            },
+            {
+              k: "anythingElse", q: "Anything else we should know before we start?", t: "textarea",
+              help: "Something that went wrong with a previous website. A partner who needs convincing. A product line you're about to drop. Anything."
+            },
+            {
+              k: "consent", t: "consent", req: true,
+              label: "I confirm I have the right to use the logos, photographs and text I'm sending, and I'm happy for AI Profit Lab to use them to build this website."
+            }
+          ]
+        }
+      ];
+
+      /* ══════════════════════════════════════════════════════════════════════
+         ENGINE
+         ══════════════════════════════════════════════════════════════════════ */
+
+      var state = {};          /* key -> string | array of strings            */
+      var picked = {};         /* key -> [File]  - kept in memory only        */
+      var meta = { ref: "", started: "", href: "" };
+      var idx = 0;
+      var TOTAL = STEPS.length + 1;   /* + the review screen                  */
+      var wrapEl = document.getElementById("steps");
+      var sentOK = false;
+      var OTHER = "Something else";
+
+      function $(id) { return document.getElementById(id); }
+
+      function esc(s) {
+        return String(s == null ? "" : s)
+          .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;");
+      }
+
+      function kb(n) {
+        if (n < 1024) return n + " B";
+        if (n < 1024 * 1024) return Math.round(n / 1024) + " KB";
+        return (n / 1024 / 1024).toFixed(1) + " MB";
+      }
+
+      /* A field with an `only` clause is present in the DOM but not part of the
+         brief unless its condition holds. Validation and the review screen both
+         ask this, so a hidden required field can never block the form. */
+      function visible(f) {
+        if (!f.only) return true;
+        var v = state[f.only.k];
+        if (v == null || v === "") return false;
+        var have = Array.isArray(v) ? v : [v];
+        for (var i = 0; i < have.length; i++) {
+          if (f.only.is.indexOf(have[i]) !== -1) return true;
+        }
+        return false;
+      }
+
+      function answered(f) {
+        if (f.t === "files") return (picked[f.k] || []).length > 0;
+        var v = state[f.k];
+        if (Array.isArray(v)) return v.length > 0;
+        return typeof v === "string" && v.trim() !== "";
+      }
+
+      /* ─────────── rendering ─────────── */
+
+      function fieldHTML(f) {
+        if (f.t === "note") return '<div class="note">' + f.html + '</div>';
+
+        if (f.t === "addon") {
+          var a = ['<div class="addon" data-field="' + f.k + '">'];
+          a.push('<span class="price">' + esc(f.price) + '</span>');
+          a.push('<h3>' + esc(f.title) + '</h3>');
+          a.push('<p>' + esc(f.blurb) + '</p>');
+          a.push('<ul>');
+          f.includes.forEach(function (i) { a.push('<li>' + esc(i) + '</li>'); });
+          a.push('</ul>');
+          a.push('<div class="opts" role="group" aria-label="' + esc(f.title) + '">');
+          f.opts.forEach(function (o, i) {
+            var oid = "f_" + f.k + "_" + i;
+            a.push('<label class="opt-card" for="' + oid + '"><input type="radio" id="' + oid +
+              '" name="f_' + f.k + '" value="' + esc(o) + '" data-k="' + f.k + '" data-kind="radio" />' +
+              '<span>' + esc(o) + '</span></label>');
+          });
+          a.push('</div>');
+          a.push('<p style="margin:12px 0 0;font-size:.82rem;color:#6B5227">' + esc(f.foot) + '</p>');
+          a.push('</div>');
+          return a.join("");
+        }
+
+        var id = "f_" + f.k;
+        var out = [];
+        out.push('<div class="field' + (f.half ? " half" : "") + '" data-field="' + f.k + '"' +
+          (visible(f) ? "" : " hidden") + '>');
+
+        if (f.t === "consent") {
+          out.push('<label class="opt-card" for="' + id + '">');
+          out.push('<input type="checkbox" id="' + id + '" data-k="' + f.k + '" data-kind="consent" />');
+          out.push('<span>' + esc(f.label) + ' <span class="req">*</span></span></label>');
+          out.push('<p class="errmsg" id="e_' + f.k + '" role="alert" hidden></p></div>');
+          return out.join("");
+        }
+
+        var star = f.req ? ' <span class="req" title="Required">*</span>' : ' <span class="opt">optional</span>';
+
+        if (f.t === "radio" || f.t === "checks" || f.t === "files") {
+          out.push('<span class="q" id="lbl_' + f.k + '">' + esc(f.q) + star + '</span>');
+        } else {
+          out.push('<label for="' + id + '">' + esc(f.q) + star + '</label>');
+        }
+        if (f.help) out.push('<p class="help">' + esc(f.help) + '</p>');
+
+        var rtl = f.rtl ? ' dir="rtl" lang="ar"' : "";
+
+        if (f.t === "files") {
+          out.push('<label class="drop" for="' + id + '" data-drop="' + f.k + '">' +
+            '<input type="file" id="' + id + '" data-k="' + f.k + '" data-kind="file" multiple' +
+            (f.accept ? ' accept="' + f.accept + '"' : "") + ' />' +
+            '<b>Tap to choose files</b><span>' + esc(f.hint || "") + '</span></label>');
+          out.push('<ul class="filelist" id="fl_' + f.k + '"></ul>');
+
+        } else if (f.t === "textarea") {
+          out.push('<textarea id="' + id + '" data-k="' + f.k + '" data-kind="v"' + rtl +
+            ' placeholder="' + esc(f.ph || "") + '"></textarea>');
+
+        } else if (f.t === "select") {
+          out.push('<select id="' + id + '" data-k="' + f.k + '" data-kind="v"><option value="">Choose…</option>');
+          f.opts.forEach(function (o) { out.push('<option value="' + esc(o) + '">' + esc(o) + '</option>'); });
+          if (f.other) out.push('<option value="' + OTHER + '">' + OTHER + '…</option>');
+          out.push('</select>');
+          if (f.other) {
+            out.push('<input class="other-in" type="text" id="' + id + '_otherTxt" data-k="' + f.k +
+              '__other" data-kind="v" placeholder="Tell us what" hidden />');
+          }
+
+        } else if (f.t === "radio" || f.t === "checks") {
+          var kind = f.t === "radio" ? "radio" : "checkbox";
+          out.push('<div class="opts' + (f.cols ? " cols2" : "") + '" role="group" aria-labelledby="lbl_' +
+            f.k + '">');
+          f.opts.forEach(function (o, i) {
+            var oid = id + "_" + i;
+            out.push('<label class="opt-card" for="' + oid + '">' +
+              '<input type="' + kind + '" id="' + oid + '" name="' + id + '" value="' + esc(o) + '"' +
+              ' data-k="' + f.k + '" data-kind="' + f.t + '" />' +
+              '<span>' + esc(o) + '</span></label>');
+          });
+          if (f.other) {
+            var oidx = id + "_other";
+            out.push('<label class="opt-card" for="' + oidx + '">' +
+              '<input type="' + kind + '" id="' + oidx + '" name="' + id + '" value="' + OTHER + '"' +
+              ' data-k="' + f.k + '" data-kind="' + f.t + '" />' +
+              '<span>' + OTHER + '</span></label>');
+            out.push('</div><input class="other-in" type="text" id="' + id + '_otherTxt" data-k="' +
+              f.k + '__other" data-kind="v" placeholder="Tell us what" hidden />');
+          } else {
+            out.push('</div>');
+          }
+
+        } else {
+          var type = f.t === "tel" ? "tel" : f.t === "email" ? "email" : f.t === "url" ? "url" : "text";
+          var extra = f.t === "tel" ? ' inputmode="tel" autocomplete="tel"'
+            : f.t === "email" ? ' inputmode="email" autocomplete="email"' : "";
+          if (f.k === "contactName") extra += ' autocomplete="name"';
+          out.push('<input type="' + type + '" id="' + id + '" data-k="' + f.k + '" data-kind="v"' +
+            rtl + extra + ' placeholder="' + esc(f.ph || "") + '" />');
+        }
+
+        out.push('<p class="errmsg" id="e_' + f.k + '" role="alert" hidden></p>');
+        out.push('</div>');
+        return out.join("");
+      }
+
+      function render() {
+        var html = [];
+
+        STEPS.forEach(function (s, si) {
+          html.push('<section class="step" id="step_' + s.id + '" data-i="' + si + '">');
+          html.push('<div class="step-head"><h2>' + esc(s.title) + '</h2><p>' + esc(s.blurb) + '</p></div>');
+
+          /* Two half-width fields sit in a row wherever they land next to each
+             other - but never across a conditional, which would leave a hole. */
+          var i = 0;
+          while (i < s.fields.length) {
+            var f = s.fields[i], g = s.fields[i + 1];
+            if (f.half && g && g.half && !f.only && !g.only) {
+              html.push('<div class="two">' + fieldHTML(f) + fieldHTML(g) + '</div>');
+              i += 2;
+            } else {
+              html.push(fieldHTML(f));
+              i += 1;
+            }
+          }
+
+          if (s.id === "files") html.push('<p class="quota" id="quota"></p>');
+
+          html.push('<div class="nav-btns">');
+          if (si > 0) html.push('<button type="button" class="btn btn-ghost" data-go="' + (si - 1) + '">Back</button>');
+          html.push('<button type="button" class="btn btn-primary grow" data-next="' + si + '">' +
+            (si === STEPS.length - 1 ? "Review my brief" : "Next") + '</button>');
+          html.push('</div></section>');
+        });
+
+        /* ─────── the review + send screen ─────── */
+        html.push('<section class="step" id="step_review" data-i="' + STEPS.length + '">' +
+          '<div class="step-head"><h2>Read it back, then send it.</h2>' +
+          '<p>Only the questions you answered are shown. Anything blank we will simply ask you about later &mdash; ' +
+          'it is not a problem.</p></div>' +
+          '<div class="review" id="reviewOut"></div>' +
+          '<p class="help" id="reviewCount"></p>' +
+          '<div class="done" id="doneBox" hidden>' +
+          '<div class="tick" aria-hidden="true">&#10003;</div>' +
+          '<h2 id="doneHead">Got it.</h2>' +
+          '<p id="doneBody"></p>' +
+          '<p style="margin-top:18px"><a class="btn btn-ghost" href="/en/smart-storefront/" ' +
+          'style="border-color:rgba(241,239,232,.3);color:var(--cream)">Back to the offer page</a></p>' +
+          '</div>' +
+          '<div id="sendBox">' +
+          '<button type="button" class="btn btn-primary btn-big" id="sendMain" hidden>Send my brief</button>' +
+          '<p class="help" id="sendNote" style="margin-top:12px"></p>' +
+          '<p style="margin:0"><button type="button" class="linky" id="otherWays" hidden>' +
+          'Or send it another way</button></p>' +
+          '<div class="send-opts" id="manual">' +
+          '<button type="button" class="btn btn-wa" id="sendWA">Send it on WhatsApp</button>' +
+          '<button type="button" class="btn btn-amber" id="sendMail">Send it by email</button>' +
+          '<button type="button" class="btn btn-ghost" id="sendCopy">Copy the whole brief</button>' +
+          '<button type="button" class="btn btn-ghost" id="sendDl">Download it as a file</button>' +
+          '</div></div>' +
+          '<div class="nav-btns"><button type="button" class="btn btn-ghost" data-go="' + (STEPS.length - 1) +
+          '">Back</button>' +
+          '<button type="button" class="linky" id="startOver" style="margin-left:auto">Clear and start again' +
+          '</button></div></section>');
+
+        wrapEl.innerHTML = html.join("");
+      }
+
+      /* ─────────── state <-> DOM ─────────── */
+
+      function applyState() {
+        var inputs = wrapEl.querySelectorAll("[data-k]");
+        Array.prototype.forEach.call(inputs, function (el) {
+          var k = el.getAttribute("data-k");
+          var kind = el.getAttribute("data-kind");
+          var v = state[k];
+          if (kind === "v") el.value = v == null ? "" : v;
+          else if (kind === "consent") el.checked = v === "yes";
+          else if (kind === "radio") el.checked = (v === el.value);
+          else if (kind === "checks") el.checked = Array.isArray(v) && v.indexOf(el.value) !== -1;
+          if (el.type === "radio" || el.type === "checkbox") {
+            var card = el.closest(".opt-card");
+            if (card) card.classList.toggle("sel", el.checked);
+          }
+        });
+        syncOthers();
+        refreshConditionals();
+        paintFiles();
+      }
+
+      /* The free-text box under a list only exists while "Something else" is chosen. */
+      function syncOthers() {
+        STEPS.forEach(function (s) {
+          s.fields.forEach(function (f) {
+            if (!f.other) return;
+            var box = $("f_" + f.k + "_otherTxt");
+            if (!box) return;
+            var v = state[f.k];
+            var on = Array.isArray(v) ? v.indexOf(OTHER) !== -1 : v === OTHER;
+            box.hidden = !on;
+            if (!on) { box.value = ""; delete state[f.k + "__other"]; }
+          });
+        });
+      }
+
+      function refreshConditionals() {
+        STEPS.forEach(function (s) {
+          s.fields.forEach(function (f) {
+            if (!f.only) return;
+            var el = wrapEl.querySelector('[data-field="' + f.k + '"]');
+            if (el) el.hidden = !visible(f);
+          });
+        });
+      }
+
+      wrapEl.addEventListener("input", onEdit);
+      wrapEl.addEventListener("change", onEdit);
+
+      function onEdit(ev) {
+        var el = ev.target;
+        var k = el.getAttribute && el.getAttribute("data-k");
+        if (!k) return;
+        var kind = el.getAttribute("data-kind");
+
+        if (kind === "file") { addFiles(k, el.files); el.value = ""; return; }
+
+        if (kind === "v") {
+          state[k] = el.value;
+        } else if (kind === "consent") {
+          state[k] = el.checked ? "yes" : "";
+        } else if (kind === "radio") {
+          state[k] = el.value;
+          var group = wrapEl.querySelectorAll('input[name="' + el.name + '"]');
+          Array.prototype.forEach.call(group, function (r) {
+            var c = r.closest(".opt-card"); if (c) c.classList.toggle("sel", r.checked);
+          });
+        } else if (kind === "checks") {
+          var arr = Array.isArray(state[k]) ? state[k].slice() : [];
+          var at = arr.indexOf(el.value);
+          if (el.checked && at === -1) arr.push(el.value);
+          if (!el.checked && at !== -1) arr.splice(at, 1);
+          state[k] = arr;
+        }
+
+        if (kind === "consent" || kind === "checks") {
+          var card = el.closest(".opt-card");
+          if (card) card.classList.toggle("sel", el.checked);
+        }
+
+        el.classList.remove("bad");
+        var err = $("e_" + k);
+        if (err) err.hidden = true;
+
+        syncOthers();
+        refreshConditionals();
+        save();
+      }
+
+      /* ─────────── files ─────────── */
+
+      function totalBytes() {
+        var n = 0;
+        Object.keys(picked).forEach(function (k) {
+          picked[k].forEach(function (f) { n += f.size; });
+        });
+        return n;
+      }
+
+      function fileErr(k, msg) {
+        var e = $("e_" + k);
+        if (!e) return;
+        e.textContent = msg;
+        e.hidden = false;
+      }
+
+      function addFiles(k, list) {
+        if (!list || !list.length) return;
+        picked[k] = picked[k] || [];
+        var rejected = [];
+        Array.prototype.forEach.call(list, function (f) {
+          if (f.size > MAX_FILE) { rejected.push(f.name + " is " + kb(f.size) + " — over the 12 MB limit"); return; }
+          if (totalBytes() + f.size > MAX_TOTAL) { rejected.push(f.name + " would take you over 25 MB in total"); return; }
+          var dup = picked[k].some(function (p) { return p.name === f.name && p.size === f.size; });
+          if (!dup) picked[k].push(f);
+        });
+        if (rejected.length) {
+          fileErr(k, rejected.join(". ") + ". Send that one to us on WhatsApp instead — the link is at the top of the page.");
+        } else {
+          var e = $("e_" + k); if (e) e.hidden = true;
+        }
+        paintFiles();
+        save();
+      }
+
+      function paintFiles() {
+        STEPS.forEach(function (s) {
+          s.fields.forEach(function (f) {
+            if (f.t !== "files") return;
+            var ul = $("fl_" + f.k);
+            if (!ul) return;
+            var arr = picked[f.k] || [];
+            ul.innerHTML = arr.map(function (file, i) {
+              return '<li><span class="nm">' + esc(file.name) + '</span>' +
+                '<span class="sz">' + kb(file.size) + '</span>' +
+                '<button type="button" class="rm" data-rm="' + f.k + '" data-i="' + i +
+                '" aria-label="Remove ' + esc(file.name) + '">&times;</button></li>';
+            }).join("");
+          });
+        });
+        var q = $("quota");
+        if (q) {
+          var t = totalBytes();
+          q.textContent = t ? kb(t) + " of 25 MB used" : "Nothing attached yet — that's fine, this section is optional.";
+          q.classList.toggle("hot", t > MAX_TOTAL * 0.85);
+        }
+      }
+
+      /* ─────────── validation ─────────── */
+
+      function validate(si) {
+        var bad = null;
+        STEPS[si].fields.forEach(function (f) {
+          if (!f.req || f.t === "note" || f.t === "addon") return;
+          if (!visible(f)) return;
+
+          var ok = answered(f);
+          if (ok && f.t === "email") ok = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(state[f.k]);
+          if (ok && f.t === "tel") ok = (String(state[f.k]).replace(/\D/g, "").length >= 7);
+          if (ok && f.t === "consent") ok = state[f.k] === "yes";
+
+          var err = $("e_" + f.k);
+          var input = $("f_" + f.k) || wrapEl.querySelector('[data-field="' + f.k + '"] input');
+          if (ok) {
+            if (err) err.hidden = true;
+            if (input) input.classList.remove("bad");
+            return;
+          }
+          if (err) {
+            err.textContent = f.t === "email" ? "That email doesn't look right."
+              : f.t === "tel" ? "That number doesn't look right."
+                : f.t === "consent" ? "We need this tick before we can use your material."
+                  : f.t === "checks" ? "Tick at least one."
+                    : "We need this one to start.";
+            err.hidden = false;
+          }
+          if (input) input.classList.add("bad");
+          if (!bad) bad = wrapEl.querySelector('[data-field="' + f.k + '"]');
+        });
+
+        if (bad) {
+          bad.scrollIntoView({ behavior: "smooth", block: "center" });
+          var focusable = bad.querySelector("input,select,textarea");
+          if (focusable) setTimeout(function () { focusable.focus({ preventScroll: true }); }, 320);
+          return false;
+        }
+        return true;
+      }
+
+      /* ─────────── navigation ─────────── */
+
+      function goTo(i) {
+        idx = Math.max(0, Math.min(TOTAL - 1, i));
+        var all = wrapEl.querySelectorAll(".step");
+        Array.prototype.forEach.call(all, function (s) {
+          s.classList.toggle("on", Number(s.getAttribute("data-i")) === idx);
+        });
+        var pct = Math.max(3, Math.round((idx / (TOTAL - 1)) * 100));
+        $("progFill").style.width = pct + "%";
+        $("progBar").setAttribute("aria-valuenow", String(pct));
+        $("progTxt").textContent = idx === TOTAL - 1 ? "Review" : "Section " + (idx + 1) + " of " + STEPS.length;
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        if (idx === TOTAL - 1) paintReview();
+        save();
+      }
+
+      wrapEl.addEventListener("click", function (ev) {
+        var rm = ev.target.closest("[data-rm]");
+        if (rm) {
+          var kk = rm.getAttribute("data-rm");
+          (picked[kk] || []).splice(Number(rm.getAttribute("data-i")), 1);
+          var e = $("e_" + kk); if (e) e.hidden = true;
+          paintFiles();
+          return;
+        }
+        var b = ev.target.closest("button");
+        if (!b) return;
+        if (b.hasAttribute("data-go")) { goTo(Number(b.getAttribute("data-go"))); return; }
+        if (b.hasAttribute("data-next")) {
+          var si = Number(b.getAttribute("data-next"));
+          if (!validate(si)) return;
+          track("brief_step_done", { step: STEPS[si].id, n: si + 1 });
+          goTo(si + 1);
+        }
+      });
+
+      /* ─────────── saving ─────────── */
+
+      var saveT = null;
+      function save() {
+        clearTimeout(saveT);
+        saveT = setTimeout(function () {
+          try {
+            /* Only names go to localStorage - file contents would blow the ~5 MB
+               quota, which is why the files step says to pick them last. */
+            var names = {};
+            Object.keys(picked).forEach(function (k) {
+              names[k] = picked[k].map(function (f) { return f.name; });
+            });
+            localStorage.setItem(STORE, JSON.stringify(
+              { v: 2, at: Date.now(), idx: idx, meta: meta, data: state, fileNames: names }));
+          } catch (e) { /* private mode: the form works, it just won't survive a reload */ }
+        }, 250);
+      }
+
+      function loadSaved() {
+        try {
+          var o = JSON.parse(localStorage.getItem(STORE) || "null");
+          return o && o.data ? o : null;
+        } catch (e) { return null; }
+      }
+
+      function wipe() { try { localStorage.removeItem(STORE); } catch (e) { } }
+
+      /* ─────────── reading the answers back ─────────── */
+
+      function answerText(f) {
+        if (f.t === "note") return "";
+        if (f.t === "files") {
+          return (picked[f.k] || []).map(function (x) { return x.name + " (" + kb(x.size) + ")"; }).join(", ");
+        }
+        var v = state[f.k];
+        var s = Array.isArray(v) ? v.join(", ") : (v || "");
+        var other = state[f.k + "__other"];
+        if (other && String(other).trim()) s = s.replace(OTHER, OTHER + ": " + String(other).trim());
+        if (f.t === "consent") s = (v === "yes" ? "Confirmed" : "");
+        return String(s).trim();
+      }
+
+      function label(f) { return f.q || f.label || f.title; }
+
+      function counts() {
+        var done = 0, total = 0;
+        STEPS.forEach(function (s) {
+          s.fields.forEach(function (f) {
+            if (f.t === "note" || !visible(f)) return;
+            total++;
+            if (answerText(f)) done++;
+          });
+        });
+        return { done: done, total: total };
+      }
+
+      function paintReview() {
+        var out = [];
+        STEPS.forEach(function (s, si) {
+          var rows = [];
+          s.fields.forEach(function (f) {
+            if (f.t === "note" || !visible(f)) return;
+            var a = answerText(f);
+            if (!a) return;
+            rows.push("<dt>" + esc(label(f)) + "</dt><dd>" + esc(a) + "</dd>");
+          });
+          if (!rows.length) return;
+          out.push("<h4>" + (si + 1) + ". " + esc(s.title) + "</h4><dl>" + rows.join("") + "</dl>");
+        });
+        $("reviewOut").innerHTML = out.length ? out.join("")
+          : '<p class="blank" style="margin:18px 0">Nothing filled in yet. Go back and answer what you can — even half of it is enough for us to start.</p>';
+        var c = counts();
+        var t = totalBytes();
+        $("reviewCount").textContent = "You answered " + c.done + " of " + c.total + " questions" +
+          (t ? ", and attached " + kb(t) + " of files." : ".");
+      }
+
+      function buildBrief() {
+        var L = [];
+        L.push("SMART STOREFRONT — PROJECT BRIEF");
+        L.push("aiprofitlab.io/en/onboarding/");
+        L.push("");
+        if (state.businessEn) L.push("Business:  " + state.businessEn);
+        if (state.contactName) L.push("Contact:   " + state.contactName);
+        if (meta.ref) L.push("Seat ref:  " + meta.ref);
+        L.push("Sent:      " + new Date().toLocaleString("en-GB", { timeZone: "Asia/Muscat" }) + " (Muscat)");
+        var c = counts();
+        L.push("Answered:  " + c.done + " of " + c.total);
+        if (state.brandingAddon) L.push("Add-on:    " + state.brandingAddon);
+        L.push("");
+
+        STEPS.forEach(function (s, si) {
+          var rows = [];
+          s.fields.forEach(function (f) {
+            if (f.t === "note" || !visible(f)) return;
+            var a = answerText(f);
+            if (!a) return;
+            rows.push("• " + label(f) + "\n  " + a.replace(/\n/g, "\n  "));
+          });
+          if (!rows.length) return;
+          L.push("── " + (si + 1) + ". " + s.title.toUpperCase() + " ──");
+          L.push(rows.join("\n"));
+          L.push("");
+        });
+        return L.join("\n").trim();
+      }
+
+      /* One entry per question, in the order the form asks them. The Apps Script
+         builds the sheet's columns from this, so adding a question here adds a
+         column there with no change on the other side. */
+      function orderedAnswers() {
+        var rows = [];
+        STEPS.forEach(function (s) {
+          s.fields.forEach(function (f) {
+            if (f.t === "note") return;
+            rows.push({ k: f.k, q: label(f), section: s.title, v: visible(f) ? answerText(f) : "" });
+          });
+        });
+        return rows;
+      }
+
+      function readFile(file) {
+        return new Promise(function (res, rej) {
+          var r = new FileReader();
+          r.onload = function () {
+            var s = String(r.result);
+            res({ name: file.name, type: file.type || "application/octet-stream", size: file.size,
+                  data: s.slice(s.indexOf(",") + 1) });
+          };
+          r.onerror = function () { rej(new Error("could not read " + file.name)); };
+          r.readAsDataURL(file);
+        });
+      }
+
+      function allFiles() {
+        var jobs = [];
+        STEPS.forEach(function (s) {
+          s.fields.forEach(function (f) {
+            if (f.t !== "files") return;
+            (picked[f.k] || []).forEach(function (file) {
+              jobs.push(readFile(file).then(function (o) { o.field = label(f); return o; }));
+            });
+          });
+        });
+        return Promise.all(jobs);
+      }
+
+      /* ─────────── sending ─────────── */
+
+      function markSent(method, headline, body, hideOptions) {
+        sentOK = true;
+        $("doneHead").textContent = headline;
+        $("doneBody").textContent = body;
+        $("doneBox").hidden = false;
+        if (hideOptions) {
+          $("sendBox").hidden = true;
+        } else {
+          $("sendNote").textContent = "Not sent yet? Any one of the buttons below will do it.";
+          $("manual").hidden = false;
+        }
+        $("doneBox").scrollIntoView({ behavior: "smooth", block: "center" });
+        track("brief_sent", { method: method, answered: counts().done, ref: meta.ref || "none" });
+      }
+
+      function copyText(text) {
+        if (navigator.clipboard && navigator.clipboard.writeText) return navigator.clipboard.writeText(text);
+        return new Promise(function (res, rej) {
+          try {
+            var ta = document.createElement("textarea");
+            ta.value = text; ta.setAttribute("readonly", "");
+            ta.style.position = "fixed"; ta.style.left = "-9999px";
+            document.body.appendChild(ta); ta.select();
+            document.execCommand("copy");
+            document.body.removeChild(ta);
+            res();
+          } catch (e) { rej(e); }
+        });
+      }
+
+      function fileName() {
+        var who = (state.businessEn || state.contactName || "brief").replace(/[^A-Za-z0-9]+/g, "-").slice(0, 40);
+        return "smart-storefront-brief-" + (who || "brief").toLowerCase() + ".txt";
+      }
+
+      function download(text) {
+        var blob = new Blob([text], { type: "text/plain;charset=utf-8" });
+        var url = URL.createObjectURL(blob);
+        var a = document.createElement("a");
+        a.href = url; a.download = fileName();
+        document.body.appendChild(a); a.click(); document.body.removeChild(a);
+        setTimeout(function () { URL.revokeObjectURL(url); }, 4000);
+      }
+
+      /* A finished brief is a few thousand characters. Most survive a WhatsApp
+         deep link, but a long one would be silently truncated by the browser's
+         URL limit - and a truncated brief that LOOKS sent is the worst outcome
+         here. Over the threshold we hand over the clipboard and a file instead. */
+      var WA_SAFE = 5500;
+
+      function sendWhatsApp() {
+        var text = buildBrief();
+        var enc = encodeURIComponent(text);
+        if (enc.length <= WA_SAFE) {
+          window.open(WA + "&text=" + enc, "_blank", "noopener");
+          markSent("whatsapp", "WhatsApp is open.",
+            "Your whole brief is in the message box. Press send — that is genuinely the last step." +
+            (totalBytes() ? " Your files aren't attached to it, so add them in the chat too." : ""));
+          return;
+        }
+        copyText(text).then(function () {
+          download(text);
+          window.open(WA + "&text=" + encodeURIComponent(
+            "Hi — I've finished my Smart Storefront brief. It's too long for one link, so it's copied and saved " +
+            "as a file. Sending it now."), "_blank", "noopener");
+          markSent("whatsapp_long", "WhatsApp is open, and your brief is copied.",
+            "It was too long for the link, so we copied it AND saved it as a file. In WhatsApp, either paste it " +
+            "or attach the file.");
+        }).catch(function () {
+          download(text);
+          markSent("whatsapp_file", "Your brief was saved as a file.",
+            "It was too long to send through a link. Attach the downloaded file to a WhatsApp message and it's done.");
+        });
+      }
+
+      function sendEmail() {
+        var text = buildBrief();
+        var subject = "Smart Storefront brief — " + (state.businessEn || state.contactName || "new client");
+        var long = text.length > 1500;
+        var body = long
+          ? "My brief is attached as a file, and copied to my clipboard if that's easier to paste.\n\n" +
+            text.slice(0, 1200) + "\n\n… continues in the attached file."
+          : text;
+        if (long) { download(text); copyText(text).catch(function () { }); }
+        window.location.href = "mailto:" + MAILTO + "?subject=" + encodeURIComponent(subject) +
+          "&body=" + encodeURIComponent(body);
+        markSent("email", "Your email app is open.",
+          long ? "The brief was long, so we also saved it as a file — attach it before you press send."
+            : "Your brief is in the message. Press send and we have it.");
+      }
+
+      /* Posts to the Apps Script web app. Sent as text/plain so the browser
+         treats it as a simple request: an application/json body triggers a CORS
+         preflight, and an Apps Script web app has no way to answer an OPTIONS. */
+      function postBrief() {
+        var btn = $("sendMain");
+        var note = $("sendNote");
+        btn.disabled = true;
+        btn.innerHTML = '<span class="spin" aria-hidden="true"></span> Sending…';
+        var bytes = totalBytes();
+        note.textContent = bytes ? "Reading your files (" + kb(bytes) + ")…" : "Sending…";
+
+        return allFiles().then(function (files) {
+          if (bytes) note.textContent = "Uploading " + kb(bytes) + " — this can take a minute on mobile data.";
+          return fetch(BRIEF_ENDPOINT, {
+            method: "POST",
+            headers: { "Content-Type": "text/plain;charset=utf-8" },
+            body: JSON.stringify({
+              ref: meta.ref || "",
+              business: state.businessEn || "",
+              name: state.contactName || "",
+              whatsapp: state.whatsapp || "",
+              email: state.email || "",
+              brandingAddon: state.brandingAddon || "",
+              startedAt: meta.started || "",
+              submittedAt: new Date().toISOString(),
+              answered: counts().done,
+              of: counts().total,
+              rows: orderedAnswers(),
+              files: files,
+              text: buildBrief()
+            })
+          });
+        }).then(function (r) {
+          if (!r.ok) throw new Error("http " + r.status);
+          return r.json();
+        }).then(function (d) {
+          if (!d || !d.ok) throw new Error(d && d.error ? d.error : "rejected");
+          wipe();
+          markSent("sheet", "Got it.",
+            "Your brief is with us" + (bytes ? ", files and all" : "") + ". You'll hear from us on WhatsApp " +
+            "within one working day with the first questions and a date for your draft.", true);
+        }).catch(function (err) {
+          btn.disabled = false;
+          btn.textContent = "Try sending again";
+          note.textContent = "That didn't go through" +
+            (bytes ? " — it may be the files. You can remove them and send the answers on their own, or use " +
+              "one of the routes below." : " — nothing is lost. Use one of the routes below and it reaches us " +
+              "the same way.");
+          $("manual").hidden = false;
+          $("otherWays").hidden = true;
+          track("brief_send_failed", { why: String(err && err.message).slice(0, 60) });
+        });
+      }
+
+      /* ─────────── prefill from the seat reference ─────────── */
+
+      function prefill() {
+        var m = /[?&]ref=([^&#]+)/.exec(location.search);
+        if (!m) return;
+        meta.ref = decodeURIComponent(m[1]);
+        save();
+        fetch(API + "/claim/" + encodeURIComponent(meta.ref))
+          .then(function (r) { return r.ok ? r.json() : null; })
+          .then(function (d) {
+            if (!d || !d.ok) return;
+            /* Never overwrite something the buyer has already typed. */
+            if (d.name && !state.contactName) state.contactName = d.name;
+            if (d.business && !state.businessEn) state.businessEn = d.business;
+            applyState();
+            save();
+            var first = String(d.name || "").trim().split(/\s+/)[0];
+            if (first) $("hello").textContent = "Now tell us what to build, " + first + ".";
+            if (d.business) {
+              $("sub").textContent = "Your seat for " + d.business + " is held. This is the only long form in the " +
+                "whole project — and it is mostly tapping, not typing. Answer what you know, skip what you don't, " +
+                "and we'll fill the gaps in one conversation.";
+            }
+          })
+          .catch(function () { /* an unreachable ledger must not stop a brief being written */ });
+      }
+
+      /* ─────────── boot ─────────── */
+
+      render();
+      meta.href = location.href;
+
+      var saved = loadSaved();
+      if (saved && saved.data && Object.keys(saved.data).length) {
+        state = saved.data;
+        meta = saved.meta || meta;
+        var when = saved.at ? new Date(saved.at).toLocaleString("en-GB", { timeZone: "Asia/Muscat" }) : "";
+        var lost = saved.fileNames && Object.keys(saved.fileNames).some(function (k) {
+          return (saved.fileNames[k] || []).length;
+        });
+        $("resumeTxt").textContent = "We brought back what you filled in" + (when ? " on " + when : "") + "." +
+          (lost ? " Your files need picking again — those can't be saved in the browser." : "");
+        $("resume").hidden = false;
+        $("resumeYes").textContent = "Carry on";
+      } else {
+        meta.started = new Date().toISOString();
+        track("brief_start", {});
+      }
+
+      applyState();
+      prefill();
+      goTo(saved && typeof saved.idx === "number" ? Math.min(saved.idx, TOTAL - 1) : 0);
+
+      /* With a sheet behind it, one button does the whole job and the manual
+         routes are the fallback. Without one, the manual routes ARE the job. */
+      if (BRIEF_ENDPOINT) {
+        $("sendMain").hidden = false;
+        $("otherWays").hidden = false;
+        $("manual").hidden = true;
+        $("sendNote").textContent = "It goes straight to us, with your files.";
+        $("sendMain").addEventListener("click", postBrief);
+        $("otherWays").addEventListener("click", function () {
+          $("manual").hidden = false;
+          $("otherWays").hidden = true;
+        });
+      } else {
+        $("sendNote").textContent = "Any one of these reaches us. WhatsApp is fastest — it lands on the same " +
+          "number that will run your project.";
+      }
+
+      $("resumeYes").addEventListener("click", function () { $("resume").hidden = true; });
+      $("resumeNo").addEventListener("click", function () {
+        if (!confirm("Clear everything you have filled in and start again?")) return;
+        wipe();
+        location.href = location.pathname + location.search;
+      });
+
+      $("sendWA").addEventListener("click", sendWhatsApp);
+      $("sendMail").addEventListener("click", sendEmail);
+      $("sendCopy").addEventListener("click", function () {
+        var text = buildBrief();
+        copyText(text).then(function () {
+          markSent("copy", "Copied.",
+            "Your whole brief is on the clipboard. Paste it into WhatsApp or an email to us and you're done.");
+        }).catch(function () {
+          download(text);
+          markSent("copy_failed", "Saved as a file instead.",
+            "This browser wouldn't let us reach the clipboard, so we saved the brief to your device. Send us the file.");
+        });
+      });
+      $("sendDl").addEventListener("click", function () {
+        download(buildBrief());
+        markSent("download", "Saved to this device.",
+          "Send us the file on WhatsApp or by email and we'll take it from there.");
+      });
+      $("startOver").addEventListener("click", function () {
+        if (!confirm("Clear everything and start again?")) return;
+        wipe();
+        location.href = location.pathname;
+      });
+
+      $("navHelp").href = WA + "&text=" + encodeURIComponent(
+        "Hi — I'm filling in the Smart Storefront brief and I'm stuck on something.");
+
+      /* Drag and drop onto any of the file boxes, for the desktop half. */
+      Array.prototype.forEach.call(wrapEl.querySelectorAll("[data-drop]"), function (box) {
+        var k = box.getAttribute("data-drop");
+        ["dragenter", "dragover"].forEach(function (e) {
+          box.addEventListener(e, function (ev) { ev.preventDefault(); box.classList.add("over"); });
+        });
+        ["dragleave", "drop"].forEach(function (e) {
+          box.addEventListener(e, function (ev) { ev.preventDefault(); box.classList.remove("over"); });
+        });
+        box.addEventListener("drop", function (ev) {
+          if (ev.dataTransfer && ev.dataTransfer.files) addFiles(k, ev.dataTransfer.files);
+        });
+      });
+
+      /* The nav is a pill and a logo, and it grows when the webfont swaps in. The
+         progress bar sticks directly below it, so its offset is measured rather
+         than guessed - a stale number tucks the bar under the nav. */
+      function syncNavHeight() {
+        var n = document.querySelector("nav");
+        if (n) document.documentElement.style.setProperty("--navh",
+          Math.round(n.getBoundingClientRect().height) + "px");
+      }
+      syncNavHeight();
+      window.addEventListener("resize", syncNavHeight);
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(syncNavHeight);
+    })();
+  </script>
+
+</body>
+
+</html>
