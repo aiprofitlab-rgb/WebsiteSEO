@@ -42,6 +42,21 @@ campaign copy:
 - **24 hours** to keep replying after they message you. Email capture lives inside
   that window.
 
+A fourth constraint, learned the hard way on 2026-09-08: **"someone reacted with
+an emoji" is two different webhooks.** A story reply — including the emoji tapped
+from the story tray — arrives as a message whose `text` IS that emoji, on the
+`messages` field. A reaction on a message in the thread arrives on the separate
+**`message_reactions`** field, as a `reaction` object with no `message` at all.
+Subscribe to both or the second kind never reaches the box:
+
+```bash
+curl -X POST "https://graph.instagram.com/v20.0/me/subscribed_apps" \
+  -d "subscribed_fields=comments,messages,message_reactions" -d "access_token=$TOKEN"
+```
+
+`GET me/subscribed_apps` is the only place this is visible; `/health` cannot see
+it, and a missing field looks exactly like nobody having written to you.
+
 ## The admin panel
 
 Everything a campaign needs changed — keywords, DM copy, which post a rule fires

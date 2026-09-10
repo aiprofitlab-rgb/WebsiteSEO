@@ -1,0 +1,87 @@
+{
+  "slug": "template",
+  "series": "Where it leaks",
+  "lang": "en",
+  "dir": "ltr",
+  "counter": true,
+  "swipe_hint": true,
+
+  "_how_to_use": "Copy to decks/<your-slug>.json and rewrite the text. «guillemets» mark every slot to fill — --final refuses to build while any remain. *asterisks* make ONE phrase amber, one per slide. Types: cover, text, stat, steps, compare, quote, cta — delete what you don't need. 6-8 slides. One problem, one number, one fix. Full notes in tools/carousel/README.md.",
+
+  "slides": [
+    {
+      "type": "cover",
+      "kicker": "«For whom — e.g. Oman distributors»",
+      "title": "«The hook — one claim, stated flat.»",
+      "body": "«One line of set-up: what they are about to get.»"
+    },
+    {
+      "type": "text",
+      "kicker": "The problem",
+      "title": "«The symptom they recognise in their own week.»",
+      "body": "«Two or three sentences. Describe it the way they would describe it to a friend — the WhatsApp thread, the spreadsheet, the quote nobody followed up. Do not sell yet.»",
+      "note": "«Optional margin note — a caveat or an aside.»"
+    },
+    {
+      "type": "stat",
+      "stat": {
+        "label": "«What the number measures»",
+        "value": "«NN»",
+        "unit": "«%»",
+        "caption": "«What that number costs them, in one sentence.»",
+        "source": "Source: «your own audit, client log or observation — never an imported statistic»"
+      }
+    },
+    {
+      "type": "steps",
+      "kicker": "The fix",
+      "title": "«The framework, named.»",
+      "items": [
+        "«Step one — an action, in the imperative.»",
+        "«Step two — short enough to read at a glance.»",
+        "«Step three»",
+        "«Step four — five items is the ceiling.»"
+      ],
+      "note": "«Optional: what most people get wrong here.»"
+    },
+    {
+      "type": "compare",
+      "kicker": "What changes",
+      "title": "«Before and after, in one line.»",
+      "compare": {
+        "before": {
+          "label": "Before",
+          "text": "«The current state. A process, not an adjective.»"
+        },
+        "after": {
+          "label": "After",
+          "text": "«The state after the fix, just as concrete — or the contrast reads as marketing.»"
+        }
+      }
+    },
+    {
+      "type": "quote",
+      "quote": {
+        "text": "«A line worth screenshotting.»",
+        "attrib": "«Role and sector — or your own name»"
+      }
+    },
+    {
+      "type": "cta",
+      "kicker": "«Next step»",
+      "title": "«The ask, stated once.»",
+      "cta": {
+        "line": "«What they get, and what it costs them to ask. Be specific — vague asks get vague replies.»",
+        "keyword": "«DM KEYWORD»",
+        "note": "«What happens after they send it.»"
+      }
+    }
+  ],
+
+  "caption": {
+    "hook": "«First line — the only one shown before “more”. Make the cover claim again, in your own voice.»",
+    "body": "«Three to five short lines carrying the context the slides could not fit. Line breaks, not paragraphs.»",
+    "cta": "«The same ask as the last slide, with the keyword spelled the same way.»",
+    "hashtags": ["«tag1»", "«tag2»", "«tag3»", "«tag4»", "«tag5»"]
+  }
+}

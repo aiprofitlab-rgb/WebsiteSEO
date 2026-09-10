@@ -55,6 +55,11 @@ TYPE_RULES = [
     (re.compile(r"/academy/(en|ar)/"), "guide"),
     (re.compile(r"^/(blog|blog-ar)/index\.html$"), "blog-hub"),
     (re.compile(r"^/(academy|academy-ar)/index\.html$"), "academy-hub"),
+    # Ahead of the keyword rules below for the reason pageType() in
+    # public_html/js/apl-analytics.js gives: those are unanchored substring
+    # tests, so a tool whose slug happens to contain "process" or "about"
+    # would be filed as that page type. A file under en/tools/ is a tool.
+    (re.compile(r"^/en/tools/"), "tool"),
     (re.compile(r"services"), "services"),
     (re.compile(r"process"), "process"),
     (re.compile(r"about"), "about"),

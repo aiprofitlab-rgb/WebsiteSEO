@@ -575,6 +575,17 @@ PAGES = {
     "demos":      ("en/demos.html",       "/en/demos/",      "/demos-ar/"),
     "checkout":   ("en/checkout.html",    "/en/checkout/",   "/checkout-ar/"),
     "order":      ("en/order.html",       "/en/order/",      "/order-ar/"),
+
+    # The free tools, added 2026-09-10. English-only for now, hence the None
+    # third field: alternates() then emits an `en` and an x-default and no
+    # `ar`, and header() falls the language toggle back to /ar/. These are the
+    # first NESTED pages in the set - /en/tools/<slug>/ is two segments, which
+    # .htaccess rule 3 (^/en/([^/]+)/$) cannot match, so section 2d there
+    # carries a rule of its own. The hub is a directory index rather than a
+    # tools.html, so DirectoryIndex serves it and no rule is needed for it.
+    "tools":      ("en/tools/index.html", "/en/tools/",      None),
+    "efawtara":   ("en/tools/oman-e-invoicing-2027.html",
+                   "/en/tools/oman-e-invoicing-2027/",       None),
 }
 
 # --------------------------------------------------------------------------
@@ -736,7 +747,8 @@ CHROME = {
         "f_links": [("What I build", "/en/services/"), ("How it works", "/en/process/"),
                     ("Prices", "/en/services/#price"), ("Start an order", "/en/checkout/"),
                     ("Revenue leak simulator", "/en/simulators/"),
-                    ("Dashboard demo", "/en/demos/#dash"), ("WhatsApp demo", "/en/demos/")],
+                    ("Dashboard demo", "/en/demos/#dash"), ("WhatsApp demo", "/en/demos/"),
+                    ("Free tools", "/en/tools/")],
         "f_direct": [("Contact page", "/en/contact/"), ("About Nahid", "/en/about/"),
                      ("Articles", "/blog/")],
         "follow": "Follow the work",

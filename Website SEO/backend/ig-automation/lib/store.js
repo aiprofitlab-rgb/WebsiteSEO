@@ -161,6 +161,7 @@ function open(file) {
     // Newest first here, reversed by the caller. Taking the tail in SQL means the
     // index does the work; ordering it back to oldest-first is free in JS.
     lastTurns: db.prepare(`SELECT role, text FROM transcript WHERE igsid = ? AND at > ? ORDER BY id DESC LIMIT ?`),
+    lastAssistantTurn: db.prepare(`SELECT at FROM transcript WHERE igsid = ? AND role = 'assistant' ORDER BY id DESC LIMIT 1`),
     dropTurns: db.prepare(`DELETE FROM transcript WHERE igsid = ?`),
 
     remember: db.prepare(`INSERT OR REPLACE INTO said (hash, at) VALUES (?, ?)`),
@@ -295,6 +296,20 @@ function open(file) {
       if (!igsid) return [];
       const n = Math.min(Math.max(Number(turns) || TRANSCRIPT_TURNS, 1), 40);
       return stmts.lastTurns.all(String(igsid), now - TRANSCRIPT_TTL_MS, n).reverse();
+    },
+
+    /**
+     * When we last said something to this person, or 0 if we never have.
+     *
+     * Read by the reaction guard in handler.js: a heart landing seconds after
+     * our own reply is a thank-you and answering it looks like a bot, while the
+     * same heart on a cold thread is a real signal. Only the timestamp is
+     * needed, which is why this is not just transcript().
+     */
+    lastSaidAt(igsid) {
+      if (!igsid) return 0;
+      const row = stmts.lastAssistantTurn.get(String(igsid));
+      return (row && row.at) || 0;
     },
 
     forget: (igsid) => stmts.dropTurns.run(String(igsid)),

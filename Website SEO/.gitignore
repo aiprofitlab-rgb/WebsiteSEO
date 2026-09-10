@@ -24,3 +24,17 @@ invoices/.env
 out/journey-*.html
 out/.journey-cache/
 Aiden_Chat*.csv
+
+# Generated carousel slides. THIS REPO IS PUBLIC and these are large binaries
+# that belong in the IG content folder, not in git. The tool and the decks that
+# produce them are tracked.
+out/carousel/
+tools/carousel/fonts/
+
+# Prospect lists and outreach working files. THIS REPO IS PUBLIC — these hold
+# ~20,000 Omani businesses' phone numbers, harvested emails and per-lead notes.
+# Committing them republishes a personal-data set under our name, and the CRM
+# columns (consent, outcome, notes) are commercially sensitive besides.
+# Only the tools in tools/prospecting/ are tracked.
+out/outreach/
+out/prospecting/

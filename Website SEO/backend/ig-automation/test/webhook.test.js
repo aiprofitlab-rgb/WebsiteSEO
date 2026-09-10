@@ -228,3 +228,36 @@ test("the signed_request signature covers the encoded payload, not the decoded o
   assert.equal(signature.parseSignedRequest(`${wrong}.${encoded}`, SECRET), null);
   assert.deepEqual(signature.parseSignedRequest(signature.makeSignedRequest(payload, SECRET), SECRET), payload);
 });
+
+/**
+ * What reaches the journal.
+ *
+ * On 2026-09-08 a story reaction was dropped inside the handler and left no
+ * trace anywhere, which made "why did Aiden answer two of three?" unanswerable
+ * from the box. Message drops are logged now; the noisy ones still are not.
+ */
+test("a dropped message is logged, while comment drops and echoes stay quiet", async () => {
+  const lines = [];
+  const realLog = console.log;
+  console.log = (...a) => lines.push(a.join(" "));
+
+  const s = await serve({
+    handleEvent: async () => [
+      { action: "drop", why: "no text (image)", surface: "dm" },
+      { action: "drop", why: "echo", surface: "dm", quiet: true },
+      { action: "drop", why: "our own comment" },
+      { action: "ai_replied", ruleId: "ai:dm", surface: "dm" },
+    ],
+  });
+
+  const buf = body();
+  await post(s.base, buf, signature.sign(buf, SECRET));
+  await new Promise((r) => setTimeout(r, 50));
+  console.log = realLog;
+
+  const logged = lines.filter((l) => l.includes('"webhook"'));
+  assert.equal(logged.length, 2, "the textless message and the reply — nothing else");
+  assert.ok(logged[0].includes("no text (image)"));
+  assert.ok(logged[1].includes("ai_replied"));
+  await s.close();
+});

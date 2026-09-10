@@ -38,9 +38,17 @@ import rtl  # noqa: E402
 # the reference article is a rewrite of a piece that tools/reskin_articles.py
 # now re-skins in place. Publishing either would duplicate a live URL.
 MODULES = ["page_home", "page_services", "page_process", "page_about", "page_contact",
-           "page_simulator", "page_demo", "page_checkout", "page_order"]
+           "page_simulator", "page_demo", "page_checkout", "page_order",
+           # The free tools, English only. Deliberately NOT mirrored into
+           # MODULES_AR below: an Arabic twin needs a native review pass, and
+           # a machine-translated tax page is the worst possible thing to
+           # publish. Their kit.PAGES rows carry None as the twin URL, so
+           # nothing on the English side advertises an Arabic page that does
+           # not exist.
+           "page_tools_hub", "page_tool_efawtara"]
 
-# Same nine pages, the Arabic side. Added 2026-08-21, replacing the old dark
+# The nine core pages, the Arabic side - the two tool modules above are not in
+# this list and must not be added to it without a native Arabic pass. Added 2026-08-21, replacing the old dark
 # skin on the five core Arabic URLs and introducing four pages Arabic never
 # had. Names are suffixed rather than shadowed because both sets sit on
 # sys.path and an Arabic module imports its English twin for the CSS.
@@ -120,6 +128,10 @@ def render(mod, lang="en"):
     )
 
     dest = ROOT / "public_html" / rel
+    # /en/tools/ is the first page directory the set has needed. write_text
+    # does not create parents, so a new nested page would otherwise die on
+    # FileNotFoundError the first time it is built on a clean checkout.
+    dest.parent.mkdir(parents=True, exist_ok=True)
     dest.write_text(html, encoding="utf-8")
     return dest, len(html)
 

@@ -61,7 +61,16 @@ function create(deps) {
       try {
         const results = await deps.handleEvent(body, deps);
         for (const r of results) {
-          if (r.action === "drop") continue; // the common case; not worth a line
+          /**
+           * A dropped COMMENT is the common case and mostly our own words coming
+           * back at us — dozens a day, worth nothing in the journal. A dropped
+           * MESSAGE is rare and is exactly what this service used to be blind to:
+           * on 2026-09-08 a story reaction arrived in a shape with no `text`, was
+           * dropped in handler.js, and left not one line anywhere to find it by.
+           * So message drops are logged unless they are marked quiet — the echo
+           * of our own DM, and Meta's retries, which genuinely say nothing.
+           */
+          if (r.action === "drop" && (r.quiet || r.surface !== "dm")) continue;
           console.log(JSON.stringify({ webhook: r.action, ...r }));
         }
       } catch (err) {

@@ -18,6 +18,13 @@ urls = [
     ("/en/smart-storefront/", 0.9),
     ("/blog/", 0.8),
 
+    # --- Free tools (added 2026-09-10) -------------------------------------
+    # English-only this pass, so there is no Arabic twin to list. source_file()
+    # resolves both without a change: /en/tools/ falls through to its directory
+    # index, and the nested slug to en/tools/<slug>.html.
+    ("/en/tools/", 0.7),
+    ("/en/tools/oman-e-invoicing-2027/", 0.8),
+
     # --- Arabic, the v4 set (rebuilt 2026-08-21) ----------------------------
     # The five core URLs are unchanged - only the skin under them moved.
     ("/ar/", 0.9),

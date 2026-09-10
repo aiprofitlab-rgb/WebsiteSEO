@@ -27,7 +27,13 @@ const SEED_FILE = path.join(__dirname, "..", "ai.json");
 const DEFAULTS = {
   enabled: false,
   comments: { enabled: true, topLevelOnly: true, maxPerMediaPerHour: 8, maxPerHour: 25, maxChars: 280 },
-  dms: { enabled: true, maxPerHour: 60, maxChars: 700 },
+  /**
+   * `reactions` covers the emoji someone taps on a message rather than typing —
+   * a separate webhook shape that this service ignored entirely until 2026-09-08.
+   * `reactionQuietMinutes` is the guard that keeps answering them from turning
+   * into politeness ping-pong; see aiAnswerDm in lib/handler.js.
+   */
+  dms: { enabled: true, maxPerHour: 60, maxChars: 700, reactions: true, reactionQuietMinutes: 15 },
   model: "gpt-4o-mini",
   temperature: 0.6,
   persona: "",

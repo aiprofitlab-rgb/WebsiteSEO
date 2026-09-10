@@ -43,6 +43,13 @@
         if (/\/academy\/(en|ar)\//.test(path)) return 'guide';
         if (/^\/(blog|blog-ar)\/?(index\.html)?$/.test(path)) return 'blog-hub';
         if (/^\/(academy|academy-ar)\/?(index\.html)?$/.test(path)) return 'academy-hub';
+        // Before the keyword branches below, not after. Every one of them is
+        // an unanchored substring test - `legal`, `service|package`,
+        // `process`, `about`, `contact` - so a tool slug that merely CONTAINS
+        // one of those words would be classified as that page type. Anything
+        // under /tools/ is a tool by construction, so the path test wins and
+        // a future slug cannot be misfiled by its wording.
+        if (/\/tools\//.test(path)) return 'tool';
         if (/privacy|terms|legal|refund/.test(path)) return 'legal';
         if (/service|package/.test(path)) return 'services';
         if (/process/.test(path)) return 'process';

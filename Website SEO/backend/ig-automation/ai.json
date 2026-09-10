@@ -75,7 +75,20 @@
   "dms": {
     "enabled": true,
     "maxPerHour": 60,
-    "maxChars": 500
+    "maxChars": 500,
+
+    "//reactions": [
+      "The emoji someone taps instead of typing. Meta delivers it as its own",
+      "webhook shape with no message text at all, and this service ignored it",
+      "until 2026-09-08 — silently, which is how a story reaction went",
+      "unanswered while two story replies beside it were answered.",
+      "reactionQuietMinutes stops the politeness ping-pong: a heart landing on",
+      "a reply we just sent is a thank-you, and answering a thank-you with",
+      "another message is the most bot-looking thing on Instagram. 0 = answer",
+      "every reaction. Both keys are optional; the defaults are these values."
+    ],
+    "reactions": true,
+    "reactionQuietMinutes": 15
   },
 
   "model": "gpt-4o",

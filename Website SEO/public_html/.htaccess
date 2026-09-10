@@ -264,6 +264,21 @@ RewriteRule ^en/claim/?$          /en/pay/        [R=301,L]
 RewriteRule ^missed-call-simulator-ar/?$          /simulators-ar/ [R=301,L]
 RewriteRule ^campaign-roi-simulator-ar/?$         /simulators-ar/ [R=301,L]
 
+# 2d. Free tools, added 2026-09-10. The hub is a DIRECTORY index
+# (public_html/en/tools/index.html), which is what makes /en/tools/ resolve
+# without a rule at all: rule 3's -f test fails on en/tools.html, rule 3b's
+# !-d test fails because en/tools IS a directory, and nothing else matches -
+# so the request falls through to DirectoryIndex. What that leaves open is the
+# index.html form. Rule 8 would send /en/tools/index.html to /en/tools/index/,
+# and the nested rule below would then SERVE en/tools/index.html there at 200,
+# i.e. the hub on a second URL. These two rules close that: the .html form
+# lands on the clean hub in one hop, and /en/tools/index/ is never served.
+# The .html rule must sit here rather than in section 7, because rule 8 is the
+# thing it is pre-empting and both are further down.
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /en/tools/index\.html\ HTTP/
+RewriteRule ^en/tools/index\.html$ https://aiprofitlab.io/en/tools/ [R=301,L]
+RewriteRule ^en/tools/index/?$      https://aiprofitlab.io/en/tools/ [R=301,L]
+
 # 3. Serve pages that genuinely live INSIDE public_html/en/
 # Must come before rule 3b. That rule encodes the site's older convention,
 # where English pages sat at the document root as <name>-en.html, so it sends
@@ -278,6 +293,16 @@ RewriteRule ^campaign-roi-simulator-ar/?$         /simulators-ar/ [R=301,L]
 RewriteCond %{REQUEST_URI} ^/en/([^/]+)/$
 RewriteCond %{DOCUMENT_ROOT}/en/%1.html -f
 RewriteRule ^en/([^/]+)/$ en/$1.html [L]
+
+# 3a. Serve /en/tools/<slug>/ from public_html/en/tools/<slug>.html.
+# Rule 3 above matches ONE segment - ^/en/([^/]+)/$ - so a nested tools URL
+# reaches none of 3, 3b, 4 or 5 and 404s without this. Modelled on rule 4:
+# the -f test means it fires only for a tool that really exists on disk, so a
+# typo still 404s rather than being swallowed. Must sit above 3b, which would
+# otherwise never see it either way but is the rule this pattern shadows.
+# `index` cannot reach here - section 2d 301s it away first.
+RewriteCond %{DOCUMENT_ROOT}/en/tools/$1.html -f
+RewriteRule ^en/tools/([^/]+)/$ en/tools/$1.html [L]
 
 # 3b. Map /en/ subpaths to root -en.html files (older convention)
 RewriteCond %{REQUEST_FILENAME} !-f

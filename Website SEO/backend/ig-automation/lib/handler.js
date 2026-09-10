@@ -370,12 +370,71 @@ async function aiAnswerComment(value, entry, deps) {
 }
 
 /**
+ * Meta names the reaction and sends the emoji beside it, but the emoji is the
+ * part worth answering and it is the part that can be missing. Every name Meta
+ * uses has an entry here, so a named reaction never arrives as nothing.
+ */
+const EMOJI_FOR = { love: "❤️", like: "👍", wow: "😮", haha: "😆", sad: "😢", angry: "😠", care: "🤗" };
+
+/**
+ * What a message event actually carries.
+ *
+ * Three different shapes arrive on `entry.messaging[]`, and until 2026-09-08
+ * this service could read exactly one of them:
+ *
+ *   message.text        an ordinary DM — and also a story reply, because the
+ *                       emoji someone taps in the story tray is delivered as a
+ *                       message whose text IS that emoji. This is why story
+ *                       reactions have always worked.
+ *   reaction            NOT a message. Meta sends its own object with no
+ *                       `message` key at all, so the old `!msg.text` guard binned
+ *                       it — silently, since webhook.js does not log drops. This
+ *                       is the shape that went unanswered on 2026-09-08.
+ *   message.attachments a sticker, GIF, image, voice note or share. There is no
+ *                       text to answer and inventing one would be worse than
+ *                       silence — but the drop now names the shape, so the next
+ *                       "why did it ignore me" is one grep instead of an evening.
+ *
+ * `key` is what the dedupe table gets claimed under. A reaction's `mid` is the id
+ * of the message being reacted TO, not an id of its own: claiming it raw would
+ * collide with that message's own row and the reaction would look like a
+ * redelivery of a DM we already answered. Hence the prefix.
+ *
+ * @returns {{text: string, kind: string, key?: string, why?: string}}
+ */
+function inbound(messaging) {
+  const msg = (messaging && messaging.message) || {};
+  const reaction = (messaging && messaging.reaction) || null;
+  const senderId = (messaging && messaging.sender && messaging.sender.id) || "";
+
+  if (reaction) {
+    // "unreact" is someone taking a heart back. There is nothing to say to that.
+    if (String(reaction.action || "react") !== "react") return { text: "", kind: "reaction", why: "unreact" };
+    const name = String(reaction.reaction || "").toLowerCase();
+    const emoji = String(reaction.emoji || "").trim() || EMOJI_FOR[name] || "";
+    if (!emoji) return { text: "", kind: "reaction", why: `reaction with no emoji (${name || "unnamed"})` };
+    return { text: emoji, kind: "reaction", key: `react:${reaction.mid || "nomid"}:${senderId}` };
+  }
+
+  const text = String(msg.text || "").trim();
+  const kind = msg.reply_to && msg.reply_to.story ? "story_reply" : "dm";
+  if (text) return { text, kind, key: msg.mid || "" };
+
+  const types = (msg.attachments || []).map((a) => (a && a.type) || "unknown");
+  return { text: "", kind, why: `no text (${types.length ? types.join(",") : "empty"})` };
+}
+
+/**
  * One message event.
  *
  * Two jobs, in this order. First the email capture, which is a specific person
  * we are specifically waiting on and must not be interrupted — a follower typing
  * their address is answering a question we asked, and handing that to a chatbot
  * instead would lose the lead. Everything else goes to the fallback.
+ *
+ * Every drop below carries `surface: "dm"` so webhook.js can log it. The comment
+ * side stays quiet because most of its drops are our own words coming back at us
+ * many times a day; a dropped message is rare and always worth a line.
  */
 async function handleMessage(messaging, entry, deps) {
   const { ig, store, ledger, selfId, selfUsername, now = Date.now() } = deps;
@@ -384,16 +443,26 @@ async function handleMessage(messaging, entry, deps) {
   const senderId = (messaging && messaging.sender && messaging.sender.id) || "";
 
   // Our own outbound DM is echoed back to us. Answering it is an infinite loop.
-  if (msg.is_echo) return { action: "drop", why: "echo" };
-  if (isSelf({ id: senderId }, (entry && entry.id) || "", selfId, selfUsername)) return { action: "drop", why: "our own message" };
-  if (!senderId || !msg.text) return { action: "drop", why: "no text" };
+  // Quiet: there is one of these for every reply we send, and it says nothing.
+  if (msg.is_echo) return { action: "drop", why: "echo", surface: "dm", quiet: true };
+  if (isSelf({ id: senderId }, (entry && entry.id) || "", selfId, selfUsername)) {
+    return { action: "drop", why: "our own message", surface: "dm", quiet: true };
+  }
+
+  const got = inbound(messaging);
+  if (!senderId || !got.text) return { action: "drop", why: got.why || "no sender", kind: got.kind, surface: "dm" };
 
   const state = store.getState(senderId, now);
   if (!state || state.state !== "awaiting_email") {
-    return deps.ai ? aiAnswerDm(messaging, entry, deps) : { action: "drop", why: "not awaiting email" };
+    return deps.ai ? aiAnswerDm(messaging, entry, deps, got) : { action: "drop", why: "not awaiting email", surface: "dm" };
   }
 
-  const found = EMAIL_RE.exec(msg.text);
+  // A reaction is a tap, not an answer. Someone mid-capture who hearts the ask
+  // has not failed to type their address, and "that doesn't look like an email"
+  // is a nag they did not earn. The state stays armed either way.
+  if (got.kind === "reaction") return { action: "drop", why: "reaction during email capture", surface: "dm" };
+
+  const found = EMAIL_RE.exec(got.text);
   if (!found) {
     // No nagging. One clarification, then leave them alone — the state stays
     // armed until the 24h window closes on its own.
@@ -412,7 +481,7 @@ async function handleMessage(messaging, entry, deps) {
   // means that when the same person says "so how does it work?" thirty seconds
   // later, the model can see it already has their email and does not ask again.
   if (store.addTurn) {
-    store.addTurn(senderId, "user", msg.text, now);
+    store.addTurn(senderId, "user", got.text, now);
     store.addTurn(senderId, "assistant", `Got their email: ${email}`, now);
   }
 
@@ -437,20 +506,26 @@ async function handleMessage(messaging, entry, deps) {
  *
  * @returns {{action: string, why?: string, ruleId?: string}}
  */
-async function aiAnswerDm(messaging, entry, deps) {
+async function aiAnswerDm(messaging, entry, deps, parsed) {
   const { ig, store, ai, rules: cfg, aiConfig, alert, now = Date.now() } = deps;
 
   const ac = aiConfig || {};
-  if (!ac.enabled) return { action: "drop", why: "not awaiting email" };
+  if (!ac.enabled) return { action: "drop", why: "not awaiting email", surface: "dm" };
   const dc = ac.dms || {};
-  if (!dc.enabled) return { action: "drop", why: "ai dms off" };
-  if (!ai.configured || !ai.configured()) return { action: "drop", why: "ai not configured" };
+  if (!dc.enabled) return { action: "drop", why: "ai dms off", surface: "dm" };
+  if (!ai.configured || !ai.configured()) return { action: "drop", why: "ai not configured", surface: "dm" };
 
-  const msg = messaging.message || {};
+  // handleMessage has already parsed this; re-parsing is for the direct callers
+  // (scripts/replay.js and the tests) so the two entry points cannot disagree.
+  const got = parsed || inbound(messaging);
   const senderId = messaging.sender.id;
-  const text = String(msg.text || "");
+  const text = got.text;
   const username = (messaging.sender && messaging.sender.username) || "";
   const since = now - DEFAULT_LIMITS.windowMs;
+
+  if (got.kind === "reaction" && dc.reactions === false) {
+    return { action: "drop", why: "reactions off", ruleId: AI_DM_RULE, surface: "dm" };
+  }
 
   const cap = Number(dc.maxPerHour);
   if (Number.isFinite(cap) && store.recentSent({ ruleId: AI_DM_RULE, since }) >= cap) {
@@ -472,9 +547,31 @@ async function aiAnswerDm(messaging, entry, deps) {
    * which is long enough to swallow a retry burst and short enough to never
    * silence a real second message.
    */
-  const mid = msg.mid || `nomid:${senderId}:${fingerprint(text)}:${Math.floor(now / 60_000)}`;
+  const mid = got.key || `nomid:${senderId}:${fingerprint(text)}:${Math.floor(now / 60_000)}`;
   if (!store.claim(mid, { accountId: entry.id || "", commenterId: senderId, username, ruleId: AI_DM_RULE }, now)) {
-    return { action: "drop", why: "already handled", ruleId: AI_DM_RULE };
+    return { action: "drop", why: "already handled", ruleId: AI_DM_RULE, surface: "dm", quiet: true };
+  }
+
+  /**
+   * A reaction on something we said seconds ago is a thank-you, not a question.
+   * Answering it starts the politeness ping-pong — we reply, they heart the
+   * reply, we reply again — which is the single most bot-looking thing an
+   * account can do. Past the quiet window the same heart is a genuine new
+   * signal: a story tap, or a thread coming back to life, and worth a line.
+   *
+   * AFTER the claim on purpose. Dedupe is the more precise guard and has to name
+   * the more precise reason, or a Meta retry of a reaction we already answered
+   * gets filed as ping-pong. The row is closed rather than released so the retry
+   * lands on "already handled"; only 'sent' rows count towards the caps, so a
+   * skip here costs the hour nothing.
+   */
+  if (got.kind === "reaction") {
+    const quietMs = Math.max(0, Number(dc.reactionQuietMinutes) || 0) * 60_000;
+    const lastSaid = store.lastSaidAt ? store.lastSaidAt(senderId) : 0;
+    if (quietMs && lastSaid && now - lastSaid < quietMs) {
+      store.finish(mid, "skipped", "reaction to something we just sent", now);
+      return { action: "drop", why: "reaction to something we just sent", ruleId: AI_DM_RULE, surface: "dm" };
+    }
   }
 
   // Read the thread BEFORE adding this message, because lib/ai.js appends it as
@@ -558,6 +655,7 @@ module.exports = {
   handleMessage,
   aiAnswerComment,
   aiAnswerDm,
+  inbound,
   isSelf,
   fingerprint,
   EMAIL_RE,

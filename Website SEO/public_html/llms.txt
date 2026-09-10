@@ -37,6 +37,13 @@ A capped launch group buys the Smart Website build at a seat price that climbs a
 - [Checkout](https://aiprofitlab.io/en/checkout/): reserve a build slot
 - [Launch offer](https://aiprofitlab.io/en/smart-storefront/): the capped launch offer, with the live seat price and the seats left at it
 
+## Free tools (English)
+
+Browser tools given away with no sign-up and no email. Each runs entirely on the visitor's device: nothing typed into them is transmitted to AI Profit Lab or to anyone else, because there is no server behind them.
+
+- [Free tools hub](https://aiprofitlab.io/en/tools/): the index of the free browser tools
+- [Oman e-invoicing 2027 (Fawtara)](https://aiprofitlab.io/en/tools/oman-e-invoicing-2027/): a plain-language explainer and readiness tool for Oman Tax Authority Decision 189/2026 (Official Gazette 1660, 9 August 2026). A live countdown, two questions that identify which mandatory phase a business falls into, and a 12-point readiness checklist that can be ticked and printed. Phase 1 is 1 April 2027 for annual supplies of more than OMR 5 million; Phase 2 is 1 October 2027 for OMR 5 million or less, i.e. every remaining VAT-registered business. Facts on the page carry a visible verification date. It is deliberately NOT a compliance checker - the Oman Tax Authority publishes the authoritative one at tms.taxoman.gov.om/portal/rollout-checking, which the page links to. AI Profit Lab is not an OTA-accredited e-invoicing service provider and does not sell an e-invoicing system.
+
 ## Main pages (Arabic)
 
 - [الصفحة الرئيسية](https://aiprofitlab.io/ar/)

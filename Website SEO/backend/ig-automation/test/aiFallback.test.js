@@ -363,3 +363,157 @@ test("a whole webhook body mixing a keyword comment, a stray comment and a DM do
   assert.equal(h.calls.sendText.length, 1, "and the DM answer");
   h.db.close();
 });
+
+// ------------------------------------------------------------- reactions ---
+//
+// The 2026-09-08 case: three people reacted to a story, two got an answer and
+// one got silence. The two were story replies (a message whose text IS the
+// emoji, already covered above); the third arrived as a `reaction` object with
+// no `message` at all and was dropped by the `!msg.text` guard, without a log
+// line to find it by. Everything below is that gap.
+
+const react = (over = {}) => ({
+  sender: { id: over.senderId || OTHER, username: over.username || "a_follower" },
+  reaction: {
+    mid: over.mid || "mid-reacted-to",
+    action: over.action || "react",
+    reaction: over.reaction === undefined ? "love" : over.reaction,
+    ...(over.emoji === undefined ? { emoji: "❤️" } : over.emoji ? { emoji: over.emoji } : {}),
+  },
+});
+
+test("a reaction is answered — it used to be dropped without a trace", async () => {
+  const h = harness();
+  const out = await handler.handleMessage(react(), entry, h.deps);
+
+  assert.equal(out.action, "ai_replied");
+  assert.equal(h.calls.sendText.length, 1);
+  assert.equal(h.asked.dm[0].text, "❤️", "the emoji is what the model gets to answer");
+  h.db.close();
+});
+
+test("a reaction Meta names but does not spell is still answerable", async () => {
+  const h = harness();
+  const out = await handler.handleMessage(react({ reaction: "wow", emoji: null }), entry, h.deps);
+
+  assert.equal(out.action, "ai_replied");
+  assert.equal(h.asked.dm[0].text, "😮");
+  h.db.close();
+});
+
+test("taking a reaction back says nothing, so we say nothing", async () => {
+  const h = harness();
+  const out = await handler.handleMessage(react({ action: "unreact" }), entry, h.deps);
+
+  assert.equal(out.action, "drop");
+  assert.equal(out.why, "unreact");
+  assert.equal(out.surface, "dm", "and it is logged, unlike before");
+  assert.equal(h.calls.sendText.length, 0);
+  h.db.close();
+});
+
+test("a heart on the reply we just sent is a thank-you, not a question", async () => {
+  const h = harness();
+  await handler.handleMessage(dm(), entry, h.deps); // we answer, and record saying it
+  const out = await handler.handleMessage(react(), entry, h.deps);
+
+  assert.equal(out.action, "drop");
+  assert.equal(out.why, "reaction to something we just sent");
+  assert.equal(h.calls.sendText.length, 1, "no politeness ping-pong");
+  h.db.close();
+});
+
+test("the same heart on a thread gone quiet is a fresh signal and gets an answer", async () => {
+  const h = harness();
+  await handler.handleMessage(dm(), entry, h.deps);
+
+  const later = { ...h.deps, now: Date.now() + 31 * 60_000 };
+  const out = await handler.handleMessage(react(), entry, later);
+
+  assert.equal(out.action, "ai_replied");
+  assert.equal(h.calls.sendText.length, 2);
+  h.db.close();
+});
+
+test("reactionQuietMinutes: 0 turns the guard off entirely", async () => {
+  const h = harness({ config: { dms: { reactionQuietMinutes: 0 } } });
+  await handler.handleMessage(dm(), entry, h.deps);
+  const out = await handler.handleMessage(react(), entry, h.deps);
+
+  assert.equal(out.action, "ai_replied");
+  h.db.close();
+});
+
+test("reactions can be switched off without touching the DMs", async () => {
+  const h = harness({ config: { dms: { reactions: false } } });
+  const off = await handler.handleMessage(react(), entry, h.deps);
+  const on = await handler.handleMessage(dm(), entry, h.deps);
+
+  assert.equal(off.why, "reactions off");
+  assert.equal(on.action, "ai_replied");
+  h.db.close();
+});
+
+test("a reaction claims its OWN row, not the row of the message it is about", async () => {
+  const h = harness();
+  await handler.handleMessage(dm({ mid: "mid-42" }), entry, h.deps);
+
+  // Same id, a different event. Claiming it raw would look like a redelivery.
+  const later = { ...h.deps, now: Date.now() + 31 * 60_000 };
+  const out = await handler.handleMessage(react({ mid: "mid-42" }), entry, later);
+
+  assert.equal(out.action, "ai_replied");
+  assert.equal(h.calls.sendText.length, 2);
+  h.db.close();
+});
+
+test("a redelivered reaction is still answered only once", async () => {
+  const h = harness();
+  const r = react();
+  await handler.handleMessage(r, entry, h.deps);
+  const retry = await handler.handleMessage(r, entry, h.deps);
+
+  assert.equal(retry.why, "already handled");
+  assert.equal(h.calls.sendText.length, 1);
+  h.db.close();
+});
+
+test("someone mid email-capture who hearts the ask is not nagged for an address", async () => {
+  const h = harness();
+  h.db.setState(OTHER, { state: "awaiting_email", ruleId: "guide", commentId: "c1" });
+
+  const out = await handler.handleMessage(react(), entry, h.deps);
+
+  assert.equal(out.action, "drop");
+  assert.equal(out.why, "reaction during email capture");
+  assert.equal(h.calls.sendText.length, 0, "no 'that doesn't look like an email'");
+  assert.ok(h.db.getState(OTHER), "and they are still armed to send one");
+  h.db.close();
+});
+
+test("a message with no text names the shape it was, so the next silence is greppable", async () => {
+  const h = harness();
+  const sticker = {
+    sender: { id: OTHER, username: "a_follower" },
+    message: { mid: "mid-s", attachments: [{ type: "image", payload: { url: "https://cdn/x.gif" } }] },
+  };
+  const out = await handler.handleMessage(sticker, entry, h.deps);
+
+  assert.equal(out.action, "drop");
+  assert.equal(out.why, "no text (image)");
+  assert.equal(out.surface, "dm");
+  h.db.close();
+});
+
+test("a story reply is read as one, and still answered as text", async () => {
+  const h = harness();
+  const storyReply = {
+    sender: { id: OTHER, username: "a_follower" },
+    message: { mid: "mid-st", text: "🔥", reply_to: { story: { id: "s1", url: "https://cdn/s.jpg" } } },
+  };
+  const out = await handler.handleMessage(storyReply, entry, h.deps);
+
+  assert.equal(out.action, "ai_replied");
+  assert.equal(handler.inbound(storyReply).kind, "story_reply");
+  h.db.close();
+});
