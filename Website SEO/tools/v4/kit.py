@@ -586,6 +586,8 @@ PAGES = {
     "tools":      ("en/tools/index.html", "/en/tools/",      None),
     "efawtara":   ("en/tools/oman-e-invoicing-2027.html",
                    "/en/tools/oman-e-invoicing-2027/",       None),
+    "vatinvoice": ("en/tools/oman-vat-invoice-generator.html",
+                   "/en/tools/oman-vat-invoice-generator/", None),
 }
 
 # --------------------------------------------------------------------------
@@ -809,11 +811,27 @@ FONTS_AR = ("https://fonts.googleapis.com/css2?family=Marcellus&family=Markazi+T
             "&family=IBM+Plex+Sans+Arabic:wght@400;500;600"
             "&family=IBM+Plex+Mono:wght@400;500&display=swap")
 
-def head_html(lang="en"):
+def head_html(lang="en", clarity=True):
     """The <head> template for one language. Everything language-dependent is
     a lookup rather than a branch: direction, html lang, og:locale, the font
     stylesheet and the skip link. The placeholders build_v4.render() fills in
-    are identical in both, so nothing downstream has to know the language."""
+    are identical in both, so nothing downstream has to know the language.
+
+    `clarity=False` ships the page with gtag but WITHOUT the Clarity tag. It
+    exists for one specific class of page and should not be used casually.
+
+    Clarity is a session recorder: it reconstructs the DOM, so anything a page
+    RENDERS is sent to Microsoft even though Clarity masks the raw values
+    inside form fields. On /en/tools/oman-vat-invoice-generator/ that was
+    measured, not assumed - a customer name and street address typed into the
+    tool were found in the body of a POST to e.clarity.ms/collect, because the
+    tool draws a live preview of the invoice and the preview is DOM. The page
+    tells the visitor that their customers' details never leave their browser.
+    Either that sentence is true or the recorder runs; it cannot be both.
+
+    Masking attributes would be a second party's promise to keep. Not sending
+    the page to a recorder at all is ours. GA4 stays: it carries event names
+    and page dimensions, never page content."""
     c = CHROME[lang]
     fonts = FONTS_AR if lang == "ar" else FONTS_EN
     return """<!DOCTYPE html>
@@ -864,7 +882,9 @@ def head_html(lang="en"):
 </head>
 <body>
 <a class="skip" href="#main">%(skip)s</a>
-""" % dict(c, fonts=fonts, analytics=ANALYTICS, apl_analytics=APL_ANALYTICS_TAG)
+""" % dict(c, fonts=fonts,
+       analytics=ANALYTICS if clarity else GTAG_SNIPPET,
+       apl_analytics=APL_ANALYTICS_TAG)
 
 
 # Kept as a module constant because it is what the English build has always

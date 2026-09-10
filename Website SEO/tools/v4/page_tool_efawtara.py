@@ -28,6 +28,7 @@ before publishing, and again every quarter.
 import json
 
 from kit import STAR
+from tool_kit import LOCK_ICON, SHELL_CSS
 
 # ==========================================================================
 # THE FACTS - one block, one date, one place to fix.
@@ -111,36 +112,7 @@ CHECKLIST = [
 ]
 
 
-CSS = """
-/* =========================================================== tool shell */
-/* Shared by every page under /en/tools/. Kept in this module for now
-   because there is exactly one tool; the day a second one needs it, this
-   block moves to a tool_kit.py and both import it rather than copying it. */
-.toolbar{
-  display:flex;flex-wrap:wrap;gap:10px 22px;align-items:center;
-  font-family:var(--mono);font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;
-  color:var(--muted);margin:0 0 clamp(20px,3vw,30px);
-}
-.toolbar span{display:inline-flex;align-items:center;gap:8px}
-.toolbar b{font-weight:500;color:var(--teal-950)}
-.s-dark .toolbar,.s-teal .toolbar{color:rgba(241,239,232,.6)}
-.s-dark .toolbar b,.s-teal .toolbar b{color:var(--cream)}
-
-/* The privacy claim. It is a load-bearing sentence, so it is a component and
-   not a paragraph someone can quietly soften. */
-.local{
-  display:flex;gap:14px;align-items:flex-start;
-  border:1px solid var(--line);border-radius:14px;background:var(--white);
-  padding:16px 18px;margin:clamp(22px,3vw,32px) 0 0;
-}
-.local svg{width:22px;height:22px;flex:none;fill:var(--teal);margin-top:2px}
-.local p{margin:0;font-size:.94rem;line-height:1.6;color:var(--muted)}
-.local b{color:var(--teal-950);font-weight:500}
-.s-dark .local{background:rgba(241,239,232,.045);border-color:var(--line-dark)}
-.s-dark .local p{color:rgba(241,239,232,.72)}
-.s-dark .local b{color:var(--cream)}
-.s-dark .local svg{fill:var(--amber-bright)}
-
+CSS = SHELL_CSS + """
 /* ============================================================= countdown */
 .cd{
   background:rgba(7,43,34,.55);border:1px solid var(--line-dark);border-radius:20px;
@@ -652,10 +624,6 @@ def js():
     return JS_TPL.replace("__FACTS__", json.dumps(FACTS, ensure_ascii=False))
 
 
-LOCK_ICON = ('<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1a5 5 0 0 0-5 5v3H6a2 2 0 0 0-2 '
-             '2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V11a2 2 0 0 0-2-2h-1V6a5 5 0 0 0-5-5zm0 2a3 3 0 0 1 3 '
-             '3v3H9V6a3 3 0 0 1 3-3zm0 11a2 2 0 0 1 1 3.7V20h-2v-2.3A2 2 0 0 1 12 14z"/></svg>')
-
 FAQ = [
     ("Is a PDF invoice enough?",
      "No &mdash; not once your phase starts. A PDF you typed in Word, Excel or a design tool and then "
@@ -1046,6 +1014,11 @@ META = dict(
           "which phase applies to your business, and a 12-point readiness checklist you can print. "
           "Runs entirely in your browser." % F["phase2_human"]),
     nav="/en/tools/oman-e-invoicing-2027/",
+    # Same reason as the invoice tool, at lower stakes: this page says it never
+    # sends what you picked, and a session recorder would send exactly that -
+    # the phase verdict and the ticked checklist, rebuilt from the DOM. One
+    # sentence cannot be true on one tool and false on the next.
+    clarity=False,
     next=("Next", "The other free tools", "/en/tools/"),
     schema=_faq_schema() + "$$SPLIT$$" + """{
   "@type":"WebApplication",

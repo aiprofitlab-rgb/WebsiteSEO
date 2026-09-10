@@ -40,6 +40,29 @@ Two systems issue invoices for this company, and they do different jobs.
 Use this one for everything that is not a storefront seat. See
 [`storefront-payments.md`](storefront-payments.md) for the other.
 
+### And a third thing that prints invoices, which issues no numbers at all
+
+[`/en/tools/oman-vat-invoice-generator/`](../tools/v4/page_tool_invoice.py) is a free
+tool on the public site that produces an Omani VAT tax invoice in the visitor's own
+browser. It is **not** a third series and must never become one:
+
+- It never mints a number. The user types their own, and it is a required field.
+- Its one convenience — offering the next number after the last one *you* used — is
+  refused outright inside `LGI-`, `INV-` and `PF-`, in any casing. Those three belong
+  to the two systems above, and a generator anyone on the internet can open handing out
+  numbers in one of them is how two real customers end up holding one invoice number.
+- Nothing it produces reaches this repo, this Mac or `register.json`. It has no server.
+
+If you ever need an invoice for this company, use `tools/invoice.py`. Do not use the
+free tool for it — that is the one way the namespaces could still collide, and it would
+collide silently.
+
+One deliberate divergence: the free tool prints **three** decimals, not the two under
+&ldquo;Gotchas&rdquo; below. It prints other companies' VAT documents, where the rial's
+third decimal is load-bearing — 5% of OMR 9.990 is OMR 0.500 (baisa), and rounding that
+to two decimals is a wrong figure on a tax document. This company's own invoices carry
+no VAT and stay at two. The rules do not conflict because they govern different paper.
+
 **They look identical on purpose.** Same issuer block, same palette, same VAT wording,
 same footer. If you restyle one, look at the other — a customer who gets both should not
 wonder whether they are dealing with the same company.

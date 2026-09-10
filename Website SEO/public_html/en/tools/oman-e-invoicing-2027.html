@@ -42,9 +42,6 @@
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-SLR9GD3MJP"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-SLR9GD3MJP');</script>
-
-<!-- Microsoft Clarity -->
-<script>(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","y7wcjlyamc");</script>
 <script defer src="/js/apl-analytics.js?v=a2905d66"></script>
 
 <style>
@@ -556,9 +553,7 @@ section{position:relative;padding:clamp(74px,9vw,138px) 0}
 }
 
 /* =========================================================== tool shell */
-/* Shared by every page under /en/tools/. Kept in this module for now
-   because there is exactly one tool; the day a second one needs it, this
-   block moves to a tool_kit.py and both import it rather than copying it. */
+/* Shared by every page under /en/tools/ - see tools/v4/tool_kit.py. */
 .toolbar{
   display:flex;flex-wrap:wrap;gap:10px 22px;align-items:center;
   font-family:var(--mono);font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;

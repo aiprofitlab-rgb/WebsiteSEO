@@ -45,7 +45,7 @@ MODULES = ["page_home", "page_services", "page_process", "page_about", "page_con
            # publish. Their kit.PAGES rows carry None as the twin URL, so
            # nothing on the English side advertises an Arabic page that does
            # not exist.
-           "page_tools_hub", "page_tool_efawtara"]
+           "page_tools_hub", "page_tool_efawtara", "page_tool_invoice"]
 
 # The nine core pages, the Arabic side - the two tool modules above are not in
 # this list and must not be added to it without a native Arabic pass. Added 2026-08-21, replacing the old dark
@@ -102,7 +102,10 @@ def render(mod, lang="en"):
         css += rtl.CORE_RTL_CSS
 
     html = (
-        kit.head_html(lang)
+        # meta['clarity'] = False drops the session recorder from this page.
+        # Only for pages that render something the visitor typed and that
+        # promise it goes nowhere - see kit.head_html().
+        kit.head_html(lang, clarity=meta.get("clarity", True))
         .replace("{{TITLE}}", meta["title"])
         .replace("{{DESC}}", meta["desc"])
         .replace("{{ROBOTS}}", kit.ROBOTS_NONE if meta.get("noindex")

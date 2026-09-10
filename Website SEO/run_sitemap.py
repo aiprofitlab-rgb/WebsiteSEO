@@ -24,6 +24,7 @@ urls = [
     # index, and the nested slug to en/tools/<slug>.html.
     ("/en/tools/", 0.7),
     ("/en/tools/oman-e-invoicing-2027/", 0.8),
+    ("/en/tools/oman-vat-invoice-generator/", 0.8),
 
     # --- Arabic, the v4 set (rebuilt 2026-08-21) ----------------------------
     # The five core URLs are unchanged - only the skin under them moved.
