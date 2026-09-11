@@ -41,14 +41,19 @@ LIVE = [
      "/en/tools/oman-vat-invoice-generator/",
      "Invoicing",
      "Anyone in Oman who issues invoices or quotes"),
+
+    ("WhatsApp link &amp; branded QR maker",
+     "A wa.me link that opens a chat with the first message already written, and a QR code in the "
+     "brand palette that is decoded from its own pixels before you are allowed to download it &mdash; "
+     "PNG and SVG. Plus a bilingual away message for the hours you are shut.",
+     "/en/tools/whatsapp-link-generator/",
+     "Getting enquiries",
+     "Any business that takes orders on WhatsApp"),
 ]
 
 # Ordered, undated. The order is the free-tools plan's order: lead intent
 # first, build cost second.
 NEXT = [
-    ("WhatsApp link &amp; branded QR maker",
-     "A wa.me link with your message already written, and a QR code in your own colours that still "
-     "scans &mdash; as PNG and SVG."),
     ("Price list &amp; catalogue builder",
      "Rows, logo, optional product photos, Arabic and English columns, VAT in or out, one A4 PDF to "
      "send on WhatsApp."),
@@ -228,9 +233,9 @@ def _itemlist():
 META = dict(
     slug="tools",
     title="Free tools for running a business in Oman | AI Profit Lab",
-    desc=("Free browser tools for Omani businesses: a VAT tax invoice and quote maker, and the "
-          "Fawtara e-invoicing deadline checker with its readiness checklist. No sign-up, no "
-          "email, and nothing you type is ever sent anywhere."),
+    desc=("Free browser tools for Omani businesses: a VAT tax invoice and quote maker, the Fawtara "
+          "e-invoicing deadline checker with its readiness checklist, and a WhatsApp chat link and "
+          "branded QR code maker. No sign-up, no email, and nothing you type is ever sent anywhere."),
     nav="/en/tools/",
     next=("Next", "What I build, and what it costs", "/en/services/"),
     schema="""{

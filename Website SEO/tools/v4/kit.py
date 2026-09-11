@@ -588,6 +588,8 @@ PAGES = {
                    "/en/tools/oman-e-invoicing-2027/",       None),
     "vatinvoice": ("en/tools/oman-vat-invoice-generator.html",
                    "/en/tools/oman-vat-invoice-generator/", None),
+    "waqr":       ("en/tools/whatsapp-link-generator.html",
+                   "/en/tools/whatsapp-link-generator/",     None),
 }
 
 # --------------------------------------------------------------------------
