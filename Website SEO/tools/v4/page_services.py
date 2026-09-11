@@ -7,6 +7,8 @@ in full - the whole ladder, one price per rung - because the page's argument
 is that you should not need a sales call to learn a number.
 Figures are the ones already published on en/index-v3.html.
 """
+import re
+
 import pay
 from kit import WA, WA_ICON, STAR, SHIELD
 
@@ -166,8 +168,8 @@ table.t .mini{display:block;font-size:.86rem;color:var(--muted);margin-top:5px;l
 """
 
 
-def body():
-    p1 = f"""<main id="main">
+def _hero():
+    return f"""<main id="main">
 
 <header class="phero s-cream grain">
   <div class="wrap">
@@ -183,14 +185,20 @@ def body():
   </div>
 </header>
 
-<div class="stats" aria-label="At a glance">
+"""
+
+def _stats():
+    return f"""<div class="stats" aria-label="At a glance">
   <div><b><span data-count="168">168</span></b><span>Hours covered per week,<br>including Fridays</span></div>
   <div><b>~1 week</b><span>From kickoff<br>to going live</span></div>
   <div><b>2</b><span>Languages, both<br>first-class</span></div>
   <div><b>OMR 0</b><span>Required monthly<br>to keep it running</span></div>
 </div>
 
-<!-- ==================================================== 01 - THE SMART WEBSITE -->
+"""
+
+def _card_site():
+    return f"""<!-- ==================================================== 01 - THE SMART WEBSITE -->
 <section class="s-cream grain" id="smart-website">
   <div class="wrap">
     <div class="sysblock">
@@ -230,7 +238,10 @@ def body():
   </div>
 </section>
 
-<!-- ===================================================== 02 - THE DASHBOARD -->
+"""
+
+def _card_dash():
+    return f"""<!-- ===================================================== 02 - THE DASHBOARD -->
 <section class="s-panel" id="dashboard">
   <div class="wrap">
     <div class="sysblock flip">
@@ -269,7 +280,10 @@ def body():
   </div>
 </section>
 
-<!-- ===================================================== 03 - THE AUTOPILOT -->
+"""
+
+def _card_auto():
+    return f"""<!-- ===================================================== 03 - THE AUTOPILOT -->
 <section class="s-dark" id="autopilot">
   <div class="wrap">
     <div class="sysblock">
@@ -314,7 +328,10 @@ def body():
   </div>
 </section>
 
-<!-- =============================================== 04 - THE VISIBILITY DESK -->
+"""
+
+def _visibility():
+    return f"""<!-- =============================================== 04 - THE VISIBILITY DESK -->
 <section class="s-panel2 grain" id="visibility">
   <div class="wrap">
     <p class="eyebrow"><span class="star">{STAR}</span> 04 &#183; The monthly one</p>
@@ -410,7 +427,8 @@ def body():
 </section>
 """
 
-    p2 = f"""
+def _price():
+    return f"""
 <!-- ================================================== THE WHOLE PRICE LIST -->
 <section class="s-white" id="price">
   <div class="wrap">
@@ -460,7 +478,10 @@ def body():
   </div>
 </section>
 
-<!-- ==================================================== THREE WAYS TO PAY -->
+"""
+
+def _pay():
+    return f"""<!-- ==================================================== THREE WAYS TO PAY -->
 <section class="s-cream grain">
   <div class="wrap">
     <p class="eyebrow"><span class="star">{STAR}</span> Three ways to pay for it</p>
@@ -518,7 +539,10 @@ def body():
   </div>
 </section>
 
-<!-- ================================================================ CTA -->
+"""
+
+def _cta():
+    return f"""<!-- ================================================================ CTA -->
 <section class="s-dark pad-s">
   <div class="wrap">
     <div style="display:flex;gap:clamp(20px,4vw,50px);align-items:center;justify-content:space-between;flex-wrap:wrap">
@@ -538,18 +562,40 @@ def body():
 
 </main>
 """
-    # PAY_HOW follows tools/v4/pay.py: the page must not offer a card until
-    # one can actually be taken. DEPOSIT comes from the same table as the
-    # checkout, so the two can never quote different deposits.
+
+
+def _sub(html):
+    """Fill the published-figure tokens, then refuse to ship an unfilled one.
+
+    PAY_HOW follows tools/v4/pay.py: the page must not offer a card until one
+    can actually be taken. DEPOSIT comes from the same table as the checkout,
+    so the two can never quote different deposits. The guarantee length is
+    read from the catalog rather than typed, because the same promise is made
+    on the checkout interstitial from the same field - two hand-written copies
+    of "6 months" is how a guarantee ends up meaning two different lengths on
+    two pages.
+    """
     pay_how = "by card or bank transfer" if pay.PAY_LIVE else "by bank transfer"
-    # The guarantee length is read from the catalog rather than typed, because
-    # the same promise is made on the checkout interstitial from the same
-    # field. Two hand-written copies of "6 months" is how a guarantee ends up
-    # meaning two different lengths on two pages.
     gmonths = str(pay.item(pay.UPSELL_ID)["guarantee_months"])
-    return ((p1 + p2).replace("{PAY_HOW}", pay_how)
-            .replace("{DEPOSIT}", pay.money(pay.DEPOSIT))
-            .replace("{GMONTHS}", gmonths))
+    out = (html.replace("{PAY_HOW}", pay_how)
+               .replace("{DEPOSIT}", pay.money(pay.DEPOSIT))
+               .replace("{GMONTHS}", gmonths))
+    # The page's whole argument is that nothing is hidden, so a token that
+    # nobody filled must not ship as literal braces in front of a buyer.
+    stray = re.search(r"\{[A-Z_]{3,}\}", out)
+    if stray:
+        raise AssertionError(f"unfilled placeholder in services body: {stray.group(0)}")
+    return out
+
+
+# The page in reading order. The Arabic twin carries the same names in the
+# same order; comparing the two lists is how a section that exists in one
+# language and not the other gets caught before a reader finds it.
+SECTIONS = [_hero, _stats, _card_site, _card_dash, _card_auto, _visibility, _price, _pay, _cta]
+
+
+def body():
+    return _sub("".join(f() for f in SECTIONS))
 
 
 META = dict(

@@ -69,23 +69,6 @@ CSS = """
   border-left:2px solid var(--amber-bright);border-bottom:2px solid var(--amber-bright);transform:rotate(-45deg);
 }
 
-/* ------------------------------------------------------------------ faq */
-.faq{border-top:1px solid var(--line)}
-.faq details{border-bottom:1px solid var(--line)}
-.faq summary{
-  cursor:pointer;list-style:none;padding:22px 44px 22px 0;position:relative;
-  font-family:var(--display);font-size:clamp(1.15rem,2vw,1.45rem);color:var(--teal-950);
-}
-.faq summary::-webkit-details-marker{display:none}
-.faq summary::after{
-  content:"";position:absolute;right:8px;top:50%;width:12px;height:12px;margin-top:-8px;
-  border-right:1.5px solid var(--amber);border-bottom:1.5px solid var(--amber);
-  transform:rotate(45deg);transition:transform .3s var(--ease);
-}
-.faq details[open] summary::after{transform:rotate(-135deg);margin-top:-3px}
-.faq .ans{padding:0 0 24px;color:var(--muted);font-size:1.02rem;max-width:70ch;margin:0}
-.faq summary:hover{color:var(--teal)}
-
 @media (max-width:900px){ .chan,.capture-grid{grid-template-columns:1fr} }
 @media (max-width:560px){ .form-grid{grid-template-columns:1fr} }
 """

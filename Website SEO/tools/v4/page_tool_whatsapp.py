@@ -325,12 +325,15 @@ fieldset.fset legend{
 .steps code{font-family:var(--mono);font-size:.86em;background:var(--panel-2);border-radius:5px;padding:2px 6px}
 
 /* ------------------------------------------------------------------ faq */
-.faq{margin:clamp(22px,3vw,32px) 0 0}
+/* border-top:0 resets kit.BASE_CSS - this FAQ puts its top rule on
+   details:first-child instead, and both would draw a double line. */
+.faq{margin:clamp(22px,3vw,32px) 0 0;border-top:0}
 .faq details{border-bottom:1px solid var(--line)}
 .faq details:first-child{border-top:1px solid var(--line)}
 .faq summary{
   cursor:pointer;list-style:none;padding:19px 34px 19px 0;position:relative;
   font-size:1.04rem;line-height:1.5;color:var(--teal-950);font-weight:500;
+  font-family:var(--sans); /* resets the shared skin's display face */
 }
 .faq summary::-webkit-details-marker{display:none}
 .faq summary::after{

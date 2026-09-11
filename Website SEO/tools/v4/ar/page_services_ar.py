@@ -62,15 +62,7 @@ def _rail_svg():
         </svg>"""
 
 
-def _p1():
-    # The Visibility Desk's figure comes from pay.list_price() through
-    # price_ar(), not pay.price() - it is published at the rack rate and sold
-    # on the checkout interstitial at a lower one. See the note in ar_common.
-    vis = price_ar("visibility")
-    # Same field the checkout interstitial reads, so the Arabic guarantee
-    # cannot end up a different length from the Arabic interstitial's.
-    gm = num(str(pay.item(pay.UPSELL_ID)["guarantee_months"]))
-    vis_wa = wa(f"مرحباً ناهد، أريد أن أسأل عن {VIS} بـ 300 ر.ع. شهرياً.")
+def _hero():
     return f"""<main id="main">
 
 <header class="phero s-cream grain">
@@ -87,14 +79,20 @@ def _p1():
   </div>
 </header>
 
-<div class="stats" aria-label="لمحة سريعة">
+"""
+
+def _stats():
+    return f"""<div class="stats" aria-label="لمحة سريعة">
   <div><b><span data-count="168">168</span></b><span>ساعة مغطّاة أسبوعياً،<br>بما فيها الجمعة</span></div>
   <div><b>أسبوع تقريباً</b><span>من البدء<br>حتى الإطلاق</span></div>
   <div><b>لغتان</b><span>وكلتاهما<br>بالمستوى نفسه</span></div>
   <div><b>صفر</b><span>ريال عُماني مطلوب شهرياً<br>لإبقائه يعمل</span></div>
 </div>
 
-<!-- ==================================================== 01 - THE SMART WEBSITE -->
+"""
+
+def _card_site():
+    return f"""<!-- ==================================================== 01 - THE SMART WEBSITE -->
 <section class="s-cream grain" id="smart-website">
   <div class="wrap">
     <div class="sysblock">
@@ -134,7 +132,10 @@ def _p1():
   </div>
 </section>
 
-<!-- ===================================================== 02 - THE DASHBOARD -->
+"""
+
+def _card_dash():
+    return f"""<!-- ===================================================== 02 - THE DASHBOARD -->
 <section class="s-panel" id="dashboard">
   <div class="wrap">
     <div class="sysblock flip">
@@ -173,7 +174,10 @@ def _p1():
   </div>
 </section>
 
-<!-- ===================================================== 03 - THE AUTOPILOT -->
+"""
+
+def _card_auto():
+    return f"""<!-- ===================================================== 03 - THE AUTOPILOT -->
 <section class="s-dark" id="autopilot">
   <div class="wrap">
     <div class="sysblock">
@@ -199,7 +203,18 @@ def _p1():
   </div>
 </section>
 
-<!-- =============================================== 04 - THE VISIBILITY DESK -->
+"""
+
+def _visibility():
+    # The Visibility Desk's figure comes from pay.list_price() through
+    # price_ar(), not pay.price() - it is published at the rack rate and sold
+    # on the checkout interstitial at a lower one. See the note in ar_common.
+    vis = price_ar("visibility")
+    # Same field the checkout interstitial reads, so the Arabic guarantee
+    # cannot end up a different length from the Arabic interstitial's.
+    gm = num(str(pay.item(pay.UPSELL_ID)["guarantee_months"]))
+    vis_wa = wa(f"مرحباً ناهد، أريد أن أسأل عن {VIS} بـ 300 ر.ع. شهرياً.")
+    return f"""<!-- =============================================== 04 - THE VISIBILITY DESK -->
 <section class="s-panel2 grain" id="visibility">
   <div class="wrap">
     <p class="eyebrow"><span class="star">{STAR}</span> ٠٤ &#183; الوحيد الشهري</p>
@@ -288,11 +303,8 @@ def _p1():
 </section>
 """
 
-
-def _p2():
-    deposit = pay.money_ar(pay.DEPOSIT)
+def _price():
     gm2 = num(str(pay.item(pay.UPSELL_ID)["guarantee_months"]))
-    pay_how = "بالبطاقة أو بحوالة بنكية" if pay.PAY_LIVE else "بحوالة بنكية"
     return f"""
 <!-- ================================================== THE WHOLE PRICE LIST -->
 <section class="s-white" id="price">
@@ -343,7 +355,12 @@ def _p2():
   </div>
 </section>
 
-<!-- ==================================================== THREE WAYS TO PAY -->
+"""
+
+def _pay():
+    deposit = pay.money_ar(pay.DEPOSIT)
+    pay_how = "بالبطاقة أو بحوالة بنكية" if pay.PAY_LIVE else "بحوالة بنكية"
+    return f"""<!-- ==================================================== THREE WAYS TO PAY -->
 <section class="s-cream grain">
   <div class="wrap">
     <p class="eyebrow"><span class="star">{STAR}</span> ثلاث طرق للدفع</p>
@@ -401,7 +418,10 @@ def _p2():
   </div>
 </section>
 
-<!-- ================================================================ CTA -->
+"""
+
+def _cta():
+    return f"""<!-- ================================================================ CTA -->
 <section class="s-dark pad-s">
   <div class="wrap">
     <div style="display:flex;gap:clamp(20px,4vw,50px);align-items:center;justify-content:space-between;flex-wrap:wrap">
@@ -423,8 +443,14 @@ def _p2():
 """
 
 
+# The page in reading order - the same names, in the same order, as the
+# English module's SECTIONS. Comparing the two lists is how a section that
+# exists in one language and not the other gets caught early.
+SECTIONS = [_hero, _stats, _card_site, _card_dash, _card_auto, _visibility, _price, _pay, _cta]
+
+
 def body():
-    return _p1() + _p2()
+    return "".join(f() for f in SECTIONS)
 
 
 META = dict(

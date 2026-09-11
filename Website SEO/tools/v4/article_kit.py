@@ -269,12 +269,18 @@ ARTICLE_CSS = """
 .faq summary:hover{color:var(--teal)}
 .faq summary::after{
   content:"";position:absolute;right:8px;top:50%;width:13px;height:1.5px;background:var(--amber);
+  /* Resets against the shared chevron in kit.BASE_CSS, which sets two
+     borders, a 45deg rotation and a negative offset - none of which
+     belong on a flat bar. Without these the marker renders as a
+     tilted stub with border stubs on two sides. */
+  margin-top:0;border:0;transform:none;transition:none;
 }
 .faq summary::before{
   content:"";position:absolute;right:14px;top:50%;width:1.5px;height:13px;margin-top:-6px;background:var(--amber);
   transition:transform .3s var(--ease),opacity .3s;
 }
 .faq details[open] summary::before{transform:rotate(90deg);opacity:0}
+.faq details[open] summary::after{transform:none;margin-top:0}
 .faq details p{margin:0 0 20px;color:var(--muted);font-size:1.01rem;line-height:1.68;max-width:66ch;padding-right:44px}
 
 /* ------------------------------------------------------------ references */

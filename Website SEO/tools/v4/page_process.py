@@ -47,18 +47,7 @@ html:not(.js) .step-rail .ln{transform:none}
 .step-body p{color:var(--muted);font-size:1.02rem;margin:0 0 14px}
 .step-when{font-family:var(--mono);font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--amber-text);display:block;margin-bottom:2px}
 
-/* ----------------------------------------------------------- mock cards */
-.mock{background:var(--white);border:1px solid var(--line);border-radius:14px;padding:20px 22px;box-shadow:0 30px 56px -44px rgba(7,43,34,.55)}
-.mock .mh{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid var(--line);padding-bottom:11px;margin-bottom:14px}
-.mock .mh b{font-family:var(--display);font-size:1.1rem;color:var(--teal-950);font-weight:400}
-.mock .mh span{font-family:var(--mono);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
-.scorerow{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:9px 0;border-bottom:1px dotted var(--line);font-size:.92rem}
-.scorerow:last-child{border-bottom:0}
-.scorerow em{font-style:normal;color:var(--muted)}
-.grade{font-family:var(--mono);font-size:.78rem;letter-spacing:.06em;padding:3px 10px;border-radius:99px;white-space:nowrap}
-.grade.bad{background:rgba(166,67,31,.12);color:var(--alert)}
-.grade.mid{background:rgba(186,117,23,.14);color:var(--amber)}
-.grade.good{background:rgba(31,175,94,.14);color:#127A41}
+/* --------------------------------------------------- go-live checklist */
 .checks{list-style:none;margin:0;padding:0}
 .checks li{position:relative;padding:8px 0 8px 28px;font-size:.94rem;border-bottom:1px dotted var(--line)}
 .checks li:last-child{border-bottom:0}

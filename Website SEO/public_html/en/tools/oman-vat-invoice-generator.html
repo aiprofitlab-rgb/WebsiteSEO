@@ -220,6 +220,47 @@ section{position:relative;padding:clamp(74px,9vw,138px) 0}
 .s-dark .chip,.s-teal .chip{background:rgba(241,239,232,.07);border-color:var(--line-dark);color:var(--cream)}
 .s-dark .chip b,.s-teal .chip b{color:var(--amber-bright)}
 
+/* ---------------------------------------------------------------- faq
+   One accordion skin for the whole site, extracted when the fifth copy
+   appeared: contact, the e-invoicing tool and the invoice tool were already
+   byte-identical, and two other pages had quietly drifted into their own
+   markers. Pages wanting a different marker override this block afterwards -
+   and must reset every property they do not want, because the chevron sets
+   two borders, a rotation and a negative offset. See article_kit.py and
+   page_tool_whatsapp.py for the two that do. */
+.faq{border-top:1px solid var(--line)}
+.faq details{border-bottom:1px solid var(--line)}
+.faq summary{
+  cursor:pointer;list-style:none;padding:22px 44px 22px 0;position:relative;
+  font-family:var(--display);font-size:clamp(1.15rem,2vw,1.45rem);color:var(--teal-950);
+}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{
+  content:"";position:absolute;right:8px;top:50%;width:12px;height:12px;margin-top:-8px;
+  border-right:1.5px solid var(--amber);border-bottom:1.5px solid var(--amber);
+  transform:rotate(45deg);transition:transform .3s var(--ease);
+}
+.faq details[open] summary::after{transform:rotate(-135deg);margin-top:-3px}
+.faq .ans{padding:0 0 24px;color:var(--muted);font-size:1.02rem;max-width:70ch;margin:0}
+.faq .ans+.ans{padding-top:0;margin-top:-10px}
+.faq summary:hover{color:var(--teal)}
+
+/* ----------------------------------------------------------- mock cards
+   A card that shows a screen rather than describing it - the scorecard on
+   the process page, and the same scorecard on the services page. Second
+   user is what moved it here. */
+.mock{background:var(--white);border:1px solid var(--line);border-radius:14px;padding:20px 22px;box-shadow:0 30px 56px -44px rgba(7,43,34,.55)}
+.mock .mh{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid var(--line);padding-bottom:11px;margin-bottom:14px}
+.mock .mh b{font-family:var(--display);font-size:1.1rem;color:var(--teal-950);font-weight:400}
+.mock .mh span{font-family:var(--mono);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.scorerow{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:9px 0;border-bottom:1px dotted var(--line);font-size:.92rem}
+.scorerow:last-child{border-bottom:0}
+.scorerow em{font-style:normal;color:var(--muted)}
+.grade{font-family:var(--mono);font-size:.78rem;letter-spacing:.06em;padding:3px 10px;border-radius:99px;white-space:nowrap}
+.grade.bad{background:rgba(166,67,31,.12);color:var(--alert)}
+.grade.mid{background:rgba(186,117,23,.14);color:var(--amber)}
+.grade.good{background:rgba(31,175,94,.14);color:#127A41}
+
 /* ------------------------------------------------------------ page hero */
 .phero{padding:clamp(150px,17vw,220px) 0 clamp(56px,7vw,90px);position:relative;overflow:hidden}
 .phero .h1{margin:0 0 22px}
@@ -953,23 +994,6 @@ table.p-items tr{break-inside:avoid}
 .vectors td:first-child{color:var(--teal-950)}
 .vectors td{color:var(--muted)}
 .vscroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
-
-/* ------------------------------------------------------------------- faq */
-.faq{border-top:1px solid var(--line)}
-.faq details{border-bottom:1px solid var(--line)}
-.faq summary{
-  cursor:pointer;list-style:none;padding:22px 44px 22px 0;position:relative;
-  font-family:var(--display);font-size:clamp(1.15rem,2vw,1.45rem);color:var(--teal-950);
-}
-.faq summary::-webkit-details-marker{display:none}
-.faq summary::after{
-  content:"";position:absolute;right:8px;top:50%;width:12px;height:12px;margin-top:-8px;
-  border-right:1.5px solid var(--amber);border-bottom:1.5px solid var(--amber);
-  transform:rotate(45deg);transition:transform .3s var(--ease);
-}
-.faq details[open] summary::after{transform:rotate(-135deg);margin-top:-3px}
-.faq .ans{padding:0 0 24px;color:var(--muted);font-size:1.02rem;max-width:70ch;margin:0}
-.faq summary:hover{color:var(--teal)}
 
 /* --------------------------------------------------------- the fact box */
 .plainlist{list-style:none;margin:clamp(18px,2.6vw,26px) 0 0;padding:0;display:grid;gap:15px}

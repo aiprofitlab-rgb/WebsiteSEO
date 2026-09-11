@@ -279,24 +279,6 @@ fieldset.q legend i{display:block;font-style:normal;font-size:.85rem;color:rgba(
 .notclaim p+p{margin-top:.8em}
 .notclaim b{color:var(--teal-950);font-weight:500}
 
-/* ------------------------------------------------------------------ faq */
-.faq{border-top:1px solid var(--line)}
-.faq details{border-bottom:1px solid var(--line)}
-.faq summary{
-  cursor:pointer;list-style:none;padding:22px 44px 22px 0;position:relative;
-  font-family:var(--display);font-size:clamp(1.15rem,2vw,1.45rem);color:var(--teal-950);
-}
-.faq summary::-webkit-details-marker{display:none}
-.faq summary::after{
-  content:"";position:absolute;right:8px;top:50%;width:12px;height:12px;margin-top:-8px;
-  border-right:1.5px solid var(--amber);border-bottom:1.5px solid var(--amber);
-  transform:rotate(45deg);transition:transform .3s var(--ease);
-}
-.faq details[open] summary::after{transform:rotate(-135deg);margin-top:-3px}
-.faq .ans{padding:0 0 24px;color:var(--muted);font-size:1.02rem;max-width:70ch;margin:0}
-.faq .ans+.ans{padding-top:0;margin-top:-10px}
-.faq summary:hover{color:var(--teal)}
-
 /* --------------------------------------------------------- the fact box */
 .facts-box{border:1px solid var(--line-dark);border-radius:18px;padding:clamp(22px,2.8vw,32px)}
 .facts-box dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:12px 22px}
