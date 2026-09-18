@@ -59,7 +59,7 @@ if WITH_PHOTO:
 LINES += [
     "item1.URL:https://linkedin.com/in/nahid-aby",
     "item1.X-ABLabel:LinkedIn",
-    "item2.URL:https://instagram.com/nahid_aby",
+    "item2.URL:https://instagram.com/ai.profit.lab.gcc",
     "item2.X-ABLabel:Instagram",
     "item3.URL:https://wa.me/96899245250",      # wa.me, not api.whatsapp.com: 25 fewer bytes
     "item3.X-ABLabel:WhatsApp",

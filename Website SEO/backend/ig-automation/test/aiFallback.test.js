@@ -147,7 +147,7 @@ test("recognising our own words survives an @mention, casing and stray whitespac
   await handler.handleComment(comment(), entry, h.deps);
 
   const echo = await handler.handleComment(
-    comment({ id: "18000000000000003", text: "@nahid_aby   THANKS FOR ASKING — IT'S ALL ON THE SITE." }),
+    comment({ id: "18000000000000003", text: "@ai.profit.lab.gcc   THANKS FOR ASKING — IT'S ALL ON THE SITE." }),
     entry,
     h.deps
   );
