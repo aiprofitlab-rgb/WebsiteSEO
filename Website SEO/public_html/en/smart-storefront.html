@@ -375,6 +375,188 @@
       transform: translateY(-1px)
     }
 
+    /* WhatsApp in the header, added 2026-09-21. Before this, the only way to
+   reach Nahid from this page was a text link inside the "live count isn't
+   loading" panel, which never shows when the count works. The class is
+   top-wa rather than a new name because js/apl-analytics.js reports that
+   class as the pinned WhatsApp button (cta_location "fab") on every other
+   page. Any other name would count these clicks as an inline link. */
+    .top-wa {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: var(--wa);
+      color: #fff !important;
+      border-radius: 8px;
+      padding: 9px 14px;
+      text-decoration: none;
+      font-size: .88rem;
+      font-weight: 600;
+      transition: transform .18s var(--spring), background .15s
+    }
+
+    .top-wa:hover {
+      background: #199B51;
+      transform: translateY(-1px)
+    }
+
+    .top-wa svg {
+      width: 18px;
+      height: 18px;
+      fill: currentColor;
+      flex: none
+    }
+
+    /* The site menu's toggle. Until 2026-09-21 the page was a dead end: the
+   logo linked home, but nothing said so. */
+    .nav-menu {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      background: none;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 8px 13px;
+      color: var(--teal-900);
+      font: 600 .88rem/1.65 var(--sans);
+      cursor: pointer;
+      transition: border-color .15s, transform .18s var(--spring)
+    }
+
+    .nav-menu:hover {
+      border-color: var(--teal);
+      transform: translateY(-1px)
+    }
+
+    .top-wa:active,
+    .nav-menu:active {
+      transform: scale(.96)
+    }
+
+    .nav-menu i {
+      position: relative;
+      display: block;
+      width: 16px;
+      height: 1.5px;
+      background: currentColor;
+      transition: background .2s
+    }
+
+    .nav-menu i::before,
+    .nav-menu i::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      width: 16px;
+      height: 1.5px;
+      background: currentColor;
+      transition: transform .3s cubic-bezier(.22, .7, .25, 1)
+    }
+
+    .nav-menu i::before {
+      top: -5px
+    }
+
+    .nav-menu i::after {
+      top: 5px
+    }
+
+    .menu-open .nav-menu i {
+      background: transparent
+    }
+
+    .menu-open .nav-menu i::before {
+      transform: translateY(5px) rotate(45deg)
+    }
+
+    .menu-open .nav-menu i::after {
+      transform: translateY(-5px) rotate(-45deg)
+    }
+
+    /* The menu itself: the same dark sheet with numbered Marcellus links as
+   the v4 site's phone menu (tools/v4/kit.py .mmenu), so a visitor moving
+   between this page and the rest of the site finds the same thing. It sits
+   above the price bar (65) and under the nav, which is lifted to 75 while
+   the menu is open so the close button and WhatsApp stay in reach. It is a
+   div, not a <nav>: the bare `nav` rule above would make it sticky. GSAP
+   animates it when loaded. Without GSAP it opens and closes instantly. */
+    .smenu {
+      position: fixed;
+      inset: 0;
+      z-index: 70;
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+      background: var(--teal-950);
+      color: var(--cream);
+      padding: 92px max(24px, calc((100vw - 1080px) / 2 + 22px)) 36px
+    }
+
+    .smenu[hidden] {
+      display: none
+    }
+
+    .smenu-in {
+      margin: auto 0;
+      width: 100%;
+      max-width: 640px
+    }
+
+    /* Opaque while open: the nav's 93% cream over the dark sheet reads as a
+   greyed-out, disabled bar. */
+    .menu-open nav {
+      z-index: 75;
+      background: var(--cream)
+    }
+
+    .menu-open #aiden-root {
+      visibility: hidden
+    }
+
+    .smenu a {
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(241, 239, 232, .12);
+      font-family: var(--display);
+      font-size: clamp(1.7rem, 7vw, 2.6rem);
+      line-height: 1.2;
+      color: var(--cream);
+      text-decoration: none;
+      transition: color .2s
+    }
+
+    .smenu a:hover {
+      color: var(--amber-bright)
+    }
+
+    .smenu a em {
+      font-family: var(--mono);
+      font-size: .78rem;
+      font-style: normal;
+      letter-spacing: .14em;
+      color: var(--amber-bright);
+      opacity: .8
+    }
+
+    .smenu .mfoot {
+      margin: 26px 0 0;
+      font-family: var(--mono);
+      font-size: .8rem;
+      letter-spacing: .06em;
+      color: rgba(241, 239, 232, .6)
+    }
+
+    /* Aiden's launcher stacks above bottom-corner buttons, but it skips
+   anything wider than 340px as "a bar, not a button", so it sat on top of
+   this page's price bar and covered "Claim a seat". Pinned clear of the
+   bar here. !important is what beats the inline --bottom the widget writes
+   on its own host. */
+    #aiden-root {
+      --bottom: 80px !important
+    }
+
     /* ══ hero ══ */
     .hero {
       background:
@@ -2758,6 +2940,25 @@
       margin-bottom: 12px
     }
 
+    /* The rest of the site, for a reader who scrolled to the end. A <p>, not a
+   <nav>: the bare `nav` rule would make it sticky. */
+    .foot-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px 18px;
+      margin: 14px 0 0
+    }
+
+    .foot-nav a {
+      padding: 6px 0;
+      text-decoration: none
+    }
+
+    .foot-nav a:hover {
+      text-decoration: underline;
+      text-underline-offset: 3px
+    }
+
     .footgrid {
       display: flex;
       gap: 20px;
@@ -3045,6 +3246,72 @@
       }
     }
 
+    /* The phone header: logo, language, WhatsApp, menu. "Claim a seat" leaves
+   the header here because the price bar at the bottom carries it on every
+   screen. In the header it wrapped onto two lines and doubled the nav's
+   height. WhatsApp and the menu shrink to icons, with the words kept for
+   screen readers. The logo stays at or above the brand's 120px floor. */
+    @media (max-width:560px) {
+      .nav-in {
+        gap: 8px;
+        padding: 10px 16px
+      }
+
+      .brand {
+        flex: 0 1 128px;
+        min-width: 120px
+      }
+
+      .nav-cta {
+        display: none
+      }
+
+      .top-wa,
+      .nav-menu {
+        width: 42px;
+        height: 42px;
+        padding: 0;
+        gap: 0;
+        justify-content: center;
+        flex: none
+      }
+
+      .top-wa svg {
+        width: 21px;
+        height: 21px
+      }
+
+      .top-wa span,
+      .nav-menu span {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip-path: inset(50%);
+        white-space: nowrap
+      }
+
+      .smenu {
+        padding-top: 84px
+      }
+    }
+
+    @media (max-width:359px) {
+      .nav-in {
+        padding: 10px 12px
+      }
+
+      .nav-lang {
+        padding: 7px 8px
+      }
+
+      .top-wa,
+      .nav-menu {
+        width: 40px;
+        height: 40px
+      }
+    }
+
     @media (prefers-reduced-motion:reduce) {
 
       *,
@@ -3088,9 +3355,122 @@
         <img src="/en/logo/wordmark-cream.svg" alt="AI Profit Lab" width="158" height="27" />
       </a>
       <a class="nav-lang" href="/smart-storefront-ar/" hreflang="ar" lang="ar">العربية</a>
+      <a class="top-wa"
+        href="https://api.whatsapp.com/send?phone=96899245250&text=Hello%20Nahid%2C%20I%20have%20a%20question%20about%20the%20Smart%20Website."
+        target="_blank" rel="noopener" aria-label="Chat with Nahid on WhatsApp"><svg viewBox="0 0 24 24"
+          aria-hidden="true">
+          <path
+            d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 1.8a8.2 8.2 0 1 1-4.2 15.3l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8zm-3.1 4c-.2 0-.5 0-.7.3-.2.3-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.8 2.8 4.4 3.8 2.2.9 2.6.7 3.1.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2-.1-.1-.2-.2-.5-.3l-1.7-.8c-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.1-.2 0-.4.1-.5l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5L10 8.2c-.2-.4-.4-.4-.6-.4h-.5z" />
+        </svg><span>WhatsApp</span></a>
       <a class="nav-cta" href="#claim">Claim a seat</a>
+      <button class="nav-menu" id="navMenu" type="button" aria-expanded="false" aria-controls="smenu"><i
+          aria-hidden="true"></i><span>Menu</span></button>
     </div>
   </nav>
+
+  <!-- The rest of the site, one tap from the header. Straight after the nav in
+     the DOM so Tab moves from the menu button into its links. Labels are the
+     v4 site's own nav (tools/v4/kit.py NAV). -->
+  <div class="smenu" id="smenu" hidden>
+    <div class="smenu-in">
+      <a href="/"><em>01</em>Home</a>
+      <a href="/en/services/"><em>02</em>What I Build</a>
+      <a href="/en/process/"><em>03</em>How It Works</a>
+      <a href="/en/about/"><em>04</em>About</a>
+      <a href="/en/contact/"><em>05</em>Contact</a>
+      <a href="/blog/"><em>06</em>Articles</a>
+      <a href="/en/tools/"><em>07</em>Free tools</a>
+      <p class="mfoot">hello@aiprofitlab.io · <span dir="ltr">+968 9924 5250</span><br>Muscat, Oman</p>
+    </div>
+  </div>
+
+  <script id="smenu-js">
+    /* The site menu. Shared verbatim with the Arabic page:
+       tools/build_smart_storefront_ar.py lifts this block by its id, so edit
+       it here and rebuild. GSAP drives the motion and is fetched only after
+       the page has loaded, so it never competes with the page itself. If it
+       never arrives (CDN blocked, offline), the menu still opens and closes,
+       just without motion. */
+    (function () {
+      "use strict";
+      var btn = document.getElementById("navMenu"), menu = document.getElementById("smenu");
+      if (!btn || !menu) return;
+      var root = document.documentElement, tl = null, requested = false;
+
+      function loadGsap() {
+        if (requested || window.gsap) return;
+        requested = true;
+        var s = document.createElement("script");
+        s.src = "https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js";
+        s.async = true;
+        document.head.appendChild(s);
+      }
+      if (document.readyState === "complete") loadGsap();
+      else window.addEventListener("load", loadGsap);
+
+      // Built on first open. matchMedia rebuilds it if the reduced-motion
+      // setting changes, and keeps an open menu open when it does.
+      function timeline() {
+        if (tl || !window.gsap) return tl;
+        gsap.matchMedia().add({
+          calm: "(prefers-reduced-motion: no-preference)",
+          reduce: "(prefers-reduced-motion: reduce)"
+        }, function (ctx) {
+          var calm = ctx.conditions.calm;
+          tl = gsap.timeline({
+            paused: true,
+            defaults: { ease: "power3.out", overwrite: "auto" },
+            onReverseComplete: function () { menu.hidden = true; }
+          });
+          // The panel uses autoAlpha so a closed menu can't catch taps. The
+          // links use plain opacity so they stay focusable mid-animation.
+          tl.fromTo(menu, { autoAlpha: 0, y: calm ? -12 : 0 }, { autoAlpha: 1, y: 0, duration: calm ? .35 : 0 })
+            .fromTo(menu.querySelectorAll("a, .mfoot"), { opacity: 0, y: calm ? 14 : 0 },
+              { opacity: 1, y: 0, duration: calm ? .45 : 0, stagger: calm ? .04 : 0 }, calm ? "-=.2" : 0);
+          if (root.classList.contains("menu-open")) tl.progress(1);
+          return function () { tl = null; };
+        });
+        return tl;
+      }
+
+      function setMenu(open) {
+        if (open === root.classList.contains("menu-open")) return;
+        // Built BEFORE the class flips: timeline() jumps a menu it finds
+        // already open to the end, which is right for a matchMedia rebuild
+        // and would swallow the first open's animation.
+        var t = timeline();
+        root.classList.toggle("menu-open", open);
+        btn.setAttribute("aria-expanded", open ? "true" : "false");
+        root.style.overflow = open ? "hidden" : "";
+        if (open) {
+          menu.hidden = false;
+          if (t) t.timeScale(1).play();
+        } else if (t && t.duration()) {
+          t.timeScale(1.6).reverse();
+        } else {
+          // No GSAP, or the zero-length reduced-motion timeline, which never
+          // fires onReverseComplete.
+          if (t) t.progress(0);
+          menu.hidden = true;
+        }
+      }
+
+      btn.addEventListener("click", function () { setMenu(!root.classList.contains("menu-open")); });
+      menu.addEventListener("click", function (e) { if (e.target.closest("a")) setMenu(false); });
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape" && root.classList.contains("menu-open")) { setMenu(false); btn.focus(); }
+      });
+      // Back from a page the menu led to restores this one from the cache,
+      // menu and all. Close it and skip the animation.
+      window.addEventListener("pageshow", function (e) {
+        if (e.persisted && root.classList.contains("menu-open")) {
+          setMenu(false);
+          if (tl) tl.progress(0);
+          menu.hidden = true;
+        }
+      });
+    })();
+  </script>
 
   <!-- ═══ 1. THE PAPER HANDSHAKE ═══ -->
   <header class="hero">
@@ -3474,6 +3854,9 @@
         <img class="foot-logo" src="/en/logo/wordmark-dark.svg" alt="AI Profit Lab" width="150" height="26"
           loading="lazy" />
         <p style="margin:0">Every success starts with insight.</p>
+        <p class="foot-nav"><a href="/">Home</a><a href="/en/services/">What I build</a><a
+            href="/en/process/">How it works</a><a href="/en/tools/">Free tools</a><a href="/blog/">Articles</a><a
+            href="/en/about/">About Nahid</a><a href="/en/contact/">Contact</a></p>
         <p style="margin:10px 0 0;font-size:.8rem">© 2026 AI Profit Lab — a brand of Lotus Gulf International (CR
           1570092) · <a href="/refund-policy/">Refund policy</a> · <a href="/privacy/">Privacy</a></p>
       </div>

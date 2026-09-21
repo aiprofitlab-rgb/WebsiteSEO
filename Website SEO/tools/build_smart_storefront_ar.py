@@ -113,9 +113,19 @@ RTL_CSS = r"""
 [dir=rtl] .mockup[data-vibe="modern"] .pchip,
 [dir=rtl] .mockup[data-vibe="expensive"] .pmark,
 [dir=rtl] .mockup[data-vibe="expensive"] .pmeta,
-[dir=rtl] .mockup[data-vibe="expensive"] .pbtn{
+[dir=rtl] .mockup[data-vibe="expensive"] .pbtn,
+[dir=rtl] .smenu a em,[dir=rtl] .smenu .mfoot{
   letter-spacing:0;text-transform:none;
 }
+/* The site menu. Markazi sets smaller than Marcellus at the same px, and
+   Plex Mono has no Arabic-Indic digits, so the fallback draws the numbers
+   tiny. The contact line leaves the mono stack because its Arabic words took
+   Plex Mono's wide space between them. The toggle's line-height follows the
+   Arabic body's 1.85 so it stands as tall as the links beside it. */
+[dir=rtl] .smenu a{font-size:clamp(1.95rem,8vw,2.9rem);line-height:1.35}
+[dir=rtl] .smenu a em{font-size:1rem}
+[dir=rtl] .smenu .mfoot{font-family:var(--sans);font-size:.95rem}
+[dir=rtl] .nav-menu{line-height:1.85}
 
 /* The phone and the four mockup builds are 236px wide with type between 8 and
    19px. Arabic needs a step up at every one of those sizes to stay legible,
@@ -348,9 +358,30 @@ BODY = r"""<body>
       <img src="/en/logo/wordmark-cream.svg" alt="AI Profit Lab" width="158" height="27"/>
     </a>
     <a class="nav-lang" href="__EN_PATH__" hreflang="en" lang="en">English</a>
+    <a class="top-wa" href="https://api.whatsapp.com/send?phone=96899245250&text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%20%D9%86%D8%A7%D9%87%D8%AF%D8%8C%20%D9%84%D8%AF%D9%8A%20%D8%B3%D8%A4%D8%A7%D9%84%20%D8%B9%D9%86%20%D8%A7%D9%84%D9%85%D9%88%D9%82%D8%B9%20%D8%A7%D9%84%D8%B0%D9%83%D9%8A." target="_blank" rel="noopener" aria-label="راسل ناهد على واتساب"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 1.8a8.2 8.2 0 1 1-4.2 15.3l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8zm-3.1 4c-.2 0-.5 0-.7.3-.2.3-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.8 2.8 4.4 3.8 2.2.9 2.6.7 3.1.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2-.1-.1-.2-.2-.5-.3l-1.7-.8c-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.1-.2 0-.4.1-.5l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5L10 8.2c-.2-.4-.4-.4-.6-.4h-.5z"/></svg><span>واتساب</span></a>
     <a class="nav-cta" href="#claim">احجز مقعدك</a>
+    <button class="nav-menu" id="navMenu" type="button" aria-expanded="false" aria-controls="smenu"><i aria-hidden="true"></i><span>القائمة</span></button>
   </div>
 </nav>
+
+<!-- Every Arabic label below is lifted from the live, reviewed site chrome
+     (tools/v4/kit.py NAV_AR and CHROME["ar"]), not translated here. The
+     WhatsApp greeting joins three reviewed fragments: "مرحباً ناهد" (wa_short),
+     "لدي سؤال عن" (wa_intro) and "الموقع الذكي" from this page's own copy.
+     The free-tools row is absent because those pages are English-only. -->
+<div class="smenu" id="smenu" hidden>
+  <div class="smenu-in">
+    <a href="/ar/"><em>٠١</em>الرئيسية</a>
+    <a href="/services/"><em>٠٢</em>ما أبنيه</a>
+    <a href="/process/"><em>٠٣</em>طريقة العمل</a>
+    <a href="/about/"><em>٠٤</em>من أنا</a>
+    <a href="/contact/"><em>٠٥</em>تواصل معي</a>
+    <a href="/blog-ar/"><em>٠٦</em>المقالات</a>
+    <p class="mfoot"><span dir="ltr">hello@aiprofitlab.io</span> · <span dir="ltr">+968 9924 5250</span><br>مسقط، سلطنة عُمان</p>
+  </div>
+</div>
+
+__MENU_JS__
 
 <!-- ═══ 1. THE PAPER HANDSHAKE ═══ -->
 <header class="hero">
@@ -665,6 +696,7 @@ BODY = r"""<body>
     <div>
       <img class="foot-logo" src="/en/logo/wordmark-dark.svg" alt="AI Profit Lab" width="150" height="26" loading="lazy"/>
       <p style="margin:0">كل نجاح يبدأ ببصيرة.</p>
+      <p class="foot-nav"><a href="/ar/">الرئيسية</a><a href="/services/">ما أبنيه</a><a href="/process/">طريقة العمل</a><a href="/blog-ar/">المقالات</a><a href="/about/">عن ناهد</a><a href="/contact/">صفحة التواصل</a></p>
       <p style="margin:10px 0 0;font-size:.8rem"><span class="ltr">© 2026 AI Profit Lab</span> — علامة تجارية تابعة لـ Lotus Gulf International (س.ت <span class="ltr">1570092</span>) · <a href="/refund-policy-ar/">سياسة الاسترجاع</a> · <a href="/privacy-ar/">الخصوصية</a></p>
     </div>
 
@@ -1622,6 +1654,13 @@ def build():
         sys.exit("the English stylesheet no longer carries: " + ", ".join(missing) +
                  "\nUpdate the MIRROR section of RTL_CSS before rebuilding.")
 
+    # The site menu's script is behaviour with no strings in it, so it is
+    # carried over whole rather than kept as a second copy that could drift.
+    menu_js = re.search(r'<script id="smenu-js">.*?</script>', src, re.S)
+    if not menu_js:
+        sys.exit(f'no <script id="smenu-js"> in {SRC.name} - the Arabic page\'s menu button\n'
+                 "would open nothing. Restore the block or update this builder.")
+
     if 'hreflang="ar"' not in src:
         sys.exit(f"{SRC.name} carries no hreflang back to the Arabic page.\n"
                  "hreflang has to be reciprocal or it is ignored, and a visitor who lands\n"
@@ -1632,6 +1671,7 @@ def build():
                .replace("__AR_URL__", AR_URL)
                .replace("__EN_URL__", EN_URL)
            + BODY.replace("__EN_PATH__", "/en/smart-storefront/")
+                 .replace("__MENU_JS__", menu_js.group(0))
            + JS).replace("__AIDEN_TAG__", aiden_version.tag()) \
                  .replace("__ANALYTICS_TAG__", analytics_version.tag())
 
