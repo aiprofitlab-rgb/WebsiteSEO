@@ -133,6 +133,12 @@ DirectoryIndex index.html
 RewriteEngine On
 RewriteBase /
 
+# 0. www -> apex, added 2026-09-27. www.aiprofitlab.io served the whole site
+# with a 200 while every canonical names the apex, splitting Google's signals
+# across two hosts. Runs first so every other rule only ever sees the apex.
+RewriteCond %{HTTP_HOST} ^www\.aiprofitlab\.io$ [NC]
+RewriteRule ^(.*)$ https://aiprofitlab.io/$1 [L,R=301]
+
 # 1. Force trailing slash on ALL URLs (except real files)
 # The !\.html$ guard is load-bearing: without it a MISSING .html file gets a
 # slash appended (/x.html -> /x.html/), rule 4 then maps that to x.html.html,

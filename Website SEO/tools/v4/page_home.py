@@ -921,7 +921,7 @@ def body():
 
 META = dict(
     slug="index",
-    title="AI Profit Lab | You don't have to learn AI — Muscat, Oman",
+    title="AI Profit Lab | AI Automation Company in Muscat, Oman",
     desc=("You never open it, never log in, never type a prompt. A bilingual smart website answers "
           "your buyers in Arabic and English at 2am and reports to your WhatsApp in one sentence. "
           "One-time fee, no monthly lock-in, built by an operator in Muscat."),
