@@ -90,6 +90,15 @@
     # ledger on every load, so the cached HTML never carries a stale figure.
     # It keeps the standard 600s must-revalidate above, which an indexed page
     # wants anyway.
+    # The private CEO dashboard (/ceo/). The file holds no data, but it is
+    # nobody's business in a search index, and a shared cache has no reason to
+    # keep it. The data itself comes from ceo-dashboard-api behind a password.
+    <Files "ceo.html">
+        Header set X-Robots-Tag "noindex, nofollow, noarchive"
+        Header set Cache-Control "no-store"
+        Header set Referrer-Policy "no-referrer"
+        Header set X-Frame-Options "DENY"
+    </Files>
     # Remove ETag to avoid conditional-GET overhead on shared hosting
     Header unset ETag
 </IfModule>

@@ -1,0 +1,44 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "gradient-text",
+        "value": "*",
+        "files": [
+          "public_html/blog/en/2026-09-27-smart-agriculture-oman-ai-sensors-automation-crop-yields.html"
+        ],
+        "createdAt": "2026-09-27T13:40:54.007Z",
+        "reason": "Claude: article-creator authoring template markup; tools/reskin_articles.py discards Tailwind skin at Step 5"
+      },
+      {
+        "rule": "dark-glow",
+        "value": "*",
+        "files": [
+          "public_html/blog/en/2026-09-27-smart-agriculture-oman-ai-sensors-automation-crop-yields.html"
+        ],
+        "createdAt": "2026-09-27T13:40:54.022Z",
+        "reason": "Claude: article-creator authoring template markup; tools/reskin_articles.py discards Tailwind skin at Step 5"
+      },
+      {
+        "rule": "gradient-text",
+        "value": "*",
+        "files": [
+          "public_html/blog/ar/2026-09-27-smart-agriculture-oman-ai-sensors-automation-crop-yields.html"
+        ],
+        "createdAt": "2026-09-27T13:40:54.037Z",
+        "reason": "Claude: article-creator authoring template markup; tools/reskin_articles.py discards Tailwind skin at Step 5"
+      },
+      {
+        "rule": "dark-glow",
+        "value": "*",
+        "files": [
+          "public_html/blog/ar/2026-09-27-smart-agriculture-oman-ai-sensors-automation-crop-yields.html"
+        ],
+        "createdAt": "2026-09-27T13:40:54.052Z",
+        "reason": "Claude: article-creator authoring template markup; tools/reskin_articles.py discards Tailwind skin at Step 5"
+      }
+    ]
+  }
+}

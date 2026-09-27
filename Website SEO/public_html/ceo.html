@@ -1,0 +1,836 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta name="referrer" content="no-referrer">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#F1EFE8" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0A1613" media="(prefers-color-scheme: dark)">
+<!--
+  PRIVATE CEO DASHBOARD — https://aiprofitlab.io/ceo/
+
+  This file is public (it ships from the public website repo) and therefore
+  holds NO data and NO key. After sign-in it reads everything from the private
+  ceo-dashboard-api on the VPS (SmartChatBot/ceo-dashboard-api), which checks
+  the password and holds the Google, OpenAI and Resend credentials.
+
+  Deliberately carries NO analytics: no GA4, no Clarity, no Aiden widget.
+  Clarity uploads the rendered DOM, and this DOM is customers' names, phone
+  numbers and chat transcripts. Keep it that way; tools/add_aiden_widget.py
+  and tools/build_aiden_index.py both exclude this file by name.
+
+  Everything a visitor typed is rendered through esc(). Never build HTML from
+  a data field without it — a chat message is attacker-controlled text.
+-->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src https://offer.aiprofitlab.io http://localhost:8093; base-uri 'none'; form-action 'none'">
+<title>CEO Dashboard · AI Profit Lab</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Arabic:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --teal-950:#072B22;--teal-900:#0A3D30;--teal:#0F6E56;--teal-600:#158268;
+  --amber:#BA7517;--amber-bright:#D89234;--amber-pale:#E8C98F;--amber-text:#8F5A11;
+  --cream:#F1EFE8;--panel:#FAF8F2;--panel-2:#EAE4D5;--ink:#232B26;--muted:#5A665D;--line:#DED8C8;
+  --wa:#1FAF5E;--alert:#A6431F;
+  --display:'Marcellus',Georgia,serif;
+  --sans:'IBM Plex Sans','IBM Plex Sans Arabic',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+  --ease:cubic-bezier(.22,.7,.25,1);
+  --r-card:16px;--r-pill:99px;
+  --shadow-card:0 26px 50px -34px rgba(7,43,34,.55);
+  --bg:var(--cream);--surface:var(--panel);--surface-2:var(--panel-2);--text:var(--ink);--text-muted:var(--muted);
+  --heading:var(--teal-950);--border:var(--line);--brand:var(--teal);--on-brand:#fff;--accent:var(--amber);--accent-text:var(--amber-text);
+  --good:#0F6E56;--warn:#8F5A11;--bad:#A6431F;--grid:rgba(35,43,38,.08);
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#0A1613;--surface:#11201B;--surface-2:#16261F;--text:#EDE8DC;--text-muted:#A6B2A9;--heading:#EDE8DC;--border:#24382F;
+    --brand:#3FAE8A;--on-brand:#0A1613;--accent:#D89234;--accent-text:#EBAB53;
+    --good:#3FAE8A;--warn:#EBAB53;--bad:#E07A55;--grid:rgba(237,232,220,.08);
+    --shadow-card:0 20px 50px -30px rgba(0,0,0,.6);color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0A1613;--surface:#11201B;--surface-2:#16261F;--text:#EDE8DC;--text-muted:#A6B2A9;--heading:#EDE8DC;--border:#24382F;
+  --brand:#3FAE8A;--on-brand:#0A1613;--accent:#D89234;--accent-text:#EBAB53;
+  --good:#3FAE8A;--warn:#EBAB53;--bad:#E07A55;--grid:rgba(237,232,220,.08);
+  --shadow-card:0 20px 50px -30px rgba(0,0,0,.6);color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{font-size:16px;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--text);font-family:var(--sans);font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased;min-height:100vh}
+h1,h2,h3{font-family:var(--display);font-weight:400;color:var(--heading);margin:0;letter-spacing:-.005em;text-wrap:balance}
+a{color:var(--brand);text-underline-offset:3px}
+button{font:inherit;color:inherit}
+::selection{background:var(--amber-pale);color:var(--teal-950)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+[hidden]{display:none !important}
+.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.num{font-variant-numeric:tabular-nums}
+.wrap{width:min(1180px,100%);margin:0 auto;padding:0 16px}
+@media (min-width:720px){.wrap{padding:0 28px}}
+
+/* ---- top bar ---- */
+.bar{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:saturate(1.2) blur(10px);-webkit-backdrop-filter:saturate(1.2) blur(10px);border-bottom:1px solid var(--border)}
+.bar .wrap{display:flex;align-items:center;gap:12px;min-height:60px;flex-wrap:wrap;padding-top:8px;padding-bottom:8px}
+.logo{display:flex;align-items:center;gap:12px;text-decoration:none;margin-right:auto}
+.logo img{height:22px;width:auto;display:block}
+.logo span{font-family:var(--mono);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--text-muted);border-left:1px solid var(--border);padding-left:12px}
+.controls{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.seg{display:inline-flex;border:1px solid var(--border);border-radius:var(--r-pill);padding:3px;background:var(--surface)}
+.seg button{border:0;background:transparent;padding:6px 12px;border-radius:var(--r-pill);font-size:.82rem;cursor:pointer;color:var(--text-muted);transition:background .2s var(--ease),color .2s var(--ease)}
+.seg button[aria-pressed="true"]{background:var(--brand);color:var(--on-brand)}
+.btn{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--border);background:var(--surface);border-radius:var(--r-pill);padding:7px 14px;font-size:.84rem;cursor:pointer;transition:transform .15s var(--ease),border-color .2s var(--ease)}
+.btn:hover{border-color:var(--brand)}
+.btn:active{transform:scale(.97)}
+.btn.primary{background:var(--brand);border-color:var(--brand);color:var(--on-brand);font-weight:500}
+.btn[disabled]{opacity:.55;cursor:default}
+.updated{font-size:.78rem;color:var(--text-muted)}
+.spin{display:inline-block;width:12px;height:12px;border:2px solid currentColor;border-right-color:transparent;border-radius:50%;animation:sp .8s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+
+/* ---- page ---- */
+main{padding:22px 0 60px}
+.hello{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;margin:6px 0 22px}
+.eyebrow{font-family:var(--mono);font-size:.74rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--text-muted)}
+.eyebrow::before{content:"✼ ";color:var(--accent)}
+.hello h1{font-size:clamp(1.9rem,4.4vw,2.8rem);line-height:1.08;margin-top:6px}
+.live{display:inline-flex;align-items:center;gap:8px;font-size:.85rem;color:var(--text-muted)}
+.live i{width:8px;height:8px;border-radius:50%;background:var(--good)}
+
+.kpis{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-bottom:18px}
+@media (min-width:900px){.kpis{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.kpi{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-card);padding:16px 16px 14px;min-width:0}
+.kpi .label{font-size:.8rem;color:var(--text-muted)}
+.kpi .value{font-family:var(--display);font-size:clamp(1.9rem,4vw,2.5rem);line-height:1.1;color:var(--heading);margin:4px 0 2px;font-variant-numeric:tabular-nums}
+.kpi .sub{font-size:.78rem;color:var(--text-muted);display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.delta{font-family:var(--mono);font-size:.74rem;padding:1px 7px;border-radius:var(--r-pill);background:var(--surface-2);color:var(--text-muted)}
+.delta.up{color:var(--good)}.delta.down{color:var(--bad)}
+
+.grid{display:grid;grid-template-columns:minmax(0,1fr);gap:16px}
+@media (min-width:980px){.grid.two.top{align-items:start}.grid.two{grid-template-columns:minmax(0,1.35fr) minmax(0,1fr)}.grid.half{grid-template-columns:repeat(2,minmax(0,1fr))}.grid.three{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-card);padding:clamp(16px,2.4vw,24px);min-width:0}
+.card h3,.h3{font-size:1.2rem;line-height:1.2}
+.card-head{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+.card-head .hint{font-size:.78rem;color:var(--text-muted)}
+section.block{margin-top:40px}
+.block-head{display:flex;align-items:center;gap:14px;margin-bottom:14px}
+.block-head h2{font-size:clamp(1.45rem,2.8vw,1.9rem);line-height:1.1;white-space:nowrap}
+.block-head::after{content:"";flex:1;height:1px;background:var(--border)}
+.muted{color:var(--text-muted)}
+.small{font-size:.82rem}
+
+/* ---- AI brief ---- */
+.brief{position:relative;background:var(--surface);border:1px solid var(--border);border-radius:var(--r-card);padding:clamp(18px,2.8vw,28px);overflow:hidden}
+.brief::before{content:"";position:absolute;inset:0 0 auto 0;height:2px;background:linear-gradient(90deg,var(--accent),var(--amber-pale))}
+.brief .headline{font-family:var(--display);font-size:clamp(1.3rem,2.6vw,1.75rem);line-height:1.25;color:var(--heading);margin:10px 0 18px;max-width:52ch}
+.brief-cols{display:grid;gap:18px}
+@media (min-width:860px){.brief-cols{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.brief h4{font-family:var(--mono);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--text-muted);font-weight:500;margin:0 0 8px}
+.brief ul{margin:0;padding-left:18px}
+.brief li{margin:0 0 6px}
+.suggest{margin-top:18px;padding:12px 14px;border-radius:12px;background:var(--surface-2);font-size:.92rem}
+.lead-ai{padding:12px 0;border-top:1px solid var(--border)}
+.lead-ai:first-child{border-top:0;padding-top:0}
+
+/* ---- lists ---- */
+.hlist{display:grid;gap:9px}
+.hrow{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 12px;align-items:center;font-size:.88rem}
+.hrow .k{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.hrow .v{font-family:var(--mono);font-size:.82rem;color:var(--text-muted);font-variant-numeric:tabular-nums}
+.hrow .track{grid-column:1 / -1;height:6px;border-radius:4px;background:var(--surface-2);overflow:hidden}
+.hrow .fill{height:100%;border-radius:4px;background:var(--brand);transform-origin:left center}
+.empty{font-size:.88rem;color:var(--text-muted);padding:10px 0}
+.offline{display:flex;gap:10px;align-items:flex-start;font-size:.86rem;color:var(--text-muted);background:var(--surface-2);border-radius:12px;padding:12px 14px}
+.offline b{color:var(--text)}
+
+/* ---- leads ---- */
+.leads{display:grid;gap:10px}
+.lead{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 14px;padding:14px;border:1px solid var(--border);border-radius:14px;background:var(--bg);cursor:pointer;text-align:left;width:100%;transition:border-color .2s var(--ease),transform .15s var(--ease)}
+.lead:hover{border-color:var(--brand)}
+.lead:active{transform:scale(.995)}
+.lead .q{font-size:.95rem;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.lead .meta{font-size:.78rem;color:var(--text-muted);display:flex;gap:8px;flex-wrap:wrap}
+.lead .when{font-size:.76rem;color:var(--text-muted);white-space:nowrap}
+.contact{display:flex;gap:8px;flex-wrap:wrap;grid-column:1 / -1}
+.chip{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:.74rem;padding:3px 10px;border-radius:var(--r-pill);border:1px solid var(--border);background:var(--surface);color:var(--text);text-decoration:none;white-space:nowrap}
+.chip.wa{border-color:color-mix(in srgb,var(--wa) 60%,var(--border))}
+.chip.wa::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--wa)}
+.chip.hot{color:var(--accent-text);border-color:color-mix(in srgb,var(--accent) 50%,var(--border))}
+.chip.why{color:var(--text-muted);background:transparent;font-family:var(--sans);text-transform:none}
+.status{display:inline-flex;align-items:center;gap:6px;font-size:.78rem;white-space:nowrap}
+.status::before{font-family:var(--mono)}
+.status.good{color:var(--good)}.status.good::before{content:"✓"}
+.status.warn{color:var(--warn)}.status.warn::before{content:"◔"}
+.status.info{color:var(--text-muted)}.status.info::before{content:"…"}
+.status.void{color:var(--text-muted);text-decoration:line-through}.status.void::before{content:"✕";text-decoration:none}
+
+/* ---- table ---- */
+.tools{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.search{flex:1 1 220px;min-width:0;border:1px solid var(--border);background:var(--bg);border-radius:var(--r-pill);padding:8px 14px;font:inherit;font-size:.88rem;color:var(--text)}
+.table-wrap{overflow-x:auto;margin:0 -4px}
+table{width:100%;border-collapse:collapse;font-size:.86rem}
+th{font-family:var(--mono);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);font-weight:500;text-align:left;padding:8px 6px;border-bottom:1px solid var(--border);white-space:nowrap}
+td{padding:10px 6px;border-bottom:1px solid var(--border);vertical-align:top}
+td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+tr.click{cursor:pointer}
+tr.click:hover td{background:color-mix(in srgb,var(--brand) 5%,transparent)}
+.clip{max-width:420px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+@media (max-width:640px){.hide-sm{display:none}.clip{max-width:200px}table.wide{min-width:560px}.updated{display:none}.btn{padding:6px 11px}}
+.more{margin-top:12px}
+
+/* ---- charts ---- */
+.chart{width:100%;height:auto;display:block;overflow:visible}
+.chart .gridline{stroke:var(--grid);stroke-width:1}
+.chart .axis{fill:var(--text-muted);font-family:var(--mono);font-size:10px}
+.chart .bar{fill:var(--brand)}
+.chart .line{fill:none;stroke:var(--brand);stroke-width:2;stroke-linejoin:round;stroke-linecap:round}
+.chart .area{fill:var(--brand);opacity:.08}
+.chart .col .hit{fill:transparent}
+.chart .col .cross{stroke:var(--text-muted);stroke-width:1;stroke-dasharray:2 3;opacity:0}
+.chart .col .dot{fill:var(--brand);stroke:var(--surface);stroke-width:2;opacity:0}
+.chart .col:hover .cross,.chart .col:hover .dot{opacity:1}
+.chart .col:hover .bar{fill:var(--teal-600)}
+.tip{position:fixed;z-index:50;pointer-events:none;background:var(--heading);color:var(--bg);font-size:.78rem;padding:6px 10px;border-radius:8px;white-space:nowrap;opacity:0;transform:translate(-50%,calc(-100% - 10px));transition:opacity .12s}
+.tip.on{opacity:1}
+.chart-total{display:flex;gap:18px;flex-wrap:wrap;margin-bottom:10px}
+.chart-total div{font-size:.8rem;color:var(--text-muted)}
+.chart-total b{display:block;font-family:var(--display);font-weight:400;font-size:1.5rem;color:var(--heading);font-variant-numeric:tabular-nums}
+
+/* ---- money ---- */
+.money{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-bottom:16px}
+.money div{background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:12px}
+.money span{display:block;font-size:.76rem;color:var(--text-muted)}
+.money b{font-family:var(--display);font-weight:400;font-size:clamp(1.2rem,2.6vw,1.6rem);color:var(--heading);font-variant-numeric:tabular-nums}
+@media (max-width:520px){.money{grid-template-columns:minmax(0,1fr)}}
+.pipe{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-bottom:16px}
+.pipe div{border-top:2px solid var(--border);padding-top:8px;font-size:.78rem;color:var(--text-muted)}
+.pipe div.on{border-top-color:var(--brand)}
+.pipe b{display:block;font-family:var(--display);font-weight:400;font-size:1.5rem;color:var(--heading)}
+.rung{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding:12px 14px;border-radius:12px;background:var(--surface-2);margin-bottom:16px;font-size:.88rem}
+
+/* ---- transcript drawer ---- */
+dialog.drawer{margin:0 0 0 auto;height:100%;max-height:100%;width:min(560px,100%);max-width:100%;border:0;padding:0;background:var(--bg);color:var(--text);box-shadow:-30px 0 60px -30px rgba(0,0,0,.4)}
+dialog.drawer::backdrop{background:rgba(7,43,34,.35)}
+.drawer-in{display:flex;flex-direction:column;height:100%}
+.drawer-head{padding:18px 20px;border-bottom:1px solid var(--border);display:flex;gap:12px;align-items:flex-start;justify-content:space-between}
+.drawer-body{padding:18px 20px 40px;overflow-y:auto;flex:1}
+.msg{max-width:88%;padding:10px 14px;border-radius:14px;margin:0 0 8px;white-space:pre-wrap;overflow-wrap:anywhere;font-size:.9rem}
+.msg.v{background:var(--brand);color:var(--on-brand);margin-left:auto;border-bottom-right-radius:4px}
+.msg.a{background:var(--surface);border:1px solid var(--border);border-bottom-left-radius:4px}
+.msg-time{font-size:.7rem;color:var(--text-muted);text-align:center;margin:14px 0 8px;font-family:var(--mono)}
+.close{border:1px solid var(--border);background:var(--surface);border-radius:50%;width:36px;height:36px;cursor:pointer;flex:none}
+
+/* ---- sign in ---- */
+.signin{min-height:100vh;display:grid;place-items:center;padding:24px 16px}
+.signin form{width:min(400px,100%);background:var(--surface);border:1px solid var(--border);border-radius:var(--r-card);padding:30px 26px;box-shadow:var(--shadow-card)}
+.signin img{height:26px;margin-bottom:22px}
+.signin h1{font-size:1.9rem;margin:6px 0 8px}
+.signin p{margin:0 0 20px;color:var(--text-muted);font-size:.9rem}
+.signin input{width:100%;border:1px solid var(--border);background:var(--bg);border-radius:12px;padding:12px 14px;font:inherit;color:var(--text);margin-bottom:12px}
+.signin .btn{width:100%;justify-content:center;padding:12px}
+.err{color:var(--bad);font-size:.85rem;min-height:1.2em;margin:0 0 10px}
+
+footer{border-top:1px solid var(--border);padding:22px 0 40px;font-size:.76rem;color:var(--text-muted)}
+.logo .on-dark,.signin .on-dark{display:none}
+@media (prefers-color-scheme:dark){.logo .on-light,.signin .on-light{display:none}.logo .on-dark,.signin .on-dark{display:block}}
+</style>
+</head>
+<body>
+
+<div id="signin" class="signin" hidden>
+  <form id="signin-form" autocomplete="on">
+    <img class="on-light" src="/en/logo/wordmark-primary.svg" alt="AI Profit Lab">
+    <img class="on-dark" src="/en/logo/wordmark-dark.svg" alt="AI Profit Lab">
+    <div class="eyebrow">Private</div>
+    <h1>CEO Dashboard</h1>
+    <p>Chats, leads, sales and traffic in one place. For Nahid only.</p>
+    <input type="text" name="username" value="ceo" autocomplete="username" hidden>
+    <input id="pw" type="password" name="password" placeholder="Password" autocomplete="current-password" required aria-label="Password">
+    <p class="err" id="signin-err" role="alert"></p>
+    <button class="btn primary" type="submit" id="signin-btn">Sign in</button>
+  </form>
+</div>
+
+<div id="shell" hidden>
+  <header class="bar">
+    <div class="wrap">
+      <a class="logo" href="/" aria-label="AI Profit Lab home">
+        <img class="on-light" src="/en/logo/wordmark-primary.svg" alt="AI Profit Lab">
+        <img class="on-dark" src="/en/logo/wordmark-dark.svg" alt="AI Profit Lab">
+        <span>CEO</span>
+      </a>
+      <div class="controls">
+        <span class="updated" id="updated"></span>
+        <div class="seg" role="group" aria-label="Period">
+          <button type="button" data-range="7" aria-pressed="true">7 days</button>
+          <button type="button" data-range="28" aria-pressed="false">28 days</button>
+        </div>
+        <button class="btn" type="button" id="refresh" title="Read every source again now">Refresh</button>
+        <button class="btn" type="button" id="signout">Sign out</button>
+      </div>
+    </div>
+  </header>
+  <main class="wrap" id="app" aria-live="polite"></main>
+  <footer><div class="wrap">© 2026 AI Profit Lab, a brand of Lotus Gulf International (CR 1570092) · South Al Khuwair, Bousher, Muscat, Oman · Private page, not indexed.</div></footer>
+</div>
+
+<dialog class="drawer" id="drawer" aria-labelledby="drawer-title">
+  <div class="drawer-in">
+    <div class="drawer-head">
+      <div><div class="eyebrow">Aiden conversation</div><h2 id="drawer-title" class="h3" style="margin-top:4px">Transcript</h2><div class="small muted" id="drawer-meta"></div></div>
+      <button class="close" type="button" id="drawer-close" aria-label="Close">✕</button>
+    </div>
+    <div class="drawer-body" id="drawer-body"></div>
+  </div>
+</dialog>
+<div class="tip" id="tip" role="tooltip"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js" integrity="sha384-XmJ9SoHtVOHoQUcKvFAzVXwdkKo1Ie3bhmSoIAkcdsHGaIrVJIkmozyq0FJeb/Ly" crossorigin="anonymous" defer></script>
+<script>
+(function () {
+  "use strict";
+
+  var API = /^(localhost|127\.0\.0\.1)$/.test(location.hostname) ? "http://localhost:8093/ceo" : "https://offer.aiprofitlab.io/ceo";
+  var TOKEN_KEY = "apl_ceo_token";
+  var DAY = 86400000;
+
+  var S = { token: "", data: null, range: 7, filter: "hot", q: "", show: 12, briefDays: "1", first: true, busy: false };
+
+  /* ------------------------------------------------------------------ utils */
+  function esc(v) {
+    return String(v == null ? "" : v).replace(/[&<>"']/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+    });
+  }
+  function $(id) { return document.getElementById(id); }
+  function store(k, v) { try { if (v === undefined) return localStorage.getItem(k); if (v === null) localStorage.removeItem(k); else localStorage.setItem(k, v); } catch (e) { return null; } }
+  var nf = new Intl.NumberFormat("en-GB");
+  function n(v) { return v == null ? "—" : nf.format(Math.round(v)); }
+  function omr(v) { return "OMR " + new Intl.NumberFormat("en-GB", { minimumFractionDigits: v % 1 ? 2 : 0, maximumFractionDigits: 2 }).format(v || 0); }
+  function offMin() { return (S.data && S.data.tzOffsetMin) || 240; }
+  function dayKey(ms) { return new Date(ms + offMin() * 60000).toISOString().slice(0, 10); }
+  function days(nDays, endMs) { var out = []; for (var i = nDays - 1; i >= 0; i--) out.push(dayKey((endMs || Date.now()) - i * DAY)); return out; }
+  var fmtDayF = new Intl.DateTimeFormat("en-GB", { weekday: "short", day: "numeric", month: "short", timeZone: "UTC" });
+  function fmtDay(key) { return fmtDayF.format(new Date(key + "T12:00:00Z")); }
+  var fmtWhenF = new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit", timeZone: "Asia/Muscat" });
+  function fmtWhen(ms) { return ms ? fmtWhenF.format(new Date(ms)) : "—"; }
+  function ago(ms) {
+    if (!ms) return "never";
+    var s = Math.max(0, (Date.now() - ms) / 1000);
+    if (s < 60) return "just now";
+    if (s < 3600) return Math.round(s / 60) + " min ago";
+    if (s < 86400) return Math.round(s / 3600) + " h ago";
+    return Math.round(s / 86400) + " d ago";
+  }
+  function inKeys(ms, keys) { if (!ms) return false; var k = dayKey(ms); return k >= keys[0] && k <= keys[keys.length - 1]; }
+  function sum(list, f) { return list.reduce(function (a, x) { return a + (f(x) || 0); }, 0); }
+  function delta(cur, prev) {
+    if (prev == null || cur == null) return "";
+    if (!prev) return cur ? '<span class="delta up">new</span>' : "";
+    var p = Math.round(((cur - prev) / prev) * 100);
+    if (!p) return '<span class="delta">±0%</span>';
+    return '<span class="delta ' + (p > 0 ? "up" : "down") + '">' + (p > 0 ? "▲ " : "▼ ") + Math.abs(p) + "%</span>";
+  }
+  function waHref(phone) {
+    var d = String(phone || "").replace(/\D/g, "");
+    if (!d) return "";
+    if (d.length === 8) d = "968" + d;
+    return "https://wa.me/" + d;
+  }
+  function contactChips(email, phone) {
+    var h = "";
+    if (phone) h += '<a class="chip wa" href="' + esc(waHref(phone)) + '" target="_blank" rel="noopener" dir="ltr">' + esc(phone) + "</a>";
+    if (email) h += '<a class="chip" href="mailto:' + esc(email) + '" dir="ltr">' + esc(email) + "</a>";
+    return h;
+  }
+  function langName(l) { return l === "ar" ? "Arabic" : "English"; }
+  function shortPath(p) {
+    var s = String(p || "").replace(/^https?:\/\/(www\.)?aiprofitlab\.io/, "");
+    return s || "/";
+  }
+  function offline(name, src, hint) {
+    return '<div class="offline"><span aria-hidden="true">○</span><div><b>' + esc(name) + " is not connected yet.</b><br>" + esc(src && src.error ? src.error : "No data.") + (hint ? "<br>" + esc(hint) : "") + "</div></div>";
+  }
+  function countBy(list, f) {
+    var m = {};
+    list.forEach(function (x) { var k = f(x); if (k) m[k] = (m[k] || 0) + 1; });
+    return Object.keys(m).map(function (k) { return { k: k, v: m[k] }; }).sort(function (a, b) { return b.v - a.v; });
+  }
+
+  /* ----------------------------------------------------------------- charts */
+  // One series, one hue (the brand teal), one y-axis. Hover shows the day and value.
+  function yTicks(max) {
+    if (max <= 4) return [0, Math.max(1, max)];
+    var step = Math.pow(10, Math.floor(Math.log10(max)));
+    var nice = max / step > 5 ? step * 2 : max / step > 2 ? step : step / 2;
+    var top = Math.ceil(max / nice) * nice;
+    var out = [];
+    for (var v = 0; v <= top + 1e-9; v += nice) out.push(Math.round(v * 100) / 100);
+    return out;
+  }
+  function chart(points, opts) {
+    // points: [{key, value}]
+    var W = 640, H = 170, L = 34, R = 6, T = 8, B = 22;
+    var max = Math.max.apply(null, points.map(function (p) { return p.value; }).concat([0]));
+    var ticks = yTicks(max || 1), top = ticks[ticks.length - 1] || 1;
+    var iw = W - L - R, ih = H - T - B, cw = iw / points.length;
+    var y = function (v) { return T + ih - (v / top) * ih; };
+    var s = '<svg class="chart" viewBox="0 0 ' + W + " " + H + '" role="img" aria-label="' + esc(opts.label) + '">';
+    ticks.forEach(function (t) {
+      s += '<line class="gridline" x1="' + L + '" x2="' + (W - R) + '" y1="' + y(t) + '" y2="' + y(t) + '"/>';
+      s += '<text class="axis" x="' + (L - 6) + '" y="' + (y(t) + 3) + '" text-anchor="end">' + esc(n(t)) + "</text>";
+    });
+    var labelAt = points.length <= 8 ? function () { return true; } : function (i) { return i === 0 || i === points.length - 1 || i === Math.floor(points.length / 2); };
+    points.forEach(function (p, i) {
+      if (labelAt(i)) s += '<text class="axis" x="' + (L + cw * i + cw / 2) + '" y="' + (H - 6) + '" text-anchor="middle">' + esc(fmtDay(p.key).replace(/^\w+ /, "")) + "</text>";
+    });
+    var tipFor = function (p) { return fmtDay(p.key) + " · " + (opts.fmt ? opts.fmt(p.value) : n(p.value)) + " " + (opts.unit || ""); };
+    if (opts.type === "line") {
+      var d = "", a = "";
+      points.forEach(function (p, i) {
+        var px = L + cw * i + cw / 2, py = y(p.value);
+        d += (i ? "L" : "M") + px.toFixed(1) + " " + py.toFixed(1);
+      });
+      a = d + "L" + (L + cw * (points.length - 1) + cw / 2).toFixed(1) + " " + (T + ih) + "L" + (L + cw / 2).toFixed(1) + " " + (T + ih) + "Z";
+      s += '<path class="area" d="' + a + '"/><path class="line grow-line" d="' + d + '"/>';
+      points.forEach(function (p, i) {
+        var px = L + cw * i + cw / 2;
+        s += '<g class="col" data-tip="' + esc(tipFor(p)) + '"><rect class="hit" x="' + (L + cw * i) + '" y="' + T + '" width="' + cw + '" height="' + ih + '"/><line class="cross" x1="' + px + '" x2="' + px + '" y1="' + T + '" y2="' + (T + ih) + '"/><circle class="dot" cx="' + px + '" cy="' + y(p.value) + '" r="4"/></g>';
+      });
+    } else {
+      var gap = Math.min(4, cw * 0.25), bw = Math.max(2, cw - gap);
+      points.forEach(function (p, i) {
+        var x = L + cw * i + gap / 2, h = (p.value / top) * ih, yy = T + ih - h, r = Math.min(4, bw / 2, h);
+        var path = h > 0 ? "M" + x + " " + (T + ih) + "V" + (yy + r) + "Q" + x + " " + yy + " " + (x + r) + " " + yy + "H" + (x + bw - r) + "Q" + (x + bw) + " " + yy + " " + (x + bw) + " " + (yy + r) + "V" + (T + ih) + "Z" : "";
+        s += '<g class="col" data-tip="' + esc(tipFor(p)) + '"><rect class="hit" x="' + (L + cw * i) + '" y="' + T + '" width="' + cw + '" height="' + ih + '"/>' + (path ? '<path class="bar grow-bar" d="' + path + '"/>' : "") + "</g>";
+      });
+    }
+    return s + "</svg>";
+  }
+  function hlist(rows, fmt) {
+    if (!rows.length) return '<div class="empty">Nothing yet in this period.</div>';
+    var max = Math.max.apply(null, rows.map(function (r) { return r.v; })) || 1;
+    return '<div class="hlist">' + rows.map(function (r) {
+      return '<div class="hrow"><span class="k" title="' + esc(r.k) + '" dir="auto">' + esc(r.k) + '</span><span class="v">' + esc(fmt ? fmt(r) : n(r.v)) + '</span><div class="track"><div class="fill grow-fill" style="width:' + Math.max(2, (r.v / max) * 100).toFixed(1) + '%"></div></div></div>';
+    }).join("") + "</div>";
+  }
+
+  /* ------------------------------------------------------------ the numbers */
+  function compute() {
+    var d = S.data, R = S.range, keys = days(R), prevKeys = days(R, Date.now() - R * DAY);
+    var convs = (d.aiden && d.aiden.conversations) || [];
+    var forms = (d.aiden && d.aiden.formLeads) || [];
+    var claims = (d.sales && d.sales.claims) || [];
+    var c = convs.filter(function (x) { return inKeys(x.start, keys); });
+    var cPrev = convs.filter(function (x) { return inKeys(x.start, prevKeys); });
+    var withContact = function (x) { return x.email || x.phone; };
+    var fIn = forms.filter(function (x) { return inKeys(x.t, keys); });
+    var clIn = claims.filter(function (x) { return inKeys(x.t, keys); });
+    var leads = c.filter(withContact).length + fIn.length + clIn.length;
+    var leadsPrev = cPrev.filter(withContact).length + forms.filter(function (x) { return inKeys(x.t, prevKeys); }).length + claims.filter(function (x) { return inKeys(x.t, prevKeys); }).length;
+    var ga = d.ga4, visits = null, visitsPrev = null, gaDays = null;
+    if (ga) {
+      var byDay = {};
+      ga.daily.forEach(function (x) { byDay[x.day] = x; });
+      gaDays = keys.map(function (k) { return { key: k, value: byDay[k] ? byDay[k].sessions : 0 }; });
+      visits = sum(keys, function (k) { return byDay[k] && byDay[k].sessions; });
+      visitsPrev = sum(prevKeys, function (k) { return byDay[k] && byDay[k].sessions; });
+    }
+    return { keys: keys, convs: c, convsPrev: cPrev, forms: fIn, claimsIn: clIn, leads: leads, leadsPrev: leadsPrev, visits: visits, visitsPrev: visitsPrev, gaDays: gaDays };
+  }
+
+  /* ------------------------------------------------------------- rendering */
+  function render() {
+    var d = S.data, m = compute(), src = d.sources || {};
+    var h = "";
+    var hour = Number(new Intl.DateTimeFormat("en-GB", { hour: "numeric", hourCycle: "h23", timeZone: "Asia/Muscat" }).format(new Date()));
+    var greet = hour < 12 ? "Good morning" : hour < 18 ? "Good afternoon" : "Good evening";
+    var live = d.ga4 && d.ga4.realtime != null ? '<span class="live"><i></i>' + n(d.ga4.realtime) + " on the site in the last 30 min · read " + esc(ago(src.ga4 && src.ga4.at)) + "</span>" : "";
+    h += '<div class="hello reveal"><div><div class="eyebrow">Last ' + S.range + " days · Muscat time</div><h1>" + greet + ", Nahid.</h1></div>" + live + "</div>";
+
+    // ---- KPI strip
+    var totals = d.sales && d.sales.totals, ladder = d.sales && d.sales.ladder;
+    h += '<div class="kpis">';
+    h += kpi("Website visits", m.visits, delta(m.visits, m.visitsPrev) + '<span>vs previous ' + S.range + " days</span>", !d.ga4);
+    h += kpi("Aiden conversations", m.convs.length, delta(m.convs.length, m.convsPrev.length) + "<span>" + n(sum(m.convs, function (x) { return x.messages; })) + " messages</span>", !d.aiden);
+    h += kpi("New leads", m.leads, delta(m.leads, m.leadsPrev) + "<span>chat contacts, forms, seat claims</span>", !d.aiden && !totals);
+    h += kpi("Seats confirmed", totals ? totals.confirmed : null, "<span>" + (totals ? omr(totals.collected) + " collected" : "") + (ladder && ladder.activeTier ? " · " + ladder.activeTier.seatsLeft + " left at " + omr(ladder.activeTier.price) : "") + "</span>", !totals);
+    h += "</div>";
+
+    // ---- AI brief + follow-ups
+    h += '<div class="grid two top">' + briefCard() + followCard(m) + "</div>";
+
+    // ---- Aiden
+    h += '<section class="block"><div class="block-head"><h2>Aiden</h2></div>';
+    if (!d.aiden) h += offline("Aiden's chat log", src.aiden, "Share the Aiden sheet with the service account as Viewer.");
+    else h += aidenBlock(m);
+    h += "</section>";
+
+    // ---- Sales
+    h += '<section class="block"><div class="block-head"><h2>Sales</h2></div>' + salesBlock(m) + "</section>";
+
+    // ---- Traffic
+    h += '<section class="block"><div class="block-head"><h2>Website traffic</h2></div>';
+    h += d.ga4 ? trafficBlock(m) : offline("Google Analytics", src.ga4, "Add the service account as Viewer in GA4 (Admin → Property access management).");
+    h += "</section>";
+
+    // ---- Search
+    h += '<section class="block"><div class="block-head"><h2>Google Search</h2></div>';
+    h += d.gsc ? searchBlock() : offline("Search Console", src.gsc, "Add the service account as a user in Search Console (Settings → Users and permissions).");
+    h += "</section>";
+
+    // ---- Sources footer
+    h += '<p class="small muted" style="margin-top:34px">' + Object.keys(src).map(function (k) {
+      var s = src[k];
+      return esc(({ aiden: "Aiden sheet", ledger: "Seat ledger", ladder: "Seat counter", briefs: "Briefs", ga4: "GA4", gsc: "Search Console" })[k] || k) + ": " + (s.ok ? "read " + esc(ago(s.at)) : "not connected");
+    }).join(" · ") + "</p>";
+
+    $("app").innerHTML = h;
+    $("updated").textContent = "Updated " + ago(d.now);
+    bind();
+    animate();
+  }
+
+  function kpi(label, value, sub, off) {
+    return '<div class="kpi reveal"><div class="label">' + esc(label) + '</div><div class="value">' + (off ? '<span class="muted">—</span>' : esc(n(value))) + '</div><div class="sub">' + (off ? "<span>not connected</span>" : sub) + "</div></div>";
+  }
+
+  function briefCard() {
+    var d = S.data, sums = d.summaries || {}, s = sums[S.briefDays];
+    var convs = (d.aiden && d.aiden.conversations) || [];
+    var byId = {};
+    convs.forEach(function (c) { byId[c.id] = c; });
+    var h = '<div class="brief reveal"><div class="card-head" style="margin:0"><div class="eyebrow">AI brief</div><div class="controls"><div class="seg" role="group" aria-label="Brief period"><button type="button" data-brief="1" aria-pressed="' + (S.briefDays === "1") + '">24 hours</button><button type="button" data-brief="7" aria-pressed="' + (S.briefDays === "7") + '">7 days</button></div><button class="btn" type="button" id="rebrief"' + (d.features && !d.features.summary ? " disabled" : "") + ">" + (s ? "Rewrite" : "Write it") + "</button></div></div>";
+    if (!s && d.features && !d.features.summary) {
+      h += '<p class="headline">The AI brief needs the OpenAI key on the server.</p><p class="small muted">Set OPENAI_API_KEY in /etc/ceo-dashboard-api/.env and restart the service.</p></div>';
+      return h;
+    }
+    if (!s) {
+      h += '<p class="headline">No brief for this period yet.</p><p class="small muted">It is written automatically each morning' + (d.features && d.features.digestHour != null ? " at " + d.features.digestHour + ":00" : "") + ' for the last 24 hours. Press “Write it” for one now; it reads the conversations and costs a few cents.</p></div>';
+      return h;
+    }
+    h += '<p class="headline" dir="auto">' + esc(s.headline) + "</p>";
+    h += '<div class="brief-cols">';
+    h += "<div><h4>Call these first</h4>" + (s.hot_leads && s.hot_leads.length ? s.hot_leads.map(function (l) {
+      var c = byId[l.id] || {};
+      return '<div class="lead-ai"><div><b dir="auto">' + esc(l.who) + '</b></div><div class="small muted" dir="auto">' + esc(l.why) + '</div><div class="small" style="margin:4px 0 6px" dir="auto">→ ' + esc(l.next_step) + '</div><div class="contact">' + contactChips(c.email, c.phone) + '<button class="chip" type="button" data-open="' + esc(l.id) + '">Read chat</button></div></div>';
+    }).join("") : '<div class="empty">No one stood out as a buyer.</div>') + "</div>";
+    h += "<div><h4>What people asked</h4>" + (s.top_questions && s.top_questions.length ? "<ul>" + s.top_questions.map(function (q) { return '<li dir="auto">' + esc(q.question) + (q.count > 1 ? ' <span class="muted mono">×' + esc(q.count) + "</span>" : "") + "</li>"; }).join("") + "</ul>" : '<div class="empty">—</div>') + "</div>";
+    h += "<div><h4>Where Aiden fell short</h4>" + (s.gaps && s.gaps.length ? "<ul>" + s.gaps.map(function (g) { return '<li dir="auto">' + esc(g) + "</li>"; }).join("") + "</ul>" : '<div class="empty">Nothing obvious.</div>') + (s.signals && s.signals.length ? '<h4 style="margin-top:14px">Worth noticing</h4><ul>' + s.signals.map(function (g) { return '<li dir="auto">' + esc(g) + "</li>"; }).join("") + "</ul>" : "") + "</div>";
+    h += "</div>";
+    if (s.suggestion) h += '<div class="suggest" dir="auto"><b>One thing to change:</b> ' + esc(s.suggestion) + "</div>";
+    h += '<p class="small muted" style="margin:14px 0 0">Written ' + esc(ago(s.generatedAt)) + " from " + esc(s.covered) + " of " + esc(s.conversations) + " conversations · " + esc(s.model) + ". Phone numbers and emails are never sent to the AI.</p></div>";
+    return h;
+  }
+
+  function followCard(m) {
+    var d = S.data;
+    var convs = ((d.aiden && d.aiden.conversations) || []).filter(function (c) { return c.hot; }).slice(0, 6);
+    var forms = ((d.aiden && d.aiden.formLeads) || []).slice(0, 3);
+    var h = '<div class="card reveal"><div class="card-head"><h2 class="h3">Follow up</h2><span class="hint">Hot chats, newest first</span></div>';
+    if (!d.aiden) return h + offline("Aiden's chat log", d.sources.aiden) + "</div>";
+    if (!convs.length && !forms.length) return h + '<div class="empty">No hot leads yet. A chat becomes hot when the visitor leaves a phone number or email, asks about price or buying, or keeps talking.</div></div>';
+    h += '<div class="leads">' + convs.map(leadButton).join("");
+    forms.forEach(function (l) {
+      h += '<div class="lead" style="cursor:default"><div><div class="q" dir="auto">' + esc(l.message || "(no message)") + '</div><div class="meta"><span class="chip">' + esc(l.source) + " form</span><span dir=\"auto\">" + esc(l.name) + (l.company ? " · " + esc(l.company) : "") + '</span></div></div><span class="when">' + esc(ago(l.t)) + '</span><div class="contact">' + contactChips(l.email, l.phone) + "</div></div>";
+    });
+    return h + "</div></div>";
+  }
+
+  function leadButton(c) {
+    return '<div class="lead" role="button" tabindex="0" data-open="' + esc(c.id) + '"><div><div class="q" dir="auto">“' + esc(c.lastQuestion || c.firstQuestion) + '”</div><div class="meta"><span>' + esc(langName(c.lang)) + "</span>" + (c.country ? "<span>" + esc(c.country) + "</span>" : "") + (c.industry ? "<span>" + esc(c.industry) + "</span>" : "") + "<span>" + esc(c.messages) + " msg</span></div></div><span class=\"when\">" + esc(ago(c.last)) + '</span><div class="contact">' + contactChips(c.email, c.phone) + c.reasons.slice(0, 2).map(function (r) { return '<span class="chip why">' + esc(r) + "</span>"; }).join("") + "</div></div>";
+  }
+
+  function aidenBlock(m) {
+    var d = S.data, perDay = {};
+    m.convs.forEach(function (c) { var k = dayKey(c.start); perDay[k] = (perDay[k] || 0) + 1; });
+    var points = m.keys.map(function (k) { return { key: k, value: perDay[k] || 0 }; });
+    var withContact = m.convs.filter(function (c) { return c.email || c.phone; }).length;
+    var hot = m.convs.filter(function (c) { return c.hot; }).length;
+    var ar = m.convs.filter(function (c) { return c.lang === "ar"; }).length;
+    var h = '<div class="grid two"><div class="card reveal"><div class="chart-total"><div><b>' + n(m.convs.length) + "</b>conversations</div><div><b>" + n(hot) + "</b>hot</div><div><b>" + n(withContact) + "</b>left contact details</div><div><b>" + (m.convs.length ? Math.round((ar / m.convs.length) * 100) : 0) + "%</b>in Arabic</div></div>" + chart(points, { label: "Aiden conversations per day", unit: "conversations" }) + "</div>";
+    h += '<div class="card reveal"><div class="card-head"><h3>Where chats start</h3><span class="hint">page the visitor was on</span></div>' + hlist(countBy(m.convs, function (c) { return c.firstPageTitle || shortPath(c.firstPage); }).slice(0, 6)) + '<div class="grid half" style="margin-top:18px"><div><div class="card-head"><h3 style="font-size:1rem">Business type</h3></div>' + hlist(countBy(m.convs, function (c) { return c.industry; }).slice(0, 5)) + '</div><div><div class="card-head"><h3 style="font-size:1rem">Country</h3></div>' + hlist(countBy(m.convs, function (c) { return c.country; }).slice(0, 5)) + "</div></div></div></div>";
+
+    // conversation table
+    var q = S.q.trim().toLowerCase();
+    var all = (d.aiden.conversations || []).filter(function (c) {
+      if (S.filter === "hot" && !c.hot) return false;
+      if (S.filter === "contact" && !(c.email || c.phone)) return false;
+      if (S.filter === "range" && !inKeys(c.start, m.keys)) return false;
+      if (!q) return true;
+      return [c.firstQuestion, c.lastQuestion, c.email, c.phone, c.industry, c.country, c.firstPageTitle].join(" ").toLowerCase().indexOf(q) >= 0;
+    });
+    h += '<div class="card reveal" style="margin-top:16px"><div class="card-head"><h3>All conversations</h3><span class="hint">' + n(d.aiden.conversations.length) + " in the last 120 days · click one to read it</span></div>";
+    h += '<div class="tools"><input class="search" id="q" type="search" placeholder="Search questions, emails, phone numbers…" value="' + esc(S.q) + '" aria-label="Search conversations"><div class="seg" role="group" aria-label="Filter">' + [["hot", "Hot"], ["contact", "With contact"], ["range", "This period"], ["all", "All"]].map(function (f) { return '<button type="button" data-filter="' + f[0] + '" aria-pressed="' + (S.filter === f[0]) + '">' + f[1] + "</button>"; }).join("") + "</div></div>";
+    if (!all.length) h += '<div class="empty">No conversations match.</div>';
+    else {
+      h += '<div class="table-wrap"><table><thead><tr><th>When</th><th>First question</th><th class="hide-sm">Contact</th><th class="n">Msgs</th></tr></thead><tbody>';
+      all.slice(0, S.show).forEach(function (c) {
+        h += '<tr class="click" data-open="' + esc(c.id) + '" tabindex="0"><td class="mono small" style="white-space:nowrap">' + esc(fmtWhen(c.start)) + '</td><td><div class="clip" dir="auto">' + (c.hot ? '<span class="chip hot" style="margin-right:6px">hot</span>' : "") + esc(c.firstQuestion) + '</div><div class="small muted">' + esc(langName(c.lang)) + (c.country ? " · " + esc(c.country) : "") + (c.industry ? " · " + esc(c.industry) : "") + '</div></td><td class="hide-sm small" dir="ltr">' + esc(c.phone || c.email || "—") + '</td><td class="n mono">' + esc(c.messages) + "</td></tr>";
+      });
+      h += "</tbody></table></div>";
+      if (all.length > S.show) h += '<button class="btn more" type="button" id="more">Show ' + Math.min(20, all.length - S.show) + " more of " + n(all.length - S.show) + "</button>";
+    }
+    return h + "</div>";
+  }
+
+  var STATUS = {
+    Confirmed: ["good", "Confirmed"],
+    Deposit_Submitted: ["warn", "Receipt uploaded"],
+    Payment_Started: ["info", "Paying"],
+    Awaiting_Deposit: ["info", "Awaiting deposit"],
+    Void: ["void", "Void"],
+  };
+  function statusChip(s) { var x = STATUS[s] || ["info", s.replace(/_/g, " ")]; return '<span class="status ' + x[0] + '">' + esc(x[1]) + "</span>"; }
+
+  function salesBlock(m) {
+    var d = S.data, sales = d.sales || {}, src = d.sources || {}, t = sales.totals, ladder = sales.ladder;
+    if (!t) return offline("The seat ledger", src.ledger);
+    var h = '<div class="grid two"><div class="card reveal"><div class="card-head"><h3>Smart Storefront seats</h3><span class="hint">all time</span></div>';
+    if (ladder && ladder.activeTier) h += '<div class="rung"><span>Live price <b class="mono">' + esc(omr(ladder.activeTier.price)) + "</b> · " + esc(ladder.activeTier.seatsLeft) + " seat" + (ladder.activeTier.seatsLeft === 1 ? "" : "s") + ' left at this price</span><span class="small muted">Card payments ' + (ladder.cardPayments ? "on" : "off") + "</span></div>";
+    else if (ladder && ladder.soldOut) h += '<div class="rung">All seats are sold.</div>';
+    h += '<div class="money"><div><span>Collected</span><b>' + esc(omr(t.collected)) + '</b></div><div><span>Booked (confirmed seats)</span><b>' + esc(omr(t.booked)) + '</b></div><div><span>Open pipeline</span><b>' + esc(omr(t.pipeline)) + "</b></div></div>";
+    var bs = t.byStatus || {};
+    h += '<div class="pipe">' + [["Awaiting_Deposit", "Awaiting deposit"], ["Payment_Started", "Paying"], ["Deposit_Submitted", "Receipt uploaded"], ["Confirmed", "Confirmed"]].map(function (s) {
+      return '<div class="' + (bs[s[0]] ? "on" : "") + '"><b>' + n(bs[s[0]] || 0) + "</b>" + esc(s[1]) + "</div>";
+    }).join("") + "</div>";
+    h += '<p class="small muted" style="margin:0">“Collected” counts only the Paid OMR column. A bank transfer you confirm by hand shows here once its amount is typed into that column.' + (bs.Void ? " " + n(bs.Void) + " void claim" + (bs.Void > 1 ? "s" : "") + " not counted." : "") + "</p></div>";
+
+    // right: where buyers came from + briefs
+    var claims = sales.claims || [];
+    h += '<div class="card reveal"><div class="card-head"><h3>Where buyers came from</h3><span class="hint">all claims</span></div>';
+    h += '<div class="grid half"><div><div class="card-head"><h3 style="font-size:1rem">They told us</h3></div>' + hlist(countBy(claims, function (c) { return c.heard || null; }).slice(0, 6)) + '</div><div><div class="card-head"><h3 style="font-size:1rem">First visit came from</h3></div>' + hlist(countBy(claims, function (c) { return c.firstSource || null; }).slice(0, 6)) + "</div></div>";
+    h += '<div style="margin-top:18px"><div class="card-head"><h3 style="font-size:1rem">Project briefs received</h3>';
+    if (sales.briefs) h += '<span class="hint">' + n(sales.briefs.count) + " total</span></div>" + (sales.briefs.recent.length ? sales.briefs.recent.slice(0, 4).map(function (b) { return '<div class="hrow" style="margin-bottom:6px"><span class="k" dir="auto">' + esc(b.business || b.name || b.email) + '</span><span class="v">' + esc(fmtWhen(b.t)) + "</span></div>"; }).join("") : '<div class="empty">None yet.</div>');
+    else h += "</div>" + offline("The brief sheet", src.briefs, "Set BRIEFS_SHEET_ID and share that sheet with the service account.");
+    h += "</div></div></div>";
+
+    // claims table
+    h += '<div class="card reveal" style="margin-top:16px"><div class="card-head"><h3>Seat claims</h3><span class="hint">' + n(m.claimsIn.length) + " new in the last " + S.range + " days</span></div>";
+    if (!claims.length) h += '<div class="empty">No claims yet.</div>';
+    else {
+      h += '<div class="table-wrap"><table class="wide"><thead><tr><th>When</th><th>Business</th><th>Status</th><th class="hide-sm">Contact</th><th class="n">Price</th><th class="n hide-sm">Paid</th></tr></thead><tbody>';
+      claims.slice(0, 15).forEach(function (c) {
+        h += '<tr><td class="mono small" style="white-space:nowrap">' + esc(fmtWhen(c.t)) + '</td><td><div dir="auto">' + esc(c.business || c.name) + '</div><div class="small muted"><span class="mono">' + esc(c.ref) + "</span>" + (c.sector ? " · " + esc(c.sector) : "") + (c.heard ? " · " + esc(c.heard) : "") + "</div></td><td>" + statusChip(c.status) + '</td><td class="hide-sm"><div class="contact">' + contactChips(c.email, c.whatsapp) + '</div></td><td class="n mono">' + (c.price ? esc(n(c.price)) : "—") + '</td><td class="n mono hide-sm">' + (c.paid ? esc(c.paid) : "—") + "</td></tr>";
+      });
+      h += "</tbody></table></div>";
+    }
+    return h + "</div>";
+  }
+
+  function trafficBlock(m) {
+    var g = S.data.ga4, R = String(S.range);
+    var users = g.daily.filter(function (x) { return m.keys.indexOf(x.day) >= 0; });
+    var h = '<div class="grid two"><div class="card reveal"><div class="chart-total"><div><b>' + n(m.visits) + "</b>visits</div><div><b>" + n(sum(users, function (x) { return x.views; })) + "</b>page views</div><div><b>" + (m.visits ? Math.round((sum(users, function (x) { return x.engaged; }) / m.visits) * 100) : 0) + "%</b>engaged visits</div></div>" + chart(m.gaDays, { type: "line", label: "Website visits per day", unit: "visits" }) + "</div>";
+    h += '<div class="card reveal"><div class="card-head"><h3>Where visitors come from</h3></div>' + hlist((g.sources[R] || []).map(function (s) { return { k: s.name, v: s.sessions }; }).slice(0, 7), function (r) { return n(r.v) + " visits"; }) + "</div></div>";
+    var ev = (g.events[R] || []).slice(0, 8);
+    var evName = { aiden_open: "Opened Aiden", cta_click: "Clicked a call to action", whatsapp_click: "Clicked WhatsApp", begin_checkout: "Started checkout", add_payment_info: "Reached payment", outbound_click: "Clicked an outside link", generate_lead: "Sent a lead form", file_download: "Downloaded a file", click: "Clicked a link" };
+    h += '<div class="grid three" style="margin-top:16px"><div class="card reveal"><div class="card-head"><h3>Top pages</h3></div>' + hlist((g.pages[R] || []).map(function (p) { return { k: p.path, v: p.views }; }).slice(0, 7), function (r) { return n(r.v) + " views"; }) + "</div>";
+    h += '<div class="card reveal"><div class="card-head"><h3>What visitors did</h3></div>' + hlist(ev.map(function (e) { return { k: evName[e.name] || e.name.replace(/_/g, " "), v: e.count }; })) + "</div>";
+    h += '<div class="card reveal"><div class="card-head"><h3>Countries</h3></div>' + hlist((g.countries[R] || []).map(function (c) { return { k: c.name, v: c.users }; }).slice(0, 6), function (r) { return n(r.v) + " people"; }) + (g.devices && g.devices.length ? '<p class="small muted" style="margin:14px 0 0">' + g.devices.map(function (x) { return esc(x.name) + " " + n(x.users); }).join(" · ") + " (28 days)</p>" : "") + "</div></div>";
+    return h;
+  }
+
+  function searchBlock() {
+    var g = S.data.gsc, R = S.range;
+    var end = Date.parse(g.lastDay + "T12:00:00Z");
+    var keys = []; for (var i = R - 1; i >= 0; i--) keys.push(new Date(end - i * DAY).toISOString().slice(0, 10));
+    var prev = []; for (var j = 2 * R - 1; j >= R; j--) prev.push(new Date(end - j * DAY).toISOString().slice(0, 10));
+    var by = {}; g.daily.forEach(function (x) { by[x.day] = x; });
+    var clicks = sum(keys, function (k) { return by[k] && by[k].clicks; }), impr = sum(keys, function (k) { return by[k] && by[k].impressions; });
+    var clicksP = sum(prev, function (k) { return by[k] && by[k].clicks; }), imprP = sum(prev, function (k) { return by[k] && by[k].impressions; });
+    var posW = sum(keys, function (k) { return by[k] && by[k].position * by[k].impressions; });
+    var h = '<div class="grid two"><div class="card reveal"><div class="chart-total"><div><b>' + n(clicks) + "</b>clicks " + delta(clicks, clicksP) + "</div><div><b>" + n(impr) + "</b>times shown " + delta(impr, imprP) + "</div><div><b>" + (impr ? (posW / impr).toFixed(1) : "—") + "</b>average position</div></div>";
+    h += '<div class="grid half"><div><div class="small muted">Clicks per day</div>' + chart(keys.map(function (k) { return { key: k, value: by[k] ? by[k].clicks : 0 }; }), { label: "Search clicks per day", unit: "clicks" }) + '</div><div><div class="small muted">Times shown per day</div>' + chart(keys.map(function (k) { return { key: k, value: by[k] ? by[k].impressions : 0 }; }), { type: "line", label: "Search impressions per day", unit: "impressions" }) + "</div></div>";
+    h += '<p class="small muted" style="margin:10px 0 0">Google reports search with a delay; this period ends ' + esc(fmtDay(g.lastDay)) + ".</p></div>";
+    var qs = g.queries[String(R)] || [];
+    h += '<div class="card reveal"><div class="card-head"><h3>What people searched</h3></div>' + (qs.length ? '<div class="table-wrap"><table><thead><tr><th>Search</th><th class="n">Clicks</th><th class="n">Shown</th><th class="n">Pos.</th></tr></thead><tbody>' + qs.slice(0, 10).map(function (q) { return '<tr><td dir="auto">' + esc(q.key) + '</td><td class="n mono">' + n(q.clicks) + '</td><td class="n mono">' + n(q.impressions) + '</td><td class="n mono">' + q.position.toFixed(1) + "</td></tr>"; }).join("") + "</tbody></table></div>" : '<div class="empty">No searches with data yet.</div>') + "</div></div>";
+    var ps = g.pages[String(R)] && g.pages[String(R)].length ? g.pages[String(R)] : g.pages["28"] || [];
+    h += '<div class="card reveal" style="margin-top:16px"><div class="card-head"><h3>Pages Google sends people to</h3></div>' + hlist(ps.map(function (p) { return { k: shortPath(p.key), v: p.clicks, i: p.impressions }; }).slice(0, 8), function (r) { return n(r.v) + " clicks · " + n(r.i) + " shown"; }) + "</div>";
+    return h;
+  }
+
+  /* ---------------------------------------------------------------- motion */
+  // One entrance on first load; the bars and lists grow in as the one standout moment.
+  // Nothing is hidden by CSS, so if GSAP never loads the page is simply static.
+  function animate() {
+    if (!S.first || !window.gsap) return;
+    S.first = false;
+    var mm = gsap.matchMedia();
+    mm.add({ motion: "(prefers-reduced-motion: no-preference)" }, function (ctx) {
+      if (!ctx.conditions.motion) return;
+      var ease = "power3.out";
+      var tl = gsap.timeline({ defaults: { ease: ease, overwrite: "auto" } });
+      tl.from("#app .reveal", { autoAlpha: 0, y: 18, duration: 0.7, stagger: { each: 0.05, amount: 0.6 } })
+        .from("#app .grow-bar", { scaleY: 0, transformOrigin: "50% 100%", duration: 0.8, stagger: { amount: 0.4 } }, 0.2)
+        .from("#app .grow-fill", { scaleX: 0, duration: 0.9, stagger: { amount: 0.5 } }, 0.25);
+      var lines = document.querySelectorAll("#app .grow-line");
+      lines.forEach(function (p) {
+        var len = p.getTotalLength ? p.getTotalLength() : 0;
+        if (len) tl.fromTo(p, { strokeDasharray: len, strokeDashoffset: len }, { strokeDashoffset: 0, duration: 1.4, ease: "power2.inOut", clearProps: "strokeDasharray,strokeDashoffset" }, 0.3);
+      });
+    });
+  }
+
+  /* ---------------------------------------------------------------- events */
+  function bind() {
+    document.querySelectorAll("[data-open]").forEach(function (el) {
+      el.addEventListener("click", function (e) { e.stopPropagation(); openConv(el.getAttribute("data-open")); });
+      el.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); openConv(el.getAttribute("data-open")); } });
+    });
+    // Contact links inside a clickable card must not also open the transcript.
+    document.querySelectorAll("[data-open] a").forEach(function (a) { a.addEventListener("click", function (e) { e.stopPropagation(); }); });
+    document.querySelectorAll("[data-filter]").forEach(function (b) {
+      b.addEventListener("click", function () { S.filter = b.getAttribute("data-filter"); S.show = 12; rerender(); });
+    });
+    document.querySelectorAll("[data-brief]").forEach(function (b) {
+      b.addEventListener("click", function () { S.briefDays = b.getAttribute("data-brief"); rerender(); });
+    });
+    var q = $("q");
+    if (q) q.addEventListener("input", function () {
+      S.q = q.value;
+      clearTimeout(q._t);
+      q._t = setTimeout(function () { var pos = q.selectionStart; rerender(); var nq = $("q"); nq.focus(); try { nq.setSelectionRange(pos, pos); } catch (e) {} }, 180);
+    });
+    var more = $("more");
+    if (more) more.addEventListener("click", function () { S.show += 20; rerender(); });
+    var rb = $("rebrief");
+    if (rb) rb.addEventListener("click", rewriteBrief);
+  }
+  function rerender() { var y = window.scrollY; render(); window.scrollTo(0, y); }
+
+  // Hover tooltips for every chart column, from one shared element.
+  document.addEventListener("pointermove", function (e) {
+    var t = e.target.closest && e.target.closest("[data-tip]"), tip = $("tip");
+    if (!t) { tip.classList.remove("on"); return; }
+    tip.textContent = t.getAttribute("data-tip");
+    tip.style.left = Math.min(window.innerWidth - 80, Math.max(80, e.clientX)) + "px";
+    tip.style.top = e.clientY + "px";
+    tip.classList.add("on");
+  });
+
+  document.querySelectorAll("[data-range]").forEach(function (b) {
+    b.addEventListener("click", function () {
+      S.range = Number(b.getAttribute("data-range"));
+      document.querySelectorAll("[data-range]").forEach(function (x) { x.setAttribute("aria-pressed", String(x === b)); });
+      store("apl_ceo_range", String(S.range));
+      if (S.data) rerender();
+    });
+  });
+
+  /* ------------------------------------------------------------ transcript */
+  function openConv(id) {
+    var dlg = $("drawer"), body = $("drawer-body");
+    body.innerHTML = '<p class="muted"><span class="spin"></span> Loading…</p>';
+    $("drawer-meta").textContent = "";
+    if (dlg.showModal) dlg.showModal(); else dlg.setAttribute("open", "");
+    api("/conversation/" + encodeURIComponent(id)).then(function (r) {
+      var c = r.conv || {};
+      $("drawer-title").textContent = c.phone || c.email || (c.industry ? c.industry : "Visitor");
+      $("drawer-meta").innerHTML = esc([langName(c.lang), c.country, c.industry, fmtWhen(c.start)].filter(Boolean).join(" · ")) + '<div class="contact" style="margin-top:8px">' + contactChips(c.email, c.phone) + (c.reasons || []).map(function (x) { return '<span class="chip why">' + esc(x) + "</span>"; }).join("") + "</div>";
+      var lastPage = "", out = "";
+      r.turns.forEach(function (t) {
+        if (t.page !== lastPage) { out += '<div class="msg-time">' + esc(fmtWhen(t.t)) + " · " + esc(t.pageTitle || shortPath(t.page)) + "</div>"; lastPage = t.page; }
+        if (t.user) out += '<div class="msg v" dir="auto">' + esc(t.user) + "</div>";
+        if (t.reply) out += '<div class="msg a" dir="auto">' + esc(t.reply) + "</div>";
+      });
+      body.innerHTML = out || '<p class="muted">Empty conversation.</p>';
+      if (window.gsap && !matchMedia("(prefers-reduced-motion: reduce)").matches) gsap.from(body.children, { autoAlpha: 0, y: 8, duration: 0.4, stagger: { amount: 0.3 }, ease: "power3.out" });
+    }).catch(function (e) { body.innerHTML = '<p class="err">' + esc(e.message) + "</p>"; });
+  }
+  $("drawer-close").addEventListener("click", function () { $("drawer").close(); });
+  $("drawer").addEventListener("click", function (e) { if (e.target === $("drawer")) $("drawer").close(); });
+
+  /* ------------------------------------------------------------------- API */
+  function api(path, opts) {
+    opts = opts || {};
+    return fetch(API + path, {
+      method: opts.method || "GET",
+      headers: Object.assign({ "Content-Type": "application/json" }, S.token ? { Authorization: "Bearer " + S.token } : {}),
+      body: opts.body ? JSON.stringify(opts.body) : undefined,
+      cache: "no-store",
+    }).then(function (res) {
+      return res.json().catch(function () { return {}; }).then(function (j) {
+        if (res.status === 401 && path !== "/login") { signOut(); throw new Error("Signed out"); }
+        if (!res.ok || j.ok === false) throw new Error(j.error === "locked" ? "Too many tries. Wait " + j.retryInMin + " minutes." : j.error === "wrong_password" ? "That password is not right." : j.error || "The dashboard service did not answer (" + res.status + ").");
+        return j;
+      });
+    });
+  }
+
+  function load(quiet) {
+    if (S.busy) return Promise.resolve();
+    S.busy = true;
+    if (!S.data && !quiet) $("app").innerHTML = '<p class="muted" style="padding:40px 0"><span class="spin"></span> Reading your data…</p>';
+    return api("/data").then(function (d) { S.data = d; render(); }).catch(function (e) {
+      if (!S.data) $("app").innerHTML = '<div class="offline" style="margin-top:30px"><div><b>Could not reach the dashboard service.</b><br>' + esc(e.message) + "</div></div>";
+    }).then(function () { S.busy = false; });
+  }
+
+  function rewriteBrief() {
+    var b = $("rebrief");
+    b.disabled = true;
+    b.innerHTML = '<span class="spin"></span> Writing…';
+    api("/summary", { method: "POST", body: { days: Number(S.briefDays) } }).then(function (r) {
+      if (r.summary) { S.data.summaries = S.data.summaries || {}; S.data.summaries[S.briefDays] = r.summary; }
+      rerender();
+    }).catch(function (e) { b.disabled = false; b.textContent = "Try again"; alert(e.message); });
+  }
+
+  $("refresh").addEventListener("click", function () {
+    var b = $("refresh");
+    b.disabled = true;
+    b.innerHTML = '<span class="spin"></span> Reading';
+    api("/refresh", { method: "POST" }).then(function () { return load(true); }).catch(function () {}).then(function () { b.disabled = false; b.textContent = "Refresh"; });
+  });
+
+  function signOut() {
+    S.token = ""; S.data = null; S.first = true;
+    store(TOKEN_KEY, null);
+    $("shell").hidden = true;
+    $("signin").hidden = false;
+    $("pw").focus();
+  }
+  $("signout").addEventListener("click", signOut);
+
+  $("signin-form").addEventListener("submit", function (e) {
+    e.preventDefault();
+    var btn = $("signin-btn");
+    btn.disabled = true;
+    $("signin-err").textContent = "";
+    api("/login", { method: "POST", body: { password: $("pw").value } }).then(function (r) {
+      S.token = r.token;
+      store(TOKEN_KEY, r.token);
+      $("pw").value = "";
+      start();
+    }).catch(function (err) { $("signin-err").textContent = err.message; }).then(function () { btn.disabled = false; });
+  });
+
+  function start() {
+    $("signin").hidden = true;
+    $("shell").hidden = false;
+    load();
+  }
+
+  // Refresh the view every five minutes while the tab is open, and on return to it.
+  setInterval(function () { if (S.token && !document.hidden) load(true); }, 5 * 60000);
+  document.addEventListener("visibilitychange", function () { if (!document.hidden && S.token && S.data && Date.now() - S.data.now > 5 * 60000) load(true); });
+  setInterval(function () { if (S.data) $("updated").textContent = "Updated " + ago(S.data.now); }, 30000);
+
+  var savedRange = Number(store("apl_ceo_range"));
+  if (savedRange === 7 || savedRange === 28) {
+    S.range = savedRange;
+    document.querySelectorAll("[data-range]").forEach(function (x) { x.setAttribute("aria-pressed", String(Number(x.getAttribute("data-range")) === savedRange)); });
+  }
+  S.token = store(TOKEN_KEY) || "";
+  if (S.token) start(); else { $("signin").hidden = false; }
+})();
+</script>
+</body>
+</html>

@@ -31,6 +31,7 @@ SITE = "https://aiprofitlab.io"
 EXCLUDE_FILES = {
     "test.html",
     "onboarding.html",                   # client-only page, not public marketing
+    "ceo.html",                          # private CEO dashboard (noindex, password-gated)
     # Live but deliberately unlinked and noindex - see the indexing decisions
     # note. The noindex check below would catch these anyway; they are named
     # here so the intent survives a future edit to that check.

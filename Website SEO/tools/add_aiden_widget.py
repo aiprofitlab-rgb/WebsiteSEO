@@ -47,7 +47,8 @@ TAG = aiden_version.tag()
 MARKER = "/js/aiden-chat.js"
 
 # Same exclusions as the knowledge index: don't touch scratch or template files.
-EXCLUDE_FILES = {"test.html", "whatsapp_receptionist_demo.html", "Customized_CEO_Dashboard.html"}
+EXCLUDE_FILES = {"test.html", "whatsapp_receptionist_demo.html", "Customized_CEO_Dashboard.html",
+                 "ceo.html"}  # the private CEO dashboard: no widget, no analytics, ever
 EXCLUDE_PATTERNS = [
     re.compile(r"/en/.*-new\.html$"),
     re.compile(r"/en/index-cinematic\.html$"),

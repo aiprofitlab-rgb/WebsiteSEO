@@ -1,0 +1,28 @@
+# Instagram competitors that tools/ig_pull.py reads through Business Discovery.
+#
+# One per line:  handle | segment | note
+#   segment = web (website design), auto (AI / automation), both
+#
+# Every handle here was taken from the competitor's OWN website footer, or
+# confirmed by the display name on the profile, on 2026-09-27. Do not add a
+# handle guessed from a listicle: squatter accounts are common (see memory
+# instagram-follower-verification). Follower counts noted are that day's.
+#
+# Business Discovery only works for Business/Creator accounts; a personal or
+# private account is reported as an error for that handle and skipped.
+
+# --- AI / automation (the existing .agents/competitors/ set) ---
+qwiclink              | auto | 7 followers, 20 posts; our most direct price competitor
+nuqta_om              | auto | 803 followers
+wiya.om               | auto | 2,930 followers; WhatsApp commerce
+qurbantech            | auto | 1 follower; near-dormant
+inzint.om             | both | 112 followers, 621 posts; chatbots + web
+
+# --- Website design, Oman / GCC ---
+alphaweb.agency       | both | 64 followers; sells "Web Design, Business Systems & Automation", closest to our pitch
+foxcode.om            | both | 1,080 followers; web + apps + AI
+mercuryagencyom_      | web  | 2,305 followers, 6 posts
+mazoonsoft            | web  | 531 followers, 903 posts; web + e-commerce
+spectrumsolutionsoman | web  | 240 followers, 926 posts
+adventzagency         | web  | 33K followers; GCC-wide, not Oman-only
+almujasam             | web  | 973 followers, 5 posts
