@@ -24,7 +24,7 @@
   Everything a visitor typed is rendered through esc(). Never build HTML from
   a data field without it — a chat message is attacker-controlled text.
 -->
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src https://offer.aiprofitlab.io http://localhost:8093; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src https://offer.aiprofitlab.io http://localhost:8094; base-uri 'none'; form-action 'none'">
 <title>CEO Dashboard · AI Profit Lab</title>
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -296,7 +296,7 @@ footer{border-top:1px solid var(--border);padding:22px 0 40px;font-size:.76rem;c
 (function () {
   "use strict";
 
-  var API = /^(localhost|127\.0\.0\.1)$/.test(location.hostname) ? "http://localhost:8093/ceo" : "https://offer.aiprofitlab.io/ceo";
+  var API = /^(localhost|127\.0\.0\.1)$/.test(location.hostname) ? "http://localhost:8094/ceo" : "https://offer.aiprofitlab.io/ceo";
   var TOKEN_KEY = "apl_ceo_token";
   var DAY = 86400000;
 
