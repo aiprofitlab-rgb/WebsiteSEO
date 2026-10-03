@@ -13,22 +13,16 @@ jobs:
       - name: 🚚 Get latest code
         uses: actions/checkout@v4
 
-      - name: 🚀 Mirror to Website Root
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+      - name: 🐍 Set up Python
+        uses: actions/setup-python@v5
         with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: "./Website SEO/public_html/"
-          server-dir: "./"
-          port: 21
-          timeout: 300000
-          log-level: verbose
-          security: loose
-          exclude: |
-            **/.git*
-            **/.git*/**
-            **/node_modules/**
-            **/.DS_Store
-            **/*.py
-            **/__pycache__/**
+          python-version: '3.11'
+
+      - name: 🚀 Sync Website to Hostinger FTP
+        env:
+          FTP_SERVER: ${{ secrets.FTP_SERVER }}
+          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+          FTP_REMOTE_ROOT: "./"
+        run: |
+          python3 "Website SEO/tools/deploy_ftp.py"
