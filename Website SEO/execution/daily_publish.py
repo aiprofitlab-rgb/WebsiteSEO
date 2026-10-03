@@ -231,8 +231,25 @@ def mark_queue_published(article_info, slug):
     print(f"Marked article #{article_info['num']} as Published.")
 
 
+def is_already_published_today():
+    today_str = datetime.now().strftime("%Y-%m-%d")
+    if not os.path.exists(QUEUE_FILE):
+        return False
+    with open(QUEUE_FILE, "r", encoding="utf-8") as f:
+        for line in f:
+            if line.strip().startswith("|") and not line.strip().startswith("|---"):
+                parts = [p.strip() for p in line.split("|")[1:-1]]
+                if len(parts) >= 6 and parts[4].lower() == "published" and parts[5] == today_str:
+                    return True
+    return False
+
+
 def main():
     print("=== Daily Article Publishing Routine ===")
+    if "--force" not in sys.argv and is_already_published_today():
+        print(f"An article has already been published today ({datetime.now().strftime('%Y-%m-%d')}). Skipping to avoid duplicate publication.")
+        return
+
     article = get_next_pending_article()
     if not article:
         print("No pending articles found in queue. All articles are published!")
