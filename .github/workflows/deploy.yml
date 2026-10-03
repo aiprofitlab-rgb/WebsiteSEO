@@ -3,17 +3,7 @@ on:
   push:
     branches:
       - main
-  # Manual trigger. Without this the only way to force a deploy from the
-  # GitHub UI is "Re-run jobs" on an old run -- and that is destructive:
-  # the FTP action syncs the CHECKED-OUT COMMIT against the server's
-  # .ftp-deploy-sync-state.json, so re-running a stale run rolls the live
-  # site BACKWARDS (deletes files added since that commit). Run #268 did
-  # exactly this on 2026-08-25 and died on "550 /assets/email".
-  # Always deploy the tip of main from here instead.
   workflow_dispatch:
-
-env:
-  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 jobs:
   web-deploy:
@@ -29,18 +19,12 @@ jobs:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          # Local source
           local-dir: "./Website SEO/public_html/"
-          # Destination: The dot means "The main entrance"
           server-dir: "./"
           port: 21
-          # Hostinger's FTP control socket is slow to answer; the action's
-          # 30s default caused "Error: Timeout (control socket)" and a
-          # silent no-op deploy (run 30883760289, 2026-08-04).
-          timeout: 120000
-          # NOTE: setting `exclude` replaces the action's defaults, so the
-          # first three patterns re-specify them. The rest keep dev-only
-          # files out of the public web root.
+          timeout: 300000
+          log-level: verbose
+          security: loose
           exclude: |
             **/.git*
             **/.git*/**
