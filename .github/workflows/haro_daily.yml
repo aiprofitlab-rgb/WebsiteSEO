@@ -1,0 +1,44 @@
+name: Daily HARO Media Pitch Drafter (Cloud Fallback)
+
+on:
+  schedule:
+    # 18:00 UTC = 22:00 Muscat / Gulf Standard Time (UTC+4)
+    - cron: '0 18 * * *'
+  workflow_dispatch:
+
+jobs:
+  draft_haro_pitches:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          pip install google-api-python-client google-auth-httplib2 google-auth-oauthlib requests
+
+      - name: Restore credentials from Secrets
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GMAIL_CREDENTIALS_JSON: ${{ secrets.GMAIL_CREDENTIALS_JSON }}
+          GMAIL_TOKEN_JSON: ${{ secrets.GMAIL_TOKEN_JSON }}
+        run: |
+          cd "Website SEO"
+          echo "GEMINI_API_KEY=$GEMINI_API_KEY" > .env
+          if [ -n "$GMAIL_CREDENTIALS_JSON" ]; then
+            echo "$GMAIL_CREDENTIALS_JSON" > credentials.json
+          fi
+          if [ -n "$GMAIL_TOKEN_JSON" ]; then
+            echo "$GMAIL_TOKEN_JSON" > token.json
+          fi
+
+      - name: Run HARO Email Processor
+        run: |
+          cd "Website SEO"
+          python execution/haro_email_processor.py

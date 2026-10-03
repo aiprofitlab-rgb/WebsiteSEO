@@ -195,21 +195,21 @@ def deploy_ftp():
     ftp_server = os.environ.get("FTP_SERVER")
     ftp_user = os.environ.get("FTP_USERNAME")
     ftp_pass = os.environ.get("FTP_PASSWORD")
-    ftp_remote_root = os.environ.get("FTP_REMOTE_ROOT", "public_html")
 
     if not all([ftp_server, ftp_user, ftp_pass]):
         print("FTP credentials not provided. Skipping direct FTP upload (relying on git sync / pipeline).")
         return
 
-    print(f"Connecting to FTP server {ftp_server}...")
-    try:
-        with ftplib.FTP(ftp_server, ftp_user, ftp_pass, timeout=30) as ftp:
-            print("FTP connection established. Syncing generated articles...")
-            # Upload public_html files
-            # (In production, uploads new/modified blog files and sitemap)
-            print("FTP sync completed successfully.")
-    except Exception as e:
-        print(f"FTP Upload warning: {e}")
+    print("Deploying updates to Hostinger FTP...")
+    deploy_script = os.path.join(WORKSPACE_ROOT, "tools", "deploy_ftp.py")
+    if os.path.exists(deploy_script):
+        res = subprocess.run([sys.executable, deploy_script], cwd=WORKSPACE_ROOT)
+        if res.returncode != 0:
+            print("Warning: FTP deployment returned non-zero exit code.")
+        else:
+            print("FTP deployment completed successfully.")
+    else:
+        print(f"Error: Deployment script {deploy_script} not found.")
 
 
 def mark_queue_published(article_info, slug):

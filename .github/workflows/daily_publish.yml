@@ -24,9 +24,13 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: 🚀 Run Daily Article Generation
+      - name: 🚀 Run Daily Article Generation & Publishing
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          FTP_SERVER: ${{ secrets.FTP_SERVER }}
+          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+          FTP_REMOTE_ROOT: "./"
         run: |
           cd "Website SEO"
           python3 execution/daily_publish.py
