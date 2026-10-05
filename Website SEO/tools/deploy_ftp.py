@@ -4,10 +4,9 @@ High-Performance Resilient FTP Deployment Script for AI Profit Lab
 ------------------------------------------------------------------
 Synchronizes public_html directly to Hostinger FTP.
 - Uses remote manifest (.deploy_manifest.json) for O(1) change detection
-- Computes local MD5 hashes in < 1 second across entire workspace
-- Uploads ONLY new/modified files instead of querying 1,300+ files individually
+- Uses Git-diff detection when running in CI/Git to sync ONLY changed files (< 5s)
 - Automatic retry and socket reconnection on transient network issues
-- Fast directory-level fallback scan if remote manifest is missing
+- Avoids slow sequential 1,300+ file remote scans over high-latency FTP
 """
 
 import os
@@ -17,6 +16,7 @@ import json
 import time
 import hashlib
 import ftplib
+import subprocess
 from pathlib import Path
 
 # Files/folders to exclude from FTP upload
@@ -81,6 +81,34 @@ def compute_local_manifest(local_dir):
     return manifest, all_files
 
 
+def get_git_diff_files(repo_root, local_dir):
+    """Finds files modified in the recent git commits that exist in local_dir."""
+    try:
+        # Check diff of last commit vs previous
+        cmd = ["git", "diff", "--name-only", "HEAD~1", "HEAD"]
+        res = subprocess.run(cmd, cwd=repo_root, capture_output=True, text=True)
+        if res.returncode != 0:
+            # Fallback to diff of HEAD vs unstaged/staged
+            cmd = ["git", "diff", "--name-only", "HEAD"]
+            res = subprocess.run(cmd, cwd=repo_root, capture_output=True, text=True)
+
+        if res.returncode == 0 and res.stdout.strip():
+            changed_rel_paths = set()
+            for line in res.stdout.strip().splitlines():
+                line = line.strip().replace("\\", "/")
+                # Check if it targets public_html
+                if "public_html/" in line:
+                    rel = line.split("public_html/", 1)[1]
+                    if not should_exclude(rel):
+                        changed_rel_paths.add(rel)
+            if changed_rel_paths:
+                print(f"[+] Git diff identified {len(changed_rel_paths)} modified web files.")
+                return changed_rel_paths
+    except Exception as e:
+        print(f"  [!] Notice: Git diff check skipped ({e})")
+    return None
+
+
 def connect_ftp(server, user, password, port=21, timeout=60):
     print(f"[*] Connecting to FTP server: {server}:{port} as {user}...")
     ftp = ftplib.FTP(timeout=timeout)
@@ -105,58 +133,6 @@ def fetch_remote_manifest(ftp, remote_root):
     except Exception:
         pass
     return None
-
-
-def fetch_remote_file_map_fast(ftp, remote_root):
-    """Fast fallback: scans remote directory tree via MLSD or NLST (directory-by-directory)."""
-    print("[*] Remote manifest not found. Scanning remote directory structure...")
-    remote_map = {}
-
-    def scan_dir(path):
-        normalized_path = path.rstrip("/")
-        try:
-            items = list(ftp.mlsd(normalized_path))
-            for name, facts in items:
-                if name in (".", ".."):
-                    continue
-                item_path = f"{normalized_path}/{name}".replace("//", "/")
-                item_type = facts.get("type")
-                if item_type == "dir":
-                    scan_dir(item_path)
-                elif item_type == "file":
-                    rel = os.path.relpath(item_path, remote_root).replace("\\", "/")
-                    if rel.startswith("./"):
-                        rel = rel[2:]
-                    size = int(facts.get("size", -1))
-                    remote_map[rel] = {"size": size}
-        except Exception:
-            # Fallback to NLST
-            try:
-                entries = ftp.nlst(normalized_path)
-                for entry in entries:
-                    name = os.path.basename(entry)
-                    if name in (".", ".."):
-                        continue
-                    item_path = f"{normalized_path}/{name}".replace("//", "/")
-                    try:
-                        sz = ftp.size(item_path)
-                        rel = os.path.relpath(item_path, remote_root).replace("\\", "/")
-                        if rel.startswith("./"):
-                            rel = rel[2:]
-                        remote_map[rel] = {"size": sz}
-                    except Exception:
-                        # Might be a directory
-                        scan_dir(item_path)
-            except Exception:
-                pass
-
-    try:
-        scan_dir(remote_root if remote_root else ".")
-    except Exception as e:
-        print(f"  [!] Directory scan notice: {e}")
-
-    print(f"[+] Remote scan complete: found {len(remote_map)} existing files.")
-    return remote_map
 
 
 def ensure_remote_dir(ftp, remote_dir, known_dirs):
@@ -218,6 +194,10 @@ def deploy():
         print(f"[!] Error: Local directory '{local_dir}' does not exist.")
         sys.exit(1)
 
+    repo_root = local_dir.parent
+    if not (repo_root / ".git").exists() and (repo_root.parent / ".git").exists():
+        repo_root = repo_root.parent
+
     print(f"[*] Local source directory: {local_dir}")
     print(f"[*] Target remote directory: {remote_root}")
 
@@ -233,22 +213,39 @@ def deploy():
 
         # Step 2: Fetch remote state
         remote_manifest = fetch_remote_manifest(ftp, remote_root)
-        if remote_manifest is None:
-            remote_manifest = fetch_remote_file_map_fast(ftp, remote_root)
 
         # Step 3: Determine files requiring upload
         to_upload = []
-        for full_path, rel_str, local_size in all_files:
-            remote_info = remote_manifest.get(rel_str)
-            if not remote_info:
-                to_upload.append((full_path, rel_str, local_size, "new file"))
-            elif "md5" in remote_info and remote_info["md5"] != local_manifest[rel_str]["md5"]:
-                to_upload.append((full_path, rel_str, local_size, "modified content (hash mismatch)"))
-            elif "md5" not in remote_info and remote_info.get("size") != local_size:
-                to_upload.append((full_path, rel_str, local_size, "size mismatch"))
+
+        if remote_manifest is not None:
+            # We have a valid remote manifest -> exact diff
+            for full_path, rel_str, local_size in all_files:
+                remote_info = remote_manifest.get(rel_str)
+                if not remote_info:
+                    to_upload.append((full_path, rel_str, local_size, "new file"))
+                elif "md5" in remote_info and remote_info["md5"] != local_manifest[rel_str]["md5"]:
+                    to_upload.append((full_path, rel_str, local_size, "modified content (hash mismatch)"))
+                elif "md5" not in remote_info and remote_info.get("size") != local_size:
+                    to_upload.append((full_path, rel_str, local_size, "size mismatch"))
+        else:
+            # Remote manifest not found -> Check Git diff to avoid 38-minute sequential FTP scan
+            git_changed = get_git_diff_files(repo_root, local_dir)
+            if git_changed:
+                print(f"[*] Deploying {len(git_changed)} files changed in recent Git commits...")
+                for full_path, rel_str, local_size in all_files:
+                    if rel_str in git_changed:
+                        to_upload.append((full_path, rel_str, local_size, "git commit diff"))
+            else:
+                # Fallback: Sync all critical HTML/sitemap/images modified in last 7 days or everything
+                print("[*] Syncing recent modified files...")
+                now = time.time()
+                for full_path, rel_str, local_size in all_files:
+                    mtime = full_path.stat().st_mtime
+                    if (now - mtime) < (7 * 86400) or rel_str in ("sitemap.xml", "blog/index.html", "blog-ar/index.html"):
+                        to_upload.append((full_path, rel_str, local_size, "recently modified"))
 
         skipped_count = len(all_files) - len(to_upload)
-        print(f"[*] Sync Plan: {len(to_upload)} files to upload, {skipped_count} files identical/up-to-date.")
+        print(f"[*] Sync Plan: {len(to_upload)} files to upload, {skipped_count} files untouched.")
 
         # Step 4: Upload changed files
         uploaded_count = 0
@@ -288,7 +285,7 @@ def deploy():
                 print(f"  [ERROR] Failed to upload: {rel_str}")
                 error_count += 1
 
-        # Step 5: Save remote manifest if all or most uploads succeeded
+        # Step 5: Save remote manifest so subsequent deploys are instant
         if error_count == 0 or uploaded_count > 0:
             save_and_upload_manifest(ftp, remote_root, local_manifest)
 
@@ -304,7 +301,7 @@ def deploy():
     print("DEPLOYMENT SUMMARY:")
     print(f"  • Total Local Files: {len(all_files)}")
     print(f"  • Uploaded Files:    {uploaded_count}")
-    print(f"  • Skipped (Up-to-Date): {skipped_count}")
+    print(f"  • Skipped:           {skipped_count}")
     print(f"  • Errors:            {error_count}")
     print(f"  • Duration:          {total_time:.2f} seconds")
     print("==================================================")
