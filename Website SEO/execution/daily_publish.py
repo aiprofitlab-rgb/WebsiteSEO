@@ -32,6 +32,16 @@ os.makedirs(BLOG_EN_DIR, exist_ok=True)
 os.makedirs(BLOG_AR_DIR, exist_ok=True)
 os.makedirs(BLOG_IMG_DIR, exist_ok=True)
 
+# Load .env file if present
+ENV_PATH = os.path.join(WORKSPACE_ROOT, ".env")
+if os.path.exists(ENV_PATH):
+    with open(ENV_PATH, "r", encoding="utf-8") as f:
+        for line in f:
+            line = line.strip()
+            if line and not line.startswith("#") and "=" in line:
+                k, v = line.split("=", 1)
+                os.environ.setdefault(k.strip(), v.strip().strip("'\""))
+
 
 def slugify(title):
     slug = title.lower()
@@ -175,6 +185,31 @@ Include:
     return slug
 
 
+def ensure_hero_image_and_reskin(slug):
+    """Ensures a hero image asset exists and builds derivatives and v4 markup."""
+    has_img = False
+    for ext in (".jpg", ".jpeg", ".png", ".webp"):
+        if os.path.exists(os.path.join(BLOG_IMG_DIR, f"{slug}{ext}")):
+            has_img = True
+            break
+
+    if not has_img:
+        default_img = os.path.join(BLOG_IMG_DIR, "default.png")
+        if os.path.exists(default_img):
+            import shutil
+            target_img = os.path.join(BLOG_IMG_DIR, f"{slug}.png")
+            shutil.copyfile(default_img, target_img)
+            print(f"Provisioned fallback hero image: {target_img}")
+
+    deriv_script = os.path.join(WORKSPACE_ROOT, "tools", "build_image_derivatives.py")
+    if os.path.exists(deriv_script):
+        subprocess.run([sys.executable, deriv_script], cwd=WORKSPACE_ROOT)
+
+    reskin_script = os.path.join(WORKSPACE_ROOT, "tools", "reskin_articles.py")
+    if os.path.exists(reskin_script):
+        subprocess.run([sys.executable, reskin_script, "--only", slug], cwd=WORKSPACE_ROOT)
+
+
 def update_hubs_and_sitemap():
     print("Updating blog hubs...")
     reskin_hubs_script = os.path.join(WORKSPACE_ROOT, "tools", "reskin_blog_hubs.py")
@@ -257,6 +292,7 @@ def main():
 
     print(f"Next topic: #{article['num']} - {article['en_title']}")
     slug = generate_article_pair(article)
+    ensure_hero_image_and_reskin(slug)
     update_hubs_and_sitemap()
     deploy_ftp()
     mark_queue_published(article, slug)
