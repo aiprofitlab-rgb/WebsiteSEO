@@ -1,15 +1,44 @@
 name: Autonomous Daily Article Publisher
 
+# Runs the article-creator skill unattended: Website SEO/execution/daily_publish.py.
+# Order matters: generate + validate -> commit -> deploy -> check the live pages.
+# The deploy has to come AFTER the commit, because it uploads what changed between
+# the server's last deployed commit and HEAD. Any failed step fails the run, and
+# GitHub emails you; a run that fails before the commit publishes nothing.
+
 on:
   schedule:
-    # Runs everyday at 22:00 UTC
-    - cron: '0 22 * * *'
+    # 03:17 UTC = 07:17 in Muscat. Off the top of the hour, where GitHub delays and
+    # drops scheduled runs, and far enough from Muscat midnight (20:00 UTC) that a
+    # late start never changes the date in the article's URL.
+    - cron: '17 3 * * *'
+    # Retry slots, 10:17 and 14:17 Muscat: they retry today's article if the first slot
+    # was postponed (Gemini's free tier answers "high demand" for minutes at a time), and
+    # once it is out, each rebuilds one queue row marked `Repair`.
+    - cron: '17 6 * * *'
+    - cron: '17 10 * * *'
   workflow_dispatch:
+    inputs:
+      repair:
+        description: 'Regenerate an existing article in place (paste its slug). Leave empty to publish the next queued topic.'
+        required: false
+        default: ''
+      force:
+        description: 'Publish even if an article already went out today'
+        type: boolean
+        default: false
+
+# One deploy at a time, shared with deploy.yml: two overlapping FTP syncs once
+# rolled the live site back.
+concurrency:
+  group: hostinger-deploy
+  cancel-in-progress: false
 
 jobs:
   publish:
     name: ✍️ Generate & Publish Daily Article
     runs-on: ubuntu-latest
+    timeout-minutes: 90
     permissions:
       contents: write
 
@@ -24,25 +53,78 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: 🚀 Run Daily Article Generation & Publishing
+      - name: 📦 Install dependencies
+        id: deps
+        run: |
+          python3 -m pip install --quiet Pillow certifi
+          echo "day=$(TZ=Asia/Muscat date +%F)" >> "$GITHUB_OUTPUT"
+
+      # Drafts that already passed, carried between today's slots, so a retry
+      # resumes instead of paying for the text and image again.
+      - name: ♻️ Restore today's draft cache
+        uses: actions/cache@v4
+        with:
+          path: Website SEO/.tmp/daily_publish
+          key: publish-${{ steps.deps.outputs.day }}-${{ github.run_id }}
+          restore-keys: publish-${{ steps.deps.outputs.day }}-
+
+      - name: 🔑 Preflight (API keys, models, skill)
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          KIE_AI_API_KEY: ${{ secrets.KIE_AI_API_KEY }}
+        run: |
+          cd "Website SEO"
+          python3 execution/daily_publish.py --preflight
+
+      - name: ✍️ Generate, render and validate
+        id: gen
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          KIE_AI_API_KEY: ${{ secrets.KIE_AI_API_KEY }}
+          REPAIR: ${{ inputs.repair }}
+          FORCE: ${{ inputs.force }}
+          LAST_SLOT: ${{ github.event_name != 'schedule' || github.event.schedule == '17 10 * * *' }}
+        run: |
+          cd "Website SEO"
+          echo "base_sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+          args=()
+          if [ -n "$REPAIR" ]; then args+=(--repair "$REPAIR"); fi
+          if [ "$FORCE" = "true" ]; then args+=(--force); fi
+          set +e
+          python3 execution/daily_publish.py "${args[@]}"
+          rc=$?
+          # 75 = Gemini stayed overloaded. Not a failure while a later slot can retry.
+          if [ $rc -eq 75 ] && [ "$LAST_SLOT" != "true" ]; then
+            echo "::warning::Gemini was overloaded; the next slot today resumes from the cache."
+            exit 0
+          fi
+          exit $rc
+
+      - name: 💾 Commit & Push
+        if: steps.gen.outputs.published == 'true'
+        env:
+          SLUG: ${{ steps.gen.outputs.slug }}
+          KIND: ${{ steps.gen.outputs.kind }}
+        run: |
+          git config user.name "AI Profit Lab Bot"
+          git config user.email "bot@aiprofitlab.io"
+          git add -A "Website SEO/public_html" "Website SEO/directives"
+          git commit -m "${KIND:-Publish} article: $SLUG"
+          git pull --rebase origin main
+          git push origin HEAD:main
+
+      - name: 🚀 Deploy to Hostinger
+        if: steps.gen.outputs.published == 'true'
+        env:
           FTP_SERVER: ${{ secrets.FTP_SERVER }}
           FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
           FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
-          FTP_REMOTE_ROOT: "./"
+        run: python3 "Website SEO/tools/deploy_ftp.py" --base "${{ steps.gen.outputs.base_sha }}"
+
+      - name: 🔎 Verify the article is live
+        if: steps.gen.outputs.published == 'true'
+        env:
+          SLUG: ${{ steps.gen.outputs.slug }}
         run: |
           cd "Website SEO"
-          python3 execution/daily_publish.py
-
-      - name: 💾 Commit & Push Changes
-        run: |
-          git config --global user.name "AI Profit Lab Bot"
-          git config --global user.email "bot@aiprofitlab.io"
-          git add "Website SEO/"
-          if git diff --staged --quiet; then
-            echo "No new article changes to commit."
-          else
-            git commit -m "Auto-publish daily article"
-            git push origin main
-          fi
+          python3 execution/daily_publish.py --verify "$SLUG"

@@ -3,10 +3,20 @@
 High-Performance Resilient FTP Deployment Script for AI Profit Lab
 ------------------------------------------------------------------
 Synchronizes public_html directly to Hostinger FTP.
-- Uses Git-diff detection when running in CI/Git to sync ONLY changed files (< 10s)
+- Uploads the files changed between the LAST SUCCESSFUL DEPLOY and HEAD. The
+  server keeps that commit in /.deployed-commit, written only after a run with
+  zero errors, so a failed or skipped deploy is caught up by the next one.
+  (Diffing HEAD~1..HEAD, as this used to, silently skipped every commit but the
+  last one in a push, and the daily publisher ran it BEFORE committing, so each
+  new article reached the server a day late, or never.)
 - Bulletproof CWD-based upload preserving directory context for Hostinger
 - Automatic retry and socket reconnection on transient network issues
+
+    python3 tools/deploy_ftp.py                  # since the server's marker (else HEAD~1)
+    python3 tools/deploy_ftp.py --base <sha>     # fallback base when there is no marker yet
 """
+
+import argparse
 
 import os
 import sys
@@ -80,33 +90,49 @@ def compute_local_manifest(local_dir):
     return manifest, all_files
 
 
-def get_git_diff_files(repo_root, local_dir):
-    """Finds files modified in recent git commits that exist in local_dir."""
-    try:
-        # Check diff of last commit vs previous
-        cmd = ["git", "diff", "--name-only", "HEAD~1", "HEAD"]
-        res = subprocess.run(cmd, cwd=repo_root, capture_output=True, text=True)
-        if res.returncode != 0:
-            cmd = ["git", "diff", "--name-only", "HEAD"]
-            res = subprocess.run(cmd, cwd=repo_root, capture_output=True, text=True)
+MARKER = ".deployed-commit"
+SITE_PREFIX = "Website SEO/public_html/"
 
-        if res.returncode == 0 and res.stdout.strip():
-            changed_rel_paths = set()
-            for line in res.stdout.strip().splitlines():
-                line = line.strip().replace("\\", "/")
-                if "public_html/" in line:
-                    rel = line.split("public_html/", 1)[1]
-                    if not should_exclude(rel):
-                        changed_rel_paths.add(rel)
-                elif not line.startswith("Website SEO") and not line.startswith("."):
-                    if not should_exclude(line):
-                        changed_rel_paths.add(line)
-            if changed_rel_paths:
-                print(f"[+] Git diff identified {len(changed_rel_paths)} modified web files.")
-                return changed_rel_paths
-    except Exception as e:
-        print(f"  [!] Notice: Git diff check skipped ({e})")
-    return None
+
+def git(repo_root, *args):
+    return subprocess.run(["git", *args], cwd=repo_root, capture_output=True, text=True)
+
+
+def is_commit(repo_root, sha):
+    return bool(sha) and set(sha) != {"0"} and git(repo_root, "cat-file", "-e", f"{sha}^{{commit}}").returncode == 0
+
+
+def read_marker(ftp, initial_cwd):
+    buf = io.BytesIO()
+    try:
+        ftp.cwd(initial_cwd)
+        ftp.retrbinary(f"RETR {MARKER}", buf.write)
+        return buf.getvalue().decode().strip()
+    except Exception:
+        return None
+
+
+def write_marker(ftp, initial_cwd, sha):
+    ftp.cwd(initial_cwd)
+    ftp.storbinary(f"STOR {MARKER}", io.BytesIO(sha.encode()))
+
+
+def get_git_diff_files(repo_root, base):
+    """public_html-relative paths added or modified between base and HEAD."""
+    res = git(repo_root, "-c", "core.quotePath=false", "diff", "--name-only", "--diff-filter=ACMRT", base, "HEAD",
+              "--", SITE_PREFIX)
+    if res.returncode != 0:
+        print(f"  [!] git diff {base[:7]}..HEAD failed: {res.stderr.strip()}")
+        return None
+    changed = set()
+    for line in res.stdout.splitlines():
+        line = line.strip().strip('"').replace("\\", "/")
+        if line.startswith(SITE_PREFIX):
+            rel = line[len(SITE_PREFIX):]
+            if not should_exclude(rel):
+                changed.add(rel)
+    print(f"[+] Git diff {base[:7]}..HEAD: {len(changed)} changed web files.")
+    return changed
 
 
 def connect_ftp(server, user, password, port=21, timeout=60):
@@ -149,7 +175,7 @@ def ensure_remote_dir_hierarchy(ftp, initial_cwd, target_dir_rel, known_dirs):
                     ftp.cwd(initial_cwd)
 
 
-def deploy():
+def deploy(base_arg=None):
     start_time = time.time()
     server = os.environ.get("FTP_SERVER")
     user = os.environ.get("FTP_USERNAME")
@@ -183,11 +209,33 @@ def deploy():
     local_manifest, all_files = compute_local_manifest(local_dir)
     print(f"[+] Local files indexed: {len(local_manifest)} files in {time.time() - start_time:.2f}s")
 
-    # Step 2: Determine files to upload via Git diff or recent modifications
-    git_changed = get_git_diff_files(repo_root, local_dir)
+    # Step 2: pick the diff base: the server's marker, else --base, else HEAD~1
+    head = git(repo_root, "rev-parse", "HEAD").stdout.strip()
+    ftp = connect_ftp(server, user, password, port)
+    initial_cwd = ftp.pwd()
+    marker = read_marker(ftp, initial_cwd)
+    if is_commit(repo_root, marker) and marker != head and \
+            git(repo_root, "merge-base", "--is-ancestor", "HEAD", marker).returncode == 0:
+        # Re-running an old workflow run is how the site was once rolled back
+        # four commits (see the deploy-failure notes). Refuse instead.
+        ftp.quit()
+        print(f"[!] Refusing to deploy {head[:7]}: the server already has the newer {marker[:7]}. "
+              "Deploy the tip of main (Run workflow), never re-run an old run.")
+        sys.exit(1)
+    if is_commit(repo_root, marker):
+        base, why = marker, "last successful deploy (server marker)"
+    elif is_commit(repo_root, base_arg):
+        base, why = base_arg, "--base (no usable server marker)"
+    elif is_commit(repo_root, "HEAD~1"):
+        base, why = git(repo_root, "rev-parse", "HEAD~1").stdout.strip(), "HEAD~1 (no marker, no --base)"
+    else:
+        base, why = None, "no git history"
+    print(f"[*] Deploying {head[:7] or '?'}; diff base {base[:7] if base else '-'} = {why}")
+
+    git_changed = get_git_diff_files(repo_root, base) if base else None
     to_upload = []
 
-    if git_changed:
+    if git_changed is not None:
         for full_path, rel_str, local_size in all_files:
             if rel_str in git_changed:
                 to_upload.append((full_path, rel_str, local_size, "git diff"))
@@ -202,11 +250,10 @@ def deploy():
     skipped_count = len(all_files) - len(to_upload)
     print(f"[*] Sync Plan: {len(to_upload)} files to upload, {skipped_count} files untouched.")
 
-    ftp = None
     known_dirs = set()
+    uploaded_count = 0
+    error_count = 0
     try:
-        ftp = connect_ftp(server, user, password, port)
-        initial_cwd = ftp.pwd()
         print(f"[*] Initial FTP directory: {initial_cwd}")
 
         uploaded_count = 0
@@ -260,6 +307,12 @@ def deploy():
                 print(f"  [ERROR] Failed to upload: {clean_rel}")
                 error_count += 1
 
+        # Only a clean run moves the marker; otherwise the next deploy retries
+        # everything since the last good one.
+        if error_count == 0 and head:
+            write_marker(ftp, initial_cwd, head)
+            print(f"[+] Server marker now {head[:7]}")
+
     finally:
         if ftp:
             try:
@@ -282,4 +335,6 @@ def deploy():
 
 
 if __name__ == "__main__":
-    deploy()
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--base", help="diff base to use when the server has no deploy marker yet")
+    deploy(ap.parse_args().base)

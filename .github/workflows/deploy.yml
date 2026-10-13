@@ -5,6 +5,11 @@ on:
       - main
   workflow_dispatch:
 
+# Shared with daily_publish.yml so two FTP syncs never overlap.
+concurrency:
+  group: hostinger-deploy
+  cancel-in-progress: false
+
 jobs:
   web-deploy:
     name: 🎉 Deploy
@@ -20,6 +25,9 @@ jobs:
         with:
           python-version: '3.11'
 
+      # deploy_ftp.py uploads everything changed since the server's last
+      # successful deploy; github.event.before is only the fallback for the very
+      # first run, before the server has a marker.
       - name: 🚀 Sync Website to Hostinger FTP
         env:
           FTP_SERVER: ${{ secrets.FTP_SERVER }}
@@ -27,4 +35,4 @@ jobs:
           FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
           FTP_REMOTE_ROOT: "./"
         run: |
-          python3 "Website SEO/tools/deploy_ftp.py"
+          python3 "Website SEO/tools/deploy_ftp.py" --base "${{ github.event.before }}"
