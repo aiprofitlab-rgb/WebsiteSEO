@@ -1178,6 +1178,18 @@ TOPIC_SCHEMA = {"type": "OBJECT", "properties": {"topics": {"type": "ARRAY", "it
 
 
 def refill_queue(rows, corp):
+    # Searches people in Oman really make come first (execution/trend_topics.py). Topics the
+    # model invents are only the fallback, for a run where that research comes back empty.
+    try:
+        import trend_topics
+        new = trend_topics.top_up(sys.modules[__name__], corp, rows, REFILL_COUNT)
+        if new:
+            return new
+        log("  trend research found no usable topic; asking the model to propose some")
+    except TransientError:
+        raise
+    except Exception as e:
+        log(f"  trend research failed ({e}); asking the model to propose topics")
     clusters = sorted({r["cluster"] for r in rows if r["cluster"]})
     titles = "\n".join(f"- {t}" for t in corp["en"].values())
     prompt = (f"Propose {REFILL_COUNT * 2} new article topics for the AI Profit Lab blog. Each must serve "

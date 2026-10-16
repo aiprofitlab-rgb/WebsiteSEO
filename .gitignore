@@ -5,3 +5,6 @@
 # Python bytecode — build byproducts, regenerated on every run.
 __pycache__/
 *.py[cod]
+
+# macOS folder metadata — appears in every folder Finder opens, anywhere in the repo.
+.DS_Store

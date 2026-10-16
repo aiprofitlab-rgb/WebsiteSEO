@@ -24,8 +24,11 @@ Automated by `.github/workflows/daily_publish.yml` (03:17 UTC = 07:17 Muscat), w
 (`Website/SKILL_article_creator/SKILL.md`); the script sends its Step 1 criteria to the model verbatim.
 
 1. Take the first `Pending` row. A row whose English title is more than 65% similar to a published
-   article is marked `Skipped` (skill Step 0). When fewer than 2 rows are `Pending`, the model proposes
-   6 new topics and appends them here. Edit or delete them freely; rows run top to bottom.
+   article is marked `Skipped` (skill Step 0). When fewer than 2 rows are `Pending`, 6 new topics are
+   appended here, taken from what people in Oman really search (`execution/trend_topics.py`: Google
+   Trends related queries + Google autocomplete, then one Gemini call to write the titles). The search
+   and evidence behind each one go to `directives/trend_report.md`. Only if that research finds nothing
+   does the model invent topics. Edit or delete them freely; rows run top to bottom.
 2. Gemini writes the EN article, then the AR edition, as structured JSON. Each is audited against the
    skill: 800–1200 body words (AR 650–1350), exactly 10 FAQs, at least 3 question H2s, a table, at
    least 3 Oman/GCC references, meta description 140–155 characters, no banned phrases, internal links.
@@ -51,6 +54,20 @@ Any failure stops the run before anything is committed. GitHub emails the failur
 - `--preflight`: checks the API key, the models and Pillow. Needs `GEMINI_API_KEY` in `.env` locally,
   or as a repository secret in GitHub.
 - Models: `GEMINI_TEXT_MODELS` / `GEMINI_IMAGE_MODELS` (comma-separated, tried in order).
+
+**Trend topics by hand** (free; no key besides `GEMINI_API_KEY`)
+- `python3 execution/trend_topics.py --dry-run`: research and write the picks to
+  `.tmp/trend_topics/<date>.md`; the queue is untouched.
+- `python3 execution/trend_topics.py`: top the queue up to 7 `Pending` topics (`--target N` to change).
+- Seed keywords are `SEEDS` at the top of the script. Each costs ~2 Trends + 4 autocomplete requests.
+
+**Learned 2026-10-15** (trend research): Oman has too little Trends data for most English B2B seeds
+(9 of 14 fell back to the UAE), so UAE signals count half and any search naming another country or
+authority (UAE, Dubai, FTA, ZATCA...) is dropped: the first test queued UAE e-invoicing rules. Two
+titles for one search in two languages slip past the 65% check, hence the same-topic check on the
+non-filler words. Autocomplete carries the Oman-specific demand ("oman e invoicing mandate 2027",
+"fawtara oman tax authority"). Trends' JSON is unofficial and rate-limits cloud IPs, so a run on
+GitHub may fall back to autocomplete only; the report says when.
 
 **Learned 2026-10-13** (why the first version failed): it published a placeholder page whenever the
 API call failed; it copied one stock `default.png` onto every article; CI never installed Pillow, so

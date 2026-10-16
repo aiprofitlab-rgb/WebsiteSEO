@@ -38,3 +38,16 @@ tools/carousel/fonts/
 # Only the tools in tools/prospecting/ are tracked.
 out/outreach/
 out/prospecting/
+
+# Keys and Google logins. THIS REPO IS PUBLIC — .env holds the API keys,
+# credentials.json the Google OAuth client secret, and token.json a refresh token
+# that works as a live login to the Google account. GitHub push protection
+# blocked a push that included all three (2026-10-15).
+.env
+credentials.json
+token.json
+
+# Personal letters (bank, salary, visa). THIS REPO IS PUBLIC — they carry Nahid's
+# name, salary and bank details. GitHub's secret scan does not read PDFs, so
+# nothing would stop one going up.
+brand/letters/
