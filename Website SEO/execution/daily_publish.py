@@ -33,6 +33,14 @@ exit, before anything is written into public_html/ or the queue:
 
 Deploying is the workflow's job (.github/workflows/daily_publish.yml), after the
 commit, so the deploy's git diff contains the new files.
+
+Since 2026-10-16 this is the FALLBACK. The daily article is written by a Google
+Antigravity agent on Nahid's Mac (execution/agent_publish.py, which reuses this
+module's checks, renderer and build). GitHub runs this script in the evening only
+when the Mac published nothing that day. It has no image model (the Gemini API free
+tier allows 0 images and kie.ai is not used), so it ships a placeholder hero and lists
+the article in directives/pending_heroes.json; the next Antigravity run generates the
+real hero and swaps it in.
 """
 
 import argparse
@@ -49,7 +57,7 @@ import sys
 import time
 import urllib.error
 import urllib.request
-from datetime import datetime
+from datetime import datetime, timedelta
 from html.parser import HTMLParser
 from pathlib import Path
 from zoneinfo import ZoneInfo
@@ -75,9 +83,13 @@ TEXT_MODELS = os.environ.get("GEMINI_TEXT_MODELS", "gemini-3.8-flash,gemini-3.6-
 IMAGE_MODELS = os.environ.get("GEMINI_IMAGE_MODELS",
                               "gemini-3.1-flash-image,gemini-3.1-flash-lite-image").split(",")
 API = "https://generativelanguage.googleapis.com/v1beta"
-# Hero images: tried in this order. kie.ai (Seedream) runs on prepaid credit; Gemini's
-# image models need billing on the key's Google project (free tier = 0 images).
-IMAGE_PROVIDERS = os.environ.get("IMAGE_PROVIDERS", "kie,gemini").split(",")
+# Hero images: tried in this order. "placeholder" (the default) ships the brand placeholder
+# and queues the article in pending_heroes.json for Antigravity to illustrate. "kie" (Seedream,
+# prepaid credit) and "gemini" (needs billing: the free tier allows 0 images) still work.
+IMAGE_PROVIDERS = os.environ.get("IMAGE_PROVIDERS", "placeholder").split(",")
+PLACEHOLDER_HERO = ROOT / "brand" / "og" / "article-hero-placeholder.png"
+PENDING_HEROES = ROOT / "directives" / "pending_heroes.json"
+TEMP_IMAGE_STATUS = "Published (temp image)"
 KIE_API = "https://api.kie.ai"
 KIE_MODEL = os.environ.get("KIE_IMAGE_MODEL", "seedream/5-pro-text-to-image")
 
@@ -145,8 +157,11 @@ def log(msg=""):
 
 
 def today():
-    # The site is read in Muscat, and the date goes into the URL.
-    return datetime.now(TZ).strftime("%Y-%m-%d")
+    # The site is read in Muscat, and the date goes into the URL. PUBLISH_DATE_LAG_HOURS
+    # lets the evening fallback keep its date when GitHub starts it hours late (runs
+    # have started 5 hours after their cron slot), past Muscat midnight.
+    lag = float(os.environ.get("PUBLISH_DATE_LAG_HOURS") or 0)
+    return (datetime.now(TZ) - timedelta(hours=lag)).strftime("%Y-%m-%d")
 
 
 # ======================================================================
@@ -1086,41 +1101,59 @@ Strictly avoid: dark mode, dark or black backgrounds, neon, glowing eyes, sci-fi
 generic stock-photo look, any text, letters, numbers, logos, watermarks, or screens with readable text."""
 
 
-def make_image(concept, title):
+def vet_image(data):
+    """(PNG bytes ready to publish or None, problems, 'WxH, luminance N'). The same bar for
+    every source: this script's image models and Antigravity's image tool."""
     try:
         from PIL import Image, ImageStat
     except ImportError:
         raise PublishError("Pillow is required: python3 -m pip install Pillow")
+    try:
+        im = Image.open(io.BytesIO(data))
+        im.load()
+    except Exception as e:
+        return None, [f"not a decodable image ({e})"], "unreadable"
+    rgb = im.convert("RGB")
+    lum = ImageStat.Stat(rgb.convert("L")).mean[0]
+    info = f"{rgb.width}x{rgb.height}, luminance {lum:.0f}"
+    problems = []
+    if rgb.width < 1000:
+        problems.append(f"only {rgb.width}px wide (needs 1000+)")
+    if rgb.width < rgb.height * 1.3:
+        problems.append("not a wide landscape frame (use 16:9)")
+    if lum < 120:
+        problems.append(f"too dark for the light-mode brand (mean luminance {lum:.0f}/255, needs 120+)")
+    if problems:
+        return None, problems, info
+    if rgb.width > 1600:                       # the largest rung served is 1200px
+        rgb = rgb.resize((1600, round(rgb.height * 1600 / rgb.width)), Image.LANCZOS)
+    out = io.BytesIO()
+    rgb.save(out, "PNG", optimize=True)
+    return out.getvalue(), [], info
+
+
+def make_image(concept, title):
     problems = []
     for attempt in range(1, ATTEMPTS + 1):
         prompt = f"{IMAGE_STYLE}\n\nArticle: {title}\nScene: {concept}"
         if problems:
             prompt += "\n\nThe previous image was rejected: " + "; ".join(problems)
         data, model = generate_image(prompt)
-        try:
-            im = Image.open(io.BytesIO(data))
-            im.load()
-        except Exception as e:
-            problems = [f"not a decodable image ({e})"]
-            continue
-        rgb = im.convert("RGB")
-        lum = ImageStat.Stat(rgb.convert("L")).mean[0]
-        problems = []
-        if rgb.width < 1000:
-            problems.append(f"only {rgb.width}px wide")
-        if rgb.width < rgb.height:
-            problems.append("portrait, not landscape")
-        if lum < 120:
-            problems.append(f"too dark for the light-mode brand (mean luminance {lum:.0f}/255)")
-        log(f"  image attempt {attempt} ({model}): {rgb.width}x{rgb.height}, luminance {lum:.0f}"
+        png, problems, info = vet_image(data)
+        log(f"  image attempt {attempt} ({model}): {info}"
             + (f" -> rejected: {'; '.join(problems)}" if problems else " -> ok"))
-        if not problems:
-            if rgb.width > 1600:                       # the largest rung served is 1200px
-                rgb = rgb.resize((1600, round(rgb.height * 1600 / rgb.width)), Image.LANCZOS)
-            out = io.BytesIO()
-            rgb.save(out, "PNG", optimize=True)
-            return out.getvalue()
+        if png:
+            return png
     raise PublishError(f"No acceptable hero image after {ATTEMPTS} attempts: {'; '.join(problems)}")
+
+
+def add_pending_hero(g):
+    """Queue a placeholder-hero article for Antigravity (agent_publish.py swaps the real one in)."""
+    data = json.loads(PENDING_HEROES.read_text(encoding="utf-8")) if PENDING_HEROES.exists() else {}
+    data[g["slug"]] = {"date": g["date"], "image_name": g["image_name"], "title": g["en"]["title"],
+                       "concept": g["en"]["image_concept"]}
+    PENDING_HEROES.write_text(json.dumps(data, ensure_ascii=False, indent=2, sort_keys=True) + "\n",
+                              encoding="utf-8")
 
 
 def image_name_for(slug, png):
@@ -1287,7 +1320,11 @@ def generate(topic, slug, date, corp, modified=None):
         ar_d, _ = write_language("ar", ar_p, slug, date, placeholder, corp, nap, modified)
         (cache / "ar.json").write_text(json.dumps(ar_d, ensure_ascii=False), encoding="utf-8")
     log(f"\n[3/3] Hero image  ({', '.join(IMAGE_PROVIDERS)})")
-    if (cache / "hero.png").exists():
+    temp = IMAGE_PROVIDERS[0].strip() == "placeholder"
+    if temp:
+        png = PLACEHOLDER_HERO.read_bytes()
+        log("  placeholder hero; the article goes into pending_heroes.json for Antigravity to illustrate")
+    elif (cache / "hero.png").exists():
         png = (cache / "hero.png").read_bytes()
         log(f"  reusing the checked image cached in {cache}")
     else:
@@ -1297,7 +1334,7 @@ def generate(topic, slug, date, corp, modified=None):
     srcs = {lang: render_source(lang, d, slug, date, name, nap, modified)
             for lang, d in (("en", en_d), ("ar", ar_d))}
     return {"slug": slug, "date": date, "image_name": name, "png": png, "en": en_d, "ar": ar_d,
-            "src": srcs}
+            "src": srcs, "temp_image": temp}
 
 
 def save_draft(g, folder):
@@ -1307,7 +1344,7 @@ def save_draft(g, folder):
         (folder / f"{lang}.html").write_text(g["src"][lang], encoding="utf-8")
         (folder / f"{lang}.json").write_text(json.dumps(g[lang], ensure_ascii=False, indent=2),
                                              encoding="utf-8")
-    meta = {k: g.get(k) for k in ("slug", "date", "image_name", "row_num")}
+    meta = {k: g.get(k) for k in ("slug", "date", "image_name", "row_num", "temp_image")}
     (folder / "meta.json").write_text(json.dumps(meta, indent=2), encoding="utf-8")
 
 
@@ -1356,8 +1393,10 @@ def record(g, row, repair_row=None):
                                  encoding="utf-8")
     with SNIPPETS_FILE.open("a", encoding="utf-8") as f:
         f.write(snippet)
+    if g.get("temp_image"):
+        add_pending_hero(g)
     if row:
-        row.update(status="Published", date=g["date"],
+        row.update(status=TEMP_IMAGE_STATUS if g.get("temp_image") else "Published", date=g["date"],
                    url=f"[{g['slug']}]({SITE}/blog/en/{g['slug']}/)")
         update_queue_row(row)
     if repair_row:
@@ -1413,6 +1452,11 @@ def cmd_publish(a):
     corp = corpus()
     row = repair_row = None
     if not a.repair and not a.from_dir and already_published(date) and not a.force:
+        if a.no_repair:
+            # The evening fallback: Antigravity already published today, and repairs are its job.
+            log(f"Already published today ({date}): {already_published(date)[0]}. Nothing to do.")
+            outputs(published="false")
+            return
         # Today's article is out. The day's later slots rebuild one `Repair` row each.
         repair_row, a.repair = next_repair_row()
         if not a.repair:
@@ -1521,14 +1565,23 @@ def cmd_preflight():
     except ImportError:
         raise PublishError("Pillow is missing: python3 -m pip install Pillow")
     nap_block(), skill_criteria()
+    providers = [p.strip() for p in IMAGE_PROVIDERS]
     res = _http_json(f"{API}/models?pageSize=1000", timeout=60)
     have = {m["name"].split("/", 1)[1] for m in res.get("models", [])}
     for kind, models in (("text", TEXT_MODELS), ("image", IMAGE_MODELS)):
+        if kind == "image" and "gemini" not in providers:
+            continue
         ok = [m for m in models if m.strip() in have]
         if not ok:
             raise PublishError(f"None of the {kind} models are available to this key: {models}")
         log(f"  {kind} models available: {', '.join(ok)}")
-    if IMAGE_PROVIDERS[0].strip() == "kie" and not os.environ.get("KIE_AI_API_KEY", "").strip():
+    if providers[0] == "placeholder":
+        if not PLACEHOLDER_HERO.exists():
+            raise PublishError(f"The placeholder hero is missing: {PLACEHOLDER_HERO}")
+        log("  images: placeholder hero; Antigravity swaps in the real one (pending_heroes.json)")
+        log("Preflight OK: key accepted, skill readable, Pillow installed.")
+        return
+    if providers[0] == "kie" and not os.environ.get("KIE_AI_API_KEY", "").strip():
         # Fail here, before the text quota is spent: Gemini's image models are 0/day on the
         # free tier, so without kie.ai the run would die at the image step.
         raise PublishError("KIE_AI_API_KEY is not set. Add it as a repository secret (Settings > "
@@ -1554,6 +1607,8 @@ def main():
     ap.add_argument("--from-dir", help="publish a reviewed dry-run folder without calling the API")
     ap.add_argument("--repair", metavar="SLUG", help="regenerate an existing article at the same URL")
     ap.add_argument("--force", action="store_true", help="publish even if today already has an article")
+    ap.add_argument("--no-repair", action="store_true",
+                    help="if today already has an article, stop instead of rebuilding a Repair row")
     ap.add_argument("--verify", metavar="SLUG", help="check the live pages after a deploy")
     ap.add_argument("--preflight", action="store_true")
     a = ap.parse_args()

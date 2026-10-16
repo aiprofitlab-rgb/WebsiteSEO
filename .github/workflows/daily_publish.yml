@@ -1,22 +1,25 @@
 name: Autonomous Daily Article Publisher
 
-# Runs the article-creator skill unattended: Website SEO/execution/daily_publish.py.
-# Order matters: generate + validate -> commit -> deploy -> check the live pages.
-# The deploy has to come AFTER the commit, because it uploads what changed between
-# the server's last deployed commit and HEAD. Any failed step fails the run, and
-# GitHub emails you; a run that fails before the commit publishes nothing.
+# FALLBACK since 2026-10-16. The daily article is written by Google Antigravity on Nahid's
+# Mac (Website SEO/execution/agent_publish.py, started hourly by Antigravity's scheduler).
+# This workflow runs once in the evening and publishes only if the Mac published nothing
+# that day. It writes with the Gemini API (free tier, GEMINI_API_KEY) and ships a
+# placeholder hero, listed in directives/pending_heroes.json; Antigravity's next run
+# generates the real image and swaps it in. It never rebuilds `Repair` rows: that is
+# Antigravity's job too.
+#
+# Order matters: generate + validate -> commit -> deploy -> check the live pages. The
+# deploy has to come AFTER the commit, because it uploads what changed between the
+# server's last deployed commit and HEAD. Any failed step fails the run, and GitHub emails
+# you; a run that fails before the commit publishes nothing.
 
 on:
   schedule:
-    # 03:17 UTC = 07:17 in Muscat. Off the top of the hour, where GitHub delays and
-    # drops scheduled runs, and far enough from Muscat midnight (20:00 UTC) that a
-    # late start never changes the date in the article's URL.
-    - cron: '17 3 * * *'
-    # Retry slots, 10:17 and 14:17 Muscat: they retry today's article if the first slot
-    # was postponed (Gemini's free tier answers "high demand" for minutes at a time), and
-    # once it is out, each rebuilds one queue row marked `Repair`.
-    - cron: '17 6 * * *'
-    - cron: '17 10 * * *'
+    # 16:17 UTC = 20:17 in Muscat, after the Mac's window for starting the day's article
+    # (06:00-19:00 Muscat). GitHub has started these runs up to 5 hours late, so the
+    # article's date is taken 6 hours back (PUBLISH_DATE_LAG_HOURS): a run that starts
+    # after Muscat midnight still publishes the day it was meant for.
+    - cron: '17 16 * * *'
   workflow_dispatch:
     inputs:
       repair:
@@ -68,10 +71,10 @@ jobs:
           key: publish-${{ steps.deps.outputs.day }}-${{ github.run_id }}
           restore-keys: publish-${{ steps.deps.outputs.day }}-
 
-      - name: 🔑 Preflight (API keys, models, skill)
+      - name: 🔑 Preflight (API key, models, skill)
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          KIE_AI_API_KEY: ${{ secrets.KIE_AI_API_KEY }}
+          IMAGE_PROVIDERS: placeholder
         run: |
           cd "Website SEO"
           python3 execution/daily_publish.py --preflight
@@ -80,27 +83,20 @@ jobs:
         id: gen
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          KIE_AI_API_KEY: ${{ secrets.KIE_AI_API_KEY }}
+          IMAGE_PROVIDERS: placeholder
+          PUBLISH_DATE_LAG_HOURS: ${{ github.event_name == 'schedule' && '6' || '0' }}
           REPAIR: ${{ inputs.repair }}
           FORCE: ${{ inputs.force }}
-          LAST_SLOT: ${{ github.event_name != 'schedule' || github.event.schedule == '17 10 * * *' }}
         run: |
           cd "Website SEO"
           echo "base_sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
-          args=()
-          if [ -n "$REPAIR" ]; then args+=(--repair "$REPAIR"); fi
+          args=(--no-repair)
+          if [ -n "$REPAIR" ]; then args=(--repair "$REPAIR"); fi
           if [ "$FORCE" = "true" ]; then args+=(--force); fi
-          set +e
           python3 execution/daily_publish.py "${args[@]}"
-          rc=$?
-          # 75 = Gemini stayed overloaded. Not a failure while a later slot can retry.
-          if [ $rc -eq 75 ] && [ "$LAST_SLOT" != "true" ]; then
-            echo "::warning::Gemini was overloaded; the next slot today resumes from the cache."
-            exit 0
-          fi
-          exit $rc
 
       - name: 💾 Commit & Push
+        id: push
         if: steps.gen.outputs.published == 'true'
         env:
           SLUG: ${{ steps.gen.outputs.slug }}
@@ -108,13 +104,24 @@ jobs:
         run: |
           git config user.name "AI Profit Lab Bot"
           git config user.email "bot@aiprofitlab.io"
+          # Antigravity may have published while this run was writing. Then this draft is
+          # dropped rather than putting two articles on one day.
+          day="${SLUG:0:10}"
+          git fetch --quiet origin main
+          if [ "$KIND" = "Publish" ] && git ls-tree --name-only origin/main "Website SEO/public_html/blog/en/" \
+               | grep "/$day-" | grep -qv "/$SLUG.html"; then
+            echo "::notice::Antigravity published an article for $day meanwhile; dropping this draft."
+            echo "pushed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
           git add -A "Website SEO/public_html" "Website SEO/directives"
-          git commit -m "${KIND:-Publish} article: $SLUG"
+          git commit -m "${KIND:-Publish} article: $SLUG (GitHub fallback, placeholder hero)"
           git pull --rebase origin main
           git push origin HEAD:main
+          echo "pushed=true" >> "$GITHUB_OUTPUT"
 
       - name: 🚀 Deploy to Hostinger
-        if: steps.gen.outputs.published == 'true'
+        if: steps.push.outputs.pushed == 'true'
         env:
           FTP_SERVER: ${{ secrets.FTP_SERVER }}
           FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
@@ -122,7 +129,7 @@ jobs:
         run: python3 "Website SEO/tools/deploy_ftp.py" --base "${{ steps.gen.outputs.base_sha }}"
 
       - name: 🔎 Verify the article is live
-        if: steps.gen.outputs.published == 'true'
+        if: steps.push.outputs.pushed == 'true'
         env:
           SLUG: ${{ steps.gen.outputs.slug }}
         run: |

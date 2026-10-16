@@ -19,40 +19,53 @@ This queue tracks remaining articles to be generated, illustrated, and published
 
 ## Daily Routine SOP
 
-Automated by `.github/workflows/daily_publish.yml` (03:17 UTC = 07:17 Muscat), which runs
-`execution/daily_publish.py`. The rules are the article-creator skill
-(`Website/SKILL_article_creator/SKILL.md`); the script sends its Step 1 criteria to the model verbatim.
+**Since 2026-10-16 Google Antigravity writes the articles** (Gemini on the Google AI Pro plan, text
+and hero image both), on Nahid's Mac, from its own clone of this repo
+(`~/Developer/aiprofitlab-publisher`). Agent instructions: `directives/antigravity_publisher.md`.
+Toolbox: `execution/agent_publish.py`. Setup and on/off switch:
+`execution/setup_antigravity_publisher.py`. The rules are the article-creator skill
+(`Website/SKILL_article_creator/SKILL.md`); its Step 1 criteria go into every brief verbatim.
 
-1. Take the first `Pending` row. A row whose English title is more than 65% similar to a published
-   article is marked `Skipped` (skill Step 0). When fewer than 2 rows are `Pending`, 6 new topics are
-   appended here, taken from what people in Oman really search (`execution/trend_topics.py`: Google
-   Trends related queries + Google autocomplete, then one Gemini call to write the titles). The search
-   and evidence behind each one go to `directives/trend_report.md`. Only if that research finds nothing
-   does the model invent topics. Edit or delete them freely; rows run top to bottom.
-2. Gemini writes the EN article, then the AR edition, as structured JSON. Each is audited against the
-   skill: 800–1200 body words (AR 650–1350), exactly 10 FAQs, at least 3 question H2s, a table, at
-   least 3 Oman/GCC references, meta description 140–155 characters, no banned phrases, internal links.
-   A failing draft goes back with its failures listed, up to 3 attempts. Every reference URL is fetched;
-   dead ones are unlinked and dropped.
-3. A hero image is generated for this article (light-mode brand style), checked, and saved under a
-   new hashed filename (`/blog/images/` is cached as immutable for a year).
-4. The source is rendered in the skill's marker contract, then derivatives → `reskin_articles.py --only`
-   → `reskin_blog_hubs.py` → `run_sitemap.py` → `build_aiden_index.py`, every exit code enforced.
-5. Status becomes `Published` with the date and link. The forum snippet (skill Step 8) is appended
-   to `directives/forum_snippets.md`.
-6. The workflow commits, deploys (everything since the server's last good deploy, recorded in
-   `/.deployed-commit`), then checks the live EN + AR pages and hero.
+1. Antigravity's scheduler runs `execution/antigravity_trigger.sh` at :17 every hour while the app (or
+   the IDE) is open. It starts a conversation only when something is due, in this order: a hero swap
+   for an article the GitHub fallback published (`directives/pending_heroes.json`); today's article,
+   started between 06:00 and 19:00 Muscat; up to 2 `Repair` rows a day. Two failed attempts park a
+   job until the next day.
+2. Topics: the first `Pending` row that passes the skill's 65% similarity check. When fewer than 2
+   are `Pending`, `next` collects what people in Oman search (Google Trends + autocomplete, free),
+   Antigravity writes titles for the strongest searches, and `topics-add` keeps only titles that
+   carry their search's words and pass the title rules. Evidence goes to `directives/trend_report.md`.
+3. The agent writes `en.json` + `claims-en.json`, then the Arabic pair. `check` audits each against
+   the skill (800-1200 body words, AR 650-1350, exactly 10 FAQs, 3+ question H2s, a table, 3+ Oman/GCC
+   references, meta 140-155 characters, banned phrases, internal links), deletes dead reference
+   links, and checks the **claims ledger**: every sentence, row or field with a number needs an
+   entry. A `sourced` number must appear on the cited page (the script downloads it); anything
+   phrased as a study, survey or "X% of businesses" must be sourced; `illustrative` must be framed
+   as an example; `general_knowledge` (max 8) can't be a percentage or a price.
+4. The agent generates the hero with its own image tool; `image` rejects anything under 1000px wide,
+   not 16:9-ish landscape, or darker than the light brand allows.
+5. `publish` resets the clone to GitHub's main, re-runs every check, renders the skill's marker
+   contract, builds (derivatives, `reskin_articles.py --only`, hubs, sitemap, Aiden index, every exit
+   code enforced), marks the row `Published`, appends the forum snippet, commits, pushes (the push
+   triggers `deploy.yml`), and polls the live EN + AR pages for up to 10 minutes.
+6. **Fallback:** `.github/workflows/daily_publish.yml` runs at 20:17 Muscat and publishes with the
+   Gemini API (free tier) only if nothing went out that day. It ships a placeholder hero
+   (`brand/og/article-hero-placeholder.png`), marks the row `Published (temp image)` and lists the
+   article in `directives/pending_heroes.json`; Antigravity's next run swaps in the real image.
+   It never rebuilds `Repair` rows. Before pushing it re-checks GitHub and drops its draft if
+   Antigravity published meanwhile.
 
-Any failure stops the run before anything is committed. GitHub emails the failure, and the topic stays
-`Pending` for the next day.
+Any failed check stops the run before anything is committed. Progress: `agent_jobs/log.md` in the
+clone, or `python3 execution/agent_publish.py status` there.
 
-**By hand**
+**By hand** (the GitHub fallback's script, runnable locally with `GEMINI_API_KEY` in `.env`)
 - `python3 execution/daily_publish.py --dry-run`: writes the draft to `.tmp/daily_publish/<slug>/`,
   publishes nothing. Then `--from-dir <that folder>` publishes it without calling the API again.
 - `--repair <slug>`: regenerates an existing article at the same URL and date (or use the Run workflow
   button with the `repair` input).
 - `--preflight`: checks the API key, the models and Pillow. Needs `GEMINI_API_KEY` in `.env` locally,
-  or as a repository secret in GitHub.
+  or as a repository secret in GitHub (the only secret the fallback needs besides the FTP ones).
+- `IMAGE_PROVIDERS`: `placeholder` (default), or `kie` / `gemini` for a generated image (paid).
 - Models: `GEMINI_TEXT_MODELS` / `GEMINI_IMAGE_MODELS` (comma-separated, tried in order).
 
 **Trend topics by hand** (free; no key besides `GEMINI_API_KEY`)
@@ -60,6 +73,14 @@ Any failure stops the run before anything is committed. GitHub emails the failur
   `.tmp/trend_topics/<date>.md`; the queue is untouched.
 - `python3 execution/trend_topics.py`: top the queue up to 7 `Pending` topics (`--target N` to change).
 - Seed keywords are `SEEDS` at the top of the script. Each costs ~2 Trends + 4 autocomplete requests.
+
+**Learned 2026-10-16** (why the Oct 13 rebuild never published): every scheduled run failed at
+preflight in under a second, because it needed a `KIE_AI_API_KEY` secret that was never added (paid
+images). Moving generation to Antigravity on the Pro plan removes both the image cost and the
+Gemini free tier's 20-requests-a-day ceiling for the main path. Antigravity's agent cannot open
+gitignored files, so its drafts live in `agent_jobs/` (in its clone, not ignored), and the
+scheduled-sidecar format is `{"builtin": "schedule", "args": ["<cron>", "<cmd>", ...]}` in
+`~/.gemini/config/sidecars/<id>/sidecar.json`.
 
 **Learned 2026-10-15** (trend research): Oman has too little Trends data for most English B2B seeds
 (9 of 14 fell back to the UAE), so UAE signals count half and any search naming another country or

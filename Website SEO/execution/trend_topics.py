@@ -260,6 +260,14 @@ def same_topic(dp, a, b):
 
 def pick(dp, cands, corp, rows, n):
     """(valid picks in the model's order, rejected picks with the reason)."""
+    res = dp.gemini_json(dp.system_prompt(), pick_prompt(dp, cands, corp, rows, n), PICK_SCHEMA,
+                         "trend topics")
+    return validate_picks(dp, res.get("topics", []), cands, corp, rows)
+
+
+def pick_prompt(dp, cands, corp, rows, n):
+    """The title-writing task. Sent to Gemini's API here, or handed to the Antigravity agent
+    by agent_publish.py; either way validate_picks() checks the answer."""
     clusters = sorted({r["cluster"] for r in rows if r["cluster"]})
     best = sorted(cands.values(), key=lambda c: -c["score"])[:MAX_CANDIDATES]
     lines = "\n".join(f"- {c['query']}  [{'; '.join(c['evidence'])}]" for c in best)
@@ -293,11 +301,15 @@ def pick(dp, cands, corp, rows, n):
         f"Order the list best first: clearest business need first, then strongest demand. Oman evidence "
         f"(Trends OM, autocomplete) outranks UAE evidence. Oman-specific angles beat generic GCC ones. "
         f"Do not overlap these published articles:\n{published}\n")
-    res = dp.gemini_json(dp.system_prompt(), prompt, PICK_SCHEMA, "trend topics")
+    return prompt
 
+
+def validate_picks(dp, topics, cands, corp, rows):
+    """Code, not the model, decides: every title must trace back to a collected search."""
+    clusters = sorted({r["cluster"] for r in rows if r["cluster"]})
     taken = list(corp["en"].values()) + [r["en_title"] for r in rows]
     used, picks, rejected = set(), [], []
-    for t in res.get("topics", []):
+    for t in topics:
         k = _norm(t.get("query"))
         c = cands.get(k)
         en, ar, cl = dp._plain(t.get("en_title")), dp._plain(t.get("ar_title")), dp._plain(t.get("cluster"))
@@ -377,6 +389,11 @@ def top_up(dp, corp, rows, n, write=True):
     if not cands:
         return []
     picks, rejected = pick(dp, cands, corp, rows, n)
+    return queue_picks(dp, picks, rejected, rows, n, stats, min(len(cands), MAX_CANDIDATES), write)
+
+
+def queue_picks(dp, picks, rejected, rows, n, stats, ncands, write=True):
+    """Append the first n picks to the queue and write the evidence report. Returns the new rows."""
     nums = [int(r["num"]) for r in rows if r["num"].isdigit()]
     nxt = max(nums) + 1 if nums else 1
     queued, spare = picks[:n], picks[n:]
@@ -387,7 +404,7 @@ def top_up(dp, corp, rows, n, write=True):
                     "ar_title": p["ar_title"], "status": "Pending", "date": "-", "url": "-"})
     date = dp.today()
     report = REPORT_FILE if write else TMP / f"{date}.md"
-    write_report(report, date, stats, min(len(cands), MAX_CANDIDATES), queued, spare, rejected)
+    write_report(report, date, stats, ncands, queued, spare, rejected)
     if write and new:
         dp.append_queue_rows(new)
     for p in queued:
