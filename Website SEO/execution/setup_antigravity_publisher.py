@@ -17,7 +17,10 @@ What it creates:
   2. An Antigravity project, "AI Profit Lab Publisher", whose workspace is that clone's
      `Website SEO/` folder, pre-approved to run `python3 execution/agent_publish.py` and to
      read web pages (for source research), so an unattended run never waits for a click.
-  3. A scheduled sidecar (~/.gemini/config/sidecars/aiprofitlab-publisher) that runs
+  3. A helper sidecar (aiprofitlab-publisher-helper) that Antigravity keeps running while the
+     app is open. The agent's terminal sandbox has no internet and cannot read the image
+     tool's output, so its check/image/submit commands are carried out by this helper.
+  4. A scheduled sidecar (~/.gemini/config/sidecars/aiprofitlab-publisher) that runs
      execution/antigravity_trigger.sh every 10 minutes, outside Antigravity's sandbox. It
      publishes what an agent submitted, and starts a conversation only when today's article,
      a hero swap or a repair is due. A run with nothing to do takes a few seconds.
@@ -39,6 +42,7 @@ from urllib.parse import quote
 HOME = Path.home()
 CONFIG = HOME / ".gemini" / "config"
 SIDECAR_ID = "aiprofitlab-publisher"
+SERVICE_ID = "aiprofitlab-publisher-helper"
 DRY_ID = "aiprofitlab-publisher-dryrun"
 DEFAULT_CLONE = HOME / "Developer" / "aiprofitlab-publisher"
 REMOTE = "https://github.com/aiprofitlab-rgb/WebsiteSEO"
@@ -140,6 +144,16 @@ def main():
         "disabled": disabled,
     })
     enable_in_config(SIDECAR_ID, pid, not disabled)
+    write_sidecar(SERVICE_ID, {
+        "command": "/bin/sh",
+        "args": [str(clone / "Website SEO" / "execution" / "antigravity_service.sh")],
+        "restart_policy": "always",
+        "display_name": "AI Profit Lab publisher: helper",
+        "description": ("Runs the publisher agent's link checks, source checks and image reads outside the "
+                        "terminal sandbox (agent_publish.py serve). Always on while the app is open."),
+        "env": {"ANTIGRAVITY_PROJECT_ID": pid},
+    })
+    enable_in_config(SERVICE_ID, pid, True)
     if a.dry_run_now:
         write_sidecar(DRY_ID, {
             "command": "/bin/sh", "args": [trigger, "--dry-run"], "restart_policy": "never",

@@ -1542,9 +1542,92 @@ def cmd_trigger(a):
             release_lock()
 
 
+# ======================================================================
+# The helper service. Antigravity's terminal sandbox has no internet and cannot read the
+# image tool's output folder, but checking a draft needs both (dead links, sourced numbers,
+# the generated hero). So the agent's commands hand themselves to this service, a sidecar
+# that runs outside the sandbox while the app is open, through files in agent_jobs/service/.
+# ======================================================================
+SERVICE = JOBS / "service"
+HEARTBEAT = SERVICE / "heartbeat"
+DELEGATED = {"next", "topics-add", "check", "image", "submit", "publish", "fail"}
+
+
+def service_alive():
+    try:
+        return time.time() - HEARTBEAT.stat().st_mtime < 30
+    except OSError:
+        return False
+
+
+def delegate(argv):
+    """Run this command in the service and relay its output. None if no service answers."""
+    rid = f"{time.time():.6f}-{os.getpid()}"
+    req, res = SERVICE / f"req-{rid}.json", SERVICE / f"res-{rid}.json"
+    req.write_text(json.dumps({"argv": argv}), encoding="utf-8")
+    deadline = time.time() + 1200
+    while time.time() < deadline:
+        if res.exists():
+            try:
+                out = json.loads(res.read_text(encoding="utf-8"))
+            except ValueError:
+                time.sleep(0.5)
+                continue
+            res.unlink(missing_ok=True)
+            print(out["output"], end="", flush=True)
+            return out["rc"]
+        if req.exists() and not service_alive():
+            req.unlink(missing_ok=True)
+            return None
+        time.sleep(1)
+    req.unlink(missing_ok=True)
+    print("STOP: the publisher's helper service did not answer within 20 minutes.")
+    return 1
+
+
+def cmd_serve(a):
+    """The helper service (a sidecar, restart_policy always). Exits when its code changes on
+    disk after a sync, so Antigravity restarts it on the new version."""
+    assert_clone()
+    SERVICE.mkdir(parents=True, exist_ok=True)
+    code = [HERE / "agent_publish.py", HERE / "daily_publish.py", HERE / "trend_topics.py"]
+    stamp = [p.stat().st_mtime for p in code]
+    log(f"helper service up (pid {os.getpid()})")
+    while True:
+        HEARTBEAT.write_text(f"{time.time():.0f}\n")
+        for req in sorted(SERVICE.glob("req-*.json")):
+            res = SERVICE / ("res-" + req.name[4:])
+            try:
+                argv = json.loads(req.read_text(encoding="utf-8"))["argv"]
+            except (ValueError, KeyError, OSError):
+                req.unlink(missing_ok=True)
+                continue
+            req.unlink(missing_ok=True)
+            if not argv or argv[0] not in DELEGATED:
+                out, rc = f"STOP: {argv[:1]} is not a command the helper runs.\n", 1
+            else:
+                r = subprocess.run([sys.executable, str(HERE / "agent_publish.py"), *argv], cwd=ROOT,
+                                   env=dict(os.environ, APL_LOCAL="1"), capture_output=True, text=True,
+                                   timeout=1100)
+                out, rc = r.stdout + r.stderr, r.returncode
+            tmp = res.with_suffix(".tmp")
+            tmp.write_text(json.dumps({"rc": rc, "output": out}), encoding="utf-8")
+            tmp.rename(res)
+        if [p.stat().st_mtime for p in code] != stamp:
+            log("code changed; exiting so Antigravity restarts the service on the new version")
+            return 0
+        time.sleep(1)
+
+
 def main():
+    if (len(sys.argv) > 1 and sys.argv[1] in DELEGATED and not os.environ.get("APL_LOCAL")
+            and MARKER.exists() and service_alive()):
+        rc = delegate(sys.argv[1:])
+        if rc is not None:
+            sys.exit(rc)
     ap = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
     sub = ap.add_subparsers(dest="cmd", required=True)
+    sub.add_parser("serve")
     sub.add_parser("next")
     sub.add_parser("topics-add")
     p = sub.add_parser("check")
@@ -1562,7 +1645,7 @@ def main():
     a = ap.parse_args()
     fn = {"next": cmd_next, "topics-add": cmd_topics_add, "check": cmd_check, "image": cmd_image,
           "submit": cmd_submit, "publish": cmd_submit, "fail": cmd_fail, "status": cmd_status,
-          "trigger": cmd_trigger}[a.cmd]
+          "trigger": cmd_trigger, "serve": cmd_serve}[a.cmd]
     try:
         if a.cmd != "status":
             assert_workspace()       # state and drafts live in the publisher's clone only
