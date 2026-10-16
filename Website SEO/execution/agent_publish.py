@@ -112,6 +112,11 @@ class Stop(Exception):
         self.code = code
 
 
+class Fix(Stop):
+    """A problem with the agent's own files: printed as FAIL, so the agent fixes it and reruns
+    (a plain Stop means tooling trouble, which the directive says to report with `fail`)."""
+
+
 def log(msg=""):
     print(msg, flush=True)
 
@@ -942,11 +947,11 @@ REQUIRED = {"title": str, "meta_description": str, "keywords": str, "category": 
 def load_draft(job, lang):
     path = folder(job) / f"{lang}.json"
     if not path.exists():
-        raise Stop(f"{path.relative_to(ROOT)} does not exist yet.")
+        raise Fix(f"{path.relative_to(ROOT)} does not exist yet.")
     try:
         raw = json.loads(path.read_text(encoding="utf-8"))
     except json.JSONDecodeError as e:
-        raise Stop(f"{path.relative_to(ROOT)} is not valid JSON: {e}")
+        raise Fix(f"{path.relative_to(ROOT)} is not valid JSON: {e}")
     bad = [k for k, t in REQUIRED.items() if not isinstance(raw.get(k), t)]
     bad += [f"sections[{i}]" for i, s in enumerate(raw.get("sections") or [])
             if not (isinstance(s, dict) and all(isinstance(s.get(k), str) for k in ("heading", "answer", "body_html")))]
@@ -955,7 +960,7 @@ def load_draft(job, lang):
     bad += [f"references[{i}]" for i, r in enumerate(raw.get("references") or [])
             if not (isinstance(r, dict) and isinstance(r.get("url"), str))]
     if bad:
-        raise Stop(f"{path.relative_to(ROOT)}: missing or wrong type: {', '.join(bad)}. See the JSON format "
+        raise Fix(f"{path.relative_to(ROOT)}: missing or wrong type: {', '.join(bad)}. See the JSON format "
                    f"in the brief.")
     return raw
 
@@ -1035,11 +1040,11 @@ def cmd_topics_add(a):
     research = json.loads((TOPICS / "research.json").read_text(encoding="utf-8"))
     path = TOPICS / "topics.json"
     if not path.exists():
-        raise Stop(f"{path.relative_to(ROOT)} does not exist yet.")
+        raise Fix(f"{path.relative_to(ROOT)} does not exist yet.")
     try:
         topics = json.loads(path.read_text(encoding="utf-8")).get("topics") or []
     except (json.JSONDecodeError, AttributeError) as e:
-        raise Stop(f"{path.relative_to(ROOT)} is not valid JSON in the shape the brief shows: {e}")
+        raise Fix(f"{path.relative_to(ROOT)} is not valid JSON in the shape the brief shows: {e}")
     corp = dp.corpus()
     _, rows = dp.read_queue()
     cands = research["cands"]
@@ -1050,7 +1055,7 @@ def cmd_topics_add(a):
     for r in rejected:
         log(f"  rejected: {r.get('en_title', '?')}  ({r['why']})")
     if not picks:
-        raise Stop("No title passed. Fix the reasons above and run topics-add again.")
+        raise Fix("No title passed. Fix the reasons above and run topics-add again.")
     job.update(status="submitted", picks=picks, rejected=rejected, last_problems=[])
     save_state(st)
     release_lock()
@@ -1088,7 +1093,7 @@ def cmd_check(a):
     job = active(st, ("new", "repair"))
     refresh_lock("check")
     if a.lang == "ar" and not (folder(job) / "en.json").exists():
-        raise Stop("Write and check the English edition first.")
+        raise Fix("Write and check the English edition first.")
     _, problems = audit_lang(job, a.lang)
     ok = report(problems, f"the {a.lang.upper()} draft")
     journal(f"check {a.lang} {job['slug']}: {'PASS' if ok else f'{len(problems)} problem(s)'}")
@@ -1112,7 +1117,7 @@ def cmd_image(a):
         journal(f"image path noted for {job['slug']} (sandbox could not read it)")
         return 0
     except OSError:
-        raise Stop(f"No file at {src}. Give the full path of the image your tool saved.")
+        raise Fix(f"No file at {src}. Give the full path of the image your tool saved.")
     png, problems, info = dp.vet_image(data)
     if not png:
         log(f"REJECTED ({info}): " + "; ".join(problems) + ". Generate a new image that fixes this.")
@@ -1141,7 +1146,7 @@ def cmd_submit(a):
         if not report(problems, "the final check of both editions"):
             return 1
     if not (folder(job) / "hero.png").exists() and not job.get("image_src"):
-        raise Stop(f"No hero image yet. Generate it, then run `{CMD} image <path>`.")
+        raise Fix(f"No hero image yet. Generate it, then run `{CMD} image <path>`.")
     job.update(status="submitted", submitted=time.time(), last_problems=[])
     save_state(st)
     release_lock()
@@ -1549,6 +1554,9 @@ def main():
         if a.cmd != "status":
             assert_workspace()       # state and drafts live in the publisher's clone only
         sys.exit(fn(a) or 0)
+    except Fix as e:
+        log(f"FAIL (a problem with your files; fix it and run the command again): {e}")
+        sys.exit(1)
     except Stop as e:
         log(f"STOP: {e}")
         sys.exit(e.code)
