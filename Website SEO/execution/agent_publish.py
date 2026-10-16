@@ -87,6 +87,15 @@ import trend_topics as tt  # noqa: E402
 
 # Not gitignored on purpose: Antigravity's agent cannot open gitignored files.
 JOBS = ROOT / "agent_jobs"
+# The agent's sandbox cannot read ../SKILL_article_creator (outside the workspace), so sync()
+# keeps a copy here and the agent's commands read that instead.
+SKILL_SOURCE = REPO / "SKILL_article_creator" / "SKILL.md"
+SKILL_COPY = JOBS / "SKILL.md"
+try:
+    SKILL_SOURCE.read_bytes()
+except OSError:
+    if SKILL_COPY.exists():
+        dp.SKILL_FILE = SKILL_COPY
 STATE = JOBS / "state.json"
 LOCK = JOBS / "run.lock"
 LOG = JOBS / "log.md"
@@ -239,6 +248,8 @@ def sync():
     git("reset", "--quiet", "--hard", "origin/main")
     # Files an interrupted build left behind would otherwise ride along in the next commit.
     git("clean", "-fdq", "--", "Website SEO/public_html", "Website SEO/directives")
+    JOBS.mkdir(parents=True, exist_ok=True)
+    shutil.copy2(SKILL_SOURCE, SKILL_COPY)
 
 
 def freshen_derivatives():
