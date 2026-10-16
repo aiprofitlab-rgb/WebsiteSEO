@@ -7,12 +7,13 @@ Automatically scan daily media query digests (HARO, Connectively, Featured.com, 
 
 ## Identity & Spokesperson Profile
 
-- **Spokesperson Name**: Nahid
-- **Title**: Founder & Lead AI Systems Architect
+- **Spokesperson Name**: Nahid Abyari (journalists need the full name to quote him)
+- **Title**: Founder, AI Profit Lab
 - **Brand**: **AI Profit Lab**
-- **Parent Legal Entity**: **International Gulf Lotus SPC**
+- **Legal Entity**: **Lotus Gulf International** (CR 1570092), per the `aiprofitlab-brand` skill and the live About page. (The older name "International Gulf Lotus SPC" is wrong; the website's AGENTS.md still carries it.)
 - **Website**: [https://aiprofitlab.io](https://aiprofitlab.io)
-- **Core Expertise**:
+- **The facts a pitch may state** live in `SPOKESPERSON_FACTS` in the processor, sourced from the live About page: an engineer who built and ran a real distribution business (never name the country), the response-time lesson, what AI Profit Lab builds, his working rules, and who he turns away. Add a fact there only once Nahid confirms it. Never add a client name, a result, a percentage or a count of years.
+- **Core Expertise** (topics he can give an opinion on, not facts to claim):
   - Practical AI implementation for businesses & enterprise workflows.
   - Autonomous AI agents & multi-agent systems.
   - Business process automation (reducing operational waste, CRM/ERP integrations).
@@ -30,9 +31,13 @@ Automatically scan daily media query digests (HARO, Connectively, Featured.com, 
 4. **Technology Entrepreneurship**: Running AI-first businesses, digital transformation in emerging markets (GCC / Middle East / Global).
 
 ### Disqualification Criteria (REJECT)
-1. **Expired Deadlines**: Any query whose submission deadline has already passed.
-2. **Irrelevant Topics**: Healthcare/medical advice, personal finance/stocks, real estate, diet/fitness, beauty/fashion, or unrelated niches.
-3. **Consumer Complaints / Paid Sponsorship Solicitations**: Direct advertorial pitches or pay-to-play link schemes.
+1. **Expired Deadlines**: Any query whose submission deadline has already passed, or is less than an hour away (no time to review). Checked in code, not by Gemini.
+2. **Not eligible**: The journalist asks for a role, credential, company size, location or personal experience Nahid doesn't have: CIO/CTO/CISO of a larger firm, nonprofit leader, MD, licensed advisor, "US-based", "e-commerce store owners", parents, homeowners. This was the old agent's biggest miss: it matched on topic alone. (On 2026-10-16 it drafted a reply to Fortune's request for a *nonprofit* CIO/CTO.)
+3. **Irrelevant Topics**: Healthcare/medical advice, personal finance/stocks, real estate, diet/fitness, beauty/fashion, travel, relationships, or unrelated niches.
+4. **Pay-to-play**: Sponsored placements, paid awards or listings ("TechRound's PR54 Is Open For Entries"), product samples, gift guides.
+
+### Journalists who reject AI-written replies
+About 45% of HARO queries carry the line **"No AI Pitches Considered"**, and some say "written in your own words". For these the agent still drafts, but writes **talking points** rather than a pitch. The subject is tagged `[WRITE IT YOURSELF]` and the notes explain why. Nahid writes the reply himself from those points and removes the tag before sending. Never send AI-written text to these journalists.
 
 ---
 
@@ -41,17 +46,18 @@ Automatically scan daily media query digests (HARO, Connectively, Featured.com, 
 HARO journalists review dozens of pitches. Our drafted responses must adhere to strict PR best practices:
 
 1. **Subject Line**:
-   `HARO Pitch: [Query Title] — [Spokesperson Name], AI Profit Lab`
-2. **Opening (1 sentence)**:
-   Acknowledge the question and state our direct qualification in 1 sentence.
-3. **Direct Soundbites / Insights (2-3 bullet points)**:
-   - Provide concrete, original, and actionable answers to their specific questions.
-   - Avoid fluff, generic AI jargon, or marketing buzzwords.
-   - Give concise, ready-to-quote statements that a reporter can copy-paste directly into their article.
-4. **Spokesperson Bio & Attribution**:
-   - Name: Nahid
-   - Role: Founder, AI Profit Lab ([https://aiprofitlab.io](https://aiprofitlab.io))
-   - Headshot / LinkedIn available upon request.
+   `HARO Pitch: [Query Title] — Nahid Abyari, AI Profit Lab` (with `[WRITE IT YOURSELF] ` in front for the no-AI queries above).
+2. **From / To**: From `nahid@aiprofitlab.io`, the address the HARO account is registered to (a verified send-as alias in this Gmail). To: the query's `reply+…@helpareporter.com` address, copied from the digest by code and never typed by Gemini.
+3. **Opening (1 sentence)**:
+   Who Nahid is and why he can answer *this* query.
+4. **Answers (2–4 short paragraphs or bullets, 120–250 words)**:
+   - Answer the journalist's questions directly, in the order asked, and include every item they list.
+   - A concrete opinion, a practical tip or how something works in practice, ready to quote.
+   - Plain brand voice: no hype words (the brand's banned list is in the prompt and in `BANNED_WORDS`).
+5. **No invented facts**: Never invent clients, results, percentages, years of experience or world statistics, and never claim Nahid did, built, switched or measured anything the facts don't say. When the query needs first-hand experience, those parts become `[ADD: …]` placeholders (at most 3). A placeholder says what to add and never suggests an answer. The notes add a **"Send only if true:"** line naming the experience the reply depends on. Code flags any figure the query doesn't explain, any banned word, and any placeholder that suggests a number, on the notes' `Check:` line.
+6. **Notes block**: Each draft opens with a notes block for Nahid (outlet, journalist, deadline in ET, Muscat time and UTC, why it fits, placeholders to fill, claims to check, and the full query). It ends at a dashed line, and **must be deleted before sending**.
+7. **Signature** (the brand signature, verbatim, from the `aiprofitlab-brand` skill):
+   Nahid Abyari · Founder, AI Profit Lab · hello@aiprofitlab.io · +968 9924 5250 · aiprofitlab.io · LinkedIn https://www.linkedin.com/in/nahid-aby · headshot on request.
 5. **Safety & Inbox Rules**:
    - **ALWAYS SAVE AS DRAFT**: Never send emails automatically. Drafts must remain in the Gmail `Drafts` folder for human review and final approval.
    - **LABEL AS PROCESSED**: Once a digest email has been fully processed (its queries analyzed and qualifying drafts created), add the Gmail label `HARO Processed` to it (and mark it read). The label, not read status, is what prevents duplicate work, so a digest Nahid has already opened still gets pitched. A digest whose Gemini analysis fails stays unlabelled and is retried on the next run.
@@ -63,9 +69,14 @@ HARO journalists review dozens of pitches. Our drafted responses must adhere to 
 - **Main Processor**: [`execution/haro_email_processor.py`](file:///Users/nahid/Desktop/Nahid/AI%20Profit%20Lab/Website/Website%20SEO/execution/haro_email_processor.py)
   - Connects to Gmail API via OAuth.
   - Queries digest emails without the `HARO Processed` label (`-label:haro-processed`, `newer_than:7d` across HARO, Connectively, Featured, SourceBottle, Qwoted), read or unread. Creates the label on first use.
-  - Uses `gemini-flash-latest` (with fallback to `gemini-flash-lite-latest`) with schema-constrained extraction.
-  - Avoids duplicate pitches by inspecting existing draft subjects before creation.
-  - Formats drafts with journalist submission link/email and spokesperson credentials.
+  - **Splits each HARO digest into queries in code** (`parse_haro_digest`): title, journalist, outlet, reply address, deadline, the "No AI Pitches" flag, and the full query text. On 2026-10-16 it was tested on 75 digests: 1,564 queries, none miscounted, no fields missing. Gemini only lists queries for digests in another format (Connectively, Qwoted, …).
+  - **Reads deadlines in code** (`parse_deadline`, ET → UTC, with year rollover) and drops expired queries before Gemini sees them.
+  - **Gemini models** (`HARO_MODELS`, override with the `HARO_GEMINI_MODELS` env var): 3.7 Flash → 3 Flash Preview → 3.5 Flash → flash-latest (3.8) → 3.6 Flash. On this key's free tier, **Gemini Pro has no quota at all**, and each Flash model allows about **20 requests a day**. The article publisher (`daily_publish.py`) uses 3.8 → 3.6 → 3.5 on the same key, so HARO starts with models the publisher doesn't use. A 429 for a spent daily quota moves straight to the next model rather than retrying. A day of HARO costs roughly one call per digest plus one per pitch. **Testing burns the same quota**: run evaluations with `HARO_GEMINI_MODELS` set to models the publisher doesn't use.
+  - **Screens every query with Gemini** (`screen_queries`). The output is held to a schema: for each query, eligible or not, a one-line reason, a fit score from 1–5, PITCH/SKIP, and whether it forbids AI replies. A pitch needs PITCH and fit ≥ 3. Every decision is printed to the log, so a missed query can be traced.
+  - **Drafts each chosen query separately** (`write_pitch`), using only `SPOKESPERSON_FACTS`. Code adds the notes block, greeting, signature and subject.
+  - **Avoids duplicates by reply address** (exact; the two digest copies share it), plus the query title, across Drafts and the last 60 days of Sent. Each digest is read once even though it arrives twice, and both copies get the label.
+  - `--dry-run` writes the drafts it would create to `.tmp/haro_dryrun/<timestamp>/` and changes nothing in Gmail (it also reads already-labelled digests, for testing).
+  - `--delete-expired` lists HARO drafts whose deadline has passed, and `--apply` deletes them. Each one is first saved to `.tmp/haro_deleted_drafts.jsonl`, because the Gmail API deletes drafts permanently. A draft with no readable deadline is kept.
 - **Interactive Authenticator**: [`tools/authenticate_gmail.py`](file:///Users/nahid/Desktop/Nahid/AI%20Profit%20Lab/Website/Website%20SEO/tools/authenticate_gmail.py)
   - Run interactively (`python3 tools/authenticate_gmail.py`) whenever OAuth credentials need initialization or renewal.
 - **Mac LaunchAgent**: [`tools/setup_mac_schedule.sh`](file:///Users/nahid/Desktop/Nahid/AI%20Profit%20Lab/Website/Website%20SEO/tools/setup_mac_schedule.sh)
@@ -91,6 +102,10 @@ HARO journalists review dozens of pitches. Our drafted responses must adhere to 
 - **Cloud fallback failed on every run, 2026-10-03 to 10-15** (13 runs, all at "Set up Python"). `cache: 'pip'` in `setup-python` needs a `requirements.txt` or `pyproject.toml`, and the repo has neither. Removed on 2026-10-16. Don't add it back without adding one of those files. The workflow now also stops with a named `::error::` if `GEMINI_API_KEY` or `GMAIL_TOKEN_JSON` is missing.
 - **"Expired token" that wasn't (2026-10-13)**: launchd runs a job missed during sleep as soon as the Mac wakes, often before Wi-Fi is back. The DNS failure was reported as an expired token. The processor now retries a network error 6 times over 2.5 minutes, and says "No network" if it still can't connect. Re-authenticate only when the log shows `invalid_grant` / "expired or invalid".
 - **Digests you opened yourself were never pitched (fixed 2026-10-16)**: the search used to find only `is:unread` mail, so a digest opened on the phone before the run was skipped for good. The 2026-10-16 Morning Edition was opened that way within an hour of arriving. The search now uses the `HARO Processed` label instead. On switching, the 21 digests that earlier runs had already processed (per `.tmp/haro_stdout.log`) were labelled by hand, so they weren't pitched again. Not every run writes to that log: drafts made 2026-10-10 06:08–06:21 UTC came from a manual run.
-- **Every digest arrives twice**: HARO sends one copy to `nahid@aiprofitlab.io` and one to `ai.profit.lab2026@gmail.com` (two subscriptions). Each copy costs a Gemini call. The duplicate draft is skipped only when Gemini writes the same subject line for both copies.
+- **Every digest arrives twice**: HARO sends one copy to `nahid@aiprofitlab.io` and one to `ai.profit.lab2026@gmail.com` (two subscriptions). Both copies have the same queries and the same reply addresses. Since 2026-10-16 the processor reads one copy and labels both. Before that, Gemini read each copy separately and picked a *different* "relevant" query from each identical copy (Oct 9 Evening). That inconsistency is what prompted the rewrite.
+- **The old all-in-one Gemini step invented details (before 2026-10-16)**: it shortened titles, and once made up a reply address (`reply+nix-data-ai@helpareporter.com`; the real one was `reply+5c58d9e2-…`). It drafted for requests Nahid wasn't eligible for: Fortune wanted a nonprofit CIO/CTO, TechTarget wanted CISOs and excluded vendors, Industry Dive wanted bank IT leaders. It also drafted for off-topic ones (romantic relationships, a holiday gift guide). Its sign-off named the wrong legal entity. All of it was replaced by the code parser, the per-query screening and the fixed facts list.
+- **Screening blind spots, fixed in the prompt (2026-10-16)**: Gemini skipped a query about "Gemini 4 Argon" because it didn't recognise the model, which was newer than its training data. It also read a "city and state you work from" attribution field as a US-only requirement. The prompt now says to take the journalist's description as true, and that an attribution field isn't a location requirement.
+- **Drafts invent first-hand experience unless told not to (2026-10-16)**: for Techopedia's "companies that switched to smaller models", the first draft said Nahid had "moved our core workflows" and that it "worked as planned". Its placeholders also suggested numbers ("e.g., 7 seconds to under 2"). The old agent's open drafts had the same fault: "In our client audits, consolidating 35,000+ thin facet URLs…", "drops unit operational costs by 60% to 85%". The prompt now forbids claimed experience, and `only_if_true` plus the `Check:` line put whatever is left in front of Nahid.
+- **Expired drafts pile up**: run `--delete-expired` (then `--apply`) now and then. On 2026-10-16 it removed 25 of 37 HARO drafts; their copies are in `.tmp/haro_deleted_drafts.jsonl`.
 - **The Mac clock is on America/Los_Angeles**, not Muscat. The LaunchAgent's 22:00 is 05:00 UTC (09:00 Muscat), which conveniently falls after all three of the previous day's HARO editions. The cloud run is scheduled for 18:00 UTC but GitHub starts it 3–5 hours late.
 

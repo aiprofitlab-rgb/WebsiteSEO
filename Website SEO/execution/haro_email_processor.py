@@ -1,9 +1,14 @@
 #!/usr/bin/env python3
 """
 HARO & Media Query Email Processor for AI Profit Lab.
-Scans incoming HARO / Connectively / Featured / Qwoted / SourceBottle digests,
-extracts relevant queries, evaluates deadlines, generates expert pitches with Gemini,
-and saves ready-to-review drafts directly in Gmail.
+Scans incoming HARO / Connectively / Featured / Qwoted / SourceBottle digests, splits them into
+queries and reads each deadline in code, has Gemini screen every query (PITCH or SKIP, with a
+reason), drafts one reply per chosen query from a fixed set of facts about Nahid, and saves the
+drafts in Gmail for review. Never sends anything.
+
+  python3 execution/haro_email_processor.py                 # the daily run
+  python3 execution/haro_email_processor.py --dry-run       # write drafts to .tmp/haro_dryrun/ instead
+  python3 execution/haro_email_processor.py --delete-expired [--apply]
 """
 
 import os
@@ -11,9 +16,12 @@ import re
 import sys
 import json
 import base64
+import calendar
 import datetime
+import email.utils
 import time
 from email.mime.text import MIMEText
+from zoneinfo import ZoneInfo
 import urllib.request
 import urllib.error
 
@@ -231,138 +239,498 @@ def safe_parse_json(text):
     return None
 
 
-def call_gemini(prompt, api_key):
-    """Call Google Gemini Flash endpoint via requests with robust retries."""
+# Tried in order. On the free tier (2026-10-16) Gemini Pro has no quota at all, and each Flash
+# model has its own allowance of about 20 requests a day. The article publisher
+# (daily_publish.py) uses 3.8 -> 3.6 -> 3.5 Flash on the same key, so HARO starts with models it
+# doesn't use and only falls back to those. A day of HARO costs about one call per digest plus
+# one per pitch. Override with a comma-separated HARO_GEMINI_MODELS.
+HARO_MODELS = os.environ.get(
+    'HARO_GEMINI_MODELS',
+    'gemini-3.7-flash,gemini-3-flash-preview,gemini-3.5-flash,gemini-flash-latest,gemini-3.6-flash').split(',')
+
+
+def _daily_quota_spent(res):
+    """True for a 429 that waiting won't fix within this run: a per-day limit, or a limit of 0."""
+    try:
+        details = res.json().get('error', {}).get('details', [])
+    except ValueError:
+        return False
+    return any('PerDay' in v.get('quotaId', '') or str(v.get('quotaValue')) in ('0', 'None')
+               for d in details for v in d.get('violations', []))
+
+
+def call_gemini(prompt, api_key, schema=None, models=None, temperature=0.2):
+    """Call Gemini and return the parsed JSON reply, trying each model in turn.
+
+    With `schema`, Gemini is held to that response shape (structured output).
+    """
     import requests
-    import time
 
-    # Working and available models
-    models = [
-        'gemini-flash-latest',
-        'gemini-flash-lite-latest',
-        'gemini-3-flash-preview',
-        'gemini-3.1-flash-lite-preview'
-    ]
-
-    payload = {
-        "contents": [{
-            "parts": [{"text": prompt}]
-        }],
-        "generationConfig": {
-            "temperature": 0.2,
-            "maxOutputTokens": 16384,
-            "responseMimeType": "application/json"
-        }
+    models = models or HARO_MODELS
+    config = {
+        "temperature": temperature,
+        "maxOutputTokens": 32768,
+        "responseMimeType": "application/json",
     }
+    if schema:
+        config["responseSchema"] = schema
+    payload = {"contents": [{"parts": [{"text": prompt}]}], "generationConfig": config}
 
     for model in models:
         url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={api_key}"
         for attempt in range(3):
             try:
-                res = requests.post(url, json=payload, timeout=60)
-                if res.status_code == 200:
-                    res_data = res.json()
-                    parts = res_data.get('candidates', [{}])[0].get('content', {}).get('parts', [])
-                    text = "".join([p.get('text', '') for p in parts if 'text' in p]).strip()
-
-                    parsed = safe_parse_json(text)
-                    if parsed:
-                        return parsed
-                    else:
-                        print(f"[!] JSON parsing error on {model}")
-                        print(f"    Raw preview: {text[:200]} ... {text[-100:]}")
-                        return None
-                elif res.status_code in [429, 503]:
-                    time.sleep(2 * (attempt + 1))
-                    continue
-                elif res.status_code == 404:
-                    # Model not found, advance to next candidate model
-                    break
-                else:
-                    print(f"[!] Gemini Error ({model}): {res.status_code} - {res.text[:200]}")
-                    break
+                res = requests.post(url, json=payload, timeout=180)
             except Exception as e:
-                time.sleep(2)
+                print(f"     [!] Gemini {model} attempt {attempt + 1}: {type(e).__name__}")
+                time.sleep(5)
                 continue
-
+            if res.status_code == 200:
+                parts = res.json().get('candidates', [{}])[0].get('content', {}).get('parts', [])
+                text = "".join(p.get('text', '') for p in parts if 'text' in p).strip()
+                parsed = safe_parse_json(text)
+                if parsed:
+                    if model != models[0]:
+                        print(f"     [*] Answered by {model}.")
+                    return parsed
+                print(f"[!] JSON parsing error on {model}. Raw preview: {text[:200]} ... {text[-100:]}")
+                break
+            if res.status_code == 429 and _daily_quota_spent(res):
+                print(f"     [!] Gemini {model}: no free quota left today. Trying the next model.")
+                break
+            if res.status_code in (429, 500, 503):
+                print(f"     [!] Gemini {model} attempt {attempt + 1}: HTTP {res.status_code} {res.text[:120]!r}")
+                time.sleep(10 * (attempt + 1))
+                continue
+            if res.status_code != 404:
+                print(f"[!] Gemini Error ({model}): {res.status_code} - {res.text[:200]}")
+            break
     return None
 
 
-def analyze_email_and_draft_pitches(email_body, subject, date_received, api_key):
+# ---------------------------------------------------------------------------
+# Who the pitches speak for. A pitch may state only these facts about Nahid or AI Profit
+# Lab; anything else he adds himself through an [ADD: ...] placeholder. Sourced on
+# 2026-10-16 from the live About page and the aiprofitlab-brand skill. Never put a client
+# name, result, percentage or year count here unless Nahid has confirmed it.
+# ---------------------------------------------------------------------------
+SPOKESPERSON_FACTS = """\
+- Name: Nahid Abyari. Title: Founder, AI Profit Lab (https://aiprofitlab.io), based in Muscat, Oman.
+  LinkedIn: https://www.linkedin.com/in/nahid-aby. Email: hello@aiprofitlab.io. There is no public
+  headshot link yet.
+- AI Profit Lab is not an agency. It is one engineer, Nahid, who does the work himself, in Arabic and English.
+- He is an engineer who built and ran a real distribution business: importing, storage, catalogues,
+  price tiers, quotes, shipping, invoices and the follow-up nobody has time for. (Never name the
+  country that business is in.)
+- What it taught him: the bottleneck was not price or product but response time. A buyer's message
+  that arrived at 9pm and got answered at 8am had already bought somewhere else.
+- So he built what he needed: a system that answers buyers in Arabic and English, knows the stock
+  and the terms of sale, and passes him only the buyers worth his time. That became AI Profit Lab.
+- AI Profit Lab builds done-for-you AI automation for small and mid-sized trading, distribution and
+  service businesses in Oman and the GCC: WhatsApp and website assistants that answer buyers,
+  missed-call follow-up, lead capture, quote and invoice automation, owner dashboards, and websites
+  with search visibility (SEO). It audits the bottleneck, builds the system, runs it and trains the team.
+- His working rules: plain language; prices published on the site; what is not included is stated
+  up front; no invented numbers.
+- Who he turns away: large companies and ERP projects, buyers who only want the cheapest option,
+  businesses with no digital presence yet, and "make us go viral" requests.
+- He does NOT have: a corporate CIO/CTO/CISO role, a nonprofit or government role, medical, legal,
+  financial-advisory or academic credentials, US/UK/EU residence, or published client case studies."""
+
+PITCH_FROM = 'nahid@aiprofitlab.io'   # the address the HARO account is registered to; a verified send-as alias
+
+# The brand signature (aiprofitlab-brand skill, section 9), one item per line.
+SIGNATURE = (
+    "Nahid Abyari\n"
+    "Founder, AI Profit Lab\n"
+    "hello@aiprofitlab.io · +968 9924 5250 · aiprofitlab.io\n"
+    "LinkedIn: https://www.linkedin.com/in/nahid-aby · headshot on request"
+)
+
+NOTES_START = "=== NOTES FOR NAHID: delete from here down to the dashed line before sending ==="
+NOTES_END = "-" * 84
+WRITE_YOURSELF = "[WRITE IT YOURSELF] "
+
+MIN_LEAD = datetime.timedelta(hours=1)   # a deadline closer than this leaves no time to review a draft
+EASTERN = ZoneInfo('America/New_York')   # HARO deadlines are in ET
+MUSCAT = ZoneInfo('Asia/Muscat')
+
+MONTHS = {name.lower(): i for i, name in enumerate(calendar.month_name) if name}
+MONTHS.update({name.lower(): i for i, name in enumerate(calendar.month_abbr) if name})
+MONTHS['sept'] = 9
+_MONTH_RE = '|'.join(sorted(MONTHS, key=len, reverse=True))
+
+BANNED_WORDS = ['synergy', 'leverage', 'transform', 'revolutionary', 'cutting-edge', 'disrupt',
+                'seamless', 'enterprise-grade', 'growth-hack', '10x', 'game-changer', 'unlock']
+
+
+def parse_deadline(raw, reference):
+    """Turn a HARO deadline into an aware UTC datetime, or None if it can't be read.
+
+    Handles "6:00 PM ET - 20 October", "October 15, 2026, at 5 p.m. Eastern" and
+    "9 October 2026, 4:56 PM ET". `reference` (an aware datetime, e.g. when the digest
+    arrived) supplies a missing year. A date with no time counts as 23:59 that day.
     """
-    Use Gemini to parse HARO digest, filter relevant topics, check deadlines,
-    and generate ready-to-use pitch drafts.
+    if not raw:
+        return None
+    text = raw.lower()
+    d = re.search(rf'\b(\d{{1,2}})(?:st|nd|rd|th)?\s+({_MONTH_RE})\b', text)
+    if d:
+        day, month = int(d.group(1)), MONTHS[d.group(2)]
+    else:
+        d = re.search(rf'\b({_MONTH_RE})\.?\s+(\d{{1,2}})(?:st|nd|rd|th)?\b', text)
+        if not d:
+            return None
+        month, day = MONTHS[d.group(1)], int(d.group(2))
+    y = re.search(r'\b(20\d{2})\b', text)
+    year = int(y.group(1)) if y else reference.year
+    if not y and month < reference.month - 6:
+        year += 1   # a December digest with a January deadline
+    hour, minute = 23, 59
+    t = re.search(r'\b(\d{1,2})(?::(\d{2}))?\s*([ap])\.?\s*m\b', text)
+    if t:
+        hour = int(t.group(1)) % 12 + (12 if t.group(3) == 'p' else 0)
+        minute = int(t.group(2) or 0)
+    try:
+        return datetime.datetime(year, month, day, hour, minute, tzinfo=EASTERN).astimezone(datetime.timezone.utc)
+    except ValueError:
+        return None
+
+
+def _unwrap(text):
+    """Join the digest's hard-wrapped lines back into paragraphs."""
+    paras = [re.sub(r'\s+', ' ', p).strip() for p in re.split(r'\n\s*\n', text)]
+    return '\n\n'.join(p for p in paras if p)
+
+
+def _field(header, label):
+    m = re.search(rf'^{label}:[ \t]*(.*)$', header, re.M)
+    return m.group(1).strip() if m else ''
+
+
+def parse_haro_digest(text):
+    """Split a HARO digest into its queries, without an LLM. Returns [] for any other format.
+
+    Each query is keyed by its reply+ address, which HARO gives every query and repeats
+    unchanged in the copies sent to both subscribed addresses.
     """
-    current_time_str = datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%d %H:%M UTC')
+    starts = list(re.finditer(r'^(\d{1,3})\) Summary:\s*', text, re.M))
+    queries = []
+    for i, m in enumerate(starts):
+        end = starts[i + 1].start() if i + 1 < len(starts) else len(text)
+        block = text[m.end():end].split('\nBack to Top')[0]
+        head, found, body = block.partition('\nQuery:')
+        if not found:
+            continue
+        title, _, fields = head.partition('\nName:')
+        fields = 'Name:' + fields
+        addr = re.search(r'[\w.+-]+@[\w-]+(?:\.[\w-]+)+', _field(fields, 'Email'))
+        outlet = _field(fields, 'Media Outlet')
+        outlet_m = re.match(r'(.*?)\s*\((https?://[^)\s]+)\)\s*$', outlet)
+        profile = re.search(r'HARO Journalist Profile URL:\s*(https?://\S+)', fields)
+        queries.append({
+            'id': addr.group(0).lower() if addr else f"query-{m.group(1)}",
+            'title': _unwrap(title),
+            'journalist': _field(fields, 'Name'),
+            'category': _field(fields, 'Category'),
+            'email': addr.group(0) if addr else '',
+            'profile_url': profile.group(1) if profile else '',
+            'outlet': outlet_m.group(1) if outlet_m else outlet,
+            'outlet_url': outlet_m.group(2) if outlet_m else '',
+            'deadline_raw': _field(fields, 'Deadline'),
+            'no_ai': 'no ai pitches considered' in fields.lower(),
+            'query': _unwrap(body),
+        })
+    return queries
 
-    # Send up to 80,000 characters to prevent clipping queries in long digests
-    trimmed_body = email_body[:80000]
 
-    prompt = f"""
-You are an expert PR pitch strategist for Nahid, Founder of AI Profit Lab (International Gulf Lotus SPC, https://aiprofitlab.io).
-Current Date/Time: {current_time_str}
-Email Subject: {subject}
-Email Received: {date_received}
+EXTRACT_SCHEMA = {
+    "type": "OBJECT",
+    "properties": {"queries": {"type": "ARRAY", "items": {
+        "type": "OBJECT",
+        "properties": {
+            "title": {"type": "STRING"}, "journalist": {"type": "STRING"}, "outlet": {"type": "STRING"},
+            "email": {"type": "STRING"}, "submission_url": {"type": "STRING"},
+            "deadline_raw": {"type": "STRING"}, "query": {"type": "STRING"},
+        },
+        "required": ["title", "outlet", "email", "deadline_raw", "query"],
+    }}},
+    "required": ["queries"],
+}
 
-EMAIL CONTENT:
----
-{trimmed_body}
----
 
-YOUR TASK:
-1. Parse the email digest into individual journalist queries (from HARO, Connectively, Featured, SourceBottle, Qwoted, etc.).
-2. For each query:
-   - Check deadline: If the deadline has already passed relative to {current_time_str}, mark 'is_expired': true. (If only a date is given without a specific time, assume 23:59 on that day).
-   - Check topic relevance to AI Profit Lab:
-     * ACCEPT: AI, Machine Learning, Generative AI, LLMs, Automation, RPA, Web Design, UX/UI, Conversion Optimization, SEO, Tech Business, Digital Transformation, Cloud Systems.
-     * REJECT: Healthcare/medicine, beauty, fashion, personal investing, crypto trading, real estate, general lifestyles, non-tech topics.
-3. For all ACTIVE (not expired) and RELEVANT queries:
-   Draft a winning, concise PR pitch tailored to the query adhering strictly to these PR guidelines:
-   * Subject Line: "HARO Pitch: [Query Title] — Nahid, AI Profit Lab"
-   * Opening: 1 clear sentence with Nahid's title and direct qualifications.
-   * Soundbites: 2-3 concise bullet points with concrete, original, actionable insights ready for the journalist to copy-paste.
-   * Bio & Signoff:
-     Nahid
-     Founder, AI Profit Lab (https://aiprofitlab.io)
-     A brand of International Gulf Lotus SPC
-     Headshot & further insights available upon request.
-   * Pitch Draft Formatting:
-     At the very top of draft_body, include reference details:
-     [OUTLET: <Publication>]
-     [QUERY: <Query Title>]
-     [DEADLINE: <Deadline>]
-     [SUBMIT TO: <Journalist Email or Submission Portal URL>]
-     ---
+def extract_queries_with_gemini(text, api_key):
+    """For a digest that isn't in HARO's format (Connectively, Qwoted, ...): list its queries with Gemini."""
+    prompt = (
+        "This email is a digest of journalist requests for expert sources. List every request in it. "
+        "Copy each field from the email; do not summarise or invent. Use an empty string for a field the email "
+        "doesn't give. 'email' is where a reply goes; 'query' is the full request text.\n\nEMAIL:\n---\n"
+        f"{text[:80000]}\n---"
+    )
+    result = call_gemini(prompt, api_key, schema=EXTRACT_SCHEMA, temperature=0)
+    queries = []
+    for i, q in enumerate((result or {}).get('queries', [])):
+        addr = (q.get('email') or '').strip()
+        queries.append({
+            'id': addr.lower() if '@' in addr else f"query-{i + 1}-{q.get('title', '')[:40].lower()}",
+            'title': q.get('title', '').strip(), 'journalist': q.get('journalist', '').strip(),
+            'category': '', 'email': addr if '@' in addr else '',
+            'profile_url': q.get('submission_url', ''), 'outlet': q.get('outlet', '').strip(), 'outlet_url': '',
+            'deadline_raw': q.get('deadline_raw', '').strip(),
+            'no_ai': 'no ai pitch' in q.get('query', '').lower(), 'query': q.get('query', '').strip(),
+        })
+    return queries
 
-Return JSON in this EXACT schema (do NOT include list of rejected queries):
-{{
-  "total_queries_found": int,
-  "skipped_queries_count": int,
-  "relevant_active_queries": [
-    {{
-      "query_title": "string",
-      "publication": "string",
-      "journalist_name": "string",
-      "journalist_email": "string",
-      "submission_url": "string",
-      "deadline_str": "string",
-      "is_expired": false,
-      "is_relevant": true,
-      "draft_subject": "string",
-      "draft_body": "string"
-    }}
-  ]
-}}
+
+SCREEN_SCHEMA = {
+    "type": "OBJECT",
+    "properties": {"decisions": {"type": "ARRAY", "items": {
+        "type": "OBJECT",
+        "properties": {
+            "id": {"type": "STRING"},
+            "eligible": {"type": "BOOLEAN"},
+            "reason": {"type": "STRING"},
+            "fit": {"type": "INTEGER"},
+            "decision": {"type": "STRING", "enum": ["PITCH", "SKIP"]},
+            "ai_replies_forbidden": {"type": "BOOLEAN"},
+        },
+        "required": ["id", "eligible", "reason", "fit", "decision", "ai_replies_forbidden"],
+        "propertyOrdering": ["id", "eligible", "reason", "fit", "decision", "ai_replies_forbidden"],
+    }}},
+    "required": ["decisions"],
+}
+
+
+def screen_queries(queries, api_key):
+    """Ask Gemini for a PITCH/SKIP decision, with a reason, on every query. None if it fails."""
+    if not queries:
+        return {}
+    listing = "\n\n".join(
+        f"[q{i}] {q['title']}\nOutlet: {q['outlet']} | Category: {q['category'] or '-'}\n{q['query']}"
+        for i, q in enumerate(queries)
+    )
+    prompt = f"""You screen journalist requests for one expert source and decide, for EVERY request,
+whether he should reply.
+
+THE SOURCE
+{SPOKESPERSON_FACTS}
+
+Decide PITCH only when all four hold:
+1. ELIGIBLE: he is the kind of person the journalist asks for. Read who should respond and every
+   requirement: role, seniority, company size, industry, credential, country or city, and personal
+   experience ("CIOs at 250-2,000-employee firms", "nonprofit CTO", "US-based", "licensed", "MD",
+   "parents who", "homeowners", "women founders", "e-commerce store owners"). If any requirement
+   rules him out, eligible=false and SKIP. Founders, small-business owners and AI or automation
+   consultants or experts do fit when the request is open to them. A form field asking for your
+   city, state or country so they can credit you is NOT a location requirement: skip on location
+   only when the request says sources must be based somewhere.
+2. TOPIC: something he can speak to from experience: practical AI adoption in small and mid-sized
+   businesses; AI agents, chatbots and assistants for customer messages and sales; WhatsApp and
+   customer-service automation; automating admin work (quotes, invoices, follow-up, data entry);
+   running a small trading, distribution or service business; websites, SEO and AI search for small
+   businesses; choosing AI tools and models on a small budget; founder life in an AI-first one-person
+   company; business and technology in Oman, the GCC and the Middle East.
+3. NOT pay-to-play: no sponsored placements, paid awards or listings, product samples, gift guides or
+   products to review.
+4. SUBSTANCE: he can give a useful, honest answer without making up statistics or client stories.
+   A request that needs real numbers or examples from his own business is fine: the draft will leave
+   placeholders for him.
+
+Requests often mention products, launches or news newer than anything you know about. Take the
+journalist's description as true; never skip a request because you don't recognise something in it.
+
+fit: 1-5, how strong a source he is for this request (5 = exactly who they want). A PITCH needs fit 3+.
+Generic business-advice requests (networking, productivity, leadership, hiring or general
+"expert tips" roundups) are fit 2 unless the request is about one of the topics in rule 2.
+In each reason, describe him only by the facts above: never credit him with experience they don't state.
+ai_replies_forbidden: true when the request says it rejects AI-written replies ("No AI pitches",
+"written in your own words", "no AI-generated responses").
+Give one decision for every id below, in order. Keep each reason to one sentence.
+
+REQUESTS
+{listing}
 """
-    return call_gemini(prompt, api_key)
+    result = call_gemini(prompt, api_key, schema=SCREEN_SCHEMA, temperature=0)
+    if not result:
+        return None
+    by_id = {d.get('id'): d for d in result.get('decisions', [])}
+    decisions = {}
+    for i, q in enumerate(queries):
+        d = by_id.get(f"q{i}")
+        if d is None:
+            print(f"     [!] Screening returned no decision for '{q['title']}'. Treating it as SKIP.")
+            d = {'decision': 'SKIP', 'fit': 0, 'eligible': False, 'reason': 'no decision returned',
+                 'ai_replies_forbidden': False}
+        decisions[q['id']] = d
+    return decisions
+
+
+DRAFT_SCHEMA = {
+    "type": "OBJECT",
+    "properties": {"fit_note": {"type": "STRING"}, "only_if_true": {"type": "STRING"}, "text": {"type": "STRING"}},
+    "required": ["fit_note", "only_if_true", "text"],
+    "propertyOrdering": ["fit_note", "only_if_true", "text"],
+}
+
+
+def write_pitch(q, api_key, notes_only):
+    """Draft the reply to one query, or talking points when the journalist rejects AI-written replies."""
+    if notes_only:
+        task = """This journalist rejects AI-written replies, so do NOT write the reply. Write talking points
+Nahid will turn into his own reply: 3-5 bullet points ("- "), one idea each, as short notes he can
+expand (fragments are fine). After them add "They asked for:" and list what the journalist wants
+included."""
+    else:
+        task = """Write Nahid's reply, ready for him to review and send:
+- Open with one sentence: who he is and why he can answer THIS request.
+- Then answer the journalist's actual questions directly, in the order asked, in 2-4 short paragraphs
+  or "- " bullets they can quote as-is. If they list things to include, include each one.
+- Give a concrete opinion, a practical tip or how something works in practice, not generalities.
+- 120-250 words unless the journalist asks for a different length."""
+
+    prompt = f"""You draft replies to journalist requests for Nahid Abyari.
+
+THE REQUEST
+Title: {q['title']}
+Outlet: {q['outlet']}
+Journalist: {q['journalist']}
+{q['query']}
+
+FACTS ABOUT NAHID: the only things you may state about him or AI Profit Lab
+{SPOKESPERSON_FACTS}
+
+{task}
+
+RULES
+- First person, as Nahid. Plain, specific and calm: an operator talking, not a vendor selling.
+- Never state that Nahid did, built, switched, chose, measured, tried, saw or experienced anything
+  unless the facts above say so. Inventing his first-hand experience is the worst mistake a draft
+  can make: a journalist will print it as true. The same goes for clients, case results,
+  percentages, counts, years of experience, team size and awards. Never invent statistics about the
+  world either.
+- Opinions, explanations of how things work, and advice are fine: they don't claim experience.
+- When the request asks for first-hand experience the facts don't cover, write those parts as
+  placeholders for Nahid, e.g. [ADD: which model you replaced, with which, and why]. Inside a
+  placeholder, say what to add; never suggest a number or an example answer. At most 3 placeholders.
+- Do not name the country of his distribution business. Do not claim local roots or a network.
+- Plain text only: no markdown, no headings, no bold. No greeting and no sign-off: both are added.
+- Never use: synergy, leverage, transform, revolutionary, cutting-edge, disrupt, seamless,
+  enterprise-grade, growth-hack, 10x, game-changer, unlock.
+
+fit_note: one sentence for Nahid on why this request suits him and anything to watch.
+only_if_true: the first-hand experience this reply depends on that the facts don't confirm, written
+as a condition Nahid can check (e.g. "you have moved a live workflow from a large model to a smaller
+one"). Empty when the reply relies only on the facts and on opinion.
+"""
+    result = call_gemini(prompt, api_key, schema=DRAFT_SCHEMA, temperature=0.4)
+    if not result or not (result.get('text') or '').strip():
+        return None
+    return result
+
+
+def claims_to_check(text, query_text):
+    """Numbers and banned words in a draft that the journalist's request doesn't explain."""
+    context = query_text.lower()
+    flags = []
+    for m in re.finditer(r'\b\d[\d,.]*\s*(%|percent|per cent|x\b|clients?|customers?|businesses|companies|'
+                         r'brands|years?|months?|staff|employees|people|projects)', text, re.I):
+        if m.group(0).lower() not in context:
+            flags.append(f'"{m.group(0)}"')
+    for word in BANNED_WORDS:
+        if re.search(rf'\b{re.escape(word)}', text, re.I) and word not in context:
+            flags.append(f'banned word "{word}"')
+    return flags
+
+
+def build_draft(q, result, notes_only):
+    """Assemble the subject and body of a pitch draft. Everything above NOTES_END is for Nahid only."""
+    deadline = q.get('deadline_utc')
+    if deadline:
+        when = (f"{q['deadline_raw']}  =  {deadline.astimezone(MUSCAT):%a %d %b, %H:%M} Muscat  "
+                f"({deadline:%Y-%m-%d %H:%M} UTC)")
+    else:
+        when = f"{q['deadline_raw'] or 'not stated'}  (couldn't read it: check the request)"
+    text = result['text'].strip()
+    notes = [
+        NOTES_START,
+        f"Outlet:      {q['outlet']}" + (f" ({q['outlet_url']})" if q['outlet_url'] else ''),
+        f"Journalist:  {q['journalist']}" + (f" · {q['profile_url']}" if q['profile_url'] else ''),
+        f"Deadline:    {when}",
+        f"Why pitch:   {result.get('fit_note', '').strip()}",
+    ]
+    condition = (result.get('only_if_true') or '').strip()
+    if condition:
+        notes.append(f"Send only if true: {condition}")
+    placeholders = re.findall(r'\[ADD:[^\]]*\]', text)
+    if placeholders:
+        notes.append(f"Fill in:     {len(placeholders)} [ADD: ...] placeholder(s) below")
+    flags = claims_to_check(re.sub(r'\[ADD:[^\]]*\]', '', text), q['query'])
+    flags += [f"placeholder suggests an answer: {p}" for p in placeholders if re.search(r'\d|e\.g\.', p)]
+    if flags:
+        notes.append("Check:       " + "; ".join(flags))
+    if notes_only:
+        notes += ["!! NO AI-WRITTEN PITCHES: this journalist rejects AI-written replies, so below are",
+                  "   talking points, not a pitch. Write the reply in your own words, then remove the",
+                  f"   {WRITE_YOURSELF.strip()} tag from the subject."]
+    notes += ["", f"Their request: {q['title']}", q['query'], NOTES_END]
+
+    # Some queries name a desk or the outlet ("Featured News") rather than a person.
+    name = q['journalist'].strip()
+    is_person = name and name.lower() != q['outlet'].strip().lower() and not re.search(
+        r'\b(news|team|editors?|desk|staff|magazine|media|newsroom|podcast)\b', name, re.I)
+    greeting = f"Hi {name.split()[0]}," if is_person else "Hello,"
+    body = "\n".join(notes) + f"\n\n{greeting}\n\n{text}\n\n{SIGNATURE}\n"
+    subject = f"HARO Pitch: {q['title']} — Nahid Abyari, AI Profit Lab"
+    if notes_only:
+        subject = WRITE_YOURSELF + subject
+    return subject, body
+
+
+def pitch_title_key(subject):
+    """The query title inside a pitch subject, so old and new subject formats compare equal."""
+    s = subject.replace(WRITE_YOURSELF, '')
+    s = re.sub(r'^\s*(re|fwd?):\s*', '', s, flags=re.I)
+    s = re.sub(r'^HARO Pitch:\s*', '', s)
+    s = re.split(r'\s+—\s+Nahid', s)[0]
+    return re.sub(r'\W+', ' ', s).strip().lower()
+
+
+def already_pitched(service):
+    """Reply addresses and title keys of HARO pitches already in Drafts or sent in the last 60 days."""
+    addresses, titles = set(), set()
+
+    def note(headers):
+        h = {x['name'].lower(): x['value'] for x in headers}
+        if 'HARO Pitch' not in h.get('subject', ''):
+            return
+        titles.add(pitch_title_key(h['subject']))
+        for addr in re.findall(r'[\w.+-]+@[\w-]+(?:\.[\w-]+)+', h.get('to', '')):
+            addresses.add(addr.lower())
+
+    token = None
+    while True:
+        page = service.users().drafts().list(userId='me', maxResults=100, pageToken=token).execute(num_retries=5)
+        for d in page.get('drafts', []):
+            msg = service.users().drafts().get(userId='me', id=d['id'], format='metadata').execute(num_retries=5)
+            note(msg.get('message', {}).get('payload', {}).get('headers', []))
+        token = page.get('nextPageToken')
+        if not token:
+            break
+    sent = service.users().messages().list(
+        userId='me', q='in:sent newer_than:60d "HARO Pitch"', maxResults=200).execute(num_retries=5)
+    for s in sent.get('messages', []):
+        msg = service.users().messages().get(userId='me', id=s['id'], format='metadata',
+                                             metadataHeaders=['To', 'Subject']).execute(num_retries=5)
+        note(msg.get('payload', {}).get('headers', []))
+    return addresses, titles
 
 
 def create_gmail_draft(service, to_email, subject, body_text):
-    """Create a draft email in Gmail."""
+    """Create a draft email in Gmail, sent from the address the HARO account uses."""
     message = MIMEText(body_text, 'plain', 'utf-8')
     if to_email and '@' in to_email and ' ' not in to_email and not to_email.startswith('http'):
         message['to'] = to_email
-    message['from'] = 'ai.profit.lab2026@gmail.com'
+    message['from'] = PITCH_FROM
     message['subject'] = subject
 
     raw_message = base64.urlsafe_b64encode(message.as_bytes()).decode('utf-8')
@@ -372,20 +740,20 @@ def create_gmail_draft(service, to_email, subject, body_text):
         }
     }
 
-    draft = service.users().drafts().create(userId='me', body=draft_body).execute()
+    draft = service.users().drafts().create(userId='me', body=draft_body).execute(num_retries=5)
     return draft
 
 
 def get_processed_label_id(service):
     """Return the id of the Gmail label that marks a digest as done, creating it on first use."""
-    for label in service.users().labels().list(userId='me').execute().get('labels', []):
+    for label in service.users().labels().list(userId='me').execute(num_retries=5).get('labels', []):
         if label['name'] == PROCESSED_LABEL:
             return label['id']
     created = service.users().labels().create(userId='me', body={
         'name': PROCESSED_LABEL,
         'labelListVisibility': 'labelShow',
         'messageListVisibility': 'show',
-    }).execute()
+    }).execute(num_retries=5)
     print(f"[+] Created Gmail label '{PROCESSED_LABEL}'.")
     return created['id']
 
@@ -402,16 +770,30 @@ def mark_digest_processed(service, msg_id, label_id):
             userId='me',
             id=msg_id,
             body={'addLabelIds': [label_id], 'removeLabelIds': ['UNREAD']}
-        ).execute()
+        ).execute(num_retries=5)
         print(f"     [+] Labelled digest '{PROCESSED_LABEL}' and marked it read.")
     except Exception as e:
         print(f"     [!] Could not label digest as processed: {e}")
 
 
-def run_haro_processor(query_days=7):
-    """Main execution function."""
+def digest_search_query(query_days, include_processed=False):
+    """Gmail search for HARO / media digests in the inbox, filtering out GitHub alerts."""
+    label_filter = '' if include_processed else f'-label:{PROCESSED_LABEL_SEARCH} '
+    return (
+        f'{label_filter}in:inbox -from:me -from:notifications@github.com -subject:"Run failed" -subject:"[aiprofitlab-rgb" '
+        '(from:haro OR from:connectively OR from:featured.com OR from:sourcebottle OR from:qwoted OR from:helpareporter '
+        f'OR subject:HARO OR subject:Connectively OR subject:Featured OR subject:SourceBottle OR subject:Qwoted) newer_than:{query_days}d'
+    )
+
+
+def run_haro_processor(query_days=7, dry_run=False):
+    """Main execution function.
+
+    dry_run: also reads digests already labelled as processed, and writes the drafts it would
+    create to .tmp/haro_dryrun/ instead of Gmail. Nothing in Gmail changes.
+    """
     print("=" * 60)
-    print("AI PROFIT LAB — AUTOMATED HARO & MEDIA PITCH ASSISTANT")
+    print("AI PROFIT LAB — AUTOMATED HARO & MEDIA PITCH ASSISTANT" + ("  [DRY RUN]" if dry_run else ""))
     print(f"Timestamp: {datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     print("=" * 60)
 
@@ -424,114 +806,215 @@ def run_haro_processor(query_days=7):
     print("[+] Successfully connected to Gmail API.")
     processed_label_id = get_processed_label_id(service)
 
-    # Search for HARO / media digest emails in the inbox that haven't been processed yet, read or
-    # not, filtering out GitHub alerts
-    query = (
-        f'-label:{PROCESSED_LABEL_SEARCH} in:inbox -from:me -from:notifications@github.com -subject:"Run failed" -subject:"[aiprofitlab-rgb" '
-        '(from:haro OR from:connectively OR from:featured.com OR from:sourcebottle OR from:qwoted OR from:helpareporter '
-        f'OR subject:HARO OR subject:Connectively OR subject:Featured OR subject:SourceBottle OR subject:Qwoted) newer_than:{query_days}d'
-    )
+    query = digest_search_query(query_days, include_processed=dry_run)
     print(f"[*] Searching inbox with query: '{query}'...")
-
-    results = service.users().messages().list(userId='me', q=query, maxResults=20).execute()
-    messages = results.get('messages', [])
-
+    messages = service.users().messages().list(userId='me', q=query, maxResults=40).execute(num_retries=5).get('messages', [])
     if not messages:
         print(f"[-] No unprocessed media digest emails found in the last {query_days} days.")
         return
 
-    print(f"[+] Found {len(messages)} unprocessed media digest email(s). Processing...")
+    # HARO sends the same digest to both subscribed addresses; read one copy, label both.
+    groups = {}
+    for msg_meta in messages:
+        msg_data = service.users().messages().get(userId='me', id=msg_meta['id'], format='full').execute(num_retries=5)
+        if not dry_run and processed_label_id in msg_data.get('labelIds', []):
+            continue  # labelled since the search ran (e.g. by an overlapping run)
+        headers = {h['name'].lower(): h['value'] for h in msg_data.get('payload', {}).get('headers', [])}
+        if 'github.com' in headers.get('from', '').lower() or 'run failed' in headers.get('subject', '').lower():
+            continue
+        groups.setdefault(headers.get('subject', '(No Subject)'), []).append((msg_data, headers))
+    print(f"[+] Found {len(messages)} unprocessed media digest email(s): {len(groups)} distinct digest(s).")
 
-    # Fetch existing drafts to avoid duplicating pitches
-    existing_draft_subjects = set()
-    try:
-        drafts_list = service.users().drafts().list(userId='me', maxResults=50).execute()
-        for d in drafts_list.get('drafts', []):
-            d_data = service.users().drafts().get(userId='me', id=d['id'], format='metadata').execute()
-            d_headers = d_data.get('message', {}).get('payload', {}).get('headers', [])
-            d_subj = next((h['value'] for h in d_headers if h['name'].lower() == 'subject'), '')
-            if d_subj:
-                existing_draft_subjects.add(d_subj.strip().lower())
-    except Exception as e:
-        print(f"[*] Note: Could not fetch existing drafts list ({e})")
-
+    pitched_addresses, pitched_titles = already_pitched(service)
+    now = datetime.datetime.now(datetime.timezone.utc)
+    out_dir = os.path.join(BASE_DIR, '.tmp', 'haro_dryrun', now.strftime('%Y%m%d-%H%M%S'))
     total_drafts_created = 0
 
-    for msg_meta in messages:
-        msg_id = msg_meta['id']
-        msg_data = service.users().messages().get(userId='me', id=msg_id, format='full').execute()
-        if processed_label_id in msg_data.get('labelIds', []):
-            continue  # labelled since the search ran (e.g. by an overlapping run)
-
-        headers = msg_data.get('payload', {}).get('headers', [])
-        subject = next((h['value'] for h in headers if h['name'].lower() == 'subject'), '(No Subject)')
-        date_header = next((h['value'] for h in headers if h['name'].lower() == 'date'), '')
-        sender_header = next((h['value'] for h in headers if h['name'].lower() == 'from'), '')
-
-        # Safeguard: Skip any obvious GitHub notification that slipped through
-        if 'github.com' in sender_header.lower() or 'run failed' in subject.lower():
-            print(f"     [SKIP] Skipping non-digest message: '{subject}'")
-            continue
-
-        print(f"\n---> Processing Digest: '{subject}' ({date_header})")
+    for subject, copies in groups.items():
+        msg_data, headers = copies[0]
+        print(f"\n---> Processing Digest: '{subject}' ({headers.get('date', '')}) x{len(copies)}")
         body_text = extract_message_body(msg_data.get('payload', {}))
+        try:
+            received = email.utils.parsedate_to_datetime(headers.get('date', ''))
+        except (TypeError, ValueError):
+            received = now
 
-        if not body_text or len(body_text) < 100:
-            print("     [!] Email body is empty or too short. Skipping.")
-            mark_digest_processed(service, msg_id, processed_label_id)
+        queries = parse_haro_digest(body_text)
+        if not queries and len(body_text) >= 100:
+            print("     [*] Not in HARO's format; listing its queries with Gemini...")
+            queries = extract_queries_with_gemini(body_text, api_key)
+        if not queries:
+            print("     [-] No journalist queries found in this email.")
+            if not dry_run:
+                for c, _ in copies:
+                    mark_digest_processed(service, c['id'], processed_label_id)
             continue
 
-        print(f"     [*] Analyzing queries with Gemini (Length: {len(body_text)} chars)...")
-        analysis = analyze_email_and_draft_pitches(body_text, subject, date_header, api_key)
-
-        if not analysis:
-            print("     [!] Could not parse email analysis from Gemini.")
+        for q in queries:
+            q['deadline_utc'] = parse_deadline(q['deadline_raw'], received)
+        active = [q for q in queries if q['deadline_utc'] is None or q['deadline_utc'] > now + MIN_LEAD]
+        print(f"     [*] {len(queries)} queries, {len(queries) - len(active)} past their deadline. "
+              f"Screening {len(active)} with Gemini...")
+        decisions = screen_queries(active, api_key)
+        if decisions is None:
+            print("     [!] Gemini screening failed. Leaving this digest for the next run.")
             continue
 
-        found = analysis.get('total_queries_found', 0)
-        active_relevant = analysis.get('relevant_active_queries', [])
-        skipped = analysis.get('skipped_queries_count', 0)
+        chosen = []
+        for q in active:
+            d = decisions[q['id']]
+            pitch = d.get('decision') == 'PITCH' and int(d.get('fit') or 0) >= 3
+            print(f"       {'PITCH' if pitch else 'skip '} fit {d.get('fit')}  {q['title'][:70]}  ({q['outlet']})"
+                  f"\n                    {d.get('reason', '')}")
+            if pitch:
+                q['notes_only'] = q['no_ai'] or bool(d.get('ai_replies_forbidden'))
+                chosen.append(q)
+        print(f"     [+] Queries Found: {len(queries)} | To pitch: {len(chosen)}")
 
-        print(f"     [+] Queries Found: {found} | Relevant & Active: {len(active_relevant)} | Skipped: {skipped}")
-
-        for item in active_relevant:
-            q_title = item.get('query_title', 'Inquiry')
-            to_addr = item.get('journalist_email') or ''
-            sub_url = item.get('submission_url') or ''
-            pub = item.get('publication', 'Media Outlet')
-            draft_sub = item.get('draft_subject', f"HARO Pitch: {q_title} — Nahid, AI Profit Lab")
-            draft_body = item.get('draft_body', '')
-
-            # Check if this exact pitch subject is already in drafts
-            if draft_sub.strip().lower() in existing_draft_subjects:
-                print(f"     [SKIP] Draft already exists for: '{draft_sub}'")
+        all_ok = True
+        for q in sorted(chosen, key=lambda x: x['deadline_utc'] or now + datetime.timedelta(days=365)):
+            if q['email'].lower() in pitched_addresses or pitch_title_key(q['title']) in pitched_titles:
+                print(f"     [SKIP] Already drafted or sent: '{q['title']}'")
                 continue
+            result = write_pitch(q, api_key, q['notes_only'])
+            if not result:
+                print(f"     [!] Gemini could not draft '{q['title']}'. The digest stays unprocessed for a retry.")
+                all_ok = False
+                continue
+            draft_subject, draft_body = build_draft(q, result, q['notes_only'])
+            print(f"\n     [+] DRAFTING {'TALKING POINTS' if q['notes_only'] else 'PITCH'}:")
+            print(f"         • Title: {q['title']}")
+            print(f"         • Publication: {q['outlet']}")
+            print(f"         • Target: {q['email'] or q['profile_url'] or 'Portal Submission'}")
+            print(f"         • Subject: {draft_subject}")
+            if dry_run:
+                os.makedirs(out_dir, exist_ok=True)
+                name = re.sub(r'[^a-z0-9]+', '-', q['title'].lower())[:60].strip('-')
+                with open(os.path.join(out_dir, f"{name}.txt"), 'w', encoding='utf-8') as f:
+                    f.write(f"To: {q['email']}\nFrom: {PITCH_FROM}\nSubject: {draft_subject}\n\n{draft_body}")
+                print(f"         [DRY RUN] Written to {out_dir}/{name}.txt")
+            else:
+                try:
+                    draft_res = create_gmail_draft(service, q['email'], draft_subject, draft_body)
+                    print(f"         [SUCCESS] Created Gmail Draft (ID: {draft_res.get('id')})")
+                except Exception as e:
+                    print(f"         [ERROR] Failed to create draft: {e}")
+                    all_ok = False
+                    continue
+            pitched_addresses.add(q['email'].lower())
+            pitched_titles.add(pitch_title_key(q['title']))
+            total_drafts_created += 1
 
-            print(f"\n     [+] DRAFTING PITCH:")
-            print(f"         • Title: {q_title}")
-            print(f"         • Publication: {pub}")
-            print(f"         • Target: {to_addr or sub_url or 'Portal Submission'}")
-            print(f"         • Subject: {draft_sub}")
-
-            try:
-                draft_res = create_gmail_draft(service, to_addr, draft_sub, draft_body)
-                draft_id = draft_res.get('id')
-                print(f"         [SUCCESS] Created Gmail Draft (ID: {draft_id})")
-                existing_draft_subjects.add(draft_sub.strip().lower())
-                total_drafts_created += 1
-            except Exception as e:
-                print(f"         [ERROR] Failed to create draft: {e}")
-
-        # Label this digest as processed now that its pitches are drafted
-        mark_digest_processed(service, msg_id, processed_label_id)
+        # Label every copy of this digest as processed now that its pitches are drafted
+        if all_ok and not dry_run:
+            for c, _ in copies:
+                mark_digest_processed(service, c['id'], processed_label_id)
 
     print("\n" + "=" * 60)
-    print(f"[SUMMARY] Routine complete. Total new pitches drafted: {total_drafts_created}")
+    print(f"[SUMMARY] Routine complete. Total new pitches drafted: {total_drafts_created}"
+          + (f" (dry run, see {out_dir})" if dry_run and total_drafts_created else ""))
     print("=" * 60)
 
 
+def build_deadline_index(service, days=45):
+    """Map each reply address, and each title key, seen in the last `days` of HARO digests to its
+    deadline (UTC). Titles cover drafts with no address, or with one the old all-in-one Gemini
+    step made up (2026-10-03: reply+nix-data-ai@..., where the query said pr@n-ix.com)."""
+    index = {}
+    msgs = service.users().messages().list(
+        userId='me', q=f'from:haro@helpareporter.com newer_than:{days}d', maxResults=500).execute(num_retries=5).get('messages', [])
+    seen_subjects = set()
+    for meta in msgs:
+        msg = service.users().messages().get(userId='me', id=meta['id'], format='full').execute(num_retries=5)
+        headers = {h['name'].lower(): h['value'] for h in msg['payload']['headers']}
+        if headers.get('subject') in seen_subjects:
+            continue
+        seen_subjects.add(headers.get('subject'))
+        received = email.utils.parsedate_to_datetime(headers['date'])
+        for q in parse_haro_digest(extract_message_body(msg['payload'])):
+            deadline = parse_deadline(q['deadline_raw'], received)
+            if q['email']:
+                index[q['email'].lower()] = deadline
+            index[pitch_title_key(q['title'])] = deadline
+    return index
+
+
+def delete_expired_drafts(apply=False):
+    """Delete HARO pitch drafts whose deadline has passed; with apply=False only list them.
+
+    The deadline comes from the draft's own notes (the "(... UTC)" stamp, or the older
+    "[DEADLINE: ...]" line). When neither is readable it is looked up by the draft's reply
+    address in the last 45 days of digests. A draft whose deadline can't be found is kept.
+    Each deleted draft is saved first to .tmp/haro_deleted_drafts.jsonl, because the Gmail
+    API deletes drafts permanently rather than moving them to Trash.
+    """
+    service = get_gmail_service()
+    now = datetime.datetime.now(datetime.timezone.utc)
+    drafts, token = [], None
+    while True:
+        page = service.users().drafts().list(userId='me', maxResults=100, pageToken=token).execute(num_retries=5)
+        drafts += page.get('drafts', [])
+        token = page.get('nextPageToken')
+        if not token:
+            break
+
+    rows, index = [], None
+    for d in drafts:
+        full = service.users().drafts().get(userId='me', id=d['id'], format='full').execute(num_retries=5)
+        msg = full.get('message', {})
+        headers = {h['name'].lower(): h['value'] for h in msg.get('payload', {}).get('headers', [])}
+        subject = headers.get('subject', '')
+        if 'HARO Pitch' not in subject:
+            continue
+        body = extract_message_body(msg.get('payload', {}))
+        created = datetime.datetime.fromtimestamp(int(msg.get('internalDate', 0)) / 1000, datetime.timezone.utc)
+        deadline = None
+        stamp = re.search(r'\((\d{4}-\d{2}-\d{2} \d{2}:\d{2}) UTC\)', body)
+        if stamp:
+            deadline = datetime.datetime.strptime(stamp.group(1), '%Y-%m-%d %H:%M').replace(tzinfo=datetime.timezone.utc)
+        if deadline is None:
+            old = re.search(r'\[DEADLINE:\s*([^\]]+)\]', body)
+            deadline = parse_deadline(old.group(1), created) if old else None
+        to = (re.findall(r'[\w.+-]+@[\w-]+(?:\.[\w-]+)+', headers.get('to', '')) or [''])[0].lower()
+        if deadline is None:
+            if index is None:
+                print("[*] Looking up deadlines in the last 45 days of HARO digests...")
+                index = build_deadline_index(service)
+            deadline = index.get(to) or index.get(pitch_title_key(subject))
+        state = 'unknown' if deadline is None else ('expired' if deadline <= now else 'active')
+        rows.append((state, deadline, subject, d['id'], full))
+
+    for state, deadline, subject, _, _ in sorted(rows, key=lambda r: (r[0], r[1] or now)):
+        when = f"{deadline:%Y-%m-%d %H:%M} UTC" if deadline else "deadline not found"
+        print(f"  {state:8} {when:22} {subject[:90]}")
+    expired = [r for r in rows if r[0] == 'expired']
+    print(f"[*] {len(rows)} HARO drafts: {len(expired)} expired, "
+          f"{sum(r[0] == 'active' for r in rows)} still open, {sum(r[0] == 'unknown' for r in rows)} unknown (kept).")
+    if not apply:
+        print("[*] Nothing deleted. Run again with --apply to delete the expired drafts.")
+        return
+    backup = os.path.join(BASE_DIR, '.tmp', 'haro_deleted_drafts.jsonl')
+    os.makedirs(os.path.dirname(backup), exist_ok=True)
+    with open(backup, 'a', encoding='utf-8') as f:
+        for _, deadline, subject, draft_id, full in expired:
+            f.write(json.dumps({'deleted_at': now.isoformat(), 'deadline': deadline.isoformat(),
+                                'subject': subject, 'draft': full}) + "\n")
+    for _, _, subject, draft_id, _ in expired:
+        service.users().drafts().delete(userId='me', id=draft_id).execute(num_retries=5)
+    print(f"[+] Deleted {len(expired)} expired drafts. Copies saved to {backup}")
+
+
 if __name__ == '__main__':
-    days = 7
-    if len(sys.argv) > 1 and sys.argv[1].isdigit():
-        days = int(sys.argv[1])
-    run_haro_processor(query_days=days)
+    import argparse
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('days', nargs='?', type=int, default=7, help='how many days of digests to read (default 7)')
+    parser.add_argument('--dry-run', action='store_true',
+                        help='write would-be drafts to .tmp/haro_dryrun/ and change nothing in Gmail')
+    parser.add_argument('--delete-expired', action='store_true',
+                        help='list HARO drafts whose deadline has passed (add --apply to delete them)')
+    parser.add_argument('--apply', action='store_true', help='with --delete-expired: actually delete')
+    args = parser.parse_args()
+    if args.delete_expired:
+        delete_expired_drafts(apply=args.apply)
+    else:
+        run_haro_processor(query_days=args.days, dry_run=args.dry_run)
