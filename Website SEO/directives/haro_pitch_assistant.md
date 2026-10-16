@@ -54,7 +54,7 @@ HARO journalists review dozens of pitches. Our drafted responses must adhere to 
    - Headshot / LinkedIn available upon request.
 5. **Safety & Inbox Rules**:
    - **ALWAYS SAVE AS DRAFT**: Never send emails automatically. Drafts must remain in the Gmail `Drafts` folder for human review and final approval.
-   - **MARK AS READ**: Once a digest email has been fully processed (its queries analyzed and qualifying drafts created), mark that digest email as read in Gmail to prevent duplicate work.
+   - **LABEL AS PROCESSED**: Once a digest email has been fully processed (its queries analyzed and qualifying drafts created), add the Gmail label `HARO Processed` to it (and mark it read). The label, not read status, is what prevents duplicate work, so a digest Nahid has already opened still gets pitched. A digest whose Gemini analysis fails stays unlabelled and is retried on the next run.
 
 ---
 
@@ -62,7 +62,7 @@ HARO journalists review dozens of pitches. Our drafted responses must adhere to 
 
 - **Main Processor**: [`execution/haro_email_processor.py`](file:///Users/nahid/Desktop/Nahid/AI%20Profit%20Lab/Website/Website%20SEO/execution/haro_email_processor.py)
   - Connects to Gmail API via OAuth.
-  - Queries unread digest emails (`newer_than:7d` across HARO, Connectively, Featured, SourceBottle, Qwoted).
+  - Queries digest emails without the `HARO Processed` label (`-label:haro-processed`, `newer_than:7d` across HARO, Connectively, Featured, SourceBottle, Qwoted), read or unread. Creates the label on first use.
   - Uses `gemini-flash-latest` (with fallback to `gemini-flash-lite-latest`) with schema-constrained extraction.
   - Avoids duplicate pitches by inspecting existing draft subjects before creation.
   - Formats drafts with journalist submission link/email and spokesperson credentials.
@@ -83,4 +83,14 @@ HARO journalists review dozens of pitches. Our drafted responses must adhere to 
   3. Under **Publishing status**, click **PUBLISH APP** (transitioning from "Testing" to "In Production").
   4. In Production status, refresh tokens do not expire after 7 days and remain valid indefinitely until manually revoked.
 - **GitHub Actions Secret**: If using GitHub Actions cloud fallback, update repository secret `GMAIL_TOKEN_JSON` with the contents of `token.json` after running `tools/authenticate_gmail.py`.
+
+---
+
+## Known Failure Modes (Self-Annealing Log)
+
+- **Cloud fallback failed on every run, 2026-10-03 to 10-15** (13 runs, all at "Set up Python"). `cache: 'pip'` in `setup-python` needs a `requirements.txt` or `pyproject.toml`, and the repo has neither. Removed on 2026-10-16. Don't add it back without adding one of those files. The workflow now also stops with a named `::error::` if `GEMINI_API_KEY` or `GMAIL_TOKEN_JSON` is missing.
+- **"Expired token" that wasn't (2026-10-13)**: launchd runs a job missed during sleep as soon as the Mac wakes, often before Wi-Fi is back. The DNS failure was reported as an expired token. The processor now retries a network error 6 times over 2.5 minutes, and says "No network" if it still can't connect. Re-authenticate only when the log shows `invalid_grant` / "expired or invalid".
+- **Digests you opened yourself were never pitched (fixed 2026-10-16)**: the search used to find only `is:unread` mail, so a digest opened on the phone before the run was skipped for good. The 2026-10-16 Morning Edition was opened that way within an hour of arriving. The search now uses the `HARO Processed` label instead. On switching, the 21 digests that earlier runs had already processed (per `.tmp/haro_stdout.log`) were labelled by hand, so they weren't pitched again. Not every run writes to that log: drafts made 2026-10-10 06:08–06:21 UTC came from a manual run.
+- **Every digest arrives twice**: HARO sends one copy to `nahid@aiprofitlab.io` and one to `ai.profit.lab2026@gmail.com` (two subscriptions). Each copy costs a Gemini call. The duplicate draft is skipped only when Gemini writes the same subject line for both copies.
+- **The Mac clock is on America/Los_Angeles**, not Muscat. The LaunchAgent's 22:00 is 05:00 UTC (09:00 Muscat), which conveniently falls after all three of the previous day's HARO editions. The cloud run is scheduled for 18:00 UTC but GitHub starts it 3–5 hours late.
 

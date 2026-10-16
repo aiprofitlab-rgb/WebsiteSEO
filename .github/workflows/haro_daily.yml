@@ -13,11 +13,12 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
 
+      # No `cache: 'pip'`: it needs a requirements.txt or pyproject.toml, the repo has
+      # neither, and every run from 2026-10-03 to 10-15 failed at this step because of it.
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-          cache: 'pip'
 
       - name: Install dependencies
         run: |
@@ -30,6 +31,12 @@ jobs:
           GMAIL_TOKEN_JSON: ${{ secrets.GMAIL_TOKEN_JSON }}
         run: |
           cd "Website SEO"
+          # Name a missing secret here, rather than let the script report it as an expired token.
+          missing=0
+          for s in GEMINI_API_KEY GMAIL_TOKEN_JSON; do
+            if [ -z "${!s}" ]; then echo "::error::Repository secret $s is not set."; missing=1; fi
+          done
+          [ "$missing" = 0 ] || exit 1
           echo "GEMINI_API_KEY=$GEMINI_API_KEY" > .env
           if [ -n "$GMAIL_CREDENTIALS_JSON" ]; then
             echo "$GMAIL_CREDENTIALS_JSON" > credentials.json

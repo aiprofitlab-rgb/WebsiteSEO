@@ -12,6 +12,7 @@ import sys
 import json
 import base64
 import datetime
+import time
 from email.mime.text import MIMEText
 import urllib.request
 import urllib.error
@@ -21,6 +22,7 @@ try:
     from google.oauth2.credentials import Credentials
     from google_auth_oauthlib.flow import InstalledAppFlow
     from google.auth.transport.requests import Request
+    from google.auth.exceptions import TransportError
     from googleapiclient.discovery import build
 except ImportError as e:
     print(f"Missing Google client libraries: {e}")
@@ -36,6 +38,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CREDENTIALS_FILE = os.path.join(BASE_DIR, 'credentials.json')
 TOKEN_FILE = os.path.join(BASE_DIR, 'token.json')
 ENV_FILE = os.path.join(BASE_DIR, '.env')
+
+# Gmail label put on every digest once it has been analysed. Gmail search spells a
+# label name in lowercase with hyphens for spaces.
+PROCESSED_LABEL = 'HARO Processed'
+PROCESSED_LABEL_SEARCH = PROCESSED_LABEL.lower().replace(' ', '-')
 
 
 def load_env():
@@ -74,15 +81,28 @@ def get_gmail_service():
     # Handle expired credentials
     if not creds or not creds.valid:
         if creds and creds.expired and creds.refresh_token:
-            try:
-                print("[*] Refreshing expired Gmail OAuth access token...")
-                creds.refresh(Request())
-                with open(TOKEN_FILE, 'w', encoding='utf-8') as token:
-                    token.write(creds.to_json())
-                print("[+] Successfully refreshed and saved token.json.")
-            except Exception as e:
-                print(f"[!] Failed to refresh token: {e}")
-                creds = None
+            # launchd runs a job missed during sleep the moment the Mac wakes, often before
+            # Wi-Fi is back (2026-10-13: DNS failure reported as an expired token). A network
+            # error is retried; only a refusal from Google means the token itself is bad.
+            for attempt in range(6):
+                try:
+                    print("[*] Refreshing expired Gmail OAuth access token...")
+                    creds.refresh(Request())
+                    with open(TOKEN_FILE, 'w', encoding='utf-8') as token:
+                        token.write(creds.to_json())
+                    print("[+] Successfully refreshed and saved token.json.")
+                    break
+                except TransportError as e:
+                    if attempt == 5:
+                        print(f"[FATAL] No network after 6 tries over 2.5 minutes, so Google could not be reached: {e}")
+                        print("        token.json is probably fine; the next scheduled run will retry.")
+                        sys.exit(1)
+                    print(f"[!] Network not reachable yet ({e}). Retrying in 30s...")
+                    time.sleep(30)
+                except Exception as e:
+                    print(f"[!] Failed to refresh token: {e}")
+                    creds = None
+                    break
 
         if not creds:
             # Check if running interactively or headless (launchd / cron / CI)
@@ -356,17 +376,36 @@ def create_gmail_draft(service, to_email, subject, body_text):
     return draft
 
 
-def mark_email_as_read(service, msg_id):
-    """Mark the email as read in Gmail by removing the UNREAD label."""
+def get_processed_label_id(service):
+    """Return the id of the Gmail label that marks a digest as done, creating it on first use."""
+    for label in service.users().labels().list(userId='me').execute().get('labels', []):
+        if label['name'] == PROCESSED_LABEL:
+            return label['id']
+    created = service.users().labels().create(userId='me', body={
+        'name': PROCESSED_LABEL,
+        'labelListVisibility': 'labelShow',
+        'messageListVisibility': 'show',
+    }).execute()
+    print(f"[+] Created Gmail label '{PROCESSED_LABEL}'.")
+    return created['id']
+
+
+def mark_digest_processed(service, msg_id, label_id):
+    """Label the digest as processed and mark it read.
+
+    The label, not read status, is what stops a digest being pitched twice, so a digest
+    opened on the phone before the run still gets pitched (2026-10-16's Morning Edition was
+    opened before the run that would have pitched it).
+    """
     try:
         service.users().messages().modify(
             userId='me',
             id=msg_id,
-            body={'removeLabelIds': ['UNREAD']}
+            body={'addLabelIds': [label_id], 'removeLabelIds': ['UNREAD']}
         ).execute()
-        print("     [+] Marked digest email as READ in inbox.")
+        print(f"     [+] Labelled digest '{PROCESSED_LABEL}' and marked it read.")
     except Exception as e:
-        print(f"     [!] Could not mark email as read: {e}")
+        print(f"     [!] Could not label digest as processed: {e}")
 
 
 def run_haro_processor(query_days=7):
@@ -379,14 +418,16 @@ def run_haro_processor(query_days=7):
     api_key = get_gemini_api_key()
     if not api_key:
         print("[ERROR] GEMINI_API_KEY is required. Please add it to .env or environment.")
-        return
+        sys.exit(1)
 
     service = get_gmail_service()
     print("[+] Successfully connected to Gmail API.")
+    processed_label_id = get_processed_label_id(service)
 
-    # Search for unread HARO / media digest emails strictly in inbox, filtering out GitHub alerts
+    # Search for HARO / media digest emails in the inbox that haven't been processed yet, read or
+    # not, filtering out GitHub alerts
     query = (
-        'is:unread in:inbox -from:me -from:notifications@github.com -subject:"Run failed" -subject:"[aiprofitlab-rgb" '
+        f'-label:{PROCESSED_LABEL_SEARCH} in:inbox -from:me -from:notifications@github.com -subject:"Run failed" -subject:"[aiprofitlab-rgb" '
         '(from:haro OR from:connectively OR from:featured.com OR from:sourcebottle OR from:qwoted OR from:helpareporter '
         f'OR subject:HARO OR subject:Connectively OR subject:Featured OR subject:SourceBottle OR subject:Qwoted) newer_than:{query_days}d'
     )
@@ -396,10 +437,10 @@ def run_haro_processor(query_days=7):
     messages = results.get('messages', [])
 
     if not messages:
-        print(f"[-] No unread media digest emails found in the last {query_days} days.")
+        print(f"[-] No unprocessed media digest emails found in the last {query_days} days.")
         return
 
-    print(f"[+] Found {len(messages)} unread media digest email(s). Processing...")
+    print(f"[+] Found {len(messages)} unprocessed media digest email(s). Processing...")
 
     # Fetch existing drafts to avoid duplicating pitches
     existing_draft_subjects = set()
@@ -419,6 +460,8 @@ def run_haro_processor(query_days=7):
     for msg_meta in messages:
         msg_id = msg_meta['id']
         msg_data = service.users().messages().get(userId='me', id=msg_id, format='full').execute()
+        if processed_label_id in msg_data.get('labelIds', []):
+            continue  # labelled since the search ran (e.g. by an overlapping run)
 
         headers = msg_data.get('payload', {}).get('headers', [])
         subject = next((h['value'] for h in headers if h['name'].lower() == 'subject'), '(No Subject)')
@@ -435,7 +478,7 @@ def run_haro_processor(query_days=7):
 
         if not body_text or len(body_text) < 100:
             print("     [!] Email body is empty or too short. Skipping.")
-            mark_email_as_read(service, msg_id)
+            mark_digest_processed(service, msg_id, processed_label_id)
             continue
 
         print(f"     [*] Analyzing queries with Gemini (Length: {len(body_text)} chars)...")
@@ -479,8 +522,8 @@ def run_haro_processor(query_days=7):
             except Exception as e:
                 print(f"         [ERROR] Failed to create draft: {e}")
 
-        # Mark this email as read now that it has been fully processed
-        mark_email_as_read(service, msg_id)
+        # Label this digest as processed now that its pitches are drafted
+        mark_digest_processed(service, msg_id, processed_label_id)
 
     print("\n" + "=" * 60)
     print(f"[SUMMARY] Routine complete. Total new pitches drafted: {total_drafts_created}")
