@@ -14,6 +14,13 @@ This queue tracks remaining articles to be generated, illustrated, and published
 | 49 | Cluster 5: Executive Strategy, Vision 2040 & ROI | The CEO Guide to Customized Dashboard Analytics and Automated Business Reporting | دليل المدير التنفيذي للوحات التحكم المخصصة وتقارير الأعمال المؤتمتة | Repair | 2026-10-08 | [2026-10-08-the-ceo-guide-to-customized-dashboard-analytics-and-automate](https://aiprofitlab.io/blog/en/2026-10-08-the-ceo-guide-to-customized-dashboard-analytics-and-automate/) |
 | 50 | Cluster 5: Executive Strategy, Vision 2040 & ROI | Future-Proofing Omani Businesses: Key AI Trends to Watch in the GCC for 2026–2030 | تأمين مستقبل الشركات العمانية: أبرز اتجاهات الذكاء الاصطناعي في الخليج 2026-2030 | Repair | 2026-10-09 | [2026-10-09-future-proofing-omani-businesses-key-ai-trends-to-watch-in-t](https://aiprofitlab.io/blog/en/2026-10-09-future-proofing-omani-businesses-key-ai-trends-to-watch-in-t/) |
 | 58 | Cluster 6: Technical Implementation & Integrations | How Vector Databases (Pinecone, Qdrant) Power Semantic Search for GCC Websites | كيف تمكّن القواعد البيانية المتجهة البحث الدلالي للمواقع في الخليج | Repair | 2026-10-10 | [2026-10-10-how-vector-databases-pinecone-qdrant-power-semantic-search-f](https://aiprofitlab.io/blog/en/2026-10-10-how-vector-databases-pinecone-qdrant-power-semantic-search-f/) |
+| 61 | Cluster 6: Technical Implementation & Integrations | Inventory Management Systems for Oman Businesses | أنظمة إدارة المخزون للشركات في عمان | Pending | - | - |
+| 62 | Cluster 6: Technical Implementation & Integrations | WhatsApp Business Web for Oman Sales Teams | دليل تشغيل واتساب بزنس ويب لفرق المبيعات في عمان | Pending | - | - |
+| 63 | Cluster 6: Technical Implementation & Integrations | Website Design Oman: What Local Businesses Need | تصميم المواقع في عمان: ما تحتاجه الشركات المحلية | Pending | - | - |
+| 64 | Cluster 6: Technical Implementation & Integrations | Best CRM Software for Small Business in Oman | أفضل برامج CRM للشركات الصغيرة في عمان | Pending | - | - |
+| 65 | Cluster 6: Technical Implementation & Integrations | Meta Business Suite: Managing Messages for Oman SMEs | استخدام Meta Business Suite للرد على استفسارات العملاء | Pending | - | - |
+| 66 | Cluster 5: Executive Strategy, Vision 2040 & ROI | Business Process Automation for Omani Trading Firms | أتمتة العمليات التجارية لشركات التجارة والتوزيع | Pending | - | - |
+| 67 | Cluster 3: Autonomous AI Agents | Building an n8n AI Agent for Office Automation | بناء وكيل ذكاء اصطناعي عبر n8n للعمليات الداخلية | Pending | - | - |
 
 ---
 
