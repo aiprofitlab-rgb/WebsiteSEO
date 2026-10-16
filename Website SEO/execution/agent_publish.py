@@ -25,7 +25,7 @@ workspace and reach the web, but cannot use git or the keychain. Everything that
 which Antigravity's scheduler runs every 10 minutes outside the sandbox.
 
 Agent instructions: directives/antigravity_publisher.md. Setup (the clone, the
-Antigravity project and the hourly schedule): execution/setup_antigravity_publisher.py.
+Antigravity project and the 10-minute schedule): execution/setup_antigravity_publisher.py.
 
 It runs ONLY in the publisher's own clone (~/Developer/aiprofitlab-publisher), never in
 the checkout Nahid works in, because every job starts by resetting the clone to
@@ -235,16 +235,20 @@ def sync():
     if os.environ.get("APL_NO_SYNC"):
         return
     git("fetch", "--quiet", "origin", "main")
+    # A rebase an interrupted run left half-done blocks every checkout until it is aborted.
+    git("rebase", "--abort", check=False)
     if git("rev-parse", "--abbrev-ref", "HEAD") != "main":
         git("checkout", "--quiet", "main")
     if int(git("rev-list", "--count", "origin/main..HEAD") or 0):
         r = subprocess.run(["git", "rebase", "origin/main"], cwd=REPO, capture_output=True, text=True)
         if r.returncode:
+            # Its job is still `submitted` (finish() runs only after a push lands), so the
+            # reset below drops the commit and this run rebuilds it on top of the new main.
             git("rebase", "--abort", check=False)
-            raise Stop("A publish commit from an earlier run conflicts with GitHub's main. Nahid has to "
-                       f"resolve it in {REPO}.", code=1)
-        git("push", "--quiet", "origin", "HEAD:main")
-        journal("pushed a commit an earlier run had left behind")
+            journal("dropped an unpushed commit that conflicts with GitHub's main; its job is rebuilt")
+        else:
+            git("push", "--quiet", "origin", "HEAD:main")
+            journal("pushed a commit an earlier run had left behind")
     git("reset", "--quiet", "--hard", "origin/main")
     # Files an interrupted build left behind would otherwise ride along in the next commit.
     git("clean", "-fdq", "--", "Website SEO/public_html", "Website SEO/directives")
@@ -277,8 +281,24 @@ def commit_and_push(message, paths=("Website SEO/public_html", "Website SEO/dire
         r = subprocess.run(["git", "push", "--quiet", "origin", "HEAD:main"], cwd=REPO,
                            capture_output=True, text=True)
         if not r.returncode:
+            git("fetch", "--quiet", "origin", "main")
+            if subprocess.run(["git", "merge-base", "--is-ancestor", "HEAD", "origin/main"],
+                              cwd=REPO).returncode:
+                raise Stop("git push reported success, but GitHub's main does not contain the commit.")
             return git("rev-parse", "--short", "HEAD")
-        git("pull", "--quiet", "--rebase", "origin", "main", check=False)
+        p = subprocess.run(["git", "pull", "--quiet", "--rebase", "origin", "main"], cwd=REPO,
+                           capture_output=True, text=True)
+        if p.returncode:
+            # Someone else pushed the same generated files (sitemap, hubs, queue) meanwhile. A
+            # rebase left in conflict sits at origin/main, where the next push "succeeds" without
+            # this commit and every later checkout fails. Drop the build instead: the job stays
+            # `submitted`, and the next run rebuilds it on top of the new main.
+            git("rebase", "--abort", check=False)
+            git("reset", "--quiet", "--hard", "origin/main")
+            journal(f"push conflicted with GitHub's main; dropped the build to redo it "
+                    f"({(p.stderr or p.stdout).strip()[:150]})")
+            raise Stop("GitHub's main changed the same files while this was being built. The build "
+                       "was dropped; the next run rebuilds it on top of the new main.")
         time.sleep(5)
     raise Stop(f"git push failed: {(r.stderr or r.stdout).strip()[:300]}. The commit is kept and the "
                f"next run pushes it.")

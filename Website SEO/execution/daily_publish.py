@@ -115,7 +115,8 @@ GENERIC_TITLE = ["supercharge your business", "ai for business", "unlock the pow
                  "revolutionize your", "transform your business", "take your business to the next level"]
 SELF_PROMO = ["we are", "we provide", "our company", "ai profit lab is", "welcome to", "at ai profit lab"]
 META_BAD_START = ("ai profit lab", "learn how", "discover", "supercharge")
-TITLE_SPECIFIC = re.compile(r"\d|oman|muscat|gcc|gulf|uae|saudi|sohar|salalah|duqm|how to|why|cost|"
+# A number counts only as a number of its own: "5 Ways", "2026", not the digit in "n8n", "GPT-4o" or "B2B".
+TITLE_SPECIFIC = re.compile(r"(?<![A-Za-z\d])\d+(?![A-Za-z])|oman|muscat|gcc|gulf|uae|saudi|sohar|salalah|duqm|how to|why|cost|"
                             r"roi|guide|free|best|top|checklist|vs\b|step", re.I)
 GCC_EN = ["muscat", "oman", "omani", "gcc", "gulf", "uae", "dubai", "saudi", "riyadh", "qatar",
           "bahrain", "kuwait", "vision 2040", "pdpl", "sohar", "salalah", "duqm", "nizwa",
