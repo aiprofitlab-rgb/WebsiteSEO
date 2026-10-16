@@ -869,10 +869,12 @@ def check_claims(lang, d, path):
     for i, c in enumerate(claims, 1):
         q = _n(c.get("quote"))
         kind = (c.get("kind") or "").strip().lower()
-        if len(q) < 4 or not _figs(q):
+        if len(q) < 4:
             problems.append(f"Ledger entry {i}: the quote must be copied text containing its number "
                             f"(got \"{c.get('quote', '')[:80]}\").")
             continue
+        if not _figs(q):
+            continue           # nothing that needs a source ("Vision 2040", the current year): harmless
         homes = [(w, t, ctx) for w, t, ctx in figured if q in _n(t) or _n(t) in q]
         if not homes:
             problems.append(f"Ledger entry {i}: \"{c.get('quote', '')[:100]}\" is not in the article. Copy "
