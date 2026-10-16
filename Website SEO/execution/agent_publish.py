@@ -1334,11 +1334,16 @@ def cmd_status(a):
 # The scheduler's entry point
 # ======================================================================
 def agentapi():
-    for c in (os.environ.get("ANTIGRAVITY_AGENTAPI_EXE"), shutil.which("agentapi"),
-              str(Path.home() / ".gemini/antigravity/bin/agentapi"),
+    """The command prefix for Antigravity's agent API. Inside a sidecar the app injects
+    ANTIGRAVITY_AGENTAPI_EXE: its language-server binary, whose `agentapi` SUBCOMMAND this is
+    (called without it, the binary tries to start a second language server and dies)."""
+    exe = os.environ.get("ANTIGRAVITY_AGENTAPI_EXE")
+    if exe and Path(exe).exists():
+        return [exe, "agentapi"]
+    for c in (shutil.which("agentapi"), str(Path.home() / ".gemini/antigravity/bin/agentapi"),
               str(Path.home() / ".gemini/antigravity-ide/bin/agentapi")):
         if c and Path(c).exists():
-            return c
+            return [c]
     raise Stop("agentapi not found: is Antigravity installed?")
 
 
@@ -1388,7 +1393,7 @@ def cmd_trigger(a):
     pid = git("config", "--get", "apl.projectId", check=False)
     if pid and not env.get("ANTIGRAVITY_PROJECT_ID"):
         env["ANTIGRAVITY_PROJECT_ID"] = pid
-    cmd = [agentapi(), "new-conversation", f"--model={MODEL}", f"--title={title}", prompt]
+    cmd = [*agentapi(), "new-conversation", f"--model={MODEL}", f"--title={title}", prompt]
     r = subprocess.run(cmd, env=env, capture_output=True, text=True, timeout=180)
     out = (r.stdout + r.stderr).strip()
     log(out[:800])
