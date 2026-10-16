@@ -145,7 +145,8 @@ def main():
             "command": "/bin/sh", "args": [trigger, "--dry-run"], "restart_policy": "never",
             "display_name": "AI Profit Lab publisher: one dry run",
             "description": "Runs once: a full article run that publishes nothing (agent_publish.py --dry-run).",
-            "env": {"ANTIGRAVITY_PROJECT_ID": pid},
+            # A new value each time: Antigravity reruns a sidecar only when its file changes.
+            "env": {"ANTIGRAVITY_PROJECT_ID": pid, "APL_REQUESTED": time.strftime("%Y-%m-%dT%H:%M:%S")},
         })
         enable_in_config(DRY_ID, pid, True)
     if a.approve:
@@ -164,7 +165,7 @@ def main():
         data.get("sidecars", {}).pop(DRY_ID, None)
         f.write_text(json.dumps(data, indent=2))
         print("  dry-run sidecar removed")
-    print(f"\nHourly schedule: {'PAUSED' if disabled else 'ON'}. Antigravity must be open for it to fire.")
+    print(f"\nSchedule (every 10 minutes): {'PAUSED' if disabled else 'ON'}. Antigravity must be open for it to fire.")
     print(f"Run log: {clone / 'Website SEO' / 'agent_jobs' / 'log.md'}")
 
 
