@@ -14,10 +14,15 @@ pages, commits, pushes (deploy.yml uploads the push) and checks the live pages.
     python3 execution/agent_publish.py check en       # audit agent_jobs/<slug>/en.json + claims-en.json
     python3 execution/agent_publish.py check ar
     python3 execution/agent_publish.py image PATH     # check and store the generated hero
-    python3 execution/agent_publish.py publish        # final checks, build, commit, push, live check
+    python3 execution/agent_publish.py submit         # final checks, then hand the job to the publisher
     python3 execution/agent_publish.py fail "why"     # give up on this job for now
     python3 execution/agent_publish.py status
-    python3 execution/agent_publish.py trigger [--dry-run]   # the scheduler's entry point
+    python3 execution/agent_publish.py trigger [--dry-run]   # the scheduler's entry point (not the agent's)
+
+The agent's commands run inside Antigravity's terminal sandbox: they read and write the
+workspace and reach the web, but cannot use git or the keychain. Everything that needs git
+(syncing the clone, preparing a job, building, committing, pushing) happens in `trigger`,
+which Antigravity's scheduler runs every 10 minutes outside the sandbox.
 
 Agent instructions: directives/antigravity_publisher.md. Setup (the clone, the
 Antigravity project and the hourly schedule): execution/setup_antigravity_publisher.py.
@@ -85,6 +90,7 @@ JOBS = ROOT / "agent_jobs"
 STATE = JOBS / "state.json"
 LOCK = JOBS / "run.lock"
 LOG = JOBS / "log.md"
+MARKER = JOBS / ".publisher-clone"
 TOPICS = JOBS / "topics"
 DIRECTIVE = "directives/antigravity_publisher.md"
 CMD = "python3 execution/agent_publish.py"
@@ -202,6 +208,14 @@ def assert_clone():
                    f"execution/setup_antigravity_publisher.py.")
 
 
+def assert_workspace():
+    """The agent's commands run in a sandbox where git cannot be used: the clone is recognised by
+    a marker file that setup_antigravity_publisher.py writes (it is never in Nahid's checkout)."""
+    if not MARKER.exists():
+        raise Stop(f"This is not the publisher's clone ({REPO}). Its commands only run there; set it up "
+                   f"with execution/setup_antigravity_publisher.py.")
+
+
 def sync():
     """Fetch and move to origin/main. A commit that never reached GitHub is pushed first."""
     if os.environ.get("APL_NO_SYNC"):
@@ -277,10 +291,15 @@ def due(st):
     """What this run should do, or None. Never writes anything."""
     today = dp.today()
     d = day(st, today)
-    if st.get("job"):
-        if st["job"].get("defer_until", "") > today:
+    job = st.get("job")
+    if job:
+        if job.get("defer_until", "") > today:
             return None              # a finished draft waiting for tomorrow holds the slot
-        return f"resume {st['job']['kind']}"
+        if job.get("status") == "submitted":
+            return "apply"
+        if job.get("status") == "ready":
+            return None              # a dry run passed; it waits for Nahid's go-ahead (--approve)
+        return f"resume {job['kind']}"
     for slug in pending_heroes():
         if d["fails"].get(f"hero:{slug}", 0) < MAX_FAILS:
             return "hero"
@@ -309,18 +328,36 @@ def new_job(st, kind):
         row, slug = next((r, s) for r, s in repair_rows() if d["fails"].get(f"repair:{s}", 0) < MAX_FAILS)
         return dict(base, slug=slug, date=slug[:10], modified=today, row_num=row["num"],
                     en_title=row["en_title"], ar_title=row["ar_title"], cluster=row["cluster"])
-    # new: topics first if the queue has run dry
+    # new: topics first if the queue has run dry (one topics round a day is enough)
     _, rows = dp.read_queue()
-    if sum(r["status"].lower() == "pending" for r in rows) < dp.REFILL_BELOW:
+    pending = sum(r["status"].lower() == "pending" for r in rows)
+    if pending == 0 or (pending < dp.REFILL_BELOW and not d.get("topics_done")):
         return dict(base, kind="topics", date=today)
-    corp = dp.corpus()
-    try:
-        row = dp.next_topic(corp)
-    except dp.PublishError:
+    row = next_pending(dp.corpus())
+    if not row:
+        if d.get("topics_done"):
+            raise Stop("No publishable topic in the queue, and today's topics round already ran.")
         return dict(base, kind="topics", date=today)
     slug = f"{today}-{dp.slugify(row['en_title'])}"
     return dict(base, slug=slug, date=today, modified=None, row_num=row["num"], en_title=row["en_title"],
                 ar_title=row["ar_title"], cluster=row["cluster"])
+
+
+def next_pending(corp):
+    """The first Pending row that passes the skill's Step 0 similarity check. Unlike
+    daily_publish.next_topic it never refills the queue through the Gemini API: here the
+    agent writes the titles, in a topics job."""
+    _, rows = dp.read_queue()
+    for r in rows:
+        if r["status"].lower() != "pending":
+            continue
+        score, slug = dp.closest(r["en_title"], corp["en"])
+        if score > dp.SIMILARITY_LIMIT:
+            r.update(status="Skipped", url=f"duplicate of {slug} ({score:.0%})")
+            dp.update_queue_row(r)
+            continue
+        return r
+    return None
 
 
 def folder(job):
@@ -396,8 +433,7 @@ def article_brief(job, corp):
                 f"complete new article on its topic. The URL and the publication date ({job['date']}) stay.")
     else:
         what = "NEW ARTICLE for today."
-    publish = (f"`{CMD} publish --dry-run`  (THIS IS A DRY RUN: never run plain `publish`)"
-               if job.get("dry_run") else f"`{CMD} publish`")
+    publish = f"`{CMD} submit`" + ("  (this is a DRY RUN: nothing goes live)" if job.get("dry_run") else "")
     return f"""# Brief: {job['en_title']}
 
 {what}
@@ -421,8 +457,9 @@ def article_brief(job, corp):
 5. Generate the hero image with your image generation tool, aspect ratio 16:9 (see Hero image).
    Then run `{CMD} image "<full path of the generated image>"`. If it is rejected, generate a
    new one that fixes what it says.
-6. Run {publish}. It rebuilds the site, commits, pushes and checks the live pages.
-7. Reply with a 3-line summary: title, live URL, anything that went wrong.
+6. Run {publish}. It runs the final checks and hands the article to the publisher, which
+   builds, commits, pushes and checks the live pages within about 10 minutes.
+7. Reply with a 3-line summary: title, URL, anything that went wrong. Then stop.
 
 If a step still fails after 5 rounds of fixes, or a tool you need is missing, run
 `{CMD} fail "<what blocked you>"` and stop.
@@ -478,7 +515,7 @@ Scene: <your image_concept>
 
 def hero_brief(job):
     f = folder(job).relative_to(ROOT)
-    publish = f"`{CMD} publish --dry-run`" if job.get("dry_run") else f"`{CMD} publish`"
+    publish = f"`{CMD} submit`" + ("  (DRY RUN)" if job.get("dry_run") else "")
     return f"""# Brief: hero image for "{job['title']}"
 
 The article {dp.SITE}/blog/en/{job['slug']}/ went live with a placeholder image (it was
@@ -493,8 +530,8 @@ Scene: {job['concept']}
 
 2. Run `{CMD} image "<full path of the generated image>"`. If it is rejected, generate a new
    one that fixes what it says.
-3. Run {publish}. It swaps the image in, rebuilds the blog hubs, commits, pushes and checks
-   the live page.
+3. Run {publish}. The publisher swaps the image in, rebuilds the blog hubs, commits, pushes and
+   checks the live page within about 10 minutes.
 4. Reply with one line: the article URL and whether the new hero is live.
 
 Your folder: `{f}/`. If it still fails after 4 images, run `{CMD} fail "<why>"` and stop.
@@ -532,9 +569,9 @@ The queue has run out of topics. Pick today's from what people in Oman really se
 ```
 
 2. Run `{CMD} topics-add`. It checks every title (it must carry its search's words, follow the
-   skill's title rules and not overlap a published article) and queues the good ones. If it
-   queues none, fix what it lists and run it again.
-3. Then run `{CMD} next` again: it hands you today's article.
+   skill's title rules and not overlap a published article). If none passes, fix what it lists
+   and run it again. Once some pass, you are done: the publisher queues them and starts today's
+   article in a new conversation.
 
 ## Task
 
@@ -954,81 +991,47 @@ def report(problems, what):
 
 
 # ======================================================================
-# Commands
+# Agent commands. These run inside Antigravity's terminal sandbox, which can read and write
+# the workspace and reach the web, but not git or the keychain: they never touch git.
 # ======================================================================
 def active(st, kinds=None):
     job = st.get("job")
-    if not job:
-        raise Stop(f"No job is open. Run `{CMD} next` first.")
+    if not job or job.get("status") != "open":
+        raise Stop("No job is open for you. Stop here.", code=0)
     if kinds and job["kind"] not in kinds:
         raise Stop(f"The open job is a {job['kind']} job; this command does not apply to it.")
     return job
 
 
 def cmd_next(a):
-    assert_clone()
-    refresh_lock("next")
     st = load_state()
     job = st.get("job")
-    if job and job.get("defer_until", "") > dp.today():
-        release_lock()
-        log(f"NOTHING TO DO: the open draft ({job['slug']}) waits for {job['defer_until']}. Stop here.")
+    if not job or job.get("status") != "open":
+        log("NOTHING TO DO: no job is open for you (the publisher starts one when something is due). "
+            "Stop here.")
         return 0
-    if not job:
-        sync()
-        label = due(st)
-        if not label:
-            save_state(st)
-            release_lock()
-            log("NOTHING TO DO: today's article is out, no hero swap or repair is due. Stop here.")
-            return 0
-        if label == "new":
-            shutil.rmtree(TOPICS, ignore_errors=True)      # research from an earlier day is stale
-        job = new_job(st, label)
-        st["job"] = job
-        d = day(st)
-        d["launches"].setdefault(job_key(job), 0)
-        save_state(st)
-        journal(f"start {job_key(job)}" + (" (dry run)" if job.get("dry_run") else ""))
+    refresh_lock("next")
     f = folder(job)
-    f.mkdir(parents=True, exist_ok=True)
-    if job["kind"] == "topics":
-        if not (TOPICS / "research.json").exists():
-            corp = dp.corpus()
-            _, rows = dp.read_queue()
-            n = max(tt.TARGET_PENDING - sum(r["status"].lower() == "pending" for r in rows), 1)
-            log("Researching what people in Oman search (Google Trends + autocomplete, ~3 minutes)...")
-            try:
-                cands, stats = tt.collect(dp)
-            except Exception as e:
-                log(f"  search research failed ({e}); you will propose topics without it")
-                cands, stats = {}, {"seeds": len(tt.SEEDS), "trends": 0, "fallback": [], "autocomplete": 0,
-                                    "blocked": str(e)[:80]}
-            best = dict(sorted(cands.items(), key=lambda kv: -kv[1]["score"])[:tt.MAX_CANDIDATES])
-            (TOPICS / "research.json").write_text(json.dumps(
-                {"cands": best, "stats": stats, "n": n}, ensure_ascii=False, indent=1), encoding="utf-8")
-        brief = topics_brief(job)
-    elif job["kind"] == "hero":
-        brief = hero_brief(job)
-    else:
-        brief = article_brief(job, dp.corpus())
-    (f / "brief.md").write_text(brief, encoding="utf-8")
+    if not (f / "brief.md").exists():
+        write_brief(job)
     log(f"JOB: {job['kind']}" + (f" · {job['slug']}" if job.get("slug") else "")
-        + (" · DRY RUN" if job.get("dry_run") else ""))
-    if job.get("status") == "ready":
-        log(f"This draft already passed every check (dry run). Run `{CMD} publish` now.")
-    else:
-        log(f"Read the brief now: {(f / 'brief.md').relative_to(ROOT)}  (it has every step and rule)")
-        done = [p.name for p in sorted(f.glob("*")) if p.name != "brief.md"]
-        if done:
-            log(f"Files already in the folder from an earlier attempt: {', '.join(done)}. Check them and "
-                f"continue from where they stop.")
+        + (" · DRY RUN (nothing goes live)" if job.get("dry_run") else ""))
+    log(f"Read the brief now: {(f / 'brief.md').relative_to(ROOT)}  (it has every step and rule)")
+    if job.get("last_problems"):
+        log("The publisher sent this job back. Fix these first:")
+        for i, p in enumerate(job["last_problems"], 1):
+            log(f" {i:2d}. {p}")
+    done = [p.name for p in sorted(f.glob("*")) if p.name not in ("brief.md", "preview", "research.json")]
+    if done:
+        log(f"Files already in the folder from an earlier attempt: {', '.join(done)}. Check them and "
+            f"continue from where they stop.")
     return 0
 
 
 def cmd_topics_add(a):
     st = load_state()
     job = active(st, ("topics",))
+    refresh_lock("topics-add")
     research = json.loads((TOPICS / "research.json").read_text(encoding="utf-8"))
     path = TOPICS / "topics.json"
     if not path.exists():
@@ -1039,7 +1042,7 @@ def cmd_topics_add(a):
         raise Stop(f"{path.relative_to(ROOT)} is not valid JSON in the shape the brief shows: {e}")
     corp = dp.corpus()
     _, rows = dp.read_queue()
-    cands, n = research["cands"], research["n"]
+    cands = research["cands"]
     if cands:
         picks, rejected = tt.validate_picks(dp, topics, cands, corp, rows)
     else:
@@ -1048,14 +1051,12 @@ def cmd_topics_add(a):
         log(f"  rejected: {r.get('en_title', '?')}  ({r['why']})")
     if not picks:
         raise Stop("No title passed. Fix the reasons above and run topics-add again.")
-    new = tt.queue_picks(dp, picks, rejected, rows, n, research["stats"], len(cands))
-    st["job"] = None
+    job.update(status="submitted", picks=picks, rejected=rejected, last_problems=[])
     save_state(st)
-    journal(f"queued {len(new)} topic(s): " + "; ".join(r["en_title"] for r in new))
-    if not os.environ.get("APL_NO_SYNC"):
-        commit_and_push(f"queue: {len(new)} trend-backed topic(s) from Antigravity",
-                        ("Website SEO/directives",))
-    log(f"Queued {len(new)} topic(s). Now run `{CMD} next` for today's article.")
+    release_lock()
+    journal(f"topics submitted: {len(picks)} passed, {len(rejected)} rejected")
+    log(f"SUBMITTED: {len(picks)} title(s) passed. The publisher adds them to the queue and then starts "
+        f"today's article in a new conversation. You are done: stop here.")
     return 0
 
 
@@ -1083,9 +1084,9 @@ def invented_picks(topics, corp, rows):
 
 
 def cmd_check(a):
-    refresh_lock("check")
     st = load_state()
     job = active(st, ("new", "repair"))
+    refresh_lock("check")
     if a.lang == "ar" and not (folder(job) / "en.json").exists():
         raise Stop("Write and check the English edition first.")
     _, problems = audit_lang(job, a.lang)
@@ -1095,31 +1096,252 @@ def cmd_check(a):
 
 
 def cmd_image(a):
-    refresh_lock("image")
     st = load_state()
     job = active(st, ("new", "repair", "hero"))
+    refresh_lock("image")
     src = Path(a.path).expanduser()
-    if not src.is_file():
+    try:
+        data = src.read_bytes()
+    except PermissionError:
+        # The image tool saves into the conversation's own folder, which the terminal sandbox
+        # may not be allowed to read. The publisher (outside the sandbox) checks it at submit.
+        job["image_src"] = str(src)
+        save_state(st)
+        log(f"NOTED: the sandbox cannot open {src}, so the publisher checks and stores it after you "
+            f"submit. Carry on.")
+        journal(f"image path noted for {job['slug']} (sandbox could not read it)")
+        return 0
+    except OSError:
         raise Stop(f"No file at {src}. Give the full path of the image your tool saved.")
-    png, problems, info = dp.vet_image(src.read_bytes())
+    png, problems, info = dp.vet_image(data)
     if not png:
         log(f"REJECTED ({info}): " + "; ".join(problems) + ". Generate a new image that fixes this.")
         journal(f"image rejected for {job['slug']}: {'; '.join(problems)}")
         return 1
     (folder(job) / "hero.png").write_bytes(png)
+    job.pop("image_src", None)
+    save_state(st)
     log(f"PASS: hero image stored ({info}) as {(folder(job) / 'hero.png').relative_to(ROOT)}")
     journal(f"image ok for {job['slug']} ({info})")
     return 0
 
 
-def hero_png(job):
-    p = folder(job) / "hero.png"
-    if not p.exists():
+def cmd_submit(a):
+    """The agent's last step: final checks, then hand the job to the publisher."""
+    st = load_state()
+    job = active(st, ("new", "repair", "hero"))
+    refresh_lock("submit")
+    if a.dry_run:
+        job["dry_run"] = True
+    if job["kind"] in ("new", "repair"):
+        problems = []
+        for lang in ("en", "ar"):
+            _, p = audit_lang(job, lang, quiet=True)
+            problems += [f"[{lang}] {x}" for x in p]
+        if not report(problems, "the final check of both editions"):
+            return 1
+    if not (folder(job) / "hero.png").exists() and not job.get("image_src"):
         raise Stop(f"No hero image yet. Generate it, then run `{CMD} image <path>`.")
-    png, problems, _ = dp.vet_image(p.read_bytes())
-    if not png:
-        raise Stop("The stored hero no longer passes: " + "; ".join(problems))
-    return png
+    job.update(status="submitted", submitted=time.time(), last_problems=[])
+    save_state(st)
+    release_lock()
+    journal(f"submitted {job_key(job)}" + (" (dry run)" if job.get("dry_run") else ""))
+    log("SUBMITTED. The publisher builds, commits and pushes it within about 10 minutes"
+        + (" as a DRY RUN: nothing goes live" if job.get("dry_run") else "")
+        + ". You are done: reply with your 3-line summary and stop.")
+    return 0
+
+
+def cmd_fail(a):
+    st = load_state()
+    job = st.get("job")
+    if job:
+        d = day(st)
+        k = fail_key(job)
+        d["fails"][k] = d["fails"].get(k, 0) + 1
+        journal(f"FAILED {job_key(job)}: {a.reason}")
+        if d["fails"][k] >= MAX_FAILS or job["kind"] == "topics":
+            st["job"] = None       # parked; its folder stays
+    save_state(st)
+    release_lock()
+    log("Recorded. Stop here; the schedule tries again later.")
+    return 0
+
+
+def cmd_status(a):
+    st = load_state()
+    today = dp.today()
+    log(f"Today (Muscat): {today}. Published today: {', '.join(dp.already_published(today)) or 'nothing'}")
+    log(f"Open job: {json.dumps(st.get('job'), ensure_ascii=False)[:600] if st.get('job') else 'none'}")
+    log(f"Today: {json.dumps(day(st, today), ensure_ascii=False)}")
+    log(f"Pending heroes: {', '.join(pending_heroes()) or 'none'}")
+    log(f"Repair rows: {', '.join(s for _, s in repair_rows()) or 'none'}")
+    age = lock_age()
+    log(f"Run lock: {'held for %d min' % (age // 60) if age is not None else 'free'}")
+    log(f"Would do now: {due(st) or 'nothing'}")
+    return 0
+
+
+# ======================================================================
+# The publisher: runs from Antigravity's scheduler, OUTSIDE the sandbox, every 10 minutes.
+# It prepares each job before a conversation starts and applies what the agent submitted.
+# ======================================================================
+def agentapi():
+    """The command prefix for Antigravity's agent API. Inside a sidecar the app injects
+    ANTIGRAVITY_AGENTAPI_EXE: its language-server binary, whose `agentapi` SUBCOMMAND this is
+    (called without it, the binary tries to start a second language server and dies)."""
+    exe = os.environ.get("ANTIGRAVITY_AGENTAPI_EXE")
+    if exe and Path(exe).exists():
+        return [exe, "agentapi"]
+    for c in (shutil.which("agentapi"), str(Path.home() / ".gemini/antigravity/bin/agentapi"),
+              str(Path.home() / ".gemini/antigravity-ide/bin/agentapi")):
+        if c and Path(c).exists():
+            return [c]
+    raise Stop("agentapi not found: is Antigravity installed?")
+
+
+def write_brief(job):
+    f = folder(job)
+    f.mkdir(parents=True, exist_ok=True)
+    if job["kind"] == "topics":
+        brief = topics_brief(job)
+    elif job["kind"] == "hero":
+        brief = hero_brief(job)
+    else:
+        brief = article_brief(job, dp.corpus())
+    (f / "brief.md").write_text(brief, encoding="utf-8")
+
+
+def research_topics():
+    """Collect real Oman searches for the topics job (outside the sandbox: ~3 minutes of requests)."""
+    shutil.rmtree(TOPICS, ignore_errors=True)
+    TOPICS.mkdir(parents=True)
+    _, rows = dp.read_queue()
+    n = max(tt.TARGET_PENDING - sum(r["status"].lower() == "pending" for r in rows), 1)
+    try:
+        cands, stats = tt.collect(dp)
+    except Exception as e:
+        log(f"  search research failed ({e}); the agent proposes topics without it")
+        cands, stats = {}, {"seeds": len(tt.SEEDS), "trends": 0, "fallback": [], "autocomplete": 0,
+                            "blocked": str(e)[:80]}
+    best = dict(sorted(cands.items(), key=lambda kv: -kv[1]["score"])[:tt.MAX_CANDIDATES])
+    (TOPICS / "research.json").write_text(json.dumps({"cands": best, "stats": stats, "n": n},
+                                                     ensure_ascii=False, indent=1), encoding="utf-8")
+
+
+def reopen(st, job, problems):
+    """Send a submitted job back to the agent with what failed; the next run starts a conversation."""
+    job.update(status="open", last_problems=problems[:30])
+    save_state(st)
+    journal(f"sent back {job_key(job)}: " + "; ".join(problems)[:300])
+    return 1
+
+
+def find_hero(job):
+    """The vetted hero: stored by the agent, or read from where its image tool saved it."""
+    p = folder(job) / "hero.png"
+    if p.exists():
+        return dp.vet_image(p.read_bytes())
+    cands = [Path(job["image_src"])] if job.get("image_src") else []
+    if job.get("conversation"):
+        for base in (Path.home() / ".gemini/antigravity/brain", Path.home() / ".gemini/antigravity-ide/brain"):
+            d = base / job["conversation"]
+            if d.is_dir():
+                cands += sorted((x for x in d.rglob("*") if x.suffix.lower() in (".png", ".jpg", ".jpeg", ".webp")
+                                 and ".system_generated" not in x.parts), key=lambda x: -x.stat().st_mtime)
+    for c in cands:
+        if c.is_file():
+            png, problems, info = dp.vet_image(c.read_bytes())
+            if png:
+                p.write_bytes(png)
+            return png, problems, info
+    return None, ["no hero image was found"], "missing"
+
+
+def apply_job(st, job):
+    """Build, commit, push and live-check what the agent submitted (a dry run stops at the preview)."""
+    if job["kind"] == "topics":
+        _, rows = dp.read_queue()
+        research = json.loads((TOPICS / "research.json").read_text(encoding="utf-8"))
+        new = tt.queue_picks(dp, job["picks"], job.get("rejected", []), rows, research["n"], research["stats"],
+                             len(research["cands"]))
+        commit_and_push(f"queue: {len(new)} trend-backed topic(s) titled by Antigravity",
+                        ("Website SEO/directives",))
+        st["job"] = None
+        day(st)["topics_done"] = True
+        if job.get("dry_run"):
+            st["dry_run_next"] = True      # the article this feeds is part of the same dry run
+        save_state(st)
+        journal(f"queued {len(new)} topic(s): " + "; ".join(r["en_title"] for r in new))
+        return 0
+    hero, problems, info = find_hero(job)
+    if not hero:
+        return reopen(st, job, [f"Hero image: {'; '.join(problems)} ({info}). Generate a new one and run "
+                                f"`{CMD} image <path>`, then `{CMD} submit`."])
+    freshen_derivatives()
+    if job["kind"] == "hero":
+        return apply_hero(st, job, hero)
+    dry = job.get("dry_run")
+    today = dp.today()
+    _, rows = dp.read_queue()
+    row = next((r for r in rows if r["num"] == str(job.get("row_num"))), None)
+    if not dry and row and row["status"].startswith("Published") and job["slug"] in row["url"]:
+        return finish(st, job, "already pushed by an earlier run")       # its push went through on sync()
+    if job["kind"] == "new":
+        if job["date"] != today and not dry:       # a draft carried over a day publishes as today's
+            old = folder(job)
+            job["slug"] = today + job["slug"][10:]
+            job["date"] = today
+            if old.exists() and not folder(job).exists():
+                old.rename(folder(job))
+            save_state(st)
+        other = [s for s in dp.already_published(today) if s != job["slug"]]
+        if other:
+            # GitHub's fallback (or a person) published while this draft was being written.
+            job["defer_until"] = (datetime.strptime(today, "%Y-%m-%d") + timedelta(days=1)).strftime("%Y-%m-%d")
+            save_state(st)
+            journal(f"deferred {job['slug']} to {job['defer_until']}: {other[0]} went out today")
+            return 0
+        if not row or row["status"].lower() != "pending":
+            st["job"] = None
+            save_state(st)
+            journal(f"dropped {job['slug']}: queue row #{job.get('row_num')} is no longer Pending")
+            return 1
+
+    drafts, problems = {}, []
+    for lang in ("en", "ar"):
+        d, p = audit_lang(job, lang, quiet=True)
+        drafts[lang] = d
+        problems += [f"[{lang}] {x}" for x in p]
+    if problems:               # a source went down since the agent checked, or a file changed
+        return reopen(st, job, problems)
+
+    slug, date = job["slug"], job["date"]
+    nap = dp.nap_block()
+    name = dp.image_name_for(slug, hero)
+    g = {"slug": slug, "date": date, "image_name": name, "png": hero, "en": drafts["en"], "ar": drafts["ar"],
+         "src": {lang: dp.render_source(lang, drafts[lang], slug, date, name, nap, job.get("modified"))
+                 for lang in ("en", "ar")}}
+    log("Building (render, image derivatives, reskin, hubs, sitemap, Aiden index)...")
+    dp.install(g)
+    if job["kind"] == "new":
+        dp.record(g, row, None)
+    else:
+        dp.record(g, None, row if row and row["status"].lower() == "repair" else None)
+
+    if dry:
+        out = copy_preview(slug, name)
+        revert_tree()
+        job.update(status="ready", dry_run=False, preview=str(out))
+        save_state(st)
+        journal(f"DRY RUN PASSED for {slug}; preview in {out.relative_to(ROOT)}. Waiting for Nahid's go-ahead "
+                f"(execution/setup_antigravity_publisher.py --approve).")
+        return 0
+
+    kind = "Repair" if job["kind"] == "repair" else "Publish"
+    sha = commit_and_push(f"{kind} article: {slug}\n\nWritten and illustrated by Google Antigravity; "
+                          f"checked and built by execution/agent_publish.py.")
+    return finish(st, job, f"{kind.lower()}, commit {sha}")
 
 
 def copy_preview(slug, image_name):
@@ -1141,82 +1363,6 @@ def revert_tree():
     git("clean", "-fdq", "--", "Website SEO/public_html", "Website SEO/directives")
 
 
-def cmd_publish(a):
-    assert_clone()
-    refresh_lock("publish")
-    st = load_state()
-    job = active(st, ("new", "repair", "hero"))
-    dry = a.dry_run or job.get("dry_run")
-    if job["kind"] == "hero":
-        return publish_hero(st, job, dry)
-    hero = hero_png(job)
-    sync()
-    freshen_derivatives()
-    today = dp.today()
-    _, rows = dp.read_queue()
-    row = next((r for r in rows if r["num"] == str(job.get("row_num"))), None)
-    if not dry and row and (row["status"].startswith("Published") and job["slug"] in row["url"]):
-        # An earlier run's push failed and sync() has just pushed it: the job is already done.
-        return finish(st, job, "already pushed by sync")
-    if job["kind"] == "new":
-        if job["date"] != today and not dry:       # a draft carried over a day publishes as today's
-            old = folder(job)
-            job["slug"] = today + job["slug"][10:]
-            job["date"] = today
-            if old.exists() and not folder(job).exists():
-                old.rename(folder(job))
-            save_state(st)
-        other = [s for s in dp.already_published(today) if s != job["slug"]]
-        if other:
-            # GitHub's fallback (or a person) published while this draft was being written.
-            job["defer_until"] = (datetime.strptime(today, "%Y-%m-%d") + timedelta(days=1)).strftime("%Y-%m-%d")
-            save_state(st)
-            release_lock()
-            journal(f"deferred {job['slug']} to {job['defer_until']}: {other[0]} went out today")
-            log(f"DEFERRED: another article went out today ({other[0]}). This draft is kept and publishes "
-                f"on {job['defer_until']}. Stop here.")
-            return 0
-        if not row or row["status"].lower() != "pending":
-            raise Stop(f"Queue row #{job.get('row_num')} is no longer Pending; someone changed the queue.")
-
-    drafts, problems = {}, []
-    for lang in ("en", "ar"):
-        d, p = audit_lang(job, lang, quiet=True)
-        drafts[lang] = d
-        problems += [f"[{lang}] {x}" for x in p]
-    if not report(problems, "the final check of both editions"):
-        return 1
-
-    slug, date = job["slug"], job["date"]
-    nap = dp.nap_block()
-    name = dp.image_name_for(slug, hero)
-    g = {"slug": slug, "date": date, "image_name": name, "png": hero, "en": drafts["en"], "ar": drafts["ar"],
-         "src": {lang: dp.render_source(lang, drafts[lang], slug, date, name, nap, job.get("modified"))
-                 for lang in ("en", "ar")}}
-    log("Building (render, image derivatives, reskin, hubs, sitemap, Aiden index)...")
-    dp.install(g)
-    if job["kind"] == "new":
-        dp.record(g, row, None)
-    else:
-        dp.record(g, None, row if row and row["status"].lower() == "repair" else None)
-
-    if dry:
-        out = copy_preview(slug, name)
-        revert_tree()
-        job.update(status="ready", dry_run=False, preview=str(out))
-        save_state(st)
-        release_lock()
-        journal(f"dry run passed for {slug}; preview in {out.relative_to(ROOT)}")
-        log(f"DRY RUN PASSED. Nothing was committed or pushed. Preview: {out.relative_to(ROOT)}/en.html "
-            f"and ar.html. The next real run publishes this draft as is.")
-        return 0
-
-    kind = "Repair" if job["kind"] == "repair" else "Publish"
-    sha = commit_and_push(f"{kind} article: {slug}\n\nWritten and illustrated by Google Antigravity; "
-                          f"checked and built by execution/agent_publish.py.")
-    return finish(st, job, f"{kind.lower()}, commit {sha}")
-
-
 def finish(st, job, how):
     slug = job["slug"]
     d = day(st)
@@ -1226,7 +1372,6 @@ def finish(st, job, how):
         d["repairs"].append(slug)
     st["job"] = None
     save_state(st)
-    release_lock()
     journal(f"published {slug} ({how})")
     log(f"PUSHED ({how}). GitHub's deploy workflow is uploading it; checking the live pages (up to 10 min)...")
     return verify(slug)
@@ -1245,17 +1390,14 @@ def verify(slug):
     return 0
 
 
-def publish_hero(st, job, dry):
-    png = hero_png(job)
-    sync()
-    freshen_derivatives()
+def apply_hero(st, job, png):
+    dry = job.get("dry_run")
     slug, old = job["slug"], job["old_image"]
     heroes = pending_heroes()
     if slug not in heroes:
         st["job"] = None
         save_state(st)
-        release_lock()
-        log("This article no longer needs a hero (someone already swapped it). Nothing to do.")
+        journal(f"{slug} no longer needs a hero (already swapped)")
         return 0
     new = dp.image_name_for(slug, png)
     (dp.IMAGES / f"{new}.png").write_bytes(png)
@@ -1284,111 +1426,25 @@ def publish_hero(st, job, dry):
     if dry:
         out = copy_preview(slug, new)
         revert_tree()
-        job.update(status="ready", dry_run=False)
+        job.update(status="ready", dry_run=False, preview=str(out))
         save_state(st)
-        release_lock()
-        log(f"DRY RUN PASSED. Preview: {out.relative_to(ROOT)}")
+        journal(f"DRY RUN PASSED for the {slug} hero; preview in {out.relative_to(ROOT)}")
         return 0
     sha = commit_and_push(f"Real hero image for {slug}\n\nGenerated by Google Antigravity; it replaces the "
                           f"placeholder the GitHub fallback shipped.")
     day(st)["heroes"].append(slug)
     st["job"] = None
     save_state(st)
-    release_lock()
     journal(f"hero swapped for {slug} (commit {sha})")
-    log(f"PUSHED {sha}. Checking the live page...")
     return verify(slug)
 
 
-def cmd_fail(a):
-    st = load_state()
-    job = st.get("job")
-    if job:
-        d = day(st)
-        k = fail_key(job)
-        d["fails"][k] = d["fails"].get(k, 0) + 1
-        journal(f"FAILED {job_key(job)}: {a.reason}")
-        if d["fails"][k] >= MAX_FAILS or job["kind"] == "topics":
-            st["job"] = None       # parked; its folder stays, and `next` resumes it tomorrow if it is due
-    save_state(st)
-    release_lock()
-    log("Recorded. Stop here; the schedule tries again later.")
-    return 0
-
-
-def cmd_status(a):
-    st = load_state()
+def start_conversation(st, job, label, dry):
     today = dp.today()
-    log(f"Today (Muscat): {today}. Published today: {', '.join(dp.already_published(today)) or 'nothing'}")
-    log(f"Open job: {json.dumps(st.get('job'), ensure_ascii=False) if st.get('job') else 'none'}")
-    log(f"Today: {json.dumps(day(st, today), ensure_ascii=False)}")
-    log(f"Pending heroes: {', '.join(pending_heroes()) or 'none'}")
-    log(f"Repair rows: {', '.join(s for _, s in repair_rows()) or 'none'}")
-    age = lock_age()
-    log(f"Run lock: {'held for %d min' % (age // 60) if age is not None else 'free'}")
-    log(f"Would do now: {due(st) or 'nothing'}")
-    return 0
-
-
-# ======================================================================
-# The scheduler's entry point
-# ======================================================================
-def agentapi():
-    """The command prefix for Antigravity's agent API. Inside a sidecar the app injects
-    ANTIGRAVITY_AGENTAPI_EXE: its language-server binary, whose `agentapi` SUBCOMMAND this is
-    (called without it, the binary tries to start a second language server and dies)."""
-    exe = os.environ.get("ANTIGRAVITY_AGENTAPI_EXE")
-    if exe and Path(exe).exists():
-        return [exe, "agentapi"]
-    for c in (shutil.which("agentapi"), str(Path.home() / ".gemini/antigravity/bin/agentapi"),
-              str(Path.home() / ".gemini/antigravity-ide/bin/agentapi")):
-        if c and Path(c).exists():
-            return [c]
-    raise Stop("agentapi not found: is Antigravity installed?")
-
-
-def cmd_trigger(a):
-    """Runs hourly from Antigravity's scheduler. Starts a conversation only when there is work."""
-    assert_clone()
-    # The lock comes first: the IDE and the app may both fire this, and a run in progress
-    # must never have its clone reset under it.
-    age = lock_age()
-    if not take_lock("trigger"):
-        log(f"busy: a run holds the lock ({(age or 0) / 60:.0f} min old)")
-        return 0
-    try:
-        sync()
-        st = load_state()
-        if a.dry_run:
-            st["dry_run_next"] = True
-            if st.get("job"):
-                st["job"]["dry_run"] = True      # an open job must not publish for real either
-        label = due(st)
-        if st.get("job"):
-            d = day(st)
-            k = job_key(st["job"])
-            d["launches"][k] = d["launches"].get(k, 0) + 1
-            if d["launches"][k] > MAX_LAUNCHES:
-                d["fails"][fail_key(st["job"])] = MAX_FAILS
-                journal(f"parked {k} for today: {MAX_LAUNCHES} conversations did not finish it")
-                st["job"] = None
-                label = due(st)
-        if not label:
-            st.pop("dry_run_next", None)
-            save_state(st)
-            release_lock()
-            log("nothing to do")
-            return 0
-        save_state(st)
-    except BaseException:
-        release_lock()
-        raise
-    today = dp.today()
-    title = f"AI Profit Lab publisher · {label} · {today}" + (" · dry run" if a.dry_run else "")
-    prompt = (f"You are the AI Profit Lab blog publisher. Open `{DIRECTIVE}` in this workspace and follow "
-              f"it exactly. Start by running `{CMD} next` in the workspace root, then do what it says."
-              + (" This is a DRY RUN: finish with `publish --dry-run`, never plain `publish`."
-                 if a.dry_run else ""))
+    title = f"AI Profit Lab publisher · {label} · {today}" + (" · dry run" if dry else "")
+    prompt = (f"You are the AI Profit Lab blog publisher. Read `{DIRECTIVE}` in this workspace and follow it "
+              f"exactly. Then run `{CMD} next` in the workspace root and do what the brief it names says."
+              + (" This is a DRY RUN: nothing you submit goes live." if dry else ""))
     env = dict(os.environ)
     pid = git("config", "--get", "apl.projectId", check=False)
     if pid and not env.get("ANTIGRAVITY_PROJECT_ID"):
@@ -1398,11 +1454,74 @@ def cmd_trigger(a):
     out = (r.stdout + r.stderr).strip()
     log(out[:800])
     if r.returncode:
-        release_lock()
-        journal(f"trigger could not start a conversation ({label}): {out[:200]}")
-        return r.returncode
-    journal(f"started a conversation: {label}" + (" (dry run)" if a.dry_run else ""))
-    return 0
+        journal(f"could not start a conversation ({label}): {out[:200]}")
+        return False
+    try:
+        job["conversation"] = json.loads(r.stdout)["response"]["newConversation"]["conversationId"]
+    except (ValueError, KeyError, TypeError):
+        pass
+    save_state(st)
+    journal(f"started a conversation: {label}" + (" (dry run)" if dry else ""))
+    return True
+
+
+def cmd_trigger(a):
+    """Every 10 minutes from Antigravity's scheduler, outside the sandbox. Applies submitted work,
+    then, if something is due and no agent is busy, prepares the job and starts a conversation."""
+    assert_clone()
+    # The lock comes first: an agent at work holds it, and its clone must never be reset under it.
+    age = lock_age()
+    if not take_lock("trigger"):
+        log(f"busy: an agent or another run holds the lock ({(age or 0) / 60:.0f} min old)")
+        return 0
+    launched = False
+    try:
+        sync()
+        st = load_state()
+        if a.dry_run:
+            st["dry_run_next"] = True
+            if st.get("job"):
+                st["job"]["dry_run"] = True      # an open job must not publish for real either
+        rc = 0
+        for _ in range(2):                       # apply topics, then start today's article right away
+            label = due(st)
+            if label != "apply":
+                break
+            rc = apply_job(st, st["job"])
+            st = load_state()
+            sync()
+        if not label or label == "apply":
+            save_state(st)
+            log(f"nothing to start ({'applied submitted work' if label == 'apply' else 'nothing due'})")
+            return rc
+        if st.get("job"):
+            d = day(st)
+            k = job_key(st["job"])
+            d["launches"][k] = d["launches"].get(k, 0) + 1
+            if d["launches"][k] > MAX_LAUNCHES:
+                d["fails"][fail_key(st["job"])] = MAX_FAILS
+                journal(f"parked {k} for today: {MAX_LAUNCHES} conversations did not finish it")
+                st["job"] = None
+                label = due(st)
+                if not label:
+                    save_state(st)
+                    return 0
+        if not st.get("job"):
+            job = new_job(st, label)
+            st["job"] = job
+            if job["kind"] == "topics":
+                log("Researching what people in Oman search (Google Trends + autocomplete, ~3 minutes)...")
+                research_topics()
+            write_brief(job)
+            journal(f"prepared {job_key(job)}" + (" (dry run)" if job.get("dry_run") else ""))
+        save_state(st)
+        launched = start_conversation(st, st["job"], label, st["job"].get("dry_run"))
+        if launched:
+            refresh_lock(f"agent {job_key(st['job'])}")
+        return 0 if launched else 1
+    finally:
+        if not launched:
+            release_lock()
 
 
 def main():
@@ -1414,8 +1533,9 @@ def main():
     p.add_argument("lang", choices=["en", "ar"])
     p = sub.add_parser("image")
     p.add_argument("path")
-    p = sub.add_parser("publish")
-    p.add_argument("--dry-run", action="store_true")
+    for name in ("submit", "publish"):           # `publish` is the old name
+        p = sub.add_parser(name)
+        p.add_argument("--dry-run", action="store_true")
     p = sub.add_parser("fail")
     p.add_argument("reason")
     sub.add_parser("status")
@@ -1423,10 +1543,11 @@ def main():
     p.add_argument("--dry-run", action="store_true")
     a = ap.parse_args()
     fn = {"next": cmd_next, "topics-add": cmd_topics_add, "check": cmd_check, "image": cmd_image,
-          "publish": cmd_publish, "fail": cmd_fail, "status": cmd_status, "trigger": cmd_trigger}[a.cmd]
+          "submit": cmd_submit, "publish": cmd_submit, "fail": cmd_fail, "status": cmd_status,
+          "trigger": cmd_trigger}[a.cmd]
     try:
         if a.cmd != "status":
-            assert_clone()           # state and drafts live in the publisher's clone only
+            assert_workspace()       # state and drafts live in the publisher's clone only
         sys.exit(fn(a) or 0)
     except Stop as e:
         log(f"STOP: {e}")

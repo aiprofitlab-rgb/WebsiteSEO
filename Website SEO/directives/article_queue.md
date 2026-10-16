@@ -26,11 +26,14 @@ Toolbox: `execution/agent_publish.py`. Setup and on/off switch:
 `execution/setup_antigravity_publisher.py`. The rules are the article-creator skill
 (`Website/SKILL_article_creator/SKILL.md`); its Step 1 criteria go into every brief verbatim.
 
-1. Antigravity's scheduler runs `execution/antigravity_trigger.sh` at :17 every hour while the app (or
-   the IDE) is open. It starts a conversation only when something is due, in this order: a hero swap
-   for an article the GitHub fallback published (`directives/pending_heroes.json`); today's article,
-   started between 06:00 and 19:00 Muscat; up to 2 `Repair` rows a day. Two failed attempts park a
-   job until the next day.
+1. The Antigravity **app** (not the IDE) runs `execution/antigravity_trigger.sh` every 10 minutes while
+   it is open, outside the agent's sandbox. The trigger syncs the clone, publishes anything an agent
+   submitted, and starts a conversation only when something is due, in this order: a hero swap for an
+   article the GitHub fallback published (`directives/pending_heroes.json`); today's article, started
+   between 06:00 and 19:00 Muscat; up to 2 `Repair` rows a day. It prepares the job and its brief first.
+   Two failed attempts park a job until the next day. The agent's own commands run in Antigravity's
+   terminal sandbox (workspace files and the web, no git or keychain), so they never touch git: the
+   agent ends with `submit`, and the next trigger builds, commits and pushes.
 2. Topics: the first `Pending` row that passes the skill's 65% similarity check. When fewer than 2
    are `Pending`, `next` collects what people in Oman search (Google Trends + autocomplete, free),
    Antigravity writes titles for the strongest searches, and `topics-add` keeps only titles that
@@ -44,7 +47,8 @@ Toolbox: `execution/agent_publish.py`. Setup and on/off switch:
    as an example; `general_knowledge` (max 8) can't be a percentage or a price.
 4. The agent generates the hero with its own image tool; `image` rejects anything under 1000px wide,
    not 16:9-ish landscape, or darker than the light brand allows.
-5. `publish` resets the clone to GitHub's main, re-runs every check, renders the skill's marker
+5. On the next trigger after `submit`, the publisher resets the clone to GitHub's main, re-runs every
+   check (a failure sends the job back to the agent with the problems), renders the skill's marker
    contract, builds (derivatives, `reskin_articles.py --only`, hubs, sitemap, Aiden index, every exit
    code enforced), marks the row `Published`, appends the forum snippet, commits, pushes (the push
    triggers `deploy.yml`), and polls the live EN + AR pages for up to 10 minutes.

@@ -6,6 +6,7 @@ Set up (or repair) the Antigravity daily publisher on this Mac. Safe to re-run.
     python3 execution/setup_antigravity_publisher.py --enable       # ...and switch the hourly schedule on
     python3 execution/setup_antigravity_publisher.py --disable      # pause the hourly schedule
     python3 execution/setup_antigravity_publisher.py --dry-run-now  # start ONE dry run right away
+    python3 execution/setup_antigravity_publisher.py --approve      # publish the reviewed dry-run draft
     python3 execution/setup_antigravity_publisher.py --cleanup-dry-run
 
 What it creates:
@@ -17,8 +18,9 @@ What it creates:
      `Website SEO/` folder, pre-approved to run `python3 execution/agent_publish.py` and to
      read web pages (for source research), so an unattended run never waits for a click.
   3. A scheduled sidecar (~/.gemini/config/sidecars/aiprofitlab-publisher) that runs
-     execution/antigravity_trigger.sh at minute 17 of every hour. It starts a conversation
-     only when today's article, a hero swap or a repair is due.
+     execution/antigravity_trigger.sh every 10 minutes, outside Antigravity's sandbox. It
+     publishes what an agent submitted, and starts a conversation only when today's article,
+     a hero swap or a repair is due. A run with nothing to do takes a few seconds.
 
 Antigravity must be open (the app or the IDE) for the schedule to fire. When the Mac is
 off all day, GitHub's evening fallback publishes instead (daily_publish.yml).
@@ -64,7 +66,10 @@ def ensure_clone(path):
     sh("git", "config", "apl.publisher", "true", cwd=path)
     sh("git", "config", "user.name", "AI Profit Lab publisher (Antigravity)", cwd=path)
     sh("git", "config", "user.email", "bot@aiprofitlab.io", cwd=path)
-    (path / "Website SEO" / "agent_jobs").mkdir(parents=True, exist_ok=True)
+    jobs = path / "Website SEO" / "agent_jobs"
+    jobs.mkdir(parents=True, exist_ok=True)
+    # The agent's sandbox cannot run git, so its commands recognise the clone by this file.
+    (jobs / ".publisher-clone").write_text("The Antigravity publisher's clone. See setup_antigravity_publisher.py.\n")
     print(f"  clone ready: {path}")
 
 
@@ -112,6 +117,8 @@ def main():
     g.add_argument("--disable", action="store_true", help="pause the hourly schedule")
     ap.add_argument("--dry-run-now", action="store_true", help="start one dry run right away")
     ap.add_argument("--cleanup-dry-run", action="store_true", help="remove the one-off dry-run sidecar")
+    ap.add_argument("--approve", action="store_true",
+                    help="publish the draft that passed its dry run (on the next 10-minute run)")
     a = ap.parse_args()
 
     clone = Path(a.clone_dir).expanduser()
@@ -123,12 +130,12 @@ def main():
     disabled = False if a.enable else True if a.disable else was_disabled
     write_sidecar(SIDECAR_ID, {
         "builtin": "schedule",
-        "args": ["17 * * * *", "/bin/sh", trigger],
+        "args": ["*/10 * * * *", "/bin/sh", trigger],
         "restart_policy": "always",
         "display_name": "AI Profit Lab publisher",
-        "description": ("Every hour at :17. If today's blog article, a hero-image swap or a repair is due, "
-                        "starts an Antigravity conversation that writes, illustrates and publishes it "
-                        "(Website SEO/execution/agent_publish.py)."),
+        "description": ("Every 10 minutes: publishes what the agent submitted, and if today's blog article, "
+                        "a hero-image swap or a repair is due, starts an Antigravity conversation that "
+                        "writes and illustrates it (Website SEO/execution/agent_publish.py)."),
         "env": {"ANTIGRAVITY_PROJECT_ID": pid},
         "disabled": disabled,
     })
@@ -141,6 +148,15 @@ def main():
             "env": {"ANTIGRAVITY_PROJECT_ID": pid},
         })
         enable_in_config(DRY_ID, pid, True)
+    if a.approve:
+        st_file = clone / "Website SEO" / "agent_jobs" / "state.json"
+        st = json.loads(st_file.read_text()) if st_file.exists() else {}
+        job = st.get("job") or {}
+        if job.get("status") != "ready":
+            sys.exit(f"Nothing to approve: the open job is {job.get('status') or 'none'}.")
+        job.update(status="submitted", dry_run=False)
+        st_file.write_text(json.dumps(st, ensure_ascii=False, indent=2))
+        print(f"  approved {job.get('slug')}: the next 10-minute run publishes it (if the schedule is on)")
     if a.cleanup_dry_run:
         shutil.rmtree(CONFIG / "sidecars" / DRY_ID, ignore_errors=True)
         f = CONFIG / "config.json"
