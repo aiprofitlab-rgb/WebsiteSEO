@@ -170,6 +170,7 @@ def main():
         if job.get("status") != "ready":
             sys.exit(f"Nothing to approve: the open job is {job.get('status') or 'none'}.")
         job.update(status="submitted", dry_run=False)
+        st.pop("dry_run_next", None)      # the jobs after it are real too
         st_file.write_text(json.dumps(st, ensure_ascii=False, indent=2))
         print(f"  approved {job.get('slug')}: the next 10-minute run publishes it (if the schedule is on)")
     if a.cleanup_dry_run:
