@@ -1,9 +1,8 @@
 name: Daily HARO Media Pitch Drafter (Cloud Fallback)
 
+# Manual runs only since 2026-10-18. Its GMAIL_TOKEN_JSON secret was never set, so every nightly
+# run failed and emailed "Run failed"; the Mac's 30-minute fallback (setup_mac_schedule.sh) covers it.
 on:
-  schedule:
-    # 18:00 UTC = 22:00 Muscat / Gulf Standard Time (UTC+4)
-    - cron: '0 18 * * *'
   workflow_dispatch:
 
 jobs:
@@ -48,4 +47,6 @@ jobs:
       - name: Run HARO Email Processor
         run: |
           cd "Website SEO"
-          python execution/haro_email_processor.py
+          # The Mac's Antigravity + Claude pipeline (haro_agent.py) takes a digest within ~10 minutes
+          # while the Mac is on; this fallback only drafts the ones older than 3 hours it left alone.
+          python execution/haro_email_processor.py --min-age-hours 3

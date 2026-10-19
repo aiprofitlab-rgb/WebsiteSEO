@@ -1,5 +1,8 @@
 #!/bin/bash
-# Setup Mac Daily 22:00 Scheduled Task for HARO Email Assistant
+# Setup the Mac's 30-minute HARO fallback run (the Gemini drafter)
+# haro_agent.py (Antigravity + Claude) takes new digests every 10 minutes. This run fires every
+# 30 minutes the Mac is awake (launchd catches up after sleep): while that pipeline is alive it
+# takes only the digests handed over to it, and when it is down, digests older than 3 hours.
 
 PLIST_NAME="com.aiprofitlab.haro.plist"
 LAUNCH_DIR="$HOME/Library/LaunchAgents"
@@ -27,16 +30,14 @@ cat <<EOF > "$PLIST_PATH"
     <array>
         <string>$PYTHON_BIN</string>
         <string>$SCRIPT_PATH</string>
+        <string>--defer-to-agent</string>
+        <string>--min-age-hours</string>
+        <string>3</string>
     </array>
     <key>WorkingDirectory</key>
     <string>$PROJECT_DIR</string>
-    <key>StartCalendarInterval</key>
-    <dict>
-        <key>Hour</key>
-        <integer>22</integer>
-        <key>Minute</key>
-        <integer>0</integer>
-    </dict>
+    <key>StartInterval</key>
+    <integer>1800</integer>
     <key>StandardOutPath</key>
     <string>$LOG_OUT</string>
     <key>StandardErrorPath</key>
@@ -49,6 +50,6 @@ EOF
 
 launchctl load "$PLIST_PATH"
 
-echo "[+] Successfully scheduled HARO Email Processor on your Mac for 22:00 daily!"
+echo "[+] Scheduled the HARO fallback on your Mac every 30 minutes while it is awake."
 echo "    Plist location: $PLIST_PATH"
 echo "    Output logs: $LOG_OUT"

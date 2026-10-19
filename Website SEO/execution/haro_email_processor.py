@@ -6,7 +6,14 @@ queries and reads each deadline in code, has Gemini screen every query (PITCH or
 reason), drafts one reply per chosen query from a fixed set of facts about Nahid, and saves the
 drafts in Gmail for review. Never sends anything.
 
-  python3 execution/haro_email_processor.py                 # the daily run
+Since 2026-10-16 this is the fallback. The main drafter is haro_agent.py (Antigravity drafts,
+Claude reviews), which runs every 10 minutes while the Mac is on. Since 2026-10-18 the Mac runs
+this every 30 minutes with --defer-to-agent --min-age-hours 3: while that pipeline is alive it
+takes only the digests handed over to it, and when it is down, digests older than 3 hours.
+GitHub no longer runs it on a schedule. The facts and rules live in haro_rules.py, shared with it.
+
+  python3 execution/haro_email_processor.py                 # every unprocessed digest, now
+  python3 execution/haro_email_processor.py --defer-to-agent --min-age-hours 3   # the Mac's scheduled run
   python3 execution/haro_email_processor.py --dry-run       # write drafts to .tmp/haro_dryrun/ instead
   python3 execution/haro_email_processor.py --delete-expired [--apply]
 """
@@ -36,6 +43,9 @@ except ImportError as e:
     print(f"Missing Google client libraries: {e}")
     print("Please install via: pip install google-api-python-client google-auth-httplib2 google-auth-oauthlib")
     sys.exit(1)
+
+from haro_rules import (SPOKESPERSON_FACTS, WRITE_YOURSELF, SCREENING_RULES,
+                        PITCH_TASK, NOTES_TASK, DRAFT_RULES, claims_to_check)
 
 # Scopes needed: Read emails, create drafts, and modify labels (mark as read)
 SCOPES = [
@@ -308,35 +318,6 @@ def call_gemini(prompt, api_key, schema=None, models=None, temperature=0.2):
     return None
 
 
-# ---------------------------------------------------------------------------
-# Who the pitches speak for. A pitch may state only these facts about Nahid or AI Profit
-# Lab; anything else he adds himself through an [ADD: ...] placeholder. Sourced on
-# 2026-10-16 from the live About page and the aiprofitlab-brand skill. Never put a client
-# name, result, percentage or year count here unless Nahid has confirmed it.
-# ---------------------------------------------------------------------------
-SPOKESPERSON_FACTS = """\
-- Name: Nahid Abyari. Title: Founder, AI Profit Lab (https://aiprofitlab.io), based in Muscat, Oman.
-  LinkedIn: https://www.linkedin.com/in/nahid-aby. Email: hello@aiprofitlab.io. There is no public
-  headshot link yet.
-- AI Profit Lab is not an agency. It is one engineer, Nahid, who does the work himself, in Arabic and English.
-- He is an engineer who built and ran a real distribution business: importing, storage, catalogues,
-  price tiers, quotes, shipping, invoices and the follow-up nobody has time for. (Never name the
-  country that business is in.)
-- What it taught him: the bottleneck was not price or product but response time. A buyer's message
-  that arrived at 9pm and got answered at 8am had already bought somewhere else.
-- So he built what he needed: a system that answers buyers in Arabic and English, knows the stock
-  and the terms of sale, and passes him only the buyers worth his time. That became AI Profit Lab.
-- AI Profit Lab builds done-for-you AI automation for small and mid-sized trading, distribution and
-  service businesses in Oman and the GCC: WhatsApp and website assistants that answer buyers,
-  missed-call follow-up, lead capture, quote and invoice automation, owner dashboards, and websites
-  with search visibility (SEO). It audits the bottleneck, builds the system, runs it and trains the team.
-- His working rules: plain language; prices published on the site; what is not included is stated
-  up front; no invented numbers.
-- Who he turns away: large companies and ERP projects, buyers who only want the cheapest option,
-  businesses with no digital presence yet, and "make us go viral" requests.
-- He does NOT have: a corporate CIO/CTO/CISO role, a nonprofit or government role, medical, legal,
-  financial-advisory or academic credentials, US/UK/EU residence, or published client case studies."""
-
 PITCH_FROM = 'nahid@aiprofitlab.io'   # the address the HARO account is registered to; a verified send-as alias
 
 # The brand signature (aiprofitlab-brand skill, section 9), one item per line.
@@ -349,7 +330,6 @@ SIGNATURE = (
 
 NOTES_START = "=== NOTES FOR NAHID: delete from here down to the dashed line before sending ==="
 NOTES_END = "-" * 84
-WRITE_YOURSELF = "[WRITE IT YOURSELF] "
 
 MIN_LEAD = datetime.timedelta(hours=1)   # a deadline closer than this leaves no time to review a draft
 EASTERN = ZoneInfo('America/New_York')   # HARO deadlines are in ET
@@ -359,9 +339,6 @@ MONTHS = {name.lower(): i for i, name in enumerate(calendar.month_name) if name}
 MONTHS.update({name.lower(): i for i, name in enumerate(calendar.month_abbr) if name})
 MONTHS['sept'] = 9
 _MONTH_RE = '|'.join(sorted(MONTHS, key=len, reverse=True))
-
-BANNED_WORDS = ['synergy', 'leverage', 'transform', 'revolutionary', 'cutting-edge', 'disrupt',
-                'seamless', 'enterprise-grade', 'growth-hack', '10x', 'game-changer', 'unlock']
 
 
 def parse_deadline(raw, reference):
@@ -515,36 +492,7 @@ whether he should reply.
 THE SOURCE
 {SPOKESPERSON_FACTS}
 
-Decide PITCH only when all four hold:
-1. ELIGIBLE: he is the kind of person the journalist asks for. Read who should respond and every
-   requirement: role, seniority, company size, industry, credential, country or city, and personal
-   experience ("CIOs at 250-2,000-employee firms", "nonprofit CTO", "US-based", "licensed", "MD",
-   "parents who", "homeowners", "women founders", "e-commerce store owners"). If any requirement
-   rules him out, eligible=false and SKIP. Founders, small-business owners and AI or automation
-   consultants or experts do fit when the request is open to them. A form field asking for your
-   city, state or country so they can credit you is NOT a location requirement: skip on location
-   only when the request says sources must be based somewhere.
-2. TOPIC: something he can speak to from experience: practical AI adoption in small and mid-sized
-   businesses; AI agents, chatbots and assistants for customer messages and sales; WhatsApp and
-   customer-service automation; automating admin work (quotes, invoices, follow-up, data entry);
-   running a small trading, distribution or service business; websites, SEO and AI search for small
-   businesses; choosing AI tools and models on a small budget; founder life in an AI-first one-person
-   company; business and technology in Oman, the GCC and the Middle East.
-3. NOT pay-to-play: no sponsored placements, paid awards or listings, product samples, gift guides or
-   products to review.
-4. SUBSTANCE: he can give a useful, honest answer without making up statistics or client stories.
-   A request that needs real numbers or examples from his own business is fine: the draft will leave
-   placeholders for him.
-
-Requests often mention products, launches or news newer than anything you know about. Take the
-journalist's description as true; never skip a request because you don't recognise something in it.
-
-fit: 1-5, how strong a source he is for this request (5 = exactly who they want). A PITCH needs fit 3+.
-Generic business-advice requests (networking, productivity, leadership, hiring or general
-"expert tips" roundups) are fit 2 unless the request is about one of the topics in rule 2.
-In each reason, describe him only by the facts above: never credit him with experience they don't state.
-ai_replies_forbidden: true when the request says it rejects AI-written replies ("No AI pitches",
-"written in your own words", "no AI-generated responses").
+{SCREENING_RULES}
 Give one decision for every id below, in order. Keep each reason to one sentence.
 
 REQUESTS
@@ -575,18 +523,7 @@ DRAFT_SCHEMA = {
 
 def write_pitch(q, api_key, notes_only):
     """Draft the reply to one query, or talking points when the journalist rejects AI-written replies."""
-    if notes_only:
-        task = """This journalist rejects AI-written replies, so do NOT write the reply. Write talking points
-Nahid will turn into his own reply: 3-5 bullet points ("- "), one idea each, as short notes he can
-expand (fragments are fine). After them add "They asked for:" and list what the journalist wants
-included."""
-    else:
-        task = """Write Nahid's reply, ready for him to review and send:
-- Open with one sentence: who he is and why he can answer THIS request.
-- Then answer the journalist's actual questions directly, in the order asked, in 2-4 short paragraphs
-  or "- " bullets they can quote as-is. If they list things to include, include each one.
-- Give a concrete opinion, a practical tip or how something works in practice, not generalities.
-- 120-250 words unless the journalist asks for a different length."""
+    task = NOTES_TASK if notes_only else PITCH_TASK
 
     prompt = f"""You draft replies to journalist requests for Nahid Abyari.
 
@@ -601,26 +538,7 @@ FACTS ABOUT NAHID: the only things you may state about him or AI Profit Lab
 
 {task}
 
-RULES
-- First person, as Nahid. Plain, specific and calm: an operator talking, not a vendor selling.
-- Never state that Nahid did, built, switched, chose, measured, tried, saw or experienced anything
-  unless the facts above say so. Inventing his first-hand experience is the worst mistake a draft
-  can make: a journalist will print it as true. The same goes for clients, case results,
-  percentages, counts, years of experience, team size and awards. Never invent statistics about the
-  world either.
-- Opinions, explanations of how things work, and advice are fine: they don't claim experience.
-- When the request asks for first-hand experience the facts don't cover, write those parts as
-  placeholders for Nahid, e.g. [ADD: which model you replaced, with which, and why]. Inside a
-  placeholder, say what to add; never suggest a number or an example answer. At most 3 placeholders.
-- Do not name the country of his distribution business. Do not claim local roots or a network.
-- Plain text only: no markdown, no headings, no bold. No greeting and no sign-off: both are added.
-- Never use: synergy, leverage, transform, revolutionary, cutting-edge, disrupt, seamless,
-  enterprise-grade, growth-hack, 10x, game-changer, unlock.
-
-fit_note: one sentence for Nahid on why this request suits him and anything to watch.
-only_if_true: the first-hand experience this reply depends on that the facts don't confirm, written
-as a condition Nahid can check (e.g. "you have moved a live workflow from a large model to a smaller
-one"). Empty when the reply relies only on the facts and on opinion.
+{DRAFT_RULES}
 """
     result = call_gemini(prompt, api_key, schema=DRAFT_SCHEMA, temperature=0.4)
     if not result or not (result.get('text') or '').strip():
@@ -628,22 +546,30 @@ one"). Empty when the reply relies only on the facts and on opinion.
     return result
 
 
-def claims_to_check(text, query_text):
-    """Numbers and banned words in a draft that the journalist's request doesn't explain."""
-    context = query_text.lower()
-    flags = []
-    for m in re.finditer(r'\b\d[\d,.]*\s*(%|percent|per cent|x\b|clients?|customers?|businesses|companies|'
-                         r'brands|years?|months?|staff|employees|people|projects)', text, re.I):
-        if m.group(0).lower() not in context:
-            flags.append(f'"{m.group(0)}"')
-    for word in BANNED_WORDS:
-        if re.search(rf'\b{re.escape(word)}', text, re.I) and word not in context:
-            flags.append(f'banned word "{word}"')
-    return flags
+def greeting(q):
+    """The greeting: "Hi <first name>,", or "Hello," when the query names a desk or the outlet ("Featured News")."""
+    name = q['journalist'].strip()
+    is_person = name and name.lower() != q['outlet'].strip().lower() and not re.search(
+        r'\b(news|team|editors?|desk|staff|magazine|media|newsroom|podcast)\b', name, re.I)
+    return f"Hi {name.split()[0]}," if is_person else "Hello,"
 
 
-def build_draft(q, result, notes_only):
-    """Assemble the subject and body of a pitch draft. Everything above NOTES_END is for Nahid only."""
+def pitch_subject(q, notes_only=False):
+    subject = f"HARO Pitch: {q['title']} — Nahid Abyari, AI Profit Lab"
+    return WRITE_YOURSELF + subject if notes_only else subject
+
+
+def pitch_body(q, text):
+    """The email the journalist receives: greeting, reply, brand signature."""
+    return f"{greeting(q)}\n\n{text.strip()}\n\n{SIGNATURE}\n"
+
+
+def build_draft(q, result, notes_only, extra_notes=(), appendix=()):
+    """Assemble the subject and body of a pitch draft. Everything above NOTES_END is for Nahid only.
+
+    extra_notes: lines added after the standard notes (haro_agent.py puts Claude's review there).
+    appendix: lines added after the journalist's request, still inside the notes.
+    """
     deadline = q.get('deadline_utc')
     if deadline:
         when = (f"{q['deadline_raw']}  =  {deadline.astimezone(MUSCAT):%a %d %b, %H:%M} Muscat  "
@@ -672,18 +598,10 @@ def build_draft(q, result, notes_only):
         notes += ["!! NO AI-WRITTEN PITCHES: this journalist rejects AI-written replies, so below are",
                   "   talking points, not a pitch. Write the reply in your own words, then remove the",
                   f"   {WRITE_YOURSELF.strip()} tag from the subject."]
-    notes += ["", f"Their request: {q['title']}", q['query'], NOTES_END]
-
-    # Some queries name a desk or the outlet ("Featured News") rather than a person.
-    name = q['journalist'].strip()
-    is_person = name and name.lower() != q['outlet'].strip().lower() and not re.search(
-        r'\b(news|team|editors?|desk|staff|magazine|media|newsroom|podcast)\b', name, re.I)
-    greeting = f"Hi {name.split()[0]}," if is_person else "Hello,"
-    body = "\n".join(notes) + f"\n\n{greeting}\n\n{text}\n\n{SIGNATURE}\n"
-    subject = f"HARO Pitch: {q['title']} — Nahid Abyari, AI Profit Lab"
-    if notes_only:
-        subject = WRITE_YOURSELF + subject
-    return subject, body
+    notes += list(extra_notes)
+    notes += ["", f"Their request: {q['title']}", q['query'], *appendix, NOTES_END]
+    body = "\n".join(notes) + "\n\n" + pitch_body(q, text)
+    return pitch_subject(q, notes_only), body
 
 
 def pitch_title_key(subject):
@@ -786,12 +704,72 @@ def digest_search_query(query_days, include_processed=False):
     )
 
 
-def run_haro_processor(query_days=7, dry_run=False):
+# haro_agent.py's footprints. Its sidecar logs every 10-minute fire and the trigger rewrites the state
+# file, so their age says whether that pipeline is alive; the state names what it handed over.
+AGENT_STATE = os.path.expanduser('~/Developer/aiprofitlab-haro/runner/state/state.json')
+AGENT_SIDECAR_LOG = os.path.expanduser('~/.gemini/antigravity/sidecar_data/aiprofitlab-haro/logs/sidecar.log')
+AGENT_ALIVE_SECS = 20 * 60
+WAKE_GRACE_SECS = 20 * 60
+
+
+def awake_seconds():
+    """Seconds since the Mac last booted or woke, or None when that can't be read (e.g. on GitHub)."""
+    if sys.platform != 'darwin':
+        return None
+    import subprocess
+    latest = 0
+    for key in ('kern.boottime', 'kern.waketime'):
+        try:
+            out = subprocess.run(['sysctl', '-n', key], capture_output=True, text=True, timeout=5).stdout
+        except (OSError, subprocess.SubprocessError):
+            continue
+        m = re.search(r'sec = (\d+)', out)
+        if m:
+            latest = max(latest, int(m.group(1)))
+    return time.time() - latest if latest else None
+
+
+def agent_handoff():
+    """What haro_agent.py leaves to this fallback: (reason to skip this run, handed_over, in_job).
+
+    handed_over is None when that pipeline is down, so every digest old enough is ours; while it is
+    alive, only the digests it gave up on or couldn't parse are. in_job: digests of its open job.
+    """
+    try:
+        with open(AGENT_STATE, encoding='utf-8') as f:
+            st = json.load(f) or {}
+    except (OSError, ValueError):
+        st = {}
+    in_job = {i for d in (st.get('job') or {}).get('digests', []) for i in d.get('ids', [])}
+    beats = [os.path.getmtime(p) for p in (AGENT_STATE, AGENT_SIDECAR_LOG) if os.path.exists(p)]
+    if beats and time.time() - max(beats) < AGENT_ALIVE_SECS and not st.get('gmail_down'):
+        handed = (set(st.get('given_up') or {}) | set(st.get('not_ours') or {})) - in_job
+        return ('' if handed else 'the Antigravity pipeline is running and has handed nothing over'), handed, in_job
+    # Down, or not started yet: at login or wake both run at once, so give it its first runs.
+    awake = awake_seconds()
+    if awake is not None and awake < WAKE_GRACE_SECS:
+        return f'the Mac woke {awake / 60:.0f} min ago; the Antigravity pipeline goes first', None, in_job
+    return '', None, in_job
+
+
+def run_haro_processor(query_days=7, dry_run=False, min_age_hours=0, defer_to_agent=False):
     """Main execution function.
 
     dry_run: also reads digests already labelled as processed, and writes the drafts it would
     create to .tmp/haro_dryrun/ instead of Gmail. Nothing in Gmail changes.
+    min_age_hours: leave digests younger than this alone. The scheduled runs pass 3, because
+    haro_agent.py (Antigravity + Claude) takes a new digest within about 10 minutes when the
+    Mac is on; what it hasn't labelled by then, this fallback drafts.
+    defer_to_agent: the Mac's 30-minute run. While haro_agent.py is alive, take only the digests
+    it handed over (no age wait); never touch its open job; skip the first minutes after a wake.
     """
+    handed, in_job = None, set()
+    if defer_to_agent and not dry_run:
+        reason, handed, in_job = agent_handoff()
+        if reason:
+            print(f"{datetime.datetime.now():%Y-%m-%d %H:%M} fallback idle: {reason}")
+            return
+
     print("=" * 60)
     print("AI PROFIT LAB — AUTOMATED HARO & MEDIA PITCH ASSISTANT" + ("  [DRY RUN]" if dry_run else ""))
     print(f"Timestamp: {datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
@@ -815,15 +793,24 @@ def run_haro_processor(query_days=7, dry_run=False):
 
     # HARO sends the same digest to both subscribed addresses; read one copy, label both.
     groups = {}
+    young = agents = 0
     for msg_meta in messages:
+        if msg_meta['id'] in in_job or (handed is not None and msg_meta['id'] not in handed):
+            agents += 1
+            continue  # haro_agent.py has it, or is alive and will take it
         msg_data = service.users().messages().get(userId='me', id=msg_meta['id'], format='full').execute(num_retries=5)
         if not dry_run and processed_label_id in msg_data.get('labelIds', []):
             continue  # labelled since the search ran (e.g. by an overlapping run)
+        if handed is None and min_age_hours and time.time() - int(msg_data.get('internalDate', 0)) / 1000 < min_age_hours * 3600:
+            young += 1
+            continue  # haro_agent.py's to take
         headers = {h['name'].lower(): h['value'] for h in msg_data.get('payload', {}).get('headers', [])}
         if 'github.com' in headers.get('from', '').lower() or 'run failed' in headers.get('subject', '').lower():
             continue
         groups.setdefault(headers.get('subject', '(No Subject)'), []).append((msg_data, headers))
-    print(f"[+] Found {len(messages)} unprocessed media digest email(s): {len(groups)} distinct digest(s).")
+    print(f"[+] Found {len(messages)} unprocessed media digest email(s): {len(groups)} distinct digest(s)."
+          + (f" Left {young} younger than {min_age_hours}h to the Antigravity pipeline." if young else "")
+          + (f" Left {agents} the Antigravity pipeline is handling." if agents else ""))
 
     pitched_addresses, pitched_titles = already_pitched(service)
     now = datetime.datetime.now(datetime.timezone.utc)
@@ -1013,8 +1000,13 @@ if __name__ == '__main__':
     parser.add_argument('--delete-expired', action='store_true',
                         help='list HARO drafts whose deadline has passed (add --apply to delete them)')
     parser.add_argument('--apply', action='store_true', help='with --delete-expired: actually delete')
+    parser.add_argument('--min-age-hours', type=float, default=0,
+                        help='skip digests younger than this (the scheduled fallback runs pass 3)')
+    parser.add_argument('--defer-to-agent', action='store_true',
+                        help="the Mac's 30-minute run: take only what haro_agent.py leaves, and nothing right after a wake")
     args = parser.parse_args()
     if args.delete_expired:
         delete_expired_drafts(apply=args.apply)
     else:
-        run_haro_processor(query_days=args.days, dry_run=args.dry_run)
+        run_haro_processor(query_days=args.days, dry_run=args.dry_run, min_age_hours=args.min_age_hours,
+                           defer_to_agent=args.defer_to_agent)
