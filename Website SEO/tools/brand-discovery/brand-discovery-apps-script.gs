@@ -250,10 +250,17 @@ function notifyNew(body, links, row) {
   if (links.length) lines.push('Files:', links.join('\n'), '');
   lines.push('────────────────────────────────────────', '', body.text || '');
 
+  /* The same brief as a .md file, so it can be saved or dropped into a project
+     folder without copying it out of the email body. */
+  var slug = String(body.business || body.name || 'brief').toLowerCase()
+    .replace(/[^a-z0-9؀-ۿ]+/g, '-').replace(/^-|-$/g, '') || 'brief';
+  var md = Utilities.newBlob(body.text || '', 'text/markdown', 'brand-discovery-' + slug + '.md');
+
   MailApp.sendEmail({
     to: recipients(),
     subject: 'Brand discovery: ' + who + (arabic ? '  [Arabic]' : ''),
     body: lines.join('\n'),
+    attachments: [md],
     replyTo: body.email || undefined,
     name: 'AI Profit Lab briefs'
   });
