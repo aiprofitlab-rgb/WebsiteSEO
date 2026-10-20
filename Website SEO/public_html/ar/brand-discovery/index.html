@@ -304,6 +304,13 @@ input[type=range]:focus-visible{outline:2px solid var(--brand);outline-offset:2p
 .btn-primary:hover{background:var(--brand-hover)}
 .btn-ghost{background:transparent;border-color:var(--ghost-border);color:var(--text)}
 .btn[disabled]{opacity:.55;pointer-events:none}
+/* "Not sent yet": shown on the review screen and while a client is away from it fixing an answer. */
+.unsent{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin:0 0 28px;padding:14px 18px;border-radius:var(--r-inset);background:var(--brand-soft);border-inline-start:3px solid var(--accent)}
+.unsent p{margin:0;flex:1 1 260px;font-size:.95rem;color:var(--text)}
+.unsent strong{color:var(--accent-text);font-weight:600}
+.unsent .btn{padding:10px 20px;font-size:.95rem}
+.unsent small{display:block;margin-top:4px;font-size:.8rem;color:var(--text-muted)}
+.nav .unsent{margin:0;flex:1 1 100%;order:-1}
 .btn .arr{display:inline-block;transition:transform .2s var(--ease)}
 .btn:hover .arr{transform:translateX(3px)}
 :root[dir="rtl"] .btn .arr{transform:scaleX(-1)}
@@ -642,6 +649,12 @@ const UI = {
   openMail: L("Open email", "افتح البريد"),
   openWa: L("Open WhatsApp", "افتح واتساب"),
   newForm: L("Start a new form", "ابدأ استبياناً جديداً"),
+  notSent: L("Not sent yet.", "لم تُرسَل بعد."),
+  notSentReview: L("Your answers reach us only when you press Send below.", "لن تصلنا إجاباتك إلا عند الضغط على زر الإرسال أدناه."),
+  notSentFix: L("When you've made your change, go back to the review and press Send.", "بعد إجراء التعديل، عُد إلى المراجعة واضغط على زر الإرسال."),
+  notSentMissing: L("Answer the highlighted question first, then go back to the review and press Send.", "أجب عن السؤال المُشار إليه أولاً، ثم عُد إلى المراجعة واضغط على زر الإرسال."),
+  pingNote: L("So we can help if sending goes wrong, your name and contact details reach us when you open this page.", "لنتمكن من المساعدة إذا تعذّر الإرسال، يصلنا اسمك وبيانات التواصل عند فتح هذه الصفحة."),
+  toReview: L("Back to review", "العودة إلى المراجعة"),
   title: L("Brand discovery questionnaire — AI Profit Lab", "استبيان اكتشاف الهوية — AI Profit Lab"),
 };
 
@@ -985,18 +998,22 @@ const pad = (n) => String(n).padStart(2, "0");
    opens in Arabic. A saved draft still wins: it records the language the client
    last chose with the toggle. A v1 draft (one page per section) keeps its answers
    and starts again from the welcome. */
-const S = { lang: document.documentElement.lang === "ar" ? "ar" : "en", pos:0, a:{}, done:null };
+/* sid ties the "reached the review" ping to the brief that follows it, so the Apps
+   Script can tell a client who sent from one who walked away. fix is true while the
+   client is away from the review correcting something (see unsentNote). */
+const newSid = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 10);
+const S = { lang: document.documentElement.lang === "ar" ? "ar" : "en", pos:0, a:{}, done:null, sid:newSid(), fix:null };
 /* Picked files, per upload field. Held in memory only: a File cannot go into
    localStorage, and the draft is no place for 25 MB of base64 anyway. */
 const picked = {};
 try {
   const d = JSON.parse(localStorage.getItem(DRAFT_KEY) || "null") || JSON.parse(localStorage.getItem(OLD_DRAFT_KEY) || "null");
-  if (d && d.a) { S.a = d.a; S.pos = Math.min(Math.max(+d.pos || 0, 0), POS_REVIEW); S.lang = d.lang === "ar" ? "ar" : "en"; }
+  if (d && d.a) { S.a = d.a; S.pos = Math.min(Math.max(+d.pos || 0, 0), POS_REVIEW); S.lang = d.lang === "ar" ? "ar" : "en"; if (d.sid) S.sid = String(d.sid); }
 } catch (e) {}
 let saveTimer = null;
 function persist(){
   clearTimeout(saveTimer);
-  saveTimer = setTimeout(() => { try { localStorage.setItem(DRAFT_KEY, JSON.stringify({ a:S.a, pos:S.pos, lang:S.lang })); } catch (e) {} }, 300);
+  saveTimer = setTimeout(() => { try { localStorage.setItem(DRAFT_KEY, JSON.stringify({ a:S.a, pos:S.pos, lang:S.lang, sid:S.sid })); } catch (e) {} }, 300);
 }
 
 const tr = (o) => (o && typeof o === "object" && "en" in o) ? (o[S.lang] || o.en) : (o || "");
@@ -1214,7 +1231,7 @@ function renderScreen(sc){
   const eyebrow = UI.part[S.lang](sc.ch + 1, Q_STEPS.length) + " · " + tr(sc.step.t);
   const p = sc.p ? tr(sc.p) : sc.i === 0 ? tr(sc.step.p) : "";
   const last = S.pos === SCREENS.length;
-  return headHTML(eyebrow, tr(sc.h), p) + `<div class="fields">${screenBody(sc)}</div>
+  return headHTML(eyebrow, tr(sc.h), p) + unsentNote() + `<div class="fields">${screenBody(sc)}</div>
     <div class="nav"><button type="button" class="btn btn-ghost" data-nav="back"><span class="arr back" aria-hidden="true">→</span> ${tr(UI.back)}</button>
     <span class="saved" id="savedNote">${tr(UI.savedLocal)}</span>
     <div class="go"><span class="kbd" aria-hidden="true">${tr(UI.enter)}</span><button type="button" class="btn btn-primary" data-nav="next">${tr(last ? UI.review : UI.next)} <span class="arr" aria-hidden="true">→</span></button></div></div>`;
@@ -1446,8 +1463,17 @@ function renderReview(answers){
 function renderReviewStep(){
   return headHTML(S.lang === "ar" ? "الخطوة الأخيرة" : "Last step", tr(UI.revH), tr(UI.revP))
     + `<div class="rev-layout"><div class="rev-sheet"></div><div class="rev">${renderReview(S.a)}</div></div>
-    <div class="nav"><button type="button" class="btn btn-ghost" data-nav="back"><span class="arr back" aria-hidden="true">→</span> ${tr(UI.back)}</button>
+    <div class="nav"><div class="unsent" role="status"><p><strong>${tr(UI.notSent)}</strong> ${tr(UI.notSentReview)}${BRIEF_ENDPOINT ? `<small>${tr(UI.pingNote)}</small>` : ""}</p></div>
+    <button type="button" class="btn btn-ghost" data-nav="back"><span class="arr back" aria-hidden="true">→</span> ${tr(UI.back)}</button>
     <div class="go"><button type="button" class="btn btn-primary" id="submitBtn" data-nav="submit">${tr(UI.submit)} <span class="arr" aria-hidden="true">→</span></button></div></div>`;
+}
+/* Shown at the top of a question screen the client reached FROM the review, by
+   Edit or by Send finding an unanswered question. Without it the only way back
+   to Send was Continue through every screen after this one. */
+function unsentNote(){
+  if (!S.fix) return "";
+  return `<div class="unsent" role="status"><p><strong>${tr(UI.notSent)}</strong> ${tr(S.fix === "missing" ? UI.notSentMissing : UI.notSentFix)}</p>
+    <button type="button" class="btn btn-primary" data-nav="review">${tr(UI.toReview)} <span class="arr" aria-hidden="true">→</span></button></div>`;
 }
 function renderDone(){
   const saved = S.done && S.done.saved;
@@ -1491,6 +1517,7 @@ function go(p, dir){
   if (p < 0 || p > POS_REVIEW) return;
   const d = dir || (p >= S.pos ? 1 : -1);
   S.pos = p; persist();
+  if (p === POS_REVIEW) { S.fix = null; pingProgress("review"); }
   render(true, d);
   window.scrollTo({ top:0, behavior: reduce ? "auto" : "smooth" });
 }
@@ -1520,7 +1547,7 @@ function clearErr(k){ const q = $(`[data-q="${k}"]`); if (q && q.classList.conta
 /* ---------------- submit ---------------- */
 async function submit(){
   const bad = SCREENS.findIndex(sc => screenFields(sc).some(f => fieldError(f)));
-  if (bad >= 0) { go(bad + 1, -1); setTimeout(() => validateScreen(SCREENS[bad]), reduce ? 50 : 700); return; }
+  if (bad >= 0) { S.fix = "missing"; go(bad + 1, -1); setTimeout(() => validateScreen(SCREENS[bad]), reduce ? 50 : 700); return; }
   const btn = $("#submitBtn"); btn.disabled = true;
   const bytes = totalBytes();
   btn.textContent = tr(bytes ? UI.uploading : UI.sending);
@@ -1544,6 +1571,7 @@ async function submit(){
       track("brand_discovery_sent", { files: files.length });
     } catch (e) {
       track("brand_discovery_send_failed", { why: String(e && e.message).slice(0, 60) });
+      pingProgress("send_failed", { why: String(e && e.message).slice(0, 120) });
     }
   }
   S.done = { saved, payload };
@@ -1567,6 +1595,7 @@ function briefFields(payload){
     whatsapp: S.a.phone || "",
     projectType: valueText(fields.find(f => f.k === "projectType"), S.a.projectType),
     lang: payload.lang,
+    sid: S.sid,
     submittedAt: payload.submittedAt,
     answered: fields.filter(answered).length,
     of: fields.length,
@@ -1574,6 +1603,23 @@ function briefFields(payload){
       .concat(fields.map(f => ({ q: tr(f.l), v: valueText(f, S.a[f.k]) }))),
     text: toMarkdown(S.a, payload)
   }));
+}
+
+/* Tells the Apps Script this client reached the review ("review") or that their
+   Send failed ("send_failed"). Contact details and a count only - never answers.
+   If no brief with the same sid follows, Nahid gets a "NOT SENT" email. A beacon
+   survives the tab closing; text/plain keeps it a simple request, like submit(). */
+let lastPing = 0;
+function pingProgress(stage, extra){
+  if (!BRIEF_ENDPOINT) return;
+  if (stage === "review") { if (Date.now() - lastPing < 60000) return; lastPing = Date.now(); track("brand_discovery_reached_review"); }
+  const fields = Q_STEPS.flatMap(allFields);
+  const body = JSON.stringify(Object.assign({ kind:"progress", stage, sid:S.sid, business:S.a.business || "", name:S.a.contactName || "",
+    email:S.a.email || "", whatsapp:S.a.phone || "", lang:S.lang, answered:fields.filter(answered).length, of:fields.length }, extra));
+  try {
+    const sent = navigator.sendBeacon && navigator.sendBeacon(BRIEF_ENDPOINT, new Blob([body], { type:"text/plain;charset=utf-8" }));
+    if (!sent) fetch(BRIEF_ENDPOINT, { method:"POST", headers:{ "Content-Type":"text/plain;charset=utf-8" }, body, keepalive:true }).catch(() => {});
+  } catch (e) {}
 }
 
 /* An upload field counts as answered by a file or a link; everything else by isFilled. */
@@ -1761,21 +1807,31 @@ document.addEventListener("click", e => {
     $(`#fe-${k}`).textContent = "";
     paintFiles(k); schedulePaint(); return;
   }
-  if (b.dataset.go) { S.done = null; go(+b.dataset.go, -1); return; }
+  if (b.dataset.go) { S.done = null; S.fix = "edit"; go(+b.dataset.go, -1); return; }
+  if (b.dataset.nav === "review") { go(POS_REVIEW, 1); return; }
   if (b.dataset.nav === "next") { next(); return; }
   if (b.dataset.nav === "back") { go(S.pos - 1, -1); return; }
   if (b.dataset.nav === "submit") { submit(); return; }
   if (b.dataset.act === "pdf") { downloadPdf(b); return; }
   if (b.dataset.act === "copy") { copyText(toMarkdown(S.done ? S.done.payload.answers : S.a, S.done ? S.done.payload : null)); return; }
-  if (b.dataset.act === "new") { S.a = {}; S.done = null; Object.keys(picked).forEach(k => delete picked[k]); try { localStorage.removeItem(DRAFT_KEY); localStorage.removeItem(OLD_DRAFT_KEY); } catch (x) {} go(0, -1); return; }
+  if (b.dataset.act === "new") { S.a = {}; S.done = null; S.fix = null; S.sid = newSid(); Object.keys(picked).forEach(k => delete picked[k]); try { localStorage.removeItem(DRAFT_KEY); localStorage.removeItem(OLD_DRAFT_KEY); } catch (x) {} go(0, -1); return; }
 });
 /* Crossing the breakpoint with the drawer open would leave a phone sheet over a
    desktop layout. */
 window.matchMedia("(min-width: 1041px)").addEventListener("change", (m) => { if (m.matches && drawer.open) { if (drawer.close) drawer.close(); else drawer.removeAttribute("open"); } paintSheet(true); });
 
+/* Leaving with a finished but unsent form: the browser's own "Leave site?" prompt.
+   Only from the review or while fixing an answer for it - mid-questionnaire the
+   draft is saved and coming back later is the expected thing to do. */
+window.addEventListener("beforeunload", e => {
+  if (S.done || !(view() === "review" || S.fix)) return;
+  e.preventDefault(); e.returnValue = "";
+});
+
 /* ---------------- boot ---------------- */
 buildSegs();
 render(false);
+if (view() === "review") pingProgress("review");
 if (motion()) {
   gsap.fromTo(".top .wrap > *", { autoAlpha:0, y:-8 }, { autoAlpha:1, y:0, duration:.6, ease:EASE, stagger:.08, clearProps:"all" });
   gsap.fromTo(".side", { autoAlpha:0, y:18 }, { autoAlpha:1, y:0, duration:.8, ease:EASE, delay:.25, clearProps:"all" });

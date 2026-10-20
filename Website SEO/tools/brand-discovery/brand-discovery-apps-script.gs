@@ -31,6 +31,11 @@
  *     tools/brand-discovery/build_brand_discovery.py, then deploy the site.
  *  6. Open the /exec URL in a browser. It should say the service is alive.
  *
+ * ── NOT SENT YET ───────────────────────────────────────────────────────────────
+ *  A second tab, "Not sent yet", lists everyone who reached the review screen,
+ *  and Nahid gets a "NOT SENT" email when one of them goes quiet without
+ *  sending. See the section of that name below.
+ *
  * ── CHANGING THE QUESTIONS ─────────────────────────────────────────────────────
  *  Don't touch this file. The page sends the question labels (always in English,
  *  whichever language the client filled it in) with every brief, and this script
@@ -75,6 +80,9 @@ function doPost(e) {
     if (!e || !e.postData || !e.postData.contents) return json({ ok: false, error: 'empty_body' });
 
     var body = JSON.parse(e.postData.contents);
+    // The page's "reached the last screen" / "send failed" pings, not a brief.
+    if (body.kind === 'progress') return json(handleProgress(body));
+
     var rows = body.rows || [];
     if (!rows.length) return json({ ok: false, error: 'no_answers' });
 
@@ -129,6 +137,7 @@ function doPost(e) {
     } catch (mailErr) {
       console.error('BRIEF SAVED BUT EMAIL FAILED: ' + mailErr);
     }
+    try { markSent(body.sid); } catch (sentErr) { console.error('MARK SENT FAILED: ' + sentErr); }
 
     return json({ ok: true, row: row, files: links.length });
   } catch (err) {
@@ -325,6 +334,175 @@ function markQuiet() {
 function isQuiet() {
   var v = Number(PropertiesService.getScriptProperties().getProperty('quietUntil') || 0);
   return Date.now() < v;
+}
+
+/* ── not sent yet ─────────────────────────────────────────────────────────────
+   A client can answer everything, reach the review screen and close the tab
+   without pressing Send. Their answers then exist only in their browser, and
+   nothing here knew they had been at all. The page now pings this script when a
+   client reaches the review (and again if a send fails), with their contact
+   details and a session id. Each session is one row in the PENDING tab:
+
+     Waiting  reached the review, no brief yet
+     Alerted  still no brief WAIT_MS after their last visit to the review, and
+              Nahid has been emailed about it (once)
+     Sent     the brief arrived - the full brief has the same session id
+
+   checkUnsent() runs on a 10-minute timer that exists only while a row is
+   Waiting: handleProgress() creates it, checkUnsent() deletes it when there is
+   nothing left to watch. */
+
+var PENDING = 'Not sent yet';
+var PENDING_COLS = ['First seen', 'Last seen', 'Status', 'Business', 'Contact', 'Email',
+                    'WhatsApp', 'Language', 'Answered', 'Note', 'Session'];
+var WAIT_MS = 30 * 60 * 1000;
+var STAMP = 'yyyy-MM-dd HH:mm';
+
+function pendingSheet() {
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var sheet = ss.getSheetByName(PENDING);
+  if (!sheet) {
+    sheet = ss.insertSheet(PENDING);
+    sheet.getRange(1, 1, 1, PENDING_COLS.length).setValues([PENDING_COLS]).setFontWeight('bold');
+    sheet.setFrozenRows(1);
+  }
+  return sheet;
+}
+
+/** Row number of a session in the PENDING tab, or 0. */
+function findSession(sheet, sid) {
+  var last = sheet.getLastRow();
+  if (!sid || last < 2) return 0;
+  var col = PENDING_COLS.indexOf('Session') + 1;
+  var ids = sheet.getRange(2, col, last - 1, 1).getValues();
+  for (var i = 0; i < ids.length; i++) if (String(ids[i][0]) === sid) return i + 2;
+  return 0;
+}
+
+function handleProgress(body) {
+  var sid = String(body.sid || '').slice(0, 64);
+  if (!sid) return { ok: false, error: 'no_session' };
+  var failed = body.stage === 'send_failed';
+  var now = Utilities.formatDate(new Date(), 'Asia/Muscat', STAMP);
+
+  var lock = LockService.getScriptLock();
+  lock.waitLock(20000);
+  try {
+    var sheet = pendingSheet();
+    var row = findSession(sheet, sid);
+    var cur = row ? sheet.getRange(row, 1, 1, PENDING_COLS.length).getValues()[0] : null;
+    var status = cur ? String(cur[2]) : '';
+    if (status === 'Sent') return { ok: true, status: status };
+
+    var line = [
+      cur ? String(cur[0]) : now,
+      now,
+      status === 'Alerted' ? 'Alerted' : 'Waiting',
+      body.business || '', body.name || '', body.email || '', body.whatsapp || '',
+      body.lang === 'ar' ? 'Arabic' : 'English',
+      (body.answered || 0) + ' of ' + (body.of || '—'),
+      failed ? 'Send failed: ' + String(body.why || 'unknown').slice(0, 120) : (cur ? String(cur[9]) : ''),
+      sid
+    ];
+    if (!row) row = Math.max(sheet.getLastRow(), 1) + 1;
+    // Plain text BEFORE the values, same reason as the brief row: "+968…" is a formula otherwise.
+    var range = sheet.getRange(row, 1, 1, line.length);
+    range.setNumberFormat('@');
+    range.setValues([line]);
+    markQuiet();
+  } finally {
+    lock.releaseLock();
+  }
+
+  ensureCheckTrigger();
+  // A failed send is worth knowing about now, not in half an hour.
+  if (failed) {
+    try { notifyUnsent(body, now, 'Their Send button failed: ' + (body.why || 'unknown reason') + '.'); }
+    catch (err) { console.error('SEND-FAILED EMAIL FAILED: ' + err); }
+  }
+  return { ok: true, status: 'Waiting' };
+}
+
+function markSent(sid) {
+  if (!sid) return;
+  var lock = LockService.getScriptLock();
+  lock.waitLock(20000);
+  try {
+    var sheet = pendingSheet();
+    var row = findSession(sheet, String(sid));
+    if (!row) return;
+    sheet.getRange(row, 2, 1, 2).setValues([[Utilities.formatDate(new Date(), 'Asia/Muscat', STAMP), 'Sent']]);
+    markQuiet();
+  } finally {
+    lock.releaseLock();
+  }
+}
+
+/** Timer: email Nahid about every session that reached the review and went quiet. */
+function checkUnsent() {
+  var sheet = pendingSheet();
+  var last = sheet.getLastRow();
+  var waiting = 0;
+  if (last >= 2) {
+    var data = sheet.getRange(2, 1, last - 1, PENDING_COLS.length).getValues();
+    data.forEach(function (r, i) {
+      if (String(r[2]) !== 'Waiting') return;
+      var seen = Utilities.parseDate(String(r[1]), 'Asia/Muscat', STAMP).getTime();
+      if (Date.now() - seen < WAIT_MS) { waiting++; return; }
+      try {
+        notifyUnsent({ business: r[3], name: r[4], email: r[5], whatsapp: r[6], lang: r[7] === 'Arabic' ? 'ar' : 'en',
+                       answered: String(r[8]) }, String(r[1]),
+                     'They reached the last screen but have not pressed Send for ' + (WAIT_MS / 60000) + ' minutes.' +
+                     (r[9] ? ' ' + r[9] + '.' : ''));
+        sheet.getRange(i + 2, 3).setValue('Alerted');
+        markQuiet();
+      } catch (err) {
+        console.error('UNSENT EMAIL FAILED: ' + err);
+        waiting++;  // try again on the next run
+      }
+    });
+  }
+  if (!waiting) removeCheckTrigger();
+}
+
+function notifyUnsent(p, seen, why) {
+  var who = p.business || p.name || 'Someone';
+  MailApp.sendEmail({
+    to: recipients(),
+    subject: 'Brand discovery NOT SENT: ' + who,
+    body: [
+      who + ' filled in the brand discovery questionnaire, but it has not reached us.',
+      '',
+      why,
+      '',
+      'Contact:   ' + (p.name || '—'),
+      'Email:     ' + (p.email || '—'),
+      'WhatsApp:  ' + (p.whatsapp || '—'),
+      'Language:  ' + (p.lang === 'ar' ? 'Arabic' : 'English'),
+      'Answered:  ' + (typeof p.answered === 'string' ? p.answered : (p.answered || 0) + ' of ' + (p.of || '—')),
+      'Last seen: ' + seen + ' (Muscat)',
+      '',
+      'Their answers are saved only in their own browser. Ask them to open',
+      SITE + ' again on the same phone or computer,',
+      'in the same browser, and press "Send to AI Profit Lab" on the last screen.',
+      'If sending keeps failing, the last screen lets them download a PDF to send on WhatsApp.',
+      '',
+      'Sheet ("' + PENDING + '" tab): ' + sheetUrl()
+    ].join('\n'),
+    replyTo: p.email || undefined,
+    name: 'AI Profit Lab briefs'
+  });
+}
+
+function ensureCheckTrigger() {
+  var have = ScriptApp.getProjectTriggers().some(function (t) { return t.getHandlerFunction() === 'checkUnsent'; });
+  if (!have) ScriptApp.newTrigger('checkUnsent').timeBased().everyMinutes(10).create();
+}
+
+function removeCheckTrigger() {
+  ScriptApp.getProjectTriggers().forEach(function (t) {
+    if (t.getHandlerFunction() === 'checkUnsent') ScriptApp.deleteTrigger(t);
+  });
 }
 
 /* ── one-time setup ───────────────────────────────────────────────────────── */
