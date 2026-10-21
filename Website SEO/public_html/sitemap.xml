@@ -20,13 +20,13 @@
   </url>
   <url>
     <loc>https://aiprofitlab.io/blog-ar/</loc>
-    <lastmod>2026-10-19</lastmod>
+    <lastmod>2026-10-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://aiprofitlab.io/blog/</loc>
-    <lastmod>2026-10-19</lastmod>
+    <lastmod>2026-10-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -1105,6 +1105,12 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://aiprofitlab.io/blog/ar/2026-10-21-business-process-automation-for-omani-trading-firms/</loc>
+    <lastmod>2026-10-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://aiprofitlab.io/blog/en/2026-03-28-ceo-dashboard/</loc>
     <lastmod>2026-09-27</lastmod>
     <changefreq>weekly</changefreq>
@@ -2175,6 +2181,12 @@
   <url>
     <loc>https://aiprofitlab.io/blog/en/2026-10-20-meta-business-suite-managing-messages-for-oman-smes/</loc>
     <lastmod>2026-10-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://aiprofitlab.io/blog/en/2026-10-21-business-process-automation-for-omani-trading-firms/</loc>
+    <lastmod>2026-10-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
