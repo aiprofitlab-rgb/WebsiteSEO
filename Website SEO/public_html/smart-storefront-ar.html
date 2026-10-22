@@ -199,7 +199,9 @@
       font-weight: 500;
       letter-spacing: .2em;
       text-transform: uppercase;
-      color: var(--amber);
+      /* --amber-text: plain --amber measures 3.2:1 on cream and fails at this
+         size. Dark grounds override this with --amber-pale. */
+      color: #8F5A11;
       margin: 0 0 16px
     }
 
@@ -370,7 +372,8 @@
       align-items: center;
       gap: 7px;
       background: var(--wa);
-      color: #fff !important;
+      /* Dark ink: white on this green measures 2.86:1 and fails WCAG AA. */
+      color: var(--teal-950) !important;
       border-radius: 8px;
       padding: 9px 14px;
       text-decoration: none;
@@ -380,7 +383,7 @@
     }
 
     .top-wa:hover {
-      background: #199B51;
+      background: var(--wa);
       transform: translateY(-1px)
     }
 
@@ -830,6 +833,7 @@
 
     .pbtn.wa {
       background: var(--wa);
+      color: var(--teal-950);
       position: relative
     }
 
@@ -1009,7 +1013,7 @@
       left: 10px;
       right: 10px;
       background: var(--amber);
-      color: #2A1B04;
+      color: #1A1002;
       border-radius: 7px;
       padding: 6px 8px;
       font-size: 9px;
@@ -3323,6 +3327,233 @@
 
       .seatbar i {
         width: auto !important
+      }
+    }
+
+    /* ══ the simple page (2026-10-22) ══
+       The flyer campaign is over and the page now has to work for a stranger
+       arriving from a Google search: say what it is in the words they searched,
+       show the price, give them proof, answer the obvious questions. Everything
+       here hangs off classes only the English markup uses, so the Arabic page,
+       which borrows this stylesheet, renders exactly as it did. */
+    .hero-simple .hero-price {
+      margin: 22px 0 0;
+      font-family: var(--mono);
+      font-size: .8rem;
+      letter-spacing: .04em;
+      line-height: 1.8;
+      color: rgba(241, 239, 232, .78)
+    }
+
+    .hero-simple .hero-price b {
+      color: var(--amber-pale);
+      font-weight: 500;
+      font-size: 1.02rem
+    }
+
+    /* Dark ink on the WhatsApp green: a white label there measures 2.86:1 and
+       fails, this one passes. */
+    .btn-wa {
+      background: var(--wa);
+      color: var(--teal-950)
+    }
+
+    .btn-wa:hover {
+      box-shadow: 0 12px 26px -14px rgba(0, 0, 0, .7)
+    }
+
+    .btn-wa svg {
+      width: 20px;
+      height: 20px;
+      fill: currentColor;
+      flex: none
+    }
+
+    .hero-ig {
+      margin: 18px 0 0;
+      font-size: .95rem
+    }
+
+    .hero-ig a {
+      color: var(--amber-pale);
+      text-underline-offset: 3px
+    }
+
+    .proof {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      margin-top: 30px
+    }
+
+    a.card {
+      display: block;
+      color: inherit;
+      text-decoration: none
+    }
+
+    .card .go {
+      display: inline-block;
+      margin-top: 14px;
+      font-family: var(--mono);
+      font-size: .76rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--teal);
+      border-bottom: 1px solid var(--amber)
+    }
+
+    .steps {
+      list-style: none;
+      margin: 30px 0 0;
+      padding: 0;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      counter-reset: step
+    }
+
+    .steps li {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 13px;
+      padding: 22px 20px;
+      counter-increment: step
+    }
+
+    .steps li::before {
+      content: "0" counter(step);
+      display: block;
+      font-family: var(--mono);
+      font-size: .78rem;
+      letter-spacing: .12em;
+      color: #8F5A11;
+      margin-bottom: 10px
+    }
+
+    .steps h3 {
+      font-family: var(--display);
+      font-weight: 400;
+      font-size: 1.25rem;
+      color: var(--teal-900);
+      margin: 0 0 8px
+    }
+
+    .steps p,
+    .steps-note {
+      margin: 0;
+      color: var(--muted);
+      font-size: .97rem
+    }
+
+    .steps-note {
+      margin-top: 16px;
+      font-size: .88rem
+    }
+
+    .faq {
+      margin-top: 26px;
+      border-top: 1px solid var(--line)
+    }
+
+    .faq details {
+      border-bottom: 1px solid var(--line)
+    }
+
+    .faq summary {
+      cursor: pointer;
+      list-style: none;
+      position: relative;
+      padding: 18px 36px 18px 0;
+      font-weight: 600;
+      font-size: 1.02rem;
+      color: var(--teal-950)
+    }
+
+    .faq summary::-webkit-details-marker {
+      display: none
+    }
+
+    .faq summary::after {
+      content: "+";
+      position: absolute;
+      right: 4px;
+      top: 13px;
+      font-family: var(--mono);
+      font-size: 1.35rem;
+      color: #8F5A11;
+      transition: transform .25s
+    }
+
+    .faq details[open] summary::after {
+      transform: rotate(45deg)
+    }
+
+    .faq details p {
+      margin: 0 0 18px;
+      max-width: 44em;
+      color: var(--muted)
+    }
+
+    .notinc {
+      margin-top: 36px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 13px;
+      padding: 22px 24px
+    }
+
+    .notinc h3 {
+      font-family: var(--display);
+      font-weight: 400;
+      font-size: 1.3rem;
+      color: var(--teal-900);
+      margin: 0 0 8px
+    }
+
+    .notinc ul {
+      margin: 0;
+      padding-left: 1.1em;
+      color: var(--muted)
+    }
+
+    .notinc li {
+      margin: 7px 0
+    }
+
+    .band {
+      background: var(--panel)
+    }
+
+    .alt-wa {
+      margin: 18px 0 0;
+      text-align: center;
+      color: var(--muted);
+      font-size: .95rem
+    }
+
+    @media (max-width:900px) {
+
+      /* Words first on a phone: the visitor came for a website, so the
+         sentence that says so is the first thing on the screen. */
+      .hero-simple .stage {
+        order: 0;
+        height: 430px;
+        margin-top: 18px
+      }
+
+      .steps {
+        grid-template-columns: 1fr
+      }
+    }
+
+    @media (max-width:640px) {
+      .proof {
+        grid-template-columns: 1fr
+      }
+
+      .hero-simple .hero-ctas .btn {
+        flex: 1 1 100%
       }
     }
 
