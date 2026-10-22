@@ -20,7 +20,13 @@ This queue tracks remaining articles to be generated, illustrated, and published
 | 64 | Cluster 6: Technical Implementation & Integrations | Best CRM Software for Small Business in Oman | أفضل برامج CRM للشركات الصغيرة في عمان | Published | 2026-10-19 | [2026-10-19-best-crm-software-for-small-business-in-oman](https://aiprofitlab.io/blog/en/2026-10-19-best-crm-software-for-small-business-in-oman/) |
 | 65 | Cluster 6: Technical Implementation & Integrations | Meta Business Suite: Managing Messages for Oman SMEs | استخدام Meta Business Suite للرد على استفسارات العملاء | Published | 2026-10-20 | [2026-10-20-meta-business-suite-managing-messages-for-oman-smes](https://aiprofitlab.io/blog/en/2026-10-20-meta-business-suite-managing-messages-for-oman-smes/) |
 | 66 | Cluster 5: Executive Strategy, Vision 2040 & ROI | Business Process Automation for Omani Trading Firms | أتمتة العمليات التجارية لشركات التجارة والتوزيع | Published | 2026-10-21 | [2026-10-21-business-process-automation-for-omani-trading-firms](https://aiprofitlab.io/blog/en/2026-10-21-business-process-automation-for-omani-trading-firms/) |
-| 67 | Cluster 3: Autonomous AI Agents | Building an n8n AI Agent for Office Automation | بناء وكيل ذكاء اصطناعي عبر n8n للعمليات الداخلية | Pending | - | - |
+| 67 | Cluster 3: Autonomous AI Agents | Building an n8n AI Agent for Office Automation | بناء وكيل ذكاء اصطناعي عبر n8n للعمليات الداخلية | Published (temp image) | 2026-10-22 | [2026-10-22-building-an-n8n-ai-agent-for-office-automation](https://aiprofitlab.io/blog/en/2026-10-22-building-an-n8n-ai-agent-for-office-automation/) |
+| 68 | Cluster 6: Technical Implementation & Integrations | HubSpot CRM for Oman SMEs: Setup and ROI Guide 2026 | نظام HubSpot CRM للشركات الصغيرة في عمان 2026 | Pending | - | - |
+| 69 | Cluster 5: Executive Strategy, Vision 2040 & ROI | Zoho CRM Pricing Guide for GCC Businesses 2026 | دليل أسعار Zoho CRM للشركات في الخليج 2026 | Pending | - | - |
+| 70 | Cluster 3: Autonomous AI Agents | Building n8n AI Agents for GCC Operations in 2026 | بناء وكلاء الذكاء الاصطناعي عبر n8n للشركات الخليجية 2026 | Pending | - | - |
+| 71 | Cluster 4: Industry-Specific AI Applications | AI Tools for Business Operations in Oman 2026 | أدوات الذكاء الاصطناعي لإدارة الأعمال في عمان 2026 | Pending | - | - |
+| 72 | Cluster 4: Industry-Specific AI Applications | Spa Inventory Management Software in Oman and GCC | برنامج إدارة مخزون مراكز التجميل والسبا في عمان | Pending | - | - |
+| 73 | Cluster 6: Technical Implementation & Integrations | WhatsApp Business Platform Setup for Muscat Firms 2026 | إعداد منصة واتساب للأعمال للشركات في مسقط 2026 | Pending | - | - |
 
 ---
 
