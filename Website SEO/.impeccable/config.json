@@ -38,6 +38,24 @@
         ],
         "createdAt": "2026-09-27T13:40:54.052Z",
         "reason": "Claude: article-creator authoring template markup; tools/reskin_articles.py discards Tailwind skin at Step 5"
+      },
+      {
+        "rule": "hero-eyebrow-chip",
+        "value": "*",
+        "files": [
+          "public_html/en/smart-storefront.html"
+        ],
+        "createdAt": "2026-10-22T15:18:45.485Z",
+        "reason": "aiprofitlab-brand skill section 4 prescribes the mono uppercase eyebrow led by an amber asterism above headings"
+      },
+      {
+        "rule": "bounce-easing",
+        "value": "bounce",
+        "files": [
+          "public_html/en/smart-storefront.html"
+        ],
+        "createdAt": "2026-10-22T15:18:45.498Z",
+        "reason": "keyframe named bounce drives the three typing-indicator dots in the decorative phone mockup; literal motion, predates 2026-10-22"
       }
     ]
   }

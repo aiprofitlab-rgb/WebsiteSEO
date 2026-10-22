@@ -3349,9 +3349,10 @@
     /* ══ the simple page (2026-10-22) ══
        The flyer campaign is over and the page now has to work for a stranger
        arriving from a Google search: say what it is in the words they searched,
-       show the price, give them proof, answer the obvious questions. Everything
-       here hangs off classes only the English markup uses, so the Arabic page,
-       which borrows this stylesheet, renders exactly as it did. */
+       show the price, give them proof, answer the obvious questions. The Arabic
+       page follows the same layout and uses these classes too (since the same
+       day), so rebuild it with tools/build_smart_storefront_ar.py after any
+       edit here. */
     .hero-simple .hero-price {
       margin: 22px 0 0;
       font-family: var(--mono);

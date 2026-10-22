@@ -3,8 +3,11 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
-<title>موقع ذكي يبيع وأنت نائم — AI Profit Lab</title>
-<meta name="description" content="موقع ثنائي اللغة يرد على زبون في الرابعة فجراً، وياخذهم الجادّين منهم إلى برنامج الواتساب، ويخبرك من هو على وشك الشراء. السعر لمرة واحدة، وسنة استضافة ورعاية مشمولة."/>
+<!-- "تصميم موقع الكتروني" is the phrase Oman searches most in Arabic for this
+     (about 70 a month, 2026-10-22), spelled the way people type it, without
+     the hamza. -->
+<title>تصميم موقع الكتروني في عُمان، بالعربية والإنجليزية — AI Profit Lab</title>
+<meta name="description" content="موقع الكتروني لنشاطك التجاري في عُمان، بالعربية والإنجليزية. يرد على المشترين في أي ساعة، وياخذ الجادّين منهم إلى برنامج الواتساب. السعر لمرة واحدة، وسنة استضافة ورعاية مشمولة، وجاهز خلال أسبوع تقريباً."/>
 <!-- Mirrors the English page's robots value; indexable since 2026-08-27. -->
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1"/>
 <meta name="author" content="AI Profit Lab"/>
@@ -15,8 +18,8 @@
 <link rel="alternate" hreflang="en" href="https://aiprofitlab.io/en/smart-storefront/"/>
 <link rel="alternate" hreflang="x-default" href="https://aiprofitlab.io/en/smart-storefront/"/>
 
-<meta property="og:title" content="موقع ذكي يبيع وأنت نائم — AI Profit Lab"/>
-<meta property="og:description" content="مسحتَ الورقة. هذا ما تتحوّل إليه الورقة."/>
+<meta property="og:title" content="تصميم موقع الكتروني في عُمان، بالعربية والإنجليزية — AI Profit Lab"/>
+<meta property="og:description" content="موقع يرد على المشترين في أي ساعة، وياخذ الجادّين منهم إلى برنامج الواتساب. السعر لمرة واحدة، وجاهز خلال أسبوع تقريباً."/>
 <meta property="og:url" content="https://aiprofitlab.io/smart-storefront-ar/"/>
 <meta property="og:type" content="website"/>
 <meta property="og:locale" content="ar_OM"/>
@@ -39,8 +42,8 @@
 <!-- ══ pledge gate ══
      Identical to the English page's, and it reads the SAME localStorage key,
      so a link handed out in one language opens the board in the other too.
-     The "Four ways to pay less" board (section 6) is hidden from every visitor
-     by default, so the published price is the price. Open the page with
+     The "Four ways to pay less" board is hidden from every visitor by
+     default, so the published price is the price. Open the page with
      ?pledges=open and the board appears, and stays open on that browser until
      ?pledges=off puts it away again. Change UNLOCK below to change the link. -->
 <script>
@@ -95,11 +98,12 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <!-- Non-blocking font load, matching the v4 pattern in tools/v4/kit.py. The
      Arabic set: Markazi Text display, IBM Plex Sans Arabic body, IBM Plex Mono
-     figures. Marcellus stays in the list for the Latin wordmark on the flyer,
-     which must not render in a Naskh face. -->
-<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Marcellus&family=Markazi+Text:wght@400;500;600&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" media="print" onload="this.media='all'" href="https://fonts.googleapis.com/css2?family=Marcellus&family=Markazi+Text:wght@400;500;600&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
-<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus&family=Markazi+Text:wght@400;500;600&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap"></noscript>
+     figures. No Marcellus: the English sheet reaches it only through
+     --display, which the RTL layer replaces, and the flyer's Latin wordmark
+     that once needed it left with the flyer. -->
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Markazi+Text:wght@400;500;600&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" media="print" onload="this.media='all'" href="https://fonts.googleapis.com/css2?family=Markazi+Text:wght@400;500;600&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Markazi+Text:wght@400;500;600&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap"></noscript>
 
 <style>
     :root {
@@ -3333,9 +3337,10 @@
     /* ══ the simple page (2026-10-22) ══
        The flyer campaign is over and the page now has to work for a stranger
        arriving from a Google search: say what it is in the words they searched,
-       show the price, give them proof, answer the obvious questions. Everything
-       here hangs off classes only the English markup uses, so the Arabic page,
-       which borrows this stylesheet, renders exactly as it did. */
+       show the price, give them proof, answer the obvious questions. The Arabic
+       page follows the same layout and uses these classes too (since the same
+       day), so rebuild it with tools/build_smart_storefront_ar.py after any
+       edit here. */
     .hero-simple .hero-price {
       margin: 22px 0 0;
       font-family: var(--mono);
@@ -3592,32 +3597,40 @@
 [dir=rtl] .hero h1{font-size:clamp(2.3rem,6vw,3.9rem);line-height:1.26}
 [dir=rtl] h2{font-size:clamp(1.9rem,4.4vw,2.7rem)}
 [dir=rtl] h3{font-size:1.1rem}
+/* The two h3s set in the display face. `[dir=rtl] h3` above ties them on
+   specificity and comes later, so without these they fall to 1.1rem of
+   Markazi, which reads as a caption rather than a heading. */
+[dir=rtl] .steps h3{font-size:1.55rem}
+[dir=rtl] .notinc h3{font-size:1.6rem}
 [dir=rtl] .hero .sub,[dir=rtl] .lede{line-height:1.85}
-[dir=rtl] .credo p{font-size:clamp(1.45rem,3.4vw,2.3rem);line-height:1.5}
 [dir=rtl] .vow q{font-size:clamp(1.25rem,2.7vw,1.6rem);line-height:1.6}
 [dir=rtl] .sig{font-size:1.2rem}
-[dir=rtl] .qtitle{font-size:1.55rem}
 [dir=rtl] .sc-sold{font-size:1.7rem}
 [dir=rtl] .sticky .info b{font-size:1.15rem}
-[dir=rtl] .curtain .sign h3{font-size:1.5rem}
 
 /* Tracking and small-caps are Latin devices. letter-spacing on Arabic breaks
    the join between letters - it does not look airy, it makes the word
    unreadable - and text-transform does nothing at all. Both come off
    everywhere the English sheet sets them on a string that is now Arabic.
    .nav-lang and .ptag are deliberately absent: both still carry Latin. */
-[dir=rtl] .eyebrow,[dir=rtl] .btn,[dir=rtl] .nav-cta,[dir=rtl] .hero-trust,
-[dir=rtl] .qstep,[dir=rtl] .sc-badge,[dir=rtl] .sc-cell .k,[dir=rtl] .sc-sold,
-[dir=rtl] .trophy .badge,[dir=rtl] .uptime,[dir=rtl] .sticky .seats,
-[dir=rtl] .sigsub,[dir=rtl] .field label,[dir=rtl] .pfoot,
-[dir=rtl] .paper .pscan,[dir=rtl] .mockup .pstrip,
-[dir=rtl] .mockup[data-vibe="modern"] .pchip,
-[dir=rtl] .mockup[data-vibe="expensive"] .pmark,
-[dir=rtl] .mockup[data-vibe="expensive"] .pmeta,
-[dir=rtl] .mockup[data-vibe="expensive"] .pbtn,
+[dir=rtl] .eyebrow,[dir=rtl] .btn,[dir=rtl] .nav-cta,
+[dir=rtl] .sc-badge,[dir=rtl] .sc-cell .k,[dir=rtl] .sc-sold,
+[dir=rtl] .sticky .seats,[dir=rtl] .sigsub,[dir=rtl] .field label,[dir=rtl] .pfoot,
+[dir=rtl] .card .go,[dir=rtl] .steps li::before,
 [dir=rtl] .smenu a em,[dir=rtl] .smenu .mfoot{
   letter-spacing:0;text-transform:none;
 }
+/* The hero's price line and the proof cards' link text are mono in English,
+   at .8rem and under. Plex Mono has no Arabic, so those words fell through to
+   the fallback at a size Arabic cannot be read at. They move to the sans a
+   size up. The price goes with them: in mono, "ر.ع." took Plex Mono's
+   full-width space and full-width full stops and printed as "249  ر . ع ." */
+[dir=rtl] .hero-simple .hero-price{font-family:var(--sans);font-size:.95rem;letter-spacing:0}
+[dir=rtl] .hero-simple .hero-price b{font-size:1.15rem;font-weight:600;font-variant-numeric:tabular-nums}
+[dir=rtl] .card .go{font-family:var(--sans);font-size:.92rem}
+/* The steps count in the same Arabic-Indic digits as the site menu (٠١ ٠٢
+   ٠٣). Plex Mono has none, so the numbers take the menu's size bump too. */
+[dir=rtl] .steps li::before{content:"٠" counter(step,arabic-indic);font-size:1rem}
 /* The site menu. Markazi sets smaller than Marcellus at the same px, and
    Plex Mono has no Arabic-Indic digits, so the fallback draws the numbers
    tiny. The contact line leaves the mono stack because its Arabic words took
@@ -3628,12 +3641,9 @@
 [dir=rtl] .smenu .mfoot{font-family:var(--sans);font-size:.95rem}
 [dir=rtl] .nav-menu{line-height:1.85}
 
-/* The phone and the four mockup builds are 236px wide with type between 8 and
-   19px. Arabic needs a step up at every one of those sizes to stay legible,
-   and Markazi needs two. Everything here is a size, never a layout. */
-[dir=rtl] .paper{line-height:1.7;font-size:11px}
-[dir=rtl] .paper .ph{font-size:21px;line-height:1.35}
-[dir=rtl] .paper .pm{font-size:11px}
+/* The hero phone is 236px wide with type between 8 and 19px. Arabic needs a
+   step up at every one of those sizes to stay legible, and Markazi needs two.
+   Everything here is a size, never a layout. */
 [dir=rtl] .pbody .pht{font-size:16.5px;line-height:1.35}
 [dir=rtl] .pchip{font-size:9px}
 [dir=rtl] .pbtn{font-size:10px}
@@ -3641,13 +3651,6 @@
 [dir=rtl] .bub{font-size:10px;line-height:1.6}
 [dir=rtl] .bub.ar{font-size:10.5px}
 [dir=rtl] .ptoast{font-size:9.5px}
-[dir=rtl] .mockup .psub{font-size:9.5px;line-height:1.7}
-[dir=rtl] .mockup[data-vibe="serious"] .pht{font-size:15px}
-[dir=rtl] .mockup[data-vibe="serious"] .pspec li{font-size:9.5px}
-[dir=rtl] .mockup[data-vibe="modern"] .pht{font-size:14px;letter-spacing:0;line-height:1.45}
-[dir=rtl] .mockup[data-vibe="expensive"] .pht{font-size:19px;line-height:1.4}
-[dir=rtl] .mockup[data-vibe="plain"] .pht{font-size:13.5px;line-height:1.5}
-[dir=rtl] .mockup[data-vibe="plain"] .plist{font-size:9.5px;line-height:1.8}
 /* The hero phone is a fixed 412px box with overflow:hidden, and .pbody is
    flex:none in the English sheet - taller Arabic copy would push the demo
    conversation straight out of the bottom of the handset. Letting the body
@@ -3675,34 +3678,16 @@
 
 /* ══════════════════ 3. MIRROR ══════════════════ */
 [dir=rtl] .brand{margin-right:0;margin-left:auto}
-/* The flyer is the Arabic flyer - this page opens by telling you you scanned
-   it. Only the brand line stays Latin, and it needs its own direction or the
-   leading star lands on the wrong side of the wordmark. */
-[dir=rtl] .paper{text-align:right}
-[dir=rtl] .paper .pbrand{font-family:'Marcellus',Georgia,serif;direction:ltr;unicode-bidi:isolate;text-align:right}
 [dir=rtl] .ptop b{margin-right:0;margin-left:auto}
 /* The demo thread carries BOTH languages on purpose - answering an Arabic
    buyer and an English one in the same thread is the whole illustration. */
 [dir=rtl] .bub.en{direction:ltr;text-align:left}
-[dir=rtl] .opt{text-align:right}
-[dir=rtl] .opt:hover{transform:translateX(-4px)}
-/* The glyph itself is flipped in the markup; only travel is restated here. */
-[dir=rtl] .opt::after{right:auto;left:14px;transform:translate(-6px,-50%)}
-[dir=rtl] .opt:hover::after{transform:translate(0,-50%)}
 /* "Grow from the reader's starting edge" - which is the right one here. */
-[dir=rtl] .qdot::after,[dir=rtl] .card::before{transform-origin:100% 50%}
+[dir=rtl] .card::before{transform-origin:100% 50%}
 [dir=rtl] .mrow b{transform-origin:left center}
-/* The amber rule under the credo's verbs is an inset shadow in the bottom
-   few px of the inline box. Latin has nothing there; Arabic has the kasra
-   and the shadda, and the rule cut through them. Inline padding-bottom
-   drops the band below the marks without opening up the leading. */
-[dir=rtl] .credo i{padding-bottom:.16em;box-shadow:inset 0 -.09em 0 var(--amber-pale)}
-[dir=rtl] .say .caret{margin-left:0;margin-right:1px}
 [dir=rtl] .vow{border-left:1px solid var(--line);border-right:3px solid var(--amber);border-radius:16px 0 0 16px}
 [dir=rtl] .seatbar i,[dir=rtl] .sc-pips i.open{background:linear-gradient(270deg,var(--amber-bright),var(--amber-pale))}
 [dir=rtl] .pledge:hover{transform:translateX(-4px)}
-[dir=rtl] .mockup[data-vibe="plain"] .plist{padding-left:0;padding-right:15px}
-[dir=rtl] .mockup[data-vibe="plain"] .pfoot{text-align:right}
 /* The receipt. Its value column has to sit on the reader's FAR edge, which is
    the left one here: `margin-left:auto` absorbs the slack on the wrong side in
    RTL and shunts every price back against its own label. The mobile rule below
@@ -3710,7 +3695,12 @@
    direction-aware and needs nothing said about it. */
 [dir=rtl] .vs-val{margin-left:0;margin-right:auto}
 [dir=rtl] .vs-row.core{background:linear-gradient(260deg,rgba(15,110,86,.10),rgba(15,110,86,.02))}
-[dir=rtl] .trophy{text-align:right}
+/* The FAQ's +/x marker and the room reserved for it, and the bullet indent
+   on "what's not included". All three name a physical side in the English
+   sheet, so the marker would sit on top of the question's first word. */
+[dir=rtl] .faq summary{padding:18px 0 18px 36px}
+[dir=rtl] .faq summary::after{right:auto;left:4px}
+[dir=rtl] .notinc ul{padding-left:0;padding-right:1.1em}
 [dir=rtl] .hp{left:auto;right:-9999px}
 /* The select's chevron is a background image, and `background-position:right`
    is not direction-aware the way padding and margin are - left alone it lands
@@ -3737,7 +3727,7 @@
       <img src="/en/logo/wordmark-cream.svg" alt="AI Profit Lab" width="158" height="27"/>
     </a>
     <a class="nav-lang" href="/en/smart-storefront/" hreflang="en" lang="en">English</a>
-    <a class="top-wa" href="https://api.whatsapp.com/send?phone=96899245250&text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%20%D9%86%D8%A7%D9%87%D8%AF%D8%8C%20%D9%84%D8%AF%D9%8A%20%D8%B3%D8%A4%D8%A7%D9%84%20%D8%B9%D9%86%20%D8%A7%D9%84%D9%85%D9%88%D9%82%D8%B9%20%D8%A7%D9%84%D8%B0%D9%83%D9%8A." target="_blank" rel="noopener" aria-label="راسل ناهد على واتساب"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 1.8a8.2 8.2 0 1 1-4.2 15.3l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8zm-3.1 4c-.2 0-.5 0-.7.3-.2.3-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.8 2.8 4.4 3.8 2.2.9 2.6.7 3.1.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2-.1-.1-.2-.2-.5-.3l-1.7-.8c-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.1-.2 0-.4.1-.5l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5L10 8.2c-.2-.4-.4-.4-.6-.4h-.5z"/></svg><span>واتساب</span></a>
+    <a class="top-wa" data-wa="header" href="https://api.whatsapp.com/send?phone=96899245250&amp;text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%20%D9%86%D8%A7%D9%87%D8%AF%D8%8C%20%D9%84%D8%AF%D9%8A%20%D8%B3%D8%A4%D8%A7%D9%84%20%D8%B9%D9%86%20%D8%A7%D9%84%D9%85%D9%88%D9%82%D8%B9%20%D8%A7%D9%84%D8%B0%D9%83%D9%8A." target="_blank" rel="noopener" aria-label="راسل ناهد على واتساب"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 1.8a8.2 8.2 0 1 1-4.2 15.3l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8zm-3.1 4c-.2 0-.5 0-.7.3-.2.3-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.8 2.8 4.4 3.8 2.2.9 2.6.7 3.1.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2-.1-.1-.2-.2-.5-.3l-1.7-.8c-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.1-.2 0-.4.1-.5l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5L10 8.2c-.2-.4-.4-.4-.6-.4h-.5z"/></svg><span>واتساب</span></a>
     <a class="nav-cta" href="#claim">احجز مقعدك</a>
     <button class="nav-menu" id="navMenu" type="button" aria-expanded="false" aria-controls="smenu"><i aria-hidden="true"></i><span>القائمة</span></button>
   </div>
@@ -3745,9 +3735,7 @@
 
 <!-- Every Arabic label below is lifted from the live, reviewed site chrome
      (tools/v4/kit.py NAV_AR and CHROME["ar"]), not translated here. The
-     WhatsApp greeting joins three reviewed fragments: "مرحباً ناهد" (wa_short),
-     "لدي سؤال عن" (wa_intro) and "الموقع الذكي" from this page's own copy.
-     The free-tools row is absent because those pages are English-only. -->
+     free-tools row is absent because those pages are English-only. -->
 <div class="smenu" id="smenu" hidden>
   <div class="smenu-in">
     <a href="/ar/"><em>٠١</em>الرئيسية</a>
@@ -3848,31 +3836,30 @@
     })();
   </script>
 
-<!-- ═══ 1. THE PAPER HANDSHAKE ═══ -->
-<header class="hero">
+<!-- ═══ 1. WHAT IT IS ═══
+     Written for a stranger arriving from a search, like the English hero:
+     the words they searched, the price, and two ways in. The price is the
+     ledger's, written into #hPrice by the script below. It is never typed
+     here. -->
+<header class="hero hero-simple">
   <div class="stars" id="stars" aria-hidden="true"></div>
   <div class="wrap hero-grid">
     <div>
-      <p class="eyebrow"><span class="star">✼</span> لقد مسحتَ الورقة</p>
-      <h1>يبيع وأنت نائم.</h1>
-      <p class="sub">موقع ذكي ثنائي اللغة يرد على مشترك بالعربية أو الإنجليزية &mdash; في أي ساعة &mdash; وياخذهم الجادّين منهم إلى برنامج الواتساب.</p>
+      <p class="eyebrow"><span class="star">✼</span> تصميم مواقع الكترونية · مسقط، سلطنة عُمان</p>
+      <h1>موقع الكتروني لنشاطك التجاري في عُمان، بالعربية والإنجليزية.</h1>
+      <p class="sub">يرد على المشترين في أي ساعة، وياخذ الجادّين منهم مباشرة إلى برنامج الواتساب. جاهز خلال أسبوع تقريباً.</p>
+      <p class="hero-price">السعر لمرة واحدة <b id="hPrice"><span class="skel" style="min-width:4.6em"></span></b><br>
+        سنة استضافة ورعاية مشمولة · بِلا اشتراك شهري</p>
 
       <div class="hero-ctas">
-        <a class="btn btn-cream" href="#roast">أرِني موقعي</a>
-        <a class="btn btn-outline" href="#value">أرِني السعر</a>
+        <a class="btn btn-wa" data-wa="hero" href="https://api.whatsapp.com/send?phone=96899245250&amp;text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%20%D9%86%D8%A7%D9%87%D8%AF%D8%8C%20%D9%84%D8%AF%D9%8A%20%D8%B3%D8%A4%D8%A7%D9%84%20%D8%B9%D9%86%20%D8%A7%D9%84%D9%85%D9%88%D9%82%D8%B9%20%D8%A7%D9%84%D8%B0%D9%83%D9%8A." target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 1.8a8.2 8.2 0 1 1-4.2 15.3l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8zm-3.1 4c-.2 0-.5 0-.7.3-.2.3-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.8 2.8 4.4 3.8 2.2.9 2.6.7 3.1.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2-.1-.1-.2-.2-.5-.3l-1.7-.8c-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.1-.2 0-.4.1-.5l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5L10 8.2c-.2-.4-.4-.4-.6-.4h-.5z"/></svg>اسألني على واتساب</a>
+        <a class="btn btn-outline" href="#claim">احجز مقعداً</a>
       </div>
-
-      <ul class="hero-trust">
-        <li>السعر لمرة واحدة</li>
-        <li>سنة استضافة ورعاية مشمولة</li>
-        <li>عربي وإنجليزي</li>
-        <li>بِلا اشتراك شهري</li>
-      </ul>
+      <p class="hero-ig"><a href="https://www.instagram.com/ai.profit.lab.gcc/" target="_blank" rel="noopener">شاهد نماذج من المواقع على إنستغرام ↖</a></p>
     </div>
 
     <div class="stage" id="stage">
-      <div class="flyer" id="flyer" aria-hidden="true"></div>
-      <div class="phone" id="phone" role="img" aria-label="هاتف يعرض الموقع الذكي ثنائي اللغة الذي تتحوّل إليه الورقة: موقع بالعربية والإنجليزية، فيه زر طلب تسعيرة بالجملة، وزر واتساب، ومحادثة حيّة مع مشترٍ، وتنبيه باستفسار جديد.">
+      <div class="phone on" id="phone" role="img" aria-label="هاتف يعرض موقعاً ثنائي اللغة لنشاط تجاري: بالعربية والإنجليزية، فيه زر طلب تسعيرة بالجملة، وزر واتساب، ومحادثة مع مشترٍ، وتنبيه باستفسار جديد.">
         <div class="pscreen">
           <div class="ptop"><b>اسم شركتك</b><span class="ptag">AR</span><span class="ptag">EN</span></div>
           <div class="pbody">
@@ -3894,14 +3881,6 @@
   </div>
 </header>
 
-<!-- ═══ 1b. THE CREDO ═══ -->
-<section class="credo">
-  <div class="wrap">
-    <p class="rv">أنا لا أبني المواقع الالكترونية وحسب &mdash; <b>أبني أنظمة رقمية ذكية
-      <i>تفكّر</i> و<i>تتكيّف</i> و<i>تُحوِّل</i>.</b></p>
-  </div>
-</section>
-
 <!-- ═══ 2. THE GUARANTEE, AND THE FACE BEHIND IT ═══ -->
 <section>
   <div class="wrap">
@@ -3914,66 +3893,47 @@
       <div>
         <q>إن لم يصلك استفسار حقيقي من مشتري خلال 30 يوماً من إطلاق الموقع؟ أُعيد بناءه مجاناً حتى يصلك واحد. وإن لم يصلك بعدها، تسترد مبلغك المالي</q>
         <p class="sig">— ناهيد أبياري</p>
-        <p class="sigsub">الرئيس التنفيذي، AI Profit Lab</p>
+        <p class="sigsub">مؤسس AI Profit Lab</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══ 3. THREE TAPS ═══ -->
-<section class="roast" id="roast">
-  <div class="wrap narrow">
-    <p class="eyebrow rv"><span class="star">✼</span> عشر ثوانٍ</p>
-    <h2 class="rv">شاهد كيف سيبدو موقعك.</h2>
-    <p class="lede rv" style="margin-bottom:30px">ثلاث نقرات. بلا بريد، وبلا تسجيل.</p>
-
-    <div class="qcard rv" id="qcard">
-      <div id="qwrap">
-        <div class="qhead">
-          <svg class="mascot" id="mascot" viewBox="0 0 80 80" aria-hidden="true">
-            <line x1="40" y1="20" x2="40" y2="10" stroke="#0A3D30" stroke-width="3" stroke-linecap="round"/>
-            <circle class="m-tip" cx="40" cy="7" r="5" fill="#D89234"/>
-            <rect x="13" y="20" width="54" height="46" rx="15" fill="#0A3D30"/>
-            <circle class="m-eye" cx="30" cy="40" r="5" fill="#F1EFE8"/>
-            <circle class="m-eye" cx="50" cy="40" r="5" fill="#F1EFE8"/>
-            <path id="mouth" d="M31 53q9 6 18 0" stroke="#E8C98F" stroke-width="3" fill="none" stroke-linecap="round"/>
-          </svg>
-          <div>
-            <p class="qstep" id="qstep">السؤال 1 من 3</p>
-            <h3 class="qtitle" id="qtitle">ماذا تبيع؟</h3>
-          </div>
-        </div>
-        <div class="opts" id="qopts"></div>
-        <div class="qprog" id="qprog"><i class="qdot on"></i><i class="qdot"></i><i class="qdot"></i></div>
-      </div>
-      <p class="say" id="say" aria-live="polite"></p>
-
-      <div class="result" id="qresult">
-        <!-- built by renderMockup() as soon as the third question is answered -->
-        <div class="mockup" id="mockup" data-vibe="serious"></div>
-        <div>
-          <h3 style="font-family:var(--display);font-weight:400;font-size:1.7rem;color:var(--teal-900);margin-bottom:12px">نموذج، لا وعد.</h3>
-          <p style="color:var(--muted);font-size:.97rem">عشر ثوانٍ من الإثبات، بقيمتها تماماً. الموقع الحقيقي يستغرق نحو أسبوع، وفيه منتجاتك أنت، باللغتين.</p>
-          <p style="margin-top:16px"><a class="btn btn-primary" href="#value">كم يكلّف؟</a></p>
-          <p><button type="button" class="opt" id="qagain" style="margin-top:10px;width:auto">ابدأ من جديد</button></p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ 4. WHAT YOU GET ═══ -->
-<section>
+<!-- ═══ 3. WHAT YOU GET ═══ -->
+<section class="band">
   <div class="wrap">
     <p class="eyebrow rv"><span class="star">✼</span> ما الذي سوف تحصل عليه</p>
-    <h2 class="rv">ستة أشياء. لكلٍّ منها وظيفة.</h2>
+    <h2 class="rv">يبيع وأنت نائم. وإليك كيف.</h2>
     <div class="grid3" style="margin-top:34px">
-      <div class="card rv"><span class="ic">🕐</span><h3>موظّف لا ينام</h3><p>وكيل ذكاء اصطناعي ثنائي اللغة يرد على المشترين في الرابعة فجراً، ويوم الجمعة، وفي العيد.</p></div>
-      <div class="card rv"><span class="ic">📲</span><h3>عملاء ساخنون في جيبك</h3><p>المشترون الجادّون يُسلَّمون مباشرة إلى واتساب.</p></div>
-      <div class="card rv"><span class="ic">📋</span><h3>مبنيّ لتسعيرات الجملة</h3><p>مسار طلب تسعيرة بالجملة، لا صندوق «اتصل بنا» للتجزئة.</p></div>
+      <div class="card rv"><span class="ic">🕐</span><h3>يرد على المشترين في أي ساعة</h3><p>وكيل ذكاء اصطناعي ثنائي اللغة يرد على المشترين في الرابعة فجراً، ويوم الجمعة، وفي العيد.</p></div>
+      <div class="card rv"><span class="ic">📲</span><h3>المشترون الجادّون يصلون إلى واتساب</h3><p>حين يكون أحدهم جاهزاً للطلب، تصل المحادثة إلى هاتفك.</p></div>
+      <div class="card rv"><span class="ic">📋</span><h3>طلبات تسعيرة بالجملة</h3><p>نموذج تسعيرة حقيقي لمشتري الجملة، لا صندوق «اتصل بنا» عادي.</p></div>
       <div class="card rv"><span class="ic">👀</span><h3>اعرف من هو على وشك الشراء</h3><p>ملخّص قصير عمّن زار وماذا سأل، يصل إلى هاتفك.</p></div>
-      <div class="card rv"><span class="ic">🔎</span><h3>يظهر في جوجل وفي ChatGPT</h3> <p>يظهر للبحث التقليدي ولإجابات الذكاء الاصطناعي معاً.</p></div>
-      <div class="card rv"><span class="ic">🛠️</span> <h3>لا يطلب صيانة</h3> <p>سنة كاملة من الاستضافة والحماية والرعاية، مشمولة.</p></div>
+      <div class="card rv"><span class="ic">🔎</span><h3>يظهر في جوجل وفي ChatGPT</h3><p>يظهر للبحث التقليدي ولإجابات الذكاء الاصطناعي معاً.</p></div>
+      <div class="card rv"><span class="ic">🛠️</span><h3>لا يطلب صيانة</h3><p>السنة الأولى من الاستضافة والحماية والرعاية، مشمولة.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 3b. PROOF ═══
+     There are no client testimonials to show yet, so the proof is the work
+     itself: the sample sites on the brand's Instagram, and the live demo -
+     the Arabic one, whose heading this card's title is lifted from. -->
+<section id="work">
+  <div class="wrap">
+    <p class="eyebrow rv"><span class="star">✼</span> تحقّق قبل أن تدفع</p>
+    <h2 class="rv">شاهد أعمالي أولاً.</h2>
+    <div class="proof">
+      <a class="card rv" href="https://www.instagram.com/ai.profit.lab.gcc/" target="_blank" rel="noopener"><span class="ic">📸</span>
+        <h3>نماذج مواقع على إنستغرام</h3>
+        <p>مواقع صمّمتُها، منشورة على حساب <span class="ltr">@ai.profit.lab.gcc</span>.</p>
+        <span class="go">افتح إنستغرام ↖</span>
+      </a>
+      <a class="card rv" href="/demos-ar/"><span class="ic">▶️</span>
+        <h3>شاهده يردّ على مشترٍ</h3>
+        <p>مشترٍ يسأل عن التوفّر والسعر بعد ساعات العمل. شاهد بالضبط ما يفعله وكيل المشتري.</p>
+        <span class="go">شاهد التجربة ←</span>
+      </a>
     </div>
   </div>
 </section>
@@ -3992,7 +3952,9 @@
      level - which parks it at the right-hand end of the cell, the first thing
      an Arabic reader meets. Measured, not assumed: right to left the cell
      reads minus, 700, ر.ع. It is set tight against the digits only so the two
-     scan as one figure. -->
+     scan as one figure.
+
+     The footnote is empty, as it is on the English page. -->
 <section class="vs-sec" id="value">
   <div class="wrap">
     <p class="eyebrow rv"><span class="star">✼</span> ما الذي يشتريه المبلغ فعلاً</p>
@@ -4027,7 +3989,7 @@
       </div>
     </div>
 
-    <p class="vs-foot rv"><b> </b>هذالسعر لن يكون متاح دايما، المقاعد محدودة لهذاالعرض. إغتنم الفرصة قبل إنتهاء المعرض </p>
+    <p class="vs-foot rv"></p>
   </div>
 </section>
 
@@ -4039,7 +4001,7 @@
 
     <div class="offline" id="ladderOffline">
       <strong>العدّاد المباشر لا يُحمّل الآن.</strong>
-      أُفضّل ألا أعرض لك شيئاً على أن أعرض رقماً اختلقته. <a href="https://api.whatsapp.com/send?phone=96899245250" target="_blank" rel="noopener">اسألني على واتساب</a>.
+      أُفضّل ألا أعرض لك شيئاً على أن أعرض رقماً اختلقته. <a data-wa="ladder" href="https://api.whatsapp.com/send?phone=96899245250" target="_blank" rel="noopener">اسألني على واتساب</a>.
     </div>
 
     <div class="scard rv" id="ladderList">
@@ -4074,21 +4036,77 @@
   </div>
 </section>
 
-<!-- ═══ 6b. THE BUTTON THAT RUNS AWAY ═══
-     Sits outside #pledges on purpose. The pledge board is gated (see the top of
-     this file) and a child of a display:none section can never be shown again,
-     so the chase lives in its own section and survives the gate. -->
-<section id="chase">
+<!-- ═══ 6b. HOW IT WORKS ═══
+     The timeline is the one terms-ar.html section 5 publishes, and most of
+     the wording is lifted from it; the payment split is the one the proforma
+     prints (deposit now, balance on delivery). -->
+<section class="band" id="how">
   <div class="wrap">
-    <div class="chase rv">
-      <p class="chase-note pledge-only-b"> هل تريد خصماً اكثر؟</p>
-      <p class="chase-note nopledge"></p>هل تريد خصماً أكثر؟</p>
-      <button type="button" id="runaway-btn">أريد خصماً أكبر</button>
-      <div class="trophy" id="trophy">
-        <span class="badge">✼ صائد أزرار معتمد</span>
-        <strong>حسناً. فزت.</strong>
-        <p style="margin:8px 0 0;color:var(--muted);font-size:.94rem">لا يوجد خصم إضافي فعلاً. لكنك طاردت زراً سبع مرات — وهذا بالضبط قدر الإصرار الذي يلزم لتحصيل فاتورة متأخرة. صوّر الشاشة؛ استحققتها.</p>
-      </div>
+    <p class="eyebrow rv"><span class="star">✼</span> طريقة العمل</p>
+    <h2 class="rv">ثلاث خطوات. أسبوع تقريباً.</h2>
+    <ol class="steps">
+      <li class="rv">
+        <h3>احجز مقعدك</h3>
+        <p>املأ النموذج القصير أدناه. تصلك فاتورتك بالبريد، وعربون 50% بالبطاقة أو بالتحويل البنكي يحفظ لك سعر اليوم.</p>
+      </li>
+      <li class="rv">
+        <h3>حدّثني عن نشاطك</h3>
+        <p>مكالمة قصيرة، ثم ترسل منتجاتك وأسعارك، ومعها شعارك وصورك إن كانت لديك.</p>
+      </li>
+      <li class="rv">
+        <h3>تطّلع عليه في اليوم الثالث، ويُطلَق في اليوم السابع</h3>
+        <p>يصلك رابط تطّلع عليه في اليوم الثالث، مع جولة تعديلات واحدة مشمولة. ويُطلَق الموقع في اليوم السابع، ويُدفع النصف الآخر عند التسليم.</p>
+      </li>
+    </ol>
+    <p class="steps-note rv">اليوم الأول هو يوم اعتماد ملخص متطلباتك، لا يوم دفعك.</p>
+  </div>
+</section>
+
+<!-- ═══ 6c. QUESTIONS, AND WHAT IS NOT INCLUDED ═══
+     Every answer is the English page's, which lifts them from terms.html
+     (sections 5, 8 and 9) and the refund policy. The Arabic is lifted the same
+     way from terms-ar.html and refund-policy-ar.html, moved from their "we"
+     into this page's "I". Change the terms first, then both pages. -->
+<section id="faq">
+  <div class="wrap narrow">
+    <p class="eyebrow rv"><span class="star">✼</span> أسئلة</p>
+    <h2 class="rv">إجابات مباشرة.</h2>
+    <div class="faq rv">
+      <details>
+        <summary>من يملك الموقع؟</summary>
+        <p>أنت. عند سداد كامل المبلغ، تملك الموقع ومحتواه والحسابات التي يعمل من خلالها، وهي مسجّلة باسمك حيثما تسمح المنصّة بذلك. ويمكنك نقله أو تعديله أو تسليمه لشخص آخر.</p>
+      </details>
+      <details>
+        <summary>ماذا يحدث بعد السنة الأولى؟</summary>
+        <p>السنة الأولى من الاستضافة والرعاية مشمولة. وبعد تلك السنة تصبح اختيارية وتُسعَّر على حدة. ولا يتوقف موقعك عن العمل لأنك رفضتها.</p>
+      </details>
+      <details>
+        <summary>لديّ موقع بالفعل. هل تستطيع استبداله؟</summary>
+        <p>نعم. يُطلَق الموقع الجديد على نطاقك أنت، أو على عنوان مؤقت أولاً إن لم يكن نطاقك جاهزاً.</p>
+      </details>
+      <details>
+        <summary>ماذا لو لم يتواصل معي أي مشترٍ؟</summary>
+        <p>إن لم يصلك استفسار حقيقي من مشتري خلال 30 يوماً من إطلاق الموقع، أُعيد بناءه مجاناً حتى يصلك واحد. وإن لم يصلك بعدها، تسترد مبلغك المالي.</p>
+      </details>
+      <details>
+        <summary>هل أحتاج إلى أي معرفة تقنية؟</summary>
+        <p>لا. ترسل منتجاتك وأسعارك وصورك، وأنا أبنيه، ويحصل فريقك على فيديو مسجّل يشرح طريقة عمله.</p>
+      </details>
+      <details>
+        <summary>كيف أدفع؟</summary>
+        <p>النصف الآن، بالبطاقة أو بالتحويل البنكي، لحجز مقعدك. والنصف الآخر عند التسليم. والمبلغ المدوَّن في الفاتورة هو المبلغ الذي تدفعه: لا تُضاف إليه ضريبة القيمة المضافة. وطريقة الاسترداد موضّحة في <a href="/refund-policy-ar/">سياسة الاسترجاع</a>.</p>
+      </details>
+    </div>
+
+    <div class="notinc rv">
+      <h3>ما لا يشمله السعر</h3>
+      <ul>
+        <li>اسم النطاق، إن لم يكن لديك واحد بعد. أستأذنك قبل شرائه، وأُطلعك على الإيصال.</li>
+        <li>الاستضافة والرعاية بعد السنة الأولى. اختيارية، وتُسعَّر على حدة.</li>
+        <li>الخدمات المدفوعة لدى أطراف ثالثة. إن احتجنا إلى واحدة، تُخبَر قبل استخدامها ويكون الحساب باسمك.</li>
+        <li>أكثر من جولة تعديلات واحدة في أسبوع الإطلاق.</li>
+        <li>الإضافات: لوحة المعلومات الحيّة لصاحب العمل، والتشغيل الآلي الكامل. تُبنى بعد إطلاق الموقع وتُباع على حدة.</li>
+      </ul>
     </div>
   </div>
 </section>
@@ -4097,8 +4115,8 @@
 <section class="roast" id="claim">
   <div class="wrap">
     <p class="eyebrow rv"><span class="star">✼</span> احجز مقعداً</p>
-    <h2 class="rv">سبعة حقول. ثم تصلك فاتورتك في بريدك.</h2>
-    <p class="lede rv" style="margin-bottom:28px">هذا يحفظ مكانك بسعر اليوم. أما التفاصيل الكاملة فتأتي لاحقاً، بعد أن يصل العربون.</p>
+    <h2 class="rv">احجز مقعدك بسعر اليوم.</h2>
+    <p class="lede rv" style="margin-bottom:28px">سبعة حقول قصيرة. تصلك فاتورتك بالبريد، وتدفع عربون 50% بالبطاقة أو بالتحويل البنكي. أما التفاصيل الكاملة فتأتي بعد ذلك.</p>
 
     <form class="form rv" id="claimForm" novalidate>
       <div class="fsummary">
@@ -4152,49 +4170,21 @@
       <p style="margin:20px 0 0"><button type="submit" class="btn btn-primary" id="fSubmit" style="width:100%">احجز لي مقعداً بهذا السعر</button></p>
       <p id="fPayNote" style="font-size:.84rem;color:var(--muted);margin:12px 0 0"></p>
     </form>
+    <p class="alt-wa">تفضّل أن تسأل أولاً؟ <a data-wa="claim" href="https://api.whatsapp.com/send?phone=96899245250&amp;text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%20%D9%86%D8%A7%D9%87%D8%AF%D8%8C%20%D9%84%D8%AF%D9%8A%20%D8%B3%D8%A4%D8%A7%D9%84%20%D8%B9%D9%86%20%D8%A7%D9%84%D9%85%D9%88%D9%82%D8%B9%20%D8%A7%D9%84%D8%B0%D9%83%D9%8A." target="_blank" rel="noopener">راسلني على واتساب</a>.</p>
   </div>
 </section>
 
-<!-- ═══ 8. FOOTER + CAT ═══ -->
+<!-- ═══ 8. FOOTER ═══ -->
 <footer>
   <div class="wrap footgrid">
     <div>
       <img class="foot-logo" src="/en/logo/wordmark-dark.svg" alt="AI Profit Lab" width="150" height="26" loading="lazy"/>
-      <p style="margin:0">كل نجاح يبدأ ببصيرة.</p>
+      <p style="margin:0">كل نجاح يبدأ برؤية.</p>
       <p class="foot-nav"><a href="/ar/">الرئيسية</a><a href="/services/">ما أبنيه</a><a href="/process/">طريقة العمل</a><a href="/blog-ar/">المقالات</a><a href="/about/">عن ناهد</a><a href="/contact/">صفحة التواصل</a></p>
       <p style="margin:10px 0 0;font-size:.8rem"><span class="ltr">© 2026 AI Profit Lab</span> — علامة تجارية تابعة لـ Lotus Gulf International (س.ت <span class="ltr">1570092</span>) · <a href="/refund-policy-ar/">سياسة الاسترجاع</a> · <a href="/privacy-ar/">الخصوصية</a></p>
     </div>
-
-    <div class="uptime">
-      <span>ضمان تشغيل 100% للذكاء الاصطناعي<sup>*</sup></span>
-      <button class="catbtn" id="catBtn" aria-label="أيقظ قط الخادم" title="لا توقظ قط الخادم">
-        <svg viewBox="0 0 70 52" id="catSvg" aria-hidden="true">
-          <rect x="4" y="26" width="62" height="9" rx="2" fill="#16261F" stroke="#3FAE8A" stroke-width="1"/>
-          <rect x="4" y="37" width="62" height="9" rx="2" fill="#16261F" stroke="#3FAE8A" stroke-width="1"/>
-          <circle cx="60" cy="30.5" r="1.6" fill="#3FAE8A"/><circle cx="60" cy="41.5" r="1.6" fill="#D89234"/>
-          <g class="cat-body">
-            <path d="M14 26c0-6 5-10 11-10s11 4 11 10z" fill="#D89234"/>
-            <path d="M36 25c7 1 9-2 8-6" stroke="#D89234" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-            <path d="M18 17.5l1.5-5 3.5 4z" fill="#BA7517"/><path d="M31 16.5l2-4 1.5 5z" fill="#BA7517"/>
-            <circle cx="22" cy="21" r="1.3" fill="#2A1B04" class="cat-eye"/><circle cx="29" cy="21" r="1.3" fill="#2A1B04" class="cat-eye"/>
-            <path d="M20.5 21.5h3M27.5 21.5h3" stroke="#2A1B04" stroke-width="1.1" stroke-linecap="round" class="cat-shut"/>
-          </g>
-          <text x="40" y="16" class="cat-z" font-size="9" fill="#E8C98F" font-family="monospace">z</text>
-          <text x="46" y="10" class="cat-z" font-size="7" fill="#E8C98F" font-family="monospace">z</text>
-        </svg>
-      </button>
-    </div>
   </div>
-  <div class="wrap"><p style="font-size:.72rem;color:rgba(241,239,232,.4);margin:18px 0 0">* القط للزينة. أما نسبة التشغيل فليست كذلك — هي اتفاقية استضافة حقيقية، والقط لم يقترب من خادم قط.</p></div>
 </footer>
-
-<div class="curtain" id="curtain">
-  <div class="sign">
-    <h3>تحت الإنشاء</h3>
-    <p>القط استيقظ وله رأي في قراءتك. لا شيء معطّل فعلاً.</p>
-    <button class="btn btn-primary" id="curtainClose" style="width:100%">انقر لإزالة القط</button>
-  </div>
-</div>
 
 <div class="sticky">
   <div class="sticky-in">
@@ -4267,7 +4257,7 @@
     document.getElementById("stars").innerHTML = starHTML;
   }
 
-  /* ─────────── confetti + dust puffs ─────────── */
+  /* ─────────── confetti ─────────── */
   var COLORS = ["#D89234", "#0F6E56", "#E8C98F", "#BA7517"];
   function spawn(cls, x, y, style, life) {
     var n = document.createElement("i");
@@ -4293,15 +4283,6 @@
       c.style.animationDelay = (Math.random() * 0.12).toFixed(2) + "s";
     }
   }
-  function puff(x, y) {
-    if (reduce) return;
-    for (var i = 0; i < 6; i++) {
-      spawn("puff", x, y, {
-        "--dx": ((Math.random() - 0.5) * 70).toFixed(0) + "px",
-        "--dy": ((Math.random() - 0.5) * 70).toFixed(0) + "px"
-      }, 620);
-    }
-  }
 
   /* ─────────── rolling numbers ───────────
      Money is written directly, never interpolated. Counting the digits up made
@@ -4321,309 +4302,23 @@
     el.classList.add("bumped");
   }
 
-  /* ─────────── 1. flyer → storefront ─────────── */
-  var flyer = document.getElementById("flyer");
-  var phone = document.getElementById("phone");
-  var STRIPS = 12;
+  /* ─────────── 1. WhatsApp taps, as a conversion ───────────
+     apl-analytics.js already reports these as cta_click with cta_type
+     "whatsapp". This page also sends whatsapp_click, one event name with
+     nothing else in it, so GA4 can mark it as a key event and Google Ads can
+     import it as a conversion. data-wa says which button. Same event, same
+     locations as the English page; `lang` tells the two apart. */
+  document.addEventListener("click", function(e){
+    var a = e.target && e.target.closest ? e.target.closest('a[href*="whatsapp.com"], a[href*="wa.me"]') : null;
+    if (a) track("whatsapp_click", { cta_location: a.getAttribute("data-wa") || "other" });
+  }, true);
 
-  var paperHTML =
-    '<div class="paper">' +
-      '<div class="pbrand">✼ AI Prof<i>i</i>t Lab</div>' +
-      '<div class="ph">موقع يبيع وأنت نائم.</div>' +
-      '<div class="pm">ثنائي اللغة · عربي وإنجليزي<br>صُنع في مسقط</div>' +
-      '<div class="pqr"></div>' +
-      '<div class="pscan">امسحني ←</div>' +
-      '<div class="pcut"></div>' +
-    '</div>';
-
-  for (var st = 0; st < STRIPS; st++) {
-    var strip = document.createElement("div");
-    strip.className = "strip";
-    strip.style.clipPath = "inset(0 " + (100 - (st + 1) * (100 / STRIPS)) + "% 0 " + (st * (100 / STRIPS)) + "%)";
-    strip.innerHTML = paperHTML;
-    flyer.appendChild(strip);
+  /* The hero's price line. Same rule as every other figure here: it is
+     whatever the ledger says, or an honest "ask me", never a typed number. */
+  function heroPrice(text) {
+    var el = document.getElementById("hPrice");
+    if (el) el.textContent = text;
   }
-
-  function upgrade() {
-    if (reduce) { flyer.style.display = "none"; phone.classList.add("on"); return; }
-    flyer.querySelectorAll(".strip").forEach(function(el, i){
-      var drift = (i - STRIPS / 2) * 5;
-      el.style.transition = "transform .95s cubic-bezier(.5,0,.75,0), opacity .8s ease-in";
-      el.style.transitionDelay = (i * 32) + "ms";
-      el.style.transform = "translate(" + drift + "px," + (150 + Math.random() * 90) + "px) rotate(" + drift + "deg)";
-      el.style.opacity = "0";
-    });
-    setTimeout(function(){ phone.classList.add("on"); }, 430);
-    setTimeout(function(){ flyer.style.display = "none"; }, 1600);
-  }
-  setTimeout(upgrade, reduce ? 0 : 900);
-
-  /* ─────────── 2. three taps ─────────── */
-  var QUESTIONS = [
-    { title: "ماذا تبيع؟", key: "sector", options: [
-      { label: "مواد بناء",        say: "مواد بناء. مشتروك يتصلون بثلاثة موردين ويشترون من أول من يرد. هذه هي اللعبة كلها." },
-      { label: "مستلزمات طبية",     say: "مستلزمات طبية. مشتروك يحتاجون أوراق المواصفات، ويحتاجونها في ساعات غريبة. صفحة تقول «منتجات عالية الجودة» لن تكفي." },
-      { label: "قطع غيار سيارات",   say: "قطع غيار. نصف استفساراتك من شخص يمسك قطعة مكسورة ويسأل إن كانت عندك. أسرع إجابة تكسب." },
-      { label: "أغذية ومواد استهلاكية", say: "أغذية ومواد استهلاكية. إعادة طلب، وقوائم أسعار، وأيام توصيل. مملّ ومتكرّر — وهذا بالضبط ما ينبغي أن تتولاه آلة." },
-      { label: "شيء آخر",          say: "شيء آخر. جيد — صناعة القوالب الجاهزة تكره ذلك، وهو السبب في ألا يكون موقعك قالباً." }
-    ]},
-    { title: "ما وضع موقعك الحالي؟", key: "site", options: [
-      { label: "ليس لديّ موقع",      say: "صريح. وكثير من منافسيك لديهم موقع أسوأ من لا شيء، فأنت متقدّم أكثر مما تظن." },
-      { label: "لديّ موقع، من 2019", say: "موقع 2019 يُحمّل صورة بأربعة ميغابايت، ثم يطلب من غريب أن يملأ نموذجاً. نستطيع التفوّق على ذلك قبل الغداء." },
-      { label: "ابن أخي بناه",       say: "كل ابن أخٍ في عُمان بنى موقعاً واحداً بالضبط. له كل الاحترام. لكنه لا يرد على مشتريك في منتصف الليل." },
-      { label: "نستخدم واتساب فقط",  say: "واتساب بصراحة هو المكان الصحيح لإغلاق الصفقة. المشكلة أن يجدك أحد أصلاً قبل أن تبدأ تلك المحادثة." }
-    ]},
-    { title: "بأي إحساس تريده؟", key: "vibe", options: [
-      { label: "جادّ ومتين",   vibe: "serious",   say: "جادّ ومتين. الترجمة: بلا صورة مصافحة أمام مبنى زجاجي." },
-      { label: "عصري ونظيف",   vibe: "modern",    say: "عصري ونظيف. ممكن. ويعني غالباً حذف أشياء، وهو ما لا أحد يحب أن يحاسبك عليه." },
-      { label: "فاخر",         vibe: "expensive", say: "فاخر. خلفية داكنة، ومساحة فارغة كثيرة، وجملة واحدة واثقة جداً. ينجح لأنه يبدو ضبطاً للنفس." },
-      { label: "المهم أن يعمل", vibe: "plain",     say: "المهم أن يعمل. ملخّصي المفضّل. آراء أقل، وإطلاق أسرع، واستفسارات أكثر." }
-    ]}
-  ];
-
-  /* ─── what the mockup is built from ───
-     Sector picks the copy and the conversation, the website answer picks the
-     notification, and the vibe picks an entirely different build of the screen
-     (SKINS below). Five sectors x four situations x four vibes, so two people
-     answering differently never see the same phone.
-
-     ARABIC: `mark` is a field rather than the English page's
-     brand.replace(/^YOUR /, "") — there is no prefix to strip off an Arabic
-     brand line, so the "expensive" build states its own wordmark. */
-  var SECTORS = {
-    "مواد بناء": {
-      brand:"شركتك لمواد البناء",
-      mark: "مواد البناء",
-      h:    "أسمنت وحديد وبلوك — يُوصَّل في كل عُمان.",
-      sub:  "من طبلية واحدة إلى مشروع كامل، بسعر يوم تسأل.",
-      chips:["أسعار الجملة","توصيل للموقع","توفّر المخزون"],
-      cta:  "اطلب تسعيرة بالجملة",
-      ar:   "مرحباً! تحتاج تسعيرة بالجملة؟",
-      en:   "400 bags, delivered to Sohar."
-    },
-    "مستلزمات طبية": {
-      brand:"شركتك للمستلزمات الطبية",
-      mark: "المستلزمات الطبية",
-      h:    "مستلزمات طبية، وأوراقها مرتّبة.",
-      sub:  "بيانات فنية، وسلسلة تبريد، ووثائق مناقصات، عند الطلب.",
-      chips:["بيانات فنية","سلسلة تبريد","مناقصات"],
-      cta:  "اطلب المواصفات والأسعار",
-      ar:   "مرحباً! تبحث عن مواصفات المنتج؟",
-      en:   "Can you send the spec sheet?"
-    },
-    "قطع غيار سيارات": {
-      brand:"شركتك لقطع الغيار",
-      mark: "قطع الغيار",
-      h:    "القطعة التي تحتاجها، متوفّرة، اليوم.",
-      sub:  "أرسل رقم القطعة أو صورة لها. ستعرف خلال دقائق.",
-      chips:["بحث برقم القطعة","أسعار التجارة","تسليم بنفس اليوم"],
-      cta:  "تحقّق من توفّر القطعة",
-      ar:   "مرحباً! تبحث عن قطعة معيّنة؟",
-      en:   "Do you have this part number?"
-    },
-    "أغذية ومواد استهلاكية": {
-      brand:"شركتك للتوزيع بالجملة",
-      mark: "التوزيع بالجملة",
-      h:    "توريد بالجملة تعتمد عليه رفوفك.",
-      sub:  "طلبات دائمة، وقوائم أسعار أسبوعية، وأيام توصيل تخطّط عليها.",
-      chips:["قائمة الأسعار","إعادة الطلب","أيام التوصيل"],
-      cta:  "احصل على قائمة أسعار هذا الأسبوع",
-      ar:   "مرحباً! تريد قائمة الأسعار؟",
-      en:   "Send me this week’s price list."
-    },
-    "شيء آخر": {
-      brand:"شركتك",
-      mark: "شركتك",
-      h:    "نُورّد في عُمان، منذ يوم بدأت.",
-      sub:  "يرد بلغة مشتريك، في ساعة مشتريك.",
-      chips:["أسعار الجملة","التوصيل","بيانات المنتجات"],
-      cta:  "اطلب تسعيرة بالجملة",
-      ar:   "مرحباً! كيف أقدر أساعدك؟",
-      en:   "Can I get a bulk quote?"
-    }
-  };
-
-  // the notification is the part that answers "what was I missing before?"
-  var TOASTS = {
-    "ليس لديّ موقع":      "استفسار جديد ← إلى هاتفك",
-    "لديّ موقع، من 2019": "رُدّ عليه " + ltr("2:14") + " فجراً ← وأنت نائم",
-    "ابن أخي بناه":       "طلب تسعيرة ← مباشرة إلى واتساب",
-    "نستخدم واتساب فقط":  "وجدك في جوجل ← والآن في واتساب",
-    _default:             "استفسار جديد ← إلى هاتفك"
-  };
-
-  function mkConv(d) {
-    return '<div class="pconv">'
-      + '<div class="bub ar d-ar">' + d.ar + '</div>'
-      + '<div class="bub d-type"><i></i><i></i><i></i></div>'
-      + '<div class="bub en d-en">' + d.en + '</div>'
-      + '</div>';
-  }
-  function mkChips(list) {
-    return list.map(function(c){ return '<span class="pchip">' + c + '</span>'; }).join("");
-  }
-  function mkItems(list) {
-    return list.map(function(c){ return '<li>' + c + '</li>'; }).join("");
-  }
-
-  /* Four builds. Same ingredients, different architecture: the chrome, the type,
-     the way the three selling points are listed and the buttons all change. */
-  var SKINS = {
-    // trade chrome, credentials, a ticked spec list, squared buttons
-    serious: function(d, toast) {
-      return '<div class="pscreen">'
-        + '<div class="ptop"><b>' + d.brand + '</b><span class="ptag">AR</span><span class="ptag">EN</span></div>'
-        + '<div class="pstrip">سجل تجاري · توريد بالجملة · عُمان</div>'
-        + '<div class="pbody">'
-        +   '<div class="pht">' + d.h + '</div>'
-        +   '<div class="prule"></div>'
-        +   '<ul class="pspec">' + mkItems(d.chips) + '</ul>'
-        +   '<div class="pbtn">' + d.cta + '</div>'
-        +   '<div class="pbtn wa">تحدّث على واتساب</div>'
-        +   '<div class="pfoot">عربي وإنجليزي · رد على مدار الساعة</div>'
-        + '</div>' + mkConv(d)
-        + '<div class="ptoast">' + toast + '</div></div>';
-    },
-    // light chrome, white space, outline chips, pill buttons
-    modern: function(d, toast) {
-      return '<div class="pscreen">'
-        + '<div class="ptop"><b>' + d.brand + '</b><span class="ptag">AR</span><span class="ptag">EN</span></div>'
-        + '<div class="pbody">'
-        +   '<div class="pht">' + d.h + '</div>'
-        +   '<p class="psub">' + d.sub + '</p>'
-        +   '<div class="pchips">' + mkChips(d.chips) + '</div>'
-        +   '<div class="pbtn">' + d.cta + '</div>'
-        +   '<div class="pbtn wa">واتساب</div>'
-        +   '<div class="pfoot">ثنائي اللغة · دائم التشغيل</div>'
-        + '</div>' + mkConv(d)
-        + '<div class="ptoast">' + toast + '</div></div>';
-    },
-    // dark, no chrome, one sentence, one thin outlined button
-    expensive: function(d, toast) {
-      return '<div class="pscreen">'
-        + '<div class="pmark">' + d.mark + '</div>'
-        + '<div class="pbody">'
-        +   '<div class="pht">' + d.h + '</div>'
-        +   '<p class="pmeta">' + d.chips.join(" · ") + '</p>'
-        +   '<div class="pbtn">استفسر</div>'
-        +   '<span class="pwa">أو واتساب ←</span>'
-        + '</div>' + mkConv(d)
-        + '<div class="ptoast">' + toast + '</div></div>';
-    },
-    // no decoration, WhatsApp first and biggest, every corner square
-    plain: function(d, toast) {
-      return '<div class="pscreen">'
-        + '<div class="ptop"><b>' + d.brand + '</b><span class="ptag">AR</span><span class="ptag">EN</span></div>'
-        + '<div class="pbody">'
-        +   '<div class="pht">' + d.h + '</div>'
-        +   '<ul class="plist">' + mkItems(d.chips) + '</ul>'
-        +   '<div class="pbtn wa">راسلنا على واتساب</div>'
-        +   '<div class="pbtn sec">' + d.cta + '</div>'
-        +   '<div class="pfoot">بالعربية والإنجليزية، في أي ساعة.</div>'
-        + '</div>' + mkConv(d)
-        + '<div class="ptoast">' + toast + '</div></div>';
-    }
-  };
-
-  function renderMockup(sector, site, vibe) {
-    var d = SECTORS[sector] || SECTORS["شيء آخر"];
-    var mk = document.getElementById("mockup");
-    mk.setAttribute("data-vibe", vibe);
-    mk.innerHTML = (SKINS[vibe] || SKINS.serious)(d, TOASTS[site] || TOASTS._default);
-  }
-
-  // `busy` locks input while the commentary is typing. Without it, two quick taps on the
-  // same question advance the counter twice, run finish() with unanswered questions, and
-  // throw before the result panel is ever shown.
-  var qi = 0, answers = {}, busy = false;
-  var qwrap = document.getElementById("qwrap"), qstep = document.getElementById("qstep"),
-      qtitle = document.getElementById("qtitle"), qopts = document.getElementById("qopts"),
-      qprog = document.getElementById("qprog"), say = document.getElementById("say"),
-      qresult = document.getElementById("qresult"), mascot = document.getElementById("mascot"),
-      mouth = document.getElementById("mouth");
-
-  function mascotThink(on) {
-    mascot.classList.toggle("think", on);
-    mouth.setAttribute("d", on ? "M35 53q5 3 10 0" : "M31 53q9 6 18 0");
-  }
-  function mascotCheer() {
-    mascot.classList.remove("think");
-    mouth.setAttribute("d", "M29 51q11 9 22 0");
-    mascot.classList.add("happy");
-    setTimeout(function(){ mascot.classList.remove("happy"); }, 650);
-  }
-
-  /* ARABIC: the English page types by appending a text node per tick. Arabic
-     letters join, and a letter's shape depends on its neighbours - growing the
-     line out of a chain of sibling text nodes leaves the joins at the mercy of
-     how the engine happens to segment them. Rewriting the WHOLE prefix into
-     ONE text node every tick keeps the run intact, so each new letter simply
-     joins the word the way it will finally sit. */
-  function type(text, done) {
-    if (reduce) { say.textContent = text; if (done) done(); return; }
-    say.innerHTML = '<span class="typed"></span><span class="caret"> </span>';
-    var node = say.querySelector(".typed"), caret = say.querySelector(".caret");
-    var i = 0;
-    var timer = setInterval(function(){
-      i += 2;
-      node.textContent = text.slice(0, i);
-      if (i >= text.length) { clearInterval(timer); caret.remove(); if (done) done(); }
-    }, 16);
-  }
-
-  function renderQuestion() {
-    var q = QUESTIONS[qi];
-    qstep.textContent = "السؤال " + (qi + 1) + " من " + QUESTIONS.length;
-    qtitle.textContent = q.title;
-    qopts.innerHTML = "";
-    q.options.forEach(function(o){
-      var b = document.createElement("button");
-      b.type = "button";
-      b.className = "opt";
-      b.textContent = o.label;
-      b.addEventListener("click", function(){ answer(q, o); });
-      qopts.appendChild(b);
-    });
-    Array.prototype.forEach.call(qprog.children, function(d, i){ d.classList.toggle("on", i <= qi); });
-  }
-
-  function answer(q, o) {
-    if (busy) return;
-    busy = true;
-    answers[q.key] = o;
-    mascotThink(true);
-    track("roast_answer", { step: q.key, choice: o.label });
-    type(o.say, function(){
-      mascotThink(false);
-      qi++;
-      if (qi < QUESTIONS.length) { setTimeout(function(){ renderQuestion(); busy = false; }, 320); }
-      else { setTimeout(finish, 420); }
-    });
-  }
-
-  function finish() {
-    var sector = answers.sector ? answers.sector.label : "شيء آخر";
-    var site = answers.site ? answers.site.label : "";
-    var vibe = answers.vibe ? answers.vibe.vibe : "serious";
-    renderMockup(sector, site, vibe);
-
-    var sectorField = document.getElementById("f-sector");
-    if (!sectorField.value) sectorField.value = sector === "شيء آخر" ? "" : sector;
-
-    qwrap.style.display = "none";
-    qresult.classList.add("on");
-    mascotCheer();
-    confetti(document.getElementById("qcard"), 18);
-    track("roast_complete", { sector: sector, site: site, vibe: vibe });
-  }
-
-  document.getElementById("qagain").addEventListener("click", function(){
-    qi = 0; answers = {}; busy = false; say.textContent = "";
-    qresult.classList.remove("on"); qwrap.style.display = "";
-    mascotThink(false);
-    renderQuestion();
-  });
-  renderQuestion();
 
   /* ─────────── 3. the ledger ─────────── */
   var state = null, chosen = [];
@@ -4677,10 +4372,10 @@
         '<p style="margin:0;color:rgba(241,239,232,.7)">راسلني وسأخبرك بصدق متى يُفتح المقعد التالي.</p>';
       document.getElementById("pledgeList").innerHTML = "";
       document.getElementById("maths").style.display = "none";
-      document.getElementById("chase").style.display = "none";
       document.getElementById("claimForm").style.display = "none";
       document.getElementById("sPrice").textContent = "نفدت المقاعد";
-      paintReceipt("نفدت المقاعد", "\u2014", "نفدت المقاعد");
+      heroPrice("نفدت المقاعد");
+      paintReceipt("نفدت المقاعد", "—", "نفدت المقاعد");
       if (stickySeats) stickySeats.textContent = "نفدت المقاعد";
       return;
     }
@@ -4797,7 +4492,8 @@
     document.getElementById("fDeposit").textContent = money(state.activeTier.deposit);
     document.getElementById("fRebate").textContent  = money(rebate);
     document.getElementById("sPrice").textContent   = money(price);
-    paintReceipt(money0(price), "\u2212" + money0(VS_TOTAL - price), money0(price));
+    heroPrice(money0(price));
+    paintReceipt(money0(price), "−" + money0(VS_TOTAL - price), money0(price));
   }
 
   function ledgerOffline() {
@@ -4807,10 +4503,9 @@
       '<p style="color:var(--muted)">لوحة التعهدات تحتاج السعر المباشر لتعرض لك أرقاماً حقيقية، وهي غير متاحة الآن. ' +
       '<a href="' + WA + '" target="_blank" rel="noopener">اسألني على واتساب</a> وسأشرحها لك.</p>';
     document.getElementById("maths").style.display = "none";
-    // No live price on screen means "I want more discount" has nothing to be less than.
-    document.getElementById("chase").style.display = "none";
     document.getElementById("sPrice").textContent = "اسألني";
-    paintReceipt("اسألني", "\u2014", "اسألني");
+    heroPrice("اسألني على واتساب");
+    paintReceipt("اسألني", "—", "اسألني");
     var stickySeats = document.getElementById("sSeats");
     if (stickySeats) stickySeats.textContent = "";
     document.getElementById("claimForm").style.display = "none";
@@ -4827,103 +4522,13 @@
       // someone to a pay page with no pay button on it.
       if (data.pay && data.pay.card) {
         var note = document.getElementById("fPayNote");
-        if (note) note.textContent = "لا دفع في هذه الصفحة. تصلك فاتورتك بالبريد لحظة الإرسال، والصفحة التالية تستلم العربون بالبطاقة — على صفحة ثواني (Thawani) الآمنة، فلا أرى رقم بطاقتك إطلاقاً.";
+        if (note) note.textContent = "تصلك فاتورتك بالبريد لحظة إتمام الطلب.";
       }
       // A sold-out ledger has already stripped the pledge board and the form; running
       // the maths afterwards would put a live price back into the sticky bar.
       if (!state.soldOut) { if (PLEDGES_ON) renderPledges(); renderMaths(); }
     })
     .catch(function(err){ console.warn("ledger unavailable:", err); ledgerOffline(); });
-
-  /* ─────────── 4. the button that runs away ─────────── */
-  var btn = document.getElementById("runaway-btn");
-  var dodges = 0, caught = false, lastDodge = 0, DODGE_LIMIT = 7;
-  // Nothing runs anywhere until the visitor has actually gone for the button.
-  var armed = false;
-  // Real cursor movement, as opposed to the page scrolling under a parked cursor.
-  // Both raise mouseover on this button; only one of them is somebody chasing it.
-  var moved = 0;
-  document.addEventListener("mousemove", function(){ moved = Date.now(); }, { passive: true });
-  var TAUNTS = ["لا.","ليس اليوم.","حاول ثانية.","تقترب.","بارد.","كدت!","الأخيرة…"];
-
-  function flee(e) {
-    if (caught) return;
-    if (e) e.preventDefault();
-    // Without a cooldown the button lands under the moving cursor, fires mouseover again,
-    // and burns all seven dodges in one flick of the wrist. Each dodge should be earned.
-    if (Date.now() - lastDodge < 260) return;
-    lastDodge = Date.now();
-    dodges++;
-
-    if (dodges > DODGE_LIMIT) { surrender(); return; }
-
-    var was = btn.getBoundingClientRect();
-    puff(was.left + was.width / 2, was.top + was.height / 2);
-
-    var w = btn.offsetWidth, h = btn.offsetHeight, pad = 8;
-    // Keep it clear of the sticky bar at the bottom and the nav at the top.
-    var x = pad + Math.random() * Math.max(0, window.innerWidth  - w - pad * 2);
-    var y = 70 + Math.random() * Math.max(0, window.innerHeight - h - 160);
-
-    btn.classList.add("loose", "squash");
-    btn.style.left = x + "px";
-    btn.style.top  = y + "px";
-    setTimeout(function(){ btn.classList.remove("squash"); }, 180);
-    btn.textContent = TAUNTS[dodges - 1] || "أريد خصماً أكبر";
-  }
-
-  function surrender() {
-    caught = true;
-    btn.classList.remove("loose", "squash");
-    btn.classList.add("caught");
-    btn.style.left = btn.style.top = "";
-    btn.textContent = "🏆 أمسكت بي";
-    var trophy = document.getElementById("trophy");
-    trophy.classList.add("on");
-    confetti(btn, 30);
-    trophy.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "center" });
-    track("button_caught", { dodges: dodges });
-  }
-
-  // The opening move has to be a genuine attempt at the button. Fleeing on the first
-  // hover also fires when the page merely scrolls under a parked cursor, or when the
-  // .rv reveal slides the button up into one — and a button that bolts before anyone
-  // has touched it reads as a broken layout, not as a joke.
-  btn.addEventListener("mousedown", function(e){ armed = true; flee(e); });
-  btn.addEventListener("mouseover", function(e){
-    if (!armed) return;
-    // A mouseover with no cursor movement behind it is the page moving, not the visitor:
-    // that is the button landing under a still cursor, and it would burn a free dodge.
-    if (Date.now() - moved > 150) return;
-    flee(e);
-  });
-
-  // Touch is the whole audience here — a mouseover-only version would be inert on a
-  // phone. But fleeing on touchstart fires when a swipe merely BEGINS on the button,
-  // and the preventDefault() that goes with it kills that scroll too. So the finger has
-  // to actually tap: short, and going nowhere.
-  var tapAt = 0, tapX = 0, tapY = 0;
-  btn.addEventListener("touchstart", function(e){
-    var t = e.changedTouches[0];
-    tapAt = Date.now(); tapX = t.clientX; tapY = t.clientY;
-  }, { passive: true });
-  btn.addEventListener("touchend", function(e){
-    var t = e.changedTouches[0];
-    if (Date.now() - tapAt > 500) return;                                           // a long press
-    if (Math.abs(t.clientX - tapX) > 12 || Math.abs(t.clientY - tapY) > 12) return; // a swipe
-    armed = true;
-    flee(e);   // the preventDefault() inside flee() also cancels the click this tap synthesises
-  }, { passive: false });
-
-  // Keyboard users get the joke without the chase: focus doesn't trigger flight, and
-  // activating it simply surrenders. An unreachable control is not a joke, it's a trap.
-  // A mouse click only counts as a catch once the chase is on and the button has come to
-  // rest — the click that ends the very press which sent it running is not a catch.
-  btn.addEventListener("click", function(e){
-    if (caught) return;
-    if (e.detail === 0) { surrender(); return; }
-    if (dodges > 0 && Date.now() - lastDodge > 600) surrender();
-  });
 
   /* ─────────── 5. the claim ─────────── */
   var form = document.getElementById("claimForm");
@@ -4975,7 +4580,6 @@
       companyUrl:  document.getElementById("f-companyurl").value.trim(),
       consent:     document.getElementById("f-consent").checked,
       pledges:     chosen,
-      caughtButton: caught,
       // Ignored by the service today (routes/claim.js reads a fixed key list),
       // and sent anyway so the row and the invoice can be told which language
       // the buyer arrived in the day that side speaks Arabic.
@@ -5018,7 +4622,7 @@
           }
           return fail("حدث خطأ أثناء حفظ حجزك. وبدلاً من أن يضيع، راسلني على واتساب وسآخذ التفاصيل بنفسي.");
         }
-        track("claim_submitted", { pledges: chosen.length, caught_button: caught });
+        track("claim_submitted", { pledges: chosen.length });
         /* The Arabic seat page, built by tools/build_pay_ar.py. Until 2026-09-05
            this sent an Arabic buyer to /en/pay/ - the last screen before they
            pay, and the one that has to explain a 50% deposit, switched to a
@@ -5042,28 +4646,6 @@
       sendClaim();
     }
   });
-
-  /* ─────────── 6. the cat ─────────── */
-  var cat = document.getElementById("catBtn");
-  var catSvg = document.getElementById("catSvg");
-  var curtain = document.getElementById("curtain");
-
-  function wake() {
-    catSvg.classList.add("awake");
-    catSvg.querySelectorAll(".cat-shut").forEach(function(e){ e.style.display = "none"; });
-    curtain.classList.add("on");
-    document.getElementById("curtainClose").focus();
-    track("cat_woken");
-  }
-  function sleep() {
-    catSvg.classList.remove("awake");
-    catSvg.querySelectorAll(".cat-shut").forEach(function(e){ e.style.display = ""; });
-    curtain.classList.remove("on");
-    cat.focus();
-  }
-  cat.addEventListener("click", function(){ curtain.classList.contains("on") ? sleep() : wake(); });
-  document.getElementById("curtainClose").addEventListener("click", sleep);
-  document.addEventListener("keydown", function(e){ if (e.key === "Escape" && curtain.classList.contains("on")) sleep(); });
 })();
 </script>
     <script defer src="/js/aiden-chat.js?v=8002bc67"></script>
