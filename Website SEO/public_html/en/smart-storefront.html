@@ -4231,11 +4231,17 @@
       /* ─────────── 1. WhatsApp taps, as a conversion ───────────
          apl-analytics.js already reports these as cta_click with
          cta_type "whatsapp". This page also sends whatsapp_click, one event
-         name with nothing else in it, so GA4 can mark it as a key event and
-         Google Ads can import it as a conversion. data-wa says which button. */
+         name with nothing else in it, for a GA4 key event, and the Google Ads
+         conversion "Storefront - WhatsApp tap" directly. The Ads account is
+         joined to the G- tag above, so send_to needs no config line of its own
+         (tested 2026-10-23). data-wa says which button. */
+      var ADS_WHATSAPP = "AW-18532297763/ZawTCM-K5aYdEKPY8YRF";
+      var ADS_CLAIM = "AW-18532297763/ekn8CNKK5aYdEKPY8YRF";
       document.addEventListener("click", function (e) {
         var a = e.target && e.target.closest ? e.target.closest('a[href*="whatsapp.com"], a[href*="wa.me"]') : null;
-        if (a) track("whatsapp_click", { cta_location: a.getAttribute("data-wa") || "other" });
+        if (!a) return;
+        track("whatsapp_click", { cta_location: a.getAttribute("data-wa") || "other" });
+        if (window.gtag) gtag("event", "conversion", { send_to: ADS_WHATSAPP });
       }, true);
 
       /* The hero's price line. Same rule as every other figure here: it is
@@ -4523,7 +4529,12 @@
               return fail("Something went wrong saving your claim. Rather than lose it, message me on WhatsApp and I'll take the details myself.");
             }
             track("claim_submitted", { pledges: chosen.length });
-            window.location.href = "/en/pay/?ref=" + encodeURIComponent(res.body.ref) + "&new=1";
+            /* Leave for the pay page once Google Ads has the conversion, or
+               after 800ms if it never answers (blocked tag, slow network). */
+            var payUrl = "/en/pay/?ref=" + encodeURIComponent(res.body.ref) + "&new=1", left = false;
+            var go = function () { if (!left) { left = true; window.location.href = payUrl; } };
+            if (window.gtag) gtag("event", "conversion", { send_to: ADS_CLAIM, event_callback: go });
+            setTimeout(go, 800);
           })
           .catch(function () {
             fail("I couldn't reach the server. Your connection or my server — either way, message me on WhatsApp and nothing is lost.");
