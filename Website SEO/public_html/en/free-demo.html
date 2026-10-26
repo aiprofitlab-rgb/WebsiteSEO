@@ -1067,12 +1067,12 @@
          Drive, an email to Nahid). Empty = the form cannot send, and says so
          with an email and a WhatsApp route instead of pretending.
 
-         ADS_DEMO is the Google Ads conversion for a sent request. Fill it once
-         the "Free demo - request" conversion action exists in account
-         262-151-3399. The Ads account is joined to the G- tag, so send_to needs
-         no config line (same as the storefront page). */
+         ADS_DEMO is the Google Ads conversion for a sent request: "Free demo -
+         request" (Submit lead form, id 7872725694) in account 262-151-3399.
+         The Ads account is joined to the G- tag, so send_to needs no config
+         line (same as the storefront page). */
       var DEMO_ENDPOINT = "https://script.google.com/macros/s/AKfycbyS5sr2u44PgGtGu7TE3rzqSkutve39G4-AWA9Iu0Bx8GGucj1jgr41ioRwBVDh7EtA/exec";
-      var ADS_DEMO = "";
+      var ADS_DEMO = "AW-18532297763/Wv-bCL6FgaodEKPY8YRF";
       var ADS_WHATSAPP = "AW-18532297763/ZawTCM-K5aYdEKPY8YRF";
 
       var TRADES = JSON.parse(document.getElementById("trades").textContent);
@@ -1463,7 +1463,7 @@
           lang: "en", page: location.pathname, referrer: document.referrer || "",
           ua: navigator.userAgent
         };
-        if ($("#fWeb").value) { finish(p); return; } // a bot filled the hidden field: thank it, send nothing
+        if ($("#fWeb").value) { finish(p, true); return; } // a bot filled the hidden field: thank it, send and count nothing
         if (!DEMO_ENDPOINT) { showFallback(p, "The form isn't connected yet."); return; }
         send.disabled = true; send.textContent = "Sending…";
         Promise.all([readFile(logoFile), gaIds()]).then(function (r) {
@@ -1483,9 +1483,11 @@
         });
       });
 
-      function finish(p) {
-        track("demo_request", { via: p.via, trade: p.trade, timeline: p.timeline, has_logo: p.logo ? "yes" : "no", has_link: p.brandLink ? "yes" : "no" });
-        if (window.gtag && ADS_DEMO) gtag("event", "conversion", { send_to: ADS_DEMO });
+      function finish(p, bot) {
+        if (!bot) {
+          track("demo_request", { via: p.via, trade: p.trade, timeline: p.timeline, has_logo: p.logo ? "yes" : "no", has_link: p.brandLink ? "yes" : "no" });
+          if (window.gtag && ADS_DEMO) gtag("event", "conversion", { send_to: ADS_DEMO });
+        }
         paintEta(); // so step 03 and the receipt below name the same minute
         $("#slipForm").hidden = true;
         $("#slipDone").hidden = false;
