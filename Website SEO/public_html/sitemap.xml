@@ -20,13 +20,13 @@
   </url>
   <url>
     <loc>https://aiprofitlab.io/blog-ar/</loc>
-    <lastmod>2026-10-24</lastmod>
+    <lastmod>2026-10-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://aiprofitlab.io/blog/</loc>
-    <lastmod>2026-10-24</lastmod>
+    <lastmod>2026-10-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -1135,6 +1135,12 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://aiprofitlab.io/blog/ar/2026-10-26-ai-tools-for-business-operations-in-oman-2026/</loc>
+    <lastmod>2026-10-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://aiprofitlab.io/blog/en/2026-03-28-ceo-dashboard/</loc>
     <lastmod>2026-09-27</lastmod>
     <changefreq>weekly</changefreq>
@@ -2235,6 +2241,12 @@
   <url>
     <loc>https://aiprofitlab.io/blog/en/2026-10-25-building-n8n-ai-agents-for-gcc-operations-in-2026/</loc>
     <lastmod>2026-10-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://aiprofitlab.io/blog/en/2026-10-26-ai-tools-for-business-operations-in-oman-2026/</loc>
+    <lastmod>2026-10-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
