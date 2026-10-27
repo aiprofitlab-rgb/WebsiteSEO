@@ -1,9 +1,10 @@
 # Free website demo landing page
 
 `/en/free-demo/` (file `public_html/en/free-demo.html`, served by `.htaccess` rule 3 like every
-`en/<name>.html`). Built 2026-10-25 as the new Google Ads landing page: a visitor types their
-business name, sees it on a sample website, and asks for a free demo homepage in their own brand,
-delivered within 24 hours by WhatsApp or email. No price on the page (Nahid's call).
+`en/<name>.html`). Built 2026-10-25 as the new Google Ads landing page: a visitor watches six real
+demos play on one laptop, types their business name onto the seventh screen, and asks for a free
+demo homepage in their own brand, delivered within 24 hours by WhatsApp or email. No price on the
+page (Nahid's call).
 
 ## The offer, as the page states it
 
@@ -28,8 +29,8 @@ paragraph.
 | Hormozi's point | Where it lives on the page |
 |---|---|
 | Name the free thing as result + time frame | h1 "See your new website in 24 hours. Free." |
-| Reveal the gap between now and where they could be | peak heading "Your Instagram today. Your website tomorrow." over the assembly |
-| Ask many times, with value between the asks | header chip, hero bar, "Make mine" after the assembly, "Get one for my business" under the proof, phone sticky bar, the slip |
+| Reveal the gap between now and where they could be | six finished demos, then their screen: "Designing next · Your business · Unveiled <live time>" (hero, the dive's wall, the slip) |
+| Ask many times, with value between the asks | header chip, hero bar, "Make mine" after the dive, phone sticky bar, the slip |
 | Qualify who gets the free work | "When do you want it live?" (This month / 1-3 months / Just looking), one tap, required, never a blocker |
 | Clear CTA + a reason to act now | under the Send button: "Send now, and it's on your WhatsApp by Tue 27 Oct, 9:03 am", the 24-hour promise as a live time (also step 03). No invented scarcity |
 
@@ -42,20 +43,35 @@ section (now the step list beside the form), two FAQs (free / call, both covered
 chips), and the "Your name" and "What do you sell?" fields (the link field's placeholder asks
 for either).
 
-## "24 hours" must not read as "a template" (2026-10-26)
+## "24 hours" must not read as "a template"
 
-Nahid worried that a 24-hour promise tells visitors the demo is a template with their name
-dropped in. The fix keeps the 24 hours (it is the hook, and the ad promises it) and says
-where the speed and the personal touch come from:
+Nahid worried (2026-10-26) that a 24-hour promise tells visitors the demo is a template with their
+name dropped in. The first fix was words: step 02 "I design it from your Instagram", the proof note
+"no two alike", a closed FAQ "Is it a template?". Those stay.
 
-- the hero tag stays "Sample · yours uses your Instagram" even after a name is typed (it used
-  to switch to "Your demo · draft", which called the name-swapped sample their demo);
-- step 02 is "I design it from your Instagram";
-- the proof note adds "no two alike", and the six demos on the rail prove it;
-- a closed FAQ, "Is it a template?", gives the reason it's quick: one homepage, not a whole site.
+On 2026-10-27 he asked for the hero and the animated part to stop implying it too, and for a wow
+moment. The old hero was one CSS sample site with a Café/Trading/Boutique/Clinic picker and colour
+dots, and the old peak flew "ingredients" into the slots of a skeleton site. Both literally showed a
+template. They were replaced by the real work:
 
-Keep those claims true: each demo has to be designed from the visitor's own material, the
-way the lead preview sites are. If demos ever start sharing a layout, these lines must change.
+- **Hero, "six worlds, one screen".** One laptop that stays put while its screen cuts (a 0.6 s
+  wipe) between six real lead preview demos in motion: the vet's cat slow-blinks, smoke rises off the
+  bakhoor coal, a hand stirs the rest house's pool, the monkey peeks over the kids' salon wall, the
+  café's clay lid lifts, the salon's butterfly opens its wings. The phone turns to each demo's phone
+  version, the light behind the laptop takes its colour, and the giant word behind it its trade. A
+  story-style segment bar (tap to jump, pause button) and a caption name the trade and place. The
+  seventh screen is theirs: "Designing next", their typed name, "Unveiled <live time>". Typing jumps
+  to it and holds there; the demos resume 3 s after they leave the field.
+- **Peak, "dive in, pull out".** On dark ground a laptop shows the vet demo; the scroll dives into
+  its screen until the demo fills the view ("Made for a vet clinic."), then pulls back: it was one of
+  seven screens in a 2-3-2 brick, six demos that share nothing plus theirs, which then swaps into the
+  centre ("Next: <name>"). On phones the same thing happens with the phone versions inside a phone
+  frame. This replaced the demo rail; the rail's note ("Not clients · names hidden · no two alike")
+  moved into it. On a desktop wall tile, the pointer plays that demo's clip.
+
+Keep these claims true: the six demos are real pages made from each business's own material, none
+are clients, and their names and logos are blurred before capture. Never add a demo whose name or
+logo is the hero itself (Malek Al Pizza, Home Hunt, Fitness Hub and Esnad were left out for that).
 
 ## Arabic twin
 
@@ -102,10 +118,13 @@ deployment would change the URL; redeploying the same id keeps it.
 
 ## Tracking
 
-- GA4 events: `demo_name_typed`, `demo_style_change`, `demo_cta_click`, `demo_form_start`,
+- GA4 events: `demo_name_typed`, `demo_world_pick` (a hero segment tapped; `world` = vet,
+  perfume, resthouse, kidsalon, cafe, salon or yours), `demo_cta_click`, `demo_form_start`,
   `demo_request`, `demo_request_failed`, plus the site-wide `whatsapp_click`.
-  `demo_cta_click` carries `cta_location` = `header`, `hero`, `peak`, `proof` or `sticky`, so you
-  can see which ask works. `demo_request` carries `timeline`.
+  `demo_cta_click` carries `cta_location` = `header`, `hero`, `peak` or `sticky`, so you can see
+  which ask works. `demo_request` carries `timeline`. Gone on 2026-10-27 with the sample site:
+  `demo_style_change` and the `proof` location. The request no longer sends `trade`/`palette`, so
+  the sheet's "Style picked" column stays empty (the script's `clip()` turns a missing field into "").
 - Google Ads: `ADS_WHATSAPP` (the existing "Storefront - WhatsApp tap") fires on WhatsApp links.
   `ADS_DEMO` is **empty** until a "Free demo - request" conversion action exists in account
   262-151-3399; paste its `AW-…/…` label there.
@@ -116,37 +135,59 @@ deployment would change the URL; redeploying the same id keeps it.
   typed name, phone and contact name were all absent from its uploads. Add the attribute to any
   new element that shows the name.
 
-## Images
+## Images and clips
 
-`python3 tools/free-demo/build_free_demo_assets.py` turns the originals in `.tmp/free-demo/src/`
-(gitignored) into hashed WebP files in `public_html/assets/free-demo/` and rewrites the page's
-references. Hashes are in the filenames because `.htaccess` caches every image for a year as
-`immutable`.
+Two steps, both re-runnable:
 
-- 16 sample photos (café, trading, boutique, clinic; 4 each) were generated with kie.ai seedream
-  for the sample websites. They show no real business.
-- 12 proof screenshots are lead preview sites (perfume, rest house, vet, café, ladies' salon,
-  kids' salon) captured with names and logos blurred **in the page before capture**. Filenames
-  carry the trade, never the business. Malek Al Pizza, Home Hunt, Fitness Hub and Esnad were
-  left out because their name or logo IS the hero. Re-check by eye after any recapture.
+1. `node tools/free-demo/capture_demo_clips.mjs [vet perfume ...]` records the six demos from their
+   live Vercel deployments (dr-mansour-vet-clinic, al-shahama-frankincense, bustan-al-bida-resort,
+   peekaboo-kids-salon, dukanah-cafe, sama-beauty-barka) on a paused clock: 3 s, 30 fps, 1280x800,
+   plus a 390x844 phone clip of the vet for the phone dive. Before any frame it blurs, in the page,
+   each site's brand and logo, every element whose own text names the business (Arabic diacritics
+   stripped; `\b` is ASCII-only, so short Arabic names get Arabic-letter lookarounds), the café's
+   whole headline (it ends "في دكانة") and the salon's giant "sama" word. Frames go to
+   `.tmp/free-demo/clips/`, with a 3x3 sheet per clip (`PEEK=1` writes only the sheets). **Read
+   every sheet by eye after a recapture**: a redeploy of a lead site can move a name into a new
+   element. Scroll-driven heroes stop before they show a name: the kids' salon at 330 px (its
+   headline turns into "بيكابو!" at about 400), and the rest house is recorded after its intro,
+   whose leaves fly into the logo.
+2. `python3 tools/free-demo/build_free_demo_assets.py` turns `.tmp/free-demo/src/` into hashed files
+   in `public_html/assets/free-demo/` (clip MP4 for desktop and `-m` for phones, a first-frame
+   poster at 1280 and 640, a wall tile, a 32 px glow, the phone stills, the café pair for the
+   sample post) and rewrites the page's `.webp`/`.mp4` references.
+
+Sizes as built 2026-10-27: desktop clips 98-504 KB (the pool's water is the heavy one), phone clips
+37-147 KB, the first-paint poster 35 KB (14 KB on phones). Only the current clip and the next are
+fetched, after `load` (or 4 s); never with reduced motion or Save-Data, and iOS Low Power Mode just
+keeps the posters.
+
+Hashes are in the filenames because `.htaccess` caches images for a year as `immutable`; hashed
+MP4s (`name.<8 hex>.mp4`) got the same rule on 2026-10-27, and `.gitignore`'s `*.mp4` has an
+exception for `public_html/assets/free-demo/` (the deploy uploads what git tracks).
 
 ## Motion traps hit while building (GSAP 3.15)
 
-- The peak's slot fill (`--on`) and colour (`--paint`) are computed from the timeline's playhead
-  in `fill()`, not tweened. Tweening the CSS variables left the site complete at progress 0:
-  ScrollTrigger's refresh jumps the playhead to the end and back, and the rewind wrote "0" then
-  "1". The flying cards are `fromTo` with `immediateRender:false, lazy:false` for the same reason.
-- GSAP folds a CSS `translate` into fixed pixels, so the flying cards and the peak phone are
-  centred with `xPercent/yPercent` (the `.gs` class drops the CSS translate).
-- Draggable `type:"scrollLeft"` wraps the rail's children in a block div; the cards live in
-  `.rail-track` so they stay a row.
+- Anything scrubbed that is not a transform is derived from the timeline's playhead in `paint()`,
+  never tweened: the laptop lid around the centre screen (`--bz`), the other six screens, the
+  captions, the heading, "Made for…" and "Next". ScrollTrigger's refresh jumps the playhead to the
+  end and back, and a tweened CSS variable kept whatever value the rewind left it on.
+- The dive is one transform: the cluster scales around the centre screen, whose centre is set as a
+  px `transformOrigin` from `offsetLeft/Top` (layout values that ignore GSAP's transforms). The
+  scale values are functions re-read on every refresh, so a resize mid-way recomputes the dive.
+- GSAP folds a CSS `translate` into fixed pixels, so the cluster is centred with `left/top: calc()`,
+  not `translate`.
+- The hero's two layers per screen need their stacking order from the first paint (layer A in
+  front). Without it the second layer, loaded ahead with the next demo, showed through: the laptop
+  played the bakhoor demo while the caption said "vet".
+- `.peak` has `overflow-x: clip` and the pin has `overflow: hidden`: the cluster is scaled far past
+  the viewport during the dive, and mobile Chrome widens the layout to fit anything that pokes out
+  sideways. `clip`, not `hidden`, on `.peak`, so the pin keeps working. Measure overflow with
+  `isMobile` on and compare `scrollWidth` to the *requested* width.
 - Reveals use `opacity`, not `autoAlpha`: `visibility:hidden` removed the FAQ toggles and the
   form's fields from the tab order until they scrolled in.
-- `.peak` has `overflow-x: clip`. The peak phone waits at `x: 70` before it slides in, and on phones
-  Chrome widened the whole layout to fit it, about 34px of sideways scroll at 320px. `body`'s
-  `overflow-x` does not stop that. Use `clip`, not `hidden`, so the pin keeps working. Measure
-  overflow with `isMobile` on and compare `scrollWidth` to the *requested* width: mobile
-  `innerWidth` grows with the overflow, so `scrollWidth - innerWidth` reads 0 and hides it.
+- The hero entrance moves the giant word's container with `y`; the scroll exit moves it with
+  `yPercent`; the word swap moves the inner span. Three properties, so none records another's
+  mid-animation value as its start.
 
 ## Not done
 

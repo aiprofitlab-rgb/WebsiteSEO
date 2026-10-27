@@ -6,6 +6,9 @@ media/
 *.mp4
 *.mov
 .tmp/
+# except the free-demo page's demo clips: small web encodes (≤ ~500 KB each,
+# hashed names) that the page plays. Built by tools/free-demo/.
+!public_html/assets/free-demo/*.mp4
 
 # Customer invoices. THIS REPO IS PUBLIC — a committed invoice publishes a real
 # customer's name, CR number, e-mail, phone and what they paid. Only the template,

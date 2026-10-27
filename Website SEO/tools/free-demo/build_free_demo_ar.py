@@ -20,17 +20,15 @@ What this file owns:
      Each English fragment must occur in the source exactly the stated number
      of times, or the build stops. Reword a line in en/free-demo.html without
      updating the row here and this script refuses to run: that is the feature.
-  2. TRADES_AR: the four sample businesses' words. Image paths and palettes are
-     read from the English page's JSON, so a re-hashed photo needs no edit here.
-  3. RTL_CSS: an `[dir=rtl]` layer appended after the English sheet. Type
+  2. RTL_CSS: an `[dir=rtl]` layer appended after the English sheet. Type
      first (Markazi Text / IBM Plex Sans Arabic, no tracking on Arabic), then
      isolation, then the short list of declarations that name a physical side.
 
-The sample site flips with the page: the laptop shows the visitor's site in
-Arabic, right to left, and the phone shows the English version. The English
-page does the reverse.
+The six demos in the hero and the peak are recordings of real pages (most of
+them Arabic-first), so they are the same files on both pages; only the words
+around them change, including the demos' trades and places in the #worlds JSON.
 
-Arabic a native reader has not passed yet is every SWAPS/TRADES row whose
+Arabic a native reader has not passed yet is every SWAPS row whose
 provenance does not start with "reviewed". Each build renders those rows to
 build/free-demo-ar-review.html for the reviewer. When the reviewer corrects a
 line, edit its Arabic here; when they pass one, change its provenance to
@@ -40,7 +38,6 @@ The URL follows the site's `-ar` convention: a root `<name>-ar.html`, served at
 `/<name>-ar/` by .htaccess rule 5, so no rewrite rule is needed.
 """
 import html
-import json
 import pathlib
 import re
 import sys
@@ -69,29 +66,8 @@ R_LEGAL = "reviewed: checkout-ar / smart-storefront-ar footer"
 
 
 # ══════════════════════════════════════════════════════════════════════════
-# The four sample businesses. Only the words live here.
-# ══════════════════════════════════════════════════════════════════════════
-TRADES_AR = {
-    "cafe":  {"sample": "مقهى السدر", "label": "قهوة وحلويات", "noun": "مقهى", "nav2": "القائمة",
-              "tag": "قهوة طازجة وحلويات، ومقعد بجانب النافذة.", "cta": "اطلب عبر واتساب",
-              "cta2": "شاهد القائمة", "ctaEn": "Order now"},
-    "trade": {"sample": "الوادي للتوريدات", "label": "جملة وتوريد", "noun": "شركة تجارية", "nav2": "المنتجات",
-              "tag": "بضاعة تعتمد عليها، تصلك في كل أنحاء عُمان.", "cta": "اطلب تسعيرة بالجملة",
-              "cta2": "تصفّح المنتجات", "ctaEn": "Get a bulk quote"},
-    "style": {"sample": "دار نور للعبايات", "label": "عبايات وعطور", "noun": "بوتيك", "nav2": "المجموعة",
-              "tag": "عبايات وعطور، مختارة بعناية.", "cta": "اطلب عبر واتساب",
-              "cta2": "وصل حديثاً", "ctaEn": "Order now"},
-    "care":  {"sample": "عيادة سكينة للأسنان", "label": "عيادة ورعاية", "noun": "عيادة", "nav2": "الخدمات",
-              "tag": "رعاية تبدأ باستقبال هادئ.", "cta": "احجز عبر واتساب",
-              "cta2": "خدماتنا", "ctaEn": "WhatsApp"},
-}
-# "اطلب تسعيرة بالجملة" is the English page's own reviewed ctaAr for trading.
-TRADES_REVIEWED = {("trade", "cta")}
-
-
-# ══════════════════════════════════════════════════════════════════════════
 # SWAPS: (section, English fragment, Arabic fragment, count, provenance).
-# Applied in order, after the trades JSON has been replaced.
+# Applied in order.
 # ══════════════════════════════════════════════════════════════════════════
 SWAPS = [
     # ── head ──────────────────────────────────────────────────────────────
@@ -143,67 +119,65 @@ SWAPS = [
     ("أعلى الصفحة", 'data-cta="hero">Get my free demo', 'data-cta="hero">اطلب نموذجك المجاني', 1, "new"),
     ("أعلى الصفحة", '<p class="trust">No payment<i>✼</i>No call<i>✼</i>English + <span lang="ar">عربي</span></p>',
      '<p class="trust">بلا دفع<i>✼</i>بلا مكالمة<i>✼</i>عربي + <span lang="en">English</span></p>', 1, "new"),
-    ("أعلى الصفحة", 'aria-label="A sample website that shows the name you type"',
-     'aria-label="موقع تجريبي يعرض الاسم الذي تكتبه"', 1, "new; read aloud to blind visitors"),
-    ("أعلى الصفحة", '<span class="tag" id="heroTag">Sample · yours uses your Instagram</span>',
-     '<span class="tag" id="heroTag">مثال · نموذجك يُصمَّم من إنستغرامك</span>', 1,
-     "new 2026-10-26; “مثال”, not “نموذج”, so the sample and the demo stay two things"),
-    ("أعلى الصفحة", 'aria-label="Try another style"', 'aria-label="جرّب شكلاً آخر"', 1, "new"),
-    ("أعلى الصفحة", 'data-trade="cafe" aria-pressed="true">Café</button>', 'data-trade="cafe" aria-pressed="true">مقهى</button>', 1, "new"),
-    ("أعلى الصفحة", 'data-trade="trade" aria-pressed="false">Trading</button>', 'data-trade="trade" aria-pressed="false">تجارة</button>', 1, "new"),
-    ("أعلى الصفحة", 'data-trade="style" aria-pressed="false">Boutique</button>', 'data-trade="style" aria-pressed="false">بوتيك</button>', 1, "new"),
-    ("أعلى الصفحة", 'data-trade="care" aria-pressed="false">Clinic</button>', 'data-trade="care" aria-pressed="false">عيادة</button>', 1, "new"),
+    ("أعلى الصفحة", '<span id="giant" dir="auto">Vet</span>', '<span id="giant" dir="auto">بيطري</span>', 1,
+     "new 2026-10-27; the first demo's word, before the script takes over"),
+    ("أعلى الصفحة", '<span class="tag">Real demos · names hidden</span>',
+     '<span class="tag">نماذج حقيقية · الأسماء مخفية</span>', 1, "new 2026-10-27"),
+    ("أعلى الصفحة", '<p class="w-cap" id="wCap"><b>Vet clinic</b> · Muscat<span class="w-lang"> · English + Arabic</span></p>',
+     '<p class="w-cap" id="wCap"><b>عيادة بيطرية</b> · مسقط<span class="w-lang"> · إنجليزي + عربي</span></p>', 1,
+     "new 2026-10-27; the words of the old demo-rail caption"),
+    ("أعلى الصفحة", 'aria-label="The demos"', 'aria-label="النماذج"', 1, "new 2026-10-27"),
+    ("أعلى الصفحة", 'aria-label="Pause the demos"', 'aria-label="أوقف عرض النماذج"', 1, "new 2026-10-27"),
+    ("الشاشة السابعة",
+     '<p class="y-k"><i class="y-dot"></i>Designing next</p><p class="y-n empty" data-b="yname" dir="auto">Your business</p><p class="y-e">Unveiled <b data-eta></b></p>',
+     '<p class="y-k"><i class="y-dot"></i>قيد التصميم</p><p class="y-n empty" data-b="yname" dir="auto">نشاطك</p><p class="y-e">جاهز قبل <b data-eta></b></p>', 3,
+     "new 2026-10-27; the visitor's own screen, with the live delivery time"),
 
-    # ── the assembly ──────────────────────────────────────────────────────
-    ("التجميع", '<h2>Your Instagram today. <span>Your website tomorrow.</span></h2>',
-     '<h2>إنستغرامك اليوم. <span>موقعك غداً.</span></h2>', 1, "new"),
-    ("التجميع", 'Demo for <b class="pname" data-b="name">Sidr Coffee House</b>',
-     'نموذج <b class="pname" data-b="name" dir="auto">Sidr Coffee House</b>', 1, "new"),
-    ("التجميع", '<i data-b="initials">SC</i></span></div><span class="ing-l">Your logo</span>',
-     '<i data-b="initials">SC</i></span></div><span class="ing-l">شعارك</span>', 1, "new"),
-    ("التجميع", '<span class="ing-l">Your colours</span>', '<span class="ing-l">ألوانك</span>', 1, "new"),
-    ("التجميع", '<span class="ing-l">Your photos</span>', '<span class="ing-l">صورك</span>', 1, "new"),
-    ("التجميع", '<span class="lang">EN · <em lang="ar">عربي</em></span></div><span class="ing-l">Your words</span>',
-     '<span class="lang"><em lang="ar">عربي</em> · EN</span></div><span class="ing-l">كلماتك</span>', 1, "new"),
-    ("التجميع", '</svg>WhatsApp</div><span class="ing-l">Your WhatsApp</span>',
-     '</svg>واتساب</div><span class="ing-l">واتسابك</span>', 1, "new"),
-    ("التجميع", '<p class="peak-final" id="peakFinal">…in Arabic too, on every phone</p>',
-     '<p class="peak-final" id="peakFinal">…وبالإنجليزية أيضاً، على كل هاتف</p>', 1, "new"),
-    ("التجميع", 'data-cta="peak">Make mine', 'data-cta="peak">اصنع نموذجي', 1, "new"),
-    ("التجميع", '<span>Free · under 24 hours</span>', '<span>مجاناً · في أقل من 24 ساعة</span>', 2, "new; also the order slip's header"),
+    # ── the six demos' words (the #worlds JSON) ──
+    ("النماذج", '"trade": "Vet clinic", "word": "Vet", "where": "Muscat", "langs": "English + Arabic"',
+     '"trade": "عيادة بيطرية", "word": "بيطري", "where": "مسقط", "langs": "إنجليزي + عربي"', 1, "new 2026-10-27"),
+    ("النماذج", '"trade": "Perfume & bakhoor", "word": "Bakhoor", "where": "Dhofar", "langs": "Arabic + English"',
+     '"trade": "عطور وبخور", "word": "بخور", "where": "ظفار", "langs": "عربي + إنجليزي"', 1, "new 2026-10-27"),
+    ("النماذج", '"trade": "Private rest house", "word": "Rest house", "where": "Al Batinah", "langs": "Arabic + English"',
+     '"trade": "استراحة خاصة", "word": "استراحة", "where": "الباطنة", "langs": "عربي + إنجليزي"', 1, "new 2026-10-27"),
+    ("النماذج", '"trade": "Kids\' salon", "word": "Kids\' salon", "where": "Muscat & Sohar", "langs": "Arabic + English"',
+     '"trade": "صالون أطفال", "word": "صالون أطفال", "where": "مسقط وصحار", "langs": "عربي + إنجليزي"', 1, "new 2026-10-27"),
+    ("النماذج", '"trade": "Heritage café", "word": "Café", "where": "Muscat", "langs": "Arabic + English"',
+     '"trade": "مقهى تراثي", "word": "مقهى", "where": "مسقط", "langs": "عربي + إنجليزي"', 1, "new 2026-10-27"),
+    ("النماذج", '"trade": "Ladies\' salon", "word": "Salon", "where": "Al Batinah", "langs": "Arabic + English"',
+     '"trade": "صالون نسائي", "word": "صالون", "where": "الباطنة", "langs": "عربي + إنجليزي"', 1, "new 2026-10-27"),
 
-    # ── proof ─────────────────────────────────────────────────────────────
-    ("النماذج", "Demos I've made for Omani businesses.", "نماذج صمّمتُها لأنشطة تجارية عُمانية.", 1, "new"),
-    ("النماذج", '<p class="note rv">Not&nbsp;clients<i>✼</i><wbr>names&nbsp;hidden<i>✼</i><wbr>no&nbsp;two&nbsp;alike</p>',
-     '<p class="note rv">ليسوا&nbsp;عملاء<i>✼</i><wbr>الأسماء&nbsp;مخفية<i>✼</i><wbr>لا&nbsp;يتشابه&nbsp;نموذجان</p>', 1, "new; “لا يتشابه نموذجان” added 2026-10-26"),
-    ("النماذج", 'aria-label="Demo examples, scroll sideways"', 'aria-label="أمثلة على النماذج، مرّر جانبياً"', 1, "new"),
+    # ── the dive ──────────────────────────────────────────────────────────
+    ("الغوص", '<h2>Six businesses. <span>Six different demos.</span></h2>',
+     '<h2>ستة أنشطة. <span>ستة نماذج مختلفة.</span></h2>', 1, "new 2026-10-27"),
+    ("الغوص", '<p class="note">Not&nbsp;clients<i>✼</i><wbr>names&nbsp;hidden<i>✼</i><wbr>no&nbsp;two&nbsp;alike</p>',
+     '<p class="note">ليسوا&nbsp;عملاء<i>✼</i><wbr>الأسماء&nbsp;مخفية<i>✼</i><wbr>لا&nbsp;يتشابه&nbsp;نموذجان</p>', 1, "new; moved from the demo rail 2026-10-27"),
+    ("الغوص", '<p class="dive-line" id="diveLine" aria-hidden="true">Made for a vet clinic.</p>',
+     '<p class="dive-line" id="diveLine" aria-hidden="true">صُمّم لعيادة بيطرية.</p>', 1, "new 2026-10-27"),
+    ("الغوص", '<i class="y-dot"></i>Next<b data-b="name" dir="auto">your business</b>',
+     '<i class="y-dot"></i>التالي<b data-b="name" dir="auto">نشاطك</b>', 1, "new 2026-10-27"),
+    ("الغوص", '<figcaption class="tl-cap">Perfume &amp; bakhoor · Dhofar</figcaption>', '<figcaption class="tl-cap">عطور وبخور · ظفار</figcaption>', 1, "new"),
+    ("الغوص", '<figcaption class="tl-cap">Private rest house · Al Batinah</figcaption>', '<figcaption class="tl-cap">استراحة خاصة · الباطنة</figcaption>', 1, "new"),
+    ("الغوص", "<figcaption class=\"tl-cap\">Kids' salon · Muscat &amp; Sohar</figcaption>", '<figcaption class="tl-cap">صالون أطفال · مسقط وصحار</figcaption>', 1, "new"),
+    ("الغوص", '<figcaption class="tl-cap">Vet clinic · Muscat</figcaption>', '<figcaption class="tl-cap">عيادة بيطرية · مسقط</figcaption>', 1, "new"),
+    ("الغوص", '<figcaption class="tl-cap">Heritage café · Muscat</figcaption>', '<figcaption class="tl-cap">مقهى تراثي · مسقط</figcaption>', 1, "new"),
+    ("الغوص", "<figcaption class=\"tl-cap\">Ladies' salon · Al Batinah</figcaption>", '<figcaption class="tl-cap">صالون نسائي · الباطنة</figcaption>', 1, "new"),
+    ("الغوص", 'data-cta="peak">Make mine', 'data-cta="peak">اصنع نموذجي', 1, "new"),
+    ("الغوص", '<span>Free · under 24 hours</span>', '<span>مجاناً · في أقل من 24 ساعة</span>', 2, "new; also the order slip's header"),
+
+    # ── the demos' alt text (the wall in the dive) ─────────────────────────
     ("النماذج", 'alt="Arabic homepage demo for a perfume and bakhoor shop, name hidden"',
      'alt="نموذج صفحة رئيسية بالعربية لمحل عطور وبخور، الاسم مخفي"', 1, "new"),
-    ("النماذج", '<figcaption><b>Perfume &amp; bakhoor</b><span>Dhofar</span><span>Arabic + English</span></figcaption>',
-     '<figcaption><b>عطور وبخور</b><span>ظفار</span><span>عربي + إنجليزي</span></figcaption>', 1, "new"),
     ("النماذج", 'alt="English homepage demo for a vet clinic, name hidden"',
      'alt="نموذج صفحة رئيسية بالإنجليزية لعيادة بيطرية، الاسم مخفي"', 1, "new"),
-    ("النماذج", '<figcaption><b>Vet clinic</b><span>Muscat</span><span>English + Arabic</span></figcaption>',
-     '<figcaption><b>عيادة بيطرية</b><span>مسقط</span><span>إنجليزي + عربي</span></figcaption>', 1, "new"),
     ("النماذج", 'alt="Arabic homepage demo for a private rest house with a pool, name hidden"',
      'alt="نموذج صفحة رئيسية بالعربية لاستراحة خاصة بمسبح، الاسم مخفي"', 1, "new"),
-    ("النماذج", '<figcaption><b>Private rest house</b><span>Al Batinah</span><span>Arabic + English</span></figcaption>',
-     '<figcaption><b>استراحة خاصة</b><span>الباطنة</span><span>عربي + إنجليزي</span></figcaption>', 1, "new"),
     ("النماذج", 'alt="Arabic homepage demo for an Omani heritage café, name hidden"',
      'alt="نموذج صفحة رئيسية بالعربية لمقهى تراثي عُماني، الاسم مخفي"', 1, "new"),
-    ("النماذج", '<figcaption><b>Heritage café</b><span>Muscat</span><span>Arabic + English</span></figcaption>',
-     '<figcaption><b>مقهى تراثي</b><span>مسقط</span><span>عربي + إنجليزي</span></figcaption>', 1, "new"),
     ("النماذج", "alt=\"Arabic homepage demo for a ladies' salon, name hidden\"",
      'alt="نموذج صفحة رئيسية بالعربية لصالون نسائي، الاسم مخفي"', 1, "new"),
-    ("النماذج", "<figcaption><b>Ladies' salon</b><span>Al Batinah</span><span>Arabic + English</span></figcaption>",
-     '<figcaption><b>صالون نسائي</b><span>الباطنة</span><span>عربي + إنجليزي</span></figcaption>', 1, "new"),
     ("النماذج", "alt=\"Arabic homepage demo for a children's hair salon, name hidden\"",
      'alt="نموذج صفحة رئيسية بالعربية لصالون حلاقة للأطفال، الاسم مخفي"', 1, "new"),
-    ("النماذج", "<figcaption><b>Kids' salon</b><span>Muscat &amp; Sohar</span><span>Arabic + English</span></figcaption>",
-     '<figcaption><b>صالون أطفال</b><span>مسقط وصحار</span><span>عربي + إنجليزي</span></figcaption>', 1, "new"),
-    ("النماذج", 'data-cta="proof">Get one for my business', 'data-cta="proof">أريد واحداً لنشاطي', 1, "new"),
-    ("النماذج", 'aria-label="Previous demo"', 'aria-label="النموذج السابق"', 1, "new"),
-    ("النماذج", 'aria-label="Next demo"', 'aria-label="النموذج التالي"', 1, "new"),
 
     # ── why free ──────────────────────────────────────────────────────────
     ("لماذا مجاني", '<h2 class="rv">Why is it free?</h2>', '<h2 class="rv">لماذا هو مجاني؟</h2>', 1, "new"),
@@ -219,8 +193,8 @@ SWAPS = [
      'aria-label="شكل المنشور التجريبي، مع إخفاء اسمك"', 1, "new"),
     ("لماذا مجاني", '<b>ai.profit.lab.gcc</b><span>Sample</span></div>', '<b>ai.profit.lab.gcc</b><span>نموذج</span></div>', 1, "new"),
     ("لماذا مجاني",
-     '<b>ai.profit.lab.gcc</b> Website demo for a <span data-b="noun">coffee house</span> in Oman, in English and Arabic.<br>\n            <span class="hide">Business name, logo and contact details removed</span>',
-     '<b>ai.profit.lab.gcc</b> نموذج موقع <span data-b="noun">مقهى</span> في عُمان، بالعربية والإنجليزية.<br>\n            <span class="hide">حُذف اسم النشاط والشعار وبيانات التواصل</span>', 1, "new"),
+     '<b>ai.profit.lab.gcc</b> Website demo for a heritage café in Oman, in English and Arabic.<br>\n            <span class="hide">Business name, logo and contact details removed</span>',
+     '<b>ai.profit.lab.gcc</b> نموذج موقع مقهى تراثي في عُمان، بالعربية والإنجليزية.<br>\n            <span class="hide">حُذف اسم النشاط والشعار وبيانات التواصل</span>', 1, "new; the café is now named, 2026-10-27"),
 
     # ── answers ───────────────────────────────────────────────────────────
     ("أسئلة", '<h2 class="rv">Straight answers.</h2>', '<h2 class="rv">إجابات مباشرة.</h2>', 1,
@@ -309,28 +283,6 @@ SWAPS = [
      '<p><span dir="ltr">© 2026 AI Profit Lab</span> — علامة تجارية تابعة لشركة Lotus Gulf International (س.ت <span dir="ltr">1570092</span>) · الخوير الجنوبية، بوشر، مسقط، سلطنة عُمان</p>', 1, R_LEGAL),
     ("أسفل الهاتف", 'data-cta="sticky">Get my free demo</a>', 'data-cta="sticky">اطلب نموذجك المجاني</a>', 1, "new"),
 
-    # ── the sample sites: the laptop turns Arabic, the phone English ─────
-    ("الموقع التجريبي", '<div class="ms" data-clarity-mask="true">', '<div class="ms" dir="rtl" lang="ar" data-clarity-mask="true">', 1, "markup"),
-    ("الموقع التجريبي",
-     '<span class="ms-nav"><span>Home</span><span data-b="nav2">Menu</span><span>About</span><span>Contact</span></span>\n        <span class="ms-lang" lang="ar">عربي</span>',
-     '<span class="ms-nav"><span>الرئيسية</span><span data-b="nav2">القائمة</span><span>من نحن</span><span>تواصل معنا</span></span>\n        <span class="ms-lang" lang="en">English</span>', 1,
-     "new (“الرئيسية” is reviewed)"),
-    ("الموقع التجريبي", '<span data-b="cta">Order on WhatsApp</span></span>', '<span data-b="cta">اطلب عبر واتساب</span></span>', 1, "new"),
-    ("الموقع التجريبي", 'data-b="label">Coffee &amp; sweets</p>', 'data-b="label">قهوة وحلويات</p>', 1, "new"),
-    ("الموقع التجريبي", 'data-b="tag">Fresh coffee, sweets and a seat by the window.</p>',
-     'data-b="tag">قهوة طازجة وحلويات، ومقعد بجانب النافذة.</p>', 1, "new"),
-    ("الموقع التجريبي",
-     '<span class="ms-btn" data-b="cta">Order on WhatsApp</span><span class="ms-btn ghost" data-b="cta2">See the menu</span>',
-     '<span class="ms-btn" data-b="cta">اطلب عبر واتساب</span><span class="ms-btn ghost" data-b="cta2">شاهد القائمة</span>', 1, "new"),
-    ("الموقع التجريبي", '<p class="ms-strip-h">New this week</p>', '<p class="ms-strip-h">جديد هذا الأسبوع</p>', 1, "new"),
-    ("الموقع التجريبي", '<div class="ms m" dir="rtl" lang="ar" data-clarity-mask="true">',
-     '<div class="ms m" dir="ltr" lang="en" data-clarity-mask="true">', 1, "markup"),
-    ("الموقع التجريبي", '<span class="ms-lang" lang="en">English</span></div>', '<span class="ms-lang" lang="ar">عربي</span></div>', 1, "markup"),
-    ("الموقع التجريبي", '<span class="ms-btn" data-b="ctaAr">اطلب الآن</span>', '<span class="ms-btn" data-b="ctaEn">Order now</span>', 1, "markup"),
-    ("الموقع التجريبي", 'stroke-linejoin="round"/></svg>الرئيسية</span>', 'stroke-linejoin="round"/></svg>Home</span>', 1, "markup"),
-    ("الموقع التجريبي", "Sidr Coffee House", TRADES_AR["cafe"]["sample"], 7, "the café sample's name, see TRADES_AR"),
-    ("الموقع التجريبي", '<i data-b="initials">SC</i>', '<i data-b="initials">م‌س</i>', 3, "markup"),
-
     # ── the script's words ────────────────────────────────────────────────
     ("الشريط العلوي",
      'chipT.appendChild(document.createTextNode(window.innerWidth < 560 ? "Free demo" : "Free demo for "));',
@@ -342,7 +294,10 @@ SWAPS = [
      'chipT.textContent = window.innerWidth < 560 ? "نموذج مجاني" : "اطلب نموذجك المجاني";', 1, "new"),
     ("النموذج", 'el.textContent = state.typed && state.name ? state.name : "your business";',
      'el.textContent = state.typed && state.name ? state.name : "نشاطك";', 1, "new"),
-    ("أعلى الصفحة", 'b.setAttribute("aria-label", "Colour " + (i + 1));', 'b.setAttribute("aria-label", "اللون " + (i + 1));', 1, "new"),
+    ("أعلى الصفحة",
+     'var TXT = { yours: "Yours", yourBiz: "Your business", fromIg: "from your Instagram", show: "Show: ", pause: "Pause the demos", play: "Play the demos" };',
+     'var TXT = { yours: "نموذجك", yourBiz: "نشاطك", fromIg: "من إنستغرامك", show: "اعرض: ", pause: "أوقف عرض النماذج", play: "شغّل عرض النماذج" };', 1,
+     "new 2026-10-27; the seventh screen's caption reads “نموذجك · من إنستغرامك”"),
     ("النموذج", '$("#etaVia").textContent = via === "whatsapp" ? "on your WhatsApp" : "in your inbox";',
      '$("#etaVia").textContent = via === "whatsapp" ? "على واتساب" : "على بريدك";', 1, "new"),
     ("النموذج", '(el.getAttribute("data-eta") === "by" ? "By " : "")', '(el.getAttribute("data-eta") === "by" ? "قبل " : "")', 1, "new"),
@@ -381,7 +336,7 @@ SWAPS = [
     ("بعد الإرسال", 'tag.textContent = "Draft started · " + p.business;', 'tag.textContent = "بدأت المسودة · \\u2068" + p.business + "\\u2069";', 1, "new"),
 
     # ── arrows ────────────────────────────────────────────────────────────
-    ("markup", ARROW_EN, ARROW_AR, 3, "markup"),
+    ("markup", ARROW_EN, ARROW_AR, 2, "markup"),
 ]
 
 
@@ -403,14 +358,7 @@ RTL_CSS = r"""
       --sans: 'IBM Plex Sans Arabic', 'Plex Arabic Fallback', 'Plex Arabic Fallback 2', 'IBM Plex Sans', -apple-system, 'Segoe UI', sans-serif;
       --mono: 'IBM Plex Mono', 'IBM Plex Sans Arabic', 'Plex Arabic Fallback', ui-monospace, monospace;
     }
-    /* the English sample site on the phone keeps the Latin faces */
-    .ms[dir=ltr] {
-      --display: 'Marcellus', Georgia, serif;
-      --sans: 'IBM Plex Sans', -apple-system, 'Segoe UI', sans-serif;
-    }
-    .ms.m[dir=ltr] { font-family: var(--sans); }
-    .ms.m[dir=ltr] .ms-lang { font-family: var(--arabic); }
-    .ms[dir=rtl] .ms-lang, [dir=rtl] .hdr-lang { font-family: 'IBM Plex Sans', -apple-system, sans-serif; }
+    [dir=rtl] .hdr-lang { font-family: 'IBM Plex Sans', -apple-system, sans-serif; }
 
     /* "English" is twice as wide as "عربي": on phones under 400px the bar
        had no room for it beside the Arabic chip, so it shortens to EN */
@@ -424,11 +372,11 @@ RTL_CSS = r"""
     [dir=rtl] .hero h1 { font-size: clamp(3rem, 6vw, 5.2rem); line-height: 1.2; max-width: 11ch; }
     [dir=rtl] .peak-head h2 { font-size: clamp(1.9rem, 3.6vw, 2.9rem); line-height: 1.25; }
     [dir=rtl] .deal .big { font-size: clamp(1.6rem, 2.8vw, 2.2rem); line-height: 1.5; }
-    [dir=rtl] .pc figcaption b { font-size: 1.6rem; }
     [dir=rtl] .slip-head b { font-size: 1.7rem; }
     [dir=rtl] .done h3 { font-size: clamp(1.9rem, 3.4vw, 2.5rem); }
     [dir=rtl] .giant { line-height: 1.15; }
-    [dir=rtl] .proof-head h2 { max-width: 20ch; }
+    [dir=rtl] .y-n { line-height: 1.3; }
+    [dir=rtl] .next-l b, [dir=rtl] .dive-line { font-size: 1.5rem; line-height: 1.4; }
     @media (max-width: 900px) { [dir=rtl] .hero h1 { font-size: clamp(2.6rem, 10vw, 3.6rem); max-width: 13ch; } }
 
     /* Tracking and capitals are Latin devices. Letter-spacing on Arabic breaks
@@ -436,33 +384,22 @@ RTL_CSS = r"""
        moves to Plex Sans Arabic, untracked, and a size up (the brand asks for
        no tiny mono Arabic). */
     [dir=rtl] .eyebrow, [dir=rtl] .hdr-q, [dir=rtl] .hero .lede, [dir=rtl] .trust, [dir=rtl] .tag,
-    [dir=rtl] .ask span, [dir=rtl] .peak-status, [dir=rtl] .ing-l, [dir=rtl] .peak-final,
-    [dir=rtl] .proof-head .note, [dir=rtl] .pc figcaption, [dir=rtl] .ig-top span, [dir=rtl] .mini span,
-    [dir=rtl] .slip-head span, [dir=rtl] .field label, [dir=rtl] .field .lbl, [dir=rtl] .done .stamp,
-    [dir=rtl] .ing-words span.lang, .ms[dir=rtl] .ms-kicker, .ms[dir=rtl] .ms-logo i, [dir=rtl] .ing-logo .ms-logo i {
-      letter-spacing: 0; text-transform: none;
-    }
-    [dir=rtl] .eyebrow, [dir=rtl] .hdr-q, [dir=rtl] .hero .lede, [dir=rtl] .trust, [dir=rtl] .tag,
-    [dir=rtl] .ask span, [dir=rtl] .peak-status, [dir=rtl] .ing-l, [dir=rtl] .peak-final,
-    [dir=rtl] .proof-head .note, [dir=rtl] .pc figcaption, [dir=rtl] .ig-top span, [dir=rtl] .mini span,
+    [dir=rtl] .ask span, [dir=rtl] .w-cap, [dir=rtl] .tl-cap, [dir=rtl] .y-k, [dir=rtl] .y-e, [dir=rtl] .next-l,
+    [dir=rtl] .peak-head .note, [dir=rtl] .ig-top span, [dir=rtl] .mini span,
     [dir=rtl] .slip-head span, [dir=rtl] .field label, [dir=rtl] .field .lbl, [dir=rtl] .done .stamp {
-      font-family: var(--sans);
+      letter-spacing: 0; text-transform: none; font-family: var(--sans);
     }
     [dir=rtl] .eyebrow { font-size: .98rem; }
     [dir=rtl] .hdr-q { font-size: .92rem; }
     [dir=rtl] .hero .lede { font-size: 1.12rem; font-weight: 600; }
     [dir=rtl] .trust { font-size: .95rem; }
     [dir=rtl] .tag, [dir=rtl] .ig-top span, [dir=rtl] .slip-head span, [dir=rtl] .mini span { font-size: .88rem; }
-    [dir=rtl] .ask span, [dir=rtl] .peak-status, [dir=rtl] .peak-final, [dir=rtl] .proof-head .note { font-size: .95rem; }
-    [dir=rtl] .ing-l { font-size: .88rem; }
-    [dir=rtl] .pc figcaption { font-size: .92rem; }
+    [dir=rtl] .ask span, [dir=rtl] .peak-head .note, [dir=rtl] .w-cap, [dir=rtl] .next-l { font-size: .95rem; }
+    [dir=rtl] .tl-cap { font-size: .78rem; }
+    [dir=rtl] .y-k, [dir=rtl] .y-e { font-size: 2.8cqw; }
+    [dir=rtl] .phone .y-k, [dir=rtl] .phone .y-e { font-size: 5.4cqw; }
     [dir=rtl] .field label, [dir=rtl] .field .lbl { font-size: .92rem; }
     [dir=rtl] .done .stamp { font-size: .9rem; }
-    .ms[dir=rtl] .ms-kicker { font: 600 17px/1.3 var(--sans); }
-    .ms[dir=rtl] .ms-name { line-height: 1.45; }
-    .ms[dir=rtl] .ms-h { line-height: 1.22; }
-    .ms[dir=rtl] .ms-sub { line-height: 1.75; }
-    .ms[dir=rtl] .ms-strip-h { line-height: 1.35; }
 
     /* ── 2. MIRROR ── only the declarations that name a physical side. */
     [dir=rtl] .eyebrow::before { margin-right: 0; margin-left: .6em; }
@@ -477,45 +414,9 @@ RTL_CSS = r"""
     [dir=rtl] .floor { left: 6%; right: 4%; }
     [dir=rtl] .tag { left: auto; right: 2%; }
     [dir=rtl] .order-prev .tag { left: auto; right: 0; }
-    [dir=rtl] .config { padding: 6px 6px 6px 8px; }
-    [dir=rtl] .dots { padding-left: 0; padding-right: 10px; border-left: 0; border-right: 1px solid var(--line); }
-    .ms[dir=rtl] .ms-nav { margin-left: 0; margin-right: auto; }
-    [dir=rtl] .ing-colours i { margin-left: 0; margin-right: -8px; }
-    [dir=rtl] .ing-colours i:first-child { margin-right: 0; }
-
-    /* the assembly, mirrored: the ingredients wait on the side their slot is on */
-    [dir=rtl] .stage .phone { left: 24%; }
-    [dir=rtl] .ing-logo { left: 91%; }
-    [dir=rtl] .ing-colours { left: 92%; }
-    [dir=rtl] .ing-photo.p0 { left: 10%; }
-    [dir=rtl] .ing-photo.p1 { left: 8%; }
-    [dir=rtl] .ing-photo.p2 { left: 84%; }
-    [dir=rtl] .ing-words { left: 70%; }
-    [dir=rtl] .ing-wa { left: 34%; }
-    [dir=rtl] .ing-photo.p2 .card { rotate: 4deg; }
-    [dir=rtl] .ing-photo.p1 .card { rotate: -5deg; }
-    [dir=rtl] .ing-photo.p0 .card { rotate: -3deg; }
-    [dir=rtl] .peak-final { left: 24%; }
-    @media (max-width: 900px) {
-      [dir=rtl] .stage .phone { left: 20%; }
-      [dir=rtl] .ing-logo { left: 88%; }
-      [dir=rtl] .ing-colours { left: 60%; }
-      [dir=rtl] .ing-photo.p0 { left: 21%; }
-      [dir=rtl] .ing-photo.p1 { left: 16%; }
-      [dir=rtl] .ing-photo.p2 { left: 87%; }
-      [dir=rtl] .ing-words { left: 53%; }
-      [dir=rtl] .ing-wa { left: 50%; }
-      [dir=rtl] .peak-final { left: 50%; }
-    }
-
-    /* The proof rail keeps a left-to-right track. Its script clamps scrollLeft
-       to 0..max, and an RTL scroller counts from 0 downwards, so mirrored it
-       would not move. The cards themselves read right to left. */
-    [dir=rtl] .rail, [dir=rtl] .rail-btns { direction: ltr; }
-    [dir=rtl] .pc { direction: rtl; }
-    [dir=rtl] .pc-dev { padding-right: 0; padding-left: 13%; }
-    [dir=rtl] .pc-dev .phone { right: auto; left: 0; }
-    [dir=rtl] .pc figcaption span + span::before { margin-right: 0; margin-left: 14px; }
+    /* the caption leaves room for the pause button, which RTL puts on the left */
+    [dir=rtl] .w-cap { left: 46px; right: 0; }
+    [dir=rtl] .tl-cap { left: auto; right: 8px; }
 
     [dir=rtl] .ig-top span { margin-left: 0; margin-right: auto; }
     [dir=rtl] .mini span { text-align: left; }
@@ -529,8 +430,6 @@ RTL_CSS = r"""
     [dir=rtl] .done { text-align: right; }
     [dir=rtl] .done .stamp { padding: 9px 12px 9px 16px; }
     @media (max-width: 420px) {
-      [dir=rtl] .config { padding: 5px 5px 5px 6px; }
-      [dir=rtl] .dots { padding-right: 6px; }
       [dir=rtl] .mini span { text-align: right; }
     }
 """
@@ -540,27 +439,8 @@ def fail(msg):
     sys.exit("build_free_demo_ar: " + msg)
 
 
-def trades_block(src):
-    """The English trades JSON with the Arabic words laid over it."""
-    m = re.search(r'(<script type="application/json" id="trades">)(.*?)(</script>)', src, re.S)
-    if not m:
-        fail("the trades JSON block is missing from the English page")
-    en = json.loads(m.group(2))
-    if set(en) != set(TRADES_AR):
-        fail("the English page's trades are %s, TRADES_AR has %s" % (sorted(en), sorted(TRADES_AR)))
-    lines = []
-    for key in en:
-        t = dict(en[key])
-        t.pop("ctaAr", None)
-        t.update(TRADES_AR[key])
-        lines.append('    "%s": %s' % (key, json.dumps(t, ensure_ascii=False)))
-    body = "\n  {\n" + ",\n".join(lines) + "\n  }\n  "
-    return src[:m.start(2)] + body + src[m.end(2):]
-
-
 def build():
-    src = SRC.read_text(encoding="utf-8")
-    out = trades_block(src)
+    out = SRC.read_text(encoding="utf-8")
     for sec, en, ar, n, prov in SWAPS:
         got = out.count(en)
         if got != n:
@@ -576,13 +456,7 @@ def build():
 
 
 def review_rows():
-    rows = [(s, en, ar, p) for s, en, ar, n, p in SWAPS if p not in ("markup",) and not p.startswith("reviewed")]
-    for key, words in TRADES_AR.items():
-        for field, ar in words.items():
-            if field == "ctaEn" or (key, field) in TRADES_REVIEWED:
-                continue
-            rows.append(("الموقع التجريبي", "%s sample: %s" % (key, field), ar, "new"))
-    return rows
+    return [(s, en, ar, p) for s, en, ar, n, p in SWAPS if p not in ("markup",) and not p.startswith("reviewed")]
 
 
 ARABIC_RUN = re.compile(r'[^<>"]*[؀-ۿ][^<>"]*')

@@ -56,6 +56,78 @@
         ],
         "createdAt": "2026-10-22T15:18:45.498Z",
         "reason": "keyframe named bounce drives the three typing-indicator dots in the decorative phone mockup; literal motion, predates 2026-10-22"
+      },
+      {
+        "rule": "hero-eyebrow-chip",
+        "value": "*",
+        "files": [
+          "public_html/en/free-demo.html"
+        ],
+        "createdAt": "2026-10-25T17:33:32.464Z",
+        "reason": "Brand system (aiprofitlab-brand skill §4): mono eyebrow led by an amber asterism is a locked brand component; it also carries the ad keywords 'website demo' and 'Oman'"
+      },
+      {
+        "rule": "clipped-overflow-container",
+        "value": "*",
+        "files": [
+          "public_html/en/free-demo.html"
+        ],
+        "createdAt": "2026-10-25T17:33:32.477Z",
+        "reason": "Intentional: the hero's giant name bleeds past the viewport and is clipped on purpose; no tooltips or menus live inside"
+      },
+      {
+        "rule": "cramped-padding",
+        "value": "*",
+        "files": [
+          "public_html/en/free-demo.html"
+        ],
+        "createdAt": "2026-10-25T17:33:32.488Z",
+        "reason": "False positive: full-bleed section grounds inset their content with .wrap (min(1180px, 100vw-32px)); ms-bar is the mock site's own nav bar"
+      },
+      {
+        "rule": "cream-palette",
+        "value": "*",
+        "files": [
+          "public_html/en/free-demo.html"
+        ],
+        "createdAt": "2026-10-25T17:33:51.294Z",
+        "reason": "Brand system (aiprofitlab-brand skill §3): #F1EFE8 cream is the mandated page ground for every AI Profit Lab page"
+      },
+      {
+        "rule": "buried-raster",
+        "value": "*",
+        "files": [
+          "public_html/en/free-demo.html"
+        ],
+        "createdAt": "2026-10-25T17:55:07.576Z",
+        "reason": "Intentional animation states: hero devices wait at opacity 0 for their entrance (max 1.8s), and the peak's site photos start at --on 0 as grey skeleton slots that fill as each ingredient lands; all reach full opacity"
+      },
+      {
+        "rule": "all-caps-body",
+        "value": "*",
+        "files": [
+          "public_html/en/free-demo.html"
+        ],
+        "createdAt": "2026-10-25T17:55:07.589Z",
+        "reason": "Brand system (aiprofitlab-brand skill §4/§6): short IBM Plex Mono uppercase labels (trust line, proof label schema, slip header) are the brand's eyebrow/chip style, not body copy"
+      },
+      {
+        "rule": "repeated-container-text",
+        "value": "*",
+        "files": [
+          "public_html/en/free-demo.html"
+        ],
+        "createdAt": "2026-10-25T17:55:07.600Z",
+        "reason": "Form convention: '(optional)' marks each optional field in the order slip so the 3 required ones stand out"
+      },
+      {
+        "rule": "dark-glow",
+        "value": "*",
+        "files": [
+          "public_html/en/free-demo.html"
+        ],
+        "createdAt": "2026-10-25T17:56:03.546Z",
+        "reason": "False positive, measured 2026-10-25: computed box-shadow of every element in .dark-sec and .hdr contains no teal; teal-black offset shadows render only on cream/panel grounds, and .dark-sec overrides device shadows to neutral black"
       }
     ]
   }
