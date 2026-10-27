@@ -25,6 +25,11 @@
   <meta property="og:image:height" content="630" />
   <meta name="twitter:card" content="summary_large_image" />
   <link rel="canonical" href="https://aiprofitlab.io/en/free-demo/" />
+  <!-- The Arabic twin, /free-demo-ar/, is generated from this file by
+       tools/free-demo/build_free_demo_ar.py. Re-run it after any edit here. -->
+  <link rel="alternate" hreflang="en" href="https://aiprofitlab.io/en/free-demo/" />
+  <link rel="alternate" hreflang="ar" href="https://aiprofitlab.io/free-demo-ar/" />
+  <link rel="alternate" hreflang="x-default" href="https://aiprofitlab.io/en/free-demo/" />
 
   <link rel="icon" href="/favicon.ico" sizes="32x32">
   <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=20260822">
@@ -154,6 +159,12 @@
     .hdr-q b { color: var(--teal); font-weight: 500; }
     .hdr.dark .hdr-q { color: rgba(237, 232, 220, .7); }
     .hdr.dark .hdr-q b { color: var(--amber-pale); }
+    /* the other language: Arabic here, English on the Arabic twin */
+    .hdr-lang { padding: 8px 2px; font: 500 .95rem/1 var(--arabic); color: var(--muted); text-decoration: none; }
+    @media (hover: hover) and (pointer: fine) { .hdr-lang:hover { color: var(--teal); } }
+    .hdr.dark .hdr-lang { color: rgba(237, 232, 220, .75); }
+    /* below 340px the logo, the link and the chip can't share the bar */
+    @media (max-width: 340px) { .hdr-lang { display: none; } }
     .chip-cta {
       display: inline-flex; align-items: center; gap: 10px; max-width: 46vw;
       min-height: 42px; padding: 0 18px 0 14px; border-radius: 99px;
@@ -284,6 +295,8 @@
       .dots { padding-left: 6px; gap: 4px; }
       .dots button { width: 24px; height: 24px; }
     }
+    /* at full tracking the hero tag wrapped onto the laptop at 320px */
+    @media (max-width: 340px) { .hero-stage .tag { letter-spacing: .03em; } }
 
     /* ══ The sample site (ms = "mini site"). Designed at a fixed virtual size,
        1280×800 for the laptop and 390×844 for the phone, and scaled to its
@@ -697,6 +710,7 @@
     </a>
     <div class="hdr-r">
       <a class="hdr-q" data-wa="header" href="https://wa.me/96899245250?text=Hi%2C%20a%20question%20about%20the%20free%20website%20demo" target="_blank" rel="noopener">Questions? <b>WhatsApp</b></a>
+      <a class="hdr-lang" href="/free-demo-ar/" hreflang="ar" lang="ar">عربي</a>
       <a class="chip-cta" href="#order" data-cta="header" id="chip" data-clarity-mask="true">
         <i class="dot" aria-hidden="true"></i><span class="chip-t" id="chipT">Get my free demo</span>
       </a>
@@ -723,8 +737,8 @@
         <p class="trust">No payment<i>✼</i>No call<i>✼</i>English + <span lang="ar">عربي</span></p>
 
         <div class="hero-stage" id="heroStage" data-clarity-mask="true" aria-label="A sample website that shows the name you type">
-          <div class="giant" aria-hidden="true"><span id="giant">Sidr Coffee House</span></div>
-          <span class="tag" id="heroTag">Sample · type your name</span>
+          <div class="giant" aria-hidden="true"><span id="giant" dir="auto">Sidr Coffee House</span></div>
+          <span class="tag" id="heroTag">Sample · yours uses your Instagram</span>
           <div class="dev laptop" data-depth="10">
             <div class="lid"><div class="screen" data-site="desk"></div></div>
             <div class="base"></div>
@@ -786,7 +800,8 @@
         <h2 class="rv">Demos I've made for Omani businesses.</h2>
         <!-- Honest in four words: these were made from public Instagram pages,
              none of them are clients, hence the hidden names. -->
-        <p class="note rv">Not clients<i>✼</i>names hidden</p>
+        <!-- each phrase holds together; on phones it wraps after a ✼ -->
+        <p class="note rv">Not&nbsp;clients<i>✼</i><wbr>names&nbsp;hidden<i>✼</i><wbr>no&nbsp;two&nbsp;alike</p>
       </div>
       <div class="rail" id="rail" tabindex="0" role="region" aria-label="Demo examples, scroll sideways">
         <!-- the track is its own flex row: Draggable's scrollLeft mode wraps a
@@ -863,13 +878,17 @@
       </div>
     </section>
 
-    <!-- ── Act 6: four answers, closed. Nobody has to read them. ──────── -->
+    <!-- ── Act 6: five answers, closed. Nobody has to read them. ──────── -->
     <section class="faq" id="faq">
       <div class="wrap faq-in">
         <h2 class="rv">Straight answers.</h2>
         <div>
           <details class="rv"><summary>What exactly do I get?<i aria-hidden="true"></i></summary>
             <p>A link to a homepage in your brand, in English and Arabic, for phones and computers. It's a demo: not the full website, and not on your own domain yet.</p></details>
+          <!-- "24 hours" can read as "a template with your name on it". The
+               answer gives the real reason it's quick. -->
+          <details class="rv"><summary>Is it a template?<i aria-hidden="true"></i></summary>
+            <p>No. I design each one from your Instagram or Maps photos, your colours and your words. It's quick because it's one homepage, not a whole website.</p></details>
           <details class="rv"><summary>What do you need from me?<i aria-hidden="true"></i></summary>
             <p>Your business name and your Instagram, website or Google Maps page. No page yet? Tell me what you sell.</p></details>
           <details class="rv"><summary>What if I like it?<i aria-hidden="true"></i></summary>
@@ -888,7 +907,7 @@
           <h2>Where should I send it?</h2>
           <ol class="mini">
             <li><b>01</b>You send this<span>30 seconds</span></li>
-            <li><b>02</b>I design your demo<span>Under 24 hours</span></li>
+            <li><b>02</b>I design it from your Instagram<span>Under 24 hours</span></li>
             <li><b>03</b>You get a link<span class="due" data-eta="by">Yours to keep</span></li>
           </ol>
           <div class="order-prev" aria-hidden="true" data-clarity-mask="true">
@@ -1123,7 +1142,9 @@
         var words = name.replace(/[^\p{L}\p{N}\s&]/gu, " ").split(/\s+/).filter(Boolean);
         var keep = words.filter(function (w) { return !stop.test(w); });
         if (!keep.length) keep = words;
-        var out = keep.slice(0, 2).map(function (w) { return Array.from(w.replace(/^ال/, "") || w)[0]; }).join("");
+        // joined by a zero-width non-joiner: two Arabic initials would
+        // otherwise join up and read as a word ("مس") instead of a monogram
+        var out = keep.slice(0, 2).map(function (w) { return Array.from(w.replace(/^ال/, "") || w)[0]; }).join("‌");
         return (out || "•").toUpperCase();
       }
 
@@ -1181,15 +1202,15 @@
         if (state.typed && state.name) {
           chipT.innerHTML = "";
           chipT.appendChild(document.createTextNode(window.innerWidth < 560 ? "Free demo" : "Free demo for "));
-          if (window.innerWidth >= 560) { var b = document.createElement("b"); b.textContent = state.name; chipT.appendChild(b); }
+          if (window.innerWidth >= 560) { var b = document.createElement("b"); b.dir = "auto"; b.textContent = state.name; chipT.appendChild(b); }
           chip.setAttribute("aria-label", "Get my free demo for " + state.name);
         } else {
           chipT.textContent = window.innerWidth < 560 ? "Free demo" : "Get my free demo";
           chip.removeAttribute("aria-label");
         }
-        var tag = $("#heroTag");
-        tag.textContent = state.typed && state.name ? "Your demo · draft" : "Sample · type your name";
-        tag.classList.toggle("live", !!(state.typed && state.name));
+        // The tag keeps saying "sample" after a name is typed: the 24-hour
+        // promise must not read as "we drop your name into this template".
+        $("#heroTag").classList.toggle("live", !!(state.typed && state.name));
 
         $$("#tradeSeg button").forEach(function (b) { b.setAttribute("aria-pressed", String(b.getAttribute("data-trade") === state.trade)); });
         var dots = $("#dots");

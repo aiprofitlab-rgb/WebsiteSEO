@@ -42,6 +42,29 @@ section (now the step list beside the form), two FAQs (free / call, both covered
 chips), and the "Your name" and "What do you sell?" fields (the link field's placeholder asks
 for either).
 
+## "24 hours" must not read as "a template" (2026-10-26)
+
+Nahid worried that a 24-hour promise tells visitors the demo is a template with their name
+dropped in. The fix keeps the 24 hours (it is the hook, and the ad promises it) and says
+where the speed and the personal touch come from:
+
+- the hero tag stays "Sample · yours uses your Instagram" even after a name is typed (it used
+  to switch to "Your demo · draft", which called the name-swapped sample their demo);
+- step 02 is "I design it from your Instagram";
+- the proof note adds "no two alike", and the six demos on the rail prove it;
+- a closed FAQ, "Is it a template?", gives the reason it's quick: one homepage, not a whole site.
+
+Keep those claims true: each demo has to be designed from the visitor's own material, the
+way the lead preview sites are. If demos ever start sharing a layout, these lines must change.
+
+## Arabic twin
+
+`/free-demo-ar/` (`public_html/free-demo-ar.html`) is generated from this page by
+`python3 tools/free-demo/build_free_demo_ar.py`. Re-run it after every English edit; it stops
+if an English string it swaps has changed, and `--check` says whether the Arabic file is
+stale. The Arabic lines a native speaker has not passed yet are listed in
+`build/free-demo-ar-review.html`.
+
 ## Where a request goes
 
 The form posts `text/plain` JSON to a Google Apps Script web app:
@@ -127,6 +150,6 @@ references. Hashes are in the filenames because `.htaccess` caches every image f
 
 ## Not done
 
-- No Arabic version yet. An Arabic ad group needs one (and the Arabic in the mock phone is
-  limited to strings harvested from the reviewed Arabic site).
+- The Arabic twin is live, but most of its lines still await the native reviewer (see
+  `build/free-demo-ar-review.html`). No Arabic ad group points at it yet.
 - `noindex` for now: ad traffic only. Indexing it is a choice to make, not a fix.
