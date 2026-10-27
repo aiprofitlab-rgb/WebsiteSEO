@@ -192,5 +192,10 @@ exception for `public_html/assets/free-demo/` (the deploy uploads what git track
 ## Not done
 
 - The Arabic twin is live, but most of its lines still await the native reviewer (see
-  `build/free-demo-ar-review.html`). No Arabic ad group points at it yet.
+  `build/free-demo-ar-review.html`). Since 2026-10-27 the ad group "Arabic - free demo"
+  (id 202241056955, in Campaign #1, sharing its $5/day) points at it: 15 Arabic phrase
+  keywords from Keyword Planner's Oman figures (تصميم موقع الكتروني 70/mo, انشاء موقع الكتروني
+  50, تصميم موقع ويب 40, …), 21 ad-group negatives for how-to, DIY builders and jobs, and one
+  RSA (ad 829609727448) whose lines are the page's own Arabic. That ad copy is unreviewed
+  Arabic too; when the reviewer corrects a page line the ad repeats, change the ad as well.
 - `noindex` for now: ad traffic only. Indexing it is a choice to make, not a fix.
