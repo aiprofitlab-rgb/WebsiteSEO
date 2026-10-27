@@ -188,7 +188,8 @@ function notify(v, row) {
     // and no longer asks their name; the Sells and Name columns stay for old rows
     'Brand link:  ' + (v['Brand link'] || '-'),
     'Send via:    ' + v['Send via'],
-    'WhatsApp:    ' + (v['WhatsApp'] || '-') + (digits ? '   https://wa.me/' + digits : ''),
+    // api.whatsapp.com, not wa.me: a mobile network was found blocking DNS for wa.me
+    'WhatsApp:    ' + (v['WhatsApp'] || '-') + (digits ? '   https://api.whatsapp.com/send?phone=' + digits : ''),
     'Email:       ' + (v['Email'] || '-'),
     'Logo:        ' + (v['Logo'] || 'none sent'),
     'Instagram:   ' + v['Instagram OK'] + ' (post it without their name, logo or contact details)',

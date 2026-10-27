@@ -54,7 +54,9 @@ AR_URL = "https://aiprofitlab.io/free-demo-ar/"
 # "مرحباً ناهد،" and "لدي سؤال عن" are the reviewed WhatsApp greeting
 # (kit.py wa_short / wa_intro); the object of the question is new.
 WA_TEXT = "مرحباً ناهد، لدي سؤال عن النموذج المجاني للموقع."
-WA_AR = "https://wa.me/96899245250?text=" + urllib.parse.quote(WA_TEXT)
+# api.whatsapp.com, never wa.me: a mobile network blocked DNS for wa.me (2026-10-27).
+WA_EN = "https://api.whatsapp.com/send?phone=96899245250&amp;text=Hi%2C%20a%20question%20about%20the%20free%20website%20demo"
+WA_AR = "https://api.whatsapp.com/send?phone=96899245250&amp;text=" + urllib.parse.quote(WA_TEXT)
 
 # The page's three arrow buttons point the way Arabic reads.
 ARROW_EN = 'M4 10h11m-4-4 4 4-4 4'
@@ -95,10 +97,11 @@ SWAPS = [
     # ── header ────────────────────────────────────────────────────────────
     ("الترويسة", '<a class="logo" href="/" aria-label="AI Profit Lab home">',
      '<a class="logo" href="/ar/" aria-label="AI Profit Lab — الصفحة الرئيسية">', 1, R_STORE),
-    ("الترويسة",
-     'href="https://wa.me/96899245250?text=Hi%2C%20a%20question%20about%20the%20free%20website%20demo" target="_blank" rel="noopener">Questions? <b>WhatsApp</b></a>',
-     'href="%s" target="_blank" rel="noopener">أسئلة؟ <b>واتساب</b></a>' % WA_AR, 1,
+    # the header, the phone bar and the footer share one WhatsApp link
+    ("الترويسة", 'href="%s"' % WA_EN, 'href="%s"' % WA_AR, 3,
      "new (the WhatsApp message's greeting is reviewed)"),
+    ("الترويسة", 'target="_blank" rel="noopener">Questions? <b>WhatsApp</b></a>',
+     'target="_blank" rel="noopener">أسئلة؟ <b>واتساب</b></a>', 1, "new"),
     ("الترويسة", '<a class="hdr-lang" href="/free-demo-ar/" hreflang="ar" lang="ar">عربي</a>',
      '<a class="hdr-lang" href="/en/free-demo/" hreflang="en" lang="en" aria-label="English">'
      '<span class="hl-long">English</span><span class="hl-short" aria-hidden="true">EN</span></a>', 1, "markup"),
@@ -281,7 +284,11 @@ SWAPS = [
     ("التذييل",
      '<p>© 2026 AI Profit Lab, a brand of Lotus Gulf International (CR 1570092) · South Al Khuwair, Bousher, Muscat, Oman</p>',
      '<p><span dir="ltr">© 2026 AI Profit Lab</span> — علامة تجارية تابعة لشركة Lotus Gulf International (س.ت <span dir="ltr">1570092</span>) · الخوير الجنوبية، بوشر، مسقط، سلطنة عُمان</p>', 1, R_LEGAL),
+    ("التذييل", 'target="_blank" rel="noopener">WhatsApp</a>', 'target="_blank" rel="noopener">واتساب</a>', 1,
+     "reviewed: kit.py whatsapp"),
     ("أسفل الهاتف", 'data-cta="sticky">Get my free demo</a>', 'data-cta="sticky">اطلب نموذجك المجاني</a>', 1, "new"),
+    ("أسفل الهاتف", 'aria-label="Chat with Nahid on WhatsApp"', 'aria-label="راسل ناهد على واتساب"', 1,
+     "reviewed: kit.py wa_aria"),
 
     # ── the script's words ────────────────────────────────────────────────
     ("الشريط العلوي",

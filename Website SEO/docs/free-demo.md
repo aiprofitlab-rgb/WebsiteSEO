@@ -93,19 +93,25 @@ The form posts `text/plain` JSON to a Google Apps Script web app:
 | Logos | Drive folder "Free demo logos" |
 
 Each request: one row (with a **Due by** column = received + 24h, Muscat time), an email to the
-script owner with a `wa.me` link to the lead, and, when the visitor chose email, a short
-confirmation to them from the owner's Gmail with `replyTo: hello@aiprofitlab.io`.
+script owner (aiprofitlab2026@gmail.com) with a WhatsApp link to the lead, and, when the visitor
+chose email, a short confirmation to them from the owner's Gmail with `replyTo: hello@aiprofitlab.io`.
 
 **Timeline** (the qualifier answer) is the last column, and the owner email shows it as
 "WANTS IT" under the due time. New columns only ever go on the end: `ensureSheet()` extends an
 existing tab's header in place. The **Sells** and **Name** columns stay but are empty from
 2026-10-25 on, because the page no longer asks for them.
 
-**Pending as of 2026-10-25:** the repo copy has the Timeline column, but the live script does
-not yet. The push was not run (auto mode treats it as a production deploy). Until it is, the
-script ignores the `timeline` field and saves everything else. Run the push and redeploy below
-before the page goes live. The live copy matched the repo copy apart from this edit on
-2026-10-25.
+**Verified end to end on 2026-10-27:** one real request from each live page (business "TEST by
+Claude - please delete", GA and Ads hits blocked) landed as a full row, Timeline and
+utm attribution included, and the owner email arrived. Deployment `@2` therefore serves the
+Timeline version. Until that day the sheet had no request from a visitor. The two test rows
+were left for Nahid to delete (auto mode refused the row delete).
+
+The owner email links the lead through `api.whatsapp.com/send?phone=` instead of `wa.me/` (see
+"WhatsApp links" below). Claude's clasp push was blocked as a production deploy, so Nahid
+pasted it in the editor; on 2026-10-27 the live code matched this file and the deployment
+served version 3. Auto mode blocks `clasp push`, but `clasp pull` and `clasp deployments` are
+allowed, which is how to check that the live script matches the repo.
 
 **The script must be authorised once by its owner** (open the sheet, Extensions > Apps Script,
 run `setup`). Before that, the `/exec` URL answers "access denied" and every request fails. The
@@ -116,18 +122,47 @@ Script edits: put the file in a clasp folder (`.clasp.json` with the script id a
 `npx @google/clasp@2.4.2 push -f`, `version`, and `deploy -i <deployment id> -V <n>`. A new
 deployment would change the URL; redeploying the same id keeps it.
 
+## WhatsApp links
+
+Every WhatsApp link on both pages is `https://api.whatsapp.com/send?phone=96899245250&text=…`,
+the form `tools/v4/kit.py` (`WA`) uses site-wide. **Never `wa.me`.** On 2026-10-27 Nahid
+reported the page's WhatsApp link dead: the network he tested on (an iPhone hotspot) drops
+every DNS lookup for `wa.me`, even one sent straight to 8.8.8.8, while `api.whatsapp.com`
+resolves and answers 200. The pages had been the only ones on the site still built with `wa.me`.
+
+Where a visitor finds it:
+- **Desktop:** "Questions? WhatsApp" in the header.
+- **Phones:** the header has no room for it at 360 px, so a round green WhatsApp button sits
+  beside "Get my free demo" in the bottom bar, which shows between the hero and the form.
+- **Both:** the footer, and the fallback line shown when a send fails.
+
+The Arabic builder swaps the one shared href (3 occurrences) for the Arabic greeting.
+
 ## Tracking
 
 - GA4 events: `demo_name_typed`, `demo_world_pick` (a hero segment tapped; `world` = vet,
   perfume, resthouse, kidsalon, cafe, salon or yours), `demo_cta_click`, `demo_form_start`,
-  `demo_request`, `demo_request_failed`, plus the site-wide `whatsapp_click`.
+  `demo_request`, `demo_request_failed`, plus the site-wide `whatsapp_click`, whose
+  `cta_location` is `header` (desktop), `sticky` (phones), `footer` or `form_fallback`. GA4 sends
+  in batches a few seconds apart, so a test that closes the page right after an action misses
+  that action's event.
   `demo_cta_click` carries `cta_location` = `header`, `hero`, `peak` or `sticky`, so you can see
   which ask works. `demo_request` carries `timeline`. Gone on 2026-10-27 with the sample site:
   `demo_style_change` and the `proof` location. The request no longer sends `trade`/`palette`, so
   the sheet's "Style picked" column stays empty (the script's `clip()` turns a missing field into "").
-- Google Ads: `ADS_WHATSAPP` (the existing "Storefront - WhatsApp tap") fires on WhatsApp links.
-  `ADS_DEMO` is **empty** until a "Free demo - request" conversion action exists in account
-  262-151-3399; paste its `AW-…/…` label there.
+- Google Ads: `ADS_WHATSAPP` (the existing "Storefront - WhatsApp tap") fires on every
+  `a[data-wa]` tap, through one delegated listener so the fallback link added after a failed send
+  counts too. `ADS_DEMO` = "Free demo - request" (`AW-18532297763/Wv-bCL6FgaodEKPY8YRF`) fires
+  on a saved request. The page never calls `gtag('config', 'AW-…')`: the GA4 tag G-SLR9GD3MJP is a
+  combined Google tag that already carries AW-18532297763, and the conversion hits were seen
+  leaving the page on 2026-10-27. If the tags are ever unlinked, add that config line.
+- Ad links carry `utm_source=google&utm_medium=cpc` plus a per-group `utm_campaign`, set as
+  each ad group's final URL suffix (2026-10-27): `free_demo_en` on "Ad group 1" (English ad),
+  `free_demo_ar` on "Arabic - free demo". The campaign-level suffix says `free_demo_oman` and
+  only applies to a new ad group that has no suffix of its own. An ad-group suffix replaces the
+  campaign one, it doesn't add to it, so give a new group the full string. Clicks before
+  2026-10-27 carry the old label `storefront_search_oman`, so a date range that spans the
+  change shows both names.
 - Each sheet row carries first/last touch, click id (gclid) and the GA client id, so a won demo
   can later be imported as an offline conversion.
 - Clarity stays on. Every region that renders the typed name carries `data-clarity-mask="true"`.
@@ -198,4 +233,18 @@ exception for `public_html/assets/free-demo/` (the deploy uploads what git track
   50, تصميم موقع ويب 40, …), 21 ad-group negatives for how-to, DIY builders and jobs, and one
   RSA (ad 829609727448) whose lines are the page's own Arabic. That ad copy is unreviewed
   Arabic too; when the reviewer corrects a page line the ad repeats, change the ad as well.
+- The Arabic ad group has its own Arabic sitelinks, callouts and snippet (2026-10-27). They
+  replace the campaign's English ones for that group only, type by type. Every line is copied
+  from a live Arabic page, so a reviewer's correction to one of those page lines applies here too:
+  - Sitelinks: اطلب نموذجك المجاني → `/free-demo-ar/#order`; هل هو قالب جاهز؟ → `#faq`;
+    لماذا هو مجاني؟ → `#free`; تجربة واتساب → `/demos-ar/`; تصميم المواقع في عمان → the Arabic
+    website-design article (`/blog/ar/2026-10-18-website-design-oman-what-local-businesses-need/`).
+  - Callouts: بلا دفع · بلا مكالمة · لن يلاحقك أحد · في أقل من 24 ساعة · بالعربية والإنجليزية ·
+    للهاتف والكمبيوتر.
+  - Snippet: header الخدمات (Google's fixed Arabic header for "Services"), with the values
+    تصميم موقع الكتروني, الموقع الذكي, لوحة متابعة المالك الحيّة, الطيار الآلي الكامل.
+  - Three sitelinks open the ad's own page at different sections. If Google disapproves any
+    of them as duplicates, the other two still keep sitelinks showing.
+  - No Arabic About, How It Works or Services page exists. The Arabic home's cards for those
+    open English pages, so they were left out.
 - `noindex` for now: ad traffic only. Indexing it is a choice to make, not a fix.
