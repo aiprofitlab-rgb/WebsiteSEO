@@ -20,13 +20,13 @@
   </url>
   <url>
     <loc>https://aiprofitlab.io/blog-ar/</loc>
-    <lastmod>2026-10-27</lastmod>
+    <lastmod>2026-10-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://aiprofitlab.io/blog/</loc>
-    <lastmod>2026-10-27</lastmod>
+    <lastmod>2026-10-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -1153,6 +1153,12 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://aiprofitlab.io/blog/ar/2026-10-29-what-is-a-chatbot-a-plain-guide-for-oman-businesses/</loc>
+    <lastmod>2026-10-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://aiprofitlab.io/blog/en/2026-03-28-ceo-dashboard/</loc>
     <lastmod>2026-09-27</lastmod>
     <changefreq>weekly</changefreq>
@@ -2271,6 +2277,12 @@
   <url>
     <loc>https://aiprofitlab.io/blog/en/2026-10-28-whatsapp-business-platform-setup-for-muscat-firms-2026/</loc>
     <lastmod>2026-10-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://aiprofitlab.io/blog/en/2026-10-29-what-is-a-chatbot-a-plain-guide-for-oman-businesses/</loc>
+    <lastmod>2026-10-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
