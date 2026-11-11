@@ -37,7 +37,7 @@ This queue tracks remaining articles to be generated, illustrated, and published
 | 81 | Cluster 6: Technical Implementation & Integrations | Google My Business Setup Guide for Oman Companies | دليل إعداد ملف Google My Business للشركات في عمان | Published | 2026-11-08 | [2026-11-08-google-my-business-setup-guide-for-oman-companies](https://aiprofitlab.io/blog/en/2026-11-08-google-my-business-setup-guide-for-oman-companies/) |
 | 82 | Cluster 5: Executive Strategy, Vision 2040 & ROI | What Business Should I Start in Oman in 2026: A Guide | ما هي أفضل المشاريع للبدء في سلطنة عمان عام 2026 | Published | 2026-11-09 | [2026-11-09-what-business-should-i-start-in-oman-in-2026-a-guide](https://aiprofitlab.io/blog/en/2026-11-09-what-business-should-i-start-in-oman-in-2026-a-guide/) |
 | 83 | Cluster 4: Industry-Specific AI Applications | Interior Design Website Guide for Oman Studios | دليل تصميم موقع ديكور وتصميم داخلي للشركات في عمان | Published | 2026-11-10 | [2026-11-10-interior-design-website-guide-for-oman-studios](https://aiprofitlab.io/blog/en/2026-11-10-interior-design-website-guide-for-oman-studios/) |
-| 84 | Cluster 3: Autonomous AI Agents | Google AI Agent Guide for Oman Business Teams | دليل استخدام Google AI Agent لفرق العمل في عمان | Pending | - | - |
+| 84 | Cluster 3: Autonomous AI Agents | Google AI Agent Guide for Oman Business Teams | دليل استخدام Google AI Agent لفرق العمل في عمان | Published | 2026-11-11 | [2026-11-11-google-ai-agent-guide-for-oman-business-teams](https://aiprofitlab.io/blog/en/2026-11-11-google-ai-agent-guide-for-oman-business-teams/) |
 | 85 | Cluster 3: Autonomous AI Agents | Claude AI Agent: Practical Guide for Oman Offices | دليل استخدام وكيل Claude AI لفرق العمل في عمان | Pending | - | - |
 
 ---
