@@ -67,15 +67,17 @@ SKIP_RTL = """
 """
 
 MAIL = '<a href="mailto:hello@aiprofitlab.io" dir="ltr">hello@aiprofitlab.io</a>'
-WHATSAPP = '<a href="https://wa.me/96899245250" dir="ltr">+968 9924 5250</a>'
+# api.whatsapp.com, never wa.me: some Omani mobile networks drop DNS for wa.me.
+WHATSAPP = '<a href="https://api.whatsapp.com/send?phone=96899245250" dir="ltr">+968 9924 5250</a>'
 
 LANGS = {
     "en": {
         "out": PUB / "en" / "brand-discovery.html",
         "path": EN_PATH, "other": AR_PATH,
         "title": "Brand discovery questionnaire — AI Profit Lab",
-        "desc": ("Before we draw a logo or pick a colour, we need to understand your business, your "
-                 "customers and the character you want to show. About 20–25 minutes; saves as you go."),
+        "desc": ("Answer these questions about your business, and we'll turn them into your brand book: "
+                 "the kind of logo that suits you, your colours, fonts and voice. About 20–25 minutes; "
+                 "saves as you go."),
         "home": "/",
         "noscript": (f"<b>This form needs JavaScript.</b> If you can't turn it on, email us at {MAIL} "
                      f"or send a WhatsApp to {WHATSAPP} and we'll go through the questions with you."),
@@ -85,8 +87,8 @@ LANGS = {
         "path": AR_PATH, "other": EN_PATH,
         "title": "استبيان اكتشاف الهوية — AI Profit Lab",
         # The form's own welcome lede, word for word.
-        "desc": ("قبل أن نصمم شعاراً أو نختار لوناً، نحتاج إلى فهم عملك وعملائك والشخصية التي تريد أن تظهر "
-                 "بها. حوالي ٢٠–٢٥ دقيقة."),
+        "desc": ("أجب عن هذه الأسئلة حول عملك، وسنحوّلها إلى دليل هويتك: نوع الشعار الذي يناسبك، ومسودة "
+                 "أولى لاسمك كشعار، وألوانك وخطوطك ونبرة صوتك. حوالي ٢٠–٢٥ دقيقة."),
         "home": "/ar/",
         # New Arabic, not yet reviewed - so it carries the same disclosure the
         # form shows on its welcome step.

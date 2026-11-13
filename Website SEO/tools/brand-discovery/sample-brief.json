@@ -1,0 +1,115 @@
+{
+ "_note": "A FICTIONAL business for testing tools/brand-discovery/build_brand_book.py. Not a client. Run: python3 tools/brand-discovery/build_brand_book.py --sample",
+ "v": 1,
+ "form": "brand-discovery",
+ "lang": "en",
+ "answers": {
+  "business": "Nakheel Roastery",
+  "nameNotes": "Short form “Nakheel”. In Arabic: محمصة نخيل",
+  "nameFinal": "final",
+  "contactName": "Sara Test",
+  "role": "Founder",
+  "email": "sara@example.com",
+  "phone": "+968 0000 0000",
+  "website": "",
+  "social": "@nakheel.roastery",
+  "industry": "Specialty coffee roastery and café",
+  "markets": "Muscat, with online orders across Oman",
+  "languages": [
+   "en",
+   "ar"
+  ],
+  "projectType": "new",
+  "oneLiner": "We roast small batches of specialty coffee in Muscat and deliver it fresh to homes and offices.",
+  "why": "Most coffee here sits on shelves for months. We want people to taste coffee the week it was roasted, and to know where it comes from.",
+  "vision": "Two cafés in Muscat and a subscription that reaches every governorate.",
+  "story": "It started in a garage in Al Khoud with a 1 kg roaster and a lot of burnt beans.\n\nFriends kept asking for bags, then their offices did.",
+  "values": "Freshness: we print the roast date on every bag.\nHonesty: we tell you where each bean comes from.\nWarmth: every customer is a guest.",
+  "customer": "Professionals aged 25–45 in Muscat who brew at home and care about quality. They follow coffee accounts on Instagram.",
+  "problem": "Supermarket coffee is stale and they can't tell where it came from.",
+  "feel": "Looked after, and a little proud of their taste",
+  "trust": "We roast to order and answer every WhatsApp message ourselves.",
+  "notCustomer": "People looking for the cheapest coffee by the kilo.",
+  "competitors": [
+   {
+    "name": "Big chain cafés"
+   },
+   {
+    "name": "Imported supermarket brands"
+   },
+   {
+    "name": "Other local roasters",
+    "link": ""
+   }
+  ],
+  "compGood": "Convenient, everywhere, familiar.",
+  "compBad": "Stale beans, no story, no service.",
+  "different": "The roast date is on every bag, and it reaches you within two days of roasting.",
+  "price": "premium",
+  "fiveWords": "warm, fresh, honest, crafted, calm",
+  "neverWords": "cheap, loud, fake",
+  "person": "A friendly barista who knows your order by name",
+  "archetypes": [
+   "creator",
+   "caregiver"
+  ],
+  "personality": {
+   "era": 40,
+   "mood": 55,
+   "reach": 60,
+   "volume": 30,
+   "detail": 30,
+   "scale": 78
+  },
+  "voice": {
+   "formality": 68,
+   "expertise": 62,
+   "energy": 38
+  },
+  "admire": "Aesop, for its calm packaging. Muji, for keeping things simple.",
+  "existing": {
+   "files": [],
+   "links": ""
+  },
+  "logoMessage": "That we take coffee seriously, but we're warm and welcoming.",
+  "logoType": [
+   "wordmark",
+   "emblem"
+  ],
+  "typeface": [
+   "serif",
+   "ruqaa"
+  ],
+  "thisThat": {
+   "temp": "a",
+   "shape": "b",
+   "density": "a",
+   "sat": "a",
+   "finish": "b",
+   "mood": "a"
+  },
+  "colorsLove": [
+   "brown",
+   "sand",
+   "green"
+  ],
+  "colorsAvoid": [
+   "pink",
+   "purple"
+  ],
+  "colorNotes": "",
+  "refsLike": {
+   "files": [],
+   "links": "https://www.pinterest.com/example-board"
+  },
+  "avoid": "Coffee cup clichés, coffee bean icons, steam swirls",
+  "channels": [
+   "instagram",
+   "whatsapp",
+   "packaging",
+   "store"
+  ],
+  "tagline": "need",
+  "anything": "We open the first café in March --> so the sign matters."
+ }
+}

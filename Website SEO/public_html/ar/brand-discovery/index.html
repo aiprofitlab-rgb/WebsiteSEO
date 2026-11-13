@@ -8,7 +8,7 @@
 <link rel="alternate" hreflang="ar" href="https://aiprofitlab.io/ar/brand-discovery/">
 <link rel="alternate" hreflang="x-default" href="https://aiprofitlab.io/en/brand-discovery/">
 <title>استبيان اكتشاف الهوية — AI Profit Lab</title>
-<meta name="description" content="قبل أن نصمم شعاراً أو نختار لوناً، نحتاج إلى فهم عملك وعملائك والشخصية التي تريد أن تظهر بها. حوالي ٢٠–٢٥ دقيقة.">
+<meta name="description" content="أجب عن هذه الأسئلة حول عملك، وسنحوّلها إلى دليل هويتك: نوع الشعار الذي يناسبك، ومسودة أولى لاسمك كشعار، وألوانك وخطوطك ونبرة صوتك. حوالي ٢٠–٢٥ دقيقة.">
 <link rel="canonical" href="https://aiprofitlab.io/ar/brand-discovery/">
 <link rel="icon" href="/favicon.ico" sizes="32x32">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=20260822">
@@ -17,7 +17,7 @@
 
 <meta property="og:type" content="website">
 <meta property="og:title" content="استبيان اكتشاف الهوية — AI Profit Lab">
-<meta property="og:description" content="قبل أن نصمم شعاراً أو نختار لوناً، نحتاج إلى فهم عملك وعملائك والشخصية التي تريد أن تظهر بها. حوالي ٢٠–٢٥ دقيقة.">
+<meta property="og:description" content="أجب عن هذه الأسئلة حول عملك، وسنحوّلها إلى دليل هويتك: نوع الشعار الذي يناسبك، ومسودة أولى لاسمك كشعار، وألوانك وخطوطك ونبرة صوتك. حوالي ٢٠–٢٥ دقيقة.">
 <meta property="og:url" content="https://aiprofitlab.io/ar/brand-discovery/">
 <meta property="og:image" content="https://aiprofitlab.io/og-aiprofitlab-2026-v2.jpg">
 <meta property="og:image:width" content="1200">
@@ -523,7 +523,7 @@ dialog.drawer::backdrop{background:transparent}
 <div class="wrap">
   <div class="shell">
     <main id="main">
-      <noscript><div class="nojs"><b>يحتاج هذا الاستبيان إلى JavaScript.</b> إذا تعذّر تفعيله، راسلنا على <a href="mailto:hello@aiprofitlab.io" dir="ltr">hello@aiprofitlab.io</a> أو عبر واتساب على <a href="https://wa.me/96899245250" dir="ltr">+968 9924 5250</a> وسنمرّ على الأسئلة معك.<br>ملاحظة: النص العربي في هذه الصفحة لم تتم مراجعته بعد من قبل متحدث أصلي.</div></noscript>
+      <noscript><div class="nojs"><b>يحتاج هذا الاستبيان إلى JavaScript.</b> إذا تعذّر تفعيله، راسلنا على <a href="mailto:hello@aiprofitlab.io" dir="ltr">hello@aiprofitlab.io</a> أو عبر واتساب على <a href="https://api.whatsapp.com/send?phone=96899245250" dir="ltr">+968 9924 5250</a> وسنمرّ على الأسئلة معك.<br>ملاحظة: النص العربي في هذه الصفحة لم تتم مراجعته بعد من قبل متحدث أصلي.</div></noscript>
       <form id="form" novalidate autocomplete="on"></form>
     </main>
     <aside class="side" aria-label="Brand sheet" aria-live="off">
@@ -584,7 +584,8 @@ dialog.drawer::backdrop{background:transparent}
    Paste its /exec URL here. Left empty, the page still works: submit lands on
    the download / copy / email / WhatsApp screen and never claims it sent. */
 const BRIEF_ENDPOINT = "https://script.google.com/macros/s/AKfycbwE-uGvKaaQxcW_b16Q_fvJ5YeRp6P1Dt7anAorT4z25kmclxATyM0VAZn5jDg9tQ7R/exec";
-const CONTACT = { email: "hello@aiprofitlab.io", wa: "+968 9924 5250", waLink: "https://wa.me/96899245250" };
+/* api.whatsapp.com, never wa.me: some Omani mobile networks drop DNS for wa.me. */
+const CONTACT = { email: "hello@aiprofitlab.io", wa: "+968 9924 5250", waLink: "https://api.whatsapp.com/send?phone=96899245250" };
 const DRAFT_KEY = "apl-brand-discovery-v2";
 /* v1 drafts were saved per section; their answers are still picked up on load. */
 const OLD_DRAFT_KEY = "apl-brand-discovery-v1";
@@ -631,11 +632,11 @@ const UI = {
   railMeta: L("About 20–25 minutes. Your answers are kept on this device as you go, so you can stop and come back.",
               "حوالي ٢٠–٢٥ دقيقة. تُحفظ إجاباتك على هذا الجهاز أثناء التعبئة، فيمكنك التوقف والعودة لاحقاً."),
   doneSavedT: L("Thank you. Your answers reached us.", "شكراً لك. وصلتنا إجاباتك."),
-  doneSavedP: L("We'll read everything carefully and contact you to book a short kickoff call. If you have logo files or references you couldn't upload, email them to us.",
-                "سنقرأ كل شيء بعناية ونتواصل معك لتحديد مكالمة تمهيدية قصيرة. إذا كانت لديك ملفات شعار أو مراجع لم تتمكن من رفعها، أرسلها إلينا بالبريد الإلكتروني."),
+  doneSavedP: L("We'll go through your answers and send your brand book to your email: the kind of logo that suits you, a first draft of your name as a logo, your colours, fonts and voice. If you have logo files or references you couldn't upload, email them to us.",
+                "سنراجع إجاباتك ونرسل دليل هويتك إلى بريدك الإلكتروني: نوع الشعار الذي يناسبك، ومسودة أولى لاسمك كشعار، وألوانك وخطوطك ونبرة صوتك. إذا كانت لديك ملفات شعار أو مراجع لم تتمكن من رفعها، أرسلها إلينا بالبريد الإلكتروني."),
   doneSendT: L("One last step: send us your answers", "خطوة أخيرة: أرسل إلينا إجاباتك"),
-  doneSendP: L("Download or copy your answers, then send them to us by email or WhatsApp. Attach any logo files and references to the same message.",
-               "حمّل إجاباتك أو انسخها، ثم أرسلها إلينا عبر البريد الإلكتروني أو واتساب. أرفق ملفات الشعار والمراجع في الرسالة نفسها."),
+  doneSendP: L("Download or copy your answers and send them to us by email or WhatsApp, so we can prepare your brand book. Attach any logo files and references to the same message.",
+               "حمّل إجاباتك أو انسخها، ثم أرسلها إلينا عبر البريد الإلكتروني أو واتساب لنُعدّ دليل هويتك. أرفق ملفات الشعار والمراجع في الرسالة نفسها."),
   pdf: L("Download as PDF", "تحميل بصيغة PDF"),
   pdfMaking: L("Preparing the PDF…", "جارٍ تجهيز ملف PDF…"),
   pdfFail: L("The PDF couldn't be made on this device. Use Copy answers instead.", "تعذّر إنشاء ملف PDF على هذا الجهاز. استخدم نسخ الإجابات بدلاً من ذلك."),
@@ -759,15 +760,10 @@ const VOICE = [
   { v:"energy", a:L("Calm & reserved","هادئ ومتحفظ"), b:L("Enthusiastic","متحمس") }
 ];
 
-const DELIVERABLES = [
-  ["logo",L("Logo suite","مجموعة الشعار")],["palette",L("Colour palette","لوحة الألوان")],["type",L("Typography","الخطوط")],
-  ["book",L("Brand book","دليل الهوية")],["voice",L("Tone-of-voice guide","دليل نبرة الصوت")],["tagline",L("Tagline","شعار لفظي")],
-  ["character",L("Brand character / mascot","شخصية / تميمة العلامة")],["pattern",L("Patterns & graphics","أنماط وعناصر رسومية")],["icons",L("Icon set","مجموعة أيقونات")],
-  ["cards",L("Business cards","بطاقات عمل")],["stationery",L("Letterhead & stationery","ورق رسمي وقرطاسية")],["signature",L("Email signature","توقيع البريد")],
-  ["social",L("Social media templates","قوالب التواصل الاجتماعي")],["profile",L("Profile & cover images","صور الحساب والغلاف")],["deck",L("Presentation template","قالب عروض تقديمية")],
-  ["packaging",L("Packaging","تغليف")],["signage",L("Signage","لافتات")],["vehicle",L("Vehicle & uniform branding","هوية المركبات والزي")],
-  ["website",L("Website","موقع إلكتروني")],["photo",L("Photography direction","توجيه التصوير")]
-].map(([v,l]) => ({ v, l }));
+/* CHANNELS keys are also read by tools/brand-discovery/build_brand_book.py, which
+   checks them (and the ARCHETYPES, LOGO_TYPES, TYPEFACES, COLOURS, PAIRS,
+   PERSONALITY and VOICE keys) against this file before it builds a brand book.
+   Rename a key here and that tool refuses to run until it learns the new one. */
 const CHANNELS = [
   ["instagram",L("Instagram","إنستغرام")],["tiktok",L("TikTok","تيك توك")],["linkedin",L("LinkedIn","لينكدإن")],["whatsapp",L("WhatsApp","واتساب")],
   ["website",L("Website","الموقع الإلكتروني")],["print",L("Print","المطبوعات")],["packaging",L("Packaging","التغليف")],["store",L("Storefront & signage","الواجهة واللافتات")],
@@ -869,19 +865,20 @@ const STEPS = [
       { k:"refsDislike", type:"upload", l:L("References you don't like","مراجع لا تعجبك") },
       { k:"avoid", type:"textarea", short:1, l:L("Symbols, images or clichés to avoid","رموز أو صور أو أفكار مستهلكة يجب تجنبها") }
     ] },
-  { id:"scope", t:L("Scope & timing","النطاق والتوقيت"),
-    h:L("What you need, and by when","ما تحتاجه، ومتى"),
-    p:L("Tick everything you think you'll need. We'll help you prioritise on the call.","اختر كل ما تعتقد أنك ستحتاجه. سنساعدك في ترتيب الأولويات خلال المكالمة."),
+  /* Until 2026-11-13 this part was "Scope & timing" and also asked for
+     deliverables, deadline, budget and approvers: the form was an intake for paying
+     brand clients. It now goes to any company, and its outcome is the brand book
+     made with tools/brand-discovery/build_brand_book.py, so those questions went.
+     Their sheet columns stay, empty on new rows. The id stays "scope" so a saved
+     draft and SCREEN_DEF still line up. */
+  { id:"scope", t:L("Where you'll be seen","أين سيراك الناس"),
+    h:L("Where your brand has to work","أين يجب أن تعمل علامتك"),
+    p:L("Where people will meet your brand, and anything else we should know.","أين سيلتقي الناس بعلامتك، وأي شيء آخر يجب أن نعرفه."),
     f:[
-      { k:"deliverables", type:"chips", req:1, o:DELIVERABLES, l:L("What do you need from us?","ماذا تحتاج منا؟") },
-      { k:"channels", type:"chips", o:CHANNELS, l:L("Where will people see your brand most?","أين سيرى الناس علامتك أكثر؟") },
+      { k:"channels", type:"chips", o:CHANNELS, l:L("Where will people see your brand most?","أين سيرى الناس علامتك أكثر؟"), hint:L("This decides which versions of the logo you need, for example a small one for profile pictures.","هذا يحدد نُسخ الشعار التي تحتاجها، مثل نسخة صغيرة لصور الحسابات.") },
       { k:"tagline", type:"radio", l:L("Do you have a tagline?","هل لديك شعار لفظي (تاغلاين)؟"), o:[
         { v:"have", l:L("Yes, we have one","نعم، لدينا واحد") }, { v:"need", l:L("No, we need one","لا، نحتاج إلى واحد") }, { v:"unsure", l:L("Not sure","لست متأكداً") } ] },
       { k:"taglineText", type:"text", l:L("If you have one, what is it?","إذا كان لديك، ما هو؟") },
-      { row:[
-        { k:"deadline", type:"text", l:L("Deadline or launch date","الموعد النهائي أو تاريخ الإطلاق"), ph:L("e.g. before Ramadan, or 1 March","مثال: قبل رمضان، أو ١ مارس") },
-        { k:"budget", type:"text", l:L("Budget range","نطاق الميزانية"), ph:L("e.g. OMR 800–1,500, or “let's discuss”","مثال: ٨٠٠–١٬٥٠٠ ر.ع، أو «نتناقش»") } ] },
-      { k:"approvers", type:"text", req:1, l:L("Who approves the work?","من يعتمد العمل؟"), hint:L("Names and roles of everyone who signs off.","أسماء ومناصب كل من يوافق على العمل.") },
       { k:"anything", type:"textarea", l:L("Anything else we should know?","هل هناك أي شيء آخر يجب أن نعرفه؟") }
     ] },
   { id:"review", t:L("Review & send","المراجعة والإرسال"),
@@ -905,7 +902,8 @@ Object.assign(UI, {
   yourBrand: L("Your brand so far", "علامتك حتى الآن"),
   yourBrandShort: L("Your brand", "علامتك"),
   backToQs: L("Back to the questions", "العودة إلى الأسئلة"),
-  sideNote: L("Built from your answers. It's a summary for us to work from, not a design.", "مبنية من إجاباتك. إنها ملخص نعمل انطلاقاً منه، وليست تصميماً."),
+  sideNote: L("Built from your answers. It's what we'll make your brand book from, not the design itself.", "مبنية من إجاباتك. هي ما ننطلق منه لإعداد دليل هويتك، وليست التصميم نفسه."),
+  preparedFor: L((b) => `Prepared for ${b}`, (b) => `أُعدّ لـ ${b}`),
   hookWide: L("As you answer, the brand sheet beside the questions fills in: your name in the lettering you pick, your colours, your character. At the end you check it and send it to us.",
               "مع كل إجابة، تمتلئ ورقة الهوية بجانب الأسئلة: اسمك بالخط الذي تختاره، وألوانك، وشخصيتك. في النهاية تراجعها وترسلها إلينا."),
   hookNarrow: L("As you answer, a brand sheet fills in from your answers: your name in the lettering you pick, your colours, your character. Tap “Your brand” at the bottom of the screen to see it.",
@@ -924,8 +922,8 @@ Object.assign(UI, {
     look: L("Look & feel", "الشكل والإحساس"), lookE: L("Fills in from your visual choices.", "تمتلئ من اختياراتك البصرية."),
     forK: L("Made for", "لمن"), forE: L("Fills in when you describe your customer.", "تمتلئ عندما تصف عميلك."),
     feel: L("Should feel", "الإحساس"),
-    scope: L("Scope", "النطاق"), scopeE: L("Fills in when you choose what you need.", "تمتلئ عندما تختار ما تحتاجه."),
-    when: L("By", "الموعد")
+    scope: L("Seen on", "أين تظهر"), scopeE: L("Fills in when you choose where people see you.", "تمتلئ عندما تختار أين يراك الناس."),
+    tagK: L("Tagline", "الشعار اللفظي")
   }
 });
 
@@ -969,9 +967,8 @@ const SCREEN_DEF = {
     { k:["refsLike","refsDislike","avoid"], h:L("Show us what you mean.","أرِنا ما تقصده.") }
   ],
   scope:[
-    { k:["deliverables","channels"], h:L("What should we make?","ماذا نصمّم لك؟") },
-    { k:["tagline","taglineText","deadline","budget"], h:L("Words and dates.","الكلمات والمواعيد.") },
-    { k:["approvers","anything"], h:L("Last few details.","تفاصيل أخيرة.") }
+    { k:["channels"], h:L("Where will people see you?","أين سيراك الناس؟") },
+    { k:["tagline","taglineText","anything"], h:L("Last few details.","تفاصيل أخيرة.") }
   ]
 };
 const FIELD = {};
@@ -989,7 +986,7 @@ Q_STEPS.forEach((s, ch) => SCREEN_DEF[s.id].forEach((d, i, arr) => SCREENS.push(
 const POS_REVIEW = SCREENS.length + 1;
 const screenFields = (sc) => sc.k.map(k => FIELD[k]);
 const posOfChapter = (ch) => SCREENS.findIndex(sc => sc.ch === ch) + 1;
-/* About 20-25 minutes over 23 screens. Only ever shown rounded. */
+/* About 20-25 minutes over 22 screens. Only ever shown rounded. */
 const MIN_PER_SCREEN = .95;
 const pad = (n) => String(n).padStart(2, "0");
 
@@ -1010,6 +1007,20 @@ try {
   const d = JSON.parse(localStorage.getItem(DRAFT_KEY) || "null") || JSON.parse(localStorage.getItem(OLD_DRAFT_KEY) || "null");
   if (d && d.a) { S.a = d.a; S.pos = Math.min(Math.max(+d.pos || 0, 0), POS_REVIEW); S.lang = d.lang === "ar" ? "ar" : "en"; if (d.sid) S.sid = String(d.sid); }
 } catch (e) {}
+/* Personal links, the same idea as /en/growth-discovery/:
+     ?b=Business name   also shows "Prepared for …" on the welcome
+     &n=Contact name
+     &ig=handle1,handle2  (fills "Social media handles")
+   Each fills an EMPTY answer only, so a client who has already started is never
+   overwritten. Nothing is saved until the client types, so the link keeps working
+   if they open it again. */
+const QS = new URLSearchParams(location.search);
+const PREPARED = (QS.get("b") || "").trim().slice(0, 80);
+[["b", "business"], ["n", "contactName"], ["ig", "social"]].forEach(([p, k]) => {
+  let v = (QS.get(p) || "").trim().slice(0, 160);
+  if (p === "ig" && v) v = v.split(",").map(h => h.trim().replace(/^@/, "")).filter(Boolean).map(h => "@" + h).join(", ");
+  if (v && !String(S.a[k] || "").trim()) S.a[k] = v;
+});
 let saveTimer = null;
 function persist(){
   clearTimeout(saveTimer);
@@ -1199,9 +1210,10 @@ function headHTML(eyebrow, h, p){
 function renderWelcome(){
   const ar = S.lang === "ar";
   const chMin = (ch) => Math.max(1, Math.round(SCREENS.filter(sc => sc.ch === ch).length * MIN_PER_SCREEN));
-  return headHTML(ar ? "استبيان اكتشاف الهوية" : "Brand discovery", ar ? "حدّثنا عن علامتك التجارية" : "Tell us about your brand",
-      ar ? "قبل أن نصمم شعاراً أو نختار لوناً، نحتاج إلى فهم عملك وعملائك والشخصية التي تريد أن تظهر بها. إجاباتك هنا هي الأساس لكل ما نصممه لك."
-         : "Before we draw a logo or pick a colour, we need to understand your business, your customers and the character you want to show. Your answers here are the foundation for everything we design for you.")
+  /* The lede is also the page's meta description (LANGS in build_brand_discovery.py). */
+  return headHTML(PREPARED ? UI.preparedFor[S.lang](PREPARED) : (ar ? "استبيان اكتشاف الهوية" : "Brand discovery"), ar ? "حدّثنا عن علامتك التجارية" : "Tell us about your brand",
+      ar ? "أجب عن هذه الأسئلة حول عملك، وسنحوّلها إلى دليل هويتك: نوع الشعار الذي يناسبك، ومسودة أولى لاسمك كشعار، وألوانك وخطوطك ونبرة صوتك."
+         : "Answer these questions about your business, and we'll turn them into your brand book: the kind of logo that suits you, a first draft of your name as a logo, your colours, fonts and voice.")
     + `<div class="welcome-body">
       <p class="hook"><span class="wide">${esc(tr(UI.hookWide))}</span><span class="narrow">${esc(tr(UI.hookNarrow))}</span></p>
       <div class="facts"><span>${ar ? "٧ أجزاء" : "7 parts"}</span><span>${ar ? "حوالي ٢٠–٢٥ دقيقة" : "About 20–25 minutes"}</span><span>${ar ? "تُحفظ المسودة تلقائياً" : "Draft saves automatically"}</span></div>
@@ -1325,7 +1337,7 @@ function sheetData(a){
     look: PAIRS.filter(p => tt[p.v] === "a" || tt[p.v] === "b").map(p => tr(tt[p.v] === "a" ? p.a : p.b))
       .concat(pick(LOGO_TYPES, a.logoType).filter(o => o.v !== "open").map(o => tr(o.l))),
     cust: String(a.customer || "").trim(), feel: String(a.feel || "").trim(),
-    dl: pick(DELIVERABLES, a.deliverables).map(o => tr(o.l)), deadline: String(a.deadline || "").trim()
+    ch: pick(CHANNELS, a.channels).map(o => tr(o.l)), tag: a.tagline === "need" ? "" : String(a.taglineText || "").trim()
   };
 }
 const RING = 2 * Math.PI * 9;
@@ -1335,7 +1347,7 @@ function sheetParts(a, big){
   const fs = (d.name.length > 24 ? 1.45 : d.name.length > 14 ? 1.9 : 2.45) * (big ? 1.4 : 1);
   const tags = (xs, cls) => `<div class="tags${cls ? " " + cls : ""}">${xs.map(x => `<span dir="auto">${esc(clip(x, 28))}</span>`).join("")}</div>`;
   const sec = (slot, k, filled, body, empty) => `<div class="sh-sec" data-slot="${slot}"><div class="sh-k">${esc(tr(k))}</div>${filled ? body : `<div class="ghost">${esc(tr(empty))}</div>`}</div>`;
-  const dl = big ? d.dl : d.dl.slice(0, 6).concat(d.dl.length > 6 ? ["+" + (d.dl.length - 6)] : []);
+  const ch = big ? d.ch : d.ch.slice(0, 6).concat(d.ch.length > 6 ? ["+" + (d.ch.length - 6)] : []);
   return {
     top: `<div class="sh-top" data-slot="top"><span class="sh-title"><span class="ast" aria-hidden="true">✼</span>${esc(tr(SH.title))}</span>
       <span class="sh-pct" dir="ltr"><svg class="ring" viewBox="0 0 22 22" aria-hidden="true"><circle class="bg" cx="11" cy="11" r="9"/><circle class="fg" cx="11" cy="11" r="9" stroke-dasharray="${(RING * pct / 100).toFixed(2)} ${RING.toFixed(2)}"/></svg>${pct}%</span></div>`,
@@ -1356,12 +1368,12 @@ function sheetParts(a, big){
     for: sec("for", SH.forK, d.cust || d.feel,
       (d.cust ? `<p class="sh-p" dir="auto">${esc(clip(d.cust, big ? 280 : 130))}</p>` : "")
       + (d.feel ? `<p class="sh-p"><span class="sh-sub">${esc(tr(SH.feel))}</span> <span dir="auto">${esc(clip(d.feel, 90))}</span></p>` : ""), SH.forE),
-    scope: sec("scope", SH.scope, d.dl.length || d.deadline,
-      (d.dl.length ? tags(dl) : "")
-      + (d.deadline ? `<p class="sh-p"><span class="sh-sub">${esc(tr(SH.when))}</span> <span dir="auto">${esc(clip(d.deadline, 60))}</span></p>` : ""), SH.scopeE),
+    scope: sec("scope", SH.scope, d.ch.length || d.tag,
+      (d.ch.length ? tags(ch) : "")
+      + (d.tag ? `<p class="sh-p"><span class="sh-sub">${esc(tr(SH.tagK))}</span> <span dir="auto">${esc(clip(d.tag, 60))}</span></p>` : ""), SH.scopeE),
     _love: d.love.map(c => c.v),
     _filled: { name:!!d.name, palette:!!(d.love.length || d.avoid.length), character:!!(d.arch.length || d.w.length || d.nw.length),
-      scales:!!d.scales.length, look:!!(d.tf || d.look.length), for:!!(d.cust || d.feel), scope:!!(d.dl.length || d.deadline) }
+      scales:!!d.scales.length, look:!!(d.tf || d.look.length), for:!!(d.cust || d.feel), scope:!!(d.ch.length || d.tag) }
   };
 }
 const SLOTS = ["top", "name", "palette", "character", "scales", "look", "for", "scope"];
@@ -1601,8 +1613,18 @@ function briefFields(payload){
     of: fields.length,
     rows: [{ q:"Form language", v: payload.lang === "ar" ? "Arabic" : "English" }]
       .concat(fields.map(f => ({ q: tr(f.l), v: valueText(f, S.a[f.k]) }))),
-    text: toMarkdown(S.a, payload)
+    text: toMarkdown(S.a, payload) + bookData(payload)
   }));
+}
+/* The raw answers, for tools/brand-discovery/build_brand_book.py. They ride at the
+   end of the emailed .md as an HTML comment, so the brief still reads as plain
+   Markdown and the Apps Script needs no change. A "-->" typed inside an answer is
+   written as "-->", which JSON reads back as the same text. Only the brief
+   sent to us carries it: Copy answers and the client's PDF do not. */
+function bookData(payload){
+  const json = JSON.stringify({ v:1, form:"brand-discovery", lang:payload.lang, submittedAt:payload.submittedAt, answers:payload.answers })
+    .replace(/-->/g, "--\\u003e");
+  return "\n\n<!-- brand-book-data\n" + json + "\n-->\n";
 }
 
 /* Tells the Apps Script this client reached the review ("review") or that their
