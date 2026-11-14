@@ -39,7 +39,7 @@ class NumberedCanvas(canvas.Canvas):
         # Footer
         page_text = f"Page {self._pageNumber} of {page_count}"
         self.drawRightString(8.5 * 72 - 45, 30, page_text)
-        self.drawString(45, 30, "Confidential — aiprofitlab.io • a brand of International Gulf Lotus SPC")
+        self.drawString(45, 30, "Confidential — aiprofitlab.io • a brand of Lotus Gulf International")
         self.setStrokeColor(colors.HexColor("#CBD5E1"))
         self.setLineWidth(0.5)
         self.line(45, 40, 8.5 * 72 - 45, 40)
@@ -182,7 +182,7 @@ def generate_pdf():
         ("Indie Hackers", "https://indiehackers.com", "DoFollow / NoFollow", "DA 83 | 1.2M+ visits", 
          "1. Add AI Profit Lab under Products.<br/>2. Share milestone case studies linking to site."),
         ("Crunchbase", "https://crunchbase.com", "NoFollow (Entity)", "DA 91 | 12M+ visits", 
-         "1. Register Organization under International Gulf Lotus SPC.<br/>2. Add website, founder, and HQ data."),
+         "1. Register Organization under Lotus Gulf International.<br/>2. Add website, founder, and HQ data."),
         ("GitHub", "https://github.com", "DoFollow (Org/Profile)", "DA 96 | 400M+ visits", 
          "1. Create github.com/aiprofitlab org.<br/>2. Publish free AI prompt packs / scripts.<br/>3. Link in READMEs & bio."),
         ("Medium", "https://medium.com", "NoFollow (Publications)", "DA 95 | 120M+ visits", 
@@ -231,7 +231,7 @@ def generate_pdf():
         "• <b>Entity Linking & Knowledge Graph:</b> Complete Crunchbase, GitHub, and Product Hunt first. These act as authoritative seed sites confirming brand identity for Google's Knowledge Graph.<br/>"
         "• <b>Canonical Syndication:</b> When publishing on Hashnode and Dev.to, always declare the canonical link pointing to <code>aiprofitlab.io</code> to pass link equity without risking duplicate content penalties.<br/>"
         "• <b>Generative Engine Optimization (GEO):</b> Platforms like Reddit, Quora, and Medium are actively scraped by LLMs (Perplexity, ChatGPT Search, Gemini). Contextual brand mentions establish AI Profit Lab as a top citation source for SME AI queries.<br/>"
-        "• <b>Legal Entity Consistency:</b> Ensure organizational submissions reference <i>International Gulf Lotus SPC</i> as the parent legal entity with <i>AI Profit Lab</i> as the brand.",
+        "• <b>Legal Entity Consistency:</b> Ensure organizational submissions reference <i>Lotus Gulf International</i> as the parent legal entity with <i>AI Profit Lab</i> as the brand.",
         body_style
     )
     

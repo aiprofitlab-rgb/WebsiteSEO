@@ -95,10 +95,10 @@ def audit_file(filepath):
     # Collapse multiple spaces
     clean_footer = re.sub(r'\s+', ' ', clean_footer)
     if is_ar:
-        if "© ٢٠٢٥ AI Profit Lab — علامة تجارية لشركة International Gulf Lotus SPC • جميع الحقوق محفوظة" not in clean_footer and "© ٢٠٢٥ AI Profit Lab" not in clean_footer:
+        if "© ٢٠٢٥ AI Profit Lab — علامة تجارية لشركة Lotus Gulf International • جميع الحقوق محفوظة" not in clean_footer and "© ٢٠٢٥ AI Profit Lab" not in clean_footer:
             issues.append("Missing or incorrect Arabic footer copyright")
     else:
-        if "© 2025 AI Profit Lab — a brand of International Gulf Lotus SPC • All Rights Reserved" not in clean_footer and "© 2025 AI Profit Lab" not in clean_footer:
+        if "© 2025 AI Profit Lab — a brand of Lotus Gulf International • All Rights Reserved" not in clean_footer and "© 2025 AI Profit Lab" not in clean_footer:
             issues.append("Missing or incorrect English footer copyright")
             
     # 8. JSON-LD Schema
@@ -107,8 +107,8 @@ def audit_file(filepath):
         issues.append("Missing JSON-LD schema")
     else:
         combined_schemas = " ".join(schema_matches)
-        if "International Gulf Lotus SPC" not in combined_schemas:
-            issues.append("JSON-LD schema missing legalName 'International Gulf Lotus SPC'")
+        if "Lotus Gulf International" not in combined_schemas:
+            issues.append("JSON-LD schema missing legalName 'Lotus Gulf International'")
         if "AI Profit Lab" not in combined_schemas:
             issues.append("JSON-LD schema missing brand name 'AI Profit Lab'")
             

@@ -1053,6 +1053,10 @@ SOCIALS = [
 ]
 
 GOOGLE_REVIEW = "https://g.page/r/CYPlrz58-k0DEAI/review"
+# The same Business Profile as a Maps link. The CID is decoded from the review
+# token above (base64 protobuf, field 1 = fixed64 CID), not looked up, so the
+# two can't point at different listings.
+GBP_MAP = "https://www.google.com/maps?cid=238121766855107971"
 
 
 # --------------------------------------------------------------------------
@@ -1076,6 +1080,8 @@ ORG_NODE = """{
     "@type":"ProfessionalService",
     "@id":"%(org)s",
     "name":"AI Profit Lab",
+    "legalName":"Lotus Gulf International",
+    "alternateName":["aiprofitlab","aiprofitlab.io","AI Profit Lab Oman"],
     "description":"Done-for-you AI automation for trading and distribution SMEs in Oman and the GCC.",
     "url":"%(site)s/",
     "email":"hello@aiprofitlab.io",
@@ -1089,8 +1095,10 @@ ORG_NODE = """{
     "parentOrganization":{"@type":"Organization","name":"Lotus Gulf International","identifier":"CR 1570092"},
     "founder":{"@type":"Person","name":"Nahid Abyari"},
     "priceRange":"OMR 950 - OMR 2200",
-    "sameAs":["https://www.linkedin.com/in/nahid-aby","https://www.youtube.com/@AI_for_Managers","https://www.facebook.com/profile.php?id=61584870364473"]
-  }""" % {"org": ORG_ID, "site": SITE}
+    "knowsAbout":["AI automation","WhatsApp Business API","Bilingual Arabic and English websites","AI chatbots for customer enquiries","Business dashboards"],
+    "hasMap":"%(map)s",
+    "sameAs":["https://www.instagram.com/ai.profit.lab.gcc/","%(map)s","https://www.linkedin.com/in/nahid-aby","https://www.youtube.com/@AI_for_Managers","https://www.facebook.com/profile.php?id=61584870364473"]
+  }""" % {"org": ORG_ID, "site": SITE, "map": GBP_MAP}
 
 WEBSITE_NODE = """{
     "@type":"WebSite",

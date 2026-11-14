@@ -73,7 +73,7 @@ ARTICLE_30_EN = r"""<!DOCTYPE html>
       "@type": "Organization",
       "@id": "https://aiprofitlab.io/#organization",
       "name": "AI Profit Lab",
-      "legalName": "International Gulf Lotus SPC",
+      "legalName": "Lotus Gulf International",
       "url": "https://aiprofitlab.io/",
       "logo": {
         "@type": "ImageObject",
@@ -280,7 +280,7 @@ ARTICLE_30_EN = r"""<!DOCTYPE html>
       <span class="rarw" aria-hidden="true">&rarr;</span>
     </a>
 
-    <p class="legal">&copy; 2026 AI Profit Lab &mdash; a brand of International Gulf Lotus SPC &bull; All Rights Reserved<br>South Al Khuwair, Bousher, Muscat, Oman &middot; CR <span dir="ltr">1570092</span></p>
+    <p class="legal">&copy; 2026 AI Profit Lab &mdash; a brand of Lotus Gulf International &bull; All Rights Reserved<br>South Al Khuwair, Bousher, Muscat, Oman &middot; CR <span dir="ltr">1570092</span></p>
   </div>
 </footer>
 <script defer src="/js/aiden-chat.js?v=8002bc67"></script>
@@ -348,7 +348,7 @@ ARTICLE_30_AR = r"""<!DOCTYPE html>
       "@type": "Organization",
       "@id": "https://aiprofitlab.io/#organization",
       "name": "AI Profit Lab",
-      "legalName": "International Gulf Lotus SPC",
+      "legalName": "Lotus Gulf International",
       "url": "https://aiprofitlab.io/",
       "logo": {
         "@type": "ImageObject",
@@ -530,7 +530,7 @@ ARTICLE_30_AR = r"""<!DOCTYPE html>
       <span class="rarw" aria-hidden="true">&larr;</span>
     </a>
 
-    <p class="legal">&copy; ٢٠٢٦ AI Profit Lab &mdash; علامة تجارية لشركة International Gulf Lotus SPC &bull; جميع الحقوق محفوظة<br>جنوب الخوير، بوشر، مسقط، سلطنة عمان &middot; س.ت <span dir="ltr">1570092</span></p>
+    <p class="legal">&copy; ٢٠٢٦ AI Profit Lab &mdash; علامة تجارية لشركة Lotus Gulf International &bull; جميع الحقوق محفوظة<br>جنوب الخوير، بوشر، مسقط، سلطنة عمان &middot; س.ت <span dir="ltr">1570092</span></p>
   </div>
 </footer>
 <script defer src="/js/aiden-chat.js?v=8002bc67"></script>
@@ -598,7 +598,7 @@ ARTICLE_39_EN = r"""<!DOCTYPE html>
       "@type": "Organization",
       "@id": "https://aiprofitlab.io/#organization",
       "name": "AI Profit Lab",
-      "legalName": "International Gulf Lotus SPC",
+      "legalName": "Lotus Gulf International",
       "url": "https://aiprofitlab.io/",
       "logo": {
         "@type": "ImageObject",
@@ -761,7 +761,7 @@ ARTICLE_39_EN = r"""<!DOCTYPE html>
       <span class="rarw" aria-hidden="true">&rarr;</span>
     </a>
 
-    <p class="legal">&copy; 2026 AI Profit Lab &mdash; a brand of International Gulf Lotus SPC &bull; All Rights Reserved<br>South Al Khuwair, Bousher, Muscat, Oman &middot; CR <span dir="ltr">1570092</span></p>
+    <p class="legal">&copy; 2026 AI Profit Lab &mdash; a brand of Lotus Gulf International &bull; All Rights Reserved<br>South Al Khuwair, Bousher, Muscat, Oman &middot; CR <span dir="ltr">1570092</span></p>
   </div>
 </footer>
 <script defer src="/js/aiden-chat.js?v=8002bc67"></script>
@@ -829,7 +829,7 @@ ARTICLE_39_AR = r"""<!DOCTYPE html>
       "@type": "Organization",
       "@id": "https://aiprofitlab.io/#organization",
       "name": "AI Profit Lab",
-      "legalName": "International Gulf Lotus SPC",
+      "legalName": "Lotus Gulf International",
       "url": "https://aiprofitlab.io/",
       "logo": {
         "@type": "ImageObject",
@@ -979,7 +979,7 @@ ARTICLE_39_AR = r"""<!DOCTYPE html>
       <span class="rarw" aria-hidden="true">&larr;</span>
     </a>
 
-    <p class="legal">&copy; ٢٠٢٦ AI Profit Lab &mdash; علامة تجارية لشركة International Gulf Lotus SPC &bull; جميع الحقوق محفوظة<br>جنوب الخوير، بوشر، مسقط، سلطنة عمان &middot; س.ت <span dir="ltr">1570092</span></p>
+    <p class="legal">&copy; ٢٠٢٦ AI Profit Lab &mdash; علامة تجارية لشركة Lotus Gulf International &bull; جميع الحقوق محفوظة<br>جنوب الخوير، بوشر، مسقط، سلطنة عمان &middot; س.ت <span dir="ltr">1570092</span></p>
   </div>
 </footer>
 <script defer src="/js/aiden-chat.js?v=8002bc67"></script>

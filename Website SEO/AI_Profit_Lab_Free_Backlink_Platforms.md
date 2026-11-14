@@ -2,7 +2,7 @@
 
 **Target Website:** `https://aiprofitlab.io`  
 **Brand:** AI Profit Lab  
-**Legal Entity:** International Gulf Lotus SPC (Muscat, Sultanate of Oman)  
+**Legal Entity:** Lotus Gulf International (Muscat, Sultanate of Oman)  
 **Target Audience:** SME Business Owners, B2B Founders, Marketing & Tech Leaders  
 **Core Verticals:** AI Consultancy, Tech Agency, AI Tools / B2B SaaS, CRM & Lead Automation  
 
@@ -31,7 +31,7 @@ Every platform meets strict quality standards:
 | **SaaSHub** | https://www.saashub.com | **DoFollow** | **DA 72** / 1.5M+ monthly visits | 1. Submit AI consulting services/tools under relevant categories (AI Tools, Marketing Automation, CRM Integrations).<br/>2. Fill in full descriptions, screenshots, and direct website URL. |
 | **AlternativeTo** | https://alternativeto.net | **NoFollow** (High-intent referral traffic) | **DA 81** / 8M+ monthly visits | 1. Create a creator account.<br/>2. Submit your service/tool as an alternative to off-the-shelf software (e.g., bespoke AI agent solutions vs. basic chatbots).<br/>3. Include direct website URL in profile. |
 | **Indie Hackers** | https://www.indiehackers.com | **DoFollow** (Product page profile) / **NoFollow** (Community posts) | **DA 83** / 1.2M+ monthly visits | 1. Create an account and add `AI Profit Lab` under the "Products" section with your live URL.<br/>2. Post milestone updates and SME AI case studies linking to your resources. |
-| **Crunchbase** | https://www.crunchbase.com | **NoFollow** (Tier-1 entity validation for Google Knowledge Graph) | **DA 91** / 12M+ monthly visits | 1. Create a free account and register **AI Profit Lab** as an Organization (under *International Gulf Lotus SPC*).<br/>2. Add homepage URL, founder profiles, headquarters (Muscat, Oman), and tech category tags. |
+| **Crunchbase** | https://www.crunchbase.com | **NoFollow** (Tier-1 entity validation for Google Knowledge Graph) | **DA 91** / 12M+ monthly visits | 1. Create a free account and register **AI Profit Lab** as an Organization (under *Lotus Gulf International*).<br/>2. Add homepage URL, founder profiles, headquarters (Muscat, Oman), and tech category tags. |
 | **GitHub** | https://github.com | **DoFollow** (Organization profile & README bio links) | **DA 96** / 400M+ monthly visits | 1. Create an organization profile (`github.com/aiprofitlab`).<br/>2. Add verified website link in organization settings.<br/>3. Publish free open-source prompt packs, boilerplates, or automation scripts with backlinks in READMEs. |
 | **Medium** | https://medium.com | **NoFollow** (High authority & fast indexation) | **DA 95** / 120M+ monthly visits | 1. Publish detailed SME guides (e.g., *AI adoption checklists, CRM workflow automation*).<br/>2. Submit articles to established publications (*Towards AI*, *Chatbots Life*, *The Startup*) for amplified reach. |
 | **Quora** | https://www.quora.com | **NoFollow** (Direct referral & Generative Engine Optimization / GEO) | **DA 93** / 300M+ monthly visits | 1. Identify high-ranking questions (e.g., *"How can small businesses use AI to reduce costs?"*).<br/>2. Provide thorough answers citing your research/framework on `aiprofitlab.io` as a reference link. |
@@ -44,7 +44,7 @@ Every platform meets strict quality standards:
 ### 1. Entity Linking & Google Knowledge Graph Validation
 Search engines prioritize entities with clear digital footprints. Complete **Crunchbase**, **GitHub**, and **Product Hunt** first. Ensure consistent brand and legal details across all accounts:
 - **Brand Name:** AI Profit Lab
-- **Legal Entity:** International Gulf Lotus SPC
+- **Legal Entity:** Lotus Gulf International
 - **Location:** Muscat, Sultanate of Oman
 - **Official Domain:** `https://aiprofitlab.io`
 
@@ -56,4 +56,4 @@ AI search engines (Perplexity, ChatGPT Search, Gemini, Claude) heavily crawl com
 
 ---
 
-*© 2025 AI Profit Lab — a brand of International Gulf Lotus SPC • All Rights Reserved*
+*© 2025 AI Profit Lab — a brand of Lotus Gulf International • All Rights Reserved*

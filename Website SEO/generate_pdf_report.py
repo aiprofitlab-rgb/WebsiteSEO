@@ -229,7 +229,7 @@ def generate_pdf():
             "link_type": "Nofollow (Essential Entity Authority for Google Knowledge Graph)",
             "standard": "Moderate–High — Moderated global venture & technology company database with automated and manual data integrity checks.",
             "relevance": "Foundational trust signal for tech consultancies and startups operating in the MENA innovation ecosystem.",
-            "pitch": "Create an entity profile connecting the brand (AI Profit Lab) with legal entity (International Gulf Lotus SPC) and Muscat HQ.",
+            "pitch": "Create an entity profile connecting the brand (AI Profit Lab) with legal entity (Lotus Gulf International) and Muscat HQ.",
             "tat": "Instant submission; 24–48 hours for data moderation."
         }
     ]

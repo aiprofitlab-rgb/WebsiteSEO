@@ -1,7 +1,7 @@
 # Backlink Opportunities & Outreach Strategy for AI Profit Lab
 **Target Domain:** [aiprofitlab.io](https://aiprofitlab.io)  
 **Business Profile:** AI Automation Consultancy for GCC SMBs  
-**Location:** Muscat, Sultanate of Oman (Legal Entity: *International Gulf Lotus SPC*)  
+**Location:** Muscat, Sultanate of Oman (Legal Entity: *Lotus Gulf International*)  
 
 ---
 
@@ -68,7 +68,7 @@ Every included site strictly satisfies at least two (and in most cases all three
 * **Topical & Geographic Relevance:** The benchmark directory for technology consultancies and emerging AI ventures in the Middle East.
 * **Submission / Pitch Process:**
   1. Authenticate via a verified LinkedIn profile.
-  2. Create the company entity for *AI Profit Lab*, linking the legal parent entity *International Gulf Lotus SPC*, Muscat HQ, and official website URL.
+  2. Create the company entity for *AI Profit Lab*, linking the legal parent entity *Lotus Gulf International*, Muscat HQ, and official website URL.
 * **Estimated Turnaround:** Immediate publication; 24–48 hours for data moderation.
 
 ---
@@ -176,7 +176,7 @@ Every included site strictly satisfies at least two (and in most cases all three
 1. **Week 1 (Foundational Entity Trust & Local Citations):**
    - Create and verify company profiles on **Clutch.co** and **Sortlist**.
    - Solicit 2–3 verified client reviews for Clutch phone validation.
-   - Establish company page on **Crunchbase** connecting *AI Profit Lab* to *International Gulf Lotus SPC*.
+   - Establish company page on **Crunchbase** connecting *AI Profit Lab* to *Lotus Gulf International*.
 
 2. **Week 2 (Regional Thought-Leadership Pitching):**
    - Draft a 3-bullet pitch for **Wamda** (`editor@wamda.com`) on *"Why GCC SMBs Must Fix Workflow Architecture Before Deploying GenAI Agents"*.

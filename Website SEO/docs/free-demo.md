@@ -239,8 +239,12 @@ exception for `public_html/assets/free-demo/` (the deploy uploads what git track
   - Sitelinks: اطلب نموذجك المجاني → `/free-demo-ar/#order`; هل هو قالب جاهز؟ → `#faq`;
     لماذا هو مجاني؟ → `#free`; تجربة واتساب → `/demos-ar/`; تصميم المواقع في عمان → the Arabic
     website-design article (`/blog/ar/2026-10-18-website-design-oman-what-local-businesses-need/`).
-  - Callouts: بلا دفع · بلا مكالمة · لن يلاحقك أحد · في أقل من 24 ساعة · بالعربية والإنجليزية ·
-    للهاتف والكمبيوتر.
+  - Callouts: بلا دفع · القرار لك، في وقتك · لن يلاحقك أحد · في أقل من 24 ساعة ·
+    بالعربية والإنجليزية · للهاتف والكمبيوتر.
+  - Don't use بلا مكالمة ("no call") or any wording built on مكالمة. Google disapproved it on
+    2026-10-27 under Dating and Companionship (certificate required), a classifier misread.
+    It was swapped for القرار لك، في وقتك, from the page's price answer. The English
+    "No call" callout is approved.
   - Snippet: header الخدمات (Google's fixed Arabic header for "Services"), with the values
     تصميم موقع الكتروني, الموقع الذكي, لوحة متابعة المالك الحيّة, الطيار الآلي الكامل.
   - Three sitelinks open the ad's own page at different sections. If Google disapproves any

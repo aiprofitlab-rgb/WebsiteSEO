@@ -922,9 +922,10 @@ def body():
 META = dict(
     slug="index",
     title="AI Profit Lab | AI Automation Company in Muscat, Oman",
-    desc=("You never open it, never log in, never type a prompt. A bilingual smart website answers "
-          "your buyers in Arabic and English at 2am and reports to your WhatsApp in one sentence. "
-          "One-time fee, no monthly lock-in, built by an operator in Muscat."),
+    # Search shows ~155 characters, so the first clause says who we are and
+    # where; the rest is what's sold. Every claim matches llms.txt.
+    desc=("AI Profit Lab is an AI automation company in Muscat. Our Arabic and English websites "
+          "answer your buyers day and night and pass them to your WhatsApp."),
     nav="/",
     hero=True,
     calc=True,

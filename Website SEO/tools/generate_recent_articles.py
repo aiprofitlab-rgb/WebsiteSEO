@@ -47,7 +47,7 @@ ARTICLE_40_EN = r"""<!DOCTYPE html>
           "@type": "Organization",
           "@id": "https://aiprofitlab.io/#organization",
           "name": "AI Profit Lab",
-          "legalName": "International Gulf Lotus SPC",
+          "legalName": "Lotus Gulf International",
           "url": "https://aiprofitlab.io/"
         },
         {
@@ -146,7 +146,7 @@ ARTICLE_40_EN = r"""<!DOCTYPE html>
 </section>
 </main>
 <footer class="ftr">
-  <p class="legal">&copy; 2026 AI Profit Lab &mdash; a brand of International Gulf Lotus SPC &bull; All Rights Reserved<br>South Al Khuwair, Bousher, Muscat, Sultanate of Oman &middot; CR <span dir="ltr">1570092</span></p>
+  <p class="legal">&copy; 2026 AI Profit Lab &mdash; a brand of Lotus Gulf International &bull; All Rights Reserved<br>South Al Khuwair, Bousher, Muscat, Sultanate of Oman &middot; CR <span dir="ltr">1570092</span></p>
 </footer>
 </body>
 </html>
@@ -179,7 +179,7 @@ ARTICLE_40_AR = r"""<!DOCTYPE html>
           "@type": "Organization",
           "@id": "https://aiprofitlab.io/#organization",
           "name": "AI Profit Lab",
-          "legalName": "International Gulf Lotus SPC",
+          "legalName": "Lotus Gulf International",
           "url": "https://aiprofitlab.io/"
         },
         {
@@ -266,7 +266,7 @@ ARTICLE_40_AR = r"""<!DOCTYPE html>
 </section>
 </main>
 <footer class="ftr">
-  <p class="legal">&copy; ٢٠٢٦ AI Profit Lab &mdash; علامة تجارية لشركة International Gulf Lotus SPC &bull; جميع الحقوق محفوظة<br>جنوب الخوير، بوشر، مسقط، سلطنة عمان &middot; س.ت <span dir="ltr">1570092</span></p>
+  <p class="legal">&copy; ٢٠٢٦ AI Profit Lab &mdash; علامة تجارية لشركة Lotus Gulf International &bull; جميع الحقوق محفوظة<br>جنوب الخوير، بوشر، مسقط، سلطنة عمان &middot; س.ت <span dir="ltr">1570092</span></p>
 </footer>
 </body>
 </html>
@@ -306,7 +306,7 @@ ARTICLE_48_EN = r"""<!DOCTYPE html>
           "@type": "Organization",
           "@id": "https://aiprofitlab.io/#organization",
           "name": "AI Profit Lab",
-          "legalName": "International Gulf Lotus SPC",
+          "legalName": "Lotus Gulf International",
           "url": "https://aiprofitlab.io/"
         },
         {
@@ -390,7 +390,7 @@ ARTICLE_48_EN = r"""<!DOCTYPE html>
 </section>
 </main>
 <footer class="ftr">
-  <p class="legal">&copy; 2026 AI Profit Lab &mdash; a brand of International Gulf Lotus SPC &bull; All Rights Reserved<br>South Al Khuwair, Bousher, Muscat, Sultanate of Oman &middot; CR <span dir="ltr">1570092</span></p>
+  <p class="legal">&copy; 2026 AI Profit Lab &mdash; a brand of Lotus Gulf International &bull; All Rights Reserved<br>South Al Khuwair, Bousher, Muscat, Sultanate of Oman &middot; CR <span dir="ltr">1570092</span></p>
 </footer>
 </body>
 </html>
@@ -423,7 +423,7 @@ ARTICLE_48_AR = r"""<!DOCTYPE html>
           "@type": "Organization",
           "@id": "https://aiprofitlab.io/#organization",
           "name": "AI Profit Lab",
-          "legalName": "International Gulf Lotus SPC",
+          "legalName": "Lotus Gulf International",
           "url": "https://aiprofitlab.io/"
         },
         {
@@ -495,7 +495,7 @@ ARTICLE_48_AR = r"""<!DOCTYPE html>
 </section>
 </main>
 <footer class="ftr">
-  <p class="legal">&copy; ٢٠٢٦ AI Profit Lab &mdash; علامة تجارية لشركة International Gulf Lotus SPC &bull; جميع الحقوق محفوظة<br>جنوب الخوير، بوشر، مسقط، سلطنة عمان &middot; س.ت <span dir="ltr">1570092</span></p>
+  <p class="legal">&copy; ٢٠٢٦ AI Profit Lab &mdash; علامة تجارية لشركة Lotus Gulf International &bull; جميع الحقوق محفوظة<br>جنوب الخوير، بوشر، مسقط، سلطنة عمان &middot; س.ت <span dir="ltr">1570092</span></p>
 </footer>
 </body>
 </html>
@@ -535,7 +535,7 @@ ARTICLE_49_EN = r"""<!DOCTYPE html>
           "@type": "Organization",
           "@id": "https://aiprofitlab.io/#organization",
           "name": "AI Profit Lab",
-          "legalName": "International Gulf Lotus SPC",
+          "legalName": "Lotus Gulf International",
           "url": "https://aiprofitlab.io/"
         },
         {
@@ -619,7 +619,7 @@ ARTICLE_49_EN = r"""<!DOCTYPE html>
 </section>
 </main>
 <footer class="ftr">
-  <p class="legal">&copy; 2026 AI Profit Lab &mdash; a brand of International Gulf Lotus SPC &bull; All Rights Reserved<br>South Al Khuwair, Bousher, Muscat, Sultanate of Oman &middot; CR <span dir="ltr">1570092</span></p>
+  <p class="legal">&copy; 2026 AI Profit Lab &mdash; a brand of Lotus Gulf International &bull; All Rights Reserved<br>South Al Khuwair, Bousher, Muscat, Sultanate of Oman &middot; CR <span dir="ltr">1570092</span></p>
 </footer>
 </body>
 </html>
@@ -652,7 +652,7 @@ ARTICLE_49_AR = r"""<!DOCTYPE html>
           "@type": "Organization",
           "@id": "https://aiprofitlab.io/#organization",
           "name": "AI Profit Lab",
-          "legalName": "International Gulf Lotus SPC",
+          "legalName": "Lotus Gulf International",
           "url": "https://aiprofitlab.io/"
         },
         {
@@ -724,7 +724,7 @@ ARTICLE_49_AR = r"""<!DOCTYPE html>
 </section>
 </main>
 <footer class="ftr">
-  <p class="legal">&copy; ٢٠٢٦ AI Profit Lab &mdash; علامة تجارية لشركة International Gulf Lotus SPC &bull; جميع الحقوق محفوظة<br>جنوب الخوير، بوشر، مسقط، سلطنة عمان &middot; س.ت <span dir="ltr">1570092</span></p>
+  <p class="legal">&copy; ٢٠٢٦ AI Profit Lab &mdash; علامة تجارية لشركة Lotus Gulf International &bull; جميع الحقوق محفوظة<br>جنوب الخوير، بوشر، مسقط، سلطنة عمان &middot; س.ت <span dir="ltr">1570092</span></p>
 </footer>
 </body>
 </html>
@@ -764,7 +764,7 @@ ARTICLE_50_EN = r"""<!DOCTYPE html>
           "@type": "Organization",
           "@id": "https://aiprofitlab.io/#organization",
           "name": "AI Profit Lab",
-          "legalName": "International Gulf Lotus SPC",
+          "legalName": "Lotus Gulf International",
           "url": "https://aiprofitlab.io/"
         },
         {
@@ -836,7 +836,7 @@ ARTICLE_50_EN = r"""<!DOCTYPE html>
 </section>
 </main>
 <footer class="ftr">
-  <p class="legal">&copy; 2026 AI Profit Lab &mdash; a brand of International Gulf Lotus SPC &bull; All Rights Reserved<br>South Al Khuwair, Bousher, Muscat, Sultanate of Oman &middot; CR <span dir="ltr">1570092</span></p>
+  <p class="legal">&copy; 2026 AI Profit Lab &mdash; a brand of Lotus Gulf International &bull; All Rights Reserved<br>South Al Khuwair, Bousher, Muscat, Sultanate of Oman &middot; CR <span dir="ltr">1570092</span></p>
 </footer>
 </body>
 </html>
@@ -869,7 +869,7 @@ ARTICLE_50_AR = r"""<!DOCTYPE html>
           "@type": "Organization",
           "@id": "https://aiprofitlab.io/#organization",
           "name": "AI Profit Lab",
-          "legalName": "International Gulf Lotus SPC",
+          "legalName": "Lotus Gulf International",
           "url": "https://aiprofitlab.io/"
         },
         {
@@ -941,7 +941,7 @@ ARTICLE_50_AR = r"""<!DOCTYPE html>
 </section>
 </main>
 <footer class="ftr">
-  <p class="legal">&copy; ٢٠٢٦ AI Profit Lab &mdash; علامة تجارية لشركة International Gulf Lotus SPC &bull; جميع الحقوق محفوظة<br>جنوب الخوير، بوشر، مسقط، سلطنة عمان &middot; س.ت <span dir="ltr">1570092</span></p>
+  <p class="legal">&copy; ٢٠٢٦ AI Profit Lab &mdash; علامة تجارية لشركة Lotus Gulf International &bull; جميع الحقوق محفوظة<br>جنوب الخوير، بوشر، مسقط، سلطنة عمان &middot; س.ت <span dir="ltr">1570092</span></p>
 </footer>
 </body>
 </html>
@@ -981,7 +981,7 @@ ARTICLE_58_EN = r"""<!DOCTYPE html>
           "@type": "Organization",
           "@id": "https://aiprofitlab.io/#organization",
           "name": "AI Profit Lab",
-          "legalName": "International Gulf Lotus SPC",
+          "legalName": "Lotus Gulf International",
           "url": "https://aiprofitlab.io/"
         },
         {
@@ -1065,7 +1065,7 @@ ARTICLE_58_EN = r"""<!DOCTYPE html>
 </section>
 </main>
 <footer class="ftr">
-  <p class="legal">&copy; 2026 AI Profit Lab &mdash; a brand of International Gulf Lotus SPC &bull; All Rights Reserved<br>South Al Khuwair, Bousher, Muscat, Sultanate of Oman &middot; CR <span dir="ltr">1570092</span></p>
+  <p class="legal">&copy; 2026 AI Profit Lab &mdash; a brand of Lotus Gulf International &bull; All Rights Reserved<br>South Al Khuwair, Bousher, Muscat, Sultanate of Oman &middot; CR <span dir="ltr">1570092</span></p>
 </footer>
 </body>
 </html>
@@ -1098,7 +1098,7 @@ ARTICLE_58_AR = r"""<!DOCTYPE html>
           "@type": "Organization",
           "@id": "https://aiprofitlab.io/#organization",
           "name": "AI Profit Lab",
-          "legalName": "International Gulf Lotus SPC",
+          "legalName": "Lotus Gulf International",
           "url": "https://aiprofitlab.io/"
         },
         {
@@ -1170,7 +1170,7 @@ ARTICLE_58_AR = r"""<!DOCTYPE html>
 </section>
 </main>
 <footer class="ftr">
-  <p class="legal">&copy; ٢٠٢٦ AI Profit Lab &mdash; علامة تجارية لشركة International Gulf Lotus SPC &bull; جميع الحقوق محفوظة<br>جنوب الخوير، بوشر، مسقط، سلطنة عمان &middot; س.ت <span dir="ltr">1570092</span></p>
+  <p class="legal">&copy; ٢٠٢٦ AI Profit Lab &mdash; علامة تجارية لشركة Lotus Gulf International &bull; جميع الحقوق محفوظة<br>جنوب الخوير، بوشر، مسقط، سلطنة عمان &middot; س.ت <span dir="ltr">1570092</span></p>
 </footer>
 </body>
 </html>
