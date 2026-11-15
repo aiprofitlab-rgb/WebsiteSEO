@@ -42,6 +42,12 @@ This queue tracks remaining articles to be generated, illustrated, and published
 | 86 | Cluster 6: Technical Implementation & Integrations | Website Design Templates vs Custom Builds for Oman SMEs | قوالب تصميم المواقع أم التصميم المخصص للشركات في عمان | Published | 2026-11-13 | [2026-11-13-website-design-templates-vs-custom-builds-for-oman-smes](https://aiprofitlab.io/blog/en/2026-11-13-website-design-templates-vs-custom-builds-for-oman-smes/) |
 | 87 | Cluster 4: Industry-Specific AI Applications | Real Estate Website Design for Oman Property Agencies | تصميم موقع عقارات لشركات الوساطة العقارية في عمان | Published | 2026-11-14 | [2026-11-14-real-estate-website-design-for-oman-property-agencies](https://aiprofitlab.io/blog/en/2026-11-14-real-estate-website-design-for-oman-property-agencies/) |
 | 88 | Cluster 3: Autonomous AI Agents | CrewAI for Business: Automating Team Workflows in Oman | دليل استخدام CrewAI لأتمتة مهام فرق العمل في عمان | Pending | - | - |
+| 89 | Cluster 6: Technical Implementation & Integrations | Oman E Invoicing Requirements: A Checklist for Local SMEs | متطلبات الفاتورة الإلكترونية في عمان: دليل عملي للشركات المحلية | Pending | - | - |
+| 90 | Cluster 6: Technical Implementation & Integrations | Fawtara Portal Oman: How to Connect Your Invoicing System | بوابة فوترة في عمان: ربط نظام الفواتير بالهيئة العامة للضرائب | Pending | - | - |
+| 91 | Cluster 3: Autonomous AI Agents | Best WhatsApp Business Greeting Message Ideas for Oman Teams | أفضل رسائل الترحيب في واتساب للأعمال لفرق المبيعات في عمان | Pending | - | - |
+| 92 | Cluster 5: Executive Strategy, Vision 2040 & ROI | How to Use WhatsApp Business for Business Growth in Oman | كيفية استخدام واتساب للأعمال لتنمية نشاطك التجاري في عمان | Pending | - | - |
+| 93 | Cluster 6: Technical Implementation & Integrations | WhatsApp Business Support: How Oman Teams Fix Account Issues | دعم واتساب للأعمال: حل مشاكل توثيق الحسابات لشركات عمان | Pending | - | - |
+| 94 | Cluster 4: Industry-Specific AI Applications | Inventory Management for Restaurants in Oman: Cut Food Waste | إدارة المخزون للمطاعم في عمان: تقليل الهدر وضبط تكاليف الأغذية | Pending | - | - |
 
 ---
 
