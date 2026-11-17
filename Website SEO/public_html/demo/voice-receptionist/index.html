@@ -1,0 +1,603 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Talk to Noor | AI Profit Lab</title>
+<meta name="description" content="A live demo of an AI voice receptionist that answers questions, books, moves and cancels appointments, and takes orders, in English or Arabic.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#F1EFE8">
+<link rel="icon" type="image/svg+xml" href="assets/icon-transparent.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Arabic:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --teal-950:#072B22; --teal-900:#0A3D30; --teal:#0F6E56; --teal-600:#158268;
+  --amber:#BA7517; --amber-bright:#D89234; --amber-pale:#E8C98F; --amber-text:#8F5A11;
+  --cream:#F1EFE8; --panel:#FAF8F2; --panel-2:#EAE4D5; --white:#FFFFFF;
+  --ink:#232B26; --muted:#5A665D; --line:#DED8C8; --alert:#A6431F;
+  --display:'Marcellus',Georgia,'Times New Roman',serif;
+  --sans:'IBM Plex Sans','IBM Plex Sans Arabic',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+  --ease:cubic-bezier(.22,.7,.25,1);
+  --r-card:16px; --r-pill:99px;
+  --shadow-card:0 26px 50px -34px rgba(7,43,34,.55);
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{font-size:17px;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--cream);color:var(--ink);font-family:var(--sans);font-size:19px;line-height:1.7;
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:hidden}
+h1,h2,h3{font-family:var(--display);font-weight:400;color:var(--teal-950);margin:0;text-wrap:balance;letter-spacing:-.005em}
+a{color:var(--teal);text-underline-offset:3px}
+::selection{background:var(--amber-pale);color:var(--teal-950)}
+:focus-visible{outline:2px solid var(--amber);outline-offset:3px;border-radius:3px}
+.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.wrap{width:min(1180px,92vw);margin:0 auto}
+/* paper grain on the cream field */
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.038;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+main,header,footer{position:relative;z-index:1}
+main{z-index:2}
+
+/* ---- header ---- */
+.top{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:26px 0 0}
+.top img{display:block;width:168px;height:auto}
+.chip{font-family:var(--mono);font-size:.78rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;
+  background:var(--white);border:1px solid var(--line);border-radius:var(--r-pill);padding:6px 14px;color:var(--muted);white-space:nowrap}
+
+/* ---- hero ---- */
+.hero{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:clamp(28px,5vw,72px);align-items:center;
+  padding:clamp(40px,7vw,96px) 0 clamp(36px,5vw,64px)}
+.eyebrow{font-family:var(--mono);font-size:.85rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin:0 0 18px}
+.eyebrow .ast{color:var(--amber);margin-right:8px}
+h1{font-size:clamp(2.5rem,5vw,4.2rem);line-height:1.04}
+h1 .ln{display:block;overflow:hidden;padding-bottom:.14em;margin-bottom:-.14em}
+h1 .ln>span{display:inline-block}
+.lede{font-size:clamp(1.06rem,1.6vw,1.25rem);color:var(--muted);max-width:60ch;margin:22px 0 0}
+.facts{display:flex;flex-wrap:wrap;gap:8px;list-style:none;padding:0;margin:26px 0 0}
+.facts li{font-family:var(--mono);font-size:.74rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--teal-900);
+  background:var(--white);border:1px solid var(--line);border-radius:var(--r-pill);padding:5px 12px}
+
+/* ---- call stage: giant type behind the orb ---- */
+.stage{position:relative;display:grid;place-items:center;align-content:center;text-align:center;min-height:440px}
+.stage>*:not(.giant){position:relative;z-index:1}
+.giant{position:absolute;inset:0;display:grid;place-items:center;font-family:var(--display);font-size:clamp(8rem,19vw,15.5rem);
+  line-height:1;color:var(--panel-2);letter-spacing:-.02em;z-index:0;user-select:none;pointer-events:none;transform:translateY(-34px)}
+.orb-wrap{position:relative;width:196px;height:196px;display:grid;place-items:center}
+.ring{position:absolute;inset:0;border-radius:50%;border:1px solid rgba(15,110,86,.28);pointer-events:none}
+.ring.r2{inset:-22px;border-color:rgba(15,110,86,.16)}
+.ring.r3{inset:-46px;border-color:rgba(15,110,86,.09)}
+.halo{position:absolute;inset:6px;border-radius:50%;background:rgba(15,110,86,.12);pointer-events:none}
+.orb{position:relative;width:176px;height:176px;border-radius:50%;border:0;cursor:pointer;background:var(--teal);color:#fff;
+  display:grid;place-items:center;box-shadow:0 30px 60px -30px rgba(7,43,34,.7),inset 0 1px 0 rgba(255,255,255,.18);
+  transition:background-color .35s var(--ease),transform .25s var(--ease)}
+.orb:hover{background:var(--teal-600)}
+.orb:active{transform:scale(.97)}
+.orb svg{width:54px;height:54px}
+.orb .i-mic,.orb .i-dots{display:none}
+.calling .orb{background:var(--teal-950)}
+.calling .orb .i-phone{display:none}
+.calling .orb .i-mic{display:block}
+.connecting .orb .i-phone{display:none}
+.connecting .orb .i-dots{display:block}
+.status{font-family:var(--display);font-size:1.6rem;color:var(--teal-950);margin:34px 0 4px;min-height:1.4em}
+.sub{font-size:1rem;color:var(--muted);margin:0;max-width:34ch}
+.sub.err{color:var(--alert)}
+.callbar{display:flex;align-items:center;gap:14px;margin-top:18px}
+.callbar[hidden]{display:none}
+.timer{font-size:.95rem;color:var(--muted);letter-spacing:.06em}
+.btn{font-family:var(--sans);font-weight:500;font-size:1rem;border-radius:var(--r-pill);padding:11px 22px;cursor:pointer;
+  transition:transform .25s var(--ease),background-color .25s var(--ease),border-color .25s var(--ease)}
+.btn:hover{transform:translateY(-2px)}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid rgba(35,43,38,.28)}
+.btn.ghost:hover{border-color:var(--ink)}
+
+/* ---- cards ---- */
+.grid{display:grid;grid-template-columns:minmax(0,.82fr) minmax(0,1.18fr);gap:clamp(18px,2.4vw,28px);align-items:start}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r-card);padding:clamp(24px,3vw,34px)}
+.card h2{font-size:clamp(1.35rem,2.4vw,1.75rem);line-height:1.2}
+.steps{list-style:none;margin:20px 0 0;padding:0}
+.steps li{display:grid;grid-template-columns:44px 1fr;gap:10px;padding:16px 0;border-top:1px solid var(--line)}
+.steps li:first-child{border-top:0;padding-top:4px}
+.steps .n{font-family:var(--mono);font-size:.9rem;font-weight:500;color:var(--amber-text);padding-top:3px}
+.steps b{display:block;font-weight:600;font-size:1rem;color:var(--teal-950)}
+.steps q{display:block;font-size:1.02rem;color:var(--ink);quotes:"“" "”"}
+.steps small{display:block;font-size:.9rem;color:var(--muted);margin-top:2px}
+.note{font-size:.95rem;color:var(--muted);margin:14px 0 0;padding-top:14px;border-top:1px solid var(--line)}
+
+.live-head{display:flex;align-items:center;justify-content:space-between;gap:6px 12px;flex-wrap:wrap}
+.cb-status{display:none}
+.pill-live{font-family:var(--mono);font-size:.74rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);
+  display:inline-flex;align-items:center;gap:8px}
+.pill-live i{width:8px;height:8px;border-radius:50%;background:var(--line)}
+.calling .pill-live{color:var(--teal)}
+.calling .pill-live i{background:var(--teal)}
+
+/* calendar */
+.cal{margin-top:20px;border:1px solid var(--line);border-radius:14px;background:var(--white);padding:16px 16px 12px}
+.cal-top{display:flex;align-items:baseline;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+.cal-title{font-family:var(--mono);font-size:.78rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.legend{display:flex;gap:14px;font-size:.8rem;color:var(--muted)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:10px;height:10px;border-radius:3px;display:inline-block}
+.lg-taken{background:rgba(90,102,93,.34)}
+.lg-new{background:var(--teal)}
+.cal-grid{display:grid;grid-template-columns:42px repeat(5,minmax(0,1fr));gap:3px 6px;align-items:center}
+.cal-grid .dh{font-family:var(--mono);font-size:.72rem;font-weight:500;color:var(--teal-950);text-align:center;line-height:1.25;padding-bottom:6px}
+.cal-grid .dh small{display:block;color:var(--muted);font-weight:400}
+.cal-grid .dh.today{color:var(--teal)}
+.cal-grid .tl{font-family:var(--mono);font-size:.68rem;color:var(--muted);text-align:right;padding-right:4px;line-height:1}
+.slot{height:13px;border-radius:3px;background:var(--panel);border:1px solid #EFEADF;position:relative}
+.slot.past{background:repeating-linear-gradient(135deg,#F3F0E8 0 3px,#FBFAF6 3px 6px);border-color:#F1EDE3}
+.slot.closed{background:#F5F2EA}
+.slot.taken{background:rgba(90,102,93,.34);border-color:transparent}
+.slot.new{background:var(--teal);border-color:var(--teal)}
+.slot.flash{box-shadow:0 0 0 3px rgba(15,110,86,.22)}
+
+/* activity feed */
+.feed{list-style:none;margin:18px 0 0;padding:0;max-height:300px;overflow:auto}
+.feed li{display:grid;grid-template-columns:52px 1fr;gap:10px;padding:11px 0;border-top:1px solid var(--line);font-size:1rem;line-height:1.5}
+.feed li:first-child{border-top:0}
+.feed .t{font-family:var(--mono);font-size:.78rem;color:var(--muted);padding-top:3px}
+.feed .what{color:var(--ink)}
+.feed .what b{font-weight:600;color:var(--teal-950)}
+.feed .what small{display:block;color:var(--muted);font-size:.88rem}
+.feed li.pending .what{color:var(--muted)}
+.feed li.bad .what b{color:var(--alert)}
+.feed li.empty{display:block;color:var(--muted);font-size:.95rem}
+.spin{display:inline-block;width:10px;height:10px;border-radius:50%;border:1.5px solid var(--line);border-top-color:var(--teal);
+  margin-right:8px;vertical-align:-1px;animation:spin .9s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* transcript */
+.tx{margin-top:16px;border-top:1px solid var(--line);padding-top:12px}
+.tx summary{cursor:pointer;font-family:var(--mono);font-size:.78rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);list-style:none}
+.tx summary::-webkit-details-marker{display:none}
+.tx summary::after{content:" +"}
+.tx[open] summary::after{content:" –"}
+.log{margin-top:10px;max-height:260px;overflow:auto;font-size:.98rem;line-height:1.55}
+.log p{margin:0 0 10px}
+.log .who{font-family:var(--mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);display:block}
+.log .ai .who{color:var(--teal)}
+.log .empty{color:var(--muted)}
+
+.disclaimer{font-size:.95rem;color:var(--muted);max-width:78ch;margin:26px 0 0}
+
+/* asterism + footer */
+.asterism{display:flex;align-items:center;gap:18px;margin:clamp(56px,7vw,96px) 0 28px;color:var(--amber)}
+.asterism::before,.asterism::after{content:"";flex:1;height:1px;background:var(--line)}
+footer{padding-bottom:40px}
+.foot{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-size:.95rem;color:var(--muted)}
+.foot a{color:var(--teal)}
+.foot .who{color:var(--ink)}
+.legal{font-size:.8rem;color:var(--muted);margin:14px 0 0}
+
+@media (max-width:900px){
+  .hero{grid-template-columns:1fr;padding-top:36px}
+  .stage{min-height:380px;order:2}
+  .grid{grid-template-columns:1fr}
+  .live{order:-1}
+  /* while on a call, keep status and End call in reach as the visitor scrolls to the calendar */
+  .calling .callbar{position:fixed;left:12px;right:12px;bottom:max(12px,env(safe-area-inset-bottom));z-index:5;margin:0;
+    background:var(--teal-950);color:var(--cream);border-radius:var(--r-pill);padding:8px 8px 8px 20px;gap:12px;
+    box-shadow:0 18px 40px -18px rgba(7,43,34,.8)}
+  .calling .cb-status{display:block;flex:1;text-align:left;font-size:.95rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .calling .callbar .timer{color:var(--amber-pale)}
+  .calling .callbar .btn.ghost{color:var(--cream);border-color:rgba(241,239,232,.4);padding:9px 18px}
+  footer{padding-bottom:96px}
+}
+@media (max-width:560px){
+  body{font-size:18px}
+  .hero{padding-top:28px;padding-bottom:28px}
+  .facts{display:none}
+  .stage{min-height:340px}
+  .top img{width:140px}
+  .chip{font-size:.7rem;padding:5px 11px}
+  .orb-wrap{width:168px;height:168px}
+  .orb{width:150px;height:150px}
+  .status{font-size:1.4rem}
+  .cal{padding:12px 10px 10px}
+  .cal-grid{grid-template-columns:34px repeat(5,minmax(0,1fr));gap:3px 4px}
+  .legend{gap:10px}
+}
+/* hidden-start states only when GSAP loaded and motion is allowed */
+.anim .rv{visibility:hidden}
+@media (prefers-reduced-motion:reduce){.spin{animation:none}}
+</style>
+</head>
+<body>
+<header class="wrap top">
+  <a href="https://aiprofitlab.io" aria-label="AI Profit Lab home"><img src="assets/wordmark-pulse-on-light.svg" alt="AI Profit Lab" width="168" height="29"></a>
+  <span class="chip">Private demo</span>
+</header>
+
+<main class="wrap" id="app">
+  <section class="hero">
+    <div class="copy">
+      <p class="eyebrow rv"><span class="ast" aria-hidden="true">✼</span>Live demo · AI voice receptionist</p>
+      <h1><span class="ln"><span>Call Noor the way</span></span><span class="ln"><span>your customers would.</span></span></h1>
+      <p class="lede rv">Noor answers the phone for a media-marketing agency. She explains the packages, books, moves and cancels consultations in the calendar, takes orders, and passes anything tricky to the team. In English or Arabic.</p>
+      <ul class="facts rv" aria-label="What this demo covers">
+        <li>Questions</li><li>Bookings</li><li>Changes</li><li>Orders</li><li>Call-backs</li>
+      </ul>
+    </div>
+
+    <div class="stage" id="stage">
+      <div class="giant" aria-hidden="true">Noor</div>
+      <div class="orb-wrap rv">
+        <span class="ring r3" aria-hidden="true"></span>
+        <span class="ring r2" aria-hidden="true"></span>
+        <span class="ring r1" aria-hidden="true"></span>
+        <span class="halo" aria-hidden="true"></span>
+        <button class="orb" id="orb" type="button" aria-label="Call Noor">
+          <svg class="i-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5.2 3.8h3l1.5 3.8-2 1.3a11 11 0 0 0 5.4 5.4l1.3-2 3.8 1.5v3a1.6 1.6 0 0 1-1.7 1.6A16.2 16.2 0 0 1 3.6 5.5a1.6 1.6 0 0 1 1.6-1.7z"/></svg>
+          <svg class="i-mic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21"/></svg>
+          <svg class="i-dots" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="6" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="18" cy="12" r="1.6"/></svg>
+        </button>
+      </div>
+      <p class="status" id="status" aria-live="polite">Tap to call Noor</p>
+      <p class="sub" id="sub">Your browser will ask for the microphone. Speak naturally, in English or Arabic.</p>
+      <div class="callbar" id="callbar" hidden>
+        <span class="cb-status" id="cbStatus" aria-hidden="true"></span>
+        <span class="timer mono" id="timer" aria-label="Time left on this call">5:00</span>
+        <button class="btn ghost" id="end" type="button">End call</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="grid">
+    <div class="card try rv">
+      <h2>Things to try</h2>
+      <ol class="steps">
+        <li><span class="n">01</span><div><b>Ask about prices</b><q>How much is it to manage my Instagram and TikTok?</q></div></li>
+        <li><span class="n">02</span><div><b>Book a consultation</b><q>Can I book a free consultation on Sunday at 11?</q><small>Watch it appear in the calendar.</small></div></li>
+        <li><span class="n">03</span><div><b>Move or cancel it</b><q>I need to move my appointment to Wednesday.</q><small>Call again and give the same mobile number.</small></div></li>
+        <li><span class="n">04</span><div><b>Place an order</b><q>I want to sign up for the Growth package.</q></div></li>
+        <li><span class="n">05</span><div><b>Test her limits</b><q>Can you guarantee me 10,000 followers?</q><small>Or ask to speak to a real person.</small></div></li>
+      </ol>
+      <p class="note">Switch to Arabic at any point. Noor switches with you.</p>
+    </div>
+
+    <div class="card live rv" id="live">
+      <div class="live-head">
+        <h2>What Noor is doing</h2>
+        <span class="pill-live" id="livePill"><i aria-hidden="true"></i><span id="liveText">Waiting for a call</span></span>
+      </div>
+      <div class="cal" aria-label="Consultation calendar">
+        <div class="cal-top">
+          <span class="cal-title" id="calTitle">This week</span>
+          <span class="legend"><span><i class="lg-taken"></i>Booked</span><span><i class="lg-new"></i>Booked on your call</span></span>
+        </div>
+        <div class="cal-grid" id="calGrid"></div>
+      </div>
+      <ol class="feed" id="feed" aria-live="polite">
+        <li class="empty">Each check, booking, change and order shows up here as Noor makes it.</li>
+      </ol>
+      <details class="tx">
+        <summary>Transcript</summary>
+        <div class="log" id="log"><p class="empty">The conversation appears here once you start a call.</p></div>
+      </details>
+    </div>
+  </section>
+
+  <p class="disclaimer">The agency, prices and policies in this demo are sample data. For your business, Noor would use your real services, opening hours and Google Calendar. Bookings here go to a test calendar used only for this demo, and each call lasts up to 5 minutes.</p>
+</main>
+
+<footer class="wrap">
+  <div class="asterism" aria-hidden="true">✼</div>
+  <div class="foot">
+    <span class="who">Built by AI Profit Lab</span>
+    <span><a href="mailto:hello@aiprofitlab.io">hello@aiprofitlab.io</a> · <a href="https://wa.me/96899245250" dir="ltr">+968 9924 5250</a> · <a href="https://aiprofitlab.io">aiprofitlab.io</a></span>
+  </div>
+  <p class="legal">© 2026 AI Profit Lab, a brand of Lotus Gulf International (CR 1570092) · South Al Khuwair, Bousher, Muscat, Oman</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/CustomEase.min.js"></script>
+<script>
+  if (window.gsap && !matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('anim');
+</script>
+<script src="assets/voice-client.js" defer></script>
+<script defer>
+(() => {
+  const AGENT_ID = 'agent_0101m7n4f0zaf46sch2cxszky2c8';
+  const TZ = 'Asia/Muscat';
+  const MAX_SECONDS = 300;
+  const SLOTS = []; for (let m = 540; m <= 990; m += 30) SLOTS.push(String(Math.floor(m / 60)).padStart(2, '0') + ':' + String(m % 60).padStart(2, '0'));
+
+  const $ = (id) => document.getElementById(id);
+  const app = document.body;
+  const orb = $('orb'), statusEl = $('status'), subEl = $('sub'), callbar = $('callbar'), timerEl = $('timer');
+  const feed = $('feed'), log = $('log'), grid = $('calGrid'), calTitle = $('calTitle'), liveText = $('liveText');
+  const hasGsap = !!window.gsap;
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (hasGsap && window.CustomEase) gsap.registerPlugin(CustomEase), CustomEase.create('apl', '0.22,0.7,0.25,1');
+  const EASE = hasGsap && window.CustomEase ? 'apl' : 'power3.out';
+
+  /* ---------- dates in Oman time ---------- */
+  const todayStr = () => new Intl.DateTimeFormat('en-CA', { timeZone: TZ, year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date());
+  const nowHM = () => new Intl.DateTimeFormat('en-GB', { timeZone: TZ, hour: '2-digit', minute: '2-digit', hour12: false }).format(new Date());
+  const d = (s) => new Date(s + 'T00:00:00Z');
+  const iso = (dt) => dt.toISOString().slice(0, 10);
+  const addDays = (s, n) => { const x = d(s); x.setUTCDate(x.getUTCDate() + n); return iso(x); };
+  const dow = (s) => d(s).getUTCDay();
+  const fmtDay = (s) => d(s).toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short', timeZone: 'UTC' });
+  const weekStart = (s) => { const w = dow(s); return addDays(s, w <= 4 ? -w : 7 - w); }; // Sun of that week; Fri/Sat jump ahead
+
+  /* ---------- calendar state (only what Noor's tools reported) ---------- */
+  const taken = new Map();   // date -> Set(HH:MM) seen as booked in the real calendar
+  const mine = new Map();    // date -> Set(HH:MM) booked during this visit
+  let lastFound = [];        // [{date,time}] from the last find_appointment
+  let shownWeek = weekStart(todayStr());
+  const setOf = (m, k) => (m.has(k) ? m.get(k) : m.set(k, new Set()).get(k));
+
+  function renderCal(flash) {
+    const today = todayStr(), now = nowHM();
+    const days = [0, 1, 2, 3, 4].map((i) => addDays(shownWeek, i));
+    calTitle.textContent = 'Week of ' + fmtDay(days[0]).replace(/^\w+ /, '');
+    const frag = document.createDocumentFragment();
+    frag.appendChild(Object.assign(document.createElement('span'), { className: 'tl' }));
+    days.forEach((ds) => {
+      const h = document.createElement('div');
+      h.className = 'dh' + (ds === today ? ' today' : '');
+      const [wd, ...rest] = fmtDay(ds).split(' ');
+      h.innerHTML = `${wd}<small>${rest.join(' ')}</small>`;
+      frag.appendChild(h);
+    });
+    SLOTS.forEach((t) => {
+      const tl = document.createElement('span');
+      tl.className = 'tl';
+      tl.textContent = t.endsWith(':00') ? t : '';
+      frag.appendChild(tl);
+      days.forEach((ds) => {
+        const c = document.createElement('span');
+        let cls = 'slot';
+        if (ds < today || (ds === today && t <= now)) cls += ' past';
+        if (taken.get(ds)?.has(t)) cls += ' taken';
+        if (mine.get(ds)?.has(t)) cls += ' new';
+        c.className = cls;
+        c.dataset.key = ds + ' ' + t;
+        c.title = fmtDay(ds) + ', ' + t + (cls.includes('new') ? ' · booked on your call' : cls.includes('taken') ? ' · booked' : '');
+        frag.appendChild(c);
+      });
+    });
+    grid.replaceChildren(frag);
+    if (flash) {
+      const cell = grid.querySelector(`[data-key="${flash}"]`);
+      if (cell) {
+        cell.classList.add('flash');
+        if (hasGsap && !reduce) gsap.fromTo(cell, { scale: 0.4, autoAlpha: 0.2 }, { scale: 1, autoAlpha: 1, duration: 0.7, ease: EASE });
+        setTimeout(() => cell.classList.remove('flash'), 2400);
+      }
+    }
+  }
+  function focusDate(ds) {
+    const w = weekStart(ds);
+    if (w !== shownWeek) {
+      shownWeek = w;
+      if (hasGsap && !reduce) gsap.fromTo(grid, { autoAlpha: 0, y: 8 }, { autoAlpha: 1, y: 0, duration: 0.5, ease: EASE });
+    }
+  }
+  const split = (s) => ({ date: s.slice(0, 10), time: s.slice(11, 16) });
+
+  /* ---------- activity feed ---------- */
+  const pending = new Map();
+  const PENDING_TEXT = {
+    check_availability: 'Checking the calendar…',
+    book_appointment: 'Booking the slot…',
+    find_appointment: 'Looking up the booking…',
+    reschedule_appointment: 'Moving the booking…',
+    cancel_appointment: 'Cancelling the booking…',
+    record_order: 'Saving the order…',
+    take_message: 'Passing the message to the team…',
+  };
+  function addFeed(html, cls = '', id) {
+    feed.querySelector('.empty')?.remove();
+    let li = id && pending.get(id);
+    if (!li) {
+      li = document.createElement('li');
+      feed.appendChild(li);
+      if (hasGsap && !reduce) gsap.from(li, { autoAlpha: 0, y: 10, duration: 0.5, ease: EASE });
+    }
+    li.className = cls;
+    li.innerHTML = `<span class="t">${nowHM()}</span><span class="what">${html}</span>`;
+    feed.scrollTop = feed.scrollHeight;
+    if (id) pending.delete(id);
+    return li;
+  }
+  function onToolRequest(e) {
+    const text = PENDING_TEXT[e.tool_name];
+    if (!text) return;
+    pending.set(e.tool_call_id, addFeed(`<span class="spin" aria-hidden="true"></span>${text}`, 'pending'));
+  }
+  function onToolResponse(e) {
+    let r = {};
+    try { r = JSON.parse(e.full_tool_result || '{}'); } catch { r = {}; }
+    if (r && typeof r.result === 'string') { try { r = JSON.parse(r.result); } catch {} }
+    const id = e.tool_call_id;
+    if (e.is_error) return addFeed('<b>Couldn’t reach the calendar</b><small>Noor will offer to take a message instead.</small>', 'bad', id);
+    switch (e.tool_name) {
+      case 'check_availability': {
+        const times = (r.booked_start_times || '').split(',').map((s) => s.trim()).filter(Boolean).map((s) => split(s).time);
+        if (r.date) { taken.set(r.date, new Set([...times, ...(mine.get(r.date) || [])])); focusDate(r.date); renderCal(); }
+        const closed = r.office === 'closed';
+        addFeed(`<b>Checked ${r.date ? fmtDay(r.date) : 'the calendar'}</b><small>${closed ? 'The office is closed that day.' : times.length ? times.length + ' slot' + (times.length > 1 ? 's' : '') + ' already booked: ' + times.join(', ') : 'Every slot is free.'}</small>`, '', id);
+        break;
+      }
+      case 'book_appointment': {
+        if (r.status === 'booked' && r.start) {
+          const { date, time } = split(r.start);
+          setOf(taken, date).add(time); setOf(mine, date).add(time);
+          focusDate(date); renderCal(date + ' ' + time);
+          addFeed(`<b>Booked ${fmtDay(date)}, ${time}</b><small>Saved to the calendar as a 30-minute consultation.</small>`, '', id);
+        } else if (r.status === 'slot_taken') {
+          addFeed('<b>That time was already taken</b><small>Noor offers other times instead.</small>', 'bad', id);
+        } else {
+          const why = { closed_day: 'The office is closed that day.', outside_hours: 'That’s outside office hours.', in_the_past: 'That time has already passed.' }[r.reason] || 'That time can’t be booked.';
+          addFeed(`<b>Not booked</b><small>${why}</small>`, 'bad', id);
+        }
+        break;
+      }
+      case 'find_appointment': {
+        const starts = (r.start_times || '').split(',').map((s) => s.trim()).filter(Boolean).map(split);
+        lastFound = starts;
+        starts.forEach(({ date, time }) => setOf(taken, date).add(time));
+        if (starts[0]) { focusDate(starts[0].date); renderCal(starts[0].date + ' ' + starts[0].time); }
+        addFeed(starts.length ? `<b>Found ${starts.length} booking${starts.length > 1 ? 's' : ''}</b><small>${starts.map((s) => fmtDay(s.date) + ', ' + s.time).join(' · ')}</small>` : '<b>No booking under that number</b>', starts.length ? '' : 'bad', id);
+        break;
+      }
+      case 'reschedule_appointment': {
+        if (r.status === 'rescheduled' && r.start) {
+          const { date, time } = split(r.start);
+          if (lastFound.length === 1) { const o = lastFound[0]; taken.get(o.date)?.delete(o.time); mine.get(o.date)?.delete(o.time); }
+          setOf(taken, date).add(time); setOf(mine, date).add(time);
+          lastFound = [{ date, time }];
+          focusDate(date); renderCal(date + ' ' + time);
+          addFeed(`<b>Moved to ${fmtDay(date)}, ${time}</b><small>The calendar is updated.</small>`, '', id);
+        } else {
+          addFeed('<b>Not moved</b><small>' + (r.status === 'slot_taken' ? 'That time was already taken.' : 'That time can’t be booked.') + '</small>', 'bad', id);
+        }
+        break;
+      }
+      case 'cancel_appointment': {
+        if (r.status === 'cancelled') {
+          if (lastFound.length === 1) { const o = lastFound[0]; taken.get(o.date)?.delete(o.time); mine.get(o.date)?.delete(o.time); renderCal(); }
+          addFeed('<b>Booking cancelled</b><small>The slot is free again.</small>', '', id);
+        } else addFeed('<b>Couldn’t cancel</b>', 'bad', id);
+        break;
+      }
+      case 'record_order':
+        addFeed('<b>Order recorded</b><small>Sent to the team’s order sheet for follow-up.</small>', '', id); break;
+      case 'take_message':
+        addFeed('<b>Call-back request sent</b><small>The team gets the name, number and reason.</small>', '', id); break;
+      case 'language_detection':
+        addFeed('<b>Switched language</b>'); break;
+      default: break;
+    }
+  }
+
+  /* ---------- transcript ---------- */
+  const clean = (t) => (window.ElevenLabsClient?.stripAudioTags ? ElevenLabsClient.stripAudioTags(t) : t).replace(/\[[a-z ]+\]\s*/gi, '').trim();
+  function onMessage(m) {
+    const text = clean(m.message || '');
+    if (!text) return;
+    log.querySelector('.empty')?.remove();
+    const p = document.createElement('p');
+    const ai = (m.role || m.source) === 'agent' || m.source === 'ai';
+    p.className = ai ? 'ai' : 'you';
+    p.innerHTML = `<span class="who">${ai ? 'Noor' : 'You'}</span>`;
+    const span = document.createElement('span');
+    span.dir = 'auto'; span.textContent = text;
+    p.appendChild(span);
+    log.appendChild(p);
+    log.scrollTop = log.scrollHeight;
+  }
+
+  /* ---------- call control ---------- */
+  let conv = null, mode = 'listening', raf = 0, tick = 0, endsAt = 0;
+  const halo = document.querySelector('.halo'), r1 = document.querySelector('.ring.r1'), r2 = document.querySelector('.ring.r2');
+  const haloTo = hasGsap ? gsap.quickTo(halo, 'scale', { duration: 0.25, ease: 'power2.out' }) : null;
+  const ringTo = hasGsap ? gsap.quickTo(r1, 'scale', { duration: 0.35, ease: 'power2.out' }) : null;
+  let idle = null;
+  function idleBreath(on) {
+    if (!hasGsap || reduce) return;
+    idle?.kill();
+    idle = on ? gsap.to([r2, '.ring.r3'], { scale: 1.035, duration: 2.6, ease: 'sine.inOut', yoyo: true, repeat: -1, stagger: 0.6 }) : null;
+    if (!on) gsap.to([r2, '.ring.r3'], { scale: 1, duration: 0.4, overwrite: 'auto' });
+  }
+  const cbStatus = $('cbStatus');
+  function setStatus(main, sub, err) { statusEl.textContent = main; cbStatus.textContent = main; subEl.textContent = sub || ''; subEl.classList.toggle('err', !!err); }
+  function loop() {
+    if (!conv) return;
+    const v = mode === 'speaking' ? conv.getOutputVolume() : conv.getInputVolume();
+    const s = 1 + Math.min(v, 1) * (mode === 'speaking' ? 0.28 : 0.18);
+    if (haloTo && !reduce) { haloTo(s); ringTo(1 + (s - 1) * 0.6); }
+    raf = requestAnimationFrame(loop);
+  }
+  function startTimer() {
+    endsAt = Date.now() + MAX_SECONDS * 1000;
+    const step = () => {
+      const left = Math.max(0, Math.round((endsAt - Date.now()) / 1000));
+      timerEl.textContent = Math.floor(left / 60) + ':' + String(left % 60).padStart(2, '0') + ' left';
+    };
+    step(); tick = setInterval(step, 1000);
+  }
+  function resetUI(msg, sub, err) {
+    cancelAnimationFrame(raf); clearInterval(tick);
+    app.classList.remove('calling', 'connecting');
+    callbar.hidden = true; orb.setAttribute('aria-label', 'Call Noor'); orb.disabled = false;
+    liveText.textContent = 'Call ended';
+    if (haloTo) { haloTo(1); ringTo(1); }
+    idleBreath(true);
+    pending.forEach((li) => li.remove()); pending.clear();
+    setStatus(msg || 'Call ended', sub || 'Tap to call again. Your bookings stay in the calendar.', err);
+  }
+  async function start() {
+    if (conv || app.classList.contains('connecting')) return;
+    if (!window.ElevenLabsClient) return setStatus('Still loading', 'Give it a second and tap again.', true);
+    app.classList.add('connecting'); orb.disabled = true;
+    setStatus('Connecting…', 'Allow the microphone if your browser asks.');
+    try {
+      const s = await navigator.mediaDevices.getUserMedia({ audio: true });
+      s.getTracks().forEach((t) => t.stop());
+    } catch {
+      app.classList.remove('connecting'); orb.disabled = false;
+      return setStatus('Microphone blocked', 'Allow microphone access for this page in your browser settings, then tap again.', true);
+    }
+    try {
+      conv = await ElevenLabsClient.Conversation.startSession({
+        agentId: AGENT_ID,
+        connectionType: 'webrtc',
+        onConnect: () => {
+          app.classList.remove('connecting'); app.classList.add('calling');
+          orb.disabled = false; orb.setAttribute('aria-label', 'End the call');
+          callbar.hidden = false; liveText.textContent = 'On a call';
+          idleBreath(false); startTimer(); loop();
+          setStatus('Noor is on the line', 'Speak whenever you’re ready.');
+        },
+        onDisconnect: () => { conv = null; resetUI(); },
+        onError: (message) => { console.warn('[voice]', message); },
+        onModeChange: ({ mode: m }) => {
+          mode = m;
+          if (app.classList.contains('calling')) setStatus(m === 'speaking' ? 'Noor is speaking' : 'Listening…', m === 'speaking' ? 'You can interrupt her any time.' : 'Go ahead, she’s listening.');
+        },
+        onMessage,
+        onAgentToolRequest: onToolRequest,
+        onAgentToolResponse: onToolResponse,
+      });
+    } catch (err) {
+      console.warn('[voice] start failed', err);
+      conv = null;
+      resetUI('Couldn’t connect', 'Check your internet connection and tap to try again.', true);
+    }
+  }
+  async function stop() { const c = conv; conv = null; try { await c?.endSession(); } catch {} resetUI(); }
+  orb.addEventListener('click', () => (conv ? stop() : start()));
+  $('end').addEventListener('click', stop);
+  window.addEventListener('pagehide', () => { try { conv?.endSession(); } catch {} });
+
+  // Local testing only: lets a test script replay tool events without a live call.
+  if (location.hostname === 'localhost') window.__voiceTest = { onToolRequest, onToolResponse, onMessage };
+
+  /* ---------- entrance ---------- */
+  renderCal();
+  if (!hasGsap) return;
+  const mm = gsap.matchMedia();
+  mm.add('(prefers-reduced-motion: no-preference)', () => {
+    const tl = gsap.timeline({ defaults: { ease: EASE, duration: 0.8 } });
+    tl.fromTo('.eyebrow', { autoAlpha: 0, y: 24 }, { autoAlpha: 1, y: 0 })
+      .from('h1 .ln > span', { yPercent: 106, duration: 1, stagger: 0.12 }, '<0.1')
+      .fromTo('.lede, .facts', { autoAlpha: 0, y: 24 }, { autoAlpha: 1, y: 0, stagger: 0.12 }, '<0.35')
+      .fromTo('.giant', { autoAlpha: 0, scale: 0.94 }, { autoAlpha: 1, scale: 1, duration: 1.4 }, 0.2)
+      .fromTo('.orb-wrap', { autoAlpha: 0, scale: 0.86 }, { autoAlpha: 1, scale: 1, duration: 1 }, 0.45)
+      .from('.status, .sub', { autoAlpha: 0, y: 12, stagger: 0.08 }, '<0.4')
+      .fromTo('.grid .card', { autoAlpha: 0, y: 24 }, { autoAlpha: 1, y: 0, stagger: 0.12 }, '<0.1')
+      .add(() => idleBreath(true));
+  });
+  mm.add('(prefers-reduced-motion: reduce)', () => { gsap.set('.rv', { autoAlpha: 1 }); });
+})();
+</script>
+</body>
+</html>
