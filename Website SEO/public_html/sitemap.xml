@@ -20,13 +20,13 @@
   </url>
   <url>
     <loc>https://aiprofitlab.io/blog-ar/</loc>
-    <lastmod>2026-11-15</lastmod>
+    <lastmod>2026-11-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://aiprofitlab.io/blog/</loc>
-    <lastmod>2026-11-15</lastmod>
+    <lastmod>2026-11-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -1249,6 +1249,12 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://aiprofitlab.io/blog/ar/2026-11-17-fawtara-portal-oman-how-to-connect-your-invoicing-system/</loc>
+    <lastmod>2026-11-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://aiprofitlab.io/blog/en/2026-03-28-ceo-dashboard/</loc>
     <lastmod>2026-09-27</lastmod>
     <changefreq>weekly</changefreq>
@@ -2463,6 +2469,12 @@
   <url>
     <loc>https://aiprofitlab.io/blog/en/2026-11-16-oman-e-invoicing-requirements-a-checklist-for-local-smes/</loc>
     <lastmod>2026-11-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://aiprofitlab.io/blog/en/2026-11-17-fawtara-portal-oman-how-to-connect-your-invoicing-system/</loc>
+    <lastmod>2026-11-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
