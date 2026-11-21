@@ -48,6 +48,8 @@ This queue tracks remaining articles to be generated, illustrated, and published
 | 92 | Cluster 5: Executive Strategy, Vision 2040 & ROI | How to Use WhatsApp Business for Business Growth in Oman | كيفية استخدام واتساب للأعمال لتنمية نشاطك التجاري في عمان | Published | 2026-11-19 | [2026-11-19-how-to-use-whatsapp-business-for-business-growth-in-oman](https://aiprofitlab.io/blog/en/2026-11-19-how-to-use-whatsapp-business-for-business-growth-in-oman/) |
 | 93 | Cluster 6: Technical Implementation & Integrations | WhatsApp Business Support: How Oman Teams Fix Account Issues | دعم واتساب للأعمال: حل مشاكل توثيق الحسابات لشركات عمان | Published | 2026-11-20 | [2026-11-20-whatsapp-business-support-how-oman-teams-fix-account-issues](https://aiprofitlab.io/blog/en/2026-11-20-whatsapp-business-support-how-oman-teams-fix-account-issues/) |
 | 94 | Cluster 4: Industry-Specific AI Applications | Inventory Management for Restaurants in Oman: Cut Food Waste | إدارة المخزون للمطاعم في عمان: تقليل الهدر وضبط تكاليف الأغذية | Pending | - | - |
+| 95 | Cluster 5: Executive Strategy, Vision 2040 & ROI | AI Company Oman: How Local Firms Choose the Right Partner | شركة ذكاء اصطناعي في عمان: كيف تختار الشريك المناسب لعملك | Pending | - | - |
+| 96 | Cluster 6: Technical Implementation & Integrations | Chatbot for WordPress: Setup Guide for Oman Sites | إعداد روبوت محادثة لمواقع ووردبريس في عمان | Pending | - | - |
 
 ---
 
