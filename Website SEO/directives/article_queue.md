@@ -50,6 +50,12 @@ This queue tracks remaining articles to be generated, illustrated, and published
 | 94 | Cluster 4: Industry-Specific AI Applications | Inventory Management for Restaurants in Oman: Cut Food Waste | إدارة المخزون للمطاعم في عمان: تقليل الهدر وضبط تكاليف الأغذية | Published | 2026-11-21 | [2026-11-21-inventory-management-for-restaurants-in-oman-cut-food-waste](https://aiprofitlab.io/blog/en/2026-11-21-inventory-management-for-restaurants-in-oman-cut-food-waste/) |
 | 95 | Cluster 5: Executive Strategy, Vision 2040 & ROI | AI Company Oman: How Local Firms Choose the Right Partner | شركة ذكاء اصطناعي في عمان: كيف تختار الشريك المناسب لعملك | Published | 2026-11-22 | [2026-11-22-ai-company-oman-how-local-firms-choose-the-right-partner](https://aiprofitlab.io/blog/en/2026-11-22-ai-company-oman-how-local-firms-choose-the-right-partner/) |
 | 96 | Cluster 6: Technical Implementation & Integrations | Chatbot for WordPress: Setup Guide for Oman Sites | إعداد روبوت محادثة لمواقع ووردبريس في عمان | Pending | - | - |
+| 97 | Cluster 6: Technical Implementation & Integrations | WhatsApp Business Online: Multi-User Guide for Oman Teams | واتساب بزنس أونلاين: دليل فرق العمل في سلطنة عمان | Pending | - | - |
+| 98 | Cluster 4: Industry-Specific AI Applications | Portfolio Website Design Guide for Oman Service Firms | تصميم موقع معرض أعمال لشركات الخدمات في عمان | Pending | - | - |
+| 99 | Cluster 6: Technical Implementation & Integrations | Best WhatsApp Business Auto Reply Messages for Oman SMEs | أفضل رسائل الرد التلقائي في واتساب بزنس للشركات العمانية | Pending | - | - |
+| 100 | Cluster 6: Technical Implementation & Integrations | Best WhatsApp Business Description Ideas for Oman SMEs | أفضل وصف لملف واتساب بزنس لشركات سلطنة عمان | Pending | - | - |
+| 101 | Cluster 5: Executive Strategy, Vision 2040 & ROI | Chatbot Advantages and Disadvantages for Oman Businesses | مميزات وعيوب الشات بوت: دليل أصحاب الأعمال في عمان | Pending | - | - |
+| 102 | Cluster 3: Autonomous AI Agents | AI Agent Skills Every Oman Business Workflow Needs | مهارات وكلاء الذكاء الاصطناعي التي تحتاجها شركات عمان | Pending | - | - |
 
 ---
 
